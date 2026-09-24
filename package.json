@@ -1,60 +1,59 @@
 {
   "name": "@bbalganjjm/natural_js",
-  "version": "1.0.0",
-  "description": "Natural-JS is a JavaScript architectural framework designed for enterprise web applications, allowing intuitive, easy, and fast implementation of user interfaces.",
-  "projects": [
-    "https://github.com/bbalganjjm/natural_js"
-  ],
-  "homepage": "https://bbalganjjm.github.io/natural_js",
-  "main": "natural.js.min.js",
-  "types": "node_modules/@types/natural_js/index.d.ts",
-  "scripts": {
-    "docs:check": "node tools/knowledge-docs/knowledge-docs.mjs check",
-    "docs:stamp": "node tools/knowledge-docs/knowledge-docs.mjs stamp"
-  },
+  "version": "2.0.0-alpha.0",
+  "private": true,
+  "description": "CVC UI framework that attaches behavior to authored HTML.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bbalganjjm/natural_js.git"
   },
-  "keywords": [
-    "UI Components",
-    "Javascript UI",
-    "Front-end",
-    "Front-end Architecture",
-    "Front-end framework",
-    "jQuery Plugin",
-    "jQuery Library",
-    "Javascript Input Validation",
-    "javascript AOP",
-    "Single Page Applications",
-    "SPA",
-    "Javascript Front",
-    "Data Grid",
-    "Data Table",
-    "table",
-    "grid",
-    "tree",
-    "tabs",
-    "natural-js",
-    "naturaljs"
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js"
+    },
+    "./page": {
+      "types": "./build/page/index.d.ts",
+      "import": "./build/page/index.js"
+    },
+    "./data": {
+      "types": "./build/data/index.d.ts",
+      "import": "./build/data/index.js"
+    },
+    "./ui": {
+      "types": "./build/ui/index.d.ts",
+      "import": "./build/ui/index.js"
+    },
+    "./comm": {
+      "types": "./build/comm/index.d.ts",
+      "import": "./build/comm/index.js"
+    }
+  },
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/",
+    "src/",
+    "README.md",
+    "LICENSE"
   ],
-  "dependencies": {
-    "@bbalganjjm/natural_js": "file:",
-    "jquery": "3.7.1"
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:browser": "playwright test -c tests/playwright.config.ts",
+    "example": "vite --config examples/vite/vite.config.ts",
+    "test:consumers": "node tools/check-consumers.mjs",
+    "docs:check": "node tools/knowledge-docs/knowledge-docs.mjs check",
+    "docs:stamp": "node tools/knowledge-docs/knowledge-docs.mjs stamp"
   },
   "devDependencies": {
-    "@types/jquery": "^3.5.32"
-  },
-  "owners": [
-    {
-      "name": "Goldman Kim",
-      "githubUsername": "bbalganjjm",
-      "email": "bbalganjjm@gmail.com"
-    }
-  ],
-  "license": "LGPL v2.1",
-  "bugs": {
-    "url": "https://github.com/bbalganjjm/natural_js/issues",
-    "email": "bbalganjjm@gmail.com"
+    "@playwright/test": "1.63.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
   }
 }

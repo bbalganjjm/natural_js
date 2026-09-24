@@ -7,13 +7,13 @@ status: draft
 symbols: [Rule, RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, FormHandle, GridHandle, PopupHandle]
 sources:
   - id: ui
-    resource: ../../v2/src/ui/index.ts
+    resource: ../../src/ui/index.ts
     title: UI type contracts
     git_blob: b8217f57369262011a20e2c5e69c4c30be55d101
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:19:59Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:52:33Z }
 ---
 
-The `./ui` entry exports types only in M2. No Form, Grid, or popup function is implemented yet; later milestones attach their behavior to authored HTML.
+The `./ui` entry remains type-only in M3. No Form, Grid, or popup function is implemented yet; later milestones attach their behavior to authored HTML.
 
 # Summary
 
@@ -33,7 +33,7 @@ The `./ui` entry exports types only in M2. No Form, Grid, or popup function is i
 
 # Pitfalls
 
-Form-used built-in formatter and validator names remain in scope; their runtime engine is not part of M2. Rule functions are application extension points, not a new public utility collection. Use `import type` until the owning component exists.
+Form-used built-in formatter and validator names remain in scope; their runtime engine is not yet implemented. Rule functions are application extension points, not a new public utility collection. Use `import type` until the owning component exists.
 
 # Related
 

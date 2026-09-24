@@ -3,29 +3,28 @@ type: Plan
 title: Natural-JS 2.0 M3 runtime plan
 description: Proposed CVC lifecycle, communication, and minimum shared-row implementation with cancellation and cleanup gates.
 tags: [meta, plan, migration]
-status: draft
 sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract
-    git_blob: fc2e61202c1cab234d25ab1ef12052e0e46d4d54
+    git_blob: 6f477ebc2a56d26afb704da194674f1728d9af31
   - id: package
-    resource: ../../v2/package.json
+    resource: ../../package.json
     title: Isolated 2.0 package
-    git_blob: 87bd07cfc1832d359f4dca93a130859042951a0d
+    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
   - id: page
-    resource: ../../v2/src/page/index.ts
+    resource: ../../src/page/index.ts
     title: Page type contract
-    git_blob: d933b25708d293ee1596b95045d1025746da4f3b
+    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
   - id: data
-    resource: ../../v2/src/data/index.ts
+    resource: ../../src/data/index.ts
     title: Data type contract
-    git_blob: 96983e05d1deb1b8b60a93abbc10fd438e74cbbe
+    git_blob: 85c9f0c7140580e7217dadb91476d824025b3a07
   - id: comm
-    resource: ../../v2/src/comm/index.ts
+    resource: ../../src/comm/index.ts
     title: Communication type contract
-    git_blob: bf04ba759196dac52cbbf89f80f2b9c78abe3ddc
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:19:59Z }
+    git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:03:22Z }
 ---
 
 M3 turns the approved page, communication, and minimum row contracts into working runtime exports. It uses the M2 package without importing or relabeling 1.x code.
@@ -36,8 +35,8 @@ Run two independent instances of one authored HTML page, complete predictable as
 
 # Checkpoint
 
-- M2 produces strict TypeScript, ESM and declarations in the independent Apache-2.0 `v2/` package. M3 starts only after the user reviews M2 results and approves this plan.
-- `FrameworkError` is the only M2 runtime export. Page, data, and communication entry points currently export types only; UI stays type-only throughout M3.
+- M2 first produced strict TypeScript, ESM and declarations in an isolated package. The user approved M3 and promotion of 2.0 to the repository root; 1.x is archived under `v1/`.
+- `FrameworkError` is the only M2 runtime export. Page, data, and communication had type-only entries before M3; UI stays type-only throughout M3.
 - Formatter/validator rules remain required capabilities for M5. M3 does not remove or port them.
 
 # Steps
@@ -54,23 +53,25 @@ Run two independent instances of one authored HTML page, complete predictable as
 
 # Next action
 
-Wait for explicit M3 approval after M2 review. Then implement the page, communicator, and rows runtime in that order while keeping UI behavior and rule ports in later milestones.
+M3 runtime and its tests are complete. Review the [M4 plan](m4-plan.md) and receive separate approval before implementing UI behavior and rule ports.
 
 # Decisions
 
 - One owner per responsibility: page owns mounted roots and lifecycle, communication owns requests, data owns row identity and change tracking, UI later owns authored field binding and rule execution.
 - A private shared module requires the same stable behavior in at least two runtime roles. `FrameworkError` is already shared; resource cleanup stays page-local until UI needs exactly the same lifetime contract.
 - Use plain functions and objects, native `fetch`, `AbortController`, and DOM APIs. No jQuery adapter, broad utility namespace, registration engine, or mutable global page registry.
-- The root package and source remain 1.x LGPL. Only newly written `v2/` source and its tarball are Apache-2.0.
+- The root package and new 2.0 source use Apache-2.0. The unchanged 1.x source and LGPL license remain under `v1/`; the 2.0 tarball excludes them.
 - Browser import smoke is an M2 foundation, not proof of M3 lifecycle or UI behavior; the M3 fixture must check actual concurrent work and cancellation.
 
 # Verification log
 
 | Date | Check | Result |
 |---|---|---|
-| 2026-09-24 | Planning | M3 scope drafted from the approved M1 contract and M2 implementation; runtime work awaits user approval. |
+| 2026-09-24 | Approval | The user approved M3 implementation, root 2.0 promotion, `v1/` preservation, and the `2.0.0-alpha.0` GitHub branch. |
+| 2026-09-24 | Runtime | Build, typecheck, Vitest 20/20, installed JS/TS consumers, and Chromium/WebKit browser 16/16 passed. URL/factory/borrowed roots, pending init cancellation, two independent pages, reload, and duplicate-ID rejection were exercised. |
+| 2026-09-24 | Package | The 2.0 tarball lists 33 files and excludes `v1/`, jQuery, old bundles, and old utility libraries. |
 
 # Open questions
 
-- M3 should determine whether immutable snapshots need shallow freezing at each changed path or another approach that meets M5 nested-data and M4 performance gates without whole-store cloning.
-- If this Windows host still cannot launch Playwright Firefox, record the failure and run that project on a working host before the later release gate.
+- M3 uses per-row detached frozen snapshots and clones only the changed top-level field. M4 must measure whether this remains within the binding budget at 100 and 1000 rows.
+- Firefox failed before page load on this Windows host (`browserType.launch: spawn UNKNOWN`); run that project on a working host before the later release gate.

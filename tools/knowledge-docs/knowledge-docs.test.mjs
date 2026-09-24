@@ -39,26 +39,30 @@ test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
         "symbols: [FrameworkError, PageContext]",
         "sources:",
         "  - id: root",
-        "    resource: ../../v2/src/index.ts",
+        "    resource: ../../src/index.ts",
         "    symbol: FrameworkError",
         "  - id: page",
-        "    resource: ../../v2/src/page/index.ts",
+        "    resource: ../../src/page/index.ts",
         "    symbol: PageContext",
         "---",
         "",
         "The fixture describes both public exports.",
         ""
     ].join("\n"));
-    write(root, "v2/package.json", JSON.stringify({
+    write(root, "package.json", JSON.stringify({
         exports: {
             ".": { types: "./build/index.d.ts", import: "./build/index.js" },
             "./page": { types: "./build/page/index.d.ts", import: "./build/page/index.js" }
         }
     }));
-    write(root, "v2/src/index.ts", "export class FrameworkError extends Error {}\n");
-    write(root, "v2/src/page/index.ts", "export interface PageContext { name: string; }\n");
-    write(root, "v2/build/index.d.ts", "export declare class FrameworkError extends Error {\n}\n");
-    write(root, "v2/build/page/index.d.ts", "export interface PageContext { name: string; }\n");
+    write(root, "src/index.ts", "export class FrameworkError extends Error {}\n");
+    write(root, "src/page/index.ts", "export interface PageContext { name: string; }\n");
+    write(root, "build/index.d.ts", "export declare class FrameworkError extends Error {\n}\n");
+    write(root, "build/page/index.d.ts", "export interface PageContext { name: string; }\n");
+
+    // Archived 1.x files are outside the active 2.0 docs and export checks.
+    write(root, "v1/src/legacy.js", "class Legacy {\n    static helper = class {}\n}\n");
+    write(root, "v1/docs/index.md", "# Archived guides\n\n[Old link](missing.md)\n");
 
     const stamp = run(root, "stamp", "docs/implementation/fixture.md");
     assert.equal(stamp.status, 0, stamp.stdout + stamp.stderr);
@@ -66,20 +70,20 @@ test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
     assert.equal(clean.status, 0, clean.stdout + clean.stderr);
     assert.match(clean.stdout, /0 errors, 0 warnings/);
 
-    fs.rmSync(path.join(root, "v2/build"), { recursive: true, force: true });
+    fs.rmSync(path.join(root, "build"), { recursive: true, force: true });
     const beforeBuild = run(root, "check");
     assert.equal(beforeBuild.status, 0, beforeBuild.stdout + beforeBuild.stderr);
 
-    write(root, "v2/build/index.d.ts", "export declare class FrameworkError extends Error {\n}\n");
-    write(root, "v2/build/page/index.d.ts", "export interface WrongName { name: string; }\n");
+    write(root, "build/index.d.ts", "export declare class FrameworkError extends Error {\n}\n");
+    write(root, "build/page/index.d.ts", "export interface WrongName { name: string; }\n");
     const mismatch = run(root, "check");
     assert.equal(mismatch.status, 1);
     assert.match(mismatch.stdout, /declaration-mismatch/);
 
     const git = spawnSync("git", ["init"], { cwd: root, encoding: "utf8" });
     assert.equal(git.status, 0, git.stderr);
-    write(root, "v2/build/page/index.d.ts", "export interface PageContext { name: string; }\n");
-    write(root, "v2/src/page/index.ts", "export interface PageContext { name: number; }\nexport type Extra = string;\n");
+    write(root, "build/page/index.d.ts", "export interface PageContext { name: string; }\n");
+    write(root, "src/page/index.ts", "export interface PageContext { name: number; }\nexport type Extra = string;\n");
     const drift = run(root, "check", "--changed");
     assert.equal(drift.status, 1);
     assert.match(drift.stdout, /error drift/);

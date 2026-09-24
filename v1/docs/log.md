@@ -1,34 +1,5 @@
 ## 2026-09-24
 
-* **Update** Promoted the Apache-2.0 2.0 package from `v2/` to the repository root on branch `2.0.0-alpha.0`; preserved all 142 checked 1.x tracked source/document files under `v1/` with their LGPL license and notices. Root docs and the OKF checker now target 2.0.
-* **Creation** Added the M3 `mountPage`, `createCommunicator`, and `createRows` runtimes, focused unit/browser tests, and installed JS/TS consumer checks. UI remains type-only for M4.
-* **Update** `docs/v2/`, `implementation/current.md`, `implementation/m3-plan.md`, and the repository workflow to describe shipped M3 behavior, abort/cleanup boundaries, root package exports, and 1.x archive links.
-* **Creation** Added `implementation/m4-plan.md` for a separate review of the authored-HTML vertical screen, nested Select, accessibility, and binding performance gates.
-* **Verification** M3 build and typecheck passed; Vitest 20/20, installed JS/TS consumers, Chromium/WebKit browser 16/16, checker regression test, and the 33-file package audit passed. Firefox remains blocked before page load on this Windows host (rowserType.launch: spawn UNKNOWN).
-* **Creation** `v2/`: added an isolated Apache-2.0 TypeScript package with explicit ESM/declaration exports, source maps, a tracked lockfile, and no 1.x or jQuery files in its tarball.
-* **Creation** `docs/v2/`: documented the implemented error, type-only role entries, installable package, and private-module boundaries without describing unimplemented runtime as shipped.
-* **Creation** `implementation/m3-plan.md`: scoped the next CVC, communication, and row-store runtime milestone for review.
-* **Update** `implementation/m1-contract.md`, `implementation/m2-plan.md`, `implementation/roadmap.md`, and `implementation/current.md`: recorded M1/M2 approval, 2.0-only Apache licensing, actual M2 checks, Firefox host limitation, and the evidence rule for shared modules.
-* **Verification** M2 package: `npm ci`, build, typecheck, Vitest, separate installed JS/TS consumers, documentation checker regression test, and Chromium/WebKit smoke passed; Firefox could not launch because of this Windows host's SideBySide `mozglue` failure.
-* **Verification** M2 OKF: changed and full checks passed with 78 concepts, 17 reserved files, 0 errors, and 0 warnings; an independent agent verified the package and FrameworkError concepts against source and tarball.
-
-* **Update** governance/okf-conventions.md and governance/repository-workflow.md: added the 2.0 TypeScript source, package entry, emitted declaration, and public-symbol documentation checks; tools/knowledge-docs now checks explicit v2 exports and TS symbol fingerprints with a focused regression test.
-* **Correction** implementation/roadmap.md and implementation/m0-baseline.md: retained Form-used formatter/validator engines, declarative built-in rules, and transitive helpers after the user's scope correction; only framework-unreachable utilities qualify for removal.
-* **Update** implementation/m1-plan.md and implementation/current.md: recorded M1 approval, the corrected retention boundary, and the M1 review gate.
-* **Creation** Added implementation/m1-contract.md with concrete HTML/JS/TS usage, public signatures, CVC lifetime, shared rows, Form rule behavior, and request/container examples.
-* **Creation** Added implementation/m2-plan.md for the next approved-scope gate; implementation/index.md and docs/index.md link the new records.
-* **Update** implementation/m1-contract.md, implementation/m1-plan.md, implementation/roadmap.md, and implementation/current.md: added nested JSON/row-local Select, duplicate-ID-free MDI, accessible native tables, fixed-fixture binding benchmarks, and optimized rewrites after user steering.
-* **Correction** implementation/m1-contract.md: aligned request 204 decoding, raw-value restoration, late-request cancellation, row validation, page output lifetime, and popup result types after independent design review.
-* **Verification** implementation/m0-baseline.md: independent recheck of Form rule dependencies and MDI/row-cloning facts; renewed its verified stamp.
-* **Verification** M1 draft: changed and full OKF checks passed with 70 concepts, 16 reserved files, 0 errors, and 0 warnings; runtime implementation remains pending.
-
-* **Correction** implementation/m0-baseline.md: corrected the 1.x View lookup scope, jQuery plugin installation exceptions, and grid-only sorting/filtering boundary after independent source review.
-* **Update** implementation/m1-plan.md: included JavaScript consumer examples in the M1 exit package.
-* **Creation** Added implementation/roadmap.md for the approved Natural-JS 2.0 milestone sequence and minimal migration policy.
-* **Creation** Added implementation/m0-baseline.md with code-backed design intent, strict inclusion inventory, representative screen, and agent evaluation tasks.
-* **Creation** Added implementation/m1-plan.md with the detailed scope and review gate for the 2.0 public contract.
-* **Update** implementation/current.md now tracks the active 2.0 checkpoint; implementation/index.md and docs/index.md link the new records.
-
 * **Creation** Added 62 Natural-JS concepts across overview, setup, getting started, core, architecture, data, UI, UI shell, template, code, and examples. The five code-only areas (`core/mask.md`, `data/datasync.md`, `ui/theming.md`, `setup/build-and-dist.md`, and `code/inspection.md`) are drafts.
 * **Creation** Added 15 bundle and folder `index.md` files for concept lookup.
 * **Creation** Added `tools/knowledge-docs/knowledge-docs.mjs` for OKF checks, source drift detection, and source stamping.

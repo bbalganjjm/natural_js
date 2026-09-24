@@ -6,17 +6,15 @@ Thumbs.db
 .settings/
 .externalToolBuilders/
 .history
-.idea/
-.vscode/
-.continue/
+.idea
+.vscode
+.continue
 .codex/
 .mcp.json
 *.iml
 AGENTS.md
 CLAUDE.md
 
+# node
 node_modules/
-build/
-playwright-report/
-test-results/
-.vite/
+package-lock.json

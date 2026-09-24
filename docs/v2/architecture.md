@@ -6,25 +6,37 @@ tags: [architecture, modules, maintainability]
 status: draft
 sources:
   - id: package
-    resource: ../../v2/package.json
+    resource: ../../package.json
     title: Public package boundaries
-    git_blob: 87bd07cfc1832d359f4dca93a130859042951a0d
+    git_blob: 148dfc8e866559ae2859b5130afabafdaa1c0af3
   - id: root
-    resource: ../../v2/src/index.ts
+    resource: ../../src/index.ts
     title: Root entry
     git_blob: d99a783055cf6bea9b6e15ca591c370ff514cec9
   - id: ui
-    resource: ../../v2/src/ui/index.ts
+    resource: ../../src/ui/index.ts
     title: UI type dependencies
     git_blob: b8217f57369262011a20e2c5e69c4c30be55d101
+  - id: page
+    resource: ../../src/page/index.ts
+    title: CVC page runner
+    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
+  - id: data
+    resource: ../../src/data/index.ts
+    title: Row store
+    git_blob: 85c9f0c7140580e7217dadb91476d824025b3a07
+  - id: comm
+    resource: ../../src/comm/index.ts
+    title: Communicator
+    git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
   - id: error
-    resource: ../../v2/src/internal/framework-error.ts
+    resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:23:45Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:52:33Z }
 ---
 
-The 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
+The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
 
 # Intent
 
@@ -32,18 +44,18 @@ Keep one definition of each framework behavior without collecting unrelated help
 
 # Participants
 
-| Path | Responsibility and current M2 state |
+| Path | Responsibility and current M3 state |
 |---|---|
-| `v2/src/index.ts` | Root public entry; currently re-exports the real `FrameworkError`. |
-| `v2/src/page/` | CVC lifecycle types; M3 adds the runtime. |
-| `v2/src/data/` | Shared row identity and change types; M3-M5 add the store. |
-| `v2/src/ui/` | Form rule and component handle types; later UI owns its common rule runner. |
-| `v2/src/comm/` | Request types; M3 adds transport and hooks. |
-| `v2/src/internal/` | Private cross-role implementation; currently the common error class only. |
+| `src/index.ts` | Root public entry; currently re-exports the real `FrameworkError`. |
+| `src/page/` | `mountPage`, CVC lifecycle, authored HTML roots, and per-instance cancellation. |
+| `src/data/` | `createRows`, immutable nested JSON snapshots, row identity, and change tracking. |
+| `src/ui/` | Form rules and component handle types only; later UI owns its common rule runner. |
+| `src/comm/` | `createCommunicator`, Request/Response hooks, JSON decoding, and cancellation. |
+| `src/internal/` | Private cross-role implementation; currently the common error class only. |
 
 # Lifecycle
 
-Build `v2/src/` once with `tsc` to `v2/build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The 1.x code is outside this build and tarball.[^package]
+Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball.[^package]
 
 # Rules
 
@@ -55,11 +67,11 @@ Build `v2/src/` once with `tsc` to `v2/build/`. The package export map resolves 
 
 # Pitfalls
 
-A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. M2 type-only entries must not be mistaken for runtime implementations.
+A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The UI type-only entry must not be mistaken for a runtime Form or Grid implementation.
 
 # Related
 
-[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable in M2. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
+[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable in M3. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
 
 [^package]: Public package boundaries
 [^root]: Root entry

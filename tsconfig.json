@@ -1,20 +1,26 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": [
-      "es6",
-      "dom"
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
     ],
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "types": [],
-    "noEmit": true,
-    "forceConsistentCasingInFileNames": true
+    "rootDir": "src",
+    "outDir": "build",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "types": []
   },
-  "files": [
-    "./@types/index.d.ts",
-    "./@types/natural_js-tests.ts"
+  "include": [
+    "src/**/*.ts"
   ]
 }

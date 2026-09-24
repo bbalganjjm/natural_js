@@ -7,19 +7,17 @@ status: draft
 symbols: [FrameworkError]
 sources:
   - id: entry
-    resource: ../../v2/src/index.ts
+    resource: ../../src/index.ts
     title: Public package entry
     git_blob: d99a783055cf6bea9b6e15ca591c370ff514cec9
   - id: error
-    resource: ../../v2/src/internal/framework-error.ts
+    resource: ../../src/internal/framework-error.ts
     title: FrameworkError implementation
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:23:45Z }
-verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T08:23:52Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:52:33Z }
 ---
 
-`FrameworkError` is the only implemented 2.0 runtime export in M2. Use it when a framework operation needs a short code and actionable context.
+`FrameworkError` is the shared error class used by the M3 page runner, row store, and communicator. It carries a short code and actionable context.
 
 # Summary
 
@@ -45,7 +43,7 @@ The constructor requires nonblank `code`, `api`, and `message` strings. A missin
 
 # Pitfalls
 
-The class is implemented, but `mountPage`, `createRows`, `bindForm`, and `createCommunicator` are not exported yet. Importing a type-only subpath does not add runtime behavior.
+`mountPage`, `createRows`, and `createCommunicator` now export runtime functions from their role entries. The `./ui` entry remains type-only; importing its Form or Grid handle type does not add runtime behavior.
 
 # Examples
 
@@ -53,15 +51,15 @@ The class is implemented, but `mountPage`, `createRows`, `bindForm`, and `create
 import { FrameworkError } from "@bbalganjjm/natural_js";
 
 throw new FrameworkError({
-  code: "FIELD_MISSING",
-  api: "bindForm",
-  message: "The field is absent from the authored view.",
+  code: "INVALID_EMPLOYEE",
+  api: "saveEmployee",
+  message: "The employee name is required.",
   detail: { field: "profile.name" }
 });
 ```
 
 # Related
 
-[Package and installation](package.md) identifies the actual M2 exports. [The M1 contract](../implementation/m1-contract.md) specifies errors required by later runtime milestones.
+[Package and installation](package.md) identifies the actual M3 exports. [The M1 contract](../implementation/m1-contract.md) specifies errors required by later runtime milestones.
 
 [^error]: FrameworkError implementation

@@ -11,8 +11,8 @@ sources:
   - id: checker
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: Current OKF checker and stamper
-    git_blob: 8c868f2ca6877b6c19329cde9bc9b9225712a3d2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:27:15Z }
+    git_blob: 6e58994a0f2fe00466fb67c1f047036e8f150e6a
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:54:40Z }
 ---
 
 M2 builds the source, package, test, and documentation foundation for the [M1 public contract](m1-contract.md). It ships real M2-owned exports and import-only consumer fixtures; CVC and UI runtime behavior begin in M3/M4.
@@ -41,7 +41,7 @@ Make TypeScript the single implementation source and generate installable ESM Ja
 
 # Next action
 
-M2 implementation is complete apart from host-blocked Firefox execution. Review the results and [the M3 runtime plan](m3-plan.md); start M3 only after its scope is approved.
+M2 was completed in an isolated `v2/` package. The user then approved promoting 2.0 to the repository root, archiving 1.x under `v1/`, and starting [M3](m3-plan.md). The original M2 steps below remain a record of how its foundation was built.
 
 # Decisions
 

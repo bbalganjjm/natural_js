@@ -21,8 +21,6 @@ const STATUSES = new Set(["draft", "stable", "deprecated"]);
 const TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
 const ACTOR = /^([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+|human:[^\s]+|process:[^\s]+)$/;
 const URL_SCHEME = /^[a-z][a-z0-9+.-]*:/i;
-// 1.x nested classes are still checked beside explicit 2.0 TypeScript entry exports.
-const LEGACY_SYMBOL_SOURCES = ["src"];
 
 class UsageError extends Error {}
 
@@ -288,33 +286,13 @@ function typescriptExports(abs) {
 
 function publicSymbols() {
     const symbols = [], issues = [];
-    for (const dir of LEGACY_SYMBOL_SOURCES) {
-        const absDir = path.join(REPO, dir);
-        if (!fs.existsSync(absDir)) continue;
-        for (const f of fs.readdirSync(absDir).filter((n) => n.endsWith(".js")).sort()) {
-            const abs = path.join(absDir, f);
-            const lines = readText(abs).split(/\r?\n/);
-            const topIdx = lines.findIndex((l) => /^(export\s+)?class\s+\w+/.test(l));
-            if (topIdx < 0) continue;
-            const cls = /class\s+(\w+)/.exec(lines[topIdx])[1];
-            const end = blockEnd(lines, topIdx);
-            let childIndent = null;
-            for (let i = topIdx + 1; i < end; i++) {
-                const m = /^(\s+)static\s+(\w+)\s*=\s*class\b/.exec(lines[i]);
-                if (!m) continue;
-                if (childIndent === null) childIndent = m[1];
-                if (m[1] === childIndent) symbols.push({ symbol: cls + "." + m[2], file: abs, line: i + 1 });
-            }
-        }
-    }
-
-    const packageFile = path.join(REPO, "v2", "package.json");
+    const packageFile = path.join(REPO, "package.json");
     if (!fs.existsSync(packageFile)) return { symbols, issues };
     const pkg = JSON.parse(readText(packageFile));
     for (const [entry, conditions] of Object.entries(pkg.exports || {})) {
         if (entry !== "." && !/^\.\/[A-Za-z][\w-]*$/.test(entry)) continue;
         const part = entry === "." ? "" : entry.slice(2);
-        const source = path.join(REPO, "v2", "src", part, "index.ts");
+        const source = path.join(REPO, "src", part, "index.ts");
         if (!fs.existsSync(source)) {
             issues.push({ file: packageFile, line: 1, rule: "entry-source-missing", msg: entry + " has no TypeScript entry " + rel(source) });
             continue;

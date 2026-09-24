@@ -23,7 +23,7 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:19:59Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:54:32Z }
 ---
 
 This is the user-approved 2.0 design contract, not yet an implemented API. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
@@ -42,7 +42,7 @@ Make a search, list, detail, save, and popup flow readable in ordinary TypeScrip
 
 ## Package and public surface
 
-The independent 2.0 package lives under `v2/` and keeps the name `@bbalganjjm/natural_js`; the repository-root 1.x package and license stay unchanged. M2 defines explicit ESM exports for `./page`, `./data`, `./ui`, and `./comm`; the root entry may re-export these public symbols only. Internal modules never import the root entry. At M2 only `FrameworkError` is a runtime export; the role entries export types until their behavior is implemented.
+The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 adds the page, data, and communication runtimes. UI remains type-only until M4.
 
 | Entry | Public symbols fixed by M1 | Required framework behavior |
 |---|---|---|
@@ -271,7 +271,7 @@ The existing built-in formatter and validator catalogs, dynamic rule dispatch, r
 | Validator | `required`, `alphabet`, `integer`, `korean`, `number`, `decimal`, `phone`, `email`, `url`, `zipcode`, `rrn`, `ssn`, `frn`, `frn_rrn`, `kbrn`, `kcn`, `date`, `time`, `accept`, `notAccept`, `match`, `notMatch`, `acceptFileExt`, `notAcceptFileExt`, `equalTo`, `maxlength`, `minlength`, `rangelength`, `maxbyte`, `minbyte`, `rangebyte`, `maxvalue`, `minvalue`, `rangevalue`, `regexp` |
 | Combined validator names | `alphabet+integer`, `integer+korean`, `alphabet+korean`, `alphabet+integer+korean`, `integer+dash`, `integer+commas` |
 
-Name lookup stays case-insensitive, including combined-name normalization. The 1.x camel-case `equalTo` lookup bug is corrected rather than treated as a reason to remove that rule. In 2.0 its argument is a `data-field` path resolved within the same Form or row, not a document-wide CSS selector; the migration guide records this argument change. See [formatter](../data/formatter.md) and [validator](../data/validator.md) for 1.x arguments and known bugs. `RuleSet` adds user rules and message overrides per component or shared page object without a mutable global registry. Its `locale` selects the built-in message language; M5 specifies exact fallback and available locales. A user rule with a built-in name intentionally overrides that rule for that component. Unknown names or malformed arguments raise a `FrameworkError` naming the field and rule. Business-specific new rules live in the application.
+Name lookup stays case-insensitive, including combined-name normalization. The 1.x camel-case `equalTo` lookup bug is corrected rather than treated as a reason to remove that rule. In 2.0 its argument is a `data-field` path resolved within the same Form or row, not a document-wide CSS selector; the migration guide records this argument change. See [formatter](../../v1/docs/data/formatter.md) and [validator](../../v1/docs/data/validator.md) for 1.x arguments and known bugs. `RuleSet` adds user rules and message overrides per component or shared page object without a mutable global registry. Its `locale` selects the built-in message language; M5 specifies exact fallback and available locales. A user rule with a built-in name intentionally overrides that rule for that component. Unknown names or malformed arguments raise a `FrameworkError` naming the field and rule. Business-specific new rules live in the application.
 
 `bindGrid(root, { rows, rules?, onSelect? })` and the later List component use the same field/rule runner as Form. Grid selection carries a `RowSnapshot<T>` and the originating event (or `null` for programmatic changes), never an array index. `grid.validate()` checks all retained invalid drafts, including filtered-out rows; `grid.validate(id)` checks that row's draft or stored fields and child Selects even when filtered out. Comparators and predicates are application functions, not a public data-utility catalog.
 
@@ -498,7 +498,7 @@ Inside the picker controller, `context.output(employee)` resolves the popup resu
 
 # Next action
 
-The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 builds the isolated package foundation; later milestones implement the proposed runtime functions and update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
+The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 built the package foundation; M3 implements the page, row, and communication functions and update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
 
 # Decisions
 

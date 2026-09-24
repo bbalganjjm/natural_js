@@ -13,8 +13,8 @@ sources:
   - id: checker
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: knowledge-docs checker and stamper
-    git_blob: 6e58994a0f2fe00466fb67c1f047036e8f150e6a
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:45:16Z }
+    git_blob: 35ca43e9625fb9809c42e7246ecfd43be1a45a98
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T05:37:38Z }
 ---
 
 `docs/` is an OKF v0.2 knowledge bundle[^okf-spec] maintained as an LLM wiki[^llm-wiki]. The primary reader is an AI coding agent writing Natural-JS code, so every rule below favors fast, unambiguous lookup over prose. The maintenance workflow (when to update what) lives in [Repository workflow](repository-workflow.md); this page defines the format.
@@ -22,16 +22,24 @@ generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:45:16Z }
 # Bundle layout
 
 ```
-docs/                     active 2.0 bundle root (index.md declares okf_version "0.2")
+docs/                     bundle root (index.md declares okf_version "0.2")
   index.md  log.md        reserved files (OKF §3.1)
-  v2/                     implemented 2.0 package and draft API concepts
+  overview/               what Natural-JS is, API conventions
+  setup/                  installation, natural.config.js, TypeScript, build and dist bundles
+  getting-started/        tutorials that build a first application
+  core/                   Natural-CORE: N(), N static functions, N.string, N.date, ...
+  architecture/           Natural-ARCHITECTURE: CVC, N.cont, AOP, N.comm, request, filters, N.context
+  data/                   Natural-DATA: N.formatter, N.validator, N.data, N.ds
+  ui/                     Natural-UI: component model, theming, one file per component
+  ui-shell/               Natural-UI.Shell: N.notify, N.docs
+  template/               Natural-TEMPLATE conventions
+  code/                   Natural-CODE inspection
+  examples/               task-oriented examples (examples/template/ for Natural-TEMPLATE)
   governance/             this specification and the repository workflow
-  implementation/         milestone plans, active checkpoint, and design contract
-
-v1/docs/                  preserved 1.x usage bundle; reference only
+  implementation/         the active implementation plan
 ```
 
-- One active 2.0 concept per public object, component or task. File names are lowercase kebab-case (`framework-error.md`, `package.md`).
+- One concept per public object, component or task. File names are lowercase kebab-case (`grid.md`, `communication-filter.md`).
 - `index.md` and `log.md` are reserved at every level and are never concepts.
 - The bundle root is `docs/`, not the repository root, so README.md and AGENTS.md stay outside the bundle.
 
@@ -41,35 +49,37 @@ Keys appear in this order; omit keys that do not apply.
 
 ```yaml
 ---
-type: API Reference
-title: FrameworkError
-description: Shared 2.0 error with a stable code, API name, message, cause, and optional detail.
-tags: [core, error, typescript]
-status: draft
-symbols: [FrameworkError]
+type: UI Component
+title: N.grid
+description: One sentence, at most ~160 characters, saying what the thing is.
+resource: https://example.com/canonical-asset   # rare; only for a real external asset
+tags: [ui, component, data-binding]
+status: draft                                    # only for draft or deprecated pages
+symbols: [N.grid, N().grid, NU.grid, NU.Grid, NU.Options.Grid]
 sources:
-  - id: entry
-    resource: ../../src/index.ts
-    title: Public package entry
-    git_blob: d99a783055cf6bea9b6e15ca591c370ff514cec9
-  - id: error
-    resource: ../../src/internal/framework-error.ts
-    title: FrameworkError implementation
-    git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:23:45Z }
+  - id: ui
+    resource: ../../src/natural.ui.js
+    title: NU.grid implementation
+    symbol: NU.grid
+    git_blob: 50229404558dabe92cdea2d02cd1c45a2481cf49
+    symbol_sha1: 1a2b3c4d5e6f
+  - id: legacy
+    resource: https://github.com/bbalganjjm/natural_js/blob/8877a4a49c2363a3358cb266bd798cb698283412/docs/DEVELOPER-GUIDE-UI-Grid.md
+    title: Legacy developer guide (removed)
+generated: { by: claude-code/claude-opus-5-5, at: 2026-09-24T03:00:00Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T08:23:52Z }
+  - { by: claude-code/claude-opus-5-5, at: 2026-09-24T05:00:00Z }
 ---
 ```
 
 | Key | Rule |
 |---|---|
 | `type` | Required (OKF). One of: `Overview`, `Guide`, `API Reference`, `UI Component`, `Architecture Pattern`, `Configuration`, `Example`, `Playbook`, `Specification`, `Plan`. |
-| `title` | The primary public symbol for API Reference and UI Component pages (`FrameworkError`, `PageContext`); plain words otherwise. |
+| `title` | The primary public symbol for API Reference and UI Component pages (`N.grid`, `N.string`); plain words otherwise. |
 | `description` | One sentence stating what the thing is. Never "This page ...". Copied verbatim into the folder `index.md`. |
 | `tags` | Lowercase kebab-case. First tag is the module facet: `core`, `architecture`, `data`, `ui`, `ui-shell`, `template`, `code`, `project`, `meta`. Then 1-4 topical tags. |
 | `status` | `draft` for pages written from code without a legacy guide or not yet reviewed; `deprecated` for retired pages kept for links. Absent means `stable`. |
-| `symbols` | Producer extension. Every identifier an agent might grep for, including public entry names and their source declarations. Required for API Reference and UI Component pages. |
+| `symbols` | Producer extension. Every identifier an agent might grep for, in usage form (`N.grid`, `N().grid`) and source form (`NU.grid`, `NU.Options.Grid`). Required for API Reference and UI Component pages. |
 | `sources` | Provenance (OKF §5.1). At least one entry. See below. |
 | `generated` | `{ by, at }`. Written by `stamp --by`; `at` is the last meaningful content change. |
 | `verified` | List of `{ by, at }`. Written by `stamp --verified-by` after an independent check against code. |
@@ -78,13 +88,13 @@ verified:
 
 # Sources and fingerprints
 
-- `resource` is REQUIRED in every entry. Code sources use a path relative to the concept file (for example `../../src/internal/framework-error.ts` from `docs/v2/`); external material uses an absolute URL.
+- `resource` is REQUIRED in every entry. Code sources use a path relative to the concept file (`../../src/natural.ui.js`); external material uses an absolute URL.
 - Local sources carry fingerprints written by `stamp`, never by hand:
   - `git_blob`: SHA-1 of `"blob <n>\0"` + file content with CRLF normalized to LF. It equals `git hash-object <file>`, works before commit, and is identical on every OS.
-  - `symbol` + `symbol_sha1`: narrows drift detection to one code unit. In 1.x JavaScript, `symbol` is a dotted class/member path such as `NU.grid` or `NU.grid.prototype.add`. In 2.0 TypeScript, it names a top-level exported declaration or explicit named re-export such as `FrameworkError` or `PageContext`. `symbol_sha1` is the first 12 hex chars of the SHA-1 of that slice. When `symbol` is set, drift is decided by `symbol_sha1` only.
-- Prefer a `symbol` over a whole file for large sources such as archived `v1/src/natural.ui.js`; otherwise every edit to that file flags every page.
-- Historical 1.x type and configuration sources remain under `v1/`, alongside [the preserved usage bundle](../../v1/docs/index.md). Active 2.0 concepts cite root `src/**/*.ts`, never generated `build/**/*.d.ts`; the checker compares emitted declaration names to TS entry names when build output exists.
-- Preserved 1.x pages migrated from the legacy guides keep one `legacy` source pointing at the removed file at commit `8877a4a49c2363a3358cb266bd798cb698283412`. It has no fingerprint.
+  - `symbol` + `symbol_sha1`: narrows drift detection to one code unit. `symbol` is a dotted path resolved inside the file: `NU.grid`, `NA.comm.request`, `NC.string`, `NU.prototype.button` (the jQuery plugin wrapper), `NU.grid.prototype.add` (an instance method). `symbol_sha1` is the first 12 hex chars of the SHA-1 of that slice. When `symbol` is set, drift is decided by `symbol_sha1` only.
+- Prefer a `symbol` over a whole file for anything inside a large file such as `src/natural.ui.js`; otherwise every edit to that file flags every page.
+- `@types/*.d.ts` is fingerprinted only by [setup/typescript](../setup/typescript.md) and `dist/natural.config.js` only by [setup/configuration](../setup/configuration.md). Other pages link to those two pages and name types and config keys by symbol.
+- Pages migrated from the legacy guides keep one `legacy` source pointing at the removed file at commit `8877a4a49c2363a3358cb266bd798cb698283412`. It has no fingerprint.
 - Per-claim attribution uses footnotes keyed by `sources[].id` (`...defaults to true.[^ui]`). Put footnotes on corrected claims, defaults and Known issues; in tables, cite once per section, not per cell.
 
 # Trust
@@ -136,7 +146,7 @@ A wrong form may appear only on a line starting with `// Wrong (legacy):` inside
 
 # Links
 
-- Concept-to-concept links are relative (`../v2/package.md`, `architecture.md`). OKF allows both forms; bundle-absolute `/v2/package.md` breaks on GitHub, in IDEs and inside the npm package because the bundle root is `docs/`.
+- Concept-to-concept links are relative (`../data/formatter.md`, `grid.md`). OKF allows both forms; bundle-absolute `/ui/grid.md` breaks on GitHub, in IDEs and inside the npm package because the bundle root is `docs/`.
 - State the relationship in prose: "Requires", "See also", "Superseded by".
 - Avoid anchor links to method headings; link the page and name the method.
 - Never link to or cite `AGENTS.md` from a concept (it may be absent from a clone). The live site bbalganjjm.github.io is not canonical; link bundle pages instead.
@@ -170,14 +180,14 @@ Exit codes: `0` no errors, `1` errors, `2` usage or internal error.
 
 | Level | Rules |
 |---|---|
-| error | `frontmatter-missing`, `frontmatter-parse`, `type-missing`, `timestamp`, `status`, `generated`, `verified`, `source-resource`, `source-id-dup`, `source-missing`, `symbol-unresolved`, `link-broken`, `link-case`, `footnote-unknown`, `index-frontmatter`, `okf-version`, `log-format`, `entry-source-missing`, `export-star`, `export-default`, `declaration-export`, `runtime-export`, `declaration-mismatch` |
+| error | `frontmatter-missing`, `frontmatter-parse`, `type-missing`, `timestamp`, `status`, `generated`, `verified`, `source-resource`, `source-id-dup`, `source-missing`, `symbol-unresolved`, `link-broken`, `link-case`, `footnote-unknown`, `index-frontmatter`, `okf-version`, `log-format` |
 | warn | `drift`, `unstamped` (both errors under `--changed` for changed files), `index-missing`, `index-gap`, `index-desc`, `index-entry-format`, `title-missing`, `description-missing`, `actor`, `verified-stale`, `log-gap`, `log-entry-format`, `orphan`, `uncovered-symbol` |
 
-`uncovered-symbol` lists every named TypeScript export from the 2.0 entry files selected by root `package.json` that no concept names in `symbols` or `sources[].symbol`. A changed 2.0 entry raises this to an error. The checker requires explicit named exports in those entry files, so `export *` and default exports are errors. TypeScript symbol slicing covers top-level exported declarations and explicit named re-exports; for other internal syntax, cite the whole source file. `docs:check` does not require a prior build, but compares names in generated `.d.ts` files when they are present.
+`uncovered-symbol` lists every `static X = class` member of a top-level class in `src/*.js` that no concept names in `symbols` or `sources[].symbol`, which is how a new public API is noticed.
 
 # Reference concept
 
-[FrameworkError](../v2/framework-error.md) is a current 2.0 API Reference example. The 1.x UI Component examples are preserved under [the 1.x UI index](../../v1/docs/ui/index.md).
+[N.button](../ui/button.md) is the reference implementation of these rules for a UI Component page.
 
 [^okf-spec]: Open Knowledge Format (OKF) v0.2 specification
 [^llm-wiki]: LLM Wiki pattern (Andrej Karpathy)
