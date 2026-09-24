@@ -10,7 +10,9 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
     git_blob: 6a2ee60393df8898e518a884fc1b8f3c6d6b9cf5
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:48:20Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, and Pagination functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -20,7 +22,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, and Pagination
 | Symbol | Signature | Returns |
 |---|---|---|
 | `Rule` | Name with positional arguments | Declarative rule tuple |
-| `RuleContext` | Field, candidate values, row identity, optional connected element | Rule context |
+| `RuleContext` | Field, values snapshot, row identity, optional field element | Rule context |
 | `FormatRule` | Value, arguments, context | Display string |
 | `ValidateRule` | Value, arguments, context | Boolean or message |
 | `ParseInput` | Entered string and context | Raw candidate |
@@ -46,7 +48,7 @@ A `PageRequest` does not carry `total`; read `list.page()` or `grid.page()` afte
 
 Use an authored native `<button type="button">` and a page/controller event handler for ordinary actions. M6 has no `bindButton` export or framework button theme.
 
-Form, Grid, and List resolve JSON `data-format` and `data-validate` names through one private UI rule runner. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
+A parser sees one snapshot of all currently entered, still unparsed drafts in `RuleContext.values`; parser order does not change that snapshot. Validator `RuleContext.values` holds the combined typed candidate, but each `ValidateRule` receives its field value as a string. Formatters see stored row values. A rule's `element` may still be detached when the component initializes; use `element.isConnected` if connection matters. Form, Grid, and List resolve JSON `data-format` and `data-validate` names through one private UI rule runner. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
 
 # Related
 

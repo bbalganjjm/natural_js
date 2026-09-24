@@ -18,10 +18,12 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:47:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
 ---
 
-`bindSelect` adds typed choices to an authored `<select>` and reports the raw selected value. Form, Grid, and List own the Select elements inside their binding roots; bind a standalone Select only once.[^select][^owner]
+`bindSelect` adds typed choices to an authored `<select>` and reports the raw selected value. Form owns marked `data-field` Selects, while Grid and List own marked Selects in their repeated templates. An unmarked Select can be bound standalone; bind each Select only once.[^select][^owner]
 
 # Quick start
 
@@ -47,7 +49,7 @@ select.dispose();
 
 # Constructor
 
-`bindSelect<V extends SelectValue>(root: HTMLSelectElement, options: { choices: readonly SelectChoice<V>[]; value?: SelectSelection<V> | readonly SelectSelection<V>[]; onChange?: (value: SelectSelection<V> | readonly SelectSelection<V>[], event: Event) => void }): SelectHandle<V>` requires a native Select and a choice array. Each choice needs a string label and a finite string, number, boolean, or `null` value; `disabled` is optional. Invalid roots, choices, callbacks, or values raise `SELECT_ROOT`, `SELECT_CHOICES`, `SELECT_CALLBACK`, or `SELECT_VALUE`.[^entry][^select]
+`bindSelect<V extends SelectValue>(root: HTMLSelectElement, options: { choices: readonly SelectChoice<V>[]; value?: SelectSelection<V> | readonly SelectSelection<V>[]; onChange?: (value: SelectSelection<V> | readonly SelectSelection<V>[], event: Event) => void }): SelectHandle<V>` requires a native Select and a choice array. Each choice needs a string label and a string, finite number, boolean, or `null` value; `disabled` is optional. Invalid roots, choices, callbacks, or values raise `SELECT_ROOT`, `SELECT_CHOICES`, `SELECT_CALLBACK`, or `SELECT_VALUE`.[^entry][^select]
 
 The component preserves authored child nodes and appends generated `<option>` elements. Authored nonempty option values remain strings; an authored empty value maps to `null`. Generated choices retain their raw scalar type even though DOM `option.value` is a string.[^select]
 
@@ -70,7 +72,7 @@ After disposal, other methods raise `SELECT_DISPOSED`. A selected option inserte
 
 # Behavior
 
-A Select owned by Form, Grid, List, or another standalone Select raises `SELECT_OWNED` when bound again. It keeps the author's native label, keyboard behavior, `required`, and CSS. Use the owning component's `data-field` or row-local `data-options` markers instead of separately binding the same element.[^owner][^select]
+A Select already claimed by Form, Grid, List, or another standalone Select raises `SELECT_OWNED` when bound again. It keeps the author's native label, keyboard behavior, `required`, and CSS. Use the owning component's `data-field` or row-local `data-options` markers instead of separately binding the same element.[^owner][^select]
 
 # Pitfalls
 

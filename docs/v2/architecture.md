@@ -77,7 +77,9 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:47:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.

@@ -21,7 +21,9 @@ sources:
     resource: ../../LICENSE
     title: Apache License 2.0 text for the new package
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:47:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
 ---
 
 Build the root package to inspect real 2.0 exports. The current alpha includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, and Pagination binding, plus retained UI-owned formatter/validator rules. Dialog, popup, and tabs remain a later milestone.

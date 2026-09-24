@@ -12,15 +12,15 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone and first-release scope
-    git_blob: bbc0367777f7e513bbd4c67eed84154d7d3f91a2
+    git_blob: 8cd4c1cc1f89fe5b5e5eb33602c0dabab9426982
   - id: m4
     resource: m4-plan.md
     title: Two-layout screen and fixed performance baseline
-    git_blob: c5f7a8617a7622faaf3ddc7deaa9428ab810a216
+    git_blob: 3bd2670785327638f8c678be54fc3b5cf1ffc9fe
   - id: m5
     resource: m5-plan.md
     title: Retained rules, row drafts, and data boundary
-    git_blob: d96b1362b15fcd9e1fef52293d25f328ab0fd744
+    git_blob: f5238f00b661bbd2bcc577e14a3e03a2297b906c
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI types and exports
@@ -69,7 +69,7 @@ sources:
     resource: ../../v1/docs/ui/list.md
     title: Preserved 1.x List contract
     git_blob: 1e93437c791acfc6b3f024c9d9f10c25349997cd
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:52:47Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:27:36Z }
 ---
 
 The user approved M6 on 2026-09-24 after the M5 data and rule gate. This plan governs the first-release data UI on authored HTML and CSS while keeping the public surface small. The usage contract below records the public decisions before integration.
@@ -154,7 +154,7 @@ showPage(1, 5);
 
 `bindList(ulOrOl, { rows, rules?, onSelect? })` repeats one authored direct `<li data-row-template>` and exposes selection, sort, filter, page, validation, and disposal. It displays nested `data-field` paths and row-local `data-options` arrays without editing them; a separate Form edits the selected row. `bindGrid(table, { rows, rules?, parse?, onSelect? })` adds text/checkbox writes, row-keyed invalid drafts, optional parsed number inputs, header `aria-sort`, and the same page operations. `setSort(compare, { column: th, direction: "ascending" | "descending" })` accepts a heading in the table's `<thead>`. Grid rejects row-local multiple Selects; Form handles multiple selection.
 
-For an editable numeric or structured raw value, pass `parse[field]`. Each parser sees all current unparsed entries in `RuleContext.values`; all parsers in one validation pass see that same input snapshot regardless of edit order. Validation sees the complete parsed candidate. HTML native constraints, authored labels, `aria-describedby` error regions, and row-selection button types remain part of the authored markup. No repeated template may contain a fixed DOM `id`.
+For an editable numeric or structured raw value, pass `parse[field]`. Each parser sees all current unparsed entries in `RuleContext.values`; all parsers in one validation pass see that same input snapshot regardless of edit order. Declared validators receive each parsed field as a string with the complete typed candidate in `RuleContext.values`; native constraints check entered control values. HTML native constraints, authored labels, `aria-describedby` error regions, and row-selection button types remain part of the authored markup. No repeated template may contain a fixed DOM `id`.
 
 M4 already proves the CVC screen in two layouts and row-local nested Selects. M5 supplies `Rows` events, safe object paths, built-in and custom rules, and invalid drafts. M6 should finish missing UI behavior rather than copy these foundations or import 1.x convenience libraries.[^m4][^m5][^form][^grid]
 
@@ -162,7 +162,7 @@ M4 already proves the CVC screen in two layouts and row-local nested Selects. M5
 
 - M0-M5 are complete on `2.0.0-alpha.0`. The user approved M6 after an independent M5 audit. M6 now has public Form, Grid, List, Select, and Pagination contracts; Button remains native HTML. The M4 two-layout screen runs all of them through one CVC controller and caller-owned Rows.[^m4][^m5][^ui]
 - Preserved 1.x Button styles, generated Select/input markup, positional pagination, and per-row List forms informed intent but were not copied. All Form-reachable formatter and validator rules remain in the private UI implementation; framework-unreachable conveniences remain outside the 2.0 package.[^legacy-button][^legacy-select][^legacy-pagination][^legacy-list]
-- The original M4/M5 fixed fixture and 1,000-row List/page fixture have same-host Chromium measurements below the M6 budgets. Chromium, Firefox, and WebKit browser suites, installed JS/TS consumers, and the package-surface audit passed. The docs and independent agent-cost gate are being closed in this milestone.
+- The original M4/M5 fixed fixture and 1,000-row List/page fixture have same-host Chromium measurements below the M6 budgets. Chromium, Firefox, and WebKit browser suites, installed JS/TS consumers, and the package-surface audit passed. Nine M6-related concepts received independent source review and verified stamps. Two isolated docs-first tasks passed their first valid Chromium run without framework code changes; their measured lookup cost is recorded below.
 
 # Steps
 
@@ -180,7 +180,7 @@ M4 already proves the CVC screen in two layouts and row-local nested Selects. M5
 
 # Next action
 
-Finish source-linked OKF updates and the independent docs-first agent tasks, record their actual accuracy and context cost, then close M6 with a fast-forward push to `2.0.0-alpha.0`. Prepare the separate M7 page-UI plan for review; do not implement M7 under M6 approval.
+M6 is complete. Review the separate [M7 page-UI plan](m7-plan.md) and its exact usage contract before any Dialog, Popup, or Tab implementation. M7 requires separate user approval.
 
 # Decisions
 
@@ -198,12 +198,14 @@ The initial implementation order is Button/Select → pagination → Form contro
 |---|---|---|
 | 2026-09-24 | Planning baseline | This review draft compares the M1 contract, roadmap, M4/M5 plans and measurements, current Form/Grid/Rows source, and preserved 1.x Button/Select/Pagination/List documentation. No M6 code was implemented. |
 | 2026-09-24 | Fixed performance gate | On the M4 reference host with the same fixture, flat initial/rebind/edit/sort/filter medians must remain at or below 30/35/5/10/8 ms; automatic nested initial/rebind/sort/filter at or below 90/100/25/18 ms. Require zero duplicate IDs. On another host, first collect its M4 baseline and require no more than twice the corresponding medians before comparing absolute numbers. Record 100- and 1,000-row measurements, DOM count, and diagnostic heap samples.[^m4] |
-| 2026-09-24 | Agent-cost gate | After M6 implementation, repeat the fixed docs-first field task with the same acceptance checks and compare against both M5 runs; add a small List/page task for the new APIs. Record first-pass correctness, retries, unique files and content output, changed files and lines, elapsed time, and actual tokens only if available. The M5 field task passed on its first Chromium run with nine changed files in both runs; the short source map narrowed unique files from 23 to 17, with about 77-78 KB of content output in the guided replay before diff review. The M4 reference was 15 unique files/53,364 bytes, seven changed files, and about 4m05s, for a different field. These byte methods and setup times differ, so compare cautiously and investigate a growth in lookup or edit spread before approving a larger public API. M8 performs the full three-task comparison.[^m4][^roadmap] |
+| 2026-09-24 | Agent-cost method | Repeat the M5 optional nested field task and add one authored List/page control task. Record first-pass accuracy, retries, unique files, read/review output bytes, changed files/lines, elapsed time, and actual tokens only if available. M5's guided field replay opened 17 unique files with about 77-78 KB of content output before diff review; its counting method differs from the M6 run. M8 performs a consistent three-task comparison before any claim of token savings.[^m4][^roadmap] |
 
 | 2026-09-24 | M6 implementation | Native Button handlers; standalone Select, controlled Pagination, read-only List, Form groups, and editable/paged Grid are implemented. Independent source review found and prompted fixes for numeric raw type, multiple-Select ambiguity, parser ordering, page-state mutation, selection-button submission, sort ARIA, root ownership, and focus restoration. |
 | 2026-09-24 | Code and browsers | Build, typecheck, Vitest 81/81, installed JS/TS consumers, and the explicit employee example typecheck passed. Chromium/WebKit browser 144/144 and fresh-cache Firefox 72/72 passed across the complete suite, including the two authored layouts and concurrent ID-clean screens. |
 | 2026-09-24 | Same-host Grid benchmark | Two warm-ups plus five Chromium 153 runs on i7-9700F: 1,000-row flat initial/rebind/edit/sort/filter medians 12.5/15.7/0.7/2.6/2.1 ms; nested automatic 46.0/45.5/1.5/9.2/5.8 ms. All M6 reference budgets pass; raw [Grid evidence](evidence/m6-binding-chromium.json). |
 | 2026-09-24 | List/page benchmark and package | At 1,000 rows/10 fields, initial full List binding took 12.3 ms, applying 25-row paging plus Pagination 0.9 ms, Next 0.2 ms, and disposal 0.1 ms; duplicate IDs: 0. The first bind creates all row records. See [List evidence](evidence/m6-list-chromium.json). The 88-file, 120,488-byte dry-run package contains no `v1/`, jQuery, docs, examples, tests, or convenience utility bundle. |
+| 2026-09-24 | Independent agent tasks | The isolated field task passed Chromium 19/19 on the first code run with zero code retries and no framework edits: 19 unique files, 135,260 bytes of read/review output, 12 files changed (+27/-20 lines), about 9m45s. The First/Last page task passed Chromium 7/7 after building the fresh worktree, with zero code retries and no framework edits: 17 unique files, about 147,243 bytes of read output, 8 files changed (+77/-10 lines), about 8m45s. Both remained unmerged evaluation artifacts. Real token use was unavailable. M6 output counting includes field diff/review while M5's quoted replay excludes diff; task scope and setup also differ, so no direct cost improvement is claimed. The field task spent about 34.7 KB on broad log/governance/test reads; the employee task map now points to narrower test starts. |
+| 2026-09-24 | Independent documentation | Nine M6-related 2.0 concepts were checked against source and tests by a separate agent, corrected, and stamped verified. Changed and full OKF checks passed with zero errors and warnings after the M7 draft was stamped. |
 
 Verification favors focused tests for high-risk behavior over copying every legacy convenience method. Run Chromium and WebKit on the current host. The fresh Playwright Firefox build passed this host after the M5 `spawn UNKNOWN` failure in an older browser cache. Release verification later checks actual Chrome, Edge, and Safari. Accessibility checks include keyboard-only activation and selection, meaningful state/error announcements, valid labels, focus retention after sorting/paging, and no duplicate IDs in repeated rows or simultaneous pages.[^m4][^roadmap]
 
@@ -212,6 +214,7 @@ Verification favors focused tests for high-risk behavior over copying every lega
 - List/Grid cache row elements for revisited pages. At 1,000 rows/10 fields, the fixed List fixture creates all 1,000 rows before `setPage(25)` (12.3 ms, 12,008 connected elements); later page switches reuse those records. This meets M6 budgets but is not virtualized. If larger data sets need lower peak memory, review a focused M10 strategy rather than adding a generic data engine now.
 - Browser heap samples lack controlled garbage collection and are diagnostic only. Another host needs its own baseline before absolute performance comparisons.
 - The system-installed Firefox does not expose the Playwright protocol, but a fresh Playwright Firefox build passed the M6 suite on this Windows host. Keep the browser cache path explicit when reproducing this result.
+- M6 agent tasks passed accurately with no code retries, but their read output is larger and counted differently from M5. M8 must use one output-byte method for the fixed tasks and trim broad history/test reads before claiming agent token efficiency.
 
 [^contract]: Approved 2.0 public and binding contract
 [^roadmap]: Milestone and first-release scope

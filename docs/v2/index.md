@@ -4,7 +4,7 @@
 * [Natural-JS 2.0 package](package.md) - Build and inspect the root Apache-2.0 ESM package and its currently implemented exports. (draft)
 * [Natural-JS 2.0 communicator](comm.md) - Fetch requests with explicit JSON or body input, response decoding, hooks, and cancellation. (draft)
 * [Natural-JS 2.0 rows](data.md) - Immutable JSON row snapshots with store-local identity, change tracking, and subscriptions. (draft)
-* [Employee screen in two authored layouts](employee-example.md) - One CVC controller shares Rows across Form, Grid, List, Select, and Pagination in two authored layouts and fetched HTML. (draft)
+* [Employee screen in two authored layouts](employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)
 * [bindForm](form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, retained rules, and accessible errors. (draft)
 * [FrameworkError](framework-error.md) - Shared 2.0 error with a stable code, API name, message, cause, and optional detail. (draft)
 * [bindGrid](grid.md) - Bind an authored native table to Rows with cell editing, nested choices, local paging, and accessible validation. (draft)

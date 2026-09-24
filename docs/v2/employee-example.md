@@ -1,8 +1,8 @@
 ---
 type: Example
 title: Employee screen in two authored layouts
-description: One CVC controller shares Rows across Form, Grid, List, Select, and Pagination in two authored layouts and fetched HTML.
-tags: [example, cvc, form, grid, accessibility]
+description: One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML.
+tags: [example, cvc, form, grid, list, select, pagination, accessibility]
 status: draft
 sources:
   - id: controller
@@ -53,7 +53,9 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:53:36Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:27:50Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T14:27:50Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -108,7 +110,7 @@ The table has native headers, including a name header with `aria-sort`; its repe
 
 Grid and List use one `Rows<Employee>` instance. A List selection calls `grid.select(id)`; Grid's selection callback selects the same ID in List, binds the detail Form, and updates the live selected-name output. The standalone Select offers typed sizes 2 and 5. Page requests go through the controller, which sets Grid and List to the same slice, reads Grid's normalized state, and calls `pagination.set(state)`. Filtering and sorting apply to both views before page slicing. The application resets to page 1 on a new search, filter, or sort; `Rows` subscriptions recalculate totals after edits.[^controller]
 
-For an invalid changed row that is hidden by a filter or page, save validation clears the filter, computes that row's page under the current name sort, selects it, then focuses the current validation element. The browser regression specifically covers an invalid row-local Grid choice on an off-page row. Editing controls become inert during save while Close stays available; settled saves restore focus when the prior target still exists.[^controller][^m4-test][^m6-test]
+For an invalid changed row hidden by a filter or page, save validation clears the filter, computes that row's page under the current name sort, and selects it. It rechecks detail Form issues or an unavailable Grid Select choice, then focuses the connected field when one is available. The browser regression covers the off-page Grid choice. Editing controls become inert during save while Close stays available; settled saves restore focus when the prior target still exists.[^controller][^m4-test][^m6-test]
 
 # Server contract
 
@@ -127,7 +129,7 @@ The fixture includes `a: [{ aa: 11, bb: 22 }, {}]`: the incomplete option is ski
 
 Open `/m4/side.html` and `/m4/stack.html` to compare independent authored layout and CSS. Use `/m4/side.html?view=server` for fetched HTML, or Open another screen to inspect simultaneous state and unique IDs. The M6 browser spec checks both layouts for keyboard page/row activation, synchronized List/Grid slices, typed page size, empty state, and independent two-screen paging.[^runner][^m6-test]
 
-For an optional nested employee field, edit the two detail HTML inputs, the Employee shapes and new-row default in `employees.ts` and `mock-server.ts`, the fixture and expected-save JSON, and the matching browser case. Form follows `data-field` paths automatically; a data-only field needs no runtime or controller event-handler change. Start with those files rather than reading `main.ts` and CSS.[^controller][^side][^stack][^fixture][^expected][^server]
+For an optional nested employee field, edit the two detail HTML inputs, the Employee shapes and new-row default in `employees.ts` and `mock-server.ts`, the fixture and expected-save JSON, and the matching browser case. Form follows `data-field` paths automatically; a data-only field needs no runtime or controller event-handler change. Start with those files rather than reading `main.ts` and CSS. The first save case in `tests/browser/m4-screen.spec.ts` is the narrowest payload regression; page-control changes start with the first case in `tests/browser/m6-screen.spec.ts`. After editing source-linked examples, check whether `m6-plan.md` needs a source-fingerprint refresh. Read only the recent entries of `docs/log.md` for a same-task update.[^controller][^side][^stack][^fixture][^expected][^server]
 
 # Pitfalls
 

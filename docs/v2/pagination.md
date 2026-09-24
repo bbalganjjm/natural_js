@@ -14,7 +14,9 @@ sources:
     resource: ../../src/ui/pagination.ts
     title: Pagination binding runtime
     git_blob: 0239548e7638456548beb441b55956381272d454
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T13:47:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+verified:
+  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
 ---
 
 `bindPagination` adds page navigation to the buttons an author supplies. It requests a page through a callback; application code updates the data view and then confirms the new state with `set`.[^pagination]
