@@ -8,7 +8,7 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 17cfe650daacff3935aa93a383868574afe95628
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:25:58Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:50:24Z }
 ---
 
 The Natural-JS 2.0 migration follows [the master roadmap](roadmap.md). Read this checkpoint before resuming a milestone. The immutable 1.x baseline is commit `b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6`; its source, LGPL license, and usage docs are also archived under `v1/`.
@@ -21,7 +21,7 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 
 - M0-M3 are complete. M3 and the root 2.0 layout were fast-forward pushed to `origin/2.0.0-alpha.0` at commit `94c73a9f`; `master` remains untouched. The 2.0 package uses Apache-2.0, while preserved `v1/` files retain their LGPL license and notices.
 - The user approved [M4](m4-plan.md). Its two-layout employee screen, Form/Grid pilots, nested row-local Select binding, browser regressions, benchmark, and independent-agent change task are implemented. M4 build, browser, package, and documentation gates passed; commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`. Its detailed evidence is in the M4 plan.
-- The user approved [M5](m5-plan.md). The independent M4 audit, fetched-HTML integration fix, retained rules, row-keyed drafts, and full Form/Grid/data contracts are implemented. Build, unit/browser, installed-consumer, package, and final same-host performance checks passed; the docs-first agent task and final documentation/push gate remain.
+- [M5](m5-plan.md) is complete. Its prior-milestone audit, fetched-HTML integration fix, retained rules, row-keyed drafts, Form/Grid/data contracts, tests, package audit, same-host benchmark, and two docs-first agent exercises are recorded below. [M6](m6-plan.md) remains a review draft; implementation requires its own approval.
 
 # Steps
 
@@ -38,11 +38,11 @@ Deliver a TypeScript-source, jQuery-free, ESM Natural-JS 2.0 at the repository r
 - [x] Close changed/full OKF checks and source stamps; commit and fast-forward push M4 to `2.0.0-alpha.0`.
 - [x] Receive M5 approval and independently recheck the unchanged M4 baseline.
 - [x] Close the fetched-HTML M4 integration gap with the same controller and HTML in both mount modes.
-- [ ] Implement M5 retained rules, row-keyed drafts, shared validation, docs, and verification.
+- [x] Implement M5 retained rules, row-keyed drafts, shared validation, docs, and verification.
 
 # Next action
 
-Run the M5 docs-first agent task against the fixed screen, then close source/document stamps and push the approved M5 result. Review the separate [M6 plan](m6-plan.md) with the user before implementing it. Keep the Firefox host limitation open.
+Review the separate [M6 plan](m6-plan.md) with the user before implementing it. Begin M6 with representative HTML/TypeScript usage and exact component signatures; carry the Firefox host limitation into its verification plan.
 
 # Decisions
 
@@ -68,9 +68,10 @@ Run the M5 docs-first agent task against the fixed screen, then close source/doc
 | 2026-09-24 | M4 documentation | Changed and full OKF checks passed: 21 concepts, 5 reserved files, 0 errors, 0 warnings. Seven M4-related 2.0 concepts received independent source review. Commit `b9a1c902` was fast-forward pushed to `origin/2.0.0-alpha.0`. |
 | 2026-09-24 | M5 final code | Build, typecheck, Vitest 79/79, Chromium/WebKit browser 102/102, direct example TypeScript check, and installed JS/TS consumers passed. The browser suite includes the fetched-HTML path, two simultaneous ID-clean pages, hidden drafts, native constraints, and unsupported-control errors. |
 | 2026-09-24 | M5 final benchmark and package | Five Chromium runs after two warm-ups on the same 1,000-row/10-field host: flat initial/rebind 12.9/14.8 ms and nested automatic 37.6/44.8 ms; all M6 reference budgets passed. Raw report: [M5 binding](evidence/m5-binding-chromium.json). The 63-file, 86,228-byte tarball excludes `v1/`, jQuery, docs, examples, and convenience utility bundles. |
-| 2026-09-24 | Independent agent | A fresh docs-first agent added `profile.department` to both layouts and the data/save path with zero code retries; its first Chromium run passed. It read 15 unique files (53,364 bytes) and changed 7 files (12 added/5 replaced lines) in about 4m05s. Actual token use was unavailable. |
+| 2026-09-24 | Independent M4 agent baseline | A fresh docs-first agent added `profile.department` to both layouts and the data/save path with zero code retries; its first Chromium run passed. It read 15 unique files (53,364 bytes) and changed 7 files (12 added/5 replaced lines) in about 4m05s. Actual token use was unavailable. |
+| 2026-09-24 | M5 agent-cost exercise | Two fresh agents independently added optional `profile.office` across the two layouts, nested data, save expectation, browser regression, and OKF concept. Both passed Chromium 19/19 on the first code run, build and docs checks, with zero code retries and nine changed files. Before the short field-change map, one read 23 full files (117,294 bytes) plus 6,890 bytes of partial rereads in about 7-8 minutes. After the map, one opened 17 unique files, fully read ten (41,590 bytes), and inspected seven partially (about 36,751 output bytes on a replay) in about 6m27s. Its content output was roughly 77-78 KB before about 17 KB of diff review; the replay and the first run's 117,294 full plus 6,890 partial bytes use different counting methods. Actual tokens are unavailable, and both runs include differing setup overhead. Accuracy held and file discovery narrowed, while M6/M8 must still measure context and edit cost consistently. |
 
 # Open questions
 
 - Firefox Playwright still fails before page load on this Windows host (`browserType.launch: spawn UNKNOWN`); rerun the browser gate on a working host before claiming Firefox support.
-- The M4 heap readings are diagnostic without controlled collection. Recheck its fixed benchmark after M5 rule work; on another host collect a new baseline before comparing the M6 budgets.
+- Chromium heap readings remain diagnostic without controlled collection. The same-host M5 rerun met the M6 reference budgets; on another host collect a new baseline before comparing them.

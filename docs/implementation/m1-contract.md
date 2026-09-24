@@ -23,7 +23,7 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:25:58Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:50:13Z }
 ---
 
 This is the user-approved 2.0 design contract. M2-M5 implement its package, CVC, communication, data, Form/Grid rule, and row-draft pieces; the later UI contracts remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
@@ -532,16 +532,16 @@ No legacy function is removed in M1. M2-M9 removal audits must prove a candidate
 | 2026-09-24 | Independent read-only source audits | CVC, Form rule dispatch, List/Grid Form use, and M0 classification conflict were inspected by separate agents. |
 | 2026-09-24 | Contract review | At M1 approval, no CVC, data, communication, or UI runtime had been implemented. |
 | 2026-09-24 | M4 status | M2-M3 shipped the package and core roles; M4 shipped the Form/Grid pilots, automatic nested row options, ID-clean dual-page checks, and fixed-fixture benchmarks. |
-| 2026-09-24 | M5 status | The retained Form rule catalog, shared private Form/Grid runner, row-keyed drafts, and Rows mutation events are under verification. Popup remains a future M7 design, not a current public type. |
+| 2026-09-24 | M5 status | The retained Form rule catalog, shared private Form/Grid runner, row-keyed drafts, and Rows mutation events passed M5's code, browser, and package gates. Popup remains a future M7 design, not a current public type. |
 
 # Open questions
 
-- M1 retains the formatter/validator names listed above, including combined validator names. M5 audits each rule's arguments and corrected behavior against 1.x; none is removed by assumption.
+- M1 retains the formatter/validator names listed above, including combined validator names. M5 audited rule arguments and corrected behavior against 1.x; none was removed by assumption.
 - M4 benchmarked automatic nested Select binding, rejected fixed IDs in repeated templates, and verified native-table keyboard interaction. A legacy ID-scoping transform was not added; reusable markup uses ID-free field markers.
-- M4 automatic nested binding met its correctness and measured performance gate. M5/M6 must preserve that behavior and recheck the recorded budget after expanding UI behavior.
+- M4 and M5 automatic nested binding met their correctness and measured performance gates. M6 must preserve that behavior and recheck the recorded budget after expanding UI behavior.
 - Date formatting remains in M5 while its optional custom calendar attachment waits until M11.
 - M6/M7 fix component-specific options and DOM/accessibility details inside the common signatures.
-- M4 browser tests cover the pilot Form blur/validation behavior. M5 must verify the full retained rule catalog; M7 must verify popup focus lifecycle.
+- M5 tests cover the retained rule catalog and Form/Grid validation behavior; M7 must verify popup focus lifecycle.
 
 [^html-id]: HTML standard ID uniqueness
 [^wai-table]: WAI table accessibility tutorial

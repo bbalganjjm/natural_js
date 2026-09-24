@@ -8,19 +8,19 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved 2.0 public and binding contract
-    git_blob: 9ef6cc85ee2e44c083184978017d08303e38a51d
+    git_blob: ac3e447352807f54773cb746b7d12acabd22602d
   - id: roadmap
     resource: roadmap.md
     title: Milestone and first-release scope
-    git_blob: d881808046dba7ee9195224708b351a7cc2e6a85
+    git_blob: 497bbe095b7df442cb224502f854f89ad25a2dbc
   - id: m4
     resource: m4-plan.md
     title: Two-layout screen and fixed performance baseline
-    git_blob: 32e787e7cfcf9c5d4aced515732d08fd3b4e89fd
+    git_blob: 06102729b33f24851ed9c743d26b1c50639b4103
   - id: m5
     resource: m5-plan.md
     title: Retained rules, row drafts, and data boundary
-    git_blob: 5ad258bc1653fd5ad566a891fe6015ac661eee7a
+    git_blob: 4f3dc9137e068ffbef6e3cca89d2123a303aa4ac
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI types and exports
@@ -53,7 +53,7 @@ sources:
     resource: ../../v1/docs/ui/list.md
     title: Preserved 1.x List contract
     git_blob: 1e93437c791acfc6b3f024c9d9f10c25349997cd
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:39:18Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:55:33Z }
 ---
 
 This is a review draft for M6 after the M5 data and rule gate. It completes the first-release data UI on authored HTML and CSS while keeping the public surface small; it does not authorize implementation yet.
@@ -66,7 +66,7 @@ Complete Button, Select, pagination, Form, List, and basic Grid as one consisten
 |---|---|---|
 | Button | Native `<button>` semantics, disabled/busy state when a framework operation owns it, and a clear lifetime for any attached behavior. | Page action handlers stay ordinary DOM code when no framework state is needed. No size/color/class generator or styled-link substitute. |
 | Select | Bind authored single and multiple `<select>` controls to typed raw choices, preserve authored placeholder options, and align standalone and row-local option behavior. | Form owns authored radio/checkbox group values; a new input generator or CSS switch is outside the minimum contract unless a reviewed use case requires it. |
-| Pagination | Manage current page, page size, total count, bounds, and authored previous/next/page controls for client or server paging. | The application fetches server pages and owns business filtering; pagination never changes `RowId` or stores page numbers in business rows. |
+| Pagination | Manage current page, page size, total count, bounds, and authored previous/next/page controls for client or server paging. | The application fetches server pages and owns business filtering; pagination controls do not mutate `Rows` or store page numbers in business rows. An application `Rows.replace` after a server fetch issues new `RowId` values. |
 | Form | Finish the native control matrix, including authored radio/checkbox groups and multiple selection, on top of M5 raw/display/parse/validate/draft rules. | No new general mask, formatter, validator, or domain form schema engine. |
 | List | Repeat one authored `<li>` template over `Rows`, show fields and row-local options, and support row-keyed selection. Reuse a separate Form for editing in the first slice. | Inline List editing needs a separately reviewed second caller for a shared edit operation; no timer-driven row creation, scroll paging engine, or index-based identity. |
 | Basic Grid | Finish native-table text/checkbox editing, selection, sort/filter/page connection, validation, and change-state display. | Frozen columns, merged headers, virtual scrolling, large edit engines, and column reordering wait for M10. |
@@ -88,7 +88,7 @@ M4 already proves the CVC screen in two layouts and row-local nested Selects. M5
 
 # Checkpoint
 
-- M0-M4 are complete on `2.0.0-alpha.0`. M5 is approved and under final verification; its gate must close before M6 implementation begins. This document is a proposal for user review, not a claim that M6 code exists.[^roadmap][^m5]
+- M0-M5 are complete on `2.0.0-alpha.0`. M5's code, browser, package, benchmark, documentation, and independent-agent gates passed. This document remains a proposal for user review, not a claim that M6 code exists.[^roadmap][^m5]
 - Current `bindForm` reads local or row-bound fields and keeps row-keyed invalid drafts. Current `bindGrid` owns a native table template, raw Select choices, selection, sort/filter, display rules, validation, and draft reconciliation. Grid text and checkbox controls still display or validate without user edit write-through; List, standalone Select, and pagination are not yet public UI exports.[^ui][^form][^grid]
 - The preserved 1.x Button mostly adds styles and enable/disable behavior; Select also generates option and input markup; pagination assumes positional lists; List creates a Form per row and supports scroll paging. Those mechanics are evidence for intent, not APIs to copy. The 2.0 implementation keeps only behavior required by the first-release components.[^legacy-button][^legacy-select][^legacy-pagination][^legacy-list]
 - M4 measured the fixed 1,000-row/10-field Chromium fixture at 11.9/13.8 ms for flat initial/rebind and 40.4/44.2 ms for automatic nested initial/rebind. The final same-host M5 rerun recorded 12.9/14.8 ms and 37.6/44.8 ms. Both records distinguish context bytes from actual agent tokens and treat heap samples as diagnostic.[^m4][^m5]
@@ -109,7 +109,7 @@ M4 already proves the CVC screen in two layouts and row-local nested Selects. M5
 
 # Next action
 
-Finish and push M5, then review this M6 draft with the user. Before coding M6, settle the Button binder question, the first-release Select group subset, and exact pagination/List public signatures using representative authored HTML and TypeScript. Record the approved slice in the active plan. Changes to M1 invariants require an updated contract and renewed review.[^contract][^roadmap]
+Review this M6 draft with the user. Before coding M6, settle the Button binder question, the first-release Select group subset, and exact pagination/List public signatures using representative authored HTML and TypeScript. Record the approved slice in the active plan. Changes to M1 invariants require an updated contract and renewed review.[^contract][^roadmap]
 
 # Decisions
 
@@ -127,7 +127,7 @@ The initial implementation order is Button/Select → pagination → Form contro
 |---|---|---|
 | 2026-09-24 | Planning baseline | This review draft compares the M1 contract, roadmap, M4/M5 plans and measurements, current Form/Grid/Rows source, and preserved 1.x Button/Select/Pagination/List documentation. No M6 code was implemented. |
 | 2026-09-24 | Fixed performance gate | On the M4 reference host with the same fixture, flat initial/rebind/edit/sort/filter medians must remain at or below 30/35/5/10/8 ms; automatic nested initial/rebind/sort/filter at or below 90/100/25/18 ms. Require zero duplicate IDs. On another host, first collect its M4 baseline and require no more than twice the corresponding medians before comparing absolute numbers. Record 100- and 1,000-row measurements, DOM count, and diagnostic heap samples.[^m4] |
-| 2026-09-24 | Agent-cost gate | Repeat the fixed docs-first screen/field task at the M5 checkpoint with the same task and acceptance checks; add a small List/page task for the new APIs; record first-pass correctness, retries, unique files and bytes read, changed files and lines, elapsed time, and actual tokens only if available. The M4 reference was 15 unique files/53,364 bytes, seven changed files, and about 4m05s; context bytes are not token counts. Investigate a growth in lookup or edit spread before approving a larger public API. M8 performs the full three-task comparison.[^m4][^roadmap] |
+| 2026-09-24 | Agent-cost gate | After M6 implementation, repeat the fixed docs-first field task with the same acceptance checks and compare against both M5 runs; add a small List/page task for the new APIs. Record first-pass correctness, retries, unique files and content output, changed files and lines, elapsed time, and actual tokens only if available. The M5 field task passed on its first Chromium run with nine changed files in both runs; the short source map narrowed unique files from 23 to 17, with about 77-78 KB of content output in the guided replay before diff review. The M4 reference was 15 unique files/53,364 bytes, seven changed files, and about 4m05s, for a different field. These byte methods and setup times differ, so compare cautiously and investigate a growth in lookup or edit spread before approving a larger public API. M8 performs the full three-task comparison.[^m4][^roadmap] |
 
 Verification favors focused tests for high-risk behavior over copying every legacy convenience method. Run Chromium and WebKit on the current host, and Firefox on a host that can launch it; the current Windows `spawn UNKNOWN` failure is an environment gap, not a Firefox pass. Release verification later checks actual Chrome, Edge, and Safari. Accessibility checks include keyboard-only activation and selection, meaningful state/error announcements, valid labels, focus retention after sorting/paging, and no duplicate IDs in repeated rows or simultaneous pages.[^m4][^roadmap]
 
@@ -135,7 +135,7 @@ Verification favors focused tests for high-risk behavior over copying every lega
 
 - Does Button need a public binder beyond native `button.disabled` and page-owned `addEventListener`? The M6 review should accept one concrete framework-owned busy/disabled use case or keep Button as a documented native-HTML contract; do not publish a click wrapper for convenience alone.[^legacy-button][^contract]
 - Should a standalone Select binder include multiple selection in its first slice, and should authored radio/checkbox groups remain Form-only? Confirm raw scalar versus array return and write types before naming public methods; preserve framework-reachable Form behavior without recreating the old generated-input styling.[^legacy-select][^form]
-- Pagination needs one agreed state/result/event contract for client and server modes. Decide whether page-visible IDs are supplied by the caller or derived inside List/Grid, while keeping `Rows` unchanged and avoiding a generic data slicing API.[^legacy-pagination][^rows]
+- Pagination needs one agreed state/result/event contract for client and server modes. Decide whether page-visible IDs are supplied by the caller or derived inside List/Grid, while keeping pagination controls from mutating `Rows` and avoiding a generic data slicing API.[^legacy-pagination][^rows]
 - Form and Grid have some distinct native-control edge handling today. M6 should choose one private shared operation only where behavior is identical and measured code duplication or drift warrants it.[^form][^grid]
 - Firefox still cannot launch on the current Windows host. Do not mark that browser verified until the same suite runs on a working host.[^m4]
 

@@ -8,11 +8,11 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 rule and binding contract
-    git_blob: 9ef6cc85ee2e44c083184978017d08303e38a51d
+    git_blob: ac3e447352807f54773cb746b7d12acabd22602d
   - id: m4
     resource: m4-plan.md
     title: M4 pilot and exit evidence
-    git_blob: 32e787e7cfcf9c5d4aced515732d08fd3b4e89fd
+    git_blob: 06102729b33f24851ed9c743d26b1c50639b4103
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
@@ -29,7 +29,7 @@ sources:
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Form, List, and Grid rule integration
     git_blob: 50229404558dabe92cdea2d02cd1c45a2481cf49
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:26:06Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:51:28Z }
 ---
 
 M5 completes the data, binding, and rule contract behind the M4 authored-HTML screen. The user approved M5 implementation on 2026-09-24 and requested an independent M4 recheck before changing the runtime.
@@ -60,7 +60,7 @@ Retain the 1.x formatter and validator behavior that Form, List, and Grid can re
 
 # Next action
 
-Run the independent docs-first feature task against the finished M5 screen, close the source/document checks, and fast-forward push M5 to the approved branch. Keep the rule catalog and drafts inside UI; [M6](m6-plan.md) remains a review draft requiring separate approval.
+M5's approved scope and verification are complete. Review [the M6 plan](m6-plan.md) and its representative HTML/TypeScript contract with the user before implementing M6. Keep the retained rule catalog and drafts inside UI.
 
 # Decisions
 
@@ -78,9 +78,12 @@ Run the independent docs-first feature task against the finished M5 screen, clos
 | 2026-09-24 | Planning | Drafted from the approved M1 contract, M4 pilot behavior, and preserved 1.x rule implementation; no M5 code was written. |
 | 2026-09-24 | Same-host M5 benchmark | Five measured Chromium runs after two warm-ups on the same i7-9700F/Chromium 153 fixture: 1,000-row flat initial/rebind 12.9/14.8 ms (M4 11.9/13.8), nested automatic 37.6/44.8 ms (M4 40.4/44.2). Flat edit/sort/filter 0.7/2.9/1.9 ms and nested 1.6/9.6/6.3 ms all meet the recorded M6 budgets. See [raw data](evidence/m5-binding-chromium.json); instantaneous heap readings remain diagnostic. |
 | 2026-09-24 | Final implementation checks | Build, typecheck, Vitest 79/79, Chromium/WebKit browser 102/102, direct example TypeScript check, and installed JS/TS consumers passed. The final tarball has 63 files/86,228 bytes and excludes 1.x, jQuery, docs, examples, and convenience utility bundles. |
-| 2026-09-24 | Approval and M4 recheck | The user approved M5 and requested a prior-milestone recheck. The unchanged M4 baseline passed build, typecheck, Vitest 29/29, Chromium/WebKit employee-screen 36/36, and full OKF 0 errors/0 warnings. Read-only audits found a fetched-HTML integration test gap and an unused future PopupHandle type; neither changes the approved M5 capability. |
+| 2026-09-24 | Approval and M4 recheck | The user approved M5 and requested a prior-milestone recheck. The unchanged M4 baseline passed build, typecheck, Vitest 29/29, Chromium/WebKit employee-screen 36/36, and full OKF 0 errors/0 warnings. Read-only audits found a fetched-HTML integration test gap and an unused future PopupHandle type; both were addressed within the approved M5 scope. |
+| 2026-09-24 | Agent-cost check | Two isolated docs-first agents added the same optional nested employee field. Both passed Chromium 19/19 first time and changed nine files without code retries. Before the source map: 23 fully read files/117,294 bytes plus 6,890 bytes of partial rereads, about 7-8 minutes. After the map: 17 unique files, ten fully read/41,590 bytes and seven partially viewed/about 36,751 output bytes on a replay, about 6m27s. Content output was roughly 77-78 KB before about 17 KB of diff review. The replay and first run used different counting methods, so no precise total byte or token saving is claimed. M4's earlier task used 15 files/53,364 bytes and took about 4m05s, with a different field and setup. |
+| 2026-09-24 | Final documentation | Changed and full OKF checks passed with 0 errors and 0 warnings; the separate M6 review plan and its source fingerprints are current. |
 
 # Open questions
 
-- Independent source review found and prompted fixes for Form stale errors and visible/hidden length consistency, Grid cross-field Select drafts, checkbox state, unsupported input controls, and stale errors. The final code/browser gate passed; the docs-first agent task and OKF close remain before the M5 push.
+- Independent source review prompted fixes for Form stale errors and visible/hidden length consistency, Grid cross-field Select drafts, checkbox state, unsupported input controls, and stale errors; the final code/browser gate passed.
 - The same-host M5 rerun stayed within every M6 reference budget; repeat the fixed fixture after major M6 Grid changes. Browser heap readings remain diagnostic without controlled collection.
+- Firefox Playwright fails before page load on this Windows host (`browserType.launch: spawn UNKNOWN`); a working host must run that gate before Firefox support is claimed.
