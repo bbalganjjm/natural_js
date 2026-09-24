@@ -8,7 +8,7 @@ sources:
   - id: plan
     resource: m9-plan.md
     title: Approved M9 release gates
-    git_blob: 5a56a183c2dda77efabb1bcbf25349383301268b
+    git_blob: f77e624506ddee5d044d692fe5415b10c2c838aa
   - id: package
     resource: ../../package.json
     title: Beta package metadata and scripts
@@ -52,7 +52,7 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:41:30Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
 ---
 
 The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the unpublished `2.0.0-beta.0` tarball measured here. The earlier `c79b9eae` artifact was replaced after Popup focus and authored-layout reflow fixes. This report separates checks that installed the exact current tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
@@ -67,7 +67,7 @@ The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the 
 | License | Root 2.0 package and all 19 packed TS source files identify Apache-2.0; preserved `v1/` and its LGPL-2.1 notices were not changed or packed. |
 | Registry | Read-only npm lookup still returns `1.0.0-latest` as `latest`; `npm whoami` reports `ENEEDAUTH` on this host. No npm version, tag, or Git release tag was published. |
 
-A second `npm pack` from the report-bearing branch tip reproduced the same SHA after only excluded docs/evidence files changed. The JavaScript ESM and strict TypeScript consumers install this tarball by path and reject a wrong SHA before installation. The JavaScript fixture checks public import availability, FrameworkError, Rows changes, communication request/response, and a private UI deep import failing with `ERR_PACKAGE_PATH_NOT_EXPORTED`. The TypeScript fixture typechecks CVC and UI usage against the installed declarations; it does not execute DOM code. A separate Vite browser consumer installed from the same tarball runs two independent CVC pages with Form/Grid, nested row-local Select choices, unique ARIA IDs, editing, disposal, and reopening. List, Pagination, Popup, and Tabs are checked by installed imports/types here and by the source-checkout browser suite for behavior. The default consumer script remains available for working-tree development.[^consumers][^browser]
+A second `npm pack` from the report-bearing branch tip reproduced the same SHA after only excluded docs/evidence files changed. After this exact-artifact review, the user excluded Safari from the initial 2.0 browser support scope and deferred npm publication until the remaining functionality and personal testing are complete. Playwright WebKit remains engine regression evidence, not a Safari claim. The JavaScript ESM and strict TypeScript consumers install this tarball by path and reject a wrong SHA before installation. The JavaScript fixture checks public import availability, FrameworkError, Rows changes, communication request/response, and a private UI deep import failing with `ERR_PACKAGE_PATH_NOT_EXPORTED`. The TypeScript fixture typechecks CVC and UI usage against the installed declarations; it does not execute DOM code. A separate Vite browser consumer installed from the same tarball runs two independent CVC pages with Form/Grid, nested row-local Select choices, unique ARIA IDs, editing, disposal, and reopening. List, Pagination, Popup, and Tabs are checked by installed imports/types here and by the source-checkout browser suite for behavior. The default consumer script remains available for working-tree development.[^consumers][^browser]
 
 # Verification
 
@@ -154,9 +154,8 @@ The full-file `docs/log.md` read exceeded the meter's 24 KiB output cap and was 
 # Open release gates
 
 - The `a45fbd6` beta tarball passed exact-artifact checks but remains unpublished.
-- A real Safari run is unavailable because there is no Mac/iOS test device; Playwright WebKit is labeled separately. Decide the Safari support statement or obtain external Safari evidence before claiming that vendor browser.
 - Complete WCAG 2.2 AA evaluation still needs manual screen-reader, actual zoom, target-size, and full-page authored-CSS review. The automated axe pass and tested 320px text-spacing states alone cannot close it.[^wcag]
-- Registry credentials are absent on this host. Publication and immutable version/tag actions also require the exact-artifact review specified by the approved M9 plan.[^plan]
+- Registry credentials are absent on this host. The user deferred npm publication and release tags until remaining features are finished, personally tested, and publication is requested again.[^plan]
 - A stable `2.0.0` manifest would change the packed bytes; this beta hash cannot serve as stable-artifact evidence. Repack and rerun artifact-dependent gates after any version or code change.[^plan]
 
 [^plan]: Approved M9 release gates

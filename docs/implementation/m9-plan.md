@@ -29,12 +29,12 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:41:30Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T19:03:21Z }
 ---
 
-M9 implementation is approved after [the unpublished M8 candidate](m8-beta-report.md). The user authorized deletion of the unused public `Rule` type while retaining Form formatter and validator behavior. No package publication, Git tag, or branch replacement has yet been approved against an exact release artifact.[^roadmap][^m8]
+M9 implementation is approved after [the unpublished M8 candidate](m8-beta-report.md). The user authorized deletion of the unused public `Rule` type while retaining Form formatter and validator behavior. The exact beta artifact was reviewed, but the user has since deferred npm publication and release tags until remaining features and personal testing are complete.[^roadmap][^m8]
 
 # Goal
 
@@ -63,11 +63,13 @@ Release Natural-JS 2.0.0 from a small Apache-2.0 ESM package whose installed Jav
 
 # Next action
 
-Proceed with the approved M9 implementation, beginning with the M8 recheck, public `Rule` type deletion, fixed-tarball consumer tests, and accessibility gates. Before any registry publication or tag, return the exact candidate SHA, tarball, package contents, release notes, completed gates, and remaining limitations for a final explicit publication decision. If real Safari cannot be tested on an available host, record the unsupported evidence and seek a support-scope or schedule decision rather than declaring the gate passed.
+Proceed with the approved M9 implementation, beginning with the M8 recheck, public `Rule` type deletion, fixed-tarball consumer tests, and accessibility gates. Before any registry publication or tag, return the exact candidate SHA, tarball, package contents, release notes, completed gates, and remaining limitations for a final explicit publication decision. The user has now placed Safari outside the initial 2.0 browser support scope; Playwright WebKit remains distinct engine evidence. Registry publication remains deferred by the user.
 
 # Decisions
 
 - Release correctness precedes optimization claims. A passing fixture proves that fixture and browser/host combination; agent read bytes are not tokens and incomparable 1.x/2.0 task runs do not prove savings.[^m8][^performance]
+- The user excluded Safari from the initial 2.0 support scope. Do not claim real Safari coverage from Playwright WebKit. Keep the browser matrix explicit about Windows vendor browsers and Playwright engines.
+- The user deferred npm publication and release tags until remaining functionality is complete, personally tested, and publication is requested again. Earlier approval of the beta artifact is not an instruction to publish it now.
 - Keep native, accessible authored HTML and CSS authoritative. `data-field` and store-local row identity bind values; document-unique IDs are used only where real HTML label or ARIA associations require them.[^roadmap]
 - The framework owns CVC lifetime, data sharing, UI binding, and Form rule dispatch. Applications own business rules, API payload conversion, layout, and visual contrast of authored CSS. A release defect in the framework's generated or changed accessibility state is still a blocker.[^roadmap][^audit]
 - Do not remove any other exported contract through release cleanup without its own reviewed decision. Do not remove a formatter, validator, or transitive helper while declarative Form/List/Grid can reach it. Avoid adding a compatibility utility package.[^audit]
@@ -82,10 +84,10 @@ Proceed with the approved M9 implementation, beginning with the M8 recheck, publ
 | 2026-09-25 | M9 approval and M8 recheck | An independent M8 recheck matched the pushed `e9db5d81` commit, three agent-task raw logs, 75/75 tests per Playwright engine, and a clean full OKF check. The user approved M9, removal of only the unused public `Rule` alias, and reported no Mac/Safari device. The rule runtime remains. |
 | 2026-09-25 | M9 implementation gate | Build, typecheck, and Vitest 81/81 passed after public `Rule` removal. Popup Tab-boundary focus was fixed without a new public API. Isolated full suites passed 103/103 each in Chromium, Firefox, and WebKit. M4/M7 authored layouts passed automated axe A/AA checks for tested states. Reference-host 1,000-row flat Grid initial/rebind medians were 11.9/16.0 ms and nested-auto 37.3/44.4 ms; List initial was 11.5 ms, with duplicate IDs 0. These preliminary medians were superseded; the linked raw [Grid](evidence/m9-binding-chromium.json) and [List](evidence/m9-list-chromium.json) records now contain the corrected beta run below. Real Safari and manual screen-reader checks remain open. |
 | 2026-09-25 | Corrected beta package gate | Clean source `a45fbd6` produced SHA-gated `2.0.0-beta.0` tarball `ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8`. JS/TS installed consumers, five Windows browser consumers, and 103/103 full source tests per Playwright engine passed. Updated 1,000-row flat Grid initial/rebind medians were 12.5/15.8 ms, nested-auto 38.0/46.9 ms, and List initial 11.4 ms. Three-engine M4 side/stack 320px text-spacing and M7 side-layout Popup focus regressions passed. The [M9 beta report](m9-beta-report.md) separates exact-tarball evidence from source checks and open Safari/manual-accessibility gates. |
+| 2026-09-25 | User release decision | Safari is outside the initial 2.0 support scope. npm publication and release tags are deferred until remaining functionality is complete, the user tests it, and the user requests publication again. The beta artifact remains unpublished. |
 
 # Open questions
 
-- Real Safari remains untested on the available Windows host. Its support claim needs an explicit release-scope decision or an external Safari result before final publication.
 - What minimum Node.js version should the published package promise? The build guide names tested Node.js 24.18; the browser package does not set a Node engine promise. Validate any wider development-tool range before documenting it.
 - Is npm publication under `@bbalganjjm/natural_js` available with the intended registry access and account permissions? Verify read-only before preparing publication; the final publish command waits for explicit approval.
 - Do the currently passing 1,000-row List numbers represent the expected first-release workload? Larger lists and virtualization remain M10 follow-up unless a real release blocker appears.

@@ -21,7 +21,7 @@ sources:
     resource: ../../LICENSE
     title: Apache License 2.0 text for the new package
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
@@ -52,6 +52,12 @@ npm pack --dry-run --json
 # Verify
 
 `npm run test:consumers` builds and packs into an isolated temporary directory, then installs that tarball in separate JS and strict TS fixtures. For a frozen release artifact, run `npm run test:consumers -- --tarball <path.tgz> --sha256 <64-hex>`; this verifies the checksum before installing the exact same tarball in both fixtures and skips rebuilding. Run `npm run test:packed-browser -- --tarball <path.tgz> --sha256 <64-hex> --browser chromium` for a browser-served CVC/Form/Grid consumer installed from that artifact. The browser option also accepts `firefox`, `webkit`, `chrome`, or `edge` when available locally. The pack list must contain no 1.x bundle, jQuery, hand-maintained 1.x declarations, or general utility library. For browser import smoke, install Playwright binaries with `npx playwright install chromium firefox webkit` and run `npm run test:browser`. `npm run example` serves the authored-HTML Vite fixture.
+
+# Browser and publication scope
+
+Safari is outside the initial 2.0 browser support scope by the user's decision. The frozen beta artifact passed installed-browser smokes in Chrome and Edge on Windows, plus Playwright Chromium, Firefox, and WebKit. Playwright WebKit is engine regression evidence, not a Safari vendor test. Other vendor/OS combinations have not been verified. Automated accessibility checks and tested keyboard flows do not establish complete WCAG 2.2 AA conformance for applications with their own HTML and CSS.
+
+The user deferred npm publication until the remaining functionality is finished, personally tested, and explicitly requested for publication. The current tarball is a local candidate only; no 2.0 release tag or registry version exists.
 
 # Pitfalls
 
