@@ -55,22 +55,22 @@ sources:
     resource: ../../v1/src/natural.core.js
     title: Preserved 1.x utility implementations
     git_blob: d6b29764f7cd8d776f63de84b6c5d38be87f1c76
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:37:44Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T18:03:18Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 This read-only M8 snapshot covers the five `package.json` entry paths at post-M7 commit `f659f1d8`. The M9-approved deletion of the unused public `Rule` alias changes the later export count to 34 types without changing retained Form rule behavior. Keep every framework-reachable Form rule; treat a public deletion or semantic change as a separate user decision.[^package][^rules]
 
 # Public inventory
 
-The source entries and generated `build/**/index.{js,d.ts}` expose 11 runtime values and 35 types. The [installed JavaScript and TypeScript consumers](../../tests/consumers/ts/check.ts) import every runtime value; the [M4 employee screen](../../examples/vite/m4/employees.ts) and [M7 MDI screen](../../examples/vite/m7/main.ts) provide actual component call paths.[^package][^root][^page][^data][^ui][^comm]
+The source entries and generated `build/**/index.{js,d.ts}` expose 11 runtime values and 35 types. The [installed JavaScript and TypeScript consumers](../../tests/consumers/ts/check.ts) import every runtime value; the [M4 entry](../../examples/vite/m4/main.ts), [M4 employee controller](../../examples/vite/m4/employees.ts), and [M7 MDI screen](../../examples/vite/m7/main.ts) provide actual call paths.[^package][^root][^page][^data][^ui][^comm]
 
 | Entry | Runtime values | Type exports | Framework responsibility and user call path | Decision |
 |---|---|---|---|---|
 | `.` | `FrameworkError` | — | Shared coded failures; the [application entry](../../examples/vite/main.ts) constructs it. | Keep. |
-| `./page` | `mountPage` | `PageContext`, `PageController`, `PageDefinition`, `PageHandle` | One CVC lifecycle for main, Popup, and Tabs; M4/M7 controllers call `mountPage`. | Keep all. |
-| `./data` | `createRows` | `RowId`, `Snapshot`, `RowStatus`, `RowSnapshot`, `RowChange`, `RowsEvent`, `Rows` | Shared row identity, immutable values, subscriptions, and changed-row saves; M4/M7 controllers call `createRows`. | Keep all. |
+| `./page` | `mountPage` | `PageContext`, `PageController`, `PageDefinition`, `PageHandle` | One CVC lifecycle for main, Popup, and Tabs; M4/M7 examples call `mountPage`. | Keep all. |
+| `./data` | `createRows` | `RowId`, `Snapshot`, `RowStatus`, `RowSnapshot`, `RowChange`, `RowsEvent`, `Rows` | Shared row identity, immutable values, subscriptions, and changed-row saves; M4/M7 examples call `createRows`. | Keep all. |
 | `./comm` | `createCommunicator` | `RequestOptions`, `Communicator` | Explicit requests, response decoding, and cancellation; M4 controller calls `createCommunicator`. | Keep all. |
 | `./ui` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs` | `Rule`, `RuleContext`, `FormatRule`, `ValidateRule`, `ParseInput`, `RuleSet`, `ValidationIssue`, `ValidationResult`, `PageRequest`, `PageInput`, `PageState`, `SelectValue`, `SelectChoice`, `SelectSelection`, `SelectHandle`, `PaginationHandle`, `FormHandle`, `SortIndicator`, `ListHandle`, `GridHandle`, `PopupHandle`, `TabHandle` | M4 screen calls the five data-UI binders; M7 screen calls Popup/Tabs. Types describe callbacks, choices, paging, and handles. | Keep seven values and 21 types besides `Rule`; review `Rule` separately. |
 

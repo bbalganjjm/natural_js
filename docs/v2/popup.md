@@ -18,9 +18,9 @@ sources:
     resource: ../../src/page/index.ts
     title: Shared CVC page runtime
     git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:24:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 `openPopup` mounts a `PageDefinition` inside an existing `<dialog>`. The author owns its title, close button, HTML, and CSS; the wrapper owns the modal lifetime, first result, and its private page handle.[^popup][^page]
@@ -91,7 +91,7 @@ The first output or ordinary close reserves the result. A later `dispose()` cann
 
 # Behavior
 
-The wrapper restores focus to the opener when it remains connected. The native dialog provides modal behavior; the wrapper keeps Tab and Shift+Tab inside the dialog at focus boundaries and allows the newly focused control to scroll into view. It also scrolls the current dialog focus into view after opening and after the CVC page becomes ready. An owning CVC page should register `context.own(() => popup.dispose())`. Detaching the dialog or its page host aborts an opening with no earlier reserved output or ordinary close; a reserved result survives detachment unless cleanup fails. The wrapper observes only while that opening lives. No visual overlay or global popup service is generated.[^popup]
+The wrapper restores focus to the connected opener unless focus is inside an open dialog that does not contain the opener. The native dialog provides modal behavior; the wrapper keeps Tab and Shift+Tab inside the dialog at focus boundaries and allows the newly focused control to scroll into view. It also scrolls the current dialog focus into view after opening and after the CVC page becomes ready. An owning CVC page should register `context.own(() => popup.dispose())`. Detaching the dialog or its page host aborts an opening with no earlier reserved output or ordinary close; a reserved result survives detachment unless cleanup fails. The wrapper observes only while that opening lives. No visual overlay or global popup service is generated.[^popup]
 
 A plain authored `<dialog>` that does not host a CVC page uses native `showModal()` and `close()` directly; there is no separate Dialog binder.[^popup]
 

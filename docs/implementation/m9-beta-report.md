@@ -8,7 +8,7 @@ sources:
   - id: plan
     resource: m9-plan.md
     title: Approved M9 release gates
-    git_blob: 5d5295574ca4049a54c1f69bf055a920cd6ec475
+    git_blob: bc8a8c666c3729f86edf767c041de2d6ecfacbb7
   - id: package
     resource: ../../package.json
     title: Beta package metadata and scripts
@@ -52,7 +52,7 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:44:43Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:13:24Z }
 ---
 
 The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the unpublished `2.0.0-beta.0` tarball measured here. The earlier `c79b9eae` artifact was replaced after Popup focus and authored-layout reflow fixes. This report separates checks that installed the exact current tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
@@ -77,7 +77,7 @@ A second `npm pack` from the report-bearing branch tip reproduced the same SHA a
 | Complete browser suite | Isolated Playwright runs passed 103/103 in each of Chromium, Firefox, and WebKit (309/309 total). The suite includes CVC lifecycle/data and M4/M7 authored-layout/UI regression coverage. |
 | Packed browser consumer | The SHA-gated tarball passed in Playwright Chromium 153.0.8010.12, Firefox 155.0, WebKit 26.6, installed Chrome 153.0.8010.53, and installed Edge 153.0.4234.48, all on Windows. These vendor runs do not substitute for real Safari on macOS or iOS. |
 | Popup keyboard and visibility | Native modal Tab/Shift+Tab boundaries wrap focus within the Popup. Opening and wrapping also keep the focused control visible in a 320 CSS-pixel viewport with enlarged text spacing. The focused regressions passed in Chromium, Firefox, and WebKit; scoped listeners are removed on disposal.[^popup][^a11y] |
-| Documentation | The changed and full OKF checks each reported 36 concepts and zero errors. Nine `verified-stale` trust-field warnings remain recorded in the active plan after automatic approval review rejected a verification-stamp refresh. This is a trust-state warning, not an unexamined API export or source drift. |
+| Documentation | The changed and full OKF checks each reported 36 concepts and zero errors. At the M9 beta checkpoint, nine `verified-stale` trust-field warnings were recorded after automatic approval review rejected a verification-stamp refresh. Later independent rechecks and any accepted refresh are tracked in the active plan. This was a trust-state warning, not an unexamined API export or source drift. |
 
 The full suites were run separately because two simultaneous Playwright Vite servers using port 4173 can interfere with one another. Firefox initially failed to start from the host browser cache (`spawn UNKNOWN`); installing its Playwright binary under `node_modules/.cache/playwright-m6` allowed the final isolated 103/103 run and exact-tarball smoke to pass. No source change was made for that host-cache issue.
 

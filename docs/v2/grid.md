@@ -30,9 +30,9 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps selection and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys.[^grid]
@@ -149,7 +149,7 @@ Each cloned `data-error-for` region receives a document-unique ID and `aria-live
 
 # Related
 
-[Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [Pagination](pagination.md) can use `grid.page()`. [The M6 plan](../implementation/m6-plan.md) records this milestone's migration scope.
+[Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [Pagination](pagination.md) can use `grid.page()`. [The M6 plan](../implementation/m6-plan.md) records this milestone's migration scope. [The advanced Grid example](advanced-grid-example.md) shows grouped headings and sticky positioning with authored HTML/CSS and no new API.
 
 [^grid]: Grid binding and validation runtime
 [^rules]: Shared Form/Grid rule runner

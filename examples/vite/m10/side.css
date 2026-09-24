@@ -1,0 +1,30 @@
+:root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #1b2a3a; background: #eaf0f6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, select { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, select:focus-visible, .grid-scroll:focus-visible { outline: 3px solid #205ea2; outline-offset: 2px; }
+.site-header { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; padding: .8rem 1rem; background: #193651; color: white; }
+.site-header h1 { margin: 0 auto 0 0; font-size: 1.2rem; }
+.site-header a { color: white; }
+[data-hosts] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 38rem), 1fr)); gap: 1rem; padding: 1rem; }
+.screen-host, .employee-page, .grid-panel { min-width: 0; }
+.employee-page { padding: 1rem; background: white; border: 1px solid #b8c9d8; border-radius: .5rem; }
+.page-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem; }
+.page-header h2 { margin: 0; font-size: 1.15rem; }
+.workspace { display: grid; grid-template-columns: minmax(0, 3fr) minmax(10rem, 1fr); gap: .8rem; margin-top: .7rem; }
+.grid-panel p { margin: 0 0 .5rem; }
+.selection-panel { min-width: 0; padding: .7rem; background: #e9f4f2; }
+.selection-panel h3 { margin: 0 0 .4rem; font-size: 1rem; }
+.grid-scroll { max-width: 100%; max-height: 19rem; overflow: auto; border: 1px solid #a4b8cb; }
+table { width: 100%; min-width: 48rem; border-collapse: separate; border-spacing: 0; }
+caption { text-align: left; font-weight: 700; padding: .5rem; background: white; }
+th, td { padding: .45rem .6rem; text-align: left; border-right: 1px solid #d1dce6; border-bottom: 1px solid #d1dce6; background: white; white-space: nowrap; }
+thead { position: sticky; top: 0; z-index: 2; }
+thead th { background: #dcebf8; }
+thead tr:first-child th:first-child { position: sticky; left: 0; z-index: 3; background: #c4dff4; }
+tbody th[scope="row"] { position: sticky; left: 0; z-index: 1; background: #f5faff; }
+tbody th button { color: #164e8b; border: 0; background: transparent; text-decoration: underline; }
+tbody th button[aria-pressed="true"] { font-weight: 700; }
+td select { max-width: 8rem; }
+@media (max-width: 780px) { .workspace { grid-template-columns: minmax(0, 1fr); } }

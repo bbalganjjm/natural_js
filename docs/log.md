@@ -1,5 +1,8 @@
 ## 2026-09-25
 
+* **Creation** M10's inferred 40-row advanced Grid reference screen now runs as two authored MDI layouts with native grouped headings, sticky header/first column, nested row-local choices, and the existing CVC/Grid API. Chromium, Firefox, and WebKit focused tests pass 4/4 each, using the repository-local Playwright browser cache for Firefox after the default cache failed to launch.
+* **Correction** Independent source/package checks tightened the M8 API call-site wording, M7 shared Rows and Tabs example scope, Popup focus exception, UI parser-failure candidate wording, and M9 next-action/List scope. Nine previously stale concepts were re-audited; two Grid concepts were also independently checked. All 11 now have refreshed `verified` fields and the changed/full OKF checks have no warnings.
+
 * **Creation** The draft M10 plan audits deferred 1.x Grid intent against the current authored-table/Rows contract, sets a reference-screen decision gate, and stages optional sticky/grouped headings, rendering lifetime, bulk edit, column state, and agent/package checks. No advanced Grid API or runtime is implemented yet.
 
 * **Update** The user excluded Safari from the initial 2.0 browser support scope and deferred npm publication and release tags until remaining functionality is complete, personally tested, and explicitly requested. The beta tarball remains unpublished; the package guide, M9 plan/report, and active checkpoint distinguish Playwright WebKit from real Safari and retain manual-accessibility limits.

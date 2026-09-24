@@ -4,6 +4,7 @@ okf_version: "0.2"
 
 # Start here
 
+* [Authored advanced Grid in two layouts](v2/advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 * [Natural-JS 2.0 package](v2/package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 module boundaries](v2/architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
 * [Employee screen in two authored layouts](v2/employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)

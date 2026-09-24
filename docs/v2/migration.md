@@ -105,9 +105,9 @@ sources:
     resource: ../../tests/rules.test.ts
     title: Declarative dispatch and combined-name checks
     git_blob: 70f1881b500b99c138c04c834258ed57eb6021be
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T19:32:25Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T18:39:10Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -244,7 +244,7 @@ The 1.x popup used `open(row)` and a popup controller's `cont.caller.close(resul
 </dialog>
 ```
 
-The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, input)` for each opening and `bindTabs(root, { initial: "people", pages: { people: host => mountPage(host, picker, input) } })` for a keyed panel. It awaits Popup `result` before another opening, accepts `undefined` for ordinary cancel, and disposes the opening, Tabs, and main page before removing a workspace. The same definition also mounts in main content; every mount gets its own controller and scoped root. On workspace removal, the M7 caller returns focus to Add screen and ignores expected cancellation of pending main or Tab readiness. Popup result cancellation remains a separate reported path.[^containers][^containers-view][^page][^containers-test]
+The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, input)` for each opening. Its `bindTabs` call supplies factories for all three authored keys: People and Preview mount the picker, while Help mounts its inline page. A Tabs binder with only a People factory would require markup containing only that key. It awaits Popup `result` before another opening, accepts `undefined` for ordinary cancel, and disposes the opening, Tabs, and main page before removing a workspace. The same picker definition also mounts in main content; every picker mount gets its own controller and scoped root. On workspace removal, the M7 caller returns focus to Add screen and ignores expected cancellation of pending main or Tab readiness. Popup result cancellation remains a separate reported path.[^containers][^containers-view][^page][^containers-test]
 
 ## 6. Classify the remaining 1.x helpers
 

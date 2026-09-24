@@ -29,9 +29,9 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:44:43Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T19:03:21Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 M9 implementation is approved after [the unpublished M8 candidate](m8-beta-report.md). The user authorized deletion of the unused public `Rule` type while retaining Form formatter and validator behavior. The exact beta artifact was reviewed, but the user has since deferred npm publication and release tags until remaining features and personal testing are complete.[^roadmap][^m8]
@@ -63,7 +63,7 @@ Release Natural-JS 2.0.0 from a small Apache-2.0 ESM package whose installed Jav
 
 # Next action
 
-Proceed with the approved M9 implementation, beginning with the M8 recheck, public `Rule` type deletion, fixed-tarball consumer tests, and accessibility gates. Before any registry publication or tag, return the exact candidate SHA, tarball, package contents, release notes, completed gates, and remaining limitations for a final explicit publication decision. The user has now placed Safari outside the initial 2.0 browser support scope; Playwright WebKit remains distinct engine evidence. Registry publication remains deferred by the user.
+The M8 recheck, public `Rule` type deletion, exact beta tarball consumer checks, and automated accessibility gates are complete and recorded below. Keep that beta artifact unpublished while M10 and later separately approved work proceeds. Before any registry publication or tag, prepare a final candidate with its exact SHA, tarball, package contents, release notes, completed gates, and remaining limitations for the user's personal tests and explicit publication decision. Safari is outside the initial 2.0 browser support scope; Playwright WebKit remains distinct engine evidence.
 
 # Decisions
 
@@ -90,7 +90,7 @@ Proceed with the approved M9 implementation, beginning with the M8 recheck, publ
 
 - What minimum Node.js version should the published package promise? The build guide names tested Node.js 24.18; the browser package does not set a Node engine promise. Validate any wider development-tool range before documenting it.
 - Is npm publication under `@bbalganjjm/natural_js` available with the intended registry access and account permissions? Verify read-only before preparing publication; the final publish command waits for explicit approval.
-- Do the currently passing 1,000-row List numbers represent the expected first-release workload? Larger lists and virtualization remain M10 follow-up unless a real release blocker appears.
+- Do the currently passing 1,000-row List numbers represent the expected first-release workload? Larger List workloads and virtualization need a separately scoped follow-up; M10 evaluates Grid rendering lifetime.
 
 [^roadmap]: First-release scope and M9 gate
 [^m8]: Unpublished M8 beta-candidate evidence and limits

@@ -23,7 +23,7 @@ sources:
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 Build the root package to inspect real 2.0 exports. The unpublished `2.0.0-beta.0` candidate includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, Pagination, Popup, and Tabs, plus retained UI-owned formatter/validator rules. A plain Dialog uses native HTML methods; it has no framework binder.

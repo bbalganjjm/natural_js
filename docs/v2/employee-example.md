@@ -55,7 +55,7 @@ sources:
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:24:21Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T18:39:10Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]

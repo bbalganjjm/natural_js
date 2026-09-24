@@ -1,5 +1,7 @@
 # Concepts
 
+* [Authored advanced Grid in two layouts](advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
+
 * [Natural-JS 2.0 module boundaries](architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
 * [Natural-JS 2.0 package](package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 communicator](comm.md) - Fetch requests with explicit JSON or body input, response decoding, hooks, and cancellation. (draft)

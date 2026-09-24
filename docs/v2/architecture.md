@@ -87,7 +87,7 @@ sources:
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:25:04Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.

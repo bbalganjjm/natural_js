@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural-JS M10 · stacked Grid</title>
+    <link rel="stylesheet" href="/m10/stack.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Advanced Grid · stacked</h1>
+      <nav aria-label="Examples"><a href="/m10/side.html">Side-by-side layout</a></nav>
+      <button type="button" data-open>Open another screen</button>
+    </header>
+    <main data-hosts></main>
+    <template data-screen>
+      <article class="employee-page" data-page="advanced-grid" aria-label="Employee Grid screen">
+        <div class="page-header">
+          <h2>Employee assignments</h2>
+          <button type="button" data-close>Close screen</button>
+        </div>
+        <section class="selection-panel" aria-label="Current employee">
+          <output data-selected aria-live="polite">No employee selected</output>
+        </section>
+        <section class="grid-panel" aria-label="Assignment table">
+          <p>Sort by Name, then scroll to inspect contact and assignment columns.</p>
+          <div class="grid-scroll" role="region" aria-label="Scrollable employee assignments" tabindex="0">
+            <table data-grid>
+              <caption>Employee assignments</caption>
+              <colgroup span="1"></colgroup><colgroup span="2"></colgroup><colgroup span="2"></colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2" aria-sort="none"><button type="button" data-sort-name>Name</button></th>
+                  <th scope="colgroup" colspan="2">Contact</th>
+                  <th scope="colgroup" colspan="2">Assignment</th>
+                </tr>
+                <tr>
+                  <th scope="col">Email</th><th scope="col">Phone</th>
+                  <th scope="col">Team</th><th scope="col">Shift</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-row-template>
+                  <th scope="row"><button type="button" data-select-row><span data-field="name"></span></button></th>
+                  <td data-field="email"></td>
+                  <td data-field="phone"></td>
+                  <td data-field="profile.team"></td>
+                  <td><label>Shift <select data-field="chosen" data-options="shifts"
+                    data-option-label="label" data-option-value="value"></select></label></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </article>
+    </template>
+    <script type="module" src="/m10/main.ts"></script>
+  </body>
+</html>

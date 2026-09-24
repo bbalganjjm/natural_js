@@ -29,10 +29,10 @@ sources:
     resource: evidence/m9-binding-chromium.json
     title: Fixed 1,000-row Grid baseline
     git_blob: ebfa20fcf965c7a4b89361892d6d4c2d35c645bb
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:46:47Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:17:03Z }
 ---
 
-M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates; it freezes no new API name and claims no advanced feature is implemented. The user has deferred npm publication until remaining work is complete and personally tested. Safari is outside the initial 2.0 browser support scope.[^roadmap]
+M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates. The first grouped/sticky authored-table slice is implemented without a new Grid API; later runtime capabilities remain unselected. The user has deferred npm publication until remaining work is complete and personally tested. Safari is outside the initial 2.0 browser support scope.[^roadmap]
 
 # Goal
 
@@ -57,6 +57,10 @@ Before API changes, freeze one advanced reference screen, its authored table/CSS
 | Multi-selection/check-all | Add only with a defined visible-page versus filtered-store meaning and a typed selected-ID result. Preserve keyboard use and never identify rows by DOM position. |
 
 The first implementation slice is authored fixed/grouped headers in two visually different layouts, with zero new public API if native HTML/CSS suffices. Subsequent slices need a usage example and cost justification.
+
+The inferred M10.0 reference is now [a 40-row employee assignment screen](../v2/advanced-grid-example.md), since no production advanced screen was supplied. It has five columns, two native column groups, a row-local nested Shift Select, keyboard-activated name sorting and row selection, a two-axis scroll region, and two independent MDI mounts. Side-by-side and stacked authored layouts reuse one CVC controller. The first selected capability is grouped and fixed headings/first column through HTML/CSS only. Column resize/reorder/hide, bulk paste, multi-selection, and virtualization remain unselected; no new Grid or Rows API is authorized by this fixture. M10.2 may study rendering lifetime on a separately declared larger workload without changing the basic contract.
+
+The browser acceptance for this slice checks native table semantics, no copied header or duplicate IDs, nested choices, keyboard sort/selection, two-screen isolation, sticky geometry, 320 CSS-pixel reflow with enlarged text spacing, and axe-tagged A/AA results. Chromium, Firefox, and WebKit passed four focused cases each. On this Windows host Firefox required the repository-local Playwright browser cache; the default cache failed at process launch (`spawn UNKNOWN`) even with one worker. Automated checks do not establish manual screen-reader conformance.
 
 # Contract gates
 
@@ -84,7 +88,7 @@ Measure the existing flat/nested 100- and 1,000-row fixtures before and after re
 
 Update `docs/v2/grid.md`, examples, indexes, `docs/log.md`, and this plan with each slice. Keep `npm run docs:check -- --changed` at zero errors and independent `verified` fields honest. Do not recreate 1.x option names, copy the old Grid, add a generic table/clipboard library, alter the M9 beta artifact, or pull M11/M12 into M10.
 
-Review and approve the M10.0 reference screen, selected capabilities, and public HTML/TS examples before runtime implementation. Revisit the scope if a slice needs a new Rows mutation contract or changes basic Grid behavior.
+The user approved proceeding with M10. The inferred M10.0 reference screen and public HTML/TS example are now implemented without a runtime or public API change. Review this concrete fixture before any M10 runtime mutation; revisit scope if a slice needs a new Rows contract or changes basic Grid behavior. Manual assistive-technology checks remain open; use the repository-local cache for repeat Firefox runs on this host.
 
 # Related
 
