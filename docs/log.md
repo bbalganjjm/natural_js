@@ -1,5 +1,14 @@
 ## 2026-09-24
 
+* **Correction** implementation/roadmap.md and implementation/m0-baseline.md: retained Form-used formatter/validator engines, declarative built-in rules, and transitive helpers after the user's scope correction; only framework-unreachable utilities qualify for removal.
+* **Update** implementation/m1-plan.md and implementation/current.md: recorded M1 approval, the corrected retention boundary, and the M1 review gate.
+* **Creation** Added implementation/m1-contract.md with concrete HTML/JS/TS usage, public signatures, CVC lifetime, shared rows, Form rule behavior, and request/container examples.
+* **Creation** Added implementation/m2-plan.md for the next approved-scope gate; implementation/index.md and docs/index.md link the new records.
+* **Update** implementation/m1-contract.md, implementation/m1-plan.md, implementation/roadmap.md, and implementation/current.md: added nested JSON/row-local Select, duplicate-ID-free MDI, accessible native tables, fixed-fixture binding benchmarks, and optimized rewrites after user steering.
+* **Correction** implementation/m1-contract.md: aligned request 204 decoding, raw-value restoration, late-request cancellation, row validation, page output lifetime, and popup result types after independent design review.
+* **Verification** implementation/m0-baseline.md: independent recheck of Form rule dependencies and MDI/row-cloning facts; renewed its verified stamp.
+* **Verification** M1 draft: changed and full OKF checks passed with 70 concepts, 16 reserved files, 0 errors, and 0 warnings; runtime implementation remains pending.
+
 * **Correction** implementation/m0-baseline.md: corrected the 1.x View lookup scope, jQuery plugin installation exceptions, and grid-only sorting/filtering boundary after independent source review.
 * **Update** implementation/m1-plan.md: included JavaScript consumer examples in the M1 exit package.
 * **Creation** Added implementation/roadmap.md for the approved Natural-JS 2.0 milestone sequence and minimal migration policy.

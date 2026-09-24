@@ -21,4 +21,4 @@ okf_version: "0.2"
 * [Code](code/index.md) - Natural-CODE inspection tools.
 * [Examples](examples/index.md) - Task-oriented pages and template examples.
 * [Governance](governance/index.md) - OKF format and repository upkeep rules.
-* [Implementation](implementation/index.md) - Natural-JS 2.0 roadmap, baseline, and active milestone status.
+* [Implementation](implementation/index.md) - Natural-JS 2.0 roadmap, public contract, and active milestone status.

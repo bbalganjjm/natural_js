@@ -8,20 +8,20 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
     git_blob: 8a4d4db0197ba476c9c1a3b76e897787cf2a2a29
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T06:51:22Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T07:41:56Z }
 ---
 
 The Natural-JS 2.0 migration follows [the master roadmap](roadmap.md). Read this short checkpoint before starting or resuming a milestone. The 1.x code and usage concepts remain the factual reference until a 2.0 implementation replaces them.
 
 # Goal
 
-Deliver a TypeScript-first, jQuery-free, ESM Natural-JS 2.0 that preserves CVC and behavior attached to authored HTML. Keep only functions required by framework behavior; application formatting, validation rules, and general utilities stay with the application.
+Deliver a TypeScript-first, jQuery-free, ESM Natural-JS 2.0 that preserves CVC and behavior attached to authored HTML. Retain Form-used formatter/validator engines, built-in rules, and required helpers; remove only framework-unreachable utilities.
 
 # Checkpoint
 
 - M0 complete (2026-09-24): the clean 1.x baseline is commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6 on master; development branch codex/natural-js-2 starts at that commit.
 - The changed docs check passed before M0 edits: 65 concepts, 16 reserved files, 0 errors, 0 warnings.
-- The approved roadmap keeps M0-M12 in order. Each milestone receives a detailed plan and review before implementation. M0 is complete; M1 contract work is the next reviewed scope.
+- The user approved M1 contract work on 2026-09-24 and corrected the migration boundary: Form-used formatter/validator behavior stays. A later M1 steering adds standards-conformant duplicate-ID handling, accessibility, fast binding, and nested JSON with row-local Select options. The M1 public contract and M2 scope are prepared for review; no 2.0 runtime code has changed.
 
 # Steps
 
@@ -31,28 +31,32 @@ Deliver a TypeScript-first, jQuery-free, ESM Natural-JS 2.0 that preserves CVC a
 - [x] Select the representative screen and three fixed agent evaluation tasks.
 - [x] Write the [M1 detailed plan](m1-plan.md), including decisions to review before M1 implementation.
 - [x] Run changed and full documentation checks; close the M0 checkpoint.
+- [x] Correct M0/M1 migration classification for declarative Form rules and transitive helpers.
+- [x] Draft [the M1 public contract](m1-contract.md) with JS/TS/HTML flows, signatures, failure rules, nested data, accessible IDs, performance gates, and API decisions.
+- [x] Draft [the M2 tooling plan](m2-plan.md).
+- [ ] Receive user review of the M1 contract and approval of the M2 scope.
 
 # Next action
 
-Review [the M1 detailed plan](m1-plan.md), then define and review the concrete API examples and signatures before M2 implementation.
+Review [the M1 public contract](m1-contract.md) and [the M2 tooling plan](m2-plan.md). Do not start M2 until its scope is approved.
 
 # Decisions
 
 - Preserve the Communicator-View-Controller roles and authored HTML as design intent; replace jQuery-based mechanisms and global initialization.
-- Treat existing public use or internal calls as evidence to inspect, not automatic justification for migration.
+- Retain behavior reachable through framework code, Form rule names in HTML, configuration, and List/Grid row Forms. Remove a utility only after this full reachability audit finds no framework use.
 - Keep framework-specific mechanics inside their owning component when a public utility is unnecessary.
 - Preserve the 1.x documentation at the immutable baseline commit. Do not describe unimplemented 2.0 APIs as current behavior.
-- M1 freezes minimum data ownership, row identity, validation-result, and page lifecycle contracts before the M4 vertical screen.
+- The M1 draft fixes minimum data ownership, row identity, validation results, Form rule retention, page lifecycle, and standards/performance gates before the M4 vertical screen; user review is pending.
 
 # Verification log
 
 | Date | Check | Result |
 |---|---|
-| 2026-09-24 | Git baseline | Clean master at b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; created codex/natural-js-2. |
-| 2026-09-24 | Pre-M0 changed docs check | 65 concepts, 16 reserved files; 0 errors, 0 warnings. |
-| 2026-09-24 | M0 independent source audits | Architecture, UI/data, and representative examples were checked against their 1.x sources by separate agents; four findings were corrected in the M0 and M1 records. |
-| 2026-09-24 | M0 docs checks | Changed and full bundle checks: 68 concepts, 16 reserved files; 0 errors, 0 warnings. |
+| 2026-09-24 | M0 completion | Baseline and prior verification are recorded in [M0 baseline](m0-baseline.md); branch codex/natural-js-2 starts at b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6. |
+| 2026-09-24 | M1 source/design audits | Separate agents checked CVC, Form rule dispatch, nested Select limits, duplicate IDs, accessibility, and example lifetimes; findings were corrected in the draft contract. |
+| 2026-09-24 | M0 correction verification | An independent agent rechecked the revised M0 facts against source; the verified stamp was renewed. |
+| 2026-09-24 | M1 docs checks | Changed and full OKF checks: 70 concepts, 16 reserved files, 0 errors, 0 warnings. |
 
 # Open questions
 
-- M1 public API names, exact method signatures, and authored HTML binding syntax remain M1 design decisions.
+- M1 API names and HTML binding syntax are proposed in the draft contract; user review may change them before M2. M4 prototypes automatic nested Select binding and may request a staged fallback if correctness or performance fails.
