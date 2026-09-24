@@ -1,0 +1,14 @@
+[
+  {
+    "status": "update",
+    "value": {
+      "id": "E-101",
+      "name": "Ada",
+      "email": "ada@example.com",
+      "salary": 125000,
+      "profile": { "team": "Platform", "department": "Infrastructure" },
+      "a": [{ "aa": 11, "bb": 22 }, {}],
+      "chosen": 22
+    }
+  }
+]

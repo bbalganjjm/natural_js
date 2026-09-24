@@ -65,3 +65,6 @@ export interface PopupHandle<Output> extends PageHandle<Output> {
   readonly result: Promise<Output | undefined>;
   close(): Promise<void>;
 }
+
+export { bindForm } from "./form.js";
+export { bindGrid } from "./grid.js";

@@ -1,0 +1,268 @@
+// SPDX-License-Identifier: Apache-2.0
+import { createCommunicator } from "@bbalganjjm/natural_js/comm";
+import { createRows } from "@bbalganjjm/natural_js/data";
+import type { Snapshot } from "@bbalganjjm/natural_js/data";
+import type { PageContext } from "@bbalganjjm/natural_js/page";
+import { bindForm, bindGrid } from "@bbalganjjm/natural_js/ui";
+import type { RuleSet, ValidationIssue } from "@bbalganjjm/natural_js/ui";
+
+type Employee = {
+  id: string;
+  name: string;
+  email: string;
+  salary: number;
+  profile: { team: string; department?: string };
+  a: { aa?: number; bb?: number }[];
+  chosen: number | null;
+};
+
+function find<ElementType extends Element>(root: ParentNode, selector: string): ElementType {
+  const element = root.querySelector<ElementType>(selector);
+  if (!element) throw new Error("Employee HTML needs " + selector);
+  return element;
+}
+
+function companyEmail(value: string): boolean {
+  return value.endsWith("@example.com");
+}
+
+function businessIssue(employee: Snapshot<Employee>): string | null {
+  if (!employee.name.trim()) return "Enter a name.";
+  if (!companyEmail(employee.email)) return "Use a company email.";
+  if (employee.salary < 0) return "Salary cannot be negative.";
+  return null;
+}
+
+const rules: RuleSet = {
+  format: {
+    group: value => Number(value).toLocaleString("en-US")
+  },
+  validate: {
+    companyEmail: value => companyEmail(value) || "Use a company email.",
+    nonnegative: value => Number(value) >= 0 || "Salary cannot be negative."
+  }
+};
+
+export function createEmployees({ root, signal, own, input }: PageContext<{ close(): void }>) {
+  const session = crypto.randomUUID();
+  const endpoint = (name: string) => "employees/" + name + "?session=" + encodeURIComponent(session);
+  const comm = createCommunicator({ baseURL: new URL("/api/", document.baseURI) });
+  const rows = createRows<Employee>();
+  own(() => rows.dispose());
+
+  const searchRoot = find<HTMLFormElement>(root, '[data-role="search"]');
+  const detailRoot = find<HTMLFormElement>(root, '[data-role="detail"]');
+  const table = find<HTMLTableElement>(root, '[data-role="grid"]');
+  const filterInput = find<HTMLInputElement>(root, '[data-role="filter"]');
+  const status = find<HTMLOutputElement>(root, '[data-role="status"]');
+  const error = find<HTMLOutputElement>(root, '[data-role="error"]');
+  const selected = find<HTMLOutputElement>(root, '[data-role="selected"]');
+  const sortHeader = find<HTMLTableCellElement>(root, 'th[aria-sort]');
+
+  const search = bindForm(searchRoot);
+  own(() => search.dispose());
+  const detail = bindForm(detailRoot, {
+    rows,
+    rules,
+    parse: {
+      salary: value => {
+        const parsed = Number(value.replaceAll(",", ""));
+        if (!value.trim() || !Number.isFinite(parsed)) throw new Error("Enter a number.");
+        return parsed;
+      }
+    }
+  });
+  own(() => detail.dispose());
+  let activeDetailId: number | null = null;
+  const grid = bindGrid(table, {
+    rows,
+    onSelect({ id, row }) {
+      if (id === activeDetailId) return;
+      if (activeDetailId !== null && rows.get(activeDetailId)?.status !== "delete") {
+        const current = detail.validate();
+        if (!current.valid) {
+          error.textContent = "Fix the current input before selecting another row.";
+          grid.select(activeDetailId);
+          current.issues[0].element?.focus();
+          return;
+        }
+      }
+      activeDetailId = id;
+      detail.bind(id);
+      selected.textContent = row ? "Selected: " + row.value.name : "No employee selected";
+    }
+  });
+  own(() => grid.dispose());
+
+  const lockTargets = [searchRoot, detailRoot, table, filterInput,
+    ...root.querySelectorAll<HTMLElement>('[data-action="add"], [data-action="delete"], [data-action="revert"], [data-action="save"]')];
+  const initialInert = lockTargets.map(element => element.inert);
+  let focusBeforeLock: HTMLElement | null = null;
+  function lockEditing(locked: boolean): void {
+    if (locked) {
+      const focused = root.ownerDocument.activeElement;
+      focusBeforeLock = focused instanceof HTMLElement &&
+        lockTargets.some(element => element === focused || element.contains(focused)) ? focused : null;
+    }
+    lockTargets.forEach((element, index) => { element.inert = locked || initialInert[index]; });
+    if (!locked) {
+      const target = focusBeforeLock;
+      focusBeforeLock = null;
+      if (!signal.aborted && target?.isConnected) target.focus({ preventScroll: true });
+    }
+  }
+
+  let searchController: AbortController | undefined;
+  let saving = false;
+  let sortDirection = 0;
+  let nextNew = 1;
+
+  function showFailure(cause: unknown): void {
+    if (signal.aborted || cause instanceof Error && cause.name === "AbortError") return;
+    error.textContent = cause instanceof Error ? cause.message : String(cause);
+  }
+
+  async function load(): Promise<boolean> {
+    searchController?.abort();
+    const current = new AbortController();
+    searchController = current;
+    status.textContent = "Loading…";
+    error.textContent = "";
+    try {
+      const values = await comm.request<Employee[]>({
+        url: endpoint("search"),
+        method: "POST",
+        json: search.read(),
+        signal: AbortSignal.any([signal, current.signal])
+      });
+      if (signal.aborted || current.signal.aborted) return false;
+      rows.replace(values);
+      grid.select(null);
+      detail.bind(null);
+      status.textContent = values.length + " employees";
+      return true;
+    } catch (cause) {
+      if (signal.aborted || current.signal.aborted) return false;
+      status.textContent = "Search failed";
+      showFailure(cause);
+      return false;
+    }
+  }
+
+  function reportIssue(issue: ValidationIssue): void {
+    let target = issue.element;
+    if (issue.rowId !== null) {
+      filterInput.value = "";
+      grid.setFilter(null);
+      grid.select(issue.rowId);
+      const updated = issue.rule === "select-option"
+        ? grid.validate(issue.rowId).issues
+        : detail.validate(issue.rowId).issues;
+      target = updated.find(item => item.field === issue.field && item.rule === issue.rule)?.element ?? target;
+    }
+    error.textContent = issue.message;
+    if (target?.isConnected) target.focus();
+  }
+
+  async function save(): Promise<void> {
+    if (saving) return;
+    const detailResult = detail.validate();
+    if (!detailResult.valid) return reportIssue(detailResult.issues[0]);
+    const gridResult = grid.validate();
+    if (!gridResult.valid) return reportIssue(gridResult.issues[0]);
+    const changes = rows.changes();
+    if (!changes.length) {
+      status.textContent = "No changes";
+      return;
+    }
+    for (const change of changes) {
+      if (change.status === "delete") continue;
+      const validation = detail.validate(change.id);
+      if (!validation.valid) return reportIssue(validation.issues[0]);
+      const choice = grid.validate(change.id);
+      if (!choice.valid) return reportIssue(choice.issues[0]);
+      const message = businessIssue(change.value);
+      if (message) {
+        grid.select(change.id);
+        error.textContent = message;
+        return;
+      }
+    }
+
+    saving = true;
+    searchController?.abort();
+    lockEditing(true);
+    error.textContent = "";
+    status.textContent = "Saving…";
+    try {
+      await comm.request<void>({
+        url: endpoint("save"),
+        method: "POST",
+        json: changes.map(({ status, value }) => ({ status, value })),
+        signal,
+        decode: () => undefined
+      });
+      if (signal.aborted) return;
+      if (await load()) status.textContent = "Saved";
+      else if (!signal.aborted) {
+        rows.replace(rows.entries().map(row => structuredClone(row.value) as Employee));
+        grid.select(null);
+        detail.bind(null);
+        status.textContent = "Saved; refresh failed";
+      }
+    } catch (cause) {
+      if (!signal.aborted) {
+        status.textContent = "Save failed";
+        showFailure(cause);
+      }
+    } finally {
+      saving = false;
+      lockEditing(false);
+    }
+  }
+
+  searchRoot.addEventListener("submit", event => {
+    event.preventDefault();
+    if (!saving) void load();
+  }, { signal });
+  filterInput.addEventListener("input", () => {
+    const query = filterInput.value.trim().toLowerCase();
+    grid.setFilter(query ? row => row.name.toLowerCase().includes(query) : null);
+  }, { signal });
+  find<HTMLButtonElement>(root, '[data-action="sort-name"]').addEventListener("click", () => {
+    sortDirection = sortDirection === 1 ? -1 : 1;
+    grid.setSort((left, right) => sortDirection * left.name.localeCompare(right.name));
+    sortHeader.setAttribute("aria-sort", sortDirection === 1 ? "ascending" : "descending");
+  }, { signal });
+  find<HTMLButtonElement>(root, '[data-action="add"]').addEventListener("click", () => {
+    const current = detail.validate();
+    if (!current.valid) return reportIssue(current.issues[0]);
+    const id = rows.add({
+      id: "NEW-" + nextNew++, name: "", email: "", salary: 0,
+      profile: { team: "", department: "" }, a: [], chosen: null
+    });
+    filterInput.value = "";
+    grid.setFilter(null);
+    grid.select(id);
+    find<HTMLInputElement>(detailRoot, '[data-field="name"]').focus();
+    status.textContent = "New employee";
+  }, { signal });
+  find<HTMLButtonElement>(root, '[data-action="delete"]').addEventListener("click", () => {
+    const id = grid.selected();
+    if (id === null) return;
+    rows.remove(id);
+    status.textContent = "Employee marked for deletion";
+  }, { signal });
+  find<HTMLButtonElement>(root, '[data-action="revert"]').addEventListener("click", () => {
+    rows.revert();
+    detail.bind(grid.selected());
+    error.textContent = "";
+    status.textContent = "Changes reverted";
+  }, { signal });
+  find<HTMLButtonElement>(root, '[data-action="save"]').addEventListener("click", () => {
+    void save();
+  }, { signal });
+  find<HTMLButtonElement>(root, '[data-action="close"]').addEventListener("click", () => input.close(), { signal });
+
+  return { init: async () => { await load(); } };
+}

@@ -5,6 +5,7 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
+import { bindForm, bindGrid } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
@@ -59,4 +60,10 @@ export function loadEmployees(comm: Communicator = createCommunicator({
   after: response => response
 })): Promise<Employee[]> {
   return comm.request<Employee[]>({ url: "employees", method: "GET" });
+}
+
+export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>) {
+  const form = bindForm(root, { rows });
+  const grid = bindGrid(table, { rows, onSelect: ({ id }) => form.bind(id) });
+  return { form, grid };
 }

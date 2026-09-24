@@ -23,10 +23,10 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:54:32Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:12:21Z }
 ---
 
-This is the user-approved 2.0 design contract, not yet an implemented API. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
+This is the user-approved 2.0 design contract. M2-M4 implement its package, CVC, communication, data, and pilot Form/Grid pieces; the later UI contracts remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
 
 # Goal
 
@@ -42,7 +42,7 @@ Make a search, list, detail, save, and popup flow readable in ordinary TypeScrip
 
 ## Package and public surface
 
-The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 adds the page, data, and communication runtimes. UI remains type-only until M4.
+The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 shipped the page, data, and communication runtimes; M4 shipped pilot Form/Grid bindings.
 
 | Entry | Public symbols fixed by M1 | Required framework behavior |
 |---|---|---|
@@ -198,7 +198,7 @@ declare function createRows<T extends object>(initial?: readonly T[]): Rows<T>;
 
 ## Nested JSON and row child Select
 
-This is a proposed new 2.0 binding capability, gated by the M4 prototype. In 1.x a Select receives its option array separately; Form treats a row property with the same DOM `id` as the selected scalar, so a nested array does not automatically become row-local options. M4 prototypes the new path; M5 implements nested row ownership and path binding; M6 completes Select/Grid/List integration. If the prototype cannot preserve correctness and binding speed, the M4 review gate may choose explicit per-row Select binding for 2.0 and schedule automatic nested binding for a later 2.x release.
+This is a 2.0 binding capability proved in the M4 pilot. In 1.x a Select receives its option array separately; Form treats a row property with the same DOM `id` as the selected scalar, so a nested array does not automatically become row-local options. M4 implemented the row-local path and measured it against an explicit per-row alternative. M5 completes nested row ownership and shared validation; M6 completes Select/Grid/List integration.
 
 ```html
 <tr data-row-template>
@@ -498,7 +498,7 @@ Inside the picker controller, `context.output(employee)` resolves the popup resu
 
 # Next action
 
-The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 built the package foundation; M3 implements the page, row, and communication functions and update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
+The user approved this M1 contract and [the M2 tooling plan](m2-plan.md). M2 built the package foundation, M3 implemented the page, row, and communication functions, and M4 added pilot Form/Grid bindings. Update this contract if a core invariant changes. Later milestone plans may refine component options but must revise this contract before changing its public invariants.
 
 # Decisions
 
@@ -524,16 +524,17 @@ No legacy function is removed in M1. M2-M9 removal audits must prove a candidate
 | Date | Check | Result |
 |---|---|---|
 | 2026-09-24 | Independent read-only source audits | CVC, Form rule dispatch, List/Grid Form use, and M0 classification conflict were inspected by separate agents. |
-| 2026-09-24 | Contract review | User approved M1 and M2 work; no CVC, data, communication, or UI runtime has been implemented. |
+| 2026-09-24 | Contract review | At M1 approval, no CVC, data, communication, or UI runtime had been implemented. |
+| 2026-09-24 | M4 status | M2-M3 shipped the package and core roles; M4 shipped the Form/Grid pilots, automatic nested row options, ID-clean dual-page checks, and fixed-fixture benchmarks. Later rule and container contracts remain draft. |
 
 # Open questions
 
 - M1 retains the formatter/validator names listed above, including combined validator names. M5 audits each rule's arguments and corrected behavior against 1.x; none is removed by assumption.
-- M4 benchmarks nested Select binding, duplicate-ID prevention, a possible legacy ID-scoping transform, and accessible native-table interaction.
-- If automatic nested binding misses its correctness or performance gate, the user may select explicit per-row Select binding for 2.0 and move automatic binding to a later 2.x milestone.
+- M4 benchmarked automatic nested Select binding, rejected fixed IDs in repeated templates, and verified native-table keyboard interaction. A legacy ID-scoping transform was not added; reusable markup uses ID-free field markers.
+- M4 automatic nested binding met its correctness and measured performance gate. M5/M6 must preserve that behavior and recheck the recorded budget after expanding UI behavior.
 - Date formatting remains in M5 while its optional custom calendar attachment waits until M11.
 - M6/M7 fix component-specific options and DOM/accessibility details inside the common signatures.
-- Browser tests must verify the proposed blur/validation behavior and popup focus lifecycle before implementation concepts can become verified.
+- M4 browser tests cover the pilot Form blur/validation behavior. M5 must verify the full retained rule catalog; M7 must verify popup focus lifecycle.
 
 [^html-id]: HTML standard ID uniqueness
 [^wai-table]: WAI table accessibility tutorial

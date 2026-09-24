@@ -1,0 +1,32 @@
+:root { color-scheme: light; font: 16px/1.5 Georgia, serif; color: #162b28; background: #f8f3e8; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, select { font: inherit; }
+button { cursor: pointer; border: 1px solid #31584f; background: #fff; border-radius: .2rem; padding: .28rem .55rem; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #b34d13; outline-offset: 2px; }
+.site-header { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; padding: .9rem 2rem; background: #21483f; color: #fff; }
+.site-header h1 { margin: 0 auto 0 0; font-size: 1.35rem; }
+.site-header a { color: #fff; }
+[data-hosts] { display: grid; gap: 1.2rem; max-width: 78rem; margin: auto; padding: 1.2rem; }
+.employee-page { display: grid; gap: 1.1rem; padding: 1.5rem; background: #fffdf8; border: 2px solid #cebba0; }
+.page-header, .search-bar, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; }
+.page-header { justify-content: space-between; border-bottom: 1px solid #cebba0; padding-bottom: .7rem; }
+.page-header h2, .detail-panel h3 { margin: 0; }
+.search-bar label { display: inline-flex; gap: .5rem; align-items: center; }
+.detail-panel { padding: 1rem; background: #f5efe2; }
+.detail-panel .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1rem; margin: .8rem 0; }
+.detail-panel label { display: grid; gap: .2rem; }
+.detail-panel input { width: 100%; padding: .4rem; }
+.detail-panel small { color: #a4201e; min-height: 1.2rem; display: block; }
+.list-panel { overflow-x: auto; }
+.actions { margin-bottom: .6rem; }
+table { width: 100%; border-collapse: collapse; }
+caption { text-align: left; font-weight: bold; padding: .4rem 0; }
+th, td { border-bottom: 1px solid #cebba0; padding: .45rem .7rem; text-align: left; }
+th[scope="col"] { background: #e6eee6; }
+th[scope="row"] button { border: 0; background: transparent; text-decoration: underline; color: #075a47; }
+button[aria-pressed="true"] { font-weight: bold; background: #d5ebdd; }
+.page-footer { display: flex; gap: 1rem; }
+[data-role="error"] { color: #a4201e; }
+@media (max-width: 650px) { .detail-panel .fields { grid-template-columns: 1fr; } }
+.search-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }

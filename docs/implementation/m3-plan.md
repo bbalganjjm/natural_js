@@ -7,7 +7,7 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract
-    git_blob: 6f477ebc2a56d26afb704da194674f1728d9af31
+    git_blob: f08f99ca449b6c53f81beb42f6d4d55d3d68e72f
   - id: package
     resource: ../../package.json
     title: Isolated 2.0 package

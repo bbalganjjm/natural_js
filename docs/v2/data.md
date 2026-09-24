@@ -10,9 +10,10 @@ sources:
     resource: ../../src/data/index.ts
     title: Row store runtime and types
     git_blob: 85c9f0c7140580e7217dadb91476d824025b3a07
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:00:49Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:14:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T09:10:24Z }
+  - { by: codex/gpt-6-sol-independent, at: 2026-09-24T10:14:39Z }
 ---
 
 The `./data` entry exports `createRows` and row types. It stores JSON-compatible rows without adding framework fields to business values, and uses store-local numeric IDs for identity.[^data]
@@ -40,7 +41,7 @@ Accepts an optional array of plain, acyclic JSON-compatible row objects. It clon
 | Store member | Behavior |
 |---|---|
 | `replace(values)` | Replaces all rows with clean copies and new IDs; existing IDs are never reused. |
-| `entries()` | Returns visible rows in store order; deleted rows are omitted. The returned frozen array is cached until a change. |
+| `entries()` | Returns non-deleted rows in store order. The returned frozen array is cached until a change. |
 | `get(id)` | Returns a row snapshot, including a row marked for deletion, or `undefined`. |
 | `add(value)` | Adds an inserted row and returns its ID. |
 | `set(id, field, value)` | Replaces one top-level field. Nested arrays/objects are cloned and frozen as one value. Returning a field to its original value clears its dirty state. |
@@ -54,7 +55,7 @@ A no-op `set`, repeated `remove` of a deleted row, and `revert` of clean rows do
 
 # Pitfalls
 
-`RowId` is neither a business key, an array index, nor a DOM `id`. Do not mutate a snapshot or infer its ID from sorted/filtered position. The M3 store accepts nested JSON as an atomic field; nested-path edits and row-local Select option binding belong to later UI milestones. A throwing subscriber propagates after the mutation and prevents later listeners from running.[^data]
+`RowId` is neither a business key, an array index, nor a DOM `id`. Do not mutate a snapshot or infer its ID from sorted/filtered position. The store still accepts nested JSON as an atomic top-level field; M4 Form copies a nested object path before calling `Rows.set`, and M4 Grid reads row-local option arrays. The full rule and draft behavior belongs to M5/M6. A throwing subscriber propagates after the mutation and prevents later listeners from running.[^data]
 
 Invalid values use `ROW_VALUE`; missing IDs use `ROW_MISSING`; editing a deleted row uses `ROW_DELETED`; a non-string runtime field uses `ROW_FIELD`. These are `FrameworkError` codes with the failing `Rows.*` API.[^data]
 
@@ -76,6 +77,6 @@ rows.dispose();
 
 # Related
 
-[The M1 contract](../implementation/m1-contract.md) defines row identity and nested data goals. [UI types](ui.md) describe the future Form/Grid connection.
+[The M1 contract](../implementation/m1-contract.md) defines row identity and nested data goals. [Form](form.md) and [Grid](grid.md) describe the M4 binding pilots.
 
 [^data]: Row store runtime and types

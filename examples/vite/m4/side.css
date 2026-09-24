@@ -1,0 +1,36 @@
+:root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #1e293b; background: #eef2f7; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+.site-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: #15243b; color: white; }
+.site-header h1 { margin: 0 auto 0 0; font-size: 1.2rem; }
+.site-header a { color: white; }
+[data-hosts] { display: grid; gap: 1rem; padding: 1rem; }
+.employee-page { background: white; border: 1px solid #cbd5e1; border-radius: .6rem; padding: 1rem; box-shadow: 0 3px 14px #1e293b12; }
+.page-header, .actions, .search-bar { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; }
+.page-header { justify-content: space-between; }
+.page-header h2 { margin: 0; }
+.search-bar { margin: 1rem 0; }
+.search-bar label { display: inline-flex; align-items: center; gap: .4rem; }
+.search-bar input { max-width: 13rem; }
+.workspace { display: grid; grid-template-columns: minmax(26rem, 2fr) minmax(16rem, 1fr); gap: 1rem; }
+.list-panel, .detail-panel { min-width: 0; padding: 1rem; border: 1px solid #d9e2ee; border-radius: .4rem; }
+.actions { margin-bottom: .8rem; }
+table { width: 100%; border-collapse: collapse; }
+caption { text-align: left; font-weight: 700; padding-bottom: .5rem; }
+th, td { text-align: left; border-bottom: 1px solid #e2e8f0; padding: .55rem .4rem; }
+th[scope="col"] { background: #eef5ff; }
+th[scope="row"] { font-weight: 400; }
+th[scope="row"] button { border: 0; background: transparent; text-decoration: underline; color: #164e8b; }
+button[aria-pressed="true"] { font-weight: 700; }
+.detail-panel h3 { margin-top: 0; }
+.detail-panel form { display: grid; gap: .15rem; margin: 1rem 0; }
+.detail-panel label { display: grid; gap: .2rem; }
+.detail-panel input { width: 100%; padding: .35rem; }
+.detail-panel small { display: block; min-height: 1.1rem; color: #a21d25; }
+.page-footer { display: flex; gap: 1rem; min-height: 1.5rem; margin-top: .9rem; }
+[data-role="error"] { color: #a21d25; }
+@media (max-width: 850px) { .workspace { grid-template-columns: 1fr; } }
+.search-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }

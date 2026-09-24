@@ -6,5 +6,6 @@
 * [Natural-JS 2.0 M1 public contract](m1-contract.md) - Proposed 2.0 page, data, Form rule, communication, and container contracts with representative usage for review.
 * [Natural-JS 2.0 M2 tooling plan](m2-plan.md) - Proposed implementation scope for TypeScript source, ESM packaging, consumer checks, and 2.0 documentation tooling.
 * [Natural-JS 2.0 M3 runtime plan](m3-plan.md) - Proposed CVC lifecycle, communication, and minimum shared-row implementation with cancellation and cleanup gates.
-* [Natural-JS 2.0 M4 vertical-screen plan](m4-plan.md) - Review plan for the first authored-HTML search, grid, detail, and save screen with nested binding, accessibility, and performance gates. (draft)
+* [Natural-JS 2.0 M4 vertical-screen plan](m4-plan.md) - Approved plan and measured result for the first authored-HTML search, Grid, detail, and save screen.
+* [Natural-JS 2.0 M5 data and rule plan](m5-plan.md) - Review plan for retained Form rules, row-keyed drafts, nested binding, and shared validation contracts. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.

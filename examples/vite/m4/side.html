@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural-JS M4 · side-by-side employees</title>
+    <link rel="stylesheet" href="/m4/side.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Employees · side-by-side</h1>
+      <button type="button" data-action="open">Open another screen</button>
+      <a href="/m4/stack.html">Stacked layout</a>
+    </header>
+    <main data-hosts></main>
+    <template data-screen>
+      <section class="employee-page" data-page="employees" aria-label="Employee screen">
+        <header class="page-header">
+          <h2>Employee editor</h2>
+          <button type="button" data-action="close">Close screen</button>
+        </header>
+        <div class="search-tools">
+          <form data-role="search" class="search-bar">
+            <label>Search name or email <input data-field="query" autocomplete="off"></label>
+            <button type="submit">Search</button>
+          </form>
+          <label>Visible filter <input data-role="filter" autocomplete="off"></label>
+        </div>
+        <div class="workspace">
+          <section class="list-panel" aria-label="Employee list">
+            <div class="actions">
+              <button type="button" data-action="add">Add employee</button>
+              <button type="button" data-action="delete">Delete selected</button>
+              <button type="button" data-action="revert">Revert changes</button>
+            </div>
+            <table data-role="grid">
+              <caption>Employees</caption>
+              <thead>
+                <tr>
+                  <th scope="col" aria-sort="none"><button type="button" data-action="sort-name">Name</button></th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Team</th>
+                  <th scope="col">Choice</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-row-template>
+                  <th scope="row"><button type="button" data-select-row>Open <span data-field="id"></span>: <span data-field="name"></span></button></th>
+                  <td data-field="email"></td>
+                  <td data-field="profile.team"></td>
+                  <td><label>Choice
+                    <select data-field="chosen" data-options="a" data-option-label="aa" data-option-value="bb">
+                      <option value="">Choose</option>
+                    </select>
+                  </label></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="detail-panel" aria-label="Employee details">
+            <h3>Details</h3>
+            <output data-role="selected" aria-live="polite">No employee selected</output>
+            <form data-role="detail" novalidate>
+              <label>Name <input data-field="name" required></label>
+              <small data-error-for="name"></small>
+              <label>Email <input data-field="email" type="email" required data-validate='[["companyEmail"]]'></label>
+              <small data-error-for="email"></small>
+              <label>Salary <input data-field="salary" inputmode="decimal" required data-format='[["group"]]' data-validate='[["nonnegative"]]'></label>
+              <small data-error-for="salary"></small>
+              <label>Team <input data-field="profile.team" required></label>
+              <small data-error-for="profile.team"></small>
+              <label>Department <input data-field="profile.department"></label>
+              <small data-error-for="profile.department"></small>
+            </form>
+            <button type="button" data-action="save">Save changes</button>
+          </section>
+        </div>
+        <footer class="page-footer">
+          <output data-role="status" aria-live="polite"></output>
+          <output data-role="error" role="alert"></output>
+        </footer>
+      </section>
+    </template>
+    <script type="module" src="/m4/main.ts"></script>
+  </body>
+</html>

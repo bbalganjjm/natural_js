@@ -1,0 +1,29 @@
+[
+  {
+    "id": "E-101",
+    "name": "Ada",
+    "email": "ada@example.com",
+    "salary": 120000,
+    "profile": { "team": "Platform", "department": "Engineering" },
+    "a": [{ "aa": 11, "bb": 22 }, {}],
+    "chosen": 22
+  },
+  {
+    "id": "E-102",
+    "name": "Grace",
+    "email": "grace@example.com",
+    "salary": 110000,
+    "profile": { "team": "Research" },
+    "a": [{ "aa": 33, "bb": 44 }, { "aa": 55, "bb": 66 }],
+    "chosen": 44
+  },
+  {
+    "id": "E-103",
+    "name": "Lin",
+    "email": "lin@example.com",
+    "salary": 90000,
+    "profile": { "team": "Design" },
+    "a": [],
+    "chosen": null
+  }
+]

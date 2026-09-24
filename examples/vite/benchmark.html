@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural-JS M4 binding benchmark</title>
+  </head>
+  <body>
+    <main>
+      <h1>Natural-JS M4 binding benchmark</h1>
+      <div data-benchmark-host></div>
+    </main>
+
+    <template data-benchmark-template="flat">
+      <table>
+        <caption>Flat binding fixture</caption>
+        <thead><tr><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th></tr></thead>
+        <tbody><tr data-row-template><td data-field="f0"></td><td data-field="f1"></td><td data-field="f2"></td><td data-field="f3"></td><td data-field="f4"></td><td data-field="f5"></td><td data-field="f6"></td><td data-field="f7"></td><td data-field="f8"></td><td data-field="f9"></td></tr></tbody>
+      </table>
+    </template>
+
+    <template data-benchmark-template="nested-auto">
+      <table>
+        <caption>Automatic row-local Select fixture</caption>
+        <thead><tr><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">Choice</th></tr></thead>
+        <tbody><tr data-row-template><td data-field="f0"></td><td data-field="f1"></td><td data-field="f2"></td><td data-field="f3"></td><td data-field="f4"></td><td data-field="f5"></td><td data-field="f6"></td><td data-field="f7"></td><td data-field="f8"></td><td><label>Choice <select data-field="chosen" data-options="a" data-option-label="aa" data-option-value="bb"><option value="">Choose</option></select></label></td></tr></tbody>
+      </table>
+    </template>
+
+    <template data-benchmark-template="nested-explicit">
+      <table>
+        <caption>Application-bound row-local Select fixture</caption>
+        <thead><tr><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">Choice</th></tr></thead>
+        <tbody><tr data-row-template><td data-field="f0"></td><td data-field="f1"></td><td data-field="f2"></td><td data-field="f3"></td><td data-field="f4"></td><td data-field="f5"></td><td data-field="f6"></td><td data-field="f7"></td><td data-field="f8"></td><td><label>Choice <select data-field="chosen"><option value="">Choose</option></select></label></td></tr></tbody>
+      </table>
+    </template>
+
+    <script type="module" src="/benchmark.ts"></script>
+  </body>
+</html>

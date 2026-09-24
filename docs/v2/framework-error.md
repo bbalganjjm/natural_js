@@ -14,10 +14,10 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: FrameworkError implementation
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:52:33Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:12:21Z }
 ---
 
-`FrameworkError` is the shared error class used by the M3 page runner, row store, and communicator. It carries a short code and actionable context.
+`FrameworkError` is the shared error class used by the page runner, row store, communicator, Form, and Grid. It carries a short code and actionable context.
 
 # Summary
 
@@ -43,7 +43,7 @@ The constructor requires nonblank `code`, `api`, and `message` strings. A missin
 
 # Pitfalls
 
-`mountPage`, `createRows`, and `createCommunicator` now export runtime functions from their role entries. The `./ui` entry remains type-only; importing its Form or Grid handle type does not add runtime behavior.
+`mountPage`, `createRows`, `createCommunicator`, `bindForm`, and `bindGrid` are runtime exports from their role entries. Import Form/Grid handle names with `import type`; their pilot implementations do not yet include the full M5 rule catalog.
 
 # Examples
 
@@ -60,6 +60,6 @@ throw new FrameworkError({
 
 # Related
 
-[Package and installation](package.md) identifies the actual M3 exports. [The M1 contract](../implementation/m1-contract.md) specifies errors required by later runtime milestones.
+[Package and installation](package.md) identifies the actual M4 exports. [The M1 contract](../implementation/m1-contract.md) specifies errors required by later runtime milestones.
 
 [^error]: FrameworkError implementation

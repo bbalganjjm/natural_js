@@ -1,18 +1,18 @@
 ---
 type: Plan
 title: Natural-JS 2.0 M4 vertical-screen plan
-description: Review plan for the first authored-HTML search, grid, detail, and save screen with nested binding, accessibility, and performance gates.
+description: Approved plan and measured result for the first authored-HTML search, Grid, detail, and save screen.
 tags: [meta, plan, migration]
 status: draft
 sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract and representative screen
-    git_blob: 6f477ebc2a56d26afb704da194674f1728d9af31
+    git_blob: f08f99ca449b6c53f81beb42f6d4d55d3d68e72f
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: 7979cb0cea284c36e166199401c00b2ac806e26f
+    git_blob: fa95aa880ebf9279b5126a3380c616a0037fc77d
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation
@@ -25,10 +25,10 @@ sources:
     resource: ../../src/comm/index.ts
     title: M3 request implementation
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:14:15Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T10:16:03Z }
 ---
 
-M4 tests the 2.0 structure through one complete application path before expanding the UI catalog. This is a plan for user review. M4 implementation does not start until its scope is approved.
+M4 tests the 2.0 structure through one complete application path before expanding the UI catalog. The user approved M4 on 2026-09-24. This record keeps its scope, implementation decisions, and measured evidence together.
 
 # Goal
 
@@ -37,7 +37,7 @@ Run search → list → select → detail edit → save against authored HTML wi
 # Checkpoint
 
 - M1 fixes the public direction: one page runtime, Rows identity, data-field independent of DOM id, and Form/Grid on authored HTML. [The M1 contract](m1-contract.md) is a design contract; M4 must label any still-unimplemented behavior accurately.
-- M3 implements page lifecycle, communication, and the minimum immutable row store. Nested arrays are atomic values under top-level Rows.set; Form path editing and the retained formatter/validator catalog remain M5 work.
+- M3 implements page lifecycle, communication, and the minimum immutable row store. Nested arrays remain atomic values under top-level Rows.set. M4 adds safe nested Form paths and application-supplied parsing/formatting/validation; the retained built-in formatter/validator catalog and row-keyed drafts remain M5 work.
 - The existing 1.x formatter, validator, and transitive rule helpers stay in v1/ as reference. No M4 prototype justifies deleting Form-reachable behavior or replacing it with an application-only rule system.
 - The 2.0 source, package, and active OKF docs are at the repository root. v1/ is preserved reference code, not the 2.0 distribution.
 
@@ -59,13 +59,13 @@ The M4 example sends only status and value records from Rows.changes(), without 
 
 M4 must prove the connection points while avoiding a partial rewrite of the legacy rule catalog. The vertical fixture may use HTML required, input types, and an application-supplied validation/format function through the approved RuleSet shape. It tests that invalid data blocks a request, a validation issue reaches the authored error region, and valid raw data reaches Rows and the save payload. The sample must distinguish this pilot from full declarative data-format/data-validate behavior.
 
-M5 implements the retained built-in formatter/validator names, the 1.x JSON rule-list syntax, message resolution, drafts, parse-before-validation, raw/display separation, nested Form path editing, and validation of filtered-out rows. M6 completes the independently usable Form/List/Grid/Select components. M4 must not advertise those later behaviors as implemented, drop any Form-used rule, or create a framework-level generic utility to stand in for them. Business validation, comparison, and server transformations remain application code; typed callbacks are the framework boundary.
+M5 completes the retained built-in formatter/validator names, combined rules, message resolution, row-keyed drafts, and shared Form/Grid validation. M4 already parses JSON rule lists for application-supplied Form functions, parses edits before writing, separates raw/display values, supports safe nested Form paths, and validates filtered-out Grid Selects; M5 extends these pilot contracts. M6 completes the independently usable Form/List/Grid/Select components. M4 must not advertise those later behaviors as implemented, drop any Form-used rule, or create a framework-level generic utility to stand in for them. Business validation, comparison, and server transformations remain application code; typed callbacks are the framework boundary.
 
 # Nested Select decision gate
 
 Automatic row-local binding is the proposed 2.0 behavior, not an unconditional implementation shortcut. The M4 prototype must cover the exact M1 example of a row with a: [{ aa: 11, bb: 22 }, {}] and b: 2, separate option data from the selected field, preserve the raw selected type, and keep row IDs stable after sort/filter. A missing option value/label is skipped; an authored empty option and an unavailable selected value follow the M1 validation contract. Unsafe prototype keys, numeric array indexes, and expression evaluation are rejected as binding paths.
 
-Measure automatic options against an explicit per-row binding of the same fixture. If correctness, accessibility, or the measured cost is unacceptable, record the failure and present an explicit-binding 2.0 fallback to the user at the M4 review gate. Do not silently narrow the approved capability. M5 implements the selected path; M6 completes component integration.
+Measure automatic options against an explicit per-row binding of the same fixture. If correctness, accessibility, or the measured cost is unacceptable, record the failure and present an explicit-binding 2.0 fallback to the user at the M4 review gate. Do not silently narrow the approved capability. M4 implements automatic row-local options in its Grid pilot; M5 completes the shared binding/rule behavior and M6 completes component integration.
 
 # Accessibility and binding measurements
 
@@ -86,7 +86,7 @@ M4 is complete only when the two authored views run the same controller, the ver
 
 # Next action
 
-M3 is complete. Wait for the user to review and approve this M4 plan. No M4 runtime or UI implementation is authorized by drafting this document.
+Review the completed M4 result and [the M5 detailed plan](m5-plan.md) with the user. M5 requires its own approval before implementation.
 
 # Decisions
 
@@ -95,14 +95,32 @@ M3 is complete. Wait for the user to review and approve this M4 plan. No M4 runt
 - Retain the 1.x Form rule capability for M5 and use only the M4 pilot's narrow validation connection in the representative screen.
 - Let measured correctness and cost decide whether automatic row-local options are ready for 2.0; ask the user before selecting the documented fallback.
 - Keep one example controller across the two layouts so markup differences test the framework boundary rather than duplicate application code.
+- M4 Form and Grid are explicit pilots: Form accepts supplied JSON rules, Grid validates row-local Selects, and passing Grid `rules` fails with `GRID_RULES` until M5. The example blocks invalid-draft row switches and locks edits during save to avoid data loss before M5 row-keyed drafts.
+- M6 reference-host budgets for the 1,000-row/10-field Chromium fixture are flat initial <=30 ms, rebind <=35 ms, one-field edit <=5 ms, sort <=10 ms, and filter <=8 ms; nested automatic initial <=90 ms, rebind <=100 ms, sort <=25 ms, and filter <=18 ms. Require zero duplicate IDs. On a different host, first collect its M4 baseline and require no more than 2x its corresponding medians before comparing absolute numbers.
 
 # Verification log
 
 | Date | Check | Result |
 |---|---|---|
 | 2026-09-24 | Planning | M4 scope drafted from M1, the roadmap, and M3 role implementations; no M4 code was written. |
+| 2026-09-24 | Approval | The user approved M4 implementation and requested meticulous work. |
+| 2026-09-24 | Pilot | Two authored HTML/CSS layouts use one CVC controller, mock search/save endpoints, Form/Grid bindings, raw nested Select options, and an atomic expected save payload. |
+| 2026-09-24 | Independent review | Found and fixed Enter in the local filter submitting a search, editing during a pending save, an invalid draft lost on row selection, lost focus after save, partial mock saves, an invalid draft leaving an unintended added row, and duplicate resend after a successful save with failed refresh. Regression checks were added. |
+| 2026-09-24 | Benchmark | Raw five-run Chromium measurements are in [m4-binding-chromium.json](evidence/m4-binding-chromium.json); 2 warm-up runs, 100/1,000 rows, 10 fields, same Windows i7-9700F and Headless Chromium 153. |
+| 2026-09-24 | Independent agent task | A fresh agent added optional `profile.department` to both views and the shared data/server/test path. First Chromium run passed, with zero code-change retries: 7 files, 12 added and 5 replaced lines. It read 15 unique files (53,364 bytes; 57,186 bytes including rereads) in about 4 minutes 5 seconds of recorded work. Two TypeScript command adjustments were needed; actual token use was unavailable. These bytes measure read context, not tokens. |
+| 2026-09-24 | Final checks | Build, typecheck, M4 example TypeScript check, Vitest 29/29, fresh-tarball JS/TS consumers, and the complete M2-M4 Chromium/WebKit browser suite 64/64 passed (M4 screen: 36/36). Changed/full OKF checks passed with 0 errors and 0 warnings. The 48-file, 46,017-byte tarball excludes 1.x and jQuery. A Firefox smoke still failed before page load with `browserType.launch: spawn UNKNOWN` on this Windows host. |
 
+The 1,000-row median times below are milliseconds from that recorded run. The flat 1.x comparison uses its preserved jQuery and Grid bundle with `onBind` completion, and excludes filter/dispose/nested Select because the contracts differ.
+
+| 1,000 rows | Initial | Rebind | One edit | Sort | Filter | Dispose | Duplicate IDs |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2.0 flat | 11.9 | 13.8 | 0.9 | 3.0 | 2.1 | 0.4 | 0 |
+| 2.0 nested automatic | 40.4 | 44.2 | 1.4 | 9.3 | 6.4 | 1.4 | 0 |
+| 2.0 nested app binding | 44.3 | 48.5 | 1.9 | 10.4 | 7.0 | 1.3 | 0 |
+| 1.x flat | 122.8 | 111.0 | 2.1 | 107.8 | n/a | n/a | 9,990 |
+
+The 100-row medians are in the raw JSON. 1.x rebind does not deep-clone immutable rows or track changes, and its sort rebinds after a header click; the numbers compare user-facing operations rather than identical algorithms. The nested app binder measures option rendering, not typed selection. Instant heap readings are stored for diagnosis, without a memory budget.
 # Open questions
 
-- M4 measurements will set concrete M6 binding budgets and may expose a need to revise the M1 nested Select path or the minimum Form/Grid split.
+- M4 measurements support automatic row-local options and set the M6 reference-host budgets below. Recheck the same fixture after M5 rule work; heap values remain diagnostic because collection was not controlled.
 - Firefox Playwright startup failed on the M2 Windows host; rerun on a working host before treating its browser gate as verified.

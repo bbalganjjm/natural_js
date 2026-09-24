@@ -3,6 +3,7 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
+import { bindForm, bindGrid } from "@bbalganjjm/natural_js/ui";
 
 const cause = new Error("original");
 const error = new FrameworkError({
@@ -16,6 +17,8 @@ assert.equal(error.code, "CONSUMER_CHECK");
 assert.equal(error.api, "installed-package");
 assert.equal(error.cause, cause);
 assert.equal(typeof mountPage, "function");
+assert.equal(typeof bindForm, "function");
+assert.equal(typeof bindGrid, "function");
 
 const rows = createRows([{ name: "A", options: [{ value: "one" }] }]);
 const id = rows.entries()[0].id;
