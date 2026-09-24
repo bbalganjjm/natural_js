@@ -1,0 +1,60 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #172430;
+  background: #f4f7f9;
+}
+
+body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+button, a { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #185cb2; outline-offset: 3px; }
+
+.site-header, .screen-header, .screen-actions, .picker-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.site-header { margin-bottom: 1.5rem; }
+.site-header h1, .screen-header h2 { margin-right: auto; }
+.workspace-screen, .event-log {
+  background: white;
+  border: 1px solid #becbd6;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.main-panel, .tabs-panel {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid #d2dbe2;
+  border-radius: 0.5rem;
+}
+
+[role="tablist"] { display: flex; gap: 0.25rem; border-bottom: 1px solid #aebbc6; }
+[role="tab"] { border: 1px solid #aebbc6; border-radius: 0.4rem 0.4rem 0 0; padding: 0.45rem 0.8rem; background: #edf2f6; }
+[role="tab"][aria-selected="true"] { background: white; border-bottom-color: white; font-weight: 700; }
+[role="tabpanel"] { padding: 0.8rem 0; min-height: 6rem; }
+[role="tabpanel"][aria-busy="true"] { opacity: 0.7; }
+
+output { display: inline-block; min-height: 1.4em; }
+.screen-actions { margin-top: 1rem; }
+.screen-actions output { flex-basis: 100%; }
+.picker-actions { margin-top: 0.8rem; }
+.event-log ul { margin-bottom: 0; }
+
+dialog {
+  border: 1px solid #74889b;
+  border-radius: 0.6rem;
+  padding: 1.25rem;
+  max-width: min(90vw, 36rem);
+}
+
+dialog::backdrop { background: rgb(16 30 44 / 55%); }

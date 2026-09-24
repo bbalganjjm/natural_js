@@ -5,8 +5,8 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindPagination } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, PageRequest, PageState, SelectChoice } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -82,4 +82,17 @@ export function connectDataUI(listRoot: HTMLUListElement, sizeRoot: HTMLSelectEl
     }
   });
   return { list, size, pagination };
+}
+
+export function openEmployeePicker(dialog: HTMLDialogElement): PopupHandle<string> {
+  return openPopup(dialog, definition, { name: "Kim" });
+}
+
+export function connectTabs(root: HTMLElement): TabHandle {
+  return bindTabs(root, {
+    initial: "employees",
+    pages: {
+      employees: host => mountPage(host, definition, { name: "Kim" })
+    }
+  });
 }

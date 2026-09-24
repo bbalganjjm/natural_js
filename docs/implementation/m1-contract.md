@@ -1,7 +1,7 @@
 ---
 type: Plan
 title: Natural-JS 2.0 M1 public contract
-description: Proposed 2.0 page, data, Form rule, communication, and container contracts with representative usage for review.
+description: Approved 2.0 page, data, Form rule, communication, and container contracts with representative usage.
 tags: [meta, plan, migration]
 status: draft
 sources:
@@ -23,10 +23,10 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:50:13Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:49:36Z }
 ---
 
-This is the user-approved 2.0 design contract. M2-M5 implement its package, CVC, communication, data, Form/Grid rule, and row-draft pieces; the later UI contracts remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
+This is the user-approved 2.0 design contract. M2-M7 implement its package, CVC, communication, data, UI rules, and page-container pieces. M8-M9 remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
 
 # Goal
 
@@ -42,17 +42,17 @@ Make a search, list, detail, save, and popup flow readable in ordinary TypeScrip
 
 ## Package and public surface
 
-The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 shipped the page, data, and communication runtimes; M4 shipped pilot Form/Grid bindings, and M5 completes their shared rule and draft contracts.
+The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/natural_js`; the 1.x source, package, license, and usage docs are preserved under `v1/`. Explicit ESM exports cover `./page`, `./data`, `./ui`, and `./comm`; the package root re-exports only public symbols. Internal modules never import the package root. M2 shipped `FrameworkError`; M3 shipped the page, data, and communication runtimes; M4 shipped pilot Form/Grid bindings; M5 completed their shared rule and draft contracts; M6-M7 added the first-release data and page UI.
 
-| Entry | Public symbols fixed by M1 | Required framework behavior |
+| Entry | Representative approved symbols | Required framework behavior |
 |---|---|---|
 | `.` | `FrameworkError` | Shared error shape, implemented below the role modules |
 | `./page` | `mountPage`, `PageContext`, `PageController`, `PageHandle`, `PageDefinition` | One CVC runtime, independent instances, lifecycle and cleanup |
 | `./data` | `createRows`, `Rows`, `RowId`, `RowSnapshot`, `RowChange`, `RowsEvent` | Shared rows, stable identity, changes, subscriptions |
-| `./ui` | `bindForm`, `bindGrid`, `openPopup`; `FormHandle`, `GridHandle`, `PopupHandle`, `Rule`, `RuleSet`, `ValidationResult` | Behavior on authored HTML, built-in rules, common handle/disposal convention |
+| `./ui` | `bindForm`, `bindGrid`, `openPopup`, `bindTabs`; `FormHandle`, `GridHandle`, `PopupHandle`, `TabHandle`, `RuleSet`, `ValidationResult` | Behavior on authored HTML, built-in rules, common handle/disposal convention |
 | `./comm` | `createCommunicator`, `Communicator` | JSON requests, cancellation, common request/response hooks |
 
-`bindForm` and `bindGrid` are needed for M4; `openPopup` names the M7 result flow. M6/M7 decide the remaining component names and options only when their implementation need is established. The M7 names in this design table are planned contracts, not current package exports; [the UI concept](../v2/ui.md) lists the implemented surface. All component handles own a root and expose `dispose()`. No formatter/validator utility package is created: Form, List, and Grid share a rule engine within `./ui`. Internal role modules import one private error implementation, never the root entry.
+This table gives representative contracts, not every entry export. M6 added List, Select, and Pagination; M7 added `openPopup`, `PopupHandle`, `bindTabs`, and `TabHandle`. [The UI concept](../v2/ui.md) lists implemented exports. Component handles expose `dispose()`; Popup owns an authored dialog and a private page handle rather than exposing a root. No formatter/validator utility package is created: Form, List, and Grid share a rule engine within `./ui`. Internal role modules import one private error implementation, never the root entry.
 
 ## First page on existing HTML, in JavaScript
 
@@ -467,22 +467,28 @@ The old implicit POST JSON becomes explicit `method: "POST", json: payload`. The
 
 ## Popup round trip and the same page runtime
 
-M7 implements `openPopup(host, pageDefinition, input?)` on top of `mountPage`; Tab uses that same runtime, with its public component signature decided in M7. They do not introduce separate HTML loading or controller initialization paths.
+M7 implements `openPopup(dialog, pageDefinition, input?)` on top of `mountPage`; Tabs use that same runtime. They do not introduce separate HTML loading or controller initialization paths. The caller supplies a connected native `<dialog>` with exactly one direct `[data-page-host]` child. That host is empty for URL/factory views or contains the borrowed root. Invalid, detached, already-open, or malformed hosts fail synchronously with `FrameworkError` before a page starts.
 
 ```ts
-interface PopupHandle<Output> extends PageHandle<Output> {
+interface PopupHandle<Output> {
+  readonly ready: Promise<void>;
   readonly result: Promise<Output | undefined>;
   close(): Promise<void>;
+  dispose(): Promise<void>;
 }
 declare function openPopup<Input, Output>(
-  host: HTMLElement, definition: PageDefinition<Input, Output>, input?: Input
+  dialog: HTMLDialogElement, definition: PageDefinition<Input, Output>, input?: Input
 ): PopupHandle<Output>;
 ```
 
-`result` resolves on the first output or an ordinary `close()` without a choice. A direct `dispose()` or parent removal before a choice rejects it with `AbortError`; loading or initialization failure rejects it with the original `FrameworkError`. Once settled, later disposal does not change the result. Await `result` directly for a round trip; `ready` is available when the caller must interact before selection. The popup's result promise belongs to that opening, not a later reopened instance.
+The first active page output reserves the choice and closes the dialog. An ordinary close reserves `undefined`; direct disposal, parent disposal, or host detachment reserves `AbortError` if no output or close was reserved. A later disposal cannot override a reserved choice. `result` settles only after native close, page cleanup, listener removal, and focus restoration, so awaiting it permits immediate reopening. A cleanup failure rejects `result` even after a choice or ordinary close. Closing during loading resolves `result` with `undefined` after cleanup while pending `ready` rejects with `AbortError`; a load/init failure rejects `result` with that failure. Native cancel, close, and `method=dialog` use the same lifetime. The popup's result belongs to that opening, not a later reopened instance.
 
 ```html
-<div data-host="popup"></div>
+<dialog data-picker aria-label="Choose employee">
+  <h2>Choose employee</h2>
+  <div data-page-host></div>
+  <form method="dialog"><button>Cancel</button></form>
+</dialog>
 ```
 
 ```ts
@@ -491,16 +497,16 @@ import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createEmployeePicker } from "./employee-picker.controller.js";
 
 type PickedEmployee = { id: string; name: string; email: string };
-const popupHost = document.querySelector<HTMLElement>('[data-host="popup"]')!;
+const dialog = document.querySelector<HTMLDialogElement>('[data-picker]')!;
 const employeePickerPage: PageDefinition<{ department: string }, PickedEmployee> = {
   view: new URL("./employee-picker.html", import.meta.url),
   controller: createEmployeePicker
 };
-const popup = openPopup(popupHost, employeePickerPage, { department: "D01" });
+const popup = openPopup(dialog, employeePickerPage, { department: "D01" });
 const selected = await popup.result; // PickedEmployee | undefined on close without a choice.
 ```
 
-Inside the picker controller, `context.output(employee)` resolves the popup result and closes that popup; in main content it notifies `page.onOutput` listeners without changing the mounted page. Popup and tab own focus movement/restoration, keyboard handling, and their page handles. Reopen makes a new controller instance. Dialog attaches behavior to existing dialog HTML; it does not require a framework visual design.
+Inside the picker controller, `context.output(employee)` closes that Popup and later resolves its result; in main content it notifies `page.onOutput` listeners without changing the mounted page. Popup and Tabs own focus movement/restoration, keyboard handling, and their private page handles. Reopen makes a new controller instance. A standalone dialog uses native `showModal()` and `close()` on authored HTML; no framework Dialog binder or visual design is needed. An owning CVC page registers `context.own(() => popup.dispose())`.
 
 # Next action
 
@@ -532,16 +538,17 @@ No legacy function is removed in M1. M2-M9 removal audits must prove a candidate
 | 2026-09-24 | Independent read-only source audits | CVC, Form rule dispatch, List/Grid Form use, and M0 classification conflict were inspected by separate agents. |
 | 2026-09-24 | Contract review | At M1 approval, no CVC, data, communication, or UI runtime had been implemented. |
 | 2026-09-24 | M4 status | M2-M3 shipped the package and core roles; M4 shipped the Form/Grid pilots, automatic nested row options, ID-clean dual-page checks, and fixed-fixture benchmarks. |
-| 2026-09-24 | M5 status | The retained Form rule catalog, shared private Form/Grid runner, row-keyed drafts, and Rows mutation events passed M5's code, browser, and package gates. Popup remains a future M7 design, not a current public type. |
+| 2026-09-24 | M5 status | The retained Form rule catalog, shared private Form/Grid runner, row-keyed drafts, and Rows mutation events passed M5's code, browser, and package gates. |
+| 2026-09-25 | M7 amendment | User approved a native dialog host and a narrow Popup result handle, plus fixed lazy Tabs. This supersedes the earlier HTMLElement and PageHandle-inheritance proposal. |
 
 # Open questions
 
 - M1 retains the formatter/validator names listed above, including combined validator names. M5 audited rule arguments and corrected behavior against 1.x; none was removed by assumption.
 - M4 benchmarked automatic nested Select binding, rejected fixed IDs in repeated templates, and verified native-table keyboard interaction. A legacy ID-scoping transform was not added; reusable markup uses ID-free field markers.
-- M4 and M5 automatic nested binding met their correctness and measured performance gates. M6 must preserve that behavior and recheck the recorded budget after expanding UI behavior.
+- M4 and M5 automatic nested binding met their correctness and measured performance gates. M6 preserved that behavior and rechecked its binding budget after expanding UI behavior.
 - Date formatting remains in M5 while its optional custom calendar attachment waits until M11.
-- M6/M7 fix component-specific options and DOM/accessibility details inside the common signatures.
-- M5 tests cover the retained rule catalog and Form/Grid validation behavior; M7 must verify popup focus lifecycle.
+- M6 fixed data-component options; M7 fixes Dialog/Popup/Tabs DOM and accessibility details without changing CVC loading.
+- M5 tests cover the retained rule catalog and Form/Grid validation behavior; M7 verified Popup focus lifecycle in Chromium, Firefox, and WebKit.
 
 [^html-id]: HTML standard ID uniqueness
 [^wai-table]: WAI table accessibility tutorial

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural-JS M7 · stacked page containers</title>
+    <link rel="stylesheet" href="/m7/stack.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Page containers · stacked</h1>
+      <button type="button" data-add-screen>Open another workspace</button>
+      <a href="/m7/side.html">Side-by-side layout</a>
+    </header>
+    <main data-screens></main>
+    <section class="event-log" aria-label="Workspace events">
+      <h2>Events</h2>
+      <ul data-history aria-live="polite"></ul>
+    </section>
+
+    <template data-screen-view>
+      <article class="workspace-screen" data-screen aria-label="Employee workspace">
+        <header class="screen-header">
+          <h2>Employee workspace</h2>
+          <button type="button" data-remove-screen>Close workspace</button>
+        </header>
+        <div class="screen-columns">
+          <section class="tabs-panel" aria-label="Tab pages">
+            <h3>Tab views</h3>
+            <section data-tabs>
+              <div role="tablist" aria-label="Employee views">
+                <button type="button" role="tab" data-tab="people">People</button>
+                <button type="button" role="tab" data-tab="help">Help</button>
+                <button type="button" role="tab" data-tab="preview">Preview</button>
+              </div>
+              <section role="tabpanel" data-panel="people" hidden></section>
+              <section role="tabpanel" data-panel="help" hidden>
+                <div data-inline-help>
+                  <p>Choose a person from the People view, or use this help panel.</p>
+                  <button type="button" data-help-action>Use help</button>
+                </div>
+              </section>
+              <section role="tabpanel" data-panel="preview" hidden>
+                <div data-preview-host></div>
+                <output data-preview-output aria-live="polite"></output>
+              </section>
+              <p data-tab-error role="alert" hidden></p>
+            </section>
+            <output data-tab-output aria-live="polite"></output>
+          </section>
+          <section class="main-panel" aria-label="Main page">
+            <h3>Main content</h3>
+            <div data-main-host></div>
+            <output data-main-output aria-live="polite"></output>
+          </section>
+        </div>
+        <div class="screen-actions">
+          <button type="button" data-open-picker>Open picker</button>
+          <button type="button" data-open-slow-picker>Open loading picker</button>
+          <button type="button" data-open-plain>Open plain dialog</button>
+          <output data-popup-output aria-live="polite"></output>
+        </div>
+        <dialog data-picker-dialog aria-label="Choose employee">
+          <h3>Choose employee</h3>
+          <div data-page-host></div>
+          <form method="dialog"><button type="submit">Cancel</button></form>
+        </dialog>
+        <dialog data-plain-dialog aria-label="Plain example dialog">
+          <h3>Plain native dialog</h3>
+          <p>Press Escape or Close to return to your workspace.</p>
+          <form method="dialog"><button type="submit">Close</button></form>
+        </dialog>
+      </article>
+    </template>
+
+    <template data-picker-view>
+      <section class="picker-page" data-picker-page>
+        <h4 data-page-heading></h4>
+        <p>Choose an employee.</p>
+        <output data-shared-choice aria-live="polite"></output>
+        <div class="picker-actions">
+          <button type="button" data-person="Ada">Choose Ada</button>
+          <button type="button" data-person="Lin">Choose Lin</button>
+          <button type="button" data-open-nested>Open picker from tab</button>
+        </div>
+      </section>
+    </template>
+    <script type="module" src="/m7/main.ts"></script>
+  </body>
+</html>

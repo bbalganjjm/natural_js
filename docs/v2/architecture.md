@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 6a2ee60393df8898e518a884fc1b8f3c6d6b9cf5
+    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -37,6 +37,14 @@ sources:
     resource: ../../src/ui/pagination.ts
     title: Pagination binding
     git_blob: 0239548e7638456548beb441b55956381272d454
+  - id: popup
+    resource: ../../src/ui/popup.ts
+    title: Authored dialog and CVC Popup lifetime
+    git_blob: ac1f9cf3fba4445084943cc877674ffb4ffc0eef
+  - id: tabs
+    resource: ../../src/ui/tabs.ts
+    title: Authored Tabs and CVC page lifetime
+    git_blob: 4bbd8b9a3b0280ed1ab2c59683bcc5597d7d6920
   - id: row-options
     resource: ../../src/ui/row-options.ts
     title: Private row-local choice extraction
@@ -77,9 +85,9 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:56:13Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -90,22 +98,22 @@ Keep one definition of each framework behavior without collecting unrelated help
 
 # Participants
 
-| Path | Responsibility through M6 |
+| Path | Responsibility through M7 |
 |---|---|
 | `src/index.ts` | Root public entry; currently re-exports the real `FrameworkError`. |
 | `src/page/` | `mountPage`, CVC lifecycle, authored HTML roots, and per-instance cancellation. |
 | `src/data/` | `createRows`, immutable nested JSON snapshots, row identity, and change tracking. |
-| `src/ui/` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, their types, and UI-owned field-path, rule, row-option, and Select-ownership helpers. |
+| `src/ui/` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs`, their types, and UI-owned field-path, rule, row-option, and Select-ownership helpers. |
 | `src/comm/` | `createCommunicator`, Request/Response hooks, JSON decoding, and cancellation. |
 | `src/internal/` | Private cross-role implementation; currently the common error class only. |
 
 # Lifecycle
 
-Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, and List bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select and Pagination bind native controls, own no row store, and restore authored markup on disposal.[^package][^form][^grid][^list][^select][^pagination]
+Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, and List bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select and Pagination bind native controls, own no row store, and restore authored markup on disposal. Popup and Tabs own private `PageHandle` instances from the same `mountPage` runtime; Popup owns one opening, while Tabs retain successfully visited pages until final disposal and evict failed or canceled pages.[^package][^form][^grid][^list][^select][^pagination][^popup][^tabs]
 
 # Rules
 
-- Import downward and directly: UI may depend on data and page types; data and communication do not import UI. Runtime modules may use private internal code. No internal module imports the package root or another role's public package specifier.
+- Import downward and directly: UI may depend on data and the page runtime/types; data and communication do not import UI. Runtime modules may use private internal code. No internal module imports the package root or another role's public package specifier.
 - Start a helper inside its owning feature. Move it to `internal/` only after at least two roles need the same semantics, lifetime, error behavior, and tests. Small operations with different meaning stay local.
 - Form, Grid, and List use one UI-owned declaration parser and dispatcher. Built-in formatter and validator implementations remain private. Grid and List share only the stable row-local option operation; Form, Grid, and List share Select ownership with standalone Select. Do not turn them into a generic formatting or validation utility package.
 - Keep DOM references and row identity local to their mounted root and row store. Standard browser operations remain direct calls; no selector, event, date, or collection wrapper is added for convenience.
@@ -117,7 +125,7 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 
 # Related
 
-[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises Form and Grid across two authored layouts. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
+[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
 
 [^package]: Public package boundaries
 [^root]: Root entry
@@ -128,5 +136,7 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 [^list]: List binding
 [^select]: Standalone Select binding
 [^pagination]: Pagination binding
+[^popup]: Authored dialog and CVC Popup lifetime
+[^tabs]: Authored Tabs and CVC page lifetime
 [^row-options]: Private row-local choice extraction
 [^select-owner]: Private Select ownership

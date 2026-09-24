@@ -1,3 +1,18 @@
+## 2026-09-25
+
+* **Verification** A separate agent checked six M7 2.0 concepts against current source and browser regressions; corrections and verified stamps now agree. Changed and full OKF checks pass with 30 concepts, 5 reserved files, zero errors, and zero warnings.
+* **Correction** Independent M7 source review tightened Popup pointer-focus and reserved-result examples, Tabs deactivation-failure recovery, reserved-result disposal wording, retained-page wording, and the 20-opening count without changing the runtime.
+* **Creation** The M8 draft freezes the three M0 agent tasks, one measurement method, 1.x migration and retained Form rule checks, public API review, and an unpublished beta-candidate gate; implementation awaits separate approval.
+* **Verification** M7 Popup, Tabs, and the two-layout MDI integration passed 20 focused cases each in Chromium, WebKit, and Firefox, plus build, typecheck, Vitest 81/81, installed JS/TS consumers, and tarball exclusion checks. The docs-first Preview task passed its first run without code retries; its cost and comparability limits are in the M7 plan.
+* **Update** The M7 plan, active checkpoint, roadmap, and M1 implementation status now reflect completed native Dialog, Popup, and Tabs work and the next M8 review gate.
+* **Update** The M7 page-container example now reuses its picker PageDefinition in a third keyed Preview Tab in both authored layouts. Preview's existing picker button opens that workspace's Popup and shows the chosen result in the Preview panel; focused Chromium checks cover manual keyboard activation, shared Rows, two workspaces, and duplicate IDs.
+* **Update** The user approved M7 and the M1 Popup amendment: a connected authored native dialog and a narrow result handle; M1's approved status and index now agree. The active plan and roadmap now track M7 implementation.
+* **Correction** Independent M7 source review clarified the actual UI exports, page-runtime dependency, authored tablist name references, and cancellation requirement of custom Tab pages.
+* **Creation** A page-container example maps the shared picker controller, two authored MDI layouts, and browser checks so agents can make focused edits.
+* **Creation** Popup and Tabs draft concepts cover the shared CVC runner, authored HTML, native dialog result lifetime, keyed tab ARIA and keyboard behavior, and accessible error recovery.
+* **Update** The M7 page-container example now passes one caller-owned Rows store to main, Popup, and Tabs in two MDI workspaces, with CVC-owned subscription cleanup and cross-screen browser checks.
+* **Update** UI, package, architecture, and folder indexes include the M7 public entry names. Installed JavaScript and TypeScript consumers now check the new functions and handle types.
+
 ## 2026-09-24
 
 * **Verification** Two isolated M6 docs-first agents completed an optional nested employee field and authored First/Last paging task with first valid Chromium runs passing, zero code retries, and no framework source edits. The M6 plan records files, output bytes, elapsed time, and the unavailable actual token count.

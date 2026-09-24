@@ -1,0 +1,10 @@
+@import "./base.css";
+
+.screen-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tabs-panel { background: #f9fbfc; }
+.main-panel { margin-left: min(3vw, 1.5rem); }

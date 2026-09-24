@@ -120,3 +120,7 @@ export { bindGrid } from "./grid.js";
 export { bindList } from "./list.js";
 export { bindSelect } from "./select.js";
 export { bindPagination } from "./pagination.js";
+export { openPopup } from "./popup.js";
+export type { PopupHandle } from "./popup.js";
+export { bindTabs } from "./tabs.js";
+export type { TabHandle } from "./tabs.js";

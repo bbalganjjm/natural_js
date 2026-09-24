@@ -8,11 +8,11 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract and representative screen
-    git_blob: ac3e447352807f54773cb746b7d12acabd22602d
+    git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and M4 exit gate
-    git_blob: 8cd4c1cc1f89fe5b5e5eb33602c0dabab9426982
+    git_blob: bb294e3a572c9778fb77679bbe9ce294c68d2841
   - id: page
     resource: ../../src/page/index.ts
     title: M3 page lifecycle implementation

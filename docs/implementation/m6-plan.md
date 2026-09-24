@@ -8,23 +8,23 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved 2.0 public and binding contract
-    git_blob: ac3e447352807f54773cb746b7d12acabd22602d
+    git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: roadmap
     resource: roadmap.md
     title: Milestone and first-release scope
-    git_blob: 8cd4c1cc1f89fe5b5e5eb33602c0dabab9426982
+    git_blob: bb294e3a572c9778fb77679bbe9ce294c68d2841
   - id: m4
     resource: m4-plan.md
     title: Two-layout screen and fixed performance baseline
-    git_blob: 3bd2670785327638f8c678be54fc3b5cf1ffc9fe
+    git_blob: 9fce2e40492f908d81bc6db9929739c5eff32cc3
   - id: m5
     resource: m5-plan.md
     title: Retained rules, row drafts, and data boundary
-    git_blob: f5238f00b661bbd2bcc577e14a3e03a2297b906c
+    git_blob: 2a9d8bb6c7f3f94c06adae284fa7a2c7d85fb601
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI types and exports
-    git_blob: 6a2ee60393df8898e518a884fc1b8f3c6d6b9cf5
+    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
@@ -69,7 +69,7 @@ sources:
     resource: ../../v1/docs/ui/list.md
     title: Preserved 1.x List contract
     git_blob: 1e93437c791acfc6b3f024c9d9f10c25349997cd
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:27:36Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:19:35Z }
 ---
 
 The user approved M6 on 2026-09-24 after the M5 data and rule gate. This plan governs the first-release data UI on authored HTML and CSS while keeping the public surface small. The usage contract below records the public decisions before integration.
@@ -180,7 +180,7 @@ M4 already proves the CVC screen in two layouts and row-local nested Selects. M5
 
 # Next action
 
-M6 is complete. Review the separate [M7 page-UI plan](m7-plan.md) and its exact usage contract before any Dialog, Popup, or Tab implementation. M7 requires separate user approval.
+M6 is complete. Review the separate [M7 page-UI plan](m7-plan.md) and its exact usage contract before any Dialog, Popup, or Tab implementation. The user separately approved M7 on 2026-09-25.
 
 # Decisions
 

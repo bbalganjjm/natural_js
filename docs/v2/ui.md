@@ -9,13 +9,13 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 6a2ee60393df8898e518a884fc1b8f3c6d6b9cf5
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+    git_blob: fb7b7ba6e42f7c8fc818ca514bdaf55647e1cf80
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:32:04Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
 ---
 
-The `./ui` entry exports the HTML-bound Form, Grid, List, Select, and Pagination functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
+The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, and Tabs functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
 
 # Summary
 
@@ -52,6 +52,6 @@ A parser sees one snapshot of all currently entered, still unparsed drafts in `R
 
 # Related
 
-[Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), and [Pagination](pagination.md) document runtime behavior. [The M1 contract](../implementation/m1-contract.md) records the first-release boundary.
+[Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), and [Tabs](tabs.md) document runtime behavior. [The M1 contract](../implementation/m1-contract.md) records the first-release boundary.
 
 [^ui]: Public UI types and runtime exports

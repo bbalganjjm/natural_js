@@ -7,7 +7,7 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:27:21Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:49:36Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -18,7 +18,7 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 
 # Checkpoint
 
-- M0-M6 are complete on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC screen. M6 browser, package, benchmark, documentation, and agent-task evidence is recorded in [the M6 plan](m6-plan.md). M7 has a separate [review draft](m7-plan.md) and awaits approval.
+- M0-M7 are complete on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC data screen. Native Dialog, Popup, and Tabs run on the common CVC page runtime in two authored MDI layouts. M6 and M7 evidence is in their [data UI](m6-plan.md) and [page UI](m7-plan.md) plans. [M8 agent and migration QA](m8-plan.md) is proposed and awaits separate approval.
 - The initial 2.0 release includes form, list, basic grid, select, pagination, button, dialog, popup, and tab.
 - Advanced grid, tree, custom date picker, notification, and document tabs follow in 2.x.
 
@@ -44,7 +44,7 @@ Each milestone starts with a detailed plan, user review, and approval of its sco
 
 # Next action
 
-Review [the M7 page-UI plan](m7-plan.md) and freeze its usage examples with the user before implementing Dialog, Popup, or Tabs.
+Review [the proposed M8 agent and migration QA plan](m8-plan.md). Freeze its three tasks and measurement method before implementation; M9 release work waits for its own plan and approval.
 
 # Decisions
 

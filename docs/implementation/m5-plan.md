@@ -8,11 +8,11 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 rule and binding contract
-    git_blob: ac3e447352807f54773cb746b7d12acabd22602d
+    git_blob: 5cb7c544900bbd86867971e87003518858e498e1
   - id: m4
     resource: m4-plan.md
     title: M4 pilot and exit evidence
-    git_blob: 3bd2670785327638f8c678be54fc3b5cf1ffc9fe
+    git_blob: 9fce2e40492f908d81bc6db9929739c5eff32cc3
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
