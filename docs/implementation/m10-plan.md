@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid rendering, row identity, draft, and lifecycle behavior
-    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
+    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract
@@ -45,12 +45,28 @@ sources:
     resource: evidence/m10-binding-chromium.json
     title: Fixed 100/1,000-row Grid budget rerun
     git_blob: de8bd9fa7081081741450f894effa1affc62d0c2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:38:53Z }
+  - id: m10-initial
+    resource: evidence/m10-initial-page-chromium.json
+    title: M10.3 5,000-row bounded first-render measurement
+    git_blob: 16c42eb3d75655853b182375f8414f81eba730d5
+  - id: m10-no-initial
+    resource: evidence/m10-no-initial-page-chromium.json
+    title: M10.3 same-source default first-render measurement
+    git_blob: 52cf73692441bd5948366d967908a948d134dc30
+  - id: m10-initial-binding
+    resource: evidence/m10-initial-page-binding-chromium.json
+    title: M10.3 fixed 100/1,000-row budget rerun
+    git_blob: 0dbd24366a169afaab3533dca27c2e2cfb201c0f
+  - id: agent-screen
+    resource: ../../tests/browser/m10-agent-screen.spec.ts
+    title: M10.4 docs-first authored Grid task
+    git_blob: 94fd90af72248bfabf0cef988fb9b35660f4b58f
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:57:08Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T23:38:54Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T00:57:44Z }
 ---
 
-M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates. The grouped/sticky authored-table slice, full-feature demo, and internal offscreen-record lifetime change are implemented without a new Grid API; public advanced operations remain unselected. The user has deferred npm publication until remaining work is complete and personally tested. Safari is outside the initial 2.0 browser support scope.[^roadmap]
+M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates. The grouped/sticky authored-table slice, full-feature demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. Column state, bulk edit, multi-selection, and virtualization remain unselected. The user has deferred npm publication until remaining work is complete and personally tested. Safari is outside the initial 2.0 browser support scope.[^roadmap]
 
 # Goal
 
@@ -88,7 +104,7 @@ The [same-process forward comparison](evidence/m10-grid-comparison.json) measure
 
 The fixed [100/1,000-row rerun](evidence/m10-binding-chromium.json) stayed inside every recorded M6 budget: at 1,000 rows, flat initial/rebind/edit/sort/filter medians were 13.1/14.7/0.7/2.7/1.8 ms and nested-auto medians were 37.2/43.6/1.1/7.4/4.9 ms. Its legacy 1.x comparison remains an architecture-level fixture, not an isolated algorithm score.[^m10-binding]
 
-The current unpublished local tarball has SHA-256 `3a6b8f030fda3443943befeb47aad3fa279b9f57e96755e5ae4ab0072286a111`. Installed JavaScript and TypeScript consumers passed, as did its browser-served CVC/Form/Grid consumer in Chromium, Firefox, and WebKit against that exact SHA. The 98-file dry-run package contains no `v1/`, jQuery, `docs/`, or demo files. This is a package-scope check for the current internal change; no npm publication or release tag occurred.
+The M10.2 unpublished local tarball had SHA-256 `3a6b8f030fda3443943befeb47aad3fa279b9f57e96755e5ae4ab0072286a111`. Installed JavaScript and TypeScript consumers and its browser-served CVC/Form/Grid consumer passed against that exact artifact in Chromium, Firefox, and WebKit. The M10.3 artifact and its same-hash consumer results are recorded below. No npm publication or release tag occurred.
 
 # Contract gates
 
@@ -105,22 +121,22 @@ The current unpublished local tarball has SHA-256 `3a6b8f030fda3443943befeb47aad
 | M10.0 Requirement fixture | Audit 1.x intent, choose one advanced screen/workload, classify candidates above, settle HTML/TS examples and budgets. | Approved scope, exclusions, reference screen, concrete acceptance cases, and any bulk-operation visibility/rollback contract. |
 | M10.1 Authored structure | Test grouped headings, sticky header/columns, horizontal overflow, sort controls, and two MDI instances in two authored layouts. Prefer CSS-only behavior. | No duplicate IDs or broken header associations; keyboard/focus works at desktop and 320 CSS pixels in Chromium, Firefox, WebKit; no unjustified public API. |
 | M10.2 Rendering lifetime | Measure and, if needed, bound cached records and update affected visible rows. Retain drafts/selection by `RowId` across page/window changes. | Fixed 1,000-row budgets do not regress; selected larger fixture meets documented render/memory acceptance limits; repeated mounts release records/listeners. |
-| M10.3 Selected operation | Review the proposed bounded initial page first; implement it only if its public contract is approved. Column state, bulk edit, and multi-selection still need a concrete caller. | Typed consumer example; initial/empty/invalid page, offscreen identity/drafts, focus and disposal; no business rules in Grid. |
+| M10.3 Bounded initial page | Implement the approved opt-in first local page. Column state, bulk edit, and multi-selection still need a concrete caller. | Typed consumer; initial/empty/invalid page, offscreen identity/drafts, focus, failure rollback, disposal, and binding budgets; no business rules in Grid. |
 | M10.4 Agent/package review | Independent agent adds a small advanced screen from docs only. Prune needless API/file splits; install one SHA-gated artifact in JS, TS, and a browser-served consumer with the chosen new Grid behavior. | First-pass result or correction record, source/doc agreement, package scope audit, same-hash installed-browser result, and changed/full OKF checks with zero errors. |
 
 # Validation and exclusions
 
-Run build, typecheck, focused unit checks for non-DOM invariants, and real-browser tests on authored tables. Check keyboard-only use, header semantics and association, sort/column state announcements, focus visibility, text spacing, narrow layout, and MDI duplicate IDs. If resize/reorder is selected, include manual screen-reader and keyboard review or record its absence as an unverified gate. Browser engines are Chromium, Firefox, and WebKit; installed Chrome/Edge smokes use the selected package. WebKit is not labeled Safari, and automated axe results alone do not establish WCAG conformance.
+Run build, typecheck, focused unit checks for non-DOM invariants, and real-browser tests on authored tables. Check keyboard-only use, header semantics and association, sort/column state announcements, focus visibility, text spacing, narrow layout, and MDI duplicate IDs. If resize/reorder is selected, include manual screen-reader and keyboard review or record its absence as an unverified gate. Current browser checks cover Chromium, Firefox, and installed Chrome/Edge; the earlier WebKit engine evidence is historical because the user excluded Safari from the initial 2.0 support scope. Automated axe results alone do not establish WCAG conformance.
 
 Measure the existing flat/nested 100- and 1,000-row fixtures before and after rendering changes. Set any larger workload and budget in M10.0, rather than inventing a universal speed claim. Record agent first-pass correctness, files/bytes read, changed scope, elapsed time, and actual tokens only if available.
 
 Update `docs/v2/grid.md`, examples, indexes, `docs/log.md`, and this plan with each slice. Keep `npm run docs:check -- --changed` at zero errors and independent `verified` fields honest. Do not recreate 1.x option names, copy the old Grid, add a generic table/clipboard library, alter the M9 beta artifact, or pull M11/M12 into M10.
 
-The user approved M10 and chose the [full-feature Grid demo](../v2/grid-demo.md) as its reference screen. The demo and internal M10.2 rendering-lifetime change now pass focused Grid and three-engine demo checks with the public Grid and Rows contracts unchanged. The Grid source was also independently reviewed for clone, issue, selection, focus, and Select ownership behavior. Revisit scope before adding a new public option, Rows mutation contract, or 1.x-style advanced operation. Manual assistive-technology checks remain open; use the repository-local cache for repeat Firefox runs on this host.
+The user approved M10 and chose the [full-feature Grid demo](../v2/grid-demo.md) as its reference screen. The demo and internal M10.2 rendering-lifetime change passed focused Grid and three-engine demo checks without changing public contracts. M10.3 then added only the `initialPage` Grid option, reusing the existing `PageRequest` type. The Grid source was also independently reviewed for clone, issue, selection, focus, and Select ownership behavior. Revisit scope before adding a new public option, Rows mutation contract, or 1.x-style advanced operation. Manual assistive-technology checks remain open; use the repository-local cache for repeat Firefox runs on this host.
 
-# Next proposal: bounded initial Grid page
+# M10.3 contract: bounded initial Grid page
 
-The measured remaining peak comes from `bindGrid` rendering every row before its caller can call `setPage`. M10.3 proposes one opt-in constructor option using the already public `PageRequest` shape:[^grid][^m10-forward]
+The measured M10.2 initial peak came from `bindGrid` rendering every row before its caller could call `setPage`. The user approved one opt-in constructor option using the already public `PageRequest` shape:[^grid][^m10-forward]
 
 ```ts
 const grid = bindGrid(table, {
@@ -129,9 +145,17 @@ const grid = bindGrid(table, {
 });
 ```
 
-The proposed option would apply the same positive-safe-integer validation, last-page clamping, and `GRID_PAGE` error as `setPage` before the first render. `page()` would report that state as soon as binding returns. Only the requested visible rows would get clones, Select ownership, and generated error IDs; all `Rows` entries would keep their identities and remain available to `select(id)` and `validate(id)`. Later `setPage` calls, including `setPage(null)`, would keep their current meaning. Omitting `initialPage` would preserve the present all-rows initial view. A malformed request must fail before the authored template or listeners are changed; use one Grid-private request validator for construction and `setPage`, without adding a shared utility. An off-page row's option or formatter error may become visible only when that row is displayed or validated, rather than during binding, and this timing change must be documented and tested. The request is copied at bind time so later caller mutation cannot change page state.
+The implemented option applies the same positive-safe-integer validation, last-page clamping, and `GRID_PAGE` error as `setPage` before the first render. `page()` reports that state as soon as binding returns. Only visible rows get clones, Select ownership, and generated error IDs; all `Rows` entries keep their identities and remain available to `select(id)` and `validate(id)`. Later `setPage` calls, including `setPage(null)`, retain their meaning. Omitting `initialPage` preserves the all-rows first view. A malformed request fails before the authored template or listeners change. One Grid-private validator serves construction and `setPage`, without a shared utility. An off-page formatter error surfaces on its first render; a row-local option error surfaces on render or `validate(id)`. If a later page fails while rendering, `setPage` keeps the prior page state and visible DOM and releases newly created row and Select resources so the caller can correct the data and retry. The request is copied at bind time so later caller mutation cannot change page state.
 
-Acceptance would add a second 5,000-row benchmark mode requiring at most 1,500 post-bind DOM nodes and ≤30 ms median bind on the reference host with a 50-row initial page, while retaining the existing no-option and 1,000-row budgets. Focused tests would cover page bounds, empty Rows, off-page validation/selection and delayed errors, nested choices, unique IDs in two MDI screens, Rows mutation/clamping, `setPage(null)`, disposal/rebind, and invalid-option atomicity in Chromium, Firefox, and WebKit. The interactive demo would then expose the new option before rebind so it continues to exercise every implemented Grid option. No List option, column engine, virtualization, bulk edit, or generic data utility is included. This is a public contract proposal and awaits user review before implementation.
+The reference-host acceptance requires at most 1,500 post-bind DOM nodes and ≤30 ms median bind for 5,000 rows × 10 fields with a 50-row initial page, while preserving no-option and fixed 100/1,000-row budgets. The recovered same-source Chromium 153 rerun used two warm-ups and five fresh-page samples. With `initialPage`, median bind was 3.0 ms and forced-GC post-bind DOM count was 1,347; without it, 96.2 ms and 105,297 nodes. The 198-transition round trip was 147.9 ms versus 130.3 ms. The initial-page mode's explicit first `setPage({ page: 1, size: 50 })` repeats its current state, so its timing is not comparable with the default mode's first transition (35.5 ms). Both DOM counts rose by 59 after the local Vite environment was rebuilt; the two final modes share that environment and source SHA. DOM counters include the page and Vite client; heap and timing measurements describe this host and fixture, not a universal ceiling. Both runs record Grid SHA-256 `67647434776f8126e007fcb3a590f9e59110ab5b5dd5219d3bc8a4b50de20add`.[^m10-initial][^m10-no-initial]
+
+The fixed [100/1,000-row rerun](evidence/m10-initial-page-binding-chromium.json) stayed within every M6 budget: 1,000-row flat initial/rebind/edit/sort/filter medians were 13.5/15.2/0.9/3.0/2.0 ms, and nested-auto initial/rebind/sort/filter medians were 42.4/47.0/9.8/6.0 ms.[^m10-initial-binding] Seven focused browser cases cover bounds, empty Rows, invalid input and failure rollback, off-page selection/validation/drafts and delayed errors, nested choices, focus, unique IDs in two MDI screens, mutation/clamping, `setPage(null)`, and disposal/rebind. The interactive demo exposes the option before rebind and still exercises every implemented Grid option. No List option, column engine, virtualization, bulk edit, or generic data utility is included. The user approved this narrow public contract for M10.3.
+
+# M10.4 agent and package review
+
+An independent agent used documentation before inspecting implementation or existing tests to add an authored Grid screen with a nested row-local Select, initial local page, row selection, sorting, off-page identity, validation drafts, unique IDs, and disposal/rebind. The agent reported reading nine documentation files (60,445 bytes), then rereading four core files (22,371 bytes); no raw read-meter log was retained for independent recomputation. Its first actual Chromium run failed before an assertion because the fixture used Vite's wrong module URL; one URL-only correction made the case pass 1/1 in Chromium without changing screen logic. The same corrected case passed 1/1 in Firefox after workspace recovery. Elapsed time was about 18 minutes, including roughly 12 minutes waiting for the shared workspace to be restored; actual tokens were unavailable. This is a docs-first task result, not a claim of first-run success or a controlled speed comparison.[^agent-screen]
+
+The M10.3 local tarball SHA-256 is `08a698cf0e7008fb0dec4eea627a78ddb1685d1359830bf0011108a2ac4226d8`. It contains 98 files with no 1.x source, jQuery, docs, tests, or demo. Its installed JavaScript and TypeScript consumers passed. Its browser-served consumer passed on the same SHA in Chromium 153, Firefox 155, real Chrome 153, and real Edge 153 on Windows. The first Chromium attempt had Firefox's repository-local Playwright path set and could not find Chromium; rerunning with the correct environment passed. No registry publication or release tag occurred.
 
 # Related
 
@@ -149,3 +173,7 @@ Acceptance would add a second 5,000-row benchmark mode requiring at most 1,500 p
 [^m10-forward]: Forward same-process 5,000-row comparison
 [^m10-reverse]: Reverse same-process 5,000-row comparison
 [^m10-binding]: Fixed 100/1,000-row budget rerun
+[^m10-initial]: Bounded initial-page 5,000-row measurement
+[^m10-no-initial]: Default first-render 5,000-row measurement on the same source
+[^m10-initial-binding]: Fixed 100/1,000-row budget rerun after M10.3
+[^agent-screen]: Independent docs-first authored Grid browser task

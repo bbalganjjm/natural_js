@@ -28,7 +28,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
-    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
+    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
   - id: list
     resource: ../../src/ui/list.ts
     title: M6 List implementation
@@ -65,9 +65,9 @@ sources:
     resource: ../../v1/docs/ui/list.md
     title: Preserved 1.x List contract
     git_blob: 1e93437c791acfc6b3f024c9d9f10c25349997cd
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:26:30Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:57:08Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T23:31:17Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T00:57:44Z }
 ---
 
 The user approved M6 on 2026-09-24 after the M5 data and rule gate. This plan governs the first-release data UI on authored HTML and CSS while keeping the public surface small. The usage contract below records the public decisions before integration.
@@ -150,7 +150,7 @@ showPage(1, 5);
 
 `bindPagination(root, { state: { page, size, total }, onPage })` returns `set`, `state`, and `dispose`. Pages are one-based; an empty result has page 1 and zero pages. The callback requests `{ page, size }` and does not change the displayed state until the application calls `set`. List and Grid accept `setPage({ page, size } | null)` and report `page(): PageState | null` after filtering, sorting, and slicing. Their client totals are filtered row counts; server totals belong to the application. `RowId` and page index never replace one another. Sorting and filtering functions are supplied by the application.
 
-`bindList(ulOrOl, { rows, rules?, onSelect? })` repeats one authored direct `<li data-row-template>` and exposes selection, sort, filter, page, validation, and disposal. It displays nested `data-field` paths and row-local `data-options` arrays without editing them; a separate Form edits the selected row. `bindGrid(table, { rows, rules?, parse?, onSelect? })` adds text/checkbox writes, row-keyed invalid drafts, optional parsed number inputs, header `aria-sort`, and the same page operations. `setSort(compare, { column: th, direction: "ascending" | "descending" })` accepts a heading in the table's `<thead>`. Grid rejects row-local multiple Selects; Form handles multiple selection.
+`bindList(ulOrOl, { rows, rules?, onSelect? })` repeats one authored direct `<li data-row-template>` and exposes selection, sort, filter, page, validation, and disposal. It displays nested `data-field` paths and row-local `data-options` arrays without editing them; a separate Form edits the selected row. `bindGrid(table, { rows, rules?, parse?, onSelect? })` adds text/checkbox writes, row-keyed invalid drafts, optional parsed number inputs, header `aria-sort`, and the same page operations. `setSort(compare, { column: th, direction: "ascending" | "descending" })` accepts a heading in the table's `<thead>`. Grid rejects row-local multiple Selects; Form handles multiple selection. The later M10.3 Grid contract adds optional `initialPage: { page, size }` for a bounded first render; this was not part of M6.
 
 For an editable numeric or structured raw value, pass `parse[field]`. Each parser sees all current unparsed entries in `RuleContext.values`; all parsers in one validation pass see that same input snapshot regardless of edit order. Declared validators receive each parsed field as a string with the complete typed candidate in `RuleContext.values`; native constraints check entered control values. HTML native constraints, authored labels, `aria-describedby` error regions, and row-selection button types remain part of the authored markup. No repeated template may contain a fixed DOM `id`.
 
@@ -205,7 +205,7 @@ The initial implementation order is Button/Select → pagination → Form contro
 | 2026-09-24 | Independent agent tasks | The isolated field task passed Chromium 19/19 on the first code run with zero code retries and no framework edits: 19 unique files, 135,260 bytes of read/review output, 12 files changed (+27/-20 lines), about 9m45s. The First/Last page task passed Chromium 7/7 after building the fresh worktree, with zero code retries and no framework edits: 17 unique files, about 147,243 bytes of read output, 8 files changed (+77/-10 lines), about 8m45s. Both remained unmerged evaluation artifacts. Real token use was unavailable. M6 output counting includes field diff/review while M5's quoted replay excludes diff; task scope and setup also differ, so no direct cost improvement is claimed. The field task spent about 34.7 KB on broad log/governance/test reads; the employee task map now points to narrower test starts. |
 | 2026-09-24 | Independent documentation | Nine M6-related 2.0 concepts were checked against source and tests by a separate agent, corrected, and stamped verified. Changed and full OKF checks passed with zero errors and warnings after the M7 draft was stamped. |
 
-Verification favors focused tests for high-risk behavior over copying every legacy convenience method. Run Chromium and WebKit on the current host. The fresh Playwright Firefox build passed this host after the M5 `spawn UNKNOWN` failure in an older browser cache. Release verification later checks actual Chrome, Edge, and Safari. Accessibility checks include keyboard-only activation and selection, meaningful state/error announcements, valid labels, focus retention after sorting/paging, and no duplicate IDs in repeated rows or simultaneous pages.[^m4][^roadmap]
+Verification favors focused tests for high-risk behavior over copying every legacy convenience method. At M6, Chromium and WebKit ran on this host; the fresh Playwright Firefox build passed after the M5 `spawn UNKNOWN` failure in an older browser cache. Current supported reruns target Chromium, Firefox, Chrome, and Edge; the user later excluded Safari from initial 2.0 support. Accessibility checks include keyboard-only activation and selection, meaningful state/error announcements, valid labels, focus retention after sorting/paging, and no duplicate IDs in repeated rows or simultaneous pages.[^m4][^roadmap]
 
 # Open questions
 

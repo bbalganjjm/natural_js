@@ -64,7 +64,7 @@ export function loadEmployees(comm: Communicator = createCommunicator({
 
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>) {
   const form = bindForm(root, { rows });
-  const grid = bindGrid(table, { rows, onSelect: ({ id }) => form.bind(id) });
+  const grid = bindGrid(table, { rows, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id) });
   return { form, grid };
 }
 

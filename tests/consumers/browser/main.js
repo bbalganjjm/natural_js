@@ -32,12 +32,12 @@ function view() {
 const definition = {
   view,
   controller({ root, input, signal, own, output }) {
-    const rows = createRows([{
-      person: { name: input.name },
-      choices: [{ label: "Eleven", value: 11 }, { label: "Twenty two", value: 22 }],
-      choice: 11
-    }]);
-    const grid = bindGrid(root.querySelector("table"), { rows });
+    const choices = [{ label: "Eleven", value: 11 }, { label: "Twenty two", value: 22 }];
+    const rows = createRows([
+      { person: { name: input.name }, choices, choice: 11 },
+      { person: { name: "Off page" }, choices, choice: 22 }
+    ]);
+    const grid = bindGrid(root.querySelector("table"), { rows, initialPage: { page: 1, size: 1 } });
     const form = bindForm(root.querySelector("form"), { rows });
     form.bind(rows.entries()[0].id);
     const screen = { rows, grid, form, disposed: false };

@@ -80,6 +80,15 @@ function gridError(code: string, message: string, detail?: Record<string, unknow
   return new FrameworkError({ api: "bindGrid", code, message, detail });
 }
 
+function checkedPage(request: PageRequest | null): PageRequest | null {
+  if (request === null) return null;
+  if (!request || !Number.isSafeInteger(request.page) || request.page < 1 ||
+      !Number.isSafeInteger(request.size) || request.size < 1) {
+    throw gridError("GRID_PAGE", "Page and size must be positive integers.");
+  }
+  return { page: request.page, size: request.size };
+}
+
 function optionValues(value: unknown, descriptor: SelectField, rowId: RowId) {
   if (!descriptor.options) return [];
   return rowOptions(value, descriptor.options, descriptor.label!, descriptor.value!, field => {
@@ -99,6 +108,7 @@ function display(element: HTMLElement, value: unknown): void {
 
 export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   rows: Rows<T>;
+  initialPage?: PageRequest;
   rules?: RuleSet;
   parse?: Record<string, ParseInput>;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
@@ -117,6 +127,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     throw gridError("DUPLICATE_ID", "A repeated row template cannot contain a fixed DOM id.", { id: fixedId.id });
   }
 
+  const initialPage = checkedPage(options.initialPage ?? null);
   const runner = createRuleRunner("bindGrid", options.rules);
   const textFields: TextField[] = [];
   const selectFields: SelectField[] = [];
@@ -227,7 +238,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   let selected: RowId | null = null;
   let sort: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null = null;
   let filter: ((row: Snapshot<T>) => boolean) | null = null;
-  let pageRequest: PageRequest | null = null;
+  let pageRequest: PageRequest | null = initialPage;
   let pageState: PageState | null = null;
   let sortIndicator: SortIndicator | null = null;
   const headerOriginals = new Map<HTMLTableCellElement, string | null>();
@@ -780,12 +791,25 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     },
     setPage(request) {
       active();
-      if (request && (!Number.isSafeInteger(request.page) || request.page < 1 ||
-          !Number.isSafeInteger(request.size) || request.size < 1)) {
-        throw gridError("GRID_PAGE", "Page and size must be positive integers.");
+      const next = checkedPage(request);
+      const previousRequest = pageRequest;
+      const previousState = pageState;
+      const previousVisibleIds = visibleIds;
+      pageRequest = next;
+      try {
+        render();
+      } catch (cause) {
+        pageRequest = previousRequest;
+        pageState = previousState;
+        const previousIds = new Set(previousVisibleIds);
+        for (const [id, record] of records) {
+          if (previousIds.has(id)) continue;
+          record.element.remove();
+          for (const select of record.selects) select.release();
+          records.delete(id);
+        }
+        throw cause;
       }
-      pageRequest = request ? { page: request.page, size: request.size } : null;
-      render();
     },
     page() {
       active();

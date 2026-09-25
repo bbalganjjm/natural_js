@@ -55,6 +55,27 @@ test("sort, filter, and local pages preserve RowId selection", async ({ page }) 
   await expect(page.locator("[data-page-state]")).toContainText("paging off");
 });
 
+test("initial page choice rebinds a bounded view and keeps off-page RowId selection", async ({ page }) => {
+  const rows = page.locator("tbody tr:not([data-row-template])");
+  await page.locator('[data-action="select-first"]').click();
+  await page.locator("[data-initial-page]").selectOption("second");
+  await expect(page.locator("[data-status]")).toContainText("selection and uncommitted edits were cleared");
+  await expect(page.locator("[data-selection]")).toHaveText("No row selected");
+  await expect(page.locator("[data-size]")).toHaveValue("2");
+  await expect(page.locator("[data-page-state]")).toContainText("Page 2 of 3");
+  await expect(rows).toHaveCount(2);
+  await expect(rows.first()).toContainText("LINUS");
+
+  await page.locator('[data-action="select-first"]').click();
+  await expect(page.locator("[data-selection]")).toContainText("RowId 1: Ada");
+  await expect(rows.first()).not.toContainText("ADA");
+  await page.locator("[data-size]").selectOption("");
+  await expect(page.locator("[data-page-state]")).toContainText("paging off");
+  await expect(page.locator("[data-initial-page]")).toHaveValue("");
+  await expect(rows).toHaveCount(6);
+  await expect(rows.first().locator("[data-select-row]")).toHaveAttribute("aria-pressed", "true");
+});
+
 test("parsing, HTML constraints, and application validation retain invalid drafts", async ({ page }) => {
   const first = page.locator("tbody tr:not([data-row-template])").first();
   await first.locator("[data-select-row]").click();

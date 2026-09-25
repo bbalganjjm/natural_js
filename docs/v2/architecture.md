@@ -24,7 +24,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
+    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding

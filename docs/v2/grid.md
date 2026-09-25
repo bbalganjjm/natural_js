@@ -13,7 +13,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
+    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Shared Form/Grid rule runner
@@ -30,9 +30,9 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:38:53Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:40:47Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T23:38:54Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps selection and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys.[^grid]
@@ -75,11 +75,12 @@ if (grid.validate().valid) console.log(rows.changes());
 
 # Constructor
 
-`bindGrid<T extends object>(root: HTMLTableElement, options: { rows: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): GridHandle<T>` requires a `<table>` with exactly one `<tbody><tr data-row-template>` across all bodies. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses clones for rows that remain visible, releases offscreen row elements and Select ownership after each view change, and recreates them when those rows return. It restores the original template on disposal. It leaves other authored table rows in place. A second live binding of the table raises `GRID_IN_USE`.[^grid]
+`bindGrid<T extends object>(root: HTMLTableElement, options: { rows: Rows<T>; initialPage?: PageRequest; rules?: RuleSet; parse?: Record<string, ParseInput>; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): GridHandle<T>` requires a `<table>` with exactly one `<tbody><tr data-row-template>` across all bodies. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses clones for rows that remain visible, releases offscreen row elements and Select ownership after each view change, and recreates them when those rows return. It restores the original template on disposal. It leaves other authored table rows in place. A second live binding of the table raises `GRID_IN_USE`.[^grid]
 
 | Option | Behavior |
 |---|---|
 | `rows` | Required caller-owned store of immutable snapshots and row identities. |
+| `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
 | `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
 | `parse` | Optional application parser per editable field path, used to turn an entered string into a raw JSON value. A number input requires one. |
 | `onSelect` | Called when the selected ID changes; programmatic changes pass `event: null`. |
@@ -111,7 +112,7 @@ Field and option paths reject array indices, expressions, prototype keys, and em
 
 ## `setPage(request)` and `page()`
 
-`setPage({ page, size })` slices rows after filtering and sorting; `null` shows all rows. Page and size must be positive safe integers (`GRID_PAGE`). `page()` returns a frozen `{ page, size, total, pages }` or `null` when local paging is off. If the current page exceeds the new result count, it clamps to the last page; an empty result has page 1 and 0 pages. Selection and drafts remain keyed to Rows IDs even when off-page.[^grid]
+`initialPage: { page, size }` applies the same local slice before the first render. `setPage({ page, size })` changes it later; `null` shows all rows. Page and size must be positive safe integers (`GRID_PAGE`) for either entry point. An invalid `initialPage` fails before the authored template changes. If a later page exposes a formatter or row-option error, `setPage` keeps the previous page state and visible rows, releases the failed row clones, and can be retried after the data or rule is fixed. `page()` returns a frozen `{ page, size, total, pages }` or `null` when local paging is off. If the current page exceeds the new result count, it clamps to the last page; an empty result has page 1 and 0 pages. Selection and drafts remain keyed to Rows IDs even when off-page.[^grid]
 
 ## `validate(id?)`
 
@@ -145,7 +146,7 @@ Each cloned `data-error-for` region receives a document-unique ID and `aria-live
 | `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and multiple Selects; use Form for those. A plain `data-field` text element displays data without editing it. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. `bindGrid` creates all initial row clones before the caller can set a local page; later paging releases offscreen clones but does not remove the initial large-store DOM peak. Measure that peak for large tables or use application-owned server pages.[^grid][^owner]
+`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and multiple Selects; use Form for those. A plain `data-field` text element displays data without editing it. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without `initialPage`, `bindGrid` creates all row clones before the caller can set a local page. Pass `initialPage` for a large local store to create only its first visible slice. Off-page formatter errors surface when that row first renders; invalid row-local options surface on display or `validate(id)`. Calling `setPage(null)` deliberately renders all rows; measure that cost or use application-owned server pages.[^grid][^owner]
 
 # Related
 

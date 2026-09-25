@@ -8,11 +8,11 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 17038e7ac366dbd8b5249b3ade6b95893dc69eb0
+    git_blob: 0036ac47768bb744686cff96749c2cdb3824fa2c
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 73046cda926dded58b03fffdfea349e2e809159f
+    git_blob: 246005d2f6f7fd5b9e78be28ff7ca3aafa13148d
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -20,14 +20,14 @@ sources:
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: b0e54a97d9702a640f310da4617ce453f0b993bf
+    git_blob: 3944c468ea8efe449f30769e59bd35b8475af65f
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T23:26:30Z }
+    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:41:13Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T23:31:17Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -45,7 +45,7 @@ Run `npm run example` from the repository root and open `/m10/demo.html`. Six em
 | `Rows` | Own immutable row snapshots, store-local IDs, change status, and subscription events. |
 | Application code | Provide sample rows, comparator, filter predicate, salary parser, custom format/validation rules, and action buttons. |
 
-The demo passes all four constructor options: required `rows`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. The custom salary rule and name display formatter are example business behavior, not new framework exports.[^controller][^grid]
+The demo exercises all five constructor options: required `rows`, optional `initialPage`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the all-rows default. The custom salary rule and name display formatter are example business behavior, not new framework exports.[^controller][^grid]
 
 # View
 
@@ -53,11 +53,12 @@ One authored `<tr data-row-template>` contains `data-field` paths for plain text
 
 # Controller
 
-The controls call every `GridHandle` method: `select` and `selected`; `setSort` with an authored heading and `aria-sort`; `setFilter`; `setPage` and `page`; `validate(id)` and `validate()`; and `dispose`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`. The observation panels show selected `RowId`, raw snapshot, change status, validation issues, `onSelect` arguments, and the latest Rows event.[^controller]
+The controls call every `GridHandle` method: `select` and `selected`; `setSort` with an authored heading and `aria-sort`; `setFilter`; `setPage` and `page`; `validate(id)` and `validate()`; and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`. The observation panels show selected `RowId`, raw snapshot, change status, validation issues, `onSelect` arguments, and the latest Rows event.[^controller]
 
 ```ts
 const grid = bindGrid(table, {
   rows,
+  initialPage: { page: 1, size: 2 },
   rules: {
     format: { displayName: value => value.toUpperCase() },
     validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
@@ -73,9 +74,9 @@ The excerpt shows the option shape; use the complete [demo controller](../../exa
 
 # How it works
 
-Change a salary to an invalid value, run validation, and inspect the issue panel: the invalid draft stays outside `Rows.changes()` until corrected. Clear a required email or choice to see HTML validation; set an unavailable shift to see `select-option`. Change the nested team or shift, edit Notes, or toggle Active to see the raw object and status. Switch the built-in-rule locale between English and Korean to inspect its message; the demo rebinds Grid, which clears selection and uncommitted input. Sorting, filtering, and paging keep the selected `RowId`; they do not turn a display position into identity. Programmatic `Rows.set` updates the display and clears stale messages; run validation again to evaluate user rules.[^controller][^grid]
+Choose an initial page before editing to see a bounded first render and `page()` state. Switching this choice rebinds the Grid, clears selection and uncommitted input, and leaves valid Rows changes intact. A size change clears the initial-page choice and uses `setPage`; choosing no page shows all rows. Change a salary to an invalid value, run validation, and inspect the issue panel: the invalid draft stays outside `Rows.changes()` until corrected. Clear a required email or choice to see HTML validation; set an unavailable shift to see `select-option`. Change the nested team or shift, edit Notes, or toggle Active to see the raw object and status. Switch the built-in-rule locale between English and Korean to inspect its message; the demo rebinds Grid, which clears selection and uncommitted input. Sorting, filtering, and paging keep the selected `RowId`; they do not turn a display position into identity. Programmatic `Rows.set` updates the display and clears stale messages; run validation again to evaluate user rules.[^controller][^grid]
 
-The five focused browser cases per engine cover nested choices and raw/display separation, keyboard selection and callbacks, sort/filter/page identity, parsing and built-in/custom validation with locale, textarea and checkbox edits, Rows changes and revert, unavailable choices, disposal/rebinding, document-unique IDs, an axe-tagged A/AA scan, and 320 CSS-pixel text-spacing reflow. Chromium, Firefox, and WebKit passed. These automated checks do not establish manual screen-reader conformance.[^browser]
+The six focused browser cases per engine cover initial-page binding and off-page selection, nested choices and raw/display separation, keyboard selection and callbacks, sort/filter/page identity, parsing and built-in/custom validation with locale, textarea and checkbox edits, Rows changes and revert, unavailable choices, disposal/rebinding, document-unique IDs, an axe-tagged A/AA scan, and 320 CSS-pixel text-spacing reflow. Chromium, Firefox, and WebKit passed. These automated checks do not establish manual screen-reader conformance.[^browser]
 
 # Variations
 
@@ -83,7 +84,7 @@ The earlier [two-layout Grid example](advanced-grid-example.md) tests MDI isolat
 
 # Pitfalls
 
-Column resize, reorder, hide/show, bulk paste, multi-selection, and virtualization are *later candidates*, not current Grid options. The demo names them without working controls. It creates all initial row clones before the first local page request, so the small six-row fixture is not evidence of bounded initial rendering on large data. Changing the locale uses dispose/rebind and discards selection and uncommitted drafts; commit or review them first. Do not send `RowId` as a business key or put a fixed `id` in a repeated row.[^grid][^controller]
+Column resize, reorder, hide/show, bulk paste, multi-selection, and virtualization are *later candidates*, not current Grid options. The demo names them without working controls. Without `initialPage`, it creates all initial row clones before the first local page request. Choosing an initial page bounds the first render, but this small six-row fixture is not evidence of large-data performance; the separate [M10 measurement](../implementation/m10-plan.md) uses 5,000 rows. Changing the locale uses dispose/rebind and discards selection and uncommitted drafts; commit or review them first. Do not send `RowId` as a business key or put a fixed `id` in a repeated row.[^grid][^controller]
 
 # Related
 

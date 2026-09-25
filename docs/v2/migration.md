@@ -48,7 +48,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 5599945bf62763fd645074c3475c8eef1a16a371
+    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
@@ -105,9 +105,9 @@ sources:
     resource: ../../tests/rules.test.ts
     title: Declarative dispatch and combined-name checks
     git_blob: 70f1881b500b99c138c04c834258ed57eb6021be
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:40:48Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -254,7 +254,7 @@ The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, 
 | Application implementation | `N.context` app settings, generic `N.message`/locale lookup, `N.data` filter/sort, Natural-TEMPLATE `p.`/`c.`/`e.` declarations, API envelopes | Keep these decisions in the page or application: explicit options, localization, predicates/comparators, direct functions, and server conversion. |
 | Discontinued behavior | `N.data.filter` string conditions evaluated as code, global `N.gc`, generic controller AOP and runtime string declaration parsing, optional `N.code` inspection | Rewrite as explicit predicates, owned cleanup, controller methods, and normal source inspection; there is no 2.0 compatibility entry. |
 
-Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. Advanced Grid features, Tree, a custom datepicker, notifications, and document tabs are later 2.x work; do not label them as discontinued 2.0 replacements.[^package][^ui][^rules][^formats][^validators]
+Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. The current Grid also accepts optional `initialPage: { page, size }` for a bounded first render of a large local `Rows` store. Other advanced Grid features, Tree, a custom datepicker, notifications, and document tabs are later 2.x work; do not label them as discontinued 2.0 replacements.[^package][^ui][^rules][^formats][^validators]
 
 # Verify
 

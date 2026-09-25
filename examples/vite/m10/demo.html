@@ -80,6 +80,14 @@
 
         <fieldset>
           <legend>Binding lifetime</legend>
+          <label>Initial page when binding
+            <select data-initial-page>
+              <option value="">No initial page (default)</option>
+              <option value="first">Page 1 · 2 rows</option>
+              <option value="second">Page 2 · 2 rows</option>
+            </select>
+          </label>
+          <p>Changing the initial page rebinds the Grid and clears selection and uncommitted edits. Valid Rows changes remain in the store.</p>
           <label>Built-in rule locale
             <select data-locale>
               <option value="en-US">English</option>

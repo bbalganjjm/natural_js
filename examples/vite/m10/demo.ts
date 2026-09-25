@@ -49,6 +49,7 @@ const sort = find<HTMLSelectElement>("[data-sort]");
 const filter = find<HTMLSelectElement>("[data-filter]");
 const size = find<HTMLSelectElement>("[data-size]");
 const locale = find<HTMLSelectElement>("[data-locale]");
+const initialPageChoice = find<HTMLSelectElement>("[data-initial-page]");
 const status = find<HTMLOutputElement>("[data-status]");
 const snapshot = find<HTMLElement>("[data-snapshot]");
 const changes = find<HTMLElement>("[data-changes]");
@@ -112,8 +113,12 @@ function applyPage(): void {
 }
 
 function bind(): void {
+  const initialPage = initialPageChoice.value
+    ? { page: initialPageChoice.value === "second" ? 2 : 1, size: 2 }
+    : undefined;
   grid = bindGrid(table, {
     rows,
+    initialPage,
     rules: {
       format: { displayName: value => value.toUpperCase() },
       validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
@@ -133,7 +138,13 @@ function bind(): void {
   });
   applySort();
   applyFilter();
-  applyPage();
+  if (initialPage) {
+    size.value = String(initialPage.size);
+    requestedPage = grid.page()?.page ?? 1;
+    refresh();
+  } else {
+    applyPage();
+  }
   status.textContent = "Grid is bound.";
 }
 
@@ -199,7 +210,16 @@ document.addEventListener("click", event => {
 
 sort.addEventListener("change", applySort);
 filter.addEventListener("change", () => { applyFilter(); requestedPage = 1; applyPage(); });
-size.addEventListener("change", () => { requestedPage = 1; applyPage(); });
+size.addEventListener("change", () => { initialPageChoice.value = ""; requestedPage = 1; applyPage(); });
+initialPageChoice.addEventListener("change", () => {
+  size.value = initialPageChoice.value ? "2" : "";
+  requestedPage = 1;
+  grid?.dispose();
+  grid = null;
+  bind();
+  status.textContent = "Initial page changed; selection and uncommitted edits were cleared. Valid Rows changes remain.";
+  refresh();
+});
 locale.addEventListener("change", () => {
   if (grid) { grid.dispose(); grid = null; bind(); }
   status.textContent = "Locale changed; selection and uncommitted edits were cleared. Blank Team shows the new rule message.";

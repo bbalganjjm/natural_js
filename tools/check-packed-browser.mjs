@@ -108,6 +108,9 @@ try {
     await expect(host.locator("tbody [data-field='person.name']")).toHaveText(name);
     await expect(host.locator("select option")).toHaveText(["Choose", "Eleven", "Twenty two"]);
     await expect(host.locator("select")).toHaveValue("11");
+    assert.deepEqual(await page.evaluate(slot => window.packedConsumer.screens[slot].grid.page(), slot),
+      { page: 1, size: 1, total: 2, pages: 2 }, "Installed Grid must apply its initial page before rendering.");
+    await expect(host.locator("tbody tr")).toHaveCount(1);
   }
   const ids = await page.evaluate(() => [...document.querySelectorAll("[id]")].map(item => item.id));
   assert.equal(new Set(ids).size, ids.length, "Live CVC screens contain duplicate IDs.");
