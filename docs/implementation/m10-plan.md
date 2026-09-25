@@ -61,12 +61,12 @@ sources:
     resource: ../../tests/browser/m10-agent-screen.spec.ts
     title: M10.4 docs-first authored Grid task
     git_blob: 94fd90af72248bfabf0cef988fb9b35660f4b58f
-generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:57:08Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T01:10:39Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-25T00:57:44Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T01:11:51Z }
 ---
 
-M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates. The grouped/sticky authored-table slice, full-feature demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. Column state, bulk edit, multi-selection, and virtualization remain unselected. The user has deferred npm publication until remaining work is complete and personally tested. Safari is outside the initial 2.0 browser support scope.[^roadmap]
+M10 is a later 2.x milestone, outside the first `2.0.0` feature set. This draft defines decision and implementation gates. The grouped/sticky authored-table slice, full-feature demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. Column state, bulk edit, multi-selection, and virtualization remain unselected. The user has deferred npm publication until remaining work is complete and personally tested. Real Safari on macOS or iOS is outside the initial 2.0 browser support scope; Playwright WebKit remains required on this Windows host.[^roadmap]
 
 # Goal
 
@@ -126,7 +126,7 @@ The M10.2 unpublished local tarball had SHA-256 `3a6b8f030fda3443943befeb47aad3f
 
 # Validation and exclusions
 
-Run build, typecheck, focused unit checks for non-DOM invariants, and real-browser tests on authored tables. Check keyboard-only use, header semantics and association, sort/column state announcements, focus visibility, text spacing, narrow layout, and MDI duplicate IDs. If resize/reorder is selected, include manual screen-reader and keyboard review or record its absence as an unverified gate. Current browser checks cover Chromium, Firefox, and installed Chrome/Edge; the earlier WebKit engine evidence is historical because the user excluded Safari from the initial 2.0 support scope. Automated axe results alone do not establish WCAG conformance.
+Run build, typecheck, focused unit checks for non-DOM invariants, and real-browser tests on authored tables. Check keyboard-only use, header semantics and association, sort/column state announcements, focus visibility, text spacing, narrow layout, and MDI duplicate IDs. If resize/reorder is selected, include manual screen-reader and keyboard review or record its absence as an unverified gate. Current browser checks include Playwright Chromium, Firefox, and WebKit plus installed Chrome and Edge on this Windows host. Only real Safari on macOS or iOS is unavailable; a WebKit pass does not claim Safari vendor coverage. Automated axe results alone do not establish WCAG conformance.
 
 Measure the existing flat/nested 100- and 1,000-row fixtures before and after rendering changes. Set any larger workload and budget in M10.0, rather than inventing a universal speed claim. Record agent first-pass correctness, files/bytes read, changed scope, elapsed time, and actual tokens only if available.
 
@@ -155,7 +155,7 @@ The fixed [100/1,000-row rerun](evidence/m10-initial-page-binding-chromium.json)
 
 An independent agent used documentation before inspecting implementation or existing tests to add an authored Grid screen with a nested row-local Select, initial local page, row selection, sorting, off-page identity, validation drafts, unique IDs, and disposal/rebind. The agent reported reading nine documentation files (60,445 bytes), then rereading four core files (22,371 bytes); no raw read-meter log was retained for independent recomputation. Its first actual Chromium run failed before an assertion because the fixture used Vite's wrong module URL; one URL-only correction made the case pass 1/1 in Chromium without changing screen logic. The same corrected case passed 1/1 in Firefox after workspace recovery. Elapsed time was about 18 minutes, including roughly 12 minutes waiting for the shared workspace to be restored; actual tokens were unavailable. This is a docs-first task result, not a claim of first-run success or a controlled speed comparison.[^agent-screen]
 
-The M10.3 local tarball SHA-256 is `08a698cf0e7008fb0dec4eea627a78ddb1685d1359830bf0011108a2ac4226d8`. It contains 98 files with no 1.x source, jQuery, docs, tests, or demo. Its installed JavaScript and TypeScript consumers passed. Its browser-served consumer passed on the same SHA in Chromium 153, Firefox 155, real Chrome 153, and real Edge 153 on Windows. The first Chromium attempt had Firefox's repository-local Playwright path set and could not find Chromium; rerunning with the correct environment passed. No registry publication or release tag occurred.
+The M10.3 local tarball SHA-256 is `08a698cf0e7008fb0dec4eea627a78ddb1685d1359830bf0011108a2ac4226d8`. It contains 98 files with no 1.x source, jQuery, docs, tests, or demo. Its installed JavaScript and TypeScript consumers passed. Its browser-served consumer passed on the same SHA in Chromium 153, Firefox 155, WebKit 26.6, real Chrome 153, and real Edge 153 on Windows. The first Chromium attempt had Firefox's repository-local Playwright path set and could not find Chromium; rerunning with the correct environment passed. The current source passed the complete Playwright suites in Chromium 123/123 (25.0 seconds), Firefox 123/123 (54.9 seconds with the local cache), and WebKit 123/123 (45.9 seconds). The user clarified that the absence of a Mac excludes only real Safari, not WebKit engine tests. No registry publication or release tag occurred.
 
 # Related
 

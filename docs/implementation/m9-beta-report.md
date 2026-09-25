@@ -52,9 +52,9 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:57:08Z }
+generated: { by: codex/gpt-6-sol, at: 2026-09-25T01:10:39Z }
 verified:
-  - { by: codex/gpt-6-sol, at: 2026-09-25T00:57:44Z }
+  - { by: codex/gpt-6-sol, at: 2026-09-25T01:11:51Z }
 ---
 
 The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the unpublished `2.0.0-beta.0` tarball measured here. The earlier `c79b9eae` artifact was replaced after Popup focus and authored-layout reflow fixes. This report separates checks that installed the exact current tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
@@ -87,7 +87,7 @@ Raw source-suite logs are [Chromium](evidence/m9-browser-chromium.log), [Firefox
 
 # Reproduce the artifact checks
 
-Run the package, installed-consumer, and browser commands from the clean `a45fbd6` package-source commit on the documented Windows/Node host. Run documentation checks from the later commit containing this report; the package-source commit predates the final M9 evidence update. The current M10.3 checkout's browser harness also requires `initialPage`, which that historical M9 tarball does not implement; use the M9 commit's matching harness when reproducing this report. Keep Playwright runs sequential; the full suite and the isolated agent fixture both use port 4173. The five historical packed-browser logs used one identical tarball and SHA. The current supported rerun below omits WebKit; its earlier log remains historical engine evidence.[^consumers][^browser]
+Run the package, installed-consumer, and browser commands from the clean `a45fbd6` package-source commit on the documented Windows/Node host. Run documentation checks from the later commit containing this report; the package-source commit predates the final M9 evidence update. The current M10.3 checkout's browser harness also requires `initialPage`, which that historical M9 tarball does not implement; use the M9 commit's matching harness when reproducing this report. Keep Playwright runs sequential; the full suite and the isolated agent fixture both use port 4173. The five historical packed-browser logs used one identical tarball and SHA. Playwright WebKit remains in the supported rerun alongside the other engines; only real Safari on macOS or iOS is unavailable here.[^consumers][^browser]
 
 ```powershell
 npm ci
@@ -100,9 +100,13 @@ $tarball = 'node_modules/.cache/m9-release-a45/bbalganjjm-natural_js-2.0.0-beta.
 $sha256 = 'ca87cf82f6fe457823500e1933ec52de0a35d8f6a529be50cb37ed6fdea126b8'
 Get-FileHash -Path $tarball -Algorithm SHA256
 npm run test:consumers -- --tarball $tarball --sha256 $sha256
-foreach ($browser in 'chromium', 'firefox', 'chrome', 'edge') {
+foreach ($browser in 'chromium', 'webkit', 'chrome', 'edge') {
   npm run test:packed-browser -- --tarball $tarball --sha256 $sha256 --browser $browser
 }
+$env:PLAYWRIGHT_BROWSERS_PATH = 'node_modules/.cache/playwright-m6'
+npx playwright install firefox
+npm run test:packed-browser -- --tarball $tarball --sha256 $sha256 --browser firefox
+Remove-Item Env:PLAYWRIGHT_BROWSERS_PATH
 ```
 
 On the report-bearing branch tip, run the two OKF checks separately:
@@ -120,6 +124,7 @@ $env:PLAYWRIGHT_BROWSERS_PATH = 'node_modules/.cache/playwright-m6'
 npx playwright install firefox
 npm run test:browser -- --project=firefox
 Remove-Item Env:PLAYWRIGHT_BROWSERS_PATH
+npm run test:browser -- --project=webkit
 ```
 
 # Accessibility boundary
