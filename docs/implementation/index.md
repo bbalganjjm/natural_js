@@ -1,5 +1,8 @@
 # Concepts
 
+* [Natural-JS 2.0 full feature implementation plan](feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)
+* [Natural-JS 2.0 framework feature coverage](feature-parity.md) - Source-backed legacy behavior gaps, required additions, and pending consolidated retirement review. (draft)
+
 * [Natural-JS 2.0 active plan](current.md) - Checkpoint, next action, and verification record for the milestone-gated Natural-JS 2.0 migration.
 * [Natural-JS 2.0 M0 baseline](m0-baseline.md) - Code-backed 1.x design intent, minimum 2.0 migration inventory, and representative evaluation screen.
 * [Natural-JS 2.0 M1 contract plan](m1-plan.md) - Detailed review plan for the public usage examples and minimum architecture contracts required before implementation.
@@ -16,7 +19,7 @@
 * [Natural-JS 2.0 M8 unpublished beta candidate](m8-beta-report.md) - M8 migration, agent tasks, browser, package, performance, and documentation gates before the M9 release plan. (draft)
 * [Natural-JS 2.0 M9 release plan](m9-plan.md) - Approved beta, release-candidate, and 2.0.0 gates for installed consumers, browsers, accessibility, performance, package scope, and publication. (draft)
 * [Natural-JS 2.0 M9 unpublished beta artifact](m9-beta-report.md) - Exact beta tarball, installed-consumer, browser, accessibility, performance, package, and agent checks before release-candidate review. (draft)
-* [Natural-JS 2.x M10 advanced Grid plan](m10-plan.md) - Draft scope and gates for advanced behavior on authored native tables without expanding Grid into a general utility library. (draft)
+* [Natural-JS 2.0 M10 advanced Grid parity plan](m10-plan.md) - Required Grid feature parity and release gates on authored native tables, with historical implementation and measurement records. (draft)
 * [Natural-JS 2.x M11 Tree and DatePicker plan](m11-plan.md) - Approved authored-HTML Tree and DatePicker scope, ownership, accessibility, and verification gates. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.
 

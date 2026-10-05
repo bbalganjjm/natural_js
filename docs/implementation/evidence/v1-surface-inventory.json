@@ -1,0 +1,3391 @@
+{
+  "date": "2026-10-05",
+  "baseline_commit": "b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6",
+  "status": "structural evidence; behavior classification remains in feature-parity.md",
+  "extraction": "Installed Vite parseAst, audit use only; no framework dependency added.",
+  "limitations": [
+    "Names and literal constructor option keys are a surface checklist, not completed behavior parity.",
+    "Constructor option keys include nested dotted paths from literal this.options assignments, not all public or merged options.",
+    "Configuration, computed property lookup, HTML declarations, dynamic formatter/validator dispatch and callbacks need manual/transitive review.",
+    "Static reference absence does not prove code unused. No v1 implementation body is copied here."
+  ],
+  "totals": {
+    "files": 8,
+    "classes": 43,
+    "members": 394,
+    "literal_constructor_option_keys": 338
+  },
+  "files": [
+    {
+      "path": "v1/src/natural.js.js",
+      "sha256": "db451e89314f57a5f13340712b681ca218d4e9b37093f3e08445948fa7ad7fd3",
+      "classes": [
+        {
+          "symbol": "NJS",
+          "members": [
+            {
+              "symbol": "NJS.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NJS.version",
+              "name": "version",
+              "kind": "ObjectExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "N.version",
+        "NA.prototype",
+        "NC.prototype",
+        "NC.toSelector",
+        "ND.prototype",
+        "NU.prototype",
+        "NUS.prototype"
+      ]
+    },
+    {
+      "path": "v1/src/natural.core.js",
+      "sha256": "65604d3581b4509412a87fab0ee0af1d0e40ae85baaf8e96391a23505e6d1db1",
+      "classes": [
+        {
+          "symbol": "NC.gc",
+          "members": [
+            {
+              "symbol": "NC.gc.minimum",
+              "name": "minimum",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.gc.full",
+              "name": "full",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.gc.ds",
+              "name": "ds",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.string",
+          "members": [
+            {
+              "symbol": "NC.string.contains",
+              "name": "contains",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.endsWith",
+              "name": "endsWith",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.startsWith",
+              "name": "startsWith",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.insertAt",
+              "name": "insertAt",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.removeWhitespace",
+              "name": "removeWhitespace",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.lpad",
+              "name": "lpad",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.rpad",
+              "name": "rpad",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.isEmpty",
+              "name": "isEmpty",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.byteLength",
+              "name": "byteLength",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.trimToEmpty",
+              "name": "trimToEmpty",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.nullToEmpty",
+              "name": "nullToEmpty",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.trimToNull",
+              "name": "trimToNull",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.trimToUndefined",
+              "name": "trimToUndefined",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.trimToZero",
+              "name": "trimToZero",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string.trimToVal",
+              "name": "trimToVal",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.date",
+          "members": [
+            {
+              "symbol": "NC.date.diff",
+              "name": "diff",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date.strToDateStrArr",
+              "name": "strToDateStrArr",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date.strToDate",
+              "name": "strToDate",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date.format",
+              "name": "format",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date.dateToTs",
+              "name": "dateToTs",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date.tsToDate",
+              "name": "tsToDate",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date.dateList",
+              "name": "dateList",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.element",
+          "members": [
+            {
+              "symbol": "NC.element.toOpts",
+              "name": "toOpts",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.element.toRules",
+              "name": "toRules",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.element.toData",
+              "name": "toData",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.element.dataChanged",
+              "name": "dataChanged",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.element.maxZindex",
+              "name": "maxZindex",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.browser",
+          "members": [
+            {
+              "symbol": "NC.browser.cookie",
+              "name": "cookie",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.browser.removeCookie",
+              "name": "removeCookie",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.browser.msieVersion",
+              "name": "msieVersion",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.browser.is",
+              "name": "is",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.browser.contextPath",
+              "name": "contextPath",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.browser.scrollbarWidth",
+              "name": "scrollbarWidth",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.message",
+          "members": [
+            {
+              "symbol": "NC.message.replaceMsgVars",
+              "name": "replaceMsgVars",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.message.get",
+              "name": "get",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.array",
+          "members": [
+            {
+              "symbol": "NC.array.deduplicate",
+              "name": "deduplicate",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.json",
+          "members": [
+            {
+              "symbol": "NC.json.mapFromKeys",
+              "name": "mapFromKeys",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.json.mergeJsonArray",
+              "name": "mergeJsonArray",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.json.format",
+              "name": "format",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.event",
+          "members": [
+            {
+              "symbol": "NC.event.isNumberRelatedKeys",
+              "name": "isNumberRelatedKeys",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.event.disable",
+              "name": "disable",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.event.windowScrollLock",
+              "name": "windowScrollLock",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.event.getMaxDuration",
+              "name": "getMaxDuration",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.event.whichAnimationEvent",
+              "name": "whichAnimationEvent",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.event.whichTransitionEvent",
+              "name": "whichTransitionEvent",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC.mask",
+          "members": [
+            {
+              "symbol": "NC.mask.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NC.mask.prototype.setGeneric",
+              "name": "setGeneric",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NC.mask.prototype.setNumeric",
+              "name": "setNumeric",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NC",
+          "members": [
+            {
+              "symbol": "NC.prototype.remove_",
+              "name": "remove_",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NC.prototype.tpBind",
+              "name": "tpBind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NC.prototype.instance",
+              "name": "instance",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NC.prototype.vals",
+              "name": "vals",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NC.prototype.events",
+              "name": "events",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NC.locale",
+              "name": "locale",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.debug",
+              "name": "debug",
+              "kind": "ConditionalExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.log",
+              "name": "log",
+              "kind": "ConditionalExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.info",
+              "name": "info",
+              "kind": "ConditionalExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.warn",
+              "name": "warn",
+              "kind": "ConditionalExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.error",
+              "name": "error",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.type",
+              "name": "type",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isString",
+              "name": "isString",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isNumeric",
+              "name": "isNumeric",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isPlainObject",
+              "name": "isPlainObject",
+              "kind": "MemberExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isEmptyObject",
+              "name": "isEmptyObject",
+              "kind": "MemberExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isArray",
+              "name": "isArray",
+              "kind": "MemberExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isArraylike",
+              "name": "isArraylike",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isWrappedSet",
+              "name": "isWrappedSet",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.isElement",
+              "name": "isElement",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.toSelector",
+              "name": "toSelector",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.serialExecute",
+              "name": "serialExecute",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.gc",
+              "name": "gc",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.string",
+              "name": "string",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.date",
+              "name": "date",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.element",
+              "name": "element",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.browser",
+              "name": "browser",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.message",
+              "name": "message",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.array",
+              "name": "array",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.json",
+              "name": "json",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.event",
+              "name": "event",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NC.mask",
+              "name": "mask",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "NA.context",
+        "NA.context.attr",
+        "NC.browser",
+        "NC.browser.msieVersion",
+        "NC.date",
+        "NC.date.strToDateStrArr",
+        "NC.error",
+        "NC.isEmptyObject",
+        "NC.isNumeric",
+        "NC.isString",
+        "NC.locale",
+        "NC.message",
+        "NC.message.replaceMsgVars",
+        "NC.string",
+        "NC.string.endsWith",
+        "NC.string.startsWith",
+        "NC.string.trimToEmpty",
+        "NC.string.trimToNull",
+        "NC.string.trimToZero",
+        "NC.type"
+      ]
+    },
+    {
+      "path": "v1/src/natural.architecture.js",
+      "sha256": "545a0f80760d888a6465942d258b520c36dba0c5bc48bb95cf27cb02a21a9c26",
+      "classes": [
+        {
+          "symbol": "NA.comm.request",
+          "members": [
+            {
+              "symbol": "NA.comm.request.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NA.comm.request.prototype.attr",
+              "name": "attr",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.comm.request.prototype.removeAttr",
+              "name": "removeAttr",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.comm.request.prototype.param",
+              "name": "param",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.comm.request.prototype.get",
+              "name": "get",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.comm.request.prototype.reload",
+              "name": "reload",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "url",
+            "referrer",
+            "contentType",
+            "cache",
+            "async",
+            "type",
+            "data",
+            "dataIsArray",
+            "dataType",
+            "urlSync",
+            "crossDomain",
+            "browserHistory",
+            "append",
+            "target"
+          ]
+        },
+        {
+          "symbol": "NA.comm",
+          "members": [
+            {
+              "symbol": "NA.comm.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NA.comm.xhr",
+              "name": "xhr",
+              "kind": "Literal",
+              "static": true
+            },
+            {
+              "symbol": "NA.comm.initFilterConfig",
+              "name": "initFilterConfig",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.comm.resetFilterConfig",
+              "name": "resetFilterConfig",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.comm.submit",
+              "name": "submit",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.comm.error",
+              "name": "error",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.comm.request",
+              "name": "request",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NA.cont",
+          "members": [
+            {
+              "symbol": "NA.cont.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NA.cont.trInit",
+              "name": "trInit",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.cont.aop",
+              "name": "aop",
+              "kind": "ObjectExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NA.context",
+          "members": [
+            {
+              "symbol": "NA.context.attrObj",
+              "name": "attrObj",
+              "kind": "ObjectExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.context.attr",
+              "name": "attr",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NA.config",
+          "members": [
+            {
+              "symbol": "NA.config.filterConfig",
+              "name": "filterConfig",
+              "kind": "field",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NA",
+          "members": [
+            {
+              "symbol": "NA.prototype.comm",
+              "name": "comm",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.prototype.request",
+              "name": "request",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.prototype.cont",
+              "name": "cont",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NA.ajax",
+              "name": "ajax",
+              "kind": "MemberExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.comm",
+              "name": "comm",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.cont",
+              "name": "cont",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.context",
+              "name": "context",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NA.config",
+              "name": "config",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "NA.ajax",
+        "NA.comm",
+        "NA.comm.initFilterConfig",
+        "NA.comm.request",
+        "NA.config",
+        "NA.config.filterConfig",
+        "NA.config.filterConfig.afterInitFilters",
+        "NA.config.filterConfig.beforeInitFilters",
+        "NA.config.filterConfig.beforeSendFilters",
+        "NA.config.filterConfig.completeFilters",
+        "NA.config.filterConfig.errorFilters",
+        "NA.config.filterConfig.successFilters",
+        "NA.cont",
+        "NA.cont.aop",
+        "NA.cont.aop.pointcuts",
+        "NA.cont.aop.wrap",
+        "NA.cont.aop.wrap.call",
+        "NA.cont.trInit",
+        "NA.cont.trInit.call",
+        "NA.context",
+        "NA.context.attr",
+        "NA.context.attrObj",
+        "NC.error",
+        "NC.gc",
+        "NC.gc.ds",
+        "NC.isArray",
+        "NC.isElement",
+        "NC.isPlainObject",
+        "NC.isString",
+        "NC.isWrappedSet",
+        "NC.string",
+        "NC.string.isEmpty",
+        "NC.type",
+        "NC.warn"
+      ]
+    },
+    {
+      "path": "v1/src/natural.data.js",
+      "sha256": "65ecebe84468c27ff149bf4010b2143ee98040351b0c604c75f1dc11abad55c8",
+      "classes": [
+        {
+          "symbol": "ND.ds",
+          "members": [
+            {
+              "symbol": "ND.ds.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "ND.ds.instance",
+              "name": "instance",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.ds.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.ds.prototype.notify",
+              "name": "notify",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "ND.formatter",
+          "members": [
+            {
+              "symbol": "ND.formatter.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "ND.formatter.prototype.format",
+              "name": "format",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.formatter.prototype.unformat",
+              "name": "unformat",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.formatter.commas",
+              "name": "commas",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.rrn",
+              "name": "rrn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.ssn",
+              "name": "ssn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.kbrn",
+              "name": "kbrn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.kcn",
+              "name": "kcn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.upper",
+              "name": "upper",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.lower",
+              "name": "lower",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.capitalize",
+              "name": "capitalize",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.zipcode",
+              "name": "zipcode",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.phone",
+              "name": "phone",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.realnum",
+              "name": "realnum",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.trimtoempty",
+              "name": "trimtoempty",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.trimtozero",
+              "name": "trimtozero",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.trimtoval",
+              "name": "trimtoval",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.date",
+              "name": "date",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.time",
+              "name": "time",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.limit",
+              "name": "limit",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.replace",
+              "name": "replace",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.lpad",
+              "name": "lpad",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.rpad",
+              "name": "rpad",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.mask",
+              "name": "mask",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.generic",
+              "name": "generic",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter.numeric",
+              "name": "numeric",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "rules",
+            "isElement",
+            "createEvent",
+            "context",
+            "targetEle"
+          ]
+        },
+        {
+          "symbol": "ND.validator",
+          "members": [
+            {
+              "symbol": "ND.validator.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "ND.validator.prototype.validate",
+              "name": "validate",
+              "kind": "FunctionExpression",
+              "static": false
+            },
+            {
+              "symbol": "ND.validator.required",
+              "name": "required",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.alphabet",
+              "name": "alphabet",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.integer",
+              "name": "integer",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.korean",
+              "name": "korean",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.alphabet_integer",
+              "name": "alphabet_integer",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.integer_korean",
+              "name": "integer_korean",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.alphabet_korean",
+              "name": "alphabet_korean",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.alphabet_integer_korean",
+              "name": "alphabet_integer_korean",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.dash_integer",
+              "name": "dash_integer",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.commas_integer",
+              "name": "commas_integer",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.number",
+              "name": "number",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.email",
+              "name": "email",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.url",
+              "name": "url",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.zipcode",
+              "name": "zipcode",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.decimal",
+              "name": "decimal",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.phone",
+              "name": "phone",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.rrn",
+              "name": "rrn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.ssn",
+              "name": "ssn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.frn",
+              "name": "frn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.frn_rrn",
+              "name": "frn_rrn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.kbrn",
+              "name": "kbrn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.kcn",
+              "name": "kcn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.date",
+              "name": "date",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.time",
+              "name": "time",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.accept",
+              "name": "accept",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.match",
+              "name": "match",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.acceptfileext",
+              "name": "acceptfileext",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.notaccept",
+              "name": "notaccept",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.notmatch",
+              "name": "notmatch",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.notacceptfileext",
+              "name": "notacceptfileext",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.equalTo",
+              "name": "equalTo",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.maxlength",
+              "name": "maxlength",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.minlength",
+              "name": "minlength",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.rangelength",
+              "name": "rangelength",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.maxbyte",
+              "name": "maxbyte",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.minbyte",
+              "name": "minbyte",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.rangebyte",
+              "name": "rangebyte",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.maxvalue",
+              "name": "maxvalue",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.minvalue",
+              "name": "minvalue",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.rangevalue",
+              "name": "rangevalue",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator.regexp",
+              "name": "regexp",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "rules",
+            "isElement",
+            "createEvent",
+            "context",
+            "targetEle"
+          ]
+        },
+        {
+          "symbol": "ND.data",
+          "members": [
+            {
+              "symbol": "ND.data.filter",
+              "name": "filter",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.data.sortBy",
+              "name": "sortBy",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.data.sort",
+              "name": "sort",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "ND",
+          "members": [
+            {
+              "symbol": "ND.prototype.datafilter",
+              "name": "datafilter",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.prototype.datasort",
+              "name": "datasort",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.prototype.formatter",
+              "name": "formatter",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.prototype.validator",
+              "name": "validator",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "ND.ds",
+              "name": "ds",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.formatter",
+              "name": "formatter",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.validator",
+              "name": "validator",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "ND.data",
+              "name": "data",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "NA.context",
+        "NA.context.attr",
+        "NC.date",
+        "NC.date.format",
+        "NC.element",
+        "NC.element.toData",
+        "NC.element.toRules",
+        "NC.error",
+        "NC.isElement",
+        "NC.isPlainObject",
+        "NC.isString",
+        "NC.isWrappedSet",
+        "NC.locale",
+        "NC.mask",
+        "NC.message",
+        "NC.message.replaceMsgVars",
+        "NC.string",
+        "NC.string.byteLength",
+        "NC.string.isEmpty",
+        "NC.string.lpad",
+        "NC.string.rpad",
+        "NC.string.trimToEmpty",
+        "NC.string.trimToNull",
+        "NC.string.trimToUndefined",
+        "NC.string.trimToVal",
+        "NC.string.trimToZero",
+        "NC.type",
+        "NC.warn",
+        "ND.data",
+        "ND.data.filter",
+        "ND.data.sort",
+        "ND.ds",
+        "ND.formatter",
+        "ND.validator",
+        "ND.validator.email",
+        "NU.datepicker",
+        "NU.form"
+      ]
+    },
+    {
+      "path": "v1/src/natural.ui.js",
+      "sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+      "classes": [
+        {
+          "symbol": "NU.ui",
+          "members": [
+            {
+              "symbol": "NU.ui.iteration",
+              "name": "iteration",
+              "kind": "ObjectExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.ui.draggable",
+              "name": "draggable",
+              "kind": "ObjectExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.ui.scroll",
+              "name": "scroll",
+              "kind": "ObjectExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.ui.utils",
+              "name": "utils",
+              "kind": "ObjectExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NU.alert",
+          "members": [
+            {
+              "symbol": "NU.alert.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.alert.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.alert.resetOffSetEle",
+              "name": "resetOffSetEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.alert.wrapInputEle",
+              "name": "wrapInputEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.alert.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.alert.prototype.show",
+              "name": "show",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.alert.prototype.hide",
+              "name": "hide",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.alert.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "obj",
+            "context",
+            "container",
+            "msgContext",
+            "msgContents",
+            "msg",
+            "vars",
+            "html",
+            "top",
+            "left",
+            "width",
+            "height",
+            "isInput",
+            "isWindow",
+            "title",
+            "button",
+            "okButtonOpts",
+            "cancelButtonOpts",
+            "closeMode",
+            "modal",
+            "onOk",
+            "onCancel",
+            "onBeforeShow",
+            "onShow",
+            "onBeforeHide",
+            "onHide",
+            "onBeforeRemove",
+            "onRemove",
+            "overlayColor",
+            "overlayClose",
+            "escClose",
+            "confirm",
+            "alwaysOnTop",
+            "alwaysOnTopCalcTarget",
+            "dynPos",
+            "windowScrollLock",
+            "draggable",
+            "draggableOverflowCorrection",
+            "draggableOverflowCorrectionAddValues",
+            "draggableOverflowCorrectionAddValues.top",
+            "draggableOverflowCorrectionAddValues.bottom",
+            "draggableOverflowCorrectionAddValues.left",
+            "draggableOverflowCorrectionAddValues.right",
+            "saveMemory"
+          ]
+        },
+        {
+          "symbol": "NU.button",
+          "members": [
+            {
+              "symbol": "NU.button.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.button.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.button.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.button.prototype.disable",
+              "name": "disable",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.button.prototype.enable",
+              "name": "enable",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "context",
+            "size",
+            "color",
+            "type",
+            "disable",
+            "onBeforeCreate",
+            "onCreate"
+          ]
+        },
+        {
+          "symbol": "NU.datepicker",
+          "members": [
+            {
+              "symbol": "NU.datepicker.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.datepicker.checkMinMaxDate",
+              "name": "checkMinMaxDate",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.datepicker.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.datepicker.createContents",
+              "name": "createContents",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.datepicker.yearPaging",
+              "name": "yearPaging",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.datepicker.selectItems",
+              "name": "selectItems",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.datepicker.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.datepicker.prototype.show",
+              "name": "show",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.datepicker.prototype.hide",
+              "name": "hide",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "context",
+            "contents",
+            "monthonly",
+            "focusin",
+            "yearsPanelPosition",
+            "monthsPanelPosition",
+            "minYear",
+            "maxYear",
+            "yearChangeInput",
+            "monthChangeInput",
+            "touchMonthChange",
+            "scrollMonthChange",
+            "minDate",
+            "maxDate",
+            "holiday",
+            "holiday.repeat",
+            "holiday.once",
+            "onChangeYear",
+            "onChangeMonth",
+            "onSelect",
+            "onBeforeShow",
+            "onShow",
+            "onBeforeHide",
+            "onHide"
+          ]
+        },
+        {
+          "symbol": "NU.popup",
+          "members": [
+            {
+              "symbol": "NU.popup.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.popup.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.popup.loadContent",
+              "name": "loadContent",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.popup.popOpen",
+              "name": "popOpen",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.popup.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.popup.prototype.open",
+              "name": "open",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.popup.prototype.close",
+              "name": "close",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.popup.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "context",
+            "url",
+            "title",
+            "button",
+            "modal",
+            "top",
+            "left",
+            "height",
+            "width",
+            "opener",
+            "closeMode",
+            "alwaysOnTop",
+            "confirm",
+            "overlayClose",
+            "escClose",
+            "onOk",
+            "onCancel",
+            "onBeforeShow",
+            "onShow",
+            "onBeforeHide",
+            "onHide",
+            "onBeforeRemove",
+            "onRemove",
+            "onOpen",
+            "onOpenData",
+            "onClose",
+            "onCloseData",
+            "onLoad",
+            "preload",
+            "dynPos",
+            "windowScrollLock",
+            "draggable",
+            "draggableOverflowCorrection",
+            "draggableOverflowCorrectionAddValues",
+            "draggableOverflowCorrectionAddValues.top",
+            "draggableOverflowCorrectionAddValues.bottom",
+            "draggableOverflowCorrectionAddValues.left",
+            "draggableOverflowCorrectionAddValues.right",
+            "saveMemory"
+          ]
+        },
+        {
+          "symbol": "NU.tab",
+          "members": [
+            {
+              "symbol": "NU.tab.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.tab.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.tab.wrapScroll",
+              "name": "wrapScroll",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.tab.loadContent",
+              "name": "loadContent",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.tab.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tab.prototype.open",
+              "name": "open",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tab.prototype.disable",
+              "name": "disable",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tab.prototype.enable",
+              "name": "enable",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tab.prototype.cont",
+              "name": "cont",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "context",
+            "links",
+            "tabOpts",
+            "randomSel",
+            "opener",
+            "onActive",
+            "onLoad",
+            "blockOnActiveWhenCreate",
+            "contents",
+            "tabScroll",
+            "tabScrollCorrection",
+            "tabScrollCorrection.tabContainerWidthCorrectionPx",
+            "tabScrollCorrection.tabContainerWidthReCalcDelayTime"
+          ]
+        },
+        {
+          "symbol": "NU.select",
+          "members": [
+            {
+              "symbol": "NU.select.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.select.prototype.data",
+              "name": "data",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.prototype.bind",
+              "name": "bind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.prototype.index",
+              "name": "index",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.prototype.val",
+              "name": "val",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.select.prototype.reset",
+              "name": "reset",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "context",
+            "key",
+            "val",
+            "append",
+            "direction",
+            "type",
+            "template"
+          ]
+        },
+        {
+          "symbol": "NU.form",
+          "members": [
+            {
+              "symbol": "NU.form.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.data",
+              "name": "data",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.row",
+              "name": "row",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.bindEvents",
+              "name": "bindEvents",
+              "kind": "ObjectExpression",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.bind",
+              "name": "bind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.unbind",
+              "name": "unbind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.add",
+              "name": "add",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.revert",
+              "name": "revert",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.validate",
+              "name": "validate",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.val",
+              "name": "val",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.form.prototype.update",
+              "name": "update",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "row",
+            "context",
+            "validate",
+            "autoUnbind",
+            "state",
+            "html",
+            "addTop",
+            "fRules",
+            "vRules",
+            "extObj",
+            "extRow",
+            "revert",
+            "cache",
+            "unbind",
+            "tpBind",
+            "onBeforeBindValue",
+            "onBindValue",
+            "onBeforeBind",
+            "onBind",
+            "InitialData"
+          ]
+        },
+        {
+          "symbol": "NU.list",
+          "members": [
+            {
+              "symbol": "NU.list.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.createScroll",
+              "name": "createScroll",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.list.vResize",
+              "name": "vResize",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.list.prototype.data",
+              "name": "data",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.contextBodyTemplate",
+              "name": "contextBodyTemplate",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.select",
+              "name": "select",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.check",
+              "name": "check",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.bind",
+              "name": "bind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.add",
+              "name": "add",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.revert",
+              "name": "revert",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.validate",
+              "name": "validate",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.val",
+              "name": "val",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.move",
+              "name": "move",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.copy",
+              "name": "copy",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.list.prototype.update",
+              "name": "update",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "row",
+            "beforeRow",
+            "context",
+            "height",
+            "validate",
+            "html",
+            "addTop",
+            "addSelect",
+            "vResizable",
+            "windowScrollLock",
+            "select",
+            "unselect",
+            "multiselect",
+            "checkAll",
+            "checkAllTarget",
+            "checkSingleTarget",
+            "hover",
+            "revert",
+            "createRowDelay",
+            "scrollPaging",
+            "scrollPaging.idx",
+            "scrollPaging.size",
+            "fRules",
+            "vRules",
+            "appendScroll",
+            "addScroll",
+            "selectScroll",
+            "checkScroll",
+            "validateScroll",
+            "cache",
+            "tpBind",
+            "rowHandlerBeforeBind",
+            "rowHandler",
+            "onBeforeSelect",
+            "onSelect",
+            "onBind"
+          ]
+        },
+        {
+          "symbol": "NU.grid",
+          "members": [
+            {
+              "symbol": "NU.grid.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.tableCells",
+              "name": "tableCells",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.tableMap",
+              "name": "tableMap",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.setTheadCellInfo",
+              "name": "setTheadCellInfo",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.removeColgroup",
+              "name": "removeColgroup",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.fixColumn",
+              "name": "fixColumn",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.fixHeader",
+              "name": "fixHeader",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.vResize",
+              "name": "vResize",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.more",
+              "name": "more",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.resize",
+              "name": "resize",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.sort",
+              "name": "sort",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.dataFilter",
+              "name": "dataFilter",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.rowSpan",
+              "name": "rowSpan",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.paste",
+              "name": "paste",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid.prototype.data",
+              "name": "data",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.contextHead",
+              "name": "contextHead",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.contextBodyTemplate",
+              "name": "contextBodyTemplate",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.select",
+              "name": "select",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.check",
+              "name": "check",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.bind",
+              "name": "bind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.add",
+              "name": "add",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.revert",
+              "name": "revert",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.validate",
+              "name": "validate",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.val",
+              "name": "val",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.move",
+              "name": "move",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.copy",
+              "name": "copy",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.show",
+              "name": "show",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.hide",
+              "name": "hide",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.grid.prototype.update",
+              "name": "update",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "row",
+            "beforeRow",
+            "context",
+            "height",
+            "fixedcol",
+            "more",
+            "validate",
+            "html",
+            "addTop",
+            "addSelect",
+            "filter",
+            "resizable",
+            "vResizable",
+            "sortable",
+            "windowScrollLock",
+            "select",
+            "unselect",
+            "multiselect",
+            "checkAll",
+            "checkAllTarget",
+            "checkSingleTarget",
+            "hover",
+            "revert",
+            "createRowDelay",
+            "scrollPaging",
+            "scrollPaging.idx",
+            "scrollPaging.size",
+            "fRules",
+            "vRules",
+            "appendScroll",
+            "addScroll",
+            "selectScroll",
+            "checkScroll",
+            "validateScroll",
+            "cache",
+            "tpBind",
+            "pastiable",
+            "rowHandlerBeforeBind",
+            "rowHandler",
+            "onBeforeSelect",
+            "onSelect",
+            "onBind",
+            "misc",
+            "misc.resizableCorrectionWidth",
+            "misc.resizableLastCellCorrectionWidth",
+            "misc.resizeBarCorrectionLeft",
+            "misc.resizeBarCorrectionHeight",
+            "misc.fixedcolHeadMarginTop",
+            "misc.fixedcolHeadMarginLeft",
+            "misc.fixedcolHeadHeight",
+            "misc.fixedcolBodyMarginTop",
+            "misc.fixedcolBodyMarginLeft",
+            "misc.fixedcolBodyBindHeight",
+            "misc.fixedcolBodyAddHeight",
+            "misc.fixedcolRootContainer",
+            "currMoveToRow"
+          ]
+        },
+        {
+          "symbol": "NU.pagination",
+          "members": [
+            {
+              "symbol": "NU.pagination.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.pagination.changePageSet",
+              "name": "changePageSet",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.pagination.prototype.data",
+              "name": "data",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.bind",
+              "name": "bind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.totalCount",
+              "name": "totalCount",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.pageNo",
+              "name": "pageNo",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.countPerPage",
+              "name": "countPerPage",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.countPerPageSet",
+              "name": "countPerPageSet",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.pagination.prototype.currPageNavInfo",
+              "name": "currPageNavInfo",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "context",
+            "totalCount",
+            "countPerPage",
+            "countPerPageSet",
+            "pageNo",
+            "onChange",
+            "blockOnChangeWhenBind",
+            "currPageNavInfo"
+          ]
+        },
+        {
+          "symbol": "NU.tree",
+          "members": [
+            {
+              "symbol": "NU.tree.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NU.tree.prototype.data",
+              "name": "data",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tree.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tree.prototype.bind",
+              "name": "bind",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tree.prototype.select",
+              "name": "select",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tree.prototype.expand",
+              "name": "expand",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.tree.prototype.collapse",
+              "name": "collapse",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "data",
+            "context",
+            "key",
+            "val",
+            "level",
+            "parent",
+            "folderSelectable",
+            "checkbox",
+            "onSelect",
+            "onCheck"
+          ]
+        },
+        {
+          "symbol": "NU",
+          "members": [
+            {
+              "symbol": "NU.prototype.alert",
+              "name": "alert",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.button",
+              "name": "button",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.datepicker",
+              "name": "datepicker",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.popup",
+              "name": "popup",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.tab",
+              "name": "tab",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.select",
+              "name": "select",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.form",
+              "name": "form",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.list",
+              "name": "list",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.grid",
+              "name": "grid",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.pagination",
+              "name": "pagination",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.prototype.tree",
+              "name": "tree",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NU.ui",
+              "name": "ui",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.alert",
+              "name": "alert",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.button",
+              "name": "button",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.datepicker",
+              "name": "datepicker",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.popup",
+              "name": "popup",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.tab",
+              "name": "tab",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.select",
+              "name": "select",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.form",
+              "name": "form",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.list",
+              "name": "list",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.grid",
+              "name": "grid",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.pagination",
+              "name": "pagination",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NU.tree",
+              "name": "tree",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "NA.comm",
+        "NA.cont",
+        "NA.cont.trInit",
+        "NA.cont.trInit.call",
+        "NA.context",
+        "NA.context.attr",
+        "NC.browser",
+        "NC.browser.is",
+        "NC.browser.scrollbarWidth",
+        "NC.date",
+        "NC.date.strToDate",
+        "NC.date.strToDateStrArr",
+        "NC.element",
+        "NC.element.dataChanged",
+        "NC.element.maxZindex",
+        "NC.element.toData",
+        "NC.element.toOpts",
+        "NC.error",
+        "NC.event",
+        "NC.event.disable",
+        "NC.event.isNumberRelatedKeys",
+        "NC.event.whichTransitionEvent",
+        "NC.event.windowScrollLock",
+        "NC.gc",
+        "NC.gc.ds",
+        "NC.isArray",
+        "NC.isEmptyObject",
+        "NC.isNumeric",
+        "NC.isPlainObject",
+        "NC.isString",
+        "NC.json",
+        "NC.json.mapFromKeys",
+        "NC.json.mapFromKeys.apply",
+        "NC.message",
+        "NC.message.get",
+        "NC.message.replaceMsgVars",
+        "NC.string",
+        "NC.string.endsWith",
+        "NC.string.isEmpty",
+        "NC.string.lpad",
+        "NC.string.trimToEmpty",
+        "NC.string.trimToNull",
+        "NC.string.trimToZero",
+        "NC.type",
+        "NC.warn",
+        "ND.ds",
+        "ND.ds.instance",
+        "NU.alert",
+        "NU.alert.resetOffSetEle",
+        "NU.alert.wrapEle",
+        "NU.alert.wrapEle.call",
+        "NU.alert.wrapInputEle",
+        "NU.alert.wrapInputEle.call",
+        "NU.button",
+        "NU.button.wrapEle",
+        "NU.button.wrapEle.call",
+        "NU.datepicker",
+        "NU.datepicker.checkMinMaxDate",
+        "NU.datepicker.checkMinMaxDate.call",
+        "NU.datepicker.createContents",
+        "NU.datepicker.createContents.call",
+        "NU.datepicker.selectItems",
+        "NU.datepicker.wrapEle",
+        "NU.datepicker.wrapEle.call",
+        "NU.datepicker.yearPaging",
+        "NU.form",
+        "NU.grid",
+        "NU.grid.dataFilter",
+        "NU.grid.dataFilter.call",
+        "NU.grid.fixColumn",
+        "NU.grid.fixColumn.call",
+        "NU.grid.fixHeader",
+        "NU.grid.fixHeader.call",
+        "NU.grid.more",
+        "NU.grid.more.call",
+        "NU.grid.paste",
+        "NU.grid.paste.call",
+        "NU.grid.removeColgroup",
+        "NU.grid.removeColgroup.call",
+        "NU.grid.resize",
+        "NU.grid.resize.call",
+        "NU.grid.rowSpan",
+        "NU.grid.rowSpan.call",
+        "NU.grid.setTheadCellInfo",
+        "NU.grid.setTheadCellInfo.call",
+        "NU.grid.sort",
+        "NU.grid.sort.call",
+        "NU.grid.tableCells",
+        "NU.grid.tableMap",
+        "NU.grid.tableMap.call",
+        "NU.grid.vResize",
+        "NU.grid.vResize.call",
+        "NU.list",
+        "NU.list.createScroll",
+        "NU.list.createScroll.call",
+        "NU.list.vResize",
+        "NU.list.vResize.call",
+        "NU.pagination",
+        "NU.pagination.changePageSet",
+        "NU.pagination.wrapEle",
+        "NU.pagination.wrapEle.call",
+        "NU.popup",
+        "NU.popup.loadContent",
+        "NU.popup.loadContent.call",
+        "NU.popup.popOpen",
+        "NU.popup.popOpen.call",
+        "NU.popup.wrapEle",
+        "NU.popup.wrapEle.call",
+        "NU.select",
+        "NU.select.wrapEle",
+        "NU.select.wrapEle.call",
+        "NU.tab",
+        "NU.tab.loadContent",
+        "NU.tab.loadContent.call",
+        "NU.tab.wrapEle",
+        "NU.tab.wrapEle.call",
+        "NU.tab.wrapScroll",
+        "NU.tab.wrapScroll.call",
+        "NU.tree",
+        "NU.ui",
+        "NU.ui.draggable",
+        "NU.ui.draggable.events",
+        "NU.ui.draggable.events.call",
+        "NU.ui.iteration",
+        "NU.ui.iteration.checkAll",
+        "NU.ui.iteration.checkAll.call",
+        "NU.ui.iteration.checkSingle",
+        "NU.ui.iteration.checkSingle.call",
+        "NU.ui.iteration.copy",
+        "NU.ui.iteration.copy.call",
+        "NU.ui.iteration.move",
+        "NU.ui.iteration.move.call",
+        "NU.ui.iteration.render",
+        "NU.ui.iteration.render.call",
+        "NU.ui.iteration.select",
+        "NU.ui.iteration.select.call",
+        "NU.ui.scroll",
+        "NU.ui.scroll.paging",
+        "NU.ui.scroll.paging.call",
+        "NU.ui.utils",
+        "NU.ui.utils.isTextInput",
+        "NU.ui.utils.wrapHandler"
+      ]
+    },
+    {
+      "path": "v1/src/natural.ui.shell.js",
+      "sha256": "0a670f80e1f0c217f80f2d8a80754e56fcdf699a74ddf65aa544e6cac814bf7b",
+      "classes": [
+        {
+          "symbol": "NUS.notify",
+          "members": [
+            {
+              "symbol": "NUS.notify.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NUS.notify.add",
+              "name": "add",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.notify.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.notify.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.notify.prototype.add",
+              "name": "add",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.notify.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "position",
+            "position.top",
+            "position.right",
+            "container",
+            "context",
+            "displayTime",
+            "alwaysOnTop",
+            "html",
+            "alwaysOnTopCalcTarget"
+          ]
+        },
+        {
+          "symbol": "NUS.docs",
+          "members": [
+            {
+              "symbol": "NUS.docs.prototype.constructor",
+              "name": "constructor",
+              "kind": "constructor",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.createLoadIndicator",
+              "name": "createLoadIndicator",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.updateLoadIndicator",
+              "name": "updateLoadIndicator",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.removeLoadIndicator",
+              "name": "removeLoadIndicator",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.errorLoadIndicator",
+              "name": "errorLoadIndicator",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.wrapEle",
+              "name": "wrapEle",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.wrapScroll",
+              "name": "wrapScroll",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.clearScrollPosition",
+              "name": "clearScrollPosition",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.loadContent",
+              "name": "loadContent",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.closeBtnControl",
+              "name": "closeBtnControl",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.inactivateTab",
+              "name": "inactivateTab",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.activateTab",
+              "name": "activateTab",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.showTabContents",
+              "name": "showTabContents",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.hideTabContents",
+              "name": "hideTabContents",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.remove",
+              "name": "remove",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs.prototype.context",
+              "name": "context",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.add",
+              "name": "add",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.active",
+              "name": "active",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.removeState",
+              "name": "removeState",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.remove",
+              "name": "remove",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.doc",
+              "name": "doc",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.cont",
+              "name": "cont",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.docs.prototype.reload",
+              "name": "reload",
+              "kind": "method",
+              "static": false
+            }
+          ],
+          "literal_constructor_option_keys": [
+            "context",
+            "multi",
+            "maxStateful",
+            "maxTabs",
+            "addLast",
+            "tabScroll",
+            "closeAllRedirectURL",
+            "tabScrollCorrection",
+            "tabScrollCorrection.rightCorrectionPx",
+            "msgContext",
+            "entireLoadIndicator",
+            "entireLoadScreenBlock",
+            "entireLoadExcludeURLs",
+            "entireLoadRequestCnt",
+            "entireLoadRequestMaxCnt",
+            "onBeforeLoad",
+            "onLoad",
+            "onBeforeEntireLoad",
+            "onErrorEntireLoad",
+            "onEntireLoad",
+            "onBeforeActive",
+            "onActive",
+            "onBeforeInactive",
+            "onInactive",
+            "onBeforeRemoveState",
+            "onRemoveState",
+            "onBeforeRemove",
+            "onRemove",
+            "saveHistory",
+            "docs",
+            "alwaysOnTop",
+            "alwaysOnTopCalcTarget",
+            "order",
+            "loadedDocId"
+          ]
+        },
+        {
+          "symbol": "NUS",
+          "members": [
+            {
+              "symbol": "NUS.prototype.notify",
+              "name": "notify",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.prototype.docs",
+              "name": "docs",
+              "kind": "method",
+              "static": false
+            },
+            {
+              "symbol": "NUS.notify",
+              "name": "notify",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NUS.docs",
+              "name": "docs",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "NA.comm",
+        "NA.comm.request",
+        "NA.comm.resetFilterConfig",
+        "NA.cont",
+        "NA.cont.trInit",
+        "NA.cont.trInit.call",
+        "NA.context",
+        "NA.context.attr",
+        "NC.browser",
+        "NC.browser.is",
+        "NC.element",
+        "NC.element.maxZindex",
+        "NC.error",
+        "NC.event",
+        "NC.event.getMaxDuration",
+        "NC.event.whichTransitionEvent",
+        "NC.isEmptyObject",
+        "NC.isWrappedSet",
+        "NC.message",
+        "NC.message.get",
+        "NC.string",
+        "NC.string.startsWith",
+        "NC.string.trimToZero",
+        "NC.type",
+        "NC.warn",
+        "NU.ui",
+        "NU.ui.draggable",
+        "NU.ui.draggable.events",
+        "NU.ui.draggable.events.call",
+        "NUS.docs",
+        "NUS.docs.activateTab",
+        "NUS.docs.activateTab.call",
+        "NUS.docs.clearScrollPosition",
+        "NUS.docs.clearScrollPosition.call",
+        "NUS.docs.closeBtnControl",
+        "NUS.docs.closeBtnControl.call",
+        "NUS.docs.createLoadIndicator",
+        "NUS.docs.createLoadIndicator.call",
+        "NUS.docs.errorLoadIndicator",
+        "NUS.docs.errorLoadIndicator.call",
+        "NUS.docs.hideTabContents",
+        "NUS.docs.hideTabContents.call",
+        "NUS.docs.inactivateTab",
+        "NUS.docs.inactivateTab.call",
+        "NUS.docs.loadContent",
+        "NUS.docs.loadContent.call",
+        "NUS.docs.remove",
+        "NUS.docs.remove.call",
+        "NUS.docs.removeLoadIndicator",
+        "NUS.docs.removeLoadIndicator.call",
+        "NUS.docs.showTabContents",
+        "NUS.docs.showTabContents.call",
+        "NUS.docs.updateLoadIndicator",
+        "NUS.docs.updateLoadIndicator.call",
+        "NUS.docs.wrapEle",
+        "NUS.docs.wrapEle.call",
+        "NUS.docs.wrapScroll",
+        "NUS.docs.wrapScroll.call",
+        "NUS.notify",
+        "NUS.notify.wrapEle",
+        "NUS.notify.wrapEle.call"
+      ]
+    },
+    {
+      "path": "v1/src/natural.template.js",
+      "sha256": "61c4b67e2a018e9fa18f8d8f5960400a66a1dbea58deb3ccedbe1d3702d65642",
+      "classes": [
+        {
+          "symbol": "NT.aop",
+          "members": [
+            {
+              "symbol": "NT.aop.codes",
+              "name": "codes",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NT.aop.template",
+              "name": "template",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NT.aop.components",
+              "name": "components",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NT.aop.events",
+              "name": "events",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NT",
+          "members": [
+            {
+              "symbol": "NT.aop",
+              "name": "aop",
+              "kind": "ClassExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "N.template",
+        "NA.context",
+        "NA.context.attr",
+        "NC.browser",
+        "NC.browser.is",
+        "NC.error",
+        "NC.message",
+        "NC.message.get",
+        "NC.string",
+        "NC.string.startsWith",
+        "NC.type",
+        "NC.warn",
+        "NT.aop",
+        "NT.aop.components",
+        "NT.aop.events",
+        "NT.aop.template"
+      ]
+    },
+    {
+      "path": "v1/src/natural.code.js",
+      "sha256": "20da68c7c6e893708e5fdaeef3e3a4484bdc755d50f6535a30443d17c3c58a46",
+      "classes": [
+        {
+          "symbol": "NCD.inspection",
+          "members": [
+            {
+              "symbol": "NCD.inspection.test",
+              "name": "test",
+              "kind": "FunctionExpression",
+              "static": true
+            },
+            {
+              "symbol": "NCD.inspection.rules",
+              "name": "rules",
+              "kind": "ObjectExpression",
+              "static": true
+            },
+            {
+              "symbol": "NCD.inspection.report",
+              "name": "report",
+              "kind": "ObjectExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        },
+        {
+          "symbol": "NCD",
+          "members": [
+            {
+              "symbol": "NCD.severityLevels",
+              "name": "severityLevels",
+              "kind": "CallExpression",
+              "static": true
+            },
+            {
+              "symbol": "NCD.inspection",
+              "name": "inspection",
+              "kind": "ClassExpression",
+              "static": true
+            },
+            {
+              "symbol": "NCD.addSourceURL",
+              "name": "addSourceURL",
+              "kind": "FunctionExpression",
+              "static": true
+            }
+          ],
+          "literal_constructor_option_keys": []
+        }
+      ],
+      "static_reference_expressions": [
+        "N.code",
+        "NA.context",
+        "NA.context.attr",
+        "NC.browser",
+        "NC.browser.is",
+        "NC.error",
+        "NC.log",
+        "NC.message",
+        "NC.message.get",
+        "NC.string",
+        "NC.string.isEmpty",
+        "NC.string.startsWith",
+        "NC.string.trimToEmpty",
+        "NC.warn"
+      ]
+    }
+  ]
+}

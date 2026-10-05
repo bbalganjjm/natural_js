@@ -105,10 +105,18 @@ sources:
     resource: ../../tests/rules.test.ts
     title: Declarative dispatch and combined-name checks
     git_blob: 70f1881b500b99c138c04c834258ed57eb6021be
-generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+  - id: parity
+    resource: ../implementation/feature-parity.md
+    title: Required 1.x framework behavior and current 2.0 gaps
+    git_blob: 33b2dbf0b732e005a46fa997fc44de65ca9c7fde
+  - id: parity-plan
+    resource: ../implementation/feature-parity-plan.md
+    title: Full framework feature coverage execution plan
+    git_blob: 821e6b9d0ffc7f9bef29b0690790f79be2bb6d67
+generated: { by: codex/gpt-6, at: 2026-10-05T09:51:49Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+  - { by: codex/gpt-6, at: 2026-10-05T09:51:49Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -125,6 +133,8 @@ Migrate one screen by keeping its authored HTML and CVC roles, then replace impl
 | `N.popup.open(data)`/`cont.caller.close(result)`; `tab.open(index, data)` | `openPopup(dialog, definition, input)`/page `output(result)`; `bindTabs` keyed pages |
 
 The root package is ESM and exposes `./page`, `./data`, `./ui`, and `./comm`. It has no jQuery or global `N` entry.[^package][^ui]
+
+The migration target includes all 1.x framework capabilities. The working APIs below describe the current implementation; selected milestone completion does not establish full feature coverage. Use the [feature coverage ledger](../implementation/feature-parity.md) and [execution plan](../implementation/feature-parity-plan.md) for required gaps and pending retirement review. No supported behavior is excluded before the user approves a consolidated retirement proposal.[^parity][^parity-plan]
 
 # Prerequisites
 
@@ -205,7 +215,9 @@ This is an abridged flow from `examples/vite/m4/employees.ts`; the full file han
 [{ "status": "update", "value": { "id": "E-101", "email": "ada@example.com" } }]
 ```
 
-The JSON above shows the 2.0 envelope shape, not the full M4 fixture. Adapt an existing server that expects a 1.x row with embedded `rowStatus`; the framework does not convert it. `RowId` stays out of the body, while a business `value.id` remains available. Form formatting changes display text only, so the payload contains raw typed values. The exact M4 body is [expected-save.json](../../examples/vite/m4/expected-save.json).[^rows][^employee][^comm]
+The JSON above shows the 2.0 envelope shape, not the full M4 fixture. Adapt an existing server that expects a 1.x row with embedded `rowStatus`; current createCommunicator does not automatically convert legacy payloads. `RowId` stays out of the body, while a business `value.id` remains available. Form formatting changes display text only, so the payload contains raw typed values. The exact M4 body is [expected-save.json](../../examples/vite/m4/expected-save.json).[^rows][^employee][^comm]
+
+Tested migration recipes for the old default POST, GET q=JSON, dataIsArray and rowStatus payload workflows remain required gaps C05/C10. This M4 JSON POST example does not cover the complete legacy protocol range; the coverage review must preserve those server workflows without introducing a generic convenience library.[^parity][^parity-plan]
 
 ## 4. Move rules without dropping Form behavior
 
@@ -216,7 +228,7 @@ Keep the 1.x JSON tuple syntax on fields: `data-format='[["commas"]]'` and `data
 | Custom validation | `rules: { validate: { companyEmail: value => value.endsWith("@example.com") || "Use a company email." } }`, as in M4. |
 | Numeric display | `data-format='[["commas"]]'` plus an application `parse` for a numeric raw field; a displayed comma is never stored in `Rows`. |
 | Cross-field `equalTo` | `[["equalTo","profile.password"]]` compares with the same row's safe `data-field` path. A 1.x jQuery selector argument such as `"#password"` must be changed. |
-| Date and mask | Formatter rules remain display-only. The 1.x date rule's optional custom datepicker attachment is deferred; native date controls or authored UI are application choices now. |
+| Date and mask | Current formatter rules remain display-only and do not attach a calendar. Explicit `bindDatePicker` and Form input events provide the current integration. The 1.x formatter-declared picker attachment remains a required gap in the feature coverage ledger. |
 
 | Retained family | Reachable path | Focused check |
 |---|---|---|
@@ -247,16 +259,20 @@ The 1.x popup used `open(row)` and a popup controller's `cont.caller.close(resul
 
 The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, input)` for each opening. Its `bindTabs` call supplies factories for all three authored keys: People and Preview mount the picker, while Help mounts its inline page. A Tabs binder with only a People factory would require markup containing only that key. It awaits Popup `result` before another opening, accepts `undefined` for ordinary cancel, and disposes the opening, Tabs, and main page before removing a workspace. The same picker definition also mounts in main content; every picker mount gets its own controller and scoped root. On workspace removal, the M7 caller returns focus to Add screen and ignores expected cancellation of pending main or Tab readiness. Popup result cancellation remains a separate reported path.[^containers][^containers-view][^page][^containers-test]
 
-## 6. Classify the remaining 1.x helpers
+## 6. Classify remaining framework behavior and helper dependencies
 
 | Boundary | 1.x examples | Migration |
 |---|---|---|
 | Browser and JavaScript APIs | `N()`/jQuery selectors and events, `N.button`, plain `N.alert`, generic `N.ajax`, simple string/array/date operations | Use scoped DOM queries, `addEventListener`, native buttons/dialogs, `fetch` through `createCommunicator` when its cancellation and hooks help, and standard JavaScript operations. |
-| Framework shell | `N.notify`, `N.docs` | Use bindNotify/bindDocuments with authored templates, explicit page factories and beforeClose. Keep routing, translations, timers and whole-app loading policy in application code. |
-| Application implementation | `N.context` app settings, generic `N.message`/locale lookup, `N.data` filter/sort, Natural-TEMPLATE `p.`/`c.`/`e.` declarations, API envelopes | Keep these decisions in the page or application: explicit options, localization, predicates/comparators, direct functions, and server conversion. |
-| Discontinued behavior | `N.data.filter` string conditions evaluated as code, global `N.gc`, generic controller AOP and runtime string declaration parsing, optional `N.code` inspection | Rewrite as explicit predicates, owned cleanup, controller methods, and normal source inspection; there is no 2.0 compatibility entry. |
+| Framework shell | `N.notify`, `N.docs` | Current bindNotify/bindDocuments support authored templates, explicit page factories and beforeClose. Notification expiry/actions/rich content, document capacity/state eviction, and aggregate request progress/blocking remain required gaps; current application compositions do not retire those framework capabilities. |
+| Current explicit application integrations | `N.context` app settings, generic `N.message`/locale lookup, `N.data` filter/sort, Natural-TEMPLATE `p.`/`c.`/`e.` declarations, API envelopes | Current examples use explicit options, application translations, predicates/comparators, direct functions and server conversion. Framework-reachable configuration, message lookup and declaration behavior still require the coverage review; this row is not an approved exclusion. |
+| Changed mechanisms and required review | `N.data.filter` string conditions evaluated as code, global `N.gc`, generic controller AOP and runtime string declaration parsing, optional `N.code` inspection | Current APIs use explicit predicates, owned cleanup and controller methods, with no 2.0 compatibility entry. Safe equivalents of declaration behavior, cross-cutting hooks and inspection remain required gaps or pending retirement items. Preserve explicit ESM controllers and the current refusal to execute unsafe HTML. |
 
-Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. The current Grid also accepts optional `initialPage: { page, size }` for a bounded first render of a large local `Rows` store. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. M12 adds persistent [Notify](notify.md) messages and dynamic [Documents](documents.md) with keyed page reuse, an application close guard and explicit reload. The [shell example](shell-example.md) composes those binders with the existing page runtime. Cascading tree checks and unselected advanced Grid features remain later work.[^package][^ui][^rules][^formats][^validators]
+Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. The current Grid also accepts optional `initialPage: { page, size }` for a bounded first render of a large local `Rows` store. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. M12 adds persistent [Notify](notify.md) messages and dynamic [Documents](documents.md) with keyed page reuse, an application close guard and explicit reload. The [shell example](shell-example.md) composes those binders with the existing page runtime.[^package][^ui][^rules][^formats][^validators]
+
+Cascading Tree checks, month-only/holiday DatePicker behavior, editable and multiple-selection Lists, complete contextual Alert behavior, retained/preloaded Popup and Tab policies and the shell gaps above remain required additions. Column resize, reorder, hide/show, multiple row selection, bulk paste and real scroll virtualization are also unimplemented and required before release. Follow the [coverage ledger](../implementation/feature-parity.md) for their exact status and the [execution plan](../implementation/feature-parity-plan.md) for implementation order; these capabilities are not implemented by the existing examples.[^parity][^parity-plan]
+
+An unused helper unrelated to framework behavior may be removed after checking direct and indirect reachability, including authored declarations, configuration, callbacks and shared row forms. That dependency cleanup is separate from excluding supported behavior. A feature retirement requires one consolidated user approval; pending candidates remain support obligations until approved. Native browser APIs, authored CSS and typed callbacks can replace legacy mechanisms only when their required behavior is preserved and verified.[^parity][^parity-plan]
 
 # Verify
 
@@ -275,7 +291,7 @@ In M4, a valid save sends only the changed raw rows matching `examples/vite/m4/e
 - `Rows.replace()` gives new IDs and clears prior changes; keep durable business identifiers in `value`, and never send store-local IDs as business keys.[^rows]
 - `mountPage` does not run scripts embedded in fetched HTML. Move controller code into an ESM module, and keep repeated markup free of fixed IDs. It rejects duplicate IDs and unsafe executable HTML.[^page]
 - A Popup result settles after close and cleanup. Await `result` before reopening its dialog; pass a fresh view factory or URL when a definition can be mounted more than once.[^page][^containers]
-- The 2.0 rule engine retains built-in names but does not promise to reproduce 1.x defects or mutable global rule registration. Check rule arguments and intentional differences in [Form](form.md) before copying a declaration.[^form][^rules]
+- The 2.0 rule engine retains built-in names and corrects documented 1.x defects; current custom overrides use per-binding `RuleSet`. Check rule arguments and current differences in [Form](form.md) before copying a declaration. Any other framework-reachable rule configuration remains subject to the coverage review.[^form][^rules][^parity]
 
 # Next
 
@@ -306,3 +322,5 @@ Use [page](page.md), [Rows](data.md), [Form](form.md), [communication](comm.md),
 [^format-test]: Retained formatter catalog and mask/date checks
 [^validator-test]: Retained validator catalog, byte, and equalTo checks
 [^rules-test]: Declarative dispatch and combined-name checks
+[^parity]: Required 1.x framework behavior and current 2.0 gaps
+[^parity-plan]: Full framework feature coverage execution plan

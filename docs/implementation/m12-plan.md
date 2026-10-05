@@ -8,7 +8,7 @@ sources:
   - id: m11
     resource: m11-plan.md
     title: Completed M11 contract and verification
-    git_blob: 995067f23917286a98ddfb6c644752f3df1a1960
+    git_blob: 9e17e3e9105eb359f364760c551a3caaa4094d7d
   - id: page
     resource: ../../src/page/index.ts
     title: Existing CVC runtime
@@ -47,9 +47,9 @@ sources:
     resource: evidence/m12-verification.json
     title: Frozen M12 source, artifact, browser logs and audit limits
     git_blob: a9ff996758f319cc69209880debfcc69907d10c9
-generated: { by: codex/gpt-6, at: 2026-10-05T08:58:30Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T09:51:27Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T08:58:30Z }
+  - { by: codex/gpt-6, at: 2026-10-05T09:51:27Z }
 ---
 
 The user authorized committing/pushing the current state and proceeding to M12 on 2026-10-05. M11 commit a7bb7f5 is already on 2.0.0-alpha.0; no substantive pending changes were found. The copied Git index reports unchanged LF files as modified; only normalized content changes belong in a commit. The original untracked js lockfile remains outside this task.
@@ -60,7 +60,7 @@ Complete the selected shell behaviors with concise TypeScript APIs, authored HTM
 
 # Checkpoint
 
-M12 is complete. M11 and its evidence were independently inspected before implementation; no conflicting CVC, Rows, UI or package contract was found. The detailed scope was recorded before source changes. Notify, Documents, the private coordinator and the two-layout CVC shell passed the final source and package gates below. The exact artifact contains 128 files and no runtime dependency; v1/master remain unchanged.
+The selected M12 scope is complete. M11 and its evidence were independently inspected before implementation; no conflicting CVC, Rows, UI or package contract was found. The detailed scope was recorded before source changes. Notify, Documents, the private coordinator and the two-layout CVC shell passed the final source and package gates below. The exact artifact contains 128 files and no runtime dependency; v1/master remain unchanged. The 2026-10-05 [full feature plan](feature-parity-plan.md) reopens uncovered legacy shell behavior; exclusions below describe this historical slice and do not authorize dropping that behavior from the expanded release scope.
 
 # Steps
 

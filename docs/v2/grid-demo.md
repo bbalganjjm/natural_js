@@ -25,12 +25,15 @@ sources:
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
     git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
-generated: { by: codex/gpt-6-sol, at: 2026-09-25T00:41:13Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
+  - { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
+
+The expanded `2.0.0` scope requires column resize/reorder/hide/show, multiple row selection, atomic bulk paste, real scroll virtualization, and the remaining 1.x Grid user features before release. These additions are not implemented or demonstrated here yet. The [feature parity ledger](../implementation/feature-parity.md) records the gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines the contract-review and release gates. Extend this same demo as each required feature is implemented and tested; the current demo's coverage is not a claim of complete 1.x parity.
 
 # Scenario
 
@@ -84,8 +87,10 @@ The earlier [two-layout Grid example](advanced-grid-example.md) tests MDI isolat
 
 # Pitfalls
 
-Column resize, reorder, hide/show, bulk paste, multi-selection, and virtualization are *later candidates*, not current Grid options. The demo names them without working controls. Without `initialPage`, it creates all initial row clones before the first local page request. Choosing an initial page bounds the first render, but this small six-row fixture is not evidence of large-data performance; the separate [M10 measurement](../implementation/m10-plan.md) uses 5,000 rows. Changing the locale uses dispose/rebind and discards selection and uncommitted drafts; commit or review them first. Do not send `RowId` as a business key or put a fixed `id` in a repeated row.[^grid][^controller]
+Column resize, reorder, hide/show, bulk paste, multiple row selection, and real virtualization are required before release and currently unavailable. They have no working controls in this demo or current Grid options. Their earlier description as later candidates records the previous selected scope; it is not the current policy. The [M10 plan](../implementation/m10-plan.md) schedules column state in M10.5, selection/check/filter in M10.6, atomic bulk paste in M10.7, virtualization in M10.8, and remaining Grid parity in M10.9.
+
+Without `initialPage`, the current Grid creates all initial row clones before the first local page request. Choosing an initial page bounds the first render; local paging and releasing offscreen records do not provide real scroll virtualization. This small six-row fixture is not evidence of large-data performance; the separate [M10 measurement](../implementation/m10-plan.md) uses 5,000 rows. Changing the locale uses dispose/rebind and discards selection and uncommitted drafts; commit or review them first. Do not send `RowId` as a business key or put a fixed `id` in a repeated row.[^grid][^controller]
 
 # Related
 
-[Grid](grid.md) defines exact public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) records performance and future-operation gates.
+[Grid](grid.md) defines exact current public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) preserves earlier measurements and defines the required follow-up stages. The [feature parity ledger](../implementation/feature-parity.md) and [parity implementation plan](../implementation/feature-parity-plan.md) track the full release requirement.

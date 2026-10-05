@@ -8,7 +8,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Migration roadmap
-    git_blob: d00f23ad20e7f2d4df4469eb78a248734dadd3b8
+    git_blob: b99c9a254693cebb6886a114e0dc775957b3d80e
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI entry
@@ -39,9 +39,9 @@ sources:
   - id: date-pattern
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/
     title: WAI-ARIA date picker keyboard example
-generated: { by: codex/gpt-6, at: 2026-10-05T07:43:45Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T09:51:16Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:45Z }
+  - { by: codex/gpt-6, at: 2026-10-05T09:51:16Z }
 ---
 
 M11 adds small HTML-bound Tree and DatePicker components after the completed M10 slices. The user authorized implementation on 2026-10-05 and later authorized restoring an external Vite initialization. Implemented contracts live in separate draft component concepts.
@@ -52,7 +52,7 @@ Preserve CVC, authored HTML/CSS, caller-owned Rows, safe nested text binding, re
 
 # Checkpoint
 
-M11 is complete. Runtime, authored two-layout CVC example, browser tests and draft concepts passed independent review and recovery validation. Source/tests were preserved before restoring externally deleted Git, docs, examples, build and caches; the regenerated package is byte-identical to the initial tested artifact.
+The selected M11 scope below is complete. Runtime, authored two-layout CVC example, browser tests and draft concepts passed independent review and recovery validation. Source/tests were preserved before restoring externally deleted Git, docs, examples, build and caches; the regenerated package is byte-identical to the initial tested artifact. The 2026-10-05 [full feature plan](feature-parity-plan.md) reopens uncovered legacy Tree/calendar behavior; historical exclusions below do not authorize omitting it from the expanded release scope.
 
 # Steps
 

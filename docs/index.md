@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 full feature implementation plan](implementation/feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)
+
 * [Application shell in two CVC layouts](v2/shell-example.md) - Compose independent document workspaces, persistent notifications, shared Form data and Popup with one CVC editor definition. (draft)
 
 * [Tree and DatePicker in two CVC layouts](v2/tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
