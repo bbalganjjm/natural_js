@@ -4,16 +4,16 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, ListHandle, GridHandle]
+symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, ListHandle, GridHandle]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
-generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
+generated: { by: codex/gpt-6, at: 2026-10-05T11:42:46Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+  - { by: codex/gpt-6, at: 2026-10-05T11:43:54Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -40,9 +40,12 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `FormHandle<T>` | `bind`, `read`, `validate`, `dispose` | Form handle |
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
-| `GridHandle<T>` | Selection, sort, filter, page, validation, disposal | Grid handle |
+| `GridColumn` | Readonly `key`, optional positive preferred `width`, optional `hidden` | Column state |
+| `GridHandle<T>` | Column state, selection, sort, filter, page, validation, disposal | Grid handle |
 
 # Pitfalls
+
+A `GridColumn.key` identifies an authored column; it is independent of a data field path or DOM ID. Read `grid.columns()` and replace the whole immutable state through `setColumns`. Widths are CSS-pixel preferences under native table constraints. Group members remain contiguous and one column stays visible; see [Grid](grid.md) for topology, callbacks and keyboard rules.[^ui]
 
 A `PageRequest` does not carry `total`; read `list.page()` or `grid.page()` after a local slice and pass that `PageState` to Pagination. The page index is one-based; an empty result has `page: 1` and `pages: 0`.[^ui]
 

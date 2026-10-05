@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 33b2dbf0b732e005a46fa997fc44de65ca9c7fde
+    git_blob: 32ebcf498bbdf86a2cb077112e4e86376c72b738
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,11 +16,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: e3c632005ad396fc6aa2992e84fb066893df0d49
+    git_blob: 2eba6862bd0b7fb40be5358f79033e72ad4d4b59
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: bdcb4f923e823f922fea6ba2b860ed6b04107595
+    git_blob: ca1e22aebe896989f1d74ec776743c323add4263
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -28,14 +28,14 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
+    git_blob: d606737eaa4d51860407c50b4d3ba2f378739ed3
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
     git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
-generated: { by: codex/gpt-6, at: 2026-10-05T09:51:37Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T11:52:37Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T09:51:37Z }
+  - { by: codex/gpt-6, at: 2026-10-05T11:53:19Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -50,6 +50,8 @@ Complete framework behavior through consistent, readable TypeScript while preser
 - The initial coverage ledger has 60 behavior families. Its eight-file AST checklist records 43 classes, 394 members and 338 literal constructor option keys. Neither count proves exhaustive behavior coverage; merged defaults, dynamic declarations, aliases and callback ordering need P0 closure.[^coverage]
 - No proposed feature omission is approved. Previously deferred/excluded behavior must be reconciled with the latest instruction. Already approved TS/ESM, new API naming, jQuery removal, unique IDs, root Apache-2.0 and preserved LGPL v1 do not need approval again.
 - Release-candidate preparation is blocked by required feature gaps. npm publication and release tags additionally require personal testing and a later explicit request. Only real macOS/iOS Safari is outside browser scope; available Windows engines remain required.
+
+M10.5 now implements authored column state and controls; [its detailed plan](m10-columns-plan.md) records the contract and gates. The detailed evidence maps all 775 checklist entries across core/Grid/other UI and shell, with 53 identified dynamic path groups; structural coverage is checked, while semantic/dynamic closure remains open. Continue that closure alongside M10.6 and prepare the single omission proposal; no candidate omission has been applied. Historical measurements retain their original source/artifact identities.[^coverage]
 
 # Steps
 
@@ -113,7 +115,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Complete P0's per-surface/dynamic mapping and the one consolidated omission proposal. In parallel prepare M10.5's representative authored HTML/TS and exact column-state contract, coordinating row-group/viewport constraints with shared foundations. No new public API is implemented by this document.
+Continue P0 Grid/UI and dynamic semantic closure, and prepare the one consolidated omission proposal after the inventory is complete. M10.5 gates are complete; plan M10.6 multiple selection/check/filter with shared row/control dependencies, representative HTML/TS, failure semantics and tests. Preserve remaining stages and publication deferral.
 
 # Decisions
 

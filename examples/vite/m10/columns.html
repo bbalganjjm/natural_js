@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Natural-JS Grid columns in two CVC layouts</title>
+  <link rel="stylesheet" href="./columns.css">
+  <script type="module" src="./columns.ts"></script>
+</head>
+<body>
+  <main>
+    <header class="site-header">
+      <p>Natural-JS 2.0 · authored Grid columns</p>
+      <h1>Two independent column layouts</h1>
+      <p>Each layout uses the same CVC controller and a separate Rows store. Change widths, visibility and order without moving row identity or raw data.</p>
+      <p><a href="./demo.html">Open the full Grid contract demo</a></p>
+    </header>
+    <div class="screens"><div data-column-host="ledger"></div><div data-column-host="notebook"></div></div>
+  </main>
+
+  <template data-column-screen="ledger">
+    <section class="column-page ledger" data-column-layout="ledger" aria-label="Ledger column workspace">
+      <header><p class="eyebrow">Layout one · horizontal controls</p><h2>Assignment ledger</h2></header>
+      <div class="workspace">
+        <fieldset class="column-controls">
+          <legend>Ledger columns</legend>
+          <label>Column <select data-column-choice data-needs-grid>
+            <option value="name">Employee</option><option value="email">Email</option><option value="phone">Phone</option>
+            <option value="team">Team</option><option value="shift">Shift</option><option value="active">Active</option>
+            <option value="notes">Notes</option><option value="salary">Salary</option>
+          </select></label>
+          <label>Preferred width (CSS pixels) <input type="number" min="1" step="1" data-column-width data-needs-grid></label>
+          <label class="check"><input type="checkbox" data-column-hidden data-needs-grid> Hide column</label>
+          <div class="actions">
+            <button type="button" data-column-action="apply" data-needs-grid>Apply</button>
+            <button type="button" data-column-action="earlier" data-needs-grid>Earlier in group</button>
+            <button type="button" data-column-action="later" data-needs-grid>Later in group</button>
+            <button type="button" data-column-action="swap" data-needs-grid>Swap groups</button>
+            <button type="button" data-column-action="reset" data-needs-grid>Reset columns</button>
+            <button type="button" data-column-action="invalid" data-needs-grid>Try duplicate key</button>
+          </div>
+          <p>Header resize: drag, Left/Right ±10, Shift ±1, Home restores initial width.</p>
+        </fieldset>
+        <section class="table-panel" aria-label="Ledger table and row actions">
+          <div class="view-actions">
+            <button type="button" data-column-action="sort" data-needs-grid>Sort by name</button>
+            <button type="button" data-column-action="filter" data-needs-grid>Toggle Platform filter</button>
+            <button type="button" data-column-action="page" data-needs-grid>Toggle local page</button>
+            <button type="button" data-column-action="validate" data-needs-grid>Validate all rows</button>
+            <button type="button" data-column-action="dispose" data-needs-grid>Dispose Grid</button>
+            <button type="button" data-column-action="rebind">Bind again</button>
+          </div>
+          <div class="grid-scroll" role="region" aria-label="Scrollable ledger assignments" tabindex="0">
+            <table data-grid>
+              <caption>Ledger: Contact precedes Assignment</caption>
+              <colgroup span="1" class="employee-columns"></colgroup>
+              <colgroup span="2" class="contact-columns"></colgroup>
+              <colgroup span="4" class="assignment-columns"></colgroup>
+              <colgroup span="1" class="salary-columns"></colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2" data-column="name" aria-sort="none">Employee <button type="button" data-resize-column="name" data-needs-grid aria-label="Resize ledger Employee column">↔</button></th>
+                  <th scope="colgroup" colspan="2" data-columns="email phone">Contact</th>
+                  <th scope="colgroup" colspan="4" data-columns="team shift active notes">Assignment</th>
+                  <th scope="col" rowspan="2" data-column="salary">Salary <button type="button" data-resize-column="salary" data-needs-grid aria-label="Resize ledger Salary column">↔</button></th>
+                </tr>
+                <tr>
+                  <th scope="col" data-column="email">Email <button type="button" data-resize-column="email" data-needs-grid aria-label="Resize ledger Email column">↔</button></th>
+                  <th scope="col" data-column="phone">Phone <button type="button" data-resize-column="phone" data-needs-grid aria-label="Resize ledger Phone column">↔</button></th>
+                  <th scope="col" data-column="team">Team <button type="button" data-resize-column="team" data-needs-grid aria-label="Resize ledger Team column">↔</button></th>
+                  <th scope="col" data-column="shift">Shift <button type="button" data-resize-column="shift" data-needs-grid aria-label="Resize ledger Shift column">↔</button></th>
+                  <th scope="col" data-column="active">Active <button type="button" data-resize-column="active" data-needs-grid aria-label="Resize ledger Active column">↔</button></th>
+                  <th scope="col" data-column="notes">Notes <button type="button" data-resize-column="notes" data-needs-grid aria-label="Resize ledger Notes column">↔</button></th>
+                </tr>
+              </thead>
+              <tbody><tr data-row-template>
+                <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name"></span></button></th>
+                <td data-column="email"><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
+                <td data-column="phone" data-field="phone"></td>
+                <td data-column="team"><label>Team <input data-field="profile.team" required></label></td>
+                <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts" data-option-label="label" data-option-value="code" required><option value="">Choose</option></select></label><output data-error-for="assignment.chosen"></output></td>
+                <td data-column="active"><label><input type="checkbox" data-field="active"> Active</label></td>
+                <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
+                <td data-column="salary"><label>Salary <input data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output></td>
+              </tr></tbody>
+              <tfoot><tr>
+                <th scope="row" data-column="name">Ledger fields</th>
+                <td colspan="2" data-columns="email phone">Contact details</td>
+                <td colspan="4" data-columns="team shift active notes">Assignment details</td>
+                <td data-column="salary">Raw salary</td>
+              </tr></tfoot>
+            </table>
+          </div>
+        </section>
+      </div>
+      <output data-column-status role="status">Loading ledger.</output>
+      <div class="observations">
+        <section><h3>Current columns</h3><pre data-columns-state tabindex="0"></pre></section>
+        <section><h3>Selection and raw changes</h3><pre data-row-state tabindex="0"></pre></section>
+      </div>
+      <p>Column callback: <output data-column-callback>Not fired yet.</output></p>
+    </section>
+  </template>
+
+  <template data-column-screen="notebook">
+    <article class="column-page notebook" data-column-layout="notebook" aria-label="Notebook column workspace">
+      <header><p class="eyebrow">Layout two · side controls</p><h2>Team notebook</h2></header>
+      <div class="workspace">
+        <section class="table-panel" aria-label="Notebook table and row actions">
+          <div class="view-actions">
+            <button type="button" data-column-action="sort" data-needs-grid>Sort by name</button>
+            <button type="button" data-column-action="filter" data-needs-grid>Toggle Platform filter</button>
+            <button type="button" data-column-action="page" data-needs-grid>Toggle local page</button>
+            <button type="button" data-column-action="validate" data-needs-grid>Validate all rows</button>
+            <button type="button" data-column-action="dispose" data-needs-grid>Dispose Grid</button>
+            <button type="button" data-column-action="rebind">Bind again</button>
+          </div>
+          <div class="grid-scroll" role="region" aria-label="Scrollable notebook assignments" tabindex="0">
+            <table data-grid>
+              <caption>Notebook: Assignment precedes Contact</caption>
+              <colgroup class="employee-columns"><col style="width: 180px"></colgroup>
+              <colgroup class="assignment-columns"><col span="4" style="width: 160px"></colgroup>
+              <colgroup class="contact-columns"><col span="2" style="width: 220px"></colgroup>
+              <colgroup class="salary-columns"><col style="width: 140px"></colgroup>
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2" data-column="name" aria-sort="none">Employee <button type="button" data-resize-column="name" data-needs-grid aria-label="Resize notebook Employee column">↔</button></th>
+                  <th scope="colgroup" colspan="4" data-columns="team shift active notes">Assignment</th>
+                  <th scope="colgroup" colspan="2" data-columns="email phone">Contact</th>
+                  <th scope="col" rowspan="2" data-column="salary">Salary <button type="button" data-resize-column="salary" data-needs-grid aria-label="Resize notebook Salary column">↔</button></th>
+                </tr>
+                <tr>
+                  <th scope="col" data-column="team">Team <button type="button" data-resize-column="team" data-needs-grid aria-label="Resize notebook Team column">↔</button></th>
+                  <th scope="col" data-column="shift">Shift <button type="button" data-resize-column="shift" data-needs-grid aria-label="Resize notebook Shift column">↔</button></th>
+                  <th scope="col" data-column="active">Active <button type="button" data-resize-column="active" data-needs-grid aria-label="Resize notebook Active column">↔</button></th>
+                  <th scope="col" data-column="notes">Notes <button type="button" data-resize-column="notes" data-needs-grid aria-label="Resize notebook Notes column">↔</button></th>
+                  <th scope="col" data-column="email">Email <button type="button" data-resize-column="email" data-needs-grid aria-label="Resize notebook Email column">↔</button></th>
+                  <th scope="col" data-column="phone">Phone <button type="button" data-resize-column="phone" data-needs-grid aria-label="Resize notebook Phone column">↔</button></th>
+                </tr>
+              </thead>
+              <tbody><tr data-row-template>
+                <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name"></span></button></th>
+                <td data-column="team"><label>Team <input data-field="profile.team" required></label></td>
+                <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts" data-option-label="label" data-option-value="code" required><option value="">Choose</option></select></label><output data-error-for="assignment.chosen"></output></td>
+                <td data-column="active"><label><input type="checkbox" data-field="active"> Active</label></td>
+                <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
+                <td data-column="email"><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
+                <td data-column="phone" data-field="phone"></td>
+                <td data-column="salary"><label>Salary <input data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output></td>
+              </tr></tbody>
+              <tfoot><tr>
+                <th scope="row" data-column="name">Notebook fields</th>
+                <td colspan="4" data-columns="team shift active notes">Assignment details</td>
+                <td colspan="2" data-columns="email phone">Contact details</td>
+                <td data-column="salary">Raw salary</td>
+              </tr></tfoot>
+            </table>
+          </div>
+        </section>
+        <fieldset class="column-controls">
+          <legend>Notebook columns</legend>
+          <label>Column <select data-column-choice data-needs-grid>
+            <option value="name">Employee</option><option value="team">Team</option><option value="shift">Shift</option>
+            <option value="active">Active</option><option value="notes">Notes</option><option value="email">Email</option>
+            <option value="phone">Phone</option><option value="salary">Salary</option>
+          </select></label>
+          <label>Preferred width (CSS pixels) <input type="number" min="1" step="1" data-column-width data-needs-grid></label>
+          <label class="check"><input type="checkbox" data-column-hidden data-needs-grid> Hide column</label>
+          <div class="actions">
+            <button type="button" data-column-action="apply" data-needs-grid>Apply</button>
+            <button type="button" data-column-action="earlier" data-needs-grid>Earlier in group</button>
+            <button type="button" data-column-action="later" data-needs-grid>Later in group</button>
+            <button type="button" data-column-action="swap" data-needs-grid>Swap groups</button>
+            <button type="button" data-column-action="reset" data-needs-grid>Reset columns</button>
+            <button type="button" data-column-action="invalid" data-needs-grid>Try duplicate key</button>
+          </div>
+          <p>Header resize: drag, Left/Right ±10, Shift ±1, Home restores initial width.</p>
+        </fieldset>
+      </div>
+      <output data-column-status role="status">Loading notebook.</output>
+      <div class="observations">
+        <section><h3>Current columns</h3><pre data-columns-state tabindex="0"></pre></section>
+        <section><h3>Selection and raw changes</h3><pre data-row-state tabindex="0"></pre></section>
+      </div>
+      <p>Column callback: <output data-column-callback>Not fired yet.</output></p>
+    </article>
+  </template>
+</body>
+</html>

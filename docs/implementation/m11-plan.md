@@ -12,7 +12,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI entry
-    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
+    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree implementation
@@ -24,7 +24,7 @@ sources:
   - id: dom
     resource: ../../src/ui/dom-state.ts
     title: Shared private DOM state ownership
-    git_blob: 2bd585b3b9e31503e31499474db0e2ffbb3d79fb
+    git_blob: 885c8d0cf0c6914d73bbbb71a0fb6aab3b35f6d3
   - id: measurements
     resource: evidence/m11-tree-chromium.json
     title: Final recovered 1000-row Tree measurements

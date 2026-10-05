@@ -5,8 +5,10 @@ import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import { rowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
+import { bindGridColumns } from "./grid-columns.js";
+import { focusVisible } from "./dom-state.js";
 import type { RuleCall } from "./rules.js";
-import type { FormatRule, GridHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
+import type { FormatRule, GridColumn, GridHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
 interface TextField {
   index: number;
@@ -59,6 +61,7 @@ interface RenderedRow<T> {
   texts: BoundText[];
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
+  releaseColumns: () => void;
 }
 
 interface FieldDraft {
@@ -112,6 +115,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   rules?: RuleSet;
   parse?: Record<string, ParseInput>;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
+  columns?: readonly GridColumn[];
+  onColumnsChange?: (change: { columns: readonly GridColumn[]; event: Event | null }) => void;
 }): GridHandle<T> {
   if (!root || root.tagName !== "TABLE") {
     throw gridError("GRID_ROOT", "The Grid root must be a table element.");
@@ -217,6 +222,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
   }
   let rootFocusTabIndex = false;
+  const authoredHeaders = new Set(root.tHead?.querySelectorAll<HTMLTableCellElement>("th") ?? []);
+  const columns = bindGridColumns(root, template, options.columns, options.onColumnsChange);
   const templateReleases: (() => void)[] = [];
   try {
     for (const field of selectFields) {
@@ -224,6 +231,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
   } catch (cause) {
     for (const release of templateReleases) release();
+    columns.dispose();
     throw cause;
   }
   const anchor = root.ownerDocument.createComment("grid rows");
@@ -300,7 +308,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     for (const button of buttons) button.setAttribute("aria-pressed", String(selected === id));
     rowIds.set(element, id);
-    return { element, errors, hasIssues: false, texts, selects: rowSelects, buttons };
+    return { element, errors, hasIssues: false, texts, selects: rowSelects, buttons,
+      releaseColumns: columns.attach(element) };
+  }
+
+  function releaseRecord(record: RenderedRow<T>): void {
+    record.element.remove();
+    record.releaseColumns();
+    for (const select of record.selects) select.release();
   }
 
   function renderSelect(binding: BoundSelect, value: Snapshot<T>, id: RowId): void {
@@ -656,20 +671,21 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           focused.setSelectionRange(...selection);
         }
       } else if (moveFocus) {
-        const next = root.querySelector<HTMLElement>(
+        const candidates = [...root.querySelectorAll<HTMLElement>(
           'tbody button[data-select-row]:not(:disabled), tbody input:not(:disabled), tbody textarea:not(:disabled), tbody select:not(:disabled)'
-        ) ?? root.querySelector<HTMLElement>('thead button:not(:disabled)') ?? root;
-        if (next === root && !root.hasAttribute("tabindex")) {
-          root.tabIndex = -1;
-          rootFocusTabIndex = true;
+        ), ...root.querySelectorAll<HTMLElement>('thead button:not(:disabled)')];
+        if (!candidates.some(focusVisible)) {
+          if (!root.hasAttribute("tabindex")) {
+            root.tabIndex = -1;
+            rootFocusTabIndex = true;
+          }
+          focusVisible(root);
         }
-        next.focus({ preventScroll: true });
       }
       visibleIds = nextIds;
       for (const [id, record] of records) {
         if (nextSet.has(id)) continue;
-        record.element.remove();
-        for (const select of record.selects) select.release();
+        releaseRecord(record);
         records.delete(id);
       }
     }
@@ -739,15 +755,23 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     root.removeEventListener("input", onInput);
     root.removeEventListener("change", onChange);
     for (const record of records.values()) {
-      record.element.remove();
-      for (const select of record.selects) select.release();
+      releaseRecord(record);
     }
     for (const release of templateReleases) release();
+    columns.dispose();
     anchor.replaceWith(template);
     throw cause;
   }
 
   return {
+    columns() {
+      active();
+      return columns.columns();
+    },
+    setColumns(state) {
+      active();
+      columns.setColumns(state);
+    },
     select(id) {
       active();
       const row = id === null ? null : options.rows.get(id);
@@ -766,7 +790,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         throw gridError("GRID_SORT", "A sort comparator must be a function or null.");
       }
       if (indicator && (compare === null || !(indicator.column instanceof HTMLTableCellElement) ||
-          indicator.column.tagName !== "TH" || !root.tHead?.contains(indicator.column) ||
+          indicator.column.tagName !== "TH" ||
+          !root.tHead?.contains(indicator.column) && !authoredHeaders.has(indicator.column) ||
           !["ascending", "descending"].includes(indicator.direction))) {
         throw gridError("GRID_SORT", "A sort indicator needs a table header and ascending or descending direction.");
       }
@@ -804,8 +829,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         const previousIds = new Set(previousVisibleIds);
         for (const [id, record] of records) {
           if (previousIds.has(id)) continue;
-          record.element.remove();
-          for (const select of record.selects) select.release();
+          releaseRecord(record);
           records.delete(id);
         }
         throw cause;
@@ -833,8 +857,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       root.removeEventListener("input", onInput);
       root.removeEventListener("change", onChange);
       for (const record of records.values()) {
-        record.element.remove();
-        for (const select of record.selects) select.release();
+        releaseRecord(record);
       }
       for (const release of templateReleases) release();
       records.clear();
@@ -846,6 +869,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         else column.setAttribute("aria-sort", original);
       }
       headerOriginals.clear();
+      authoredHeaders.clear();
+      columns.dispose();
       if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
       boundRoots.delete(root);
       anchor.replaceWith(template);

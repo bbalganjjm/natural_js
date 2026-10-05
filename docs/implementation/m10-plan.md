@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid rendering, row identity, draft, and lifecycle behavior
-    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
+    git_blob: d606737eaa4d51860407c50b4d3ba2f378739ed3
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract
@@ -61,13 +61,13 @@ sources:
     resource: ../../tests/browser/m10-agent-screen.spec.ts
     title: M10.4 docs-first authored Grid task
     git_blob: 94fd90af72248bfabf0cef988fb9b35660f4b58f
-generated: { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T11:42:46Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T01:11:51Z }
-  - { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
+  - { by: codex/gpt-6, at: 2026-10-05T11:43:54Z }
 ---
 
-M10 now includes required work for the `2.0.0` release. The grouped/sticky authored-table slice, current-contract demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. Column resize/reorder/hide/show, multiple row selection, bulk paste, and real scroll virtualization remain unimplemented and must be completed before release. The [feature parity ledger](feature-parity.md) and [feature parity implementation plan](feature-parity-plan.md) define the wider requirement to preserve 1.x user features. The user has deferred npm publication until remaining work is complete and personally tested. Real Safari on macOS or iOS is outside the initial 2.0 browser support scope; Playwright WebKit remains required on this Windows host.
+M10 now includes required work for the `2.0.0` release. The grouped/sticky authored-table slice, current-contract demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. M10.5 implements column resize/reorder/show/hide; legacy chooser/options/callback closure remains open. Multiple row selection, bulk paste and real scroll virtualization remain unimplemented and required before release. The [feature parity ledger](feature-parity.md) and [feature parity implementation plan](feature-parity-plan.md) define the wider requirement to preserve 1.x user features. The user has deferred npm publication until remaining work is complete and personally tested. Real Safari on macOS or iOS is outside the initial 2.0 browser support scope; Playwright WebKit remains required on this Windows host.
 
 M10.0–M10.4 below record the earlier selected scope and its measurements. Earlier decisions to leave advanced operations optional, unselected, or for a later 2.x milestone are historical decisions, not the current release policy. These records do not establish completion of the expanded M10 requirement.
 
@@ -83,12 +83,12 @@ The 1.x Grid exposed `height`, `fixedcol`, `resizable`, `pastiable`, `multiselec
 
 # Required scope and contract review
 
-Before implementation or API changes, present the detailed stage contract for human review: reference HTML/TypeScript, ownership, data size, input types, keyboard path, save behavior, errors, rollback, and acceptance cases. Use the interactive demo and two-layout employee fixture as concrete callers. A missing production screen does not defer a required feature. The following requirements remain to be implemented:
+Before implementation or API changes, present the detailed stage contract for human review: reference HTML/TypeScript, ownership, data size, input types, keyboard path, save behavior, errors, rollback, and acceptance cases. Use the interactive demo and two-layout employee fixture as concrete callers. A missing production screen does not defer a required feature. The table records required capabilities and their current implementation boundaries:
 
 | Requirement | Implementation and contract boundary |
 |---|---|
 | Fixed header/columns and grouped structure | Preserve the authored `<thead>`, `rowspan`/`colspan`, sticky positioning, and scroll-container behavior already demonstrated. Close remaining body/footer and column/viewport integration gaps from the ledger. Never clone a header. |
-| Column resize, reorder, hide/show | Required before release. Review one coherent column-state contract with stable column identity, keyboard and pointer controls, grouped cells, hidden columns, and persistence ownership. Do not expose generic drag/drop or layout utilities. |
+| Column resize, reorder, hide/show | Implemented in [M10.5](m10-columns-plan.md): immutable full state, authored stable keys, pointer/keyboard controls, native groups and restoration. Applications own persistence and chooser controls; full legacy option/callback closure remains open. No generic drag/drop or layout utility. |
 | Real scroll virtualization | Required before release. Render a bounded viewport window while scrolling through the full view; local paging and offscreen-record release alone do not meet this requirement. Measure DOM count, render time, and memory; preserve selection, offscreen drafts, validation, and focus by `RowId`. |
 | Atomic bulk paste | Required before release. Parse and validate through existing Grid/Form rules before committing the whole paste. Define what Rows, drafts, and subscribers observe on success and failure. Current `Rows.set` notifies per cell and `Rows.replace` changes IDs, so review whether one narrow Rows mutation contract is needed. Keep clipboard matrix parsing private. |
 | Multiple selection/check-all and filters | Required before release. Define visible-page versus filtered-store selection, typed selected-ID results, check-all/single-check semantics, and value-filter controls. Preserve keyboard use and never identify rows by DOM position. |
@@ -96,7 +96,7 @@ Before implementation or API changes, present the detailed stage contract for hu
 
 The earlier M10.1 implementation slice covered authored fixed/grouped headers in two layouts without a new public API. Each required follow-up slice needs a reviewed usage example, implementation contract, and acceptance evidence.
 
-The [40-row two-layout screen](../v2/advanced-grid-example.md) is the completed M10.1 structure regression: grouped and fixed headings/first column use authored HTML/CSS without a new Grid API. The user then selected an interactive demo page that exercises every currently supported Grid option and behavior as the M10 reference screen. The demo covers `rows`, `initialPage`, `rules`, `parse`, and `onSelect`; every current Grid method and declarative marker; nested choices, row identity, validation drafts, accessibility, and Rows change tracking. It must show the observed result and label required but unimplemented features as unavailable. Extend this same demo for column resize/reorder/hide/show, multiple selection, atomic bulk paste, real virtualization, and remaining parity as their implementations and tests become available.
+The [40-row two-layout screen](../v2/advanced-grid-example.md) is the completed M10.1 structure regression: grouped and fixed headings/first column use authored HTML/CSS without a new Grid API. The user then selected an interactive demo page that exercises every currently supported Grid option and behavior as the M10 reference screen. The demo covers `rows`, `initialPage`, `rules`, `parse`, `onSelect`, and the implemented M10.5 `columns`/`onColumnsChange`; every current Grid method and declarative marker; nested choices, row identity, validation drafts, accessibility, and Rows change tracking. It must show the observed result and label required but unimplemented features as unavailable. Column controls are now implemented; extend this same demo for multiple selection, atomic bulk paste, real virtualization, and remaining parity as their implementations and tests become available.
 
 The M10.1 two-layout acceptance checks native table semantics, no copied header or duplicate IDs, nested choices, keyboard sort and pointer selection, two-screen isolation, sticky geometry, 320 CSS-pixel reflow with enlarged text spacing, and axe-tagged A/AA results. Chromium, Firefox, and WebKit passed four focused cases each. On this Windows host Firefox required the repository-local Playwright browser cache; the default cache failed at process launch (`spawn UNKNOWN`) even with one worker. Automated checks do not establish manual screen-reader conformance.
 
@@ -128,7 +128,7 @@ The M10.2 unpublished local tarball had SHA-256 `3a6b8f030fda3443943befeb47aad3f
 | M10.2 Rendering lifetime | Measure and, if needed, bound cached records and update affected visible rows. Retain drafts/selection by `RowId` across page/window changes. | Fixed 1,000-row budgets do not regress; selected larger fixture meets documented render/memory acceptance limits; repeated mounts release records/listeners. |
 | M10.3 Bounded initial page | Implemented the approved opt-in first local page. The initial scope deferred column state, bulk edit, and multi-selection; required follow-up stages now cover them. | Typed consumer; initial/empty/invalid page, offscreen identity/drafts, focus, failure rollback, disposal, and binding budgets; no business rules in Grid. |
 | M10.4 Agent/package review | Independent agent adds a small advanced screen from docs only. Prune needless API/file splits; install one SHA-gated artifact in JS, TS, and a browser-served consumer with the chosen new Grid behavior. | First-pass result or correction record, source/doc agreement, package scope audit, same-hash installed-browser result, and changed/full OKF checks with zero errors. |
-| M10.5 Column state | Required, unimplemented: review then implement column resize/reorder/hide/show with grouped cells, stable IDs, and keyboard/pointer controls. | Reviewed contract; focus/header semantics, layout restoration, two-screen isolation, disposal, and demo/browser evidence. |
+| M10.5 Column state | Implemented immutable full state, preferred width, pointer/keyboard resize, reorder and show/hide with authored native groups and controls. [Detailed contract and final evidence](m10-columns-plan.md). | Fifteen column regressions, focus/topology/restoration, two independent layouts, whole-suite/package/binding-budget gates; legacy option/chooser closure remains open. |
 | M10.6 Selection/check/filter | Required, unimplemented: multiple selection, check-all/single-check and value-filter behavior with explicit view/store scope. | Stable selected/checked IDs across sort/filter/page/window changes, keyboard behavior, cancellation/error cases, and demo/browser evidence. |
 | M10.7 Atomic bulk paste | Required, unimplemented: validate the complete clipboard matrix, then publish one atomic result without changing row IDs. Review any necessary narrow Rows mutation first. | Success/failure store, draft and subscriber invariants; typed/nested values, readonly/disabled/hidden columns, offscreen rows, and demo/browser evidence. |
 | M10.8 Virtualization | Required, unimplemented: a real bounded viewport window over the scrolling view, integrated with column state, editing, selection, and paging. | Reviewed workload/budgets; bounded DOM, scroll/focus/identity/draft/validation behavior, repeated lifetime checks, and demo/browser evidence. |

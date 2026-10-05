@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createRows } from "@bbalganjjm/natural_js/data";
 import { bindGrid } from "@bbalganjjm/natural_js/ui";
-import type { GridHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
+import type { GridColumn, GridHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 
 type Employee = {
   readonly name: string;
@@ -59,8 +59,19 @@ const pageState = find<HTMLOutputElement>("[data-page-state]");
 const callback = find<HTMLOutputElement>("[data-callback]");
 const eventOutput = find<HTMLOutputElement>("[data-event]");
 const salaryInput = find<HTMLInputElement>("[data-new-salary]");
-const nameHeader = table.tHead!.rows[0].cells[0];
-const salaryHeader = table.tHead!.rows[0].cells[3];
+const columnChoice = find<HTMLSelectElement>("[data-column-choice]");
+const columnWidth = find<HTMLInputElement>("[data-column-width]");
+const columnHidden = find<HTMLInputElement>("[data-column-hidden]");
+const columnState = find<HTMLElement>("[data-columns-state]");
+const columnCallback = find<HTMLOutputElement>("[data-columns-callback]");
+const nameHeader = find<HTMLTableCellElement>('thead th[data-column="name"]');
+const salaryHeader = find<HTMLTableCellElement>('thead th[data-column="salary"]');
+const defaultColumns: readonly GridColumn[] = [
+  { key: "name", width: 180 }, { key: "email", width: 240 }, { key: "phone", width: 160 },
+  { key: "team", width: 160 }, { key: "shift", width: 150 }, { key: "active", width: 100 },
+  { key: "notes", width: 240 }, { key: "salary", width: 150 }
+];
+let initialColumns: readonly GridColumn[] = defaultColumns;
 let grid: GridHandle<Employee> | null = null;
 let requestedPage = 1;
 let stopRows = () => {};
@@ -81,6 +92,40 @@ function refresh(): void {
   find<HTMLButtonElement>('[data-action="rebind"]').disabled = grid !== null;
   find<HTMLButtonElement>('[data-action="previous"]').disabled = !page || page.page <= 1;
   find<HTMLButtonElement>('[data-action="next"]').disabled = !page || page.page >= page.pages;
+  refreshColumns();
+}
+
+function columnGroup(key: string): string {
+  if (key === "email" || key === "phone") return "contact";
+  if (["team", "shift", "active", "notes"].includes(key)) return "assignment";
+  return key;
+}
+
+function refreshColumns(): void {
+  if (!grid) {
+    columnState.textContent = "Grid unbound; authored column layout restored.";
+    return;
+  }
+  const columns = grid.columns();
+  columnState.textContent = JSON.stringify(columns, null, 2);
+  const index = columns.findIndex(column => column.key === columnChoice.value);
+  const column = columns[index];
+  columnWidth.value = column.width === undefined ? "" : String(column.width);
+  columnHidden.checked = column.hidden === true;
+  find<HTMLButtonElement>('[data-action="column-left"]').disabled = index === 0 ||
+    columnGroup(columns[index - 1].key) !== columnGroup(column.key);
+  find<HTMLButtonElement>('[data-action="column-right"]').disabled = index === columns.length - 1 ||
+    columnGroup(columns[index + 1].key) !== columnGroup(column.key);
+}
+
+function moveColumn(direction: -1 | 1): void {
+  if (!grid) return;
+  const columns = [...grid.columns()];
+  const index = columns.findIndex(column => column.key === columnChoice.value);
+  const next = index + direction;
+  if (!columns[next] || columnGroup(columns[index].key) !== columnGroup(columns[next].key)) return;
+  [columns[index], columns[next]] = [columns[next], columns[index]];
+  grid.setColumns(columns);
 }
 
 function applySort(): void {
@@ -119,6 +164,7 @@ function bind(): void {
   grid = bindGrid(table, {
     rows,
     initialPage,
+    columns: defaultColumns,
     rules: {
       format: { displayName: value => value.toUpperCase() },
       validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
@@ -129,8 +175,14 @@ function bind(): void {
     onSelect({ id, row, event }) {
       callback.textContent = `RowId ${id ?? "none"}, ${row?.value.name ?? "none"}, event ${event?.type ?? "programmatic"}`;
       refresh();
+    },
+    onColumnsChange({ columns, event }) {
+      columnCallback.textContent = `${columns.filter(column => !column.hidden).length} visible, event ${event?.type ?? "programmatic"}`;
+      columnState.textContent = JSON.stringify(columns, null, 2);
+      if (grid) refreshColumns();
     }
   });
+  initialColumns = grid.columns().map(column => ({ ...column }));
   stopRows();
   stopRows = rows.subscribe(event => {
     eventOutput.textContent = `${event.type}${"id" in event ? ` RowId ${event.id}` : ""}, changed ${event.changed}`;
@@ -167,6 +219,28 @@ function act(action: string): void {
   if (action === "replace") { rows.replace(Array.from({ length: 6 }, (_, index) => employee(index))); status.textContent = "Rows replaced with new RowIds."; return; }
   if (!grid) throw new Error("Bind the Grid before using this control.");
   switch (action) {
+    case "apply-columns": {
+      const width = columnWidth.value.trim();
+      grid.setColumns(grid.columns().map(column => column.key === columnChoice.value
+        ? { key: column.key, ...(width ? { width: Number(width) } : {}), hidden: columnHidden.checked }
+        : column));
+      break;
+    }
+    case "column-left": moveColumn(-1); break;
+    case "column-right": moveColumn(1); break;
+    case "swap-groups": {
+      const columns = grid.columns();
+      const contact = columns.filter(column => columnGroup(column.key) === "contact");
+      const assignment = columns.filter(column => columnGroup(column.key) === "assignment");
+      const contactFirst = columns.findIndex(column => column.key === contact[0].key) <
+        columns.findIndex(column => column.key === assignment[0].key);
+      grid.setColumns([columns.find(column => column.key === "name")!,
+        ...(contactFirst ? [...assignment, ...contact] : [...contact, ...assignment]),
+        columns.find(column => column.key === "salary")!]);
+      break;
+    }
+    case "reset-columns": grid.setColumns(initialColumns); break;
+    case "invalid-columns": grid.setColumns([...grid.columns(), grid.columns()[0]]); break;
     case "previous": requestedPage = (grid.page()?.page ?? 1) - 1; applyPage(); return;
     case "next": requestedPage = (grid.page()?.page ?? 1) + 1; applyPage(); return;
     case "select-first": grid.select(rows.entries()[0]?.id ?? null); break;
@@ -209,6 +283,7 @@ document.addEventListener("click", event => {
 });
 
 sort.addEventListener("change", applySort);
+columnChoice.addEventListener("change", refreshColumns);
 filter.addEventListener("change", () => { applyFilter(); requestedPage = 1; applyPage(); });
 size.addEventListener("change", () => { initialPageChoice.value = ""; requestedPage = 1; applyPage(); });
 initialPageChoice.addEventListener("change", () => {

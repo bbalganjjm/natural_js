@@ -1,0 +1,1010 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-05",
+  "recorded_at": "2026-10-05T11:17:15.258Z",
+  "status": "P0_grid_structural_mapping_complete_semantic_closure_open",
+  "scope": {
+    "source_inventory": "docs/implementation/evidence/v1-surface-inventory.json",
+    "source": "v1/src/natural.ui.js",
+    "class": "NU.grid",
+    "expected": {
+      "classes": 1,
+      "members": 31,
+      "literal_option_paths": 57,
+      "surface_entries": 89
+    },
+    "excluded": "Other NU/NUS classes and core are owned by their separate evidence files; consumer files are frozen and unchanged."
+  },
+  "profiles": {
+    "G01": {
+      "owner": "data/ui-grid",
+      "current": {
+        "description": "Caller-owned Rows entries/get/replace/add/set/remove/revert/changes and bindGrid subscriptions replace mutable Grid-owned data. Selected/checked projections, append completion and authored-default creation remain open.",
+        "refs": [
+          "src/data/index.ts",
+          "src/ui/grid.ts"
+        ]
+      },
+      "status": "partial",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G01"
+      },
+      "acceptance": [
+        {
+          "id": "G01-A01",
+          "description": "Verify CRUD, filtered/projected change payloads and off-page updates preserve stable RowIds and notify shared views once."
+        },
+        {
+          "id": "G01-A02",
+          "description": "Exercise append and empty-to-populated completion, selection/check projections and new rows created from authored defaults."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid.spec.ts",
+        "tests/browser/grid-m6.spec.ts"
+      ]
+    },
+    "G02": {
+      "owner": "data/ui-grid",
+      "current": {
+        "description": "Rows.add appends a cloned JSON value; no ordered insert/move/copy contract. Comparator sorting does not move store records.",
+        "refs": [
+          "src/data/index.ts",
+          "src/ui/grid.ts"
+        ]
+      },
+      "status": "missing_order_operations",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G02"
+      },
+      "acceptance": [
+        {
+          "id": "G02-A01",
+          "description": "Specify indexed/top/end insertion and movement with identity, selection, draft and viewport behavior."
+        },
+        {
+          "id": "G02-A02",
+          "description": "Copy into an independent value and new RowId; preserve intended edits while repairing legacy shared-reference copying."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G03": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "bindGrid accepts one authored tr per record; grouped headers/footer and columns are separate from multi-line tbody record templates.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/grid-columns.ts"
+        ]
+      },
+      "status": "partial",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G03"
+      },
+      "acceptance": [
+        {
+          "id": "G03-A01",
+          "description": "Define one record represented by multiple authored rows, with one RowId and owned control/error lifetime."
+        },
+        {
+          "id": "G03-A02",
+          "description": "Preserve template customization, nested controls, sorting/filtering/paging/selection/column operations and exact disposal."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid.spec.ts",
+        "tests/browser/grid-columns.spec.ts"
+      ]
+    },
+    "G04": {
+      "owner": "ui-grid/form",
+      "current": {
+        "description": "Grid edits text-like/number/boolean checkbox/textarea and single Select; radio, multiple Select and other inputs are rejected or unsupported. Form is a foundation, not an equivalent Grid control matrix.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/form.ts",
+          "src/ui/select.ts"
+        ]
+      },
+      "status": "partial",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G04"
+      },
+      "acceptance": [
+        {
+          "id": "G04-A01",
+          "description": "Verify radio groups, checkbox collections, multiple Select and supported native input types use raw values and unique instance-scoped names/labels."
+        },
+        {
+          "id": "G04-A02",
+          "description": "Preserve readonly/disabled, nested values, parsers, validation and option-source updates across rendered/off-page rows."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid-m6.spec.ts",
+        "tests/browser/grid.spec.ts"
+      ]
+    },
+    "G05": {
+      "owner": "ui-grid/form",
+      "current": {
+        "description": "Grid display writes textContent or native control values; no image src or authored rich-content binding/renderer contract.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/form.ts"
+        ]
+      },
+      "status": "missing_display_modes",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G05"
+      },
+      "acceptance": [
+        {
+          "id": "G05-A01",
+          "description": "Add explicit image/rich-content rendering that preserves authored DOM and keeps text default."
+        },
+        {
+          "id": "G05-A02",
+          "description": "Verify formatted values, nested paths, error cleanup, updates and row lifetime without arbitrary executable HTML."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G06": {
+      "owner": "ui-grid/rules",
+      "current": {
+        "description": "Grid rules/parse/drafts/validate(id?) cover current and off-page values; legacy focusout/Enter validation and reveal policies differ.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/rules.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "central_rules_present_parity_open",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G06"
+      },
+      "acceptance": [
+        {
+          "id": "G06-A01",
+          "description": "Verify all legacy declarative rules, user rules, typed parsers and failure results across controls/off-page rows."
+        },
+        {
+          "id": "G06-A02",
+          "description": "Define interaction timing and error reveal/focus, including invalid hidden columns, paging and later virtualization."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/rules.test.ts",
+        "tests/browser/grid-m6.spec.ts",
+        "tests/browser/grid-initial-page.spec.ts"
+      ]
+    },
+    "G07": {
+      "owner": "data/ui-grid",
+      "current": {
+        "description": "Rows preserves change records and removes deleted rows from entries; Grid has no changed/deleted row status presentation policy.",
+        "refs": [
+          "src/data/index.ts",
+          "src/ui/grid.ts"
+        ]
+      },
+      "status": "missing_visible_deleted_status_policy",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G07"
+      },
+      "acceptance": [
+        {
+          "id": "G07-A01",
+          "description": "Distinguish new-row removal from persisted-row tombstones in changes and save payloads."
+        },
+        {
+          "id": "G07-A02",
+          "description": "Specify optional marked-deleted/changed views and revert/validation/check/selection behavior without exposing stale editable rows."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G08": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "Grid select(RowId|null), selected() and onSelect use stable IDs and authored data-select-row buttons; row-click toggle and pre-selection veto are absent.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "partial_single_selection",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G08"
+      },
+      "acceptance": [
+        {
+          "id": "G08-A01",
+          "description": "Define row-click/deselection/veto behavior, event/value/previous-ID payloads and no-op semantics."
+        },
+        {
+          "id": "G08-A02",
+          "description": "Preserve selection across sorting/filtering/paging/removal and independent screens; checks must not trigger selection."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid.spec.ts",
+        "tests/browser/grid-m6.spec.ts"
+      ]
+    },
+    "G09": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "Current selection holds one RowId. Legacy click-toggle multiple selection and array/isAppend calls are separate from required modern range gestures.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "missing_multiple_and_range_selection",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G09"
+      },
+      "acceptance": [
+        {
+          "id": "G09-A01",
+          "description": "Add stable selected-ID sets, replace/append/toggle and selected-value projection with clear order/scope."
+        },
+        {
+          "id": "G09-A02",
+          "description": "Define accessible keyboard/pointer range selection, anchors, disabled controls and sort/filter/page/virtualization transitions."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G10": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "Boolean data-field checkbox editing exists, but separate checked-ID state, scoped check-all and exclusive checking have no contract.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "missing_check_state",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G10"
+      },
+      "acceptance": [
+        {
+          "id": "G10-A01",
+          "description": "Define checks independently of selection and field values; preserve check() and checked-data workflows."
+        },
+        {
+          "id": "G10-A02",
+          "description": "Verify checked/unchecked/mixed states, disabled rows, exclusive mode and explicit visible/page/filter/all scope."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G11": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "Grid.setSort supplies comparator sorting plus native aria-sort; automatic header activation/direction cycling and configurable symbols remain unclosed.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "partial_comparator_sort",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G11"
+      },
+      "acceptance": [
+        {
+          "id": "G11-A01",
+          "description": "Provide authored accessible header actions and coherent direction indicators without copying headers."
+        },
+        {
+          "id": "G11-A02",
+          "description": "Verify raw-value sort, stable row identity/drafts, column-hidden headers, reset/rebind and filter/page/check/selection interactions."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid-columns.spec.ts",
+        "tests/browser/m10-grid.spec.ts"
+      ]
+    },
+    "G12": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "Grid.setFilter accepts a value predicate; distinct-value chooser, search/counts and full/partial/empty indicators are absent.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "partial_predicate_filter",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G12"
+      },
+      "acceptance": [
+        {
+          "id": "G12-A01",
+          "description": "Provide authored column value filtering with unique raw values, search, counts and reset."
+        },
+        {
+          "id": "G12-A02",
+          "description": "Define filtered dataset versus store identity, selection/check scopes, sort/rebind updates and column menus."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G13": {
+      "owner": "ui-grid/authored-css",
+      "current": {
+        "description": "One native table and authored CSS can keep headers/columns/footer; grid-columns preserves explicit native grouped headers/footer/colgroups. Full sticky/viewport integration remains open.",
+        "refs": [
+          "src/ui/grid-columns.ts",
+          "examples/vite/m10/columns.html",
+          "examples/vite/m10/columns.css"
+        ]
+      },
+      "status": "partial_native_sticky_and_topology",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G13"
+      },
+      "acceptance": [
+        {
+          "id": "G13-A01",
+          "description": "Verify grouped/rowspan headers, footer, pinned columns and responsive sticky layouts with column order/visibility/width."
+        },
+        {
+          "id": "G13-A02",
+          "description": "Preserve header associations and node identity without cloning headers; test scrolling/resize/focus across required browsers."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid-columns.spec.ts",
+        "tests/browser/m10-grid.spec.ts"
+      ]
+    },
+    "G14": {
+      "owner": "ui-grid/columns",
+      "current": {
+        "description": "GridColumn, columns/setColumns and onColumnsChange implement preferred widths, pointer/keyboard resizing and order/visibility with authored controls. Parent completed runtime/package gates separately and final stage documentation review is in progress; this P0 mapping does not recertify those gates or close full legacy chooser/options/callback behavior.",
+        "refs": [
+          "src/ui/index.ts",
+          "src/ui/grid.ts",
+          "src/ui/grid-columns.ts",
+          "docs/implementation/m10-columns-plan.md"
+        ]
+      },
+      "status": "implemented_contract_under_validation",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G14"
+      },
+      "acceptance": [
+        {
+          "id": "G14-A01",
+          "description": "Finish stage validation for immutable full-state changes, native grouped topology, pointer cancel/keyboard reset, focus/caret and exact disposal."
+        },
+        {
+          "id": "G14-A02",
+          "description": "Crosswalk legacy show/hide indices, generated chooser, width tuning/options and all menu/lifecycle edges while preserving Rows identity/values."
+        },
+        {
+          "id": "G14-A03",
+          "description": "Required reorder is an added user requirement; no legacy reorder implementation is claimed."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid-columns.spec.ts",
+        "tests/consumers/browser/main.js",
+        "tests/consumers/ts/check.ts",
+        "tools/check-packed-browser.mjs"
+      ]
+    },
+    "G15": {
+      "owner": "ui-grid/viewport/authored-css",
+      "current": {
+        "description": "Authored CSS supplies dimensions/containment; no Grid-owned vertical resize or action/error reveal contract.",
+        "refs": [
+          "src/ui/grid.ts",
+          "examples/vite/m10/columns.css"
+        ]
+      },
+      "status": "missing_height_resize_and_reveal_policies",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G15"
+      },
+      "acceptance": [
+        {
+          "id": "G15-A01",
+          "description": "Support accessible height resize or demonstrate equivalent authored interaction with disposal/focus and bounded dimensions."
+        },
+        {
+          "id": "G15-A02",
+          "description": "Specify append/add/select/check/validate reveal and scroll chaining across local pages and future virtualization."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G16": {
+      "owner": "ui-grid/form/popup/page",
+      "current": {
+        "description": "openPopup/mountPage/bindForm exist as foundations; generated more-detail selection, previous/next navigation and validation gates are absent.",
+        "refs": [
+          "src/ui/popup.ts",
+          "src/ui/form.ts",
+          "src/page/index.ts"
+        ]
+      },
+      "status": "missing_integrated_detail_workflow",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G16"
+      },
+      "acceptance": [
+        {
+          "id": "G16-A01",
+          "description": "Provide an authored typed detail view sharing RowId/Rows and configurable fields including hidden grid columns."
+        },
+        {
+          "id": "G16-A02",
+          "description": "Verify previous/next/close validation, shared edits, invalid row focus, cancellation, reload and owned cleanup."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G17": {
+      "owner": "ui-grid",
+      "current": {
+        "description": "Authored header colspan/rowspan handling does not merge repeated body values. Legacy rowSpan visually suppresses equal adjacent content rather than changing native rowspan.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/grid-columns.ts"
+        ]
+      },
+      "status": "missing_data_driven_repeated_value_merge",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G17"
+      },
+      "acceptance": [
+        {
+          "id": "G17-A01",
+          "description": "Define accessible repeated-value presentation/grouping across nested raw values and dependent columns."
+        },
+        {
+          "id": "G17-A02",
+          "description": "Verify sort/filter/edit/page/virtualization changes and restore complete editable content/identity when groups break."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G18": {
+      "owner": "ui-grid/data/rules",
+      "current": {
+        "description": "Current cell input commits parsed/validated drafts; no bulk tab/newline paste transaction or Grid paste contract.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/data/index.ts",
+          "src/ui/rules.ts"
+        ]
+      },
+      "status": "missing_bulk_paste",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G18"
+      },
+      "acceptance": [
+        {
+          "id": "G18-A01",
+          "description": "Add required paste/bulk-edit workflow with explicit validation/failure semantics and bounded notifications."
+        },
+        {
+          "id": "G18-A02",
+          "description": "Verify quoted/newline cells, raw parsing, readonly/disabled fields, current column order/hidden cells, off-page targets and undo/revert."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G19": {
+      "owner": "ui-grid/viewport/data",
+      "current": {
+        "description": "initialPage/setPage/page render one local page and release offscreen records. This is neither legacy progressive append scrolling nor required real scroll virtualization.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/ui/index.ts"
+        ]
+      },
+      "status": "partial_local_paging_missing_progressive_and_virtualization",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G19"
+      },
+      "acceptance": [
+        {
+          "id": "G19-A01",
+          "description": "Preserve progressive loading/scheduling/append completion and failure/abort/reentrancy behavior."
+        },
+        {
+          "id": "G19-A02",
+          "description": "Implement real scroll virtualization with bounded connected DOM, stable RowIds/drafts/errors and keyboard focus; measure 1k/10k rows."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid-initial-page.spec.ts",
+        "tests/browser/grid-lifetime.spec.ts",
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    },
+    "G20": {
+      "owner": "ui-grid/page/authored-css",
+      "current": {
+        "description": "Grid subscribes/releases rows and preserves authored templates; no row-before/after render hooks, bind completion callback or integrated empty/result status markup.",
+        "refs": [
+          "src/ui/grid.ts",
+          "src/page/index.ts"
+        ]
+      },
+      "status": "partial_lifetime_missing_hooks_and_empty_status",
+      "semantic_status": "open",
+      "ledger_ref": {
+        "path": "docs/implementation/feature-parity.md",
+        "id": "G20"
+      },
+      "acceptance": [
+        {
+          "id": "G20-A01",
+          "description": "Expose typed owned row/action hooks with stable RowId and cleanup, preserving before-bind/action ordering."
+        },
+        {
+          "id": "G20-A02",
+          "description": "Provide authored empty/result/status and hover behavior; verify initialization, append/revert/update completion and no late work after disposal."
+        }
+      ],
+      "planned_acceptance_refs": [
+        "tests/browser/grid-lifetime.spec.ts",
+        "docs/implementation/feature-parity-plan.md"
+      ]
+    }
+  },
+  "classes": [
+    {"symbol":"NU.grid","legacy_line":4938,"profiles":["G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14","G15","G16","G17","G18","G19","G20"],"note":"Constructor/class declaration is an umbrella surface, not one tested feature. Global deep merges, aliases, callbacks and row-Form/iteration helpers extend the literal surface."}
+  ],
+  "members": [
+    {"symbol":"NU.grid.prototype.constructor","kind":"constructor","legacy_line":4940,"profiles":["G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14","G15","G16","G17","G18","G19","G20"],"note":"Explicit bindGrid(table,{rows,...}) replaces Grid construction/DOM registry. Initialization option interactions, all callbacks, multi-line templates and failure/cleanup ordering remain open.","reachability":{"declarations":[{"source_id":"types-ui","line":355}],"dynamic_refs":["D01","D02","D07","D08","D10","D11"]}},
+    {"symbol":"NU.grid.tableCells","kind":"FunctionExpression","static":true,"legacy_line":5144,"profiles":["G03","G13","G14"],"note":"Grid-owned span-aware table-to-matrix calculation used by tableMap, colgroup removal, more and resize; cannot be removed as unused. Modern private topology compiler/native cell collections replace its used role; generic public conversion overload needs a compatibility recipe.","status":"owned_topology_replacement_under_validation","reachability":{"declarations":[{"source_id":"types-ui","line":359}],"direct_static_refs":[{"line":5196},{"line":5197},{"line":5198},{"line":5200},{"line":5201},{"line":5207},{"line":5250},{"line":5253},{"line":5547},{"line":5563},{"line":5579}]}},
+    {"symbol":"NU.grid.tableMap","kind":"FunctionExpression","static":true,"legacy_line":5174,"profiles":["G03","G13","G14"],"note":"Grid-owned colgroup/header/body/footer element matrix supplies sizing, hide/show and empty colspan. Current plans retain native topology internally; no public TableMap handle. Public introspection is an additional crosswalk obligation.","status":"owned_topology_replacement_under_validation","reachability":{"declarations":[{"source_id":"types-ui","line":360}],"direct_static_refs":[{"line":5071}]}},
+    {"symbol":"NU.grid.setTheadCellInfo","kind":"FunctionExpression","static":true,"legacy_line":5212,"profiles":["G11","G12","G14","G17"],"note":"Derives header data-id from body field IDs and maps spanned columns. Current explicit data-column keys are distinct from data-field paths/DOM IDs; sort/filter/group mapping still needs typed ownership.","reachability":{"declarations":[{"source_id":"types-ui","line":361}],"direct_static_refs":[{"line":5074}]}},
+    {"symbol":"NU.grid.removeColgroup","kind":"FunctionExpression","static":true,"legacy_line":5247,"profiles":["G13","G14"],"note":"Copies col widths into header/footer cells, strips scope and removes colgroups for resize. Used legacy workaround is replaced by native retained colgroups and exact restoration; preserving width/associations is the acceptance obligation.","status":"owned_topology_replacement_under_validation","reachability":{"declarations":[{"source_id":"types-ui","line":362}],"direct_static_refs":[{"line":5056}]}},
+    {"symbol":"NU.grid.fixColumn","kind":"FunctionExpression","static":true,"legacy_line":5274,"profiles":["G13","G14","G15"],"note":"Keeps a configured count of left columns visually fixed and uses correction/root-container settings. Authored sticky CSS and keyed state need complete pinning, responsive/scroll and disposal proof.","reachability":{"declarations":[{"source_id":"types-ui","line":363}],"direct_static_refs":[{"line":5085}]}},
+    {"symbol":"NU.grid.fixHeader","kind":"FunctionExpression","static":true,"legacy_line":5363,"profiles":["G13","G15","G19"],"note":"Creates separate header/body/footer wrappers; fixed footer, scroll lock, progressive scroll and height-resize are composed here. One native table/sticky CSS replaces copied/split layout mechanics only after equivalent workflows are validated.","reachability":{"declarations":[{"source_id":"types-ui","line":364}],"direct_static_refs":[{"line":5067}]}},
+    {"symbol":"NU.grid.vResize","kind":"FunctionExpression","static":true,"legacy_line":5467,"profiles":["G13","G15"],"note":"Pointer/touch height resizing accounts for footer height; CSS sizing alone does not preserve the interactive feature. Accessible authored height interaction remains a required contract.","reachability":{"declarations":[{"source_id":"types-ui","line":365}],"direct_static_refs":[{"line":5463}]}},
+    {"symbol":"NU.grid.more","kind":"FunctionExpression","static":true,"legacy_line":5529,"profiles":["G14","G16","G20"],"note":"Generates column chooser/check-all/counts plus per-row detail Popup/Form, previous/next and validation on navigation/close. Column state alone does not cover generated chooser or detail navigation.","reachability":{"declarations":[{"source_id":"types-ui","line":366}],"direct_static_refs":[{"line":5061}]}},
+    {"symbol":"NU.grid.resize","kind":"FunctionExpression","static":true,"legacy_line":5758,"profiles":["G13","G14"],"note":"Legacy horizontal drag bars synchronize header/body/footer sizes and sortLock. Native preferred widths plus authored pointer/keyboard controls are implemented under ongoing optimized-layout/stage validation; no complete option-edge closure.","status":"implemented_contract_under_validation","reachability":{"declarations":[{"source_id":"types-ui","line":367}],"direct_static_refs":[{"line":5116}]}},
+    {"symbol":"NU.grid.sort","kind":"FunctionExpression","static":true,"legacy_line":5948,"profiles":["G11","G12"],"note":"Header click toggles raw-data direction and rebinds; sortableItem can contain markup. setSort comparator/aria-sort exists, automatic authored activation/direction recipe and filter/rebind edges remain.","reachability":{"declarations":[{"source_id":"types-ui","line":368}],"direct_static_refs":[{"line":5111}]}},
+    {"symbol":"NU.grid.dataFilter","kind":"FunctionExpression","static":true,"legacy_line":5983,"profiles":["G12","G11","G20"],"note":"Column distinct-value panels provide selection/search/counts and full/partial/empty indicators over a cloned filter dataset. setFilter predicate does not implement that UI/workflow.","reachability":{"declarations":[{"source_id":"types-ui","line":369}],"direct_static_refs":[{"line":5124}]}},
+    {"symbol":"NU.grid.rowSpan","kind":"FunctionExpression","static":true,"legacy_line":6281,"profiles":["G17","G03"],"note":"Equal adjacent values suppress repeated cell content/borders conditioned on preceding merge columns. This differs from authored header rowspan and from actual native body rowspan; no current repeated-data merge contract.","reachability":{"declarations":[{"source_id":"types-ui","line":370}],"direct_static_refs":[{"line":104}]}},
+    {"symbol":"NU.grid.paste","kind":"FunctionExpression","static":true,"legacy_line":6320,"profiles":["G18","G04","G06"],"note":"Delegated spreadsheet-like paste uses tab/newline/quoted-cell parsing and val calls, skips readonly/disabled fields. Required bulk contract must preserve typed raw values and define transaction/failure/off-page/column-order semantics.","reachability":{"declarations":[{"source_id":"types-ui","line":378}],"direct_static_refs":[{"line":5128}]}},
+    {"symbol":"NU.grid.prototype.data","kind":"method","legacy_line":6376,"profiles":["G01","G07","G09","G10"],"note":"Overloads return all/raw shared wrapper, modified/status, selected or checked rows and optional property projection. Rows entries/changes provide part of this; selected/check sets and explicit legacy server projection remain open.","reachability":{"declarations":[{"source_id":"types-ui","line":1189},{"source_id":"types-ui","line":1210},{"source_id":"types-ui","line":1218},{"source_id":"types-ui","line":1437},{"source_id":"types-ui","line":1445}]}},
+    {"symbol":"NU.grid.prototype.context","kind":"method","legacy_line":6440,"profiles":["G03","G20"],"note":"Caller retains the authored table/root and uses querySelector(All) instead of jQuery selector wrappers; global instance discovery remains separately open in core C13.","status":"native_dom_replacement_parity_open","reachability":{"declarations":[{"source_id":"types-ui","line":1227},{"source_id":"types-ui","line":1454}]}},
+    {"symbol":"NU.grid.prototype.contextHead","kind":"method","legacy_line":6444,"profiles":["G11","G12","G13","G14"],"note":"Caller-owned table.tHead/querySelector retains the real authored header; copied legacy header wrapper is unnecessary only when sticky/sort/filter/column outcomes remain.","status":"native_dom_replacement_parity_open","reachability":{"declarations":[{"source_id":"types-ui","line":1236}]}},
+    {"symbol":"NU.grid.prototype.contextBodyTemplate","kind":"method","legacy_line":6448,"profiles":["G03","G20"],"note":"Caller retains authored tr/template before bind; legacy mutable cloned tbody enables multi-line/template controls and detail/code-list customization that need a lifecycle-safe equivalent.","reachability":{"declarations":[{"source_id":"types-ui","line":1249}]}},
+    {"symbol":"NU.grid.prototype.select","kind":"method","legacy_line":6452,"profiles":["G08","G09","G15"],"note":"Getter returns selected row indexes; setter accepts scalar/array and replace/append flags, dispatches click selection and scrolls to last target. Current select(RowId|null)/selected() is single-ID only.","reachability":{"declarations":[{"source_id":"types-ui","line":1258},{"source_id":"types-ui","line":1271}],"dynamic_refs":["D01","D02","D07","D08","D10","D11"]}},
+    {"symbol":"NU.grid.prototype.check","kind":"method","legacy_line":6495,"profiles":["G10","G15"],"note":"Getter/setter operates target checkbox indexes, scalar/array and replace/append independently of selection, with reveal. Boolean data-field editing is not this check state.","reachability":{"declarations":[{"source_id":"types-ui","line":1279},{"source_id":"types-ui","line":1291}],"dynamic_refs":["D01","D02","D07","D08","D10","D11"]}},
+    {"symbol":"NU.grid.prototype.bind","kind":"method","legacy_line":6537,"profiles":["G01","G03","G07","G11","G12","G19","G20"],"note":"Replace/append and internal sort/filter/update call types schedule row creation, reset indicators/check-all, maintain paging limits, render localized empty state and invoke completion flags. Rows.replace/subscription/local paging cover only part.","reachability":{"declarations":[{"source_id":"types-ui","line":1307},{"source_id":"types-ui","line":1465}],"dynamic_refs":["D01","D02","D07","D08","D10","D11"]}},
+    {"symbol":"NU.grid.prototype.add","kind":"method","legacy_line":6671,"profiles":["G01","G02","G03","G04","G08","G15","G20"],"note":"Creates row from entered/authored defaults plus data via row Form, supports top/index insertion and row hooks/revert/optional selection/reveal. Rows.add appends a JSON copy but does not supply that workflow.","reachability":{"declarations":[{"source_id":"types-ui","line":1323}],"dynamic_refs":["D01","D02","D07","D08","D10","D11"]}},
+    {"symbol":"NU.grid.prototype.remove","kind":"method","legacy_line":6763,"profiles":["G01","G07","G10","G19"],"note":"Inserted rows disappear; existing rows are marked rowStatus delete and remain visibly marked; notifies DataSync. Rows.remove tracks deletion but Grid hides removed entries, so visibility/save/revert semantics remain open.","reachability":{"declarations":[{"source_id":"types-ui","line":1333}]}},
+    {"symbol":"NU.grid.prototype.revert","kind":"method","legacy_line":6795,"profiles":["G01","G06","G07","G20"],"note":"Option-gated per-row/array/all revert invokes before/after row hooks and row Form snapshots. Rows.revert provides central data operation; draft/status/deleted view and callback parity remain.","reachability":{"declarations":[{"source_id":"types-ui","line":1342}]}},
+    {"symbol":"NU.grid.prototype.validate","kind":"method","legacy_line":6840,"profiles":["G06","G15"],"note":"Legacy returns boolean, validates given rendered row or invalid/insert/update row Forms and optionally reveals last failure. Current ValidationResult includes issues and all/off-page row validation; interaction/scope/reveal crosswalk remains.","reachability":{"declarations":[{"source_id":"types-ui","line":1351}]}},
+    {"symbol":"NU.grid.prototype.val","kind":"method","legacy_line":6870,"profiles":["G01","G04","G06","G07"],"note":"Getter/setter delegates to row Form when rendered and writes directly otherwise; new Rows.set fixes intended off-page change notification. Raw grouped values/parser/validation behavior and legacy payload mapping remain.","reachability":{"declarations":[{"source_id":"types-ui","line":1361},{"source_id":"types-ui","line":1372}]}},
+    {"symbol":"NU.grid.prototype.move","kind":"method","legacy_line":6888,"profiles":["G02","G19"],"note":"Used NU.ui.iteration.move changes data/DOM order and paging bookkeeping; setSort is a derived view rather than store movement.","reachability":{"declarations":[{"source_id":"types-ui","line":1382}],"transitive_symbol":"NU.ui.iteration.move"}},
+    {"symbol":"NU.grid.prototype.copy","kind":"method","legacy_line":6894,"profiles":["G02","G03","G07"],"note":"Used iteration.copy aliases the same row object and cloned Form instance; modern support must create independent values/identity and insertion tracking, repairing this defect.","reachability":{"declarations":[{"source_id":"types-ui","line":1392}],"transitive_symbol":"NU.ui.iteration.copy"}},
+    {"symbol":"NU.grid.prototype.show","kind":"method","legacy_line":6900,"profiles":["G13","G14","G20"],"note":"Accepts numeric column index or array in implementation; restores widths/display/span counts in header/body/footer/template and empty colspan. Modern hidden=false full state uses stable keys; chooser/empty/multi-line edges remain open.","status":"implemented_contract_under_validation","reachability":{"declarations":[{"source_id":"types-ui","line":1401}]}},
+    {"symbol":"NU.grid.prototype.hide","kind":"method","legacy_line":6940,"profiles":["G13","G14","G20"],"note":"Accepts numeric column index or array in implementation; reduces spanned groups and updates empty colspan. Current keyed state detaches hidden native cells/cols and keeps at least one visible; migration and additional legacy edges need closure.","status":"implemented_contract_under_validation","reachability":{"declarations":[{"source_id":"types-ui","line":1410}]}},
+    {"symbol":"NU.grid.prototype.update","kind":"method","legacy_line":6986,"profiles":["G01","G06","G07","G20"],"note":"DataSync update refreshes one row/key or rebinds with update completion suppressed. Current Rows subscriptions refresh known IDs/fields; hooks, external mutation and all template/status modes remain open.","reachability":{"declarations":[{"source_id":"types-ui","line":1420}]}}
+  ],
+  "literal_options": [
+    {"option_path":"data","legacy_line":4942,"profiles":["G01","G07"],"note":"First argument or opts.data supplies mutable shared NJS records; use one caller-owned Rows and explicit legacy wire conversion.","default_kind":"ConditionalExpression","declaration":{"source_id":"types-misc","line":2339},"lexical_readers":{"opts.data":[5016,5712,5963,5970,5974,6033,6050,6059,6069,6140,6142,6242,6380,6382,6384,6397,6400,6415,6418,6426,6433,6544,6547,6548,6553,6569,6581,6586,6604,6606,6658,6683,6725,6730,6770,6773,6774,6785,6818,6832,77,89,95,104,109,110,123,135,137,175,191,232,234,235,238,257,259,260,263,391,395,396,401,403,404],"this.options.data":[6823,6848,6849,6872,6879,6880,6990,6991,6994]}},
+    {"option_path":"row","legacy_line":4943,"profiles":["G08","G09"],"note":"Current clicked/selected index bookkeeping (-1 unset); use stable RowId state.","default_value":-1,"declaration":{"source_id":"types-misc","line":2347},"lexical_readers":{"opts.row":[161,164,170,175,184,191]}},
+    {"option_path":"beforeRow","legacy_line":4944,"profiles":["G08","G09"],"note":"Previous selected index influences single-select clearing and callback payloads; no current beforeSelect callback.","default_value":-1,"declaration":{"source_id":"types-misc","line":2355},"lexical_readers":{"opts.beforeRow":[175,181,184,191]}},
+    {"option_path":"context","legacy_line":4945,"profiles":["G03","G13","G20"],"note":"Selector/jQuery table root, merged globally/locally and registered as instance; explicit authored HTMLTableElement root replaces selector machinery.","default_value":null,"declaration":{"source_id":"types-misc","line":2406},"lexical_readers":{"this.options.context":[5023,5024,5027,5040,5043,5046,5078,5080,5089,5091,5132,6441,6875,6989,6997],"opts.context":[5181,5182,5188,5189,5192,5196,5197,5198,5200,5201,5249,5250,5253,5256,5279,5286,5298,5366,5371,5384,5393,5394,5398,5399,5403,5410,5412,5419,5425,5432,5448,5449,5453,5541,5542,5547,5558,5579,5588,5674,5679,5697,5789,5790,5797,5799,5852,5854,5855,5867,5870,6488,6526,6583,6595,6597,6615,6616,6621,6638,6651,6658,6664,6673,6674,6689,6691,6694,6698,6699,6700,6702,6710,6718,6747,6751,6752,6775,6780,6786,6809,6822,6844,6847,6861,6862,6863,6910,6923,6950,6969,74,104,135,140,150,153,164,170,181,242,243,246,267,385,386]}},
+    {"option_path":"height","legacy_line":4946,"profiles":["G13","G15","G19"],"note":"Above zero activates split fixed header/footer and progressive body scroll; zero renders list layout. CSS height plus initialPage is not full equivalence.","default_value":0,"declaration":{"source_id":"types-misc","line":2418},"lexical_readers":{"this.options.height":[5065,5077,5084,5090],"opts.height":[5187,5252,5263,5426,5796,5803,5851,5854,5864,5867,5869,5870,6126,6484,6522,6603,6706,6863,6910,6950,109]}},
+    {"option_path":"fixedcol","legacy_line":4947,"profiles":["G13","G14"],"note":"Number of fixed left columns; legacy applied in height=0 mode. Sticky CSS integration still needs proof with keyed reorder/visibility.","default_value":0,"declaration":{"source_id":"types-misc","line":2434},"lexical_readers":{"opts.fixedcol":[5278,5281,5306,6640,6742,98]}},
+    {"option_path":"more","legacy_line":4948,"profiles":["G14","G16"],"note":"true expands from template field IDs; array restricts detail fields. Generates both chooser and row detail; current columns alone covers neither complete workflow.","default_value":false,"declaration":{"source_id":"types-misc","line":2452},"lexical_readers":{"this.options.more":[5060],"opts.more":[5533,5534,5688]}},
+    {"option_path":"validate","legacy_line":4949,"profiles":["G06","G04"],"note":"Controls row Form focusout validation; explicit Grid.validate and current input/change drafts need interaction matrix review.","default_value":true,"declaration":{"source_id":"types-misc","line":2460},"lexical_readers":{"opts.validate":[6728,80]}},
+    {"option_path":"html","legacy_line":4950,"profiles":["G05","G04"],"note":"Forwarded to row Form rich display behavior; current textContent default has no explicit HTML/image renderer.","default_value":false,"declaration":{"source_id":"types-misc","line":2468},"lexical_readers":{"opts.html":[6727,79]}},
+    {"option_path":"addTop","legacy_line":4951,"profiles":["G02","G19"],"note":"Sets default top/end insertion and disables delay/scrollPaging when false; Rows.add appends only.","default_value":true,"declaration":{"source_id":"types-misc","line":2479},"lexical_readers":{"this.options.addTop":[5031],"opts.addTop":[6688,6730,6731,6752,6755]}},
+    {"option_path":"addSelect","legacy_line":4952,"profiles":["G08","G02","G15"],"note":"Optional selection of created row through legacy scroll-box callbacks; no built-in modern add-and-select workflow.","default_value":false,"declaration":{"source_id":"types-misc","line":2489},"lexical_readers":{"opts.addSelect":[6711,6716,6754]}},
+    {"option_path":"filter","legacy_line":4953,"profiles":["G12"],"note":"Enables all header data-filter markers and column value panels; modern setFilter is predicate only.","default_value":false,"declaration":{"source_id":"types-misc","line":2502},"lexical_readers":{"this.options.filter":[5120,5121],"opts.filter":[6558]}},
+    {"option_path":"resizable","legacy_line":4954,"profiles":["G14","G13"],"note":"Enables drag bars and colgroup-removal workaround; current authored native controls/column state implement contract under ongoing validation.","default_value":false,"status":"implemented_contract_under_validation","declaration":{"source_id":"types-misc","line":2516},"lexical_readers":{"this.options.resizable":[5055,5115]}},
+    {"option_path":"vResizable","legacy_line":4955,"profiles":["G15","G13"],"note":"Enables vertical resize under fixed-header layout, including footer offset; current column width resizing is unrelated.","default_value":false,"declaration":{"source_id":"types-misc","line":2524},"lexical_readers":{"opts.vResizable":[5462]}},
+    {"option_path":"sortable","legacy_line":4956,"profiles":["G11"],"note":"Enables automatic header activation and direction switching; current comparator/aria-sort needs authored activation contract.","default_value":false,"declaration":{"source_id":"types-misc","line":2535},"lexical_readers":{"this.options.sortable":[5110],"opts.sortable":[6540]}},
+    {"option_path":"windowScrollLock","legacy_line":4957,"profiles":["G15","G13"],"note":"Scopes wheel/touch scroll chaining to body viewport; authored overscroll containment must be demonstrated across intended interactions.","default_value":true,"declaration":{"source_id":"types-misc","line":2545},"lexical_readers":{"opts.windowScrollLock":[5436]}},
+    {"option_path":"select","legacy_line":4958,"profiles":["G08"],"note":"Enables single row-click selection, distinct from checked checkbox state.","default_value":false,"declaration":{"source_id":"types-misc","line":2554},"lexical_readers":{"this.options.select":[5050],"opts.select":[6388,6454]}},
+    {"option_path":"unselect","legacy_line":4959,"profiles":["G08","G09"],"note":"Allows selected-row click deselection for single mode; multi mode always toggles in legacy. Current explicit select(null) is only part.","default_value":true,"declaration":{"source_id":"types-misc","line":2564},"lexical_readers":{"opts.unselect":[169]}},
+    {"option_path":"multiselect","legacy_line":4960,"profiles":["G09"],"note":"Allows multiple independent row-click toggles; scalar/array select supports append. Legacy handler has no range modifier implementation; required modern ranges are separate.","default_value":false,"declaration":{"source_id":"types-misc","line":2573},"lexical_readers":{"this.options.multiselect":[5050],"opts.multiselect":[6388,6454,169,180]}},
+    {"option_path":"checkAll","legacy_line":4961,"profiles":["G10"],"note":"Selector for header check-all control; activates only with checkAllTarget. Separate from selection and row data fields.","default_value":null,"declaration":{"source_id":"types-misc","line":2587},"lexical_readers":{"this.options.checkAll":[5100],"opts.checkAll":[5964,6578,6579,200]}},
+    {"option_path":"checkAllTarget","legacy_line":4962,"profiles":["G10","G04"],"note":"Selector for check-all row targets; current checkbox editing does not provide checked projections or mixed/scope state.","default_value":null,"declaration":{"source_id":"types-misc","line":2605},"lexical_readers":{"this.options.checkAllTarget":[5100],"opts.checkAllTarget":[6412,6499,6510,6513,158,204,206,209,210,211]}},
+    {"option_path":"checkSingleTarget","legacy_line":4963,"profiles":["G10"],"note":"Exclusive target checking when paired checkAll options are absent; actual removeAttr clearing defect requires intended checked-state repair.","default_value":null,"declaration":{"source_id":"types-misc","line":2623},"lexical_readers":{"this.options.checkSingleTarget":[5103],"opts.checkSingleTarget":[6412,6499,6510,6513,158,223,224]}},
+    {"option_path":"hover","legacy_line":4964,"profiles":["G20"],"note":"Adds grid_hover__ class; authored CSS can preserve hover while keyboard/focus behavior is independently specified.","default_value":false,"declaration":{"source_id":"types-misc","line":2631},"lexical_readers":{"this.options.hover":[5045]}},
+    {"option_path":"revert","legacy_line":4965,"profiles":["G01","G07","G06"],"note":"Enables row Form snapshots and gates Grid.revert; Rows supports revert but data/draft/status/hooks need equivalence.","default_value":false,"declaration":{"source_id":"types-misc","line":2641},"lexical_readers":{"opts.revert":[6732,6797,83]}},
+    {"option_path":"createRowDelay","legacy_line":4966,"profiles":["G19","G20"],"note":"Per-row scheduling delay; rendering completion and reentrancy/abort remain open, not a virtualization switch.","default_value":1,"declaration":{"source_id":"types-misc","line":2652},"lexical_readers":{"this.options.createRowDelay":[5033],"opts.createRowDelay":[6609,119]}},
+    {"option_path":"scrollPaging","legacy_line":4967,"profiles":["G19"],"note":"Progressive rendered-page bookkeeping object, deep merged and expanded after construction. Current local PageRequest/PageState differs.","default_kind":"ObjectExpression","declaration":{"source_id":"types-misc","line":2675},"lexical_readers":{"this.options.scrollPaging":[5021,5032,5037],"opts.scrollPaging":[5442,6214,6545,6547,6550,6586,6588,6592,6601,6603,6606,6781,6783,109,112,135,137,383,390,392,395,396,398,401,403,404]}},
+    {"option_path":"scrollPaging.idx","legacy_line":4968,"profiles":["G19"],"note":"Runtime start index advanced by scrolling/append and adjusted after remove/move.","default_value":0,"declaration":{"source_id":"types-misc","line":2676},"lexical_readers":{"opts.scrollPaging.idx":[6214,6547,6586,6588,6592,6601,6783,112,390,392,395,396,401,403]}},
+    {"option_path":"scrollPaging.size","legacy_line":4969,"profiles":["G19","G02"],"note":"Default rows per progressive append page; zero disables paging. Runtime limit/defSize are additional paths.","default_value":100,"declaration":{"source_id":"types-misc","line":2677},"lexical_readers":{"this.options.scrollPaging.size":[5021,5032,5037],"opts.scrollPaging.size":[6545,6550,6603,6781,109,135,137,383,404]}},
+    {"option_path":"fRules","legacy_line":4971,"profiles":["G06","G04"],"note":"Field-to-tuple declaration object is declared but not forwarded by Grid bind/add to row Form. Preserve intended per-field rules; current RuleSet name-to-function map is a different shape.","default_value":null,"declaration":{"source_id":"types-misc","line":2688},"reachability_note":"No forwarding observed in Grid row creation; declared framework capability remains required and dynamic HTML/rule dispatch is retained."},
+    {"option_path":"vRules","legacy_line":4972,"profiles":["G06","G04"],"note":"Declared per-field validator tuple maps are ignored by Grid row creation in legacy; declarative data-validate works transitively. No silent capability retirement based on this defect.","default_value":null,"declaration":{"source_id":"types-misc","line":2698},"reachability_note":"No forwarding observed in Grid row creation; declared framework capability remains required and dynamic HTML/rule dispatch is retained."},
+    {"option_path":"appendScroll","legacy_line":4973,"profiles":["G15","G19","G01"],"note":"Reveal appended data at bottom after append binding; no equivalent built-in current reveal policy.","default_value":true,"declaration":{"source_id":"types-misc","line":2706},"lexical_readers":{"opts.appendScroll":[6614]}},
+    {"option_path":"addScroll","legacy_line":4974,"profiles":["G15","G02"],"note":"Reveal inserted row; optional addSelect ordering depends on animation completion.","default_value":true,"declaration":{"source_id":"types-misc","line":2714},"lexical_readers":{"opts.addScroll":[6705]}},
+    {"option_path":"selectScroll","legacy_line":4975,"profiles":["G15","G08","G09"],"note":"Reveal last selected row for programmatic index/array selection.","default_value":true,"declaration":{"source_id":"types-misc","line":2722},"lexical_readers":{"opts.selectScroll":[6483]}},
+    {"option_path":"checkScroll","legacy_line":4976,"profiles":["G15","G10"],"note":"Reveal last checked row for programmatic check calls.","default_value":true,"declaration":{"source_id":"types-misc","line":2730},"lexical_readers":{"opts.checkScroll":[6520]}},
+    {"option_path":"validateScroll","legacy_line":4977,"profiles":["G15","G06"],"note":"Reveal last invalid rendered row on validation failure; current issue results do not implement reveal.","default_value":true,"declaration":{"source_id":"types-misc","line":2738},"lexical_readers":{"opts.validateScroll":[6860]}},
+    {"option_path":"cache","legacy_line":4978,"profiles":["G03","G19","G20"],"note":"Passed to bound row Forms only; added rows use Form default. Current descriptors/record release replace lookup caching internally, with behavior/memory gates still required.","default_value":true,"status":"owner_private_replacement_parity_open","declaration":{"source_id":"types-misc","line":2746},"lexical_readers":{"opts.cache":[85]}},
+    {"option_path":"tpBind","legacy_line":4979,"profiles":["G04","G20"],"note":"Priority event binding reaches added row Form only; binding-before-action order is a used workflow, not unused handler machinery.","default_value":false,"declaration":{"source_id":"types-misc","line":2756},"lexical_readers":{"opts.tpBind":[6733]}},
+    {"option_path":"pastiable","legacy_line":4980,"profiles":["G18"],"note":"Legacy spelling enables delegated paste and contenteditable display targets; bulk typed paste contract is missing.","default_value":false,"declaration":{"source_id":"types-misc","line":2770},"lexical_readers":{"this.options.pastiable":[5127]}},
+    {"option_path":"rowHandlerBeforeBind","legacy_line":4981,"profiles":["G20","G03","G01"],"note":"Before row Form data bind and revert, supplies row index/element/value with Grid this; current owned row hook absent.","default_value":null,"declaration":{"source_id":"types-misc","line":2787},"lexical_readers":{"opts.rowHandlerBeforeBind":[6811,6812,6825,6826,88,89]}},
+    {"option_path":"rowHandler","legacy_line":4982,"profiles":["G20","G03","G01"],"note":"After row bind/add/revert; application customization needs stable RowId, owned cleanup and deterministic order.","default_value":null,"declaration":{"source_id":"types-misc","line":2804},"lexical_readers":{"opts.rowHandler":[6738,6739,6817,6818,6831,6832,94,95]}},
+    {"option_path":"onBeforeSelect","legacy_line":4983,"profiles":["G08","G09"],"note":"Cancelable pre-selection callback (legacy undefined/true allow); veto bookkeeping/onSelect defect must be repaired around intended behavior.","default_value":null,"declaration":{"source_id":"types-misc","line":2827},"lexical_readers":{"opts.onBeforeSelect":[174,175]}},
+    {"option_path":"onSelect","legacy_line":4984,"profiles":["G08","G09"],"note":"Current onSelect gives RowId,row snapshot,event; legacy gives index, element, whole data, before index and fires even after veto. Define intended transition payload/order.","default_value":null,"declaration":{"source_id":"types-misc","line":2848},"lexical_readers":{"opts.onSelect":[190,191]}},
+    {"option_path":"onBind","legacy_line":4985,"profiles":["G20","G19","G01"],"note":"Bind/page completion callback gets first/last flags including empty binding, suppressed on update; no current corresponding callback.","default_value":null,"declaration":{"source_id":"types-misc","line":2866},"lexical_readers":{"opts.onBind":[6657,6658,134,135]}},
+    {"option_path":"misc","legacy_line":4986,"profiles":["G13","G14","G15"],"note":"Deep-merged geometry correction namespace, with browser configuration overrides. Used outcomes belong near native Grid topology/CSS, not an unrelated utility package.","default_kind":"ObjectExpression","status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2887},"lexical_readers":{"opts.misc":[5295,5298,5320,5324,5327,5331,5337,5803,5808,5864,5867,5870,5880,5881,5916,6743,99]},"config_override":{"source_id":"config","line":480,"kind":"ObjectExpression"}},
+    {"option_path":"misc.resizableCorrectionWidth","legacy_line":4987,"profiles":["G14","G13"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2317},"lexical_readers":{"opts.misc.resizableCorrectionWidth":[5864,5867,5870,5880,5881]},"config_override":{"source_id":"config","line":486,"kind":"ConditionalExpression"}},
+    {"option_path":"misc.resizableLastCellCorrectionWidth","legacy_line":4988,"profiles":["G14","G13"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2318},"lexical_readers":{"opts.misc.resizableLastCellCorrectionWidth":[5864,5867,5870]},"config_override":{"source_id":"config","line":492,"kind":"Literal"}},
+    {"option_path":"misc.resizeBarCorrectionLeft","legacy_line":4989,"profiles":["G14","G13"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2319},"lexical_readers":{"opts.misc.resizeBarCorrectionLeft":[5808,5916]},"config_override":{"source_id":"config","line":498,"kind":"ConditionalExpression"}},
+    {"option_path":"misc.resizeBarCorrectionHeight","legacy_line":4990,"profiles":["G14","G13"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2320},"lexical_readers":{"opts.misc.resizeBarCorrectionHeight":[5803]},"config_override":{"source_id":"config","line":504,"kind":"Literal"}},
+    {"option_path":"misc.fixedcolHeadMarginTop","legacy_line":4991,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2321},"lexical_readers":{"opts.misc.fixedcolHeadMarginTop":[5324]},"config_override":{"source_id":"config","line":510,"kind":"Literal"}},
+    {"option_path":"misc.fixedcolHeadMarginLeft","legacy_line":4992,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2322},"lexical_readers":{"opts.misc.fixedcolHeadMarginLeft":[5320]},"config_override":{"source_id":"config","line":516,"kind":"ConditionalExpression"}},
+    {"option_path":"misc.fixedcolHeadHeight","legacy_line":4993,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2323},"lexical_readers":{"opts.misc.fixedcolHeadHeight":[5327]},"config_override":{"source_id":"config","line":522,"kind":"ConditionalExpression"}},
+    {"option_path":"misc.fixedcolBodyMarginTop","legacy_line":4994,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2324},"lexical_readers":{"opts.misc.fixedcolBodyMarginTop":[5331]},"config_override":{"source_id":"config","line":528,"kind":"UnaryExpression"}},
+    {"option_path":"misc.fixedcolBodyMarginLeft","legacy_line":4995,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2325},"lexical_readers":{"opts.misc.fixedcolBodyMarginLeft":[5337]},"config_override":{"source_id":"config","line":534,"kind":"ConditionalExpression"}},
+    {"option_path":"misc.fixedcolBodyBindHeight","legacy_line":4996,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":0,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2326},"lexical_readers":{"opts.misc.fixedcolBodyBindHeight":[99]},"config_override":{"source_id":"config","line":540,"kind":"Literal"}},
+    {"option_path":"misc.fixedcolBodyAddHeight","legacy_line":4997,"profiles":["G13","G15"],"note":"Used legacy pixel correction for split/fixed or resize geometry; native colgroups/sticky CSS may replace the mechanism only with equivalent responsive width/alignment outcomes.","default_value":1,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2327},"lexical_readers":{"opts.misc.fixedcolBodyAddHeight":[6743]},"config_override":{"source_id":"config","line":546,"kind":"Literal"}},
+    {"option_path":"misc.fixedcolRootContainer","legacy_line":4998,"profiles":["G13","G15"],"note":"Selector for positioned root reacting to dynamic containing-height layout; native authored positioning must preserve layout outcomes.","default_value":null,"status":"owned_geometry_replacement_parity_open","declaration":{"source_id":"types-misc","line":2328},"lexical_readers":{"opts.misc.fixedcolRootContainer":[5295,5298]},"config_override":{"source_id":"config","line":553,"kind":"Literal"}},
+    {"option_path":"currMoveToRow","legacy_line":5000,"profiles":["G02","G19"],"note":"Internal destination index affects progressive paging after moving/copying beyond rendered rows; not a modern API proposal.","default_value":-1,"declaration":{"source_id":"types-misc","line":2895},"lexical_readers":{"opts.currMoveToRow":[245,387]}}
+  ],
+  "additional_paths": [
+    {"id":"D01","profiles":["G01","G03","G20"],"paths":["N.grid","N(data).grid","NU.prototype.grid","NU.Grid.options","NU.Grid.tempRowEle","NU.Grid.tableMap","NU.Grid.thead","NU.Grid.contextEle","NU.Grid.rowSpanIds"],"note":"Root Object.assign and jQuery prototype installation expose class and instance-method aliases; declared public fields enable root/template/matrix introspection. Explicit ESM bindGrid plus caller-owned roots/templates replaces aliases but multi-line and customization outcomes remain required.","legacy_refs":[{"source_id":"root","line":17},{"source_id":"root","line":19},{"line":53},{"line":4938},{"source_id":"types-ui","line":342},{"source_id":"types-ui","line":1142}],"cross_ledger":["C13","C15"]},
+    {"id":"D02","profiles":["G01","G06","G08","G13","G14","G16","G20"],"paths":["NA.context.attr(ui).grid","opts deep merge","global/local callback composition"],"note":"Constructor deep-merges global Grid options then local options; wrapHandler composes local/global onBeforeSelect,onSelect,onBind. Arbitrary configured/local extension keys are outside literal inventory. Current app-owned typed binder options/rules/messages need an explicit consistent default/composition recipe.","legacy_refs":[{"line":5005},{"line":5011},{"line":5018},{"line":417}],"cross_ledger":["C11","C13"]},
+    {"id":"D03","profiles":["G12","G14","G16","G20"],"paths":["message","message.ko_KR","message.ko_KR.empty","message.ko_KR.search","message.ko_KR.selectAll","message.ko_KR.dFilter","message.ko_KR.more","message.ko_KR.column","message.ko_KR.showHide","message.ko_KR.prev","message.ko_KR.next","message.en_US","message.en_US.empty","message.en_US.search","message.en_US.selectAll","message.en_US.dFilter","message.en_US.more","message.en_US.column","message.en_US.showHide","message.en_US.prev","message.en_US.next"],"note":"Merged locale message object supplies empty/search/selectAll/data-filter/more/column/show-hide/previous/next text. Current authored labels/status can localize these outcomes; no global Grid message object or integrated empty/menu/detail workflow is claimed.","legacy_refs":[{"source_id":"config","line":451},{"source_id":"config","line":452},{"source_id":"config","line":463}],"cross_ledger":["C13"],"config_path_refs":[{"path":"message","source_id":"config","line":453},{"path":"message.ko_KR","source_id":"config","line":454},{"path":"message.ko_KR.empty","source_id":"config","line":455},{"path":"message.ko_KR.search","source_id":"config","line":456},{"path":"message.ko_KR.selectAll","source_id":"config","line":457},{"path":"message.ko_KR.dFilter","source_id":"config","line":458},{"path":"message.ko_KR.more","source_id":"config","line":459},{"path":"message.ko_KR.column","source_id":"config","line":460},{"path":"message.ko_KR.showHide","source_id":"config","line":461},{"path":"message.ko_KR.prev","source_id":"config","line":462},{"path":"message.ko_KR.next","source_id":"config","line":463},{"path":"message.en_US","source_id":"config","line":465},{"path":"message.en_US.empty","source_id":"config","line":466},{"path":"message.en_US.search","source_id":"config","line":467},{"path":"message.en_US.selectAll","source_id":"config","line":468},{"path":"message.en_US.dFilter","source_id":"config","line":469},{"path":"message.en_US.more","source_id":"config","line":470},{"path":"message.en_US.column","source_id":"config","line":471},{"path":"message.en_US.showHide","source_id":"config","line":472},{"path":"message.en_US.prev","source_id":"config","line":473},{"path":"message.en_US.next","source_id":"config","line":474}]},
+    {"id":"D04","profiles":["G11"],"paths":["sortableItem","sortableItem.asc","sortableItem.desc"],"note":"Merged sortableItem asc/desc strings may contain markup; legacy swaps labels. Native aria-sort and authored labels replace presentation mechanics while correct direction/activation remain required.","legacy_refs":[{"source_id":"config","line":446},{"source_id":"config","line":447},{"source_id":"config","line":448},{"line":5968},{"line":5972},{"line":5976}],"config_path_refs":[{"path":"sortableItem","source_id":"config","line":446},{"path":"sortableItem.asc","source_id":"config","line":447},{"path":"sortableItem.desc","source_id":"config","line":448}]},
+    {"id":"D05","profiles":["G04","G05","G06"],"paths":["tbody id/name field binding","data-format","data-validate","fRules","vRules","ND.formatter/validator dynamic catalogs"],"note":"Rows are NU.form instances. Formatter/validator HTML tuples and global/custom catalogs are reached transitively; field-to-tuple fRules/vRules differ from modern rule-name-to-function RuleSet. Grid omits forwarding those declared object options, a defect to repair rather than permission to drop their intended capability.","legacy_refs":[{"line":76},{"line":88},{"line":3347},{"line":3473},{"line":3515},{"line":6733},{"source_id":"legacy-guide","line":134},{"source_id":"legacy-guide","line":346}],"cross_ledger":["C11","C12","U01"]},
+    {"id":"D06","profiles":["G02","G19","G20"],"paths":["scrollPaging.limit","scrollPaging.defSize","isBinding","currMoveToRow","bind callType append/grid.bind/grid.dataFilter/grid.sort/grid.update"],"note":"Runtime-added limit/defSize/isBinding coordinate progressive scroll, append, queued/reentrant bind and completion; all rendered pages accumulate. Modern local paging/released records does not certify progressive loading or real virtualization.","legacy_refs":[{"line":120},{"line":137},{"line":140},{"line":389},{"line":5021},{"line":5037},{"line":5442},{"line":6537}]},
+    {"id":"D07","profiles":["G01","G08","G09","G19","G20"],"paths":["NU.EventHandlers.Grid.RowHandlerBeforeBind","RowHandler","OnBeforeSelect","OnSelect","OnBind"],"note":"Declared callbacks expose Grid this, row indexes/elements/whole data and completion flags; runtime mutates beforeRow before after-selection callback and fires onSelect after veto. Intended modern typed transitions/hooks need deterministic ordering, RowId and owned cleanup.","legacy_refs":[{"source_id":"types-misc","line":3462},{"source_id":"types-misc","line":3463},{"source_id":"types-misc","line":3466},{"source_id":"types-misc","line":3469},{"source_id":"types-misc","line":3480},{"source_id":"types-misc","line":3490},{"line":88},{"line":94},{"line":135},{"line":174},{"line":190}],"cross_ledger":["C08"]},
+    {"id":"D08","profiles":["G08","G09","G10","G15"],"paths":["NU.ui.iteration.select","NU.ui.iteration.checkAll","NU.ui.iteration.checkSingle","select(array,isAppend)","check(array,isAppend)"],"note":"Selection click ignores check-target controls; multi selection toggles independent rows and does not implement Shift/Ctrl range. Checks are DOM-target state independent of selected classes. check-all targets rendered rows; legacy removeProp/removeAttr clearing defects must be repaired, with explicit modern scope and mixed state.","legacy_refs":[{"line":144},{"line":192},{"line":217},{"line":6452},{"line":6495},{"source_id":"legacy-guide","line":282},{"source_id":"legacy-guide","line":337}]},
+    {"id":"D09","profiles":["G01","G03","G04","G05","G06","G07"],"paths":["NU.form row instances","NU.form.add/default values","NC.prototype.vals","NC.element.toData","radio/checkbox groups","multiple Select","img.src/html","readonly/disabled"],"note":"Shared row Form performs raw/group values, defaults, display, validation and rowStatus. Grid bind and add pass different unbind/cache/tpBind options; current Form capabilities do not automatically reach Grid. Per-row names/labels/controls and independent screen ownership need evidence.","legacy_refs":[{"line":76},{"line":3350},{"line":3473},{"line":3495},{"line":3639},{"line":3954},{"line":6733},{"source_id":"legacy-guide","line":279}],"cross_ledger":["U01","U02","C10"]},
+    {"id":"D10","profiles":["G03","G04","G20"],"paths":["p.grid declarations","p.select row template code lists","e.* delegated row actions","arbitrary selector row events"],"note":"NT.aop creates components dynamically and recovers row index from repeated row elements; grouped controls use name-based targets. Current arbitrary DOM listeners cannot recover private Grid RowId maps; typed owned row action hook and binding-before-action order remain required even if parser mechanism is retired.","legacy_refs":[{"source_id":"template","line":174},{"source_id":"template","line":334},{"source_id":"template","line":350},{"source_id":"template","line":374},{"source_id":"legacy-example-template","line":73}],"cross_ledger":["C07","C08"]},
+    {"id":"D11","profiles":["G01","G06","G07","G20"],"paths":["ND.ds.instance(Grid,true)","Grid.update(row,key)","shared Form/Select edits"],"note":"Constructor registers Grid DataSync and external updates call update. Current caller-owned Rows subscription is its central replacement; selected/check/status views, completion suppression and field hook order remain open.","legacy_refs":[{"line":5135},{"line":6791},{"line":6986}],"cross_ledger":["C09","C10"]},
+    {"id":"D12","profiles":["G01","G02","G06","G12","G13","G14","G15","G18"],"paths":["NC.json.mapFromKeys","NC.prototype.vals","NC.element.toData","NC.event.windowScrollLock","NU.ui.draggable.events","NU.ui.iteration.move/copy","NU.grid.tableCells/tableMap"],"note":"Referenced helpers are Grid-owned dependencies reached through UI/row Forms, not unused standalone libraries. Native DOM/CSS/pointer handling, private topology and typed data projection may replace them locally after preserving owning outcomes. Regex/selector and global message utilities have dynamic paths beyond static reference lists.","legacy_refs":[{"line":5284},{"line":5407},{"line":5479},{"line":6389},{"line":6411},{"line":6889},{"line":6895}],"cross_ledger":["C15"]},
+    {"id":"D13","profiles":["G14","G16"],"paths":["more=true field expansion","more:string[] detail restriction","generated column chooser/count/check-all","detail Form/Popup previous/next/close validation"],"note":"more bundles two workflows: column chooser and editable detail dialog. Detail includes hidden fields, shares dataset, validates navigation and vetoes close. Authored column controls are a partial replacement; Popup/Form foundations do not finish row-detail behavior.","legacy_refs":[{"line":5533},{"line":5613},{"line":5674},{"line":5718},{"line":5735},{"line":5751}],"cross_ledger":["U13","U15","U16"]},
+    {"id":"D14","profiles":["G03","G13","G14","G17"],"paths":["data-column/data-columns","authored colgroup/cols","scope col/colgroup","header/footer rowspan/colspan"],"note":"Current column contract keeps real header/footer/cell/colgroup nodes, validates native span membership and continuity, adjusts visible groups and restores exactly. It replaces split/copy geometry under ongoing validation; multi-line body records and repeated-value merging are separate missing features.","legacy_refs":[{"line":5174},{"line":5212},{"line":5247},{"line":5363},{"line":6281},{"source_id":"modern-columns-plan","line":65},{"source_id":"modern-columns-plan","line":75},{"source_id":"modern-columns-plan","line":77}]},
+    {"id":"D15","profiles":["G04","G06","G18","G19"],"paths":["Clipboard text/plain","tab/newline quoted paste","readonly/disabled skip","focused field start index"],"note":"Legacy paste loops through rendered row elements then val; off-page targets can be written without RowStatus/notification. Required modern paste must reconcile current column order, parsers/drafts, atomic or reported partial failures, notification bounds and future virtualized rows.","legacy_refs":[{"line":6320},{"line":6346},{"line":6353},{"line":6367},{"source_id":"legacy-guide","line":344}]},
+    {"id":"D16","profiles":["G09","G14","G18","G19"],"paths":["required column resize/reorder/hide","required multiple selection","required bulk paste","required real scroll virtualization","planned range selection"],"note":"User-required six Grid capabilities remain obligations. Reorder and bounded scroll virtualization are explicit added requirements; no historical reorder/range gesture or virtualization implementation is inferred from legacy multiselect/scrollPaging. Range semantics are a modern planned selection contract, not certified legacy behavior.","legacy_refs":[{"source_id":"ledger","section":"Grid coverage G09/G14/G18/G19"},{"source_id":"plan","section":"Required scope"}]},
+    {"id":"D17","profiles":["G01","G07","G09","G10"],"paths":["data(false)","data(modified/insert/update/delete,cols...)","data(selected/checked,cols...)","rowStatus insert/update/delete payload"],"note":"Mutable wrapper sharing/projection/save rows remain used application workflows. Current immutable Rows/change records require explicit tested wire conversion; selected/checked values are separate state families. Legacy selected/checked projection callback arguments bug is repaired around declared intent, not silently preserved or removed.","legacy_refs":[{"line":6376},{"line":6382},{"line":6386},{"line":6403},{"line":6763},{"source_id":"legacy-example-fixed","line":250},{"source_id":"legacy-example-fixed","line":270}],"cross_ledger":["C05","C09","C10"]}
+  ],
+  "omission_groups": [
+    {
+      "id": "GR01",
+      "kind": "potential_public_mechanism_retirement_scope_only",
+      "surface": [
+        "NU.grid.tableCells",
+        "NU.grid.tableMap",
+        "NU.Grid.tableMap",
+        "NU.Grid.contextEle",
+        "NU.Grid.thead"
+      ],
+      "profiles": [
+        "G03",
+        "G13",
+        "G14"
+      ],
+      "reason": "Used Grid topology/calculation logic is replaced near Grid by native cell/column plans. No helper is classified unused. Direct public matrix/introspection calls need migration review before any API/workflow loss.",
+      "user_visible_loss_if_excluded": "Applications calling exposed matrix helpers or expecting split-table/live mutable topology fields would lose those integration mechanisms.",
+      "replacement": "Caller-owned native table/header/template plus explicit column keys; private span-aware topology retains Grid behavior. Provide a concrete inspection/migration recipe for direct external callers.",
+      "condition": "Retain all G03/G13/G14 outcomes. Add to the single consolidated user decision only if an actual framework capability remains unsupported; no exclusion is approved here."
+    },
+    {
+      "id": "GR02",
+      "kind": "potential_legacy_geometry_option_retirement_scope_only",
+      "option_paths": [
+        "misc.resizableCorrectionWidth",
+        "misc.resizableLastCellCorrectionWidth",
+        "misc.resizeBarCorrectionLeft",
+        "misc.resizeBarCorrectionHeight",
+        "misc.fixedcolHeadMarginTop",
+        "misc.fixedcolHeadMarginLeft",
+        "misc.fixedcolHeadHeight",
+        "misc.fixedcolBodyMarginTop",
+        "misc.fixedcolBodyMarginLeft",
+        "misc.fixedcolBodyBindHeight",
+        "misc.fixedcolBodyAddHeight",
+        "misc.fixedcolRootContainer"
+      ],
+      "profiles": [
+        "G13",
+        "G14",
+        "G15"
+      ],
+      "reason": "Shipped browser/layout correction fields are actively read. A native layout may make these specific knobs structurally unnecessary, but static reference absence is not the rationale.",
+      "user_visible_loss_if_excluded": "Callers would lose exact legacy split-table/fixed-column pixel adjustment and positioned-root selector controls.",
+      "replacement": "Authored native table/colgroup widths, sticky offsets, containing-block CSS and preferred GridColumn widths with tested responsive alignment.",
+      "condition": "Prove equivalent pinning/footer/resize/reflow outcomes or record exact remaining customization loss in the same complete omission batch. No Grid feature is proposed for omission by this record."
+    },
+    {
+      "id": "GR03",
+      "kind": "cross_scope_parser_retirement_dependency",
+      "external_group_ref": {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "id": "R03"
+      },
+      "profiles": [
+        "G03",
+        "G04",
+        "G20"
+      ],
+      "reason": "Grid p./e. declarations are active through TEMPLATE; runtime parser review is centralized in core.",
+      "user_visible_loss_if_excluded": "Automatic declaration interpretation and delegated string-named row event discovery.",
+      "replacement": "Explicit typed CVC composition/code-data loading and an owned stable-RowId row-action hook.",
+      "condition": "Grid templates, code lists, row event context and binding-before-action behavior stay required; no duplicate approval request or unused claim."
+    }
+  ],
+  "coverage": {
+    "classes": 1,
+    "members": 31,
+    "literal_option_paths": 57,
+    "literal_top_level_options": 43,
+    "surface_entries": 89,
+    "individually_mapped_surface_entries": 89,
+    "structural_mapping_percent": 100,
+    "semantic_closed_surface_entries": 0,
+    "semantic_open_surface_entries": 89,
+    "additional_dynamic_groups": 17,
+    "additional_dynamic_groups_closed": 0,
+    "config_paths_examined": 37,
+    "config_paths_outside_constructor_literals": 24,
+    "member_set_matches_inventory": true,
+    "option_set_matches_inventory": true,
+    "legacy_source_sha256_matches_inventory": true
+  },
+  "verification": {
+    "runtime_tests_run_in_this_audit": [],
+    "historical_tests_recertified": false,
+    "omissions_approved": [],
+    "limits": [
+      "Structural mapping and source references do not certify behavior or test results.",
+      "Static reference absence never proves an exported or dynamically activated member unused.",
+      "Literal options include nested dotted paths and exclude external merges/runtime additions.",
+      "Current column contracts and optimized layout are present; stage gate claims belong to separate M10.5 evidence. Full legacy semantic closure remains open.",
+      "No legacy implementation body is copied into this evidence."
+    ],
+    "structural_checks": [
+      "NU.grid class/member/option sets derived from inventory and independently anchored with installed Vite parseAst.",
+      "Every member and literal option has a profile mapping and concrete note; all 31 members and 57 option paths have preserved declaration anchors.",
+      "Direct static reference expressions and lexical Grid/shared iteration/scroll option readers are observations, not exhaustive dynamic closure.",
+      "All semantic entries remain open; no historical/current runtime test is recertified by this audit."
+    ],
+    "read_proxy": {
+      "unique_hashed_files": 29,
+      "utf8_bytes": 1448394,
+      "meaning": "Unique file byte/hash/AST inputs and selected excerpt review proxy only. It is not actual model context, tokens, full-file semantic reading or token savings; repeated excerpts and parser-library internals are excluded."
+    },
+    "current_snapshot_note": "Parent froze artifact code before this final source snapshot. This P0 audit records hashes/structural mapping only and does not rerun or recertify runtime/package gates; other documentation may continue changing."
+  },
+  "inheritance": {
+    "member_static": "For member entries only, omitted static is false; static:true is explicit.",
+    "version": 1,
+    "rule": "Entries inherit entry_defaults. Profile IDs resolve owner/current/status and all profile acceptance cases; specific note/status/acceptance_additions refine that inherited mapping. A mapped entry can reference multiple owners. Omitted arrays contain no recorded additional evidence, not proof of absence.",
+    "source_rule": "legacy_line and option-reader line/expression refer to legacy-ui unless source_id is specified. Source IDs resolve through sources. No source body is embedded.",
+    "lexical_readers": "Each lexical_readers object maps an exact uncomputed option expression to its distinct observed legacy-ui line numbers, preserving all recorded reader anchors. Missing readers mean none recorded by this static scope, not unused.",
+    "format": "Surface and dynamic records occupy one JSON line each to reduce indentation; expand entry_defaults/profile references when reviewing. Source/option reader references keep every recorded anchor."
+  },
+  "entry_defaults": {
+    "source_id": "legacy-ui",
+    "semantic_closure": "open",
+    "public_api_proposed": false,
+    "retirement_decision": "not_approved",
+    "acceptance": "all cases and planned refs of listed profiles",
+    "reachability_policy": "Direct, contextual, transitive, aliases, declarations, configuration and external consumers remain relevant. Static absence does not establish unused; no entry is authorized for deletion."
+  },
+  "sources": {
+    "inventory": {
+      "path": "docs/implementation/evidence/v1-surface-inventory.json",
+      "sha256": "da8b2fb4013f4b18432f581fa0cfd1c91d3d67f95f3be5d36ed6478cac35a8c5",
+      "utf8_bytes": 98043
+    },
+    "extractor": {
+      "path": "tools/audit-v1-surface.mjs",
+      "sha256": "2671ea7d33cdd09763d3fa5ea5a1d667fe2768402b1025c13c334a110a7e9e98",
+      "utf8_bytes": 5096
+    },
+    "legacy-ui": {
+      "path": "v1/src/natural.ui.js",
+      "sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+      "utf8_bytes": 354376
+    },
+    "config": {
+      "path": "v1/dist/natural.config.js",
+      "sha256": "7777a896a606553a80b02925fc496056fde07ba9dbf335b9579ded917d37201c",
+      "utf8_bytes": 32802
+    },
+    "types-ui": {
+      "path": "v1/@types/natural.ui.d.ts",
+      "sha256": "f7df6a7719bac02ee1dd28b7a68079eb31f4663859717683d258022e95bf0eda",
+      "utf8_bytes": 93759
+    },
+    "types-misc": {
+      "path": "v1/@types/natural.ui.misc.d.ts",
+      "sha256": "8ad6aa60a59de22c3afbf4f987f81110616b1e16cb92ac45f4aa9169d5869b94",
+      "utf8_bytes": 179738
+    },
+    "types-root": {
+      "path": "v1/@types/natural.js.d.ts",
+      "sha256": "8907cd91d1ccb88f951f3cf8eacc9b934d1b03eb2f8bf57b86f5a5cbb89ac36b",
+      "utf8_bytes": 18993
+    },
+    "root": {
+      "path": "v1/src/natural.js.js",
+      "sha256": "db451e89314f57a5f13340712b681ca218d4e9b37093f3e08445948fa7ad7fd3",
+      "utf8_bytes": 1832
+    },
+    "template": {
+      "path": "v1/src/natural.template.js",
+      "sha256": "61c4b67e2a018e9fa18f8d8f5960400a66a1dbea58deb3ccedbe1d3702d65642",
+      "utf8_bytes": 18425
+    },
+    "legacy-guide": {
+      "path": "v1/docs/ui/grid.md",
+      "sha256": "9835ebcfa46c340ee3ed2f8dc03c2c0516b9136e56bbd4670f07744f2a55290b",
+      "utf8_bytes": 31654
+    },
+    "legacy-example-fixed": {
+      "path": "v1/docs/examples/grid-crud-fixed-header.md",
+      "sha256": "2decfdc3cd3564e903dd3e6a3ab0ff54b062236fb0f0240c8f2dd75b475016a2",
+      "utf8_bytes": 22675
+    },
+    "legacy-example-template": {
+      "path": "v1/docs/examples/template/search-grid-crud.md",
+      "sha256": "db525d85cd83c6acaecbb7e438240635b158fd1e7886a0d65068729abfe6677e",
+      "utf8_bytes": 17763
+    },
+    "legacy-walkthrough": {
+      "path": "v1/docs/getting-started/grid-crud-walkthrough.md",
+      "sha256": "1ee2c676198388af3ea799e9fad7aa16a6d5ae77dc4b53dff33417611cde4f15",
+      "utf8_bytes": 31088
+    },
+    "ledger": {
+      "path": "docs/implementation/feature-parity.md",
+      "sha256": "c78f0ede4bd99a277a650cf42446f6a362e63f98925f8875749c41d3c93d150e",
+      "utf8_bytes": 20998
+    },
+    "plan": {
+      "path": "docs/implementation/feature-parity-plan.md",
+      "sha256": "24181aaa3536d9f85f620bbcf57198378276702c7b22d7e5032528bf57724501",
+      "utf8_bytes": 18682
+    },
+    "modern-columns-plan": {
+      "path": "docs/implementation/m10-columns-plan.md",
+      "sha256": "f1ac82d4fb5fa9bffb3605190a0c0897122d20d621e62397e8074843a8b52ff5",
+      "utf8_bytes": 11933
+    },
+    "grid": {
+      "path": "src/ui/grid.ts",
+      "sha256": "edd434de32f78dcbcc5c15a1b53ac790a73db8690f5d4dede7988464e9ff8ecc",
+      "utf8_bytes": 38417
+    },
+    "columns": {
+      "path": "src/ui/grid-columns.ts",
+      "sha256": "9cf71e4f97683e1f2b2c467d5af42b1eb52ea11cb73b83ad6a390fab11ab49b5",
+      "utf8_bytes": 26461
+    },
+    "ui": {
+      "path": "src/ui/index.ts",
+      "sha256": "e7396147633a7708cae5884ab9df78e47fdfd2e6427f3a34cae6979a9e92bc00",
+      "utf8_bytes": 4095
+    },
+    "data": {
+      "path": "src/data/index.ts",
+      "sha256": "19ffb3e03549ca88012716a8befbfa482276dd50ef622ad17ca1b20c08cb5674",
+      "utf8_bytes": 9387
+    },
+    "rules": {
+      "path": "src/ui/rules.ts",
+      "sha256": "1a4897d07ac4d7a680ffa3f5195f4d219931a48290fcf308b6faa6cedbfad689",
+      "utf8_bytes": 7019
+    },
+    "form": {
+      "path": "src/ui/form.ts",
+      "sha256": "d05ebde6299ba9bc398ef63d27c21cd67420b01ad91d895279c36d1fbe9ba877",
+      "utf8_bytes": 27205
+    },
+    "select": {
+      "path": "src/ui/select.ts",
+      "sha256": "b3564b47653787f27347a465dca1c28c8f6246419289c74b7735fc4acc60bd39",
+      "utf8_bytes": 5439
+    },
+    "popup": {
+      "path": "src/ui/popup.ts",
+      "sha256": "0e3575893c293e2a3b152c802fe46a0d77c101c417a4aea019ad3bbc7336d26f",
+      "utf8_bytes": 9461
+    },
+    "page": {
+      "path": "src/page/index.ts",
+      "sha256": "befcbcca6e87b71d5482ab1efa6ce0aa4a2676e3cbc75c81866d6fd7186565bf",
+      "utf8_bytes": 12227
+    },
+    "column-example-ts": {
+      "path": "examples/vite/m10/columns.ts",
+      "sha256": "0eb0400f2e0d131c0e6f51e3b0603d0200db0c88e60a69ab0953971241ab5278",
+      "utf8_bytes": 9720
+    },
+    "column-example-html": {
+      "path": "examples/vite/m10/columns.html",
+      "sha256": "4452d46ed174cbe7029bed090d132c630839c62964b8b4304a4e1959607fa1d4",
+      "utf8_bytes": 14836
+    },
+    "column-example-css": {
+      "path": "examples/vite/m10/columns.css",
+      "sha256": "42e7c392b6e6ee798e9bf94e0cb1ca672dd9912991e952bbce0404cd18403917",
+      "utf8_bytes": 4101
+    },
+    "core-mapping": {
+      "path": "docs/implementation/evidence/v1-core-parity.json",
+      "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029",
+      "utf8_bytes": 322169
+    }
+  }
+}

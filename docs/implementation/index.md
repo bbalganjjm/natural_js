@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.5 column implementation](m10-columns-plan.md) - Column state, authored table topology, accessible resizing, and restoration gates for M10.5. (draft)
+
 * [Natural-JS 2.0 full feature implementation plan](feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)
 * [Natural-JS 2.0 framework feature coverage](feature-parity.md) - Source-backed legacy behavior gaps, required additions, and pending consolidated retirement review. (draft)
 

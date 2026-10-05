@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
+    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
+    git_blob: d606737eaa4d51860407c50b4d3ba2f378739ed3
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -69,9 +69,21 @@ sources:
     resource: ../../src/comm/index.ts
     title: Current communication hooks
     git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
-generated: { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
+  - id: grid-mapping
+    resource: evidence/v1-grid-parity.json
+    title: Detailed Grid surface, configuration and dynamic mapping
+    git_blob: 6a61d2fb9c4cf6acc401c54caeb7db038ead33d3
+  - id: ui-mapping
+    resource: evidence/v1-ui-parity.json
+    title: Detailed other UI and shell surface and dynamic mapping
+    git_blob: 24050c621e8d57cf4090c1a295674ce0b404d0d7
+  - id: core-mapping
+    resource: evidence/v1-core-parity.json
+    title: Detailed core surface and dynamic reachability mapping
+    git_blob: 8d7594b97048b06779166c451443bfafcee11c12
+generated: { by: codex/gpt-6, at: 2026-10-05T11:52:37Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
+  - { by: codex/gpt-6, at: 2026-10-05T11:53:19Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -87,6 +99,10 @@ The first audit covers eight preserved JavaScript sources. Its reproducible AST 
 Run `node tools/audit-v1-surface.mjs --check` to compare the checklist with the preserved files. The private development tool uses installed Vite parsing and is outside the npm package; `--write` explicitly regenerates structural evidence. Constructor keys cover literal assignments to this.options only: the 338 entries include 307 top-level keys and 31 nested dotted paths, not 338 independent public options. Reference expressions cover uncomputed member paths. Neither extraction closes dynamic reachability.[^extractor]
 
 Status: **core** means the central behavior exists but the family still needs full option/callback verification; **partial** means a concrete gap exists; **missing** means no equivalent current contract; **review** means a proposed workflow retirement is pending. Every gap and review item remains a support obligation until implemented or explicitly approved for exclusion.
+
+The detailed mappings assign all 775 structural entries to owners, current counterparts, gaps, acceptance conditions and reachability observations: core 260 (27 classes / 207 members / 26 literal paths), Grid 89 (1 / 31 / 57), and other UI/shell 426 (15 / 156 / 255). The root NU.grid receiver/static aliases remain in the other-UI member set; only the nested Grid class belongs to the Grid file. Exact sets, AST anchors, kinds, defaults and preserved source hashes were checked independently.[^core-mapping][^grid-mapping][^ui-mapping]
+
+There are 53 identified dynamic/configuration/declaration path groups (15 core, 17 Grid, 21 UI/shell), plus separately indexed nested helpers, external configuration and old declarations. These are review inputs, not exhaustive behavior counts or completed parity. Semantic/dynamic closure and the consolidated omission proposal remain open. No absence of static references proves a helper unused, and candidate labels are not approvals. Evidence source hashes describe the audit snapshot; some modern source/document files changed during implementation and indexing. Those snapshots do not recertify current runtime or historical gates.[^core-mapping][^grid-mapping][^ui-mapping]
 
 # Steps
 
@@ -109,7 +125,7 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G11 | sortable, sortableItem, grid.sort | Partial comparator/aria-sort exists; header activation and direction toggling need framework-owned behavior. |
 | G12 | filter, data-filter, grid.dataFilter | Partial predicate exists; distinct-value selection, search/counts and filter indicators are missing. |
 | G13 | height, fixedcol, fixHeader/fixColumn, fixed footer | Authored sticky/grouped examples exist. Footer and integration with column/viewport state need complete proof. Never copy headers. |
-| G14 | resizable/resize, show/hide, more column chooser | Missing column tools. Reorder is an additional explicit requirement; the audit found no equivalent 1.x reorder API. |
+| G14 | resizable/resize, show/hide, more column chooser | Partial: M10.5 implements state, preferred width, pointer/keyboard resize, reorder and show/hide with authored controls. Legacy chooser/options/callback edge closure remains open; no omission approved. Reorder is an explicit added requirement. |
 | G15 | vResizable/vResize, scroll lock and action-driven scroll | Missing height-resize interaction and reveal policies; authored CSS may supply dimensions/containment. |
 | G16 | more detail Form/Popup, previous/next validation | Missing integrated row detail behavior. Existing Popup/Form are its foundations. |
 | G17 | data-rowspan, rowSpanIds, grid.rowSpan | Missing data-driven repeated-value merging; authored header spans are a different behavior. |
@@ -173,7 +189,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Close P0's symbol/option/behavior mapping and prepare one complete retirement proposal before requesting that decision. Then implement the required Grid stages and dependent shared data/control contracts through the existing milestone process. New public contracts receive representative HTML/TS and tests before implementation. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 Grid/UI/options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state is implemented; use [its detailed plan](m10-columns-plan.md) for evidence and boundaries, then plan selection/check/filter as M10.6. New public contracts receive representative HTML/TS and tests before implementation. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
 
 # Decisions
 
@@ -190,10 +206,11 @@ Close P0's symbol/option/behavior mapping and prepare one complete retirement pr
 |---|---|---|
 | 2026-10-05 | Scope instruction | Full 1.x framework coverage and six explicit Grid capabilities are required before release preparation. No new omission approved. |
 | 2026-10-05 | Initial source audit | Independent Grid, other UI/shell and core reviews identified these gaps against 80e1fb3. Eight-file parser checklist generated; per-option mapping and dynamic/configuration closure remain open. Runtime source and historical tests are unchanged. |
+| 2026-10-05 | Detailed structural mapping | All 775 entries have profile-owned obligations. Independent Core/Grid audit and the root's separate UI AST/default/reference checks confirm structural coverage. The 53 identified dynamic groups remain semantically open; no runtime parity, unused-helper proof or omission approval is claimed. |
 
 # Open questions
 
-P0 must finish the consolidated retirement proposal, classify literal/default/merged options and document legacy values/callback edge cases. Manual assistive-technology review and actual token telemetry remain open. This initial family ledger is not a claim that every 1.x option is fully classified or that current 2.0 has complete parity.
+P0 must close behavior equivalence for mapped literal/merged options, dynamic dispatch and callback edge cases, then finish the consolidated retirement proposal. Manual assistive-technology review and actual token telemetry remain open. Structural mapping is complete for the eight-file checklist; exhaustive behavioral closure and current 2.0 parity are incomplete.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
 [^extractor]: Reproducible private development audit
@@ -210,4 +227,7 @@ P0 must finish the consolidated retirement proposal, classify literal/default/me
 [^form]: Current Form implementation
 [^page]: Current CVC runtime and HTML transport
 [^data]: Current shared Rows contract
+[^core-mapping]: Detailed core surface and dynamic reachability mapping
+[^grid-mapping]: Detailed Grid surface, configuration and dynamic mapping
+[^ui-mapping]: Detailed other UI and shell surface and dynamic mapping
 [^comm]: Current communication hooks

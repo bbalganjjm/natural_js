@@ -14,10 +14,15 @@ function view() {
       <output data-error-for="person.name"></output>
     </form>
     <table data-consumer-grid>
-      <thead><tr><th scope="col">Person</th><th scope="col">Choice</th></tr></thead>
+      <thead><tr>
+        <th scope="col" data-column="person">Person
+          <button type="button" data-resize-column="person" aria-label="Resize Person column">Resize</button>
+        </th>
+        <th scope="col" data-column="choice">Choice</th>
+      </tr></thead>
       <tbody><tr data-row-template>
-        <th scope="row"><span data-field="person.name"></span></th>
-        <td><label>Choice
+        <th scope="row" data-column="person"><span data-field="person.name"></span></th>
+        <td data-column="choice"><label>Choice
           <select data-field="choice" data-options="choices"
             data-option-label="label" data-option-value="value">
             <option value="">Choose</option>
@@ -68,7 +73,12 @@ const definition = {
       { key: 1, parent: null, date: "2026-10-05", person: { name: input.name }, choices, choice: 11 },
       { key: 2, parent: 1, date: "2026-10-06", person: { name: "Off page" }, choices, choice: 22 }
     ]);
-    const grid = bindGrid(root.querySelector("table"), { rows, initialPage: { page: 1, size: 1 } });
+    const columnEvents = [];
+    const grid = bindGrid(root.querySelector("table"), {
+      rows, initialPage: { page: 1, size: 1 },
+      columns: [{ key: "person", width: 180 }, { key: "choice", width: 120 }],
+      onColumnsChange: ({ columns, event }) => columnEvents.push({ columns, type: event?.type ?? null })
+    });
     const form = bindForm(root.querySelector("form"), { rows });
     form.bind(rows.entries()[0].id);
     const tree = bindTree(root.querySelector("[data-consumer-tree]"), {
@@ -99,7 +109,7 @@ const definition = {
         }
       })
     });
-    const screen = { rows, grid, form, tree, picker, notifications, documents, openDocument, disposed: false };
+    const screen = { rows, grid, columnEvents, form, tree, picker, notifications, documents, openDocument, disposed: false };
     state.screens[input.slot] = screen;
     own(async () => {
       await documents.dispose();

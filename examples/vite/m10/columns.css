@@ -1,0 +1,59 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+:root { color-scheme: light; font: 16px/1.5 system-ui, sans-serif; background: #f3f5f7; color: #203040; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { padding: clamp(.75rem, 2vw, 1.5rem); }
+h1, h2, h3, p { margin-top: 0; }
+.site-header { max-width: 65rem; }
+.screens { display: grid; gap: 1.5rem; }
+.screens > div, .column-page, .workspace, .table-panel { min-width: 0; }
+.column-page { background: #fff; border: 1px solid #afbdca; padding: 1rem; border-radius: .4rem; }
+.column-page > header { border-bottom: 3px solid #2d679a; margin-bottom: 1rem; }
+.eyebrow { margin-bottom: .25rem; color: #31597c; font-weight: 600; }
+.ledger .workspace { display: grid; gap: 1rem; }
+.ledger .column-controls { display: flex; gap: .7rem; flex-wrap: wrap; align-items: start; }
+.ledger .column-controls > label { flex: 1 1 10rem; }
+.ledger .column-controls > p { flex-basis: 100%; margin: 0; }
+.notebook { background: #fffbf4; border-color: #bda986; }
+.notebook > header { border-color: #886435; }
+.notebook .eyebrow { color: #735223; }
+.notebook .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; gap: 1rem; }
+.notebook .column-controls > label { margin-bottom: .7rem; }
+fieldset { min-width: 0; border: 1px solid #9baebe; margin: 0; padding: .8rem; }
+legend { font-weight: 600; }
+label { display: grid; gap: .2rem; }
+label.check, td[data-column="active"] label { display: flex; gap: .4rem; align-items: center; }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; padding: .35rem .5rem; border: 1px solid #376589; background: #fff; border-radius: .2rem; }
+button:disabled { color: #626c73; border-color: #a8b2bb; cursor: default; }
+button:hover:not(:disabled) { background: #e2eef7; }
+input, select, textarea { max-width: 100%; min-width: 0; padding: .25rem; border: 1px solid #7c91a3; background: #fff; }
+:focus-visible { outline: 3px solid #ad5200; outline-offset: 2px; }
+.actions, .view-actions { display: flex; flex-wrap: wrap; gap: .4rem; }
+.view-actions { margin-bottom: .65rem; }
+.notebook .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.column-controls p { margin-bottom: 0; }
+.grid-scroll { max-width: 100%; max-height: 27rem; overflow: auto; border: 1px solid #91a6b7; }
+table { table-layout: fixed; width: 100%; border-collapse: separate; border-spacing: 0; }
+caption { padding: .5rem; text-align: left; font-weight: 600; }
+th, td { padding: .4rem; text-align: left; vertical-align: top; overflow-wrap: anywhere; border-right: 1px solid #c8d3dc; border-bottom: 1px solid #c8d3dc; }
+thead { position: sticky; top: 0; z-index: 2; }
+thead th { background: #e2edf5; }
+.notebook thead th, .notebook tfoot { background: #f3e9d7; }
+tbody tr:nth-child(even) { background: #f7fafc; }
+.notebook tbody tr:nth-child(even) { background: #fff5e4; }
+tbody tr[data-row-template], [hidden] { display: none !important; }
+td input:not([type="checkbox"]), td select, td textarea { width: 100%; }
+td output { display: block; color: #9a1f24; font-size: .9rem; }
+td output:empty { display: none; }
+[aria-invalid="true"] { border-color: #aa1b23; }
+button[data-select-row][aria-pressed="true"] { background: #285c82; color: #fff; }
+button[data-resize-column] { padding: .05rem .25rem; margin-top: .2rem; cursor: ew-resize; touch-action: none; }
+tfoot { background: #edf2f6; font-size: .9rem; }
+[data-column-status] { display: block; min-height: 1.6rem; margin: .8rem 0; font-weight: 600; }
+.observations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.observations section { min-width: 0; background: #f2f5f7; padding: .7rem; }
+.observations h3 { font-size: 1rem; }
+pre { max-height: 15rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .85rem; margin: 0; }
+@media (max-width: 52rem) { .notebook .workspace { grid-template-columns: minmax(0, 1fr); } .notebook .column-controls { order: -1; } }
+@media (max-width: 35rem) { .observations { grid-template-columns: minmax(0, 1fr); } .column-page { padding: .6rem; } }

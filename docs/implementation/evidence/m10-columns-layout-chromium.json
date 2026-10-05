@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-05T11:16:20.556Z",
+  "browser": "153.0.8010.12",
+  "platform": "win32",
+  "cpu": "Intel(R) Core(TM) i7-9700F CPU @ 3.00GHz",
+  "warmup": 2,
+  "runs": 5,
+  "sources_sha256": {
+    "src/ui/grid.ts": "edd434de32f78dcbcc5c15a1b53ac790a73db8690f5d4dede7988464e9ff8ecc",
+    "src/ui/grid-columns.ts": "9cf71e4f97683e1f2b2c467d5af42b1eb52ea11cb73b83ad6a390fab11ab49b5",
+    "src/ui/dom-state.ts": "3950451df55497a3d94559820cfc7597acdfb593e77e518e12a2e2ab7dc47062",
+    "src/ui/index.ts": "e7396147633a7708cae5884ab9df78e47fdfd2e6427f3a34cae6979a9e92bc00"
+  },
+  "method": "Same host, 10 flat native columns, full 100/1000 rendered rows; operation elapsed time includes incidental native geometry reads, no extra forced paint or layout fence; preferred widths 120px; reverse/hide/resize one field; no Rows changes. Fresh owned table/store per sample. No universal speed claim or final virtualization benchmark.",
+  "samples": [
+    {
+      "rows": 100,
+      "fields": 10,
+      "runs": [
+        {
+          "initial": 3.899999998509884,
+          "reorder": 12.800000004470348,
+          "hide": 6.5,
+          "width": 0
+        },
+        {
+          "initial": 3.899999998509884,
+          "reorder": 11.600000001490116,
+          "hide": 7.5,
+          "width": 0
+        },
+        {
+          "initial": 3.5999999940395355,
+          "reorder": 10.900000005960464,
+          "hide": 6.899999998509884,
+          "width": 0.19999999552965164
+        },
+        {
+          "initial": 3.600000001490116,
+          "reorder": 10.699999995529652,
+          "hide": 6,
+          "width": 0.10000000149011612
+        },
+        {
+          "initial": 3.5,
+          "reorder": 10.899999998509884,
+          "hide": 6,
+          "width": 0.10000000149011612
+        }
+      ],
+      "median_ms": {
+        "initial": 3.600000001490116,
+        "reorder": 10.900000005960464,
+        "hide": 6.5,
+        "width": 0.10000000149011612
+      },
+      "rows_notifications": 0,
+      "duplicate_ids": 0
+    },
+    {
+      "rows": 1000,
+      "fields": 10,
+      "runs": [
+        {
+          "initial": 27.5,
+          "reorder": 124.39999999850988,
+          "hide": 76.29999999701977,
+          "width": 0.10000000149011612
+        },
+        {
+          "initial": 27.399999998509884,
+          "reorder": 143.70000000298023,
+          "hide": 69.29999999701977,
+          "width": 0.10000000149011612
+        },
+        {
+          "initial": 26.799999997019768,
+          "reorder": 122.20000000298023,
+          "hide": 62.79999999701977,
+          "width": 0.10000000149011612
+        },
+        {
+          "initial": 23.899999998509884,
+          "reorder": 142.60000000149012,
+          "hide": 68.30000000447035,
+          "width": 0.19999999552965164
+        },
+        {
+          "initial": 25.700000002980232,
+          "reorder": 120.60000000149012,
+          "hide": 62,
+          "width": 0.10000000149011612
+        }
+      ],
+      "median_ms": {
+        "initial": 26.799999997019768,
+        "reorder": 124.39999999850988,
+        "hide": 68.30000000447035,
+        "width": 0.10000000149011612
+      },
+      "rows_notifications": 0,
+      "duplicate_ids": 0
+    }
+  ]
+}

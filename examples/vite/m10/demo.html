@@ -49,6 +49,31 @@
         </fieldset>
 
         <fieldset>
+          <legend>Columns</legend>
+          <label>Column
+            <select data-column-choice data-needs-grid>
+              <option value="name">Employee</option><option value="email">Email</option>
+              <option value="phone">Phone</option><option value="team">Team</option>
+              <option value="shift">Shift</option><option value="active">Active</option>
+              <option value="notes">Notes</option><option value="salary">Salary</option>
+            </select>
+          </label>
+          <label>Preferred width (CSS pixels)
+            <input type="number" min="1" step="1" data-column-width data-needs-grid>
+          </label>
+          <label class="check-label"><input type="checkbox" data-column-hidden data-needs-grid> Hide this column</label>
+          <div class="button-row">
+            <button type="button" data-action="apply-columns" data-needs-grid>Apply width / visibility</button>
+            <button type="button" data-action="column-left" data-needs-grid>Move earlier in group</button>
+            <button type="button" data-action="column-right" data-needs-grid>Move later in group</button>
+            <button type="button" data-action="swap-groups" data-needs-grid>Swap Contact / Assignment</button>
+            <button type="button" data-action="reset-columns" data-needs-grid>Reset columns</button>
+            <button type="button" data-action="invalid-columns" data-needs-grid>Try duplicate column key</button>
+          </div>
+          <p>Drag a header resize button, or focus it and use Left/Right (10 pixels), Shift+Left/Right (1 pixel), or Home to restore its initial width. At least one column stays visible.</p>
+        </fieldset>
+
+        <fieldset>
           <legend>Selection and validation</legend>
           <div class="button-row">
             <button type="button" data-action="select-first" data-needs-grid>Select first store row</button>
@@ -115,28 +140,32 @@
             <colgroup span="4"></colgroup><colgroup span="1"></colgroup>
             <thead>
               <tr>
-                <th scope="col" rowspan="2" aria-sort="none">Employee</th>
-                <th scope="colgroup" colspan="2">Contact</th>
-                <th scope="colgroup" colspan="4">Assignment</th>
-                <th scope="col" rowspan="2" aria-sort="none">Salary</th>
+                <th scope="col" rowspan="2" aria-sort="none" data-column="name">Employee <button type="button" data-resize-column="name" data-needs-grid aria-label="Resize Employee column">↔</button></th>
+                <th scope="colgroup" colspan="2" data-columns="email phone">Contact</th>
+                <th scope="colgroup" colspan="4" data-columns="team shift active notes">Assignment</th>
+                <th scope="col" rowspan="2" aria-sort="none" data-column="salary">Salary <button type="button" data-resize-column="salary" data-needs-grid aria-label="Resize Salary column">↔</button></th>
               </tr>
               <tr>
-                <th scope="col">Email</th><th scope="col">Phone</th>
-                <th scope="col">Team</th><th scope="col">Shift</th><th scope="col">Active</th><th scope="col">Notes</th>
+                <th scope="col" data-column="email">Email <button type="button" data-resize-column="email" data-needs-grid aria-label="Resize Email column">↔</button></th>
+                <th scope="col" data-column="phone">Phone <button type="button" data-resize-column="phone" data-needs-grid aria-label="Resize Phone column">↔</button></th>
+                <th scope="col" data-column="team">Team <button type="button" data-resize-column="team" data-needs-grid aria-label="Resize Team column">↔</button></th>
+                <th scope="col" data-column="shift">Shift <button type="button" data-resize-column="shift" data-needs-grid aria-label="Resize Shift column">↔</button></th>
+                <th scope="col" data-column="active">Active <button type="button" data-resize-column="active" data-needs-grid aria-label="Resize Active column">↔</button></th>
+                <th scope="col" data-column="notes">Notes <button type="button" data-resize-column="notes" data-needs-grid aria-label="Resize Notes column">↔</button></th>
               </tr>
             </thead>
             <tbody>
               <tr data-row-template>
-                <th scope="row"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button></th>
-                <td><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
-                <td data-field="phone"></td>
-                <td><label>Team <input type="text" data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
-                <td><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
+                <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button></th>
+                <td data-column="email"><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
+                <td data-column="phone" data-field="phone"></td>
+                <td data-column="team"><label>Team <input type="text" data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
+                <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
                   data-option-label="meta.label" data-option-value="code" required><option value="">Choose</option></select></label>
                   <output data-error-for="assignment.chosen"></output></td>
-                <td><label><input type="checkbox" data-field="active"> Active</label></td>
-                <td><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
-                <td><label>Salary <input type="number" min="0" step="1" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
+                <td data-column="active"><label><input type="checkbox" data-field="active"> Active</label></td>
+                <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
+                <td data-column="salary"><label>Salary <input type="number" min="0" step="1" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
                   <output data-error-for="salary"></output></td>
               </tr>
             </tbody>
@@ -148,15 +177,18 @@
           <section><h3>Selected RowId and raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
           <section><h3>Rows.changes()</h3><pre data-changes tabindex="0">[]</pre></section>
           <section><h3>Validation issues</h3><pre data-issues tabindex="0">Not run yet.</pre></section>
+          <section><h3>grid.columns()</h3><pre data-columns-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Callbacks</h3><p>onSelect: <output data-callback>Not fired yet.</output></p>
+            <p>onColumnsChange: <output data-columns-callback>Not fired yet.</output></p>
             <p>Rows.subscribe: <output data-event>Not fired yet.</output></p></section>
         </div>
       </section>
     </div>
 
-    <section class="future" aria-label="Later Grid candidates">
-      <h2>Later candidates</h2>
-      <p>Column resize, reorder, hide/show, bulk paste, multi-selection, and virtualization are not implemented Grid options here. They need separate M10 contracts.</p>
+    <section class="future" aria-label="Remaining required Grid features">
+      <h2>Remaining required features</h2>
+      <p>Multiple selection, bulk paste, and real scroll virtualization remain required and are not implemented here. Local paging is separate from virtualization.</p>
+      <p><a href="./columns.html">Compare column behavior in two independent CVC layouts</a>.</p>
     </section>
   </main>
 </body>

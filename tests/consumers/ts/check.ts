@@ -6,7 +6,7 @@ import type { Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, GridColumn, GridHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -64,8 +64,19 @@ export function loadEmployees(comm: Communicator = createCommunicator({
 
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>) {
   const form = bindForm(root, { rows });
-  const grid = bindGrid(table, { rows, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id) });
-  return { form, grid };
+  const columns: readonly GridColumn[] = [{ key: "person", width: 180 }, { key: "choice", width: 120 }];
+  const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
+  const grid: GridHandle<Employee> = bindGrid(table, {
+    rows, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
+    onColumnsChange: change => columnChanges.push(change)
+  });
+  return { form, grid, columnChanges };
+}
+
+export function configureColumns(grid: GridHandle<Employee>, columns: readonly GridColumn[]): readonly GridColumn[] {
+  const applied: void = grid.setColumns(columns);
+  void applied;
+  return grid.columns();
 }
 
 export function connectDataUI(listRoot: HTMLUListElement, sizeRoot: HTMLSelectElement,

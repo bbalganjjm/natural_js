@@ -40,7 +40,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
+    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -48,7 +48,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
+    git_blob: d606737eaa4d51860407c50b4d3ba2f378739ed3
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
@@ -108,15 +108,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 33b2dbf0b732e005a46fa997fc44de65ca9c7fde
+    git_blob: 32ebcf498bbdf86a2cb077112e4e86376c72b738
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 821e6b9d0ffc7f9bef29b0690790f79be2bb6d67
-generated: { by: codex/gpt-6, at: 2026-10-05T09:51:49Z }
+    git_blob: 2512abdf8fd2bfbaa2370df7892a2bcf2bd2b37a
+generated: { by: codex/gpt-6, at: 2026-10-05T11:42:46Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-05T09:51:49Z }
+  - { by: codex/gpt-6, at: 2026-10-05T11:43:54Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -270,7 +270,7 @@ The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, 
 
 Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. The current Grid also accepts optional `initialPage: { page, size }` for a bounded first render of a large local `Rows` store. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. M12 adds persistent [Notify](notify.md) messages and dynamic [Documents](documents.md) with keyed page reuse, an application close guard and explicit reload. The [shell example](shell-example.md) composes those binders with the existing page runtime.[^package][^ui][^rules][^formats][^validators]
 
-Cascading Tree checks, month-only/holiday DatePicker behavior, editable and multiple-selection Lists, complete contextual Alert behavior, retained/preloaded Popup and Tab policies and the shell gaps above remain required additions. Column resize, reorder, hide/show, multiple row selection, bulk paste and real scroll virtualization are also unimplemented and required before release. Follow the [coverage ledger](../implementation/feature-parity.md) for their exact status and the [execution plan](../implementation/feature-parity-plan.md) for implementation order; these capabilities are not implemented by the existing examples.[^parity][^parity-plan]
+Cascading Tree checks, month-only/holiday DatePicker behavior, editable and multiple-selection Lists, complete contextual Alert behavior, retained/preloaded Popup and Tab policies and the shell gaps above remain required additions. Grid column resize/reorder/show/hide now uses authored data-column keys, full GridColumn state, columns()/setColumns() and onColumnsChange; see [Grid](grid.md) and its [interactive demo](grid-demo.md). Multiple row selection, bulk paste and real scroll virtualization remain unimplemented and required before release. Follow the [coverage ledger](../implementation/feature-parity.md) for their exact status and the [execution plan](../implementation/feature-parity-plan.md) for implementation order; these capabilities are not implemented by the existing examples.[^parity][^parity-plan]
 
 An unused helper unrelated to framework behavior may be removed after checking direct and indirect reachability, including authored declarations, configuration, callbacks and shared row forms. That dependency cleanup is separate from excluding supported behavior. A feature retirement requires one consolidated user approval; pending candidates remain support obligations until approved. Native browser APIs, authored CSS and typed callbacks can replace legacy mechanisms only when their required behavior is preserved and verified.[^parity][^parity-plan]
 

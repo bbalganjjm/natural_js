@@ -1,0 +1,212 @@
+
+Running 182 tests using 1 worker
+
+
+
+[1/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener
+  1) [chromium] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener 
+
+    Error: page.addStyleTag: Execution context was destroyed, most likely because of a navigation
+
+      67 |   await page.setViewportSize({ width: 320, height: 256 });
+      68 |   await page.goto("/m7/side.html");
+    > 69 |   await page.addStyleTag({ content: textSpacing });
+         |              ^
+      70 |   expect(await page.evaluate(() => document.documentElement.scrollWidth))
+      71 |     .toBeLessThanOrEqual(320);
+      72 |   const screen = page.locator('[data-screen="1"]');
+        at D:\workspace\natural_js\tests\browser\a11y-popup-tabs.spec.ts:69:14
+
+    Error Context: test-results\a11y-popup-tabs-native-Pop-64e3d--Escape-restores-the-opener-chromium\error-context.md
+
+
+
+
+[2/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:99:1 › two MDI workspaces keep unique IDs and resolvable ARIA references
+[3/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:112:1 › vertical Tabs skip disabled buttons and keep manual activation
+[4/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › side MDI and open Popup pass automated WCAG-tagged checks
+[5/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › stack MDI and open Popup pass automated WCAG-tagged checks
+[6/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › side Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[7/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › side data UI remains keyboard-operable at 320px
+[8/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › stack Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[9/182] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › stack data UI remains keyboard-operable at 320px
+[10/182] [chromium] › tests\browser\datepicker.spec.ts:24:1 › DatePicker compiles authored weeks once and restores markup, IDs, and ownership
+[11/182] [chromium] › tests\browser\datepicker.spec.ts:61:1 › calendar keyboard preserves leap-day intent, week order, selection, and roving focus
+[12/182] [chromium] › tests\browser\datepicker.spec.ts:95:1 › limits constrain keyboard and pointer selection without emitting programmatic changes
+[13/182] [chromium] › tests\browser\datepicker.spec.ts:134:1 › Monday weeks and extreme years use UTC calendar days across daylight-saving dates
+[14/182] [chromium] › tests\browser\datepicker.spec.ts:169:1 › locale labels retain the Gregorian ISO calendar
+[15/182] [chromium] › tests\browser\datepicker.spec.ts:192:1 › invalid dates, locale, markup, and repeated IDs fail before changing authored nodes
+[16/182] [chromium] › tests\browser\datepicker.spec.ts:229:1 › application date selection updates nested Form rows through native input events
+[17/182] [chromium] › tests\browser\datepicker.spec.ts:259:1 › authored calendar exposes an accessible grid before and after keyboard navigation
+[18/182] [chromium] › tests\browser\documents.spec.ts:21:1 › documents reuse keys, reload with the original factory, isolate MDI, and restore authored markup
+[19/182] [chromium] › tests\browser\documents.spec.ts:84:1 › malformed page handles release their partial work and Tabs restores authored alert nodes
+[20/182] [chromium] › tests\browser\documents.spec.ts:152:1 › close during reload waits for the original page cleanup before removing its panel
+[21/182] [chromium] › tests\browser\documents.spec.ts:188:1 › superseded documents abort, failures recover the previous page, and retained entries retry
+[22/182] [chromium] › tests\browser\documents.spec.ts:235:1 › close guards deduplicate, refusal and errors preserve pages, and disposal cancels a pending guard
+[23/182] [chromium] › tests\browser\documents.spec.ts:296:1 › closing an inactive document does not wait for or cancel another pending selection
+[24/182] [chromium] › tests\browser\documents.spec.ts:326:1 › a present close guard must explicitly return a boolean before a document is removed
+[25/182] [chromium] › tests\browser\documents.spec.ts:353:1 › horizontal document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[26/182] [chromium] › tests\browser\documents.spec.ts:353:1 › vertical document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[27/182] [chromium] › tests\browser\documents.spec.ts:388:1 › invalid repeated templates fail atomically before binding and the root can be corrected
+[28/182] [chromium] › tests\browser\form-m6.spec.ts:3:1 › Form keeps choice groups raw, accessible, and scoped to their MDI forms
+[29/182] [chromium] › tests\browser\form-m6.spec.ts:99:1 › local Form reads group values and rejects ambiguous declarations
+[30/182] [chromium] › tests\browser\form.spec.ts:3:1 › Form keeps invalid edits out of Rows and exposes authored errors accessibly
+[31/182] [chromium] › tests\browser\form.spec.ts:106:1 › local Form reads nested fields and row validation leaves another bound row alone
+[32/182] [chromium] › tests\browser\form.spec.ts:147:1 › Form retains invalid drafts by row and resolves cross-field candidates
+[33/182] [chromium] › tests\browser\form.spec.ts:211:1 › built-in Form rules keep raw values and direct fill replaces formatted text
+[34/182] [chromium] › tests\browser\form.spec.ts:241:1 › parser failures retain drafts and null raw values can format
+[35/182] [chromium] › tests\browser\form.spec.ts:291:1 › local file input validates its filename and row-bound file input fails clearly
+[36/182] [chromium] › tests\browser\form.spec.ts:342:1 › built-in required rejects an unchecked checkbox and custom required can override it
+[37/182] [chromium] › tests\browser\form.spec.ts:376:1 › visible and hidden Form drafts obey native text length constraints
+[38/182] [chromium] › tests\browser\form.spec.ts:413:1 › Form clears a committed draft after a subscriber error but keeps a rejected draft
+[39/182] [chromium] › tests\browser\form.spec.ts:469:1 › Form rejects display formatters on controls without text display semantics
+[40/182] [chromium] › tests\browser\form.spec.ts:491:1 › hidden Form length checks use entered text before parsing
+[41/182] [chromium] › tests\browser\form.spec.ts:526:1 › external Rows.set clears stale Form errors without running validators in its subscriber
+[42/182] [chromium] › tests\browser\form.spec.ts:578:1 › untouched stored text has the same visible and hidden length result
+[43/182] [chromium] › tests\browser\form.spec.ts:602:1 › validate commits a draft made valid by an external row update without rebinding
+[44/182] [chromium] › tests\browser\grid-columns.spec.ts:80:1 › column changes keep field nodes, nested raw choices, selection and caret
+[45/182] [chromium] › tests\browser\grid-columns.spec.ts:104:1 › hidden columns keep drafts across row release and preserve native visible groups
+[46/182] [chromium] › tests\browser\grid-columns.spec.ts:129:1 › invalid replacement is atomic and returned state is immutable
+[47/182] [chromium] › tests\browser\grid-columns.spec.ts:155:1 › width-only updates leave row topology, focus and data untouched
+[48/182] [chromium] › tests\browser\grid-columns.spec.ts:173:1 › sort indicators on hidden headers and exact dispose restoration work
+[49/182] [chromium] › tests\browser\grid-columns.spec.ts:190:1 › keyboard resize reports one coherent change and resets preferred width
+[50/182] [chromium] › tests\browser\grid-columns.spec.ts:205:1 › pointer resize commits once, cancellation restores state and teardown releases capture
+[51/182] [chromium] › tests\browser\grid-columns.spec.ts:230:1 › malformed topology and bind failures leave original markup available for retry
+[52/182] [chromium] › tests\browser\grid-columns.spec.ts:258:1 › returning the resize pointer to its start restores the preview without notifying
+[53/182] [chromium] › tests\browser\grid-columns.spec.ts:273:1 › callback failures keep the successful state and failed data binding can be retried
+[54/182] [chromium] › tests\browser\grid-columns.spec.ts:297:1 › no-column tables retain their behavior and state methods have clear bounds
+[55/182] [chromium] › tests\browser\grid-columns.spec.ts:319:1 › column hiding and paging skip hidden, inert and CSS-hidden focus candidates
+[56/182] [chromium] › tests\browser\grid-columns.spec.ts:351:1 › two CVC layouts expose working column tools and remain isolated and accessible
+[57/182] [chromium] › tests\browser\grid-columns.spec.ts:376:1 › flat columns move freely and late rows use current topology without rebinding fields
+[58/182] [chromium] › tests\browser\grid-columns.spec.ts:401:1 › implicit columns do not add ordering restrictions around an authored middle group
+[59/182] [chromium] › tests\browser\grid-initial-page.spec.ts:13:1 › initialPage renders only its slice, copies input, clamps, and preserves the no-option default
+[60/182] [chromium] › tests\browser\grid-initial-page.spec.ts:77:1 › invalid initialPage leaves authored template and Select ownership untouched; setPage failure is atomic
+[61/182] [chromium] › tests\browser\grid-initial-page.spec.ts:128:1 › initialPage keeps off-page identity and validation while deferring invalid row options
+[62/182] [chromium] › tests\browser\grid-initial-page.spec.ts:181:1 › two initial-page Grids keep nested choices and generated error IDs isolated, then rebind cleanly
+[63/182] [chromium] › tests\browser\grid-initial-page.spec.ts:243:1 › off-page formatter failure rolls back page and releases its new Select before retry
+[64/182] [chromium] › tests\browser\grid-initial-page.spec.ts:299:1 › off-page Select option failure rolls back and releases its new clone before retry
+[65/182] [chromium] › tests\browser\grid-initial-page.spec.ts:350:1 › initial-page draft and focus survive a page-away and return without duplicate IDs
+[66/182] [chromium] › tests\browser\grid-lifetime.spec.ts:13:1 › Grid releases visited pages while restoring the selected row, draft, and error
+[67/182] [chromium] › tests\browser\grid-lifetime.spec.ts:105:1 › offscreen validation text clears on external set, revert, remove, and replace
+[68/182] [chromium] › tests\browser\grid-m6.spec.ts:14:1 › Grid text and checkbox edits keep typed nested raw values
+[69/182] [chromium] › tests\browser\grid-m6.spec.ts:61:1 › Grid parse failure stays with RowId through paging and clears on revert
+[70/182] [chromium] › tests\browser\grid-m6.spec.ts:118:1 › Grid sort and page state use authored headings and restore focus
+[71/182] [chromium] › tests\browser\grid-m6.spec.ts:163:1 › Grid rejects ambiguous controls before changing authored markup
+[72/182] [chromium] › tests\browser\grid-m6.spec.ts:195:1 › Form and Grid parsers see one unparsed input snapshot
+[73/182] [chromium] › tests\browser\grid-m6.spec.ts:240:1 › Grid and List keep keyboard focus when a disabled row leaves the page
+[74/182] [chromium] › tests\browser\grid.spec.ts:12:1 › nested row options keep raw values, row identity, and native table markup
+[75/182] [chromium] › tests\browser\grid.spec.ts:103:1 › a repeated fixed id is rejected before cloning
+[76/182] [chromium] › tests\browser\grid.spec.ts:123:1 › nested field paths preserve a number apart from the same DOM string
+[77/182] [chromium] › tests\browser\grid.spec.ts:166:1 › rule arguments fail before binding and custom Grid rules run
+[78/182] [chromium] › tests\browser\grid.spec.ts:196:1 › formatted text, validators, and cloned error regions stay accessible across filtering
+[79/182] [chromium] › tests\browser\grid.spec.ts:258:1 › failed Select edits stay with RowId and clear on revert, remove, and replace
+[80/182] [chromium] › tests\browser\grid.spec.ts:349:1 › external row updates do not run user validators after the value commits
+[81/182] [chromium] › tests\browser\grid.spec.ts:382:1 › cross-field Select drafts validate together and commit on change or explicit validation
+[82/182] [chromium] › tests\browser\grid.spec.ts:448:1 › programmatic lengths, checkbox state, stale errors, and unsupported inputs are explicit
+[83/182] [chromium] › tests\browser\grid.spec.ts:521:1 › a thrown Select validator keeps its draft until explicit validation succeeds
+[84/182] [chromium] › tests\browser\import.spec.ts:3:1 › ESM package loads in two authored views without duplicate IDs
+[85/182] [chromium] › tests\browser\list.spec.ts:13:1 › authored list keeps nested raw choices and RowId selection through sort, filter, and page
+[86/182] [chromium] › tests\browser\list.spec.ts:101:1 › List validates hidden rows and links errors without changing raw data
+[87/182] [chromium] › tests\browser\list.spec.ts:164:1 › List rejects duplicate template IDs before mutation
+[88/182] [chromium] › tests\browser\list.spec.ts:184:1 › List multiple Select validation requires a raw array
+[89/182] [chromium] › tests\browser\m10-agent-screen.spec.ts:57:1 › a docs-first authored Grid keeps row identity and drafts across local views
+[90/182] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › authored table binds raw nested choices, formatter, and accessible labels
+[91/182] [chromium] › tests\browser\m10-demo.spec.ts:34:1 › sort, filter, and local pages preserve RowId selection
+[92/182] [chromium] › tests\browser\m10-demo.spec.ts:58:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[93/182] [chromium] › tests\browser\m10-demo.spec.ts:79:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[94/182] [chromium] › tests\browser\m10-demo.spec.ts:122:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[95/182] [chromium] › tests\browser\m10-demo.spec.ts:164:1 › required and unavailable choices validate; dispose and rebind restore the template
+[96/182] [chromium] › tests\browser\m10-grid.spec.ts:10:3 › side keeps grouped headings, nested choices, and MDI rows independent
+[97/182] [chromium] › tests\browser\m10-grid.spec.ts:45:3 › side keeps fixed headings visible and the narrow document reflowed
+[98/182] [chromium] › tests\browser\m10-grid.spec.ts:10:3 › stack keeps grouped headings, nested choices, and MDI rows independent
+[99/182] [chromium] › tests\browser\m10-grid.spec.ts:45:3 › stack keeps fixed headings visible and the narrow document reflowed
+[100/182] [chromium] › tests\browser\m12-shell.spec.ts:5:3 › side shares one editor definition and Rows while retaining and guarding documents
+[101/182] [chromium] › tests\browser\m12-shell.spec.ts:86:3 › side retries failure, cancels pending pages, and releases an independent shell
+[102/182] [chromium] › tests\browser\m12-shell.spec.ts:146:3 › side preserves accessible authored empty and populated shell states at 320px
+[103/182] [chromium] › tests\browser\m12-shell.spec.ts:5:3 › stack shares one editor definition and Rows while retaining and guarding documents
+[104/182] [chromium] › tests\browser\m12-shell.spec.ts:86:3 › stack retries failure, cancels pending pages, and releases an independent shell
+[105/182] [chromium] › tests\browser\m12-shell.spec.ts:146:3 › stack preserves accessible authored empty and populated shell states at 320px
+[106/182] [chromium] › tests\browser\m4-screen.spec.ts:5:3 › side preserves authored HTML through search, edit, nested choice, and save
+[107/182] [chromium] › tests\browser\m4-screen.spec.ts:45:3 › side keeps two pages ID-clean and independent
+[108/182] [chromium] › tests\browser\m4-screen.spec.ts:73:3 › side keeps unsaved edits when Enter is pressed in the local filter
+[109/182] [chromium] › tests\browser\m4-screen.spec.ts:86:3 › side keeps invalid drafts by row while navigating and adding
+[110/182] [chromium] › tests\browser\m4-screen.spec.ts:107:3 › side restores focus to a hidden row with an unavailable choice
+[111/182] [chromium] › tests\browser\m4-screen.spec.ts:122:3 › side handles empty, failed, and replaced searches
+[112/182] [chromium] › tests\browser\m4-screen.spec.ts:144:3 › side validates hidden changes and recovers from save failure
+[113/182] [chromium] › tests\browser\m4-screen.spec.ts:5:3 › stack preserves authored HTML through search, edit, nested choice, and save
+[114/182] [chromium] › tests\browser\m4-screen.spec.ts:45:3 › stack keeps two pages ID-clean and independent
+[115/182] [chromium] › tests\browser\m4-screen.spec.ts:73:3 › stack keeps unsaved edits when Enter is pressed in the local filter
+[116/182] [chromium] › tests\browser\m4-screen.spec.ts:86:3 › stack keeps invalid drafts by row while navigating and adding
+[117/182] [chromium] › tests\browser\m4-screen.spec.ts:107:3 › stack restores focus to a hidden row with an unavailable choice
+[118/182] [chromium] › tests\browser\m4-screen.spec.ts:122:3 › stack handles empty, failed, and replaced searches
+[119/182] [chromium] › tests\browser\m4-screen.spec.ts:144:3 › stack validates hidden changes and recovers from save failure
+[120/182] [chromium] › tests\browser\m4-screen.spec.ts:171:1 › a saved insert is not resent when the post-save refresh fails
+[121/182] [chromium] › tests\browser\m4-screen.spec.ts:192:1 › save locks editing while keeping Close available and aborts after removal
+[122/182] [chromium] › tests\browser\m4-screen.spec.ts:214:1 › the development mock rejects an entire conflicting save
+[123/182] [chromium] › tests\browser\m4-screen.spec.ts:233:1 › closing during a delayed search does not update a removed page
+[124/182] [chromium] › tests\browser\m4-screen.spec.ts:246:1 › server HTML runs the same employee controller in two ID-clean pages
+[125/182] [chromium] › tests\browser\m6-screen.spec.ts:5:3 › side keeps Grid, List, Select, Pagination, and Form in one row flow
+[126/182] [chromium] › tests\browser\m6-screen.spec.ts:69:3 › side keeps two paged instances separate and ID-clean
+[127/182] [chromium] › tests\browser\m6-screen.spec.ts:5:3 › stack keeps Grid, List, Select, Pagination, and Form in one row flow
+[128/182] [chromium] › tests\browser\m6-screen.spec.ts:69:3 › stack keeps two paged instances separate and ID-clean
+[129/182] [chromium] › tests\browser\m6-screen.spec.ts:92:1 › a hidden invalid Grid choice reopens its page before focusing
+[130/182] [chromium] › tests\browser\m7-screen.spec.ts:4:3 › side shares one page definition across main, Tab, and Popup
+[131/182] [chromium] › tests\browser\m7-screen.spec.ts:114:3 › side keeps two MDI workspaces and Popup results separate
+[132/182] [chromium] › tests\browser\m7-screen.spec.ts:4:3 › stack shares one page definition across main, Tab, and Popup
+[133/182] [chromium] › tests\browser\m7-screen.spec.ts:114:3 › stack keeps two MDI workspaces and Popup results separate
+[134/182] [chromium] › tests\browser\m7-screen.spec.ts:172:1 › immediate workspace removal treats page readiness cancellation as normal
+[135/182] [chromium] › tests\browser\m7-screen.spec.ts:186:1 › slow Popup close and parent removal settle once and release the page
+[136/182] [chromium] › tests\browser\notify.spec.ts:19:1 › notifications retain authored markup, announce through stable channels, and insert safe text without focus
+[137/182] [chromium] › tests\browser\notify.spec.ts:75:1 › dismissal follows native keyboard activation and keeps focused removal inside the region
+[138/182] [chromium] › tests\browser\notify.spec.ts:110:1 › dismissal skips unavailable close controls and clear remains scoped to one MDI region
+[139/182] [chromium] › tests\browser\notify.spec.ts:139:1 › invalid notification markup and label references fail before mutation or ownership
+[140/182] [chromium] › tests\browser\notify.spec.ts:192:1 › invalid show arguments remain atomic and disposal releases ownership and returned dismissals
+[141/182] [chromium] › tests\browser\notify.spec.ts:228:1 › an authored notification without close controls is dismissed through its returned function
+[142/182] [chromium] › tests\browser\notify.spec.ts:249:1 › notification insertion and dismissal pass automated A and AA checks
+[143/182] [chromium] › tests\browser\page.spec.ts:3:1 › two pages keep separate roots, outputs, and reload input
+[144/182] [chromium] › tests\browser\page.spec.ts:61:1 › pending initialization aborts immediately and releases resources
+[145/182] [chromium] › tests\browser\page.spec.ts:101:1 › fetched HTML has one root and duplicate IDs are rejected
+[146/182] [chromium] › tests\browser\page.spec.ts:138:1 › fetched HTML rejects executable attributes before insertion
+[147/182] [chromium] › tests\browser\page.spec.ts:163:1 › factory roots are checked against the insertion document
+[148/182] [chromium] › tests\browser\page.spec.ts:190:1 › late own registration disposes a resource after cancellation
+[149/182] [chromium] › tests\browser\page.spec.ts:226:1 › output stops when a listener reloads its page
+[150/182] [chromium] › tests\browser\popup.spec.ts:3:1 › output waits for page cleanup, restores focus, and permits immediate reopening
+[151/182] [chromium] › tests\browser\popup.spec.ts:67:1 › closing during initialization aborts ready but resolves an ordinary result
+[152/182] [chromium] › tests\browser\popup.spec.ts:121:1 › native cancellation, detached host, and cleanup failure keep one terminal result
+[153/182] [chromium] › tests\browser\popup.spec.ts:169:1 › malformed dialogs fail synchronously and failed initialization leaves a reusable host
+[154/182] [chromium] › tests\browser\popup.spec.ts:210:1 › nested popup restores focus to the next authored control when its opener disappears
+[155/182] [chromium] › tests\browser\popup.spec.ts:238:1 › direct open-attribute removal still aborts page work and settles the result
+[156/182] [chromium] › tests\browser\popup.spec.ts:262:1 › twenty openings leave no page DOM or Popup listeners behind
+[157/182] [chromium] › tests\browser\popup.spec.ts:316:1 › close wins over same-task output without beforetoggle notification
+[158/182] [chromium] › tests\browser\select-pagination.spec.ts:13:1 › Select preserves authored raw strings and generated typed choices
+[159/182] [chromium] › tests\browser\select-pagination.spec.ts:52:1 › multiple Select keeps scalar identity, order, ownership, and disposal
+[160/182] [chromium] › tests\browser\select-pagination.spec.ts:94:1 › Pagination is controlled, bounded, accessible, focus-safe, and reversible
+[161/182] [chromium] › tests\browser\select-pagination.spec.ts:154:1 › Pagination rejects invalid state and repeated IDs before changing the HTML
+[162/182] [chromium] › tests\browser\select-pagination.spec.ts:185:1 › Pagination state snapshot cannot change its internal page
+[163/182] [chromium] › tests\browser\tabs.spec.ts:3:1 › authored tabs keep IDs, navigate manually, and isolate two instances
+[164/182] [chromium] › tests\browser\tabs.spec.ts:100:1 › superseded loads abort, failed pages restore the previous tab, and retry remounts
+[165/182] [chromium] › tests\browser\tabs.spec.ts:179:1 › initial failure is retryable, borrowed HTML stays, and invalid markup is rejected
+[166/182] [chromium] › tests\browser\tabs.spec.ts:248:1 › native Enter and Space activate once after arrow focus
+[167/182] [chromium] › tests\browser\tabs.spec.ts:311:1 › failed cached activation is evicted and a later visit creates a fresh page
+[168/182] [chromium] › tests\browser\tabs.spec.ts:371:1 › dispose during initial loading aborts without an unhandled ready rejection
+[169/182] [chromium] › tests\browser\tabs.spec.ts:418:1 › superseding a slow deactivation retains the previous controller for revisit
+[170/182] [chromium] › tests\browser\tree-date-screen.spec.ts:5:3 › side connects Tree and DatePicker to independent CVC Forms
+[171/182] [chromium] › tests\browser\tree-date-screen.spec.ts:80:3 › side keeps authored MDI labels clean through modal use and repeated disposal
+[172/182] [chromium] › tests\browser\tree-date-screen.spec.ts:5:3 › stack connects Tree and DatePicker to independent CVC Forms
+[173/182] [chromium] › tests\browser\tree-date-screen.spec.ts:80:3 › stack keeps authored MDI labels clean through modal use and repeated disposal
+[174/182] [chromium] › tests\browser\tree.spec.ts:11:1 › Tree resolves unordered parents, binds nested text, and reuses nodes on updates
+[175/182] [chromium] › tests\browser\tree.spec.ts:90:1 › Tree keyboard separates focus and selection and collapses focused descendants safely
+[176/182] [chromium] › tests\browser\tree.spec.ts:146:1 › Tree validates markup and hierarchy and rolls back failed initial binding
+[177/182] [chromium] › tests\browser\tree.spec.ts:217:1 › Tree keeps the last valid DOM on hierarchy and formatter failures and recovers
+[178/182] [chromium] › tests\browser\tree.spec.ts:261:1 › two Trees keep generated label IDs unique and their state independent
+[179/182] [chromium] › tests\browser\tree.spec.ts:300:1 › Tree can reverse prior DOM ancestry while keeping RowIds and selected focus
+[180/182] [chromium] › tests\browser\tree.spec.ts:330:1 › Tree measured binding updates preserve records for 1,000 flat and nested rows
+[181/182] [chromium] › tests\browser\tree.spec.ts:370:1 › Tree handles a deep hierarchy without recursive traversal
+[182/182] [chromium] › tests\browser\tree.spec.ts:395:1 › authored Tree states pass automated A and AA checks
+  1 failed
+    [chromium] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener 
+  181 passed (1.1m)
+(node:4612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

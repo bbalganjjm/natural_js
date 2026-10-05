@@ -110,6 +110,9 @@ try {
     await expect(host.locator("select")).toHaveValue("11");
     assert.deepEqual(await page.evaluate(slot => window.packedConsumer.screens[slot].grid.page(), slot),
       { page: 1, size: 1, total: 2, pages: 2 }, "Installed Grid must apply its initial page before rendering.");
+    assert.deepEqual(await page.evaluate(slot => window.packedConsumer.screens[slot].grid.columns(), slot),
+      [{ key: "person", width: 180 }, { key: "choice", width: 120 }],
+      "Installed Grid must expose its preferred column widths.");
     await expect(host.locator("[data-consumer-grid] tbody tr")).toHaveCount(1);
   }
   const ids = await page.evaluate(() => [...document.querySelectorAll("[id]")].map(item => item.id));
@@ -120,6 +123,90 @@ try {
   assert(described, "Form errors must be described by unique, connected regions.");
 
   const first = page.locator('[data-host="a"]');
+  const columnsBefore = await page.evaluate(() => {
+    const state = window.packedConsumer;
+    const notifications = { a: 0, b: 0 };
+    state.columnProbe = {
+      notifications,
+      unsubscribe: Object.entries(state.screens).map(([slot, screen]) =>
+        screen.rows.subscribe(() => notifications[slot]++)),
+      person: document.querySelector('[data-host="a"] [data-consumer-grid] tbody [data-field="person.name"]'),
+      choice: document.querySelector('[data-host="a"] [data-consumer-grid] select')
+    };
+    return Object.fromEntries(Object.entries(state.screens).map(([slot, screen]) =>
+      [slot, { entries: screen.rows.entries(), changes: screen.rows.changes() }]));
+  });
+  const columnKeys = () => first.locator("[data-consumer-grid] thead tr").evaluate(row =>
+    [...row.cells].map(cell => cell.dataset.column));
+  const rowColumnKeys = () => first.locator("[data-consumer-grid] tbody tr").evaluate(row =>
+    [...row.cells].map(cell => cell.dataset.column));
+  await page.evaluate(() => {
+    const grid = window.packedConsumer.screens.a.grid;
+    grid.setColumns([...grid.columns()].reverse());
+  });
+  assert.deepEqual(await columnKeys(), ["choice", "person"], "Flat authored headers must follow column order.");
+  assert.deepEqual(await rowColumnKeys(), ["choice", "person"], "Rendered row cells must follow column order.");
+  await page.evaluate(() => {
+    const grid = window.packedConsumer.screens.a.grid;
+    grid.setColumns(grid.columns().map(column => ({ ...column, hidden: column.key === "choice" })));
+  });
+  assert.deepEqual(await columnKeys(), ["person"]);
+  assert.deepEqual(await rowColumnKeys(), ["person"]);
+  await expect(first.locator('[data-consumer-grid] [data-column="choice"]')).toHaveCount(0);
+  await page.evaluate(() => {
+    const grid = window.packedConsumer.screens.a.grid;
+    grid.setColumns(grid.columns().map(column => ({ ...column, hidden: false })));
+  });
+  assert.deepEqual(await columnKeys(), ["choice", "person"]);
+  assert.deepEqual(await rowColumnKeys(), ["choice", "person"]);
+  await expect(first.locator("select")).toHaveValue("11");
+  const resize = first.getByRole("button", { name: "Resize Person column" });
+  await resize.focus();
+  await page.keyboard.press("ArrowRight");
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.grid.columns()
+    .find(column => column.key === "person").width), 190, "Authored resize control must change the preferred width.");
+  await page.keyboard.press("Home");
+  const columnsAfter = await page.evaluate(() => {
+    const state = window.packedConsumer;
+    const probe = state.columnProbe;
+    probe.unsubscribe.forEach(unsubscribe => unsubscribe());
+    const result = {
+      rows: Object.fromEntries(Object.entries(state.screens).map(([slot, screen]) =>
+        [slot, { entries: screen.rows.entries(), changes: screen.rows.changes() }])),
+      notifications: probe.notifications,
+      samePerson: probe.person === document.querySelector('[data-host="a"] [data-consumer-grid] tbody [data-field="person.name"]'),
+      sameChoice: probe.choice === document.querySelector('[data-host="a"] [data-consumer-grid] select'),
+      focused: document.activeElement === document.querySelector('[data-host="a"] [data-resize-column="person"]'),
+      columns: state.screens.a.grid.columns(),
+      events: state.screens.a.columnEvents,
+      otherColumns: state.screens.b.grid.columns(),
+      otherEvents: state.screens.b.columnEvents,
+      otherHeaderKeys: [...document.querySelector('[data-host="b"] [data-consumer-grid] thead tr').cells]
+        .map(cell => cell.dataset.column),
+      otherRowKeys: [...document.querySelector('[data-host="b"] [data-consumer-grid] tbody tr').cells]
+        .map(cell => cell.dataset.column)
+    };
+    delete state.columnProbe;
+    return result;
+  });
+  assert.deepEqual(columnsAfter.rows, columnsBefore, "Column layout must preserve all Rows values and changes.");
+  assert.deepEqual(columnsAfter.notifications, { a: 0, b: 0 }, "Column layout must not notify Rows subscribers.");
+  assert(columnsAfter.samePerson && columnsAfter.sameChoice, "Column layout must preserve existing field nodes and bindings.");
+  assert(columnsAfter.focused, "Keyboard resizing must preserve focus on the authored control.");
+  assert.deepEqual(columnsAfter.columns,
+    [{ key: "choice", width: 120, hidden: false }, { key: "person", width: 180, hidden: false }]);
+  assert.deepEqual(columnsAfter.events, [
+    { columns: [{ key: "choice", width: 120 }, { key: "person", width: 180 }], type: null },
+    { columns: [{ key: "choice", width: 120, hidden: true }, { key: "person", width: 180, hidden: false }], type: null },
+    { columns: [{ key: "choice", width: 120, hidden: false }, { key: "person", width: 180, hidden: false }], type: null },
+    { columns: [{ key: "choice", width: 120, hidden: false }, { key: "person", width: 190, hidden: false }], type: "keydown" },
+    { columns: [{ key: "choice", width: 120, hidden: false }, { key: "person", width: 180, hidden: false }], type: "keydown" }
+  ], "Installed Grid must report each committed column state with its event source.");
+  assert.deepEqual(columnsAfter.otherColumns, [{ key: "person", width: 180 }, { key: "choice", width: 120 }]);
+  assert.deepEqual(columnsAfter.otherEvents, [], "Column changes must stay within their mounted screen.");
+  assert.deepEqual(columnsAfter.otherHeaderKeys, ["person", "choice"], "Other screen headers must keep their authored order.");
+  assert.deepEqual(columnsAfter.otherRowKeys, ["person", "choice"], "Other screen row cells must keep their authored order.");
+
   await first.locator("form input").fill("Ann");
   await expect(first.locator("[data-consumer-grid] tbody [data-field='person.name']")).toHaveText("Ann");
   await expect(page.locator('[data-host="b"] form input')).toHaveValue("Bea");

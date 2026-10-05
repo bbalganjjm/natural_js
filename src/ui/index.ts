@@ -90,6 +90,12 @@ export interface SortIndicator {
   readonly direction: "ascending" | "descending";
 }
 
+export interface GridColumn {
+  readonly key: string;
+  readonly width?: number;
+  readonly hidden?: boolean;
+}
+
 export interface ListHandle<T extends object> {
   select(id: RowId | null): void;
   selected(): RowId | null;
@@ -102,6 +108,8 @@ export interface ListHandle<T extends object> {
 }
 
 export interface GridHandle<T extends object> {
+  columns(): readonly GridColumn[];
+  setColumns(columns: readonly GridColumn[]): void;
   select(id: RowId | null): void;
   selected(): RowId | null;
   setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null,

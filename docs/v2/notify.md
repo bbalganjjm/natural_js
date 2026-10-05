@@ -13,7 +13,7 @@ sources:
   - id: dom
     resource: ../../src/ui/dom-state.ts
     title: Private attribute restoration and document-unique IDs
-    git_blob: 2bd585b3b9e31503e31499474db0e2ffbb3d79fb
+    git_blob: 885c8d0cf0c6914d73bbbb71a0fb6aab3b35f6d3
   - id: browser
     resource: ../../tests/browser/notify.spec.ts
     title: Notification browser checks

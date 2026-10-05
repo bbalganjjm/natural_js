@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
+    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -24,7 +24,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: b277c2b22e728630836eedcbc4fd998ddb4f5e5c
+    git_blob: d606737eaa4d51860407c50b4d3ba2f378739ed3
+  - id: grid-columns
+    resource: ../../src/ui/grid-columns.ts
+    title: Private Grid column topology and resize ownership
+    git_blob: 320875af9ad09ea42e98898a1f745b3cec69d652
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
@@ -56,7 +60,7 @@ sources:
   - id: dom-state
     resource: ../../src/ui/dom-state.ts
     title: Private shared DOM state ownership
-    git_blob: 2bd585b3b9e31503e31499474db0e2ffbb3d79fb
+    git_blob: 885c8d0cf0c6914d73bbbb71a0fb6aab3b35f6d3
   - id: row-options
     resource: ../../src/ui/row-options.ts
     title: Private row-local choice extraction
@@ -109,10 +113,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T11:42:46Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+  - { by: codex/gpt-6, at: 2026-10-05T11:43:54Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -146,6 +150,8 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 # Pitfalls
 
+`grid-columns.ts` owns native cell/colgroup topology and resize lifetime only for Grid. Field references are captured before column attachment, and cloned rows release this owner with Select ownership. Layout changes never mutate Rows or rebind data. The public contract is one state type, two handle methods and two binder options; application HTML provides show/move controls. The module reuses `dom-state.ts` attribute restoration and available-control focus for row/column transitions, including synchronization of pending CSSOM serialization before absent-style restoration. No generic drag, layout or persistence package was introduced.[^grid-columns][^grid][^dom-state]
+
 A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
 # Related
@@ -157,6 +163,7 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 [^error]: Shared framework error
 
 [^form]: Form binding
+[^grid-columns]: Private Grid column topology and resize ownership
 [^grid]: Grid binding
 [^list]: List binding
 [^select]: Standalone Select binding

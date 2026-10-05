@@ -18,24 +18,28 @@ h2, h3 { margin: 0 0 .5rem; }
 fieldset { min-width: 0; margin: 0; padding: .8rem; border: 1px solid #c4d0dd; border-radius: .4rem; }
 legend { padding: 0 .25rem; font-weight: 700; }
 fieldset > label { display: grid; gap: .25rem; margin-bottom: .65rem; }
+fieldset > .check-label { display: flex; align-items: center; gap: .5rem; }
 fieldset select, fieldset input { max-width: 100%; border: 1px solid #75889d; border-radius: .25rem; padding: .35rem; background: #fff; color: inherit; }
 .button-row { display: flex; flex-wrap: wrap; gap: .4rem; margin: .35rem 0; }
 .button-row button { flex: 1 1 auto; }
 fieldset p { margin: .5rem 0 0; }
 .table-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
 .grid-scroll { max-width: 100%; max-height: 29rem; overflow: auto; border: 1px solid #9eafc1; }
-table { border-collapse: separate; border-spacing: 0; min-width: 76rem; width: 100%; }
+table { border-collapse: separate; border-spacing: 0; table-layout: fixed; width: 100%; }
+[hidden] { display: none !important; }
 caption { text-align: left; padding: .45rem; font-weight: 600; }
 th, td { border-bottom: 1px solid #cfdae4; border-right: 1px solid #cfdae4; padding: .4rem .55rem; text-align: left; vertical-align: top; }
 thead { position: sticky; top: 0; z-index: 2; background: #dce9f7; }
 thead th { background: #dce9f7; }
-thead tr:first-child th:first-child { position: sticky; left: 0; z-index: 3; }
+thead th[data-column="name"] { position: sticky; left: 0; z-index: 3; }
+button[data-resize-column] { padding: .1rem .3rem; margin-top: .2rem; cursor: ew-resize; touch-action: none; }
 tbody th[scope="row"] { position: sticky; left: 0; z-index: 1; background: #f5f9fe; }
 tbody tr:nth-child(even) { background: #f8fafc; }
 tbody tr[data-row-template] { display: none; }
 tbody button[aria-pressed="true"] { background: #1b4f86; color: #fff; }
 td label { display: grid; gap: .2rem; }
-td input:not([type="checkbox"]), td select, td textarea { width: 100%; min-width: 8rem; border: 1px solid #718398; border-radius: .2rem; padding: .2rem; background: #fff; color: inherit; }
+td input:not([type="checkbox"]), td select, td textarea { width: 100%; min-width: 0; border: 1px solid #718398; border-radius: .2rem; padding: .2rem; background: #fff; color: inherit; }
+th, td { overflow-wrap: anywhere; }
 td output { display: block; max-width: 14rem; color: #9a1721; font-size: .9rem; }
 td output:empty { display: none; }
 [aria-invalid="true"] { border-color: #b31a24 !important; }
