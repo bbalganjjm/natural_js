@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-05",
+  "version": "2.0.0-beta.0",
+  "baseline_commit": "a7bb7f5b0f51100d3e7b155a34e82183201ab98f",
+  "tarball": "bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+  "sha256": "ea0f8e2e5538d6a0f210ab3918d3141658a2370b9c7362b72512008af5266c32",
+  "packed_files": 128,
+  "packed_bytes": 184003,
+  "unpacked_bytes": 896713,
+  "package_scope": {
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "allowed_paths_only": true,
+    "legacy_excluded": true,
+    "source_license": "Apache-2.0",
+    "publication_performed": false
+  },
+  "framework_and_fixture_source_sha256": {
+    "src/ui/notify.ts": "30b3217769f5922befd12466d081a57c63eec5a5f048ceb97a9c64081f9ebbca",
+    "src/ui/documents.ts": "878be46a60d7673675bf99c0747ea60edadeb129d8dd16d659d319c8fba0679c",
+    "src/ui/tab-pages.ts": "b7f4fe37b514073a84b01ed89023917822740add62c2f580865dd832b9085e1e",
+    "src/ui/tabs.ts": "657888840ddb869cadf5ac7e5d19492233cf3d3e90c3d84886ed16c6ce8ed07a",
+    "src/ui/index.ts": "62bd9ef34ba91f8c8355314157cf3719b5f0c1672bffbde30d158f32350abcac",
+    "src/ui/dom-state.ts": "09a60328db95549c75a0213cfccddfa910d03c6dd4f0ea44d1f82f7904df0d13",
+    "src/page/index.ts": "befcbcca6e87b71d5482ab1efa6ce0aa4a2676e3cbc75c81866d6fd7186565bf",
+    "examples/vite/m12/main.ts": "87e6adf6a06790e2da928f8a659f8ed1d3613573faee09b777e8aa3c862c7024",
+    "tests/browser/notify.spec.ts": "00e4831a5a0a7bf924213e7e522ca0b2d7ad1c7c3a4d84127c45abdd4a96ac38",
+    "tests/browser/documents.spec.ts": "f8fc2c1cb58b00759cca328798724ba84e2834cea932718741ef04a01aed7374",
+    "tests/browser/m12-shell.spec.ts": "c4d15a3f205e7150153d43fd63fe924796f96dcfaace5ea1a86309652a0f32d8",
+    "tests/consumers/browser/main.js": "296260c4c78873c265cbf843d46f4cb75eb9fcb1b83a5034fb63dbb36e259e4e",
+    "tools/check-packed-browser.mjs": "710b3eb037e408598558395fcec521b09fb14973d7f62b8cf88f3450ac6a5f98",
+    "README.md": "8340c8006c96ecde0d5c6de1b832925a987c95d6be7c613757eb1c76746a1cbe"
+  },
+  "checks": {
+    "build": "pass",
+    "typecheck": "pass",
+    "example_typecheck": "pass",
+    "vitest": {
+      "passed": 81
+    },
+    "full_browser_suites": {
+      "chromium": {
+        "passed": 167,
+        "elapsed": "22.8s",
+        "log": "m12-browser-chromium.log"
+      },
+      "firefox": {
+        "passed": 167,
+        "elapsed": "1.4m",
+        "log": "m12-browser-firefox.log"
+      },
+      "webkit": {
+        "passed": 167,
+        "elapsed": "59.9s",
+        "log": "m12-browser-webkit.log"
+      }
+    },
+    "installed_consumers": {
+      "javascript": "pass",
+      "typescript": "pass"
+    },
+    "packed_browser_consumers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32",
+        "passed": true,
+        "log": "m12-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "win32",
+        "passed": true,
+        "log": "m12-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "win32",
+        "passed": true,
+        "log": "m12-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "154.0.8037.93",
+        "platform": "win32",
+        "passed": true,
+        "log": "m12-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "154.0.4258.53",
+        "platform": "win32",
+        "passed": true,
+        "log": "m12-packed-edge.log"
+      }
+    ]
+  },
+  "audit": {
+    "initial_docs_first_files": 3,
+    "initial_docs_first_file_bytes": 21674,
+    "initial_docs_first_breakdown": {
+      "docs/v2/notify.md": 5669,
+      "docs/v2/documents.md": 9309,
+      "docs/v2/shell-example.md": 6696
+    },
+    "actual_tokens_available": false,
+    "implementation_acceptance_task_run": false,
+    "independent_source_and_contract_review": true,
+    "cleanup_sentinel_patch": "Authored by the final auditor; directly reviewed by the root agent and covered in the 17-case focused run and final full suites."
+  },
+  "normalized_log_sha256": {
+    "m12-browser-chromium.log": "603b1d23006c377dbacad260571312c5fcee9bf7a7b7986d64b94c1957a80586",
+    "m12-browser-firefox.log": "4f9ebbc292159b51cd4443b155d955d3e89397d431d367043cb917d46db5230a",
+    "m12-browser-webkit.log": "d1d8279eaf3511a62cafa3b57d93d8019120ed8ec4f2d132108180a9b3e9f04a",
+    "m12-consumers.log": "4dced6fa7268f5dd5e7c297e5a721961319df2d4a98b04934be26a6b76bd3d5a",
+    "m12-packed-chromium.log": "2da2c198e227fbfae208b909a7ddf9a9a3c7107dbc18368c7ba61a16dfa1ff05",
+    "m12-packed-firefox.log": "2f30c28137d437edd2eea345157e7eab71aaf762c0229523f6c66cabf7493918",
+    "m12-packed-webkit.log": "6b36fa7191c63768c02470110c9a4652490f625101fa15da2372b8c16ab94aa0",
+    "m12-packed-chrome.log": "cfb54e892e5e0fe1e559b6e23f6f89c38e713c12bcd4c194891ab47271fd7140",
+    "m12-packed-edge.log": "cef949c89cd87be6294bc6129a8f0b24807aa0fe5d1232d95ae417c2ed9aef8a",
+    "m12-unit.log": "34b6939069eae75201bda731d82cd0b1e7ef1467b32f7087524cd3b661d68583"
+  },
+  "limits": [
+    "Log files use LF; source byte hashes describe the frozen Windows files used for this artifact.",
+    "Automated accessibility covers tested authored states; manual assistive-technology review remains open.",
+    "Real macOS/iOS Safari is excluded; Playwright WebKit is required and passed.",
+    "No npm publication or release tag; local checks do not inspect registry state.",
+    "Docs-first file bytes are a context proxy, not actual token usage or a new equivalent implementation benchmark.",
+    "Earlier partial runs and SHA-256 7ccecf3e174625b5ac47c34315e3866c10b0b726ce13236dc6b66ad2fb711efd are superseded."
+  ]
+}

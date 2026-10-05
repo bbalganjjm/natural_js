@@ -1,0 +1,4 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+@import "./base.css";
+.shell-layout { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2fr) minmax(0, 3fr); gap: .75rem; }
+@media (max-width: 900px) { .shell-layout { grid-template-columns: minmax(0, 1fr); } }

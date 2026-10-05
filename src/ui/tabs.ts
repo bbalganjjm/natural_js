@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
-import type { PageHandle } from "../page/index.js";
 import { restoreAttributes, uniqueId } from "./dom-state.js";
 
-type TabPage = Pick<PageHandle, "ready" | "activate" | "deactivate" | "dispose">;
+import { createTabPages, nextTab, panelHasFocusTarget } from "./tab-pages.js";
+import type { TabPage } from "./tab-pages.js";
 
 export interface TabHandle {
   readonly ready: Promise<void>;
@@ -24,18 +24,8 @@ function tabError(code: string, message: string, detail?: Record<string, unknown
   return new FrameworkError({ api: "bindTabs", code, message, detail });
 }
 
-function aborted(): DOMException {
-  return new DOMException("Tab operation aborted", "AbortError");
-}
-
 function owned(root: HTMLElement, selector: string): HTMLElement[] {
   return [...root.querySelectorAll<HTMLElement>(selector)].filter(element => element.closest("[data-tabs]") === root);
-}
-
-function focusable(panel: HTMLElement): boolean {
-  return [...panel.querySelectorAll<HTMLElement>(
-    'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex], [contenteditable]:not([contenteditable="false"])'
-  )].some(element => element.tabIndex >= 0 && !element.closest("[hidden]") && !element.closest("[inert]"));
 }
 
 export function bindTabs(root: HTMLElement, options: {
@@ -128,24 +118,17 @@ export function bindTabs(root: HTMLElement, options: {
     tab.panel.setAttribute("aria-labelledby", tab.button.id);
   }
   const alert = alerts[0];
-  const alertText = alert.textContent;
+  const alertNodes = [...alert.childNodes];
   const alertHidden = alert.hidden;
-  restore.push(() => { alert.textContent = alertText; alert.hidden = alertHidden; });
+  restore.push(() => { alert.replaceChildren(...alertNodes); alert.hidden = alertHidden; });
   restore.push(restoreAttributes(root, ["tabindex"]));
   const panelTabIndex = new Map(tabs.map(tab => [tab.panel, tab.panel.getAttribute("tabindex")] as const));
 
-  const cache = new Map<string, TabPage>();
   const controller = new AbortController();
   let selectedKey: string | null = null;
-  let stableKey: string | null = null;
-  let activeKey: string | null = null;
   let focusedKey = options.initial;
   let busy = false;
   let disposed = false;
-  let revision = 0;
-  let inFlight: TabPage | null = null;
-  let deactivating: TabPage | null = null;
-  let tail = Promise.resolve();
   let disposal: Promise<void> | null = null;
   boundRoots.add(root);
 
@@ -159,7 +142,7 @@ export function bindTabs(root: HTMLElement, options: {
       tab.panel.hidden = !selected;
       if (selected && busy) tab.panel.setAttribute("aria-busy", "true");
       else tab.panel.removeAttribute("aria-busy");
-      if (selected && !focusable(tab.panel)) tab.panel.tabIndex = 0;
+      if (selected && !panelHasFocusTarget(tab.panel)) tab.panel.tabIndex = 0;
       else {
         const authored = panelTabIndex.get(tab.panel);
         if (authored === null) tab.panel.removeAttribute("tabindex");
@@ -182,125 +165,33 @@ export function bindTabs(root: HTMLElement, options: {
     }
   }
 
-  async function evict(key: string, page: TabPage): Promise<void> {
-    if (cache.get(key) === page) cache.delete(key);
-    if (inFlight === page) inFlight = null;
-    if (activeKey === key) activeKey = null;
-    if (stableKey === key) stableKey = null;
-    await page.dispose();
-  }
-
-  function stale(expected: number): boolean {
-    return disposed || revision !== expected;
-  }
-
-  async function transition(key: string, expected: number): Promise<void> {
-    if (stale(expected)) throw aborted();
-    const previous = stableKey;
-    if (activeKey === key && selectedKey === key) return;
-    if (activeKey !== null && activeKey !== key) {
-      moveFocus(selectedKey, key);
-      const oldKey = activeKey;
-      const oldPage = cache.get(oldKey)!;
-      deactivating = oldPage;
-      try {
-        await oldPage.deactivate();
-      } catch (cause) {
-        try { await evict(oldKey, oldPage); } catch { /* Keep the original lifecycle error. */ }
-        if (stale(expected)) throw aborted();
-        selectedKey = null;
-        busy = false;
-        render();
-        alert.textContent = options.errorText ?? "Tab could not be opened.";
-        alert.hidden = false;
-        throw cause;
-      } finally {
-        if (deactivating === oldPage) deactivating = null;
-      }
-      activeKey = null;
-    }
-    if (stale(expected)) throw aborted();
-
-    moveFocus(selectedKey, key);
-    selectedKey = key;
-    focusedKey = key;
-    busy = true;
-    alert.hidden = true;
-    alert.textContent = "";
-    render();
-    let target = cache.get(key);
-    try {
-      if (target) {
-        inFlight = target;
-        await target.activate();
-      } else {
-        target = options.pages[key](tabByKey.get(key)!.panel);
-        if (!target || typeof target.activate !== "function" || typeof target.deactivate !== "function" ||
-            typeof target.dispose !== "function" || typeof target.ready?.then !== "function") {
-          throw tabError("TAB_PAGE", "A Tab page factory must return a PageHandle-compatible page.");
-        }
-        cache.set(key, target);
-        inFlight = target;
-        await target.ready;
-      }
-      if (stale(expected)) throw aborted();
-      inFlight = null;
-      activeKey = key;
-      stableKey = key;
-      busy = false;
+  const pages = createTabPages({
+    create: key => options.pages[key](tabByKey.get(key)!.panel),
+    invalidPage: () => tabError("TAB_PAGE", "A Tab page factory must return a PageHandle-compatible page."),
+    change(key, loading, focus) {
+      selectedKey = key;
+      busy = loading;
+      if (focus && key !== null) focusedKey = key;
       render();
-      return;
-    } catch (cause) {
-      if (target) {
-        try { await evict(key, target); } catch { /* The page rejection remains primary. */ }
+    },
+    moveFocus,
+    error(show) {
+      alert.textContent = show ? options.errorText ?? "Tab could not be opened." : "";
+      alert.hidden = !show;
+    },
+    recovered(failed, restored) {
+      if (document.activeElement === tabByKey.get(failed)?.button && restored !== null) {
+        tabByKey.get(restored)?.button.focus({ preventScroll: true });
       }
-      if (stale(expected)) throw aborted();
-      const previousPage = previous === null || previous === key ? null : cache.get(previous);
-      if (previousPage) {
-        const restoreKey = previous!;
-        selectedKey = restoreKey;
-        focusedKey = restoreKey;
-        busy = true;
-        render();
-        inFlight = previousPage;
-        try {
-          await previousPage.activate();
-          if (stale(expected)) throw aborted();
-          activeKey = restoreKey;
-          stableKey = restoreKey;
-        } catch {
-          try { await evict(restoreKey, previousPage); } catch { /* Keep the failed target error. */ }
-          if (stale(expected)) throw aborted();
-          selectedKey = null;
-          stableKey = null;
-        } finally {
-          if (inFlight === previousPage) inFlight = null;
-        }
-      } else {
-        selectedKey = null;
-        stableKey = null;
-      }
-      busy = false;
-      render();
-      alert.textContent = options.errorText ?? "Tab could not be opened.";
-      alert.hidden = false;
-      if (document.activeElement === tabByKey.get(key)?.button && stableKey !== null) {
-        tabByKey.get(stableKey)?.button.focus({ preventScroll: true });
-      }
-      throw cause;
     }
-  }
+  });
 
   function select(key: string): Promise<void> {
     if (disposed) return Promise.reject(tabError("TAB_DISPOSED", "This Tabs binding has been disposed."));
     const tab = tabByKey.get(key);
     if (!tab) return Promise.reject(tabError("TAB_KEY", "Unknown Tab key.", { key }));
     if (tab.button.disabled) return Promise.reject(tabError("TAB_DISABLED", "A disabled Tab cannot be selected.", { key }));
-    const expected = ++revision;
-    if (inFlight) void inFlight.dispose().catch(() => {});
-    const result = tail.then(() => transition(key, expected));
-    tail = result.then(() => {}, () => {});
-    return result;
+    return pages.select(key);
   }
 
   function onClick(event: MouseEvent): void {
@@ -319,21 +210,7 @@ export function bindTabs(root: HTMLElement, options: {
     if (!(button instanceof HTMLButtonElement) ||
         tabByKey.get(button.getAttribute("data-tab") ?? "")?.button !== button ||
         button.disabled) return;
-    const current = tabs.findIndex(tab => tab.button === button);
-    const enabled = tabs.filter(tab => !tab.button.disabled && tab.button.isConnected);
-    if (!enabled.length) return;
-    const vertical = list.getAttribute("aria-orientation") === "vertical";
-    let next: Tab | undefined;
-    if (event.key === "Home") next = enabled[0];
-    else if (event.key === "End") next = enabled.at(-1);
-    else if (event.key === (vertical ? "ArrowDown" : "ArrowRight") ||
-             event.key === (vertical ? "ArrowUp" : "ArrowLeft")) {
-      const direction = event.key === (vertical ? "ArrowDown" : "ArrowRight") ? 1 : -1;
-      for (let step = 1; step <= tabs.length; step++) {
-        const candidate = tabs[(current + direction * step + tabs.length * step) % tabs.length];
-        if (!candidate.button.disabled && candidate.button.isConnected) { next = candidate; break; }
-      }
-    }
+    const next = nextTab(tabs, button, event.key, list.getAttribute("aria-orientation") === "vertical");
     if (next) {
       event.preventDefault();
       focusedKey = next.key;
@@ -370,22 +247,11 @@ export function bindTabs(root: HTMLElement, options: {
     dispose() {
       if (disposal) return disposal;
       disposed = true;
-      revision++;
       controller.abort();
-      if (inFlight) void inFlight.dispose().catch(() => {});
-      if (deactivating) void deactivating.dispose().catch(() => {});
-      disposal = tail.then(async () => {
-        let failure: unknown;
-        for (const page of cache.values()) {
-          try { await page.dispose(); } catch (cause) { failure ??= cause; }
-        }
-        cache.clear();
+      disposal = pages.dispose().finally(() => {
         selectedKey = null;
-        stableKey = null;
-        activeKey = null;
         for (const undo of restore.reverse()) undo();
         boundRoots.delete(root);
-        if (failure !== undefined) throw failure;
       });
       return disposal;
     }

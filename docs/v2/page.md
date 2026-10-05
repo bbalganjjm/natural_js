@@ -10,9 +10,10 @@ sources:
     resource: ../../src/page/index.ts
     title: Page runtime and types
     git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T09:00:49Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T09:10:24Z }
+  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 ---
 
 The `./page` entry exports `mountPage` and its CVC types. Each mount creates a controller instance for one authored HTML root.[^page]
@@ -79,6 +80,6 @@ await page.dispose();
 
 # Related
 
-[The M1 contract](../implementation/m1-contract.md) defines the wider CVC design. [Communication](comm.md) accepts the same instance signal, and [architecture](architecture.md) defines ownership.
+[Documents](documents.md) retains dynamic pages and calls their existing lifecycle methods; [the shell example](shell-example.md) reuses a definition in main content, Documents and Popup. [The M1 contract](../implementation/m1-contract.md) defines the wider CVC design. [Communication](comm.md) accepts the same instance signal, and [architecture](architecture.md) defines ownership.
 
 [^page]: Page runtime and types

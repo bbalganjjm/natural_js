@@ -1,0 +1,13 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test
+> vitest run
+
+
+ RUN  v5.0.1 D:/workspace/natural_js
+
+
+ Test Files  8 passed (8)
+      Tests  81 passed (81)
+   Start at  17:51:47
+   Duration  1.08s (import 66%, transform 20%, worker 8%, tests 6%)
+

@@ -24,3 +24,7 @@
 * [Natural-JS 2.0 UI contracts](ui.md) - Shared rule, validation, selection, and page types for the implemented HTML-bound UI. (draft)
 * [bindTree](tree.md) - Bind authored hierarchical lists to Rows with single selection, expansion, nested text fields, and keyboard navigation. (draft)
 * [bindDatePicker](datepicker.md) - Bind controlled ISO date selection and keyboard navigation to an authored calendar table. (draft)
+
+* [bindNotify](notify.md) - Bind persistent plain-text notifications and manual dismissal to an authored list and stable announcement regions. (draft)
+* [bindDocuments](documents.md) - Bind dynamic keyed document tabs to authored templates and retained CVC page instances with guarded close and explicit reload. (draft)
+* [Application shell in two CVC layouts](shell-example.md) - Compose independent document workspaces, persistent notifications, shared Form data and Popup with one CVC editor definition. (draft)

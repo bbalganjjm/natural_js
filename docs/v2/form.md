@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
+    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime

@@ -8,11 +8,11 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Migration roadmap
-    git_blob: 770252179cc12dd6547fa8a3178cfcc4f5a71c33
+    git_blob: d00f23ad20e7f2d4df4469eb78a248734dadd3b8
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI entry
-    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
+    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree implementation

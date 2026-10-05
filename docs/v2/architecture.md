@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
+    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -44,7 +44,7 @@ sources:
   - id: tabs
     resource: ../../src/ui/tabs.ts
     title: Authored Tabs and CVC page lifetime
-    git_blob: e626d6e3de1be958b6525b56372187d5945b3e78
+    git_blob: 8e2fe057168717b6b8ad2182c66935a492a89292
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree hierarchy and authored-list binding
@@ -97,10 +97,22 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
-generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
+  - id: documents
+    resource: ../../src/ui/documents.ts
+    title: Dynamic authored document containers
+    git_blob: 9d1da99633d4c2525eb6440b7aed98bb8753cb61
+  - id: notify
+    resource: ../../src/ui/notify.ts
+    title: Persistent authored notifications
+    git_blob: 78af2890f980c0091246e81abd2a041b084bc30f
+  - id: tab-pages
+    resource: ../../src/ui/tab-pages.ts
+    title: Private shared page-tab transitions and keyboard helpers
+    git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
+generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
+  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -111,18 +123,18 @@ Keep one definition of each framework behavior without collecting unrelated help
 
 # Participants
 
-| Path | Responsibility through M11 |
+| Path | Responsibility through M12 |
 |---|---|
 | `src/index.ts` | Root public entry; currently re-exports the real `FrameworkError`. |
 | `src/page/` | `mountPage`, CVC lifecycle, authored HTML roots, and per-instance cancellation. |
 | `src/data/` | `createRows`, immutable nested JSON snapshots, row identity, and change tracking. |
-| `src/ui/` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs`, `bindTree`, `bindDatePicker`, their types, and UI-owned field-path, rule, row-option, and Select-ownership helpers. |
+| `src/ui/` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs`, `bindTree`, `bindDatePicker`, `bindNotify`, `bindDocuments`, their types, and UI-owned field-path, rule, row-option, and Select-ownership helpers. |
 | `src/comm/` | `createCommunicator`, Request/Response hooks, JSON decoding, and cancellation. |
 | `src/internal/` | Private cross-role implementation; currently the common error class only. |
 
 # Lifecycle
 
-Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, List, and Tree bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select, Pagination, and DatePicker bind authored controls, own no row store, and restore authored markup on disposal. Popup and Tabs own private `PageHandle` instances from the same `mountPage` runtime; Popup owns one opening, keeps modal focus visible within authored scrollable CSS, and restores the opener, while Tabs retain successfully visited pages until final disposal and evict failed or canceled pages.[^package][^form][^grid][^list][^select][^pagination][^popup][^tabs]
+Build `src/` once with `tsc` to `build/`. The package export map resolves public paths to generated JavaScript and declarations. Consumers cannot use an internal package subpath through `exports`. The preserved `v1/` code is outside this build and tarball. Form, Grid, List, and Tree bind within authored roots, subscribe to a caller-owned row store when supplied, and release their own listeners and subscriptions on disposal. Standalone Select, Pagination, and DatePicker bind authored controls, own no row store, and restore authored markup on disposal. Popup, Tabs and Documents own private `PageHandle` instances from the same `mountPage` runtime; Popup owns one opening, keeps modal focus visible within authored scrollable CSS, and restores the opener, while Tabs retain successfully visited pages until final disposal and evict failed or canceled pages. Documents also create/remove keyed entries and call an application close predicate. Notifications own cloned message items and stable announcement changes; they own no store or page runtime.[^package][^form][^grid][^list][^select][^pagination][^popup][^tabs]
 
 # Rules
 
@@ -134,11 +146,11 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 # Pitfalls
 
-A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners.[^tree][^datepicker][^dom-state][^row-options][^select-owner]
+A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
 # Related
 
-[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [Tree](tree.md) and [DatePicker](datepicker.md) keep source and handle types together; [the authored M11 example](tree-date-example.md) connects them through the same CVC runtime. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
+[The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [Tree](tree.md) and [DatePicker](datepicker.md) keep source and handle types together; [the authored M11 example](tree-date-example.md) connects them through the same CVC runtime. [Documents](documents.md), [Notify](notify.md) and [the application shell example](shell-example.md) complete the selected shell composition without a public shell engine. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
 
 [^package]: Public package boundaries
 [^root]: Root entry
@@ -157,3 +169,7 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 [^tree]: Tree hierarchy and authored-list binding
 [^datepicker]: Controlled authored-calendar binding
 [^dom-state]: Private shared DOM state ownership
+
+[^documents]: Dynamic authored document containers
+[^notify]: Persistent authored notifications
+[^tab-pages]: Private shared page-tab transitions and keyboard helpers

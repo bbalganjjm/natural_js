@@ -9,18 +9,23 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Tabs exports
-    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
+    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
   - id: tabs
     resource: ../../src/ui/tabs.ts
     title: Tabs lifecycle and ARIA binding
-    git_blob: e626d6e3de1be958b6525b56372187d5945b3e78
+    git_blob: 8e2fe057168717b6b8ad2182c66935a492a89292
   - id: page
     resource: ../../src/page/index.ts
     title: Shared CVC page runtime
     git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:56:13Z }
+  - id: coordinator
+    resource: ../../src/ui/tab-pages.ts
+    title: Private shared page-tab transitions and keyboard helpers
+    git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
+generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T15:58:02Z }
+  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 ---
 
 `bindTabs` connects authored tab buttons and panels by matching keys. It lazily creates each CVC page, keeps visited pages for reactivation, and changes ARIA and focus state without replacing the author's layout or CSS.[^tabs][^page]
@@ -92,14 +97,18 @@ The binder pairs tabs by `data-tab` and `data-panel`, never by position. It adds
 
 Switching deactivates the prior page before revealing and starting the target. Visited pages remain in their panels and reactivate on revisit. A failed or canceled page is disposed and evicted so a later selection can call its factory again. If a target fails after the prior page deactivated, the binder tries to reactivate it and restore selection; failed recovery shows the authored alert and reports `selected() === null`. If the prior page itself fails to deactivate, it is evicted and the alert appears with no active page. A newer selection wins over an older pending one.[^tabs][^page]
 
+Static Tabs and dynamic Documents share private transition/cache/focus helpers. This does not add methods or options to the static Tabs contract; mountPage remains the CVC runtime.[^coordinator]
+
 # Pitfalls
 
 A custom TabPage whose pending operation never settles after `dispose()` can block later selections; use `mountPage` or implement the same cancellation contract. A borrowed inline page root must already be inside its Tab panel; it cannot be mounted simultaneously in a Popup. Page output while a Tab is inactive is ignored by the page runtime. The author supplies tab names, error region, visible focus styles, and panel content; this binder does not provide a theme or document-tab model.[^tabs][^page]
 
 # Related
 
-[The page runtime](page.md) defines the lifecycle that Tab factories return. [Popup](popup.md) can mount the same fresh-root definition. [The page-container example](page-containers-example.md) shows two authored layouts. [The M7 plan](../implementation/m7-plan.md) records fixed Tabs scope.
+[Documents](documents.md) provides a dynamic keyed set with guarded close and explicit reload. [The page runtime](page.md) defines the lifecycle that Tab factories return. [Popup](popup.md) can mount the same fresh-root definition. [The page-container example](page-containers-example.md) shows two authored layouts. [The M7 plan](../implementation/m7-plan.md) records fixed Tabs scope.
 
 [^entry]: Public Tabs exports
 [^tabs]: Tabs lifecycle and ARIA binding
 [^page]: Shared CVC page runtime
+
+[^coordinator]: Private shared page-tab transitions and keyboard helpers

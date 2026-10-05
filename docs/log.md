@@ -1,5 +1,17 @@
 ## 2026-10-05
 
+* **Verification** Final changed and full OKF checks passed with 47 concepts, 5 reserved files, zero errors and zero warnings. M12 API and completion pages received verified stamps after the independent source/archive/evidence review; unchanged historical concepts received only source-fingerprint refreshes.
+
+* **Verification** M12 frozen source passed build/typecheck, strict shell example, Vitest 81/81 and full Chromium/Firefox/WebKit suites 167/167 each. The same 128-file unpublished artifact (SHA-256 ea0f8e2e5538d6a0f210ab3918d3141658a2370b9c7362b72512008af5266c32) passed installed JS/TS and all five available browser consumers. Raw logs and frozen-source hashes are archived; earlier partial runs and the 7ccecf3e artifact are superseded.
+* **Correction** Independent M12 review resolved malformed/partial handle cleanup, alert-node identity, pending cleanup ordering, strict guard values, thrown-null error display, overlapping authored regions and unavailable empty-state focus targets. Final cleanup retains its first rejection even when null/undefined. WebKit notification focus tests use native keyboard activation to exercise the component contract across engines.
+* **Verification** Independent source/contract review covered new Notify/Documents/shell concepts and affected module, UI, package, migration, page and Tabs contracts. Initial docs-first context was 3 files / 21674 file bytes; no actual token, new implementation benchmark or speedup claim. The root separately reviewed the final auditor's cleanup-sentinel patch. Historical evidence and registry state were not recertified.
+* **Update** The active plan and roadmap now hand off from completed selected M12 scope to personal demo testing and a separately planned release candidate. npm publication, release tags and master/v1 changes remain deferred or outside this task.
+
+* **Creation** M12 adds authored Notify and dynamic Documents draft contracts plus a two-layout shell example. The implementation shares concrete static/dynamic tab coordination privately and retains the existing CVC execution, Form rules and per-shell Rows.
+* **Correction** Populated-shell axe identified invalid close-button ownership inside a tablist. Generated tab/close wrappers now belong to a separate authored item host, and the named tablist owns only tab IDs through ARIA. Independent review also checks close guard results and page-cleanup ordering.
+
+* **Creation** The user authorized M12 implementation after the already-pushed M11 checkpoint. The detailed notification/document shell plan preserves authored HTML and one CVC runtime, specifies minimal close policy and ownership, and excludes a new public shell engine or global registry.
+
 * **Verification** Recovered M11 passed build/typecheck, Vitest 81/81, final full source suites 144/144 in Chromium, Firefox and WebKit, plus installed JS/TS and five-browser consumers. Its regenerated 113-file unpublished tarball is byte-identical to the initial artifact (SHA-256 15d171e80c5d72e137205e88d469f0a3d538801ffedac7bad7dd0c42ff37c257); raw source/artifact and 1000-row binding evidence is preserved.
 * **Correction** The user authorized removing a temporary Vite initialization. Preserved final M11 code/tests, restored Git and tracked resources from 60352c3, reconstructed reviewed docs/examples, restored original metadata and the prior untracked lockfile, removed scaffold/IDE dev configuration, and repeated all available checks. No v1/master change or registry publication occurred.
 

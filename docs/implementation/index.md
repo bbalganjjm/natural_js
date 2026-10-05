@@ -19,3 +19,5 @@
 * [Natural-JS 2.x M10 advanced Grid plan](m10-plan.md) - Draft scope and gates for advanced behavior on authored native tables without expanding Grid into a general utility library. (draft)
 * [Natural-JS 2.x M11 Tree and DatePicker plan](m11-plan.md) - Approved authored-HTML Tree and DatePicker scope, ownership, accessibility, and verification gates. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.
+
+* [Natural-JS 2.x M12 notification and document shell plan](m12-plan.md) - Approved authored notification and dynamic document-tab scope on the existing CVC runtime. (draft)

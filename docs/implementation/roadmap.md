@@ -7,9 +7,9 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6, at: 2026-10-05T07:40:27Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T08:58:26Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:43Z }
+  - { by: codex/gpt-6, at: 2026-10-05T08:58:26Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -22,7 +22,7 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 
 - M0-M8 are complete on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC data screen. Native Dialog, Popup, and Tabs run on the common CVC page runtime in two authored MDI layouts. M6 and M7 evidence is in their [data UI](m6-plan.md) and [page UI](m7-plan.md) plans; [M8](m8-beta-report.md) holds the unpublished beta-candidate, migration, agent-task, and three-browser evidence. [M9 release work](m9-plan.md) has a verified unpublished beta; publication remains deferred.
 - The initial 2.0 release includes form, list, basic grid, select, pagination, button, dialog, popup, and tab.
-- Selected advanced Grid slices and M11 Tree and DatePicker are implemented. Their recovered source, package, browser and documentation gates are complete; notification, document tabs, and shell remain in M12.
+- Selected advanced Grid slices and M11 Tree and DatePicker are complete. M12 adds authored notifications, dynamic document tabs and an application shell composed from the same CVC runtime; its final verification is recorded in the [M12 plan](m12-plan.md).
 
 # Steps
 
@@ -46,7 +46,7 @@ Each milestone starts with a detailed plan, user review, and approval of its sco
 
 # Next action
 
-The M9 beta artifact is verified but unpublished. Real Safari on macOS or iOS is outside initial 2.0 support; available Playwright WebKit remains required. The user deferred registry publication and release tags until remaining functionality is complete, personally tested, and publication is requested again. The selected [M10 slices](m10-plan.md) and approved [M11 Tree and DatePicker implementation](m11-plan.md) are complete. The rebuilt M11 artifact matches the original checksum and passed the required browser and package checks; prepare the M12 scope next. The user approved removing only the unused public `Rule` alias; retained Form rules are unchanged.
+The selected implementation scope through [M12](m12-plan.md) is complete with final source, package and browser evidence. Use the demos for the user's personal testing before a separately planned M9 release-candidate run. Registry publication and release tags remain deferred until explicitly requested. Real Safari on macOS or iOS is excluded; available Playwright WebKit remains required. Unselected M10 features remain future work, not release blockers. The user approved removing only the unused public `Rule` alias; retained Form rules are unchanged.
 
 # Decisions
 

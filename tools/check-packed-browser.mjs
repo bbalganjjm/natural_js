@@ -142,6 +142,37 @@ try {
   assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.rows.entries()[0].value.date), "2026-10-07");
   assert.equal(await page.evaluate(() => window.packedConsumer.screens.b.picker.value()), "2026-10-05");
 
+  await page.evaluate(() => {
+    window.packedConsumer.screens.a.notifications.show("<b>Saved</b>");
+    window.packedConsumer.screens.b.notifications.show("Other workspace");
+  });
+  await expect(first.locator("[data-notify-list] [data-notify-message]")).toHaveText("<b>Saved</b>");
+  await expect(first.locator("[data-notify-message] b")).toHaveCount(0);
+  await first.locator("[data-notify-close]").click();
+  await expect(first.locator("[data-notify-list] li")).toHaveCount(0);
+  await expect(page.locator('[data-host="b"] [data-notify-list] li')).toHaveCount(1);
+  await page.evaluate(() => window.packedConsumer.screens.a.openDocument("Employee"));
+  const documentInput = first.locator('[data-document-panels] input');
+  await expect(documentInput).toHaveValue("Ann");
+  const initialController = await first.locator("[data-document-controller]").getAttribute("data-document-controller");
+  await page.evaluate(() => window.packedConsumer.screens.a.openDocument("Other"));
+  await page.evaluate(() => window.packedConsumer.screens.a.openDocument("Employee"));
+  assert.equal(await first.locator('[data-document-controller]').first().getAttribute("data-document-controller"), initialController);
+  const guarded = await page.evaluate(() => window.packedConsumer.screens.a.documents.close("Employee"));
+  assert.equal(guarded, false, "Application close policy must preserve the document.");
+  await page.evaluate(() => window.packedConsumer.screens.a.documents.reload("Employee"));
+  assert.notEqual(await first.locator('[role="tabpanel"]:not([hidden]) [data-document-controller]').getAttribute("data-document-controller"), initialController);
+  await first.locator('[role="tabpanel"]:not([hidden]) input').fill("Anne");
+  await expect(first.locator(':scope > article > form input')).toHaveValue("Anne");
+  await page.evaluate(async () => {
+    window.packedConsumer.allowClose = true;
+    await window.packedConsumer.screens.a.documents.close("Employee");
+  });
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.documents.selected()), "Other");
+  assert.deepEqual(await page.evaluate(() => window.packedConsumer.screens.b.documents.keys()), []);
+  const finalIds = await page.evaluate(() => [...document.querySelectorAll("[id]")].map(item => item.id));
+  assert.equal(new Set(finalIds).size, finalIds.length, "Dynamic document IDs must stay unique.");
+
   const disposed = await page.evaluate(async () => {
     const firstScreen = window.packedConsumer.screens.a;
     const handle = window.packedConsumer.handles.a;

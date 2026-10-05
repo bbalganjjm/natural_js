@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Application shell in two CVC layouts](v2/shell-example.md) - Compose independent document workspaces, persistent notifications, shared Form data and Popup with one CVC editor definition. (draft)
+
 * [Tree and DatePicker in two CVC layouts](v2/tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
 * [Interactive Grid contract demo](v2/grid-demo.md) - Exercise every implemented Grid option, method, and declarative marker on one authored native table while inspecting raw Rows state. (draft)

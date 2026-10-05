@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural-JS M12 · authored application shell</title>
+    <link rel="stylesheet" href="/m12/side.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Application shell · side navigation</h1>
+      <button type="button" data-add-shell>Open another workspace</button>
+      <a href="/m12/stack.html">Stacked menu layout</a>
+    </header>
+    <p>Each workspace shares its own records across main content, document pages and a Popup. Changes stay local; validation does not send or save data.</p>
+    <main data-shells></main>
+    <template data-shell-view>
+      <article class="shell" aria-label="Application workspace">
+        <header class="shell-header">
+          <h2 data-shell-title>Workspace</h2>
+          <button type="button" data-remove-shell>Close workspace</button>
+        </header>
+        <div class="shell-layout">
+          <nav class="menu" aria-label="Page menu">
+            <h3>Pages</h3>
+            <button type="button" data-open-document="ada">Open Ada document</button>
+            <button type="button" data-open-document="lin">Open Lin document</button>
+            <button type="button" data-open-document="slow">Open pending page</button>
+            <button type="button" data-open-document="retry">Open failing / retry page</button>
+            <button type="button" data-open-popup>Open Ada Popup</button>
+            <button type="button" data-revert>Revert shared changes</button>
+            <p>Pending stays loading until closed. The retry page fails once, then opens normally.</p>
+          </nav>
+          <section class="main-panel" aria-label="Main content">
+            <h3>Main editor</h3>
+            <div data-main-host></div>
+          </section>
+          <section class="document-panel" aria-label="Documents">
+            <h3>Document pages</h3>
+            <div class="document-actions">
+              <button type="button" data-reload-document>Reload selected document</button>
+              <button type="button" data-close-documents>Close all documents</button>
+            </div>
+            <section data-documents>
+              <div role="tablist" aria-label="Open documents">
+                <template data-document-tab-template>
+                  <div role="presentation">
+                    <button type="button" role="tab" data-document-tab><span data-document-title></span></button>
+                    <button type="button" data-document-close aria-label="Close document">×</button>
+                  </div>
+                </template>
+              </div>
+              <div data-document-items></div>
+              <div data-document-panels>
+                <template data-document-panel-template><section role="tabpanel" hidden></section></template>
+              </div>
+              <div data-document-empty><p>No open documents.</p><button type="button" data-open-document="ada">Open first document</button></div>
+              <p data-document-error role="alert" hidden></p>
+            </section>
+          </section>
+        </div>
+        <section data-notify role="region" aria-label="Workspace notifications">
+          <h3>Notifications</h3>
+          <div class="notice-actions">
+            <button type="button" data-notify-normal>Show ordinary notice</button>
+            <button type="button" data-notify-urgent>Show important notice</button>
+            <button type="button" data-notify-clear>Clear notices</button>
+          </div>
+          <ul data-notify-list>
+            <li data-notify-template><span data-notify-message></span><button type="button" data-notify-close aria-label="Dismiss notice">Dismiss</button></li>
+          </ul>
+          <span class="visually-hidden" data-notify-status role="status" aria-live="polite" aria-atomic="true"></span>
+          <span class="visually-hidden" data-notify-alert role="alert" aria-atomic="true"></span>
+        </section>
+        <section aria-label="Workspace state">
+          <h3>State and lifecycle</h3>
+          <output data-popup-result aria-live="polite"></output>
+          <pre data-state aria-label="Document state"></pre>
+          <h4>Raw shared Rows changes</h4>
+          <pre data-changes aria-label="Changed data"></pre>
+          <ol data-history aria-label="Page lifecycle"></ol>
+        </section>
+        <dialog data-editor-dialog aria-label="Ada Popup editor">
+          <h3>Popup editor</h3>
+          <div data-page-host></div>
+          <form method="dialog"><button type="submit">Cancel Popup</button></form>
+        </dialog>
+      </article>
+    </template>
+    <template data-editor-view>
+      <section class="editor" data-editor>
+        <h4 data-editor-title>Person editor</h4>
+        <form data-editor-form>
+          <label>Name <input data-field="profile.name" required data-validate='[["required"]]'></label>
+          <output data-error-for="profile.name"></output>
+          <label>Salary <input data-field="salary" inputmode="decimal" data-format='[["commas"]]' data-validate='[["number"]]'></label>
+          <output data-error-for="salary"></output>
+          <button type="submit">Validate changes</button>
+          <button type="button" data-use-person>Use this person</button>
+        </form>
+        <output data-validation aria-live="polite"></output>
+      </section>
+    </template>
+    <script type="module" src="/m12/main.ts"></script>
+  </body>
+</html>

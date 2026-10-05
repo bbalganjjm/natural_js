@@ -9,14 +9,14 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
-generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
+    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
+generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
+  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 ---
 
-The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, and DatePicker functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
+The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
 
 # Summary
 
@@ -52,6 +52,6 @@ A parser sees one snapshot of all currently entered, still unparsed drafts in `R
 
 # Related
 
-[Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), and [Tabs](tabs.md), [Tree](tree.md), and [DatePicker](datepicker.md) document runtime behavior. [The M1 contract](../implementation/m1-contract.md) records the first-release boundary.
+[Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), and [Tabs](tabs.md), [Tree](tree.md), and [DatePicker](datepicker.md), [Notify](notify.md), and [Documents](documents.md) document runtime behavior. [The M1 contract](../implementation/m1-contract.md) records the first-release boundary.
 
 [^ui]: Public UI types and runtime exports

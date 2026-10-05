@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+@import "./base.css";
+:root { color: #312a21; background: #f5f1e9; }
+.shell { border-radius: 0; border-color: #c7bba7; }
+.shell-layout { display: flex; flex-direction: column; gap: 1rem; }
+.menu { flex-direction: row; flex-wrap: wrap; align-items: center; }
+.menu h3 { width: 100%; }

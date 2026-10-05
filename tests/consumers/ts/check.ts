@@ -5,8 +5,8 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -107,4 +107,17 @@ export function connectCalendar(root: HTMLElement): DatePickerHandle {
   const picker = bindDatePicker(root, { value: "2026-10-05", min: "2026-01-01", max: "2026-12-31" });
   picker.setValue(null);
   return picker;
+}
+
+export function connectShell(notifyRoot: HTMLElement, documentRoot: HTMLElement): {
+  notifications: NotifyHandle; documents: DocumentHandle;
+} {
+  const notifications = bindNotify(notifyRoot);
+  const documents = bindDocuments(documentRoot, { beforeClose: async key => key !== "locked" });
+  void documents.open("employee", {
+    title: "Employee", page: host => mountPage(host, definition, { name: "Kim" })
+  });
+  const dismiss = notifications.show("Opened employee.");
+  dismiss();
+  return { notifications, documents };
 }

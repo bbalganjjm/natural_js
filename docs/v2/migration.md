@@ -40,7 +40,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
+    git_blob: 722a7e8120165661fc7ab8ddc7032b139ed8df79
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -105,10 +105,10 @@ sources:
     resource: ../../tests/rules.test.ts
     title: Declarative dispatch and combined-name checks
     git_blob: 70f1881b500b99c138c04c834258ed57eb6021be
-generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
+  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -252,10 +252,11 @@ The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, 
 | Boundary | 1.x examples | Migration |
 |---|---|---|
 | Browser and JavaScript APIs | `N()`/jQuery selectors and events, `N.button`, plain `N.alert`, generic `N.ajax`, simple string/array/date operations | Use scoped DOM queries, `addEventListener`, native buttons/dialogs, `fetch` through `createCommunicator` when its cancellation and hooks help, and standard JavaScript operations. |
+| Framework shell | `N.notify`, `N.docs` | Use bindNotify/bindDocuments with authored templates, explicit page factories and beforeClose. Keep routing, translations, timers and whole-app loading policy in application code. |
 | Application implementation | `N.context` app settings, generic `N.message`/locale lookup, `N.data` filter/sort, Natural-TEMPLATE `p.`/`c.`/`e.` declarations, API envelopes | Keep these decisions in the page or application: explicit options, localization, predicates/comparators, direct functions, and server conversion. |
 | Discontinued behavior | `N.data.filter` string conditions evaluated as code, global `N.gc`, generic controller AOP and runtime string declaration parsing, optional `N.code` inspection | Rewrite as explicit predicates, owned cleanup, controller methods, and normal source inspection; there is no 2.0 compatibility entry. |
 
-Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. The current Grid also accepts optional `initialPage: { page, size }` for a bounded first render of a large local `Rows` store. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. Cascading tree checks, other advanced Grid features, notifications, and document tabs remain later work; do not label them as discontinued 2.0 replacements.[^package][^ui][^rules][^formats][^validators]
+Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. The current Grid also accepts optional `initialPage: { page, size }` for a bounded first render of a large local `Rows` store. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. M12 adds persistent [Notify](notify.md) messages and dynamic [Documents](documents.md) with keyed page reuse, an application close guard and explicit reload. The [shell example](shell-example.md) composes those binders with the existing page runtime. Cascading tree checks and unselected advanced Grid features remain later work.[^package][^ui][^rules][^formats][^validators]
 
 # Verify
 
@@ -278,7 +279,7 @@ In M4, a valid save sends only the changed raw rows matching `examples/vite/m4/e
 
 # Next
 
-Use [page](page.md), [Rows](data.md), [Form](form.md), [communication](comm.md), [Popup](popup.md), and [Tabs](tabs.md) for exact signatures. For a narrower implementation start, inspect `examples/vite/m4/employees.ts` and `examples/vite/m7/main.ts`; their authored views and focused tests show the entire working routes.[^employee][^containers]
+Use [page](page.md), [Rows](data.md), [Form](form.md), [communication](comm.md), [Popup](popup.md), and [Tabs](tabs.md), [Documents](documents.md), and [Notify](notify.md) for exact signatures. For a narrower implementation start, inspect `examples/vite/m4/employees.ts` and `examples/vite/m7/main.ts`; their authored views and focused tests show the entire working routes.[^employee][^containers]
 
 [^legacy-screen]: Preserved 1.x search, grid, detail, and save example
 [^legacy-comm]: Preserved 1.x page loading and request serialization

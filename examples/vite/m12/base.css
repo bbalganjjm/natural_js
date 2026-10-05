@@ -1,0 +1,34 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+:root { font-family: system-ui, sans-serif; color: #1b2c39; background: #edf3f6; }
+body { max-width: 1400px; margin: auto; padding: 1rem; }
+button, input { font: inherit; }
+button { padding: .4rem .65rem; cursor: pointer; }
+button:disabled { cursor: default; }
+:focus-visible { outline: 3px solid #155caa; outline-offset: 2px; }
+.site-header, .shell-header, .document-actions, .notice-actions { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+.site-header h1, .shell-header h2 { margin-right: auto; }
+.shell { background: white; padding: 1rem; margin: 1rem 0; border: 1px solid #b9c9d4; border-radius: .5rem; }
+.shell-layout > * { min-width: 0; }
+.menu { display: flex; flex-direction: column; gap: .5rem; }
+.menu h3 { margin: 0; }
+.main-panel, .document-panel { min-width: 0; padding: .75rem; border: 1px solid #d2dce3; }
+h3, h4 { margin: .5rem 0; }
+[data-document-items] { display: flex; flex-wrap: wrap; gap: .3rem; margin: .7rem 0; }
+[data-document-items] > [role="presentation"] { display: flex; }
+[role="tab"][aria-selected="true"] { font-weight: 700; background: #daeaf7; }
+[data-document-close] { padding: .4rem; }
+[data-document-empty] { padding: .8rem 0; }
+[data-document-error], [data-error-for] { color: #a21919; }
+form label { display: block; margin: .65rem 0; }
+form input { box-sizing: border-box; display: block; width: 100%; max-width: 25rem; padding: .35rem; }
+[data-error-for], output { display: block; min-height: 1.2em; }
+.editor { min-width: 0; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f3f6f8; padding: .6rem; font-size: .8rem; }
+[data-history] { padding-left: 1.5rem; max-height: 12rem; overflow: auto; overflow-wrap: anywhere; font-size: .8rem; }
+[data-notify-list] { list-style: none; padding: 0; }
+[data-notify-list] > li { display: flex; gap: .5rem; align-items: center; border: 1px solid #a3b9c9; padding: .5rem; margin: .5rem 0; }
+[data-notify-message] { flex: 1; overflow-wrap: anywhere; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+dialog { box-sizing: border-box; width: min(95vw, 35rem); max-height: calc(100dvh - 1rem); overflow: auto; padding: 1rem; border: 1px solid #698498; border-radius: .5rem; }
+dialog::backdrop { background: rgb(15 30 40 / 50%); }
+@media (max-width: 600px) { body { padding: .5rem; } .shell { padding: .65rem; } }

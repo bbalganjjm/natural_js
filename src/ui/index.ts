@@ -127,3 +127,8 @@ export { bindTree } from "./tree.js";
 export type { TreeHandle } from "./tree.js";
 export { bindDatePicker } from "./datepicker.js";
 export type { DatePickerHandle } from "./datepicker.js";
+
+export { bindNotify } from "./notify.js";
+export type { NotifyHandle } from "./notify.js";
+export { bindDocuments } from "./documents.js";
+export type { DocumentHandle } from "./documents.js";

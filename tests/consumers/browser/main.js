@@ -1,8 +1,8 @@
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import { bindForm, bindGrid, bindTree, bindDatePicker } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
-const state = { ready: false, screens: {}, handles: {}, outputs: [] };
+const state = { ready: false, screens: {}, handles: {}, outputs: [], allowClose: false, documentControllers: 0 };
 window.packedConsumer = state;
 
 function view() {
@@ -38,6 +38,24 @@ function view() {
         <tbody><tr data-date-week-template>${"<td><button type=button data-date-day></button></td>".repeat(7)}</tr></tbody>
       </table>
     </section>
+    <section data-notify aria-label="Notifications">
+      <ol data-notify-list><li data-notify-template><span data-notify-message></span>
+        <button type="button" data-notify-close>Dismiss</button></li></ol>
+      <p data-notify-status role="status"></p><p data-notify-alert role="alert"></p>
+    </section>
+    <section data-documents>
+      <div role="tablist" aria-label="Documents">
+        <template data-document-tab-template><span>
+          <button type="button" role="tab" data-document-tab><span data-document-title></span></button>
+          <button type="button" data-document-close>Close document</button>
+        </span></template>
+      </div>
+      <div data-document-items></div>
+      <div data-document-panels><template data-document-panel-template>
+        <section role="tabpanel"></section>
+      </template></div>
+      <p data-document-empty>No documents</p><p data-document-error role="alert" hidden></p>
+    </section>
     <button type="button" data-action="save">Save</button>`;
   return root;
 }
@@ -60,9 +78,32 @@ const definition = {
       value: rows.entries()[0].value.date, min: "2026-10-01", max: "2026-10-31",
       onChange: value => rows.set(rows.entries()[0].id, "date", value)
     });
-    const screen = { rows, grid, form, tree, picker, disposed: false };
+    const notifications = bindNotify(root.querySelector("[data-notify]"));
+    const documents = bindDocuments(root.querySelector("[data-documents]"), {
+      beforeClose: () => state.allowClose
+    });
+    const openDocument = key => documents.open(key, {
+      title: key,
+      page: host => mountPage(host, {
+        view() {
+          const section = document.createElement("section");
+          section.innerHTML = '<form><label>Document name <input data-field="person.name" required></label><output data-error-for="person.name"></output></form>';
+          return section;
+        },
+        controller({ root: pageRoot, own: ownPage }) {
+          pageRoot.dataset.documentController = String(++state.documentControllers);
+          const documentForm = bindForm(pageRoot.querySelector("form"), { rows });
+          documentForm.bind(rows.entries()[0].id);
+          ownPage(() => documentForm.dispose());
+          return {};
+        }
+      })
+    });
+    const screen = { rows, grid, form, tree, picker, notifications, documents, openDocument, disposed: false };
     state.screens[input.slot] = screen;
-    own(() => {
+    own(async () => {
+      await documents.dispose();
+      notifications.dispose();
       picker.dispose();
       tree.dispose();
       form.dispose();
