@@ -74,7 +74,7 @@ export function assertFormatArgs(name: string, args: readonly unknown[]): void {
       }
       return;
     case "date":
-      if (args.length > 1) throw new TypeError("date picker arguments are reserved for M11; date formats display text only.");
+      if (args.length > 1) throw new TypeError("date accepts one display format; bindDatePicker provides explicit calendar selection.");
       if (args.length === 1) {
         if (typeof args[0] === "number") {
           if (![4, 6, 8, 10, 12, 14].includes(integer("date format", args[0], 4, 14))) {

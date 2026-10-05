@@ -1,0 +1,39 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+:root { font-family: system-ui, sans-serif; color: #192b39; background: #f1f5f7; }
+body { max-width: 1200px; margin: auto; padding: 1rem; }
+button, input { font: inherit; }
+button { cursor: pointer; padding: .45rem .7rem; }
+button:disabled { cursor: default; }
+:focus-visible { outline: 3px solid #145caa; outline-offset: 2px; }
+.site-header, .screen-header, .actions, .calendar-nav { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; }
+.site-header h1, .screen-header h2 { margin-right: auto; }
+.workspace { padding: 1rem; margin: 1rem 0; background: white; border: 1px solid #bdcbd5; border-radius: .5rem; }
+.screen-body > section { min-width: 0; }
+.screen-body h3 { margin-top: 0; }
+[role="tree"], [role="group"] { list-style: none; padding: 0; }
+[role="group"] { margin-left: 1.2rem; }
+[role="treeitem"] { margin: .35rem 0; padding: .3rem; border-radius: .3rem; }
+[role="treeitem"][aria-selected="true"] > [data-tree-label] { background: #dbeaf6; font-weight: 700; }
+[data-tree-label] { padding: .3rem; display: inline-block; }
+[data-tree-label] small { margin-left: .4rem; font-weight: 400; }
+[data-tree-toggle] { padding: .1rem .4rem; min-width: 1.7rem; }
+[data-tree-toggle]::after { content: "+"; }
+[data-tree-toggle][aria-expanded="true"]::after { content: "−"; }
+form label { display: block; margin: .75rem 0; }
+form input { box-sizing: border-box; display: block; width: 100%; max-width: 24rem; padding: .4rem; }
+[data-error-for] { display: block; color: #a51b19; min-height: 1.2em; }
+output { display: block; min-height: 1.3em; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; background: #f3f6f8; padding: .75rem; }
+dialog { box-sizing: border-box; max-width: min(95vw, 30rem); max-height: calc(100dvh - 1rem); overflow: auto; padding: 1rem; border: 1px solid #71879a; border-radius: .5rem; }
+dialog::backdrop { background: rgb(15 30 40 / 50%); }
+.calendar-nav [data-date-title] { flex: 1; margin: .5rem 0; text-align: center; }
+[data-date-grid] { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 2px; }
+[data-date-grid] th { font-size: .8rem; }
+[data-date-grid] td { text-align: center; }
+[data-date-day] { width: 100%; min-width: 2rem; padding: .45rem .1rem; border: 1px solid transparent; background: #f2f5f7; color: #192b39; }
+[data-date-outside] { background: white; }
+[data-date-day]:disabled { color: #63717b; }
+[data-date-grid] [aria-selected="true"] button { background: #185ea1; color: white; }
+[data-date-day][aria-current="date"] { border-color: #185ea1; }
+.calendar-help { font-size: .85rem; }
+@media (max-width: 600px) { body { padding: .5rem; } .workspace { padding: .65rem; } }

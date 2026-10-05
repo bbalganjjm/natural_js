@@ -5,8 +5,8 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -95,4 +95,16 @@ export function connectTabs(root: HTMLElement): TabHandle {
       employees: host => mountPage(host, definition, { name: "Kim" })
     }
   });
+}
+
+
+export function connectHierarchy(root: HTMLUListElement,
+  rows: Rows<{ key: string; parent: string | null; label: string }>): TreeHandle {
+  return bindTree(root, { rows, key: row => row.key, parent: row => row.parent });
+}
+
+export function connectCalendar(root: HTMLElement): DatePickerHandle {
+  const picker = bindDatePicker(root, { value: "2026-10-05", min: "2026-01-01", max: "2026-12-31" });
+  picker.setValue(null);
+  return picker;
 }

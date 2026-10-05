@@ -122,3 +122,8 @@ export { openPopup } from "./popup.js";
 export type { PopupHandle } from "./popup.js";
 export { bindTabs } from "./tabs.js";
 export type { TabHandle } from "./tabs.js";
+
+export { bindTree } from "./tree.js";
+export type { TreeHandle } from "./tree.js";
+export { bindDatePicker } from "./datepicker.js";
+export type { DatePickerHandle } from "./datepicker.js";

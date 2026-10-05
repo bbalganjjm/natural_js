@@ -1,0 +1,81 @@
+{
+  "rows": 1000,
+  "fields": 1,
+  "warmup": 2,
+  "samples": 5,
+  "measurements": [
+    {
+      "layout": "flat",
+      "bindMs": 7.099999997764826,
+      "updateMs": 1.4000000022351742,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 5.800000000745058,
+      "updateMs": 1.300000000745058,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 6.299999997019768,
+      "updateMs": 1.8999999985098839,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 5.899999998509884,
+      "updateMs": 1.9000000022351742,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 6.199999999254942,
+      "updateMs": 1.199999999254942,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 6,
+      "updateMs": 1.3999999985098839,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 6.200000002980232,
+      "updateMs": 2,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 6.900000002235174,
+      "updateMs": 1.5999999977648258,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 6,
+      "updateMs": 2.100000001490116,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 6.199999999254942,
+      "updateMs": 1.5999999977648258,
+      "nodes": 1000,
+      "sameRecords": true
+    }
+  ],
+  "date": "2026-10-05",
+  "engine": "Playwright Chromium on Windows",
+  "source_sha256": "8d3e0924075047d93138b54a0d9798829a41763eb494b2db90546f73a3fb7848"
+}

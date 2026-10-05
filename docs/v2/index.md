@@ -1,5 +1,7 @@
 # Concepts
 
+* [Tree and DatePicker in two CVC layouts](tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
+
 * [Interactive Grid contract demo](grid-demo.md) - Exercise every implemented Grid option, method, and declarative marker on one authored native table while inspecting raw Rows state. (draft)
 * [Authored advanced Grid in two layouts](advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 
@@ -20,3 +22,5 @@
 * [bindTabs](tabs.md) - Bind authored keyed tab buttons and panels to lazy CVC pages with manual keyboard activation. (draft)
 * [Natural-JS 2.0 page runtime](page.md) - Mount authored HTML with an independent CVC controller, lifecycle, cancellation, and output. (draft)
 * [Natural-JS 2.0 UI contracts](ui.md) - Shared rule, validation, selection, and page types for the implemented HTML-bound UI. (draft)
+* [bindTree](tree.md) - Bind authored hierarchical lists to Rows with single selection, expansion, nested text fields, and keyboard navigation. (draft)
+* [bindDatePicker](datepicker.md) - Bind controlled ISO date selection and keyboard navigation to an authored calendar table. (draft)

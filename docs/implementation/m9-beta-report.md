@@ -8,7 +8,7 @@ sources:
   - id: plan
     resource: m9-plan.md
     title: Approved M9 release gates
-    git_blob: bc8a8c666c3729f86edf767c041de2d6ecfacbb7
+    git_blob: 822f8c4012eccabd400bf903f848af6f852c91fd
   - id: package
     resource: ../../package.json
     title: Beta package metadata and scripts
@@ -18,9 +18,8 @@ sources:
     title: Reproducible development dependencies
     git_blob: 2634778a0c93af4e08ab9068277170265f213579
   - id: browser
-    resource: ../../tools/check-packed-browser.mjs
-    title: Exact-tarball browser consumer check
-    git_blob: 2ea727d313e0332867df245287e6b4a581a552e1
+    resource: https://github.com/bbalganjjm/natural_js/blob/b2335c33fff5f4fa3b353b81a6a6bdbadab2a04e/tools/check-packed-browser.mjs
+    title: Historical exact-tarball browser consumer check
   - id: consumers
     resource: ../../tools/check-consumers.mjs
     title: Exact-tarball JavaScript and TypeScript consumer check
@@ -52,9 +51,10 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-25T01:10:39Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T07:27:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T01:11:51Z }
+  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
 ---
 
 The clean source commit `a45fbd669e42e70e4e03624de8286b6440012d53` produced the unpublished `2.0.0-beta.0` tarball measured here. The earlier `c79b9eae` artifact was replaced after Popup focus and authored-layout reflow fixes. This report separates checks that installed the exact current tarball from source-checkout tests and records the remaining release gates. It does not claim registry publication, real Safari coverage, or complete WCAG 2.2 AA conformance.[^plan][^package]
@@ -87,7 +87,7 @@ Raw source-suite logs are [Chromium](evidence/m9-browser-chromium.log), [Firefox
 
 # Reproduce the artifact checks
 
-Run the package, installed-consumer, and browser commands from the clean `a45fbd6` package-source commit on the documented Windows/Node host. Run documentation checks from the later commit containing this report; the package-source commit predates the final M9 evidence update. The current M10.3 checkout's browser harness also requires `initialPage`, which that historical M9 tarball does not implement; use the M9 commit's matching harness when reproducing this report. Keep Playwright runs sequential; the full suite and the isolated agent fixture both use port 4173. The five historical packed-browser logs used one identical tarball and SHA. Playwright WebKit remains in the supported rerun alongside the other engines; only real Safari on macOS or iOS is unavailable here.[^consumers][^browser]
+Build the historical package from its `a45fbd6` package-source commit on the documented Windows/Node host. Run the exact-tarball installed-consumer and browser commands with the compatible harness and fixtures at `b2335c33fff5f4fa3b353b81a6a6bdbadab2a04e`; that locally inspected checkout has no Grid initialPage, Tree, or DatePicker consumer requirement. Run documentation checks from the later commit containing this report; the package-source commit predates the final M9 evidence update. The current M11 fixtures also require Grid `initialPage`, Tree, and DatePicker, which that historical M9 tarball does not implement; use that compatible harness checkout when reproducing this report. This compatibility inspection is not a new run of the historical tarball. Current artifact checks are recorded in the [M11 plan](m11-plan.md). Keep Playwright runs sequential; the full suite and the isolated agent fixture both use port 4173. The five historical packed-browser logs used one identical tarball and SHA. Playwright WebKit remains in the supported rerun alongside the other engines; only real Safari on macOS or iOS is unavailable here.[^consumers][^browser]
 
 ```powershell
 npm ci
@@ -167,7 +167,7 @@ The full-file `docs/log.md` read exceeded the meter's 24 KiB output cap and was 
 [^plan]: Approved M9 release gates
 [^package]: Beta package metadata and exports
 [^consumers]: Exact-tarball JS/TS consumer check
-[^browser]: Exact-tarball browser consumer check
+[^browser]: Historical exact-tarball browser consumer check
 [^a11y]: M4 and M7 browser accessibility regression
 [^popup]: Native Popup focus implementation
 [^grid-benchmark]: Raw M9 Grid measurements

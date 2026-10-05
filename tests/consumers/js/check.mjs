@@ -3,7 +3,7 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker } from "@bbalganjjm/natural_js/ui";
 
 const cause = new Error("original");
 const error = new FrameworkError({
@@ -24,6 +24,8 @@ assert.equal(typeof bindSelect, "function");
 assert.equal(typeof bindPagination, "function");
 assert.equal(typeof openPopup, "function");
 assert.equal(typeof bindTabs, "function");
+assert.equal(typeof bindTree, "function");
+assert.equal(typeof bindDatePicker, "function");
 
 const rows = createRows([{ name: "A", options: [{ value: "one" }] }]);
 const id = rows.entries()[0].id;

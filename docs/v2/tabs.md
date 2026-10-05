@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Tabs exports
-    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
+    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
   - id: tabs
     resource: ../../src/ui/tabs.ts
     title: Tabs lifecycle and ARIA binding
-    git_blob: 4bbd8b9a3b0280ed1ab2c59683bcc5597d7d6920
+    git_blob: e626d6e3de1be958b6525b56372187d5945b3e78
   - id: page
     resource: ../../src/page/index.ts
     title: Shared CVC page runtime

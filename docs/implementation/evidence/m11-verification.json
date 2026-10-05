@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-05",
+  "version": "2.0.0-beta.0",
+  "tarball": "bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+  "sha256": "15d171e80c5d72e137205e88d469f0a3d538801ffedac7bad7dd0c42ff37c257",
+  "packed_files": 113,
+  "packed_bytes": 161994,
+  "unpacked_bytes": 785086,
+  "identical_to_initial_artifact": true,
+  "framework_source_sha256": {
+    "src/ui/index.ts": "c02391ff64ffb27e2247d3a44103c2a256db0117e0e81c29b124428afffe3bd6",
+    "src/ui/tree.ts": "8d3e0924075047d93138b54a0d9798829a41763eb494b2db90546f73a3fb7848",
+    "src/ui/datepicker.ts": "ddb34471a9e40e28b044874d9535946715492121140ce5bbde67283918b971c4",
+    "src/ui/dom-state.ts": "09a60328db95549c75a0213cfccddfa910d03c6dd4f0ea44d1f82f7904df0d13",
+    "src/ui/tabs.ts": "ab6fe7270327185641cde577d37b20003bc07b7910babeda0f08ce2573a85a61",
+    "src/ui/format-rules.ts": "e3e1118d54f475d5002573a4d49b16894d6d2d6600397e4479d119b414d8a7b0"
+  },
+  "checks": {
+    "build": "pass",
+    "typecheck": "pass",
+    "example_typecheck": "pass",
+    "vitest": {
+      "passed": 81
+    },
+    "full_browser_suites": {
+      "chromium": {
+        "passed": 144,
+        "elapsed": "47.6s"
+      },
+      "firefox": {
+        "passed": 144,
+        "elapsed": "1.8m"
+      },
+      "webkit": {
+        "passed": 144,
+        "elapsed": "1.5m"
+      }
+    },
+    "installed_consumers": {
+      "javascript": "pass",
+      "typescript": "pass"
+    },
+    "packed_browser_consumers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32",
+        "passed": true
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "win32",
+        "passed": true
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "win32",
+        "passed": true
+      },
+      {
+        "browser": "chrome",
+        "version": "154.0.8037.93",
+        "platform": "win32",
+        "passed": true
+      },
+      {
+        "browser": "edge",
+        "version": "154.0.4258.53",
+        "platform": "win32",
+        "passed": true
+      }
+    ],
+    "tree_1000_row_medians_ms": {
+      "flat": {
+        "bindMs": 6.2,
+        "updateMs": 1.4
+      },
+      "nested": {
+        "bindMs": 6.2,
+        "updateMs": 1.6
+      }
+    },
+    "tree_dom_records_reused": true
+  },
+  "audit": {
+    "initial_docs_first_files": 3,
+    "initial_docs_first_file_bytes": 24571,
+    "implementation_acceptance_task_run": false,
+    "actual_tokens_available": false,
+    "independent_source_and_contract_review": true
+  },
+  "recovery": {
+    "user_authorized": true,
+    "baseline_commit": "60352c3fcabb25387be71e186d668dd9880ba8df",
+    "preserved_final_source_and_tests": true,
+    "restored_original_untracked_lockfile_from_backup": true,
+    "removed_temporary_vite_scaffold": true,
+    "repeated_all_available_browser_checks": true
+  },
+  "limits": [
+    "Automated accessibility covers tested authored states; manual assistive-technology review remains open.",
+    "Real macOS/iOS Safari is excluded; Playwright WebKit is required and passed.",
+    "No npm publication or release tag.",
+    "Docs-first file bytes are a context proxy; no actual token comparison or new fixed implementation task."
+  ]
+}

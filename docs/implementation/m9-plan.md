@@ -8,7 +8,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: First-release scope and M9 gate
-    git_blob: 2bf6a8dd16deff7de9a5f075cc1e16c85c5a3c4c
+    git_blob: 770252179cc12dd6547fa8a3178cfcc4f5a71c33
   - id: m8
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-beta-report.md
     title: Unpublished M8 beta-candidate evidence and limits

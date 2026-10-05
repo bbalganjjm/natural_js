@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public List handle and export
-    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
+    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime

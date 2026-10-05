@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Natural-JS M11 · tree and dates stacked</title>
+    <link rel="stylesheet" href="/m11/stack.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>People and dates · stacked</h1>
+      <button type="button" data-add-screen>Open another workspace</button>
+      <a href="/m11/side.html">Side-by-side layout</a>
+    </header>
+    <p>Select a person with the tree, edit their name or date, and inspect the raw changes. The two workspaces have independent data.</p>
+    <main data-screens></main>
+    <template data-workspace>
+      <article class="workspace" aria-label="People workspace">
+        <header class="screen-header">
+          <h2 data-workspace-title>Workspace</h2>
+          <button type="button" data-remove-screen>Close workspace</button>
+        </header>
+        <div class="screen-body">
+          <section class="detail-panel" aria-label="Selected person">
+            <h3>Details</h3>
+            <form data-detail>
+              <label>Name <input data-field="name" required data-validate='[["required"]]'></label>
+              <output data-error-for="name"></output>
+              <label>Role <input data-field="role" required></label>
+              <output data-error-for="role"></output>
+              <label>Review date <input type="date" data-field="date" min="2026-01-01" max="2027-12-31" required></label>
+              <output data-error-for="date"></output>
+              <div class="actions">
+                <button type="button" data-open-date>Choose review date</button>
+                <button type="submit">Validate for save</button>
+                <button type="button" data-revert>Revert changes</button>
+              </div>
+            </form>
+            <output data-result aria-live="polite"></output>
+            <h4>Raw Rows changes</h4>
+            <pre data-changes aria-label="Changed data"></pre>
+          </section>
+          <section class="people-panel" aria-label="People hierarchy">
+            <h3>People</h3>
+            <p>Arrow keys move focus. Enter selects. Right and Left expand and collapse.</p>
+            <ul data-people aria-label="People">
+              <li data-row-template>
+                <button type="button" data-tree-toggle aria-label="Toggle children"></button>
+                <span data-tree-label><span data-field="name"></span><small data-field="role"></small></span>
+                <ul data-tree-children></ul>
+              </li>
+              <li data-empty hidden>No people</li>
+            </ul>
+            <output data-selected aria-live="polite"></output>
+          </section>
+        </div>
+        <dialog data-date-dialog aria-label="Choose review date">
+          <div data-datepicker>
+            <div class="calendar-nav">
+              <button type="button" data-date-prev aria-label="Previous month">Previous</button>
+              <h3 data-date-title>Review date</h3>
+              <button type="button" data-date-next aria-label="Next month">Next</button>
+            </div>
+            <table data-date-grid>
+              <thead><tr>
+                <th scope="col" abbr="Monday">Mo</th><th scope="col" abbr="Tuesday">Tu</th>
+                <th scope="col" abbr="Wednesday">We</th><th scope="col" abbr="Thursday">Th</th>
+                <th scope="col" abbr="Friday">Fr</th><th scope="col" abbr="Saturday">Sa</th>
+                <th scope="col" abbr="Sunday">Su</th>
+              </tr></thead>
+              <tbody><tr data-date-week-template>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+                <td><button type="button" data-date-day><span data-date-number></span></button></td>
+              </tr></tbody>
+            </table>
+            <div class="actions"><button type="button" data-date-today>Today</button></div>
+          </div>
+          <p class="calendar-help">Arrow keys move by day or week; Page Up and Page Down change month. Enter chooses. Escape cancels.</p>
+          <button type="button" data-close-date>Cancel</button>
+        </dialog>
+      </article>
+    </template>
+    <script type="module" src="/m11/main.ts"></script>
+  </body>
+</html>

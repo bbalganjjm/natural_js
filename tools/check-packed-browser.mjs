@@ -105,29 +105,42 @@ try {
     const host = page.locator(`[data-host="${slot}"]`);
     await expect(host.locator("article")).toHaveCount(1);
     await expect(host.locator("form input")).toHaveValue(name);
-    await expect(host.locator("tbody [data-field='person.name']")).toHaveText(name);
+    await expect(host.locator("[data-consumer-grid] tbody [data-field='person.name']")).toHaveText(name);
     await expect(host.locator("select option")).toHaveText(["Choose", "Eleven", "Twenty two"]);
     await expect(host.locator("select")).toHaveValue("11");
     assert.deepEqual(await page.evaluate(slot => window.packedConsumer.screens[slot].grid.page(), slot),
       { page: 1, size: 1, total: 2, pages: 2 }, "Installed Grid must apply its initial page before rendering.");
-    await expect(host.locator("tbody tr")).toHaveCount(1);
+    await expect(host.locator("[data-consumer-grid] tbody tr")).toHaveCount(1);
   }
   const ids = await page.evaluate(() => [...document.querySelectorAll("[id]")].map(item => item.id));
   assert.equal(new Set(ids).size, ids.length, "Live CVC screens contain duplicate IDs.");
-  assert.equal(ids.length, 2, "Expected one accessible Form error region per screen.");
+  assert(ids.length >= 4, "Expected Form error and calendar title IDs in both screens.");
   const described = await page.evaluate(() => [...document.querySelectorAll("form")].every(form =>
     form.querySelector("input").getAttribute("aria-describedby") === form.querySelector("output").id));
   assert(described, "Form errors must be described by unique, connected regions.");
 
   const first = page.locator('[data-host="a"]');
   await first.locator("form input").fill("Ann");
-  await expect(first.locator("tbody [data-field='person.name']")).toHaveText("Ann");
+  await expect(first.locator("[data-consumer-grid] tbody [data-field='person.name']")).toHaveText("Ann");
   await expect(page.locator('[data-host="b"] form input')).toHaveValue("Bea");
   await first.locator("select").selectOption("22");
   assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.rows.entries()[0].value.choice),
     22, "Nested row-local Select must keep its raw number value.");
   await first.locator('[data-action="save"]').click();
   assert.deepEqual(await page.evaluate(() => window.packedConsumer.outputs), ["a"]);
+
+  await expect(first.locator('[role="treeitem"]')).toHaveCount(2);
+  await first.locator('[role="treeitem"]').first().focus();
+  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("Enter");
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.tree.selected()),
+    await page.evaluate(() => window.packedConsumer.screens.a.rows.entries()[1].id));
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.b.tree.selected()), null);
+  await first.locator('[data-date-value="2026-10-07"]').click();
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.picker.value()), "2026-10-07");
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.rows.entries()[0].value.date), "2026-10-07");
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.b.picker.value()), "2026-10-05");
 
   const disposed = await page.evaluate(async () => {
     const firstScreen = window.packedConsumer.screens.a;

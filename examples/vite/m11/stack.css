@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+@import "./base.css";
+:root { background: #f6f3ed; color: #302b23; }
+.workspace { border-color: #c7bdab; border-radius: 0; }
+.screen-body { display: flex; flex-direction: column; gap: 1.2rem; }
+.people-panel { background: #f7f4ed; padding: .7rem; }
+[data-people] { margin-bottom: 0; }
+form { max-width: 40rem; }

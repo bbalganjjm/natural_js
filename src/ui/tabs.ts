@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
 import type { PageHandle } from "../page/index.js";
+import { restoreAttributes, uniqueId } from "./dom-state.js";
 
 type TabPage = Pick<PageHandle, "ready" | "activate" | "deactivate" | "dispose">;
 
@@ -18,7 +19,6 @@ interface Tab {
 }
 
 const boundRoots = new WeakSet<HTMLElement>();
-let nextId = 0;
 
 function tabError(code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
   return new FrameworkError({ api: "bindTabs", code, message, detail });
@@ -30,14 +30,6 @@ function aborted(): DOMException {
 
 function owned(root: HTMLElement, selector: string): HTMLElement[] {
   return [...root.querySelectorAll<HTMLElement>(selector)].filter(element => element.closest("[data-tabs]") === root);
-}
-
-function attribute(element: Element, name: string): () => void {
-  const original = element.getAttribute(name);
-  return () => {
-    if (original === null) element.removeAttribute(name);
-    else element.setAttribute(name, original);
-  };
 }
 
 function focusable(panel: HTMLElement): boolean {
@@ -121,23 +113,15 @@ export function bindTabs(root: HTMLElement, options: {
     throw tabError("TAB_MARKUP", "Tab list aria-labelledby must reference distinct existing DOM ids.");
   }
   const restore: Array<() => void> = [];
-  function uniqueId(): string {
-    let id: string;
-    do { id = `njs-tab-${++nextId}`; }
-    while (authoredIds.has(id) || document.getElementById(id));
-    authoredIds.add(id);
-    return id;
-  }
   for (const tab of tabs) {
     for (const element of [tab.button, tab.panel]) {
       if (!element.id) {
-        restore.push(attribute(element, "id"));
-        element.id = uniqueId();
+        restore.push(restoreAttributes(element, ["id"]));
+        element.id = uniqueId(document, "njs-tab");
       }
     }
-    restore.push(attribute(tab.button, "aria-controls"), attribute(tab.button, "aria-selected"),
-      attribute(tab.button, "tabindex"), attribute(tab.panel, "aria-labelledby"),
-      attribute(tab.panel, "aria-busy"), attribute(tab.panel, "tabindex"));
+    restore.push(restoreAttributes(tab.button, ["aria-controls", "aria-selected", "tabindex"]),
+      restoreAttributes(tab.panel, ["aria-labelledby", "aria-busy", "tabindex"]));
     const hidden = tab.panel.hidden;
     restore.push(() => { tab.panel.hidden = hidden; });
     tab.button.setAttribute("aria-controls", tab.panel.id);
@@ -147,7 +131,7 @@ export function bindTabs(root: HTMLElement, options: {
   const alertText = alert.textContent;
   const alertHidden = alert.hidden;
   restore.push(() => { alert.textContent = alertText; alert.hidden = alertHidden; });
-  restore.push(attribute(root, "tabindex"));
+  restore.push(restoreAttributes(root, ["tabindex"]));
   const panelTabIndex = new Map(tabs.map(tab => [tab.panel, tab.panel.getAttribute("tabindex")] as const));
 
   const cache = new Map<string, TabPage>();

@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
+    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
@@ -25,7 +25,7 @@ sources:
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Retained Form formatter behavior
-    git_blob: a3ec42f7837c785a5f3fa3688283c13117b528a1
+    git_blob: 401c9a722f118f4a3e4e31665add45a8da3d2b7a
   - id: validators
     resource: ../../src/ui/validate-rules.ts
     title: Retained Form validator behavior
@@ -34,9 +34,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -126,7 +127,7 @@ A matched error region keeps its authored `id` or receives a document-unique one
 | Rule or behavior | 2.0 contract |
 |---|---|
 | `equalTo` | Its argument is a safe `data-field` path in the same Form/row, such as `[["equalTo","profile.password"]]`, not a document-wide jQuery selector. The 1.x camel-case dispatch defect is corrected. |
-| `date` | Formatting is display-only; with no argument it selects a format from the input length, or accepts an explicit format or supported length. Invalid calendar dates remain unchanged for display and fail the `date` validator. The optional 1.x date picker attachment waits for M11. |
+| `date` | Formatting is display-only; with no argument it selects a format from the input length, or accepts an explicit format or supported length. Invalid calendar dates remain unchanged for display and fail the `date` validator. Use explicit `bindDatePicker` and an application callback to update the input and dispatch its native input event; formatting does not create a calendar. |
 | `generic` | `#` accepts one digit, `@` a letter or space, and `~` an alphanumeric or space; `!` escapes the next literal. Unlike the 1.x mask, `#` does not accept whitespace. |
 | `numeric` | A checked numeric pattern controls display and optional `round`, `ceil`, or `floor` behavior. Unsupported patterns fail at binding; use `parse` for the raw number. |
 | `limit` | Truncates displayed text using the retained one/two-unit character count and optional suffix. It does not set the 1.x `title` tooltip or truncate stored raw data. |
@@ -142,7 +143,7 @@ These are the changes needed when moving a Form declaration. The full applicatio
 
 # Related
 
-[Rows](data.md) owns row identity and events. [Select](select.md) describes standalone typed choices; Form owns marked Select fields. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
+[Rows](data.md) owns row identity and events. [DatePicker](datepicker.md) provides explicit ISO calendar selection. [Select](select.md) describes standalone typed choices; Form owns marked Select fields. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
 
 [^entry]: Public UI entry and Form types
 [^form]: Form binding runtime

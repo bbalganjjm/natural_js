@@ -12,7 +12,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: UI runtime exports
-    git_blob: e1c3c3d309fb5b5724965ce348396046b1c77db7
+    git_blob: 942a4a8f60385c98f28b480d4b2b8d60da43a2a9
   - id: compiler
     resource: ../../tsconfig.json
     title: 2.0 TypeScript build settings
@@ -21,12 +21,13 @@ sources:
     resource: ../../LICENSE
     title: Apache License 2.0 text for the new package
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T21:37:53Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
 ---
 
-Build the root package to inspect real 2.0 exports. The unpublished `2.0.0-beta.0` candidate includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, Pagination, Popup, and Tabs, plus retained UI-owned formatter/validator rules. A plain Dialog uses native HTML methods; it has no framework binder.
+Build the root package to inspect real 2.0 exports. The unpublished `2.0.0-beta.0` candidate includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, and DatePicker, plus retained UI-owned formatter/validator rules. A plain Dialog uses native HTML methods; it has no framework binder.
 
 # Goal
 
@@ -47,11 +48,11 @@ npm run test:consumers
 npm pack --dry-run --json
 ```
 
-`package.json` exposes `.`, `./page`, `./data`, `./ui`, and `./comm`. The root exports `FrameworkError`; the page, data, and communication entries export `mountPage`, `createRows`, and `createCommunicator` respectively. The UI entry exports `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs`, and their types.[^ui] Every entry has generated JavaScript and declarations. `src/` is packaged with `build/` so declaration and JavaScript source maps resolve to the TypeScript original.[^package][^compiler]
+`package.json` exposes `.`, `./page`, `./data`, `./ui`, and `./comm`. The root exports `FrameworkError`; the page, data, and communication entries export `mountPage`, `createRows`, and `createCommunicator` respectively. The UI entry exports `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs`, `bindTree`, `bindDatePicker`, and their types.[^ui] Every entry has generated JavaScript and declarations. `src/` is packaged with `build/` so declaration and JavaScript source maps resolve to the TypeScript original.[^package][^compiler]
 
 # Verify
 
-`npm run test:consumers` builds and packs into an isolated temporary directory, then installs that tarball in separate JS and strict TS fixtures. For a frozen release artifact, run `npm run test:consumers -- --tarball <path.tgz> --sha256 <64-hex>`; this verifies the checksum before installing the exact same tarball in both fixtures and skips rebuilding. Run `npm run test:packed-browser -- --tarball <path.tgz> --sha256 <64-hex> --browser chromium` for a browser-served CVC/Form/Grid consumer installed from that artifact. The browser option also accepts `firefox`, `webkit`, `chrome`, or `edge` when available locally. The pack list must contain no 1.x bundle, jQuery, hand-maintained 1.x declarations, or general utility library. For browser import smoke, install Playwright binaries with `npx playwright install chromium firefox webkit` and run `npm run test:browser`. `npm run example` serves the authored-HTML Vite fixture.
+`npm run test:consumers` builds and packs into an isolated temporary directory, then installs that tarball in separate JS and strict TS fixtures. For a frozen release artifact, run `npm run test:consumers -- --tarball <path.tgz> --sha256 <64-hex>`; this verifies the checksum before installing the exact same tarball in both fixtures and skips rebuilding. Run `npm run test:packed-browser -- --tarball <path.tgz> --sha256 <64-hex> --browser chromium` for a browser-served CVC/Form/Grid/Tree/DatePicker consumer installed from that artifact. The browser option also accepts `firefox`, `webkit`, `chrome`, or `edge` when available locally. The pack list must contain no 1.x bundle, jQuery, hand-maintained 1.x declarations, or general utility library. For browser import smoke, install Playwright binaries with `npx playwright install chromium firefox webkit` and run `npm run test:browser`. `npm run example` serves the authored-HTML Vite fixture.
 
 # Browser and publication scope
 
@@ -61,13 +62,13 @@ The user deferred npm publication until the remaining functionality is finished,
 
 # Pitfalls
 
-Use `import type` for UI type names; `./ui` now also has the runtime Form, Grid, List, Select, Pagination, Popup, and Tabs functions. The beta candidate is publishable in its manifest, but has not been published. The existing npm `latest` tag still resolves to 1.x. Review the exact tarball and checksum before any `npm publish --tag beta` command. Use the root scripts for 2.0 checks; the 1.x package under `v1/` is reference material.
+Use `import type` for UI type names; `./ui` now also has the runtime Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, and DatePicker functions. The beta candidate is publishable in its manifest, but has not been published. The existing npm `latest` tag still resolves to 1.x. Review the exact tarball and checksum before any `npm publish --tag beta` command. Use the root scripts for 2.0 checks; the 1.x package under `v1/` is reference material.
 
 The root 2.0 source and packed output use Apache-2.0.[^license] The 1.x license, source headers, package metadata, and third-party files stay under `v1/` and are excluded from the 2.0 tarball.
 
 # Next
 
-Read the implemented [page](page.md), [data](data.md), and [communication](comm.md) APIs, the [UI contracts](ui.md), [Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), [Tabs](tabs.md), and [employee example](employee-example.md), and [FrameworkError](framework-error.md). Follow [the active plan](../implementation/current.md) for the next milestone gate.
+Read the implemented [page](page.md), [data](data.md), and [communication](comm.md) APIs, the [UI contracts](ui.md), [Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), [Tabs](tabs.md), [Tree](tree.md), [DatePicker](datepicker.md), and [employee example](employee-example.md), and [FrameworkError](framework-error.md). Follow [the active plan](../implementation/current.md) for the next milestone gate.
 
 [^package]: 2.0 package and public exports
 [^compiler]: 2.0 TypeScript build settings

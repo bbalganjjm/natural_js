@@ -8,7 +8,7 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 rule and binding contract
-    git_blob: 5cb7c544900bbd86867971e87003518858e498e1
+    git_blob: 2372a50d7444e6e0ee97546aa43f031ec933dc4d
   - id: m4
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m4-plan.md
     title: M4 pilot and exit evidence

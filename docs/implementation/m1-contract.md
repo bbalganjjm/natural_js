@@ -23,7 +23,7 @@ sources:
   - id: apg-grid
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/grid/
     title: WAI-ARIA grid interaction pattern
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T15:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
 ---
 
 This is the user-approved 2.0 design contract. M2-M7 implement its package, CVC, communication, data, UI rules, and page-container pieces. M8-M9 remain planned. It keeps the CVC roles and Form-used rule behavior while giving each mounted HTML root its own controller and resource lifetime.
@@ -269,7 +269,7 @@ declare function bindForm<T extends object = Record<string, unknown>>(
 
 HTML retains the 1.x JSON list syntax and built-in rule names: `data-format='[["commas"]]'` and `data-validate='[["required"],["email"]]'`. `bindForm(root, { rows?, rules?, parse? })` returns a handle with `bind(id | null)`, `read()`, `validate(id?)`, and `dispose()`. `read()` returns a detached record of only bound fields in nested JSON shape; it is not a full `T` row snapshot. Without `rows` it owns local values for a search form. With `rows`, a bound field writes through `Rows.set` only after input parsing (if configured) and validation succeed. Focus restores the stored raw value; this is not an inverse formatter operation. An input draft is parsed if a field parser exists, then validators inspect that raw candidate, never formatted display text. A failed parse or rule leaves the unformatted draft visible and creates an issue. Only a valid candidate enters `Rows.set`; blur then reapplies one-way display formatting. `validate(id)` uses retained raw draft input when present and stored raw data otherwise, including for an unrendered row. `parse` is an optional field-name map of `ParseInput` functions, used only when an application needs input conversion. A failed edit stays in a row-keyed draft and does not corrupt the row. `bind(id)` preserves the previous row's draft and restores a target row's draft on return; `replace`, `revert`, and disposal discard affected drafts. For a local Form without `rows`, `validate()` checks its current inputs. For a row-bound Form, `validate()` checks every retained invalid draft and the currently bound row, or returns valid if neither exists. `validate(id)` checks that row's draft if present, otherwise its stored raw data, even when filtered out; it does not rebind or change another draft. Every issue from `validate(id)` carries that non-null row ID. An explicit Form `validate(id?)` rechecks retained drafts and commits candidates that have become valid; its result reports any remaining draft or stored-value issues. Rows mutation notifications clear stale visible issues but do not call application validators. HTML Constraint Validation API results and custom/built-in rule results appear in one `ValidationResult`. The component exposes field errors in the authored HTML and keeps their text/ARIA association; M5 defines the event timing and error markup.
 
-The existing built-in formatter and validator catalogs, dynamic rule dispatch, rule messages, and transitive mask/date/byte-count operations are in scope. No built-in rule may be removed merely because a static search finds no call. The 1.x names below are retained as M1's catalog boundary; M5 tests arguments and corrected behavior rather than copying documented bugs. The `date` formatter remains in M5, while its optional custom calendar attachment waits for M11.
+The existing built-in formatter and validator catalogs, dynamic rule dispatch, rule messages, and transitive mask/date/byte-count operations are in scope. No built-in rule may be removed merely because a static search finds no call. The 1.x names below are retained as M1's catalog boundary; M5 tests arguments and corrected behavior rather than copying documented bugs. The `date` formatter remains a display rule. M11 adds explicit `bindDatePicker` selection with application-owned Form input connection rather than an implicit formatter attachment.
 
 | Catalog | Retained 1.x rule names |
 |---|---|
@@ -546,7 +546,7 @@ No legacy function is removed in M1. M2-M9 removal audits must prove a candidate
 - M1 retains the formatter/validator names listed above, including combined validator names. M5 audited rule arguments and corrected behavior against 1.x; none was removed by assumption.
 - M4 benchmarked automatic nested Select binding, rejected fixed IDs in repeated templates, and verified native-table keyboard interaction. A legacy ID-scoping transform was not added; reusable markup uses ID-free field markers.
 - M4 and M5 automatic nested binding met their correctness and measured performance gates. M6 preserved that behavior and rechecked its binding budget after expanding UI behavior.
-- Date formatting remains in M5 while its optional custom calendar attachment waits until M11.
+- Date formatting remains a retained UI rule; M11 provides explicit controlled calendar selection through `bindDatePicker`.
 - M6 fixed data-component options; M7 fixes Dialog/Popup/Tabs DOM and accessibility details without changing CVC loading.
 - M5 tests cover the retained rule catalog and Form/Grid validation behavior; M7 verified Popup focus lifecycle in Chromium, Firefox, and WebKit.
 
