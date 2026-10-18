@@ -123,6 +123,151 @@ try {
   assert(described, "Form errors must be described by unique, connected regions.");
 
   const first = page.locator('[data-host="a"]');
+  const gridBefore = await page.evaluate(() => {
+    const state = window.packedConsumer;
+    const notifications = { a: 0, b: 0 };
+    state.gridProbe = {
+      notifications,
+      unsubscribe: Object.entries(state.screens).map(([slot, screen]) =>
+        screen.rows.subscribe(() => notifications[slot]++)),
+      roots: [...document.querySelectorAll('[data-host] article')],
+      form: document.querySelector('[data-host="a"] form'),
+      input: document.querySelector('[data-host="a"] form input'),
+      header: document.querySelector('[data-host="a"] [data-consumer-grid] thead th'),
+      person: document.querySelector('[data-host="a"] [data-consumer-grid] tbody [data-field="person.name"]'),
+      choice: document.querySelector('[data-host="a"] [data-consumer-grid] select')
+    };
+    return Object.fromEntries(Object.entries(state.screens).map(([slot, screen]) =>
+      [slot, { entries: screen.rows.entries(), changes: screen.rows.changes() }]));
+  });
+  const gridApi = await page.evaluate(() => {
+    const screen = window.packedConsumer.screens.a;
+    const [first, second] = screen.rows.entries();
+    screen.grid.select(first.id);
+    screen.grid.setSelected([second.id]);
+    screen.grid.setChecked([first.id]);
+    return {
+      ids: [first.id, second.id], active: screen.grid.selected(),
+      selected: screen.grid.selectedIds(), checked: screen.grid.checkedIds(),
+      filter: screen.grid.columnFilter("choice"), choices: screen.grid.filterChoices("choice"),
+      matching: screen.grid.filterChoices("choice", "twENTY"),
+      events: screen.gridEvents,
+      frozen: Object.isFrozen(screen.grid.selectedIds()) && Object.isFrozen(screen.grid.checkedIds()) &&
+        Object.isFrozen(screen.grid.filterChoices("choice"))
+    };
+  });
+  const [firstId, secondId] = gridApi.ids;
+  assert.equal(gridApi.active, firstId);
+  assert.deepEqual(gridApi.selected, [secondId], "Active detail and selected IDs must be independent.");
+  assert.deepEqual(gridApi.checked, [firstId], "Checked IDs must be independent of selected IDs.");
+  assert.equal(gridApi.filter, null);
+  assert.deepEqual(gridApi.choices, [
+    { value: 11, label: "Eleven", count: 1 }, { value: 22, label: "Twenty two", count: 1 }
+  ], "Installed distinct choices must retain numeric raw values and counts.");
+  assert.deepEqual(gridApi.matching, [{ value: 22, label: "Twenty two", count: 1 }]);
+  assert(gridApi.frozen, "Installed Grid must expose immutable ID and choice snapshots.");
+  assert.deepEqual(gridApi.events.map(event => event.kind),
+    ["before-active", "active", "before-selection", "selection", "before-check", "check"]);
+  assert(gridApi.events.every(event => event.type === null), "Programmatic Grid callbacks must have null events.");
+  assert.deepEqual(gridApi.events[3], { kind: "selection", ids: [secondId], previous: [], type: null });
+  assert.deepEqual(gridApi.events[5], { kind: "check", ids: [firstId], previous: [], type: null });
+  await first.locator("[data-select-row]").click({ modifiers: ["Control"] });
+  await expect(first.locator("[data-select-row]")).toHaveAttribute("aria-pressed", "true");
+  assert.deepEqual(await page.evaluate(() => window.packedConsumer.screens.a.grid.selectedIds()), [firstId, secondId]);
+  await first.locator("[data-check-row]").uncheck();
+  await first.locator("[data-check-all]").check();
+  await expect(first.locator("[data-check-all]")).toHaveJSProperty("indeterminate", false);
+  const checkedScopes = await page.evaluate(() => {
+    const state = window.packedConsumer;
+    const grid = state.screens.a.grid;
+    const probe = state.gridProbe;
+    probe.sameRowFields = probe.person === document.querySelector('[data-host="a"] [data-consumer-grid] tbody [data-field="person.name"]') &&
+      probe.choice === document.querySelector('[data-host="a"] [data-consumer-grid] select');
+    const afterHeader = { visible: grid.checkState("visible"), store: grid.checkState("store") };
+    grid.checkAll(true, "store");
+    grid.checkAll(false, "visible");
+    grid.setColumnFilter("choice", [11]);
+    const filtered = { values: grid.columnFilter("choice"), page: grid.page(), state: grid.checkState("filtered") };
+    grid.checkAll(true, "filtered");
+    grid.checkAll(false, "filtered");
+    return { afterHeader, filtered, checked: grid.checkedIds(), active: grid.selected(),
+      selected: grid.selectedIds(), events: state.screens.a.gridEvents };
+  });
+  assert.deepEqual(checkedScopes.afterHeader, {
+    visible: { checked: true, indeterminate: false, total: 1, count: 1 },
+    store: { checked: false, indeterminate: true, total: 2, count: 1 }
+  });
+  assert.deepEqual(checkedScopes.filtered, {
+    values: [11], page: { page: 1, size: 1, total: 1, pages: 1 },
+    state: { checked: false, indeterminate: false, total: 1, count: 0 }
+  });
+  assert.deepEqual(checkedScopes.checked, [secondId], "Scoped check-all must preserve checks outside its scope.");
+  assert.equal(checkedScopes.active, firstId);
+  assert.deepEqual(checkedScopes.selected, [firstId, secondId]);
+  assert(checkedScopes.events.some(event => event.kind === "selection" && event.type === "click"));
+  assert(checkedScopes.events.some(event => event.kind === "check" && event.type === "change"));
+  const filteredIdentity = await page.evaluate(() => {
+    const grid = window.packedConsumer.screens.a.grid;
+    grid.setColumnFilter("choice", [22]);
+    const result = { active: grid.selected(), selected: grid.selectedIds(), checked: grid.checkedIds(),
+      visible: grid.checkState("visible"), values: grid.columnFilter("choice") };
+    grid.setColumnFilter("choice", null);
+    return result;
+  });
+  assert.deepEqual(filteredIdentity, {
+    active: firstId, selected: [firstId, secondId], checked: [secondId], values: [22],
+    visible: { checked: true, indeterminate: false, total: 1, count: 1 }
+  });
+  const sortPerson = first.locator('[data-sort-column="person"]');
+  await sortPerson.click();
+  await expect(first.locator('[data-consumer-grid] th[data-column="person"]').first()).toHaveAttribute("aria-sort", "ascending");
+  await sortPerson.click();
+  await expect(first.locator('[data-consumer-grid] th[data-column="person"]').first()).toHaveAttribute("aria-sort", "descending");
+  await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveText("Off page");
+  await first.locator('[data-row-action="inspect"]').click();
+  assert.deepEqual(await page.evaluate(() => {
+    const screen = window.packedConsumer.screens.a;
+    return { action: screen.gridEvents.at(-1), active: screen.grid.selected() };
+  }), { action: { kind: "action", action: "inspect", id: secondId, name: "Off page",
+    element: "inspect", current: true, type: "click" }, active: firstId });
+  const gridAfter = await page.evaluate(() => {
+    const state = window.packedConsumer;
+    const screen = state.screens.a;
+    const other = state.screens.b;
+    screen.grid.setSort(null);
+    screen.grid.setColumnFilter("choice", null);
+    screen.grid.setPage({ page: 1, size: 1 });
+    screen.grid.select(null);
+    screen.grid.setSelected([]);
+    screen.grid.setChecked([]);
+    screen.gridEvents.length = 0;
+    const probe = state.gridProbe;
+    probe.unsubscribe.forEach(unsubscribe => unsubscribe());
+    const result = {
+      rows: Object.fromEntries(Object.entries(state.screens).map(([slot, entry]) =>
+        [slot, { entries: entry.rows.entries(), changes: entry.rows.changes() }])),
+      notifications: probe.notifications, sameRowFields: probe.sameRowFields,
+      sameScreenNodes: probe.roots.every(root => root.isConnected) &&
+        probe.form === document.querySelector('[data-host="a"] form') &&
+        probe.input === document.querySelector('[data-host="a"] form input') &&
+        probe.header === document.querySelector('[data-host="a"] [data-consumer-grid] thead th'),
+      reset: { active: screen.grid.selected(), selected: screen.grid.selectedIds(), checked: screen.grid.checkedIds(),
+        filter: screen.grid.columnFilter("choice"), page: screen.grid.page() },
+      other: { active: other.grid.selected(), selected: other.grid.selectedIds(), checked: other.grid.checkedIds(),
+        filter: other.grid.columnFilter("choice"), page: other.grid.page(), events: other.gridEvents }
+    };
+    delete state.gridProbe;
+    return result;
+  });
+  assert.deepEqual(gridAfter.rows, gridBefore, "Selection, checks, filters, sorting and actions must preserve Rows values and changes.");
+  assert.deepEqual(gridAfter.notifications, { a: 0, b: 0 }, "Grid view state must not notify Rows subscribers.");
+  assert(gridAfter.sameRowFields && gridAfter.sameScreenNodes, "Grid controls must preserve field and mounted screen nodes.");
+  const resetGrid = { active: null, selected: [], checked: [], filter: null,
+    page: { page: 1, size: 1, total: 2, pages: 2 } };
+  assert.deepEqual(gridAfter.reset, resetGrid);
+  assert.deepEqual(gridAfter.other, { ...resetGrid, events: [] }, "Grid view state must remain isolated between screens.");
+  await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveText("Ada");
+
   const columnsBefore = await page.evaluate(() => {
     const state = window.packedConsumer;
     const notifications = { a: 0, b: 0 };

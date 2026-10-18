@@ -1,5 +1,6 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.6 selection and filter plan](m10-selection-plan.md) - Required independent row selection and checks, authored sort/filter controls, and stable row actions. (draft)
 * [Natural-JS 2.0 M10.5 column implementation](m10-columns-plan.md) - Column state, authored table topology, accessible resizing, and restoration gates for M10.5. (draft)
 
 * [Natural-JS 2.0 full feature implementation plan](feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)

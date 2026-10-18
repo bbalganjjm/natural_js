@@ -12,7 +12,7 @@
     <header>
       <p class="eyebrow">Natural-JS 2.x</p>
       <h1>Grid contract demo</h1>
-      <p>Try every implemented Grid option and method against one authored table. Select a row before using row actions. The state below shows raw data, not formatted display text.</p>
+      <p>Try every implemented Grid option and method against one authored table. Select an active row before using store actions; Inspect works on its own row. The state below shows raw data, not formatted display text.</p>
     </header>
 
     <div class="workspace">
@@ -24,16 +24,18 @@
               <option value="none">Store order</option>
               <option value="name-asc">Name A–Z</option>
               <option value="name-desc">Name Z–A</option>
+              <option value="salary-asc">Salary low to high</option>
               <option value="salary-desc">Salary high to low</option>
             </select>
           </label>
-          <label>Team filter
+          <label>Manual Team filter
             <select data-filter data-needs-grid>
               <option value="">All teams</option>
               <option value="Platform">Platform</option>
               <option value="Support">Support</option>
             </select>
           </label>
+          <div class="button-row"><button type="button" data-action="empty-team-filter" data-needs-grid>Set empty Team value filter</button></div>
           <label>Page size
             <select data-size data-needs-grid>
               <option value="">All rows</option>
@@ -46,6 +48,7 @@
             <button type="button" data-action="next" data-needs-grid>Next</button>
           </div>
           <output data-page-state aria-live="polite">All rows</output>
+          <p>Header sort buttons cycle ascending, descending, then store order. The Team header filters distinct raw values; its search narrows choices without filtering rows. Choice counts exclude the Team header's own filter.</p>
         </fieldset>
 
         <fieldset>
@@ -74,10 +77,49 @@
         </fieldset>
 
         <fieldset>
-          <legend>Selection and validation</legend>
+          <legend>Selection</legend>
+          <label>Selection mode
+            <select data-selection-mode>
+              <option value="single">Single</option>
+              <option value="multiple">Multiple</option>
+            </select>
+          </label>
+          <label class="check-label"><input type="checkbox" data-disable-inactive> Disable selection and checks for inactive rows</label>
+          <p>Changing mode or the inactive-row policy rebinds the Grid and clears selection, checks and uncommitted edits.</p>
+          <label class="check-label"><input type="checkbox" data-veto-active> Veto active-row changes</label>
+          <label class="check-label"><input type="checkbox" data-veto-selection> Veto selection-set changes</label>
           <div class="button-row">
             <button type="button" data-action="select-first" data-needs-grid>Select first store row</button>
             <button type="button" data-action="clear-selection" data-needs-grid>Clear selection</button>
+            <button type="button" data-action="select-first-two" data-needs-grid>Set first two eligible selections</button>
+            <button type="button" data-action="clear-multiple" data-needs-grid>Clear selection set</button>
+          </div>
+          <p>Select first store row and Clear selection change only the active row used by store actions. Set first two eligible selections and Clear selection set change only the selection set.</p>
+          <p>In multiple mode: click replaces the selection, Ctrl/Meta-click toggles, and Shift-click selects a visible-page range. Focus a row's select button and use Up/Down, Home/End, Shift+navigation or Space.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Independent row checks</legend>
+          <label>Check-all scope
+            <select data-check-scope data-needs-grid>
+              <option value="visible">Visible page</option>
+              <option value="filtered">All filtered rows</option>
+              <option value="store">Entire Rows store</option>
+            </select>
+          </label>
+          <label class="check-label"><input type="checkbox" data-veto-checks> Veto check changes</label>
+          <div class="button-row">
+            <button type="button" data-action="check-all" data-needs-grid>Check scope</button>
+            <button type="button" data-action="uncheck-all" data-needs-grid>Uncheck scope</button>
+            <button type="button" data-action="check-selected" data-needs-grid>Set checks to selected IDs</button>
+            <button type="button" data-action="clear-checks" data-needs-grid>Clear all checks</button>
+          </div>
+          <p>Checks do not select a row or edit its Active value. The header checkbox always covers the visible page and shows a mixed state for a partial check.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Validation</legend>
+          <div class="button-row">
             <button type="button" data-action="validate-selected" data-needs-grid>Validate selected</button>
             <button type="button" data-action="validate-all" data-needs-grid>Validate all</button>
           </div>
@@ -140,15 +182,19 @@
             <colgroup span="4"></colgroup><colgroup span="1"></colgroup>
             <thead>
               <tr>
-                <th scope="col" rowspan="2" aria-sort="none" data-column="name">Employee <button type="button" data-resize-column="name" data-needs-grid aria-label="Resize Employee column">↔</button></th>
+                <th scope="col" rowspan="2" aria-sort="none" data-column="name"><button type="button" data-sort-column="name" data-needs-grid aria-label="Sort by employee name">Employee</button> <button type="button" data-resize-column="name" data-needs-grid aria-label="Resize Employee column">↔</button>
+                  <label class="check-label"><input type="checkbox" data-check-all="visible" data-needs-grid> Check visible</label></th>
                 <th scope="colgroup" colspan="2" data-columns="email phone">Contact</th>
                 <th scope="colgroup" colspan="4" data-columns="team shift active notes">Assignment</th>
-                <th scope="col" rowspan="2" aria-sort="none" data-column="salary">Salary <button type="button" data-resize-column="salary" data-needs-grid aria-label="Resize Salary column">↔</button></th>
+                <th scope="col" rowspan="2" aria-sort="none" data-column="salary"><button type="button" data-sort-column="salary" data-needs-grid aria-label="Sort by salary">Salary</button> <button type="button" data-resize-column="salary" data-needs-grid aria-label="Resize Salary column">↔</button></th>
               </tr>
               <tr>
                 <th scope="col" data-column="email">Email <button type="button" data-resize-column="email" data-needs-grid aria-label="Resize Email column">↔</button></th>
                 <th scope="col" data-column="phone">Phone <button type="button" data-resize-column="phone" data-needs-grid aria-label="Resize Phone column">↔</button></th>
-                <th scope="col" data-column="team">Team <button type="button" data-resize-column="team" data-needs-grid aria-label="Resize Team column">↔</button></th>
+                <th scope="col" data-column="team">Team <button type="button" data-resize-column="team" data-needs-grid aria-label="Resize Team column">↔</button>
+                  <label class="header-filter">Search choices <input type="search" data-filter-search="team" data-needs-grid></label>
+                  <label class="header-filter">Distinct teams <select multiple size="2" data-filter-column="team" data-needs-grid></select></label>
+                  <button type="button" data-clear-filter="team" data-needs-grid>All teams</button></th>
                 <th scope="col" data-column="shift">Shift <button type="button" data-resize-column="shift" data-needs-grid aria-label="Resize Shift column">↔</button></th>
                 <th scope="col" data-column="active">Active <button type="button" data-resize-column="active" data-needs-grid aria-label="Resize Active column">↔</button></th>
                 <th scope="col" data-column="notes">Notes <button type="button" data-resize-column="notes" data-needs-grid aria-label="Resize Notes column">↔</button></th>
@@ -156,7 +202,9 @@
             </thead>
             <tbody>
               <tr data-row-template>
-                <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button></th>
+                <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button>
+                  <label class="check-label"><input type="checkbox" data-check-row> Check row</label>
+                  <button type="button" data-row-action="inspect">Inspect</button></th>
                 <td data-column="email"><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
                 <td data-column="phone" data-field="phone"></td>
                 <td data-column="team"><label>Team <input type="text" data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
@@ -174,11 +222,17 @@
         <p class="status"><output data-status role="status">Grid is bound.</output></p>
 
         <div class="observations">
-          <section><h3>Selected RowId and raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
+          <section><h3>Active RowId and raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
           <section><h3>Rows.changes()</h3><pre data-changes tabindex="0">[]</pre></section>
           <section><h3>Validation issues</h3><pre data-issues tabindex="0">Not run yet.</pre></section>
           <section><h3>grid.columns()</h3><pre data-columns-state tabindex="0">Not bound yet.</pre></section>
+          <section><h3>Selection and independent checks</h3><pre data-selection-state tabindex="0">Not bound yet.</pre></section>
+          <section><h3>Distinct Team filter and counts</h3><pre data-filter-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Callbacks</h3><p>onSelect: <output data-callback>Not fired yet.</output></p>
+            <p>beforeSelect / beforeSelectionChange / beforeCheckChange: <output data-before-callback>Not fired yet.</output></p>
+            <p>onSelectionChange: <output data-selection-callback>Not fired yet.</output></p>
+            <p>onCheckChange: <output data-check-callback>Not fired yet.</output></p>
+            <p>onRowAction: <output data-action-callback>Not fired yet.</output></p>
             <p>onColumnsChange: <output data-columns-callback>Not fired yet.</output></p>
             <p>Rows.subscribe: <output data-event>Not fired yet.</output></p></section>
         </div>
@@ -187,7 +241,7 @@
 
     <section class="future" aria-label="Remaining required Grid features">
       <h2>Remaining required features</h2>
-      <p>Multiple selection, bulk paste, and real scroll virtualization remain required and are not implemented here. Local paging is separate from virtualization.</p>
+      <p>Bulk paste and real scroll virtualization remain required and are not implemented here. Local paging is separate from virtualization.</p>
       <p><a href="./columns.html">Compare column behavior in two independent CVC layouts</a>.</p>
     </section>
   </main>

@@ -2,11 +2,11 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { Rows } from "@bbalganjjm/natural_js/data";
+import type { RowId, RowSnapshot, Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, GridColumn, GridHandle, PageRequest, PageState, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, GridColumn, GridHandle, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -66,17 +66,59 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
   const form = bindForm(root, { rows });
   const columns: readonly GridColumn[] = [{ key: "person", width: 180 }, { key: "choice", width: 120 }];
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
+  const selectionChanges: GridIdsChange[] = [];
+  const checkChanges: GridIdsChange[] = [];
   const grid: GridHandle<Employee> = bindGrid(table, {
     rows, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
+    multiple: true,
+    canSelect: row => row.status !== "delete",
+    canCheck: row => row.status !== "delete",
+    beforeSelect: ({ id, row, event }) => {
+      const selected: RowId | null = id;
+      const snapshot: RowSnapshot<Employee> | null = row;
+      const source: Event | null = event;
+      void source;
+      return selected === null || snapshot !== null;
+    },
+    beforeSelectionChange: change => { const input: GridIdsChange = change; return input.ids.length <= rows.entries().length; },
+    onSelectionChange: change => { selectionChanges.push(change); },
+    beforeCheckChange: change => { const input: GridIdsChange = change; return input.ids.length <= rows.entries().length; },
+    onCheckChange: change => { checkChanges.push(change); },
+    sorts: { person: (a, b) => a.name.localeCompare(b.name) },
+    filters: { name: { value: row => row.name, label: value => String(value ?? "") } },
+    onRowAction: ({ action, id, row, element, event }) => {
+      const context: [string, RowId, RowSnapshot<Employee>, HTMLButtonElement, Event] =
+        [action, id, row, element, event];
+      void context;
+    },
     onColumnsChange: change => columnChanges.push(change)
   });
-  return { form, grid, columnChanges };
+  return { form, grid, columnChanges, selectionChanges, checkChanges };
 }
 
 export function configureColumns(grid: GridHandle<Employee>, columns: readonly GridColumn[]): readonly GridColumn[] {
   const applied: void = grid.setColumns(columns);
   void applied;
   return grid.columns();
+}
+
+export function configureGridState(grid: GridHandle<Employee>, ids: readonly RowId[], scope: GridRowScope) {
+  const selectedWrite: void = grid.setSelected(ids);
+  const selected: readonly RowId[] = grid.selectedIds();
+  const checkedWrite: void = grid.setChecked(ids);
+  const checked: readonly RowId[] = grid.checkedIds();
+  const allWrite: void = grid.checkAll(true, scope);
+  const checkState: GridCheckState = grid.checkState(scope);
+  const visible: GridCheckState = grid.checkState("visible");
+  const filtered: GridCheckState = grid.checkState("filtered");
+  const store: GridCheckState = grid.checkState("store");
+  const filterWrite: void = grid.setColumnFilter("name", ["Kim", 1, false, null]);
+  const values: readonly SelectValue[] | null = grid.columnFilter("name");
+  const choices: readonly GridFilterChoice[] = grid.filterChoices("name");
+  const matching: readonly GridFilterChoice[] = grid.filterChoices("name", "kim");
+  const clearFilter: void = grid.setColumnFilter("name", null);
+  void [selectedWrite, checkedWrite, allWrite, filterWrite, clearFilter];
+  return { selected, checked, checkState, visible, filtered, store, values, choices, matching };
 }
 
 export function connectDataUI(listRoot: HTMLUListElement, sizeRoot: HTMLSelectElement,

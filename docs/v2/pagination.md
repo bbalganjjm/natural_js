@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public page types and Pagination export
-    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
+    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
   - id: pagination
     resource: ../../src/ui/pagination.ts
     title: Pagination binding runtime

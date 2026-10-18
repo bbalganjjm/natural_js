@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
+    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: d606737eaa4d51860407c50b4d3ba2f378739ed3
+    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-05T11:52:37Z }
+generated: { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T11:53:19Z }
+  - { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -104,6 +104,8 @@ The detailed mappings assign all 775 structural entries to owners, current count
 
 There are 53 identified dynamic/configuration/declaration path groups (15 core, 17 Grid, 21 UI/shell), plus separately indexed nested helpers, external configuration and old declarations. These are review inputs, not exhaustive behavior counts or completed parity. Semantic/dynamic closure and the consolidated omission proposal remain open. No absence of static references proves a helper unused, and candidate labels are not approvals. Evidence source hashes describe the audit snapshot; some modern source/document files changed during implementation and indexing. Those snapshots do not recertify current runtime or historical gates.[^core-mapping][^grid-mapping][^ui-mapping]
 
+The detailed JSON records preserve the 2026-10-05 audit snapshot. Use the family table below and the current milestone plans for later implementation status, including M10.6; an older counterpart gap in that snapshot does not override current tested behavior.
+
 # Steps
 
 ## Grid coverage
@@ -119,11 +121,11 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G05 | Row Form img.src and html rendering | Missing: display currently uses value/textContent. Add explicit image and authored rich-content/renderer binding while keeping text the default. |
 | G06 | validate, declarative rules, focusout/Enter and validate-scroll | Core rules/drafts/off-page validation exist; interaction and reveal-error equivalence remains open. |
 | G07 | row_data_changed__, row_data_deleted__, data_changed__ | Missing visible status/deletion policies. Rows tracks changes, but entries excludes removed rows; marked deleted-row views require an explicit contract. |
-| G08 | select, unselect, onBeforeSelect, row-click toggle | Partial single-ID selection; define deselection, veto and row-click behavior. |
-| G09 | multiselect, selected projection, array select | Missing; multiple selection, range gestures and selected-ID results are required. |
-| G10 | check, checkAll/checkAllTarget/checkSingleTarget | Missing separate check state, exclusive checking and scoped check-all synchronization. |
-| G11 | sortable, sortableItem, grid.sort | Partial comparator/aria-sort exists; header activation and direction toggling need framework-owned behavior. |
-| G12 | filter, data-filter, grid.dataFilter | Partial predicate exists; distinct-value selection, search/counts and filter indicators are missing. |
+| G08 | select, unselect, onBeforeSelect, row-click toggle | Partial: active-detail API, clear and atomic before-veto exist. The default same-ID no-op preserves current callers; legacy row-click-toggle policy/edge closure remains required. |
+| G09 | multiselect, selected projection, array select | Core: independent frozen selected IDs, full replacement, Ctrl/Meta toggle, Shift range and scoped keyboard gestures in M10.6. Legacy projections/option/callback semantic closure remains open. |
+| G10 | check, checkAll/checkAllTarget/checkSingleTarget | Partial: independent checks, explicit visible/filtered/store check-all, eligibility and mixed/empty controls are implemented. Exclusive checking remains required. |
+| G11 | sortable, sortableItem, grid.sort | Core: application comparator, aria-sort and authored ascending/descending/clear header activation are implemented; legacy option/edge closure remains open. |
+| G12 | filter, data-filter, grid.dataFilter | Core: manual and scalar column predicates, raw distinct choices, search/counts and controlled native Selects are implemented. Remaining legacy indicator/options/edge closure stays open. |
 | G13 | height, fixedcol, fixHeader/fixColumn, fixed footer | Authored sticky/grouped examples exist. Footer and integration with column/viewport state need complete proof. Never copy headers. |
 | G14 | resizable/resize, show/hide, more column chooser | Partial: M10.5 implements state, preferred width, pointer/keyboard resize, reorder and show/hide with authored controls. Legacy chooser/options/callback edge closure remains open; no omission approved. Reorder is an explicit added requirement. |
 | G15 | vResizable/vResize, scroll lock and action-driven scroll | Missing height-resize interaction and reveal policies; authored CSS may supply dimensions/containment. |
@@ -189,7 +191,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Continue P0 Grid/UI/options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state is implemented; use [its detailed plan](m10-columns-plan.md) for evidence and boundaries, then plan selection/check/filter as M10.6. New public contracts receive representative HTML/TS and tests before implementation. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. Prepare atomic paste as M10.7, then true virtualization and remaining Grid parity. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
 
 # Decisions
 

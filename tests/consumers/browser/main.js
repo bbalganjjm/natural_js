@@ -16,12 +16,18 @@ function view() {
     <table data-consumer-grid>
       <thead><tr>
         <th scope="col" data-column="person">Person
+          <button type="button" data-sort-column="person">Sort Person</button>
+          <label>Check page <input type="checkbox" data-check-all="visible"></label>
           <button type="button" data-resize-column="person" aria-label="Resize Person column">Resize</button>
         </th>
         <th scope="col" data-column="choice">Choice</th>
       </tr></thead>
       <tbody><tr data-row-template>
-        <th scope="row" data-column="person"><span data-field="person.name"></span></th>
+        <th scope="row" data-column="person">
+          <button type="button" data-select-row><span data-field="person.name"></span></button>
+          <label>Check row <input type="checkbox" data-check-row></label>
+          <button type="button" data-row-action="inspect">Inspect</button>
+        </th>
         <td data-column="choice"><label>Choice
           <select data-field="choice" data-options="choices"
             data-option-label="label" data-option-value="value">
@@ -74,8 +80,33 @@ const definition = {
       { key: 2, parent: 1, date: "2026-10-06", person: { name: "Off page" }, choices, choice: 22 }
     ]);
     const columnEvents = [];
+    const gridEvents = [];
+    const idsEvent = kind => ({ ids, previous, event }) =>
+      gridEvents.push({ kind, ids, previous, type: event?.type ?? null });
     const grid = bindGrid(root.querySelector("table"), {
-      rows, initialPage: { page: 1, size: 1 },
+      rows, initialPage: { page: 1, size: 1 }, multiple: true,
+      canSelect: row => row.value.key > 0,
+      canCheck: row => row.value.key > 0,
+      beforeSelect: ({ id, event }) => {
+        gridEvents.push({ kind: "before-active", id, type: event?.type ?? null });
+        return true;
+      },
+      onSelect: ({ id, row, event }) => gridEvents.push({
+        kind: "active", id, name: row?.value.person.name ?? null, type: event?.type ?? null
+      }),
+      beforeSelectionChange: change => { idsEvent("before-selection")(change); return true; },
+      onSelectionChange: idsEvent("selection"),
+      beforeCheckChange: change => { idsEvent("before-check")(change); return true; },
+      onCheckChange: idsEvent("check"),
+      sorts: { person: (a, b) => a.person.name.localeCompare(b.person.name) },
+      filters: { choice: {
+        value: row => row.choice,
+        label: value => choices.find(choice => choice.value === value)?.label ?? String(value)
+      } },
+      onRowAction: ({ action, id, row, element, event }) => gridEvents.push({
+        kind: "action", action, id, name: row.value.person.name,
+        element: element.dataset.rowAction, current: rows.get(id) === row, type: event.type
+      }),
       columns: [{ key: "person", width: 180 }, { key: "choice", width: 120 }],
       onColumnsChange: ({ columns, event }) => columnEvents.push({ columns, type: event?.type ?? null })
     });
@@ -109,7 +140,7 @@ const definition = {
         }
       })
     });
-    const screen = { rows, grid, columnEvents, form, tree, picker, notifications, documents, openDocument, disposed: false };
+    const screen = { rows, grid, gridEvents, columnEvents, form, tree, picker, notifications, documents, openDocument, disposed: false };
     state.screens[input.slot] = screen;
     own(async () => {
       await documents.dispose();

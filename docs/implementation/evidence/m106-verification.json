@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-18",
+  "milestone": "M10.6",
+  "baseline_commit": "ecbacb3a9012b2d781a418abb9ce8fee261bdd73",
+  "branch": "2.0.0-alpha.0",
+  "version": "2.0.0-beta.0",
+  "artifact": {
+    "filename": "bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "d5dbc96d5916a44b517e32af04693cf1d6f0efd1f99cdece9b8a4b0fe8fbefa9",
+    "files": 143,
+    "packed_bytes": 221071,
+    "unpacked_bytes": 1087744,
+    "allowed_paths_only": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "license": "Apache-2.0",
+    "publication_performed": false
+  },
+  "sources_sha256": {
+    "src/ui/grid.ts": "cf6ac0884fc6bbbf2eafbd1d07cb6b310002f9e6aff03a4eee24704b6b264c70",
+    "src/ui/grid-selection.ts": "939bbdb875c96b3e26dfee7eb1e29fd4dbcc93fe2485728ce0f3cbfae2a68991",
+    "src/ui/grid-filters.ts": "87099c05a591403be2584ac1d17b5ce2d2d2356bf565f016a6035e18f8910887",
+    "src/ui/index.ts": "4123d97a9292d29c6fdf08190511bf2c59c4bd4f7eb1702f021ed2be4fb79987",
+    "src/ui/select.ts": "b3564b47653787f27347a465dca1c28c8f6246419289c74b7735fc4acc60bd39",
+    "src/ui/grid-columns.ts": "9cf71e4f97683e1f2b2c467d5af42b1eb52ea11cb73b83ad6a390fab11ab49b5",
+    "src/ui/dom-state.ts": "3950451df55497a3d94559820cfc7597acdfb593e77e518e12a2e2ab7dc47062",
+    "src/data/index.ts": "19ffb3e03549ca88012716a8befbfa482276dd50ef622ad17ca1b20c08cb5674",
+    "tests/browser/grid-selection.spec.ts": "26bc7a80e7c9f0194034331a8d73a4f2f90c4b26b5d9e472eb604116f60458ba",
+    "tests/browser/m10-demo.spec.ts": "2ca473503078bb1ea0f5286a9aa09d10085a1e51e22b341e7db06ac7133b06f3",
+    "examples/vite/m10/demo.html": "04fab61f48d8942eb78ab278ca0127ca35b391eb317c02e949fb52e7b0657133",
+    "examples/vite/m10/demo.ts": "e8a447b087881d7c4f32a1e2f7fdd3f82fcd820e12d8179739ed79bf8df132fa",
+    "examples/vite/m10/demo.css": "9dc485d0844a158df3cceeb9b76bc9f7d9503a0e58495884f1038d266fda1f42",
+    "tests/consumers/browser/main.js": "8afb43c4aa621f5ca21193be9c9339452d1c9751708f43d170c7345c5f5b66c0",
+    "tests/consumers/ts/check.ts": "696987cfeb685c53f666b0c7b0b108bad71d8e1c1408cabe4f697cb58afbddc3",
+    "tools/check-packed-browser.mjs": "326ef372c7a1f1b291d3b9410318b17f4ed2236432ae26b7c5dcb6b698552bc9",
+    "README.md": "0fb30bcae12f761439e3417ccedc1c733c688d3937806930599a0e7cb78f9f33"
+  },
+  "commands": {
+    "evidence": "m106-gates.jsonl",
+    "records": 15,
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "browser_example_types": "pass; Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 81
+    },
+    "new_focused_cases": 17,
+    "full_suites": {
+      "chromium": {
+        "passed": 199,
+        "elapsed": "1.1m",
+        "log": "m106-browser-chromium.log"
+      },
+      "firefox": {
+        "passed": 199,
+        "elapsed": "2.2m",
+        "log": "m106-browser-firefox.log"
+      },
+      "webkit": {
+        "passed": 199,
+        "elapsed": "2.0m",
+        "log": "m106-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32",
+        "passed": true,
+        "log": "m106-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "win32",
+        "passed": true,
+        "log": "m106-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "win32",
+        "passed": true,
+        "log": "m106-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "155.0.8059.80",
+        "platform": "win32",
+        "passed": true,
+        "log": "m106-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "155.0.4283.62",
+        "platform": "win32",
+        "passed": true,
+        "log": "m106-packed-edge.log"
+      }
+    ]
+  },
+  "performance": {
+    "fixture": "tools/benchmark-m4.mjs",
+    "log": "m106-binding-performance.log",
+    "warmup": 2,
+    "runs": 5,
+    "scenarios": [
+      {
+        "kind": "flat",
+        "rows": 1000,
+        "medians_ms": {
+          "initial": 12.800000000745058,
+          "rebind": 15.800000000745058,
+          "edit": 0.7999999970197678,
+          "sort": 2.7999999970197678,
+          "filter": 1.9000000022351742
+        },
+        "budgets_ms": {
+          "initial": 30,
+          "rebind": 35,
+          "edit": 5,
+          "sort": 10,
+          "filter": 8
+        },
+        "passed": true
+      },
+      {
+        "kind": "nested-auto",
+        "rows": 1000,
+        "medians_ms": {
+          "initial": 39.80000000074506,
+          "rebind": 46.79999999701977,
+          "sort": 8.600000001490116,
+          "filter": 5.800000000745058
+        },
+        "budgets_ms": {
+          "initial": 90,
+          "rebind": 100,
+          "sort": 25,
+          "filter": 18
+        },
+        "passed": true
+      }
+    ],
+    "limits": "Same host, completed DOM operations in headless Chromium. These fixtures measure existing flat/nested binding, not universal performance or bulk/viewport guarantees. Legacy comparison in the raw fixture is outside the 2.0 budgets."
+  },
+  "review": {
+    "independent_code_findings_fixed": [
+      "Keyboard Shift range includes focused origin without a prior anchor.",
+      "Forced prune post notifications follow committed row DOM/view, preventing deleted-row resurrection and post-error divergence.",
+      "View revision rejects stale before-hook proposals even when the projected RowIds are identical."
+    ],
+    "new_regressions_cover_findings": true,
+    "source_review": "Independent read-only review approved corrected paths; actual browser confirmation is in final suites.",
+    "docs_and_archive_review": "Independent read-only review approved the changed documents and exact source/log/archive evidence. Every143 packed member matches current workspace bytes; scope excludes full legacy parity, manual AT, release authorization and actual token savings.",
+    "actual_tokens_measured": false,
+    "fixed_agent_task_rerun": false
+  },
+  "harness_notes": [
+    "Firefox uses node_modules/.cache/playwright-m6; default cache launch failed during the initial focused run, not a skipped engine.",
+    "Source fixtures disable Vite WebSocket reloads; application behavior remains exercised.",
+    "Raw stdout/stderr logs are preserved. Silent successful compiler runs have exit/status/arguments and source hashes in the gate record."
+  ],
+  "log_sha256": {
+    "m106-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m106-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m106-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m106-unit.log": "7d327ededb9bc0300dc4f282629fd5bbc2e7c20068c499e2f1a05556167b2f15",
+    "m106-browser-chromium.log": "2c540b7f4a00cbbcc3662c9172f50ff18b2635711f582acf2c187285389f1e11",
+    "m106-pack.log": "36d4c56508c66ea6a6f55ae7d17c5b94000aa3a9a979769f504b9391cd24386a",
+    "m106-consumers.log": "237bafe8881878cc766fa6d01861fd1ac172df21232a4c5b6ec04c140611f69d",
+    "m106-packed-chromium.log": "0064a0aff3ea1e2352176f384ad100cc306d0a0bc1deabef1b6e674d882b11b4",
+    "m106-packed-firefox.log": "c2d6596a59be34b278507942fcd990e9a297aa3b64f76e3911f8d9453d934cae",
+    "m106-packed-webkit.log": "4697af77a1dae9525fab141e398e31be46701deccccebe2ac734a7e1957208d4",
+    "m106-packed-chrome.log": "9eb1dd50a209a69980d4623b616ed10de3f6fda789ab3306b9cbff6d989d9e34",
+    "m106-packed-edge.log": "b90f06d3bdbbe662875e87188221d05ce49185d7816fada760069176430a353d",
+    "m106-browser-firefox.log": "e7086c60adc9999dd87b17bd617eb1cbb0169b4c87a1519fc679776eaf90c9ee",
+    "m106-browser-webkit.log": "4f7764ed919a9fff0bbf0f0718c0f50521e4f983c15e7bd8538a8750da4776fc",
+    "m106-binding-performance.log": "1440e0e5241a9c79d1f88603550b430b8aefe23f4ec6b819beae4ec3d799a94d"
+  },
+  "limits": [
+    "Manual assistive-technology/personal acceptance remain open; actual macOS/iOS Safari is excluded.",
+    "All legacy behavior/options/dynamic closure, exclusive checking and consolidated omission review remain open.",
+    "M10.7 paste and M10.8 real virtualization remain required.",
+    "No npm publication/release tags/master/v1 changes.",
+    "No equivalent agent task or actual token savings claim."
+  ]
+}

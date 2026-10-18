@@ -96,6 +96,27 @@ export interface GridColumn {
   readonly hidden?: boolean;
 }
 
+export type GridRowScope = "visible" | "filtered" | "store";
+
+export interface GridIdsChange {
+  readonly ids: readonly RowId[];
+  readonly previous: readonly RowId[];
+  readonly event: Event | null;
+}
+
+export interface GridCheckState {
+  readonly checked: boolean;
+  readonly indeterminate: boolean;
+  readonly total: number;
+  readonly count: number;
+}
+
+export interface GridFilterChoice {
+  readonly value: SelectValue;
+  readonly label: string;
+  readonly count: number;
+}
+
 export interface ListHandle<T extends object> {
   select(id: RowId | null): void;
   selected(): RowId | null;
@@ -112,6 +133,15 @@ export interface GridHandle<T extends object> {
   setColumns(columns: readonly GridColumn[]): void;
   select(id: RowId | null): void;
   selected(): RowId | null;
+  selectedIds(): readonly RowId[];
+  setSelected(ids: readonly RowId[]): void;
+  checkedIds(): readonly RowId[];
+  setChecked(ids: readonly RowId[]): void;
+  checkAll(checked: boolean, scope: GridRowScope): void;
+  checkState(scope: GridRowScope): GridCheckState;
+  columnFilter(key: string): readonly SelectValue[] | null;
+  setColumnFilter(key: string, values: readonly SelectValue[] | null): void;
+  filterChoices(key: string, search?: string): readonly GridFilterChoice[];
   setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null,
     indicator?: SortIndicator): void;
   setFilter(predicate: ((row: Snapshot<T>) => boolean) | null): void;

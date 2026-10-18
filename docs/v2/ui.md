@@ -4,16 +4,24 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, ListHandle, GridHandle]
+symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 98601f6d9ce1b487dd52c81dad860b465b71e8c0
-generated: { by: codex/gpt-6, at: 2026-10-05T11:42:46Z }
+    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+  - id: selection
+    resource: ../../src/ui/grid-selection.ts
+    title: Private Grid identity, membership, and check contracts
+    git_blob: ad63db1a070132c0ab9eca715bbe994ed010663c
+  - id: filters
+    resource: ../../src/ui/grid-filters.ts
+    title: Private Grid scalar filters and choice counts
+    git_blob: fd1b4b22060a716b1351e8c3029f76c0b0ca3964
+generated: { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-05T11:43:54Z }
+  - { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -41,7 +49,31 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
 | `GridColumn` | Readonly `key`, optional positive preferred `width`, optional `hidden` | Column state |
-| `GridHandle<T>` | Column state, selection, sort, filter, page, validation, disposal | Grid handle |
+| `GridIdsChange` | Readonly `ids: readonly RowId[]`, `previous: readonly RowId[]`, `event: Event \| null` | Membership transition |
+| `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit check scope |
+| `GridCheckState` | Readonly booleans `checked`, `indeterminate`; numbers `total`, `count` | Eligible scope aggregate |
+| `GridFilterChoice` | Readonly `value: SelectValue`, `label: string`, `count: number` | One raw column choice and matching-row count |
+| `GridHandle<T>` | Column state, active identity, independent selected/checked membership, sort, column/manual filters, page, validation, disposal | Grid handle |
+
+# Grid state methods
+
+These methods extend the existing active-detail `select(id)` / `selected()` contract. `multiple` defaults to `false` and enables UI batch gestures only; the full-set methods are always available. Returned membership arrays, check states and filter choices are frozen. Pure state/view changes do not edit Rows.[^ui][^selection][^filters]
+
+| Method | Result or effect |
+|---|---|
+| `selectedIds(): readonly RowId[]` | Selected membership in store order. |
+| `setSelected(ids: readonly RowId[]): void` | Replace the selected set after complete ID/eligibility validation. |
+| `checkedIds(): readonly RowId[]` | Checked membership in store order. |
+| `setChecked(ids: readonly RowId[]): void` | Replace the independent checked set after complete validation. |
+| `checkAll(checked: boolean, scope: GridRowScope): void` | Add/remove eligible scope IDs, preserving checks outside the scope. |
+| `checkState(scope: GridRowScope): GridCheckState` | `total` eligible scope rows, `count` checked, full/mixed flags; an empty scope has both flags false. |
+| `columnFilter(key: string): readonly SelectValue[] \| null` | Raw filter state: `null` all, `[]` none, `[null]` raw null only. |
+| `setColumnFilter(key: string, values: readonly SelectValue[] \| null): void` | Replace one configured column filter; columns and the manual filter combine with AND. |
+| `filterChoices(key: string, search?: string): readonly GridFilterChoice[]` | Choices/counts under manual and other-column filters, excluding this column's filter and paging; optional label search only narrows choices. |
+
+`visible` means the current filtered page, `filtered` means all matching rows before paging, and `store` means every nondeleted row. `canCheck` determines eligibility for these aggregates and operations; a disabled native checkbox only blocks its own UI gesture. Number `1` and string `"1"` remain different filter values. The eleven additional binder options and native markers are listed in [Grid](grid.md), alongside keyboard and restoration rules.[^selection][^filters]
+
+`GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after visible rows and scopes commit.[^selection]
 
 # Pitfalls
 
@@ -58,3 +90,5 @@ A parser sees one snapshot of all currently entered, still unparsed drafts in `R
 [Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), and [Tabs](tabs.md), [Tree](tree.md), and [DatePicker](datepicker.md), [Notify](notify.md), and [Documents](documents.md) document runtime behavior. [The M1 contract](../implementation/m1-contract.md) records the first-release boundary.
 
 [^ui]: Public UI types and runtime exports
+[^selection]: Private Grid identity, membership, and check contracts
+[^filters]: Private Grid scalar filters and choice counts
