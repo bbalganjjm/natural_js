@@ -29,13 +29,39 @@ assert.equal(typeof bindDatePicker, "function");
 assert.equal(typeof bindNotify, "function");
 assert.equal(typeof bindDocuments, "function");
 
-const rows = createRows([{ name: "A", options: [{ value: "one" }] }]);
+const rows = createRows([{ name: "A", options: [{ value: "one" }] }, { name: "B", options: [] }]);
 const id = rows.entries()[0].id;
 rows.set(id, "name", "B");
 assert.equal(rows.get(id).value.name, "B");
 assert.equal(rows.changes()[0].status, "update");
 rows.revert(id);
 assert.equal(rows.get(id).value.name, "A");
+const secondId = rows.entries()[1].id;
+const batches = [];
+const stop = rows.subscribe(event => batches.push(event));
+rows.setMany([
+  { id, values: { name: "First", options: [{ value: "two" }] } },
+  { id: secondId, values: { name: "Second" } }
+]);
+assert.equal(batches.length, 1);
+assert.deepEqual(batches[0], { type: "setMany", ids: [id, secondId], changed: true });
+assert(Object.isFrozen(batches[0]) && Object.isFrozen(batches[0].ids));
+assert.deepEqual(rows.entries().map(row => row.id), [id, secondId]);
+assert.equal(rows.get(id).value.options[0].value, "two");
+assert.throws(() => { rows.get(id).value.name = "Bypass batch"; }, TypeError);
+assert.throws(() => rows.get(id).value.options.push({ value: "Bypass nested snapshot" }), TypeError);
+assert.deepEqual(rows.changes().map(row => row.status), ["update", "update"]);
+const before = rows.entries();
+assert.throws(() => rows.setMany([
+  { id, values: { name: "Must not commit" } }, { id: secondId, values: { name: undefined } }
+]));
+assert.equal(rows.entries(), before, "An invalid later patch must preserve the complete batch.");
+assert.equal(batches.length, 1);
+rows.setMany([{ id, values: { name: "First" } }]);
+assert.equal(batches.length, 1, "A net no-op must not notify installed consumers.");
+stop();
+rows.revert();
+assert.deepEqual(rows.entries().map(row => row.value.name), ["A", "B"]);
 rows.dispose();
 
 const originalFetch = globalThis.fetch;

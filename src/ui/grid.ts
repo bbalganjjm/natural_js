@@ -10,6 +10,7 @@ import { createGridSelection } from "./grid-selection.js";
 import { createGridFilters } from "./grid-filters.js";
 import { bindSelect } from "./select.js";
 import { focusVisible } from "./dom-state.js";
+import { readClipboard } from "./grid-paste.js";
 import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
@@ -120,6 +121,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   initialPage?: PageRequest;
   rules?: RuleSet;
   parse?: Record<string, ParseInput>;
+  paste?: boolean;
+  onPaste?: (result: ValidationResult) => void;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
   multiple?: boolean;
   canSelect?: (row: RowSnapshot<T>) => boolean;
@@ -158,6 +161,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const checkIndexes: number[] = [];
   if (options.onRowAction !== undefined && typeof options.onRowAction !== "function") {
     throw gridError("GRID_ACTION", "onRowAction must be a function.");
+  }
+  if (options.paste !== undefined && typeof options.paste !== "boolean" ||
+      options.onPaste !== undefined && typeof options.onPaste !== "function") {
+    throw gridError("GRID_PASTE", "paste must be boolean and onPaste must be a function.");
   }
   const authored = [template, ...template.querySelectorAll<HTMLElement>("*")];
   for (const [index, element] of authored.entries()) {
@@ -243,9 +250,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const knownFields = new Set([...textFields.map(field => field.name),
     ...selectFields.map(field => field.name).filter((name): name is string => name !== undefined)]);
   for (const [field, parser] of Object.entries(options.parse ?? {})) {
-    const editable = textFields.filter(descriptor => descriptor.name === field && descriptor.editable);
+    const editable = textFields.filter(descriptor => descriptor.name === field);
     if (editable.length !== 1 || editable[0].checkbox || typeof parser !== "function") {
-      throw gridError("GRID_PARSE_FIELD", "A Grid parser needs one editable non-checkbox input.", { field });
+      throw gridError("GRID_PARSE_FIELD", "A Grid parser needs one non-checkbox text field.", { field });
     }
   }
   for (const field of errorFields.keys()) {
@@ -322,6 +329,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const drafts = new Map<RowId, Map<string, FieldDraft>>();
   const issueText = new Map<RowId, Map<string, string[]>>();
   let reconciling = false;
+  let pasting = false;
+  let pasteCommit = false;
+  let pasteNotified = false;
+  const pasteFields = [
+    ...textFields.map((field, text) => ({ name: field.name, path: field.path, index: field.index, text, select: -1 })),
+    ...selectFields.flatMap((field, select) => field.name && field.field
+      ? [{ name: field.name, path: field.field, index: field.index, text: -1, select }] : [])
+  ].sort((a, b) => a.index - b.index);
   const rowIds = new WeakMap<HTMLTableRowElement, RowId>();
   const selects = new WeakMap<HTMLSelectElement, { id: RowId; binding: BoundSelect }>();
   const edits = new WeakMap<HTMLElement, { id: RowId; binding: BoundText }>();
@@ -353,6 +368,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }));
     for (const binding of texts) {
       if (binding.descriptor.editable) edits.set(binding.element, { id, binding });
+      else if (options.paste && !binding.element.hasAttribute("tabindex") &&
+          !binding.element.closest("button, a, input, select, textarea, summary, [contenteditable]")) {
+        binding.element.tabIndex = 0;
+      }
     }
     const rowSelects = selectFields.map(descriptor => {
       const element = nodes[descriptor.index] as HTMLSelectElement;
@@ -461,9 +480,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     record.snapshot = snapshot;
   }
 
-  function candidateValues(row: RowSnapshot<T>): Candidates {
+  function candidateValues(row: RowSnapshot<T>, pending = drafts.get(row.id)): Candidates {
     let values = row.value as Readonly<Record<string, unknown>>;
-    const pending = drafts.get(row.id);
     for (const draft of pending?.values() ?? []) values = writePath(values, draft.path, draft.entered);
     const enteredValues = values;
     const parsed = new Map<string, unknown>();
@@ -500,7 +518,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     };
   }
 
-  function validateRow(row: RowSnapshot<T>, candidate = candidateValues(row)): ValidationIssue[] {
+  function validateRow(row: RowSnapshot<T>, candidate = candidateValues(row),
+    pending = drafts.get(row.id), publish = true): ValidationIssue[] {
     const record = records.get(row.id);
     const { values, parseErrors } = candidate;
     const issues: ValidationIssue[] = [];
@@ -517,7 +536,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const context = ruleContext(row, descriptor.name, values, element);
       const source = (bound?.element ?? authored[descriptor.index]).cloneNode(true);
       if (source instanceof HTMLInputElement || source instanceof HTMLTextAreaElement) {
-        display(source, drafts.get(row.id)?.get(descriptor.name)?.entered ?? value);
+        display(source, pending?.get(descriptor.name)?.entered ?? value);
         const textLength = source instanceof HTMLTextAreaElement ||
           ["text", "search", "tel", "url", "email", "password"].includes(source.type);
         const tooShort = textLength && source.minLength >= 0 &&
@@ -563,9 +582,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       messages.push(issue.message);
       byField.set(issue.field, messages);
     }
-    if (issues.length) issueText.set(row.id, byField);
-    else issueText.delete(row.id);
-    if (record) showIssues(record, byField);
+    if (publish) {
+      if (issues.length) issueText.set(row.id, byField);
+      else issueText.delete(row.id);
+      if (record) showIssues(record, byField);
+    }
     return issues;
   }
 
@@ -658,6 +679,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   function onRows(event: RowsEvent): void {
+    if (pasteCommit) pasteNotified = true;
     if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
       drafts.clear();
       issueText.clear();
@@ -675,23 +697,25 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           clearIssues(record);
         }
       }
-    } else if (event.type === "set") {
-      const pending = drafts.get(event.id);
-      const row = pending ? options.rows.get(event.id) : undefined;
-      if (pending && row && !reconciling) {
-        for (const [field, draft] of pending) {
-          if (!Object.is(readPath(row.value, draft.path), draft.baseline)) pending.delete(field);
+    } else if (event.type === "set" || event.type === "setMany") {
+      for (const id of event.type === "setMany" ? event.ids : [event.id]) {
+        const pending = drafts.get(id);
+        const row = pending ? options.rows.get(id) : undefined;
+        if (pending && row && !reconciling) {
+          for (const [field, draft] of pending) {
+            if (!Object.is(readPath(row.value, draft.path), draft.baseline)) pending.delete(field);
+          }
+          if (!pending.size) drafts.delete(id);
         }
-        if (!pending.size) drafts.delete(event.id);
-      }
-      const record = records.get(event.id);
-      if (!reconciling) issueText.delete(event.id);
-      if (record) {
-        if (pending) resetRecord(record);
-        if (!reconciling) clearIssues(record);
+        const record = records.get(id);
+        if (!reconciling) issueText.delete(id);
+        if (record) {
+          if (pending) resetRecord(record);
+          if (!reconciling) clearIssues(record);
+        }
       }
     }
-    render()?.();
+    if (!pasteCommit) render()?.();
   }
   function syncSelection(): void {
     if (!buttonIndexes.length && !checkIndexes.length && !headerChecks.length) return;
@@ -994,10 +1018,180 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     draft(entry.id, entry.binding.descriptor.name, entry.binding.descriptor.path, entered, true);
   }
 
+  function paste(text: string, start: { readonly id: RowId; readonly field: string }): ValidationResult {
+    active();
+    if (pasting) throw gridError("GRID_PASTE_BUSY", "A paste is already being prepared.");
+    if (typeof text !== "string") throw gridError("GRID_PASTE_TEXT", "Paste needs clipboard text.");
+    const rowIndex = visibleIds.indexOf(start?.id);
+    const first = records.get(start?.id);
+    if (rowIndex < 0 || !first) throw gridError("GRID_PASTE_TARGET", "Paste needs a visible row.", { id: start?.id });
+    const binding = (record: RenderedRow<T>, field: typeof pasteFields[number]) =>
+      field.text >= 0 ? record.texts[field.text] : record.selects[field.select];
+    const fields = pasteFields.filter(field => {
+      const element = binding(first, field).element;
+      return element.isConnected && !element.closest("[hidden]");
+    }).sort((a, b) => {
+      const left = binding(first, a).element;
+      const right = binding(first, b).element;
+      return left === right ? 0 : left.compareDocumentPosition(right) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+    });
+    const fieldIndex = fields.findIndex(field => field.name === start.field);
+    if (fieldIndex < 0 || new Set(fields.map(field => field.name)).size !== fields.length) {
+      throw gridError("GRID_PASTE_TARGET", "Paste needs unique visible field names.", { field: start.field });
+    }
+    const entries = options.rows.entries();
+    const revision = viewRevision;
+    const layout = columns.columns();
+    const pendingBefore = new Map([...drafts].map(([id, pending]) => [id, new Map(pending)]));
+    const issuesBefore = new Map(issueText);
+    function current(): void {
+      active();
+      const sameDrafts = drafts.size === pendingBefore.size && [...pendingBefore].every(([id, pending]) => {
+        const actual = drafts.get(id);
+        return actual?.size === pending.size && [...pending].every(([field, draft]) => actual.get(field) === draft);
+      });
+      if (options.rows.entries() !== entries || viewRevision !== revision || columns.columns() !== layout || !sameDrafts) {
+        throw gridError("GRID_PASTE_STALE", "The Grid changed while paste was being prepared. Retry with its current view.");
+      }
+    }
+    const issues: ValidationIssue[] = [];
+    function issue(id: RowId, field: string, message: string): void {
+      const record = records.get(id);
+      const descriptor = fields.find(item => item.name === field);
+      const element = record && descriptor ? binding(record, descriptor).element : undefined;
+      issues.push({ rowId: id, field, rule: "paste", message, ...(element?.isConnected ? { element } : {}) });
+    }
+    const staged = new Map<RowId, { pending: Map<string, FieldDraft>; pasted: Set<string>; row: RowSnapshot<T> }>();
+    const updates: { id: RowId; values: Partial<T> }[] = [];
+    pasting = true;
+    try {
+      let matrix: string[][] = [];
+      try { matrix = readClipboard(text); }
+      catch (cause) {
+        if (!(cause instanceof FrameworkError) || cause.code !== "GRID_PASTE_TEXT") throw cause;
+        issue(start.id, start.field, `${cause.message} Clipboard row ${cause.detail?.row}, column ${cause.detail?.column}.`);
+      }
+      if (rowIndex + matrix.length > visibleIds.length || matrix.some(row => fieldIndex + row.length > fields.length)) {
+        issue(start.id, start.field, "Clipboard data exceeds the visible rows or fields. No values were pasted.");
+      }
+      if (!issues.length) for (const [offset, cells] of matrix.entries()) {
+        const id = visibleIds[rowIndex + offset];
+        const row = options.rows.get(id)!;
+        const record = records.get(id)!;
+        const pending = new Map(drafts.get(id));
+        const pasted = new Set<string>();
+        for (const [column, text] of cells.entries()) {
+          const field = fields[fieldIndex + column];
+          const bound = binding(record, field);
+          const element = bound.element;
+          if (element.matches(":disabled") || element.closest('[hidden], [inert], [aria-readonly="true"]') ||
+              (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) && element.readOnly) continue;
+          let entered: unknown = text;
+          if (field.select >= 0) {
+            const select = record.selects[field.select];
+            const values = [...select.element.options]
+              .filter(option => select.rawByOption.has(option) && !option.matches(":disabled") &&
+                String(select.rawByOption.get(option) ?? "") === text)
+              .map(option => select.rawByOption.get(option));
+            if (!values.length || values.some(value => !Object.is(value, values[0]))) {
+              issue(id, field.name, "Clipboard text must identify one enabled raw option value.");
+              continue;
+            }
+            entered = values[0];
+          } else if (record.texts[field.text].descriptor.checkbox) {
+            if (text !== "true" && text !== "false") {
+              issue(id, field.name, "Paste true or false into a checkbox.");
+              continue;
+            }
+            entered = text === "true";
+          }
+          pending.set(field.name, { entered, baseline: readPath(row.value, field.path), path: field.path });
+          pasted.add(field.name);
+        }
+        if (pasted.size) staged.set(id, { row, pending, pasted });
+      }
+      if (!issues.length) for (const [id, prepared] of staged) {
+        const candidate = candidateValues(prepared.row, prepared.pending);
+        issues.push(...validateRow(prepared.row, candidate, prepared.pending, false));
+        let values = prepared.row.value as Readonly<Record<string, unknown>>;
+        const patch: Record<string, unknown> = {};
+        for (const field of prepared.pasted) {
+          const path = prepared.pending.get(field)!.path;
+          if (candidate.parseErrors.has(field)) continue;
+          values = writePath(values, path, candidate.parsed.get(field));
+          patch[path[0]] = values[path[0]];
+        }
+        updates.push({ id, values: patch as Partial<T> });
+      }
+      current();
+      if (issues.length) {
+        for (const found of issues) {
+          if (found.rowId === null) continue;
+          const messages = new Map(issueText.get(found.rowId));
+          messages.set(found.field, [...new Set([...(messages.get(found.field) ?? []), found.message])]);
+          issueText.set(found.rowId, messages);
+          const record = records.get(found.rowId);
+          if (record) showIssues(record, messages);
+        }
+      } else {
+        function clearPasted(): void {
+          for (const [id, prepared] of staged) {
+            const pending = drafts.get(id);
+            for (const field of prepared.pasted) {
+              if (pending?.get(field) === pendingBefore.get(id)?.get(field)) pending?.delete(field);
+            }
+            if (!pending?.size) drafts.delete(id);
+            if (issueText.get(id) === issuesBefore.get(id)) issueText.delete(id);
+            const record = records.get(id);
+            if (record) {
+              resetRecord(record);
+              const messages = issueText.get(id);
+              if (messages) showIssues(record, messages);
+              else clearIssues(record);
+            }
+          }
+        }
+        pasteCommit = true;
+        pasteNotified = false;
+        try {
+          options.rows.setMany(updates);
+          clearPasted();
+        } catch (cause) {
+          pasteCommit = false;
+          let committed = pasteNotified;
+          try { committed ||= options.rows.entries() !== entries; }
+          catch { committed = true; }
+          if (committed) {
+            clearPasted();
+            try { if (!disposed) render()?.(); } catch { /* Preserve the committed batch's first error. */ }
+          }
+          throw cause;
+        } finally { pasteCommit = false; }
+        if (!disposed && staged.size) render()?.();
+      }
+    } finally { pasting = false; }
+    const result = { valid: issues.length === 0, issues };
+    options.onPaste?.(result);
+    return result;
+  }
+
+  function onPaste(event: ClipboardEvent): void {
+    if (!options.paste || event.defaultPrevented || !event.clipboardData?.types.includes("text/plain") ||
+        !(event.target instanceof HTMLElement)) return;
+    const target = event.target.closest<HTMLElement>("[data-field]") ??
+      (event.target.querySelectorAll("[data-field]").length === 1 ? event.target.querySelector<HTMLElement>("[data-field]") : null);
+    const row = target?.closest<HTMLTableRowElement>("tr");
+    const id = row && rowIds.get(row);
+    if (id === undefined || id === null || !target || !root.contains(target)) return;
+    event.preventDefault();
+    paste(event.clipboardData.getData("text/plain"), { id, field: target.getAttribute("data-field")! });
+  }
+
   root.addEventListener("click", onClick);
   root.addEventListener("input", onInput);
   root.addEventListener("change", onChange);
   root.addEventListener("keydown", onKeyDown);
+  root.addEventListener("paste", onPaste);
   let unsubscribe = () => {};
   try {
     for (const element of filterElements) {
@@ -1024,6 +1218,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     root.removeEventListener("input", onInput);
     root.removeEventListener("change", onChange);
     root.removeEventListener("keydown", onKeyDown);
+    root.removeEventListener("paste", onPaste);
     restoreHeader();
     for (const record of records.values()) {
       releaseRecord(record);
@@ -1035,6 +1230,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   return {
+    paste,
     columns() {
       active();
       return columns.columns();
@@ -1112,6 +1308,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       root.removeEventListener("input", onInput);
       root.removeEventListener("change", onChange);
       root.removeEventListener("keydown", onKeyDown);
+      root.removeEventListener("paste", onPaste);
       restoreHeader();
       for (const record of records.values()) {
         releaseRecord(record);

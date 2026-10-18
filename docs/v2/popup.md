@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Popup exports
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Popup lifecycle and result

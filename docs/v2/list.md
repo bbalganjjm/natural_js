@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public List handle and export
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 8d3ef3e1ff3e7b7fb7faed27fc592846dd5fe090
+    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options

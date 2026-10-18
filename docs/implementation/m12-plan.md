@@ -8,7 +8,7 @@ sources:
   - id: m11
     resource: m11-plan.md
     title: Completed M11 contract and verification
-    git_blob: 16fb54e3ec4e90c3a98a6e1d908103706694ffec
+    git_blob: 2ba2a5a0023d5c16d43c63ff5a140b6b36688c6e
   - id: page
     resource: ../../src/page/index.ts
     title: Existing CVC runtime

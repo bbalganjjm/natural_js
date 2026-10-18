@@ -127,6 +127,27 @@
         </fieldset>
 
         <fieldset>
+          <legend>Atomic bulk paste</legend>
+          <label>Start field
+            <select data-paste-field data-needs-grid>
+              <option value="name">Employee</option><option value="email" selected>Email</option>
+              <option value="phone">Phone (protected)</option><option value="profile.team">Team</option>
+              <option value="assignment.chosen">Shift raw code</option><option value="active">Active</option>
+              <option value="notes">Notes</option><option value="salary">Salary</option>
+            </select>
+          </label>
+          <label>Tab-separated cells
+            <textarea data-paste-text data-needs-grid rows="6">ada.paste@example.com	ignored phone	Platform	2	true	"First line
+Second line"	200
+grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</textarea>
+          </label>
+          <div class="button-row"><button type="button" data-action="paste" data-needs-grid>Paste at active row</button></div>
+          <p>Select an active row on the visible page first. The sample starts at Email in the default column order and updates two rows. Shift uses its raw numeric code; Active accepts true or false. Double quotes preserve tabs and newlines inside a cell.</p>
+          <p>Paste follows the current visible row and column order. Phone is protected and still consumes its source position. Readonly and disabled fields behave the same way. Overflow or any invalid cell rejects the entire paste. You can also paste plain text directly into a bound table field.</p>
+          <output data-paste-status role="status">No paste attempted.</output>
+        </fieldset>
+
+        <fieldset>
           <legend>Rows store</legend>
           <div class="button-row">
             <button type="button" data-action="add" data-needs-grid>Add row</button>
@@ -206,7 +227,7 @@
                   <label class="check-label"><input type="checkbox" data-check-row> Check row</label>
                   <button type="button" data-row-action="inspect">Inspect</button></th>
                 <td data-column="email"><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
-                <td data-column="phone" data-field="phone"></td>
+                <td data-column="phone"><label>Phone <input type="tel" data-field="phone" readonly></label></td>
                 <td data-column="team"><label>Team <input type="text" data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
                 <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
                   data-option-label="meta.label" data-option-value="code" required><option value="">Choose</option></select></label>
@@ -241,7 +262,7 @@
 
     <section class="future" aria-label="Remaining required Grid features">
       <h2>Remaining required features</h2>
-      <p>Bulk paste and real scroll virtualization remain required and are not implemented here. Local paging is separate from virtualization.</p>
+      <p>Real scroll virtualization remains required and is not implemented here. Local paging is separate from virtualization.</p>
       <p><a href="./columns.html">Compare column behavior in two independent CVC layouts</a>.</p>
     </section>
   </main>

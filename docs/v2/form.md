@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
+    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Shared safe object field paths

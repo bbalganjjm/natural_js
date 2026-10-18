@@ -16,15 +16,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
+    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
+    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
   - id: grid-columns
     resource: ../../src/ui/grid-columns.ts
     title: Private Grid column topology and resize ownership
@@ -40,7 +40,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 8d3ef3e1ff3e7b7fb7faed27fc592846dd5fe090
+    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -100,7 +100,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Row store
-    git_blob: 10c07414eacccc414b81afc8be5661dd21afe3c6
+    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator

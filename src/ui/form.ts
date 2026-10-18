@@ -500,11 +500,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
   root.addEventListener("focusin", onFocusIn);
   root.addEventListener("focusout", onFocusOut);
   const unsubscribe = rows?.subscribe(event => {
-    if (disposed || event.type === "set" && reconciling) return;
+    if (disposed || (event.type === "set" || event.type === "setMany") && reconciling) return;
     if (event.type === "replace" || event.type === "revert" && event.id === undefined) drafts.clear();
     else if (event.type === "remove") drafts.delete(event.id);
     else if (event.type === "revert" && event.id !== undefined) drafts.delete(event.id);
-    if (boundId === null || event.type === "set" && event.id !== boundId) return;
+    if (boundId === null || event.type === "set" && event.id !== boundId ||
+        event.type === "setMany" && !event.ids.includes(boundId)) return;
     const row = rows.get(boundId);
     if (!row || row.status === "delete") {
       boundId = null;
@@ -515,7 +516,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
     const reset = event.type === "replace" ||
       event.type === "revert" && (event.id === undefined || event.id === boundId);
-    if (reset || event.type === "set") issues.clear();
+    if (reset || event.type === "set" || event.type === "setMany") issues.clear();
     render(!reset);
     showIssues();
   });

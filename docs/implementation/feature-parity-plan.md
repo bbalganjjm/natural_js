@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: c056f8f7a5361ba6622e1fdc111f13dacb29ff66
+    git_blob: 8dbdde5b9b2fedd52a3c8f012f5d098bd3324cb7
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,26 +16,26 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 3abaa89c6ea2ef23ef4911c4b527d5d766b23dec
+    git_blob: e1f373a0ed7f8503d9dac3c5a76c7cd4a9b7737d
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 0e62d2620c1e8e866bbf387a092a3be949c38dc9
+    git_blob: 0cb27bf571ec8678bcccb9f05c16c84afd61a189
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
-    git_blob: 10c07414eacccc414b81afc8be5661dd21afe3c6
+    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
+    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
-generated: { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
+generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -115,7 +115,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 gates are complete within its contract; plan M10.7 atomic paste and its minimal shared Rows/control dependency, representative HTML/TS, parsing/validation and rollback. Preserve remaining stages and publication deferral.
+Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. Prepare M10.8 real virtualization with a private mounted window, preserved logical-page checks/paste, measured variable heights, bounded focus retention, accessible row indices and explicit DOM/performance budgets. Preserve remaining stages and publication deferral.
 
 # Decisions
 
@@ -136,7 +136,7 @@ Continue P0 dynamic semantic closure and prepare the single omission proposal af
 
 # Open questions
 
-P0's exhaustive behavior mapping, final omission candidates and their one user decision are pending. Exact column/group/viewport and batch-edit public types require the detailed slice review. Manual assistive-technology testing and actual token telemetry remain open; available automated/browser checks must still run during implementation.
+P0's exhaustive behavior mapping, final omission candidates and their one user decision are pending. Viewport and remaining parity public contracts require their detailed slice review; column/group and batch-edit contracts are recorded in their implemented stage plans. Manual assistive-technology testing and actual token telemetry remain open; available automated/browser checks must still run during implementation.
 
 [^coverage]: Initial source-backed coverage ledger
 [^roadmap]: Milestone governance and current scope

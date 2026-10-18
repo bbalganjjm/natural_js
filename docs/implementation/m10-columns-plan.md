@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required full framework and Grid scope
-    git_blob: f78d81c9b1f31e250e1492b9c2b07b0d430c6d4b
+    git_blob: 6b8b12267257595163c37b4c2beb457b8d3fda71
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field ownership and row lifetime
-    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
+    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -40,7 +40,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Grid handle and column state
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: tables
     resource: https://www.w3.org/WAI/tutorials/tables/irregular/
     title: WAI grouped header and native column associations

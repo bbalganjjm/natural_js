@@ -24,6 +24,7 @@ export interface RowChange<T> {
 export type RowsEvent =
   | { readonly type: "replace"; readonly changed: true }
   | { readonly type: "add" | "set" | "remove"; readonly id: RowId; readonly changed: true }
+  | { readonly type: "setMany"; readonly ids: readonly RowId[]; readonly changed: true }
   | { readonly type: "revert"; readonly id?: RowId; readonly changed: boolean };
 
 export interface Rows<T extends object> {
@@ -32,6 +33,7 @@ export interface Rows<T extends object> {
   get(id: RowId): RowSnapshot<T> | undefined;
   add(value: T): RowId;
   set<Key extends keyof T>(id: RowId, field: Key, value: T[Key]): void;
+  setMany(updates: readonly { readonly id: RowId; readonly values: Partial<T> }[]): void;
   remove(id: RowId): void;
   revert(id?: RowId): void;
   changes(): readonly RowChange<T>[];
@@ -95,7 +97,7 @@ function cloneRow(value: unknown, api: string): FrozenRow {
 }
 
 function sameJson(left: unknown, right: unknown): boolean {
-  if (left === right) return true;
+  if (Object.is(left, right)) return true;
   if (!left || !right || typeof left !== "object" || typeof right !== "object") return false;
   if (Array.isArray(left)) {
     return Array.isArray(right) &&
@@ -112,6 +114,7 @@ function sameJson(left: unknown, right: unknown): boolean {
 export function createRows<T extends object>(initial: readonly T[] = []): Rows<T> {
   let nextId = 1;
   let disposed = false;
+  let revision = 0;
   let entryCache: readonly RowSnapshot<T>[] | undefined;
   let changeCache: readonly RowChange<T>[] | undefined;
   const rows = new Map<RowId, StoredRow<T>>();
@@ -127,6 +130,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
 
   function notify(event: RowsEvent): void {
     if (event.changed) {
+      revision++;
       entryCache = undefined;
       changeCache = undefined;
     }
@@ -148,9 +152,40 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
   }
 
   function requireRow(id: RowId, api: string): StoredRow<T> {
+    active(api);
     const row = rows.get(id);
     if (!row) throw rowError(api, "ROW_MISSING", "The row ID is not in this store.", { id });
     return row;
+  }
+
+  function unchanged(version: number, api: string): void {
+    active(api);
+    if (revision !== version) {
+      throw rowError(api, "ROW_VALUE", "Rows changed while preparing values. Retry with the current rows.");
+    }
+  }
+
+  function editableRow(id: RowId, api: string): StoredRow<T> {
+    const row = requireRow(id, api);
+    if (row.status === "delete") {
+      throw rowError(api, "ROW_DELETED", "Revert a deleted row before editing it.", { id });
+    }
+    return row;
+  }
+
+  function applyFields(row: StoredRow<T>, values: FrozenRow): boolean {
+    const fields = Object.keys(values).filter(field => !sameJson(row.current[field], values[field]));
+    if (!fields.length) return false;
+    row.current = Object.freeze({ ...row.current, ...values });
+    if (row.original) {
+      for (const field of fields) {
+        if (sameJson(row.original[field], values[field])) row.dirty.delete(field);
+        else row.dirty.add(field);
+      }
+      row.status = row.dirty.size ? "update" : "clean";
+    }
+    row.view = view(row.id, row.current, row.status);
+    return true;
   }
 
   function makeRow(id: RowId, current: FrozenRow, inserted: boolean): StoredRow<T> {
@@ -168,12 +203,14 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
   const store: Rows<T> = {
     replace(values) {
       active("Rows.replace");
+      const version = revision;
       const nextRows = new Map<RowId, StoredRow<T>>();
       let id = nextId;
       for (const value of values) {
         nextRows.set(id, makeRow(id, cloneRow(value, "Rows.replace"), false));
         id++;
       }
+      unchanged(version, "Rows.replace");
       rows.clear();
       for (const [key, row] of nextRows) rows.set(key, row);
       nextId = id;
@@ -192,7 +229,9 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     },
     add(value) {
       active("Rows.add");
+      const version = revision;
       const current = cloneRow(value, "Rows.add");
+      unchanged(version, "Rows.add");
       const row = makeRow(nextId++, current, true);
       rows.set(row.id, row);
       notify({ type: "add", id: row.id, changed: true });
@@ -200,23 +239,37 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     },
     set(id, field, value) {
       active("Rows.set");
-      const row = requireRow(id, "Rows.set");
-      if (row.status === "delete") {
-        throw rowError("Rows.set", "ROW_DELETED", "Revert a deleted row before editing it.", { id });
-      }
+      const version = revision;
+      const row = editableRow(id, "Rows.set");
       if (typeof field !== "string") {
         throw rowError("Rows.set", "ROW_FIELD", "A row field must be a string.", { field: String(field) });
       }
       const next = cloneFrozen(value, "Rows.set");
-      if (sameJson(row.current[field], next)) return;
-      row.current = Object.freeze({ ...row.current, [field]: next });
-      if (row.original) {
-        if (sameJson(row.original[field], next)) row.dirty.delete(field);
-        else row.dirty.add(field);
-        row.status = row.dirty.size ? "update" : "clean";
-      }
-      row.view = view(row.id, row.current, row.status);
+      unchanged(version, "Rows.set");
+      if (!applyFields(row, { [field]: next })) return;
       notify({ type: "set", id, changed: true });
+    },
+    setMany(updates) {
+      active("Rows.setMany");
+      const version = revision;
+      if (!Array.isArray(updates)) {
+        throw rowError("Rows.setMany", "ROW_VALUE", "Row updates must be an array.");
+      }
+      const prepared = new Map<RowId, { row: StoredRow<T>; values: FrozenRow }>();
+      for (const update of updates) {
+        if (!update || typeof update !== "object" || Array.isArray(update) || !isPlainObject(update)) {
+          throw rowError("Rows.setMany", "ROW_VALUE", "A row update needs an ID and a values object.");
+        }
+        const row = editableRow(update.id, "Rows.setMany");
+        const values = cloneRow(update.values, "Rows.setMany");
+        prepared.set(row.id, { row, values: { ...prepared.get(row.id)?.values, ...values } });
+      }
+      unchanged(version, "Rows.setMany");
+      const ids: RowId[] = [];
+      for (const [id, { row, values }] of prepared) {
+        if (applyFields(row, values)) ids.push(id);
+      }
+      if (ids.length) notify({ type: "setMany", ids: Object.freeze(ids), changed: true });
     },
     remove(id) {
       active("Rows.remove");

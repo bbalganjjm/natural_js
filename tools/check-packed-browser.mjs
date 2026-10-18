@@ -352,6 +352,77 @@ try {
   assert.deepEqual(columnsAfter.otherHeaderKeys, ["person", "choice"], "Other screen headers must keep their authored order.");
   assert.deepEqual(columnsAfter.otherRowKeys, ["person", "choice"], "Other screen row cells must keep their authored order.");
 
+  const pasteAccepted = await page.evaluate(() => {
+    const state = window.packedConsumer;
+    const screen = state.screens.a;
+    const ids = screen.rows.entries().map(row => row.id);
+    const other = state.screens.b.rows.entries();
+    const events = [];
+    const unsubscribe = screen.rows.subscribe(event => events.push(event));
+    screen.grid.setColumns([...screen.grid.columns()].reverse());
+    screen.grid.setPage(null);
+    const result = screen.grid.paste("Pasted Ada\t22\nPasted Other\t11", { id: ids[0], field: "person.name" });
+    const acceptedEntries = screen.rows.entries();
+    const choice = document.querySelector('[data-host="a"] [data-consumer-grid] select');
+    choice.focus();
+    const rejected = screen.grid.paste("Must not commit\t11\nNeither may this\t999", {
+      id: ids[0], field: "person.name"
+    });
+    const response = {
+      valid: result.valid, rejected: rejected.valid,
+      issues: rejected.issues.map(({ rowId, field, rule }) => ({ rowId, field, rule })),
+      ids, entries: screen.rows.entries(), changes: screen.rows.changes(), events,
+      immutableEvent: Object.isFrozen(events[0]) && Object.isFrozen(events[0].ids),
+      unchangedAfterRejection: acceptedEntries === screen.rows.entries(),
+      focusPreserved: document.activeElement === choice,
+      otherUnchanged: other === state.screens.b.rows.entries(),
+      callbacks: screen.pasteEvents
+    };
+    unsubscribe();
+    return response;
+  });
+  assert.equal(pasteAccepted.valid, true, "Installed Grid must accept a complete typed two-row paste.");
+  assert.equal(pasteAccepted.rejected, false, "An unavailable later Select value must reject the whole paste.");
+  assert(pasteAccepted.issues.some(issue => issue.rowId === secondId && issue.field === "choice"));
+  assert.deepEqual(pasteAccepted.entries.map(row => row.id), [firstId, secondId]);
+  assert.deepEqual(pasteAccepted.entries.map(row => [row.value.person.name, row.value.choice]),
+    [["Pasted Ada", 22], ["Pasted Other", 11]]);
+  assert.deepEqual(pasteAccepted.changes.map(row => row.status), ["update", "update"]);
+  assert.deepEqual(pasteAccepted.events, [{ type: "setMany", ids: [firstId, secondId], changed: true }],
+    "A successful paste must publish one coherent store event, and rejection must not publish another.");
+  assert(pasteAccepted.immutableEvent && pasteAccepted.unchangedAfterRejection &&
+    pasteAccepted.focusPreserved && pasteAccepted.otherUnchanged,
+  "Paste must preserve stable snapshots, focus and the independent CVC screen on rejection.");
+  assert.deepEqual(pasteAccepted.callbacks.map(result => result.valid), [true, false]);
+  await expect(first.locator("form input")).toHaveValue("Pasted Ada");
+  await expect(first.locator("[data-tree-label]")).toHaveText(["Pasted Ada", "Pasted Other"]);
+  assert.deepEqual(await first.locator('[data-consumer-grid] select').evaluateAll(elements =>
+    elements.map(element => element.value)), ["22", "11"]);
+  const nativePaste = await first.locator('[data-consumer-grid] select').first().evaluate(element => {
+    element.focus();
+    const clipboardData = new DataTransfer();
+    clipboardData.setData("text/plain", "11");
+    // Firefox discards DataTransfer passed to an untrusted ClipboardEvent constructor.
+    const event = new Event("paste", { bubbles: true, cancelable: true });
+    Object.defineProperty(event, "clipboardData", { value: clipboardData });
+    element.dispatchEvent(event);
+    return { prevented: event.defaultPrevented, focused: document.activeElement === element };
+  });
+  assert.deepEqual(nativePaste, { prevented: true, focused: true });
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.rows.entries()[0].value.choice), 11,
+    "Native installed paste must preserve the Select's numeric raw value.");
+  assert.deepEqual(await page.evaluate(() => window.packedConsumer.screens.a.pasteEvents.map(result => result.valid)),
+    [true, false, true]);
+  await expect(page.locator('[data-host="b"] form input')).toHaveValue("Bea");
+  await page.evaluate(() => {
+    const screen = window.packedConsumer.screens.a;
+    screen.rows.revert();
+    screen.grid.setPage({ page: 1, size: 1 });
+    screen.pasteEvents.length = 0;
+  });
+  await expect(first.locator("form input")).toHaveValue("Ada");
+  await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveText("Ada");
+
   await first.locator("form input").fill("Ann");
   await expect(first.locator("[data-consumer-grid] tbody [data-field='person.name']")).toHaveText("Ann");
   await expect(page.locator('[data-host="b"] form input')).toHaveValue("Bea");

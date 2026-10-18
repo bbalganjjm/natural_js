@@ -1,0 +1,304 @@
+{
+  "date": "2026-10-18",
+  "milestone": "M10.7",
+  "baseline_commit": "4aaae297f2d1f59fd60206ed236d3c09c7400fa6",
+  "branch": "2.0.0-alpha.0",
+  "version": "2.0.0-beta.0",
+  "artifact": {
+    "filename": "bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d",
+    "files": 148,
+    "packed_bytes": 230483,
+    "unpacked_bytes": 1136381,
+    "allowed_paths_only": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "license": "Apache-2.0",
+    "publication_performed": false
+  },
+  "sources_sha256": {
+    "src/ui/grid.ts": "f10322cd8326ca433327db89c6ab6a6dfcbb14c74eb1bd453831b604bdc28b84",
+    "src/ui/grid-paste.ts": "e0a102940b5f55c6966e6b4617a3adac8790fdc5afc7ef589a41cb4b574cbec8",
+    "src/ui/form.ts": "77d9e625515a3ae1541a980663e1f64de1d56958de44dc89ee6d69043fbf4bb0",
+    "src/ui/list.ts": "16da1eb7d848df7d138cb23aa2efc80de1bff876637f271249e2cf16fd338bb0",
+    "src/ui/grid-selection.ts": "939bbdb875c96b3e26dfee7eb1e29fd4dbcc93fe2485728ce0f3cbfae2a68991",
+    "src/ui/grid-filters.ts": "87099c05a591403be2584ac1d17b5ce2d2d2356bf565f016a6035e18f8910887",
+    "src/ui/index.ts": "71045c4b9e351657ec87be297733ac6dc3794e48c31ed3606d38b5d4cb083791",
+    "src/ui/select.ts": "b3564b47653787f27347a465dca1c28c8f6246419289c74b7735fc4acc60bd39",
+    "src/ui/grid-columns.ts": "9cf71e4f97683e1f2b2c467d5af42b1eb52ea11cb73b83ad6a390fab11ab49b5",
+    "src/ui/dom-state.ts": "3950451df55497a3d94559820cfc7597acdfb593e77e518e12a2e2ab7dc47062",
+    "src/data/index.ts": "c34e9102fa5dd9f0db2287d960057c811611ba04dd09a31f0dc58b5680cfe963",
+    "tests/browser/grid-selection.spec.ts": "26bc7a80e7c9f0194034331a8d73a4f2f90c4b26b5d9e472eb604116f60458ba",
+    "tests/browser/grid-paste.spec.ts": "992da5d9f015b9cc9c6a1fec61051a6d70c618220eebf0bbbebf7e725ab9ed54",
+    "tests/grid-paste.test.ts": "3345a370a2bf87576b29e1a2552ebaa28cf362251b1abefedc5f3d9f61ce6cbd",
+    "tests/rows.test.ts": "2b195a71cc9141ffef0c3690835fc98de139b15ba7f86af62ae240f584a64515",
+    "tests/consumers/js/check.mjs": "3aa8c29fb01b641e201e385bddec7bb2280475e4144b18c3f4d82a5ec171733a",
+    "tests/browser/m10-demo.spec.ts": "2f2a578ed5049ae9ee5b2843f7282fc3d7e5711d6df48b9d54e271a30b8c5d79",
+    "examples/vite/m10/demo.html": "92b1da24f60dbc13980c3edc908fb71cb6b3fba91feca258579fd9d309fde512",
+    "examples/vite/m10/demo.ts": "3e75a03041acff9a4cd7140668190cf83f2f10988484973c1f628fefbf9c01c0",
+    "examples/vite/m10/demo.css": "814964cf0c41ef66875f169bdf76ed37975fedf0d8f7fd44388f00cd7481d008",
+    "tests/consumers/browser/main.js": "bf4c3e2c9fc66c61e60307428b7128df72a51bb626f53b9ce2fdb46339f22ef3",
+    "tests/consumers/ts/check.ts": "bdeb487e55d2a6031fadc0b90a6d240de626ee71cbd72f07563610e1aae9f313",
+    "tools/check-packed-browser.mjs": "d1221ff99a459dca17586039f66a9b51a15694bbdfd2cb3f0939fdbb8b5b1abf",
+    "README.md": "186dc01ad38460140bedba78b9b85a38aba57ecdcaaf760d5b10beadd98cdc8f"
+  },
+  "commands": {
+    "evidence": "m107-gates.jsonl",
+    "records": 28,
+    "final_gate_records": 15,
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true,
+    "superseded": [
+      {
+        "label": "build",
+        "exit_code": 0,
+        "log": "m107-build.log"
+      },
+      {
+        "label": "types",
+        "exit_code": 0,
+        "log": "m107-types.log"
+      },
+      {
+        "label": "example-types",
+        "exit_code": 0,
+        "log": "m107-example-types.log"
+      },
+      {
+        "label": "unit",
+        "exit_code": 0,
+        "log": "m107-unit.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 1,
+        "log": "m107-browser-chromium.log"
+      },
+      {
+        "label": "build",
+        "exit_code": 0,
+        "log": "m107-build-2.log"
+      },
+      {
+        "label": "types",
+        "exit_code": 0,
+        "log": "m107-types-2.log"
+      },
+      {
+        "label": "example-types",
+        "exit_code": 0,
+        "log": "m107-example-types-2.log"
+      },
+      {
+        "label": "unit",
+        "exit_code": 0,
+        "log": "m107-unit-2.log"
+      },
+      {
+        "label": "pack",
+        "exit_code": 0,
+        "log": "m107-pack.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 1,
+        "log": "m107-browser-chromium-2.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 0,
+        "log": "m107-browser-chromium-3.log"
+      },
+      {
+        "label": "browser-firefox",
+        "exit_code": 1,
+        "log": "m107-browser-firefox.log"
+      }
+    ]
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "browser_example_types": "pass; Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 92
+    },
+    "new_focused_cases": 19,
+    "new_demo_cases": 1,
+    "full_suites": {
+      "chromium": {
+        "passed": 219,
+        "elapsed": "1.1m",
+        "log": "m107-browser-chromium-4.log"
+      },
+      "firefox": {
+        "passed": 219,
+        "elapsed": "2.3m",
+        "log": "m107-browser-firefox-2.log"
+      },
+      "webkit": {
+        "passed": 219,
+        "elapsed": "2.1m",
+        "log": "m107-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32",
+        "passed": true,
+        "log": "m107-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "win32",
+        "passed": true,
+        "log": "m107-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "win32",
+        "passed": true,
+        "log": "m107-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "155.0.8059.80",
+        "platform": "win32",
+        "passed": true,
+        "log": "m107-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "155.0.4283.62",
+        "platform": "win32",
+        "passed": true,
+        "log": "m107-packed-edge.log"
+      }
+    ],
+    "large_paste": {
+      "rows": 1000,
+      "fields": 2,
+      "events": 1,
+      "stable_ids": true,
+      "focus": true,
+      "unique_dom_ids": true,
+      "gate": "functional browser regression; 15-second completion timeout is not a binding-speed budget"
+    }
+  },
+  "performance": {
+    "fixture": "tools/benchmark-m4.mjs",
+    "log": "m107-binding-performance.log",
+    "warmup": 2,
+    "runs": 5,
+    "scenarios": [
+      {
+        "kind": "flat",
+        "rows": 1000,
+        "medians_ms": {
+          "initial": 12.800000000745058,
+          "rebind": 16.099999997764826,
+          "edit": 0.8999999985098839,
+          "sort": 2.800000000745058,
+          "filter": 2
+        },
+        "budgets_ms": {
+          "initial": 30,
+          "rebind": 35,
+          "edit": 5,
+          "sort": 10,
+          "filter": 8
+        },
+        "passed": true
+      },
+      {
+        "kind": "nested-auto",
+        "rows": 1000,
+        "medians_ms": {
+          "initial": 38.900000002235174,
+          "rebind": 48.5,
+          "sort": 9,
+          "filter": 5.699999999254942
+        },
+        "budgets_ms": {
+          "initial": 90,
+          "rebind": 100,
+          "sort": 25,
+          "filter": 18
+        },
+        "passed": true
+      }
+    ],
+    "limits": "Same host, completed DOM operations in headless Chromium. Existing flat/nested binding budgets do not establish universal bulk-paste or viewport performance. Legacy comparison in raw fixture is outside 2.0 budgets."
+  },
+  "review": {
+    "independent_code_findings_fixed": [
+      "Postcommit subscriber-created newer input drafts and error maps are preserved by captured identity.",
+      "Error recovery renders with ordinary notification ownership so prune callbacks cannot leave deleted rows visible.",
+      "Select ambiguity and Rows scalar equality use Object.is, including signed zero.",
+      "Reentrant JSON value evaluation cannot resurrect removed rows or commit stale outer set/setMany/add/replace operations; disposal is checked."
+    ],
+    "new_regressions_cover_findings": true,
+    "source_review": "Independent read-only source audit approved final Grid/TSV and Rows guards with executable probes.",
+    "docs_and_archive_review": "Independent final API/body and archive/evidence reviews approved all 15 final gates, 28 logs, 24 source/fixture hashes and 148 package members before verified metadata.",
+    "independent_reviewers": [
+      "m107_scope",
+      "m107_docs_audit",
+      "m107_archive_audit"
+    ],
+    "actual_tokens_measured": false,
+    "fixed_agent_task_rerun": false
+  },
+  "harness_notes": [
+    "Firefox uses node_modules/.cache/playwright-m6; other engines use their default installed caches.",
+    "Retained failed attempts: Chromium first lost a pre-action execution context during development reload, then a dynamic source-module fetch failed in fixture setup. Firefox first rejected two synthetic-event assertions because its ClipboardEvent constructor discarded the supplied DataTransfer. A readonly event-data fixture fixed that test-only difference; production code and assertions were retained. Final full gates run after the development server restarts on the frozen build.",
+    "Source fixtures disable Vite WebSocket reloads; application behavior remains exercised.",
+    "Raw stdout/stderr and command args/exit/source/log hashes are preserved, including successful silent compilers."
+  ],
+  "log_sha256": {
+    "m107-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-unit.log": "05aa486bb67f75abfb99515c828f934f2937fad967e2dd297a8d9431497bc7bf",
+    "m107-browser-chromium.log": "777fe6a63945cc2a333f5c86f7e02825526f7e29883163109bfa0bf7987ee01d",
+    "m107-build-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-example-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-unit-2.log": "78556d2cbd303b6c6b88e95d05d51ad1732483bd6a0b8c4758dee4c95f3e9d24",
+    "m107-pack.log": "42d957c0cdb91a3e7398b22a982bd45b560f235126cc1443e6f5165fef4d46fa",
+    "m107-browser-chromium-2.log": "abf2387dcf731a28d32948a053effc4c77f043b365fd3ba62a7a0469f2b95524",
+    "m107-browser-chromium-3.log": "f13eea216ff14292aa92c2a3330b96c252bdf558dce4dad5917a2125461a443b",
+    "m107-browser-firefox.log": "8397c77de05f3d80ee1b2ef1de12e93a4f71081aa50ab58b5aae508757af9f59",
+    "m107-build-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-types-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-example-types-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m107-unit-3.log": "fd583f2aef37781a2cbc03fdfaac02d545f9a3b47cce32ab6a185f0eb495fc59",
+    "m107-pack-2.log": "42d957c0cdb91a3e7398b22a982bd45b560f235126cc1443e6f5165fef4d46fa",
+    "m107-browser-chromium-4.log": "23a5a042b7f350a8514c56ff14e3f8f80502efb6ca1e0e822ba5feafe6a2caa5",
+    "m107-browser-firefox-2.log": "ddd54f7b29ee1b93268090bae7f2889406b6055ffce9b6cd3177646277f1b7c6",
+    "m107-browser-webkit.log": "c8068d8ec9656090dae2c3425151470f243582cdbd94c7eb631e1ec95b9c1baa",
+    "m107-consumers.log": "bcc872ca9ad0643202cc3b3b70b19085d3d2683e6b2b68de3e678788319ef01c",
+    "m107-packed-chromium.log": "541b33ef641f5f83901232f37a5df46ff395b18180ce28a9fbea8100d75afae2",
+    "m107-packed-firefox.log": "d6404761928d436673afb87ee4c15d72fc9bce3de3774d69b22fe18640c3350e",
+    "m107-packed-webkit.log": "0a636cc6c1455a7a81b6b202ffb3e74761bef04108d303840703da2e71c0f6b0",
+    "m107-packed-chrome.log": "dabfcbc536ff5f856e94e83057a6b925052c3bf4ed9eeeb18ae0b32cfb0627aa",
+    "m107-packed-edge.log": "dc6bf986c78d2f0ae06218b92d91024eb53af9142c310fae1e42c44cf80f9fca",
+    "m107-binding-performance.log": "cb9fd8f147d1fa2618afa949d3f18f4088636681608c5a1e523d32eafec80f03"
+  },
+  "limits": [
+    "Manual assistive-technology/personal acceptance and actual OS clipboard integration remain open; actual macOS/iOS Safari is excluded.",
+    "M10.8 real virtualization, remaining Grid/component parity, P0 semantic/dynamic closure and consolidated omission review remain required.",
+    "No npm publication/release tags/master/v1 changes.",
+    "No equivalent agent task or actual token-saving claim."
+  ]
+}

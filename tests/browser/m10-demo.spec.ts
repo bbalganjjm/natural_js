@@ -199,3 +199,43 @@ test("required and unavailable choices validate; dispose and rebind restore the 
   const ids = await page.locator("[id]").evaluateAll(elements => elements.map(element => element.id));
   expect(new Set(ids).size).toBe(ids.length);
 });
+
+test("bulk paste reports atomic rejection and applies typed cells with protected positions", async ({ page }) => {
+  const rows = page.locator("tbody tr:not([data-row-template])");
+  await page.locator('[data-action="select-first"]').click();
+  const sample = await page.locator("[data-paste-text]").inputValue();
+  await page.locator("[data-paste-text]").fill(sample.replace(/225$/, "50"));
+  await page.locator('[data-action="paste"]').click();
+  await expect(page.locator("[data-paste-status]")).toContainText("Paste rejected");
+  await expect(page.locator("[data-issues]")).toContainText('"field": "salary"');
+  await expect(page.locator("[data-changes]")).toHaveText("[]");
+  await expect(rows.first().locator('[data-field="email"]')).toHaveValue("employee1@example.com");
+  await expect(rows.nth(1).locator('[data-field="salary"]')).toHaveValue("175");
+
+  await page.locator("[data-paste-text]").fill(sample);
+  await page.locator('[data-action="paste"]').click();
+  await expect(page.locator("[data-paste-status]")).toContainText("Paste accepted");
+  await expect(page.locator("[data-event]")).toHaveText("setMany RowIds 1, 2, changed true");
+  await expect(rows.first().locator('[data-field="email"]')).toHaveValue("ada.paste@example.com");
+  await expect(rows.first().locator('[data-field="phone"]')).toHaveValue("+1 555 0101");
+  await expect(rows.first().locator("select")).toHaveValue("2");
+  await expect(rows.nth(1).locator("select")).toHaveValue("4");
+  await expect(rows.nth(1).locator('[data-field="active"]')).not.toBeChecked();
+  await expect(rows.first().locator('[data-field="notes"]')).toHaveValue("First line\nSecond line");
+  await expect(page.locator("[data-snapshot]")).toContainText('"chosen": 2');
+
+  const native = await rows.first().locator('[data-field="salary"]').evaluate(element => {
+    element.focus();
+    const clipboardData = new DataTransfer();
+    clipboardData.setData("text/plain", "220\n250");
+    // Firefox discards DataTransfer passed to an untrusted ClipboardEvent constructor.
+    const event = new Event("paste", { bubbles: true, cancelable: true });
+    Object.defineProperty(event, "clipboardData", { value: clipboardData });
+    element.dispatchEvent(event);
+    return { prevented: event.defaultPrevented, focused: document.activeElement === element };
+  });
+  expect(native).toEqual({ prevented: true, focused: true });
+  await expect(rows.first().locator('[data-field="salary"]')).toHaveValue("220");
+  await expect(rows.nth(1).locator('[data-field="salary"]')).toHaveValue("250");
+  await expect(page.locator("[data-paste-status]")).toContainText("Paste accepted");
+});

@@ -72,6 +72,9 @@ const checkCallback = find<HTMLOutputElement>("[data-check-callback]");
 const actionCallback = find<HTMLOutputElement>("[data-action-callback]");
 const eventOutput = find<HTMLOutputElement>("[data-event]");
 const salaryInput = find<HTMLInputElement>("[data-new-salary]");
+const pasteText = find<HTMLTextAreaElement>("[data-paste-text]");
+const pasteField = find<HTMLSelectElement>("[data-paste-field]");
+const pasteStatus = find<HTMLOutputElement>("[data-paste-status]");
 const columnChoice = find<HTMLSelectElement>("[data-column-choice]");
 const columnWidth = find<HTMLInputElement>("[data-column-width]");
 const columnHidden = find<HTMLInputElement>("[data-column-hidden]");
@@ -99,7 +102,7 @@ function refresh(): void {
   pageState.textContent = page
     ? `Page ${page.page} of ${page.pages} · ${page.total} filtered rows · size ${page.size}`
     : `${rows.entries().length} store rows · paging off`;
-  for (const control of document.querySelectorAll<HTMLButtonElement | HTMLInputElement | HTMLSelectElement>("[data-needs-grid]")) {
+  for (const control of document.querySelectorAll<HTMLButtonElement | HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("[data-needs-grid]")) {
     if (grid && control.hasAttribute("data-check-all")) continue;
     control.disabled = grid === null;
   }
@@ -189,6 +192,13 @@ function bind(): void {
   grid = bindGrid(table, {
     rows,
     initialPage,
+    paste: true,
+    onPaste(result) {
+      showValidation(result);
+      pasteStatus.textContent = result.valid ? "Paste accepted; all supplied writable cells applied together."
+        : `Paste rejected; no pasted cells applied. ${result.issues.map(issue => `RowId ${issue.rowId}, ${issue.field}: ${issue.message}`).join(" ")}`;
+      refresh();
+    },
     columns: defaultColumns,
     multiple: selectionMode.value === "multiple",
     canSelect: disableInactive.checked ? row => row.value.active : undefined,
@@ -239,7 +249,7 @@ function bind(): void {
   initialColumns = grid.columns().map(column => ({ ...column }));
   stopRows();
   stopRows = rows.subscribe(event => {
-    eventOutput.textContent = `${event.type}${"id" in event ? ` RowId ${event.id}` : ""}, changed ${event.changed}`;
+    eventOutput.textContent = `${event.type}${"id" in event ? ` RowId ${event.id}` : "ids" in event ? ` RowIds ${event.ids.join(", ")}` : ""}, changed ${event.changed}`;
     refresh();
   });
   applySort();
@@ -273,6 +283,7 @@ function act(action: string): void {
   if (action === "replace") { rows.replace(Array.from({ length: 6 }, (_, index) => employee(index))); status.textContent = "Rows replaced with new RowIds."; return; }
   if (!grid) throw new Error("Bind the Grid before using this control.");
   switch (action) {
+    case "paste": grid.paste(pasteText.value, { id: selectedId(), field: pasteField.value }); return;
     case "apply-columns": {
       const width = columnWidth.value.trim();
       grid.setColumns(grid.columns().map(column => column.key === columnChoice.value

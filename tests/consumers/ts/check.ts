@@ -6,7 +6,7 @@ import type { RowId, RowSnapshot, Rows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, GridColumn, GridHandle, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, GridColumn, GridHandle, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -34,6 +34,8 @@ export function editEmployees(): Rows<Employee> {
   const rows = createRows<Employee>([{ name: "Kim", options: [{ value: "A" }] }]);
   const id = rows.entries()[0].id;
   rows.set(id, "options", [{ value: "B" }]);
+  const applied: void = rows.setMany([{ id, values: { name: "Lee", options: [{ value: "C" }] } }]);
+  void applied;
   return rows;
 }
 
@@ -68,8 +70,10 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
   const selectionChanges: GridIdsChange[] = [];
   const checkChanges: GridIdsChange[] = [];
+  const pastes: ValidationResult[] = [];
   const grid: GridHandle<Employee> = bindGrid(table, {
     rows, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
+    paste: true, onPaste: result => pastes.push(result),
     multiple: true,
     canSelect: row => row.status !== "delete",
     canCheck: row => row.status !== "delete",
@@ -93,7 +97,11 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
     },
     onColumnsChange: change => columnChanges.push(change)
   });
-  return { form, grid, columnChanges, selectionChanges, checkChanges };
+  return { form, grid, columnChanges, selectionChanges, checkChanges, pastes };
+}
+
+export function pasteEmployees(grid: GridHandle<Employee>, id: RowId, text: string): ValidationResult {
+  return grid.paste(text, { id, field: "name" });
 }
 
 export function configureColumns(grid: GridHandle<Employee>, columns: readonly GridColumn[]): readonly GridColumn[] {

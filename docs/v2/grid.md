@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
+    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -46,10 +46,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^selection]
@@ -99,7 +99,9 @@ if (grid.validate().valid) console.log(rows.changes());
 | `rows` | Required caller-owned store of immutable snapshots and row identities. |
 | `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
 | `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
-| `parse` | Optional application parser per editable field path, used to turn an entered string into a raw JSON value. A number input requires one. |
+| `parse` | Optional application parser per unique non-checkbox text/display field path, used to turn an entered string into a raw JSON value. A number input requires one. |
+| `paste` | Optional boolean, default `false`; enables delegated native `text/plain` paste into bound row fields and safe focusability for plain display fields. The `paste` method is available independently. |
+| `onPaste` | `(result: ValidationResult) => void` after an API or native paste returns a validation result, including rejection. It is not called when preparation or a committed observer throws. |
 | `columns` | Optional full column state; each key appears exactly once in display order. Template `data-column` also enables management with authored defaults. |
 | `onColumnsChange` | Optional callback after committed layout changes; programmatic changes pass `event: null`. |
 | `onSelect` | `({ id, row, event }) => void` after active detail identity changes; `id` and `row` may be `null`. It does not report selected or checked membership. |
@@ -197,6 +199,29 @@ Authored filter selects display `label (count)` through `bindSelect`. Editing th
 
 Returns `{ valid, issues }` for an explicit nondeleted ID or all nondeleted rows, including filtered-out or off-page rows. It checks supported input HTML constraints (including programmatically bound text length limits), parsers and validators, Select availability, Select `required`, and Select validators. A missing or deleted explicit ID raises `GRID_ROW`. An issue has `rowId`, `field`, `rule`, and `message`; `element` exists only for a connected row control. Validation evaluates all cell drafts for one row against the same candidate values, even while the row is filtered out. A draft that passes is committed to `Rows`; a failed draft stays outside the store. Call `validate()` before saving to reconcile drafts after external row changes.[^grid][^rules]
 
+## `paste(text, { id, field })`
+
+Returns `ValidationResult` for a synchronous, whole-field paste starting at a visible `RowId` and exact `data-field` path. The method works without enabling native paste. Rows advance through the current sorted, filtered page; fields advance through connected bound fields in current visible column order, then authored order within each cell. Managed hidden columns and `[hidden]` fields are excluded. Display-only text fields participate, while check/action columns without `data-field` do not consume clipboard positions. Visible field paths must be unique. A start outside this visible field/row set raises `GRID_PASTE_TARGET`.[^grid]
+
+```ts
+const result = grid.paste("ada@example.com\tPlatform\ngrace@example.com\tSupport", {
+  id: firstVisibleId, field: "email"
+});
+if (!result.valid) console.log(result.issues);
+```
+
+The example requires Email and Team to be consecutive bound fields in the current layout. There is no implicit field-name header, business-key lookup, row creation, automatic page advance or silent truncation. Rectangular and ragged tab-separated rows are accepted; shorter rows leave unsupplied fields unchanged. Double quotes enclose a whole cell, `""` escapes a quote inside it, and quoted tabs/newlines stay inside that cell. CRLF and CR normalize to newlines; a final line terminator does not add an extra row. Empty text represents one empty cell. Malformed quoting and any row/field overflow return a `paste` issue with no stored changes. Clipboard HTML is never evaluated.[^grid]
+
+Disabled native controls, readonly inputs/textareas and fields under `inert` or `aria-readonly="true"` consume a clipboard position but are not written. This preserves column alignment. Checkbox text must be exactly `true` or `false`. A Select cell matches text to `String(rawValue ?? "")` among its currently enabled options, preserving its raw string, finite number, boolean or null type. Unknown or disabled values fail; two different raw values with the same serialization, such as number `1` and string `"1"`, are ambiguous and fail. Raw identity uses `Object.is`, including the distinction between `0` and `-0`. Display labels are not converters. Row-local nested option arrays use the same binding as normal Select editing.[^grid]
+
+Pasted fields overlay existing drafts for each affected row. Existing parsers see one combined unparsed candidate; HTML constraints and rules check the complete parsed row, including unrelated drafts and bound fields outside the pasted range. Only supplied writable fields are committed, with copied nested paths preserving other stored values. An unrelated valid draft is considered during validation but is not saved by paste. Any validation failure leaves stored values, drafts, entered input, selection and focus intact; returned issues identify `rowId`, `field`, `rule`, `message` and a connected `element` when present. Accessible messages merge with existing field errors instead of erasing them.[^grid]
+
+A successful paste uses one `Rows.setMany` change, preserving row IDs and dirty tracking; a net no-op emits no Rows event. Other Forms, Grids, Lists and Trees receive the coherent batch. The originating Grid clears only its captured pasted drafts, preserves newer subscriber-created drafts/errors, and then renders the committed view, which may move or hide rows if a sort/filter depends on a changed value. Keep parser and rule callbacks pure. A callback changing Rows, view, columns or drafts invalidates preparation with `GRID_PASTE_STALE`; reentrant paste raises `GRID_PASTE_BUSY`, and disposal raises `GRID_DISPOSED`. Application callback side effects are not rolled back. A subscriber/render/`onPaste` error after commit propagates with the stored batch retained; inspect current state before retrying.[^grid]
+
+Parsers must return JSON-compatible raw values. Returning `undefined` reports a parse issue; other invalid JSON values such as `Date`, `NaN`, functions or cycles fail with `ROW_VALUE` at `Rows.setMany` before commit. This exception preserves input/drafts and skips `onPaste`; it is not a returned validation result.[^grid]
+
+With `paste: true`, an uncanceled native event carrying `text/plain` in a bound row field is intercepted and runs this same operation. It replaces complete field values rather than inserting at a text caret. A plain display field without authored `tabindex` gains `tabindex="0"` on its clone unless it is inside an interactive ancestor; existing interactive controls keep their own focus behavior. No extra tab stop is added inside a row button. A row control containing exactly one bound display field can also be the paste target. An earlier `preventDefault()` is respected. Without the option, native editing and caret paste remain browser behavior; the method is still available.[^grid]
+
 ## `dispose()`
 
 Removes delegated listeners and visible cloned rows, unsubscribes from `Rows`, clears drafts, cached issue text, and Select ownership, and restores the untouched row template, authored sort state, header checkbox checked/mixed/disabled state, filter Select nodes and selected options, column/cell/group order, spans/styles, and resize button attributes. It cancels previews and releases document listeners, pointer capture and animation frames. Failed binding also releases acquired ownership and restores authored controls for retry. It does not dispose the caller-owned store. Repeated disposal is safe; other methods then raise `GRID_DISPOSED`.[^grid][^select]
@@ -211,6 +236,7 @@ Removes delegated listeners and visible cloned rows, unsubscribes from `Rows`, c
 | `onSelectionChange`, `onCheckChange` | `(change: GridIdsChange) => void`, after state and checkbox/button DOM commit | Not a controller binding |
 | `onRowAction` | `({ action, id, row, element, event }) => void`, resolving the current row snapshot at activation | Not a controller binding |
 | `onColumnsChange` | `({ columns, event }) => void`, after one effective committed change; immutable state and native keydown/pointerup, or `null` for `setColumns` | Not a controller binding |
+| `onPaste` | `(result: ValidationResult) => void`, after a completed API/native paste attempt; invalid results contain all collected issues | Not a controller binding |
 
 Initial binding, equal state, canceled preview and disposal do not emit column changes. Callback errors propagate after the new state is committed; do not retry assuming rollback.[^columns]
 
@@ -241,18 +267,21 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `GRID_SELECT`, `GRID_OPTIONS`, `GRID_FORMAT` | Invalid selection control, option markers/source, or formatter on a Select or non-text input. |
 | `GRID_ERROR_REGION` | Repeated or unmatched `data-error-for` path in the template. |
 | `GRID_FILE_ROWS`, `GRID_CONTROL` | Bound file/radio input, multiple Select, or unsupported input control. |
-| `GRID_PARSE_FIELD` | A number input lacks a parser, or a parser is attached to an ambiguous/noneditable field. |
+| `GRID_PARSE_FIELD` | A number input lacks a parser, or a parser is not a function or names a missing/repeated text field or checkbox. |
 | `GRID_COLUMNS`, `GRID_COLUMN_MARKUP` | Invalid full state/callback, broken column keys/group membership/spans, or malformed resize control. |
 | `GRID_SORT`, `GRID_PAGE` | Invalid sort indicator/comparator or local page request. |
 | `GRID_SELECTION`, `GRID_CHECK` | Invalid mode/callback/eligibility result, ID batch, before-hook result, check scope/flag, or stale reentrant transition. |
 | `GRID_FILTER` | Unknown column key, invalid scalar filter/value/label/search, predicate, or authored filter control. |
 | `GRID_ACTION` | Invalid action callback or named row action button. |
+| `GRID_PASTE` | Invalid native-paste option or result callback. |
+| `GRID_PASTE_TEXT`, `GRID_PASTE_TARGET` | Non-string API input, malformed quoted TSV, or missing/nonvisible/ambiguous start. Malformed TSV becomes a returned `paste` issue; invalid API input or target throws. |
+| `GRID_PASTE_BUSY`, `GRID_PASTE_STALE` | Reentrant preparation or a callback changing the captured store, view, layout or drafts. |
 | `GRID_ROW`, `GRID_DISPOSED` | Missing/deleted row or use after disposal. |
 | `SELECT_OWNED` | Trying to bind a Grid-owned Select again. |
 | `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and row-field multiple Selects; use Form for those. Header filter Selects are authored `multiple` controls with their own column-filter contract. A plain `data-field` text element displays data without editing it. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without `initialPage`, `bindGrid` creates all row clones before the caller can set a local page. Pass `initialPage` for a large local store to create only its first visible slice. Off-page formatter errors surface when that row first renders; invalid row-local options surface on display or `validate(id)`. Calling `setPage(null)` deliberately renders all rows; measure that cost or use application-owned server pages.[^grid][^owner]
+`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and row-field multiple Selects; use Form for those. Header filter Selects are authored `multiple` controls with their own column-filter contract. A plain `data-field` text element has no generated editor; it can still receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without `initialPage`, `bindGrid` creates all row clones before the caller can set a local page. Pass `initialPage` for a large local store to create only its first visible slice. Off-page formatter errors surface when that row first renders; invalid row-local options surface on display or `validate(id)`. Calling `setPage(null)` deliberately renders all rows; measure that cost or use application-owned server pages.[^grid][^owner]
 
 # Related
 

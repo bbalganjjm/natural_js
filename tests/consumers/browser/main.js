@@ -81,10 +81,16 @@ const definition = {
     ]);
     const columnEvents = [];
     const gridEvents = [];
+    const pasteEvents = [];
     const idsEvent = kind => ({ ids, previous, event }) =>
       gridEvents.push({ kind, ids, previous, type: event?.type ?? null });
     const grid = bindGrid(root.querySelector("table"), {
       rows, initialPage: { page: 1, size: 1 }, multiple: true,
+      paste: true,
+      onPaste: result => pasteEvents.push({
+        valid: result.valid,
+        issues: result.issues.map(({ rowId, field, rule }) => ({ rowId, field, rule }))
+      }),
       canSelect: row => row.value.key > 0,
       canCheck: row => row.value.key > 0,
       beforeSelect: ({ id, event }) => {
@@ -140,7 +146,7 @@ const definition = {
         }
       })
     });
-    const screen = { rows, grid, gridEvents, columnEvents, form, tree, picker, notifications, documents, openDocument, disposed: false };
+    const screen = { rows, grid, gridEvents, columnEvents, pasteEvents, form, tree, picker, notifications, documents, openDocument, disposed: false };
     state.screens[input.slot] = screen;
     own(async () => {
       await documents.dispose();

@@ -1,5 +1,6 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.7 atomic paste plan](m10-paste-plan.md) - Coherent row batches and validated clipboard paste on authored Grid fields. (draft)
 * [Natural-JS 2.0 M10.6 selection and filter plan](m10-selection-plan.md) - Required independent row selection and checks, authored sort/filter controls, and stable row actions. (draft)
 * [Natural-JS 2.0 M10.5 column implementation](m10-columns-plan.md) - Column state, authored table topology, accessible resizing, and restoration gates for M10.5. (draft)
 

@@ -8,19 +8,19 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 7dbcdf4bf9679da5445e410e7357e6920a03768b
+    git_blob: 0e52e47afc8e7b3fb0345fc983c2273ce7c01a17
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: b478b9ab207cb9bbb8612976f057d41d5c13382f
+    git_blob: 7c030c89b141a890885f722d9b6c24080035a50f
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
-    git_blob: 7f6984b5b2358e75002b9b29df1f2fb2ab0a3b39
+    git_blob: 6c215483429fdb5b147361afd3dbace0237929ed
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: 8fce530c985ed269c60c7b4569cdaaa474ac518e
+    git_blob: 3fdfa76aa21e5e8bdb792bf49c1021ba404f494d
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
@@ -41,10 +41,18 @@ sources:
     resource: ../implementation/evidence/m106-verification.json
     title: Final M10.6 source, package, browser and performance record
     git_blob: 64b1fb4d57cc1d5720475bd8be4157b77d58f8aa
+  - id: paste-browser
+    resource: ../../tests/browser/grid-paste.spec.ts
+    title: Atomic paste, typed controls, drafts and lifecycle regressions
+    git_blob: 7eec047c1dc16e875190bb257809c7530dc4440c
+  - id: paste-evidence
+    resource: ../implementation/evidence/m107-verification.json
+    title: Final M10.7 source, package, browser and performance record
+    git_blob: b8cd7bb9b7687ebfd895a57548f124936f54b91c
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
+    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Independent active row, selection and check state
@@ -56,16 +64,16 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
-generated: { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
+generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
 
-The expanded `2.0.0` scope requires column resize/reorder/hide/show, multiple row selection, atomic bulk paste, real scroll virtualization, and the remaining 1.x Grid user features before release. Column state, multiple selection, independent row checks, authored header sorting/filtering and stable row actions are implemented here. Paste, virtualization and remaining legacy behavior are still required gaps. The [feature parity ledger](../implementation/feature-parity.md) records the gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines the contract-review and release gates. Extend this same demo as each required feature is implemented and tested; the current demo's coverage is not a claim of complete 1.x parity.
+The expanded `2.0.0` scope requires column resize/reorder/hide/show, multiple row selection, atomic bulk paste, real scroll virtualization, and the remaining 1.x Grid user features before release. Column state, multiple selection, independent row checks, authored header sorting/filtering, stable row actions and atomic bulk paste are implemented here. Virtualization and remaining legacy behavior are still required gaps. The [feature parity ledger](../implementation/feature-parity.md) records the gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines the contract-review and release gates. Extend this same demo as each required feature is implemented and tested; the current demo's coverage is not a claim of complete 1.x parity.
 
 # Scenario
 
@@ -76,11 +84,11 @@ Run `npm run example` from the repository root and open `/m10/demo.html`. Six em
 | Owner | Responsibility |
 |---|---|
 | Authored HTML/CSS | Table headings, labels, field controls, error regions, scroll behavior, and layout. |
-| `bindGrid` | Bind visible rows, editing, active row, independent selection/check sets, sort/filter/page view, validation, and cleanup. |
+| `bindGrid` | Bind visible rows, editing, active row, independent selection/check sets, sort/filter/page view, validation, atomic paste, and cleanup. |
 | `Rows` | Own immutable row snapshots, store-local IDs, change status, and subscription events. |
 | Application code | Provide sample rows, comparator, filter predicate, salary parser, custom format/validation rules, and action buttons. |
 
-The demo supplies required `rows`, optional `initialPage`, `columns`, `onColumnsChange`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Selection controls supply `multiple`, `canSelect`, `canCheck`, `beforeSelect`, `beforeSelectionChange`, `onSelectionChange`, `beforeCheckChange`, and `onCheckChange`; authored headers and row actions use `sorts`, `filters`, and `onRowAction`. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the all-rows default. The custom salary rule, name display formatter, comparators and Team value function are application behavior.[^controller][^grid]
+The demo supplies required `rows`, optional `initialPage`, `columns`, `onColumnsChange`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Selection controls supply `multiple`, `canSelect`, `canCheck`, `beforeSelect`, `beforeSelectionChange`, `onSelectionChange`, `beforeCheckChange`, and `onCheckChange`; authored headers and row actions use `sorts`, `filters`, and `onRowAction`. `paste: true` enables direct native plaintext paste, and `onPaste` displays accepted/rejected results. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the all-rows default. The custom salary rule, name display formatter, comparators and Team value function are application behavior.[^controller][^grid]
 
 # View
 
@@ -94,12 +102,14 @@ The column controls call `columns` and `setColumns` to adjust preferred width, s
 
 `select` and `selected` address only the active row used by the snapshot and store actions. `selectedIds`/`setSelected` address an independent selection set; `checkedIds`/`setChecked` address an independent check set. The set methods replace the complete set and the getters return frozen IDs in store order. Clearing the active row does not clear either set. The demo's first-two and clear-set controls change membership without changing the active row. `checkAll` and `checkState` expose explicit scopes; `columnFilter`, `setColumnFilter`, and `filterChoices` expose the Team filter and its raw values/counts.[^controller][^selection][^filters][^ui]
 
-Other controls call `setSort` with an authored heading and `aria-sort`, `setFilter`, `setPage` and `page`, `validate(id)` and `validate()`, and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`. Observation panels show active `RowId`, raw snapshot, both ID sets, scoped check state, filter values/counts, validation issues, before/change callbacks, row actions and the latest Rows event.[^controller]
+Other controls call `setSort` with an authored heading and `aria-sort`, `setFilter`, `setPage` and `page`, `validate(id)` and `validate()`, `paste(text, { id, field })`, and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`; accepted paste uses `setMany`. Observation panels show active `RowId`, raw snapshot, both ID sets, scoped check state, filter values/counts, validation issues, before/change callbacks, row actions and the latest Rows event.[^controller]
 
 ```ts
 const grid = bindGrid(table, {
   rows,
   initialPage: { page: 1, size: 2 },
+  paste: true,
+  onPaste(result) { /* show acceptance or collected cell issues */ },
   columns: defaultColumns,
   multiple: selectionMode.value === "multiple",
   canSelect: disableInactive.checked ? row => row.value.active : undefined,
@@ -146,7 +156,13 @@ Header sort buttons cycle ascending, descending, then cleared and update `aria-s
 
 Activate Inspect after sorting, filtering or paging to see `onRowAction` receive `{ action, id, row, element, event }` for the current row snapshot and stable ID. It does not change the active row or either ID set.[^controller][^grid]
 
+The Atomic bulk paste panel provides a Start field selector, TSV textarea, Paste at active row button and live status output. First activate a visible row with at least one following visible row, keep the default column order, and leave Start field at Email. The supplied two-row sample maps Email, protected Phone, nested Team, raw numeric Shift code, Boolean Active, Notes and Salary. The first Notes cell contains a quoted newline. Phone consumes its source cell without changing its stored value. The accepted sample saves both rows in one `setMany` event; the observation panels show the changed snapshots and collected result. Shift matches raw codes `2` and `4`, rather than their labels, and Active requires `true` or `false`.[^view][^controller][^grid]
+
+Change the sample to an invalid email, unknown shift, invalid salary or excess row/field to see the whole paste rejected with row/field issues; prior data and entered drafts remain. Pasting at the last visible row rejects the supplied two-row sample instead of creating a row or advancing the page. Moving or hiding columns changes paste positions, so adapt the matrix before retrying. You can also paste plaintext directly into a bound table field; this uses whole-field replacement rather than caret insertion. The readonly Phone input remains protected. An earlier canceled native paste is left alone.[^view][^controller][^grid]
+
 Browser regressions cover initial-page/off-page identity, nested choices and raw/display separation, selection/check interactions and callbacks, sort/filter/page behavior, parsing and validation, Rows changes, disposal, document-unique IDs, automated accessibility scans and 320 CSS-pixel text-spacing reflow. Column regressions retain grouped topology, invalid replacement, hidden drafts, focus, resize and restoration checks. The [M10.5 plan](../implementation/m10-columns-plan.md) preserves its preceding results. Final M10.6 suites pass 199/199 in each required engine; installed JS/TS and five-browser consumers pass the same 143-file artifact. Its exact hashes and limits are in the [verification record](../implementation/evidence/m106-verification.json). No equivalent AI task or actual token telemetry was rerun. Automated checks do not establish manual screen-reader conformance.[^browser][^columns-browser][^selection-browser][^selection-evidence]
+
+M10.7 final suites pass 219/219 in Chromium, Firefox and WebKit, including 19 focused paste regressions and the added demo case. Installed JS/TS and all five Windows browser consumers pass the same 148-file package, SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Existing binding budgets pass. Source/log hashes, retained initial failures, the synthetic-event fixture correction and unverified manual/OS-clipboard limits are recorded with the stage; this does not recertify the historical M10.6 artifact.[^paste-browser][^paste-evidence]
 
 # Variations
 
@@ -156,12 +172,14 @@ The earlier [two-layout Grid example](advanced-grid-example.md) tests MDI isolat
 
 # Pitfalls
 
-Bulk paste and real virtualization remain required and unavailable. Column state and selection/check/filter are implemented with working controls; group topology constrains legal column moves. Earlier later-candidate descriptions do not govern the current required scope. The [M10 plan](../implementation/m10-plan.md) schedules column state in M10.5, selection/check/filter in M10.6, atomic bulk paste in M10.7, virtualization in M10.8, and remaining Grid parity in M10.9.
+Real virtualization and remaining Grid parity remain required follow-up work. Column state, selection/check/filter and atomic bulk paste are implemented with working controls; group topology constrains legal column moves. Earlier later-candidate descriptions do not govern the current required scope. The [M10 plan](../implementation/m10-plan.md) schedules column state in M10.5, selection/check/filter in M10.6, atomic bulk paste in M10.7, virtualization in M10.8, and remaining Grid parity in M10.9. The [M10.7 plan](../implementation/m10-paste-plan.md) defines this stage's contract and verification gates.
 
 Without `initialPage`, the current Grid creates all initial row clones before the first local page request. Choosing an initial page bounds the first render; local paging and releasing offscreen records do not provide real scroll virtualization. This small six-row fixture is not evidence of large-data performance; the separate [M10 measurement](../implementation/m10-plan.md) uses 5,000 rows. Rebinding for locale, initial page, mode or eligibility policy discards the active row, selection/check sets and uncommitted drafts; commit or review them first. Use `setSelected([])` or `setChecked([])` to clear a complete set; `select(null)` clears only the active row. Keep the check checkbox separate from `data-field`, do not send `RowId` as a business key, and do not put a fixed `id` in a repeated row.[^grid][^controller][^selection]
 
 # Related
 
 [^selection-evidence]: Final M10.6 source, package, browser and performance record
+[^paste-browser]: Atomic paste, typed controls, drafts and lifecycle regressions
+[^paste-evidence]: Final M10.7 source, package, browser and performance record
 
 [Grid](grid.md) defines exact current public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) preserves earlier measurements and defines the required follow-up stages. The [feature parity ledger](../implementation/feature-parity.md) and [parity implementation plan](../implementation/feature-parity-plan.md) track the full release requirement.

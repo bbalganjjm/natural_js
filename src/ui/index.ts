@@ -129,6 +129,7 @@ export interface ListHandle<T extends object> {
 }
 
 export interface GridHandle<T extends object> {
+  paste(text: string, start: { readonly id: RowId; readonly field: string }): ValidationResult;
   columns(): readonly GridColumn[];
   setColumns(columns: readonly GridColumn[]): void;
   select(id: RowId | null): void;

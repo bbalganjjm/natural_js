@@ -499,6 +499,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     unsubscribe = options.rows.subscribe(event => {
       if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
         for (const record of records.values()) clearIssues(record);
+      } else if (event.type === "setMany") {
+        for (const id of event.ids) {
+          const record = records.get(id);
+          if (record) clearIssues(record);
+        }
       } else if ("id" in event && event.id !== undefined) {
         const record = records.get(event.id);
         if (record) clearIssues(record);

@@ -44,19 +44,19 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: c98a8f30607b9c026fbd60574ef65b6129b796e1
+    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: a2b3ec849f3595369370a2201aac3b99c9da0d2f
+    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: 8d3ef3e1ff3e7b7fb7faed27fc592846dd5fe090
+    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: e603f619679c24be778b04f45ea3c467b50bf2c2
+    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -64,7 +64,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Current shared Rows contract
-    git_blob: 10c07414eacccc414b81afc8be5661dd21afe3c6
+    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-18T09:59:03Z }
+  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -131,7 +131,7 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G15 | vResizable/vResize, scroll lock and action-driven scroll | Missing height-resize interaction and reveal policies; authored CSS may supply dimensions/containment. |
 | G16 | more detail Form/Popup, previous/next validation | Missing integrated row detail behavior. Existing Popup/Form are its foundations. |
 | G17 | data-rowspan, rowSpanIds, grid.rowSpan | Missing data-driven repeated-value merging; authored header spans are a different behavior. |
-| G18 | pastiable, grid.paste, readonly/disabled handling | Missing bulk paste through existing raw parsing and validation with explicit failure semantics. |
+| G18 | pastiable, grid.paste, readonly/disabled handling | M10.7 implements quoted plaintext paste through existing raw parsing/rules, typed nested choices, protected field positions and one atomic Rows batch. Explicit overflow, stale preparation and validation failures preserve stored values and drafts; see [the detailed plan](m10-paste-plan.md). Full option/dynamic parity remains subject to P0 closure. |
 | G19 | createRowDelay, scrollPaging, append binding | Partial local paging exists; progressive loading/scheduling remains open. Real scroll virtualization is additionally required; initialPage and cache release do not supply it. |
 | G20 | rowHandlerBeforeBind/rowHandler/onBind, empty display, hover | Partial lifetime/CSS behavior exists; row hooks and empty/result/status markup need contracts. |
 
@@ -191,7 +191,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. Prepare atomic paste as M10.7, then true virtualization and remaining Grid parity. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste within its detailed contract; prepare M10.8 true virtualization, then remaining Grid parity. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
 
 # Decisions
 
