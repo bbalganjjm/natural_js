@@ -26,6 +26,7 @@ fieldset textarea { width: 100%; resize: vertical; }
 fieldset p { margin: .5rem 0 0; }
 .table-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
 .grid-scroll { max-width: 100%; max-height: 29rem; overflow: auto; border: 1px solid #9eafc1; }
+.grid-scroll[data-viewport-enabled] { height: 400px; }
 table { border-collapse: separate; border-spacing: 0; table-layout: fixed; width: 100%; }
 [hidden] { display: none !important; }
 caption { text-align: left; padding: .45rem; font-weight: 600; }

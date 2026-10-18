@@ -52,6 +52,18 @@
         </fieldset>
 
         <fieldset>
+          <legend>Scroll viewport</legend>
+          <label class="check-label"><input type="checkbox" data-viewport> Render only rows near the viewport</label>
+          <label>Dataset
+            <select data-dataset><option value="6">6 employees</option><option value="5000">5,000 employees</option></select>
+          </label>
+          <label>Row number in store order <input type="number" min="1" value="2500" data-reveal-row data-needs-grid></label>
+          <div class="button-row"><button type="button" data-action="reveal" data-needs-grid>Reveal row without selecting</button></div>
+          <output data-viewport-state aria-live="polite">All rows rendered.</output>
+          <p>Viewport and dataset changes rebind the Grid and clear selection, checks and drafts. Reveal requires the row to belong to the current filtered page.</p>
+        </fieldset>
+
+        <fieldset>
           <legend>Columns</legend>
           <label>Column
             <select data-column-choice data-needs-grid>
@@ -196,7 +208,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <h2>Employee assignments</h2>
           <output data-selection aria-live="polite">No row selected</output>
         </div>
-        <div class="grid-scroll" role="region" aria-label="Scrollable employee assignments" tabindex="0">
+        <div class="grid-scroll" data-scroll-root role="region" aria-label="Scrollable employee assignments" tabindex="0">
           <table data-grid>
             <caption>Employee assignments with nested shift choices</caption>
             <colgroup span="1"></colgroup><colgroup span="2"></colgroup>
@@ -262,7 +274,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
 
     <section class="future" aria-label="Remaining required Grid features">
       <h2>Remaining required features</h2>
-      <p>Real scroll virtualization remains required and is not implemented here. Local paging is separate from virtualization.</p>
+      <p>Viewport rendering is available above. Remaining Grid parity includes grouped and merged row blocks; local paging remains separate from viewport rendering.</p>
       <p><a href="./columns.html">Compare column behavior in two independent CVC layouts</a>.</p>
     </section>
   </main>

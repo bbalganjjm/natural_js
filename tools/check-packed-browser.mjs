@@ -101,6 +101,46 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const viewportRows = page.locator('[data-consumer-viewport] tbody tr:not([aria-hidden="true"])');
+  await expect.poll(() => viewportRows.count()).toBeGreaterThan(0);
+  assert(await viewportRows.count() < 80, "Installed viewport must bound the mounted 5,000-row table.");
+  const viewportWrite = await page.evaluate(() => {
+    const v = window.packedConsumer.viewport;
+    const ids = v.rows.entries().map(row => row.id);
+    const events = [];
+    const stop = v.rows.subscribe(event => events.push(event));
+    const result = v.grid.paste(Array.from({ length: 1000 }, (_, index) => `Pasted ${index + 1}\t22`).join("\n"),
+      { id: ids[1000], field: "name" });
+    v.grid.checkAll(true, "visible");
+    v.grid.reveal(ids[1999]);
+    stop();
+    return { valid: result.valid, events: events.map(event => ({ type: event.type, count: event.ids?.length })),
+      stable: v.rows.entries().every((row, index) => row.id === ids[index]),
+      last: v.rows.get(ids[1999]).value, checked: v.grid.checkedIds().length, active: v.grid.selected() };
+  });
+  assert(viewportWrite.valid && viewportWrite.stable, "Installed offscreen paste must preserve every RowId.");
+  assert.deepEqual(viewportWrite.events, [{ type: "setMany", count: 1000 }]);
+  assert.equal(viewportWrite.last.name, "Pasted 1000");
+  assert.equal(viewportWrite.last.choice, 22, "Offscreen Select paste must retain numeric choices.");
+  assert.equal(viewportWrite.checked, 5000, "Visible checks cover the logical page, not mounted rows.");
+  assert.equal(viewportWrite.active, null, "Reveal must not select a row.");
+  await expect.poll(async () => page.evaluate(() => {
+    const v = window.packedConsumer.viewport;
+    return [...v.table.querySelectorAll('input[data-field="name"]')].some(input => input.value === "Pasted 1000");
+  })).toBe(true);
+  assert(await viewportRows.count() < 80, "Offscreen paste/reveal must not mount all target rows.");
+  const viewportCleanup = await page.evaluate(async () => {
+    const v = window.packedConsumer.viewport;
+    v.root.scrollTop = v.root.scrollHeight;
+    v.root.dispatchEvent(new Event("scroll"));
+    v.grid.dispose();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const restored = v.table.outerHTML === v.original;
+    v.rows.dispose(); v.root.remove();
+    return restored;
+  });
+  assert(viewportCleanup, "Installed viewport disposal must restore the exact authored table with pending work.");
+
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = page.locator(`[data-host="${slot}"]`);
     await expect(host.locator("article")).toHaveCount(1);

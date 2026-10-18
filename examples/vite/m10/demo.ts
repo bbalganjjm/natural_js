@@ -45,6 +45,11 @@ function employee(index: number): Employee {
 
 const rows = createRows<Employee>(Array.from({ length: 6 }, (_, index) => employee(index)));
 const table = find<HTMLTableElement>("[data-grid]");
+const scrollRoot = find<HTMLElement>("[data-scroll-root]");
+const viewportChoice = find<HTMLInputElement>("[data-viewport]");
+const datasetChoice = find<HTMLSelectElement>("[data-dataset]");
+const revealRow = find<HTMLInputElement>("[data-reveal-row]");
+const viewportState = find<HTMLOutputElement>("[data-viewport-state]");
 const sort = find<HTMLSelectElement>("[data-sort]");
 const filter = find<HTMLSelectElement>("[data-filter]");
 const size = find<HTMLSelectElement>("[data-size]");
@@ -117,7 +122,15 @@ function refresh(): void {
   filterState.textContent = grid ? JSON.stringify({
     team: grid.columnFilter("team"), choices: grid.filterChoices("team", filterSearch.value)
   }, null, 2) : "Grid unbound; column filters cleared.";
+  refreshViewport();
   refreshColumns();
+}
+
+function refreshViewport(): void {
+  const mounted = table.querySelectorAll('tbody tr:not([data-row-template]):not([aria-hidden="true"])').length;
+  viewportState.textContent = grid
+    ? `${rows.entries().length.toLocaleString("en-US")} store rows · ${mounted} mounted rows · viewport ${viewportChoice.checked ? "on" : "off"}`
+    : "Grid unbound.";
 }
 
 function columnGroup(key: string): string {
@@ -191,6 +204,7 @@ function bind(): void {
   find<HTMLInputElement>("[data-check-all]").disabled = false;
   grid = bindGrid(table, {
     rows,
+    viewport: viewportChoice.checked ? { root: scrollRoot, estimate: 150, overscan: 3 } : undefined,
     initialPage,
     paste: true,
     onPaste(result) {
@@ -280,9 +294,18 @@ function showValidation(result: ValidationResult): void {
 function act(action: string): void {
   if (action === "rebind") { bind(); return; }
   if (action === "revert-all") { rows.revert(); status.textContent = "All Rows changes reverted."; return; }
-  if (action === "replace") { rows.replace(Array.from({ length: 6 }, (_, index) => employee(index))); status.textContent = "Rows replaced with new RowIds."; return; }
+  if (action === "replace") { rows.replace(Array.from({ length: Number(datasetChoice.value) }, (_, index) => employee(index))); status.textContent = "Rows replaced with new RowIds."; return; }
   if (!grid) throw new Error("Bind the Grid before using this control.");
   switch (action) {
+    case "reveal": {
+      const index = Number(revealRow.value) - 1;
+      const row = Number.isSafeInteger(index) ? rows.entries()[index] : undefined;
+      if (!row) throw new Error("Enter a row number present in the store.");
+      grid.reveal(row.id);
+      status.textContent = `Revealed RowId ${row.id}; selection unchanged.`;
+      requestAnimationFrame(refreshViewport);
+      return;
+    }
     case "paste": grid.paste(pasteText.value, { id: selectedId(), field: pasteField.value }); return;
     case "apply-columns": {
       const width = columnWidth.value.trim();
@@ -371,6 +394,18 @@ document.addEventListener("change", event => {
   if (event.target instanceof Element && table.contains(event.target)) refresh();
 });
 filterSearch.addEventListener("input", () => { queueMicrotask(refresh); });
+scrollRoot.addEventListener("scroll", () => { requestAnimationFrame(refreshViewport); }, { passive: true });
+for (const control of [viewportChoice, datasetChoice]) {
+  control.addEventListener("change", () => {
+    grid?.dispose(); grid = null;
+    scrollRoot.toggleAttribute("data-viewport-enabled", viewportChoice.checked);
+    if (control === datasetChoice) rows.replace(Array.from({ length: Number(datasetChoice.value) }, (_, index) => employee(index)));
+    scrollRoot.scrollTop = 0;
+    bind();
+    status.textContent = "Viewport or dataset changed; selection, checks and uncommitted edits were cleared.";
+    requestAnimationFrame(refreshViewport);
+  });
+}
 for (const control of [selectionMode, disableInactive]) {
   control.addEventListener("change", () => {
     if (grid) { grid.dispose(); grid = null; bind(); }

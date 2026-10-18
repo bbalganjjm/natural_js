@@ -1,7 +1,7 @@
 ---
 type: UI Component
 title: bindGrid
-description: Bind an authored native table to Rows with independent selection and checks, authored sort/filter controls, cell editing, and accessible validation.
+description: Bind an authored native table to Rows with measured viewport rendering, independent selection and checks, atomic paste, and accessible validation.
 tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
@@ -9,15 +9,23 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
+    git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
+    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
     git_blob: 320875af9ad09ea42e98898a1f745b3cec69d652
+  - id: viewport
+    resource: ../../src/ui/grid-viewport.ts
+    title: Private measured viewport, anchoring, spacers and lifetime
+    git_blob: 4a6d52ef382fb5da76a8fe47d4bfafbd3b6a1b1f
+  - id: viewport-browser
+    resource: ../../tests/browser/grid-viewport.spec.ts
+    title: Logical scopes, bounded DOM, focus, measurements and lifecycle regressions
+    git_blob: 94b18cca941e2a8e5003c91a0346d4c07fa9b0cd
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private active identity, membership, eligibility, and transition ordering
@@ -46,10 +54,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^selection]
@@ -92,12 +100,13 @@ if (grid.validate().valid) console.log(rows.changes());
 
 # Constructor
 
-`bindGrid<T extends object>(root, options): GridHandle<T>` requires an `HTMLTableElement` with exactly one `<tbody><tr data-row-template>` across all bodies. The options below require `rows: Rows<T>`. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses clones for rows that remain visible, releases offscreen row elements and Select ownership after each view change, and recreates them when those rows return. It restores the original template on disposal. It leaves other authored table rows in place. A second live binding of the table raises `GRID_IN_USE`.[^grid]
+`bindGrid<T extends object>(root, options): GridHandle<T>` requires an `HTMLTableElement` with exactly one `<tbody><tr data-row-template>` across all bodies. The options below require `rows: Rows<T>`. The template and its descendants must not have fixed DOM IDs. The runtime temporarily replaces that row with a comment anchor, reuses clones that remain mounted, releases departing row elements and Select ownership, and recreates them when needed. Without `viewport`, the mounted set is the complete logical page. It restores the original template on disposal and leaves other authored table rows in place. A second live binding raises `GRID_IN_USE`.[^grid]
 
 | Option | Behavior |
 |---|---|
 | `rows` | Required caller-owned store of immutable snapshots and row identities. |
 | `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
+| `viewport` | Optional `{ root: HTMLElement, estimate: number, overscan?: number }`; the distinct same-document ancestor scroll root supplies finite authored height/overflow. Estimate is a positive finite initial row height in CSS pixels; overscan is a nonnegative safe integer count, default 3. |
 | `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
 | `parse` | Optional application parser per unique non-checkbox text/display field path, used to turn an entered string into a raw JSON value. A number input requires one. |
 | `paste` | Optional boolean, default `false`; enables delegated native `text/plain` paste into bound row fields and safe focusability for plain display fields. The `paste` method is available independently. |
@@ -142,7 +151,7 @@ Eligibility callbacks must return strict booleans. Keep eligibility, comparator,
 | `data-options="path"` | Select | Finds the row-local array of option objects, separate from the selected `data-field`. |
 | `data-option-label="path"`, `data-option-value="path"` | Select with `data-options` | Read each option's label and raw scalar value. |
 
-Field and option paths reject array indices, expressions, prototype keys, and empty segments. The Grid compiles field descriptors once, keeps element references only for currently displayed clones, and updates their fields when raw values change. A nested field edit copies the affected object path and calls `Rows.set` for its top-level field.[^grid][^path]
+Field and option paths reject array indices, expressions, prototype keys, and empty segments. The Grid compiles field descriptors once, keeps row element references only for mounted clones, and updates their fields when raw values change. A nested field edit copies the affected object path and calls `Rows.set` for its top-level field.[^grid][^path]
 
 # Methods
 
@@ -199,9 +208,13 @@ Authored filter selects display `label (count)` through `bindSelect`. Editing th
 
 Returns `{ valid, issues }` for an explicit nondeleted ID or all nondeleted rows, including filtered-out or off-page rows. It checks supported input HTML constraints (including programmatically bound text length limits), parsers and validators, Select availability, Select `required`, and Select validators. A missing or deleted explicit ID raises `GRID_ROW`. An issue has `rowId`, `field`, `rule`, and `message`; `element` exists only for a connected row control. Validation evaluates all cell drafts for one row against the same candidate values, even while the row is filtered out. A draft that passes is committed to `Rows`; a failed draft stays outside the store. Call `validate()` before saving to reconcile drafts after external row changes.[^grid][^rules]
 
+## `reveal(id)`
+
+Scrolls a nondeleted row in the current sorted, filtered logical page into view without changing active identity, either membership set, or focus. A filtered-out, off-page, missing or deleted ID raises `GRID_VIEWPORT_ROW`; the caller changes filtering/paging explicitly. With `viewport`, the row is mounted using estimates and corrected measurements, scrolling to the nearest edge when needed. Authored top-sticky headers are included in the usable viewport; left-only sticky positioning does not reduce its height. Without `viewport`, the existing row uses native nearest scrolling.[^grid][^viewport]
+
 ## `paste(text, { id, field })`
 
-Returns `ValidationResult` for a synchronous, whole-field paste starting at a visible `RowId` and exact `data-field` path. The method works without enabling native paste. Rows advance through the current sorted, filtered page; fields advance through connected bound fields in current visible column order, then authored order within each cell. Managed hidden columns and `[hidden]` fields are excluded. Display-only text fields participate, while check/action columns without `data-field` do not consume clipboard positions. Visible field paths must be unique. A start outside this visible field/row set raises `GRID_PASTE_TARGET`.[^grid]
+Returns `ValidationResult` for a synchronous, whole-field paste starting at a logical-page `RowId` and exact `data-field` path. The method works without enabling native paste. Rows advance through the current sorted, filtered page; fields advance in current visible column order, then authored order within each cell. Managed hidden columns and `[hidden]` fields are excluded. Display-only text fields participate, while check/action columns without `data-field` do not consume clipboard positions. Visible field paths must be unique. With `viewport`, the start and target rows need not be mounted. A start outside this logical field/row set raises `GRID_PASTE_TARGET`.[^grid]
 
 ```ts
 const result = grid.paste("ada@example.com\tPlatform\ngrace@example.com\tSupport", {
@@ -224,7 +237,7 @@ With `paste: true`, an uncanceled native event carrying `text/plain` in a bound 
 
 ## `dispose()`
 
-Removes delegated listeners and visible cloned rows, unsubscribes from `Rows`, clears drafts, cached issue text, and Select ownership, and restores the untouched row template, authored sort state, header checkbox checked/mixed/disabled state, filter Select nodes and selected options, column/cell/group order, spans/styles, and resize button attributes. It cancels previews and releases document listeners, pointer capture and animation frames. Failed binding also releases acquired ownership and restores authored controls for retry. It does not dispose the caller-owned store. Repeated disposal is safe; other methods then raise `GRID_DISPOSED`.[^grid][^select]
+Removes delegated listeners and mounted clones, unsubscribes from `Rows`, clears drafts, cached issue text, detached validation probes and Select ownership, and restores the untouched row template, authored sort state, header checkbox checked/mixed/disabled state, filter Select nodes and selected options, column/cell/group order, spans/styles, and resize button attributes. Viewport disposal removes owned spacers, disconnects measurement observers, cancels pending frames and restores authored row-count/index attributes and overflow anchoring. It also cancels resize previews and releases document listeners and pointer capture. Failed binding releases acquired ownership and restores authored controls for retry. It does not dispose the caller-owned store. Repeated disposal is safe; other methods then raise `GRID_DISPOSED`.[^grid][^select][^viewport]
 
 # Events
 
@@ -246,6 +259,36 @@ Deleting/replacing Rows or changing eligibility prunes unavailable state without
 
 # Behavior
 
+## Measured viewport
+
+```html
+<div class="employee-scroll" role="region" aria-label="Employees" tabindex="0">
+  <table class="employees"><!-- authored headings and one row template --></table>
+</div>
+```
+
+```css
+.employee-scroll { height: 400px; overflow: auto; }
+.employees { width: 800px; table-layout: fixed; }
+```
+
+```ts
+const grid = bindGrid(table, {
+  rows, viewport: { root: scrollRegion, estimate: 48, overscan: 3 }
+});
+grid.reveal(rows.entries()[2500].id);
+```
+
+The scroll region, dimensions, column widths and visual design remain authored. A stable table width/`table-layout: fixed` or authored col widths avoid horizontal changes as different row content mounts; native minimum-content constraints still apply. `estimate` is a starting height, not clipping or a fixed-height requirement. ResizeObserver measures wrapping, controls and row height changes; width/column changes invalidate stale offscreen measurements. Scroll, resize and measurements coalesce in one animation frame, retaining the top row identity and intra-row position. Appending through Rows preserves existing IDs and anchoring. Hidden CVC roots start with a bounded estimated window and measure when shown.[^viewport][^viewport-browser]
+
+The mounted set contains the intersecting logical rows, overscan on either side and at most one focused row. A distant focused editor stays attached with its input state and composition; disjoint spacer segments represent intervening rows without keeping their controls alive. Departing unfocused rows release element references and Select ownership. Drafts and issue text remain keyed by RowId. Scrolling changes this mounted set without rerunning application sort/filter callbacks. `"visible"` check scope, range selection, keyboard navigation and paste continue to use the complete logical page, rather than only connected rows. Keyboard row navigation reveals the target before focus; Tab/Shift+Tab can cross the mounted boundary while editor shortcuts remain native.[^grid][^viewport][^viewport-browser]
+
+Offscreen paste and validation use compiled field paths, raw row-local option plans and cached detached native HTML-validation controls, rather than creating a row/Select for every target. Those plans do not mutate option sources or add state to Rows. Issues omit `element` when the corresponding control is not connected; callbacks must not require a DOM node for every logical row. Passing validation does not automatically reveal it.[^grid][^viewport-browser]
+
+The table keeps native semantics. In viewport mode `aria-rowcount` includes the complete logical page and authored header, static body and footer rows; mounted data rows and static rows receive their corresponding one-based `aria-rowindex`. Owned native spacer rows are `aria-hidden="true"` and noninteractive. Other authored table rows remain in place. One template tr represents one RowId; template cells with `rowspan` other than 1 reject with `GRID_VIEWPORT_MARKUP` before ownership changes. Nonvirtual markup remains supported; grouped/merged logical row blocks remain required M10.9 work, not a retired feature.[^grid][^viewport][^viewport-browser]
+
+## Columns, drafts and interaction
+
 Managed columns compile native topology once. They move original header/footer cells, maintain visible group colspan and reorder expanded native cols. Hidden cells, cols and empty groups leave the connected table model. A scope="colgroup" cell must match an authored native colgroup membership. Header/footer rows must cover all template keys, including carried rowspans; authored `rowspan` remains unchanged. The original repeated template is never moved or altered. Data field indices are captured before applying column order to a clone.[^columns][^grid]
 
 Widths follow native CSS table/minimum-content constraints. When all visible columns have explicit widths the runtime prefers their sum as table width; otherwise it restores the original table-width preference. Authors choose table layout, responsive scroll containment, sticky positioning and visual resize affordances in CSS. Resize controls receive owned `touch-action: none`, `user-select: none` and `aria-keyshortcuts` if absent; disposal restores originals. ArrowLeft/ArrowRight adjust 10 pixels, Shift adjusts 1, and Home restores the initial preferred width. Pointer previews publish one change at release; Escape/cancel restores the prior state. Move preserves focus/caret; hiding focused content tries available visible controls then the table. Detached hidden controls are still validated through row-keyed drafts, but issues omit a disconnected element.[^columns][^grid]
@@ -256,7 +299,7 @@ When a user types in a supported input, the Grid retains the entered draft and v
 
 Each cloned `data-error-for` region receives a document-unique ID and `aria-live="polite"` if not authored. The matching field control includes that ID in `aria-describedby`; failed validation sets `aria-invalid="true"` and writes issue text. A pass restores the control's authored `aria-invalid` state. The table retains native semantics and does not acquire `role="grid"`. When the focused row leaves the visible slice, focus moves to another available control, header button, or the table root. Authors still provide labels and table headings.[^grid]
 
-With `multiple: false`, row buttons keep their existing active-detail behavior. With `multiple: true`, a plain activation replaces selected membership, Ctrl/Meta toggles one ID, Shift replaces it with the eligible range in current visible page order, and Ctrl/Meta+Shift adds that range. Range selection excludes `canSelect`-ineligible rows; an anchor outside the page cannot extend across pages. ArrowUp/ArrowDown/Home/End move focus among eligible visible selection buttons; adding Shift also selects the range, starting from the focused row when no visible anchor exists. Ctrl/Meta+A replaces membership with eligible visible IDs, and Escape clears membership while retaining active detail identity. Enter/Space use native button activation; checkboxes and header controls keep native keyboard behavior. These Grid shortcuts apply only while a row selection button has focus, preserving editor shortcuts.[^grid][^selection]
+With `multiple: false`, row buttons keep their existing active-detail behavior. With `multiple: true`, a plain activation replaces selected membership, Ctrl/Meta toggles one ID, Shift replaces it with the eligible range in current visible page order, and Ctrl/Meta+Shift adds that range. Range selection excludes `canSelect`-ineligible rows; an anchor outside the page cannot extend across pages. ArrowUp/ArrowDown/Home/End move focus among eligible logical-page selection buttons, revealing offscreen targets in viewport mode; adding Shift also selects the range, starting from the focused row when no visible anchor exists. Ctrl/Meta+A replaces membership with eligible visible IDs, and Escape clears membership while retaining active detail identity. Enter/Space use native button activation; checkboxes and header controls keep native keyboard behavior. These Grid shortcuts apply only while a row selection button has focus, preserving editor shortcuts.[^grid][^selection]
 
 # Pitfalls
 
@@ -270,6 +313,7 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `GRID_PARSE_FIELD` | A number input lacks a parser, or a parser is not a function or names a missing/repeated text field or checkbox. |
 | `GRID_COLUMNS`, `GRID_COLUMN_MARKUP` | Invalid full state/callback, broken column keys/group membership/spans, or malformed resize control. |
 | `GRID_SORT`, `GRID_PAGE` | Invalid sort indicator/comparator or local page request. |
+| `GRID_VIEWPORT`, `GRID_VIEWPORT_MARKUP`, `GRID_VIEWPORT_ROW` | Invalid viewport root/estimate/overscan, a multi-row template span in viewport mode, or reveal outside the current logical page. |
 | `GRID_SELECTION`, `GRID_CHECK` | Invalid mode/callback/eligibility result, ID batch, before-hook result, check scope/flag, or stale reentrant transition. |
 | `GRID_FILTER` | Unknown column key, invalid scalar filter/value/label/search, predicate, or authored filter control. |
 | `GRID_ACTION` | Invalid action callback or named row action button. |
@@ -281,13 +325,15 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and row-field multiple Selects; use Form for those. Header filter Selects are authored `multiple` controls with their own column-filter contract. A plain `data-field` text element has no generated editor; it can still receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without `initialPage`, `bindGrid` creates all row clones before the caller can set a local page. Pass `initialPage` for a large local store to create only its first visible slice. Off-page formatter errors surface when that row first renders; invalid row-local options surface on display or `validate(id)`. Calling `setPage(null)` deliberately renders all rows; measure that cost or use application-owned server pages.[^grid][^owner]
+`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and row-field multiple Selects; use Form for those. Header filter Selects are authored `multiple` controls with their own column-filter contract. A plain `data-field` text element has no generated editor; it can still receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without either `initialPage` or `viewport`, binding creates all row clones. Local paging limits the logical page; viewport limits its mounted DOM. `setPage(null)` keeps viewport rendering bounded when enabled, otherwise deliberately renders all rows. Offscreen formatter errors surface when a row mounts; invalid row-local options also surface on validation/paste. Rendering can fail while scrolling or revealing a previously unmounted bad row: fix the source/rule before retrying. Progressive loading and transport cancellation stay in the application/page layer; virtualization does not reduce the Rows store itself.[^grid][^owner][^viewport]
 
 # Related
 
 [Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [Pagination](pagination.md) can use `grid.page()`. [The M6 plan](../implementation/m6-plan.md) records this milestone's migration scope. [The interactive Grid demo](grid-demo.md) exercises every implemented option, method, and declarative marker. [The two-layout example](advanced-grid-example.md) shows grouped headings and sticky positioning with authored HTML/CSS and no new API.
 
 [^columns]: Private native column topology and resize ownership
+[^viewport]: Private measured viewport, anchoring, spacers and lifetime
+[^viewport-browser]: Logical scopes, bounded DOM, focus, measurements and lifecycle regressions
 [^selection]: Private active identity, membership, eligibility, and transition ordering
 [^filters]: Private scalar column filters and choice counts
 [^select]: Native Select binding reused for header filters

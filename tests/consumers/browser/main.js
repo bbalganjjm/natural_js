@@ -166,6 +166,24 @@ const definition = {
 };
 
 try {
+  const scrollRoot = document.createElement("section");
+  scrollRoot.dataset.consumerViewport = "";
+  scrollRoot.setAttribute("aria-label", "Viewport assignments");
+  scrollRoot.style.cssText = "height:400px;overflow:auto;";
+  scrollRoot.innerHTML = `<table style="border-collapse:collapse;width:100%"><caption>Viewport employees</caption>
+    <thead><tr><th scope="col">Name</th><th scope="col">Choice</th></tr></thead>
+    <tbody><tr data-row-template style="height:48px"><th scope="row"><label>Name <input data-field="name" required></label></th>
+      <td><label>Choice <select data-field="choice" data-options="choices" data-option-label="label" data-option-value="value"></select></label></td></tr></tbody></table>`;
+  document.querySelector("main").append(scrollRoot);
+  const viewportRows = createRows(Array.from({ length: 5000 }, (_, index) => ({
+    name: `Employee ${index + 1}`, choice: 11,
+    choices: [{ label: "Eleven", value: 11 }, { label: "Twenty two", value: 22 }]
+  })));
+  const viewportTable = scrollRoot.querySelector("table");
+  const originalViewport = viewportTable.outerHTML;
+  const viewportGrid = bindGrid(viewportTable, { rows: viewportRows,
+    viewport: { root: scrollRoot, estimate: 48, overscan: 3 }, paste: true, multiple: true });
+  state.viewport = { root: scrollRoot, table: viewportTable, rows: viewportRows, grid: viewportGrid, original: originalViewport };
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = document.querySelector(`[data-host="${slot}"]`);
     const page = mountPage(host, definition, { slot, name });

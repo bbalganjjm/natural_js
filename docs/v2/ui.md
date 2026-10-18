@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
+    git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -18,10 +18,22 @@ sources:
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filters and choice counts
     git_blob: fd1b4b22060a716b1351e8c3029f76c0b0ca3964
-generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+  - id: grid
+    resource: ../../src/ui/grid.ts
+    title: Logical-page and mounted-row Grid contracts
+    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+  - id: viewport
+    resource: ../../src/ui/grid-viewport.ts
+    title: Private measured viewport, anchoring and lifetime
+    git_blob: 4a6d52ef382fb5da76a8fe47d4bfafbd3b6a1b1f
+  - id: viewport-browser
+    resource: ../../tests/browser/grid-viewport.spec.ts
+    title: Viewport scope, focus and lifecycle regressions
+    git_blob: 94b18cca941e2a8e5003c91a0346d4c07fa9b0cd
+generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -53,7 +65,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit check scope |
 | `GridCheckState` | Readonly booleans `checked`, `indeterminate`; numbers `total`, `count` | Eligible scope aggregate |
 | `GridFilterChoice` | Readonly `value: SelectValue`, `label: string`, `count: number` | One raw column choice and matching-row count |
-| `GridHandle<T>` | Column state, active identity, independent selected/checked membership, sort, column/manual filters, page, validation, atomic paste, disposal | Grid handle |
+| `GridHandle<T>` | Column state, active identity, independent selected/checked membership, sort, column/manual filters, page, reveal, validation, atomic paste, disposal | Grid handle |
 
 # Grid state methods
 
@@ -71,7 +83,7 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 | `setColumnFilter(key: string, values: readonly SelectValue[] \| null): void` | Replace one configured column filter; columns and the manual filter combine with AND. |
 | `filterChoices(key: string, search?: string): readonly GridFilterChoice[]` | Choices/counts under manual and other-column filters, excluding this column's filter and paging; optional label search only narrows choices. |
 
-`visible` means the current filtered page, `filtered` means all matching rows before paging, and `store` means every nondeleted row. `canCheck` determines eligibility for these aggregates and operations; a disabled native checkbox only blocks its own UI gesture. Number `1` and string `"1"` remain different filter values. Binder options and native markers are listed in [Grid](grid.md), alongside keyboard and restoration rules.[^selection][^filters]
+`visible` means the complete current filtered page, including unmounted rows with viewport rendering; `filtered` means all matching rows before paging, and `store` means every nondeleted row. `canCheck` determines eligibility for these aggregates and operations; a disabled native checkbox only blocks its own UI gesture. Number `1` and string `"1"` remain different filter values. Binder options and native markers are listed in [Grid](grid.md), alongside keyboard and restoration rules.[^selection][^filters][^grid]
 
 `GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after visible rows and scopes commit.[^selection]
 
@@ -80,6 +92,12 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 `GridHandle<T>.paste(text: string, start: { readonly id: RowId; readonly field: string }): ValidationResult` validates a whole-field TSV matrix and commits its writable cells through one `Rows.setMany`. It starts at a visible store-local ID and exact field path, follows current sorted/filtered page and visible bound-field order, and rejects overflow without creating rows. It reuses `ValidationResult`; there is no separate public clipboard or transaction type.[^ui]
 
 The binder's optional `paste: true` enables native `text/plain` handling; the method is always available. `onPaste?: (result: ValidationResult) => void` receives accepted or rejected completed attempts and has no event argument. Native paste replaces whole fields rather than inserting at the caret. Complete candidate validation includes retained drafts, but only pasted fields are saved. Protected controls consume positions without writes, typed Select matches retain raw values, and invalid attempts preserve data/input while updating accessible issues. [Grid](grid.md) defines quoting, disabled/ambiguous choices, cancellation, stale preparation and observer-error rules. Catching a post-commit exception does not imply rollback.[^ui]
+
+# Grid viewport
+
+`bindGrid` accepts inline `viewport?: { root: HTMLElement; estimate: number; overscan?: number }`. The distinct same-document ancestor root supplies finite authored height and scrolling; estimate is a positive finite CSS-pixel starting row height, refined from measurements. Overscan is a nonnegative safe integer row count, default 3. There is no public viewport manager or geometry type.[^grid][^viewport]
+
+`GridHandle<T>.reveal(id: RowId): void` scrolls a row in the current logical page to the nearest visible edge without changing selection or focus. Filtered-out, off-page and missing/deleted IDs raise `GRID_VIEWPORT_ROW`. It also works without viewport mode through native scrolling. The mounted window stays separate from logical check/range/paste scope; one distant focused row may remain attached. Offscreen validation/paste reuse raw choice plans and private cached HTML-validation controls rather than mounting every target. Native ARIA row positions include authored static rows and the complete logical page; owned spacers are hidden from accessibility. See [Grid](grid.md) for authored CSS, keyboard, row-span and cleanup rules.[^grid][^viewport][^viewport-browser]
 
 # Pitfalls
 
@@ -98,3 +116,6 @@ A parser sees one snapshot of all currently entered, still unparsed drafts in `R
 [^ui]: Public UI types and runtime exports
 [^selection]: Private Grid identity, membership, and check contracts
 [^filters]: Private Grid scalar filters and choice counts
+[^grid]: Logical-page and mounted-row Grid contracts
+[^viewport]: Private measured viewport, anchoring and lifetime
+[^viewport-browser]: Viewport scope, focus and lifecycle regressions

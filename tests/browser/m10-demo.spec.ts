@@ -239,3 +239,27 @@ test("bulk paste reports atomic rejection and applies typed cells with protected
   await expect(rows.nth(1).locator('[data-field="salary"]')).toHaveValue("250");
   await expect(page.locator("[data-paste-status]")).toContainText("Paste accepted");
 });
+
+test("viewport mode bounds a 5,000-row dataset and reveals a row without selecting it", async ({ page }) => {
+  await page.locator("[data-viewport]").check();
+  await page.locator("[data-dataset]").selectOption("5000");
+  const rows = page.locator('tbody tr:not([data-row-template]):not([aria-hidden="true"])');
+  await expect(page.locator("[data-viewport-state]")).toContainText("5,000 store rows");
+  await expect(page.locator("[data-viewport-state]")).toContainText("viewport on");
+  expect(await rows.count()).toBeLessThan(80);
+  await expect(page.locator("[data-grid]")).toHaveAttribute("aria-rowcount", "5002");
+  await page.locator("[data-reveal-row]").fill("2500");
+  await page.locator('[data-action="reveal"]').click();
+  await expect.poll(() => rows.locator('[data-field="name"]').allTextContents()).toContain("NEW EMPLOYEE 2500");
+  await expect(page.locator("[data-selection]")).toHaveText("No row selected");
+  await expect(page.locator("[data-status]")).toContainText("selection unchanged");
+  expect(await rows.count()).toBeLessThan(80);
+  await page.locator('[data-action="check-all"]').click();
+  await expect(page.locator("[data-selection-state]")).toContainText('"count": 5000');
+  await page.locator('[data-action="dispose"]').click();
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("tbody tr[data-row-template]")).toHaveCount(1);
+  await page.locator("[data-dataset]").selectOption("6");
+  await page.locator("[data-viewport]").uncheck();
+  await expect(rows).toHaveCount(6);
+});

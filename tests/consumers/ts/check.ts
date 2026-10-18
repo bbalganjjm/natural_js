@@ -64,7 +64,7 @@ export function loadEmployees(comm: Communicator = createCommunicator({
   return comm.request<Employee[]>({ url: "employees", method: "GET" });
 }
 
-export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>) {
+export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {
   const form = bindForm(root, { rows });
   const columns: readonly GridColumn[] = [{ key: "person", width: 180 }, { key: "choice", width: 120 }];
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
@@ -73,6 +73,7 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
   const pastes: ValidationResult[] = [];
   const grid: GridHandle<Employee> = bindGrid(table, {
     rows, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
+    viewport: scrollRoot ? { root: scrollRoot, estimate: 48, overscan: 3 } : undefined,
     paste: true, onPaste: result => pastes.push(result),
     multiple: true,
     canSelect: row => row.status !== "delete",
@@ -102,6 +103,11 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
 
 export function pasteEmployees(grid: GridHandle<Employee>, id: RowId, text: string): ValidationResult {
   return grid.paste(text, { id, field: "name" });
+}
+
+export function revealEmployee(grid: GridHandle<Employee>, id: RowId): void {
+  const applied: void = grid.reveal(id);
+  void applied;
 }
 
 export function configureColumns(grid: GridHandle<Employee>, columns: readonly GridColumn[]): readonly GridColumn[] {

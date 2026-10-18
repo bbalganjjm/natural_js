@@ -11,30 +11,34 @@ sources:
   - id: m11
     resource: m11-plan.md
     title: M11 implementation and verification
-    git_blob: 2ba2a5a0023d5c16d43c63ff5a140b6b36688c6e
+    git_blob: e25d01fcf5e747b713202462af3bd6e1d3397cb8
   - id: m12
     resource: m12-plan.md
     title: M12 notification and document shell implementation
-    git_blob: 9fde3efef63f0f2a36f0d717cbe98fbe2d52ceaf
+    git_blob: 9be421a8bceae92173fb08aeee4b4a6ca3225a2a
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and consolidated omission review
-    git_blob: 6b8b12267257595163c37b4c2beb457b8d3fda71
+    git_blob: 67f002bb9b5189f1c60608a6dcd706edd4121e7e
   - id: columns
     resource: m10-columns-plan.md
     title: Implemented column state and final verification
-    git_blob: 847b14fd0b2cbc7797425adfbd27d37ac680abda
+    git_blob: e678e5bdb882d71cc5ece6c681778051a2f359dc
   - id: selection
     resource: m10-selection-plan.md
     title: M10.6 independent selection, checks and filters
-    git_blob: 6b025ecd5d0d01433326310f33f0597261e1d0b7
+    git_blob: ff717b494b713c6c4c27e378ce011a06362ec7e6
   - id: paste
     resource: m10-paste-plan.md
     title: M10.7 atomic paste and final verification
-    git_blob: 297c498e532b5013e87698d2656991c15ea608a2
-generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+    git_blob: 7ea582a4e5e93da4ccf8c3317dc1d3b4b256909e
+  - id: viewport
+    resource: m10-viewport-plan.md
+    title: M10.8 measured viewport and final verification
+    git_blob: e3392bd770012dfe21b884db9149ebe26c391bed
+generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order and [the milestone index](index.md) for completed history. The fixed 1.x baseline is b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; its LGPL source and docs stay unchanged under v1/.
@@ -47,7 +51,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 - M0-M8 are complete; the [M8 report](m8-beta-report.md) contains migration and fixed agent-task evidence.
 - M9 has a verified unpublished beta; [the report](m9-beta-report.md) preserves its exact artifact and historical harness. Release-candidate work, npm publication and release tags remain deferred until personal testing and the user's corresponding request.
-- Selected [M10 slices](m10-plan.md) are complete: authored grouped/sticky Grid, offscreen record release, bounded initialPage and the current Grid demo. M10.5 implements resize/reorder/show/hide; M10.6 implements independent selection/check sets, authored header sort/filters and current-identity row actions. M10.7 implements atomic validated paste with one Rows batch and retained nested raw values/drafts. Their detailed plans preserve final gates. True virtualization and remaining Grid parity are mandatory gaps.[^paste]
+- Selected [M10 slices](m10-plan.md) are complete: authored grouped/sticky Grid, offscreen record release, bounded initialPage and the current Grid demo. M10.5 implements resize/reorder/show/hide; M10.6 implements independent selection/check sets, authored header sort/filters and current-identity row actions. M10.7 implements atomic validated paste with one Rows batch and retained nested raw values/drafts. M10.8 adds measured variable-height viewport rendering, one attached focused editor, reveal and offscreen logical-page paste/checks. Their detailed plans preserve final gates; remaining Grid parity is mandatory.[^paste][^viewport]
 - The selected [M11](m11-plan.md) scope is complete: authored Tree and DatePicker, two-layout CVC example, independent contract audit, and recovered full browser/package/document gates. Remaining 1.x Tree/calendar behavior is required by the new parity plan.
 - Work stays on 2.0.0-alpha.0. master and v1/ are unchanged. The original untracked js lockfile was restored from the Sep 24 backup and remains outside this task.
 
@@ -58,7 +62,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 # Next action
 
-Prepare M10.8 real viewport rendering. Specify authored scroll ownership, logical-page versus mounted-row scope, variable heights and anchor preservation, bounded focused/editor retention, offscreen validation/paste, accessible row counts/indices, future row-group boundaries and 5,000-row DOM/time budgets before code. Keep visible checks/ranges/paste scoped to the logical sorted/filtered page. Continue P0 options/dynamic closure and prepare the consolidated omission proposal only after that review. M10.9 and other component parity remain required. Personal testing precedes separately requested release work; no npm publication or release tag.[^parity][^paste]
+Prepare M10.9 remaining Grid contracts: grouped body templates, data-driven merging, changed/deleted policies, detail navigation, bind/row hooks, append and height resize. Preserve the measured logical-row boundary and plan indivisible grouped blocks with viewport/keyboard integration before implementation. Continue P0 options/dynamic closure and prepare the consolidated omission proposal only after that review. M10.9 and other component parity remain required. Personal testing precedes separately requested release work; no npm publication or release tag.[^parity][^paste]
 
 # Decisions
 
@@ -79,15 +83,18 @@ Prepare M10.8 real viewport rendering. Specify authored scroll ownership, logica
 | 2026-10-05 | M10.5 final gates | Build/types/browser-controller types and 81 units pass; 182/182 tests in each required engine. JS/TS and all five Windows browser consumers pass the exact 133-file tarball SHA-256 0a43e4e97e295e1d7ee1ab3188008c613cf9607327970f93c5beda4b461c7f2e. Original binding budgets pass; column measurements, independent findings and limits stay in the stage plan. |
 | 2026-10-18 | M10.6 final gates | Build/types/browser-controller types, 81 units and 199/199 full tests in each engine pass. JS/TS and five Windows browser consumers pass the exact 143-file tarball SHA-256 d5dbc96d5916a44b517e32af04693cf1d6f0efd1f99cdece9b8a4b0fe8fbefa9. Original binding budgets pass. Source/command hashes, independent corrections and scope limits stay in the M10.6 plan. |
 | 2026-10-18 | M10.7 final gates | Build/types/browser-controller types, 92 units and 219/219 full tests in each engine pass. JS/TS and five Windows browsers pass the exact 148-file artifact SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Binding budgets pass; independent findings, retained failed attempts and limits stay in the stage plan. |
+| 2026-10-18 | M10.8 final gates | Build/types/browser-controller types, 95 units and 242/242 full tests in each engine pass. Installed JS/TS and five Windows browsers pass the same 153-file artifact SHA-256 487285dc347b4d763391bd2101a6dab8faee6ee313fc5162b138dbe44ecdae69. The 5,000-row viewport fixtures mount at most 14 rows and pass declared timing/ownership budgets; original binding budgets pass. Independent corrections, raw logs and measured limits stay in the [stage plan](m10-viewport-plan.md). |
 
 # Open questions
 
 - Accessibility automation covers tested states only. Personal review and manual assistive-technology checks remain open.
 - Actual token use and equivalent 1.x task data remain unavailable. Prior measurements and M11 docs-first reads are context proxies.
 - Registry publication and release tags are deferred regardless of local manifest eligibility or authentication.
-- P0's semantic/dynamic closure and the one omission decision are pending. Viewport and remaining parity contracts require their detailed stage review; implemented selected-scope contracts do not prove full legacy coverage.
+- P0's semantic/dynamic closure and the one omission decision are pending. Remaining parity contracts require their detailed stage review; implemented selected-scope contracts do not prove full legacy coverage.
 
 [^columns]: Implemented column state and final verification
 [^selection]: M10.6 independent selection, checks and filters
 [^paste]: M10.7 atomic paste and final verification
 [^parity]: Required feature completion and consolidated omission review
+
+[^viewport]: M10.8 measured viewport and final verification

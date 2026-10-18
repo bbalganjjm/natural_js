@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 933a4cf818bb8072551850fe54b12036b5cc01d3
+    git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 3742e5985f226a94404f44f13f93cb9fea55422a
+    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
+  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -132,7 +132,7 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G16 | more detail Form/Popup, previous/next validation | Missing integrated row detail behavior. Existing Popup/Form are its foundations. |
 | G17 | data-rowspan, rowSpanIds, grid.rowSpan | Missing data-driven repeated-value merging; authored header spans are a different behavior. |
 | G18 | pastiable, grid.paste, readonly/disabled handling | M10.7 implements quoted plaintext paste through existing raw parsing/rules, typed nested choices, protected field positions and one atomic Rows batch. Explicit overflow, stale preparation and validation failures preserve stored values and drafts; see [the detailed plan](m10-paste-plan.md). Full option/dynamic parity remains subject to P0 closure. |
-| G19 | createRowDelay, scrollPaging, append binding | Partial local paging exists; progressive loading/scheduling remains open. Real scroll virtualization is additionally required; initialPage and cache release do not supply it. |
+| G19 | createRowDelay, scrollPaging, append binding | M10.8 adds measured variable-height viewport rendering, bounded mounted rows with one focused pin, logical-page checks/paste and append-compatible RowId anchoring. See [the detailed contract](m10-viewport-plan.md). Data loading remains application-owned; legacy scheduling/progressive-loading option and dynamic closure remain open. initialPage and cache release alone are not virtualization. |
 | G20 | rowHandlerBeforeBind/rowHandler/onBind, empty display, hover | Partial lifetime/CSS behavior exists; row hooks and empty/result/status markup need contracts. |
 
 ## Other data UI and containers
@@ -191,7 +191,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste within its detailed contract; prepare M10.8 true virtualization, then remaining Grid parity. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. Plan M10.9 remaining Grid parity, including indivisible multi-row templates/merges and viewport integration, before adding those contracts. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
 
 # Decisions
 
