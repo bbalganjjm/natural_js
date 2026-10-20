@@ -12,6 +12,7 @@ import { bindSelect } from "./select.js";
 import { focusVisible, restoreAttributes } from "./dom-state.js";
 import { readClipboard } from "./grid-paste.js";
 import { createGridViewport, validateGridViewport } from "./grid-viewport.js";
+import { compileGridBody } from "./grid-row-blocks.js";
 import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
@@ -59,7 +60,8 @@ interface BoundSelect {
 }
 
 interface RenderedRow<T> {
-  element: HTMLTableRowElement;
+  elements: HTMLTableRowElement[];
+  mergeCells: HTMLTableCellElement[];
   errors: Map<string, HTMLElement>;
   hasIssues: boolean;
   snapshot?: RowSnapshot<T>;
@@ -144,16 +146,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     throw gridError("GRID_ROOT", "The Grid root must be a table element.");
   }
   if (boundRoots.has(root)) throw gridError("GRID_IN_USE", "This table is already bound as a Grid.");
-  const templates = [...root.tBodies].flatMap(body => [...body.rows].filter(row => row.hasAttribute("data-row-template")));
-  if (templates.length !== 1) {
-    throw gridError("GRID_TEMPLATE", "The Grid needs one tbody row marked data-row-template.");
-  }
-  const template = templates[0];
-  if (options.viewport !== undefined) validateGridViewport(root, template, options.viewport);
-  const fixedId = template.hasAttribute("id") ? template : template.querySelector<HTMLElement>("[id]");
-  if (fixedId) {
-    throw gridError("DUPLICATE_ID", "A repeated row template cannot contain a fixed DOM id.", { id: fixedId.id });
-  }
+  const body = compileGridBody(root);
+  const { templates, authored } = body;
+  if (options.viewport !== undefined) validateGridViewport(root, templates, options.viewport);
+  body.validate();
 
   const initialPage = checkedPage(options.initialPage ?? null);
   const runner = createRuleRunner("bindGrid", options.rules);
@@ -169,7 +165,6 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       options.onPaste !== undefined && typeof options.onPaste !== "function") {
     throw gridError("GRID_PASTE", "paste must be boolean and onPaste must be a function.");
   }
-  const authored = [template, ...template.querySelectorAll<HTMLElement>("*")];
   for (const [index, element] of authored.entries()) {
     const errorFor = element.getAttribute("data-error-for");
     if (errorFor !== null) {
@@ -319,10 +314,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   if (options.onColumnsChange !== undefined && typeof options.onColumnsChange !== "function") {
     throw gridError("GRID_COLUMNS", "onColumnsChange must be a function.");
   }
-  const columns = bindGridColumns(root, template, options.columns, options.viewport ? change => {
+  const columns = bindGridColumns(root, templates, options.columns, change => {
+    mergeRows();
     viewport?.invalidate();
     options.onColumnsChange?.(change);
-  } : options.onColumnsChange);
+  });
   const templateReleases: (() => void)[] = [];
   try {
     for (const field of selectFields) {
@@ -333,13 +329,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     columns.dispose();
     throw cause;
   }
-  const anchor = root.ownerDocument.createComment("grid rows");
-  const staticRows = [...root.rows].filter(row => row !== template);
+  const staticRows = [...root.rows].filter(row => !templates.includes(row));
   const staticRowIndexes = staticRows.map(row => row.rowIndex);
-  const templatePosition = template.rowIndex;
+  const templatePosition = templates[0].rowIndex;
   const restoreAria = restoreAttributes(root, ["aria-rowcount"]);
   const restoreStaticAria = staticRows.map(row => restoreAttributes(row, ["aria-rowindex"]));
-  template.replaceWith(anchor);
+  const anchor = body.mount();
   const records = new Map<RowId, RenderedRow<T>>();
   const drafts = new Map<RowId, Map<string, FieldDraft>>();
   const issueText = new Map<RowId, Map<string, string[]>>();
@@ -363,6 +358,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   let sortIndicator: SortIndicator | null = null;
   const headerOriginals = new Map<HTMLTableCellElement, string | null>();
   let visibleIds: RowId[] = [];
+  let visibleIndexes = new Map<RowId, number>();
+  let mergeKeys = new Map<RowId, readonly unknown[]>();
   let mountedIds: readonly RowId[] = [];
   let filteredIds: RowId[] = [];
   let viewRevision = 0;
@@ -386,9 +383,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   function createRecord(id: RowId): RenderedRow<T> {
-    const element = template.cloneNode(true) as HTMLTableRowElement;
-    element.removeAttribute("data-row-template");
-    const nodes = [element, ...element.querySelectorAll<HTMLElement>("*")];
+    const { elements, nodes, mergeCells } = body.clone();
     const texts = textFields.map(descriptor => ({
       descriptor,
       element: nodes[descriptor.index],
@@ -439,14 +434,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
     }
     const checks = checkIndexes.map(index => nodes[index] as HTMLInputElement);
-    rowIds.set(element, id);
-    return { element, errors, hasIssues: false, texts, selects: rowSelects, buttons,
+    for (const element of elements) rowIds.set(element, id);
+    return { elements, mergeCells, errors, hasIssues: false, texts, selects: rowSelects, buttons,
       buttonDisabled: buttons.map(button => button.disabled), checks, checkDisabled: checks.map(check => check.disabled),
-      releaseColumns: columns.attach(element) };
+      releaseColumns: columns.attach(elements) };
   }
 
   function releaseRecord(record: RenderedRow<T>): void {
-    record.element.remove();
+    for (const element of record.elements) element.remove();
     record.releaseColumns();
     for (const select of record.selects) select.release();
   }
@@ -802,6 +797,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const previousFiltered = filteredIds;
     const previousIds = new Set(records.keys());
     const previousVisible = visibleIds;
+    const previousIndexes = visibleIndexes;
+    const previousMergeKeys = mergeKeys;
     const previousScroll = options.viewport?.root.scrollTop;
     try { return render(); }
     catch (cause) {
@@ -809,6 +806,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       pageState = previousState;
       filteredIds = previousFiltered;
       visibleIds = previousVisible;
+      visibleIndexes = previousIndexes;
+      mergeKeys = previousMergeKeys;
       viewport?.set(previousVisible, false);
       if (previousScroll !== undefined) options.viewport!.root.scrollTop = previousScroll;
       syncRowIndexes();
@@ -817,6 +816,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         releaseRecord(record);
         records.delete(id);
       }
+      mergeRows();
       throw cause;
     }
   }
@@ -876,9 +876,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (pageRequest && page !== pageRequest.page) pageRequest = { page, size: pageRequest.size };
     pageState = pageRequest ? Object.freeze({ page, size: pageRequest.size, total: filtered.length, pages }) : null;
     const displayed = pageRequest ? filtered.slice((page - 1) * pageRequest.size, page * pageRequest.size) : filtered;
+    const nextMergeKeys = body.merged ? new Map(displayed.map(row => [row.id, body.keys(row.value)])) : mergeKeys;
     const nextIds = displayed.map(row => row.id);
     viewport?.set(nextIds);
     visibleIds = nextIds;
+    if (viewport || body.merged) visibleIndexes = new Map(nextIds.map((id, index) => [id, index]));
+    mergeKeys = nextMergeKeys;
     filteredIds = filtered.map(row => row.id);
     syncRowIndexes();
     renderWindow();
@@ -888,6 +891,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function renderWindow(): void {
     if (disposed) return;
+    body.resetMerges();
     const focused = root.ownerDocument.activeElement;
     const focusedRow = focused instanceof Element ? focused.closest("tr") : null;
     const focusedId = focusedRow && rowIds.get(focusedRow);
@@ -905,7 +909,6 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         renderRecord(record, snapshot);
         const issues = issueText.get(id);
         if (issues) showIssues(record, issues);
-        if (viewport) record.element.setAttribute("aria-rowindex", String(templatePosition + visibleIds.indexOf(id) + 1));
       }
     } catch (cause) {
       for (const [id, record] of records) if (!existing.has(id)) {
@@ -926,15 +929,20 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         ? [focused.selectionStart, focused.selectionEnd] as const : null;
       if (viewport) viewport.place(new Map(nextIds.flatMap(id => {
         const record = records.get(id);
-        return record ? [[id, record.element] as const] : [];
-      })));
+        return record ? [[id, record.elements] as const] : [];
+      })), columns.columns().filter(column => !column.hidden).length || body.columnCount);
       else {
-        for (const id of mountedIds) if (!nextSet.has(id)) records.get(id)?.element.remove();
+        for (const id of mountedIds) if (!nextSet.has(id)) {
+          for (const element of records.get(id)?.elements ?? []) element.remove();
+        }
         let cursor: Node = anchor;
         for (let index = nextIds.length - 1; index >= 0; index--) {
-          const element = records.get(nextIds[index])!.element;
-          if (element !== focusedRow && element.nextSibling !== cursor) anchor.parentNode!.insertBefore(element, cursor);
-          cursor = element;
+          const elements = records.get(nextIds[index])!.elements;
+          for (let physical = elements.length - 1; physical >= 0; physical--) {
+            const element = elements[physical];
+            if (element !== focusedRow && element.nextSibling !== cursor) anchor.parentNode!.insertBefore(element, cursor);
+            cursor = element;
+          }
         }
       }
       if (restoreFocus && root.ownerDocument.activeElement !== focused) {
@@ -961,19 +969,32 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         records.delete(id);
       }
     }
+    mergeRows();
+    syncRowIndexes();
     syncSelection();
+  }
+
+  function mergeRows(): void {
+    if (!body.merged) return;
+    body.merge(mountedIds.flatMap(id => {
+      const record = records.get(id);
+      return record ? [{ elements: record.elements, mergeCells: record.mergeCells,
+        keys: mergeKeys.get(id)!, index: visibleIndexes.get(id)! }] : [];
+    }), root.ownerDocument.activeElement);
   }
 
   function syncRowIndexes(): void {
     if (!viewport) return;
-    root.setAttribute("aria-rowcount", String(staticRows.length + visibleIds.length));
+    root.setAttribute("aria-rowcount", String(staticRows.length + visibleIds.length * templates.length));
     for (const [index, row] of staticRows.entries()) {
       const original = staticRowIndexes[index];
-      row.setAttribute("aria-rowindex", String(original < templatePosition ? original + 1 : original + visibleIds.length));
+      row.setAttribute("aria-rowindex", String(original + 1 + (original > templatePosition ? (visibleIds.length - 1) * templates.length : 0)));
     }
     for (const [id, record] of records) {
-      const index = visibleIds.indexOf(id);
-      if (index >= 0) record.element.setAttribute("aria-rowindex", String(templatePosition + index + 1));
+      const index = visibleIndexes.get(id);
+      if (index !== undefined) for (const [physical, element] of record.elements.entries()) {
+        element.setAttribute("aria-rowindex", String(templatePosition + index * templates.length + physical + 1));
+      }
     }
   }
 
@@ -1023,13 +1044,13 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         throw cause;
       }
     }
-    else records.get(id)?.element.scrollIntoView({ block: "nearest", inline: "nearest" });
+    else records.get(id)?.elements.find(element => element.getClientRects().length)?.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
 
   function rowControls(record: RenderedRow<T>): HTMLElement[] {
-    return [...record.element.querySelectorAll<HTMLElement>(
+    return record.elements.flatMap(row => [...row.querySelectorAll<HTMLElement>(
       'button, input, textarea, select, a[href], [tabindex], [contenteditable="true"]'
-    )].filter(element => element.tabIndex >= 0 && !element.matches(":disabled") &&
+    )]).filter(element => element.tabIndex >= 0 && !element.matches(":disabled") &&
       !element.closest("[hidden], [inert]") && element.getClientRects().length > 0 &&
       root.ownerDocument.defaultView!.getComputedStyle(element).visibility === "visible");
   }
@@ -1188,19 +1209,26 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       field.text >= 0 ? record.texts[field.text] : record.selects[field.select];
     const layout = columns.columns();
     const source = (field: typeof pasteFields[number]) => authored[field.index];
+    const members = (field: typeof pasteFields[number]) => {
+      const cell = source(field).closest("td, th");
+      return (cell?.getAttribute("data-column") ?? cell?.getAttribute("data-columns") ?? "").trim().split(/\s+/);
+    };
     const fields = pasteFields.filter(field => {
       if (viewport) {
         const element = source(field);
-        const key = element.closest("td, th")?.getAttribute("data-column");
-        return !element.closest("[hidden]") && (!layout.length || layout.some(column => column.key === key && !column.hidden));
+        const keys = members(field);
+        return !element.closest("[hidden]") && (!layout.length || layout.some(column => keys.includes(column.key) && !column.hidden));
       }
       const element = binding(first!, field).element;
       return element.isConnected && !element.closest("[hidden]");
     }).sort((a, b) => {
       if (viewport) {
-        const column = (field: typeof pasteFields[number]) => layout.findIndex(item =>
-          item.key === source(field).closest("td, th")?.getAttribute("data-column"));
-        return column(a) - column(b) || a.index - b.index;
+        const physical = (field: typeof pasteFields[number]) => templates.indexOf(source(field).closest("tr")!);
+        const column = (field: typeof pasteFields[number]) => {
+          const keys = members(field);
+          return layout.findIndex(item => keys.includes(item.key) && !item.hidden);
+        };
+        return physical(a) - physical(b) || column(a) - column(b) || a.index - b.index;
       }
       const left = binding(first!, a).element;
       const right = binding(first!, b).element;
@@ -1408,7 +1436,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     for (const release of templateReleases) release();
     columns.dispose();
-    anchor.replaceWith(template);
+    body.restore();
     throw cause;
   }
 
@@ -1509,6 +1537,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       issueText.clear();
       validationControls.clear();
       visibleIds = [];
+      visibleIndexes.clear();
+      mergeKeys.clear();
       filteredIds = [];
       for (const [column, original] of headerOriginals) {
         if (original === null) column.removeAttribute("aria-sort");
@@ -1519,7 +1549,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       columns.dispose();
       if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
       boundRoots.delete(root);
-      anchor.replaceWith(template);
+      body.restore();
     }
   };
 }

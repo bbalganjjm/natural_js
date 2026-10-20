@@ -3,11 +3,11 @@ import AxeBuilder from "@axe-core/playwright";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/m10/demo.html");
-  await expect(page.locator("tbody tr:not([data-row-template])")).toHaveCount(6);
+  await expect(page.locator("[data-grid] tbody tr:not([data-row-template])")).toHaveCount(6);
 });
 
 test("authored table binds raw nested choices, formatter, and accessible labels", async ({ page }) => {
-  const rows = page.locator("tbody tr:not([data-row-template])");
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await expect(rows.first().locator('[data-field="name"]')).toHaveText("ADA");
   await expect(rows.first().locator("select option")).toHaveCount(3);
   await expect(rows.nth(1).locator("select option")).toHaveCount(3);
@@ -32,14 +32,14 @@ test("authored table binds raw nested choices, formatter, and accessible labels"
 });
 
 test("sort, filter, and local pages preserve RowId selection", async ({ page }) => {
-  const rows = page.locator("tbody tr:not([data-row-template])");
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await page.locator('[data-action="select-first"]').click();
   await page.locator("[data-sort]").selectOption("name-desc");
-  await expect(page.locator('thead th[aria-sort="descending"]')).toContainText("Employee");
+  await expect(page.locator('[data-grid] thead th[aria-sort="descending"]')).toContainText("Employee");
   await expect(rows.first()).toContainText("MARGARET");
   await page.locator("[data-sort]").selectOption("salary-desc");
-  await expect(page.locator('thead th[aria-sort="descending"]')).toContainText("Salary");
-  await expect(page.locator('thead th').first()).toHaveAttribute("aria-sort", "none");
+  await expect(page.locator('[data-grid] thead th[aria-sort="descending"]')).toContainText("Salary");
+  await expect(page.locator('[data-grid] thead th').first()).toHaveAttribute("aria-sort", "none");
   await page.locator("[data-filter]").selectOption("Platform");
   await expect(rows).toHaveCount(3);
   await page.locator("[data-size]").selectOption("2");
@@ -56,7 +56,7 @@ test("sort, filter, and local pages preserve RowId selection", async ({ page }) 
 });
 
 test("initial page choice rebinds a bounded view and keeps off-page RowId selection", async ({ page }) => {
-  const rows = page.locator("tbody tr:not([data-row-template])");
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await page.locator('[data-action="select-first"]').click();
   await page.locator("[data-initial-page]").selectOption("second");
   await expect(page.locator("[data-status]")).toContainText("selection and uncommitted edits were cleared");
@@ -77,7 +77,7 @@ test("initial page choice rebinds a bounded view and keeps off-page RowId select
 });
 
 test("parsing, HTML constraints, and application validation retain invalid drafts", async ({ page }) => {
-  const first = page.locator("tbody tr:not([data-row-template])").first();
+  const first = page.locator("[data-grid] tbody tr:not([data-row-template])").first();
   await first.locator("[data-select-row]").click();
   const salary = first.locator('[data-field="salary"]');
   await salary.fill("");
@@ -120,7 +120,7 @@ test("parsing, HTML constraints, and application validation retain invalid draft
 });
 
 test("nested edits and Rows add, set, remove, revert, replace, changes stay observable", async ({ page }) => {
-  const rows = page.locator("tbody tr:not([data-row-template])");
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   const first = rows.first();
   await first.locator("[data-select-row]").click();
   await first.locator('[data-field="profile.team"]').fill("Support");
@@ -162,7 +162,7 @@ test("nested edits and Rows add, set, remove, revert, replace, changes stay obse
 });
 
 test("required and unavailable choices validate; dispose and rebind restore the template", async ({ page }) => {
-  const rows = page.locator("tbody tr:not([data-row-template])");
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await page.locator('[data-action="select-first"]').click();
   await page.locator('[data-action="missing-choice"]').click();
   await page.locator('[data-action="validate-selected"]').click();
@@ -174,7 +174,7 @@ test("required and unavailable choices validate; dispose and rebind restore the 
   await expect(page.locator("[data-issues]")).toContainText('"field": "assignment.chosen"');
   await page.locator('[data-action="dispose"]').click();
   await expect(rows).toHaveCount(0);
-  await expect(page.locator("tbody tr[data-row-template]")).toHaveCount(1);
+  await expect(page.locator("[data-grid] tbody tr[data-row-template]")).toHaveCount(1);
   await expect(page.locator('[data-action="rebind"]')).toBeEnabled();
   await page.locator('[data-action="rebind"]').click();
   await expect(rows).toHaveCount(6);
@@ -201,7 +201,7 @@ test("required and unavailable choices validate; dispose and rebind restore the 
 });
 
 test("bulk paste reports atomic rejection and applies typed cells with protected positions", async ({ page }) => {
-  const rows = page.locator("tbody tr:not([data-row-template])");
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await page.locator('[data-action="select-first"]').click();
   const sample = await page.locator("[data-paste-text]").inputValue();
   await page.locator("[data-paste-text]").fill(sample.replace(/225$/, "50"));
@@ -243,7 +243,7 @@ test("bulk paste reports atomic rejection and applies typed cells with protected
 test("viewport mode bounds a 5,000-row dataset and reveals a row without selecting it", async ({ page }) => {
   await page.locator("[data-viewport]").check();
   await page.locator("[data-dataset]").selectOption("5000");
-  const rows = page.locator('tbody tr:not([data-row-template]):not([aria-hidden="true"])');
+  const rows = page.locator('[data-grid] tbody tr:not([data-row-template]):not([aria-hidden="true"])');
   await expect(page.locator("[data-viewport-state]")).toContainText("5,000 store rows");
   await expect(page.locator("[data-viewport-state]")).toContainText("viewport on");
   expect(await rows.count()).toBeLessThan(80);
@@ -258,14 +258,14 @@ test("viewport mode bounds a 5,000-row dataset and reveals a row without selecti
   await expect(page.locator("[data-selection-state]")).toContainText('"count": 5000');
   await page.locator('[data-action="dispose"]').click();
   await expect(rows).toHaveCount(0);
-  await expect(page.locator("tbody tr[data-row-template]")).toHaveCount(1);
+  await expect(page.locator("[data-grid] tbody tr[data-row-template]")).toHaveCount(1);
   await page.locator("[data-dataset]").selectOption("6");
   await page.locator("[data-viewport]").uncheck();
   await expect(rows).toHaveCount(6);
 });
 
 test("ordered row controls insert and copy by identity while value revert keeps store order", async ({ page }) => {
-  const rows = page.locator('tbody tr:not([data-row-template]):not([aria-hidden="true"])');
+  const rows = page.locator('[data-grid] tbody tr:not([data-row-template]):not([aria-hidden="true"])');
   const names = rows.locator('[data-field="name"]');
   await page.locator('[data-action="select-first"]').click();
   await page.locator('[data-action="move-end"]').click();
@@ -298,4 +298,68 @@ test("ordered row controls insert and copy by identity while value revert keeps 
   await expect(names.first()).toHaveText("GRACE");
   await expect(names.last()).toHaveText("ADA");
   await expect(page.locator('[data-status]')).toContainText("row order kept");
+});
+
+test("two authored row-block layouts share edits, nested choices and hierarchical merge keys", async ({ page }) => {
+  const two = page.locator('[data-block-grid="two"]');
+  const three = page.locator('[data-block-grid="three"]');
+  await expect(two.locator("tbody tr")).toHaveCount(8);
+  await expect(three.locator("tbody tr")).toHaveCount(12);
+  await expect(two.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "6");
+  await expect(three.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "9");
+  await expect(two.locator('[data-merge="team"]').first()).toHaveAttribute("rowspan", "4");
+  await expect(three.locator('[data-merge="team"]').first()).toHaveAttribute("rowspan", "6");
+
+  await two.locator('[data-field="notes"]').first().fill("Shared across authored layouts");
+  await two.locator('[data-field="notes"]').first().blur();
+  await expect(three.locator('[data-field="notes"]').first()).toHaveValue("Shared across authored layouts");
+  await three.locator('[data-field="name"]').first().fill("Ada Lovelace");
+  await three.locator('[data-field="name"]').first().blur();
+  await expect(two.locator('[data-field="name"]').first()).toHaveValue("Ada Lovelace");
+  await three.locator('select[data-field="assignment.chosen"]').first().selectOption("2");
+  await expect(two.locator('select[data-field="assignment.chosen"]').first()).toHaveValue("2");
+
+  await two.locator("[data-select-row]").nth(1).click();
+  await page.locator("[data-block-department]").fill("Research");
+  await page.locator('[data-block-action="keys"]').click();
+  await expect(two.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "2");
+  await expect(three.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "3");
+  await expect(two.locator('[data-merge="department"]:visible')).toHaveCount(4);
+  await expect(three.locator('[data-merge="team"]:visible')).toHaveCount(4);
+  await page.locator("[data-block-department]").fill("Engineering");
+  await page.locator('[data-block-action="keys"]').click();
+  await expect(two.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "6");
+  await expect(three.locator('[data-merge="team"]:visible')).toHaveCount(3);
+  await expect(page.locator("[data-grid] tbody tr")).toHaveCount(6);
+  await expect(page.locator("[data-selection]")).toHaveText("No row selected");
+});
+
+test("row-block store controls move and copy whole records independently of the employee demo", async ({ page }) => {
+  const two = page.locator('[data-block-grid="two"]');
+  const three = page.locator('[data-block-grid="three"]');
+  const codes = two.locator('[data-field="code"]');
+  await two.locator("[data-select-row]").first().click();
+  await page.locator('[data-block-action="last"]').click();
+  await expect(codes).toHaveText(["R2", "R3", "R4", "R1"]);
+  await expect(three.locator('[data-field="code"]')).toHaveText(["R2", "R3", "R4", "R1"]);
+  await page.locator('[data-block-action="first"]').click();
+  await expect(codes.first()).toHaveText("R1");
+  await page.locator('[data-block-action="copy"]').click();
+  await expect(codes).toHaveText(["R1", "R2", "R3", "R4", "R5"]);
+  await expect(two.locator("tbody tr")).toHaveCount(10);
+  await expect(three.locator("tbody tr")).toHaveCount(15);
+  await two.locator('[data-field="notes"]').last().fill("Copy only");
+  await two.locator('[data-field="notes"]').last().blur();
+  await expect(three.locator('[data-field="notes"]').last()).toHaveValue("Copy only");
+  await expect(two.locator('[data-field="notes"]').first()).toHaveValue("Morning handoff");
+  await three.locator("[data-row-action]").last().click();
+  await expect(page.locator("[data-block-status]")).toContainText("Inspect RowId 5: Ada, Copy only");
+  await page.locator('[data-block-action="reset"]').click();
+  await expect(codes).toHaveText(["R1", "R2", "R3", "R4"]);
+  await expect(two.locator("tbody tr")).toHaveCount(8);
+  await expect(three.locator("tbody tr")).toHaveCount(12);
+  await expect(page.locator('[data-block-action="copy"]')).toBeDisabled();
+  await expect(page.locator("[data-block-state]")).toContainText('"selected": null');
+  await expect(page.locator("[data-grid] tbody tr")).toHaveCount(6);
+  await expect(page.locator("[data-changes]")).toHaveText("[]");
 });

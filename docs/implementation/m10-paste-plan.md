@@ -8,7 +8,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field, draft and view owner
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable row store
@@ -16,7 +16,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion
-    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
+    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
   - id: evidence
     resource: evidence/m107-verification.json
     title: Frozen M10.7 source, commands, artifact and results

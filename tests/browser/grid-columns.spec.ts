@@ -29,7 +29,7 @@ declare global {
 }
 
 const source = (path: string) => `/@fs/${fileURLToPath(new URL(path, import.meta.url)).replaceAll("\\", "/")}`;
-const modules = { grid: source("../../src/ui/grid.ts"), data: source("../../src/data/index.ts") };
+const modules = { grid: source("../../src/ui/grid.ts"), data: source("../../src/data/index.ts"), columns: source("../../src/ui/grid-columns.ts") };
 const markup = `<caption>Assignments</caption>
   <colgroup span="1"></colgroup><colgroup span="2"></colgroup><colgroup><col style="width:160px"></colgroup>
   <thead><tr><th scope="col" data-column="name" rowspan="2">Name</th>
@@ -396,6 +396,126 @@ test("flat columns move freely and late rows use current topology without rebind
       difference: table.outerHTML === original ? null : { original, actual: table.outerHTML } };
   }, modules);
   expect(result).toEqual({ hidden: "150", order: ["quantity", "label"], text: ["150", "Ada"], restored: true, difference: null });
+});
+
+test("authored row blocks preserve focused span cells through column changes", async ({ page }) => {
+  const result = await page.evaluate(async modules => {
+    const { bindGrid } = await import(modules.grid);
+    const table = document.createElement("table");
+    table.innerHTML = '<thead><tr><th scope="col" data-column="name">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="choice">Choice</th></tr></thead>' +
+      '<tbody data-row-template><tr><th scope="row" data-column="name" rowspan="0"><button type="button" data-select-row><span data-field="name"></span></button></th>' +
+      '<td data-columns="team choice" colspan="2"><label>Team <input data-field="profile.team"></label></td></tr>' +
+      '<tr><td data-column="team"><span data-field="salary"></span></td><td data-column="choice"><label>Choice <select data-field="choice" data-options="options" data-option-label="label" data-option-value="code"></select></label></td></tr></tbody>';
+    document.body.append(table);
+    const original = table.outerHTML;
+    const handle = bindGrid(table, { rows: window.columnFixture.rows });
+    const input = table.querySelector<HTMLInputElement>("tbody input")!;
+    input.focus(); input.setSelectionRange(1, 4);
+    const observer = new MutationObserver(() => {});
+    observer.observe(table, { childList: true, subtree: true });
+    handle.setColumns([{ key: "team" }, { key: "choice" }, { key: "name" }]);
+    const detachedFocusedCell = observer.takeRecords().some(record => [...record.removedNodes].some(node => node === input || node.contains(input)));
+    observer.disconnect();
+    const focused = document.activeElement === input;
+    const caret = [input.selectionStart, input.selectionEnd];
+    const topology = [...table.tBodies[0].rows].map(row => [...row.cells].map(cell => cell.dataset.column ?? cell.dataset.columns));
+    const span = table.querySelector<HTMLTableCellElement>("tbody [data-column=name]")!.rowSpan;
+    const beforeFailure = table.outerHTML;
+    let invalid = "";
+    try { handle.setColumns([{ key: "team" }, { key: "name" }, { key: "choice" }]); }
+    catch (cause) { invalid = (cause as { code: string }).code; }
+    const atomic = table.outerHTML === beforeFailure;
+    handle.setColumns(handle.columns().map((column: GridColumn) => ({ ...column, hidden: column.key !== "name" })));
+    const hidden = !input.isConnected;
+    const focusRecovered = table.contains(document.activeElement) && document.activeElement !== input;
+    handle.setColumns(handle.columns().map(({ key }: GridColumn) => ({ key })));
+    const sameInput = table.querySelector("tbody input") === input;
+    const sameRows = table.tBodies[0].rows.length === 4;
+    handle.dispose();
+    const restored = table.outerHTML === original;
+    table.remove();
+    return { detachedFocusedCell, focused, caret, topology, span, invalid, atomic, hidden, focusRecovered, sameInput, sameRows, restored };
+  }, modules);
+  expect(result).toEqual({ detachedFocusedCell: false, focused: true, caret: [1, 4],
+    topology: [["team choice", "name"], ["team", "choice"], ["team choice", "name"], ["team", "choice"]],
+    span: 2, invalid: "GRID_COLUMNS", atomic: true, hidden: true, focusRecovered: true, sameInput: true, sameRows: true, restored: true });
+});
+
+test("body span topology fails before column ownership and allows a corrected retry", async ({ page }) => {
+  const result = await page.evaluate(async modules => {
+    const { bindGridColumns } = await import(modules.columns);
+    const cases = [
+      '<tr><td data-column="name" rowspan="3"></td><td data-column="team"></td></tr><tr><td data-column="team"></td></tr>',
+      '<tr><td data-column="name" rowspan="2"></td><td data-column="team"></td></tr><tr><td data-column="name"></td><td data-column="team"></td></tr>',
+      '<tr><td data-column="name" rowspan="2"></td><td data-column="team"></td></tr><tr></tr>',
+      '<tr><td data-columns="name team" colspan="2" rowspan="2"></td></tr><tr><td data-column="team"></td></tr>'
+    ];
+    return cases.map(markup => {
+      const table = document.createElement("table");
+      table.innerHTML = `<tbody>${markup}</tbody>`;
+      document.body.append(table);
+      const original = table.outerHTML;
+      let code = "";
+      try { bindGridColumns(table, [...table.tBodies[0].rows], undefined); }
+      catch (cause) { code = (cause as { code: string }).code; }
+      const untouched = table.outerHTML === original;
+      table.innerHTML = '<tbody><tr><td data-column="name" rowspan="0"></td><td data-column="team"></td></tr><tr><td data-column="team"></td></tr></tbody>';
+      const corrected = table.outerHTML;
+      const owner = bindGridColumns(table, [...table.tBodies[0].rows], undefined);
+      owner.dispose();
+      const retried = table.outerHTML === corrected;
+      table.remove();
+      return { code, untouched, retried };
+    });
+  }, modules);
+  expect(result).toEqual(Array(4).fill({ code: "GRID_COLUMN_MARKUP", untouched: true, retried: true }));
+});
+
+test("column attachment owns and releases an entire authored row block", async ({ page }) => {
+  const result = await page.evaluate(async modules => {
+    const { bindGridColumns } = await import(modules.columns);
+    const table = document.createElement("table");
+    table.innerHTML = '<thead><tr><th data-column="name">Name</th><th data-column="team">Team</th></tr></thead>' +
+      '<tbody><tr><td data-column="name" rowspan="0"><input value="Ada"></td><td data-column="team">Platform</td></tr><tr><td data-column="team"><input value="Second line"></td></tr></tbody>';
+    document.body.append(table);
+    const original = table.outerHTML;
+    const templates = [...table.tBodies[0].rows];
+    const owner = bindGridColumns(table, templates, undefined);
+    const rows = templates.map(row => row.cloneNode(true) as HTMLTableRowElement);
+    rows[0].cells[0].rowSpan = 2;
+    const input = rows[0].querySelector("input")!;
+    for (const row of rows) table.tBodies[0].append(row);
+    owner.setColumns([{ key: "team" }, { key: "name" }]);
+    const release = owner.attach(rows);
+    const order = [...rows[0].cells].map(cell => cell.dataset.column);
+    input.focus();
+    owner.setColumns(owner.columns().map((column: GridColumn) => ({ ...column, hidden: column.key === "name" })));
+    const focusMovedWithinBlock = document.activeElement === rows[1].querySelector("input");
+    owner.setColumns(owner.columns().map(({ key }: GridColumn) => ({ key })));
+    const mergeCell = rows[0].querySelector<HTMLTableCellElement>("[data-column=name]")!;
+    mergeCell.rowSpan = 4;
+    owner.setColumns([{ key: "name" }, { key: "team" }]);
+    const compiledTopology = mergeCell.rowSpan === 4;
+    mergeCell.rowSpan = 2;
+    let duplicate = "";
+    try { owner.attach(rows); } catch (cause) { duplicate = (cause as { code: string }).code; }
+    release(); release();
+    const releasedOrder = [...rows[0].cells].map(cell => cell.dataset.column);
+    rows[1].cells[0].dataset.column = "name";
+    let malformed = "";
+    try { owner.attach(rows); } catch (cause) { malformed = (cause as { code: string }).code; }
+    rows[1].cells[0].dataset.column = "team";
+    const retryRelease = owner.attach(rows);
+    const sameInput = rows[0].querySelector("input") === input;
+    retryRelease();
+    for (const row of rows) row.remove();
+    owner.dispose();
+    const restored = table.outerHTML === original;
+    table.remove();
+    return { order, focusMovedWithinBlock, compiledTopology, duplicate, releasedOrder, malformed, sameInput, restored };
+  }, modules);
+  expect(result).toEqual({ order: ["team", "name"], focusMovedWithinBlock: true, compiledTopology: true, duplicate: "GRID_COLUMNS", releasedOrder: ["name", "team"],
+    malformed: "GRID_COLUMN_MARKUP", sameInput: true, restored: true });
 });
 
 test("implicit columns do not add ordering restrictions around an authored middle group", async ({ page }) => {

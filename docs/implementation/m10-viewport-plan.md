@@ -8,19 +8,19 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field, view, draft and selection integration
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: paste
     resource: m10-paste-plan.md
     title: Completed atomic paste contract
-    git_blob: c489cebd6afaf3a695f79292fa9ca104da82a34f
+    git_blob: 102967beaef66f4d82511049ac1b65677e943c73
   - id: parity
     resource: feature-parity-plan.md
     title: Required viewport and remaining parity
-    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
+    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured window and scroll ownership
-    git_blob: 4a6d52ef382fb5da76a8fe47d4bfafbd3b6a1b1f
+    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
   - id: browser
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Logical scopes, geometry, drafts, accessibility and lifecycle regressions
@@ -28,11 +28,11 @@ sources:
   - id: unit
     resource: ../../tests/grid-viewport.test.ts
     title: Window boundary and overscan calculations
-    git_blob: 5cb50921ceafecd680ff94e0f3aaca4700b11bfa
+    git_blob: a007af3f632dabfcfbd43e3baf955806c959151b
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Completed operation timing, live geometry and post-GC DOM counters
-    git_blob: 9b54dc88ddbde2fd3d68e9cc19af6412048d8185
+    git_blob: 3e720fc86181e9f6d61422c575390a626946b643
   - id: evidence
     resource: evidence/m108-verification.json
     title: Frozen M10.8 source, commands, artifact and results

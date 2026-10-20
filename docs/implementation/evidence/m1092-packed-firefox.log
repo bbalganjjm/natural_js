@@ -1,0 +1,7 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test:packed-browser
+> node tools/check-packed-browser.mjs --tarball D:\workspace\natural_js\node_modules\.cache\m1092-artifact\bbalganjjm-natural_js-2.0.0-beta.0.tgz --sha256 10fb7f8ea71ee36c798c015ca179ef47962ff815a870394ddcd96e51b6f7488e --browser firefox
+
+
+added 1 package in 2s
+Packed browser consumer passed (firefox 155.0, win32, SHA-256 10fb7f8ea71ee36c798c015ca179ef47962ff815a870394ddcd96e51b6f7488e).

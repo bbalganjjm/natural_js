@@ -24,11 +24,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: grid-columns
     resource: ../../src/ui/grid-columns.ts
     title: Private Grid column topology and resize ownership
-    git_blob: 320875af9ad09ea42e98898a1f745b3cec69d652
+    git_blob: 874fca4953ffe70a2ef3b8e7001968da66bf89c4
   - id: grid-selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid active identity, sets, eligibility, and transitions
@@ -40,7 +40,11 @@ sources:
   - id: grid-viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured Grid window and scroll lifetime
-    git_blob: 4a6d52ef382fb5da76a8fe47d4bfafbd3b6a1b1f
+    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+  - id: grid-blocks
+    resource: ../../src/ui/grid-row-blocks.ts
+    title: Private authored record structure and native merge ownership
+    git_blob: 4b3c9f899394bb8f73327cac498d3aa03f3db72f
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
@@ -125,10 +129,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -168,7 +172,7 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 `grid-filters.ts` owns raw JSON-scalar column filter state and distinct choice counts under the manual and other-column filters before paging. Its public result is `GridFilterChoice`. Grid connects authored header multiple selects to the existing `bindSelect`, preserving raw number/string identity, search-hidden selections and original control ownership; it adds no second Select implementation. Grid also routes authored sort buttons through its existing sorting path and resolves row actions against current Rows identity. Application eligibility, sort and filter functions stay pure; domain comparators and filter values remain caller-owned.[^grid-filters][^grid][^select][^ui]
 
-`grid-viewport.ts` owns only measured heights, prefix offsets, native spacer placement, authored scroll-root anchoring and observer/frame cleanup. Grid owns logical projection, mounted bindings, offscreen validation/paste and the single focused-row pin. One inline viewport option and `reveal(id)` expose the required behavior; there is no shared virtual-list engine, loader registry or new public type. Measurements use logical RowIds, independent of DOM IDs, with current single-tr limits explicit for later grouped blocks.[^grid-viewport][^grid][^ui]
+`grid-viewport.ts` owns measured logical-record heights, prefix offsets, native spacer placement, authored scroll-root anchoring and observer/frame cleanup. It observes the complete physical tr block for each RowId. `grid-row-blocks.ts` owns template extraction/restoration, finite authored spans and temporary adjacent native merges with measured height floors; it does not own field state. Grid owns projection, mounted bindings, offscreen validation/paste and the single focused-record pin. These are private owners used by one Grid flow; no shared virtual-list/merge engine, loader registry or public type is added. See [Grid](grid.md) for the authored markup and boundary rules.[^grid-viewport][^grid-blocks][^grid][^ui]
 
 A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
@@ -185,6 +189,7 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 [^grid-selection]: Private Grid active identity, sets, eligibility, and transitions
 [^grid-filters]: Private Grid scalar filter state and choice counts
 [^grid-viewport]: Private measured Grid window and scroll lifetime
+[^grid-blocks]: Private authored record structure and native merge ownership
 [^grid]: Grid binding
 [^list]: List binding
 [^select]: Standalone Select binding

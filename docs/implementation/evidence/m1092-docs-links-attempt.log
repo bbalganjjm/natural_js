@@ -1,0 +1,7 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 docs:check
+> node tools/knowledge-docs/knowledge-docs.mjs check --changed
+
+docs/implementation/m10-row-blocks-plan.md:123: error link-broken: link target 'evidence/m1092-docs-changed.log' does not exist
+docs/implementation/m10-row-blocks-plan.md:123: error link-broken: link target 'evidence/m1092-docs-full.log' does not exist
+knowledge-docs: 55 concepts, 5 reserved files | 2 errors, 0 warnings (link-broken 2)

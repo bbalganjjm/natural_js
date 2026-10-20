@@ -12,7 +12,7 @@
     <header>
       <p class="eyebrow">Natural-JS 2.x</p>
       <h1>Grid contract demo</h1>
-      <p>Try every implemented Grid option and method against one authored table. Select an active row before using store actions; Inspect works on its own row. The state below shows raw data, not formatted display text.</p>
+      <p>Try every implemented Grid option and method against the employee table. The row-block examples below share a separate store across two authored layouts. Select an active row before using store actions; Inspect works on its own row. The state below shows raw data, not formatted display text.</p>
     </header>
 
     <div class="workspace">
@@ -279,9 +279,79 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
       </section>
     </div>
 
-    <section class="future" aria-label="Remaining required Grid features">
-      <h2>Remaining required features</h2>
-      <p>Viewport rendering is available above. Remaining Grid parity includes grouped and merged row blocks; local paging remains separate from viewport rendering.</p>
+    <section class="future" data-block-demo aria-label="Authored row blocks and adjacent merges">
+      <h2>Authored row blocks and adjacent merges</h2>
+      <p>Each record occupies two rows in the first layout and three in the second. Edit Name, Notes or the nested Shift choice in either table to update the other. Adjacent Department values merge first; Team values merge only within the same Department. Store actions use the last record selected in either layout.</p>
+      <fieldset>
+        <legend>Shared record actions</legend>
+        <label>Department <input data-block-department value="Engineering" data-block-needs-selection disabled></label>
+        <label>Team <input data-block-team value="Platform" data-block-needs-selection disabled></label>
+        <div class="button-row">
+          <button type="button" data-block-action="keys" data-block-needs-selection disabled>Apply merge keys</button>
+          <button type="button" data-block-action="first" data-block-needs-selection disabled>Move to first</button>
+          <button type="button" data-block-action="last" data-block-needs-selection disabled>Move to end</button>
+          <button type="button" data-block-action="copy" data-block-needs-selection disabled>Copy to end</button>
+          <button type="button" data-block-action="reset">Reset shared records</button>
+        </div>
+      </fieldset>
+      <p class="status"><output data-block-status role="status">Select a record in either layout.</output></p>
+
+      <h3>Two rows per record</h3>
+      <div class="grid-scroll" role="region" aria-label="Two-row assignment layout" tabindex="0">
+        <table data-block-grid="two">
+          <caption>Assignments with notes beneath each name and shift</caption>
+          <thead><tr>
+            <th scope="col" data-column="record">Record</th>
+            <th scope="col" data-column="department">Department</th>
+            <th scope="col" data-column="team">Team</th>
+            <th scope="col" data-column="person">Name</th>
+            <th scope="col" data-column="shift">Shift</th>
+          </tr></thead>
+          <tbody data-row-template>
+            <tr>
+              <th scope="row" data-column="record" rowspan="0"><button type="button" data-select-row>Select <span data-field="code"></span></button></th>
+              <td data-column="department" data-merge="department" rowspan="0"><span data-field="department"></span></td>
+              <td data-column="team" data-merge="team" rowspan="0"><span data-field="team"></span></td>
+              <td data-column="person"><label>Name <input data-field="name" required></label></td>
+              <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
+                data-option-label="meta.label" data-option-value="code" required></select></label></td>
+            </tr>
+            <tr><td data-columns="person shift" colspan="2"><label>Notes <textarea data-field="notes" rows="2"></textarea></label>
+              <output data-error-for="name"></output></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Three rows per record</h3>
+      <div class="grid-scroll" role="region" aria-label="Three-row assignment layout" tabindex="0">
+        <table data-block-grid="three">
+          <caption>The same assignments with notes first and record actions last</caption>
+          <thead><tr>
+            <th scope="col" data-column="record">Record</th>
+            <th scope="col" data-column="department">Department</th>
+            <th scope="col" data-column="team">Team</th>
+            <th scope="col" data-column="person">Name</th>
+            <th scope="col" data-column="shift">Shift</th>
+          </tr></thead>
+          <tbody data-row-template>
+            <tr>
+              <th scope="row" data-column="record" rowspan="3"><button type="button" data-select-row>Select <span data-field="code"></span></button></th>
+              <td data-column="department" data-merge="department" rowspan="3"><span data-field="department"></span></td>
+              <td data-column="team" data-merge="team" rowspan="3"><span data-field="team"></span></td>
+              <td data-columns="person shift" colspan="2"><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
+            </tr>
+            <tr>
+              <td data-column="person"><label>Name <input data-field="name" required></label></td>
+              <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
+                data-option-label="meta.label" data-option-value="code" required></select></label></td>
+            </tr>
+            <tr><td data-columns="person shift" colspan="2"><button type="button" data-row-action="inspect">Inspect record</button>
+              <label class="check-label"><input type="checkbox" data-check-row> Check record</label><output data-error-for="name"></output></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Shared Rows snapshots</h3>
+      <pre data-block-state tabindex="0">Not bound yet.</pre>
       <p><a href="./columns.html">Compare column behavior in two independent CVC layouts</a>.</p>
     </section>
   </main>

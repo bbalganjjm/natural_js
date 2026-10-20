@@ -1,0 +1,91 @@
+
+Running 270 tests using 1 worker
+
+
+
+[1/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener
+[2/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:99:1 › two MDI workspaces keep unique IDs and resolvable ARIA references
+[3/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:112:1 › vertical Tabs skip disabled buttons and keep manual activation
+[4/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › side MDI and open Popup pass automated WCAG-tagged checks
+[5/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › stack MDI and open Popup pass automated WCAG-tagged checks
+[6/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › side Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[7/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › side data UI remains keyboard-operable at 320px
+[8/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › stack Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[9/270] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › stack data UI remains keyboard-operable at 320px
+[10/270] [firefox] › tests\browser\datepicker.spec.ts:24:1 › DatePicker compiles authored weeks once and restores markup, IDs, and ownership
+[11/270] [firefox] › tests\browser\datepicker.spec.ts:61:1 › calendar keyboard preserves leap-day intent, week order, selection, and roving focus
+[12/270] [firefox] › tests\browser\datepicker.spec.ts:95:1 › limits constrain keyboard and pointer selection without emitting programmatic changes
+[13/270] [firefox] › tests\browser\datepicker.spec.ts:134:1 › Monday weeks and extreme years use UTC calendar days across daylight-saving dates
+[14/270] [firefox] › tests\browser\datepicker.spec.ts:169:1 › locale labels retain the Gregorian ISO calendar
+[15/270] [firefox] › tests\browser\datepicker.spec.ts:192:1 › invalid dates, locale, markup, and repeated IDs fail before changing authored nodes
+[16/270] [firefox] › tests\browser\datepicker.spec.ts:229:1 › application date selection updates nested Form rows through native input events
+[17/270] [firefox] › tests\browser\datepicker.spec.ts:259:1 › authored calendar exposes an accessible grid before and after keyboard navigation
+[18/270] [firefox] › tests\browser\documents.spec.ts:21:1 › documents reuse keys, reload with the original factory, isolate MDI, and restore authored markup
+[19/270] [firefox] › tests\browser\documents.spec.ts:84:1 › malformed page handles release their partial work and Tabs restores authored alert nodes
+[20/270] [firefox] › tests\browser\documents.spec.ts:152:1 › close during reload waits for the original page cleanup before removing its panel
+[21/270] [firefox] › tests\browser\documents.spec.ts:188:1 › superseded documents abort, failures recover the previous page, and retained entries retry
+[22/270] [firefox] › tests\browser\documents.spec.ts:235:1 › close guards deduplicate, refusal and errors preserve pages, and disposal cancels a pending guard
+[23/270] [firefox] › tests\browser\documents.spec.ts:296:1 › closing an inactive document does not wait for or cancel another pending selection
+[24/270] [firefox] › tests\browser\documents.spec.ts:326:1 › a present close guard must explicitly return a boolean before a document is removed
+[25/270] [firefox] › tests\browser\documents.spec.ts:353:1 › horizontal document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[26/270] [firefox] › tests\browser\documents.spec.ts:353:1 › vertical document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[27/270] [firefox] › tests\browser\documents.spec.ts:388:1 › invalid repeated templates fail atomically before binding and the root can be corrected
+[28/270] [firefox] › tests\browser\form-m6.spec.ts:3:1 › Form keeps choice groups raw, accessible, and scoped to their MDI forms
+[29/270] [firefox] › tests\browser\form-m6.spec.ts:99:1 › local Form reads group values and rejects ambiguous declarations
+[30/270] [firefox] › tests\browser\form.spec.ts:3:1 › Form keeps invalid edits out of Rows and exposes authored errors accessibly
+[31/270] [firefox] › tests\browser\form.spec.ts:106:1 › local Form reads nested fields and row validation leaves another bound row alone
+[32/270] [firefox] › tests\browser\form.spec.ts:147:1 › Form retains invalid drafts by row and resolves cross-field candidates
+[33/270] [firefox] › tests\browser\form.spec.ts:211:1 › built-in Form rules keep raw values and direct fill replaces formatted text
+[34/270] [firefox] › tests\browser\form.spec.ts:241:1 › parser failures retain drafts and null raw values can format
+[35/270] [firefox] › tests\browser\form.spec.ts:291:1 › local file input validates its filename and row-bound file input fails clearly
+[36/270] [firefox] › tests\browser\form.spec.ts:342:1 › built-in required rejects an unchecked checkbox and custom required can override it
+[37/270] [firefox] › tests\browser\form.spec.ts:376:1 › visible and hidden Form drafts obey native text length constraints
+[38/270] [firefox] › tests\browser\form.spec.ts:413:1 › Form clears a committed draft after a subscriber error but keeps a rejected draft
+[39/270] [firefox] › tests\browser\form.spec.ts:469:1 › Form rejects display formatters on controls without text display semantics
+[40/270] [firefox] › tests\browser\form.spec.ts:491:1 › hidden Form length checks use entered text before parsing
+[41/270] [firefox] › tests\browser\form.spec.ts:526:1 › external Rows.set clears stale Form errors without running validators in its subscriber
+[42/270] [firefox] › tests\browser\form.spec.ts:578:1 › untouched stored text has the same visible and hidden length result
+[43/270] [firefox] › tests\browser\form.spec.ts:602:1 › validate commits a draft made valid by an external row update without rebinding
+[44/270] [firefox] › tests\browser\grid-columns.spec.ts:80:1 › column changes keep field nodes, nested raw choices, selection and caret
+[45/270] [firefox] › tests\browser\grid-columns.spec.ts:104:1 › hidden columns keep drafts across row release and preserve native visible groups
+[46/270] [firefox] › tests\browser\grid-columns.spec.ts:129:1 › invalid replacement is atomic and returned state is immutable
+[47/270] [firefox] › tests\browser\grid-columns.spec.ts:155:1 › width-only updates leave row topology, focus and data untouched
+[48/270] [firefox] › tests\browser\grid-columns.spec.ts:173:1 › sort indicators on hidden headers and exact dispose restoration work
+[49/270] [firefox] › tests\browser\grid-columns.spec.ts:190:1 › keyboard resize reports one coherent change and resets preferred width
+[50/270] [firefox] › tests\browser\grid-columns.spec.ts:205:1 › pointer resize commits once, cancellation restores state and teardown releases capture
+[51/270] [firefox] › tests\browser\grid-columns.spec.ts:230:1 › malformed topology and bind failures leave original markup available for retry
+[52/270] [firefox] › tests\browser\grid-columns.spec.ts:258:1 › returning the resize pointer to its start restores the preview without notifying
+[53/270] [firefox] › tests\browser\grid-columns.spec.ts:273:1 › callback failures keep the successful state and failed data binding can be retried
+[54/270] [firefox] › tests\browser\grid-columns.spec.ts:297:1 › no-column tables retain their behavior and state methods have clear bounds
+[55/270] [firefox] › tests\browser\grid-columns.spec.ts:319:1 › column hiding and paging skip hidden, inert and CSS-hidden focus candidates
+[56/270] [firefox] › tests\browser\grid-columns.spec.ts:351:1 › two CVC layouts expose working column tools and remain isolated and accessible
+[57/270] [firefox] › tests\browser\grid-columns.spec.ts:376:1 › flat columns move freely and late rows use current topology without rebinding fields
+[58/270] [firefox] › tests\browser\grid-columns.spec.ts:401:1 › authored row blocks preserve focused span cells through column changes
+[59/270] [firefox] › tests\browser\grid-columns.spec.ts:444:1 › body span topology fails before column ownership and allows a corrected retry
+[60/270] [firefox] › tests\browser\grid-columns.spec.ts:474:1 › column attachment owns and releases an entire authored row block
+[61/270] [firefox] › tests\browser\grid-columns.spec.ts:521:1 › implicit columns do not add ordering restrictions around an authored middle group
+[62/270] [firefox] › tests\browser\grid-initial-page.spec.ts:13:1 › initialPage renders only its slice, copies input, clamps, and preserves the no-option default
+[63/270] [firefox] › tests\browser\grid-initial-page.spec.ts:77:1 › invalid initialPage leaves authored template and Select ownership untouched; setPage failure is atomic
+[64/270] [firefox] › tests\browser\grid-initial-page.spec.ts:128:1 › initialPage keeps off-page identity and validation while deferring invalid row options
+[65/270] [firefox] › tests\browser\grid-initial-page.spec.ts:181:1 › two initial-page Grids keep nested choices and generated error IDs isolated, then rebind cleanly
+[66/270] [firefox] › tests\browser\grid-initial-page.spec.ts:243:1 › off-page formatter failure rolls back page and releases its new Select before retry
+[67/270] [firefox] › tests\browser\grid-initial-page.spec.ts:299:1 › off-page Select option failure rolls back and releases its new clone before retry
+[68/270] [firefox] › tests\browser\grid-initial-page.spec.ts:350:1 › initial-page draft and focus survive a page-away and return without duplicate IDs
+[69/270] [firefox] › tests\browser\grid-lifetime.spec.ts:13:1 › Grid releases visited pages while restoring the selected row, draft, and error
+[70/270] [firefox] › tests\browser\grid-lifetime.spec.ts:105:1 › offscreen validation text clears on external set, revert, remove, and replace
+[71/270] [firefox] › tests\browser\grid-m6.spec.ts:14:1 › Grid text and checkbox edits keep typed nested raw values
+[72/270] [firefox] › tests\browser\grid-m6.spec.ts:61:1 › Grid parse failure stays with RowId through paging and clears on revert
+[73/270] [firefox] › tests\browser\grid-m6.spec.ts:118:1 › Grid sort and page state use authored headings and restore focus
+[74/270] [firefox] › tests\browser\grid-m6.spec.ts:163:1 › Grid rejects ambiguous controls before changing authored markup
+[75/270] [firefox] › tests\browser\grid-m6.spec.ts:195:1 › Form and Grid parsers see one unparsed input snapshot
+[76/270] [firefox] › tests\browser\grid-m6.spec.ts:240:1 › Grid and List keep keyboard focus when a disabled row leaves the page
+[77/270] [firefox] › tests\browser\grid-paste.spec.ts:119:1 › a matrix preserves IDs and untouched snapshots and publishes one complete batch
+[78/270] [firefox] › tests\browser\grid-paste.spec.ts:139:1 › an invalid last cell rejects every write and preserves current input and draft state
+[79/270] [firefox] › tests\browser\grid-paste.spec.ts:156:1 › all parsers see entered values and all validators see the complete parsed candidate
+[80/270] [firefox] › tests\browser\grid-paste.spec.ts:176:1 › unrelated nested drafts participate in validation without being committed
+[81/270] [firefox] › tests\browser\grid-paste.spec.ts:190:1 › quoted TSV handles tabs, escaped quotes, multiline values, CRLF and one final terminator
+[82/270] [firefox] › tests\browser\grid-paste.spec.ts:203:1 › malformed, overflowing and HTML-invalid matrices never truncate or partially write
+[83/270] [firefox] › tests\browser\grid-paste.spec.ts:218:1 › current column order, hidden fields, filtered order and page bounds determine mapping
+[84/270] [firefox] › tests\browser\grid-paste.spec.ts:239:1 › protected positions consume clipboard cells while typed nested choices retain their raw type
+(node:17536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

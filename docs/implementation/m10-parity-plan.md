@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature scope and dependency order
-    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
+    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
   - id: coverage
     resource: feature-parity.md
     title: Remaining Grid behavior families
-    git_blob: d56c7421cb82ffbbf5322211552e4994ed3d1eb3
+    git_blob: a2bde6a387d048e332eb7b57fa4540e4f3782e62
   - id: data
     resource: ../../src/data/index.ts
     title: Shared row identity, order and immutable changes
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid projection, drafts and mounted lifetime
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: ordering-browser
     resource: ../../tests/browser/rows-ordering.spec.ts
     title: Shared order, draft, focus and viewport regressions
@@ -32,7 +32,7 @@ sources:
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Settled viewport and identity-preserving move measurements
-    git_blob: 9b54dc88ddbde2fd3d68e9cc19af6412048d8185
+    git_blob: 3e720fc86181e9f6d61422c575390a626946b643
   - id: evidence
     resource: evidence/m1091-verification.json
     title: Frozen M10.9.1 source, commands, artifact and results
@@ -40,10 +40,10 @@ sources:
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured logical-row viewport
-    git_blob: 4a6d52ef382fb5da76a8fe47d4bfafbd3b6a1b1f
-generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 ---
 
 # Goal
@@ -54,13 +54,13 @@ Complete G01-G20 without replacing CVC, authored HTML/CSS or the small role modu
 
 M10.8 is pushed at 96b4295. Its immutable record preserves 95 units, 242 full cases in each required engine, five installed-browser consumers of the same 153-file artifact, and passing binding/viewport budgets. The preceding checkpoint was rechecked without recertifying it: all sixteen log hashes and the exact tarball match; thirteen archived target-source raw hashes and HEAD-normalized content match. HEAD newline variants plus archived source reproduce twenty-one of twenty-eight historical source hashes; seven excluded mixed-newline fixture/helper originals are unavailable and are not counted as reproduced. New gates use explicit UTF-8 CRLF-to-LF source fingerprints, with byte-exact log/archive hashes, to make subsequent resumption portable. Historical records remain unchanged; fresh gates certify this slice.
 
-The existing Grid uses one tr per RowId. A RowId's authored tr group must stay indivisible for binding/measurement. Design adjacent repeated-value merging alongside those groups, including column topology, row references, focus, spacers and native table indices. An equal-value run may exceed the viewport; merging must not force the entire run into mounted DOM. Specify continuation at window/page boundaries in M10.9.2 before implementation. Complete shared ordered-row operations first, as required by the dependency plan.[^grid][^viewport][^parity]
+M10.9.1 completed the shared ordered-row foundation. M10.9.2 now implements an authored tr group as one indivisible RowId for binding/measurement, together with adjacent repeated-value merging, column topology, focus, spacers and native table indices. Equal-value runs may exceed the viewport; merging stays inside consecutive mounted/page boundaries. Its contract and current gates are in [the row-block plan](m10-row-blocks-plan.md). Later slices remain required.[^grid][^viewport][^parity]
 
 # Steps
 
 | Slice | Work and owner | Completion boundary |
 |---|---|---|
-| M10.9.1 Ordered shared rows — current delivery | Data-owned insertion, move and independent copy. Grid/List/Form/Tree consume the same store order and stable identities. Preserve selection/check order, drafts, issues, focused nodes and caret/composition; extend the existing Grid demo. | Invalid calls change nothing; successful operations notify once; no-ops preserve caches; nested copies are independent; sort/filter/page/viewport and shared UI remain correct. This closes the ordered-operation foundation of G02/U07, not their entire feature families. |
+| M10.9.1 Ordered shared rows — verified | Data-owned insertion, move and independent copy. Grid/List/Form/Tree consume the same store order and stable identities. Preserve selection/check order, drafts, issues, focused nodes and caret/composition; extend the existing Grid demo. | Invalid calls change nothing; successful operations notify once; no-ops preserve caches; nested copies are independent; sort/filter/page/viewport and shared UI remain correct. This closes the ordered-operation foundation of G02/U07, not their entire feature families. |
 | M10.9.2 Authored row blocks and merging | Plan one logical RowId across multiple authored tr elements and adjacent data-driven merging with explicit window/page continuation. Keep fields/columns/ARIA/focus/viewport consistent without mounting an unbounded equal-value run. | Two different authored layouts, grouped headers/footers, native row/column spans, split/merge after edits and sorting/filtering/paging, offscreen paste/validation, bounded viewport and teardown. No copied header or flattened business data. |
 | M10.9.3 Controls, display and validation interaction | Complete Grid-native/group input coverage with the Form-owned semantics, consistent programmatic length constraints, explicit image/custom display, exclusive checks and validation reveal/keyboard behavior. | Stored/raw/display values, nested groups, failure drafts, document-unique IDs and accessible keyboard interactions match the owning contracts. Reuse real shared behavior without a generic renderer/rule registry. |
 | M10.9.4 Status and row lifecycle | Changed/deleted visibility, authored defaults/creation, row/bind hooks, append/progressive-load integration and empty/result markup. | Stable identity and callback ordering through failure/reentrancy/disposal; deleted-row behavior and view scopes are explicit. Business row factories/loaders stay application-owned. |
@@ -110,11 +110,11 @@ Work-cost observations: the public surface is one optional add target, two metho
 
 # Next action
 
-Prepare M10.9.2's authored multi-tr/merge contract and representative HTML/TS before implementation. Treat one RowId's tr elements as an indivisible measured unit. Specify adjacent-value merge continuation at window/page boundaries without mounting an unbounded run, preserving column topology, fields, native ARIA, drafts, focus and offscreen paste. Keep every later slice, other-component parity and P0 semantic/dynamic closure required. No new omission, publication, release tag or actual token-saving claim is approved here.
+M10.9.2's [recorded gates](m10-row-blocks-plan.md) are complete. Prepare M10.9.3 control/display/validation contracts against the relevant 1.x behavior. Keep every later slice, other-component parity and P0 semantic/dynamic closure required. No new omission, publication, release tag or actual token-saving claim is approved here.
 
 # Open questions
 
-Manual assistive-technology and real OS clipboard integration remain unverified; real macOS/iOS Safari remains excluded. Actual token telemetry and equivalent-task comparisons remain unavailable until the later fixed AI evaluation. Subsequent multi-tr/merge public APIs are not yet specified or implemented.
+Manual assistive-technology and real OS clipboard integration remain unverified; real macOS/iOS Safari remains excluded. Actual token telemetry and equivalent-task comparisons remain unavailable until the later fixed AI evaluation. Authored block/merge markup is now implemented; its final verification belongs to the separate stage plan rather than the historical M10.9.1 record above.
 
 [^parity]: Required feature scope and dependency order
 [^coverage]: Remaining Grid behavior families

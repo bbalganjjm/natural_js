@@ -21,11 +21,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime
-    git_blob: 4a6d52ef382fb5da76a8fe47d4bfafbd3b6a1b1f
+    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
   - id: viewport-browser
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Viewport scope, focus and lifecycle regressions

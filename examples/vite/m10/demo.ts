@@ -444,5 +444,77 @@ locale.addEventListener("change", () => {
   status.textContent = "Locale changed; selection and uncommitted edits were cleared. Blank Team shows the new rule message.";
   refresh();
 });
-window.addEventListener("pagehide", () => { grid?.dispose(); stopRows(); rows.dispose(); }, { once: true });
+type BlockRecord = {
+  readonly code: string;
+  readonly department: string;
+  readonly team: string;
+  readonly name: string;
+  readonly notes: string;
+  readonly assignment: Employee["assignment"];
+};
+
+const blockValues: readonly BlockRecord[] = Array.from({ length: 4 }, (_, index) => {
+  const value = employee(index);
+  return { code: `R${index + 1}`, department: index < 3 ? "Engineering" : "Operations",
+    team: index === 2 ? "Support" : "Platform", name: value.name, notes: value.notes, assignment: value.assignment };
+});
+const blockRows = createRows(blockValues);
+const blockRoot = find<HTMLElement>("[data-block-demo]");
+const blockStatus = find<HTMLOutputElement>("[data-block-status]");
+const blockState = find<HTMLElement>("[data-block-state]");
+const blockDepartment = find<HTMLInputElement>("[data-block-department]");
+const blockTeam = find<HTMLInputElement>("[data-block-team]");
+let blockId: number | null = null;
+
+function refreshBlocks(): void {
+  const record = blockId === null ? undefined : blockRows.get(blockId);
+  for (const control of blockRoot.querySelectorAll<HTMLButtonElement | HTMLInputElement>("[data-block-needs-selection]")) {
+    control.disabled = !record;
+  }
+  if (record) { blockDepartment.value = record.value.department; blockTeam.value = record.value.team; }
+  blockState.textContent = JSON.stringify({ selected: blockId, records: blockRows.entries() }, null, 2);
+}
+
+const blockGrids = [...blockRoot.querySelectorAll<HTMLTableElement>("[data-block-grid]")].map(element => bindGrid(element, {
+  rows: blockRows,
+  paste: true,
+  onSelect({ id, row }) {
+    blockId = id;
+    blockStatus.textContent = row ? `Selected RowId ${id}: ${row.value.name}. Store actions update both layouts.`
+      : "Select a record in either layout.";
+    refreshBlocks();
+  },
+  onRowAction({ id, row }) { blockStatus.textContent = `Inspect RowId ${id}: ${row.value.name}, ${row.value.notes}`; }
+}));
+const stopBlocks = blockRows.subscribe(event => {
+  blockStatus.textContent = `${event.type} updated both layouts.`;
+  refreshBlocks();
+});
+
+blockRoot.addEventListener("click", event => {
+  const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>("[data-block-action]") : null;
+  if (!button) return;
+  try {
+    if (button.dataset.blockAction === "reset") { blockId = null; blockRows.replace(blockValues); return; }
+    if (blockId === null) throw new Error("Select a record in either layout first.");
+    switch (button.dataset.blockAction) {
+      case "keys": blockRows.setMany([{ id: blockId, values: { department: blockDepartment.value, team: blockTeam.value } }]); break;
+      case "first": blockRows.move(blockId, blockRows.entries()[0]?.id); break;
+      case "last": blockRows.move(blockId); break;
+      case "copy": {
+        const id = blockRows.copy(blockId);
+        blockRows.set(id, "code", `R${id}`);
+        blockGrids[0].select(id);
+        break;
+      }
+    }
+  } catch (cause) { blockStatus.textContent = cause instanceof Error ? cause.message : String(cause); }
+});
+refreshBlocks();
+
+window.addEventListener("pagehide", () => {
+  grid?.dispose(); stopRows(); rows.dispose();
+  for (const handle of blockGrids) handle.dispose();
+  stopBlocks(); blockRows.dispose();
+}, { once: true });
 bind();

@@ -1,0 +1,457 @@
+{
+  "date": "2026-10-20",
+  "milestone": "M10.9.2",
+  "baseline_commit": "839be0ad167fb6f0ae00c980021543975497c970",
+  "source_normalization": "UTF-8; CRLF normalized to LF",
+  "sources_sha256": {
+    "src/ui/grid.ts": "d30cc0fbe205f670876447dd8688e945d61718581fc763b6d64bbbfadb9f6710",
+    "src/ui/grid-paste.ts": "e0a102940b5f55c6966e6b4617a3adac8790fdc5afc7ef589a41cb4b574cbec8",
+    "src/ui/form.ts": "a0df85c92407f08545aeb79f0b85f966ec2189a73b6c183e2c47a7e03bc9240d",
+    "src/ui/list.ts": "8f0aaf8b14a8c94d4f147ae2655371e3336e4f6cfcc5c0e2ff97451b1d8553ff",
+    "src/ui/grid-selection.ts": "2c91b9a9bbe3e2676b51a5fd2034151a38473983e9ef716acb278a737ae48f2f",
+    "src/ui/grid-filters.ts": "87099c05a591403be2584ac1d17b5ce2d2d2356bf565f016a6035e18f8910887",
+    "src/ui/index.ts": "47c128cdad73036db0dad91470ba4d375dddbb1ea9311c2a9b0c59ae7624b885",
+    "src/ui/select.ts": "b584b7e4adfa98345ffa717adc60b85d80e1b8db1ca3ebe1b9e7ce2f06215f0c",
+    "src/ui/grid-columns.ts": "c5708a4ffb719d84a90dd1fcb94f58f35976e12fc665fe42f3b75ec532957b23",
+    "src/ui/dom-state.ts": "2f7326f36ae4efd8a2022a38228c1baae4834436b592aa8a4dc2e7544fa6796d",
+    "src/data/index.ts": "6635a25de82902ce4ccefecd95919eab95603e477748e33d2aa65a5d6055a1b5",
+    "tests/browser/grid-selection.spec.ts": "26bc7a80e7c9f0194034331a8d73a4f2f90c4b26b5d9e472eb604116f60458ba",
+    "tests/browser/grid-paste.spec.ts": "992da5d9f015b9cc9c6a1fec61051a6d70c618220eebf0bbbebf7e725ab9ed54",
+    "tests/grid-paste.test.ts": "3345a370a2bf87576b29e1a2552ebaa28cf362251b1abefedc5f3d9f61ce6cbd",
+    "tests/rows.test.ts": "c555082bd4912020ab3ea5bb9750ffaebc63e171517c465067f361d0906cd598",
+    "tests/consumers/js/check.mjs": "defdcc0e1eb9319b5d1c27a7246de57aaff59ab704206f081e5489fd4ee10122",
+    "tests/browser/m10-demo.spec.ts": "82fdd8886b517a0ef61a014b36fd8c00e7bb26d690730e4e226f71024efc904d",
+    "examples/vite/m10/demo.html": "52c04ae3e1c5b30b121442fe06b3edd674378598c2c2f5b20df6557fa91de415",
+    "examples/vite/m10/demo.ts": "64c758eff796eb56d36c93787432860674af9aedc76cf5fb2482a274aec0cfac",
+    "examples/vite/m10/demo.css": "c7b307f6b62369afd93630a1e204a9b9775a7da127a8b86b3090c99a11b8ca24",
+    "tests/consumers/browser/main.js": "c34cca7e41b4801cf632877c5a0a2dd5276748bcf5f58c6a17e5c0adc80294ed",
+    "tests/consumers/ts/check.ts": "7a922c46fbcfd4064ff1bcb1b23c81b35ee4ca3de0320692667bc1b4b18188ab",
+    "tools/check-packed-browser.mjs": "236b5c30c1839adbdb74e01a1407807808166fa0ac0ba8ee4c651afaaccd4590",
+    "README.md": "aff23e5d6ac819a8e558e388c0940ff6301778798a565502eb2e513b4d3b8ad7",
+    "src/ui/grid-viewport.ts": "1fa2b43877929149ac9c122449d5ac569da657bc54c7cae57e4f1db3fea4aa55",
+    "tests/grid-viewport.test.ts": "023b6e0b6f0f904bfa1eaf58cfd45bf8928ccba816225beb4c225998d5d32b48",
+    "tests/browser/grid-viewport.spec.ts": "61efa7d7c9449f523cce5dab8a5b4d5654ea5d36e9e8c7a6e7e78da6a6cc101b",
+    "tools/benchmark-grid-viewport.mjs": "d4046a44ccbb32f83ddec966c1f44274e72561d2ba66edbd5788e0d059ed9c4c",
+    "tests/browser/rows-ordering.spec.ts": "3b5fa9eb57443ac23ecaa8144965b306bf24f659c04d2b8eef723daaa63a5af9",
+    "src/ui/grid-row-blocks.ts": "ab193c36430f363663988586318409b0b377b4e190acead12f36677f26c2a538",
+    "tests/browser/grid-row-blocks.spec.ts": "2c532bf52aa109cc65eaa3cfed81f2afc335041197ccdb76668e2793423d5e7b"
+  },
+  "artifact": {
+    "sha256": "10fb7f8ea71ee36c798c015ca179ef47962ff815a870394ddcd96e51b6f7488e",
+    "files": 158,
+    "packed_bytes": 254389,
+    "unpacked_bytes": 1255017,
+    "all_members_match_frozen_workspace": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "publication": "not performed"
+  },
+  "commands": {
+    "record_file": "m1092-gates.jsonl",
+    "records": 23,
+    "final_gate_records": 16,
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true,
+    "superseded": [
+      {
+        "label": "build",
+        "exit_code": 0,
+        "log": "m1092-build.log"
+      },
+      {
+        "label": "types",
+        "exit_code": 0,
+        "log": "m1092-types.log"
+      },
+      {
+        "label": "example-types",
+        "exit_code": 0,
+        "log": "m1092-example-types.log"
+      },
+      {
+        "label": "unit",
+        "exit_code": 0,
+        "log": "m1092-unit.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 0,
+        "log": "m1092-browser-chromium.log"
+      },
+      {
+        "label": "browser-firefox",
+        "exit_code": 4294967295,
+        "log": "m1092-browser-firefox.log"
+      },
+      {
+        "label": "viewport-performance",
+        "exit_code": 1,
+        "log": "m1092-viewport-performance.log"
+      }
+    ],
+    "note": "First Chromium completed successfully on the pre-review source. The provisional Firefox child was intentionally interrupted to correct independently reproduced media/frame merging; it is retained, never counted as a passing gate. All final runtime and browser fixtures use the corrected frozen source.",
+    "post_gate_fixture_revision": {
+      "file": "tools/benchmark-grid-viewport.mjs",
+      "before_sha256": "fac2d5afb3cea6b456704d529e7cc6b7710ae953375a325ddece91411a181f57",
+      "after_sha256": "d4046a44ccbb32f83ddec966c1f44274e72561d2ba66edbd5788e0d059ed9c4c",
+      "unchanged_runtime_and_browser_fixture_files": 30,
+      "earlier_unaffected_gate_labels": [
+        "build",
+        "types",
+        "example-types",
+        "unit",
+        "browser-chromium",
+        "browser-firefox",
+        "browser-webkit",
+        "pack",
+        "consumers",
+        "packed-chromium",
+        "packed-firefox",
+        "packed-webkit",
+        "packed-chrome",
+        "packed-edge",
+        "binding-performance"
+      ],
+      "reason": "The first blocks benchmark placed a name field between its intended score/note clipboard targets. Move that display before the score input so the declared two-field paste reaches note in authored row-major order. Runtime, package, browser fixtures, all assertions, sample counts and predeclared budgets stay unchanged. Only the affected viewport benchmark is rerun; each retained gate still matches all files it actually executes."
+    }
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "example_types": "pass; Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 104
+    },
+    "new_row_block_cases": 15,
+    "new_column_cases": 3,
+    "new_demo_cases": 2,
+    "full_suites": {
+      "chromium": {
+        "passed": 270,
+        "elapsed": "1.4m",
+        "log": "m1092-browser-chromium-2.log"
+      },
+      "firefox": {
+        "passed": 270,
+        "elapsed": "3.0m",
+        "log": "m1092-browser-firefox-2.log"
+      },
+      "webkit": {
+        "passed": 270,
+        "elapsed": "2.5m",
+        "log": "m1092-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "log": "m1092-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "log": "m1092-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "log": "m1092-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "155.0.8059.85",
+        "passed": true,
+        "log": "m1092-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "155.0.4283.62",
+        "passed": true,
+        "log": "m1092-packed-edge.log"
+      }
+    ],
+    "installed_blocks": "One authored tbody, finite normalized source rowspan=0, native cross-record merges, secondary-row actions, nested raw Select paste, stable focused nodes across move and exact teardown."
+  },
+  "performance": {
+    "binding": {
+      "log": "m1092-binding-performance.log",
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 15.5,
+            "rebind": 18.40000000037253,
+            "edit": 0.8000000007450581,
+            "sort": 2.200000001117587,
+            "filter": 1
+          },
+          "budgets_ms": {
+            "initial": 30,
+            "rebind": 35,
+            "edit": 5,
+            "sort": 10,
+            "filter": 8
+          }
+        },
+        {
+          "kind": "nested-auto",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 43.30000000074506,
+            "rebind": 56.79999999888241,
+            "sort": 6.800000000745058,
+            "filter": 3.099999999627471
+          },
+          "budgets_ms": {
+            "initial": 90,
+            "rebind": 100,
+            "sort": 25,
+            "filter": 18
+          }
+        }
+      ]
+    },
+    "viewport": {
+      "log": "m1092-viewport-performance-2.log",
+      "method": {
+        "count": 5000,
+        "kinds": [
+          "flat",
+          "nested",
+          "blocks"
+        ],
+        "runs": 5,
+        "warmup": 2,
+        "rootHeight": 400,
+        "estimate": 48,
+        "overscan": 3,
+        "mountedBound": 80,
+        "blocks": {
+          "physicalRowsPerRecord": 2,
+          "estimate": 80,
+          "mountedBound": 64,
+          "pasteRecords": 100,
+          "merge": "Adjacent scalar group keys span complete two-row records; each native merge stays inside a consecutive mounted segment."
+        },
+        "timing": "Rows and authored HTML prepared outside timing. Each operation includes two successive stable animation-frame geometry observations; fail after fifteen frames.",
+        "focus": "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
+        "paste": "Flat/nested paste one thousand offscreen records; blocks paste one hundred. Each changes two fields in one atomic event; nested detail uses numeric Select values.",
+        "move": "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
+        "geometry": "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies the complete requested record rectangle and forward scroll advances logical intersection. Blocks record native physical-row heights, record bounds and merge spans; twenty cycle windows record actual intersections.",
+        "cleanup": "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
+        "memory": "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim.",
+        "cleanupBudget": {
+          "nodes": 8,
+          "jsEventListeners": 0,
+          "documents": 0
+        },
+        "budgets": "Host-relative Chromium medians declared before measurement; other engines report samples without applying Chromium thresholds."
+      },
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 17.40000000037253,
+            "reveal": 65.90000000037253,
+            "scroll": 83,
+            "columns": 50.79999999888241,
+            "paste": 33,
+            "move": 63.29999999888241,
+            "dispose": 24.90000000037253
+          },
+          "budgets_ms": {
+            "initial": 120,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100
+          },
+          "maximum_physical_rows": 14,
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "nested",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 7.700000001117587,
+            "reveal": 64.09999999962747,
+            "scroll": 83,
+            "columns": 50.5,
+            "paste": 33.69999999925494,
+            "move": 63.100000001490116,
+            "dispose": 20
+          },
+          "budgets_ms": {
+            "initial": 180,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100
+          },
+          "maximum_physical_rows": 14,
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "blocks",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 17,
+            "reveal": 65.59999999962747,
+            "scroll": 49.70000000111759,
+            "columns": 50.30000000074506,
+            "paste": 33.80000000074506,
+            "move": 62.5,
+            "dispose": 5.599999999627471
+          },
+          "budgets_ms": {
+            "initial": 35,
+            "reveal": 100,
+            "scroll": 120,
+            "columns": 100,
+            "paste": 85,
+            "move": 100
+          },
+          "maximum_physical_rows": 24,
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        }
+      ]
+    },
+    "limits": "Same-host completed DOM operations in headless Chromium; DOM counters do not certify JavaScript heap retention, universal speed, equivalent AI task speed or token savings."
+  },
+  "review": {
+    "baseline": "Independent reviewer reconstructed 29 M10.9.1 normalized source hashes, all 16 raw logs and the exact preceding 153-file artifact. No historical evidence changed.",
+    "source": "Column and viewport owners, independent legacy contract review and a separate complete change reviewer checked shared identity, native spans, logical paste, geometry, focus and release.",
+    "corrections": "Reject native media/frame/focus controls in merge cells before DOM ownership; width-only documentation distinguishes column width work from Grid merge/viewport geometry. Independent reviewer reproduced both corrections.",
+    "documents": "Approved before verified stamps: Grid/demo/architecture/migration and stage/current/parent/coverage/execution plans match implementation and raw evidence. Independent review verifies 31 current source hashes, all 23 raw logs, 16 final gates, exact archive members, medians/budgets and unchanged assertions; reversing only the two authored benchmark lines reconstructs the exact old fixture hash.",
+    "reviewers": [
+      "m1092_columns",
+      "m1092_viewport",
+      "m1092_legacy_contract",
+      "m1092_review"
+    ]
+  },
+  "log_sha256": {
+    "m1092-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1092-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1092-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1092-unit.log": "cb29d44606c9b030403b2715faf38b3bc04d30acaca7b9b829c77625c92e4a8d",
+    "m1092-browser-chromium.log": "df40566092bf5cb88249e2465b474bdd009fe1fdbe55079674521d38ca18de88",
+    "m1092-browser-firefox.log": "be7f70481a23637ae3558e67fb28da8e077ad5e3e0743055ad2cc57f9547e438",
+    "m1092-build-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1092-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1092-example-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1092-unit-2.log": "7207edab76ea72ba72c32a97b49f313d7a8da49c1f455567fb6351b27d4d6163",
+    "m1092-pack.log": "e56b6e202d01bb69f1e20d323b387b6740a8aa6f582c224ba613f4b5cadf0cd2",
+    "m1092-browser-chromium-2.log": "6d2f1995ec61835efd74dee5815c2181cadb779f745b04d732e7ca02b9574fe1",
+    "m1092-consumers.log": "395449254bb7943ad30bcaeb3d12a87c60749f28543fe430695959a0086cc2ca",
+    "m1092-packed-chromium.log": "1c82b28da951448bdfa87b6c0738999213975101fb3c85c7e4e568022693a64f",
+    "m1092-packed-firefox.log": "21661bf298fba1741efdad940c9245f0fd0fc31b04fd47025548f82096d9fb06",
+    "m1092-packed-webkit.log": "e2da8dd8cc34c2123461bbcc7b29fca3c8f7031e5ba11d5f38aa3a577d964f99",
+    "m1092-packed-chrome.log": "cafb1e8e38464dd342ae63fe9df605ae06c883dd37558ac26a0b2969123f2577",
+    "m1092-packed-edge.log": "afc8150bcc87c4adacef8da4775b2a17321b08ed8c81fd3100c1dc7786b81aec",
+    "m1092-browser-firefox-2.log": "4b553c84d7fd738b1f327a7ec151ef4f7c36d368f4dd46f3dd3eba1e01076d15",
+    "m1092-browser-webkit.log": "057d09038bede73365b7a0705b2154d8828f7fea640ea37959d395f361945f46",
+    "m1092-binding-performance.log": "ea68d3c346e70be3387911a57b7ce23f06952049f3985f7d4601956d66c9c3c1",
+    "m1092-viewport-performance.log": "08b210b8684b0fdc2b1e151427e1e91d4ccd58d2eb0a16490d409b652952d7f6",
+    "m1092-viewport-performance-2.log": "ec6aeb64045f45c0264ddcb5ab545c338198ba6f47b791d26d9c682c09e9d87e"
+  },
+  "limits": [
+    "CSS-only font/line-height shrink with no table/root geometry notification waits for the next normal Grid update; explicitly documented and marked shortcut.",
+    "Manual assistive technology, personal acceptance and actual OS IME/clipboard remain unverified; actual macOS/iOS Safari is excluded.",
+    "Only M10.9.2 authored record blocks and merging is completed. Remaining Grid/component parity and P0 semantic/dynamic closure remain required; no new omission is approved.",
+    "No npm publication/release tags/master/v1 changes; no actual token telemetry, equivalent fixed agent task or JavaScript heap-retention claim."
+  ]
+}

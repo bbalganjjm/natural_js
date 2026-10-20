@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: d56c7421cb82ffbbf5322211552e4994ed3d1eb3
+    git_blob: a2bde6a387d048e332eb7b57fa4540e4f3782e62
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,11 +16,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: ba504741040aa19c0839c80fa895ebc290c44244
+    git_blob: 6e9d2434002929beb69898bc2fd65a7af20252b7
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 7e37f97c01820ecdaff97428406f428cecffb6f7
+    git_blob: 3976836b6a1e5f37fdff5223f60d7772e523e862
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -28,14 +28,14 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
     git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
-generated: { by: codex/gpt-6, at: 2026-10-20T11:46:42Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T11:46:42Z }
+  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -115,7 +115,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. Its final gates pass within that contract; M10.9.1 ordered shared Rows is verified within [the detailed M10.9 plan](m10-parity-plan.md); prepare authored multi-tr/merge contracts next, then continue the remaining required slices. Preserve remaining stages and publication deferral.
+Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. M10.9.1 ordered shared Rows and [M10.9.2 authored row blocks/merging](m10-row-blocks-plan.md) are complete within [the detailed M10.9 plan](m10-parity-plan.md). Prepare M10.9.3 native control/display/validation contracts, then continue the remaining required slices. Preserve remaining stages and publication deferral.
 
 # Decisions
 

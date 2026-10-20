@@ -8,15 +8,15 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required full framework and Grid scope
-    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
+    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field ownership and row lifetime
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
-    git_blob: 320875af9ad09ea42e98898a1f745b3cec69d652
+    git_blob: 874fca4953ffe70a2ef3b8e7001968da66bf89c4
   - id: dom-state
     resource: ../../src/ui/dom-state.ts
     title: Shared restoration and available-control focus
@@ -24,7 +24,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/grid-columns.spec.ts
     title: Column state, resize, failure and lifetime regressions
-    git_blob: d36cd2d5df6ed96b280f7fa8eb560ad3ef94fc72
+    git_blob: 32ae71084783b69f9b4116c80a98a6ab21a2f582
   - id: example
     resource: ../../examples/vite/m10/columns.ts
     title: Two independent column CVC instances

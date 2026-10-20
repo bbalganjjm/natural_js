@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-10-20T13:29:36.890Z",
+  "status": "passed",
+  "tarball": "bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+  "sha256": "10fb7f8ea71ee36c798c015ca179ef47962ff815a870394ddcd96e51b6f7488e",
+  "members": 158,
+  "byte_exact_workspace_matches": 158,
+  "unpacked_bytes": 1255017,
+  "runtime_dependencies": 0,
+  "public_entries": [
+    ".",
+    "./page",
+    "./data",
+    "./ui",
+    "./comm"
+  ],
+  "runtime_modules": 31,
+  "all_runtime_modules_reachable": true,
+  "private_public_exports": [],
+  "private_subpaths_blocked": 8,
+  "forbidden_paths": [],
+  "jquery_runtime_matches": [],
+  "latest_source_gates": [
+    {
+      "label": "build",
+      "log": "m1092-build-2.log",
+      "sources": 31,
+      "normalized_sha_match": true,
+      "log_sha_match": true
+    },
+    {
+      "label": "types",
+      "log": "m1092-types-2.log",
+      "sources": 31,
+      "normalized_sha_match": true,
+      "log_sha_match": true
+    },
+    {
+      "label": "example-types",
+      "log": "m1092-example-types-2.log",
+      "sources": 31,
+      "normalized_sha_match": true,
+      "log_sha_match": true
+    },
+    {
+      "label": "unit",
+      "log": "m1092-unit-2.log",
+      "sources": 31,
+      "normalized_sha_match": true,
+      "log_sha_match": true
+    }
+  ],
+  "member_list_sha256": "54cf631af96efa1cd9be9f48e83ec94e3560ce24c5c5a5bc59eb306aeba756f7",
+  "public_exports": {
+    ".": [
+      "FrameworkError"
+    ],
+    "./page": [
+      "mountPage"
+    ],
+    "./data": [
+      "createRows"
+    ],
+    "./ui": [
+      "bindDatePicker",
+      "bindDocuments",
+      "bindForm",
+      "bindGrid",
+      "bindList",
+      "bindNotify",
+      "bindPagination",
+      "bindSelect",
+      "bindTabs",
+      "bindTree",
+      "openPopup"
+    ],
+    "./comm": [
+      "createCommunicator"
+    ]
+  },
+  "constraints": "Read-only workspace audit; only this ignored cache JSON written; no install, tests, perf, Git, code or docs edits."
+}

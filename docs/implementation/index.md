@@ -28,6 +28,7 @@
 * [Natural-JS 2.0 M9 release plan](m9-plan.md) - Approved beta, release-candidate, and 2.0.0 gates for installed consumers, browsers, accessibility, performance, package scope, and publication. (draft)
 * [Natural-JS 2.0 M9 unpublished beta artifact](m9-beta-report.md) - Exact beta tarball, installed-consumer, browser, accessibility, performance, package, and agent checks before release-candidate review. (draft)
 * [Natural-JS 2.0 M10 advanced Grid parity plan](m10-plan.md) - Required Grid feature parity and release gates on authored native tables, with historical implementation and measurement records. (draft)
+* [Natural-JS 2.0 M10.9.2 authored row blocks and merging](m10-row-blocks-plan.md) - Implement authored multi-tr records and hierarchical native cell merging without expanding measured viewport windows. (draft)
 * [Natural-JS 2.x M11 Tree and DatePicker plan](m11-plan.md) - Approved authored-HTML Tree and DatePicker scope, ownership, accessibility, and verification gates. (draft)
 * [Natural-JS 2.0 master roadmap](roadmap.md) - Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.
 

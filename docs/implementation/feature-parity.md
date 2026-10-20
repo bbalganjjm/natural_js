@@ -48,7 +48,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
+    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -116,7 +116,7 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 |---|---|---|
 | G01 | data, bind, add, remove, revert, val, update | Partial: shared CRUD/change tracking exists; selected/checked projections, append completion and template-default creation need coverage. |
 | G02 | addTop, indexed add, move, copy | M10.9.1 adds insertion before a live RowId, identity-preserving movement and deeply independent committed-value copy in shared Rows. Native order, tombstones, no-ops, one notification and value reversion are explicit in [the detailed plan](m10-parity-plan.md). Template defaults and UI/dynamic option closure remain required; this does not close the entire family. |
-| G03 | tbody template, contextBodyTemplate | Partial: current Grid accepts one tr per record. Multi-line row groups and template customization need identity/lifetime contracts. |
+| G03 | tbody template, contextBodyTemplate | M10.9.2 implements authored tbody multi-tr records alongside the existing single tr form. One RowId owns the complete block, nested fields, actions, drafts, columns and measured viewport lifetime; see [the row-block contract](m10-row-blocks-plan.md). Remaining dynamic template-option equivalence still needs P0 semantic closure. |
 | G04 | Row Form radio/checkbox groups, multiple Select and input types | Partial: text/number/checkbox/textarea/single Select exist; complete the native control matrix and grouped raw values. |
 | G05 | Row Form img.src and html rendering | Missing: display currently uses value/textContent. Add explicit image and authored rich-content/renderer binding while keeping text the default. |
 | G06 | validate, declarative rules, focusout/Enter and validate-scroll | Core rules/drafts/off-page validation exist; interaction and reveal-error equivalence remains open. |
@@ -130,7 +130,7 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G14 | resizable/resize, show/hide, more column chooser | Partial: M10.5 implements state, preferred width, pointer/keyboard resize, reorder and show/hide with authored controls. Legacy chooser/options/callback edge closure remains open; no omission approved. Reorder is an explicit added requirement. |
 | G15 | vResizable/vResize, scroll lock and action-driven scroll | Missing height-resize interaction and reveal policies; authored CSS may supply dimensions/containment. |
 | G16 | more detail Form/Popup, previous/next validation | Missing integrated row detail behavior. Existing Popup/Form are its foundations. |
-| G17 | data-rowspan, rowSpanIds, grid.rowSpan | Missing data-driven repeated-value merging; authored header spans are a different behavior. |
+| G17 | data-rowspan, rowSpanIds, grid.rowSpan | M10.9.2 implements display-only raw-key hierarchical native merging, recomputed on the current projection and split at mounted/page/focus boundaries. Natural physical-row heights are preserved without expanding equal-value runs. The [row-block contract](m10-row-blocks-plan.md) retains later legacy option/dynamic semantic closure. |
 | G18 | pastiable, grid.paste, readonly/disabled handling | M10.7 implements quoted plaintext paste through existing raw parsing/rules, typed nested choices, protected field positions and one atomic Rows batch. Explicit overflow, stale preparation and validation failures preserve stored values and drafts; see [the detailed plan](m10-paste-plan.md). Full option/dynamic parity remains subject to P0 closure. |
 | G19 | createRowDelay, scrollPaging, append binding | M10.8 adds measured variable-height viewport rendering, bounded mounted rows with one focused pin, logical-page checks/paste and append-compatible RowId anchoring. See [the detailed contract](m10-viewport-plan.md). Data loading remains application-owned; legacy scheduling/progressive-loading option and dynamic closure remain open. initialPage and cache release alone are not virtualization. |
 | G20 | rowHandlerBeforeBind/rowHandler/onBind, empty display, hover | Partial lifetime/CSS behavior exists; row hooks and empty/result/status markup need contracts. |
@@ -191,7 +191,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. Continue [M10.9](m10-parity-plan.md) with the ordered Rows foundation before indivisible multi-row templates/merges and viewport integration. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. [M10.9.1](m10-parity-plan.md) ordered Rows and [M10.9.2](m10-row-blocks-plan.md) indivisible authored row blocks/merging are complete. Prepare M10.9.3 native control/display/validation contracts next. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
 
 # Decisions
 

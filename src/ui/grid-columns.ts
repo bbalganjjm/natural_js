@@ -14,6 +14,7 @@ interface RowPlan {
   children: readonly Node[];
   cells: readonly CellPlan[];
   connected: readonly HTMLTableCellElement[];
+  group?: readonly RowPlan[];
 }
 interface ColPlan {
   element: HTMLTableColElement;
@@ -45,12 +46,14 @@ function sameNodes(left: readonly Node[], right: readonly Node[]): boolean {
 /** Private column owner; field descriptors must be mapped before attach moves cells. */
 export function bindGridColumns(
   root: HTMLTableElement,
-  template: HTMLTableRowElement,
+  templates: readonly HTMLTableRowElement[],
   initial: readonly GridColumn[] | undefined,
   onChange?: (change: { columns: readonly GridColumn[]; event: Event | null }) => void
 ) {
   if (onChange !== undefined && typeof onChange !== "function") fail("GRID_COLUMNS", "onColumnsChange must be a function.");
-  const managed = initial !== undefined || [...template.cells].some(cell => cell.hasAttribute("data-column"));
+  if (!templates.length) fail("GRID_COLUMN_MARKUP", "A row template needs at least one authored row.");
+  const templateRows = new Set(templates);
+  const managed = initial !== undefined || templates.some(row => [...row.cells].some(cell => cell.hasAttribute("data-column") || cell.hasAttribute("data-columns")));
   const empty = Object.freeze([]) as readonly GridColumn[];
   if (!managed) {
     return {
@@ -58,32 +61,31 @@ export function bindGridColumns(
       setColumns(columns: readonly GridColumn[]) {
         if (!Array.isArray(columns) || columns.length) fail("GRID_COLUMNS", "This Grid has no managed columns.");
       },
-      attach: (_row: HTMLTableRowElement) => noop,
+      attach: (_rows: readonly HTMLTableRowElement[]) => noop,
       dispose: noop
     };
   }
   if (ownedRoots.has(root)) fail("GRID_COLUMNS", "The table already has a column owner.");
-  const keys = [...template.cells].map(cell => {
-    const key = cell.getAttribute("data-column");
-    if (!key || /\s/u.test(key) || cell.hasAttribute("data-columns") || cell.colSpan !== 1) {
-      fail("GRID_COLUMN_MARKUP", "Every template cell needs one data-column key and colspan=1.", key ? [key] : []);
-    }
-    return key;
-  });
-  if (!keys.length || new Set(keys).size !== keys.length) {
-    fail("GRID_COLUMN_MARKUP", "Template column keys must be nonempty and unique.", keys);
-  }
-  const keySet = new Set(keys);
-  function membership(element: Element): string[] {
+  function declaredKeys(element: Element): string[] {
     const leaf = element.getAttribute("data-column");
     const group = element.getAttribute("data-columns");
     if ((leaf === null) === (group === null)) {
       fail("GRID_COLUMN_MARKUP", "Use either data-column or data-columns on a managed cell.");
     }
     const members = leaf === null ? group!.trim().split(/\s+/u) : [leaf];
-    if (members.some(key => !keySet.has(key)) || new Set(members).size !== members.length) {
-      fail("GRID_COLUMN_MARKUP", "Column membership needs unique known keys.", members);
+    if (members.some(key => !key || /\s/u.test(key)) || new Set(members).size !== members.length) {
+      fail("GRID_COLUMN_MARKUP", "Column membership needs nonempty unique keys.", members);
     }
+    return members;
+  }
+  const keys = [...templates[0].cells].flatMap(declaredKeys);
+  if (!keys.length || new Set(keys).size !== keys.length) {
+    fail("GRID_COLUMN_MARKUP", "Template column keys must be nonempty and unique.", keys);
+  }
+  const keySet = new Set(keys);
+  function membership(element: Element): string[] {
+    const members = declaredKeys(element);
+    if (members.some(key => !keySet.has(key))) fail("GRID_COLUMN_MARKUP", "Column membership needs unique known keys.", members);
     return members;
   }
   function compileRow(row: HTMLTableRowElement): RowPlan {
@@ -101,11 +103,10 @@ export function bindGridColumns(
     });
     return { row, children: [...row.childNodes], cells, connected: cells.map(cell => cell.element) };
   }
-  const rows = new Set<RowPlan>([...root.rows].filter(row => row !== template).map(compileRow));
-  const cellGroups = [...rows].flatMap(plan => plan.cells).filter(cell => cell.keys.length > 1);
-  function checkSection(section: HTMLTableSectionElement | null): void {
-    if (!section) return;
-    const sectionRows = [...section.rows];
+  const rows = new Set<RowPlan>([...root.rows].filter(row => !templateRows.has(row)).map(compileRow));
+  const cellGroups = [...[...rows].flatMap(plan => plan.cells.map(cell => cell.keys)),
+    ...templates.flatMap(row => [...row.cells].map(membership))].filter(members => members.length > 1);
+  function checkRows(sectionRows: readonly HTMLTableRowElement[]): void {
     const carried = new Map<string, number>();
     for (const [index, row] of sectionRows.entries()) {
       const covered = new Set(carried.keys());
@@ -113,21 +114,26 @@ export function bindGridColumns(
       for (const [key, remaining] of carried) if (remaining > 1) next.set(key, remaining - 1);
       for (const cell of row.cells) {
         const members = membership(cell);
+        if (cell.hasAttribute("data-column") && cell.colSpan !== 1) fail("GRID_COLUMN_MARKUP", "A leaf cell needs colspan=1.", members);
         const span = cell.rowSpan === 0 ? sectionRows.length - index : cell.rowSpan;
         if (span > sectionRows.length - index) fail("GRID_COLUMN_MARKUP", "A rowspan extends beyond its authored row group.", members);
         for (const key of members) {
-          if (covered.has(key)) fail("GRID_COLUMN_MARKUP", "Header or footer spans overlap a column.", [key]);
+          if (covered.has(key)) fail("GRID_COLUMN_MARKUP", "Authored spans overlap a column.", [key]);
           covered.add(key);
           if (span > 1) next.set(key, span - 1);
         }
       }
-      if (covered.size !== keys.length) fail("GRID_COLUMN_MARKUP", "Each header and footer row must cover every column, including carried rowspans.", keys.filter(key => !covered.has(key)));
+      if (covered.size !== keys.length) fail("GRID_COLUMN_MARKUP", "Each authored row must cover every column, including carried rowspans.", keys.filter(key => !covered.has(key)));
       carried.clear();
       for (const [key, remaining] of next) carried.set(key, remaining);
     }
   }
-  checkSection(root.tHead);
-  checkSection(root.tFoot);
+  checkRows(templates);
+  checkRows([...root.tHead?.rows ?? []]);
+  checkRows([...root.tFoot?.rows ?? []]);
+  const templateShape = templates.map((row, index) => [...row.cells].map(cell => ({
+    keys: membership(cell), rowSpan: cell.rowSpan || templates.length - index
+  })));
   for (const plan of rows) {
     if (ownedRows.has(plan.row)) fail("GRID_COLUMNS", "A row already has a column owner.");
   }
@@ -222,7 +228,7 @@ export function bindGridColumns(
     });
     if (next.every(column => column.hidden === true)) fail("GRID_COLUMNS", "At least one column must remain visible.", keys);
     const order = new Map(next.map((column, index) => [column.key, index]));
-    for (const cell of cellGroups) checkContinuity(cell.keys, order);
+    for (const members of cellGroups) checkContinuity(members, order);
     for (const group of groups) checkContinuity(group.keys, order);
     return Object.freeze(next);
   }
@@ -258,9 +264,13 @@ export function bindGridColumns(
       else cell.element.remove();
     }
     if (!sameNodes(plan.connected, visible)) {
-      const fragment = document.createDocumentFragment();
-      for (const cell of visible) fragment.append(cell);
-      plan.row.append(fragment);
+      const focused = document.activeElement;
+      let cursor: Node | null = null;
+      for (let index = visible.length - 1; index >= 0; index--) {
+        const cell = visible[index];
+        if (!cell.contains(focused) && (cell.parentNode !== plan.row || cell.nextSibling !== cursor)) plan.row.insertBefore(cell, cursor);
+        cursor = cell;
+      }
       plan.connected = visible;
     }
   }
@@ -322,7 +332,7 @@ export function bindGridColumns(
     applyWidths(next, previous);
     if (focused && activeCell && !activeCell.keys.some(key => !values.get(key)!.hidden)) {
       const targetIndex = Math.min(...activeCell.keys.map(key => order.get(key)!));
-      const candidates = [...activePlan!.cells].filter(cell => cell.element.isConnected && !cell.element.hidden)
+      const candidates = (activePlan!.group ?? [activePlan!]).flatMap(plan => plan.cells).filter(cell => cell.element.isConnected && !cell.element.hidden)
         .sort((a, b) => Math.abs(Math.min(...a.keys.map(key => order.get(key)!)) - targetIndex) - Math.abs(Math.min(...b.keys.map(key => order.get(key)!)) - targetIndex));
       const rowControls = candidates.flatMap(cell => [...cell.element.querySelectorAll<HTMLElement>(controls)]);
       if (!focusAvailable(rowControls) && !focusAvailable(root.tHead?.querySelectorAll<HTMLElement>(controls) ?? [])) {
@@ -476,24 +486,32 @@ export function bindGridColumns(
       cancelDrag();
       commit(next, null);
     },
-    attach(row: HTMLTableRowElement): () => void {
+    attach(elements: readonly HTMLTableRowElement[]): () => void {
       active();
-      if (row === template || ownedRows.has(row)) fail("GRID_COLUMNS", "A row already has a column owner or is the authored template.");
-      const plan = compileRow(row);
-      if (plan.cells.length !== keys.length || plan.cells.some(cell => cell.keys.length !== 1) || plan.cells.some((cell, index) => cell.keys[0] !== keys[index])) {
-        fail("GRID_COLUMN_MARKUP", "A repeated row must retain the original template column order.", plan.cells.flatMap(cell => cell.keys));
+      if (new Set(elements).size !== elements.length || elements.some(row => templateRows.has(row) || ownedRows.has(row))) {
+        fail("GRID_COLUMNS", "A row already has a column owner or is the authored template.");
       }
-      rows.add(plan);
-      ownedRows.add(row);
+      if (elements.length !== templates.length) fail("GRID_COLUMN_MARKUP", "A repeated row group must retain its authored row count.");
+      checkRows(elements);
+      const plans = elements.map(compileRow);
+      if (plans.some((plan, index) => plan.cells.length !== templateShape[index].length || plan.cells.some((cell, cellIndex) => {
+        const authored = templateShape[index][cellIndex];
+        return cell.keys.length !== authored.keys.length || cell.keys.some((key, keyIndex) => key !== authored.keys[keyIndex]) ||
+          (cell.element.rowSpan || elements.length - index) !== authored.rowSpan;
+      }))) {
+        fail("GRID_COLUMN_MARKUP", "A repeated row group must retain the original template column topology.", plans.flatMap(plan => plan.cells.flatMap(cell => cell.keys)));
+      }
+      for (const plan of plans) { plan.group = plans; rows.add(plan); ownedRows.add(plan.row); }
       try {
-        applyRow(plan, new Map(state.map((column, index) => [column.key, index])), new Map(state.map(column => [column.key, column])));
-      } catch (cause) { rows.delete(plan); restoreRow(plan); throw cause; }
+        const order = new Map(state.map((column, index) => [column.key, index]));
+        const values = new Map(state.map(column => [column.key, column]));
+        for (const plan of plans) applyRow(plan, order, values);
+      } catch (cause) { for (const plan of plans) { rows.delete(plan); restoreRow(plan); } throw cause; }
       let released = false;
       return () => {
         if (released) return;
         released = true;
-        rows.delete(plan);
-        restoreRow(plan);
+        for (const plan of plans) { rows.delete(plan); restoreRow(plan); }
       };
     },
     dispose(): void {

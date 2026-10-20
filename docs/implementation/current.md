@@ -19,30 +19,30 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and consolidated omission review
-    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
+    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
   - id: columns
     resource: m10-columns-plan.md
     title: Implemented column state and final verification
-    git_blob: d57cf94fe1fb7d71e375536c3ae6833a55b2c14e
+    git_blob: e812677e93d3bd0c3ab960fb4b713492011b6125
   - id: selection
     resource: m10-selection-plan.md
     title: M10.6 independent selection, checks and filters
-    git_blob: a5f9c8787293a023c0a845fe6879249acdeaefed
+    git_blob: 2ada8e07a0967664da5e341df96784c4bf6cda38
   - id: paste
     resource: m10-paste-plan.md
     title: M10.7 atomic paste and final verification
-    git_blob: c489cebd6afaf3a695f79292fa9ca104da82a34f
+    git_blob: 102967beaef66f4d82511049ac1b65677e943c73
   - id: viewport
     resource: m10-viewport-plan.md
     title: M10.8 measured viewport and final verification
-    git_blob: 4333c3825c6d3621e1136881d9476f1ed4bf277d
+    git_blob: 67427e5d2027ea9c9f623003178d36bded19f14e
   - id: grid-parity
     resource: m10-parity-plan.md
     title: M10.9 ordered Rows and remaining Grid continuation
-    git_blob: 71b858430a66bd69399e3669bc937734983d37c1
-generated: { by: codex/gpt-6, at: 2026-10-20T11:46:42Z }
+    git_blob: d3856b58cb495d85c9a3dd5477dee641f6b1f55c
+generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T11:46:42Z }
+  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order and [the milestone index](index.md) for completed history. The fixed 1.x baseline is b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; its LGPL source and docs stay unchanged under v1/.
@@ -66,7 +66,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 # Next action
 
-M10.9.1 ordered shared Rows is verified under the [detailed M10.9 plan](m10-parity-plan.md). Prepare M10.9.2 authored multi-tr/merged-block contracts and representative HTML/TS before code. The remaining slices retain grouped body templates, data-driven merging, changed/deleted policies, detail navigation, bind/row hooks, append and height resize. Preserve the measured logical-row boundary and plan indivisible grouped blocks with viewport/keyboard integration before implementation. Continue P0 options/dynamic closure and prepare the consolidated omission proposal only after that review. M10.9 and other component parity remain required. Personal testing precedes separately requested release work; no npm publication or release tag.[^parity][^paste]
+M10.9.2 authored row blocks and adjacent merging is complete under [its detailed plan](m10-row-blocks-plan.md). Prepare M10.9.3 native control/display/validation interaction contracts from the relevant 1.x behavior before implementation. Later slices retain changed/deleted policies, detail navigation, bind/row hooks, append and height resize. Continue P0 options/dynamic closure and prepare the consolidated omission proposal only after that review. M10.9 and other component parity remain required. Personal testing precedes separately requested release work; no npm publication or release tag.[^parity][^paste]
 
 # Decisions
 
@@ -89,6 +89,7 @@ M10.9.1 ordered shared Rows is verified under the [detailed M10.9 plan](m10-pari
 | 2026-10-18 | M10.7 final gates | Build/types/browser-controller types, 92 units and 219/219 full tests in each engine pass. JS/TS and five Windows browsers pass the exact 148-file artifact SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Binding budgets pass; independent findings, retained failed attempts and limits stay in the stage plan. |
 | 2026-10-18 | M10.8 final gates | Build/types/browser-controller types, 95 units and 242/242 full tests in each engine pass. Installed JS/TS and five Windows browsers pass the same 153-file artifact SHA-256 487285dc347b4d763391bd2101a6dab8faee6ee313fc5162b138dbe44ecdae69. The 5,000-row viewport fixtures mount at most 14 rows and pass declared timing/ownership budgets; original binding budgets pass. Independent corrections, raw logs and measured limits stay in the [stage plan](m10-viewport-plan.md). |
 | 2026-10-20 | M10.9.1 final gates | Ordered add/move/independent copy and shared UI integration pass build/types, 102 units and 250/250 full tests per engine. JS/TS and five installed Windows browsers pass one 153-file artifact SHA-256 cdc1a545dcbf1dc9bbf149d3012acad01a3d4fdddb90f1a7f054a67cc064493e; original binding/viewport budgets and the new 5,000-row move budget pass. Exact evidence and baseline newline limits stay in [the stage plan](m10-parity-plan.md). |
+| 2026-10-20 | M10.9.2 final gates | Authored multi-tr records and hierarchical native merging pass build/types, 104 units and 270/270 full tests per engine. JS/TS and five installed Windows browsers pass one 158-file artifact SHA-256 10fb7f8ea71ee36c798c015ca179ef47962ff815a870394ddcd96e51b6f7488e. All existing budgets and the new 5,000-record/two-tr budgets pass, with at most 24 physical rows. Changed/full docs: 55 concepts, five reserved files, zero errors/warnings. Exact evidence, independent findings and the isolated benchmark fixture correction stay in [the stage plan](m10-row-blocks-plan.md). |
 
 # Open questions
 

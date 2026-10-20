@@ -2,7 +2,7 @@
 
 * [Tree and DatePicker in two CVC layouts](tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
-* [Interactive Grid contract demo](grid-demo.md) - Exercise every implemented Grid option, method, and declarative marker on one authored native table while inspecting raw Rows state. (draft)
+* [Interactive Grid contract demo](grid-demo.md) - Exercise implemented Grid contracts and two authored row-block layouts while inspecting raw Rows state. (draft)
 * [Authored advanced Grid in two layouts](advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 
 * [Natural-JS 2.0 module boundaries](architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
@@ -14,7 +14,7 @@
 * [Migrating a 1.x screen to Natural-JS 2.0](migration.md) - Move a 1.x search/list/detail screen, changed-row save, and Popup or Tab page to scoped ESM APIs. (draft)
 * [bindForm](form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, retained rules, and accessible errors. (draft)
 * [FrameworkError](framework-error.md) - Shared 2.0 error with a stable code, API name, message, cause, and optional detail. (draft)
-* [bindGrid](grid.md) - Bind an authored native table to Rows with measured viewport rendering, independent selection and checks, atomic paste, and accessible validation. (draft)
+* [bindGrid](grid.md) - Bind authored native table row blocks to Rows with adjacent merging, bounded viewport rendering, selection, paste, and accessible validation. (draft)
 * [bindList](list.md) - Bind an authored native list to Rows with read-only fields, row-local choices, selection, and paging. (draft)
 * [bindPagination](pagination.md) - Connect authored page buttons to explicit one-based page state and change requests. (draft)
 * [openPopup](popup.md) - Run one CVC page in an authored native dialog and settle its result after close and cleanup. (draft)

@@ -20,11 +20,24 @@ function assertOptions(table: HTMLTableElement, options: ViewportOptions): void 
 }
 
 /** Called before Grid acquires columns or changes authored markup. */
-export function validateGridViewport(table: HTMLTableElement, template: HTMLTableRowElement, options: ViewportOptions): void {
+export function validateGridViewport(table: HTMLTableElement, templates: readonly HTMLTableRowElement[], options: ViewportOptions): void {
   assertOptions(table, options);
-  if ([...template.cells].some(cell => cell.rowSpan !== 1)) {
+  if (templates.some((row, index) => [...row.cells].some(cell => index + (cell.rowSpan || templates.length - index) > templates.length))) {
     throw new FrameworkError({ api: "bindGrid", code: "GRID_VIEWPORT_MARKUP", message: "A viewport template cannot span multiple logical rows." });
   }
+}
+
+function measure(rows: readonly HTMLTableRowElement[]): number {
+  if (rows.length === 1) return rows[0].getBoundingClientRect().height;
+  let first: number | undefined;
+  let last = 0;
+  for (const row of rows) {
+    const bounds = row.getBoundingClientRect();
+    if (!bounds.width && !bounds.height) continue;
+    first ??= bounds.top;
+    last = bounds.bottom;
+  }
+  return first === undefined ? 0 : last - first;
 }
 
 function at(offsets: readonly number[], position: number): number {
@@ -70,7 +83,7 @@ export function createGridViewport(
   const heights = new Map<RowId, number>();
   let offsets = [0];
   let gap = 0;
-  let mounted = new Map<RowId, HTMLTableRowElement>();
+  let mounted = new Map<RowId, readonly HTMLTableRowElement[]>();
   let spacers: HTMLTableRowElement[] = [];
   let first: HTMLTableRowElement | undefined;
   let lastOrigin = 0;
@@ -165,8 +178,8 @@ export function createGridViewport(
     if (disposed) return;
     const saved = capture();
     heights.clear();
-    for (const [id, element] of mounted) {
-      const height = element.getBoundingClientRect().height;
+    for (const [id, rows] of mounted) {
+      const height = measure(rows);
       if (height > 0) heights.set(id, height);
     }
     pending = saved;
@@ -201,10 +214,14 @@ export function createGridViewport(
     tableWidth = nextTableWidth;
     const saved = capture();
     let changed = false;
+    const measured = new Set<RowId>();
     for (const entry of entries) {
       const id = rowIds.get(entry.target);
-      if (id === undefined) continue;
-      const height = entry.target.getBoundingClientRect().height;
+      if (id === undefined || measured.has(id)) continue;
+      const rows = mounted.get(id);
+      if (!rows) continue;
+      measured.add(id);
+      const height = measure(rows);
       if (height > 0 && Math.abs((heights.get(id) ?? estimate) - height) > 0.25) {
         heights.set(id, height);
         changed = true;
@@ -264,16 +281,16 @@ export function createGridViewport(
       if (pin !== undefined && (pin < start || pin >= end)) result.splice(pin < start ? 0 : result.length, 0, pinned!);
       return result;
     },
-    place(records: ReadonlyMap<RowId, HTMLTableRowElement>): void {
+    place(records: ReadonlyMap<RowId, readonly HTMLTableRowElement[]>, columnCount?: number): void {
       if (disposed) return;
       const savedOrigin = origin();
       const focused = document.activeElement?.closest("tr");
-      const row = records.values().next().value;
-      const columns = row ? [...row.cells].filter(cell => !cell.hidden).reduce((count, cell) => count + cell.colSpan, 0) : 1;
+      const row = records.values().next().value?.[0];
+      const columns = columnCount ?? (row ? [...row.cells].filter(cell => !cell.hidden).reduce((count, cell) => count + cell.colSpan, 0) : 1);
       const nodes: HTMLTableRowElement[] = [];
       const nextSpacers: HTMLTableRowElement[] = [];
       let previous = 0;
-      for (const [id, element] of [...records].sort(([left], [right]) => (indices.get(left) ?? Infinity) - (indices.get(right) ?? Infinity))) {
+      for (const [id, rows] of [...records].sort(([left], [right]) => (indices.get(left) ?? Infinity) - (indices.get(right) ?? Infinity))) {
         const index = indices.get(id);
         if (index === undefined) continue;
         if (index > previous) {
@@ -281,19 +298,25 @@ export function createGridViewport(
           nodes.push(padding);
           nextSpacers.push(padding);
         }
-        nodes.push(element);
+        nodes.push(...rows);
         previous = index + 1;
-        rowIds.set(element, id);
-        if (mounted.get(id) !== element) observer.observe(element);
+        const previousRows = mounted.get(id);
+        for (const element of rows) {
+          rowIds.set(element, id);
+          if (!previousRows?.includes(element)) observer.observe(element);
+        }
       }
       if (previous < ids.length) {
         const padding = spacer(offsets[ids.length] - offsets[previous] - gap, columns);
         nodes.push(padding);
         nextSpacers.push(padding);
       }
-      for (const [id, element] of mounted) if (records.get(id) !== element) {
-        observer.unobserve(element);
-        element.remove();
+      for (const [id, rows] of mounted) {
+        const nextRows = records.get(id);
+        for (const element of rows) if (!nextRows?.includes(element)) {
+          observer.unobserve(element);
+          element.remove();
+        }
       }
       for (const element of spacers) element.remove();
       let cursor: Node = anchor;

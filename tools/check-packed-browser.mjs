@@ -101,6 +101,31 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const blocks = await page.evaluate(() => {
+    const b = window.packedConsumer.blocks;
+    const [first, second] = b.rows.entries();
+    const physical = [...b.table.tBodies[0].rows];
+    const initial = { count: physical.length, span: physical[0].cells[0].rowSpan,
+      follower: getComputedStyle(physical[2].cells[0]).display };
+    const note = physical[3].querySelector("textarea");
+    note.focus(); note.setSelectionRange(1, 4);
+    physical[3].querySelector("button").click();
+    b.rows.move(second.id, first.id);
+    const retained = b.table.tBodies[0].rows[1].querySelector("textarea") === note;
+    const result = b.grid.paste("Updated\t22\tPasted note", { id: second.id, field: "profile.name" });
+    const value = b.rows.get(second.id).value.profile;
+    const focused = document.activeElement === note;
+    b.grid.dispose(); const restored = b.table.outerHTML === b.original;
+    b.rows.dispose(); b.root.remove();
+    return { initial, action: b.lastAction === second.id, retained, focused, valid: result.valid, value, restored };
+  });
+  assert.deepEqual(blocks.initial, { count: 8, span: 8, follower: "none" });
+  assert(blocks.action && blocks.retained && blocks.focused && blocks.valid && blocks.restored,
+    "Installed native row blocks must retain one identity, nested binding, focus and exact teardown.");
+  assert.equal(blocks.value.name, "Updated");
+  assert.equal(blocks.value.choice, 22);
+  assert.equal(blocks.value.note, "Pasted note");
+
   const ordered = await page.evaluate(() => {
     const { rows, grid } = window.packedConsumer.viewport;
     const [first] = rows.entries();

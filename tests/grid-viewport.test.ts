@@ -1,5 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { viewportRange } from "../src/ui/grid-viewport.js";
+import { validateGridViewport, viewportRange } from "../src/ui/grid-viewport.js";
+
+function markup(spans: readonly (readonly number[])[]) {
+  class Element {}
+  const document = { defaultView: { HTMLElement: Element } };
+  return {
+    table: { ownerDocument: document } as unknown as HTMLTableElement,
+    root: Object.assign(new Element(), { ownerDocument: document, contains: () => true }) as unknown as HTMLElement,
+    rows: spans.map(cells => ({ cells: cells.map(rowSpan => ({ rowSpan })) })) as unknown as HTMLTableRowElement[]
+  };
+}
 
 describe("Grid viewport geometry", () => {
   const offsets = [0, 20, 60, 90, 170, 190, 220];
@@ -17,5 +27,16 @@ describe("Grid viewport geometry", () => {
   it("handles empty and one-row projections without inventing rows", () => {
     expect(viewportRange([0], 0, 400, 3)).toEqual([0, 0]);
     expect(viewportRange([0, 300], 100, 50, 0)).toEqual([0, 1]);
+  });
+  it("accepts spans contained by an authored group without changing its zero-span markup", () => {
+    const { table, root, rows } = markup([[0, 2], [1]]);
+    expect(() => validateGridViewport(table, rows, { root, estimate: 80 })).not.toThrow();
+    expect(rows[0].cells[0].rowSpan).toBe(0);
+  });
+  it("rejects spans crossing a logical RowId before acquiring viewport resources", () => {
+    for (const spans of [[[2]], [[1], [2]], [[3], [1]]]) {
+      const { table, root, rows } = markup(spans);
+      expect(() => validateGridViewport(table, rows, { root, estimate: 80 })).toThrow("multiple logical rows");
+    }
   });
 });

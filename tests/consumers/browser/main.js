@@ -166,6 +166,24 @@ const definition = {
 };
 
 try {
+  const blockRoot = document.createElement("section");
+  blockRoot.dataset.consumerBlocks = "";
+  blockRoot.innerHTML = `<h2>Authored record blocks</h2><table><caption>Grouped assignments</caption>
+    <thead><tr><th scope="col">Group</th><th scope="col">Name or choice</th><th scope="col">Notes</th></tr></thead>
+    <tbody data-row-template><tr><th scope="rowgroup" rowspan="0" data-merge="group"><span data-field="group"></span></th>
+      <td colspan="2"><label>Name <input data-field="profile.name" required></label></td></tr>
+      <tr><td><label>Choice <select data-field="profile.choice" data-options="profile.options" data-option-label="label" data-option-value="value"></select></label></td>
+        <td><label>Note <textarea data-field="profile.note"></textarea></label><button type="button" data-row-action="inspect">Inspect</button></td></tr></tbody></table>`;
+  document.querySelector("main").append(blockRoot);
+  const blockTable = blockRoot.querySelector("table");
+  const originalBlock = blockTable.outerHTML;
+  const blockRows = createRows(Array.from({ length: 4 }, (_, index) => ({ group: "Same", profile: {
+    name: `Assignment ${index + 1}`, choice: 11, note: `Note ${index + 1}`,
+    options: [{ label: "Eleven", value: 11 }, { label: "Twenty two", value: 22 }]
+  } })));
+  const blockGrid = bindGrid(blockTable, { rows: blockRows, paste: true,
+    onRowAction: ({ id }) => { state.blocks.lastAction = id; } });
+  state.blocks = { root: blockRoot, table: blockTable, rows: blockRows, grid: blockGrid, original: originalBlock };
   const scrollRoot = document.createElement("section");
   scrollRoot.dataset.consumerViewport = "";
   scrollRoot.setAttribute("aria-label", "Viewport assignments");
