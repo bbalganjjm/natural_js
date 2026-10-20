@@ -11,38 +11,42 @@ sources:
   - id: m11
     resource: m11-plan.md
     title: M11 implementation and verification
-    git_blob: e25d01fcf5e747b713202462af3bd6e1d3397cb8
+    git_blob: 6bf388b92ee55d57654ce38bd5ae6c3523c85def
   - id: m12
     resource: m12-plan.md
     title: M12 notification and document shell implementation
-    git_blob: 9be421a8bceae92173fb08aeee4b4a6ca3225a2a
+    git_blob: 59e12ee10e388b6d44f9e413b0334528974a5c1c
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and consolidated omission review
-    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
+    git_blob: 5ba1d09c171ba5d80fe51d529f6110c686cc2300
   - id: columns
     resource: m10-columns-plan.md
     title: Implemented column state and final verification
-    git_blob: e812677e93d3bd0c3ab960fb4b713492011b6125
+    git_blob: 064cdf580dbe9bd7bb8e7bbb299dd7e090b47ff0
   - id: selection
     resource: m10-selection-plan.md
     title: M10.6 independent selection, checks and filters
-    git_blob: 2ada8e07a0967664da5e341df96784c4bf6cda38
+    git_blob: c74ac9113e2e676567542b32a929bd3972f46ec7
   - id: paste
     resource: m10-paste-plan.md
     title: M10.7 atomic paste and final verification
-    git_blob: 102967beaef66f4d82511049ac1b65677e943c73
+    git_blob: 736b701d5ccb317ecccf15cf675e45cca2f0fe78
   - id: viewport
     resource: m10-viewport-plan.md
     title: M10.8 measured viewport and final verification
-    git_blob: 67427e5d2027ea9c9f623003178d36bded19f14e
+    git_blob: af50fb8144d418b43759925323c37f9f7db0b2e8
   - id: grid-parity
     resource: m10-parity-plan.md
     title: M10.9 ordered Rows and remaining Grid continuation
-    git_blob: d3856b58cb495d85c9a3dd5477dee641f6b1f55c
-generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+    git_blob: 5336f2f7e289a16e7d44b0d084fee32998c8c762
+  - id: controls
+    resource: m10-controls-plan.md
+    title: M10.9.3 native controls, display and validation gates
+    git_blob: 59d716878876701a4ab0418f60103ee1f7127a66
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order and [the milestone index](index.md) for completed history. The fixed 1.x baseline is b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; its LGPL source and docs stay unchanged under v1/.
@@ -66,7 +70,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 # Next action
 
-M10.9.2 authored row blocks and adjacent merging is complete under [its detailed plan](m10-row-blocks-plan.md). Prepare M10.9.3 native control/display/validation interaction contracts from the relevant 1.x behavior before implementation. Later slices retain changed/deleted policies, detail navigation, bind/row hooks, append and height resize. Continue P0 options/dynamic closure and prepare the consolidated omission proposal only after that review. M10.9 and other component parity remain required. Personal testing precedes separately requested release work; no npm publication or release tag.[^parity][^paste]
+M10.9.3 native controls/display/validation is complete under [its detailed plan](m10-controls-plan.md). Prepare M10.9.4 status and row lifecycle against 1.x: specify changed/deleted visibility, authored defaults, row/bind hooks, append/progressive loading and empty/result markup before implementation. Later slices retain detail navigation and height resize. Continue P0 options/dynamic closure and prepare the consolidated omission proposal only after that review. After all required feature work, complete the mandatory [M13 whole-code review and remediation](m13-review-plan.md) using ponytail-review before personal testing or separately requested release work. M10.9 and other component parity remain required; no npm publication or release tag.[^controls][^parity]
 
 # Decisions
 
@@ -90,6 +94,8 @@ M10.9.2 authored row blocks and adjacent merging is complete under [its detailed
 | 2026-10-18 | M10.8 final gates | Build/types/browser-controller types, 95 units and 242/242 full tests in each engine pass. Installed JS/TS and five Windows browsers pass the same 153-file artifact SHA-256 487285dc347b4d763391bd2101a6dab8faee6ee313fc5162b138dbe44ecdae69. The 5,000-row viewport fixtures mount at most 14 rows and pass declared timing/ownership budgets; original binding budgets pass. Independent corrections, raw logs and measured limits stay in the [stage plan](m10-viewport-plan.md). |
 | 2026-10-20 | M10.9.1 final gates | Ordered add/move/independent copy and shared UI integration pass build/types, 102 units and 250/250 full tests per engine. JS/TS and five installed Windows browsers pass one 153-file artifact SHA-256 cdc1a545dcbf1dc9bbf149d3012acad01a3d4fdddb90f1a7f054a67cc064493e; original binding/viewport budgets and the new 5,000-row move budget pass. Exact evidence and baseline newline limits stay in [the stage plan](m10-parity-plan.md). |
 | 2026-10-20 | M10.9.2 final gates | Authored multi-tr records and hierarchical native merging pass build/types, 104 units and 270/270 full tests per engine. JS/TS and five installed Windows browsers pass one 158-file artifact SHA-256 10fb7f8ea71ee36c798c015ca179ef47962ff815a870394ddcd96e51b6f7488e. All existing budgets and the new 5,000-record/two-tr budgets pass, with at most 24 physical rows. Changed/full docs: 55 concepts, five reserved files, zero errors/warnings. Exact evidence, independent findings and the isolated benchmark fixture correction stay in [the stage plan](m10-row-blocks-plan.md). |
+| 2026-10-20 | M10.9.3 frozen runtime gates | Native groups, typed arrays, exclusive checks, validation timing/reveal and explicit display pass build/strict source/example types, 105 units and 313/313 full tests per engine. JS/TS and all five Windows browsers pass the same 168-file artifact SHA-256 cfe710f0d644d95505f63d81e2a36e2fff6b17a64c50be6bb0d45f8653225831. Sixteen final gates share 155 input fingerprints; all binding/viewport budgets pass. Independent corrections, provisional attempts and limits stay in [the stage plan](m10-controls-plan.md). |
+| 2026-10-21 | M10.9.3 final closure | Independent source/API/plan/archive/evidence reviews approve the slice. Changed/full OKF checks pass with 57 concepts, five reserved files and zero errors/warnings. Fourteen reviewed concepts receive verified metadata; twelve historical concepts preserve bodies and generated/verified dates while fingerprints refresh. M10.9.4 is next; the required M13 whole-code review/remediation remains future work. |
 
 # Open questions
 
@@ -105,3 +111,4 @@ M10.9.2 authored row blocks and adjacent merging is complete under [its detailed
 
 [^viewport]: M10.8 measured viewport and final verification
 [^grid-parity]: M10.9 ordered Rows and remaining Grid continuation
+[^controls]: M10.9.3 native controls, display and validation gates

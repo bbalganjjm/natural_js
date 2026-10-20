@@ -5,6 +5,7 @@ import { parsePath, readPath } from "./field-path.js";
 import { rowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
 import { createRuleRunner } from "./rules.js";
+import { disabled, display, nativeMessage } from "./native-control.js";
 import type { RuleCall } from "./rules.js";
 import type {
   FormatRule, ListHandle, PageRequest, PageState, RuleContext, RuleSet,
@@ -67,16 +68,6 @@ const boundRoots = new WeakSet<HTMLUListElement | HTMLOListElement>();
 
 function listError(code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
   return new FrameworkError({ api: "bindList", code, message, detail });
-}
-
-function display(element: HTMLElement, value: unknown): void {
-  if (element instanceof HTMLInputElement && element.type === "checkbox") {
-    element.checked = value === true;
-  } else {
-    const text = value == null ? "" : String(value);
-    if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) element.value = text;
-    else element.textContent = text;
-  }
 }
 
 export function bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: {
@@ -335,18 +326,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const binding = record?.texts[index];
       const element = binding?.element.isConnected ? binding.element : undefined;
       const value = readPath(values, field.path);
-      const source = authored[field.index].cloneNode(true);
+      const original = authored[field.index];
+      const source = original.cloneNode(true);
       if (source instanceof HTMLInputElement || source instanceof HTMLTextAreaElement) {
+        source.disabled = disabled(original, root);
         display(source, value);
-        const textLike = source instanceof HTMLTextAreaElement ||
-          ["text", "search", "tel", "url", "email", "password"].includes(source.type);
-        const tooShort = textLike && source.minLength >= 0 && source.value.length > 0 &&
-          source.value.length < source.minLength;
-        const tooLong = textLike && source.maxLength >= 0 && source.value.length > source.maxLength;
-        if (!source.validity.valid || tooShort || tooLong) {
-          const message = tooShort ? `Use at least ${source.minLength} characters.` :
-            tooLong ? `Use at most ${source.maxLength} characters.` :
-              source.validationMessage || "Invalid input.";
+        const message = nativeMessage(source, value);
+        if (message) {
           issues.push({ rowId: row.id, field: field.name, rule: "html", message,
             ...(element ? { element } : {}) });
         }

@@ -109,6 +109,29 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
   return { form, grid, columnChanges, selectionChanges, checkChanges, pastes };
 }
 
+export function connectNativeControls(root: HTMLFormElement, table: HTMLTableElement, scrollRoot: HTMLElement) {
+  const rows = createRows<{
+    assignment: { mode: string | null; tags: string[]; selected: SelectValue[];
+      options: { label: string; code: SelectValue }[] };
+    summary: string;
+  }>([{ assignment: { mode: "office", tags: ["alpha"], selected: [11],
+    options: [{ label: "Eleven", code: 11 }, { label: "False", code: false }, { label: "Empty", code: null }] }, summary: "Assignment" }]);
+  const form = bindForm(root, { rows, render: { summary(value, context) {
+    const id: RowId | null = context.rowId;
+    void id;
+    return context.element!.ownerDocument.createTextNode(String(value ?? ""));
+  } } });
+  const grid = bindGrid(table, { rows, checkMode: "single", validateOn: "manual", revealInvalid: true,
+    viewport: { root: scrollRoot, estimate: 88 }, paste: true,
+    render: { summary: value => value === null ? null : String(value) } });
+  const id = rows.entries()[0].id;
+  const result: ValidationResult = grid.paste('remote\t"[""alpha""]"\t[11,false,null]', { id, field: "assignment.mode" });
+  const checkedWrite: void = grid.setChecked([id]);
+  const selected: readonly SelectValue[] = rows.get(id)!.value.assignment.selected;
+  void checkedWrite;
+  return { rows, form, grid, result, selected };
+}
+
 export function pasteEmployees(grid: GridHandle<Employee>, id: RowId, text: string): ValidationResult {
   return grid.paste(text, { id, field: "name" });
 }

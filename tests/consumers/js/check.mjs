@@ -88,6 +88,14 @@ ordered.revert();
 assert.deepEqual(ordered.entries().map(row => row.id), [last.id, first.id], "Value revert preserves current row order.");
 ordered.dispose();
 
+const controls = createRows([{ assignment: { mode: "office", tags: ["alpha"], selected: [11] } }]);
+controls.setMany([{ id: controls.entries()[0].id,
+  values: { assignment: { mode: "remote", tags: [], selected: [22, false, null] } } }]);
+assert.deepEqual(controls.changes()[0].value.assignment,
+  { mode: "remote", tags: [], selected: [22, false, null] }, "Grouped control values remain raw JSON in the installed save payload.");
+assert.throws(() => controls.entries()[0].value.assignment.selected.push("Bypass control snapshot"), TypeError);
+controls.dispose();
+
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async request => {
   assert.equal(request.url, "https://example.test/api/employees");
@@ -109,5 +117,11 @@ await assert.rejects(import("@bbalganjjm/natural_js/ui/form"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });
 await assert.rejects(import("@bbalganjjm/natural_js/ui/grid-row-blocks"), {
+  code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
+});
+await assert.rejects(import("@bbalganjjm/natural_js/ui/native-control"), {
+  code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
+});
+await assert.rejects(import("@bbalganjjm/natural_js/ui/field-render"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });

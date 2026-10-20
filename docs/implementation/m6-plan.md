@@ -24,15 +24,15 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
-    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
+    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: list
     resource: ../../src/ui/list.ts
     title: M6 List implementation
-    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
+    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
   - id: select
     resource: ../../src/ui/select.ts
     title: M6 standalone Select implementation

@@ -1,4 +1,7 @@
+import { fileURLToPath } from "node:url";
 import { expect, test } from "@playwright/test";
+
+const listModule = `/@fs/${fileURLToPath(new URL("../../src/ui/list.ts", import.meta.url)).replaceAll("\\", "/")}`;
 
 test("Form keeps invalid edits out of Rows and exposes authored errors accessibly", async ({ page }) => {
   await page.goto("/");
@@ -580,23 +583,28 @@ test("untouched stored text has the same visible and hidden length result", asyn
   const result = await page.evaluate(async () => {
     const { bindForm, createRows } = await import("/m3-fixture.ts");
     const root = document.createElement("form");
-    root.innerHTML = '<input data-field="name" minlength="4">';
+    root.innerHTML = '<input data-field="name" minlength="4" maxlength="6">';
     document.body.append(root);
-    const rows = createRows([{ name: "ab" }, { name: "long" }]);
-    const [first, second] = rows.entries();
+    const rows = createRows([{ name: "ab" }, { name: "long" }, { name: "too-long" }]);
+    const [first, second, third] = rows.entries();
     const form = bindForm(root, { rows });
     form.bind(first.id);
     const visible = form.validate(first.id);
     form.bind(second.id);
     const hidden = form.validate(first.id);
+    const longHidden = form.validate(third.id);
+    form.bind(third.id);
+    const longVisible = form.validate(third.id);
+    form.bind(second.id);
     const shown = root.querySelector("input")!.value;
     form.dispose();
     rows.dispose();
     root.remove();
     return { visible: visible.issues.map(issue => issue.rule),
-      hidden: hidden.issues.map(issue => issue.rule), shown };
+      hidden: hidden.issues.map(issue => issue.rule), longHidden: longHidden.issues.map(issue => issue.rule),
+      longVisible: longVisible.issues.map(issue => issue.rule), shown };
   });
-  expect(result).toEqual({ visible: [], hidden: [], shown: "long" });
+  expect(result).toEqual({ visible: ["html"], hidden: ["html"], longHidden: ["html"], longVisible: ["html"], shown: "long" });
 });
 
 test("validate commits a draft made valid by an external row update without rebinding", async ({ page }) => {
@@ -625,4 +633,72 @@ test("validate commits a draft made valid by an external row update without rebi
     return { before, valid: result.valid, after, shown };
   });
   expect(result).toEqual({ before: "old", valid: true, after: "new", shown: "other" });
+});
+
+test("native Form constraints reject sanitized values and respect disabled fieldsets", async ({ page }) => {
+  await page.goto("/");
+  const result = await page.evaluate(async () => {
+    const { bindForm, createRows } = await import("/m3-fixture.ts");
+    const root = document.createElement("form");
+    root.innerHTML = `<label>Date <input type="date" data-field="date"></label>
+      <label>Color <input type="color" data-field="color"></label>
+      <label>Range <input type="range" min="0" max="10" data-field="range"></label>
+      <fieldset disabled><legend>Locked fields <label>Legend text <input data-field="legend" minlength="3"></label></legend>
+        <label>Disabled text <input data-field="disabledText" minlength="3" required></label>
+        <label><input type="radio" name="locked-choice" value="a" required data-field="choice">A</label>
+        <label><input type="radio" name="locked-choice" value="b" data-field="choice">B</label>
+        <label><input type="checkbox" value="a" required data-field="tags">A</label>
+        <label><input type="checkbox" value="b" data-field="tags">B</label></fieldset>`;
+    document.body.append(root);
+    const rows = createRows([{ date: "bad", color: "bad", range: 100, legend: "ab", disabledText: "", choice: null, tags: [] },
+      { date: "2026-01-02", color: "#AABBCC", range: 1, legend: "valid", disabledText: "", choice: null, tags: [] }]);
+    const [first, second] = rows.entries(); const form = bindForm(root, { rows });
+    const native = ["date", "color"].filter(field => root.querySelector<HTMLInputElement>(`[data-field="${field}"]`)!.type === field);
+    form.bind(first.id); const invalid = form.validate(first.id).issues.map(issue => [issue.field, issue.rule]);
+    const fallback = ["date", "color"].filter(field => !native.includes(field))
+      .map(field => root.querySelector<HTMLInputElement>(`[data-field="${field}"]`)!.value);
+    form.bind(second.id); const valid = form.validate(second.id).valid;
+    const hidden = form.validate(first.id).issues.map(issue => [issue.field, issue.rule]);
+    const shown = root.querySelector<HTMLInputElement>('[data-field="date"]')!.value;
+    form.dispose(); rows.dispose(); root.remove(); return { invalid, hidden, valid, shown, native, fallback };
+  });
+  const issues = [...result.native, "range", "legend"].map(field => [field, "html"]);
+  expect(result).toEqual({ invalid: issues, hidden: issues, valid: true, shown: "2026-01-02", native: result.native,
+    fallback: Array(2 - result.native.length).fill("bad") });
+});
+
+test("Form parsers only run explicitly declared own field functions", async ({ page }) => {
+  await page.goto("/");
+  const result = await page.evaluate(async () => {
+    const { bindForm, createRows } = await import("/m3-fixture.ts");
+    const root = document.createElement("form");
+    root.innerHTML = '<label>Name <input data-field="toString"></label><label>Age <input data-field="age"></label>';
+    document.body.append(root); const rows = createRows([{ toString: "old", age: 12 }]);
+    const form = bindForm(root, { rows, parse: { age: Number } }); form.bind(rows.entries()[0].id);
+    const [name, age] = root.querySelectorAll("input");
+    name.value = "new"; name.dispatchEvent(new Event("change", { bubbles: true }));
+    age.value = "42"; age.dispatchEvent(new Event("change", { bubbles: true }));
+    const stored = rows.entries()[0].value; form.dispose(); rows.dispose(); root.remove(); return stored;
+  });
+  expect(result).toEqual({ toString: "new", age: 42 });
+});
+
+test("Form and List bind authored image sources and retain alternative text", async ({ page }) => {
+  await page.goto("/");
+  const result = await page.evaluate(async listModule => {
+    const [{ bindForm, createRows }, { bindList }] = await Promise.all([import("/m3-fixture.ts"), import(listModule)]);
+    const image = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    const formRoot = document.createElement("form"); formRoot.innerHTML = '<img data-field="src" alt="Employee portrait">';
+    const listRoot = document.createElement("ol"); listRoot.innerHTML = '<li data-row-template><img data-field="src" alt="List portrait"></li>';
+    document.body.append(formRoot, listRoot); const original = listRoot.innerHTML;
+    const rows = createRows([{ src: image as string | null }]); const id = rows.entries()[0].id;
+    const form = bindForm(formRoot, { rows }); form.bind(id); const list = bindList(listRoot, { rows });
+    const images = [formRoot.querySelector("img")!, listRoot.querySelector("img")!];
+    const bound = images.every(element => element.getAttribute("src") === image);
+    rows.set(id, "src", null); const cleared = images.every(element => !element.hasAttribute("src"));
+    const alt = images.map(element => element.alt);
+    form.dispose(); list.dispose(); const restored = listRoot.innerHTML === original;
+    rows.dispose(); formRoot.remove(); listRoot.remove(); return { bound, cleared, alt, restored };
+  }, listModule);
+  expect(result).toEqual({ bound: true, cleared: true, alt: ["Employee portrait", "List portrait"], restored: true });
 });

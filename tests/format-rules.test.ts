@@ -79,6 +79,13 @@ describe("retained Form formatter rules", () => {
     expect(format("time", "1234")).toBe("12:34");
   });
 
+  it("keeps the actual early year across ISO-week, leap-day and month calculations", () => {
+    expect(format("date", "00040101", "W")).toBe("01");
+    expect(format("date", "00991231", "W")).toBe("53");
+    expect(format("date", "01000101", "W")).toBe("53");
+    expect(format("date", "00000229", "Y-m-d t z L")).toBe("0000-02-29 29 59 1");
+  });
+
   it("rejects malformed declarations and unsupported picker arguments early", () => {
     expect(() => assertFormatArgs("date", [8, "date"])).toThrow(TypeError);
     expect(() => assertFormatArgs("date", [5])).toThrow(RangeError);

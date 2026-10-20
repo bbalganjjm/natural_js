@@ -5,6 +5,8 @@ import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
 import { claimSelect } from "./select-owner.js";
+import { control, disabled, display, displayField, fieldValue, formatCapable, nativeMessage } from "./native-control.js";
+import { fieldRenderers, renderField } from "./field-render.js";
 import type {
   FormHandle, FormatRule, ParseInput, RuleContext, RuleSet,
   ValidateRule, ValidationIssue, ValidationResult
@@ -38,77 +40,6 @@ function formError(code: string, message: string, detail?: Record<string, unknow
   return new FrameworkError({ api: "bindForm", code, message, detail });
 }
 
-function control(element: HTMLElement): element is Control {
-  return element.localName === "input" || element.localName === "select" || element.localName === "textarea";
-}
-
-function formatCapable(element: HTMLElement): boolean {
-  if (element.localName === "select") return false;
-  return element.localName !== "input" ||
-    ["text", "search", "tel", "url", "email", "password"].includes((element as HTMLInputElement).type);
-}
-
-function textLengthControl(element: Control): element is HTMLInputElement | HTMLTextAreaElement {
-  return element.localName === "textarea" || element.localName === "input" &&
-    ["text", "search", "tel", "url", "email", "password"].includes((element as HTMLInputElement).type);
-}
-
-function inputValue(element: HTMLElement): unknown {
-  if (!control(element)) return element.textContent ?? "";
-  if (element.localName === "input") {
-    const input = element as HTMLInputElement;
-    if (input.type === "checkbox") return input.checked;
-    if (input.type === "file") return input.files?.[0]?.name ?? "";
-  }
-  return element.value;
-}
-
-function fieldValue(field: Field): unknown {
-  if (field.kind === "radio") {
-    const selected = field.elements.find(element => (element as HTMLInputElement).checked);
-    return selected ? (selected as HTMLInputElement).value : null;
-  }
-  if (field.kind === "checkbox" && field.elements.length > 1) {
-    return field.elements.filter(element => (element as HTMLInputElement).checked)
-      .map(element => (element as HTMLInputElement).value);
-  }
-  if (field.kind === "multiple") {
-    return [...(field.element as HTMLSelectElement).selectedOptions].map(option => option.value);
-  }
-  return inputValue(field.element);
-}
-
-function display(element: HTMLElement, value: unknown): void {
-  if (!control(element)) {
-    element.textContent = value == null ? "" : String(value);
-  } else if (element.localName === "input" && (element as HTMLInputElement).type === "checkbox") {
-    (element as HTMLInputElement).checked = value === true;
-  } else if (element.localName === "select" && (element as HTMLSelectElement).multiple) {
-    const selected = new Set(Array.isArray(value) ? value.map(String) : []);
-    for (const option of (element as HTMLSelectElement).options) option.selected = selected.has(option.value);
-  } else {
-    element.value = value == null ? "" : String(value);
-  }
-}
-
-function displayField(field: Field, value: unknown): void {
-  if (field.kind === "radio") {
-    const selected = value == null ? null : String(value);
-    for (const element of field.elements) {
-      const input = element as HTMLInputElement;
-      input.checked = selected !== null && input.value === selected;
-    }
-  } else if (field.kind === "checkbox" && field.elements.length > 1) {
-    const selected = new Set(Array.isArray(value) ? value.map(String) : []);
-    for (const element of field.elements) {
-      const input = element as HTMLInputElement;
-      input.checked = selected.has(input.value);
-    }
-  } else {
-    display(field.element, value);
-  }
-}
-
 function errorId(element: HTMLElement): string {
   if (element.id) return element.id;
   let candidate: string;
@@ -120,7 +51,8 @@ function errorId(element: HTMLElement): string {
 
 export function bindForm<T extends object = Record<string, unknown>>(
   root: HTMLElement,
-  options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput> } = {}
+  options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>;
+    render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null> } = {}
 ): FormHandle<T> {
   if (!root || root.nodeType !== 1) {
     throw formError("FORM_ROOT", "Form root must be an HTML element.");
@@ -129,6 +61,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     throw formError("FORM_IN_USE", "This Form root is already bound.");
   }
   const { rows, rules, parse } = options;
+  const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
   const errorRegions = new Map<string, HTMLElement>();
@@ -206,20 +139,28 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (field.format.length && !formatCapable(field.element)) {
       throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
     }
-    if (parse?.[field.name] && (field.kind === "checkbox" || field.kind === "multiple")) {
+    if (parsers.get(field.name) && (field.kind === "checkbox" || field.kind === "multiple")) {
       throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert boolean or array controls.", { field: field.name });
     }
   }
+  const renderers = fieldRenderers("bindForm", fields.map(field => ({ name: field.name, element: field.element })), options.render);
+  const renderedOriginals = fields.filter(field => renderers.has(field.name)).map(field => ({ element: field.element, children: [...field.element.childNodes] }));
+  const localRenderedValues = new Map(rows ? [] : fields.filter(field => renderers.has(field.name)).map(field => [field, fieldValue(field)] as const));
   const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
   const releaseSelects: (() => void)[] = [];
+  let localRenderStarted = false;
   try {
     for (const field of fields) {
       if (field.element instanceof HTMLSelectElement) {
         releaseSelects.push(claimSelect(field.element, "bindForm"));
       }
     }
+    boundRoots.add(root);
+    if (!rows && renderers.size) { localRenderStarted = true; renderLocal(); }
   } catch (cause) {
+    boundRoots.delete(root);
     for (const release of releaseSelects) release();
+    if (localRenderStarted) for (const original of renderedOriginals) original.element.replaceChildren(...original.children);
     throw cause;
   }
   for (const field of fields) {
@@ -260,8 +201,20 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function localValues(): Record<string, unknown> {
     let values: Record<string, unknown> = {};
-    for (const field of fields) values = writePath(values, field.path, fieldValue(field));
+    for (const field of fields) values = writePath(values, field.path, localFieldValue(field));
     return values;
+  }
+
+  function localFieldValue(field: Field): unknown {
+    return localRenderedValues.has(field) ? localRenderedValues.get(field) : fieldValue(field);
+  }
+
+  function renderLocal(): void {
+    const values = localValues();
+    for (const field of fields) {
+      const renderer = renderers.get(field.name);
+      if (renderer) renderField("bindForm", field.element, readPath(values, field.path), context(field, null, values), renderer);
+    }
   }
 
   function context(field: Field, id: RowId | null, values: Record<string, unknown>): RuleContext {
@@ -288,7 +241,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       let value = input;
       let parseError: string | undefined;
       let parseFailed = false;
-      const parser = parse?.[field.name];
+      const parser = parsers.get(field.name);
       if (parser) {
         try { value = parser(String(input ?? ""), context(field, id, enteredValues)); }
         catch (cause) {
@@ -312,7 +265,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
     if (field.kind === "radio" || field.kind === "checkbox" && field.elements.length > 1) {
-      const required = field.elements.some(element => (element as HTMLInputElement).required);
+      const required = field.elements.some(element => (element as HTMLInputElement).required) &&
+        field.elements.some(element => !disabled(element, root));
       const entered = candidate.entered === undefined ? candidate.value : candidate.entered;
       const selected = field.kind === "radio" ?
         entered != null && field.elements.some(element => (element as HTMLInputElement).value === String(entered)) :
@@ -323,20 +277,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const visible = id === null || id === boundId;
       const probe = visible ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
-      if (!visible) display(probe, entered);
-      const text = String(entered ?? "");
-      const tooShort = !visible && candidate.entered !== undefined &&
-        textLengthControl(probe) && probe.minLength >= 0 &&
-        text.length > 0 && text.length < probe.minLength;
-      const tooLong = !visible && candidate.entered !== undefined &&
-        textLengthControl(probe) && probe.maxLength >= 0 &&
-        text.length > probe.maxLength;
-      if (!probe.validity.valid || tooShort || tooLong) {
-        const message = tooShort ? `Use at least ${probe.minLength} characters.` :
-          tooLong ? `Use at most ${probe.maxLength} characters.` :
-            probe.validationMessage || "Invalid input.";
-        found.push(issue(field, id, "html", message));
-      }
+      if (!visible) { probe.disabled = disabled(field.element, root); display(probe, entered); }
+      const message = nativeMessage(probe, entered);
+      if (message) found.push(issue(field, id, "html", message));
     }
     found.push(...runner.validate(field.validate, candidate.value, context(field, id, values)));
     return found;
@@ -381,7 +324,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
         continue;
       }
       const raw = source ? readPath(source, field.path) : field.kind === "radio" ? null : "";
-      displayField(field, source && !focused && field.format.length
+      const renderer = renderers.get(field.name);
+      if (renderer) renderField("bindForm", field.element, raw, context(field, boundId, source ?? {}), renderer);
+      else displayField(field, source && !focused && field.format.length
         ? runner.format(field.format, raw, context(field, boundId, source)) : raw);
     }
   }
@@ -444,12 +389,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
       reconcile(boundId);
       return;
     }
-    const entered = new Map(fields.map(item => [item, fieldValue(item)] as const));
+    const entered = new Map(fields.map(item => [item, localFieldValue(item)] as const));
     const checked = evaluate(null, localValues(), entered);
     for (const item of fields) {
       if (item === field || issues.has(item)) issues.set(item, checked.byField.get(item) ?? []);
     }
     showIssues();
+    if (renderers.size) renderLocal();
   }
 
   function onPointerDown(event: PointerEvent): void {
@@ -521,7 +467,6 @@ export function bindForm<T extends object = Record<string, unknown>>(
     showIssues();
   });
 
-  boundRoots.add(root);
   return {
     bind(id) {
       active();
@@ -555,7 +500,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     validate(id) {
       active();
       if (!rows) {
-        const entered = new Map(fields.map(field => [field, fieldValue(field)] as const));
+        const entered = new Map(fields.map(field => [field, localFieldValue(field)] as const));
         const checked = evaluate(null, localValues(), entered);
         const found = [...checked.byField.values()].flat();
         for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
@@ -605,6 +550,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
         else region.setAttribute("aria-live", original.live);
         region.textContent = original.text;
       }
+      for (const original of renderedOriginals) original.element.replaceChildren(...original.children);
+      localRenderedValues.clear();
       drafts.clear();
       issues.clear();
     }

@@ -8,7 +8,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: 2.0 release boundary and M10 milestone
-    git_blob: b99c9a254693cebb6886a114e0dc775957b3d80e
+    git_blob: 4cbd20e61c7ea08e4b412a0c92dd88461ed52cf9
   - id: baseline
     resource: m0-baseline.md
     title: 1.x Grid intent and deferred capabilities
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid rendering, row identity, draft, and lifecycle behavior
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract

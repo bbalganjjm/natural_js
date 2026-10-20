@@ -573,3 +573,101 @@ test("two instances remain accessible and exact disposal releases authored filte
   const axe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"]).analyze();
   expect(axe.violations.map(violation => violation.id)).toEqual([]);
 });
+
+test("single checks replace one row atomically and keep selection and Boolean fields independent", async ({ page }) => {
+  await page.evaluate(() => {
+    const h = window.selectionFixture;
+    h.rebind({ checkMode: "single" });
+    h.grid.select(5); h.grid.setSelected([1, 2]); h.grid.setChecked([1]); h.events.length = 0;
+    h.hooks.beforeCheckChange = () => false;
+  });
+  const checks = page.locator('[data-selection-fixture] tbody [data-check-row]');
+  await checks.nth(1).click();
+  await expect(checks.first()).toBeChecked();
+  await expect(checks.nth(1)).not.toBeChecked();
+  expect(await page.evaluate(() => window.selectionFixture.events.length)).toBe(0);
+  await page.evaluate(() => { window.selectionFixture.hooks.beforeCheckChange = undefined; });
+  await checks.nth(1).check();
+  await expect(checks.first()).not.toBeChecked();
+  await expect(checks.nth(1)).toBeChecked();
+  const result = await page.evaluate(() => {
+    const h = window.selectionFixture;
+    h.grid.setChecked([3]); const current = h.grid.checkedIds(); h.grid.setChecked([3]);
+    const same = h.grid.checkedIds() === current;
+    h.grid.setChecked([]);
+    return { active: h.grid.selected(), selected: h.grid.selectedIds(), checked: h.grid.checkedIds(), same,
+      events: h.events.map(({ ids, previous, type, checked }) => ({ ids, previous, type, checked })),
+      values: h.rows.entries().map(row => row.value.active), storeEvents: h.storeEvents };
+  });
+  expect(result).toEqual({ active: 5, selected: [1, 2], checked: [], same: true,
+    events: [{ ids: [2], previous: [1], type: "change", checked: [2] },
+      { ids: [3], previous: [2], type: null, checked: [3] }, { ids: [], previous: [3], type: null, checked: [] }],
+    values: [true, true, true, true, true, true], storeEvents: 0 });
+});
+
+test("single mode rejects ambiguous check proposals after ordinary ID validation without changing state", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.selectionFixture; h.rebind({ checkMode: "single" }); h.grid.setChecked([1]);
+    const before = h.table.outerHTML; const current = h.grid.checkedIds(); const events = h.events.length;
+    let beforeCalls = 0; h.hooks.beforeCheckChange = () => { beforeCalls++; };
+    const attempts = [() => h.grid.setChecked([1, 2]), () => h.grid.checkAll(true, "store"),
+      () => h.grid.setChecked([2, 2]), () => h.grid.setChecked([2, 999]), () => h.grid.setChecked([2, 4])];
+    const codes = attempts.map(run => { try { run(); return "none"; } catch (cause) { return (cause as { code: string }).code; } });
+    return { codes, unchanged: h.table.outerHTML === before && h.grid.checkedIds() === current && h.events.length === events,
+      beforeCalls, state: h.grid.checkState("store"), headerDisabled: h.table.querySelector<HTMLInputElement>("[data-check-all]")!.disabled };
+  });
+  expect(result).toEqual({ codes: ["GRID_CHECK_MODE", "GRID_CHECK_MODE", "GRID_CHECK", "GRID_ROW", "GRID_CHECK"],
+    unchanged: true, beforeCalls: 0, state: { checked: false, indeterminate: true, total: 5, count: 1 }, headerDisabled: true });
+});
+
+test("single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.selectionFixture; h.rebind({ checkMode: "single" }); h.grid.setChecked([6]);
+    const header = h.table.querySelector<HTMLInputElement>("[data-check-all]")!;
+    h.grid.setFilter(row => row.name === "Ada");
+    const enabled = !header.disabled;
+    h.grid.checkAll(true, "visible"); const replaced = h.grid.checkedIds();
+    h.grid.setFilter(() => false); h.grid.checkAll(true, "visible");
+    const empty = { ids: h.grid.checkedIds(), same: h.grid.checkedIds() === replaced,
+      state: h.grid.checkState("visible"), disabled: header.disabled };
+    h.grid.setFilter(row => row.name === "Bjarne"); h.grid.checkAll(false, "visible");
+    const outside = h.grid.checkedIds();
+    h.grid.setFilter(row => row.name === "Ada"); h.grid.checkAll(false, "visible");
+    return { enabled, replaced, empty, outside, cleared: h.grid.checkedIds(), storeEvents: h.storeEvents };
+  });
+  expect(result).toEqual({ enabled: true, replaced: [1], empty: { ids: [1], same: true,
+    state: { checked: false, indeterminate: false, total: 0, count: 0 }, disabled: true }, outside: [1], cleared: [], storeEvents: 0 });
+});
+
+test("single checks retain reentrant commits and prune only unavailable rows", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.selectionFixture; h.rebind({ checkMode: "single" }); h.grid.setChecked([1]); h.events.length = 0;
+    h.hooks.beforeCheckChange = () => { h.hooks.beforeCheckChange = undefined; h.grid.setChecked([3]); };
+    let stale = "none";
+    try { h.grid.setChecked([2]); } catch (cause) { stale = (cause as { code: string }).code; }
+    const committed = h.grid.checkedIds();
+    h.rows.move(3, 1); const afterMove = h.grid.checkedIds();
+    h.rows.remove(3);
+    return { stale, committed, afterMove, final: h.grid.checkedIds(),
+      events: h.events.filter(event => event.kind === "checked").map(({ ids, previous }) => ({ ids, previous })) };
+  });
+  expect(result).toEqual({ stale: "GRID_CHECK", committed: [3], afterMove: [3], final: [],
+    events: [{ ids: [3], previous: [1] }, { ids: [], previous: [3] }] });
+});
+
+test("invalid check modes fail before DOM ownership and permit corrected binding", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.selectionFixture; h.grid.dispose(); const before = h.table.outerHTML;
+    const invalid = JSON.parse('[{"checkMode":"one"},{"checkMode":null},{"checkMode":false}]');
+    const attempts = invalid.map((extra: Partial<Options>) => {
+      let code = "none";
+      try { h.rebind(extra); } catch (cause) { code = (cause as { code: string }).code; }
+      return { code, unchanged: h.table.outerHTML === before };
+    });
+    h.rebind({ checkMode: "multiple" }); h.grid.setChecked([1, 2]);
+    const multiple = h.grid.checkedIds(); h.rebind(); h.grid.setChecked([1, 2]);
+    return { attempts, multiple, defaultMultiple: h.grid.checkedIds() };
+  });
+  expect(result).toEqual({ attempts: Array.from({ length: 3 }, () => ({ code: "GRID_CHECK_MODE", unchanged: true })),
+    multiple: [1, 2], defaultMultiple: [1, 2] });
+});

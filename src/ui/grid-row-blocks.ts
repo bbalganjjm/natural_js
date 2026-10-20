@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
 import { parsePath, readPath } from "./field-path.js";
+import { interactiveContent } from "./native-control.js";
 
 function invalid(message: string, code = "GRID_TEMPLATE"): never {
   throw new FrameworkError({ api: "bindGrid", code, message });
@@ -34,7 +35,7 @@ export function compileGridBody(table: HTMLTableElement) {
     if (!(element instanceof HTMLTableCellElement) || element.parentElement !== templates[0] ||
         (element.rowSpan || templates.length) !== templates.length ||
         element.matches("[tabindex], [contenteditable], [data-error-for]") ||
-        element.querySelector("button, input, textarea, select, a[href], area[href], details, dialog, audio[controls], video[controls], iframe, object, embed, img[usemap], [tabindex], [contenteditable], [data-error-for], [data-row-action], [data-select-row], [data-check-row]")) {
+        element.querySelector(`${interactiveContent}, [data-error-for], [data-row-action], [data-select-row], [data-check-row]`)) {
       invalid("A merge needs a display-only first-row cell spanning its complete record.", "GRID_MERGE");
     }
     const name = element.getAttribute("data-merge")!;

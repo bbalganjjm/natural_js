@@ -13,7 +13,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
+    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
@@ -26,10 +26,18 @@ sources:
     resource: ../../src/ui/rules.ts
     title: Private UI rule runner
     git_blob: 967142342d060056cd3f124db29f6893a2875d48
-generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+  - id: native
+    resource: ../../src/ui/native-control.ts
+    title: Shared native field values, display and constraints
+    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+  - id: controls-browser
+    resource: ../../tests/browser/grid-controls.spec.ts
+    title: Shared native display and authored-template constraint regressions
+    git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -89,7 +97,7 @@ rows.dispose();
 |---|---|---|
 | `data-row-template` | One direct `li` | Defines the repeated authored markup. |
 | `data-empty` | Optional direct `li` | Shown when the visible slice is empty; prior hidden state returns on disposal. |
-| `data-field="path"` | Row descendant | Reads a safe dot-separated object path; text uses `textContent`. |
+| `data-field="path"` | Row descendant | Reads a safe dot-separated object path; ordinary display uses text, and images receive native `src`. |
 | `data-format='[["name",...args]]'` | Text-like input, textarea, or text element | Formats display only; non-text inputs and Selects reject it. |
 | `data-validate='[["name",...args]]'` | Field | Validates the stored raw value. |
 | `data-error-for="path"` | Row descendant | Displays issues as text and associates with a matching field. |
@@ -124,6 +132,8 @@ An invalid page request raises `LIST_PAGE`; use after disposal raises `LIST_DISP
 
 List fields and row-local Selects are display-only; bound input and Select controls in cloned rows are disabled. Use a Form for editing. Validation checks native input constraints, retained or application rules, Select availability and `required`; invalid controls get `aria-invalid`, and authored error regions receive text and a document-unique `id` for `aria-describedby`. The list keeps native semantics and authored CSS. When a focused row leaves the visible slice, focus moves to another selection button or the list root.[^list]
 
+Native validation probes use the authored template's constraints and effective disabled state, rather than the display clone's forced disabled state. Programmatic text min/max lengths and invalid native value sanitization therefore report the same failures as Form/Grid, including for off-page rows. Authored disabled controls retain native `willValidate` behavior. An image's `src` is removed for `null` or empty text, with authored `alt` preserved. These shared operations stay private; List has no public `render` option and remains display-only.[^native][^list][^controls-browser]
+
 Cloned row elements are reused across sort/filter/page changes and updated when their row snapshot changes. `RowId` never becomes a DOM ID. A deleted selected row clears selection. `Rows.replace` and changes clear stale issues without running validators in a store callback; call `validate()` before saving.[^list]
 
 # Pitfalls
@@ -141,3 +151,5 @@ Shared Rows insertion/movement/copy changes store order while preserving existin
 [^options]: Shared private row-local options
 [^path]: Safe nested field paths
 [^rules]: Private UI rule runner
+[^native]: Shared native field values, display and constraints
+[^controls-browser]: Shared native display and authored-template constraint regressions

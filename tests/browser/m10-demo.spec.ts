@@ -76,6 +76,49 @@ test("initial page choice rebinds a bounded view and keeps off-page RowId select
   await expect(rows.first().locator("[data-select-row]")).toHaveAttribute("aria-pressed", "true");
 });
 
+test("check and validation policy controls rebind working Grid options", async ({ page }) => {
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
+  const checks = rows.locator("[data-check-row]");
+  await checks.nth(0).check();
+  await checks.nth(1).check();
+  await expect(rows.locator("[data-check-row]:checked")).toHaveCount(2);
+  await page.locator("[data-check-mode]").selectOption("single");
+  await expect(rows.locator("[data-check-row]:checked")).toHaveCount(0);
+  await expect(page.locator("[data-check-all]")).toBeDisabled();
+  await checks.nth(0).check();
+  await checks.nth(1).check();
+  await expect(checks.nth(0)).not.toBeChecked();
+  await expect(checks.nth(1)).toBeChecked();
+  await page.locator("[data-check-mode]").selectOption("multiple");
+  await expect(page.locator("[data-check-all]")).toBeEnabled();
+
+  await page.locator("[data-validate-on]").selectOption("blur");
+  await page.locator('[data-action="select-first"]').click();
+  const salary = rows.first().locator('[data-field="salary"]');
+  await salary.fill("190");
+  await salary.dispatchEvent("change");
+  await expect(page.locator("[data-snapshot]")).toContainText('"salary": 150');
+  await salary.blur();
+  await expect(page.locator("[data-snapshot]")).toContainText('"salary": 190');
+
+  await page.locator("[data-validate-on]").selectOption("manual");
+  await page.locator("[data-reveal-invalid]").check();
+  await page.locator('[data-action="select-first"]').click();
+  await salary.fill("210");
+  await salary.blur();
+  await expect(page.locator("[data-snapshot]")).toContainText('"salary": 190');
+  await page.locator('[data-action="validate-selected"]').click();
+  await expect(page.locator("[data-snapshot]")).toContainText('"salary": 210');
+  await salary.fill("50");
+  await salary.blur();
+  await expect(salary).not.toHaveAttribute("aria-invalid", "true");
+  await page.locator('[data-action="validate-selected"]').click();
+  await expect(salary).toBeFocused();
+  await expect(salary).toHaveAttribute("aria-invalid", "true");
+  await expect(page.locator("[data-issues]")).toContainText("Salary must be at least 100.");
+  await expect(page.locator("[data-snapshot]")).toContainText('"salary": 210');
+});
+
 test("parsing, HTML constraints, and application validation retain invalid drafts", async ({ page }) => {
   const first = page.locator("[data-grid] tbody tr:not([data-row-template])").first();
   await first.locator("[data-select-row]").click();
@@ -361,5 +404,41 @@ test("row-block store controls move and copy whole records independently of the 
   await expect(page.locator('[data-block-action="copy"]')).toBeDisabled();
   await expect(page.locator("[data-block-state]")).toContainText('"selected": null');
   await expect(page.locator("[data-grid] tbody tr")).toHaveCount(6);
+  await expect(page.locator("[data-changes]")).toHaveText("[]");
+});
+
+test("authored row blocks share grouped controls, typed multiple choices and native values", async ({ page }) => {
+  const two = page.locator('[data-block-grid="two"]');
+  const three = page.locator('[data-block-grid="three"]');
+  await two.locator('[data-field="mode"][value="office"]').first().check();
+  await expect(three.locator('[data-field="mode"][value="office"]').first()).toBeChecked();
+  await two.locator('[data-field="channels"][value="chat"]').first().check();
+  await two.locator('[data-field="channels"][value="email"]').first().uncheck();
+  await expect(three.locator('[data-field="channels"][value="chat"]').first()).toBeChecked();
+  await expect(three.locator('[data-field="channels"][value="email"]').first()).not.toBeChecked();
+  await three.locator('[data-field="assignment.selected"]').first().selectOption(["1", "2"]);
+  await expect(two.locator('[data-field="assignment.selected"]').first()).toHaveValues(["1", "2"]);
+  await two.locator('[data-field="date"]').first().fill("2026-11-01");
+  await two.locator('[data-field="date"]').first().blur();
+  await expect(three.locator('[data-field="date"]').first()).toHaveValue("2026-11-01");
+  await three.locator('[data-field="hours"]').first().focus();
+  await page.keyboard.press("ArrowLeft");
+  await expect(two.locator('[data-field="hours"]').first()).toHaveValue("7");
+  const state = JSON.parse(await page.locator("[data-block-state]").innerText());
+  expect(state.records[0].value).toMatchObject({
+    mode: "office", channels: ["chat"], assignment: { selected: [1, 2] }, date: "2026-11-01", hours: 7
+  });
+  expect(state.records[1].value.mode).toBe("office");
+  await expect(two.locator('[data-field="team"] strong').first()).toHaveText("Platform");
+  const image = two.locator('img[data-field="avatar"]').first();
+  await expect(image).toHaveAttribute("src", /^data:image\/svg\+xml,/);
+  await expect(image).toHaveAttribute("alt", "Employee avatar");
+  await expect.poll(() => image.evaluate(element => (element as HTMLImageElement).naturalWidth)).toBe(32);
+  const radioNames = await page.locator('[data-block-grid] input[type="radio"]').evaluateAll(elements =>
+    elements.map(element => (element as HTMLInputElement).name));
+  expect(radioNames.every(Boolean)).toBe(true);
+  expect(new Set(radioNames).size).toBe(8);
+  const ids = await page.locator("[id]").evaluateAll(elements => elements.map(element => element.id));
+  expect(new Set(ids).size).toBe(ids.length);
   await expect(page.locator("[data-changes]")).toHaveText("[]");
 });

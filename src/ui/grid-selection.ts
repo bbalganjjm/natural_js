@@ -12,6 +12,7 @@ interface ActiveChange<T> {
 export function createGridSelection<T extends object>(options: {
   rows: Rows<T>;
   multiple?: boolean;
+  checkMode?: "multiple" | "single";
   canSelect?: (row: RowSnapshot<T>) => boolean;
   canCheck?: (row: RowSnapshot<T>) => boolean;
   beforeSelect?: (change: ActiveChange<T>) => boolean | void;
@@ -40,6 +41,9 @@ export function createGridSelection<T extends object>(options: {
 
   if (options.multiple !== undefined && typeof options.multiple !== "boolean") {
     fail("GRID_SELECTION", "Grid multiple selection must be a boolean.");
+  }
+  if (options.checkMode !== undefined && options.checkMode !== "multiple" && options.checkMode !== "single") {
+    fail("GRID_CHECK_MODE", "Grid checkMode must be multiple or single.");
   }
   for (const name of ["canSelect", "beforeSelect", "onSelect", "beforeSelectionChange", "onSelectionChange"] as const) {
     if (options[name] !== undefined && typeof options[name] !== "function") {
@@ -151,6 +155,9 @@ export function createGridSelection<T extends object>(options: {
     const next = checkedIds(ids, "check");
     const change = idsChange(next, checks, event);
     unchanged();
+    if (options.checkMode === "single" && next.length > 1) {
+      fail("GRID_CHECK_MODE", "Single check mode accepts at most one checked row.");
+    }
     if (same(next, checks)) return;
     if (!allowed(options.beforeCheckChange, change, unchanged, "check")) return;
     checks = next;
@@ -206,9 +213,13 @@ export function createGridSelection<T extends object>(options: {
       if (typeof checked !== "boolean") fail("GRID_CHECK", "Grid check-all requires a boolean.");
       const unchanged = checkpoint("check");
       const ids = new Set(checks);
+      let replace = checked && options.checkMode === "single";
       for (const id of scopeIds(scope)) {
         if (!eligible(id, "check")) continue;
-        if (checked) ids.add(id);
+        if (checked) {
+          if (replace) { ids.clear(); replace = false; }
+          ids.add(id);
+        }
         else ids.delete(id);
       }
       unchanged();

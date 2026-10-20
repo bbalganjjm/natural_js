@@ -186,7 +186,7 @@ test("Grid rejects ambiguous controls before changing authored markup", async ({
   }, modules);
   expect(result).toEqual({
     number: { code: "GRID_PARSE_FIELD", original: true },
-    multiple: { code: "GRID_CONTROL", original: true },
+    multiple: { code: "", original: true },
     parsed: { code: "", original: true }
   });
 });

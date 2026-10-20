@@ -13,7 +13,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
-    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
+    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filters and choice counts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime
@@ -30,10 +30,22 @@ sources:
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Viewport scope, focus and lifecycle regressions
     git_blob: 94b18cca941e2a8e5003c91a0346d4c07fa9b0cd
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - id: form
+    resource: ../../src/ui/form.ts
+    title: Form field options and explicit display
+    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
+  - id: native
+    resource: ../../src/ui/native-control.ts
+    title: Private shared native field values and constraints
+    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+  - id: render
+    resource: ../../src/ui/field-render.ts
+    title: Private explicit render preflight and DOM ownership
+    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -76,8 +88,8 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 | `selectedIds(): readonly RowId[]` | Selected membership in store order. |
 | `setSelected(ids: readonly RowId[]): void` | Replace the selected set after complete ID/eligibility validation. |
 | `checkedIds(): readonly RowId[]` | Checked membership in store order. |
-| `setChecked(ids: readonly RowId[]): void` | Replace the independent checked set after complete validation. |
-| `checkAll(checked: boolean, scope: GridRowScope): void` | Add/remove eligible scope IDs, preserving checks outside the scope. |
+| `setChecked(ids: readonly RowId[]): void` | Replace the independent checked set after complete validation; single check mode allows zero or one ID. |
+| `checkAll(checked: boolean, scope: GridRowScope): void` | Add/remove eligible scope IDs under the configured check mode; single mode rejects a true proposal with more than one eligible scope ID. |
 | `checkState(scope: GridRowScope): GridCheckState` | `total` eligible scope rows, `count` checked, full/mixed flags; an empty scope has both flags false. |
 | `columnFilter(key: string): readonly SelectValue[] \| null` | Raw filter state: `null` all, `[]` none, `[null]` raw null only. |
 | `setColumnFilter(key: string, values: readonly SelectValue[] \| null): void` | Replace one configured column filter; columns and the manual filter combine with AND. |
@@ -86,6 +98,14 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 `visible` means the complete current filtered page, including unmounted rows with viewport rendering; `filtered` means all matching rows before paging, and `store` means every nondeleted row. `canCheck` determines eligibility for these aggregates and operations; a disabled native checkbox only blocks its own UI gesture. Number `1` and string `"1"` remain different filter values. Binder options and native markers are listed in [Grid](grid.md), alongside keyboard and restoration rules.[^selection][^filters][^grid]
 
 `GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after visible rows and scopes commit.[^selection]
+
+`checkMode?: "multiple" | "single"` is an inline Grid option, separate from `multiple` selection gestures. Multiple mode is the default. Single checking replaces the previous ID atomically through the same hooks; `setChecked` and `checkAll(true, scope)` never silently pick a first row. [Grid](grid.md) defines empty/one/many scope behavior and disabled header checks; no new public check-mode type or getter is added.[^grid][^selection]
+
+# Field options
+
+Grid accepts inline `validateOn?: "change" | "blur" | "manual"` (default `"change"`) and `revealInvalid?: boolean` (default `false`). They control draft commit timing and optional current-page error reveal/focus; explicit `validate()` remains the save gate. Native groups compile as one field: boolean single checkbox, string-array repeated checkboxes, string/null radio, and an always-array multiple Select whose row-local options retain raw scalar types. [Grid](grid.md) defines native type fallback, Enter, protected groups and quoted JSON-array paste.[^grid][^native]
+
+Form and Grid accept `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`. A configured display callback is synchronous and returns literal text, `null`, or a fresh disconnected same-document Element/Text/DocumentFragment. `UI_RENDER` reports invalid targets/results, callback causes and recursive target updates. No public renderer type, registry, HTML parser or sanitizer is added. [Form](form.md#explicit-display) and [Grid](grid.md#display-rendering) define preflight and restoration. List shares native value/constraint operations but has no `render` option.[^form][^grid][^render][^native]
 
 # Grid paste
 
@@ -119,3 +139,6 @@ A parser sees one snapshot of all currently entered, still unparsed drafts in `R
 [^grid]: Logical-page and mounted-row Grid contracts
 [^viewport]: Private measured viewport, anchoring and lifetime
 [^viewport-browser]: Viewport scope, focus and lifecycle regressions
+[^form]: Form field options and explicit display
+[^native]: Private shared native field values and constraints
+[^render]: Private explicit render preflight and DOM ownership

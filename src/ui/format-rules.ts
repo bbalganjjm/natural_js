@@ -255,6 +255,13 @@ function parsedDate(value: string): Date | null {
 
 function two(value: number): string { return String(value).padStart(2, "0"); }
 
+function utcDay(year: number, month: number, day: number): Date {
+  const date = new Date(0);
+  // Date.UTC and multi-argument constructors reinterpret years 0-99 as 1900-1999.
+  date.setUTCFullYear(year, month, day);
+  return date;
+}
+
 function datePattern(date: Date, pattern: string): string {
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -268,20 +275,23 @@ function datePattern(date: Date, pattern: string): string {
   const zone = `${offsetSign}${offsetHours}${offsetMinutes}`;
   const zoneColon = `${offsetSign}${offsetHours}:${offsetMinutes}`;
   const hour12 = hour % 12 || 12;
-  const dayOfYear = Math.floor((Date.UTC(year, month, day) - Date.UTC(year, 0, 1)) / 86400000);
+  const dayOfYear = Math.floor((utcDay(year, month, day).getTime() - utcDay(year, 0, 1).getTime()) / 86400000);
   const isoWeek = (): number => {
-    const dayUtc = new Date(Date.UTC(year, month, day));
+    const dayUtc = utcDay(year, month, day);
     dayUtc.setUTCDate(dayUtc.getUTCDate() + 4 - (dayUtc.getUTCDay() || 7));
-    return Math.ceil((((dayUtc.getTime() - Date.UTC(dayUtc.getUTCFullYear(), 0, 1)) / 86400000) + 1) / 7);
+    return Math.ceil((((dayUtc.getTime() - utcDay(dayUtc.getUTCFullYear(), 0, 1).getTime()) / 86400000) + 1) / 7);
   };
+  const monthEnd = new Date(date); monthEnd.setMonth(month + 1, 0);
+  const january = new Date(date); january.setMonth(0, 1);
+  const july = new Date(date); july.setMonth(6, 1);
   const tokens: Record<string, string> = {
     Y: String(year).padStart(4, "0"), y: two(year % 100), m: two(month + 1), n: String(month + 1),
     F: MONTHS[month], M: MONTHS[month].slice(0, 3), d: two(day), j: String(day),
     l: DAYS[weekday], D: DAYS[weekday].slice(0, 3), N: String(weekday || 7), w: String(weekday),
     S: day % 100 >= 11 && day % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][day % 10] ?? "th",
-    z: String(dayOfYear), W: two(isoWeek()), t: String(new Date(year, month + 1, 0).getDate()),
+    z: String(dayOfYear), W: two(isoWeek()), t: String(monthEnd.getDate()),
     L: Number(year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)).toString(),
-    I: String(Number(date.getTimezoneOffset() < Math.max(new Date(year, 0, 1).getTimezoneOffset(), new Date(year, 6, 1).getTimezoneOffset()))),
+    I: String(Number(date.getTimezoneOffset() < Math.max(january.getTimezoneOffset(), july.getTimezoneOffset()))),
     H: two(hour), G: String(hour), h: two(hour12), g: String(hour12), i: two(date.getMinutes()),
     s: two(date.getSeconds()), a: hour >= 12 ? "pm" : "am", A: hour >= 12 ? "PM" : "AM",
     O: zone, P: zoneColon, Z: String(offset * 60), U: String(Math.floor(date.getTime() / 1000)),

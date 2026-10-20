@@ -499,22 +499,27 @@ test("programmatic lengths, checkbox state, stale errors, and unsupported inputs
       formatTable.remove();
     }
     const radioTable = document.createElement("table");
-    radioTable.innerHTML = '<tbody><tr data-row-template><td><input type="radio" data-field="active"></td></tr></tbody>';
+    radioTable.innerHTML = '<tbody><tr data-row-template><td><input type="radio" data-field="active" value="ready"></td></tr></tbody>';
     document.body.append(radioTable);
-    const radioRows = createRows([{ active: true }]);
+    const radioRows = createRows([{ active: "ready" }]);
     let radioCode = "";
-    try { bindGrid(radioTable, { rows: radioRows }); }
+    let radioChecked = false;
+    try {
+      const radio = bindGrid(radioTable, { rows: radioRows });
+      radioChecked = radioTable.querySelector("input")!.checked && radio.validate().valid;
+      radio.dispose();
+    }
     catch (cause) { radioCode = (cause as { code: string }).code; }
     radioRows.dispose();
     radioTable.remove();
-    return { checked, rule: issue?.rule, before, cleared, valid, fileCode, fileUntouched, formatCodes, radioCode };
+    return { checked, rule: issue?.rule, before, cleared, valid, fileCode, fileUntouched, formatCodes, radioCode, radioChecked };
   }, modules);
   expect(result).toEqual({
     checked: true, rule: "html",
     before: { invalid: "true", error: "Use at least 4 characters." },
     cleared: { invalid: null, error: "" }, valid: true,
     fileCode: "GRID_FILE_ROWS", fileUntouched: true,
-    formatCodes: ["checkbox:GRID_FORMAT", "number:GRID_FORMAT", "date:GRID_FORMAT", "hidden:GRID_FORMAT"], radioCode: "GRID_CONTROL"
+    formatCodes: ["checkbox:GRID_FORMAT", "number:GRID_FORMAT", "date:GRID_FORMAT", "hidden:GRID_FORMAT"], radioCode: "", radioChecked: true
   });
 });
 

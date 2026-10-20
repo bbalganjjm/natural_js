@@ -1,0 +1,683 @@
+{
+  "date": "2026-10-20",
+  "milestone": "M10.9.3",
+  "baseline_commit": "a8ec22b25fdbe613c0f9850cb7478d28cd57239a",
+  "source_normalization": "UTF-8; CRLF normalized to LF",
+  "sources_sha256": {
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "README.md": "96992bf0a505b671a973eab5fcdaf490acb884a45b45a64ab8bc74d0728a22b6",
+    "examples/vite/benchmark.html": "30b8eb3cb1bb0549d7765d91cd83f35dab6a445f797aef83e9caa9388505d55c",
+    "examples/vite/benchmark.ts": "0e4d4b89c4170ad720e979a468b8b1698db1307e0bba7e0a326fbcf69c127a1e",
+    "examples/vite/index.html": "1d736b5207986ed8709a94a852a3ddc33eaa438535b21dd65291b524805bf9be",
+    "examples/vite/m10/columns.css": "42e7c392b6e6ee798e9bf94e0cb1ca672dd9912991e952bbce0404cd18403917",
+    "examples/vite/m10/columns.html": "4452d46ed174cbe7029bed090d132c630839c62964b8b4304a4e1959607fa1d4",
+    "examples/vite/m10/columns.ts": "0eb0400f2e0d131c0e6f51e3b0603d0200db0c88e60a69ab0953971241ab5278",
+    "examples/vite/m10/demo.css": "c7b307f6b62369afd93630a1e204a9b9775a7da127a8b86b3090c99a11b8ca24",
+    "examples/vite/m10/demo.html": "325de59f62b4eeeec6a6439ef897ea7f9624cf0824141603b5eb341f8df57c76",
+    "examples/vite/m10/demo.ts": "5f53581820c80ea91c1c36facc122f4763a33d21f10accfac990a5d260efbb8b",
+    "examples/vite/m10/main.ts": "31a2303e50f7f61b8829e1656523cacdd40ecfaf474ec6f50a6cbcda864ec5f9",
+    "examples/vite/m10/side.css": "263a9e42d1199f6b9b7956fed25044262e8a8511e28c1a7f1b50dc3d489cef28",
+    "examples/vite/m10/side.html": "7df785711b42b8f6a3cf59c62814650d91f1dc7c104e6dc8bef3997e37a3f18e",
+    "examples/vite/m10/stack.css": "218dc7f874b47909451c10c0680fb53ef0d52019e00cf9f2b17024bf54c62b21",
+    "examples/vite/m10/stack.html": "16a82fd3eccd0948ff7b2acb7c000346e42287967e8a5b2dc46a7225e4d51014",
+    "examples/vite/m11/base.css": "f473633f01902340c9d235ac2fc47b55c0842115a02214bb63047ba140efdcba",
+    "examples/vite/m11/main.ts": "df310a7a4028f33867534159ba2d7e41ab5ed3367dd0d41aaf71acc474f58718",
+    "examples/vite/m11/side.css": "7e5b4cd7eeb3bf800f9badf626a7585d7c879d8cb662b26518eaff0cc81eb0e5",
+    "examples/vite/m11/side.html": "ab277ebe58246e4c1ad8736ceae8fcd34979655f98ad6fafbe09120b94d68450",
+    "examples/vite/m11/stack.css": "f0e62cf51a6cd0f037c3783d84db5bf0141b78e2ae655417e87017cd64a1c64c",
+    "examples/vite/m11/stack.html": "4b0f176482616161832bc572b45520a5c1862422343879def19bf39ce89660a6",
+    "examples/vite/m12/base.css": "e29607ec6746973ce75aef6eb46393a740553955f7dee7304f9e62da8dffd3e9",
+    "examples/vite/m12/main.ts": "87e6adf6a06790e2da928f8a659f8ed1d3613573faee09b777e8aa3c862c7024",
+    "examples/vite/m12/side.css": "43fa11020aa7902e9ba053a50bfc9a1bf98e96480933949e09a83cf57d0ba92a",
+    "examples/vite/m12/side.html": "b100d15ae3c1118b6c5b0ad67c99fd214aec8cc9b198d6856961c85a8552c951",
+    "examples/vite/m12/stack.css": "02e7c9cd27306102b376a11aa836ccc63cea680e42cfaaac962440cf1cfb47d4",
+    "examples/vite/m12/stack.html": "73cefd942750f12f3c43df7de2aaa22a58901820682ec995fe13565027ac4b50",
+    "examples/vite/m3-fixture.ts": "c061a8481097ac8ea3af16b21414234c32b16951b5c0df220eafee5590bdef7a",
+    "examples/vite/m4/employees.json": "2e3def0ba822a5a1fbf907e5e7470e3bd5e2768fe85efdddbaf6f580d3cadd3d",
+    "examples/vite/m4/employees.ts": "677970576b9beaf735f2e045080a74f59876777c711dafc43bfaffa00434df95",
+    "examples/vite/m4/expected-save.json": "2099e731e1f69eb5e3c656a5b918d498b1890270a1f390049e7f97a6971d206c",
+    "examples/vite/m4/main.ts": "d8a817d1b8d5b7299e21dd535c6fb7ef4836b5215a410ed0b2cbf406b5e23116",
+    "examples/vite/m4/mock-server.ts": "9c726aaaf907908d7e0ffe64fe54a6a86ff243a17fee91003dfe368256068a60",
+    "examples/vite/m4/side.css": "06052420e6ecdad19b2d40fc9ab6d47703b39ae8adeac8b1a8a3a7cc6800456f",
+    "examples/vite/m4/side.html": "59b0d8d3e35f8c027df7fd74ad43c299d5c6fb471f42e6b38ab7069dd002fb10",
+    "examples/vite/m4/stack.css": "0d3862b786c23709d65627e80ac54b73be1ecff2d0d91975d3cfe67f42f5d418",
+    "examples/vite/m4/stack.html": "f83eb2acd794fba0590267cc1a5ef8ce5e6504bd4ca8ef39d77031f9ac3e1fe5",
+    "examples/vite/m7-fixture.ts": "6cdcb2692f59b6f4ad6170b230da73431c64a7053437962cdc55a9b6a101c421",
+    "examples/vite/m7/base.css": "d38e7167ab549e979e34ce1083796f79e7aaed0d29684f5e6ef5a159ef163369",
+    "examples/vite/m7/main.ts": "c836c45c6d39ee9b04dfafcc7afd5b725f55e158ce1882f2e01937f86ca948e2",
+    "examples/vite/m7/side.css": "3e575cea26cc40da38fb63e958b4707f15f727bc121a4d39e00d23dcddefe5a2",
+    "examples/vite/m7/side.html": "170f4fe6e0c73b5d94edce65ec3037afc70fc2eca066d56801aa736b6b397fb8",
+    "examples/vite/m7/stack.css": "5f79b35407138932a74a752b5e9d5ca424f5a3c3d074c049de688e0a447283e5",
+    "examples/vite/m7/stack.html": "7f501e83b8eb3f0b96682dd3db93a1983bac180cced8c08f1afe16c381adea38",
+    "examples/vite/main.ts": "c47b508a4e8c827c4b2d3af76fc330b3dc1a3c6cad66ac7f0b169edbc7a99e07",
+    "examples/vite/vite.config.ts": "ca8e720c73c82637bd269617a9a85119fd0ad0d04b49cc30df8fb5debbcd5af3",
+    "package-lock.json": "1131672764d18c7b9985eddd9878bf6c0e6e8ca776cb78bf43831a99ac1eb631",
+    "package.json": "1e8cb7125d1eea98f7168cbfb476d9e2a4c5b116c0d87f16e008ec43e67de221",
+    "src/comm/index.ts": "74a7ed8be5b6cdea6e4a9c40ab11c9f73320444e3ba5e05054a0bdd7dc0dd956",
+    "src/data/index.ts": "6635a25de82902ce4ccefecd95919eab95603e477748e33d2aa65a5d6055a1b5",
+    "src/index.ts": "3c3ffb9253b608e8ea20ee2511a51d6c7621ccb96ba9113f90fc1f1e3ec93a13",
+    "src/internal/framework-error.ts": "272a5f1c6ff684eeae2272586ed1e12cd9be0a12a5890eff1872b0281dbf619e",
+    "src/page/index.ts": "befcbcca6e87b71d5482ab1efa6ce0aa4a2676e3cbc75c81866d6fd7186565bf",
+    "src/ui/datepicker.ts": "815cbe70960f083ded2a806268f9467405af524c949b1ac490bbf665af116a7f",
+    "src/ui/documents.ts": "878be46a60d7673675bf99c0747ea60edadeb129d8dd16d659d319c8fba0679c",
+    "src/ui/dom-state.ts": "2f7326f36ae4efd8a2022a38228c1baae4834436b592aa8a4dc2e7544fa6796d",
+    "src/ui/field-path.ts": "2a31e756daccb79deb5d2f3d4cf43292c0790eb35bacfd88b910010859fbb97a",
+    "src/ui/field-render.ts": "c632c7cf174f9ab0a97e541afd14a92a1defb12e0659de46428ff0114cba7360",
+    "src/ui/form.ts": "5baa391dfa6e0f7b3d9ee882610796bed90ddbb7f51f06eeaefe425e3aa24986",
+    "src/ui/format-rules.ts": "49b5c51630264a86bc0c4dc77c6b3834c1b8725f17cc0f12b482b841c276fe09",
+    "src/ui/grid-columns.ts": "c5708a4ffb719d84a90dd1fcb94f58f35976e12fc665fe42f3b75ec532957b23",
+    "src/ui/grid-filters.ts": "87099c05a591403be2584ac1d17b5ce2d2d2356bf565f016a6035e18f8910887",
+    "src/ui/grid-paste.ts": "e0a102940b5f55c6966e6b4617a3adac8790fdc5afc7ef589a41cb4b574cbec8",
+    "src/ui/grid-row-blocks.ts": "87ed400994712aac98af01aa7c36d188051134d79b77f5212f5b0431a9e69251",
+    "src/ui/grid-selection.ts": "db28c178a791e4879b1963f2fc04c4ab4d42f54f07190b46c7061cb9f3b4b630",
+    "src/ui/grid-viewport.ts": "1fa2b43877929149ac9c122449d5ac569da657bc54c7cae57e4f1db3fea4aa55",
+    "src/ui/grid.ts": "5e2090f9876fb2015e966b5830a5505f29364d01b1b67c7c251acf57e81d665d",
+    "src/ui/index.ts": "47c128cdad73036db0dad91470ba4d375dddbb1ea9311c2a9b0c59ae7624b885",
+    "src/ui/list.ts": "ef923a82f114e4befa6ece9dac0310876bd806d944da6fec2853f9cfe27e3f9f",
+    "src/ui/native-control.ts": "9c006cb1b64cdeb66e92e76e8b807f1308b35658cf8eb37556857da13861ce2c",
+    "src/ui/notify.ts": "30b3217769f5922befd12466d081a57c63eec5a5f048ceb97a9c64081f9ebbca",
+    "src/ui/pagination.ts": "ce949630fde6eb6802f5b6e24377ea1ed5f598c6641afea9aece0fc8851aedfa",
+    "src/ui/popup.ts": "7c061a27ddbbd0d360893e6677bc624ec3c17ffdddf5c24546d81ef16381ec19",
+    "src/ui/row-options.ts": "63b387289762b7c1a7b55fdb2f4240a8d2232a26f2800f7b10a37e71dabf4598",
+    "src/ui/rules.ts": "cdab1ff5355f66413bc8e3b8746b23ab4bc0a2fbc940e57687732d213934517e",
+    "src/ui/select-owner.ts": "0e111dd61ef5801b129d5f325f4d05d71b74ce4496a9452fba6a460c4ec09f28",
+    "src/ui/select.ts": "b584b7e4adfa98345ffa717adc60b85d80e1b8db1ca3ebe1b9e7ce2f06215f0c",
+    "src/ui/tab-pages.ts": "b7f4fe37b514073a84b01ed89023917822740add62c2f580865dd832b9085e1e",
+    "src/ui/tabs.ts": "8dacb3280ec945100ed9651c541c047bd703b5b0bacd27fe761abe07dc7e88ce",
+    "src/ui/tree.ts": "8d3e0924075047d93138b54a0d9798829a41763eb494b2db90546f73a3fb7848",
+    "src/ui/validate-rules.ts": "2e6210c8578acebe495de64e8b638016877b81d3a1fcad568c7554dc223d722e",
+    "tests/browser/a11y-popup-tabs.spec.ts": "50d7ae23d0b338312c9dab13726752be53f1c4d4861df311bc76fd8e06e82a3e",
+    "tests/browser/datepicker.spec.ts": "864b0ecac5372c4dc2a85c56b21817cdd06366248a608ffd6ae0c8446d9bec55",
+    "tests/browser/documents.spec.ts": "dec4374372f9ea8518887d24782313fd950a28e21aabebe0c9e907ad3039e3c2",
+    "tests/browser/field-render.spec.ts": "06bf397f72a4bc879fe7a4dca4f3bf309e4d14b8f712698c72c3874993b8c74a",
+    "tests/browser/form-m6.spec.ts": "e0620b5e0d7cd86d83e778d7513a6e63acbfdd3993393041e337d16aa43f3795",
+    "tests/browser/form.spec.ts": "752b4bac1ff43fc2626727bcbef0d8541f3de82fb9d0a43e95dd6355a89d6bf3",
+    "tests/browser/grid-columns.spec.ts": "9b50ee1c99ef8efca758d5060c4dfd0a2cadc83d8a1e2d51ed6f0f689771a574",
+    "tests/browser/grid-controls.spec.ts": "6f7f5754e810c0109aa2b536bd0f679b1a0ae724756a8ea7eb608f7bf8f0f5d0",
+    "tests/browser/grid-initial-page.spec.ts": "ea80e1746c999386bfe7dba63fa6f3c15541c85b535060f95f3bcdff8b40276a",
+    "tests/browser/grid-lifetime.spec.ts": "3e7df5735978d45d392c1326f02e55d80a72689bb5bef8fb57a47fdb8e9cfd11",
+    "tests/browser/grid-m6.spec.ts": "88169140c9e6ef330f225d74312e3febcaaf3e93dd5abecced8b12c2139e2f3a",
+    "tests/browser/grid-paste.spec.ts": "992da5d9f015b9cc9c6a1fec61051a6d70c618220eebf0bbbebf7e725ab9ed54",
+    "tests/browser/grid-row-blocks.spec.ts": "2c532bf52aa109cc65eaa3cfed81f2afc335041197ccdb76668e2793423d5e7b",
+    "tests/browser/grid-selection.spec.ts": "462549892e7cef7028e290c3dae55a68f5828b24ccd2a6130485bd0b61ca217a",
+    "tests/browser/grid-viewport.spec.ts": "61efa7d7c9449f523cce5dab8a5b4d5654ea5d36e9e8c7a6e7e78da6a6cc101b",
+    "tests/browser/grid.spec.ts": "3d05127796239549dcefea5c78af310aa38b4b006aedc77732daf00cf6f11dcc",
+    "tests/browser/import.spec.ts": "049cfb88e3b19ce3f4c1b470768a19e0f26a3e5cf551a75ef3e1c05e62864ab4",
+    "tests/browser/list.spec.ts": "735295bb02ba5e578356baf2b7e5783dd1bc8d7b186d9f176f918d4269a16a3a",
+    "tests/browser/m10-agent-screen.spec.ts": "f1386618d35613c33d25673293b8d88971eb746075cd91f427f6594980d1787c",
+    "tests/browser/m10-demo.spec.ts": "a35a27bbbc02605b23b5b88aab9f8145f75157043cdb63452202a90831446c5b",
+    "tests/browser/m10-grid.spec.ts": "77d8004013200262b012310f40e4f59f4a10e1c4d8312af0eaf2424180b62bfd",
+    "tests/browser/m12-shell.spec.ts": "c4d15a3f205e7150153d43fd63fe924796f96dcfaace5ea1a86309652a0f32d8",
+    "tests/browser/m4-screen.spec.ts": "c19a07060618bfdcba092c394f06419c0d974a366ee7e308132926d1d9c4d530",
+    "tests/browser/m6-screen.spec.ts": "41f37fac13aa6145b0feeb7e7da6414e672dbe48bd65ebb154c2b649c334c229",
+    "tests/browser/m7-screen.spec.ts": "761f2c919474bb5f197d39d3804ae339fa72731ecfa196ef533f4c8e36f93c3b",
+    "tests/browser/notify.spec.ts": "00e4831a5a0a7bf924213e7e522ca0b2d7ad1c7c3a4d84127c45abdd4a96ac38",
+    "tests/browser/page.spec.ts": "f655b38c447823cbe2faea456d3cd79b74f77e8ba8bbf3c218232bfc0c69de7b",
+    "tests/browser/popup.spec.ts": "ff834b86af72986f3cd6d101d5fbadd72706258aa9022452adb799122490ca07",
+    "tests/browser/rows-ordering.spec.ts": "3b5fa9eb57443ac23ecaa8144965b306bf24f659c04d2b8eef723daaa63a5af9",
+    "tests/browser/select-pagination.spec.ts": "69ad1abd0758c6708e9d15a8c527752ad9de7ecde58e28ccd7bd504e57ac406e",
+    "tests/browser/tabs.spec.ts": "6e3f30ba645f36d4feeabf9c4f341b8177c89102b8d5a091b40febfaeaca82d1",
+    "tests/browser/tree-date-screen.spec.ts": "ec8a7e49e41a002f37aea24fbf10c59a4a00512c12e6009648abb2df85c80229",
+    "tests/browser/tree.spec.ts": "8d963e30ca29e7afc296f74bcf9554e3d701fa8287a81a03294110a4eafe8198",
+    "tests/communicator.test.ts": "1c028249a592964e14cf240543e98869e967e6065058347d54216e141d851dad",
+    "tests/consumers/browser/index.html": "422d379c5dbd600239893cf6c4737cd294a343236451a542d9dadebce2d3d5d5",
+    "tests/consumers/browser/main.js": "ec944eba5705792a4cd226af763941fe74e6a0a6a789e68430606089aaf02c9f",
+    "tests/consumers/browser/package.json": "609158e6c5fbc237939fa3ddf7faab80ab690bdc0c8d584414a885130103c4e8",
+    "tests/consumers/js/check.mjs": "d45515ef4f1fd06c66c68bdd7e6fd35f768159747c748f2934686369bde3358d",
+    "tests/consumers/js/package.json": "609158e6c5fbc237939fa3ddf7faab80ab690bdc0c8d584414a885130103c4e8",
+    "tests/consumers/ts/check.ts": "3193ab19942d73aa0b5fbd5eaa2e108e582f7a43987daf0c67ede041059f33bc",
+    "tests/consumers/ts/package.json": "609158e6c5fbc237939fa3ddf7faab80ab690bdc0c8d584414a885130103c4e8",
+    "tests/consumers/ts/tsconfig.json": "eeebe97c5197336b94700e575d71b6b9cb466574de23d5da0d663a7ed09e3c46",
+    "tests/evaluation/m8/README.md": "ce8a66b67ce60902b0194fb48783406c8a8ae50469947c8ecc4bc9a31e0b3766",
+    "tests/evaluation/m8/meter.mjs": "c377d08ac932d6d18d7da01f525524bf149245521ee68c6adb634e5b719719a7",
+    "tests/evaluation/m8/task1-brief.md": "f707e48d241ee73fdd8bf5ce7182de11936ea10e59d39de28b0969fcdfcea6f1",
+    "tests/evaluation/m8/task1-mdi-qa.spec.mjs": "09a15bd9687876fd0b68f25eb776dcab24b619baf555c6c2e366f562c1a10612",
+    "tests/evaluation/m8/task1-seed.tar": "c22b50496c3d3318fe01615e63796c2e24aaef6faca4422bf8650026ada06c5d",
+    "tests/evaluation/m8/task2-brief.md": "b36709ecf7738ab2b806dbc6b9925420c26d1646d31b3c0d53f03f2248af8668",
+    "tests/evaluation/m8/task2-seed.tar": "59f2e0ad164858ea50758fd29d1073dfda3d7be62dd59d2d70f7ea4735027ffc",
+    "tests/evaluation/m8/task3-brief.md": "a7d166e4e984e671b37ec7c6e27f5fd922c35987f8c19d106e3c4fdc39a49b18",
+    "tests/evaluation/m8/task3-seed.tar": "e881fb107e964a8a19191f291aaecb406ed60795191cbe6e9077e5cc9b8edb05",
+    "tests/field-path.test.ts": "c349e55ad477cf75f44bd775219fcabc56a75904550717451f9d1ca75e60e887",
+    "tests/format-rules.test.ts": "4b1d29e7ad0e823af5149c8fe9ef0304b669ac41334675b6b133854b383c8ab9",
+    "tests/framework-error.test.ts": "b596af6d2af24f59d84b08366c6182209f64fb2a63f459f9440ed5e4e6721f17",
+    "tests/grid-paste.test.ts": "3345a370a2bf87576b29e1a2552ebaa28cf362251b1abefedc5f3d9f61ce6cbd",
+    "tests/grid-viewport.test.ts": "023b6e0b6f0f904bfa1eaf58cfd45bf8928ccba816225beb4c225998d5d32b48",
+    "tests/playwright.config.ts": "0fbdbccf560ab2717d4726a1ef0537ddd53a1ca09c0e8d302c143149de75ae9b",
+    "tests/row-options.test.ts": "2594e9d566637ef01b9055c55e6ddeb2fdd31189985f083dab35c07c38627623",
+    "tests/rows.test.ts": "c555082bd4912020ab3ea5bb9750ffaebc63e171517c465067f361d0906cd598",
+    "tests/rules.test.ts": "beaa584dcee7e9bb1d488620347df993cea983fa0c62e04c2c9df7bcf524ddf9",
+    "tests/validate-rules.test.ts": "f8045a7d23ed947ffad16956fec8d0b09719e08efdbdc85ab8bef9e0268d5a56",
+    "tools/audit-v1-surface.mjs": "2671ea7d33cdd09763d3fa5ea5a1d667fe2768402b1025c13c334a110a7e9e98",
+    "tools/benchmark-grid-viewport.mjs": "d4046a44ccbb32f83ddec966c1f44274e72561d2ba66edbd5788e0d059ed9c4c",
+    "tools/benchmark-m10-columns.mjs": "ac4fe6d2d838c03d70a3bf62ba4731c0da24d237e572dd68c83722e0384ea895",
+    "tools/benchmark-m10-grid.mjs": "35eb3c2cd8e79313431042277533a8e78281ea0d4eaddd5d02a53a97eeba9a31",
+    "tools/benchmark-m4.mjs": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+    "tools/benchmark-m6-list.mjs": "6cc4153bead605aa62495873c9b8b152d2a6d3985947838a1fcaf02111ed5df5",
+    "tools/check-consumers.mjs": "bcc93fb22857bc15d1b23bce18860c43557068ed03447b138c85097ccb45e992",
+    "tools/check-packed-browser.mjs": "ac8c01f7b8e3e22b632ac460c2298b0d49fda5ba97acf33a7f3fb7255e476919",
+    "tools/knowledge-docs/knowledge-docs.mjs": "32ccfe81c14b72a4f1d6ac32c9cfa37ef9d63237950396a62702580085da019a",
+    "tools/knowledge-docs/knowledge-docs.test.mjs": "46ff4647130ac85ff98dea718fa5fc8f5ee7b45a96d34ccf853afa213139aab9",
+    "tsconfig.json": "ced3f31a9299471036d3f09d5d74cf68cbd9174ae14fd105577cb8f3420e7cea",
+    "vitest.config.ts": "5f09f58032547a51c2310698b1e6023ccfc41b03cc9f595900ca4331be49c215"
+  },
+  "artifact": {
+    "sha256": "cfe710f0d644d95505f63d81e2a36e2fff6b17a64c50be6bb0d45f8653225831",
+    "files": 168,
+    "packed_bytes": 266871,
+    "unpacked_bytes": 1309779,
+    "all_members_match_frozen_workspace": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "publication": "not performed"
+  },
+  "commands": {
+    "record_file": "m1093-gates.jsonl",
+    "records": 42,
+    "final_gate_records": 16,
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true,
+    "superseded": [
+      {
+        "label": "build",
+        "exit_code": 0,
+        "log": "m1093-build.log"
+      },
+      {
+        "label": "types",
+        "exit_code": 0,
+        "log": "m1093-types.log"
+      },
+      {
+        "label": "example-types",
+        "exit_code": 0,
+        "log": "m1093-example-types.log"
+      },
+      {
+        "label": "unit",
+        "exit_code": 0,
+        "log": "m1093-unit.log"
+      },
+      {
+        "label": "pack",
+        "exit_code": 0,
+        "log": "m1093-pack.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 1,
+        "log": "m1093-browser-chromium.log"
+      },
+      {
+        "label": "build",
+        "exit_code": 0,
+        "log": "m1093-build-2.log"
+      },
+      {
+        "label": "types",
+        "exit_code": 0,
+        "log": "m1093-types-2.log"
+      },
+      {
+        "label": "example-types",
+        "exit_code": 0,
+        "log": "m1093-example-types-2.log"
+      },
+      {
+        "label": "unit",
+        "exit_code": 0,
+        "log": "m1093-unit-2.log"
+      },
+      {
+        "label": "pack",
+        "exit_code": 0,
+        "log": "m1093-pack-2.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 0,
+        "log": "m1093-browser-chromium-2.log"
+      },
+      {
+        "label": "browser-firefox",
+        "exit_code": 1,
+        "log": "m1093-browser-firefox.log"
+      },
+      {
+        "label": "build",
+        "exit_code": 0,
+        "log": "m1093-build-3.log"
+      },
+      {
+        "label": "types",
+        "exit_code": 0,
+        "log": "m1093-types-3.log"
+      },
+      {
+        "label": "example-types",
+        "exit_code": 0,
+        "log": "m1093-example-types-3.log"
+      },
+      {
+        "label": "unit",
+        "exit_code": 0,
+        "log": "m1093-unit-3.log"
+      },
+      {
+        "label": "pack",
+        "exit_code": 0,
+        "log": "m1093-pack-3.log"
+      },
+      {
+        "label": "consumers",
+        "exit_code": 0,
+        "log": "m1093-consumers.log"
+      },
+      {
+        "label": "packed-chromium",
+        "exit_code": 0,
+        "log": "m1093-packed-chromium.log"
+      },
+      {
+        "label": "packed-firefox",
+        "exit_code": 0,
+        "log": "m1093-packed-firefox.log"
+      },
+      {
+        "label": "packed-webkit",
+        "exit_code": 0,
+        "log": "m1093-packed-webkit.log"
+      },
+      {
+        "label": "packed-chrome",
+        "exit_code": 0,
+        "log": "m1093-packed-chrome.log"
+      },
+      {
+        "label": "packed-edge",
+        "exit_code": 0,
+        "log": "m1093-packed-edge.log"
+      },
+      {
+        "label": "browser-chromium",
+        "exit_code": 0,
+        "log": "m1093-browser-chromium-3.log"
+      },
+      {
+        "label": "browser-firefox",
+        "exit_code": 1,
+        "log": "m1093-browser-firefox-2.log"
+      }
+    ],
+    "note": "The first Chromium gate retained an obsolete unsupported-radio expectation. A later provisional Chromium passed; its Firefox child was deliberately stopped for the independently reproduced merge-render correction. Superseded records remain retained and never certify final source. Every final gate fingerprints all root 2.0 runtime sources, examples, tests, tools, README and package/build configuration. Final compiler output is archived once and its exact archive is used by all installed consumers. No historical result is rerun or recertified.",
+    "fingerprint_scope": "155 files: root 2.0 src, examples/vite, tests, tools, README, LICENSE, package/lock and TS/Vitest configuration. Installed dependencies and browser binaries are identified by lock/runtime/consumer records rather than byte-fingerprinted; preserved v1 benchmark reference inputs remain unchanged against HEAD."
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "example_types": "pass; Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 105
+    },
+    "new_control_cases": 27,
+    "new_field_render_cases": 6,
+    "new_exclusive_check_cases": 5,
+    "new_form_cases": 3,
+    "new_demo_cases": 2,
+    "full_suites": {
+      "chromium": {
+        "passed": 313,
+        "elapsed": "1.6m",
+        "log": "m1093-browser-chromium-4.log"
+      },
+      "firefox": {
+        "passed": 313,
+        "elapsed": "3.3m",
+        "log": "m1093-browser-firefox-3.log"
+      },
+      "webkit": {
+        "passed": 313,
+        "elapsed": "2.9m",
+        "log": "m1093-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "log": "m1093-packed-chromium-2.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "log": "m1093-packed-firefox-2.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "log": "m1093-packed-webkit-2.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "155.0.8059.85",
+        "passed": true,
+        "log": "m1093-packed-chrome-2.log"
+      },
+      {
+        "browser": "edge",
+        "version": "155.0.4283.62",
+        "passed": true,
+        "log": "m1093-packed-edge-2.log"
+      }
+    ],
+    "installed_controls": "Authored cross-tr radio/checkbox groups and raw typed multiple Select arrays, protected atomic array paste, manual validation/current-page reveal, Form/Grid display renderers and exclusive row checks alongside all existing installed record/column/viewport/CVC assertions."
+  },
+  "performance": {
+    "binding": {
+      "log": "m1093-binding-performance.log",
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 16.699999999254942,
+            "rebind": 21.90000000037253,
+            "edit": 0.8000000007450581,
+            "sort": 2.5,
+            "filter": 1.299999998882413
+          },
+          "budgets_ms": {
+            "initial": 30,
+            "rebind": 35,
+            "edit": 5,
+            "sort": 10,
+            "filter": 8
+          }
+        },
+        {
+          "kind": "nested-auto",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 41.90000000037253,
+            "rebind": 49.20000000111759,
+            "sort": 6.300000000745058,
+            "filter": 3.200000001117587
+          },
+          "budgets_ms": {
+            "initial": 90,
+            "rebind": 100,
+            "sort": 25,
+            "filter": 18
+          }
+        }
+      ]
+    },
+    "viewport": {
+      "log": "m1093-viewport-performance.log",
+      "method": {
+        "count": 5000,
+        "kinds": [
+          "flat",
+          "nested",
+          "blocks"
+        ],
+        "runs": 5,
+        "warmup": 2,
+        "rootHeight": 400,
+        "estimate": 48,
+        "overscan": 3,
+        "mountedBound": 80,
+        "blocks": {
+          "physicalRowsPerRecord": 2,
+          "estimate": 80,
+          "mountedBound": 64,
+          "pasteRecords": 100,
+          "merge": "Adjacent scalar group keys span complete two-row records; each native merge stays inside a consecutive mounted segment."
+        },
+        "timing": "Rows and authored HTML prepared outside timing. Each operation includes two successive stable animation-frame geometry observations; fail after fifteen frames.",
+        "focus": "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
+        "paste": "Flat/nested paste one thousand offscreen records; blocks paste one hundred. Each changes two fields in one atomic event; nested detail uses numeric Select values.",
+        "move": "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
+        "geometry": "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies the complete requested record rectangle and forward scroll advances logical intersection. Blocks record native physical-row heights, record bounds and merge spans; twenty cycle windows record actual intersections.",
+        "cleanup": "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
+        "memory": "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim.",
+        "cleanupBudget": {
+          "nodes": 8,
+          "jsEventListeners": 0,
+          "documents": 0
+        },
+        "budgets": "Host-relative Chromium medians declared before measurement; other engines report samples without applying Chromium thresholds."
+      },
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 17.40000000037253,
+            "reveal": 66,
+            "scroll": 83.09999999962747,
+            "columns": 50.19999999925494,
+            "paste": 33.69999999925494,
+            "move": 63.59999999962747,
+            "dispose": 24.09999999962747
+          },
+          "budgets_ms": {
+            "initial": 120,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100
+          },
+          "maximum_physical_rows": 14,
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "nested",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 8.299999998882413,
+            "reveal": 65.60000000149012,
+            "scroll": 83.19999999925494,
+            "columns": 49.70000000111759,
+            "paste": 33.20000000111759,
+            "move": 63.399999998509884,
+            "dispose": 18.5
+          },
+          "budgets_ms": {
+            "initial": 180,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100
+          },
+          "maximum_physical_rows": 14,
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "blocks",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 17.09999999962747,
+            "reveal": 66.19999999925494,
+            "scroll": 50.19999999925494,
+            "columns": 49.09999999962747,
+            "paste": 34.09999999962747,
+            "move": 62.899999998509884,
+            "dispose": 4.800000000745058
+          },
+          "budgets_ms": {
+            "initial": 35,
+            "reveal": 100,
+            "scroll": 120,
+            "columns": 100,
+            "paste": 85,
+            "move": 100
+          },
+          "maximum_physical_rows": 24,
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        }
+      ]
+    },
+    "limits": "Same-host completed DOM operations in headless Chromium; DOM counters do not certify JavaScript heap retention, universal speed, equivalent AI task speed or token savings. Existing budgets and fixtures are unchanged; new native-group browser tests cover bounded offscreen work separately."
+  },
+  "review": {
+    "baseline": "Separate read-only audit matched all 31 preceding HEAD-normalized sources, 23 byte-exact logs/gate records, all 16 final gates and the exact preceding 158-file artifact. Source/metadata members match HEAD; generated members match the preserved verified cache, without claiming an independent historical rebuild. The documented old benchmark input in 15 unaffected gates remains explicit.",
+    "source": "Independent complete-change reviewer traced connected native controls, Form/Grid/List constraints, array paste, selection, rendering and viewport lifetime. Concrete mixed-radio-form and released-invalid-element failures were independently reproduced before and after correction.",
+    "corrections": [
+      "Reject mixed native radio form owners before any ownership/DOM changes.",
+      "Refresh every validation issue element after first-error reveal; released rows have no stale DOM reference.",
+      "Use the first visible group member for paste positions while protecting the entire partially hidden group; managed column visibility also applies to offscreen authored probes.",
+      "Share authored interactive-content protection across renderer and merge owners; protect local Form ownership before invoking render callbacks, retain raw values, rollback failed initialization and restore original children.",
+      "Retain native fallback semantics on unsupported Windows WebKit date/color controls; capability fixtures preserve all supported-type assertions.",
+      "Correct early-year date token operations using native full-year setters, retaining Form-reachable formatter behavior.",
+      "Reject newly rendered interactive/bound content inside merged cells before replacement; ordinary nonmerged controls and display-only merged output remain allowed.",
+      "Native group constraints check entered drafts, including explicit null, independently of parser defaults; hidden viewport roots/ancestors protect mounted and offscreen paste equally."
+    ],
+    "plans": "Independent reviewers approve the future M13 whole-2.0 read-only ponytail-review report, authorized remediation, regressions and independent re-review before personal testing. It remains a future milestone, not an execution result.",
+    "reviewers": [
+      "m1093_core_review",
+      "m1093_controls",
+      "m1093_legacy",
+      "m109_docs"
+    ]
+  },
+  "log_sha256": {
+    "m1093-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-unit.log": "18d765c3d5bf9d5e60446f1321df908fec688f5302290452b964fdcb68437a58",
+    "m1093-pack.log": "92344aee7f6ea5c81c033893ddea28cea4e997eed72eecb8530bf70b0aa3c721",
+    "m1093-browser-chromium.log": "2da2de2faeabd75ee21263c51290d7cdcab3dc8f46deb510f297ca1835430f65",
+    "m1093-build-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-example-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-unit-2.log": "27beb218778645f0a1dc02e890f6113afbc6e0fce9c89e1fd466bd5eccdd0bfc",
+    "m1093-pack-2.log": "807646f95707921bba65d27b1ae2877605594f43af5aa5ed475844be4f7aba54",
+    "m1093-browser-chromium-2.log": "219bce57c3481604150706d86f1fcf71239f18a1a619776eac3357b3f024b994",
+    "m1093-browser-firefox.log": "41c1c3fac496ec9a54f62718f3113da2e5596fe9e50948281970b3563b9f9c9d",
+    "m1093-build-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-types-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-example-types-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-unit-3.log": "724be0e4ab1253159ffd215cf1573511297ff8cd14f64a25b220c46f83e1dce6",
+    "m1093-pack-3.log": "f809ec50da320b8986cc6eb19e3f28b969895ba4e28e61cec90aef38b95780b2",
+    "m1093-consumers.log": "4d705c7c0e8a7c3eeebb0589b94cedf2e05fd55235dd075a0f418a7b77f1ac9f",
+    "m1093-packed-chromium.log": "89ca4eb3e31c26f549519b3e1e7fcdf3da3704d306775511e56daa81a809433e",
+    "m1093-packed-firefox.log": "0cc8f6d8bf724ca2f3df0f5500b5bf8672d5d91a46dc05f5d1087a9cb17dd1b8",
+    "m1093-packed-webkit.log": "6b8841a44c6e3e3fedf96d02c3adb503e0932b69f6a3e354e21f43132418583b",
+    "m1093-packed-chrome.log": "115ee06c853d11626193c90f63515941386e8b245710b90a6083c920cdbbb445",
+    "m1093-packed-edge.log": "3ebf42cb8c7d11474cd6714be2ed1a3c97c119080c2eab0e47c613eb55e0c150",
+    "m1093-browser-chromium-3.log": "80fcf3ca29373e03f2715085c2aec56d2c9df6211e73aaf8519cce07a26aa556",
+    "m1093-browser-firefox-2.log": "d3439e9ccff1bd599f244413c53ce5c9413c652dd25a4adf3f8fd0e72799b491",
+    "m1093-build-4.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-types-4.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-example-types-4.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1093-unit-4.log": "d7121288d8afb0bb508eb7b7db4c68a62363b92a3cc6a6b1b24168b125256543",
+    "m1093-pack-4.log": "23ddcb92045550e4c7c9cbd47b6370d454e8b629953a8ed9a4d521ff1f942bb9",
+    "m1093-consumers-2.log": "e70ad7e744b310f4742f15d517576f992f65299b7d7e06ba801bd04974cb8550",
+    "m1093-packed-chromium-2.log": "234b99fdbf7185bc173e29b503c8fc43f379578bc137e2b79151e8f44040191b",
+    "m1093-packed-firefox-2.log": "d02f7360a4cd0eeb822cb9b2ca1e6b6d0d66eb965b88a1fbe2fce7fcbef73ce4",
+    "m1093-packed-webkit-2.log": "61a75d95d9d176b807c6d6a523267945bea8d38ffc2b7b5c38f2215926b8475e",
+    "m1093-packed-chrome-2.log": "895bbc3497cccc2e0c016377aea06424659fc3116bb16eb1b83dc13bba4d9334",
+    "m1093-packed-edge-2.log": "cd6de34fa30e40aa143020e1f80de19d1ffc7bfdb02886b8b16bfe925c69195d",
+    "m1093-browser-chromium-4.log": "9ad13c7e08b2c69436d6edb135d6572200fd207fe755b215955501433fb10be2",
+    "m1093-browser-firefox-3.log": "4242e93e5e48d41fee0d17dc2278d141134f0a988812f4ef70032f9fa4c6526c",
+    "m1093-browser-webkit.log": "8ec45379c39a885e8e92a425b83fa613e5d1e92862db439305ba2bfa0e8dd9ba",
+    "m1093-binding-performance.log": "6a9c4a7b14bdce1b0f7aba562f123557027fdb8ce53f43268e4a1eeb598a724e",
+    "m1093-viewport-performance.log": "ad911c68a0296524d946a0116ef406f0d8eb27342035c84b7cfa22ec4bd0cace"
+  },
+  "limits": [
+    "Remaining Grid status/lifecycle/detail/geometry and other component/P0 semantic/dynamic closure stay required. No new omission is approved.",
+    "M13 whole-code review/remediation and fixed final AI task evaluation are future gates; no actual token telemetry, equivalent-task speed or JavaScript heap-retention claim.",
+    "Manual assistive technology, personal acceptance and actual OS IME/clipboard remain unverified; actual macOS/iOS Safari is excluded.",
+    "No npm publication/release tags/master/v1 changes. Native unsupported input types follow browser fallback rather than a new custom picker."
+  ]
+}

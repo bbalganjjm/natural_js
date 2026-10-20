@@ -8,11 +8,11 @@ sources:
   - id: continuation
     resource: m10-parity-plan.md
     title: Required Grid continuation and prior ordered Rows gates
-    git_blob: d3856b58cb495d85c9a3dd5477dee641f6b1f55c
+    git_blob: 5336f2f7e289a16e7d44b0d084fee32998c8c762
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding, logical identities, drafts and paste
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Authored column topology and layout ownership
@@ -28,7 +28,7 @@ sources:
   - id: body
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and native merge ownership
-    git_blob: 4b3c9f899394bb8f73327cac498d3aa03f3db72f
+    git_blob: bc21fd1cc985184a332034bf26bfddd40f1434a3
   - id: browser
     resource: ../../tests/browser/grid-row-blocks.spec.ts
     title: Multi-tr binding, native geometry, ownership and logical paste regressions
@@ -40,7 +40,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Two authored layouts sharing nested record state
-    git_blob: 412de2bc375f43ea3436d61ccf3b1d3e9fbf9fe1
+    git_blob: 45f0dceff456a17899ef36c6bbf9f44fbe5d5004
   - id: artifact-audit
     resource: evidence/m1092-artifact-audit.json
     title: Independent byte-exact package and private-entry audit

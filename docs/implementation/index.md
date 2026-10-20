@@ -1,5 +1,9 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.3 controls and validation](m10-controls-plan.md) - Complete Grid control values, explicit display, exclusive checks and validation interaction using shared native field semantics. (draft)
+
+* [Natural-JS 2.0 M13 whole-code review and remediation](m13-review-plan.md) - Required whole-code review and verified remediation after feature parity and before personal testing or release preparation. (draft)
+
 * [Natural-JS 2.0 M10.9 remaining Grid plan](m10-parity-plan.md) - Staged closure of legacy Grid behavior through ordered Rows, authored row groups, merging and existing UI owners. (draft)
 
 * [Natural-JS 2.0 M10.8 viewport plan](m10-viewport-plan.md) - Measured variable-height Grid rendering with bounded DOM and preserved logical-page contracts. (draft)

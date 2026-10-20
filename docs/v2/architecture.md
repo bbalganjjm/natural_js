@@ -20,11 +20,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
+    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: grid-columns
     resource: ../../src/ui/grid-columns.ts
     title: Private Grid column topology and resize ownership
@@ -32,7 +32,7 @@ sources:
   - id: grid-selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid active identity, sets, eligibility, and transitions
-    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
+    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
   - id: grid-filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filter state and choice counts
@@ -44,11 +44,11 @@ sources:
   - id: grid-blocks
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and native merge ownership
-    git_blob: 4b3c9f899394bb8f73327cac498d3aa03f3db72f
+    git_blob: bc21fd1cc985184a332034bf26bfddd40f1434a3
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
+    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -89,6 +89,14 @@ sources:
     resource: ../../src/ui/field-path.ts
     title: Private UI field path semantics
     git_blob: dfac85c3d4cc2c0a61cb2e4ee210b01583ecc5b2
+  - id: native
+    resource: ../../src/ui/native-control.ts
+    title: Private shared native values, display and constraints
+    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+  - id: render
+    resource: ../../src/ui/field-render.ts
+    title: Private explicit render configuration and DOM ownership
+    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private Form/Grid rule runner
@@ -96,7 +104,7 @@ sources:
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Private retained formatter rules
-    git_blob: 401c9a722f118f4a3e4e31665add45a8da3d2b7a
+    git_blob: ba7dbc318be4622e90ec0004846566fd3b5b5362
   - id: validators
     resource: ../../src/ui/validate-rules.ts
     title: Private retained validator rules
@@ -129,10 +137,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -160,7 +168,7 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 - Import downward and directly: UI may depend on data and the page runtime/types; data and communication do not import UI. Runtime modules may use private internal code. No internal module imports the package root or another role's public package specifier.
 - Start a helper inside its owning feature. Move it to `internal/` only after at least two roles need the same semantics, lifetime, error behavior, and tests. Small operations with different meaning stay local.
-- Form, Grid, and List use one UI-owned declaration parser and dispatcher. Built-in formatter and validator implementations remain private. Grid and List share only the stable row-local option operation; Form, Grid, and List share Select ownership with standalone Select. Do not turn them into a generic formatting or validation utility package.
+- Form, Grid, and List use one UI-owned declaration parser and dispatcher, native field value/display/constraint operations, and Select ownership with standalone Select. Built-in formatter and validator implementations remain private. Grid and List share row-local options; Form and Grid share explicit field rendering. Do not turn these concrete contracts into a generic formatting, validation or utility package.
 - Keep DOM references and row identity local to their mounted root and row store. Standard browser operations remain direct calls; no selector, event, date, or collection wrapper is added for convenience.
 - A shared error code has one implementation. `FrameworkError` is the first cross-role contract, implemented privately and re-exported only at the root.[^root][^error]
 
@@ -173,6 +181,8 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 `grid-filters.ts` owns raw JSON-scalar column filter state and distinct choice counts under the manual and other-column filters before paging. Its public result is `GridFilterChoice`. Grid connects authored header multiple selects to the existing `bindSelect`, preserving raw number/string identity, search-hidden selections and original control ownership; it adds no second Select implementation. Grid also routes authored sort buttons through its existing sorting path and resolves row actions against current Rows identity. Application eligibility, sort and filter functions stay pure; domain comparators and filter values remain caller-owned.[^grid-filters][^grid][^select][^ui]
 
 `grid-viewport.ts` owns measured logical-record heights, prefix offsets, native spacer placement, authored scroll-root anchoring and observer/frame cleanup. It observes the complete physical tr block for each RowId. `grid-row-blocks.ts` owns template extraction/restoration, finite authored spans and temporary adjacent native merges with measured height floors; it does not own field state. Grid owns projection, mounted bindings, offscreen validation/paste and the single focused-record pin. These are private owners used by one Grid flow; no shared virtual-list/merge engine, loader registry or public type is added. See [Grid](grid.md) for the authored markup and boundary rules.[^grid-viewport][^grid-blocks][^grid][^ui]
+
+`native-control.ts` has concrete Form/Grid/List callers for scalar/group values, image/text display, text-length checks and native value sanitization. Its interactive-content selector is shared by Grid merge and explicit-render preflight. Each binder still owns compilation, probes, drafts, rules and error presentation; List validates against authored-template probes, not its disabled display clones. Grid compiles one logical group across physical rows, allocates isolated native radio names, and retains its scalar fast path without creating a Form controller per record. `field-render.ts` is shared only by Form/Grid: it validates explicit display targets and fresh same-document results before replacement. No renderer, native-field or check-mode type is added to the public entry. Form alone snapshots original custom-render children for disposal; Grid already owns unchanged template restoration.[^native][^render][^form][^grid][^list]
 
 A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
@@ -198,6 +208,8 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 [^tabs]: Authored Tabs and CVC page lifetime
 [^row-options]: Private row-local choice extraction
 [^select-owner]: Private Select ownership
+[^native]: Private shared native values, display and constraints
+[^render]: Private explicit render configuration and DOM ownership
 
 [^tree]: Tree hierarchy and authored-list binding
 [^datepicker]: Controlled authored-calendar binding

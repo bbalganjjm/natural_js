@@ -1,7 +1,7 @@
 ---
 type: UI Component
 title: bindGrid
-description: Bind authored native table row blocks to Rows with adjacent merging, bounded viewport rendering, selection, paste, and accessible validation.
+description: Bind authored table records to Rows with native choice groups, merging, bounded rendering, atomic paste, and accessible validation.
 tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
@@ -13,7 +13,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -25,7 +25,7 @@ sources:
   - id: blocks
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and native adjacent merging
-    git_blob: 4b3c9f899394bb8f73327cac498d3aa03f3db72f
+    git_blob: bc21fd1cc985184a332034bf26bfddd40f1434a3
   - id: blocks-browser
     resource: ../../tests/browser/grid-row-blocks.spec.ts
     title: Multi-row identity, spans, merging, physical ARIA and bounded geometry
@@ -37,7 +37,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private active identity, membership, eligibility, and transition ordering
-    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
+    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private scalar column filters and choice counts
@@ -50,6 +50,26 @@ sources:
     resource: ../../src/ui/rules.ts
     title: Shared Form/Grid rule runner
     git_blob: 967142342d060056cd3f124db29f6893a2875d48
+  - id: native
+    resource: ../../src/ui/native-control.ts
+    title: Shared native field values, display and constraints
+    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+  - id: render
+    resource: ../../src/ui/field-render.ts
+    title: Private explicit field rendering and DOM ownership
+    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+  - id: controls-browser
+    resource: ../../tests/browser/grid-controls.spec.ts
+    title: Native groups, values, validation timing, display and MDI regressions
+    git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
+  - id: render-browser
+    resource: ../../tests/browser/field-render.spec.ts
+    title: Renderer preflight, returned nodes, errors and reentry regressions
+    git_blob: 8320051e7aa3cb4af2ee5be9f4225e3a8a6fb0c7
+  - id: checks-browser
+    resource: ../../tests/browser/grid-selection.spec.ts
+    title: Independent membership and exclusive check regressions
+    git_blob: 699235cbb85f7f3aaf0a2ad08d6b875d01786317
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Safe nested field paths
@@ -62,10 +82,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -116,7 +136,10 @@ if (grid.validate().valid) console.log(rows.changes());
 | `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
 | `viewport` | Optional `{ root: HTMLElement, estimate: number, overscan?: number }`; the distinct same-document ancestor scroll root supplies finite authored height/overflow. Estimate is the positive finite initial height of a complete logical record in CSS pixels; overscan counts logical records, default 3. |
 | `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
-| `parse` | Optional application parser per unique non-checkbox text/display field path, used to turn an entered string into a raw JSON value. A number input requires one. |
+| `parse` | Optional application parser per unique scalar text/display or radio field path, used to turn an entered string into a raw JSON value. Number and range inputs require one. Boolean checkbox and array-valued controls reject string parsers. |
+| `render` | Optional `Record<string, (value: unknown, context: RuleContext) => Node \| string \| null>` for explicit display fields; see [display rendering](#display-rendering). |
+| `validateOn` | `"change"` (default), `"blur"`, or `"manual"`; controls draft validation/commit timing. Explicit `validate()` remains the save gate. |
+| `revealInvalid` | Optional boolean, default `false`; explicit validation and rejected paste reveal the first current-page invalid row and try to focus its visible enabled field. |
 | `paste` | Optional boolean, default `false`; enables delegated native `text/plain` paste into bound row fields and safe focusability for plain display fields. The `paste` method is available independently. |
 | `onPaste` | `(result: ValidationResult) => void` after an API or native paste returns a validation result, including rejection. It is not called when preparation or a committed observer throws. |
 | `columns` | Optional full column state; each key appears exactly once in display order. Template `data-column` also enables management with authored defaults. |
@@ -125,6 +148,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `multiple` | Optional boolean, default `false`. Enables batch mouse/keyboard gestures on row selection buttons; full-set methods work in both modes. |
 | `canSelect` | `(row: RowSnapshot<T>) => boolean`; eligibility for active detail and selected membership, default all nondeleted rows. |
 | `canCheck` | `(row: RowSnapshot<T>) => boolean`; checked membership eligibility, default all nondeleted rows. |
+| `checkMode` | `"multiple"` (default) or `"single"`; single mode permits zero or one checked ID and atomically replaces the previous ID when another row is checked. |
 | `beforeSelect` | `({ id, row, event }) => boolean \| void` before active detail identity changes. |
 | `beforeSelectionChange` | `(change: GridIdsChange) => boolean \| void` before selected membership changes. |
 | `onSelectionChange` | `(change: GridIdsChange) => void` after selected membership commits. |
@@ -145,13 +169,13 @@ Eligibility callbacks must return strict booleans. Keep eligibility, comparator,
 | `data-resize-column="key"` | Header button | Authored `type="button"`, nonempty `aria-label`, inside matching leaf header. Pointer and keyboard resizing. |
 | `data-row-template` | One tbody row or one tbody | Repeats one tr or the tbody's complete tr block under one RowId. |
 | `data-merge="path"` | Display-only direct cell in the first template tr | Raw scalar merge key; the cell must span the entire logical record and contain only matching bound fields. Adjacent equal records share a native rowspan. |
-| `data-field="path"` | Row descendant | Reads a top-level or dot-separated object path. Text cells use `textContent`; supported inputs and textareas can edit it. |
+| `data-field="path"` | Row descendant | Reads a top-level or dot-separated object path. Plain display uses text; native controls edit values, and images receive `src`. |
 | `data-format='[["name", ...args]]'` | Text-like input, textarea, or text element | Applies display-only rules; non-text inputs and Selects reject it. Stored row data stays raw. |
 | `data-validate='[["name", ...args]]'` | Field or Select | Validates raw values with built-in or supplied rules. Rules are parsed once from the template. |
 | `data-error-for="path"` | Row descendant | Displays field issues as text and receives a generated unique ID for `aria-describedby`. |
 | `data-select-row` | Row button | `type="button"`; activates detail identity, with batch gestures when `multiple: true`. `aria-pressed` reflects active identity in default mode and batch membership in multiple mode; multiple mode also marks the active button with `aria-current="true"`. |
 | `data-check-row` | Row checkbox | Native `input type="checkbox"` for checked membership; must not carry `data-field`. |
-| `data-check-all="visible\|filtered\|store"` | Header checkbox | Native checkbox with an explicit scope, separate from `data-field`; reflects full, mixed and empty scope state. |
+| `data-check-all="visible\|filtered\|store"` | Header checkbox | Native checkbox with an explicit scope, separate from `data-field`; reflects scope state and is disabled for an empty scope or more than one eligible row in single mode. |
 | `data-sort-column="key"` | Header button in a `th` | `type="button"`; requires a matching `sorts` entry and cycles ascending, descending, clear. |
 | `data-filter-column="key"` | Header `select multiple` | Requires a matching `filters` entry; binds raw choices through the existing Select component. |
 | `data-filter-search="key"` | Header text/search input | Narrows matching choice labels without changing row filtering. |
@@ -161,6 +185,10 @@ Eligibility callbacks must return strict booleans. Keep eligibility, comparator,
 | `data-option-label="path"`, `data-option-value="path"` | Select with `data-options` | Read each option's label and raw scalar value. |
 
 Field and option paths reject array indices, expressions, prototype keys, and empty segments. The Grid compiles field descriptors once, keeps row element references only for mounted clones, and updates their fields when raw values change. A nested field edit copies the affected object path and calls `Rows.set` for its top-level field.[^grid][^path]
+
+Radio and checkbox members sharing one field path form one logical field, including members in different physical rows of a record. One checkbox stores a boolean; repeated checkboxes store a string array; radio stores a string or `null`. Choices must have distinct values, matching control kinds and consistent rule declarations. Radio members must share one native form owner; all-null owners are allowed, while mixed owners fail before mutation. Every cloned radio group receives a document-unique native name, so records and simultaneous MDI Grids remain independent inside or outside a native form. The authored template names are unchanged and restored with the template. Use wrapping labels and a fieldset/legend for group meaning.[^grid][^controls-browser]
+
+A row-field `<select multiple>` always stores an array, including zero or one selected item. Row-local `data-options` preserves raw strings, finite numbers, booleans and `null` through the option map. Native date, datetime-local, time, month, week, color and hidden inputs use strings; number/range use the required application parser. When an engine implements an authored type as a text fallback, the effective native control defines its constraints; no date polyfill or new date utility is installed.[^grid][^native][^controls-browser]
 
 # Methods
 
@@ -183,7 +211,7 @@ For width-only changes, the column owner updates native col/table widths without
 
 ## `selectedIds()` / `setSelected(ids)` and `checkedIds()` / `setChecked(ids)`
 
-The getters return frozen arrays in store order. Each setter replaces its entire independent set in every mode, including IDs outside the visible page. It validates the complete array before changing state: duplicate, missing/deleted or ineligible IDs reject the whole proposal. Selected membership uses `canSelect`; checked membership uses `canCheck`. Neither setter changes active detail identity or the other set, and none of these state changes edits Rows.[^selection]
+The getters return frozen arrays in store order. Each setter replaces its entire independent set, including IDs outside the visible page. It validates the complete array before changing state: duplicate, missing/deleted or ineligible IDs reject the whole proposal. Selected membership uses `canSelect`; checked membership uses `canCheck`. In `checkMode: "single"`, a checked proposal with more than one valid eligible ID then raises `GRID_CHECK_MODE` unchanged. Neither setter changes active detail identity or the other set, and none of these state changes edits Rows.[^selection][^checks-browser]
 
 ## `checkAll(checked, scope)` and `checkState(scope)`
 
@@ -195,7 +223,9 @@ Both require an explicit `GridRowScope`; there is no default scope.[^selection]
 | `"filtered"` | All rows passing the manual filter and every active column filter, before paging. |
 | `"store"` | All nondeleted rows, regardless of filters or paging. |
 
-`checkAll(true, scope)` adds every eligible ID in that scope; `false` removes only those IDs. Checks outside the scope remain. `checkState` returns a frozen `GridCheckState`: `{ checked, indeterminate, total, count }`, where `total` counts eligible scope rows and `count` counts their checked IDs. `checked` means a nonempty scope is fully checked; `indeterminate` means some but not all are checked. An empty scope has both flags false. A header checkbox is disabled for an empty eligible scope and otherwise preserves authored disabling. Boolean `data-field` editors remain independent.[^grid][^selection]
+In multiple mode, `checkAll(true, scope)` adds every eligible scope ID and preserves checks outside it. In single mode, more than one eligible scope ID raises `GRID_CHECK_MODE` unchanged; exactly one replaces the previous checked ID, including an outside-scope ID, and an empty scope leaves checks unchanged. No operation implicitly chooses the first row. In either mode, `checkAll(false, scope)` removes only checks in that scope. Native checking in single mode uses the same atomic replacement, veto and callback path.[^selection][^checks-browser]
+
+`checkState` returns a frozen `GridCheckState`: `{ checked, indeterminate, total, count }`, where `total` is the actual eligible scope count even in single mode, and `count` counts its checked IDs. `checked` means a nonempty scope is fully checked; `indeterminate` means some but not all are checked. An empty scope has both flags false. A header checkbox is disabled for an empty eligible scope, for more than one eligible row in single mode, or when authored disabled. Boolean `data-field` editors remain independent.[^grid][^selection]
 
 ## `columnFilter(key)`, `setColumnFilter(key, values)` and `filterChoices(key, search?)`
 
@@ -217,13 +247,15 @@ Authored filter selects display `label (count)` through `bindSelect`. Editing th
 
 Returns `{ valid, issues }` for an explicit nondeleted ID or all nondeleted rows, including filtered-out or off-page rows. It checks supported input HTML constraints (including programmatically bound text length limits), parsers and validators, Select availability, Select `required`, and Select validators. A missing or deleted explicit ID raises `GRID_ROW`. An issue has `rowId`, `field`, `rule`, and `message`; `element` exists only for a connected row control. Validation evaluates all cell drafts for one row against the same candidate values, even while the row is filtered out. A draft that passes is committed to `Rows`; a failed draft stays outside the store. Call `validate()` before saving to reconcile drafts after external row changes.[^grid][^rules]
 
+With `revealInvalid: true`, this method and rejected paste find the first issue whose RowId belongs to the current logical page, reveal that row through the existing viewport, and try to focus its first visible enabled field member. Returned issues for that row receive their now-connected field references. Hidden columns can still have issues without a focusable target. Off-page/filtered-out errors stay recorded; this option never changes page or filter to reach them.[^grid][^controls-browser]
+
 ## `reveal(id)`
 
 Scrolls a nondeleted row in the current sorted, filtered logical page into view without changing active identity, either membership set, or focus. A filtered-out, off-page, missing or deleted ID raises `GRID_VIEWPORT_ROW`; the caller changes filtering/paging explicitly. With `viewport`, the row is mounted using estimates and corrected measurements, scrolling to the nearest edge when needed. Authored top-sticky headers are included in the usable viewport; left-only sticky positioning does not reduce its height. Without `viewport`, the existing row uses native nearest scrolling.[^grid][^viewport]
 
 ## `paste(text, { id, field })`
 
-Returns `ValidationResult` for a synchronous, whole-field paste starting at a logical-page `RowId` and exact `data-field` path. The method works without enabling native paste. Each clipboard line addresses one logical record; fields advance by physical template row, then current visible column order, then authored order within a cell. A spanning cell uses its first visible column member. Managed hidden columns and authored `[hidden]` fields are excluded; temporary merge suppression does not remove a logical field. Display-only text fields participate, while check/action columns without `data-field` consume no position. Visible field paths must be unique. With `viewport`, the start and target records need not be mounted. A start outside this logical field/record set raises `GRID_PASTE_TARGET`.[^grid][^blocks-browser]
+Returns `ValidationResult` for a synchronous, whole-field paste starting at a logical-page `RowId` and exact `data-field` path. The method works without enabling native paste. Each clipboard line addresses one logical record; fields advance by physical template row, then current visible column order, then authored order within a cell. A spanning cell uses its first visible column member. Managed hidden columns and authored `[hidden]` fields are excluded; temporary merge suppression does not remove a logical field. Display fields participate, while check/action columns without `data-field` consume no position. A radio/checkbox group consumes one field position at its first visible member; other repeated visible field paths are ambiguous and rejected. With `viewport`, the start and target records need not be mounted. A start outside this logical field/record set raises `GRID_PASTE_TARGET`.[^grid][^blocks-browser][^controls-browser]
 
 ```ts
 const result = grid.paste("ada@example.com\tPlatform\ngrace@example.com\tSupport", {
@@ -234,9 +266,11 @@ if (!result.valid) console.log(result.issues);
 
 The example requires Email and Team to be consecutive bound fields in the current layout. There is no implicit field-name header, business-key lookup, row creation, automatic page advance or silent truncation. Rectangular and ragged tab-separated rows are accepted; shorter rows leave unsupplied fields unchanged. Double quotes enclose a whole cell, `""` escapes a quote inside it, and quoted tabs/newlines stay inside that cell. CRLF and CR normalize to newlines; a final line terminator does not add an extra row. Empty text represents one empty cell. Malformed quoting and any row/field overflow return a `paste` issue with no stored changes. Clipboard HTML is never evaluated.[^grid]
 
-Disabled native controls, readonly inputs/textareas and fields under `inert` or `aria-readonly="true"` consume a clipboard position but are not written. This preserves column alignment. Checkbox text must be exactly `true` or `false`. A Select cell matches text to `String(rawValue ?? "")` among its currently enabled options, preserving its raw string, finite number, boolean or null type. Unknown or disabled values fail; two different raw values with the same serialization, such as number `1` and string `"1"`, are ambiguous and fail. Raw identity uses `Object.is`, including the distinction between `0` and `-0`. Display labels are not converters. Row-local nested option arrays use the same binding as normal Select editing.[^grid]
+Disabled native controls, readonly inputs/textareas and fields under `inert` or `aria-readonly="true"` consume a clipboard position but are not written. Any protected member protects its entire radio/checkbox group. This preserves column alignment. A single checkbox accepts exactly `true` or `false`; radio accepts an available choice string or empty text for `null`. A scalar Select matches text to `String(rawValue ?? "")` among enabled options, preserving its raw type. Unknown or disabled values fail; two different raw values with the same serialization, such as number `1` and string `"1"`, are ambiguous and fail. Raw identity uses `Object.is`, including the distinction between `0` and `-0`. Display labels are not converters.[^grid][^controls-browser]
 
-Pasted fields overlay existing drafts for each affected row. Existing parsers see one combined unparsed candidate; HTML constraints and rules check the complete parsed row, including unrelated drafts and bound fields outside the pasted range. Only supplied writable fields are committed, with copied nested paths preserving other stored values. An unrelated valid draft is considered during validation but is not saved by paste. Any validation failure leaves stored values, drafts, entered input, selection and focus intact; returned issues identify `rowId`, `field`, `rule`, `message` and a connected `element` when present. Accessible messages merge with existing field errors instead of erasing them.[^grid]
+Repeated checkboxes and multiple Selects accept a JSON array in one TSV cell, including `[]`. Apply ordinary TSV quoting around JSON quotes: the cell for `["mail","sms"]` is `"[""mail"",""sms""]"`. Checkbox members require available strings; typed Select arrays match available raw scalar values, so `[1,"1",null]` can retain three distinct choices. Duplicate, unavailable or disabled choices reject the complete paste. Row-local nested option arrays use the normal Select mapping; no array-index path syntax or clipboard rule engine is added.[^grid][^controls-browser]
+
+Pasted fields overlay existing drafts for each affected row. Existing parsers see one combined unparsed candidate; native constraints check entered values while business rules receive the complete parsed row, including unrelated drafts and bound fields outside the pasted range. Only supplied writable fields are committed, with copied nested paths preserving other stored values. An unrelated valid draft is considered during validation but is not saved by paste. Validation failure leaves stored values, drafts, entered input and selection intact. Focus stays unchanged by default; `revealInvalid: true` may reveal and focus the first current-page error. Returned issues identify `rowId`, `field`, `rule`, `message` and a currently connected `element` when present; released rows retain no stale reference. Accessible messages merge with existing field errors instead of erasing them.[^grid]
 
 A successful paste uses one `Rows.setMany` change, preserving row IDs and dirty tracking; a net no-op emits no Rows event. Other Forms, Grids, Lists and Trees receive the coherent batch. The originating Grid clears only its captured pasted drafts, preserves newer subscriber-created drafts/errors, and then renders the committed view, which may move or hide rows if a sort/filter depends on a changed value. Keep parser and rule callbacks pure. A callback changing Rows, view, columns or drafts invalidates preparation with `GRID_PASTE_STALE`; reentrant paste raises `GRID_PASTE_BUSY`, and disposal raises `GRID_DISPOSED`. Application callback side effects are not rolled back. A subscriber/render/`onPaste` error after commit propagates with the stored batch retained; inspect current state before retrying.[^grid]
 
@@ -313,7 +347,7 @@ The scroll region, dimensions, column widths and visual design remain authored. 
 
 The mounted set contains the intersecting logical rows, overscan on either side and at most one focused row. A distant focused editor stays attached with its input state and composition; disjoint spacer segments represent intervening rows without keeping their controls alive. Departing unfocused rows release element references and Select ownership. Drafts and issue text remain keyed by RowId. Scrolling changes this mounted set without rerunning application sort/filter callbacks. `"visible"` check scope, range selection, keyboard navigation and paste continue to use the complete logical page, rather than only connected rows. Keyboard row navigation reveals the target before focus; Tab/Shift+Tab can cross the mounted boundary while editor shortcuts remain native.[^grid][^viewport][^viewport-browser]
 
-Offscreen paste and validation use compiled field paths, raw row-local option plans and cached detached native HTML-validation controls, rather than creating a row/Select for every target. Those plans do not mutate option sources or add state to Rows. Issues omit `element` when the corresponding control is not connected; callbacks must not require a DOM node for every logical row. Passing validation does not automatically reveal it.[^grid][^viewport-browser]
+Offscreen paste and validation use compiled field paths, raw row-local option plans and cached detached native HTML-validation controls, rather than creating a row/Select for every target. Those plans do not mutate option sources or add state to Rows. Issues omit `element` when the corresponding control is not connected; callbacks must not require a DOM node for every logical row. Only explicit `reveal` or the opt-in `revealInvalid` behavior mounts a row for visibility.[^grid][^viewport-browser]
 
 The table keeps native semantics. In viewport mode `aria-rowcount` counts physical rows: logical-page records times block size, plus authored header, static body and footer rows. Every mounted physical tr and static row receives its own one-based `aria-rowindex`; merging does not change that count. Owned native spacer rows are `aria-hidden="true"` and noninteractive. Hidden first/last authored rows remain inside their complete block but do not inflate its measured height. Other authored rows remain in place.[^grid][^viewport][^blocks-browser]
 
@@ -323,9 +357,23 @@ Managed columns compile native topology once across the complete block. They mov
 
 Widths follow native CSS table/minimum-content constraints. When all visible columns have explicit widths the runtime prefers their sum as table width; otherwise it restores the original table-width preference. Authors choose table layout, responsive scroll containment, sticky positioning and visual resize affordances in CSS. Resize controls receive owned `touch-action: none`, `user-select: none` and `aria-keyshortcuts` if absent; disposal restores originals. ArrowLeft/ArrowRight adjust 10 pixels, Shift adjusts 1, and Home restores the initial preferred width. Pointer previews publish one change at release; Escape/cancel restores the prior state. Move preserves focus/caret; hiding focused content tries available visible controls then the table. Detached hidden controls are still validated through row-keyed drafts, but issues omit a disconnected element.[^columns][^grid]
 
-Text formatting is one-way: rules transform displayed text while the row snapshot and save payload retain the raw value. Validation invokes the shared UI rule runner on raw values. A Select option's DOM `value` is a string, but its row-local mapping preserves a raw string, finite number, boolean, or `null`. Authored empty options map to `null`; nonempty authored options remain strings. A missing selected raw value shows no selected option and yields `select-option`.[^grid][^rules]
+Text formatting is one-way: rules transform displayed text while the row snapshot and save payload retain the raw value. Validation invokes the shared UI rule runner on raw values. A Select option's DOM `value` is a string, but its row-local mapping preserves a raw string, finite number, boolean, or `null`. Authored empty options map to `null`; nonempty authored options remain strings. A missing selected raw value shows no selected option and yields `select-option`. A multiple Select keeps an array for every selection count.[^grid][^rules]
 
-When a user types in a supported input, the Grid retains the entered draft and validates it; a native `change` commits valid text, checkbox, number, or Select candidates. A parser receives the entered string and one snapshot of all unparsed row drafts, independent of parser order; declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. A throw or `undefined` creates a `parse` issue and preserves the draft. The Grid checks all fields against the row value plus every draft for that row. A choice that fails stays visible as a draft under that row ID and field path, while `Rows` remains unchanged. A later field change can make cross-field drafts valid and commit them. Changing another row field does not clear the draft. Programmatic `Rows` updates refresh the display and clear stale error text without invoking user validators; call `validate()` before saving. Validation message text is kept by `RowId` without DOM references, so a failing off-page row shows its issue again when it returns. An external replacement of a drafted field, `replace`, `remove`, `revert`, or `dispose` clears the affected drafts. Filtering, sorting, and paging keep them. `validate(id)` checks drafts even without a rendered row.[^grid]
+`validateOn: "change"` retains and validates text drafts on input, then commits valid candidates on native change. `"blur"` defers scalar draft commits until focus leaves that logical field; native group/Select changes still commit once. `"manual"` retains every draft until explicit `validate()`. In change/blur mode, unmodified Enter commits a scalar text-like or number input; textarea newlines, composition and modified shortcuts remain native. This does not add a second blur commit after a successful change or Enter.[^grid][^controls-browser]
+
+A parser receives the entered string and one snapshot of all unparsed row drafts, independent of parser order; declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. Only own parser/render configuration keys are used, including a field named `toString`. A throw or `undefined` from a parser creates a `parse` issue and preserves the draft. The Grid checks all fields against the row value plus every draft for that row. A choice that fails stays visible as a draft under that row ID and field path, while `Rows` remains unchanged. A later field change can make cross-field drafts valid and commit them. Programmatic `Rows` updates refresh the display and clear stale error text without invoking user validators; call `validate()` before saving. Validation message text is kept by `RowId` without DOM references, so a failing off-page row shows its issue again when it returns. An external replacement of a drafted field, `replace`, `remove`, `revert`, or `dispose` clears the affected drafts. Filtering, sorting, and paging keep them. `validate(id)` checks drafts even without a rendered row.[^grid][^controls-browser]
+
+Form, Grid and List share private native value/constraint operations. Programmatic values obey text min/max lengths as well as native validity; disabled controls retain their effective native validation state, including disabled fieldsets and their first-legend exception. A native input that sanitizes an invalid stored candidate reports an issue instead of silently changing Rows. Visible and detached probes use the same candidate rules. These helpers are not package exports.[^native][^controls-browser]
+
+## Display rendering
+
+`<img data-field="avatar" alt="Employee portrait">` writes the raw field to its native `src` attribute. `null` or empty text removes `src`; authored `alt` stays unchanged. Ordinary display fields insert text.[^native]
+
+Form and Grid accept `render: { summary(value, context) { /* return fresh DOM, text or null */ } }`. The callback receives the raw field and `RuleContext`; it must return synchronously. A string stays literal text and `null` clears the target. A Node must be a fresh, disconnected, parentless Element, Text or DocumentFragment from the target's document. Returning a connected/reused/foreign node, the target, its ancestor, an async result or another value raises `UI_RENDER`. Callback failures preserve their cause; errors identify the binder API and field. Recursive updates to the same target also fail with `UI_RENDER`.[^render][^render-browser]
+
+Configuration is checked before binding ownership: each own entry must name exactly one display target and a function. A target cannot be a native value control, image, editable region, error region, or have `data-format`; it cannot contain another bound field, error region, framework interaction marker or native interactive/focusable content, including links, controlled media, frames and `tabindex`. The application creates and sanitizes any trusted rich DOM and keeps factories free of store-changing side effects. No string-to-HTML switch, sanitizer or renderer registry is provided. Grid disposal restores the untouched authored template; [Form](form.md) restores the original children of its custom render targets.[^render][^grid][^controls-browser]
+
+Inside a `data-merge` cell, returned DOM must also stay display-only: native interactive/focusable content, field/error declarations and framework interaction markers raise `UI_RENDER` before replacement. Text and ordinary display nodes such as `strong` remain allowed. This prevents record-specific controls from disappearing into an adjacent merge; ordinary nonmerged Grid and Form display can still return application-owned interactive DOM.[^render][^controls-browser]
 
 Each cloned `data-error-for` region receives a document-unique ID and `aria-live="polite"` if not authored. The matching field control includes that ID in `aria-describedby`; failed validation sets `aria-invalid="true"` and writes issue text. A pass restores the control's authored `aria-invalid` state. The table retains native semantics and does not acquire `role="grid"`. When the focused row leaves the visible slice, focus moves to another available control, header button, or the table root. Authors still provide labels and table headings.[^grid]
 
@@ -340,8 +388,11 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `GRID_SELECT`, `GRID_OPTIONS`, `GRID_FORMAT` | Invalid selection control, option markers/source, or formatter on a Select or non-text input. |
 | `GRID_ERROR_REGION` | Repeated or unmatched `data-error-for` path in the template. |
 | `GRID_MERGE` | A malformed/non-display merge cell, a cell not spanning its complete block, or a nonscalar merge key. |
-| `GRID_FILE_ROWS`, `GRID_CONTROL` | Bound file/radio input, multiple Select, or unsupported input control. |
-| `GRID_PARSE_FIELD` | A number input lacks a parser, or a parser is not a function or names a missing/repeated text field or checkbox. |
+| `GRID_FILE_ROWS`, `GRID_CONTROL` | Bound file input, unsupported native type, or malformed/mixed/repeated choice group. |
+| `GRID_PARSE_FIELD` | A number/range input lacks a parser, or a parser is not a function or names a missing/ambiguous field or boolean/array control. |
+| `GRID_VALIDATE` | Invalid validation timing or nonboolean invalid-row reveal option. |
+| `GRID_CHECK_MODE` | Unknown check mode or a single-check proposal with more than one eligible ID. |
+| `UI_RENDER` | Invalid explicit render configuration, callback failure, recursive rendering, or an invalid/owned/async returned value. |
 | `GRID_COLUMNS`, `GRID_COLUMN_MARKUP` | Invalid full state/callback, broken column keys/group membership/spans, or malformed resize control. |
 | `GRID_SORT`, `GRID_PAGE` | Invalid sort indicator/comparator or local page request. |
 | `GRID_VIEWPORT`, `GRID_VIEWPORT_MARKUP`, `GRID_VIEWPORT_ROW` | Invalid viewport root/estimate/overscan, a span escaping the logical record, or reveal outside the current logical page. |
@@ -356,7 +407,7 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-`RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and row-field multiple Selects; use Form for those. Header filter Selects are authored `multiple` controls with their own column-filter contract. A plain `data-field` text element has no generated editor; it can still receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without either `initialPage` or `viewport`, binding creates all row clones. Local paging limits the logical page; viewport limits its mounted DOM. `setPage(null)` keeps viewport rendering bounded when enabled, otherwise deliberately renders all rows. Offscreen formatter errors surface when a row mounts; invalid row-local options also surface on validation/paste. Rendering can fail while scrolling or revealing a previously unmounted bad row: fix the source/rule before retrying. Progressive loading and transport cancellation stay in the application/page layer; virtualization does not reduce the Rows store itself.[^grid][^owner][^viewport]
+`RowId` is neither a DOM ID nor a display index. Grid edits authored native value controls; file inputs remain outside JSON Rows, and unsupported/button inputs are rejected. Header filter Selects keep their separate column-filter contract. A plain `data-field` display has no generated editor but can receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar or array. A Select owned by Grid cannot also be bound with `bindSelect`. Without either `initialPage` or `viewport`, binding creates all row clones. Local paging limits the logical page; viewport limits its mounted DOM. `setPage(null)` keeps viewport rendering bounded when enabled, otherwise deliberately renders all rows. Offscreen formatter/renderer errors surface when a row mounts; invalid row-local options also surface on validation/paste. Fix the source/rule before retrying a failed mount, scroll or reveal. Progressive loading and transport cancellation stay in the application/page layer; virtualization does not reduce the Rows store itself.[^grid][^owner][^viewport]
 
 Row insertion/movement/copy use caller-owned Rows: `add(value, before?)`, `move(id, before?)`, `copy(id, before?)`. Targets are live store IDs. Current sort/filter/page still determines displayed order; viewport anchoring follows RowId. Movement preserves drafts/errors and the focused row node, including nonviewport rendering. Selected/checked arrays are reconciled to store order and normal post-change callbacks observe committed DOM, bypassing vetoes for this forced reconciliation. Active identity and membership stay unchanged unless eligibility changes. See [Rows](data.md) for no-ops, value reversion and business-key responsibility.[^grid][^selection]
 
@@ -378,6 +429,11 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^select]: Native Select binding reused for header filters
 [^grid]: Grid binding and validation runtime
 [^rules]: Shared Form/Grid rule runner
+[^native]: Shared native field values, display and constraints
+[^render]: Private explicit field rendering and DOM ownership
+[^controls-browser]: Native groups, values, validation timing, display and MDI regressions
+[^render-browser]: Renderer preflight, returned nodes, errors and reentry regressions
+[^checks-browser]: Independent membership and exclusive check regressions
 [^path]: Safe nested field paths
 [^options]: Shared private row-local options
 [^owner]: Shared Select ownership

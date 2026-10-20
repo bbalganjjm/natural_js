@@ -1,18 +1,18 @@
 ---
 type: Example
 title: Interactive Grid contract demo
-description: Exercise implemented Grid contracts and two authored row-block layouts while inspecting raw Rows state.
+description: Exercise Grid controls, validation policies, native choice groups, and two authored row-block layouts while inspecting raw Rows state.
 tags: [ui, grid, example, accessibility]
 status: draft
 sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: a098c15ddb0b4b91ffd48e77243897ba3f42eac9
+    git_blob: 9aea1426b7cc157e26f6bd5278b7fb9e8a2fca84
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 412de2bc375f43ea3436d61ccf3b1d3e9fbf9fe1
+    git_blob: 45f0dceff456a17899ef36c6bbf9f44fbe5d5004
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -20,7 +20,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: fa604ad4f6a6328fe23d3e9b4f953c321011016b
+    git_blob: 5fb12b0ee765b072a0091e3e492c9d74db5ce246
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
@@ -36,7 +36,7 @@ sources:
   - id: selection-browser
     resource: ../../tests/browser/grid-selection.spec.ts
     title: Independent selection, checks, authored filters and row actions
-    git_blob: 7c318e628e0f32dbc4d8c1bd54e2ba6be38167d5
+    git_blob: 699235cbb85f7f3aaf0a2ad08d6b875d01786317
   - id: selection-evidence
     resource: ../implementation/evidence/m106-verification.json
     title: Final M10.6 source, package, browser and performance record
@@ -52,7 +52,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -64,7 +64,7 @@ sources:
   - id: blocks
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and adjacent native merging
-    git_blob: 4b3c9f899394bb8f73327cac498d3aa03f3db72f
+    git_blob: bc21fd1cc985184a332034bf26bfddd40f1434a3
   - id: blocks-browser
     resource: ../../tests/browser/grid-row-blocks.spec.ts
     title: Multi-row identity, logical paste, focus, physical ARIA and bounded geometry
@@ -72,7 +72,11 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Independent active row, selection and check state
-    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
+    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
+  - id: controls-browser
+    resource: ../../tests/browser/grid-controls.spec.ts
+    title: Native groups, typed values, validation and display regressions
+    git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Raw column filters and distinct choice counts
@@ -81,15 +85,15 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
-generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
 
-The expanded `2.0.0` scope requires the remaining 1.x Grid user features before release. Column state, multiple selection, independent row checks, authored header sorting/filtering, stable row actions, atomic bulk paste, measured viewport rendering, authored multi-tr records and adjacent native merging are implemented. The [feature parity ledger](../implementation/feature-parity.md) records remaining gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines their review and release gates. Extend this same demo as required features arrive; its coverage does not claim complete 1.x parity.[^grid][^viewport][^blocks]
+The expanded `2.0.0` scope requires the remaining 1.x Grid user features before release. Column state, multiple selection, independent row checks, authored header sorting/filtering, stable row actions, atomic bulk paste, measured viewport rendering, authored multi-tr records, native merging, choice groups, explicit display, exclusive checks and validation timing/reveal are implemented. The [feature parity ledger](../implementation/feature-parity.md) records remaining gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines their review and release gates. Extend this same demo as required features arrive; its coverage does not claim complete 1.x parity.[^grid][^viewport][^blocks]
 
 # Scenario
 
@@ -104,13 +108,13 @@ Run `npm run example` from the repository root and open `/m10/demo.html`. The in
 | `Rows` | Own immutable row snapshots, store-local IDs, change status, and subscription events. |
 | Application code | Provide sample rows, comparator, filter predicate, salary parser, custom format/validation rules, and action buttons. |
 
-The demo supplies required `rows`, optional `initialPage`, `viewport`, `columns`, `onColumnsChange`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Selection controls supply `multiple`, `canSelect`, `canCheck`, `beforeSelect`, `beforeSelectionChange`, `onSelectionChange`, `beforeCheckChange`, and `onCheckChange`; authored headers and row actions use `sorts`, `filters`, and `onRowAction`. `paste: true` enables direct native plaintext paste, and `onPaste` displays accepted/rejected results. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the complete logical-page default. The custom salary rule, name display formatter, comparators and Team value function are application behavior.[^controller][^grid]
+The demo supplies required `rows`, optional `initialPage`, `viewport`, `columns`, `onColumnsChange`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Selection controls supply `multiple`, `canSelect`, `canCheck`, `checkMode`, `beforeSelect`, `beforeSelectionChange`, `onSelectionChange`, `beforeCheckChange`, and `onCheckChange`; authored headers and row actions use `sorts`, `filters`, and `onRowAction`. Validation controls set `validateOn` and `revealInvalid`. `paste: true` enables direct native plaintext paste, and `onPaste` displays accepted/rejected results. The lower row-block Grids add a `render` factory and range parser. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the complete logical-page default. The custom salary rule, name display formatter, comparators and Team value function are application behavior.[^controller][^grid]
 
 # View
 
 The main explorer's `<tr data-row-template>` contains `data-field` paths for plain text, email, nested team, checkbox, textarea, number, and Select fields. `data-format` formats the display name; `data-validate` invokes both built-in `required` and the custom salary rule. The same row includes `data-error-for` regions, a `data-select-row` button, and a row-local Select with `data-options="assignment.shifts"`, `data-option-label="meta.label"`, and `data-option-value="code"`. The independent check uses `<input type="checkbox" data-check-row>` without `data-field`; the Active editor remains a separate Boolean data field. `<button type="button" data-row-action="inspect">` exposes the current row to the application. The repeated row contains no fixed DOM ID. Native email/required constraints work alongside the declared rules.[^view]
 
-The lower **Authored row blocks and adjacent merges** section keeps four separate shared records in two tables: `[data-block-grid="two"]` places Name/Shift above Notes, while `[data-block-grid="three"]` places Notes first, Name/Shift second, and Inspect/check controls last. Each `<tbody data-row-template>` repeats the full record. Department and Team are display-only full-block `data-merge` cells; the two-row layout also demonstrates source `rowspan="0"`. Nested Shift choices retain raw numeric codes. Exact markup and merge boundaries are defined once in [Grid](grid.md).[^view][^controller][^blocks]
+The lower **Authored row blocks and adjacent merges** section keeps four separate shared records in two tables: `[data-block-grid="two"]` places Name/Shift above Notes, while `[data-block-grid="three"]` places Notes first, Name/Shift second, and Inspect/check controls last. Each `<tbody data-row-template>` repeats the full record. Both include Work mode radio groups, Contact channels checkbox groups, nested Available shifts multiple Selects, Start date, Daily hours range and avatar images. Department and Team are display-only full-block `data-merge` cells; the two-row layout also demonstrates source `rowspan="0"`. Team uses an application-created `<strong>` renderer, and nested Shift choices retain raw numeric codes. Exact markup and merge boundaries are defined once in [Grid](grid.md).[^view][^controller][^blocks]
 
 The authored header contains `data-sort-column="name"` and `data-sort-column="salary"` buttons, a visible-page `data-check-all="visible"` checkbox, and the Team controls: a multiple `data-filter-column="team"` Select, `data-filter-search="team"` input, and `data-clear-filter="team"` button. Grid binds the filter choices through the existing native Select behavior; the application keeps control of labels and layout.[^view][^grid]
 
@@ -131,6 +135,9 @@ const grid = bindGrid(table, {
   onPaste(result) { /* show acceptance or collected cell issues */ },
   columns: defaultColumns,
   multiple: selectionMode.value === "multiple",
+  checkMode: checkMode.value as "multiple" | "single",
+  validateOn: validateOn.value as "change" | "blur" | "manual",
+  revealInvalid: revealInvalid.checked,
   canSelect: disableInactive.checked ? row => row.value.active : undefined,
   canCheck: disableInactive.checked ? row => row.value.active : undefined,
   sorts: { name: (a, b) => a.name.localeCompare(b.name), salary: (a, b) => a.salary - b.salary },
@@ -169,7 +176,9 @@ Single mode is the default: row buttons keep the existing active-row behavior. I
 
 Enable the inactive-row policy to supply `canSelect` and `canCheck` from `row.value.active`; it disables the corresponding controls without disabling unrelated editors. Changing that policy or mode rebinds the demo. Before hooks return `false` to veto a proposed change: `beforeSelect` receives `{ id, row, event }`; `beforeSelectionChange` and `beforeCheckChange` receive `{ ids, previous, event }`. A canceled multiple-mode gesture preserves both its active row and membership. State commits before the change callbacks; programmatic events are `null`. Removing/replacing data or making a row ineligible prunes invalid state without allowing a veto to retain missing rows.[^controller][^selection]
 
-Check a row without selecting it, then compare the scope controls. `checkAll(true, scope)` adds eligible IDs in that scope and `checkAll(false, scope)` removes them; checks outside the scope remain intact. `checkState(scope)` returns frozen `{ checked, indeterminate, total, count }`, where `total` counts eligible targets and `count` counts checked targets. A partial scope is mixed. An empty scope reports both flags `false` and both counts `0`; its header checkbox is disabled.[^selection][^ui]
+Check a row without selecting it, then compare the scope controls. Default multiple check mode adds/removes eligible scope IDs while preserving outside checks. Switch **Check mode** to Single to check a new row and atomically replace the previous ID. A true scope proposal containing multiple eligible rows rejects with `GRID_CHECK_MODE`; the corresponding check-all control is disabled instead of selecting a first row. Exactly one eligible scope ID replaces the prior check, an empty true scope is a no-op, and false removes only scope IDs in either mode. `checkState(scope)` returns frozen `{ checked, indeterminate, total, count }`, with the real eligible `total` in both modes. A partial scope is mixed; an empty scope has both flags false and a disabled header checkbox.[^controller][^selection][^ui]
+
+In **Validation**, select On blur to defer scalar commits until leaving the field, or On validation request to retain all drafts until **Validate selected** or **Validate all**. Default On change validates input drafts and commits valid native changes. Unmodified scalar Enter commits in change/blur mode; textarea, composition and modified keys keep native behavior. Enable **Reveal and focus the first invalid field** and validate a current-page invalid row to use the existing reveal/focus path. Off-page errors do not change page/filter. Changing these policies or Check mode rebinds only the main Grid and clears its selection/checks/drafts; the shared row-block section is separate.[^view][^controller][^grid]
 
 | Scope | Eligible targets |
 |---|---|
@@ -189,7 +198,7 @@ Browser regressions cover initial-page/off-page identity, nested choices and raw
 
 Historical M10.7 final suites pass 219/219 in Chromium, Firefox and WebKit, including 19 focused paste regressions and the added demo case. Installed JS/TS and all five Windows browser consumers pass the same 148-file package, SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Existing binding budgets pass. Source/log hashes, retained initial failures, the synthetic-event fixture correction and unverified manual/OS-clipboard limits are recorded with that stage; these results do not certify the later viewport implementation or recertify the historical M10.6 artifact.[^paste-browser][^paste-evidence]
 
-The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Row-block regressions add multi-tr identity, cross-row validation references, native spans and raw hierarchical merging, physical ARIA indexes, merged-follower paste, focus pinning, fully merged single-column geometry and hidden boundary rows. Current-stage gates are tracked in the [row-block plan](../implementation/m10-row-blocks-plan.md); interactive use adds no unmeasured performance or token-saving claim.[^viewport-browser][^blocks-browser]
+The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Row-block regressions add multi-tr identity, cross-row validation references, native spans and raw hierarchical merging, physical ARIA indexes, merged-follower paste, focus pinning, fully merged single-column geometry and hidden boundary rows. Native-control regressions cover group isolation, stable array/raw values, JSON-array paste, disabled constraints, rendering ownership, validation timing and first-error reveal. Current-stage gates are tracked in the [control plan](../implementation/m10-controls-plan.md); interactive use adds no unmeasured performance or token-saving claim.[^viewport-browser][^blocks-browser][^controls-browser]
 
 The Rows controls demonstrate Add, Insert before selected, Copy before selected, Copy to end, Move earlier/later and Move to first/end. Insertion/copy activates the new stable ID. Copies use the stored valid values, not an uncommitted editor draft; editing a copy leaves its source unchanged. Movement keeps active identity and selected/checked membership while their returned ID arrays follow store order. Sorting/filtering/paging still controls the displayed projection. Revert all removes inserted copies and restores values while retaining the current order. Business key allocation stays application-owned.[^controller]
 
@@ -197,13 +206,15 @@ The Rows controls demonstrate Add, Insert before selected, Copy before selected,
 
 In the row-block section, edit Name, Notes or Shift in either layout to update the shared record in both. Select a record in either table, then use **Apply merge keys**, **Move to first**, **Move to end** or **Copy to end**. Department merges first; Team merges only within the same Department. The status and shared snapshots show the committed RowId/value changes. **Reset shared records** replaces this separate store and clears its selected identity; the main explorer's Dataset/viewport controls do not control these two small layouts.[^view][^controller]
 
+Change Work mode or Contact channels and compare the same record in the other layout; repeated native radio names remain independent per record and table. Available shifts always stores a raw numeric array, including one choice. Start date stays an ISO string, while Daily hours uses the application number parser. Images retain their authored alternative text and the Team label's `<strong>` is fresh application DOM. The shared snapshot panel shows these values without converting them to display strings.[^view][^controller][^browser]
+
 Open `/m10/columns.html` for Ledger and Notebook: independent CVC instances with opposite group order, footer groups and span/child-authored colgroups. Controls expose state, invalid-state recovery, sort/filter/page/validation/dispose/rebind. Each starts with three visible rows. Native column markers separate keys from nested field paths; generated IDs remain unique across screens.[^columns-view][^columns-controller]
 
 The earlier [two-layout Grid example](advanced-grid-example.md) tests MDI isolation and sticky/grouped table structure with the same public Grid API. Application HTML/CSS can change independently of this demo's controller choices.[^grid]
 
 # Pitfalls
 
-Remaining Grid parity stays required follow-up work. Column state, selection/check/filter, atomic bulk paste, measured virtualization and authored row blocks have working controls; group topology constrains legal column moves. Merge cells are display-only and must span their complete record. Current [Grid](grid.md) markup and cleanup rules apply; the [M10.9 plan](../implementation/m10-parity-plan.md) tracks the remaining slices.[^grid][^viewport][^blocks]
+Remaining Grid parity stays required follow-up work. Column state, selection/check/filter, atomic bulk paste, measured virtualization, authored row blocks and native control/validation policies have working controls; group topology constrains legal column moves. Merge cells are display-only and must span their complete record. Current [Grid](grid.md) markup and cleanup rules apply; the [M10.9 plan](../implementation/m10-parity-plan.md) tracks the remaining slices.[^grid][^viewport][^blocks]
 
 Without `initialPage` or `viewport`, Grid creates all initial row clones. Local paging bounds the logical page; viewport bounds connected DOM and keeps page-wide check/range/paste semantics. The scroll root needs finite authored height and stable table/column widths; its estimate does not force fixed-height rows. Interactive use is not a controlled performance measurement. Rebinding for locale, initial page, mode or eligibility policy also discards active identity, selected/checked sets and uncommitted drafts. Use `setSelected([])` or `setChecked([])` to clear a complete set; `select(null)` clears only the active row. Keep the check checkbox separate from `data-field`, do not send `RowId` as a business key, and do not put a fixed `id` in a repeated row.[^grid][^controller][^selection][^viewport]
 
@@ -216,5 +227,6 @@ Without `initialPage` or `viewport`, Grid creates all initial row clones. Local 
 [^viewport-browser]: Bounded rendering, logical scopes, offscreen paste and focus regressions
 [^blocks]: Private authored record structure and adjacent native merging
 [^blocks-browser]: Multi-row identity, logical paste, focus, physical ARIA and bounded geometry
+[^controls-browser]: Native groups, typed values, validation and display regressions
 
 [Grid](grid.md) defines exact current public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) preserves earlier measurements and defines the required follow-up stages. The [feature parity ledger](../implementation/feature-parity.md) and [parity implementation plan](../implementation/feature-parity-plan.md) track the full release requirement.

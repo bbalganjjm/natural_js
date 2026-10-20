@@ -173,17 +173,33 @@ try {
     <tbody data-row-template><tr><th scope="rowgroup" rowspan="0" data-merge="group"><span data-field="group"></span></th>
       <td colspan="2"><label>Name <input data-field="profile.name" required></label></td></tr>
       <tr><td><label>Choice <select data-field="profile.choice" data-options="profile.options" data-option-label="label" data-option-value="value"></select></label></td>
-        <td><label>Note <textarea data-field="profile.note"></textarea></label><button type="button" data-row-action="inspect">Inspect</button></td></tr></tbody></table>`;
+        <td><label>Note <textarea data-field="profile.note"></textarea></label><button type="button" data-row-action="inspect">Inspect</button>
+          <fieldset><legend>Mode</legend><label><input type="radio" name="packed-mode" data-field="settings.mode" value="office">Office</label>
+            <label><input type="radio" name="packed-mode" data-field="settings.mode" value="remote">Remote</label></fieldset>
+          <label><input type="checkbox" data-field="settings.tags" value="alpha">Alpha</label><label><input type="checkbox" data-field="settings.tags" value="beta">Beta</label>
+          <label>Typed choices <select multiple data-field="settings.selected" data-options="settings.options" data-option-label="label" data-option-value="code"></select></label>
+          <span data-field="summary"></span><label>Check assignment <input type="checkbox" data-check-row></label></td></tr></tbody></table>
+    <form data-block-detail><label>Assignment name <input data-field="profile.name" required></label><output data-error-for="profile.name"></output><span data-field="summary"></span></form>`;
   document.querySelector("main").append(blockRoot);
   const blockTable = blockRoot.querySelector("table");
   const originalBlock = blockTable.outerHTML;
-  const blockRows = createRows(Array.from({ length: 4 }, (_, index) => ({ group: "Same", profile: {
+  const blockRows = createRows(Array.from({ length: 4 }, (_, index) => ({ group: "Same", summary: `Summary ${index + 1}`,
+    settings: { mode: "office", tags: ["alpha"], selected: [11],
+      options: [{ label: "Eleven", code: 11 }, { label: "False", code: false }, { label: "Empty", code: null }] }, profile: {
     name: `Assignment ${index + 1}`, choice: 11, note: `Note ${index + 1}`,
     options: [{ label: "Eleven", value: 11 }, { label: "Twenty two", value: 22 }]
   } })));
-  const blockGrid = bindGrid(blockTable, { rows: blockRows, paste: true,
+  const blockGrid = bindGrid(blockTable, { rows: blockRows, paste: true, checkMode: "single", validateOn: "manual", revealInvalid: true,
+    render: { summary(value, context) { const strong = context.element.ownerDocument.createElement("strong"); strong.textContent = String(value ?? ""); return strong; } },
     onRowAction: ({ id }) => { state.blocks.lastAction = id; } });
-  state.blocks = { root: blockRoot, table: blockTable, rows: blockRows, grid: blockGrid, original: originalBlock };
+  const blockDetail = blockRoot.querySelector("[data-block-detail]");
+  const originalDetail = blockDetail.outerHTML;
+  const blockForm = bindForm(blockDetail, { rows: blockRows, render: { summary(value, context) {
+    const em = context.element.ownerDocument.createElement("em"); em.textContent = String(value ?? ""); return em;
+  } } });
+  blockForm.bind(blockRows.entries()[0].id);
+  state.blocks = { root: blockRoot, table: blockTable, rows: blockRows, grid: blockGrid, original: originalBlock,
+    form: blockForm, detail: blockDetail, originalDetail };
   const scrollRoot = document.createElement("section");
   scrollRoot.dataset.consumerViewport = "";
   scrollRoot.setAttribute("aria-label", "Viewport assignments");

@@ -112,6 +112,12 @@
 
         <fieldset>
           <legend>Independent row checks</legend>
+          <label>Check mode
+            <select data-check-mode>
+              <option value="multiple">Multiple</option>
+              <option value="single">Single</option>
+            </select>
+          </label>
           <label>Check-all scope
             <select data-check-scope data-needs-grid>
               <option value="visible">Visible page</option>
@@ -127,15 +133,25 @@
             <button type="button" data-action="clear-checks" data-needs-grid>Clear all checks</button>
           </div>
           <p>Checks do not select a row or edit its Active value. The header checkbox always covers the visible page and shows a mixed state for a partial check.</p>
+          <p>Single mode keeps at most one checked record. A check-all control is disabled when its scope contains more than one eligible record.</p>
         </fieldset>
 
         <fieldset>
           <legend>Validation</legend>
+          <label>Validate edits
+            <select data-validate-on>
+              <option value="change">On change</option>
+              <option value="blur">On blur</option>
+              <option value="manual">On validation request</option>
+            </select>
+          </label>
+          <label class="check-label"><input type="checkbox" data-reveal-invalid> Reveal and focus the first invalid field</label>
           <div class="button-row">
             <button type="button" data-action="validate-selected" data-needs-grid>Validate selected</button>
             <button type="button" data-action="validate-all" data-needs-grid>Validate all</button>
           </div>
           <p>Type in the table to see HTML and application validation. Invalid drafts stay outside Rows.</p>
+          <p>Manual mode keeps edits as drafts until Validate selected or Validate all succeeds. Changing a check or validation policy rebinds the Grid and clears selection, checks and drafts.</p>
         </fieldset>
 
         <fieldset>
@@ -281,7 +297,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
 
     <section class="future" data-block-demo aria-label="Authored row blocks and adjacent merges">
       <h2>Authored row blocks and adjacent merges</h2>
-      <p>Each record occupies two rows in the first layout and three in the second. Edit Name, Notes or the nested Shift choice in either table to update the other. Adjacent Department values merge first; Team values merge only within the same Department. Store actions use the last record selected in either layout.</p>
+      <p>Each record occupies two rows in the first layout and three in the second. Edit any field in either table to update the other, including radio and checkbox groups, typed nested choices, dates and ranges. Avatars retain their authored alternative text; Team labels are rendered with an application-created strong element. Adjacent Department values merge first; Team values merge only within the same Department. Store actions use the last record selected in either layout.</p>
       <fieldset>
         <legend>Shared record actions</legend>
         <label>Department <input data-block-department value="Engineering" data-block-needs-selection disabled></label>
@@ -312,11 +328,24 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
               <th scope="row" data-column="record" rowspan="0"><button type="button" data-select-row>Select <span data-field="code"></span></button></th>
               <td data-column="department" data-merge="department" rowspan="0"><span data-field="department"></span></td>
               <td data-column="team" data-merge="team" rowspan="0"><span data-field="team"></span></td>
-              <td data-column="person"><label>Name <input data-field="name" required></label></td>
+              <td data-column="person"><img data-field="avatar" alt="Employee avatar" width="32" height="32">
+                <label>Name <input data-field="name" required></label></td>
               <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
-                data-option-label="meta.label" data-option-value="code" required></select></label></td>
+                data-option-label="meta.label" data-option-value="code" required></select></label>
+                <label>Available shifts <select multiple data-field="assignment.selected" data-options="assignment.shifts"
+                  data-option-label="meta.label" data-option-value="code" required size="2"></select></label></td>
             </tr>
             <tr><td data-columns="person shift" colspan="2"><label>Notes <textarea data-field="notes" rows="2"></textarea></label>
+              <fieldset><legend>Work mode</legend>
+                <label class="check-label"><input type="radio" data-field="mode" value="remote" required style="width:auto"> Remote</label>
+                <label class="check-label"><input type="radio" data-field="mode" value="office" style="width:auto"> Office</label>
+              </fieldset>
+              <fieldset><legend>Contact channels</legend>
+                <label class="check-label"><input type="checkbox" data-field="channels" value="email" required> Email</label>
+                <label class="check-label"><input type="checkbox" data-field="channels" value="chat"> Chat</label>
+              </fieldset>
+              <label>Start date <input type="date" data-field="date" required></label>
+              <label>Daily hours <input type="range" data-field="hours" min="1" max="12" step="1"></label>
               <output data-error-for="name"></output></td></tr>
           </tbody>
         </table>
@@ -338,12 +367,25 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
               <th scope="row" data-column="record" rowspan="3"><button type="button" data-select-row>Select <span data-field="code"></span></button></th>
               <td data-column="department" data-merge="department" rowspan="3"><span data-field="department"></span></td>
               <td data-column="team" data-merge="team" rowspan="3"><span data-field="team"></span></td>
-              <td data-columns="person shift" colspan="2"><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
+              <td data-columns="person shift" colspan="2"><label>Notes <textarea data-field="notes" rows="2"></textarea></label>
+                <fieldset><legend>Work mode</legend>
+                  <label class="check-label"><input type="radio" data-field="mode" value="remote" required style="width:auto"> Remote</label>
+                  <label class="check-label"><input type="radio" data-field="mode" value="office" style="width:auto"> Office</label>
+                </fieldset>
+                <fieldset><legend>Contact channels</legend>
+                  <label class="check-label"><input type="checkbox" data-field="channels" value="email" required> Email</label>
+                  <label class="check-label"><input type="checkbox" data-field="channels" value="chat"> Chat</label>
+                </fieldset></td>
             </tr>
             <tr>
-              <td data-column="person"><label>Name <input data-field="name" required></label></td>
+              <td data-column="person"><img data-field="avatar" alt="Employee avatar" width="32" height="32">
+                <label>Name <input data-field="name" required></label>
+                <label>Start date <input type="date" data-field="date" required></label></td>
               <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
-                data-option-label="meta.label" data-option-value="code" required></select></label></td>
+                data-option-label="meta.label" data-option-value="code" required></select></label>
+                <label>Available shifts <select multiple data-field="assignment.selected" data-options="assignment.shifts"
+                  data-option-label="meta.label" data-option-value="code" required size="2"></select></label>
+                <label>Daily hours <input type="range" data-field="hours" min="1" max="12" step="1"></label></td>
             </tr>
             <tr><td data-columns="person shift" colspan="2"><button type="button" data-row-action="inspect">Inspect record</button>
               <label class="check-label"><input type="checkbox" data-check-row> Check record</label><output data-error-for="name"></output></td></tr>

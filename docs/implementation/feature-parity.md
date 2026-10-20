@@ -48,15 +48,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
+    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
+    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -117,13 +117,13 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G01 | data, bind, add, remove, revert, val, update | Partial: shared CRUD/change tracking exists; selected/checked projections, append completion and template-default creation need coverage. |
 | G02 | addTop, indexed add, move, copy | M10.9.1 adds insertion before a live RowId, identity-preserving movement and deeply independent committed-value copy in shared Rows. Native order, tombstones, no-ops, one notification and value reversion are explicit in [the detailed plan](m10-parity-plan.md). Template defaults and UI/dynamic option closure remain required; this does not close the entire family. |
 | G03 | tbody template, contextBodyTemplate | M10.9.2 implements authored tbody multi-tr records alongside the existing single tr form. One RowId owns the complete block, nested fields, actions, drafts, columns and measured viewport lifetime; see [the row-block contract](m10-row-blocks-plan.md). Remaining dynamic template-option equivalence still needs P0 semantic closure. |
-| G04 | Row Form radio/checkbox groups, multiple Select and input types | Partial: text/number/checkbox/textarea/single Select exist; complete the native control matrix and grouped raw values. |
-| G05 | Row Form img.src and html rendering | Missing: display currently uses value/textContent. Add explicit image and authored rich-content/renderer binding while keeping text the default. |
-| G06 | validate, declarative rules, focusout/Enter and validate-scroll | Core rules/drafts/off-page validation exist; interaction and reveal-error equivalence remains open. |
+| G04 | Row Form radio/checkbox groups, multiple Select and input types | M10.9.3 adds cross-tr radio/repeated-checkbox groups, document-unique native radio names, raw typed multiple Select arrays and native string/date/range/hidden inputs through shared private field semantics. Mixed native radio form owners fail before binding. File remains local Form only; legacy option/dynamic closure remains required. See [the control contract](m10-controls-plan.md). |
+| G05 | Row Form img.src and html rendering | M10.9.3 binds native image src and explicit synchronous Form/Grid render functions returning fresh same-document nodes, text or null. Plain strings remain text; authored control/error ownership and exact Form child-node restoration are enforced. No string-to-HTML option or renderer registry is added. Legacy option/dynamic closure remains required. |
+| G06 | validate, declarative rules, focusout/Enter and validate-scroll | M10.9.3 shares programmatic/native disabled/length/sanitization constraints and adds change/blur/manual timing, native-aware Enter and current-page first-error reveal/focus. Released invalid rows lose stale element references after reveal. Existing rule/draft and off-page contracts remain; full legacy option/dynamic closure remains required. |
 | G07 | row_data_changed__, row_data_deleted__, data_changed__ | Missing visible status/deletion policies. Rows tracks changes, but entries excludes removed rows; marked deleted-row views require an explicit contract. |
 | G08 | select, unselect, onBeforeSelect, row-click toggle | Partial: active-detail API, clear and atomic before-veto exist. The default same-ID no-op preserves current callers; legacy row-click-toggle policy/edge closure remains required. |
 | G09 | multiselect, selected projection, array select | Core: independent frozen selected IDs, full replacement, Ctrl/Meta toggle, Shift range and scoped keyboard gestures in M10.6. Legacy projections/option/callback semantic closure remains open. |
-| G10 | check, checkAll/checkAllTarget/checkSingleTarget | Partial: independent checks, explicit visible/filtered/store check-all, eligibility and mixed/empty controls are implemented. Exclusive checking remains required. |
+| G10 | check, checkAll/checkAllTarget/checkSingleTarget | M10.9.3 adds zero-or-one exclusive checks through the existing atomic veto/callback paths; scoped check-all preserves/replaces/rejects for zero/one/multiple eligible IDs. Active, selected and data-checkbox state stay independent. Existing scope/eligibility/mixed controls remain; legacy option/callback/dynamic closure is still required. |
 | G11 | sortable, sortableItem, grid.sort | Core: application comparator, aria-sort and authored ascending/descending/clear header activation are implemented; legacy option/edge closure remains open. |
 | G12 | filter, data-filter, grid.dataFilter | Core: manual and scalar column predicates, raw distinct choices, search/counts and controlled native Selects are implemented. Remaining legacy indicator/options/edge closure stays open. |
 | G13 | height, fixedcol, fixHeader/fixColumn, fixed footer | Authored sticky/grouped examples exist. Footer and integration with column/viewport state need complete proof. Never copy headers. |
@@ -141,7 +141,7 @@ Legacy symbols are NU.* in natural.ui.js and NUS.* in natural.ui.shell.js. Curre
 
 | ID | Legacy behavior / evidence | Current status and required work |
 |---|---|---|
-| U01 | form.bind/val; grouped inputs and image/rich display | Partial: nested raw/display/drafts exist; image/rich binding and complete control parity remain. Coordinate with G04/G05. |
+| U01 | form.bind/val; grouped inputs and image/rich display | M10.9.3 adds native image src and explicit Form/Grid DOM display, with local Form raw-value caching and authored child-node restoration; common native read/write/constraint behavior is shared privately. Nested raw/display/drafts and Form groups remain. Full control/option/callback/dynamic parity stays open with G04/G05. |
 | U02 | form.unbind/add/remove/revert/update, initial defaults | Partial shared CRUD; authored-default reset, insertion and creation from entered fields need explicit workflows. |
 | U03 | onBeforeBindValue/onBindValue/onBeforeBind/onBind | Partial parser/rule hooks; rendering observation/veto and initialization ordering require coverage. |
 | U04 | list.bind/select/data/validate, unselect | Core single selection/display; row-click and deselection policy remain open. |

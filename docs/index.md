@@ -10,8 +10,9 @@ okf_version: "0.2"
 
 * [Tree and DatePicker in two CVC layouts](v2/tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
-* [Interactive Grid contract demo](v2/grid-demo.md) - Exercise implemented Grid contracts and two authored row-block layouts while inspecting raw Rows state. (draft)
-* [bindGrid](v2/grid.md) - Bind authored native table row blocks to Rows with adjacent merging, bounded viewport rendering, selection, paste, and accessible validation. (draft)
+* [Interactive Grid contract demo](v2/grid-demo.md) - Exercise Grid controls, validation policies, native choice groups, and two authored row-block layouts while inspecting raw Rows state. (draft)
+* [bindGrid](v2/grid.md) - Bind authored table records to Rows with native choice groups, merging, bounded rendering, atomic paste, and accessible validation. (draft)
+* [bindForm](v2/form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, explicit display, retained rules, and accessible errors. (draft)
 * [Authored advanced Grid in two layouts](v2/advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 * [Natural-JS 2.0 package](v2/package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 module boundaries](v2/architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)

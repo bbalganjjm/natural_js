@@ -63,6 +63,9 @@ const selection = find<HTMLOutputElement>("[data-selection]");
 const pageState = find<HTMLOutputElement>("[data-page-state]");
 const callback = find<HTMLOutputElement>("[data-callback]");
 const selectionMode = find<HTMLSelectElement>("[data-selection-mode]");
+const checkMode = find<HTMLSelectElement>("[data-check-mode]");
+const validateOn = find<HTMLSelectElement>("[data-validate-on]");
+const revealInvalid = find<HTMLInputElement>("[data-reveal-invalid]");
 const disableInactive = find<HTMLInputElement>("[data-disable-inactive]");
 const vetoActive = find<HTMLInputElement>("[data-veto-active]");
 const vetoSelection = find<HTMLInputElement>("[data-veto-selection]");
@@ -215,6 +218,9 @@ function bind(): void {
     },
     columns: defaultColumns,
     multiple: selectionMode.value === "multiple",
+    checkMode: checkMode.value as "multiple" | "single",
+    validateOn: validateOn.value as "change" | "blur" | "manual",
+    revealInvalid: revealInvalid.checked,
     canSelect: disableInactive.checked ? row => row.value.active : undefined,
     canCheck: disableInactive.checked ? row => row.value.active : undefined,
     sorts: { name: (a, b) => a.name.localeCompare(b.name), salary: (a, b) => a.salary - b.salary },
@@ -427,6 +433,13 @@ for (const control of [selectionMode, disableInactive]) {
     refresh();
   });
 }
+for (const control of [checkMode, validateOn, revealInvalid]) {
+  control.addEventListener("change", () => {
+    if (grid) { grid.dispose(); grid = null; bind(); }
+    status.textContent = "Check or validation policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
+    refresh();
+  });
+}
 columnChoice.addEventListener("change", refreshColumns);
 filter.addEventListener("change", () => { applyFilter(); requestedPage = 1; applyPage(); });
 size.addEventListener("change", () => { initialPageChoice.value = ""; requestedPage = 1; applyPage(); });
@@ -450,13 +463,21 @@ type BlockRecord = {
   readonly team: string;
   readonly name: string;
   readonly notes: string;
-  readonly assignment: Employee["assignment"];
+  readonly assignment: Employee["assignment"] & { readonly selected: readonly number[] };
+  readonly mode: string | null;
+  readonly channels: readonly string[];
+  readonly date: string;
+  readonly hours: number;
+  readonly avatar: string;
 };
 
+const avatar = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#dce9f7"/><circle cx="16" cy="11" r="5" fill="#315f91"/><path d="M6 29v-4a10 10 0 0 1 20 0v4" fill="#315f91"/></svg>');
 const blockValues: readonly BlockRecord[] = Array.from({ length: 4 }, (_, index) => {
   const value = employee(index);
   return { code: `R${index + 1}`, department: index < 3 ? "Engineering" : "Operations",
-    team: index === 2 ? "Support" : "Platform", name: value.name, notes: value.notes, assignment: value.assignment };
+    team: index === 2 ? "Support" : "Platform", name: value.name, notes: value.notes,
+    assignment: { ...value.assignment, selected: value.assignment.chosen === null ? [] : [value.assignment.chosen] },
+    mode: index % 2 ? "office" : "remote", channels: ["email"], date: "2026-10-20", hours: 8, avatar };
 });
 const blockRows = createRows(blockValues);
 const blockRoot = find<HTMLElement>("[data-block-demo]");
@@ -478,6 +499,14 @@ function refreshBlocks(): void {
 const blockGrids = [...blockRoot.querySelectorAll<HTMLTableElement>("[data-block-grid]")].map(element => bindGrid(element, {
   rows: blockRows,
   paste: true,
+  parse: { hours: Number },
+  render: {
+    team(value) {
+      const label = document.createElement("strong");
+      label.textContent = String(value ?? "");
+      return label;
+    }
+  },
   onSelect({ id, row }) {
     blockId = id;
     blockStatus.textContent = row ? `Selected RowId ${id}: ${row.value.name}. Store actions update both layouts.`

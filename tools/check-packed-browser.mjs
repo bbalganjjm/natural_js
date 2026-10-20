@@ -101,6 +101,61 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const controls = await page.evaluate(() => {
+    const b = window.packedConsumer.blocks;
+    const [first, second] = b.rows.entries();
+    const detail = b.table.tBodies[0].rows[3];
+    const name = b.table.tBodies[0].rows[2].querySelector("input");
+    const selected = detail.querySelector("select[multiple]");
+    b.form.bind(second.id); b.grid.select(first.id); b.grid.setSelected([first.id, second.id]); b.grid.setChecked([first.id]);
+    detail.querySelector("[data-check-row]").click();
+    const checks = { checked: b.grid.checkedIds(), selected: b.grid.selectedIds(), active: b.grid.selected() };
+    name.value = ""; name.dispatchEvent(new Event("input", { bubbles: true })); name.dispatchEvent(new Event("change", { bubbles: true }));
+    const deferred = b.rows.get(second.id) === second;
+    const invalid = b.grid.validate(second.id);
+    const revealed = !invalid.valid && invalid.issues[0].element === name && document.activeElement === name;
+    name.value = "Manual assignment"; name.dispatchEvent(new Event("input", { bubbles: true })); name.dispatchEvent(new Event("change", { bubbles: true }));
+    const validated = b.grid.validate(second.id).valid && b.detail.querySelector("input").value === "Manual assignment";
+    detail.querySelector('input[type="radio"][value="remote"]').click();
+    detail.querySelector('input[type="checkbox"][value="beta"]').click();
+    for (const option of selected.options) option.selected = option.text === "False" || option.text === "Empty";
+    selected.dispatchEvent(new Event("change", { bubbles: true }));
+    const groupsDeferred = b.rows.get(second.id).value.settings.mode === "office";
+    const groupsValid = b.grid.validate(second.id).valid;
+    const groups = b.rows.get(second.id).value.settings;
+    const events = []; const stop = b.rows.subscribe(event => events.push(event.type));
+    const text = ["office", JSON.stringify(["beta"]), JSON.stringify([11, false, null])]
+      .map(value => `"${value.replaceAll('"', '""')}"`).join("\t");
+    const pasted = b.grid.paste(text, { id: second.id, field: "settings.mode" });
+    const arrayValue = b.rows.get(second.id).value.settings;
+    const pasteEvents = [...events]; events.length = 0; const beforeInvalid = b.rows.entries();
+    const rejected = b.grid.paste("[99]", { id: second.id, field: "settings.selected" });
+    const rejection = { valid: rejected.valid, unchanged: b.rows.entries() === beforeInvalid, events: events.length,
+      revealed: rejected.issues[0]?.element === selected && document.activeElement === selected };
+    stop();
+    b.rows.set(second.id, "summary", "<b>Stored summary</b>");
+    const rendered = detail.querySelector("strong").textContent === "<b>Stored summary</b>" &&
+      b.detail.querySelector("em").textContent === "<b>Stored summary</b>" && !detail.querySelector("b");
+    const names = [...b.table.querySelectorAll('input[type="radio"]')].map(input => input.name);
+    const result = { deferred, revealed, validated, groupsDeferred, groupsValid, groups, arrayValue,
+      pasted: pasted.valid, pasteEvents, rejection, rendered, radioGroups: new Set(names).size, checks,
+      expected: { first: first.id, second: second.id } };
+    b.rows.revert(); b.form.bind(first.id); b.grid.setChecked([]); b.grid.setSelected([]); b.grid.select(null);
+    return result;
+  });
+  assert(controls.deferred && controls.revealed && controls.validated && controls.groupsDeferred && controls.groupsValid,
+    "Installed manual validation must retain drafts, reveal their field and update the shared Form after validation.");
+  assert.deepEqual({ mode: controls.groups.mode, tags: controls.groups.tags, selected: controls.groups.selected },
+    { mode: "remote", tags: ["alpha", "beta"], selected: [false, null] });
+  assert(controls.pasted && controls.rendered, "Installed controls and explicit Form/Grid renderers must preserve raw values.");
+  assert.deepEqual({ mode: controls.arrayValue.mode, tags: controls.arrayValue.tags, selected: controls.arrayValue.selected },
+    { mode: "office", tags: ["beta"], selected: [11, false, null] });
+  assert.deepEqual(controls.pasteEvents, ["setMany"]);
+  assert.deepEqual(controls.rejection, { valid: false, unchanged: true, events: 0, revealed: true });
+  assert.equal(controls.radioGroups, 4, "Installed radio names must isolate each logical record without a native form.");
+  assert.deepEqual(controls.checks, { checked: [controls.expected.second],
+    selected: [controls.expected.first, controls.expected.second], active: controls.expected.first });
+
   const blocks = await page.evaluate(() => {
     const b = window.packedConsumer.blocks;
     const [first, second] = b.rows.entries();
@@ -115,12 +170,13 @@ try {
     const result = b.grid.paste("Updated\t22\tPasted note", { id: second.id, field: "profile.name" });
     const value = b.rows.get(second.id).value.profile;
     const focused = document.activeElement === note;
+    b.form.dispose(); const detailRestored = b.detail.outerHTML === b.originalDetail;
     b.grid.dispose(); const restored = b.table.outerHTML === b.original;
     b.rows.dispose(); b.root.remove();
-    return { initial, action: b.lastAction === second.id, retained, focused, valid: result.valid, value, restored };
+    return { initial, action: b.lastAction === second.id, retained, focused, valid: result.valid, value, restored, detailRestored };
   });
   assert.deepEqual(blocks.initial, { count: 8, span: 8, follower: "none" });
-  assert(blocks.action && blocks.retained && blocks.focused && blocks.valid && blocks.restored,
+  assert(blocks.action && blocks.retained && blocks.focused && blocks.valid && blocks.restored && blocks.detailRestored,
     "Installed native row blocks must retain one identity, nested binding, focus and exact teardown.");
   assert.equal(blocks.value.name, "Updated");
   assert.equal(blocks.value.choice, 22);

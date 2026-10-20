@@ -7,9 +7,9 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T09:50:34Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -24,6 +24,7 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 - The initial plan prioritized form, list, basic grid, select, pagination, button, dialog, popup, and tab. The 2026-10-05 instruction supersedes that limited release scope: all 1.x framework behavior and six required Grid additions must be completed or specifically approved for omission before release preparation.
 - Selected advanced Grid slices and M11 Tree and DatePicker are complete. M12 adds authored notifications, dynamic document tabs and an application shell composed from the same CVC runtime; its final verification is recorded in the [M12 plan](m12-plan.md).
 - Selected completion is scoped historical evidence. The [coverage ledger](feature-parity.md) and [full feature implementation plan](feature-parity-plan.md) identify required gaps across Grid, other UI, CVC and communication. Their P0 exhaustive inventory remains open; no new omission is approved.
+- [M13 whole-code review and remediation](m13-review-plan.md) is a required final gate after all required parity work and before personal testing or separately requested release preparation. It reviews the complete 2.0 code and its consumers, then closes findings through authorized fixes, regression checks and independent re-review.
 
 # Steps
 
@@ -42,12 +43,13 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 | M10 Advanced grid | Complete resize/reorder/hide, multiple selection/checks, bulk paste, true virtualization and remaining legacy Grid behavior within consistent contracts. |
 | M11 Tree and date picker | Add tree and custom date picker with authored template and accessibility contracts. |
 | M12 Shell | Add notification, document tabs, and application shell behavior on the shared page runtime. |
+| M13 Whole-code review and remediation | After required parity closes, run `ponytail:ponytail-review` over the complete 2.0 source, callers, tests, tools, examples, docs and packaging. Complete all Must fix and Should fix findings through authorized remediation, affected gates and independent re-review; record concrete decisions for remaining suggestions before personal testing or release preparation. |
 
-Each milestone starts with a detailed plan, user review, and approval of its contracts/scope. Record the next plan and verification in [current.md](current.md) before moving on. Reopen uncovered behavior under the existing owning milestone, with shared dependencies first. Required continuation now precedes M9 release preparation; the dated M0-M12 sequence and prior results remain history. The new execution plan stages M10.5-M10.9 and M3/M5/M6/M7/M11/M12 parity work. Feature retirement receives one consolidated review after P0, not repeated individual requests.
+Each milestone starts with a detailed plan, user review, and approval of its contracts/scope. Record the next plan and verification in [current.md](current.md) before moving on. Reopen uncovered behavior under the existing owning milestone, with shared dependencies first. Required continuation and M13 now precede M9 release preparation; the dated M0-M12 sequence and prior results remain history. The execution plan stages M10.5-M10.9 and M3/M5/M6/M7/M11/M12 parity work before the final whole-code review. Feature retirement receives one consolidated review after P0, not repeated individual requests.
 
 # Next action
 
-Complete P0's option/member/dynamic mapping and one consolidated omission proposal, then the required Grid and other framework stages in [the execution plan](feature-parity-plan.md). Full required coverage and personal testing precede a separately planned M9 release candidate. Registry publication and release tags remain deferred until explicitly requested. Real Safari on macOS or iOS is excluded; available Playwright WebKit remains required. The previously approved unused public Rule alias stays removed; retained Form rules remain supported.
+Complete P0's option/member/dynamic mapping and one consolidated omission proposal, then the required Grid and other framework stages in [the execution plan](feature-parity-plan.md). After required coverage and its owning milestone gates close, complete [M13](m13-review-plan.md) before personal testing and a separately planned M9 release candidate. Registry publication and release tags remain deferred until explicitly requested. Real Safari on macOS or iOS is excluded; available Playwright WebKit remains required. The previously approved unused public Rule alias stays removed; retained Form rules remain supported.
 
 # Decisions
 
@@ -71,4 +73,4 @@ Complete P0's option/member/dynamic mapping and one consolidated omission propos
 # Open questions
 
 - M6 met the [reference-host binding budgets](m4-plan.md); List's first bind still builds all row records, so larger data sets need a later memory review. A fresh Playwright Firefox build passed the M6 browser suite on this host. M8 compared its three 2.0 tasks with one byte-count method; actual token use and an equivalent 1.x baseline remain unavailable.
-- P0's complete mapping, consolidated omission proposal and detailed new public contracts remain open. Required parity gaps block release preparation.
+- P0's complete mapping, consolidated omission proposal and detailed new public contracts remain open. Required parity gaps and unfinished M13 review/remediation block personal acceptance and release preparation.

@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature scope and dependency order
-    git_blob: 9d3857f89e6c2389e3b709ca8a87de44d3db425d
+    git_blob: 5ba1d09c171ba5d80fe51d529f6110c686cc2300
   - id: coverage
     resource: feature-parity.md
     title: Remaining Grid behavior families
-    git_blob: a2bde6a387d048e332eb7b57fa4540e4f3782e62
+    git_blob: 73330951d3aa6b77b4fbc1ae533e6c5617fd8e3d
   - id: data
     resource: ../../src/data/index.ts
     title: Shared row identity, order and immutable changes
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid projection, drafts and mounted lifetime
-    git_blob: 0f6a8028fdd030854b38e3f9647bb08d19b2273e
+    git_blob: f1194e961ddbd2881c365362b45731c694a01716
   - id: ordering-browser
     resource: ../../tests/browser/rows-ordering.spec.ts
     title: Shared order, draft, focus and viewport regressions
@@ -41,9 +41,9 @@ sources:
     resource: ../../src/ui/grid-viewport.ts
     title: Measured logical-row viewport
     git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
-generated: { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T13:42:47Z }
+  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
 ---
 
 # Goal
@@ -54,7 +54,7 @@ Complete G01-G20 without replacing CVC, authored HTML/CSS or the small role modu
 
 M10.8 is pushed at 96b4295. Its immutable record preserves 95 units, 242 full cases in each required engine, five installed-browser consumers of the same 153-file artifact, and passing binding/viewport budgets. The preceding checkpoint was rechecked without recertifying it: all sixteen log hashes and the exact tarball match; thirteen archived target-source raw hashes and HEAD-normalized content match. HEAD newline variants plus archived source reproduce twenty-one of twenty-eight historical source hashes; seven excluded mixed-newline fixture/helper originals are unavailable and are not counted as reproduced. New gates use explicit UTF-8 CRLF-to-LF source fingerprints, with byte-exact log/archive hashes, to make subsequent resumption portable. Historical records remain unchanged; fresh gates certify this slice.
 
-M10.9.1 completed the shared ordered-row foundation. M10.9.2 now implements an authored tr group as one indivisible RowId for binding/measurement, together with adjacent repeated-value merging, column topology, focus, spacers and native table indices. Equal-value runs may exceed the viewport; merging stays inside consecutive mounted/page boundaries. Its contract and current gates are in [the row-block plan](m10-row-blocks-plan.md). Later slices remain required.[^grid][^viewport][^parity]
+M10.9.1 completed the shared ordered-row foundation. M10.9.2 implements an authored tr group as one indivisible RowId for binding/measurement, together with adjacent repeated-value merging, column topology, focus, spacers and native table indices. Equal-value runs may exceed the viewport; merging stays inside consecutive mounted/page boundaries. Its contract and gates are in [the row-block plan](m10-row-blocks-plan.md). M10.9.3 adds native/group values, typed array paste, explicit display, exclusive checks and validation timing/reveal; [its plan](m10-controls-plan.md) records the shared private responsibilities, independent corrections and frozen gates. Later slices remain required.[^grid][^viewport][^parity]
 
 # Steps
 
@@ -110,7 +110,7 @@ Work-cost observations: the public surface is one optional add target, two metho
 
 # Next action
 
-M10.9.2's [recorded gates](m10-row-blocks-plan.md) are complete. Prepare M10.9.3 control/display/validation contracts against the relevant 1.x behavior. Keep every later slice, other-component parity and P0 semantic/dynamic closure required. No new omission, publication, release tag or actual token-saving claim is approved here.
+M10.9.3's [frozen gates and final closure](m10-controls-plan.md) are complete. Prepare M10.9.4's status/row-lifecycle contract against 1.x: changed/deleted views, authored defaults, row/bind hooks, append/progressive loading and empty/result markup, keeping business factories/loaders application-owned. Keep every later slice, other-component parity and P0 semantic/dynamic closure required. After required coverage, the [M13 whole-code review/remediation](m13-review-plan.md) remains mandatory before personal acceptance. No new omission, publication, release tag or actual token-saving claim is approved here.
 
 # Open questions
 
