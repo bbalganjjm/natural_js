@@ -20,11 +20,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
+    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: grid-columns
     resource: ../../src/ui/grid-columns.ts
     title: Private Grid column topology and resize ownership
@@ -32,7 +32,7 @@ sources:
   - id: grid-selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid active identity, sets, eligibility, and transitions
-    git_blob: ad63db1a070132c0ab9eca715bbe994ed010663c
+    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
   - id: grid-filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filter state and choice counts
@@ -44,7 +44,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
+    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -104,7 +104,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Row store
-    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
+    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator

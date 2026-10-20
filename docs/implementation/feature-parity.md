@@ -48,15 +48,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
+    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
+    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -64,7 +64,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Current shared Rows contract
-    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
+    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -115,7 +115,7 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | ID | Legacy behavior / evidence | Current status and required work |
 |---|---|---|
 | G01 | data, bind, add, remove, revert, val, update | Partial: shared CRUD/change tracking exists; selected/checked projections, append completion and template-default creation need coverage. |
-| G02 | addTop, indexed add, move, copy | Missing ordered insertion/movement. Independent row copying must preserve intended behavior without shared mutable aliases. |
+| G02 | addTop, indexed add, move, copy | M10.9.1 adds insertion before a live RowId, identity-preserving movement and deeply independent committed-value copy in shared Rows. Native order, tombstones, no-ops, one notification and value reversion are explicit in [the detailed plan](m10-parity-plan.md). Template defaults and UI/dynamic option closure remain required; this does not close the entire family. |
 | G03 | tbody template, contextBodyTemplate | Partial: current Grid accepts one tr per record. Multi-line row groups and template customization need identity/lifetime contracts. |
 | G04 | Row Form radio/checkbox groups, multiple Select and input types | Partial: text/number/checkbox/textarea/single Select exist; complete the native control matrix and grouped raw values. |
 | G05 | Row Form img.src and html rendering | Missing: display currently uses value/textContent. Add explicit image and authored rich-content/renderer binding while keeping text the default. |
@@ -147,7 +147,7 @@ Legacy symbols are NU.* in natural.ui.js and NUS.* in natural.ui.shell.js. Curre
 | U04 | list.bind/select/data/validate, unselect | Core single selection/display; row-click and deselection policy remain open. |
 | U05 | Editable List row Form, list.val/update | Missing inline editing: current List disables bound controls and rejects radio fields. Share Form/Grid semantics. |
 | U06 | List multiselect/check/checkAll/checkSingle/onBeforeSelect | Missing; use stable IDs and explicit selection/check scope. |
-| U07 | List indexed add/move/copy/append/addSelect | Partial shared CRUD; insertion, order, copy and append behavior remain. |
+| U07 | List indexed add/move/copy/append/addSelect | M10.9.1 supplies shared ordered insertion/movement/independent copy and List order/focus/error integration. List-specific addSelect/default/append/dynamic workflows remain required. |
 | U08 | List height/scrollPaging/createRowDelay/reveal/vResize | Partial CSS/local paging; progressive scrolling, height resize and reveal remain. |
 | U09 | select.bind/val/index/remove/reset/append | Core native single/multiple choices; document and test removal, index and authored-default reset equivalence. |
 | U10 | Select-generated radio/checkbox choice groups | Missing authored item templates, label IDs and instance-scoped names. Static Form groups are insufficient. |
@@ -191,7 +191,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. Plan M10.9 remaining Grid parity, including indivisible multi-row templates/merges and viewport integration, before adding those contracts. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. Continue [M10.9](m10-parity-plan.md) with the ordered Rows foundation before indivisible multi-row templates/merges and viewport integration. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
 
 # Decisions
 

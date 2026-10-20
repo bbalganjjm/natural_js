@@ -13,7 +13,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
+    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Shared safe object field paths
@@ -34,10 +34,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -140,6 +140,8 @@ These are the changes needed when moving a Form declaration. The full applicatio
 - `read()` is not a save gate. A local Form can return invalid entered text; a row-bound Form excludes invalid drafts. Check `validate()` before sending `Rows.changes()`.[^form]
 - A parser must return a JSON-compatible raw value. Throwing or returning `undefined` keeps the entered draft and produces a `parse` issue; arbitrary invalid objects are rejected by `Rows`.[^form]
 - `data-field` is not a DOM `id`. Repeated and simultaneous authored views must avoid duplicate fixed IDs.[^path]
+
+A shared Rows `move` changes order only. Form retains its bound RowId, draft, validation message and current control focus without rerendering or rerunning formatters. Independent copied rows are separate snapshots; Form switches to one only through an explicit `bind(id)`. See [Rows](data.md) for order and copy semantics.[^form]
 
 # Related
 

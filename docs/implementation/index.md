@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9 remaining Grid plan](m10-parity-plan.md) - Staged closure of legacy Grid behavior through ordered Rows, authored row groups, merging and existing UI owners. (draft)
+
 * [Natural-JS 2.0 M10.8 viewport plan](m10-viewport-plan.md) - Measured variable-height Grid rendering with bounded DOM and preserved logical-page contracts. (draft)
 
 * [Natural-JS 2.0 M10.7 atomic paste plan](m10-paste-plan.md) - Coherent row batches and validated clipboard paste on authored Grid fields. (draft)

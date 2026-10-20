@@ -16,11 +16,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid rendering, row identity, draft, and lifecycle behavior
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract
-    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
+    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
   - id: old-grid
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Grid options and implementation
@@ -61,13 +61,13 @@ sources:
     resource: ../../tests/browser/m10-agent-screen.spec.ts
     title: M10.4 docs-first authored Grid task
     git_blob: 94fd90af72248bfabf0cef988fb9b35660f4b58f
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T01:11:51Z }
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 ---
 
-M10 now includes required work for the `2.0.0` release. The grouped/sticky authored-table slice, current-contract demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. M10.5 implements column resize/reorder/show/hide, and M10.6 implements independent selected/check state, scoped checks, header sorting/filtering and stable row actions. M10.7 implements atomic validated paste through one coherent Rows batch. M10.8 implements measured variable-height viewport rendering, reveal and logical-page offscreen paste/checks. Legacy option/callback closure remains required before release. The [feature parity ledger](feature-parity.md) and [feature parity implementation plan](feature-parity-plan.md) define the wider requirement to preserve 1.x user features. The user has deferred npm publication until remaining work is complete and personally tested. Real Safari on macOS or iOS is outside the initial 2.0 browser support scope; Playwright WebKit remains required on this Windows host.
+M10 now includes required work for the `2.0.0` release. The grouped/sticky authored-table slice, current-contract demo, internal offscreen-record lifetime change, and opt-in bounded initial page are implemented. M10.5 implements column resize/reorder/show/hide, and M10.6 implements independent selected/check state, scoped checks, header sorting/filtering and stable row actions. M10.7 implements atomic validated paste through one coherent Rows batch. M10.8 implements measured variable-height viewport rendering, reveal and logical-page offscreen paste/checks. M10.9.1 adds shared ordered insertion, movement and independent copying; legacy option/callback closure remains required before release. The [feature parity ledger](feature-parity.md) and [feature parity implementation plan](feature-parity-plan.md) define the wider requirement to preserve 1.x user features. The user has deferred npm publication until remaining work is complete and personally tested. Real Safari on macOS or iOS is outside the initial 2.0 browser support scope; Playwright WebKit remains required on this Windows host.
 
 M10.0–M10.4 below record the earlier selected scope and its measurements. Earlier decisions to leave advanced operations optional, unselected, or for a later 2.x milestone are historical decisions, not the current release policy. These records do not establish completion of the expanded M10 requirement.
 
@@ -132,7 +132,7 @@ The M10.2 unpublished local tarball had SHA-256 `3a6b8f030fda3443943befeb47aad3f
 | M10.6 Selection/check/filter | Implemented independent active/selected/check state, scoped check-all, authored header sort/filter controls and stable row actions; [detailed plan](m10-selection-plan.md). Exclusive-check and other legacy edge closure remains required. | Stable IDs across sort/filter/page, keyboard ranges, atomic veto, callback/reentrancy failures, raw choices, lifetime and demo/browser evidence. |
 | M10.7 Atomic bulk paste | Implemented [detailed contract](m10-paste-plan.md): complete candidate validation, one coherent Rows batch, retained IDs and input state, typed choices and quoted plaintext. | Success/failure store, draft and subscriber invariants; typed/nested values, protected/reordered fields, displayed-page bounds, callback reentrancy and demo/browser evidence. Viewport-wide paste integration follows M10.8. |
 | M10.8 Virtualization | Implemented [detailed contract](m10-viewport-plan.md): an authored scroll root, measured window, disjoint focused-row pin, reveal, offscreen paste/validation and logical page scope. | Declared 5,000-row budgets, bounded DOM/ownership, scroll/focus/identity/draft/validation, exact cleanup and full browser/installed-package gates stay in the stage plan. |
-| M10.9 Remaining Grid parity | Required, unimplemented: close every remaining Grid ledger gap or obtain the single consolidated human approval for proposed omissions. | Completed parity ledger, documented supported behavior, expanded demo, full browser checks, and same-artifact consumers before release. |
+| M10.9 Remaining Grid parity | Partial: [M10.9.1](m10-parity-plan.md) implements the ordered Rows foundation. Close every remaining Grid ledger gap or obtain the single consolidated human approval for proposed omissions. | Completed parity ledger, documented supported behavior, expanded demo, full browser checks, and same-artifact consumers before release. |
 
 # Validation and exclusions
 

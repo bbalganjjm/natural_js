@@ -101,6 +101,36 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const ordered = await page.evaluate(() => {
+    const { rows, grid } = window.packedConsumer.viewport;
+    const [first] = rows.entries();
+    const last = rows.entries().at(-1);
+    grid.setSelected([first.id, last.id]); grid.setChecked([first.id, last.id]);
+    const events = [];
+    const stop = rows.subscribe(event => events.push(event.type));
+    const inserted = rows.add({ name: "Inserted", choices: first.value.choices, choice: first.value.choice }, first.id);
+    const copied = rows.copy(first.id, inserted);
+    rows.move(last.id, first.id);
+    const snapshot = rows.get(copied);
+    rows.set(copied, "name", "Independent copy");
+    const result = {
+      order: rows.entries().slice(0, 4).map(row => row.id), expected: [copied, inserted, last.id, first.id],
+      selected: grid.selectedIds(), checked: grid.checkedIds(), expectedMembership: [last.id, first.id],
+      sameSource: rows.get(first.id) === first && rows.get(last.id) === last,
+      independent: snapshot.value.choices !== first.value.choices && rows.get(first.id).value.name === first.value.name,
+      events: [...events]
+    };
+    rows.remove(copied); rows.remove(inserted); rows.move(last.id);
+    grid.setSelected([]); grid.setChecked([]); grid.reveal(first.id);
+    stop();
+    return result;
+  });
+  assert.deepEqual(ordered.order, ordered.expected, "Installed insert/copy/move must use stable target IDs.");
+  assert.deepEqual(ordered.selected, ordered.expectedMembership);
+  assert.deepEqual(ordered.checked, ordered.expectedMembership);
+  assert(ordered.sameSource && ordered.independent, "Installed copy must be independent and move must preserve source snapshots.");
+  assert.deepEqual(ordered.events, ["add", "add", "move", "set"]);
+
   const viewportRows = page.locator('[data-consumer-viewport] tbody tr:not([aria-hidden="true"])');
   await expect.poll(() => viewportRows.count()).toBeGreaterThan(0);
   assert(await viewportRows.count() < 80, "Installed viewport must bound the mounted 5,000-row table.");

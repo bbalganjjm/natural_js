@@ -13,7 +13,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
+    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
@@ -26,9 +26,10 @@ sources:
     resource: ../../src/ui/rules.ts
     title: Private UI rule runner
     git_blob: 967142342d060056cd3f124db29f6893a2875d48
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -128,6 +129,8 @@ Cloned row elements are reused across sort/filter/page changes and updated when 
 # Pitfalls
 
 A List does not commit edits from its disabled display controls. Keep application sort/filter functions outside the framework. A Select inside a List row is owned by List and cannot also be bound with `bindSelect`. A fixed ID in the repeated template raises `DUPLICATE_ID`; keep IDs outside repeated markup and use `data-field` for binding.[^list]
+
+Shared Rows insertion/movement/copy changes store order while preserving existing IDs. Sort/filter/page still controls displayed order. Movement retains existing validation messages and keeps a focused row button attached during reorder; bound fields remain read-only under the current List contract. Value reversion retains store order; see [Rows](data.md) for the operation contract.[^list]
 
 # Related
 

@@ -8,11 +8,11 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: a51e2c6964f6066664778af40a387766823c08f2
+    git_blob: 29663915ff4d8e261cfaefdabf1412d2fc1a458e
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 82d8435e16750d2357826430243037e5c6499b1c
+    git_blob: 41cdcaff87292e68200d4d098fbece83933e4161
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -20,7 +20,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: 2c046be7b161c6f4608cfb4b66a96dca9aaf7eef
+    git_blob: cd5c2b1a5e41b02a8356afa64114e57eec4f5a9d
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
@@ -52,7 +52,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -64,7 +64,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Independent active row, selection and check state
-    git_blob: ad63db1a070132c0ab9eca715bbe994ed010663c
+    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Raw column filters and distinct choice counts
@@ -73,10 +73,10 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:44Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:44Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -110,7 +110,7 @@ The column controls call `columns` and `setColumns` to adjust preferred width, s
 
 `select` and `selected` address only the active row used by the snapshot and store actions. `selectedIds`/`setSelected` address an independent selection set; `checkedIds`/`setChecked` address an independent check set. The set methods replace the complete set and the getters return frozen IDs in store order. Clearing the active row does not clear either set. The demo's first-two and clear-set controls change membership without changing the active row. `checkAll` and `checkState` expose explicit scopes; `columnFilter`, `setColumnFilter`, and `filterChoices` expose the Team filter and its raw values/counts.[^controller][^selection][^filters][^ui]
 
-Other controls call `setSort` with an authored heading and `aria-sort`, `setFilter`, `setPage` and `page`, `reveal(id)`, `validate(id)` and `validate()`, `paste(text, { id, field })`, and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`; accepted paste uses `setMany`. Observation panels show active `RowId`, raw snapshot, both ID sets, scoped check state, filter values/counts, validation issues, before/change callbacks, row actions and the latest Rows event.[^controller]
+Other controls call `setSort` with an authored heading and `aria-sort`, `setFilter`, `setPage` and `page`, `reveal(id)`, `validate(id)` and `validate()`, `paste(text, { id, field })`, and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `move`, `copy`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`; accepted paste uses `setMany`. Observation panels show active `RowId`, raw snapshot, both ID sets, scoped check state, filter values/counts, validation issues, before/change callbacks, row actions and the latest Rows event.[^controller]
 
 ```ts
 const grid = bindGrid(table, {
@@ -180,6 +180,8 @@ Browser regressions cover initial-page/off-page identity, nested choices and raw
 Historical M10.7 final suites pass 219/219 in Chromium, Firefox and WebKit, including 19 focused paste regressions and the added demo case. Installed JS/TS and all five Windows browser consumers pass the same 148-file package, SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Existing binding budgets pass. Source/log hashes, retained initial failures, the synthetic-event fixture correction and unverified manual/OS-clipboard limits are recorded with that stage; these results do not certify the later viewport implementation or recertify the historical M10.6 artifact.[^paste-browser][^paste-evidence]
 
 The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Current-stage release gates and independent verification are tracked in the [M10.8 plan](../implementation/m10-viewport-plan.md); this document adds no unmeasured performance or token-saving claim.[^viewport-browser]
+
+The Rows controls demonstrate Add, Insert before selected, Copy before selected, Copy to end, Move earlier/later and Move to first/end. Insertion/copy activates the new stable ID. Copies use the stored valid values, not an uncommitted editor draft; editing a copy leaves its source unchanged. Movement keeps active identity and selected/checked membership while their returned ID arrays follow store order. Sorting/filtering/paging still controls the displayed projection. Revert all removes inserted copies and restores values while retaining the current order. Business key allocation stays application-owned.[^controller]
 
 # Variations
 

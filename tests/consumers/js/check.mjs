@@ -64,6 +64,30 @@ rows.revert();
 assert.deepEqual(rows.entries().map(row => row.value.name), ["A", "B"]);
 rows.dispose();
 
+const ordered = createRows([{ name: "First", nested: [{ value: 1 }] }, { name: "Last", nested: [] }]);
+const [first, last] = ordered.entries();
+const orderEvents = [];
+ordered.subscribe(event => orderEvents.push(event));
+const inserted = ordered.add({ name: "Before first", nested: [] }, first.id);
+ordered.move(last.id, first.id);
+const copied = ordered.copy(first.id, inserted);
+assert.deepEqual(ordered.entries().map(row => row.id), [copied, inserted, last.id, first.id]);
+assert.equal(ordered.get(first.id), first, "Moving a row cannot change its snapshot.");
+assert.notEqual(ordered.get(copied).value.nested, first.value.nested);
+ordered.set(copied, "nested", [{ value: 2 }]);
+assert.equal(ordered.get(first.id).value.nested[0].value, 1);
+assert.equal(ordered.get(copied).status, "insert");
+const orderBeforeNoop = ordered.entries();
+ordered.move(copied, inserted);
+assert.equal(ordered.entries(), orderBeforeNoop);
+assert.deepEqual(orderEvents.map(event => event.type), ["add", "move", "add", "set"]);
+assert(orderEvents.every(Object.isFrozen));
+assert.throws(() => ordered.copy(first.id, 999), error => error.code === "ROW_MISSING");
+assert.equal(ordered.entries(), orderBeforeNoop);
+ordered.revert();
+assert.deepEqual(ordered.entries().map(row => row.id), [last.id, first.id], "Value revert preserves current row order.");
+ordered.dispose();
+
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async request => {
   assert.equal(request.url, "https://example.test/api/employees");

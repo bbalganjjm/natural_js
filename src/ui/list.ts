@@ -467,9 +467,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const moveFocus = focused instanceof HTMLElement && focusedId !== undefined &&
         focusedId !== null && !next.has(focusedId);
       for (const id of visibleIds) if (!next.has(id)) records.get(id)?.element.remove();
-      const fragment = root.ownerDocument.createDocumentFragment();
-      for (const id of ids) fragment.append(records.get(id)!.element);
-      anchor.before(fragment);
+      let cursor: Node = anchor;
+      for (let index = ids.length - 1; index >= 0; index--) {
+        const element = records.get(ids[index])!.element;
+        if (element !== focusedRow && element.nextSibling !== cursor) root.insertBefore(element, cursor);
+        cursor = element;
+      }
       if (restoreFocus && root.ownerDocument.activeElement !== focused) focused.focus({ preventScroll: true });
       else if (moveFocus) {
         const nextControl = root.querySelector<HTMLElement>('button[data-select-row]:not(:disabled)') ?? root;
@@ -504,7 +507,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           const record = records.get(id);
           if (record) clearIssues(record);
         }
-      } else if ("id" in event && event.id !== undefined) {
+      } else if (event.type !== "move" && "id" in event && event.id !== undefined) {
         const record = records.get(event.id);
         if (record) clearIssues(record);
       }

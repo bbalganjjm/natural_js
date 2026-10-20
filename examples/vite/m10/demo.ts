@@ -293,7 +293,7 @@ function showValidation(result: ValidationResult): void {
 
 function act(action: string): void {
   if (action === "rebind") { bind(); return; }
-  if (action === "revert-all") { rows.revert(); status.textContent = "All Rows changes reverted."; return; }
+  if (action === "revert-all") { rows.revert(); status.textContent = "Values restored and added rows removed; row order kept."; return; }
   if (action === "replace") { rows.replace(Array.from({ length: Number(datasetChoice.value) }, (_, index) => employee(index))); status.textContent = "Rows replaced with new RowIds."; return; }
   if (!grid) throw new Error("Bind the Grid before using this control.");
   switch (action) {
@@ -344,6 +344,20 @@ function act(action: string): void {
     case "validate-selected": showValidation(grid.validate(selectedId())); return;
     case "validate-all": showValidation(grid.validate()); return;
     case "add": grid.select(rows.add(employee(rows.entries().length))); break;
+    case "insert-before": grid.select(rows.add(employee(rows.entries().length), selectedId())); break;
+    case "copy-before": grid.select(rows.copy(selectedId(), selectedId())); break;
+    case "copy-end": grid.select(rows.copy(selectedId())); break;
+    case "move-first": rows.move(selectedId(), rows.entries()[0]?.id); break;
+    case "move-end": rows.move(selectedId()); break;
+    case "move-up":
+    case "move-down": {
+      const id = selectedId();
+      const entries = rows.entries();
+      const index = entries.findIndex(row => row.id === id);
+      if (action === "move-up" && index > 0) rows.move(id, entries[index - 1].id);
+      if (action === "move-down" && index < entries.length - 1) rows.move(id, entries[index + 2]?.id);
+      break;
+    }
     case "remove": rows.remove(selectedId()); break;
     case "revert-selected": rows.revert(selectedId()); break;
     case "set-salary": {

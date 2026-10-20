@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: caa35aad41fd0f56fe136585b6142631159b5b93
+    git_blob: d56c7421cb82ffbbf5322211552e4994ed3d1eb3
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,26 +16,26 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: fd63fd078a2280fc73dd15b6ba09d82cb3834847
+    git_blob: ba504741040aa19c0839c80fa895ebc290c44244
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: cca1dda479cc32393e7ff8267410cb0e072219fb
+    git_blob: 7e37f97c01820ecdaff97428406f428cecffb6f7
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
-    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
+    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:42Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:42Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -51,7 +51,7 @@ Complete framework behavior through consistent, readable TypeScript while preser
 - No proposed feature omission is approved. Previously deferred/excluded behavior must be reconciled with the latest instruction. Already approved TS/ESM, new API naming, jQuery removal, unique IDs, root Apache-2.0 and preserved LGPL v1 do not need approval again.
 - Release-candidate preparation is blocked by required feature gaps. npm publication and release tags additionally require personal testing and a later explicit request. Only real macOS/iOS Safari is outside browser scope; available Windows engines remain required.
 
-M10.5 implements authored column state and controls; [its detailed plan](m10-columns-plan.md) preserves its gates. M10.6 implements independent selection/check sets, scoped checks, native header sort/filters and stable actions; [its plan](m10-selection-plan.md) records the contract and current gates. The detailed evidence maps all 775 checklist entries across core/Grid/other UI and shell, with 53 identified dynamic path groups; structural coverage is checked, while semantic/dynamic closure remains open. Continue that closure alongside M10.7 and prepare the single omission proposal; no candidate omission has been applied. Historical measurements retain their original source/artifact identities.[^coverage]
+M10.5 implements authored column state and controls; [its detailed plan](m10-columns-plan.md) preserves its gates. M10.6 implements independent selection/check sets, scoped checks, native header sort/filters and stable actions; [its plan](m10-selection-plan.md) records the contract and current gates. The detailed evidence maps all 775 checklist entries across core/Grid/other UI and shell, with 53 identified dynamic path groups; structural coverage is checked, while semantic/dynamic closure remains open. Continue that closure alongside the remaining Grid/component slices and prepare the single omission proposal; no candidate omission has been applied. Historical measurements retain their original source/artifact identities.[^coverage]
 
 # Steps
 
@@ -73,7 +73,7 @@ Before dependent UI work, design the minimum ordered insert/move/independent-cop
 
 Compile field/control plans once and reuse only identical control read/write, parsing, rule invocation and draft behavior across Form/Grid/editable List. Group controls and nested row-local Selects must share raw-value semantics. Arbitrary row actions need typed stable identity. Centralize document-unique ID/label/ARIA restoration and resource ownership where existing binders already share them. Keep column topology, resize/drag geometry, selection ranges, paste parsing and viewport calculations private to their UI owner unless another implemented feature genuinely needs identical behavior.
 
-M10.8 keeps viewport offsets keyed by logical RowId and makes the current one-tr template boundary explicit: spanning multiple logical rows is rejected only in viewport mode. M10.9 must design indivisible multi-tr/merged blocks and adapt their measurements, spacers and keyboard contracts together; that required behavior is not retired. Type declarations stay near their owner. Share a private file only for an established responsibility/reuse case; do not add a public utility entry point.[^grid][^form]
+M10.8 keeps viewport offsets keyed by logical RowId and makes the current one-tr template boundary explicit: spanning multiple logical rows is rejected only in viewport mode. M10.9 must design indivisible authored tr groups per RowId and adjacent-merge continuation at window/page boundaries, adapting measurements, spacers and keyboard contracts without mounting an unbounded equal-value run; that required behavior is not retired. Type declarations stay near their owner. Share a private file only for an established responsibility/reuse case; do not add a public utility entry point.[^grid][^form]
 
 ## Required Grid continuation: M10.5-M10.9
 
@@ -115,7 +115,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. Its final gates pass within that contract; prepare M10.9's remaining Grid contracts and detailed mapping/acceptance plan. Preserve remaining stages and publication deferral.
+Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. Its final gates pass within that contract; M10.9.1 ordered shared Rows is verified within [the detailed M10.9 plan](m10-parity-plan.md); prepare authored multi-tr/merge contracts next, then continue the remaining required slices. Preserve remaining stages and publication deferral.
 
 # Decisions
 

@@ -500,7 +500,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   root.addEventListener("focusin", onFocusIn);
   root.addEventListener("focusout", onFocusOut);
   const unsubscribe = rows?.subscribe(event => {
-    if (disposed || (event.type === "set" || event.type === "setMany") && reconciling) return;
+    if (disposed || event.type === "move" || (event.type === "set" || event.type === "setMany") && reconciling) return;
     if (event.type === "replace" || event.type === "revert" && event.id === undefined) drafts.clear();
     else if (event.type === "remove") drafts.delete(event.id);
     else if (event.type === "revert" && event.id !== undefined) drafts.delete(event.id);

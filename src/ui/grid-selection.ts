@@ -85,6 +85,7 @@ export function createGridSelection<T extends object>(options: {
   }
 
   function ordered(ids: ReadonlySet<RowId>): readonly RowId[] {
+    if (!ids.size) return empty;
     return Object.freeze(options.rows.entries().filter(row => ids.has(row.id)).map(row => row.id));
   }
 
@@ -225,8 +226,8 @@ export function createGridSelection<T extends object>(options: {
     prune(): (() => void) | undefined {
       const unchanged = checkpoint("selection");
       const id = selected !== null && !eligible(selected, "selection") ? null : selected;
-      const ids = Object.freeze(selection.filter(target => eligible(target, "selection")));
-      const nextChecks = Object.freeze(checks.filter(target => eligible(target, "check")));
+      const ids = ordered(new Set(selection.filter(target => eligible(target, "selection"))));
+      const nextChecks = ordered(new Set(checks.filter(target => eligible(target, "check"))));
       const nextAnchor = anchor !== null && !eligible(anchor, "selection") ? null : anchor;
       unchanged();
       const activeChanged = id !== selected;

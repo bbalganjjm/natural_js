@@ -13,7 +13,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -29,7 +29,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private active identity, membership, eligibility, and transition ordering
-    git_blob: ad63db1a070132c0ab9eca715bbe994ed010663c
+    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private scalar column filters and choice counts
@@ -54,10 +54,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It clones one authored row template, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^selection]
@@ -326,6 +326,8 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
 `RowId` is neither a DOM ID nor a display index. Grid edits text-like inputs, textareas, checkboxes, and number inputs with an application parser. It rejects radio, file, unsupported input types, and row-field multiple Selects; use Form for those. Header filter Selects are authored `multiple` controls with their own column-filter contract. A plain `data-field` text element has no generated editor; it can still receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas, and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar. A Select owned by Grid cannot also be bound with `bindSelect`. Without either `initialPage` or `viewport`, binding creates all row clones. Local paging limits the logical page; viewport limits its mounted DOM. `setPage(null)` keeps viewport rendering bounded when enabled, otherwise deliberately renders all rows. Offscreen formatter errors surface when a row mounts; invalid row-local options also surface on validation/paste. Rendering can fail while scrolling or revealing a previously unmounted bad row: fix the source/rule before retrying. Progressive loading and transport cancellation stay in the application/page layer; virtualization does not reduce the Rows store itself.[^grid][^owner][^viewport]
+
+Row insertion/movement/copy use caller-owned Rows: `add(value, before?)`, `move(id, before?)`, `copy(id, before?)`. Targets are live store IDs. Current sort/filter/page still determines displayed order; viewport anchoring follows RowId. Movement preserves drafts/errors and the focused row node, including nonviewport rendering. Selected/checked arrays are reconciled to store order and normal post-change callbacks observe committed DOM, bypassing vetoes for this forced reconciliation. Active identity and membership stay unchanged unless eligibility changes. See [Rows](data.md) for no-ops, value reversion and business-key responsibility.[^grid][^selection]
 
 # Related
 

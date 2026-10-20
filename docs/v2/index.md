@@ -8,7 +8,7 @@
 * [Natural-JS 2.0 module boundaries](architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
 * [Natural-JS 2.0 package](package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 communicator](comm.md) - Fetch requests with explicit JSON or body input, response decoding, hooks, and cancellation. (draft)
-* [Natural-JS 2.0 rows](data.md) - Immutable JSON row snapshots with store-local identity, change tracking, and subscriptions. (draft)
+* [Natural-JS 2.0 rows](data.md) - Immutable JSON row snapshots with stable identity, ordered insertion, movement and copying, change tracking, and subscriptions. (draft)
 * [CVC pages in main content, Popup, and Tabs](page-containers-example.md) - One picker PageDefinition shares Rows across main content, Popup, and People and Preview Tabs in two authored MDI layouts. (draft)
 * [Employee screen in two authored layouts](employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)
 * [Migrating a 1.x screen to Natural-JS 2.0](migration.md) - Move a 1.x search/list/detail screen, changed-row save, and Popup or Tab page to scoped ESM APIs. (draft)

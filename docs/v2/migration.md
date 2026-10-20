@@ -32,7 +32,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: RowId, changes, and immutable row values
-    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
+    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request payload, decoder, and cancellation
@@ -44,11 +44,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 90add5b0bbc03917c1484878e21f397fcd9b8eed
+    git_blob: 591643428dd7e24841e2eedf8e4caebc8999b50e
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -60,7 +60,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
-    git_blob: 73cb44cea92fa725f824305c9f9f280a070196b7
+    git_blob: 9d130dd7169ff9b5c542a144de85cd037a8defa1
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private declarative rule dispatch
@@ -116,15 +116,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: caa35aad41fd0f56fe136585b6142631159b5b93
+    git_blob: d56c7421cb82ffbbf5322211552e4994ed3d1eb3
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 67f002bb9b5189f1c60608a6dcd706edd4121e7e
-generated: { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
+generated: { by: codex/gpt-6, at: 2026-10-20T11:46:44Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-18T11:23:05Z }
+  - { by: codex/gpt-6, at: 2026-10-20T11:46:44Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -306,6 +306,8 @@ In M4, a valid save sends only the changed raw rows matching `examples/vite/m4/e
 - The 2.0 rule engine retains built-in names and corrects documented 1.x defects; current custom overrides use per-binding `RuleSet`. Check rule arguments and current differences in [Form](form.md) before copying a declaration. Any other framework-reachable rule configuration remains subject to the coverage review.[^form][^rules][^parity]
 
 # Next
+
+Legacy addTop/indexed add/move/copy workflows now use Rows `add(value, beforeId?)`, `move(id, beforeId?)` and `copy(id, beforeId?)`. Resolve a live target ID from the intended store/view context instead of treating a display index as identity; omit it to append. Copy creates deeply independent stored JSON and a new inserted RowId while preserving business fields. Generate unique application keys before `add` when needed by Tree/server rules. Move does not change dirty status or add a save-payload operation, and value `revert` keeps the current order. The [M10.9 plan](../implementation/m10-parity-plan.md) tracks subsequent grouped/merged row and other required gaps.[^rows]
 
 Use [page](page.md), [Rows](data.md), [Form](form.md), [communication](comm.md), [Popup](popup.md), and [Tabs](tabs.md), [Documents](documents.md), and [Notify](notify.md) for exact signatures. For a narrower implementation start, inspect `examples/vite/m4/employees.ts` and `examples/vite/m7/main.ts`; their authored views and focused tests show the entire working routes.[^employee][^containers]
 

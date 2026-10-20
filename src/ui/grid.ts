@@ -930,9 +930,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       })));
       else {
         for (const id of mountedIds) if (!nextSet.has(id)) records.get(id)?.element.remove();
-        const fragment = root.ownerDocument.createDocumentFragment();
-        for (const id of nextIds) fragment.append(records.get(id)!.element);
-        anchor.before(fragment);
+        let cursor: Node = anchor;
+        for (let index = nextIds.length - 1; index >= 0; index--) {
+          const element = records.get(nextIds[index])!.element;
+          if (element !== focusedRow && element.nextSibling !== cursor) anchor.parentNode!.insertBefore(element, cursor);
+          cursor = element;
+        }
       }
       if (restoreFocus && root.ownerDocument.activeElement !== focused) {
         focused.focus({ preventScroll: true });

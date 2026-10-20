@@ -8,15 +8,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field, draft and view owner
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable row store
-    git_blob: a6ff14aa948a02e0aeb60385ef9a0aee0056a7d4
+    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion
-    git_blob: 67f002bb9b5189f1c60608a6dcd706edd4121e7e
+    git_blob: bd0a4c95c2ea68bbbc766fc8503d3bebcacdb4d8
   - id: evidence
     resource: evidence/m107-verification.json
     title: Frozen M10.7 source, commands, artifact and results
@@ -28,7 +28,7 @@ sources:
   - id: unit
     resource: ../../tests/rows.test.ts
     title: Atomic batches, identity and reentrant JSON boundaries
-    git_blob: d78bf28c837dd674b249a974ecf40d6e1ebda317
+    git_blob: 26f54b607abec62d7e6eb04c6583f603fb47d12c
 generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }

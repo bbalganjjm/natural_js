@@ -60,6 +60,236 @@ describe("createRows", () => {
     rows.dispose();
   });
 
+  it("inserts before live IDs and publishes each complete order once", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }]);
+    const [first, second] = rows.entries();
+    const orders: number[][] = [];
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => {
+      events.push(event);
+      orders.push(rows.entries().map(row => row.value.value));
+    });
+
+    const head = rows.add({ value: 0 }, first.id);
+    const middle = rows.add({ value: 3 }, second.id);
+    const tail = rows.add({ value: 4 });
+    expect(orders).toEqual([[0, 1, 2], [0, 1, 3, 2], [0, 1, 3, 2, 4]]);
+    expect(events).toEqual([head, middle, tail].map(id => ({ type: "add", id, changed: true })));
+    expect(events.every(Object.isFrozen)).toBe(true);
+    expect(rows.get(first.id)).toBe(first);
+    expect(rows.get(second.id)).toBe(second);
+    rows.dispose();
+  });
+
+  it("moves snapshots without changing values or status and retains tombstone order on revert", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }]);
+    const [first, second, third, fourth] = rows.entries();
+    rows.set(first.id, "value", 10);
+    rows.remove(second.id);
+    const inserted = rows.add({ value: 5 }, third.id);
+    const updated = rows.get(first.id);
+    const deleted = rows.get(second.id);
+    const added = rows.get(inserted);
+    const orders: number[][] = [];
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => {
+      events.push(event);
+      orders.push(rows.entries().map(row => row.id));
+    });
+
+    rows.move(third.id, first.id);
+    rows.move(first.id);
+    expect(orders).toEqual([
+      [third.id, first.id, inserted, fourth.id], [third.id, inserted, fourth.id, first.id]
+    ]);
+    expect(events).toEqual([
+      { type: "move", id: third.id, changed: true }, { type: "move", id: first.id, changed: true }
+    ]);
+    expect(events.every(Object.isFrozen)).toBe(true);
+    for (const snapshot of [updated, deleted, added, third, fourth]) {
+      expect(rows.get(snapshot!.id)).toBe(snapshot);
+    }
+    expect(rows.changes()).toEqual([
+      { id: second.id, status: "delete", value: { value: 2 } },
+      { id: inserted, status: "insert", value: { value: 5 } },
+      { id: first.id, status: "update", value: { value: 10 } }
+    ]);
+
+    rows.revert(first.id);
+    expect(rows.entries().map(row => row.id)).toEqual([third.id, inserted, fourth.id, first.id]);
+    rows.revert();
+    expect(rows.entries().map(row => row.id)).toEqual([third.id, second.id, fourth.id, first.id]);
+    expect(rows.entries().map(row => row.value.value)).toEqual([3, 2, 4, 1]);
+    expect(rows.changes()).toEqual([]);
+    rows.dispose();
+  });
+
+  it("preserves caches for move no-ops and uses the full store successor including tombstones", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }]);
+    const [first, second, third, fourth] = rows.entries();
+    rows.remove(second.id);
+    const entries = rows.entries();
+    const changes = rows.changes();
+    const listener = vi.fn();
+    rows.subscribe(listener);
+
+    rows.move(first.id, first.id);
+    rows.move(third.id, fourth.id);
+    rows.move(fourth.id);
+    expect(rows.entries()).toBe(entries);
+    expect(rows.changes()).toBe(changes);
+    expect(listener).not.toHaveBeenCalled();
+
+    rows.move(first.id, third.id);
+    expect(rows.entries()).toEqual(entries);
+    expect(rows.entries()).not.toBe(entries);
+    expect(listener).toHaveBeenCalledExactlyOnceWith({ type: "move", id: first.id, changed: true });
+    const movedEntries = rows.entries();
+    const movedChanges = rows.changes();
+    rows.move(first.id, third.id);
+    expect(rows.entries()).toBe(movedEntries);
+    expect(rows.changes()).toBe(movedChanges);
+    expect(listener).toHaveBeenCalledTimes(1);
+    rows.revert(second.id);
+    expect(rows.entries().map(row => row.id)).toEqual([second.id, first.id, third.id, fourth.id]);
+    rows.dispose();
+  });
+
+  it("copies the committed edited value into an independent inserted row with a fresh ID", () => {
+    const rows = createRows([{ key: "business-key", nested: { choices: [{ value: 1 }] } }]);
+    const source = rows.entries()[0].id;
+    rows.set(source, "nested", { choices: [{ value: 2 }] });
+    const edited = rows.get(source)!;
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => events.push(event));
+    const copied = rows.copy(source, source);
+    const copy = rows.get(copied)!;
+    expect(copied).toBeGreaterThan(source);
+    expect(rows.entries()).toEqual([copy, edited]);
+    expect(copy.status).toBe("insert");
+    expect(copy.value).toEqual(edited.value);
+    expect(copy.value).not.toBe(edited.value);
+    expect(copy.value.nested.choices[0]).not.toBe(edited.value.nested.choices[0]);
+    expect(Object.isFrozen(copy.value.nested.choices[0])).toBe(true);
+    expect(events).toEqual([{ type: "add", id: copied, changed: true }]);
+    expect(Object.isFrozen(events[0])).toBe(true);
+    expect(rows.get(source)).toBe(edited);
+
+    rows.revert(source);
+    expect(rows.get(copied)!.value.nested.choices[0].value).toBe(2);
+    rows.set(copied, "nested", { choices: [{ value: 3 }] });
+    const appended = rows.copy(copied);
+    expect(rows.entries().map(row => row.id)).toEqual([copied, source, appended]);
+    rows.set(copied, "nested", { choices: [{ value: 4 }] });
+    expect(rows.get(source)!.value.nested.choices[0].value).toBe(1);
+    expect(rows.get(appended)!.value.nested.choices[0].value).toBe(3);
+    rows.revert();
+    expect(rows.entries().map(row => row.id)).toEqual([source]);
+    rows.dispose();
+  });
+
+  it("rejects invalid ordered operations before changing caches, events or the next ID", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }]);
+    const [first, second] = rows.entries();
+    rows.remove(second.id);
+    const entries = rows.entries();
+    const changes = rows.changes();
+    const listener = vi.fn();
+    rows.subscribe(listener);
+    for (const [operation, write] of [
+      ["add", (before: number) => rows.add({ value: 3 }, before)],
+      ["move", (before: number) => rows.move(first.id, before)],
+      ["copy", (before: number) => rows.copy(first.id, before)]
+    ] as const) {
+      for (const [target, code] of [[999, "ROW_MISSING"], [second.id, "ROW_DELETED"]] as const) {
+        expect(() => write(target)).toThrow(expect.objectContaining({ code, api: `Rows.${operation}` }));
+      }
+    }
+    for (const operation of ["move", "copy"] as const) {
+      expect(() => rows[operation](999, first.id))
+        .toThrow(expect.objectContaining({ code: "ROW_MISSING", api: `Rows.${operation}` }));
+      expect(() => rows[operation](second.id, first.id))
+        .toThrow(expect.objectContaining({ code: "ROW_DELETED", api: `Rows.${operation}` }));
+      expect(() => rows[operation](second.id, second.id))
+        .toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    }
+    const getter = vi.fn(() => 3);
+    expect(() => rows.add({ get value() { return getter(); } }, 999))
+      .toThrow(expect.objectContaining({ code: "ROW_MISSING" }));
+    expect(getter).not.toHaveBeenCalled();
+    for (const value of [new Date(), NaN, undefined]) {
+      expect(() => rows.add({ value } as never, first.id))
+        .toThrow(expect.objectContaining({ code: "ROW_VALUE", api: "Rows.add" }));
+    }
+    expect(rows.entries()).toBe(entries);
+    expect(rows.changes()).toBe(changes);
+    expect(rows.get(first.id)).toBe(first);
+    expect(listener).not.toHaveBeenCalled();
+    expect(rows.add({ value: 3 }, first.id)).toBe(second.id + 1);
+    rows.dispose();
+  });
+
+  it("keeps ordered commits and notifies remaining subscribers when one throws", () => {
+    for (const operation of ["add", "move", "copy"] as const) {
+      const rows = createRows([{ value: 1 }, { value: 2 }]);
+      const [first, second] = rows.entries();
+      const cause = new Error("ordered subscriber failed");
+      rows.subscribe(() => { throw cause; });
+      const events: RowsEvent[] = [];
+      rows.subscribe(event => {
+        events.push(event);
+        expect(Object.isFrozen(event)).toBe(true);
+        expect(rows.entries().map(row => row.value.value))
+          .toEqual(operation === "add" ? [3, 1, 2] : operation === "move" ? [2, 1] : [2, 1, 2]);
+      });
+      expect(() => {
+        if (operation === "add") rows.add({ value: 3 }, first.id);
+        else rows[operation](second.id, first.id);
+      }).toThrow(cause);
+      expect(events).toEqual([{
+        type: operation === "move" ? "move" : "add",
+        id: operation === "move" ? second.id : second.id + 1,
+        changed: true
+      }]);
+      expect(rows.entries().map(row => row.value.value))
+        .toEqual(operation === "add" ? [3, 1, 2] : operation === "move" ? [2, 1] : [2, 1, 2]);
+      rows.dispose();
+    }
+  });
+
+  it("rejects stale outer values when JSON getters move or copy rows and honors disposal", () => {
+    for (const nestedOperation of ["move", "copy"] as const) {
+      for (const operation of ["set", "setMany", "add", "replace"] as const) {
+        const rows = createRows([{ nested: { value: 1 } }, { nested: { value: 2 } }]);
+        const [first, second] = rows.entries();
+        const events: RowsEvent[] = [];
+        rows.subscribe(event => events.push(event));
+        const value = { get value() { rows[nestedOperation](second.id, first.id); return 3; } };
+        expect(() => {
+          if (operation === "set") rows.set(first.id, "nested", value);
+          else if (operation === "setMany") rows.setMany([
+            { id: first.id, values: { nested: value } }, { id: second.id, values: { nested: { value: 4 } } }
+          ]);
+          else if (operation === "add") rows.add({ nested: value }, second.id);
+          else rows.replace([{ nested: value }]);
+        }).toThrow(expect.objectContaining({ code: "ROW_VALUE", api: `Rows.${operation}` }));
+        expect(rows.entries().map(row => row.value.nested.value))
+          .toEqual(nestedOperation === "move" ? [2, 1] : [2, 1, 2]);
+        expect(rows.get(first.id)).toBe(first);
+        expect(rows.get(second.id)).toBe(second);
+        expect(events).toHaveLength(1);
+        expect(events[0].type).toBe(nestedOperation === "move" ? "move" : "add");
+        rows.dispose();
+      }
+    }
+    const rows = createRows([{ value: 1 }]);
+    const id = rows.entries()[0].id;
+    expect(() => rows.add({ get value() { rows.dispose(); return 2; } }, id))
+      .toThrow(expect.objectContaining({ code: "ROWS_DISPOSED", api: "Rows.add" }));
+    expect(() => rows.move(id)).toThrow(expect.objectContaining({ code: "ROWS_DISPOSED", api: "Rows.move" }));
+    expect(() => rows.copy(id)).toThrow(expect.objectContaining({ code: "ROWS_DISPOSED", api: "Rows.copy" }));
+  });
+
   it("rejects non-JSON values without changing existing rows and releases listeners", () => {
     const rows = createRows([{ value: 1 }]);
     const id = rows.entries()[0].id;

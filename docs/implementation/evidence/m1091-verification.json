@@ -1,0 +1,626 @@
+{
+  "date": "2026-10-20",
+  "milestone": "M10.9.1",
+  "baseline_commit": "96b4295f2297982f150fc2a323c35df3f2c3b120",
+  "branch": "2.0.0-alpha.0",
+  "version": "2.0.0-beta.0",
+  "artifact": {
+    "filename": "bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "cdc1a545dcbf1dc9bbf149d3012acad01a3d4fdddb90f1a7f054a67cc064493e",
+    "files": 153,
+    "packed_bytes": 246206,
+    "unpacked_bytes": 1217879,
+    "all_members_match_workspace": true,
+    "allowed_paths_only": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "license": "Apache-2.0",
+    "publication_performed": false
+  },
+  "sources_sha256": {
+    "src/ui/grid.ts": "39dd0ff4a66a4cc37cef55d2fd9c67dc2f8acadc5487ab07ed0cff0834a33b99",
+    "src/ui/grid-paste.ts": "e0a102940b5f55c6966e6b4617a3adac8790fdc5afc7ef589a41cb4b574cbec8",
+    "src/ui/form.ts": "a0df85c92407f08545aeb79f0b85f966ec2189a73b6c183e2c47a7e03bc9240d",
+    "src/ui/list.ts": "8f0aaf8b14a8c94d4f147ae2655371e3336e4f6cfcc5c0e2ff97451b1d8553ff",
+    "src/ui/grid-selection.ts": "2c91b9a9bbe3e2676b51a5fd2034151a38473983e9ef716acb278a737ae48f2f",
+    "src/ui/grid-filters.ts": "87099c05a591403be2584ac1d17b5ce2d2d2356bf565f016a6035e18f8910887",
+    "src/ui/index.ts": "47c128cdad73036db0dad91470ba4d375dddbb1ea9311c2a9b0c59ae7624b885",
+    "src/ui/select.ts": "b584b7e4adfa98345ffa717adc60b85d80e1b8db1ca3ebe1b9e7ce2f06215f0c",
+    "src/ui/grid-columns.ts": "9cf71e4f97683e1f2b2c467d5af42b1eb52ea11cb73b83ad6a390fab11ab49b5",
+    "src/ui/dom-state.ts": "2f7326f36ae4efd8a2022a38228c1baae4834436b592aa8a4dc2e7544fa6796d",
+    "src/data/index.ts": "6635a25de82902ce4ccefecd95919eab95603e477748e33d2aa65a5d6055a1b5",
+    "tests/browser/grid-selection.spec.ts": "26bc7a80e7c9f0194034331a8d73a4f2f90c4b26b5d9e472eb604116f60458ba",
+    "tests/browser/grid-paste.spec.ts": "992da5d9f015b9cc9c6a1fec61051a6d70c618220eebf0bbbebf7e725ab9ed54",
+    "tests/grid-paste.test.ts": "3345a370a2bf87576b29e1a2552ebaa28cf362251b1abefedc5f3d9f61ce6cbd",
+    "tests/rows.test.ts": "c555082bd4912020ab3ea5bb9750ffaebc63e171517c465067f361d0906cd598",
+    "tests/consumers/js/check.mjs": "0aa0f677d4275a025b6f804a4da83e1b15f47b899fd0cb2217da43baa188e67e",
+    "tests/browser/m10-demo.spec.ts": "4600c1ee3df4da68549fe4d82866e9f8478d6ea368b5169899d0446f0f93c470",
+    "examples/vite/m10/demo.html": "90f0029ba8b640079f16c0fc63b2d49f0a9bacc2ad8006aadba20d0cb6da9f0f",
+    "examples/vite/m10/demo.ts": "7390a887c4b3464c1b9a3b2515c663f4c979bbb82d297e70ac6364dc808953bd",
+    "examples/vite/m10/demo.css": "c7b307f6b62369afd93630a1e204a9b9775a7da127a8b86b3090c99a11b8ca24",
+    "tests/consumers/browser/main.js": "e071561754aff345cb792afd60a5cc0ec29d869b9bc5e4427addcacc8ae3d870",
+    "tests/consumers/ts/check.ts": "7a922c46fbcfd4064ff1bcb1b23c81b35ee4ca3de0320692667bc1b4b18188ab",
+    "tools/check-packed-browser.mjs": "94fc2517497d8c09d9a2421ad382b0db1b3dd7130c8f0a65e87346795b6a8b97",
+    "README.md": "bdda904509af93d6884fa6443169776f162f9eae90354d8001e76ccc614bf926",
+    "src/ui/grid-viewport.ts": "02b7f69750172dc231f5f5c5dad404116a533abc6b191bcacf4dcfc48abe566c",
+    "tests/grid-viewport.test.ts": "53ccb170474e2be2f286f512a90ec5312edf25604aebb15fcf1abcb621fa7b7e",
+    "tests/browser/grid-viewport.spec.ts": "61efa7d7c9449f523cce5dab8a5b4d5654ea5d36e9e8c7a6e7e78da6a6cc101b",
+    "tools/benchmark-grid-viewport.mjs": "2fbfb8c7f9ac0161149188ace2287c19493c292e78c5943d08e29a97ea9e23a6",
+    "tests/browser/rows-ordering.spec.ts": "3b5fa9eb57443ac23ecaa8144965b306bf24f659c04d2b8eef723daaa63a5af9"
+  },
+  "source_normalization": "UTF-8; CRLF normalized to LF for portable source identity. Raw log/archive SHA-256 remains byte-exact.",
+  "commands": {
+    "evidence": "m1091-gates.jsonl",
+    "records": 16,
+    "final_gate_records": 16,
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true,
+    "superseded": []
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "browser_example_types": "pass; Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 102
+    },
+    "new_focused_cases": 7,
+    "new_demo_cases": 1,
+    "full_suites": {
+      "chromium": {
+        "passed": 250,
+        "elapsed": "1.4m",
+        "log": "m1091-browser-chromium.log"
+      },
+      "firefox": {
+        "passed": 250,
+        "elapsed": "2.7m",
+        "log": "m1091-browser-firefox.log"
+      },
+      "webkit": {
+        "passed": 250,
+        "elapsed": "2.5m",
+        "log": "m1091-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "win32",
+        "passed": true,
+        "log": "m1091-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "win32",
+        "passed": true,
+        "log": "m1091-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "win32",
+        "passed": true,
+        "log": "m1091-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "155.0.8059.85",
+        "platform": "win32",
+        "passed": true,
+        "log": "m1091-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "155.0.4283.62",
+        "platform": "win32",
+        "passed": true,
+        "log": "m1091-packed-edge.log"
+      }
+    ],
+    "installed_ordering": "Target-ID insertion/copy/move, ordered selection/checks, source snapshot and deep-array independence, coherent events and restored original fixture order before existing viewport/paste checks."
+  },
+  "performance": {
+    "binding": {
+      "fixture": "tools/benchmark-m4.mjs",
+      "log": "m1091-binding-performance.log",
+      "warmup": 2,
+      "runs": 5,
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 14.5,
+            "rebind": 16,
+            "edit": 1,
+            "sort": 2.8999999999068677,
+            "filter": 1.3999999999068677
+          },
+          "budgets_ms": {
+            "initial": 30,
+            "rebind": 35,
+            "edit": 5,
+            "sort": 10,
+            "filter": 8
+          },
+          "passed": true
+        },
+        {
+          "kind": "nested-auto",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 42.5999999998603,
+            "rebind": 47.800000000046566,
+            "sort": 7.900000000139698,
+            "filter": 3
+          },
+          "budgets_ms": {
+            "initial": 90,
+            "rebind": 100,
+            "sort": 25,
+            "filter": 18
+          },
+          "passed": true
+        }
+      ]
+    },
+    "viewport": {
+      "fixture": "tools/benchmark-grid-viewport.mjs",
+      "log": "m1091-viewport-performance.log",
+      "method": {
+        "count": 5000,
+        "kinds": [
+          "flat",
+          "nested"
+        ],
+        "runs": 5,
+        "warmup": 2,
+        "rootHeight": 400,
+        "estimate": 48,
+        "overscan": 3,
+        "mountedBound": 80,
+        "timing": "Rows and authored HTML prepared outside timing. Each operation includes two successive stable animation-frame geometry observations; fail after fifteen frames.",
+        "focus": "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
+        "paste": "One thousand offscreen rows, two fields, one atomic event; nested detail uses numeric Select values.",
+        "move": "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
+        "geometry": "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies its target rectangle and forward scroll advances logical intersection. Twenty cycle windows record actual intersections.",
+        "cleanup": "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
+        "memory": "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim.",
+        "cleanupBudget": {
+          "nodes": 8,
+          "jsEventListeners": 0,
+          "documents": 0
+        },
+        "budgets": "Host-relative Chromium medians declared before measurement; other engines report samples without applying Chromium thresholds."
+      },
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 8.800000000046566,
+            "reveal": 63,
+            "scroll": 82.80000000004657,
+            "columns": 49,
+            "paste": 34,
+            "move": 61.9000000001397,
+            "dispose": 16.699999999953434
+          },
+          "budgets_ms": {
+            "initial": 120,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100
+          },
+          "maximum_mounted": 14,
+          "dom_counters": [
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 46,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 46,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 46,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 46,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 419,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 46,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "nested",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 7.199999999953434,
+            "reveal": 63.5,
+            "scroll": 83.69999999995343,
+            "columns": 49.199999999953434,
+            "paste": 32.9000000001397,
+            "move": 63.800000000046566,
+            "dispose": 17.0999999998603
+          },
+          "budgets_ms": {
+            "initial": 180,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100
+          },
+          "maximum_mounted": 14,
+          "dom_counters": [
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 52,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 52,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 52,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 52,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            },
+            {
+              "beforeFixture": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              },
+              "beforeCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "afterCycles": {
+                "documents": 1,
+                "nodes": 659,
+                "jsEventListeners": 9
+              },
+              "beforeFocusRelease": {
+                "documents": 1,
+                "nodes": 52,
+                "jsEventListeners": 0
+              },
+              "afterDispose": {
+                "documents": 1,
+                "nodes": 9,
+                "jsEventListeners": 0
+              }
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        }
+      ]
+    },
+    "limits": "Same-host completed DOM operations in headless Chromium. DOM/listener counters do not establish JavaScript heap retention, universal speed or AI-token savings."
+  },
+  "review": {
+    "independent_findings": "Legacy intent and source/consumer/benchmark static review approved the ordered foundation. Focused fixture corrections use required-empty drafts, supported List button focus and an explicit original-row demo selection; runtime semantics were not weakened.",
+    "source_review": "Independent review approved Rows validation/order/copy/reentrancy, all four UI integrations, installed contracts and timing assertions.",
+    "docs_and_archive_review": "Independent final API/body and archive/evidence reviews approved all 16 gates, 29 normalized source/fixture hashes, 16 byte-exact raw logs, all 153 packed members and recomputed performance medians before verified metadata.",
+    "independent_reviewers": [
+      "m109_legacy_contract",
+      "m109_docs"
+    ],
+    "actual_tokens_measured": false,
+    "fixed_agent_task_rerun": false
+  },
+  "harness_notes": [
+    "Firefox uses node_modules/.cache/playwright-m6; other engines use default installed caches.",
+    "Source fixtures disable Vite WebSocket reloads; native paste fixtures use readonly clipboardData for Firefox.",
+    "Focused provisional fixtures initially assumed programmatic minlength validation in Form and a disabled List input could hold focus. Required-empty drafts and the supported List row button correct those setup assumptions; exact-node/caret/issue assertions remain. The demo explicitly selects its original RowId before verifying value-revert order.",
+    "A focused setup import failed once before behavior assertions during development; final full suites run after restarting the owned server on frozen sources.",
+    "M10.8 baseline recheck preserves all 16 raw logs and the exact old 153-file tarball. Twenty-one of 28 historical raw source hashes were reconstructed from HEAD newline variants/the tarball; seven excluded mixed-newline fixture/helper originals were unavailable and were not counted as reproduced. New gates use explicit normalized source hashes to avoid this resume ambiguity.",
+    "Raw stdout/stderr, command args/exit/source/log hashes are retained, including silent compilers."
+  ],
+  "log_sha256": {
+    "m1091-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1091-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1091-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m1091-unit.log": "8f33d80fe2c765950e7cb1da03640acf73ba666c7f7c4c815fd54ac60cd7e3e8",
+    "m1091-pack.log": "5a5f33c54a0bb1811d645077798399432dab328927b25cb4fde63afd77d7169d",
+    "m1091-browser-chromium.log": "b6697b8c8909403c6dfab5575151837b9393621ab4f36bc754bf1d39e357b645",
+    "m1091-browser-firefox.log": "96374cb05c876bc5dd784542e588c6322a5efedf48e837aabd23493ec0e86d55",
+    "m1091-browser-webkit.log": "40a2c809b4b31fdcda246350ce016e1aa247caab01c6f2f5259eab823f40fe69",
+    "m1091-consumers.log": "8e3b98d1145a3ccec8c1ff28b83689732ac6f4ea82cbb93eb06e2ba100344978",
+    "m1091-packed-chromium.log": "11ff9a0a6fa2d700da8282b06536ed692f54e15b30931633616bc7b77a560854",
+    "m1091-packed-firefox.log": "faa2d01b290a1ccb43565431fb73d33c4704b9ac713441a99fa2e59f2b507e8f",
+    "m1091-packed-webkit.log": "ff2df4ce58acae9514ab9fd62324028e00287a65a4c712b307e1fa7bac6bd79e",
+    "m1091-packed-chrome.log": "0195e5c947d96b090cf54132c00e6bca281d2ebf61e7843d7fdaada193c17067",
+    "m1091-packed-edge.log": "3aaa04e43dbead93eb16a24eb8354156163f0f21a3ca878a63a1ce742d346092",
+    "m1091-binding-performance.log": "4fd2865d7d521e92d5e7852269f91568fcafea010ecb1517577333154274105c",
+    "m1091-viewport-performance.log": "2b00cf5a0113345ed447f577321c63ada32295aaa8c05019380d8f33acc4dcd8"
+  },
+  "limits": [
+    "Manual assistive-technology/personal acceptance, actual OS IME and clipboard integration remain open; actual macOS/iOS Safari is excluded.",
+    "Only M10.9.1 ordered Rows foundation is delivered. M10.9.2 multi-tr/merged blocks, the remaining Grid/component slices and P0 semantic/dynamic closure remain required; no feature omission is approved.",
+    "No npm publication/release tags/master/v1 changes.",
+    "No equivalent agent task, actual token telemetry or JavaScript heap-retention claim."
+  ]
+}

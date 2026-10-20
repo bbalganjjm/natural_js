@@ -23,7 +23,7 @@ export interface RowChange<T> {
 
 export type RowsEvent =
   | { readonly type: "replace"; readonly changed: true }
-  | { readonly type: "add" | "set" | "remove"; readonly id: RowId; readonly changed: true }
+  | { readonly type: "add" | "move" | "set" | "remove"; readonly id: RowId; readonly changed: true }
   | { readonly type: "setMany"; readonly ids: readonly RowId[]; readonly changed: true }
   | { readonly type: "revert"; readonly id?: RowId; readonly changed: boolean };
 
@@ -31,7 +31,9 @@ export interface Rows<T extends object> {
   replace(values: readonly T[]): void;
   entries(): readonly RowSnapshot<T>[];
   get(id: RowId): RowSnapshot<T> | undefined;
-  add(value: T): RowId;
+  add(value: T, before?: RowId): RowId;
+  move(id: RowId, before?: RowId): void;
+  copy(id: RowId, before?: RowId): RowId;
   set<Key extends keyof T>(id: RowId, field: Key, value: T[Key]): void;
   setMany(updates: readonly { readonly id: RowId; readonly values: Partial<T> }[]): void;
   remove(id: RowId): void;
@@ -200,6 +202,24 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     };
   }
 
+  function place(row: StoredRow<T>, before?: RowId): boolean {
+    if (before === row.id) return false;
+    if (before === undefined && !rows.has(row.id)) {
+      rows.set(row.id, row);
+      return true;
+    }
+    const ordered = [...rows.values()];
+    const index = ordered.indexOf(row);
+    if (index >= 0 && ordered[index + 1]?.id === before) return false;
+    rows.clear();
+    for (const current of ordered) {
+      if (current.id === before) rows.set(row.id, row);
+      if (current !== row) rows.set(current.id, current);
+    }
+    if (before === undefined) rows.set(row.id, row);
+    return true;
+  }
+
   const store: Rows<T> = {
     replace(values) {
       active("Rows.replace");
@@ -227,13 +247,31 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       active("Rows.get");
       return rows.get(id)?.view;
     },
-    add(value) {
+    add(value, before) {
       active("Rows.add");
       const version = revision;
+      if (before !== undefined) editableRow(before, "Rows.add");
       const current = cloneRow(value, "Rows.add");
       unchanged(version, "Rows.add");
       const row = makeRow(nextId++, current, true);
-      rows.set(row.id, row);
+      place(row, before);
+      notify({ type: "add", id: row.id, changed: true });
+      return row.id;
+    },
+    move(id, before) {
+      const row = editableRow(id, "Rows.move");
+      if (before !== undefined) editableRow(before, "Rows.move");
+      if (place(row, before)) notify({ type: "move", id, changed: true });
+    },
+    copy(id, before) {
+      active("Rows.copy");
+      const version = revision;
+      const source = editableRow(id, "Rows.copy");
+      if (before !== undefined) editableRow(before, "Rows.copy");
+      const current = cloneRow(source.current, "Rows.copy");
+      unchanged(version, "Rows.copy");
+      const row = makeRow(nextId++, current, true);
+      place(row, before);
       notify({ type: "add", id: row.id, changed: true });
       return row.id;
     },

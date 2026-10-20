@@ -13,7 +13,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
-    git_blob: ad63db1a070132c0ab9eca715bbe994ed010663c
+    git_blob: d13fed2fbb25d7d936a9629266fef0c0a117867c
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filters and choice counts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 5d19633080503208065e451156cb9bc50c56fb07
+    git_blob: a74a48cfcd0f7e506b471338bfc0ec26813eb910
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime

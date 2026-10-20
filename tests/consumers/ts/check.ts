@@ -56,6 +56,14 @@ export function namesOfValidRows(rows: Rows<Employee>, form: FormHandle<Employee
   return names;
 }
 
+export function orderEmployees(rows: Rows<Employee>, source: RowId, before?: RowId): RowId {
+  const inserted: RowId = rows.add({ name: "Inserted" }, before);
+  const moved: void = rows.move(source, inserted);
+  const copied: RowId = rows.copy(source, before);
+  void moved;
+  return copied;
+}
+
 export function loadEmployees(comm: Communicator = createCommunicator({
   baseURL: new URL("https://example.test/api/"),
   prepare: request => request,

@@ -8,9 +8,9 @@ import { createServer } from "vite";
 
 const schema = "natural-js-grid-viewport-benchmark/v1";
 const count = 5000;
-const stages = ["initial", "reveal", "scroll", "columns", "paste", "dispose"];
-const budgets = { flat: { initial: 120, reveal: 100, scroll: 100, columns: 150, paste: 2000 },
-  nested: { initial: 180, reveal: 100, scroll: 100, columns: 150, paste: 2000 } };
+const stages = ["initial", "reveal", "scroll", "columns", "paste", "move", "dispose"];
+const budgets = { flat: { initial: 120, reveal: 100, scroll: 100, columns: 150, paste: 2000, move: 100 },
+  nested: { initial: 180, reveal: 100, scroll: 100, columns: 150, paste: 2000, move: 100 } };
 const cleanupBudget = { nodes: 8, jsEventListeners: 0, documents: 0 };
 function argumentsFrom(args) {
   const values = new Map();
@@ -176,7 +176,15 @@ async function main() {
           assert(kind === "nested" ? last.profile.choice === 20 : last.note === "Pasted 1000", "Last offscreen detail lost its raw type or value.");
           assert(document.activeElement === input && input.value === "-", "Unrelated invalid draft must survive offscreen paste.");
           grid.checkAll(true, "visible"); assert(grid.checkedIds().length === count, "Mounted window cannot narrow logical checks.");
-          const metrics = { initial, reveal, scroll, columns, paste: pasteMetric };
+          const moved = rows.get(ids[count - 1]);
+          const move = await timed(() => rows.move(moved.id, ids[2499]));
+          assert(rows.entries()[2499].id === moved.id && rows.get(moved.id) === moved,
+            "Moving before a stable target must change order while preserving the snapshot.");
+          assert(events.length === 2 && events[1].type === "move" && events[1].id === moved.id,
+            "Moving a row must publish exactly one coherent move event.");
+          assert(document.activeElement === input && input.value === "-" && input.selectionStart === 0 && input.selectionEnd === 1,
+            "A moved viewport window must preserve the unrelated focused draft and caret.");
+          const metrics = { initial, reveal, scroll, columns, paste: pasteMetric, move };
           window.viewportBenchmark = { root, table, rows, grid, style, original, authoredRoot, settled, inspect, metrics, stop,
             get maximumMounted() { return maximumMounted; }, get maximumElements() { return maximumElements; } };
           return { ...metrics };
@@ -263,6 +271,7 @@ async function main() {
         timing: "Rows and authored HTML prepared outside timing. Each operation includes two successive stable animation-frame geometry observations; fail after fifteen frames.",
         focus: "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
         paste: "One thousand offscreen rows, two fields, one atomic event; nested detail uses numeric Select values.",
+        move: "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
         geometry: "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies its target rectangle and forward scroll advances logical intersection. Twenty cycle windows record actual intersections.",
         cleanup: "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
         memory: cdp ? "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim."
