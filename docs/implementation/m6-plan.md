@@ -28,7 +28,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: list
     resource: ../../src/ui/list.ts
     title: M6 List implementation

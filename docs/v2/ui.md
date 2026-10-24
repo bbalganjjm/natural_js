@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
+    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -33,7 +33,7 @@ sources:
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime
-    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+    git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
   - id: viewport-browser
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Viewport scope, focus and lifecycle regressions
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -82,10 +82,10 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
 | `GridColumn` | Readonly `key`, optional positive preferred `width`, optional `hidden` | Column state |
 | `GridIdsChange` | Readonly `ids: readonly RowId[]`, `previous: readonly RowId[]`, `event: Event \| null` | Membership transition |
-| `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit check scope |
+| `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit row-identity or check scope |
 | `GridCheckState` | Readonly booleans `checked`, `indeterminate`; numbers `total`, `count` | Eligible scope aggregate |
 | `GridFilterChoice` | Readonly `value: SelectValue`, `label: string`, `count: number` | One raw column choice and matching-row count |
-| `GridHandle<T>` | Status/column state, native defaults, explicit refresh, active identity, selected/checked membership, sort/filter/page, reveal, validation, paste, disposal | Grid handle |
+| `GridHandle<T>` | Immutable row scopes, status/column state, native defaults, refresh, active identity, selected/checked membership, sort/filter/page, aligned reveal, validation, paste, disposal | Grid handle |
 
 # Grid state methods
 
@@ -137,7 +137,9 @@ The binder's optional `paste: true` enables native `text/plain` handling; the me
 
 `bindGrid` accepts inline `viewport?: { root: HTMLElement; estimate: number; overscan?: number }`. The distinct same-document ancestor root supplies finite authored height and scrolling; estimate is a positive finite CSS-pixel starting row height, refined from measurements. Overscan is a nonnegative safe integer row count, default 3. There is no public viewport manager or geometry type.[^grid][^viewport]
 
-`GridHandle<T>.reveal(id: RowId): void` scrolls a row in the current logical page to the nearest visible edge without changing selection or focus. Filtered-out, off-page and missing/deleted IDs raise `GRID_VIEWPORT_ROW`. It also works without viewport mode through native scrolling. The mounted window stays separate from logical check/range/paste scope; one distant focused row may remain attached. Offscreen validation/paste reuse raw choice plans and private cached HTML-validation controls rather than mounting every target. Native ARIA row positions include authored static rows and the complete logical page; owned spacers are hidden from accessibility. See [Grid](grid.md) for authored CSS, keyboard, row-span and cleanup rules.[^grid][^viewport][^viewport-browser]
+`GridHandle<T>.rowIds(scope: GridRowScope): readonly RowId[]` returns frozen logical IDs: visible is the complete page including unmounted records, filtered is the sorted status/manual/column projection before paging, and store is live Rows order. Visible/filtered include explicitly shown tombstones; no selection/check eligibility predicate runs. Old snapshots remain unchanged. Applications derive detail neighbors by ID and skip tombstones before Form binding.[^grid]
+
+`GridHandle<T>.reveal(id: RowId, options?: { block?: ScrollLogicalPosition }): void` aligns a current-page record with nearest (default), start, center or end without selecting or focusing it. Malformed options raise GRID_VIEWPORT_ALIGN; filtered-out/off-page/missing IDs raise GRID_VIEWPORT_ROW. Explicitly displayed tombstones may be revealed read-only. The viewport accounts for top-sticky headings and bottom-sticky footers; nonvirtual tables use native scrolling with authored scroll-padding/margins. One distant focused record may remain attached. Offscreen validation/paste reuse raw choice plans and cached HTML probes, while native ARIA positions describe the full logical page. See [Grid](grid.md) for the authored heightResize option, pointer/keyboard control, scopes and cleanup.[^grid][^viewport][^viewport-browser]
 
 # Pitfalls
 

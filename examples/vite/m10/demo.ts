@@ -1,22 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowStatus } from "@bbalganjjm/natural_js/data";
-import { bindGrid } from "@bbalganjjm/natural_js/ui";
-import type { GridColumn, GridHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
-
-type Employee = {
-  readonly name: string;
-  readonly email: string;
-  readonly phone: string;
-  readonly profile: { readonly team: string };
-  readonly assignment: {
-    readonly shifts: readonly { readonly meta: { readonly label: string }; readonly code: number }[];
-    readonly chosen: number | null;
-  };
-  readonly active: boolean;
-  readonly notes: string;
-  readonly salary: number;
-};
+import { mountPage } from "@bbalganjjm/natural_js/page";
+import type { PageHandle } from "@bbalganjjm/natural_js/page";
+import { bindGrid, openPopup } from "@bbalganjjm/natural_js/ui";
+import type { GridColumn, GridHandle, GridRowScope, PopupHandle, RuleSet, ValidationResult } from "@bbalganjjm/natural_js/ui";
+import { employeeDetail } from "./detail.js";
+import type { Employee } from "./detail.js";
 
 function find<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
@@ -80,6 +70,7 @@ const statusViews: Record<string, readonly RowStatus[]> = {
 const size = find<HTMLSelectElement>("[data-size]");
 const locale = find<HTMLSelectElement>("[data-locale]");
 const initialPageChoice = find<HTMLSelectElement>("[data-initial-page]");
+const revealBlock = find<HTMLSelectElement>("[data-reveal-block]");
 const status = find<HTMLOutputElement>("[data-status]");
 const snapshot = find<HTMLElement>("[data-snapshot]");
 const changes = find<HTMLElement>("[data-changes]");
@@ -133,6 +124,86 @@ let beforeRows = 0;
 let boundRows = 0;
 let activeRowBindings = 0;
 let rowClicks = 0;
+const detailChanges = new EventTarget();
+const detailDialog = find<HTMLDialogElement>("[data-detail-dialog]");
+const detailHost = find<HTMLElement>("[data-detail-inline-host]");
+const detailTemplate = find<HTMLTemplateElement>("[data-detail-template]");
+const detailPage = employeeDetail(() => detailTemplate.content.firstElementChild!.cloneNode(true) as HTMLElement);
+let inlineDetail: PageHandle | null = null;
+let popupDetail: PopupHandle<unknown> | null = null;
+const employeeParsers = { salary: (value: string) => value.trim() ? Number(value) : undefined };
+
+function employeeRules(): RuleSet {
+  return {
+    format: { displayName: value => value.toUpperCase() },
+    validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
+    messages: { payAtLeast: "Salary must be at least {0}." }, locale: locale.value
+  };
+}
+
+function reportDetail(cause: unknown): void {
+  if (cause instanceof Error && cause.name === "AbortError") return;
+  status.textContent = cause instanceof Error ? cause.message : String(cause);
+}
+
+function restoreDetailFocus(opener: HTMLButtonElement): void {
+  if (document.querySelector("dialog[open]")) return;
+  if (opener.isConnected && !opener.disabled) opener.focus({ preventScroll: true });
+  else scrollRoot.focus({ preventScroll: true });
+}
+
+function stopDetails(): void {
+  const page = inlineDetail;
+  inlineDetail = null;
+  void page?.dispose().catch(reportDetail);
+  void popupDetail?.dispose().catch(reportDetail);
+}
+
+function disposeGrid(): void {
+  stopDetails();
+  grid?.dispose();
+  grid = null;
+}
+
+function openDetail(id: number, place: "inline" | "popup", opener: HTMLButtonElement): void {
+  if (!grid || rows.get(id)?.status === "delete") return;
+  opener.focus({ preventScroll: true });
+  const input = {
+    rows, grid, id, scope: "filtered" as GridRowScope,
+    rules: employeeRules(), parse: employeeParsers, viewChanges: detailChanges,
+    viewChanged() { requestedPage = grid?.page()?.page ?? 1; refresh(); }
+  };
+  try {
+    if (place === "inline") {
+      const previous = inlineDetail;
+      if (previous) {
+        if (previous.root && !previous.root.dispatchEvent(new Event("detail-replace", { cancelable: true }))) return;
+        if (inlineDetail !== previous) return;
+        void previous.dispose().then(() => {
+          if (inlineDetail === previous) { inlineDetail = null; openDetail(id, place, opener); }
+        }).catch(reportDetail);
+        return;
+      }
+      let page: PageHandle;
+      page = mountPage(detailHost, detailPage, { ...input, close() {
+        if (inlineDetail === page) inlineDetail = null;
+        void page.dispose().then(() => restoreDetailFocus(opener), reportDetail);
+      } });
+      inlineDetail = page;
+      void page.ready.catch(reportDetail);
+      return;
+    }
+    if (popupDetail) return;
+    const opened = openPopup(detailDialog, detailPage, { ...input, dialog: detailDialog,
+      close() { void opened.close().catch(reportDetail); } });
+    popupDetail = opened;
+    void opened.ready.catch(reportDetail);
+    void opened.result.catch(reportDetail).finally(() => {
+      if (popupDetail === opened) popupDetail = null;
+      restoreDetailFocus(opener);
+    });
+  } catch (cause) { reportDetail(cause); }
+}
 
 function refreshRowResources(): void {
   rowResourcesState.textContent = JSON.stringify({ before: beforeRows, bound: boundRows, active: activeRowBindings, clicks: rowClicks }, null, 2);
@@ -165,6 +236,7 @@ function refresh(): void {
   }, null, 2) : "Grid unbound; column filters cleared.";
   refreshViewport();
   refreshColumns();
+  detailChanges.dispatchEvent(new Event("change"));
 }
 
 function refreshViewport(): void {
@@ -258,6 +330,9 @@ function bind(): void {
         if (label) label.textContent = `Status: ${context.row.status}`;
         const undo = element.querySelector<HTMLButtonElement>('[data-row-action="undo"]');
         if (undo) undo.disabled = context.row.status === "clean";
+        for (const action of element.querySelectorAll<HTMLButtonElement>('[data-row-action^="detail-"]')) {
+          action.disabled = context.row.status === "delete";
+        }
       }
       if (!rowResources.checked) return;
       boundRows++; activeRowBindings++;
@@ -274,6 +349,7 @@ function bind(): void {
         total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted });
     },
     viewport: viewportChoice.checked ? { root: scrollRoot, estimate: 150, overscan: 3 } : undefined,
+    heightResize: { root: scrollRoot, handle: find<HTMLButtonElement>("[data-resize-height]"), min: 160, max: 800 },
     initialPage,
     paste: true,
     onPaste(result) {
@@ -291,13 +367,8 @@ function bind(): void {
     canCheck: disableInactive.checked ? row => row.value.active : undefined,
     sorts: { name: (a, b) => a.name.localeCompare(b.name), salary: (a, b) => a.salary - b.salary },
     filters: { team: { value: row => row.profile.team } },
-    rules: {
-      format: { displayName: value => value.toUpperCase() },
-      validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
-      messages: { payAtLeast: "Salary must be at least {0}." },
-      locale: locale.value
-    },
-    parse: { salary: input => input.trim() ? Number(input) : undefined },
+    rules: employeeRules(),
+    parse: employeeParsers,
     beforeSelect({ id, row, event }) {
       beforeCallback.textContent = `beforeSelect RowId ${id ?? "none"}, ${row?.value.name ?? "none"}, event ${event?.type ?? "programmatic"}: ${vetoActive.checked ? "vetoed" : "allowed"}`;
       return !vetoActive.checked;
@@ -323,6 +394,10 @@ function bind(): void {
       refresh();
     },
     onRowAction({ action, id, row, element, event }) {
+      if (action === "detail-inline" || action === "detail-popup") {
+        openDetail(id, action === "detail-inline" ? "inline" : "popup", element);
+        return;
+      }
       if (action === "undo") rows.revert(id);
       actionCallback.textContent = `${action}: RowId ${id}, ${row.value.name}, control ${element.tagName.toLowerCase()}, event ${event.type}`;
       refresh();
@@ -374,7 +449,7 @@ function act(action: string): void {
       const index = Number(revealRow.value) - 1;
       const row = Number.isSafeInteger(index) ? rows.entries()[index] : undefined;
       if (!row) throw new Error("Enter a row number present in the store.");
-      grid.reveal(row.id);
+      grid.reveal(row.id, { block: revealBlock.value as ScrollLogicalPosition });
       status.textContent = `Revealed RowId ${row.id}; selection unchanged.`;
       requestAnimationFrame(refreshViewport);
       return;
@@ -464,7 +539,7 @@ function act(action: string): void {
       rows.set(id, "assignment", { ...row.value.assignment, chosen: null });
       break;
     }
-    case "dispose": grid.dispose(); grid = null; status.textContent = "Grid disposed; Rows is still available."; break;
+    case "dispose": disposeGrid(); status.textContent = "Grid disposed; Rows is still available."; break;
     default: return;
   }
   if (action !== "dispose") status.textContent = `${action} applied.`;
@@ -497,7 +572,7 @@ filterSearch.addEventListener("input", () => { queueMicrotask(refresh); });
 scrollRoot.addEventListener("scroll", () => { requestAnimationFrame(refreshViewport); }, { passive: true });
 for (const control of [viewportChoice, datasetChoice]) {
   control.addEventListener("change", () => {
-    grid?.dispose(); grid = null;
+    disposeGrid();
     scrollRoot.toggleAttribute("data-viewport-enabled", viewportChoice.checked);
     if (control === datasetChoice) rows.replace(Array.from({ length: Number(datasetChoice.value) }, (_, index) => employee(index)));
     scrollRoot.scrollTop = 0;
@@ -508,14 +583,14 @@ for (const control of [viewportChoice, datasetChoice]) {
 }
 for (const control of [selectionMode, disableInactive]) {
   control.addEventListener("change", () => {
-    if (grid) { grid.dispose(); grid = null; bind(); }
+    if (grid) { disposeGrid(); bind(); }
     status.textContent = "Selection policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
     refresh();
   });
 }
 for (const control of [checkMode, validateOn, revealInvalid]) {
   control.addEventListener("change", () => {
-    if (grid) { grid.dispose(); grid = null; bind(); }
+    if (grid) { disposeGrid(); bind(); }
     status.textContent = "Check or validation policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
     refresh();
   });
@@ -527,7 +602,7 @@ statusFilter.addEventListener("change", () => {
   refresh();
 });
 rowResources.addEventListener("change", () => {
-  if (grid) { grid.dispose(); grid = null; bind(); }
+  if (grid) { disposeGrid(); bind(); }
   status.textContent = "Row resource tracking changed; selection, checks and drafts were cleared.";
   refreshRowResources();
   refresh();
@@ -536,14 +611,13 @@ size.addEventListener("change", () => { initialPageChoice.value = ""; requestedP
 initialPageChoice.addEventListener("change", () => {
   size.value = initialPageChoice.value ? "2" : "";
   requestedPage = 1;
-  grid?.dispose();
-  grid = null;
+  disposeGrid();
   bind();
   status.textContent = "Initial page changed; selection and uncommitted edits were cleared. Valid Rows changes remain.";
   refresh();
 });
 locale.addEventListener("change", () => {
-  if (grid) { grid.dispose(); grid = null; bind(); }
+  if (grid) { disposeGrid(); bind(); }
   status.textContent = "Locale changed; selection and uncommitted edits were cleared. Blank Team shows the new rule message.";
   refresh();
 });
@@ -632,7 +706,7 @@ blockRoot.addEventListener("click", event => {
 refreshBlocks();
 
 window.addEventListener("pagehide", () => {
-  grid?.dispose(); stopRows(); rows.dispose();
+  disposeGrid(); stopRows(); rows.dispose();
   for (const handle of blockGrids) handle.dispose();
   stopBlocks(); blockRows.dispose();
 }, { once: true });

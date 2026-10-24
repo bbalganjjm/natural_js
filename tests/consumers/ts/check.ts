@@ -170,7 +170,17 @@ export function pasteEmployees(grid: GridHandle<Employee>, id: RowId, text: stri
 
 export function revealEmployee(grid: GridHandle<Employee>, id: RowId): void {
   const applied: void = grid.reveal(id);
-  void applied;
+  const centered: void = grid.reveal(id, { block: "center" });
+  const visible: readonly RowId[] = grid.rowIds("visible");
+  const filtered: readonly RowId[] = grid.rowIds("filtered");
+  const store: readonly RowId[] = grid.rowIds("store");
+  void [applied, centered, visible, filtered, store];
+}
+
+export function connectGridGeometry(table: HTMLTableElement, root: HTMLElement,
+  handle: HTMLButtonElement, rows: Rows<Employee>): GridHandle<Employee> {
+  return bindGrid(table, { rows, viewport: { root, estimate: 48 },
+    heightResize: { root, handle, min: 160, max: 800 } });
 }
 
 export function configureColumns(grid: GridHandle<Employee>, columns: readonly GridColumn[]): readonly GridColumn[] {

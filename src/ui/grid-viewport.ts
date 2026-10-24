@@ -88,7 +88,7 @@ export function createGridViewport(
   let first: HTMLTableRowElement | undefined;
   let lastOrigin = 0;
   let pending: { id: RowId; within: number } | undefined;
-  let revealing: RowId | undefined;
+  let revealing: { id: RowId; block: ScrollLogicalPosition } | undefined;
   let expectedScroll: number | undefined;
   let rootWidth = root.getBoundingClientRect().width;
   let tableWidth = table.getBoundingClientRect().width;
@@ -114,26 +114,32 @@ export function createGridViewport(
     return lastOrigin;
   }
 
-  function occlusion(): number {
-    const header = table.tHead;
-    if (!header || !root.clientHeight) return 0;
+  function occlusion(bottom = false): number {
+    const section = bottom ? table.tFoot : table.tHead;
+    if (!section || !root.clientHeight) return 0;
     const bounds = root.getBoundingClientRect();
     const top = bounds.top + root.clientTop;
+    const end = top + root.clientHeight;
     const left = bounds.left + root.clientLeft;
     const bands: { top: number; bottom: number; stuck: boolean }[] = [];
-    for (const element of [header, ...header.querySelectorAll<HTMLElement>("tr, th, td")]) {
+    for (const element of [section, ...section.querySelectorAll<HTMLElement>("tr, th, td")]) {
       const style = view.getComputedStyle(element);
-      if (style.position !== "sticky" || style.top === "auto") continue;
+      const inset = bottom ? style.bottom : style.top;
+      if (style.position !== "sticky" || inset === "auto") continue;
       const rect = element.getBoundingClientRect();
       if (rect.height <= 0 || rect.right <= left || rect.left >= left + root.clientWidth ||
-          rect.bottom <= top || rect.top >= top + root.clientHeight) continue;
-      bands.push({ top: rect.top, bottom: rect.bottom, stuck: rect.top <= top + (Number.parseFloat(style.top) || 0) + 1 });
+          rect.bottom <= top || rect.top >= end) continue;
+      bands.push({ top: rect.top, bottom: rect.bottom, stuck: bottom
+        ? rect.bottom >= end - (Number.parseFloat(inset) || 0) - 1
+        : rect.top <= top + (Number.parseFloat(inset) || 0) + 1 });
     }
-    let edge = top;
-    for (const band of bands.sort((left, right) => left.top - right.top)) {
-      if (band.stuck || band.top <= edge + 1) edge = Math.max(edge, band.bottom);
+    let edge = bottom ? end : top;
+    for (const band of bands.sort((left, right) => bottom ? right.bottom - left.bottom : left.top - right.top)) {
+      if (bottom) {
+        if (band.stuck || band.bottom >= edge - 1) edge = Math.min(edge, band.top);
+      } else if (band.stuck || band.top <= edge + 1) edge = Math.max(edge, band.bottom);
     }
-    return Math.min(root.clientHeight, edge - top);
+    return Math.min(root.clientHeight, bottom ? end - edge : edge - top);
   }
 
   function top(): number {
@@ -187,17 +193,21 @@ export function createGridViewport(
     schedule();
   }
 
-  function scrollToRow(id: RowId): void {
+  function scrollToRow(id: RowId, block: ScrollLogicalPosition): void {
     const index = indices.get(id);
     if (disposed || index === undefined) return;
     const position = top();
     const inset = occlusion();
-    const height = root.clientHeight ? root.clientHeight - inset : estimate;
+    const height = root.clientHeight ? Math.max(0, root.clientHeight - inset - occlusion(true)) : estimate;
     const start = offsets[index];
     const end = offsets[index + 1] - gap;
     let next = position;
-    if (start < position && end <= position + height) next = start;
-    else if (start >= position && end > position + height) next = end - start > height ? start : end - height;
+    if (block === "start" || block === "nearest" && end - start > height) next = start;
+    else if (block === "center") next = (start + end - height) / 2;
+    else if (block === "end") next = end - height;
+    else if (start < position) next = start;
+    else if (end > position + height) next = end - height;
+    next = Math.max(0, next);
     if (next === position) return;
     const topIndex = at(offsets, next);
     pending = { id: ids[topIndex], within: next - offsets[topIndex] };
@@ -231,7 +241,7 @@ export function createGridViewport(
       pending = saved;
       rebuild();
     }
-    if (revealing !== undefined) scrollToRow(revealing);
+    if (revealing !== undefined) scrollToRow(revealing.id, revealing.block);
     schedule();
   });
 
@@ -275,7 +285,7 @@ export function createGridViewport(
     invalidate,
     window(pinned: RowId | null): readonly RowId[] {
       if (disposed) return [];
-      const [start, end] = viewportRange(offsets, top(), root.clientHeight ? root.clientHeight - occlusion() : estimate, overscan);
+      const [start, end] = viewportRange(offsets, top(), root.clientHeight ? Math.max(0, root.clientHeight - occlusion() - occlusion(true)) : estimate, overscan);
       const result = ids.slice(start, end);
       const pin = pinned === null ? undefined : indices.get(pinned);
       if (pin !== undefined && (pin < start || pin >= end)) result.splice(pin < start ? 0 : result.length, 0, pinned!);
@@ -283,6 +293,7 @@ export function createGridViewport(
     },
     place(records: ReadonlyMap<RowId, readonly HTMLTableRowElement[]>, columnCount?: number): void {
       if (disposed) return;
+      const revealedWasMounted = revealing !== undefined && mounted.get(revealing.id) === records.get(revealing.id);
       const savedOrigin = origin();
       const focused = document.activeElement?.closest("tr");
       const row = records.values().next().value?.[0];
@@ -334,12 +345,20 @@ export function createGridViewport(
         if (index !== undefined) scroll(savedOrigin + offsets[index] + pending.within - occlusion());
         pending = undefined;
       }
-      if (revealing !== undefined && heights.has(revealing)) revealing = undefined;
+      if (revealing !== undefined && revealedWasMounted && heights.has(revealing.id)) revealing = undefined;
       for (const id of heights.keys()) if (!indices.has(id)) heights.delete(id);
     },
-    reveal(id: RowId): void {
-      revealing = id;
-      scrollToRow(id);
+    reveal(id: RowId, block: ScrollLogicalPosition = "nearest"): void {
+      const rows = mounted.get(id);
+      const height = rows && measure(rows);
+      if (height && Math.abs((heights.get(id) ?? estimate) - height) > 0.25) {
+        const saved = capture();
+        heights.set(id, height);
+        pending = saved;
+        rebuild();
+      }
+      revealing = { id, block };
+      scrollToRow(id, block);
     },
     dispose(): void {
       if (disposed) return;

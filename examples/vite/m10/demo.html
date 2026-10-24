@@ -67,9 +67,13 @@
             <select data-dataset><option value="6">6 employees</option><option value="5000">5,000 employees</option></select>
           </label>
           <label>Row number in store order <input type="number" min="1" value="2500" data-reveal-row data-needs-grid></label>
+          <label>Reveal alignment
+            <select data-reveal-block data-needs-grid><option value="nearest">Nearest</option><option value="start">Start</option><option value="center">Center</option><option value="end">End</option></select>
+          </label>
           <div class="button-row"><button type="button" data-action="reveal" data-needs-grid>Reveal row without selecting</button></div>
           <output data-viewport-state aria-live="polite">All rows rendered.</output>
           <p>Viewport and dataset changes rebind the Grid and clear selection, checks and drafts. Reveal requires the row to belong to the current filtered page.</p>
+          <p>Drag the labelled handle below the table to resize its scroll area from 160 to 800 pixels, or use Up/Down (10 pixels), Shift (one pixel), Home/End and Escape to cancel a drag.</p>
         </fieldset>
 
         <fieldset>
@@ -276,6 +280,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
                 <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button>
                   <label class="check-label"><input type="checkbox" data-check-row> Check row</label>
                   <button type="button" data-row-action="inspect">Inspect</button>
+                  <button type="button" data-row-action="detail-popup">Popup details</button>
+                  <button type="button" data-row-action="detail-inline">Inline details</button>
                   <button type="button" data-row-action="undo" disabled>Undo row changes</button>
                   <small data-demo-row-status></small></th>
                 <td data-column="email"><label>Email <input type="email" data-field="email" value="new.employee@example.com" required></label><output data-error-for="email"></output></td>
@@ -293,7 +299,14 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
             <tfoot><tr data-empty hidden><td data-columns="name email phone team shift active notes salary" colspan="8"><output role="status">No employees match the current status and filters.</output></td></tr></tfoot>
           </table>
         </div>
+        <button type="button" data-resize-height data-needs-grid aria-label="Resize employee grid height">Resize grid height ↕</button>
         <p class="status"><output data-status role="status">Grid is bound.</output></p>
+
+        <section class="employee-details" aria-label="Inline employee details">
+          <h3>Inline employee details</h3>
+          <p>Use a row's Inline details or Popup details button. Both run the same authored CVC page and share Rows; detail identity is independent of selection. Hidden Grid fields remain editable here.</p>
+          <div data-detail-inline-host></div>
+        </section>
 
         <div class="observations">
           <section><h3>Active RowId and raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
@@ -418,5 +431,28 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
       <p><a href="./columns.html">Compare column behavior in two independent CVC layouts</a>.</p>
     </section>
   </main>
+  <dialog class="employee-detail-dialog" data-detail-dialog aria-label="Employee details popup"><div data-page-host></div></dialog>
+  <template data-detail-template>
+    <section class="employee-detail-page" aria-label="Employee details">
+      <label>Navigation scope
+        <select data-detail-scope><option value="visible">Current logical page</option><option value="filtered" selected>Sorted and filtered rows</option><option value="store">Live store order</option></select>
+      </label>
+      <p><output data-detail-state aria-live="polite"></output></p>
+      <form novalidate>
+        <fieldset><legend>Employee fields</legend>
+          <label>Name <input data-field="name" required></label><output data-error-for="name"></output>
+          <label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output>
+          <label>Phone <input type="tel" data-field="phone" readonly></label>
+          <label>Team <input data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output>
+          <label>Shift <select data-field="assignment.chosen" required><option value="">Choose a shift</option></select></label><output data-error-for="assignment.chosen"></output>
+          <label class="check-label"><input type="checkbox" data-field="active"> Active</label>
+          <label>Notes <textarea data-field="notes" rows="2"></textarea></label>
+          <label>Salary <input type="text" inputmode="decimal" data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output>
+        </fieldset>
+      </form>
+      <p><output data-detail-error role="status"></output></p>
+      <div class="button-row"><button type="button" data-detail-previous>Previous employee</button><button type="button" data-detail-next>Next employee</button><button type="button" data-detail-close>Close details</button></div>
+    </section>
+  </template>
 </body>
 </html>

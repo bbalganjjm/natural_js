@@ -14,6 +14,8 @@ The [Tree and DatePicker example](https://github.com/bbalganjjm/natural_js/blob/
 
 The new 2.0 source and package use Apache-2.0. The preserved 1.x code, bundles, types, documentation, and LGPL-2.1 license live in `v1/` and are excluded from the 2.0 npm tarball. The original `master` branch remains unchanged.
 
+The Grid demo uses one authored CVC detail page inline and in Popup, validates previous/next and close actions, and shares edits with the table. Frozen row scopes expose logical identity independently of mounted DOM and selection. Authored height controls support pointer and keyboard resizing, while explicit reveal alignment accounts for both sticky edges in the measured viewport.
+
 ## Build and check
 
 Run `npm ci`, `npm run build`, `npm run typecheck`, `npm test`, `npm run test:consumers`, and `npm run test:browser` from the repository root. Registry publication is deferred; use the locally packed artifact to test this 2.0 candidate. Browser checks need Playwright binaries installed with `npx playwright install chromium firefox webkit`. `npm run example` starts the authored-HTML Vite fixture.

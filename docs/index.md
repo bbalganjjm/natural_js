@@ -10,7 +10,7 @@ okf_version: "0.2"
 
 * [Tree and DatePicker in two CVC layouts](v2/tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
-* [Interactive Grid contract demo](v2/grid-demo.md) - Exercise Grid status views, clean append, owned row resources, native defaults, and two HTML layouts with raw Rows inspection. (draft)
+* [Interactive Grid contract demo](v2/grid-demo.md) - Exercise authored CVC row details, height controls, aligned reveal, status views, and two Grid layouts with raw Rows inspection. (draft)
 * [bindGrid](v2/grid.md) - Bind authored table records with status views, owned row hooks, native defaults, bounded rendering, paste, and accessible validation. (draft)
 * [bindForm](v2/form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, explicit display, retained rules, and accessible errors. (draft)
 * [Authored advanced Grid in two layouts](v2/advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)

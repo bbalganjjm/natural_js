@@ -1,26 +1,30 @@
 ---
 type: Example
 title: Interactive Grid contract demo
-description: Exercise Grid status views, clean append, owned row resources, native defaults, and two HTML layouts with raw Rows inspection.
+description: Exercise authored CVC row details, height controls, aligned reveal, status views, and two Grid layouts with raw Rows inspection.
 tags: [ui, grid, example, accessibility]
 status: draft
 sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 59f879929b180fa38737697bda63ddecdfc745e4
+    git_blob: 02434e51c577173a31a293bfea06ae83a60eb591
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: b97ee4c4cbea81aaabb4e3c8ceb2bcb5ed1cafd7
+    git_blob: 9292385b3f01a48f31b75c2b70db7a57569577fa
+  - id: detail-controller
+    resource: ../../examples/vite/m10/detail.ts
+    title: One authored employee detail page in main content and Popup
+    git_blob: 8f3c9c4b74b6155a190b4289ddb8b7b777ed6955
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
-    git_blob: 801f48cfce47aae55f04a30dc48b0b2ce7ef8116
+    git_blob: 61755db1e75ac726dde2f9509261f72525042a15
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: 88523fc46449b8f109d14bff86346e6d37780194
+    git_blob: d68e33ec8fa3a1383a5dc7f6ac91ac59c05e9f54
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
@@ -52,11 +56,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
-    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+    git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
   - id: viewport-browser
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Bounded rendering, logical scopes, offscreen paste and focus regressions
@@ -88,11 +92,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
+generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -118,6 +122,10 @@ Row status selects live, modified, deleted, all retained or no statuses through 
 
 # View
 
+The row's Inline detail and Popup detail actions share one authored template and employeeDetail PageDefinition. Their editors include fields hidden from the current Grid column state. The nested Shift Select is native application markup populated before Form's subscriber, with an application parser retaining numeric codes. No competing Select binder or new Form option-map contract is used.[^view][^controller][^detail-controller]
+
+The labelled height button connects heightResize to the existing scroll region. ArrowUp/Down, Shift, Home/End and pointer dragging adjust the area; the reveal control accepts nearest/start/center/end. Scroll containment stays in authored CSS. These controls work with or without the optional measured viewport.[^view][^controller][^style]
+
 The main explorer's `<tr data-row-template>` contains `data-field` paths for plain text, email, nested team, checkbox, textarea, number, and Select fields. `data-format` formats the display name; `data-validate` invokes both built-in `required` and the custom salary rule. The same row includes `data-error-for` regions, a `data-select-row` button, and a row-local Select with `data-options="assignment.shifts"`, `data-option-label="meta.label"`, and `data-option-value="code"`. The independent check uses `<input type="checkbox" data-check-row>` without `data-field`; the Active editor remains a separate Boolean data field. `<button type="button" data-row-action="inspect">` exposes the current row to the application. The repeated row contains no fixed DOM ID. Native email/required constraints work alongside the declared rules.[^view]
 
 The lower **Authored row blocks and adjacent merges** section keeps four separate shared records in two tables: `[data-block-grid="two"]` places Name/Shift above Notes, while `[data-block-grid="three"]` places Notes first, Name/Shift second, and Inspect/check controls last. Each `<tbody data-row-template>` repeats the full record. Both include Work mode radio groups, Contact channels checkbox groups, nested Available shifts multiple Selects, Start date, Daily hours range and avatar images. Department and Team are display-only full-block `data-merge` cells; the two-row layout also demonstrates source `rowspan="0"`. Team uses an application-created `<strong>` renderer, and nested Shift choices retain raw numeric codes. Exact markup and merge boundaries are defined once in [Grid](grid.md).[^view][^controller][^blocks]
@@ -127,6 +135,8 @@ The authored header contains `data-sort-column="name"` and `data-sort-column="sa
 An authored `tfoot tr[data-empty]` contains the empty-result message and declares membership of all eight managed columns. Each repeated record contains an Undo action and a status label populated by `onRowBind`. Observation panels distinguish captured defaults, the last full-bind counts, tracked row resources and current Rows state; no message or widget theme is generated by the framework.[^view][^controller]
 
 # Controller
+
+Details use rowIds with visible, filtered or store scope. Previous/next validates the current Form, re-reads ordered IDs and skips tombstones; filtered navigation computes pages from the raw filtered projection. Opening detail does not require Grid selection or pass through its veto/eligibility rules. Native cancel, authored close and replacement of an inline page validate first; forced disposal always releases resources. Removal/replacement of the current record exposes an authored no-row state. Repeated open/close and switching pages preserve shared Rows and restore focus to an available opener or the connected employee-region fallback.[^detail-controller][^controller][^browser]
 
 The column controls call `columns` and `setColumns` to adjust preferred width, show/hide, move within a group, swap groups, reset, and deliberately reject invalid state. Resize buttons support pointer drag, ArrowLeft/ArrowRight, Shift for 1-pixel steps, Home and Escape cancellation. State and callback panels distinguish committed layout changes from Rows changes.[^controller]
 
@@ -210,7 +220,7 @@ Browser regressions cover initial-page/off-page identity, nested choices and raw
 
 Historical M10.7 final suites pass 219/219 in Chromium, Firefox and WebKit, including 19 focused paste regressions and the added demo case. Installed JS/TS and all five Windows browser consumers pass the same 148-file package, SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Existing binding budgets pass. Source/log hashes, retained initial failures, the synthetic-event fixture correction and unverified manual/OS-clipboard limits are recorded with that stage; these results do not certify the later viewport implementation or recertify the historical M10.6 artifact.[^paste-browser][^paste-evidence]
 
-The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Row-block regressions add multi-tr identity, cross-row validation references, native spans and raw hierarchical merging, physical ARIA indexes, merged-follower paste, focus pinning, fully merged single-column geometry and hidden boundary rows. Native-control regressions cover group isolation, stable array/raw values, JSON-array paste, disabled constraints, rendering ownership, validation timing and first-error reveal. Lifecycle regressions add status boundaries, captured defaults, callback cleanup/errors, readonly tombstones, focus recovery, append and exact restoration. Current-stage gates belong to the [lifecycle plan](../implementation/m10-lifecycle-plan.md); interactive use adds no unmeasured performance or token-saving claim.[^viewport-browser][^blocks-browser][^controls-browser][^lifecycle-browser]
+The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Row-block regressions add multi-tr identity, cross-row validation references, native spans and raw hierarchical merging, physical ARIA indexes, merged-follower paste, focus pinning, fully merged single-column geometry and hidden boundary rows. Native-control regressions cover group isolation, stable array/raw values, JSON-array paste, disabled constraints, rendering ownership, validation timing and first-error reveal. Lifecycle regressions add status boundaries, captured defaults, callback cleanup/errors, readonly tombstones, focus recovery, append and exact restoration. Current-stage gates belong to the [detail/geometry plan](../implementation/m10-detail-plan.md); the [lifecycle plan](../implementation/m10-lifecycle-plan.md) preserves its preceding slice; interactive use adds no unmeasured performance or token-saving claim.[^viewport-browser][^blocks-browser][^controls-browser][^lifecycle-browser]
 
 The Rows controls demonstrate Add, Insert before selected, Copy before selected, Copy to end, Move earlier/later and Move to first/end. Insertion/copy activates the new stable ID. Copies use the stored valid values, not an uncommitted editor draft; editing a copy leaves its source unchanged. Movement keeps active identity and selected/checked membership while their returned ID arrays follow store order. Sorting/filtering/paging still controls the displayed projection. Revert all removes inserted copies and restores values while retaining the current order. Business key allocation stays application-owned.[^controller]
 
@@ -247,5 +257,6 @@ Without `initialPage` or `viewport`, Grid creates all initial row clones. Local 
 [^blocks-browser]: Multi-row identity, logical paste, focus, physical ARIA and bounded geometry
 [^controls-browser]: Native groups, typed values, validation and display regressions
 [^lifecycle-browser]: Status, defaults, callback ownership, focus and failure regressions
+[^detail-controller]: One authored employee detail page in main content and Popup
 
 [Grid](grid.md) defines exact current public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) preserves earlier measurements and defines the required follow-up stages. The [feature parity ledger](../implementation/feature-parity.md) and [parity implementation plan](../implementation/feature-parity-plan.md) track the full release requirement.

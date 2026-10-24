@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
+    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -21,7 +21,19 @@ sources:
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring, spacers and lifetime
-    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+    git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
+  - id: height
+    resource: ../../src/ui/grid-height.ts
+    title: Private authored height control and property-scoped restoration
+    git_blob: 83e7e08a3036ff2d96279b768095703f8d61e4ed
+  - id: geometry-browser
+    resource: ../../tests/browser/grid-geometry.spec.ts
+    title: Pointer and keyboard height controls, sticky footer and reveal alignment
+    git_blob: 45e93f4737d06db7fadceb2574efe4a6c88a9e90
+  - id: detail-browser
+    resource: ../../tests/browser/grid-detail.spec.ts
+    title: Immutable logical row scopes and public reveal boundaries
+    git_blob: 59fe30118252219ffd40fbc37f01689f93863457
   - id: blocks
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and native adjacent merging
@@ -90,10 +102,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -144,6 +156,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `statusFilter` | Optional readonly `RowStatus[]`; defaults to clean/insert/update. Includes retained deleted rows only when explicitly requested. |
 | `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
 | `viewport` | Optional `{ root: HTMLElement, estimate: number, overscan?: number }`; the distinct same-document ancestor scroll root supplies finite authored height/overflow. Estimate is the positive finite initial height of a complete logical record in CSS pixels; overscan counts logical records, default 3. |
+| `heightResize` | Optional `{ root: HTMLElement, handle: HTMLButtonElement, min: number, max: number }`; connect an authored labelled height button to the ancestor scroll area. The root must equal the viewport root when both options are used. Bounds are positive finite border-box pixels, with min <= max. |
 | `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
 | `parse` | Optional application parser per unique scalar text/display or radio field path, used to turn an entered string into a raw JSON value. Number and range inputs require one. Boolean checkbox and array-valued controls reject string parsers. |
 | `render` | Optional `Record<string, (value: unknown, context: RuleContext) => Node \| string \| null>` for explicit display fields; see [display rendering](#display-rendering). |
@@ -290,9 +303,15 @@ Returns `{ valid, issues }` for an explicit nondeleted ID or all nondeleted rows
 
 With `revealInvalid: true`, this method and rejected paste find the first issue whose RowId belongs to the current logical page, reveal that row through the existing viewport, and try to focus its first visible enabled field member. Returned issues for that row receive their now-connected field references. Hidden columns can still have issues without a focusable target. Off-page/filtered-out errors stay recorded; this option never changes page or filter to reach them.[^grid][^controls-browser]
 
-## `reveal(id)`
+## `rowIds(scope)`
 
-Scrolls a nondeleted row in the current sorted, filtered logical page into view without changing active identity, either membership set, or focus. A filtered-out, off-page, missing or deleted ID raises `GRID_VIEWPORT_ROW`; the caller changes filtering/paging explicitly. With `viewport`, the row is mounted using estimates and corrected measurements, scrolling to the nearest edge when needed. Authored top-sticky headers are included in the usable viewport; left-only sticky positioning does not reduce its height. Without `viewport`, the existing row uses native nearest scrolling.[^grid][^viewport]
+Returns frozen `readonly RowId[]` snapshots without scanning the DOM or applying selection/check eligibility. `visible` is the complete logical page, including unmounted records; `filtered` is the current status/manual/column/sort projection before paging; `store` is live Rows order. Explicitly shown tombstones remain in visible/filtered scopes; skip them before binding a Form. Old results remain unchanged after later updates. Unknown scopes raise `GRID_SCOPE` and disposed handles raise `GRID_DISPOSED`.[^grid][^detail-browser]
+
+## `reveal(id, options?)`
+
+Scrolls a row in the current logical page without changing active identity, membership or focus. `options.block` accepts native `nearest` (default), `start`, `center` or `end`; malformed options raise `GRID_VIEWPORT_ALIGN` before scrolling. A filtered-out, off-page or missing ID raises `GRID_VIEWPORT_ROW`; explicitly shown deleted rows may be revealed read-only. The caller changes filtering/paging explicitly. With viewport, estimates and measured corrections align the entire logical record between top-sticky header and bottom-sticky footer bands. Left/right-only stickiness does not reduce usable height. Oversized records use their start for nearest alignment. Without viewport, native `scrollIntoView` receives the same block; authors use scroll-padding/scroll-margin for sticky content.[^grid][^viewport][^geometry-browser]
+
+Application selection/check/add handlers may call centered reveal when desired. Authored `overscroll-behavior: contain` keeps scroll-boundary gestures inside the area without wheel interception. These explicit operations do not silently change action-scroll defaults or close remaining legacy flag/option equivalence.[^grid][^viewport]
 
 ## `paste(text, { id, field })`
 
@@ -362,6 +381,12 @@ Initial binding, equal state, canceled preview and disposal do not emit column c
 Deleting/replacing Rows or changing eligibility prunes unavailable state without consulting veto hooks. Prune notifications run after the view commits or its failed binding rolls back, so a callback can make a later Rows/view change without resurrecting deleted rows or losing a newly appended count. Active/selected eligibility remains independent of checking eligibility. A post callback error propagates with state and cleanup committed; later callbacks in that notification sequence may not run. Pure view or membership changes do not emit Rows notifications.[^selection][^grid][^lifecycle-browser]
 
 # Behavior
+
+## Height controls
+
+The `heightResize` handle must be a same-document `button type="button"` outside the target table, named by authored aria-label or aria-labelledby. The runtime gives it a focusable horizontal separator role, a unique root `aria-controls` connection and measured value/bounds. Primary pointer movement adjusts height; ArrowUp/Down change ten pixels, Shift changes one, and Home/End select configured bounds. Escape, pointer cancellation, lost capture or mouse movement after the primary button was released restores pre-drag height properties. Disabled, hidden or inert controls do nothing. Pointer previews coalesce per animation frame; existing viewport observation owns row recalculation.[^height][^geometry-browser]
+
+Height is measured as a border box, including content-box padding/borders. CSS layout remains authored. An external size outside configured bounds widens the announced range to include the actual size; owned actions still clamp to configured bounds. Unmeasurable roots omit their current value and make the handle inert until measurable, preserving authored inert state. Cleanup restores the original height/min-height/max-height values and priorities, handle attributes/style and generated root ID while preserving other owners' styles. No wrapper, copied heading/footer, theme, public height setter or change callback is generated.[^height]
 
 ## Empty pages
 
@@ -467,6 +492,8 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `GRID_COLUMNS`, `GRID_COLUMN_MARKUP` | Invalid full state/callback, broken column keys/group membership/spans, or malformed resize control. |
 | `GRID_SORT`, `GRID_PAGE` | Invalid sort indicator/comparator or local page request. |
 | `GRID_VIEWPORT`, `GRID_VIEWPORT_MARKUP`, `GRID_VIEWPORT_ROW` | Invalid viewport root/estimate/overscan, a span escaping the logical record, or reveal outside the current logical page. |
+| `GRID_VIEWPORT_ALIGN`, `GRID_SCOPE` | Malformed reveal options/alignment or an unknown rowIds scope. |
+| `GRID_HEIGHT` | Invalid root/handle/bounds/name, duplicate root ID or a height root/handle already owned by another binding. |
 | `GRID_SELECTION`, `GRID_CHECK` | Invalid mode/callback/eligibility result, ID batch, before-hook result, check scope/flag, or stale reentrant transition. |
 | `GRID_FILTER` | Unknown column key, invalid scalar filter/value/label/search, predicate, or authored filter control. |
 | `GRID_ACTION` | Invalid action callback or named row action button. |
@@ -494,6 +521,9 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^blocks]: Private authored record structure and native adjacent merging
 [^blocks-browser]: Multi-row identity, spans, merging, physical ARIA and bounded geometry
 [^viewport]: Private measured viewport, anchoring, spacers and lifetime
+[^height]: Private authored height control and property-scoped restoration
+[^geometry-browser]: Pointer and keyboard height controls, sticky footer and reveal alignment
+[^detail-browser]: Immutable logical row scopes and public reveal boundaries
 [^viewport-browser]: Logical scopes, bounded DOM, focus, measurements and lifecycle regressions
 [^selection]: Private active identity, membership, eligibility, and transition ordering
 [^filters]: Private scalar column filters and choice counts

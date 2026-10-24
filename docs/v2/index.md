@@ -2,7 +2,7 @@
 
 * [Tree and DatePicker in two CVC layouts](tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
-* [Interactive Grid contract demo](grid-demo.md) - Exercise Grid status views, clean append, owned row resources, native defaults, and two HTML layouts with raw Rows inspection. (draft)
+* [Interactive Grid contract demo](grid-demo.md) - Exercise authored CVC row details, height controls, aligned reveal, status views, and two Grid layouts with raw Rows inspection. (draft)
 * [Authored advanced Grid in two layouts](advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 
 * [Natural-JS 2.0 module boundaries](architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)

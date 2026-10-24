@@ -296,6 +296,42 @@ try {
   });
   assert(viewportCleanup, "Installed viewport disposal must restore the exact authored table with pending work.");
 
+  const geometry = await page.evaluate(async () => {
+    const h = window.packedConsumer.geometry;
+    const ids = h.grid.rowIds("visible");
+    const snapshots = { count: ids.length, filtered: h.grid.rowIds("filtered").length,
+      store: h.grid.rowIds("store").length, frozen: Object.isFrozen(ids) };
+    h.grid.reveal(ids[49], { block: "center" });
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const target = [...h.table.querySelectorAll("tbody tr")].find(row => row.textContent.includes("Geometry 50"));
+    const head = h.table.tHead.getBoundingClientRect(), foot = h.table.tFoot.getBoundingClientRect();
+    const bounds = target?.getBoundingClientRect();
+    const centered = !!bounds && bounds.top >= head.bottom - 1 && bounds.bottom <= foot.top + 1 &&
+      Math.abs((bounds.top + bounds.bottom - head.bottom - foot.top) / 2) <= 2;
+    const originalHeight = h.root.getBoundingClientRect().height;
+    h.handle.focus();
+    h.handle.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true, cancelable: true }));
+    const resized = h.root.getBoundingClientRect().height;
+    const accessible = { role: h.handle.getAttribute("role"), controls: h.handle.getAttribute("aria-controls") === h.root.id,
+      height: Number(h.handle.getAttribute("aria-valuenow")) };
+    h.grid.setFilter(row => row.name === "Geometry 50");
+    const filtered = { visible: h.grid.rowIds("visible"), filtered: h.grid.rowIds("filtered"), store: h.grid.rowIds("store").length,
+      oldSnapshot: ids.length, active: h.grid.selected() };
+    h.grid.dispose();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const restored = h.container.outerHTML === h.original;
+    h.handle.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    const quiet = h.container.outerHTML === h.original;
+    h.rows.dispose(); h.container.remove();
+    return { snapshots, centered, originalHeight, resized, accessible, filtered, restored, quiet };
+  });
+  assert.deepEqual(geometry.snapshots, { count: 100, filtered: 100, store: 100, frozen: true });
+  assert(geometry.centered, "Installed centered reveal must fit between sticky header and footer.");
+  assert.equal(geometry.resized, geometry.originalHeight + 10);
+  assert.deepEqual(geometry.accessible, { role: "separator", controls: true, height: geometry.resized });
+  assert.deepEqual(geometry.filtered, { visible: [50], filtered: [50], store: 100, oldSnapshot: 100, active: null });
+  assert(geometry.restored && geometry.quiet, "Installed geometry must restore authored markup and release listeners.");
+
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = page.locator(`[data-host="${slot}"]`);
     await expect(host.locator("article")).toHaveCount(1);

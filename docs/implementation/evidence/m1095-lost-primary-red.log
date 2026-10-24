@@ -1,0 +1,42 @@
+
+[WebServer] (node:21196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+
+(node:24656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [chromium] › tests\browser\grid-geometry.spec.ts:157:1 › a mouse movement without the primary button cancels a stranded drag and ignores its late release
+  1) [chromium] › tests\browser\grid-geometry.spec.ts:157:1 › a mouse movement without the primary button cancels a stranded drag and ignores its late release 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Object {
+    -   "cancelled": true,
+    -   "current": "400",
+    -   "height": 400,
+    +   "cancelled": false,
+    +   "current": "800",
+    +   "height": 800,
+        "preview": 450,
+      }
+
+      168 |     return { preview, cancelled, height: h.root.getBoundingClientRect().height, current: h.handle.getAttribute("aria-valuenow") };
+      169 |   });
+    > 170 |   expect(result).toEqual({ preview: 450, cancelled: true, height: 400, current: "400" });
+          |                  ^
+      171 | });
+      172 |
+      173 | test("disposal during a queued drag restores source and rejects all late pointer or keyboard writes", async ({ page }) => {
+        at D:\workspace\natural_js\tests\browser\grid-geometry.spec.ts:170:18
+
+    Error Context: test-results\grid-geometry-a-mouse-move-4ea1f-nd-ignores-its-late-release-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\grid-geometry.spec.ts:157:1 › a mouse movement without the primary button cancels a stranded drag and ignores its late release 

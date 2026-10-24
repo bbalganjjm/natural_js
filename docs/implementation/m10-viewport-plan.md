@@ -8,19 +8,19 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field, view, draft and selection integration
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: paste
     resource: m10-paste-plan.md
     title: Completed atomic paste contract
-    git_blob: 1eadfc1bd38f917132078aeeeece4237a58d76ff
+    git_blob: fb085ef25d7f4363507e4a5fc1127e248d35628b
   - id: parity
     resource: feature-parity-plan.md
     title: Required viewport and remaining parity
-    git_blob: 9ca475cb85b77b2b2cdec35b1525a91c1359a1e1
+    git_blob: 541cc62e6cf615fa4fe46df5ad2ab6e77236529d
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured window and scroll ownership
-    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+    git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
   - id: browser
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Logical scopes, geometry, drafts, accessibility and lifecycle regressions

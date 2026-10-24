@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 5c1e7f449aef6a3694ce9d05205c740adeb23862
+    git_blob: 3c56833fbf03d509a739e978312dcb2d181a5ab1
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,11 +16,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 8a39cf43297075cab6464f3fc963138223ac7b85
+    git_blob: f73afe51bcc4f77ddfbee26cb46868a41c46f681
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 82f15e3313a3cac0189516ecd018c6ccb68477e9
+    git_blob: ca976afbdb9644faa87070b0f2a0f0f1d1d6cbae
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -28,14 +28,14 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
     git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -115,7 +115,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. M10.9.1 ordered shared Rows, [M10.9.2 authored row blocks/merging](m10-row-blocks-plan.md), [M10.9.3 native controls/display/validation](m10-controls-plan.md) and [M10.9.4 status/row lifecycle](m10-lifecycle-plan.md) retain separate contracts and frozen evidence under [the detailed M10.9 plan](m10-parity-plan.md). Specify M10.9.5 detail/geometry next, then the remaining required slices. Per-field dirty presentation, edited-deletion display and scheduler-option equivalence remain explicit obligations. Preserve other stages, the final M13 review/remediation gate and publication deferral.
+Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. M10.9.1 ordered shared Rows, [M10.9.2 authored row blocks/merging](m10-row-blocks-plan.md), [M10.9.3 native controls/display/validation](m10-controls-plan.md) and [M10.9.4 status/row lifecycle](m10-lifecycle-plan.md) retain separate contracts and frozen evidence under [the detailed M10.9 plan](m10-parity-plan.md). M10.9.5 implements [authored detail navigation and geometry](m10-detail-plan.md) through existing owners. Specify M10.9.6 legacy semantic closure next, then the remaining required component/CVC slices. Per-field dirty presentation, edited-deletion display and scheduler-option equivalence remain explicit obligations. Preserve other stages, the final M13 review/remediation gate and publication deferral.
 
 # Decisions
 

@@ -1,0 +1,420 @@
+
+
+Running 382 tests using 1 worker
+
+
+
+[1/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener
+[2/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:99:1 › two MDI workspaces keep unique IDs and resolvable ARIA references
+[3/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:112:1 › vertical Tabs skip disabled buttons and keep manual activation
+[4/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › side MDI and open Popup pass automated WCAG-tagged checks
+[5/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › stack MDI and open Popup pass automated WCAG-tagged checks
+[6/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › side Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[7/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › side data UI remains keyboard-operable at 320px
+[8/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › stack Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[9/382] [webkit] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › stack data UI remains keyboard-operable at 320px
+[10/382] [webkit] › tests\browser\datepicker.spec.ts:24:1 › DatePicker compiles authored weeks once and restores markup, IDs, and ownership
+[11/382] [webkit] › tests\browser\datepicker.spec.ts:61:1 › calendar keyboard preserves leap-day intent, week order, selection, and roving focus
+[12/382] [webkit] › tests\browser\datepicker.spec.ts:95:1 › limits constrain keyboard and pointer selection without emitting programmatic changes
+[13/382] [webkit] › tests\browser\datepicker.spec.ts:134:1 › Monday weeks and extreme years use UTC calendar days across daylight-saving dates
+[14/382] [webkit] › tests\browser\datepicker.spec.ts:169:1 › locale labels retain the Gregorian ISO calendar
+[15/382] [webkit] › tests\browser\datepicker.spec.ts:192:1 › invalid dates, locale, markup, and repeated IDs fail before changing authored nodes
+[16/382] [webkit] › tests\browser\datepicker.spec.ts:229:1 › application date selection updates nested Form rows through native input events
+[17/382] [webkit] › tests\browser\datepicker.spec.ts:259:1 › authored calendar exposes an accessible grid before and after keyboard navigation
+[18/382] [webkit] › tests\browser\documents.spec.ts:21:1 › documents reuse keys, reload with the original factory, isolate MDI, and restore authored markup
+[19/382] [webkit] › tests\browser\documents.spec.ts:84:1 › malformed page handles release their partial work and Tabs restores authored alert nodes
+[20/382] [webkit] › tests\browser\documents.spec.ts:152:1 › close during reload waits for the original page cleanup before removing its panel
+[21/382] [webkit] › tests\browser\documents.spec.ts:188:1 › superseded documents abort, failures recover the previous page, and retained entries retry
+[22/382] [webkit] › tests\browser\documents.spec.ts:235:1 › close guards deduplicate, refusal and errors preserve pages, and disposal cancels a pending guard
+[23/382] [webkit] › tests\browser\documents.spec.ts:296:1 › closing an inactive document does not wait for or cancel another pending selection
+[24/382] [webkit] › tests\browser\documents.spec.ts:326:1 › a present close guard must explicitly return a boolean before a document is removed
+[25/382] [webkit] › tests\browser\documents.spec.ts:353:1 › horizontal document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[26/382] [webkit] › tests\browser\documents.spec.ts:353:1 › vertical document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[27/382] [webkit] › tests\browser\documents.spec.ts:388:1 › invalid repeated templates fail atomically before binding and the root can be corrected
+[28/382] [webkit] › tests\browser\field-render.spec.ts:16:1 › renderer declarations use only own functions, including a field named toString
+[29/382] [webkit] › tests\browser\field-render.spec.ts:34:1 › configuration rejects ambiguous fields and owned native content before mutation or execution
+[30/382] [webkit] › tests\browser\field-render.spec.ts:71:1 › rendered strings remain text while fresh native nodes, fragments and null replace content
+[31/382] [webkit] › tests\browser\field-render.spec.ts:100:1 › invalid ownership and async returns preserve field content without unhandled rejections
+[32/382] [webkit] › tests\browser\field-render.spec.ts:123:1 › factory exceptions and same-target reentry stay structured, release their guard and allow independent targets
+[33/382] [webkit] › tests\browser\field-render.spec.ts:145:1 › local Form renders from raw values, refreshes dependent display and restores authored nodes
+[34/382] [webkit] › tests\browser\form-m6.spec.ts:3:1 › Form keeps choice groups raw, accessible, and scoped to their MDI forms
+[35/382] [webkit] › tests\browser\form-m6.spec.ts:99:1 › local Form reads group values and rejects ambiguous declarations
+[36/382] [webkit] › tests\browser\form.spec.ts:6:1 › Form keeps invalid edits out of Rows and exposes authored errors accessibly
+[37/382] [webkit] › tests\browser\form.spec.ts:109:1 › local Form reads nested fields and row validation leaves another bound row alone
+[38/382] [webkit] › tests\browser\form.spec.ts:150:1 › Form retains invalid drafts by row and resolves cross-field candidates
+[39/382] [webkit] › tests\browser\form.spec.ts:214:1 › built-in Form rules keep raw values and direct fill replaces formatted text
+[40/382] [webkit] › tests\browser\form.spec.ts:244:1 › parser failures retain drafts and null raw values can format
+[41/382] [webkit] › tests\browser\form.spec.ts:294:1 › local file input validates its filename and row-bound file input fails clearly
+[42/382] [webkit] › tests\browser\form.spec.ts:345:1 › built-in required rejects an unchecked checkbox and custom required can override it
+[43/382] [webkit] › tests\browser\form.spec.ts:379:1 › visible and hidden Form drafts obey native text length constraints
+[44/382] [webkit] › tests\browser\form.spec.ts:416:1 › Form clears a committed draft after a subscriber error but keeps a rejected draft
+[45/382] [webkit] › tests\browser\form.spec.ts:472:1 › Form rejects display formatters on controls without text display semantics
+
+
+[46/382] [webkit] › tests\browser\form.spec.ts:494:1 › hidden Form length checks use entered text before parsing
+[47/382] [webkit] › tests\browser\form.spec.ts:529:1 › external Rows.set clears stale Form errors without running validators in its subscriber
+[48/382] [webkit] › tests\browser\form.spec.ts:581:1 › untouched stored text has the same visible and hidden length result
+[49/382] [webkit] › tests\browser\form.spec.ts:610:1 › validate commits a draft made valid by an external row update without rebinding
+[50/382] [webkit] › tests\browser\form.spec.ts:638:1 › native Form constraints reject sanitized values and respect disabled fieldsets
+[51/382] [webkit] › tests\browser\form.spec.ts:670:1 › Form parsers only run explicitly declared own field functions
+[52/382] [webkit] › tests\browser\form.spec.ts:686:1 › Form and List bind authored image sources and retain alternative text
+[53/382] [webkit] › tests\browser\grid-columns.spec.ts:80:1 › column changes keep field nodes, nested raw choices, selection and caret
+[54/382] [webkit] › tests\browser\grid-columns.spec.ts:104:1 › hidden columns keep drafts across row release and preserve native visible groups
+[55/382] [webkit] › tests\browser\grid-columns.spec.ts:129:1 › invalid replacement is atomic and returned state is immutable
+[56/382] [webkit] › tests\browser\grid-columns.spec.ts:155:1 › width-only updates leave row topology, focus and data untouched
+[57/382] [webkit] › tests\browser\grid-columns.spec.ts:173:1 › sort indicators on hidden headers and exact dispose restoration work
+[58/382] [webkit] › tests\browser\grid-columns.spec.ts:190:1 › keyboard resize reports one coherent change and resets preferred width
+[59/382] [webkit] › tests\browser\grid-columns.spec.ts:205:1 › pointer resize commits once, cancellation restores state and teardown releases capture
+[60/382] [webkit] › tests\browser\grid-columns.spec.ts:230:1 › malformed topology and bind failures leave original markup available for retry
+[61/382] [webkit] › tests\browser\grid-columns.spec.ts:258:1 › returning the resize pointer to its start restores the preview without notifying
+[62/382] [webkit] › tests\browser\grid-columns.spec.ts:273:1 › callback failures keep the successful state and failed data binding can be retried
+[63/382] [webkit] › tests\browser\grid-columns.spec.ts:297:1 › no-column tables retain their behavior and state methods have clear bounds
+[64/382] [webkit] › tests\browser\grid-columns.spec.ts:319:1 › column hiding and paging skip hidden, inert and CSS-hidden focus candidates
+[65/382] [webkit] › tests\browser\grid-columns.spec.ts:351:1 › two CVC layouts expose working column tools and remain isolated and accessible
+[66/382] [webkit] › tests\browser\grid-columns.spec.ts:376:1 › flat columns move freely and late rows use current topology without rebinding fields
+[67/382] [webkit] › tests\browser\grid-columns.spec.ts:401:1 › authored row blocks preserve focused span cells through column changes
+[68/382] [webkit] › tests\browser\grid-columns.spec.ts:444:1 › body span topology fails before column ownership and allows a corrected retry
+[69/382] [webkit] › tests\browser\grid-columns.spec.ts:474:1 › column attachment owns and releases an entire authored row block
+[70/382] [webkit] › tests\browser\grid-columns.spec.ts:521:1 › implicit columns do not add ordering restrictions around an authored middle group
+[71/382] [webkit] › tests\browser\grid-controls.spec.ts:106:1 › radio groups with different native form owners fail before binding owns the authored table
+[72/382] [webkit] › tests\browser\grid-controls.spec.ts:128:1 › a partly hidden choice group consumes one protected paste position in mounted and offscreen rows
+[73/382] [webkit] › tests\browser\grid-controls.spec.ts:147:1 › a hidden viewport or ancestor protects mounted and offscreen paste targets equally
+[74/382] [webkit] › tests\browser\grid-controls.spec.ts:169:1 › required radio validation checks entered null before a parser can supply a raw default
+[75/382] [webkit] › tests\browser\grid-controls.spec.ts:181:1 › cross-tr native groups keep per-row values and stable identity without a native form
+[76/382] [webkit] › tests\browser\grid-controls.spec.ts:199:1 › multiple Select keeps empty and single arrays and distinguishes nested raw scalar types
+[77/382] [webkit] › tests\browser\grid-controls.spec.ts:214:1 › radio names isolate two MDI Grids and every record inside one outer form
+[78/382] [webkit] › tests\browser\grid-controls.spec.ts:239:1 › date time month week color and hidden stay strings while range uses its parser
+[79/382] [webkit] › tests\browser\grid-controls.spec.ts:253:1 › native value sanitization reports stored invalid values without silently rewriting them
+[80/382] [webkit] › tests\browser\grid-controls.spec.ts:274:1 › blur defers scalar commits and commits group and Select changes exactly once
+[81/382] [webkit] › tests\browser\grid-controls.spec.ts:292:1 › manual timing retains scalar radio checkbox and Select drafts until explicit validate
+[82/382] [webkit] › tests\browser\grid-controls.spec.ts:309:1 › Enter commits one scalar but composition modifiers and textarea Enter remain native
+[83/382] [webkit] › tests\browser\grid-controls.spec.ts:329:1 › quoted JSON array TSV applies two logical rows atomically and preserves unrelated drafts
+[84/382] [webkit] › tests\browser\grid-controls.spec.ts:344:1 › typed array paste preserves Object.is identity for negative and positive zero
+[85/382] [webkit] › tests\browser\grid-controls.spec.ts:360:1 › invalid JSON arrays unavailable choices and radio values reject the entire paste
+[86/382] [webkit] › tests\browser\grid-controls.spec.ts:378:1 › offscreen array paste keeps the two-tr viewport bounded and a focused draft attached
+[87/382] [webkit] › tests\browser\grid-controls.spec.ts:398:1 › partially disabled readonly or inert groups consume one protected logical position
+[88/382] [webkit] › tests\browser\grid-controls.spec.ts:413:1 › Grid Form and List apply programmatic text lengths and authored disabled constraints consistently
+[89/382] [webkit] › tests\browser\grid-controls.spec.ts:432:1 › only own parser and renderer keys are invoked including a field named toString
+[90/382] [webkit] › tests\browser\grid-controls.spec.ts:455:1 › images preserve alt and explicit Grid and Form renderers use fresh DOM or literal text
+[91/382] [webkit] › tests\browser\grid-controls.spec.ts:486:1 › merged render output stays display-only while ordinary display can render native interactive nodes
+[92/382] [webkit] › tests\browser\grid-controls.spec.ts:519:1 › invalid render targets fail before taking Grid Form or nested Select ownership
+[93/382] [webkit] › tests\browser\grid-controls.spec.ts:541:1 › connected foreign reused and asynchronous render nodes reject with exact binding recovery
+[94/382] [webkit] › tests\browser\grid-controls.spec.ts:574:1 › revealing the first error removes stale element references from other released invalid rows
+[95/382] [webkit] › tests\browser\grid-controls.spec.ts:592:1 › validation and rejected paste reveal the current-page invalid row and return connected focused fields
+[96/382] [webkit] › tests\browser\grid-controls.spec.ts:613:1 › off-page and filtered validation keeps the application page filter and focus unchanged
+[97/382] [webkit] › tests\browser\grid-controls.spec.ts:628:1 › single checks remain independent in two accessible MDI Grids and disposal restores authored DOM
+[98/382] [webkit] › tests\browser\grid-detail.spec.ts:72:1 › row scopes expose sorted projection, logical page and live store independently of eligibility
+[99/382] [webkit] › tests\browser\grid-detail.spec.ts:89:1 › projected scopes include explicitly shown tombstones while store remains live
+[100/382] [webkit] › tests\browser\grid-detail.spec.ts:104:1 › row identity snapshots are frozen and old results survive ordering and data changes
+[101/382] [webkit] › tests\browser\grid-detail.spec.ts:119:1 › identity lookup includes unmounted page rows without DOM queries, rendering or focus changes
+[102/382] [webkit] › tests\browser\grid-detail.spec.ts:147:1 › identity snapshots follow pre-bind rollback and post-bind commit while rejecting invalid scopes
+[103/382] [webkit] › tests\browser\grid-detail.spec.ts:177:1 › reveal accepts all logical alignments without selecting, checking or committing drafts
+[104/382] [webkit] › tests\browser\grid-detail.spec.ts:195:1 › malformed reveal options fail before row lookup, scrolling or view changes
+[105/382] [webkit] › tests\browser\grid-detail.spec.ts:209:1 › reveal stays inside the current page and permits only explicitly projected tombstones
+[106/382] [webkit] › tests\browser\grid-detail.spec.ts:224:1 › alignment getters run once and their failures or disposal cannot trigger stale scrolling
+[107/382] [webkit] › tests\browser\grid-detail.spec.ts:242:1 › row-hook disposal during virtual reveal restores height and authored table ownership
+[108/382] [webkit] › tests\browser\grid-detail.spec.ts:259:1 › combined viewport and height cleanup restores a stylesheet-sized root without adding inline style
+[109/382] [webkit] › tests\browser\grid-geometry.spec.ts:71:1 › authored height handle exposes actual geometry and bounded native keyboard controls
+[110/382] [webkit] › tests\browser\grid-geometry.spec.ts:88:1 › height controls preserve modified shortcuts and blocked authored interactions
+[111/382] [webkit] › tests\browser\grid-geometry.spec.ts:101:1 › pointer previews coalesce and commit with content-box conversion and exact priority restoration
+[112/382] [webkit] › tests\browser\grid-geometry.spec.ts:120:1 › Escape, pointer cancellation, lost capture and a second pointer leave the original drag intact
+[113/382] [webkit] › tests\browser\grid-geometry.spec.ts:140:1 › native captured pointer dragging commits measured height and releases capture
+[114/382] [webkit] › tests\browser\grid-geometry.spec.ts:157:1 › a mouse movement without the primary button cancels a stranded drag and ignores its late release
+[115/382] [webkit] › tests\browser\grid-geometry.spec.ts:173:1 › disposal during a queued drag restores source and rejects all late pointer or keyboard writes
+[116/382] [webkit] › tests\browser\grid-geometry.spec.ts:188:1 › invalid height configurations fail before markup ownership
+[117/382] [webkit] › tests\browser\grid-geometry.spec.ts:202:1 › root and handle ownership cannot be shared and failure cleanup permits a retry
+[118/382] [webkit] › tests\browser\grid-geometry.spec.ts:218:1 › hidden preparation measures when shown and external dimensions announce honest current values
+[119/382] [webkit] › tests\browser\grid-geometry.spec.ts:231:1 › an unmeasurable root leaves no incomplete focusable separator and preserves authored inert state
+[120/382] [webkit] › tests\browser\grid-geometry.spec.ts:247:1 › height changes retain nested drafts, focused editors and a bounded logical viewport
+[121/382] [webkit] › tests\browser\grid-geometry.spec.ts:262:1 › reveal start center end and nearest use sticky multi-row header and footer space
+[122/382] [webkit] › tests\browser\grid-geometry.spec.ts:280:1 › last-row reveal stays above a sticky footer after height and managed column changes
+[123/382] [webkit] › tests\browser\grid-geometry.spec.ts:294:1 › explicit alignment survives remeasurement of a cached row after virtual remount
+[124/382] [webkit] › tests\browser\grid-geometry.spec.ts:318:1 › multi-tr oversized records use one identity and nearest alignment keeps their start visible
+[125/382] [webkit] › tests\browser\grid-geometry.spec.ts:333:1 › nonvirtual height resizing and all reveal alignments preserve logical rows and selection
+[126/382] [webkit] › tests\browser\grid-geometry.spec.ts:356:1 › independent MDI height handles keep unique ARIA references and accessible controls
+[127/382] [webkit] › tests\browser\grid-initial-page.spec.ts:13:1 › initialPage renders only its slice, copies input, clamps, and preserves the no-option default
+[128/382] [webkit] › tests\browser\grid-initial-page.spec.ts:77:1 › invalid initialPage leaves authored template and Select ownership untouched; setPage failure is atomic
+[129/382] [webkit] › tests\browser\grid-initial-page.spec.ts:128:1 › initialPage keeps off-page identity and validation while deferring invalid row options
+[130/382] [webkit] › tests\browser\grid-initial-page.spec.ts:181:1 › two initial-page Grids keep nested choices and generated error IDs isolated, then rebind cleanly
+[131/382] [webkit] › tests\browser\grid-initial-page.spec.ts:243:1 › off-page formatter failure rolls back page and releases its new Select before retry
+[132/382] [webkit] › tests\browser\grid-initial-page.spec.ts:299:1 › off-page Select option failure rolls back and releases its new clone before retry
+[133/382] [webkit] › tests\browser\grid-initial-page.spec.ts:350:1 › initial-page draft and focus survive a page-away and return without duplicate IDs
+[134/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+[135/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+[136/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+[137/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:184:1 › deleted rows consume protected paste lines in mounted and offscreen records
+[138/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:206:1 › native merge runs split at status boundaries and recompute after revert
+[139/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:220:1 › committed pruning still notifies once when a deleted-row hook fails
+[140/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:242:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+[141/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:271:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+[142/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:290:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+[143/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:309:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+[144/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:329:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+[145/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:345:1 › defaults preserve captured native groups and own parsers without claiming business fields
+[146/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:373:1 › default parser failures and ambiguous native fields never write Rows or source markup
+[147/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:392:1 › default parser promises are consumed and fail without changing data
+[148/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:406:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+[149/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:421:1 › the table is already claimed when the first application hook runs
+[150/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:433:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+[151/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:451:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+[152/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:476:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+[153/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:495:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+[154/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:511:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+[155/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:524:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+[156/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:541:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+[157/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:563:1 › own stays valid for an active binding and immediately releases resources registered after closure
+[158/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:575:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+[159/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:598:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+[160/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:612:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+[161/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:630:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+[162/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:651:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+[163/382] [webkit] › tests\browser\grid-lifecycle.spec.ts:674:1 › two authored status views share Rows without sharing view state and remain accessible
+[164/382] [webkit] › tests\browser\grid-lifetime.spec.ts:13:1 › Grid releases visited pages while restoring the selected row, draft, and error
+[165/382] [webkit] › tests\browser\grid-lifetime.spec.ts:105:1 › offscreen validation text clears on external set, revert, remove, and replace
+[166/382] [webkit] › tests\browser\grid-m6.spec.ts:14:1 › Grid text and checkbox edits keep typed nested raw values
+[167/382] [webkit] › tests\browser\grid-m6.spec.ts:61:1 › Grid parse failure stays with RowId through paging and clears on revert
+[168/382] [webkit] › tests\browser\grid-m6.spec.ts:118:1 › Grid sort and page state use authored headings and restore focus
+[169/382] [webkit] › tests\browser\grid-m6.spec.ts:163:1 › Grid rejects ambiguous controls before changing authored markup
+[170/382] [webkit] › tests\browser\grid-m6.spec.ts:195:1 › Form and Grid parsers see one unparsed input snapshot
+[171/382] [webkit] › tests\browser\grid-m6.spec.ts:240:1 › Grid and List keep keyboard focus when a disabled row leaves the page
+[172/382] [webkit] › tests\browser\grid-paste.spec.ts:119:1 › a matrix preserves IDs and untouched snapshots and publishes one complete batch
+[173/382] [webkit] › tests\browser\grid-paste.spec.ts:139:1 › an invalid last cell rejects every write and preserves current input and draft state
+[174/382] [webkit] › tests\browser\grid-paste.spec.ts:156:1 › all parsers see entered values and all validators see the complete parsed candidate
+[175/382] [webkit] › tests\browser\grid-paste.spec.ts:176:1 › unrelated nested drafts participate in validation without being committed
+[176/382] [webkit] › tests\browser\grid-paste.spec.ts:190:1 › quoted TSV handles tabs, escaped quotes, multiline values, CRLF and one final terminator
+[177/382] [webkit] › tests\browser\grid-paste.spec.ts:203:1 › malformed, overflowing and HTML-invalid matrices never truncate or partially write
+[178/382] [webkit] › tests\browser\grid-paste.spec.ts:218:1 › current column order, hidden fields, filtered order and page bounds determine mapping
+[179/382] [webkit] › tests\browser\grid-paste.spec.ts:239:1 › protected positions consume clipboard cells while typed nested choices retain their raw type
+[180/382] [webkit] › tests\browser\grid-paste.spec.ts:258:1 › unknown, disabled, ambiguous choices and non-boolean checkbox text fail without coercion
+[181/382] [webkit] › tests\browser\grid-paste.spec.ts:274:1 › serialized negative zero preserves raw identity and rejects an ambiguous positive-zero choice
+[182/382] [webkit] › tests\browser\grid-paste.spec.ts:293:1 › opt-in native paste replaces whole fields, reports results and honors earlier cancellation
+[183/382] [webkit] › tests\browser\grid-paste.spec.ts:319:1 › disabled native ownership stays untouched and disposal restores authored markup and listeners
+[184/382] [webkit] › tests\browser\grid-paste.spec.ts:342:1 › parser side effects invalidate stale preparation and nested paste cannot interleave
+[185/382] [webkit] › tests\browser\grid-paste.spec.ts:378:1 › observer errors are postcommit and do not resurrect successful pasted drafts
+[186/382] [webkit] › tests\browser\grid-paste.spec.ts:398:1 › a postcommit subscriber's newer draft survives cleanup of the pasted draft
+[187/382] [webkit] › tests\browser\grid-paste.spec.ts:420:1 › error recovery does not resurrect a row removed by the active-selection callback
+[188/382] [webkit] › tests\browser\grid-paste.spec.ts:447:1 › a parser returning a non-JSON value fails before changing the store or current draft
+[189/382] [webkit] › tests\browser\grid-paste.spec.ts:469:1 › one batch updates shared Form, List and Tree while preserving unrelated drafts and keyed nodes
+[190/382] [webkit] › tests\browser\grid-paste.spec.ts:502:1 › a thousand-row paste is coherent, retains focus and generates document-unique error IDs
+[191/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:101:1 › two authored block layouts keep native spans, nested options and exact teardown
+[192/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:118:1 › independent instances keep unique cross-row validation references and accessible native markup
+[193/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:136:1 › secondary row actions and edits share one identity and preserve focused drafts on moves
+[194/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:162:1 › column changes update every physical row without replacing nested fields
+[195/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:183:1 › native merges follow raw hierarchical values and projected page boundaries
+[196/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:210:1 › equal display strings cannot merge distinct raw values
+[197/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:221:1 › merging never hides the currently focused display field
+[198/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:234:1 › paste retains logical fields hidden only by merging and uses row-major nested order
+[199/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:251:1 › virtual blocks stay bounded with physical native row positions and far reveal
+[200/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:272:1 › a focused secondary row pins its complete block while offscreen paste stays logical
+[201/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:293:1 › invalid block and merge declarations fail before changing authored HTML or ownership
+[202/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:324:1 › a fully merged bare viewport preserves measurable rows and exact authored styles
+[203/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:351:1 › record blocks share nested values and stable identities with Form and List
+[204/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:375:1 › scalar merge validation is atomic and direct cell fields retain column ownership
+[205/382] [webkit] › tests\browser\grid-row-blocks.spec.ts:400:1 › hidden boundary rows remain in indivisible blocks without inflating measured height
+[206/382] [webkit] › tests\browser\grid-selection.spec.ts:106:1 › active detail stays independent from immutable store-ordered membership and checks
+[207/382] [webkit] › tests\browser\grid-selection.spec.ts:127:1 › default row activation still synchronizes List and Form without creating batch membership
+[208/382] [webkit] › tests\browser\grid-selection.spec.ts:151:1 › plain, Ctrl, Shift and Ctrl+Shift gestures use the eligible visible order
+[209/382] [webkit] › tests\browser\grid-selection.spec.ts:169:1 › native keyboard navigation skips ineligible rows and leaves editing shortcuts intact
+[210/382] [webkit] › tests\browser\grid-selection.spec.ts:202:1 › veto preserves active row, membership, focus and the range anchor
+[211/382] [webkit] › tests\browser\grid-selection.spec.ts:226:1 › invalid ID batches fail atomically and unavailable rows disable only their own operations
+[212/382] [webkit] › tests\browser\grid-selection.spec.ts:249:1 › scoped check-all preserves outside checks and native mixed states apart from Boolean fields
+[213/382] [webkit] › tests\browser\grid-selection.spec.ts:286:1 › header checks use native Space activation and veto restores their DOM state
+[214/382] [webkit] › tests\browser\grid-selection.spec.ts:305:1 › data removal and eligibility changes force pruning despite vetoes
+[215/382] [webkit] › tests\browser\grid-selection.spec.ts:324:1 › prune callbacks may change Rows or the view and throwing callbacks leave cleanup committed
+[216/382] [webkit] › tests\browser\grid-selection.spec.ts:387:1 › before hooks reject view changes even when every projected row ID stays the same
+[217/382] [webkit] › tests\browser\grid-selection.spec.ts:404:1 › post callbacks see committed DOM and before-hook reentrancy rejects stale proposals
+[218/382] [webkit] › tests\browser\grid-selection.spec.ts:442:1 › authored sorts cycle ascending, descending and clear while preserving focus and state
+[219/382] [webkit] › tests\browser\grid-selection.spec.ts:460:1 › column choices keep raw scalar identity and count other filters before pagination
+[220/382] [webkit] › tests\browser\grid-selection.spec.ts:489:1 › authored filter selects retain raw values and search narrows only the choices
+[221/382] [webkit] › tests\browser\grid-selection.spec.ts:512:1 › row actions resolve the current identity and retained drafts survive filtering, paging and layout
+[222/382] [webkit] › tests\browser\grid-selection.spec.ts:538:1 › two instances remain accessible and exact disposal releases authored filter ownership for retry
+[223/382] [webkit] › tests\browser\grid-selection.spec.ts:577:1 › single checks replace one row atomically and keep selection and Boolean fields independent
+[224/382] [webkit] › tests\browser\grid-selection.spec.ts:608:1 › single mode rejects ambiguous check proposals after ordinary ID validation without changing state
+[225/382] [webkit] › tests\browser\grid-selection.spec.ts:623:1 › single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope
+[226/382] [webkit] › tests\browser\grid-selection.spec.ts:642:1 › single checks retain reentrant commits and prune only unavailable rows
+[227/382] [webkit] › tests\browser\grid-selection.spec.ts:658:1 › invalid check modes fail before DOM ownership and permit corrected binding
+[228/382] [webkit] › tests\browser\grid-viewport.spec.ts:78:1 › 5,000 nested rows have bounded mounted DOM and complete native table positions
+[229/382] [webkit] › tests\browser\grid-viewport.spec.ts:89:1 › rapid bidirectional scrolling settles at the correct logical rows without accumulating DOM
+[230/382] [webkit] › tests\browser\grid-viewport.spec.ts:103:1 › reveal uses sorted filtered page identity and never changes focus or selection
+[231/382] [webkit] › tests\browser\grid-viewport.spec.ts:117:1 › visible checks and selection ranges span the whole logical page
+[232/382] [webkit] › tests\browser\grid-viewport.spec.ts:127:1 › Home End and adjacent keyboard navigation reveal logical neighbors
+[233/382] [webkit] › tests\browser\grid-viewport.spec.ts:138:1 › Tab and Shift Tab cross a mounted boundary without skipping logical rows
+[234/382] [webkit] › tests\browser\grid-viewport.spec.ts:152:1 › a distant focused editor retains its exact node caret and composition without retaining the gap
+[235/382] [webkit] › tests\browser\grid-viewport.spec.ts:170:1 › offscreen drafts and validation issues survive release and remount
+[236/382] [webkit] › tests\browser\grid-viewport.spec.ts:183:1 › 1,000 offscreen nested rows paste atomically without cloning every target
+[237/382] [webkit] › tests\browser\grid-viewport.spec.ts:204:1 › released nested Selects relinquish ownership while current controls stay typed
+[238/382] [webkit] › tests\browser\grid-viewport.spec.ts:218:1 › measured wrapping and column resize retain the visible row anchor
+[239/382] [webkit] › tests\browser\grid-viewport.spec.ts:235:1 › hidden preparation wakes on display and column hide reorder keeps the current window
+[240/382] [webkit] › tests\browser\grid-viewport.spec.ts:248:1 › append remove revert replace and filtering retain identity and recover a valid viewport
+[241/382] [webkit] › tests\browser\grid-viewport.spec.ts:264:1 › invalid viewport options and rowspans fail before taking ownership; pending frames dispose cleanly
+[242/382] [webkit] › tests\browser\grid-viewport.spec.ts:290:1 › authored static body and footer rows keep their positions in the logical ARIA count
+[243/382] [webkit] › tests\browser\grid-viewport.spec.ts:306:1 › nonvirtual reveal scrolls an authored row and preserves selection and focus
+[244/382] [webkit] › tests\browser\grid-viewport.spec.ts:321:1 › two authored MDI instances keep unique IDs native ARIA and keyboard accessibility
+[245/382] [webkit] › tests\browser\grid-viewport.spec.ts:338:1 › reveal keeps the first row below an authored sticky header
+[246/382] [webkit] › tests\browser\grid-viewport.spec.ts:357:1 › formatter failures restore logical state DOM ARIA and scroll after queued viewport work
+[247/382] [webkit] › tests\browser\grid-viewport.spec.ts:406:1 › inherited disabled fields and first legend exemption agree for mounted and offscreen rows
+[248/382] [webkit] › tests\browser\grid-viewport.spec.ts:443:3 › Shift End abandons stale navigation after a filter post callback
+[249/382] [webkit] › tests\browser\grid-viewport.spec.ts:443:3 › Shift End abandons stale navigation after a dispose post callback
+[250/382] [webkit] › tests\browser\grid.spec.ts:12:1 › nested row options keep raw values, row identity, and native table markup
+[251/382] [webkit] › tests\browser\grid.spec.ts:103:1 › a repeated fixed id is rejected before cloning
+[252/382] [webkit] › tests\browser\grid.spec.ts:123:1 › nested field paths preserve a number apart from the same DOM string
+[253/382] [webkit] › tests\browser\grid.spec.ts:166:1 › rule arguments fail before binding and custom Grid rules run
+[254/382] [webkit] › tests\browser\grid.spec.ts:196:1 › formatted text, validators, and cloned error regions stay accessible across filtering
+[255/382] [webkit] › tests\browser\grid.spec.ts:258:1 › failed Select edits stay with RowId and clear on revert, remove, and replace
+[256/382] [webkit] › tests\browser\grid.spec.ts:349:1 › external row updates do not run user validators after the value commits
+[257/382] [webkit] › tests\browser\grid.spec.ts:382:1 › cross-field Select drafts validate together and commit on change or explicit validation
+[258/382] [webkit] › tests\browser\grid.spec.ts:448:1 › programmatic lengths, checkbox state, stale errors, and unsupported inputs are explicit
+[259/382] [webkit] › tests\browser\grid.spec.ts:526:1 › a thrown Select validator keeps its draft until explicit validation succeeds
+[260/382] [webkit] › tests\browser\import.spec.ts:3:1 › ESM package loads in two authored views without duplicate IDs
+[261/382] [webkit] › tests\browser\list.spec.ts:13:1 › authored list keeps nested raw choices and RowId selection through sort, filter, and page
+[262/382] [webkit] › tests\browser\list.spec.ts:101:1 › List validates hidden rows and links errors without changing raw data
+[263/382] [webkit] › tests\browser\list.spec.ts:164:1 › List rejects duplicate template IDs before mutation
+[264/382] [webkit] › tests\browser\list.spec.ts:184:1 › List multiple Select validation requires a raw array
+[265/382] [webkit] › tests\browser\m10-agent-screen.spec.ts:57:1 › a docs-first authored Grid keeps row identity and drafts across local views
+[266/382] [webkit] › tests\browser\m10-demo.spec.ts:9:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[267/382] [webkit] › tests\browser\m10-demo.spec.ts:45:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[268/382] [webkit] › tests\browser\m10-demo.spec.ts:71:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[269/382] [webkit] › tests\browser\m10-demo.spec.ts:96:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[270/382] [webkit] › tests\browser\m10-demo.spec.ts:114:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[271/382] [webkit] › tests\browser\m10-demo.spec.ts:160:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[272/382] [webkit] › tests\browser\m10-demo.spec.ts:181:1 › authored table binds raw nested choices, formatter, and accessible labels
+[273/382] [webkit] › tests\browser\m10-demo.spec.ts:206:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[274/382] [webkit] › tests\browser\m10-demo.spec.ts:247:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[275/382] [webkit] › tests\browser\m10-demo.spec.ts:269:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[276/382] [webkit] › tests\browser\m10-demo.spec.ts:297:1 › sort, filter, and local pages preserve RowId selection
+[277/382] [webkit] › tests\browser\m10-demo.spec.ts:321:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[278/382] [webkit] › tests\browser\m10-demo.spec.ts:342:1 › check and validation policy controls rebind working Grid options
+[279/382] [webkit] › tests\browser\m10-demo.spec.ts:385:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[280/382] [webkit] › tests\browser\m10-demo.spec.ts:428:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[281/382] [webkit] › tests\browser\m10-demo.spec.ts:470:1 › required and unavailable choices validate; dispose and rebind restore the template
+[282/382] [webkit] › tests\browser\m10-demo.spec.ts:509:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[283/382] [webkit] › tests\browser\m10-demo.spec.ts:549:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[284/382] [webkit] › tests\browser\m10-demo.spec.ts:573:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[285/382] [webkit] › tests\browser\m10-demo.spec.ts:609:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[286/382] [webkit] › tests\browser\m10-demo.spec.ts:645:1 › row-block store controls move and copy whole records independently of the employee demo
+[287/382] [webkit] › tests\browser\m10-demo.spec.ts:675:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[288/382] [webkit] › tests\browser\m10-grid.spec.ts:10:3 › side keeps grouped headings, nested choices, and MDI rows independent
+[289/382] [webkit] › tests\browser\m10-grid.spec.ts:45:3 › side keeps fixed headings visible and the narrow document reflowed
+[290/382] [webkit] › tests\browser\m10-grid.spec.ts:10:3 › stack keeps grouped headings, nested choices, and MDI rows independent
+[291/382] [webkit] › tests\browser\m10-grid.spec.ts:45:3 › stack keeps fixed headings visible and the narrow document reflowed
+[292/382] [webkit] › tests\browser\m12-shell.spec.ts:5:3 › side shares one editor definition and Rows while retaining and guarding documents
+[293/382] [webkit] › tests\browser\m12-shell.spec.ts:86:3 › side retries failure, cancels pending pages, and releases an independent shell
+[294/382] [webkit] › tests\browser\m12-shell.spec.ts:146:3 › side preserves accessible authored empty and populated shell states at 320px
+[295/382] [webkit] › tests\browser\m12-shell.spec.ts:5:3 › stack shares one editor definition and Rows while retaining and guarding documents
+[296/382] [webkit] › tests\browser\m12-shell.spec.ts:86:3 › stack retries failure, cancels pending pages, and releases an independent shell
+[297/382] [webkit] › tests\browser\m12-shell.spec.ts:146:3 › stack preserves accessible authored empty and populated shell states at 320px
+[298/382] [webkit] › tests\browser\m4-screen.spec.ts:5:3 › side preserves authored HTML through search, edit, nested choice, and save
+[299/382] [webkit] › tests\browser\m4-screen.spec.ts:45:3 › side keeps two pages ID-clean and independent
+[300/382] [webkit] › tests\browser\m4-screen.spec.ts:73:3 › side keeps unsaved edits when Enter is pressed in the local filter
+[301/382] [webkit] › tests\browser\m4-screen.spec.ts:86:3 › side keeps invalid drafts by row while navigating and adding
+[302/382] [webkit] › tests\browser\m4-screen.spec.ts:107:3 › side restores focus to a hidden row with an unavailable choice
+[303/382] [webkit] › tests\browser\m4-screen.spec.ts:122:3 › side handles empty, failed, and replaced searches
+[304/382] [webkit] › tests\browser\m4-screen.spec.ts:144:3 › side validates hidden changes and recovers from save failure
+[305/382] [webkit] › tests\browser\m4-screen.spec.ts:5:3 › stack preserves authored HTML through search, edit, nested choice, and save
+[306/382] [webkit] › tests\browser\m4-screen.spec.ts:45:3 › stack keeps two pages ID-clean and independent
+[307/382] [webkit] › tests\browser\m4-screen.spec.ts:73:3 › stack keeps unsaved edits when Enter is pressed in the local filter
+[308/382] [webkit] › tests\browser\m4-screen.spec.ts:86:3 › stack keeps invalid drafts by row while navigating and adding
+[309/382] [webkit] › tests\browser\m4-screen.spec.ts:107:3 › stack restores focus to a hidden row with an unavailable choice
+[310/382] [webkit] › tests\browser\m4-screen.spec.ts:122:3 › stack handles empty, failed, and replaced searches
+[311/382] [webkit] › tests\browser\m4-screen.spec.ts:144:3 › stack validates hidden changes and recovers from save failure
+[312/382] [webkit] › tests\browser\m4-screen.spec.ts:171:1 › a saved insert is not resent when the post-save refresh fails
+[313/382] [webkit] › tests\browser\m4-screen.spec.ts:192:1 › save locks editing while keeping Close available and aborts after removal
+[314/382] [webkit] › tests\browser\m4-screen.spec.ts:214:1 › the development mock rejects an entire conflicting save
+[315/382] [webkit] › tests\browser\m4-screen.spec.ts:233:1 › closing during a delayed search does not update a removed page
+[316/382] [webkit] › tests\browser\m4-screen.spec.ts:246:1 › server HTML runs the same employee controller in two ID-clean pages
+[317/382] [webkit] › tests\browser\m6-screen.spec.ts:5:3 › side keeps Grid, List, Select, Pagination, and Form in one row flow
+[318/382] [webkit] › tests\browser\m6-screen.spec.ts:69:3 › side keeps two paged instances separate and ID-clean
+[319/382] [webkit] › tests\browser\m6-screen.spec.ts:5:3 › stack keeps Grid, List, Select, Pagination, and Form in one row flow
+[320/382] [webkit] › tests\browser\m6-screen.spec.ts:69:3 › stack keeps two paged instances separate and ID-clean
+[321/382] [webkit] › tests\browser\m6-screen.spec.ts:92:1 › a hidden invalid Grid choice reopens its page before focusing
+[322/382] [webkit] › tests\browser\m7-screen.spec.ts:4:3 › side shares one page definition across main, Tab, and Popup
+[323/382] [webkit] › tests\browser\m7-screen.spec.ts:114:3 › side keeps two MDI workspaces and Popup results separate
+[324/382] [webkit] › tests\browser\m7-screen.spec.ts:4:3 › stack shares one page definition across main, Tab, and Popup
+[325/382] [webkit] › tests\browser\m7-screen.spec.ts:114:3 › stack keeps two MDI workspaces and Popup results separate
+[326/382] [webkit] › tests\browser\m7-screen.spec.ts:172:1 › immediate workspace removal treats page readiness cancellation as normal
+[327/382] [webkit] › tests\browser\m7-screen.spec.ts:186:1 › slow Popup close and parent removal settle once and release the page
+[328/382] [webkit] › tests\browser\notify.spec.ts:19:1 › notifications retain authored markup, announce through stable channels, and insert safe text without focus
+[329/382] [webkit] › tests\browser\notify.spec.ts:75:1 › dismissal follows native keyboard activation and keeps focused removal inside the region
+[330/382] [webkit] › tests\browser\notify.spec.ts:110:1 › dismissal skips unavailable close controls and clear remains scoped to one MDI region
+[331/382] [webkit] › tests\browser\notify.spec.ts:139:1 › invalid notification markup and label references fail before mutation or ownership
+[332/382] [webkit] › tests\browser\notify.spec.ts:192:1 › invalid show arguments remain atomic and disposal releases ownership and returned dismissals
+[333/382] [webkit] › tests\browser\notify.spec.ts:228:1 › an authored notification without close controls is dismissed through its returned function
+[334/382] [webkit] › tests\browser\notify.spec.ts:249:1 › notification insertion and dismissal pass automated A and AA checks
+[335/382] [webkit] › tests\browser\page.spec.ts:3:1 › two pages keep separate roots, outputs, and reload input
+[336/382] [webkit] › tests\browser\page.spec.ts:61:1 › pending initialization aborts immediately and releases resources
+[337/382] [webkit] › tests\browser\page.spec.ts:101:1 › fetched HTML has one root and duplicate IDs are rejected
+[338/382] [webkit] › tests\browser\page.spec.ts:138:1 › fetched HTML rejects executable attributes before insertion
+[339/382] [webkit] › tests\browser\page.spec.ts:163:1 › factory roots are checked against the insertion document
+[340/382] [webkit] › tests\browser\page.spec.ts:190:1 › late own registration disposes a resource after cancellation
+[341/382] [webkit] › tests\browser\page.spec.ts:226:1 › output stops when a listener reloads its page
+[342/382] [webkit] › tests\browser\popup.spec.ts:3:1 › output waits for page cleanup, restores focus, and permits immediate reopening
+[343/382] [webkit] › tests\browser\popup.spec.ts:67:1 › closing during initialization aborts ready but resolves an ordinary result
+[344/382] [webkit] › tests\browser\popup.spec.ts:121:1 › native cancellation, detached host, and cleanup failure keep one terminal result
+[345/382] [webkit] › tests\browser\popup.spec.ts:169:1 › malformed dialogs fail synchronously and failed initialization leaves a reusable host
+[346/382] [webkit] › tests\browser\popup.spec.ts:210:1 › nested popup restores focus to the next authored control when its opener disappears
+[347/382] [webkit] › tests\browser\popup.spec.ts:238:1 › direct open-attribute removal still aborts page work and settles the result
+[348/382] [webkit] › tests\browser\popup.spec.ts:262:1 › twenty openings leave no page DOM or Popup listeners behind
+[349/382] [webkit] › tests\browser\popup.spec.ts:316:1 › close wins over same-task output without beforetoggle notification
+[350/382] [webkit] › tests\browser\rows-ordering.spec.ts:65:1 › shared row moves preserve nested drafts errors and the attached focused Grid editor
+[351/382] [webkit] › tests\browser\rows-ordering.spec.ts:99:1 › clean page append updates shared views without replacing Form or Grid drafts and focused nodes
+[352/382] [webkit] › tests\browser\rows-ordering.spec.ts:135:1 › a focused List control stays attached through moves and view sorting and recovers after filtering
+[353/382] [webkit] › tests\browser\rows-ordering.spec.ts:156:1 › forced order callbacks bypass vetoes and see the committed DOM while old arrays remain frozen
+[354/382] [webkit] › tests\browser\rows-ordering.spec.ts:174:1 › row moves inside before hooks reject only the stale outer membership proposal
+[355/382] [webkit] › tests\browser\rows-ordering.spec.ts:185:1 › copies publish committed nested values to every view without copying a source draft
+[356/382] [webkit] › tests\browser\rows-ordering.spec.ts:206:1 › a Tree business-key subscriber error retains the committed copy and reaches later subscribers
+[357/382] [webkit] › tests\browser\rows-ordering.spec.ts:223:1 › viewport insertion and movement preserve the measured anchor and follow the current sorted filtered page
+[358/382] [webkit] › tests\browser\select-pagination.spec.ts:13:1 › Select preserves authored raw strings and generated typed choices
+[359/382] [webkit] › tests\browser\select-pagination.spec.ts:52:1 › multiple Select keeps scalar identity, order, ownership, and disposal
+[360/382] [webkit] › tests\browser\select-pagination.spec.ts:94:1 › Pagination is controlled, bounded, accessible, focus-safe, and reversible
+[361/382] [webkit] › tests\browser\select-pagination.spec.ts:154:1 › Pagination rejects invalid state and repeated IDs before changing the HTML
+[362/382] [webkit] › tests\browser\select-pagination.spec.ts:185:1 › Pagination state snapshot cannot change its internal page
+[363/382] [webkit] › tests\browser\tabs.spec.ts:3:1 › authored tabs keep IDs, navigate manually, and isolate two instances
+[364/382] [webkit] › tests\browser\tabs.spec.ts:100:1 › superseded loads abort, failed pages restore the previous tab, and retry remounts
+[365/382] [webkit] › tests\browser\tabs.spec.ts:179:1 › initial failure is retryable, borrowed HTML stays, and invalid markup is rejected
+[366/382] [webkit] › tests\browser\tabs.spec.ts:248:1 › native Enter and Space activate once after arrow focus
+[367/382] [webkit] › tests\browser\tabs.spec.ts:311:1 › failed cached activation is evicted and a later visit creates a fresh page
+[368/382] [webkit] › tests\browser\tabs.spec.ts:371:1 › dispose during initial loading aborts without an unhandled ready rejection
+[369/382] [webkit] › tests\browser\tabs.spec.ts:418:1 › superseding a slow deactivation retains the previous controller for revisit
+[370/382] [webkit] › tests\browser\tree-date-screen.spec.ts:5:3 › side connects Tree and DatePicker to independent CVC Forms
+[371/382] [webkit] › tests\browser\tree-date-screen.spec.ts:80:3 › side keeps authored MDI labels clean through modal use and repeated disposal
+[372/382] [webkit] › tests\browser\tree-date-screen.spec.ts:5:3 › stack connects Tree and DatePicker to independent CVC Forms
+[373/382] [webkit] › tests\browser\tree-date-screen.spec.ts:80:3 › stack keeps authored MDI labels clean through modal use and repeated disposal
+[374/382] [webkit] › tests\browser\tree.spec.ts:11:1 › Tree resolves unordered parents, binds nested text, and reuses nodes on updates
+[375/382] [webkit] › tests\browser\tree.spec.ts:90:1 › Tree keyboard separates focus and selection and collapses focused descendants safely
+[376/382] [webkit] › tests\browser\tree.spec.ts:146:1 › Tree validates markup and hierarchy and rolls back failed initial binding
+[377/382] [webkit] › tests\browser\tree.spec.ts:217:1 › Tree keeps the last valid DOM on hierarchy and formatter failures and recovers
+[378/382] [webkit] › tests\browser\tree.spec.ts:261:1 › two Trees keep generated label IDs unique and their state independent
+[379/382] [webkit] › tests\browser\tree.spec.ts:300:1 › Tree can reverse prior DOM ancestry while keeping RowIds and selected focus
+[380/382] [webkit] › tests\browser\tree.spec.ts:330:1 › Tree measured binding updates preserve records for 1,000 flat and nested rows
+[381/382] [webkit] › tests\browser\tree.spec.ts:370:1 › Tree handles a deep hierarchy without recursive traversal
+[382/382] [webkit] › tests\browser\tree.spec.ts:395:1 › authored Tree states pass automated A and AA checks
+  382 passed (4.4m)
+[WebServer] (node:15624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:7956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 오후 4:16:14 [vite] (client) [Unhandled error] Error: subscriber failed
+[WebServer]  > notify ../../src/data/index.ts:149:21
+[WebServer]     147 |        if (disposed) break;
+[WebServer]     148 |        if (!listeners.has(listener)) continue;
+[WebServer]     149 |        try { listener(event); }
+[WebServer]         |                       ^
+[WebServer]     150 |        catch (cause) {
+[WebServer]     151 |          if (!failed) {
+[WebServer]  > set ../../src/data/index.ts:318:13
+[WebServer]  > reconcile ../../src/ui/form.ts:349:20
+[WebServer]  > onInput ../../src/ui/form.ts:389:16
+[WebServer] 
+[WebServer] 오후 4:16:14 [vite] (client) [Unhandled error] FrameworkError: Rows require acyclic JSON-compatible values.
+[WebServer]  > rowError ../../src/data/index.ts:60:28
+[WebServer]     58 |  
+[WebServer]     59 |  function rowError(api: string, code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
+[WebServer]     60 |    return new FrameworkError({ api, code, message, detail });
+[WebServer]        |                              ^
+[WebServer]     61 |  }
+[WebServer]     62 |  
+[WebServer]  > cloneFrozen ../../src/data/index.ts:72:19
+[WebServer]  > set ../../src/data/index.ts:315:31
+[WebServer]  > reconcile ../../src/ui/form.ts:349:20
+[WebServer]  > onInput ../../src/ui/form.ts:389:16
+[WebServer] 

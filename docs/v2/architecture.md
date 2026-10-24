@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
+    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -24,7 +24,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+  - id: grid-height
+    resource: ../../src/ui/grid-height.ts
+    title: Private authored Grid height ownership
+    git_blob: 83e7e08a3036ff2d96279b768095703f8d61e4ed
   - id: grid-columns
     resource: ../../src/ui/grid-columns.ts
     title: Private Grid column topology and resize ownership
@@ -40,7 +44,7 @@ sources:
   - id: grid-viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured Grid window and scroll lifetime
-    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+    git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
   - id: grid-blocks
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and native merge ownership
@@ -141,10 +145,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -194,6 +198,8 @@ Appended loaded rows share the existing Rows notification path and stay clean. F
 
 A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
+Grid exposes frozen logical row IDs from its existing projection for authored detail navigation. Form, Popup and mountPage keep data editing, dialog lifecycle and page execution; the demo composes them without a framework navigation manager. Private grid-height owns only an authored handle, three height properties and its pointer/keyboard resources, reusing DOM restoration, unique IDs and focus helpers. The existing viewport owner handles alignment, measured correction and both sticky edges. No copied table, second scroller, shared axis engine or public geometry library is introduced.[^grid][^grid-height][^grid-viewport][^form][^popup]
+
 # Related
 
 [The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [Tree](tree.md) and [DatePicker](datepicker.md) keep source and handle types together; [the authored M11 example](tree-date-example.md) connects them through the same CVC runtime. [Documents](documents.md), [Notify](notify.md) and [the application shell example](shell-example.md) complete the selected shell composition without a public shell engine. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
@@ -210,6 +216,7 @@ A repeated snippet is not automatically a shared abstraction; first check whethe
 [^grid-blocks]: Private authored record structure and native merge ownership
 [^grid-hooks]: Private Grid row callbacks and reverse resource cleanup
 [^grid]: Grid binding
+[^grid-height]: Private authored Grid height ownership
 [^list]: List binding
 [^select]: Standalone Select binding
 [^pagination]: Pagination binding

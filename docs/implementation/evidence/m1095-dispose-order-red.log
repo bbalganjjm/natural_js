@@ -1,0 +1,40 @@
+
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\grid-detail.spec.ts:250:1 › combined viewport and height cleanup restores a stylesheet-sized root without adding inline style
+  1) [chromium] › tests\browser\grid-detail.spec.ts:250:1 › combined viewport and height cleanup restores a stylesheet-sized root without adding inline style 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 2
+    + Received  + 2
+
+      Object {
+        "handle": true,
+        "resized": 320,
+    -   "restored": true,
+    -   "style": null,
+    +   "restored": false,
+    +   "style": "",
+      }
+
+      262 |       handle: h.handle.outerHTML === h.handleSource };
+      263 |   });
+    > 264 |   expect(result).toEqual({ resized: 320, style: null, restored: true, handle: true });
+          |                  ^
+      265 | });
+      266 |
+        at D:\workspace\natural_js\tests\browser\grid-detail.spec.ts:264:18
+
+    Error Context: test-results\grid-detail-combined-viewp-1f9b4-without-adding-inline-style-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\grid-detail.spec.ts:250:1 › combined viewport and height cleanup restores a stylesheet-sized root without adding inline style 
+[WebServer] (node:13336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:8632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

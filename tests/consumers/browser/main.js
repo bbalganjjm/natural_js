@@ -233,6 +233,23 @@ try {
     onRowAction({ action, id }) { if (action === "undo") lifecycleRows.revert(id); }
   });
   lifecycle.stop = lifecycleRows.subscribe(event => lifecycle.events.push(event));
+  const geometry = document.createElement("section");
+  geometry.dataset.consumerGeometry = "";
+  geometry.innerHTML = `<h2>Grid geometry</h2><div style="height:240px;overflow:auto;box-sizing:border-box;border:1px solid">
+    <table style="border-collapse:collapse;width:100%"><caption>Geometry employees</caption>
+      <thead style="position:sticky;top:0;background:white"><tr><th scope="col">Name</th></tr></thead>
+      <tbody><tr data-row-template style="height:48px"><td><span data-field="name"></span></td></tr></tbody>
+      <tfoot style="position:sticky;bottom:0;background:white"><tr><td>End of employees</td></tr></tfoot></table>
+    </div><button type="button" aria-label="Resize employee area">Resize height</button>`;
+  document.querySelector("main").append(geometry);
+  const geometryRoot = geometry.querySelector("div"), geometryTable = geometry.querySelector("table");
+  const geometryHandle = geometry.querySelector("button"), geometryRows = createRows(Array.from({ length: 100 }, (_, index) => ({ name: `Geometry ${index + 1}` })));
+  geometryRoot.style.cssText = geometryRoot.style.cssText;
+  const originalGeometry = geometry.outerHTML;
+  const geometryGrid = bindGrid(geometryTable, { rows: geometryRows,
+    viewport: { root: geometryRoot, estimate: 48 }, heightResize: { root: geometryRoot, handle: geometryHandle, min: 160, max: 640 } });
+  state.geometry = { container: geometry, root: geometryRoot, table: geometryTable, handle: geometryHandle,
+    grid: geometryGrid, rows: geometryRows, original: originalGeometry };
   const scrollRoot = document.createElement("section");
   scrollRoot.dataset.consumerViewport = "";
   scrollRoot.setAttribute("aria-label", "Viewport assignments");

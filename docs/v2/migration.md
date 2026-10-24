@@ -40,7 +40,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
+    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -48,11 +48,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
-    git_blob: 671b4e3bd886cbe159e851ebcd3625f1fd9ea2ae
+    git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
   - id: viewport-browser
     resource: ../../tests/browser/grid-viewport.spec.ts
     title: Viewport logical scopes, typed paste and lifecycle regressions
@@ -136,15 +136,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 5c1e7f449aef6a3694ce9d05205c740adeb23862
+    git_blob: 3c56833fbf03d509a739e978312dcb2d181a5ab1
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 9ca475cb85b77b2b2cdec35b1525a91c1359a1e1
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+    git_blob: 541cc62e6cf615fa4fe46df5ad2ab6e77236529d
+generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -300,7 +300,7 @@ The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, 
 
 Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. Grid accepts optional `initialPage: { page, size }` to limit the logical page and `viewport: { root, estimate, overscan? }` to limit mounted DOM independently. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. M12 adds persistent [Notify](notify.md) messages and dynamic [Documents](documents.md) with keyed page reuse, an application close guard and explicit reload. The [shell example](shell-example.md) composes those binders with the existing page runtime.[^package][^ui][^rules][^formats][^validators][^grid]
 
-Cascading Tree checks, month-only/holiday DatePicker behavior, editable and multiple-selection Lists, complete contextual Alert behavior, retained/preloaded Popup and Tab policies and the shell gaps above remain required additions. Grid column resize/reorder/show/hide uses authored keys and full GridColumn state. M10.6 adds independent selectedIds/setSelected and checkedIds/setChecked, explicit scoped check-all, authored sort/filter controls and stable row actions; select/selected/onSelect still control the active detail row only. M10.7 replaces legacy pastiable with opt-in native plaintext paste and grid.paste(text, { id, field }): quoted TSV is validated before one Rows.setMany change, protected fields consume positions, and overflow or ambiguous raw choices rejects the complete proposal. Display fields participate without injecting contenteditable; authored HTML remains the template. M10.8 adds measured variable-height viewport rendering, M10.9.2 adds authored multi-tr records and adjacent native merges, M10.9.3 adds native groups/inputs, explicit display, validation timing/reveal and exclusive checks, and M10.9.4 adds status projection, native defaults, owned row binding, clean append and authored empty markup. Detail/geometry and remaining option/dynamic closure stay required. The [coverage ledger](../implementation/feature-parity.md) records exact gaps and the [execution plan](../implementation/feature-parity-plan.md) orders their completion.[^parity][^parity-plan][^grid][^viewport][^blocks]
+Cascading Tree checks, month-only/holiday DatePicker behavior, editable and multiple-selection Lists, complete contextual Alert behavior, retained/preloaded Popup and Tab policies and the shell gaps above remain required additions. Grid column resize/reorder/show/hide uses authored keys and full GridColumn state. M10.6 adds independent selectedIds/setSelected and checkedIds/setChecked, explicit scoped check-all, authored sort/filter controls and stable row actions; select/selected/onSelect still control the active detail row only. M10.7 replaces legacy pastiable with opt-in native plaintext paste and grid.paste(text, { id, field }): quoted TSV is validated before one Rows.setMany change, protected fields consume positions, and overflow or ambiguous raw choices rejects the complete proposal. Display fields participate without injecting contenteditable; authored HTML remains the template. M10.8 adds measured variable-height viewport rendering, M10.9.2 adds authored multi-tr records and adjacent native merges, M10.9.3 adds native groups/inputs, explicit display, validation timing/reveal and exclusive checks, and M10.9.4 adds status projection, native defaults, owned row binding, clean append and authored empty markup. M10.9.5 adds authored CVC details, logical identity scopes, height controls and explicit reveal alignment. Remaining option/dynamic closure stays required. The [coverage ledger](../implementation/feature-parity.md) records exact gaps and the [execution plan](../implementation/feature-parity-plan.md) orders their completion.[^parity][^parity-plan][^grid][^viewport][^blocks]
 
 Replace row-local radio names/duplicate field IDs with `data-field` groups: Grid compiles members across the record and allocates a unique native radio name per clone, while Form keeps its explicit authored form/name contract. One checkbox is boolean, repeated checkboxes and multiple Selects always use arrays, and radio is string/null. This removes 1.x's selection-count-dependent scalar/array shape. Nested Grid Select options preserve raw scalar types. Native date/time/month/week/color/hidden values are strings; Grid number/range inputs require application parsers, and unsupported types follow the engine's native text fallback. File upload stays outside JSON Rows. Array clipboard values use a JSON array inside one normally quoted TSV cell; protected groups still consume one field position. See [Grid](grid.md) for the complete value/paste contract.[^grid][^form][^native][^controls-browser]
 
@@ -321,6 +321,12 @@ Replace template-input extraction with `grid.defaults()` and an application fact
 Replace generated empty HTML with one authored static `tr[data-empty]` or `tbody[data-empty]`. Use `onBind` for completed initial/replace/append/explicit-view/refresh results; it reports retained total, filtered, logical visible and logical mounted counts plus a replace/append event or null. Ordinary mutations and viewport scrolling do not emit completion; use Rows subscriptions for counters needing those updates. The original nonpaged isFirstPage defect is not copied into a boolean compatibility API.[^grid][^rows]
 
 An unused helper unrelated to framework behavior may be removed after checking direct and indirect reachability, including authored declarations, configuration, callbacks and shared row forms. That dependency cleanup is separate from excluding supported behavior. A feature retirement requires one consolidated user approval; pending candidates remain support obligations until approved. Native browser APIs, authored CSS and typed callbacks can replace legacy mechanisms only when their required behavior is preserved and verified.[^parity][^parity-plan]
+
+## 7. Compose row details and resize authored areas
+
+For legacy Grid more/detail workflows, author a detail view and run it through the same PageDefinition in main content or openPopup. Share Rows with bindForm, validate the current ID before previous/next and authored close/native cancel, then re-read grid.rowIds(scope) because validation can commit edits that change ordering/filter membership. Skip tombstones before Form binding; filtered cross-page placement uses the raw filtered array, including shown tombstones. Keep detail identity independent of selection/veto rules, and leave store-scope filters intact. Removal/replacement unbinds stale details; forced disposal always cleans up. The runnable Grid demo supplies native row-local options in application code before Form renders; no new Form option-map API or navigation manager is introduced.[^grid][^form][^page][^containers]
+
+Replace vertical-resize wrappers with heightResize on an authored ancestor and labelled type=button handle, with explicit min/max border-box pixels. The framework owns pointer/keyboard cleanup and three height properties; authors own CSS and visual design. Use reveal(id, { block: "center" }) explicitly from selection/check/add handlers when desired. The measured viewport accounts for both sticky edges; native nonvirtual scrolling uses authored scroll-padding/margins. Use overscroll-behavior: contain rather than old wheel interception. Available APIs do not retire legacy flag/default obligations; those remain in the parity ledger.[^grid][^viewport][^parity]
 
 # Verify
 
@@ -343,7 +349,7 @@ In M4, a valid save sends only the changed raw rows matching `examples/vite/m4/e
 
 # Next
 
-Legacy addTop/indexed add/move/copy workflows now use Rows `add(value, beforeId?)`, `move(id, beforeId?)` and `copy(id, beforeId?)`. Resolve a live target ID from the intended store/view context instead of treating a display index as identity; omit it to append an inserted row. Use `append` separately for loaded clean rows. Copy creates deeply independent stored JSON and a new inserted RowId while preserving business fields. Generate unique application keys before `add` when needed by Tree/server rules. Move does not change dirty status or add a save-payload operation, and value `revert` keeps the current order. The [M10.9 plan](../implementation/m10-parity-plan.md) tracks remaining detail, geometry and semantic closure after [status/row lifecycle](../implementation/m10-lifecycle-plan.md).[^rows]
+Legacy addTop/indexed add/move/copy workflows now use Rows `add(value, beforeId?)`, `move(id, beforeId?)` and `copy(id, beforeId?)`. Resolve a live target ID from the intended store/view context instead of treating a display index as identity; omit it to append an inserted row. Use `append` separately for loaded clean rows. Copy creates deeply independent stored JSON and a new inserted RowId while preserving business fields. Generate unique application keys before `add` when needed by Tree/server rules. Move does not change dirty status or add a save-payload operation, and value `revert` keeps the current order. The [M10.9 plan](../implementation/m10-parity-plan.md) tracks remaining semantic closure after [status/row lifecycle](../implementation/m10-lifecycle-plan.md) and [detail/geometry](../implementation/m10-detail-plan.md).[^rows]
 
 After all required features, the [M13 review and remediation gate](../implementation/m13-review-plan.md) precedes personal testing and separately requested release work.
 

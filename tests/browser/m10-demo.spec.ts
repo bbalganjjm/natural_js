@@ -6,6 +6,178 @@ test.beforeEach(async ({ page }) => {
   await expect(page.locator("[data-grid] tbody tr:not([data-row-template])")).toHaveCount(6);
 });
 
+test("one authored CVC detail page edits nested shared values inline and in Popup independently of selection", async ({ page }) => {
+  await page.locator("[data-disable-inactive]").check();
+  await page.locator("[data-veto-active]").check();
+  const record = page.locator("[data-grid] tbody tr:not([data-row-template])").nth(2);
+  await record.locator('[data-row-action="detail-inline"]').click();
+  const inline = page.locator("[data-detail-inline-host] [data-detail-row]");
+  await expect(inline).toHaveAttribute("data-detail-row", "3");
+  await expect(page.locator("[data-selection]")).toHaveText("No row selected");
+  await inline.locator('[data-field="assignment.chosen"]').selectOption("2");
+  await expect(record.locator('[data-field="assignment.chosen"]')).toHaveValue("2");
+  await expect(page.locator("[data-changes]")).toContainText('"chosen": 2');
+
+  await page.locator("[data-column-choice]").selectOption("salary");
+  await page.locator("[data-column-hidden]").check();
+  await page.locator('[data-action="apply-columns"]').click();
+  await expect(record.locator('[data-field="salary"]')).toHaveCount(0);
+  await inline.locator('[data-field="salary"]').fill("260");
+  await expect(page.locator("[data-changes]")).toContainText('"salary": 260');
+  await record.locator('[data-row-action="detail-popup"]').click();
+  const dialog = page.locator("[data-detail-dialog]");
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "3");
+  await expect(dialog.locator('[data-field="salary"]')).toHaveValue("260");
+  await dialog.locator('[data-field="notes"]').fill("Shared popup edit");
+  await expect(inline.locator('[data-field="notes"]')).toHaveValue("Shared popup edit");
+  const ids = await page.locator("[id]").evaluateAll(elements => elements.map(element => element.id));
+  expect(new Set(ids).size).toBe(ids.length);
+  const axe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"]).analyze();
+  expect(axe.violations.map(violation => violation.id)).toEqual([]);
+  await dialog.locator("[data-detail-close]").click();
+  await expect(dialog).not.toBeVisible();
+  await expect(record.locator('[data-row-action="detail-popup"]')).toBeFocused();
+  await inline.locator("[data-detail-close]").click();
+  await expect(page.locator("[data-detail-inline-host]")).toBeEmpty();
+});
+
+test("detail validation blocks navigation, authored close and Escape while preserving the current draft", async ({ page }) => {
+  await page.locator('[data-grid] [data-row-action="detail-popup"]').first().click();
+  const dialog = page.locator("[data-detail-dialog]");
+  const salary = dialog.locator('[data-field="salary"]');
+  await expect(dialog.locator("[data-detail-previous]")).toBeDisabled();
+  await salary.fill("50");
+  await dialog.locator("[data-detail-next]").click();
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "1");
+  await expect(dialog.locator("[data-detail-error]")).toContainText("Salary must be at least 100.");
+  await expect(salary).toHaveValue("50");
+  await expect(salary).toBeFocused();
+  await dialog.locator("[data-detail-close]").click();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeVisible();
+  await expect(salary).toBeFocused();
+  await salary.fill("180");
+  await dialog.locator("[data-detail-next]").click();
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "2");
+  await dialog.locator("[data-detail-previous]").click();
+  await expect(salary).toHaveValue("180");
+  await expect(dialog.locator("[data-detail-previous]")).toBeDisabled();
+  await dialog.locator("[data-detail-close]").click();
+  await expect(dialog).not.toBeVisible();
+});
+
+test("detail scopes skip tombstones and compute filtered pages from raw projection positions", async ({ page }) => {
+  await page.locator('[data-action="select-first"]').click();
+  await page.locator('[data-action="remove"]').click();
+  await page.locator("[data-status-filter]").selectOption("all");
+  await page.locator("[data-size]").selectOption("2");
+  await page.locator('[data-grid] [data-row-action="detail-popup"]').nth(1).click();
+  const dialog = page.locator("[data-detail-dialog]");
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "2");
+  await expect(dialog.locator("[data-detail-previous]")).toBeDisabled();
+  await dialog.locator("[data-detail-next]").click();
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "3");
+  await expect(page.locator("[data-page-state]")).toContainText("Page 2 of 3");
+  await dialog.locator("[data-detail-scope]").selectOption("visible");
+  await expect(dialog.locator("[data-detail-previous]")).toBeDisabled();
+  await dialog.locator("[data-detail-next]").click();
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "4");
+  await expect(dialog.locator("[data-detail-next]")).toBeDisabled();
+  await dialog.locator("[data-detail-scope]").selectOption("store");
+  await dialog.locator("[data-detail-next]").click();
+  await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "5");
+  await expect(page.locator("[data-page-state]")).toContainText("Page 2 of 3");
+  await dialog.locator("[data-detail-close]").click();
+  await expect(page.locator("[data-scroll-root]")).toBeFocused();
+});
+
+test("detail keeps identity after an edit leaves the filter and store navigation does not clear that filter", async ({ page }) => {
+  await page.locator("[data-filter]").selectOption("Platform");
+  await page.locator('[data-grid] [data-row-action="detail-inline"]').first().click();
+  const inline = page.locator("[data-detail-inline-host] [data-detail-row]");
+  await inline.locator('[data-field="profile.team"]').fill("Support");
+  await expect(inline).toHaveAttribute("data-detail-row", "1");
+  await expect(inline.locator("[data-detail-state]")).toContainText("outside filtered scope");
+  await expect(inline.locator("[data-detail-next]")).toBeDisabled();
+  await inline.locator("[data-detail-scope]").selectOption("store");
+  await inline.locator("[data-detail-next]").click();
+  await expect(inline).toHaveAttribute("data-detail-row", "2");
+  await expect(inline.locator('[data-field="name"]')).toHaveValue("Grace");
+  await expect(page.locator("[data-filter]")).toHaveValue("Platform");
+  await expect(page.locator("[data-grid] tbody tr:not([data-row-template])")).toHaveCount(2);
+  await inline.locator("[data-detail-close]").click();
+  await expect(page.locator("[data-scroll-root]")).toBeFocused();
+});
+
+test("detail removal and force disposal release Forms and stale controls without validating away cleanup", async ({ page }) => {
+  const failures: string[] = [];
+  page.on("pageerror", error => failures.push(error.message));
+  await page.locator('[data-action="select-first"]').click();
+  await page.locator('[data-grid] [data-row-action="detail-inline"]').first().click();
+  const host = page.locator("[data-detail-inline-host]");
+  await host.locator('[data-field="salary"]').fill("50");
+  await page.locator('[data-grid] [data-row-action="detail-inline"]').nth(1).click();
+  await expect(host.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "1");
+  await expect(host.locator('[data-field="salary"]')).toHaveValue("50");
+  await expect(host.locator("[data-detail-error]")).toContainText("Salary must be at least 100.");
+  await page.locator('[data-action="remove"]').click();
+  await expect(host.locator("[data-detail-state]")).toContainText("No current employee");
+  await expect(host.locator("fieldset")).toHaveAttribute("disabled", "");
+  await expect(host.locator('[data-field="name"]')).toBeDisabled();
+  await expect(host.locator("[data-detail-next]")).toBeDisabled();
+  await host.locator("[data-detail-close]").click();
+  await expect(host).toBeEmpty();
+  await page.locator('[data-grid] [data-row-action="detail-inline"]').first().click();
+  await page.locator('[data-action="replace"]').click();
+  await expect(host.locator("[data-detail-state]")).toContainText("No current employee");
+  await host.locator("[data-detail-close]").click();
+  await expect(host).toBeEmpty();
+  await page.locator('[data-grid] [data-row-action="detail-popup"]').first().click();
+  const dialog = page.locator("[data-detail-dialog]");
+  const oldSalary = await dialog.locator('[data-field="salary"]').elementHandle();
+  await dialog.locator('[data-field="salary"]').fill("50");
+  await page.locator('[data-action="dispose"]').evaluate((button: HTMLButtonElement) => button.click());
+  await expect(dialog).not.toBeVisible();
+  await expect(dialog.locator("[data-page-host]")).toBeEmpty();
+  const before = await page.locator("[data-changes]").textContent();
+  await oldSalary!.evaluate((element: HTMLInputElement) => {
+    element.value = "777";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("[data-changes]")).toHaveText(before ?? "");
+  await page.locator('[data-action="rebind"]').click();
+  for (let index = 0; index < 3; index++) {
+    await page.locator('[data-grid] [data-row-action="detail-popup"]').first().click();
+    await expect(dialog.locator('[data-field="salary"]')).toHaveValue("150");
+    await dialog.locator("[data-detail-close]").click();
+    await expect(dialog.locator("[data-page-host]")).toBeEmpty();
+  }
+  expect(failures).toEqual([]);
+});
+
+test("authored height and reveal controls operate the measured Grid without selecting a row", async ({ page }) => {
+  const handle = page.locator("[data-resize-height]");
+  await expect(handle).toHaveAttribute("role", "separator");
+  await expect(handle).toHaveAttribute("aria-valuemin", "160");
+  await expect(handle).toHaveAttribute("aria-valuemax", "800");
+  await handle.focus();
+  await page.keyboard.press("End");
+  await expect(handle).toHaveAttribute("aria-valuenow", "800");
+  await page.keyboard.press("Shift+ArrowUp");
+  await expect(handle).toHaveAttribute("aria-valuenow", "799");
+  await page.keyboard.press("Home");
+  await expect(handle).toHaveAttribute("aria-valuenow", "160");
+  await page.locator("[data-viewport]").check();
+  await page.locator("[data-dataset]").selectOption("5000");
+  await page.locator("[data-reveal-block]").selectOption("center");
+  await page.locator('[data-action="reveal"]').click();
+  await expect(page.locator('[data-grid] [data-field="name"]', { hasText: "NEW EMPLOYEE 2500" })).toHaveCount(1);
+  await expect(page.locator("[data-selection]")).toHaveText("No row selected");
+  expect(await page.locator('[data-grid] tbody tr:not([aria-hidden="true"])').count()).toBeLessThan(80);
+});
+
 test("authored table binds raw nested choices, formatter, and accessible labels", async ({ page }) => {
   const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await expect(rows.first().locator('[data-field="name"]')).toHaveText("ADA");

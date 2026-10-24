@@ -16,7 +16,9 @@ import { compileGridBody } from "./grid-row-blocks.js";
 import { display, displayField, fieldValue, nativeMessage, disabled as controlDisabled } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createGridHooks } from "./grid-hooks.js";
+import { bindGridHeight, validateGridHeight } from "./grid-height.js";
 import type { GridRowBinding } from "./grid-hooks.js";
+import type { GridHeightOptions } from "./grid-height.js";
 import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
@@ -140,6 +142,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     readonly mounted: number; readonly event: RowsEvent | null }) => void;
   initialPage?: PageRequest;
   viewport?: { root: HTMLElement; estimate: number; overscan?: number };
+  heightResize?: GridHeightOptions;
   rules?: RuleSet;
   parse?: Record<string, ParseInput>;
   paste?: boolean;
@@ -187,6 +190,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const empty = emptyMarkers[0];
   const restoreEmpty = empty && restoreAttributes(empty, ["hidden"]);
   if (options.viewport !== undefined) validateGridViewport(root, templates, options.viewport);
+  if (options.heightResize !== undefined) validateGridHeight(root, options.heightResize, options.viewport?.root);
   body.validate();
   const validateOn = options.validateOn ?? "change";
   if (!["change", "blur", "manual"].includes(validateOn) ||
@@ -393,6 +397,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   let rootFocusTabIndex = false;
   const authoredHeaders = new Set(root.tHead?.querySelectorAll<HTMLTableCellElement>("th") ?? []);
   let viewport: ReturnType<typeof createGridViewport> | undefined;
+  let height: ReturnType<typeof bindGridHeight> | undefined;
   if (options.onColumnsChange !== undefined && typeof options.onColumnsChange !== "function") {
     throw gridError("GRID_COLUMNS", "onColumnsChange must be a function.");
   }
@@ -440,11 +445,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   let pageState: PageState | null = null;
   let sortIndicator: SortIndicator | null = null;
   const headerOriginals = new Map<HTMLTableCellElement, string | null>();
-  let visibleIds: RowId[] = [];
+  let visibleIds: readonly RowId[] = Object.freeze([]);
   let visibleIndexes = new Map<RowId, number>();
   let mergeKeys = new Map<RowId, readonly unknown[]>();
   let mountedIds: readonly RowId[] = [];
-  let filteredIds: RowId[] = [];
+  let filteredIds: readonly RowId[] = Object.freeze([]);
   let viewRevision = 0;
   let sortKey: string | null = null;
   let disposed = false;
@@ -1056,12 +1061,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       pageState = pageRequest ? Object.freeze({ page, size: pageRequest.size, total: filtered.length, pages }) : null;
       const displayed = pageRequest ? filtered.slice((page - 1) * pageRequest.size, page * pageRequest.size) : filtered;
       const nextMergeKeys = body.merged ? new Map(displayed.map(row => [row.id, body.keys(row.value)])) : mergeKeys;
-      const nextIds = displayed.map(row => row.id);
+      const nextIds = Object.freeze(displayed.map(row => row.id));
       viewport?.set(nextIds);
       visibleIds = nextIds;
       if (viewport || body.merged || options.revealInvalid) visibleIndexes = new Map(nextIds.map((id, index) => [id, index]));
       mergeKeys = nextMergeKeys;
-      filteredIds = filtered.map(row => row.id);
+      filteredIds = Object.freeze(filtered.map(row => row.id));
       root.setAttribute("data-changed", String(options.rows.changes().length > 0));
       const emptyFocus = empty?.contains(root.ownerDocument.activeElement) && nextIds.length > 0;
       if (empty) empty.hidden = nextIds.length > 0;
@@ -1301,22 +1306,32 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (button && id !== undefined && !button.matches(":disabled")) selection.choose(id, event);
   }
 
-  function reveal(id: RowId): void {
+  function reveal(id: RowId, request?: { block?: ScrollLogicalPosition }): void {
     active();
+    if (request !== undefined && (!request || typeof request !== "object" || Array.isArray(request))) {
+      throw gridError("GRID_VIEWPORT_ALIGN", "Reveal options need a block of nearest, start, center or end.");
+    }
+    const requested = request?.block;
+    const block = requested === undefined ? "nearest" : requested;
+    active();
+    if (!["nearest", "start", "center", "end"].includes(block)) {
+      throw gridError("GRID_VIEWPORT_ALIGN", "Reveal options need a block of nearest, start, center or end.");
+    }
     const row = options.rows.get(id);
     if (!row || !visibleIds.includes(id)) {
       throw gridError("GRID_VIEWPORT_ROW", "Reveal needs a row in the current logical page.", { id });
     }
     if (viewport) {
       const previousScroll = options.viewport!.root.scrollTop;
-      try { viewport.reveal(id); renderWindow(); }
+      try { viewport.reveal(id, block); renderWindow(); }
       catch (cause) {
+        if (disposed) throw cause;
         viewport.set(visibleIds, false);
         options.viewport!.root.scrollTop = previousScroll;
         throw cause;
       }
     }
-    else records.get(id)?.elements.find(element => element.getClientRects().length)?.scrollIntoView({ block: "nearest", inline: "nearest" });
+    else records.get(id)?.elements.find(element => element.getClientRects().length)?.scrollIntoView({ block, inline: "nearest" });
   }
 
   function rowControls(record: RenderedRow<T>): HTMLElement[] {
@@ -1737,6 +1752,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   try {
     if (options.viewport) viewport = createGridViewport(root, anchor.parentElement as HTMLTableSectionElement,
       anchor, options.viewport, renderWindow);
+    if (options.heightResize) height = bindGridHeight(root, options.heightResize);
     for (const element of filterElements) {
       const select = element as HTMLSelectElement;
       const key = select.getAttribute("data-filter-column")!;
@@ -1765,6 +1781,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     root.removeEventListener("keydown", onKeyDown);
     root.removeEventListener("paste", onPaste);
     root.removeEventListener("focusout", onFocusOut);
+    height?.dispose();
     viewport?.dispose();
     if (options.viewport) {
       restoreAria();
@@ -1783,6 +1800,13 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   return {
+    rowIds(scope) {
+      active();
+      if (scope === "visible") return visibleIds;
+      if (scope === "filtered") return filteredIds;
+      if (scope === "store") return Object.freeze(options.rows.entries().map(row => row.id));
+      throw gridError("GRID_SCOPE", "A Grid row scope must be visible, filtered or store.");
+    },
     defaults,
     refresh() {
       bindable();
@@ -1887,6 +1911,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       root.removeEventListener("keydown", onKeyDown);
       root.removeEventListener("paste", onPaste);
       root.removeEventListener("focusout", onFocusOut);
+      height?.dispose();
       viewport?.dispose();
       if (options.viewport) {
         restoreAria();

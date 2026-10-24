@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.5 detail navigation and geometry](m10-detail-plan.md) - Compose validated row details through CVC and add authored height controls and occlusion-aware reveal to the existing Grid. (draft)
+
 * [Natural-JS 2.0 M10.9.4 status and row lifecycle](m10-lifecycle-plan.md) - Preserve row identity through explicit status views, authored defaults, row cleanup, clean batch append and empty markup. (draft)
 
 * [Natural-JS 2.0 M10.9.3 controls and validation](m10-controls-plan.md) - Complete Grid control values, explicit display, exclusive checks and validation interaction using shared native field semantics. (draft)

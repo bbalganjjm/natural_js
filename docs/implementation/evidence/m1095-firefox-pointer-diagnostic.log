@@ -1,0 +1,36 @@
+
+[WebServer] (node:2156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+
+(node:1200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [firefox] › node_modules\.cache\m1095-geometry-diagnostic.spec.mjs:140:1 › native captured pointer dragging commits measured height and releases capture
+[firefox] › node_modules\.cache\m1095-geometry-diagnostic.spec.mjs:140:1 › native captured pointer dragging commits measured height and releases capture
+GEOMETRY_DIAGNOSTIC {"bounds":{"x":8,"y":690.4000244140625,"width":89.86666870117188,"height":22},"viewport":{"width":1280,"height":720},"trace":[{"type":"scroll","scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":400,"handleTop":690.4000244140625,"focus":false},{"type":"pointermove","clientY":701,"pageY":770,"screenY":790,"buttons":0,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":400,"handleTop":690.4000244140625,"focus":false,"captured":false},{"type":"pointerdown","clientY":701,"pageY":770,"screenY":790,"buttons":1,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":400,"handleTop":690.4000244140625,"focus":false,"captured":false},{"type":"gotpointercapture","clientY":718,"pageY":787,"screenY":807,"buttons":1,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":400,"handleTop":690.4000244140625,"focus":true,"captured":true},{"type":"pointermove","clientY":718,"pageY":787,"screenY":807,"buttons":1,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":400,"handleTop":690.4000244140625,"focus":true,"captured":true},{"type":"pointermove","clientY":-85,"pageY":-16,"screenY":4,"buttons":0,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":417,"handleTop":707.4000244140625,"focus":true,"captured":true},{"type":"pointermove","clientY":-85,"pageY":-16,"screenY":4,"buttons":0,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":417,"handleTop":707.4000244140625,"focus":true,"captured":true},{"type":"pointermove","clientY":-85,"pageY":-16,"screenY":4,"buttons":0,"pointer":0,"scrollY":69,"viewport":720,"rootTop":290.3999938964844,"height":417,"handleTop":707.4000244140625,"focus":true,"captured":true}]}
+
+  1) [firefox] › node_modules\.cache\m1095-geometry-diagnostic.spec.mjs:140:1 › native captured pointer dragging commits measured height and releases capture 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-height-handle]')
+    Expected: "470"
+    Received: "160"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('[data-height-handle]') with timeout 5000ms
+      - waiting for locator('[data-height-handle]')
+        14 × locator resolved to <button type="button" role="separator" aria-valuemin="160" aria-valuemax="800" aria-valuenow="160" data-height-handle="" aria-valuetext="160px" aria-orientation="horizontal" aria-controls="njs-grid-height-1" aria-label="Resize employee grid height" aria-keyshortcuts="ArrowUp ArrowDown Shift+ArrowUp Shift+ArrowDown Home End">Resize height</button>
+           - unexpected value "160"
+
+        at D:\workspace\natural_js\node_modules\.cache\m1095-geometry-diagnostic.spec.mjs:152:23
+
+    Error Context: test-results\m1095-geometry-diagnostic--5e466-height-and-releases-capture-firefox\error-context.md
+
+
+  1 failed
+    [firefox] › node_modules\.cache\m1095-geometry-diagnostic.spec.mjs:140:1 › native captured pointer dragging commits measured height and releases capture 

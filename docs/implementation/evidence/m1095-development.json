@@ -1,0 +1,39 @@
+{
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "tests/playwright.config.ts",
+    "tests/browser/grid-detail.spec.ts",
+    "--project=chromium",
+    "--workers=1",
+    "--reporter=line",
+    "--grep",
+    "combined viewport and height cleanup"
+  ],
+  "exit_code": 1,
+  "grid_sha256": "0951d49372f920f217170c990201605160f5720705f6a55093179d64ecd1497a",
+  "finding": "Viewport bound before height but disposed first; original absent style becomes an empty attribute.",
+  "log": "m1095-dispose-order-red.log",
+  "firefox_native_pointer": {
+    "failed_gate": "m1095-browser-firefox.log",
+    "diagnostic": "m1095-firefox-pointer-diagnostic.log",
+    "diagnostic_sha256": "3312f04283fe843741d4106546789cfa0284ae642ef4ec409e64c5938bffdde9",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "start_y": 701.4,
+    "intended_end_y": 771.4,
+    "observed_released_pointer_client_y": -85,
+    "observed_buttons": 0,
+    "correction": "Center the handle and assert the complete 70px drag plus late-move coordinates stay inside the viewport; preserve the exact 470px result. No weakened threshold or timeout.",
+    "diagnostic_limit": "Ignored copied harness instruments original events; earlier setup attempts are not certification of final inputs."
+  },
+  "lost_mouse_primary": {
+    "log": "m1095-lost-primary-red.log",
+    "sha256": "43435341fe3bf3e3de3a96ccf111e4c8a1beb1281a77b8d3933a2ffdc9ca2f64",
+    "finding": "An active captured mouse gesture continued resizing after buttons became zero; a late release committed 800px instead of cancelling to the exact original 400px.",
+    "correction": "Cancel a mouse drag when the primary button bit is absent; retain ordinary pointerup commit and existing cancellation cleanup."
+  }
+}
