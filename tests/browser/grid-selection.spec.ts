@@ -481,9 +481,12 @@ test("column choices keep raw scalar identity and count other filters before pag
   });
   const all = [{ value: 1, label: "number: 1", count: 2 }, { value: "1", label: "string: 1", count: 2 },
     { value: 2, label: "number: 2", count: 1 }, { value: null, label: "Unassigned", count: 1 }];
-  const blue = [{ value: "1", label: "string: 1", count: 1 }, { value: 1, label: "number: 1", count: 1 }, { value: null, label: "Unassigned", count: 1 }];
+  const blue = [{ value: 1, label: "number: 1", count: 1 }, { value: "1", label: "string: 1", count: 1 },
+    { value: 2, label: "number: 2", count: 0 }, { value: null, label: "Unassigned", count: 1 }];
   expect(result).toEqual({ all, selfExcluded: all, otherFilter: blue, groupChoices: [{ value: "red", label: "red", count: 1 }, { value: "blue", label: "blue", count: 1 }],
-    manualAndOther: blue, search: [{ value: 1, label: "number: 1", count: 1 }], selected: [1], rawText: ["Bjarne"], none: 0, reset: null, frozen: true, storeEvents: 0 });
+    manualAndOther: [blue[1], blue[0], blue[2], blue[3]],
+    search: [{ value: 1, label: "number: 1", count: 1 }, { value: 2, label: "number: 2", count: 0 }],
+    selected: [1], rawText: ["Bjarne"], none: 0, reset: null, frozen: true, storeEvents: 0 });
 });
 
 test("authored filter selects retain raw values and search narrows only the choices", async ({ page }) => {

@@ -6,6 +6,14 @@ tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
 sources:
+  - id: filter-browser
+    resource: ../../tests/browser/grid-filter-apply.spec.ts
+    title: Applied search, zero counts and callback ownership regressions
+    git_blob: 3b343f4fd1a39c9ca575972bf980f74b4d8bf6cf
+  - id: toggle-browser
+    resource: ../../tests/browser/grid-toggle.spec.ts
+    title: Native selection toggle, veto and lifecycle regressions
+    git_blob: 12977459c39dd2231fd215d7fa8fd47e651619c1
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
@@ -13,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
+    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -57,11 +65,11 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private active identity, membership, eligibility, and transition ordering
-    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
+    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private scalar column filters and choice counts
-    git_blob: 9503e0aa8b72fc577f50b4ef992b9ab60bd84c1c
+    git_blob: a9a6604b72bf9077bf8cbf8f8db91bf0c774f7a8
   - id: select
     resource: ../../src/ui/select.ts
     title: Native Select binding reused for header filters
@@ -89,7 +97,7 @@ sources:
   - id: checks-browser
     resource: ../../tests/browser/grid-selection.spec.ts
     title: Independent membership and exclusive check regressions
-    git_blob: 699235cbb85f7f3aaf0a2ad08d6b875d01786317
+    git_blob: 118e0325d6bf6b6b8b7c723c8c31b2bc2bc0b897
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Safe nested field paths
@@ -102,10 +110,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -170,6 +178,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `onColumnsChange` | Optional callback after committed layout changes; programmatic changes pass `event: null`. |
 | `onSelect` | `({ id, row, event }) => void` after active detail identity changes; `id` and `row` may be `null`. It does not report selected or checked membership. |
 | `multiple` | Optional boolean, default `false`. Enables batch mouse/keyboard gestures on row selection buttons; full-set methods work in both modes. |
+| `toggleSelection` | Optional boolean, default `false`. Unmodified select-button activation toggles single active identity or clicked multiple membership; see [explicit toggles](#explicit-selection-toggles). |
 | `canSelect` | `(row: RowSnapshot<T>) => boolean`; eligibility for active detail and selected membership, default all nondeleted rows. |
 | `canCheck` | `(row: RowSnapshot<T>) => boolean`; checked membership eligibility, default all nondeleted rows. |
 | `checkMode` | `"multiple"` (default) or `"single"`; single mode permits zero or one checked ID and atomically replaces the previous ID when another row is checked. |
@@ -207,6 +216,7 @@ Eligibility callbacks must return strict booleans. Keep eligibility, comparator,
 | `data-sort-column="key"` | Header button in a `th` | `type="button"`; requires a matching `sorts` entry and cycles ascending, descending, clear. |
 | `data-filter-column="key"` | Header `select multiple` | Requires a matching `filters` entry; binds raw choices through the existing Select component. |
 | `data-filter-search="key"` | Header text/search input | Narrows matching choice labels without changing row filtering. |
+| `data-apply-filter="key"` | Header button | `type="button"`, configured filter key and exactly one matching search input; applies matching raw values through click/plain Enter. |
 | `data-clear-filter="key"` | Header button | `type="button"`; resets this column filter to `null`. |
 | `data-row-action="name"` | Row button | Named `type="button"` action requiring `onRowAction`; cannot also be `data-select-row` and does not implicitly select or check. |
 | `data-options="path"` | Select | Finds the row-local array of option objects, separate from the selected `data-field`. |
@@ -292,7 +302,7 @@ In multiple mode, `checkAll(true, scope)` adds every eligible scope ID and prese
 
 Column keys must be configured in `filters`. `columnFilter` returns a frozen raw scalar array or `null`. `setColumnFilter` accepts a complete array of strings, finite numbers, booleans or `null`; duplicates are normalized. `null` means all values, `[]` means none, and `[null]` means only the raw null value. Numeric `1` and string `"1"` remain distinct. Column predicates combine with AND and with the separate predicate from `setFilter`.[^filters]
 
-`filterChoices` returns a frozen array of frozen `GridFilterChoice` values, `{ value, label, count }`, in first store-occurrence order. Counts apply the manual predicate and every other column filter, exclude this column's own filter, and ignore paging. Without a label function, labels use `String(value ?? "")`. Optional search is a case-insensitive label substring; it narrows choices only and leaves filter state unchanged.[^filters]
+`filterChoices` returns a frozen array of frozen `GridFilterChoice` values, `{ value, label, count }`, in first store-occurrence order. The value universe comes from status-projected rows passing the manual predicate. Counts additionally apply every other column filter, exclude this column's own filter, and ignore paging. Values excluded by another column remain present with count zero and stay selectable. Zero counts never erase an explicit selection. Without a label function, labels use `String(value ?? "")`. Optional search is a case-insensitive label substring; it narrows choices only and leaves filter state unchanged.[^filters]
 
 Authored filter selects display `label (count)` through `bindSelect`. Editing the displayed choices preserves selected raw values hidden by the current search or other filters. Resetting the column sets `null`; it does not clear the search input. Original Select nodes, selection and ownership are restored on disposal or failed binding; do not bind the same control separately while Grid owns it.[^grid][^select]
 
@@ -389,6 +399,30 @@ Deleting/replacing Rows or changing eligibility prunes unavailable state without
 
 # Behavior
 
+## Explicit selection toggles
+
+Set toggleSelection: true to enable plain activation toggles while preserving the existing default. In single mode, activating the active row clears it. In multiple mode, activating an unselected row adds and activates it; activating any selected member removes only that member and sets active identity to null, preserving other members and checks. This uses the existing atomic before hooks and callback order. A veto leaves state and DOM unchanged; post-callback errors retain the committed state.[^selection]
+
+Ctrl/Meta/Shift/Alt gestures keep their existing behavior. Native Enter/Space on the authored selection button produces one ordinary click and follows the same policy. Programmatic select(id) stays idempotent and active-only; setSelected and setChecked remain absolute independent set operations. No row-wide click handler or extra keyboard activation handler is added.[^selection][^grid][^toggle-browser]
+
+## Apply a choice search
+
+~~~html
+<label>Team search <input type="search" data-filter-search="team"></label>
+<button type="button" data-apply-filter="team">Apply matches</button>
+<label>Teams <select multiple data-filter-column="team"></select></label>
+~~~
+
+The Apply marker requires a configured filter key and exactly one matching authored search/text input in this table header. Input alone still previews choices. Apply replaces that column's complete filter with the matching raw values; no matches uses [], and blank/whitespace clears to null then clears the input if the completion callback has not replaced its query. A callback that disposes Grid releases ownership before any subsequent Apply UI writes. Plain Enter applies only when a matching enabled Apply button exists. Composing input, modifier keys and disabled controls do not apply; handled Enter prevents native form submission. Existing data-clear-filter resets membership and keeps the search input.[^grid][^filters]
+
+Filter value/label callbacks must be synchronous and pure. Choice calculation rejects a stale result if Rows, the manual predicate or column-filter state changes before publication. This is a local cache safeguard, not a general callback transaction. A rendering-preparation failure restores the previous filter/view; a completion callback failure after commit keeps the new state. Apply reuses those existing boundaries.[^filters][^grid][^filter-browser]
+
+## Authored column recovery
+
+Compose labeled checkboxes with columns(), setColumns() and onColumnsChange. Derive checked, mixed and shown/total output from current columns; keep no second selection store. Map the full current state and change only hidden so widths, order and topology survive. The demo keeps an authored actions/recovery column out of business-column choices and forces it visible for chooser writes. All business columns may hide, while that physical column and the external chooser still allow recovery. Arbitrary all-physical-hidden API writes still raise GRID_COLUMNS.[^columns]
+
+Synchronize from committed state before outward application callbacks, or in the handler's finally refresh. Invalid layout/preparation fails before a layout commit; an onColumnsChange error occurs afterward. Native checkbox focus remains in the chooser; hiding an editor uses the existing visible same-record/header/table fallback. These are application compositions using the current layout owner, not a new public chooser component.[^columns][^grid]
+
 ## Height controls
 
 The `heightResize` handle must be a same-document `button type="button"` outside the target table, named by authored aria-label or aria-labelledby. The runtime gives it a focusable horizontal separator role, a unique root `aria-controls` connection and measured value/bounds. Primary pointer movement adjusts height; ArrowUp/Down change ten pixels, Shift changes one, and Home/End select configured bounds. Escape, pointer cancellation, lost capture or mouse movement after the primary button was released restores pre-drag height properties. Disabled, hidden or inert controls do nothing. Pointer previews coalesce per animation frame; existing viewport observation owns row recalculation.[^height][^geometry-browser]
@@ -476,7 +510,7 @@ Inside a `data-merge` cell, returned DOM must also stay display-only: native int
 
 Each cloned `data-error-for` region receives a document-unique ID and `aria-live="polite"` if not authored. The matching field control includes that ID in `aria-describedby`; failed validation sets `aria-invalid="true"` and writes issue text. A pass restores the control's authored `aria-invalid` state. The table retains native semantics and does not acquire `role="grid"`. When the focused row leaves the visible slice, focus moves to another available control, header button, or the table root. Authors still provide labels and table headings.[^grid]
 
-With `multiple: false`, row buttons keep their existing active-detail behavior. With `multiple: true`, a plain activation replaces selected membership, Ctrl/Meta toggles one ID, Shift replaces it with the eligible range in current visible page order, and Ctrl/Meta+Shift adds that range. Range selection excludes `canSelect`-ineligible rows; an anchor outside the page cannot extend across pages. ArrowUp/ArrowDown/Home/End move focus among eligible logical-page selection buttons, revealing offscreen targets in viewport mode; adding Shift also selects the range, starting from the focused row when no visible anchor exists. Ctrl/Meta+A replaces membership with eligible visible IDs, and Escape clears membership while retaining active detail identity. Enter/Space use native button activation; checkboxes and header controls keep native keyboard behavior. These Grid shortcuts apply only while a row selection button has focus, preserving editor shortcuts.[^grid][^selection]
+With the default `toggleSelection: false`, single row buttons keep their existing active-detail behavior and a multiple plain activation replaces selected membership. With `multiple: true`, Ctrl/Meta toggles one ID, Shift replaces it with the eligible range in current visible page order, and Ctrl/Meta+Shift adds that range. Range selection excludes `canSelect`-ineligible rows; an anchor outside the page cannot extend across pages. ArrowUp/ArrowDown/Home/End move focus among eligible logical-page selection buttons, revealing offscreen targets in viewport mode; adding Shift also selects the range, starting from the focused row when no visible anchor exists. Ctrl/Meta+A replaces membership with eligible visible IDs, and Escape clears membership while retaining active detail identity. Enter/Space use native button activation; checkboxes and header controls keep native keyboard behavior. These Grid shortcuts apply only while a row selection button has focus, preserving editor shortcuts.[^grid][^selection]
 
 # Pitfalls
 
@@ -502,7 +536,7 @@ With `multiple: false`, row buttons keep their existing active-detail behavior. 
 | `GRID_VIEWPORT_ALIGN`, `GRID_SCOPE` | Malformed reveal options/alignment or an unknown rowIds scope. |
 | `GRID_HEIGHT` | Invalid root/handle/bounds/name, duplicate root ID or a height root/handle already owned by another binding. |
 | `GRID_SELECTION`, `GRID_CHECK` | Invalid mode/callback/eligibility result, ID batch, before-hook result, check scope/flag, or stale reentrant transition. |
-| `GRID_FILTER` | Unknown column key, invalid scalar filter/value/label/search, predicate, or authored filter control. |
+| `GRID_FILTER` | Unknown column key, invalid scalar filter/value/label/search, predicate or authored filter control, or stale choice calculation after a Rows/manual/column mutation. |
 | `GRID_ACTION` | Invalid action callback or named row action button. |
 | `GRID_PASTE` | Invalid native-paste option or result callback. |
 | `GRID_PASTE_TEXT`, `GRID_PASTE_TARGET` | Non-string API input, malformed quoted TSV, or missing/nonvisible/ambiguous start. Malformed TSV becomes a returned `paste` issue; invalid API input or target throws. |
@@ -547,3 +581,7 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^owner]: Shared Select ownership
 [^hooks]: Private synchronous row binding and resource ownership
 [^lifecycle-browser]: Status, defaults, callbacks, cleanup, empty state and failure regressions
+
+[^toggle-browser]: Native selection toggle, veto and lifecycle regressions
+
+[^filter-browser]: Applied search, zero counts and callback ownership regressions

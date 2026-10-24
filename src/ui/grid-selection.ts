@@ -12,6 +12,7 @@ interface ActiveChange<T> {
 export function createGridSelection<T extends object>(options: {
   rows: Rows<T>;
   multiple?: boolean;
+  toggleSelection?: boolean;
   checkMode?: "multiple" | "single";
   canSelect?: (row: RowSnapshot<T>) => boolean;
   canCheck?: (row: RowSnapshot<T>) => boolean;
@@ -41,6 +42,9 @@ export function createGridSelection<T extends object>(options: {
 
   if (options.multiple !== undefined && typeof options.multiple !== "boolean") {
     fail("GRID_SELECTION", "Grid multiple selection must be a boolean.");
+  }
+  if (options.toggleSelection !== undefined && typeof options.toggleSelection !== "boolean") {
+    fail("GRID_SELECTION", "Grid toggleSelection must be a boolean.");
   }
   if (options.checkMode !== undefined && options.checkMode !== "multiple" && options.checkMode !== "single") {
     fail("GRID_CHECK_MODE", "Grid checkMode must be multiple or single.");
@@ -188,9 +192,11 @@ export function createGridSelection<T extends object>(options: {
     choose(id: RowId, event: MouseEvent | KeyboardEvent, origin?: RowId): boolean {
       const unchanged = checkpoint("selection");
       if (!eligible(id, "selection")) { unchanged(); return false; }
+      const toggle = options.toggleSelection && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
       if (!options.multiple) {
-        return changeSelection(id, selection, event, anchor, unchanged);
+        return changeSelection(toggle && selected === id ? null : id, selection, event, anchor, unchanged);
       }
+      let nextId: RowId | null = id;
       let nextAnchor = id;
       let ids: Set<RowId>;
       if (event.shiftKey) {
@@ -203,11 +209,12 @@ export function createGridSelection<T extends object>(options: {
         ids = new Set(event.ctrlKey || event.metaKey ? selection : []);
         for (const target of range) if (eligible(target, "selection")) ids.add(target);
         if (start >= 0 && rangeAnchor !== null) nextAnchor = rangeAnchor;
-      } else if (event.ctrlKey || event.metaKey) {
+      } else if (event.ctrlKey || event.metaKey || toggle) {
         ids = new Set(selection);
         if (!ids.delete(id)) ids.add(id);
+        else if (toggle) nextId = null;
       } else ids = new Set([id]);
-      return changeSelection(id, ordered(ids), event, nextAnchor, unchanged);
+      return changeSelection(nextId, ordered(ids), event, nextAnchor, unchanged);
     },
     checkAll(checked: boolean, scope: GridRowScope, event: Event | null = null): void {
       if (typeof checked !== "boolean") fail("GRID_CHECK", "Grid check-all requires a boolean.");

@@ -48,7 +48,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
+    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -136,15 +136,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 5fb336d40e62f53e16ea51ac372517b2e391eceb
+    git_blob: b944d2e956b0c36d785ce140e156ec3286e1fd23
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+    git_blob: 4257da35d31c0303b536cc02c1e9131d0dd8edfa
+generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -329,6 +329,16 @@ An unused helper unrelated to framework behavior may be removed after checking d
 For legacy Grid more/detail workflows, author a detail view and run it through the same PageDefinition in main content or openPopup. Share Rows with bindForm, validate the current ID before previous/next and authored close/native cancel, then re-read grid.rowIds(scope) because validation can commit edits that change ordering/filter membership. Skip tombstones before Form binding; filtered cross-page placement uses the raw filtered array, including shown tombstones. Keep detail identity independent of selection/veto rules, and leave store-scope filters intact. Removal/replacement unbinds stale details; forced disposal always cleans up. The runnable Grid demo supplies native row-local options in application code before Form renders; no new Form option-map API or navigation manager is introduced.[^grid][^form][^page][^containers]
 
 Replace vertical-resize wrappers with heightResize on an authored ancestor and labelled type=button handle, with explicit min/max border-box pixels. The framework owns pointer/keyboard cleanup and three height properties; authors own CSS and visual design. Use reveal(id, { block: "center" }) explicitly from selection/check/add handlers when desired. The measured viewport accounts for both sticky edges; native nonvirtual scrolling uses authored scroll-padding/margins. Use overscroll-behavior: contain rather than old wheel interception. Available APIs do not retire legacy flag/default obligations; those remain in the parity ledger.[^grid][^viewport][^parity]
+
+## 8. Preserve selection, filter and recovery workflows
+
+For legacy single selection with unselect enabled, use toggleSelection: true; for legacy multiselect use multiple: true with toggleSelection: true. Native unmodified activation toggles active identity in single mode. In multiple mode it toggles the clicked membership and clears active identity when removing any member. Existing programmatic select remains absolute. Modifier gestures use the documented modern range/toggle behavior. Row-wide activation and full callback/default equivalence remain required in the semantic review.[^grid]
+
+Keep data-filter-search for preview and add a type=button data-apply-filter="key" for explicit matching-value application and plain Enter. Blank Apply clears; no match selects none. Other-column exclusions now remain visible as zero-count choices, and explicit selections survive. Legacy All that also clears search is an application handler that clears the input and calls setColumnFilter(key,null); the existing clear marker alone still preserves search.[^grid]
+
+Compose a native column chooser from complete columns() state. Exclude an authored actions/recovery column from business choices and force it visible for those writes. This supports hiding every business column without allowing an invalid all-physical-hidden layout. Derive shown/total, All and mixed state from live columns; do not copy the old unmaintained count element or maintain another state store.[^grid]
+
+For action scroll, check successful resulting identity/state and current rowIds("visible") before reveal. Use the last requested ID for selection/check centering, center indexed insertion, start/end for front/end insertion, and end for a nonempty batch appended to a previously nonempty store. Opt-out, veto, errors and offpage/filtered targets do not scroll or change page/filter. To show the last invalid visible row, disable first-invalid reveal, call validate(), collect issue IDs, then scan the current visual page in reverse and reveal its last issue at center. Issue array order is store order and may differ after sorting. Preserve focus; application code owns the policy. The [demo](grid-demo.md) exercises these compositions.[^grid]
 
 # Verify
 

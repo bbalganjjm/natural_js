@@ -12,11 +12,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and dependency order
-    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
+    git_blob: 4257da35d31c0303b536cc02c1e9131d0dd8edfa
   - id: coverage
     resource: feature-parity.md
     title: Framework behavior coverage and approved omission boundary
-    git_blob: 5fb336d40e62f53e16ea51ac372517b2e391eceb
+    git_blob: b944d2e956b0c36d785ce140e156ec3286e1fd23
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Source truth, independent review and documentation upkeep
@@ -24,7 +24,7 @@ sources:
   - id: architecture
     resource: ../v2/architecture.md
     title: Public ownership, one-way dependencies and private sharing
-    git_blob: 8aa188569c26384cbc3084ac501c0cc2bbde2a41
+    git_blob: f0a0e483d79d096a6d4e2f5f6d69c1534ce4c796
   - id: evaluation
     resource: m8-eval.md
     title: Fixed agent tasks and honest read-cost accounting

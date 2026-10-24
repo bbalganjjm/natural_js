@@ -1,0 +1,1 @@
+examples/vite/m10/demo.ts(393,5): error TS2353: Object literal may only specify known properties, and 'toggleSelection' does not exist in type '{ rows: Rows<Employee>; statusFilter?: readonly RowStatus[] | undefined; beforeRowBind?: ((context: GridRowBinding<Employee>) => void) | undefined; ... 26 more ...; onColumnsChange?: ((change: { ...; }) => void) | undefined; }'.

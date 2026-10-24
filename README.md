@@ -16,6 +16,8 @@ The new 2.0 source and package use Apache-2.0. The preserved 1.x code, bundles, 
 
 The Grid demo uses one authored CVC detail page inline and in Popup, validates previous/next and close actions, and shares edits with the table. Frozen row scopes expose logical identity independently of mounted DOM and selection. Authored height controls support pointer and keyboard resizing, while explicit reveal alignment accounts for both sticky edges in the measured viewport.
 
+Grid can opt into native selection toggles with `toggleSelection`; authored filter Apply buttons complement search previews and zero-count choices. The demo composes native column checkboxes, a persistent recovery column and action-driven scrolling through existing Grid handles, without another public component or state store.
+
 ## Build and check
 
 Run `npm ci`, `npm run build`, `npm run typecheck`, `npm test`, `npm run test:consumers`, and `npm run test:browser` from the repository root. Registry publication is deferred; use the locally packed artifact to test this 2.0 candidate. Browser checks need Playwright binaries installed with `npx playwright install chromium firefox webkit`. `npm run example` starts the authored-HTML Vite fixture.

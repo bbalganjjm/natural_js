@@ -1,0 +1,66 @@
+
+
+Running 55 tests using 1 worker
+
+
+
+[1/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:62:1 › choices keep occurrence order and zero counts inside manual and status domains
+[2/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:80:1 › preview stays separate and Apply replaces the complete raw filter
+[3/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:90:1 › no matches means none and whitespace Apply clears the column and preview
+[4/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:100:1 › boolean and null choices keep raw identities while applying labels
+[5/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:110:1 › plain Enter applies without implicit form submission
+[6/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:116:1 › composing modifier and disabled gestures do not apply or prevent defaults
+[7/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:134:1 › a search without an authored Apply keeps Enter preview-only
+[8/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:148:1 › blank no-op refreshes choices and Clear preserves its search contract
+[9/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:159:1 › Apply preserves other filters paging identities checks and hidden drafts
+[10/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:181:1 › invalid Apply declarations fail before DOM ownership
+[11/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:201:1 › preparation failures retain the previous filter view page and data
+[12/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:217:1 › post-commit bind failure retains the committed state and query
+[13/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:229:1 › one-shot Rows manual and column mutations cannot publish stale choices
+[14/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:255:1 › independent native headers stay accessible and exact disposal leaves late controls quiet
+[15/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:273:1 › Enter uses an enabled matching Apply when another matching button is disabled
+[16/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:285:1 › zero-count raw values and labels retain synchronous scalar validation
+[17/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:307:1 › completion disposal leaves restored application input state untouched
+[18/55] [chromium] › tests\browser\grid-filter-apply.spec.ts:321:1 › completion callbacks retain a newer live query and a replacement Grid owner
+[19/55] [chromium] › tests\browser\grid-selection.spec.ts:106:1 › active detail stays independent from immutable store-ordered membership and checks
+[20/55] [chromium] › tests\browser\grid-selection.spec.ts:127:1 › default row activation still synchronizes List and Form without creating batch membership
+[21/55] [chromium] › tests\browser\grid-selection.spec.ts:151:1 › plain, Ctrl, Shift and Ctrl+Shift gestures use the eligible visible order
+[22/55] [chromium] › tests\browser\grid-selection.spec.ts:169:1 › native keyboard navigation skips ineligible rows and leaves editing shortcuts intact
+[23/55] [chromium] › tests\browser\grid-selection.spec.ts:202:1 › veto preserves active row, membership, focus and the range anchor
+[24/55] [chromium] › tests\browser\grid-selection.spec.ts:226:1 › invalid ID batches fail atomically and unavailable rows disable only their own operations
+[25/55] [chromium] › tests\browser\grid-selection.spec.ts:249:1 › scoped check-all preserves outside checks and native mixed states apart from Boolean fields
+[26/55] [chromium] › tests\browser\grid-selection.spec.ts:286:1 › header checks use native Space activation and veto restores their DOM state
+[27/55] [chromium] › tests\browser\grid-selection.spec.ts:305:1 › data removal and eligibility changes force pruning despite vetoes
+[28/55] [chromium] › tests\browser\grid-selection.spec.ts:324:1 › prune callbacks may change Rows or the view and throwing callbacks leave cleanup committed
+[29/55] [chromium] › tests\browser\grid-selection.spec.ts:387:1 › before hooks reject view changes even when every projected row ID stays the same
+[30/55] [chromium] › tests\browser\grid-selection.spec.ts:404:1 › post callbacks see committed DOM and before-hook reentrancy rejects stale proposals
+[31/55] [chromium] › tests\browser\grid-selection.spec.ts:442:1 › authored sorts cycle ascending, descending and clear while preserving focus and state
+[32/55] [chromium] › tests\browser\grid-selection.spec.ts:460:1 › column choices keep raw scalar identity and count other filters before pagination
+[33/55] [chromium] › tests\browser\grid-selection.spec.ts:492:1 › authored filter selects retain raw values and search narrows only the choices
+[34/55] [chromium] › tests\browser\grid-selection.spec.ts:515:1 › row actions resolve the current identity and retained drafts survive filtering, paging and layout
+[35/55] [chromium] › tests\browser\grid-selection.spec.ts:541:1 › two instances remain accessible and exact disposal releases authored filter ownership for retry
+[36/55] [chromium] › tests\browser\grid-selection.spec.ts:580:1 › single checks replace one row atomically and keep selection and Boolean fields independent
+[37/55] [chromium] › tests\browser\grid-selection.spec.ts:611:1 › single mode rejects ambiguous check proposals after ordinary ID validation without changing state
+[38/55] [chromium] › tests\browser\grid-selection.spec.ts:626:1 › single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope
+[39/55] [chromium] › tests\browser\grid-selection.spec.ts:645:1 › single checks retain reentrant commits and prune only unavailable rows
+[40/55] [chromium] › tests\browser\grid-selection.spec.ts:661:1 › invalid check modes fail before DOM ownership and permit corrected binding
+[41/55] [chromium] › tests\browser\grid-toggle.spec.ts:87:1 › default and explicit false keep repeated single activation and independent absolute sets
+[42/55] [chromium] › tests\browser\grid-toggle.spec.ts:103:1 › default and explicit false retain replacement rather than plain membership toggling
+[43/55] [chromium] › tests\browser\grid-toggle.spec.ts:117:1 › single toggle clears detail through existing Form and List callbacks without changing sets
+[44/55] [chromium] › tests\browser\grid-toggle.spec.ts:142:1 › multiple plain toggles retain other members and clear active when any member is removed
+[45/55] [chromium] › tests\browser\grid-toggle.spec.ts:160:1 › native Enter and Space activate exactly one toggle without replacing focus
+[46/55] [chromium] › tests\browser\grid-toggle.spec.ts:174:1 › Ctrl, Meta, Shift and Alt retain existing gestures when plain toggling is enabled
+[47/55] [chromium] › tests\browser\grid-toggle.spec.ts:195:1 › programmatic activation and full-set writes stay absolute and idempotent with toggling
+[48/55] [chromium] › tests\browser\grid-toggle.spec.ts:211:1 › single deselection veto leaves committed detail, membership and DOM unchanged
+[49/55] [chromium] › tests\browser\grid-toggle.spec.ts:226:1 › both multiple vetoes preserve state and the range anchor before any post callback
+[50/55] [chromium] › tests\browser\grid-toggle.spec.ts:250:1 › toggle before-hook reentrancy preserves inner commits and rejects the stale outer proposal
+[51/55] [chromium] › tests\browser\grid-toggle.spec.ts:280:1 › invalid and throwing before hooks reject toggles while post failure keeps the committed DOM
+[52/55] [chromium] › tests\browser\grid-toggle.spec.ts:304:1 › ineligible, deleted, checked and editable targets never manufacture row activation
+[53/55] [chromium] › tests\browser\grid-toggle.spec.ts:323:1 › sort, filter, page and range keys keep stable identity and existing clear shortcuts
+[54/55] [chromium] › tests\browser\grid-toggle.spec.ts:344:1 › invalid toggle flags fail before DOM ownership and permit corrected binding
+[55/55] [chromium] › tests\browser\grid-toggle.spec.ts:359:1 › independent instances preserve focus, unique IDs and exact quiet teardown
+  55 passed (15.4s)
+[WebServer] (node:17424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:19772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

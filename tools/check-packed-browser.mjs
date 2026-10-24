@@ -379,6 +379,43 @@ try {
   assert(described, "Form errors must be described by unique, connected regions.");
 
   const first = page.locator('[data-host="a"]');
+  const selectionButton = first.locator("[data-select-row]");
+  await selectionButton.click();
+  await expect(selectionButton).toHaveAttribute("aria-pressed", "true");
+  await selectionButton.click();
+  await expect(selectionButton).toHaveAttribute("aria-pressed", "false");
+  await selectionButton.press("Space");
+  await expect(selectionButton).toHaveAttribute("aria-pressed", "true");
+  await selectionButton.press("Enter");
+  await expect(selectionButton).toHaveAttribute("aria-pressed", "false");
+  assert.deepEqual(await page.evaluate(() => {
+    const { grid, rows } = window.packedConsumer.screens.a;
+    const id = rows.entries()[0].id;
+    const toggled = { active: grid.selected(), selected: grid.selectedIds(), checked: grid.checkedIds() };
+    grid.select(id); grid.select(id);
+    return { toggled, absolute: grid.selected(), selected: grid.selectedIds(), other: window.packedConsumer.screens.b.grid.selected() };
+  }), { toggled: { active: null, selected: [], checked: [] }, absolute: 1, selected: [], other: null },
+  "Installed native toggles must clear active state while absolute calls and independent CVC screens retain their contracts.");
+  const choiceSearch = first.locator('[data-filter-search="choice"]');
+  await choiceSearch.fill("twENTY");
+  assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.grid.columnFilter("choice")), null);
+  await choiceSearch.press("Enter");
+  assert.deepEqual(await page.evaluate(() => window.packedConsumer.screens.a.grid.columnFilter("choice")), [22]);
+  await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveText("Off page");
+  await choiceSearch.fill("   ");
+  await first.locator('[data-apply-filter="choice"]').click();
+  await expect(choiceSearch).toHaveValue("");
+  await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveText("Ada");
+  assert.deepEqual(await page.evaluate(() => {
+    const screen = window.packedConsumer.screens.a;
+    screen.grid.setColumnFilter("person", ["Ada"]);
+    const choices = screen.grid.filterChoices("choice");
+    screen.grid.setColumnFilter("person", null);
+    screen.grid.select(null); screen.grid.setSelected([]); screen.grid.setChecked([]);
+    screen.gridEvents.length = 0;
+    return choices;
+  }), [{ value: 11, label: "Eleven", count: 1 }, { value: 22, label: "Twenty two", count: 0 }],
+  "Installed choice counts must retain zero-count values after another column filter.");
   const gridBefore = await page.evaluate(() => {
     const state = window.packedConsumer;
     const notifications = { a: 0, b: 0 };

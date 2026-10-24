@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required full framework and Grid scope
-    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
+    git_blob: 4257da35d31c0303b536cc02c1e9131d0dd8edfa
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field ownership and row lifetime
-    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
+    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership

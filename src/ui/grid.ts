@@ -150,6 +150,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   onPaste?: (result: ValidationResult) => void;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
   multiple?: boolean;
+  toggleSelection?: boolean;
   checkMode?: "multiple" | "single";
   validateOn?: "change" | "blur" | "manual";
   revealInvalid?: boolean;
@@ -393,6 +394,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       throw gridError("GRID_FILTER", "Filter search/reset controls need a configured column key and native input/button.");
     }
   }
+  const filterApplyBindings = [...root.tHead?.querySelectorAll<HTMLElement>("[data-apply-filter]") ?? []].map(element => {
+    const key = element.getAttribute("data-apply-filter")!;
+    const inputs = filterSearchElements.filter(input => input.getAttribute("data-filter-search") === key);
+    if (!(element instanceof HTMLButtonElement) || element.type !== "button" || !filterKeys.has(key) || inputs.length !== 1) {
+      throw gridError("GRID_FILTER", "An Apply button needs a configured key and exactly one matching filter search input.");
+    }
+    return { element, key, input: inputs[0] };
+  });
   const filterBindings: { element: HTMLSelectElement; key: string; handle: SelectHandle<SelectValue>;
     source?: readonly GridFilterChoice[]; query?: string; shown: readonly GridFilterChoice[] }[] = [];
   let rootFocusTabIndex = false;
@@ -978,6 +987,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
   }
 
+  function applyFilter(binding: typeof filterApplyBindings[number]): void {
+    const query = binding.input.value;
+    const blank = !query.trim();
+    setColumnFilter(binding.key, blank ? null : columnFilters.filterChoices(binding.key, query).map(choice => choice.value));
+    if (disposed) return;
+    if (blank && binding.input.value === query) binding.input.value = "";
+    refreshFilters();
+  }
+
   function refreshView(): (() => void) | undefined {
     const previousRequest = pageRequest;
     const previousState = pageState;
@@ -1298,6 +1316,13 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         direction === null ? undefined : { column: sortButton.closest("th")!, direction }, direction === null ? null : key);
       return;
     }
+    const apply = target.closest<HTMLButtonElement>("button[data-apply-filter]");
+    const filterApply = filterApplyBindings.find(binding => binding.element === apply);
+    if (filterApply && !filterApply.element.matches(":disabled") && !disabled(filterApply.input)) {
+      event.preventDefault();
+      applyFilter(filterApply);
+      return;
+    }
     const reset = target.closest<HTMLButtonElement>("button[data-clear-filter]");
     if (reset && root.tHead?.contains(reset) && !reset.matches(":disabled")) {
       setColumnFilter(reset.getAttribute("data-clear-filter")!, null);
@@ -1388,6 +1413,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function onKeyDown(event: KeyboardEvent): void {
     if (!(event.target instanceof Element)) return;
+    if (event.key === "Enter" && !event.isComposing && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+      const binding = filterApplyBindings.find(binding => binding.input === event.target && !binding.element.matches(":disabled"));
+      if (binding && !disabled(binding.input)) {
+        event.preventDefault();
+        applyFilter(binding);
+        return;
+      }
+    }
     if (event.key === "Enter" && !event.isComposing && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey &&
         validateOn !== "manual" && event.target instanceof HTMLInputElement &&
         ["text", "search", "tel", "url", "email", "password", "number"].includes(event.target.type)) {

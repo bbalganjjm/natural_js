@@ -30,6 +30,7 @@ export function createGridFilters<T extends object>(options: {
   }
   const state = new Map<string, readonly SelectValue[]>();
   const memberships = new Map<string, ReadonlySet<SelectValue>>();
+  let revision = 0;
   let cacheRows: ReturnType<Rows<T>["entries"]> | undefined;
   let cacheManual: ReturnType<typeof manual> | undefined;
   const choices = new Map<string, readonly GridFilterChoice[]>();
@@ -55,6 +56,7 @@ export function createGridFilters<T extends object>(options: {
     if (typeof search !== "string") fail(key, "Filter search must be a string.");
     const entries = project();
     const predicate = manual();
+    const version = revision;
     if (entries !== cacheRows || predicate !== cacheManual) {
       cacheRows = entries;
       cacheManual = predicate;
@@ -64,15 +66,19 @@ export function createGridFilters<T extends object>(options: {
     if (!result) {
       const counts = new Map<SelectValue, number>();
       for (const row of entries) {
-        if (predicate && !predicate(row.value) || !matches(row.value, key)) continue;
+        if (predicate && !predicate(row.value)) continue;
         const raw = value(key, row.value);
-        counts.set(raw, (counts.get(raw) ?? 0) + 1);
+        const count = counts.get(raw) ?? 0;
+        counts.set(raw, count + (matches(row.value, key) ? 1 : 0));
       }
       result = Object.freeze([...counts].map(([raw, count]) => {
         const label = config.label ? config.label(raw) : String(raw ?? "");
         if (typeof label !== "string") fail(key, "A filter label must be a string.");
         return Object.freeze({ value: raw, label, count });
       }));
+      if (entries !== project() || predicate !== manual() || version !== revision) {
+        fail(key, "Rows or filter state changed while computing column choices.");
+      }
       choices.set(key, result);
     }
     const query = search.toLowerCase();
@@ -96,6 +102,7 @@ export function createGridFilters<T extends object>(options: {
       if (next === previous || next !== null && previous !== null && next.length === previous.length &&
           next.every(value => previous.includes(value))) return;
       function write(values: readonly SelectValue[] | null) {
+        revision++;
         if (values === null) { state.delete(key); memberships.delete(key); }
         else { state.set(key, values); memberships.set(key, new Set(values)); }
         choices.clear();

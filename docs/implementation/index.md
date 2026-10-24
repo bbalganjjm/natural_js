@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.6.2 interaction and view controls](m10-interactions-plan.md) - Add explicit selection toggles, applied distinct-value search and authored column recovery and action-scroll compositions. (draft)
+
 * [Natural-JS 2.0 M10.9.6.1 change presentation](m10-change-state-plan.md) - Expose immutable loaded originals and bind exact committed-field changes while retaining edited deletion views and original deletion payloads. (draft)
 
 * [Natural-JS 2.0 M10.9.6 Grid semantic closure](m10-closure-plan.md) - Resolve legacy Grid options and dynamic workflows through bounded implementation slices and explicit acceptance evidence. (draft)

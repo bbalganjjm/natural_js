@@ -13,15 +13,15 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
-    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
+    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filters and choice counts
-    git_blob: 9503e0aa8b72fc577f50b4ef992b9ab60bd84c1c
+    git_blob: a9a6604b72bf9077bf8cbf8f8db91bf0c774f7a8
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
+    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -152,6 +152,14 @@ A `PageRequest` does not carry `total`; read `list.page()` or `grid.page()` afte
 Use an authored native `<button type="button">` and a page/controller event handler for ordinary actions. M6 has no `bindButton` export or framework button theme.
 
 A parser sees one snapshot of all currently entered, still unparsed drafts in `RuleContext.values`; parser order does not change that snapshot. Validator `RuleContext.values` uses typed candidates for successfully parsed fields; a field whose parser fails retains its entered draft there and reports a parse issue. Each `ValidateRule` receives its own field value as a string. Formatters see stored row values. A rule's `element` may still be detached when the component initializes; use `element.isConnected` if connection matters. Form, Grid, and List resolve JSON `data-format` and `data-validate` tuples through one private UI rule runner; the tuple shape is not a separate public type. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
+
+## Grid interaction policy
+
+Grid accepts toggleSelection?: boolean, default false. True toggles unmodified native select-button activations; removing any multiple member clears active identity while preserving other members and checks. Native Enter/Space reuse click. Modifier gestures and absolute select/setSelected/setChecked remain unchanged.[^selection][^grid]
+
+Distinct filter choices retain zero-count values inside the manual/status domain. An optional authored data-apply-filter button applies matching raw values; input alone still previews choices. Blank Apply clears the filter, while data-clear-filter keeps its existing search-preserving behavior. See [Grid](grid.md#apply-a-choice-search) for keyboard, pure callbacks and failure boundaries.[^filters][^grid]
+
+Column checkboxes/All/mixed/count/recovery and action-driven scrolling compose existing columns/setColumns/onColumnsChange and reveal handles. Business labels and policies stay application-owned; no new public chooser type, scroll controller or utility package is added. The [Grid demo](grid-demo.md) provides the authored contract.
 
 # Related
 

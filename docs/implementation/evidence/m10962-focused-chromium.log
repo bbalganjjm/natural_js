@@ -1,0 +1,136 @@
+
+
+Running 92 tests using 1 worker
+
+
+
+[1/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:62:1 › choices keep occurrence order and zero counts inside manual and status domains
+[2/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:80:1 › preview stays separate and Apply replaces the complete raw filter
+[3/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:90:1 › no matches means none and whitespace Apply clears the column and preview
+[4/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:100:1 › boolean and null choices keep raw identities while applying labels
+[5/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:110:1 › plain Enter applies without implicit form submission
+[6/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:116:1 › composing modifier and disabled gestures do not apply or prevent defaults
+[7/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:134:1 › a search without an authored Apply keeps Enter preview-only
+[8/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:148:1 › blank no-op refreshes choices and Clear preserves its search contract
+[9/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:159:1 › Apply preserves other filters paging identities checks and hidden drafts
+[10/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:181:1 › invalid Apply declarations fail before DOM ownership
+[11/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:201:1 › preparation failures retain the previous filter view page and data
+[12/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:217:1 › post-commit bind failure retains the committed state and query
+[13/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:229:1 › one-shot Rows manual and column mutations cannot publish stale choices
+[14/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:255:1 › independent native headers stay accessible and exact disposal leaves late controls quiet
+[15/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:273:1 › Enter uses an enabled matching Apply when another matching button is disabled
+[16/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:285:1 › zero-count raw values and labels retain synchronous scalar validation
+[17/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:307:1 › completion disposal leaves restored application input state untouched
+[18/92] [chromium] › tests\browser\grid-filter-apply.spec.ts:321:1 › completion callbacks retain a newer live query and a replacement Grid owner
+[19/92] [chromium] › tests\browser\grid-selection.spec.ts:106:1 › active detail stays independent from immutable store-ordered membership and checks
+[20/92] [chromium] › tests\browser\grid-selection.spec.ts:127:1 › default row activation still synchronizes List and Form without creating batch membership
+[21/92] [chromium] › tests\browser\grid-selection.spec.ts:151:1 › plain, Ctrl, Shift and Ctrl+Shift gestures use the eligible visible order
+[22/92] [chromium] › tests\browser\grid-selection.spec.ts:169:1 › native keyboard navigation skips ineligible rows and leaves editing shortcuts intact
+[23/92] [chromium] › tests\browser\grid-selection.spec.ts:202:1 › veto preserves active row, membership, focus and the range anchor
+[24/92] [chromium] › tests\browser\grid-selection.spec.ts:226:1 › invalid ID batches fail atomically and unavailable rows disable only their own operations
+[25/92] [chromium] › tests\browser\grid-selection.spec.ts:249:1 › scoped check-all preserves outside checks and native mixed states apart from Boolean fields
+[26/92] [chromium] › tests\browser\grid-selection.spec.ts:286:1 › header checks use native Space activation and veto restores their DOM state
+[27/92] [chromium] › tests\browser\grid-selection.spec.ts:305:1 › data removal and eligibility changes force pruning despite vetoes
+[28/92] [chromium] › tests\browser\grid-selection.spec.ts:324:1 › prune callbacks may change Rows or the view and throwing callbacks leave cleanup committed
+[29/92] [chromium] › tests\browser\grid-selection.spec.ts:387:1 › before hooks reject view changes even when every projected row ID stays the same
+[30/92] [chromium] › tests\browser\grid-selection.spec.ts:404:1 › post callbacks see committed DOM and before-hook reentrancy rejects stale proposals
+[31/92] [chromium] › tests\browser\grid-selection.spec.ts:442:1 › authored sorts cycle ascending, descending and clear while preserving focus and state
+[32/92] [chromium] › tests\browser\grid-selection.spec.ts:460:1 › column choices keep raw scalar identity and count other filters before pagination
+[33/92] [chromium] › tests\browser\grid-selection.spec.ts:492:1 › authored filter selects retain raw values and search narrows only the choices
+[34/92] [chromium] › tests\browser\grid-selection.spec.ts:515:1 › row actions resolve the current identity and retained drafts survive filtering, paging and layout
+[35/92] [chromium] › tests\browser\grid-selection.spec.ts:541:1 › two instances remain accessible and exact disposal releases authored filter ownership for retry
+[36/92] [chromium] › tests\browser\grid-selection.spec.ts:580:1 › single checks replace one row atomically and keep selection and Boolean fields independent
+[37/92] [chromium] › tests\browser\grid-selection.spec.ts:611:1 › single mode rejects ambiguous check proposals after ordinary ID validation without changing state
+[38/92] [chromium] › tests\browser\grid-selection.spec.ts:626:1 › single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope
+[39/92] [chromium] › tests\browser\grid-selection.spec.ts:645:1 › single checks retain reentrant commits and prune only unavailable rows
+[40/92] [chromium] › tests\browser\grid-selection.spec.ts:661:1 › invalid check modes fail before DOM ownership and permit corrected binding
+[41/92] [chromium] › tests\browser\grid-toggle.spec.ts:87:1 › default and explicit false keep repeated single activation and independent absolute sets
+[42/92] [chromium] › tests\browser\grid-toggle.spec.ts:103:1 › default and explicit false retain replacement rather than plain membership toggling
+[43/92] [chromium] › tests\browser\grid-toggle.spec.ts:117:1 › single toggle clears detail through existing Form and List callbacks without changing sets
+[44/92] [chromium] › tests\browser\grid-toggle.spec.ts:142:1 › multiple plain toggles retain other members and clear active when any member is removed
+[45/92] [chromium] › tests\browser\grid-toggle.spec.ts:160:1 › native Enter and Space activate exactly one toggle without replacing focus
+[46/92] [chromium] › tests\browser\grid-toggle.spec.ts:174:1 › Ctrl, Meta, Shift and Alt retain existing gestures when plain toggling is enabled
+[47/92] [chromium] › tests\browser\grid-toggle.spec.ts:195:1 › programmatic activation and full-set writes stay absolute and idempotent with toggling
+[48/92] [chromium] › tests\browser\grid-toggle.spec.ts:211:1 › single deselection veto leaves committed detail, membership and DOM unchanged
+[49/92] [chromium] › tests\browser\grid-toggle.spec.ts:226:1 › both multiple vetoes preserve state and the range anchor before any post callback
+[50/92] [chromium] › tests\browser\grid-toggle.spec.ts:250:1 › toggle before-hook reentrancy preserves inner commits and rejects the stale outer proposal
+[51/92] [chromium] › tests\browser\grid-toggle.spec.ts:280:1 › invalid and throwing before hooks reject toggles while post failure keeps the committed DOM
+[52/92] [chromium] › tests\browser\grid-toggle.spec.ts:304:1 › ineligible, deleted, checked and editable targets never manufacture row activation
+[53/92] [chromium] › tests\browser\grid-toggle.spec.ts:323:1 › sort, filter, page and range keys keep stable identity and existing clear shortcuts
+[54/92] [chromium] › tests\browser\grid-toggle.spec.ts:344:1 › invalid toggle flags fail before DOM ownership and permit corrected binding
+[55/92] [chromium] › tests\browser\grid-toggle.spec.ts:359:1 › independent instances preserve focus, unique IDs and exact quiet teardown
+[56/92] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+[57/92] [chromium] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[58/92] [chromium] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[59/92] [chromium] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[60/92] [chromium] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[61/92] [chromium] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[62/92] [chromium] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[63/92] [chromium] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[64/92] [chromium] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+[65/92] [chromium] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[66/92] [chromium] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[67/92] [chromium] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[68/92] [chromium] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+[69/92] [chromium] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[70/92] [chromium] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+[71/92] [chromium] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[72/92] [chromium] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[73/92] [chromium] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+[74/92] [chromium] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[75/92] [chromium] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[76/92] [chromium] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[77/92] [chromium] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[78/92] [chromium] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+[79/92] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[80/92] [chromium] › tests\browser\m10-interactions.spec.ts:44:1 › authored column chooser has native mixed state and recovers every hidden business column
+[81/92] [chromium] › tests\browser\m10-interactions.spec.ts:71:1 › chooser retains widths, group order, raw drafts and selection while another store is unchanged
+[82/92] [chromium] › tests\browser\m10-interactions.spec.ts:101:1 › recovery-only rows retain shared CVC details and Undo without duplicate IDs or accessibility errors
+[83/92] [chromium] › tests\browser\m10-interactions.spec.ts:119:1 › column actions restore exact authored table nodes and resynchronize after disposal and rebind
+[84/92] [chromium] › tests\browser\m10-interactions.spec.ts:133:1 › Team preview, Apply and Enter, app All and None expose the exact current choice count
+[85/92] [chromium] › tests\browser\m10-interactions.spec.ts:158:1 › another typed column filter retains enabled selected zero-count Team choices
+[86/92] [chromium] › tests\browser\m10-interactions.spec.ts:174:1 › toggle-policy controls bind native single and multiple activation while checks stay independent
+[87/92] [chromium] › tests\browser\m10-interactions.spec.ts:193:1 › application selection and checks reveal the last requested ID only after the complete state commits
+  1) [chromium] › tests\browser\m10-interactions.spec.ts:193:1 › application selection and checks reveal the last requested ID only after the complete state commits 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Array [
+        Object {
+          "block": "center",
+    -     "id": "5",
+    +     "id": "1",
+        },
+      ]
+
+      218 |   await page.locator("[data-sort]").selectOption("name-desc");
+      219 |   await act(page, "check-all");
+    > 220 |   expect(await reveals(page)).toEqual([{ id: "5", block: "center" }]);
+          |                               ^
+      221 | });
+      222 |
+      223 | test("action-scroll opt-out and current-page guards preserve filtering and paging", async ({ page }) => {
+        at D:\workspace\natural_js\tests\browser\m10-interactions.spec.ts:220:31
+
+    Error Context: test-results\m10-interactions-applicati-37119--the-complete-state-commits-chromium\error-context.md
+
+
+
+
+[88/92] [chromium] › tests\browser\m10-interactions.spec.ts:223:1 › action-scroll opt-out and current-page guards preserve filtering and paging
+[89/92] [chromium] › tests\browser\m10-interactions.spec.ts:240:1 › front, indexed and end insertion use start, center and end after successful selection
+[90/92] [chromium] › tests\browser\m10-interactions.spec.ts:255:1 › append skips an empty prior store and reveals only the last newly loaded current-page row
+[91/92] [chromium] › tests\browser\m10-interactions.spec.ts:276:1 › last-invalid reveal follows visual page order and preserves focus with first-invalid core reveal disabled
+[92/92] [chromium] › tests\browser\m10-interactions.spec.ts:298:1 › application end insertion uses the existing bounded viewport without affecting independent row-block stores
+  1 failed
+    [chromium] › tests\browser\m10-interactions.spec.ts:193:1 › application selection and checks reveal the last requested ID only after the complete state commits 
+  91 passed (40.5s)
+[WebServer] (node:16612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:20472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

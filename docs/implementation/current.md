@@ -4,14 +4,18 @@ title: Natural-JS 2.0 active plan
 description: Checkpoint, next action, and verification record for the milestone-gated Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: interactions
+    resource: m10-interactions-plan.md
+    title: M10.9.6.2 explicit interaction and authored view controls
+    git_blob: eb9309843c9b6d29ef7e4cd6da9bb56557492b14
   - id: closure
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: c2748cde7f68f55aa49425c7eb05d1a6d4ca5530
+    git_blob: 71dd27824a5726744f4dd0452c3155558dabe26b
   - id: change-state
     resource: m10-change-state-plan.md
     title: M10.9.6.1 committed-field changes and retained deletions
-    git_blob: 87a11f2c34619f7241c9c0df16d38bb643826cc9
+    git_blob: f1e48cf1457df86d2d799fa1de7168da557d58bc
   - id: conventions
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
@@ -27,42 +31,42 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and consolidated omission review
-    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
+    git_blob: 4257da35d31c0303b536cc02c1e9131d0dd8edfa
   - id: columns
     resource: m10-columns-plan.md
     title: Implemented column state and final verification
-    git_blob: 8aeeb583fa2fc2d84729771a6fbfecf2d01b5129
+    git_blob: 6f134d83c14a8b8135b9cd180a5322dd67044177
   - id: selection
     resource: m10-selection-plan.md
     title: M10.6 independent selection, checks and filters
-    git_blob: b5b5a100fc0eed246baa9245822fd290d02b0e37
+    git_blob: c7e96dcfd26a0612856b41dd3c04c41b09800500
   - id: paste
     resource: m10-paste-plan.md
     title: M10.7 atomic paste and final verification
-    git_blob: c4c18d27307ea9cc6f3ffaace2e01bfc16b20be2
+    git_blob: 5674e103e6e093e507251d20db1b3f81917602d5
   - id: viewport
     resource: m10-viewport-plan.md
     title: M10.8 measured viewport and final verification
-    git_blob: 2f216a8375df1c3fac82b98ecfa3ab5ab9df7bb9
+    git_blob: 9cfb4ae2c9917a713fff43c202a51993f316e758
   - id: grid-parity
     resource: m10-parity-plan.md
     title: M10.9 ordered Rows and remaining Grid continuation
-    git_blob: c878d15741578d8bbb837b78a6d71da5d4d7c545
+    git_blob: 03c34062aa9fed9d5fa461657c8a2487f0b489d2
   - id: controls
     resource: m10-controls-plan.md
     title: M10.9.3 native controls, display and validation gates
-    git_blob: 58a97fe603c77bd5c1ce940566ff0798ed60e249
+    git_blob: 42e2041882d710df72cbb959a8a2229c0a311d8f
   - id: lifecycle
     resource: m10-lifecycle-plan.md
     title: M10.9.4 status and row lifecycle verification
-    git_blob: fde3563b7fcbe763caa56bbca280565aecea1487
+    git_blob: 13bfdbc7cdf22204e35368bafd97e98174a44aab
   - id: detail
     resource: m10-detail-plan.md
     title: M10.9.5 detail navigation and geometry verification
-    git_blob: 4d9518149a14fa06af41eaf010392e01e55d8600
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+    git_blob: 62c7a18a89b135d2b7a1ee9fe486f937c6c21c18
+generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order and [the milestone index](index.md) for completed history. The fixed 1.x baseline is b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; its LGPL source and docs stay unchanged under v1/.
@@ -86,7 +90,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 # Next action
 
-Specify M10.9.6.2 interaction/view controls under the [M10.9.6 parent](m10-closure-plan.md): exact plain-click toggle policy, zero-count distinct filters and search/application, authored column chooser/recovery and action-scroll outcomes. [M10.9.6.1](m10-change-state-plan.md) implements immutable loaded originals, committed-field markers and retained edited deletion display with the original delete payload. All sixteen frozen runtime gates pass; final independent evidence/document closure is recorded in that plan. The complete 89-entry/17-group audit remains an immutable 7a36a39 planning snapshot, with all twenty families open until their full obligations close. Progressive rendering/completion (.3), semantic acceptance (.4), other component/CVC parity, P0 and the mandatory [M13 whole-code review/remediation](m13-review-plan.md) remain required. No npm publication or release tag.[^change-state][^closure][^parity]
+Specify M10.9.6.3 progressive rendering/completion under the [parent](m10-closure-plan.md): already-loaded prefix growth, yielding, per-chunk first/last completion and cancellation through existing Grid/CVC ownership. [M10.9.6.2](m10-interactions-plan.md) implements explicit native toggles, zero-count choices and Apply/Enter, authored chooser/recovery and action-scroll recipes; all sixteen frozen runtime gates pass. Its plan records completed independent source/API/archive/evidence/document review. Keep the complete 89-entry/17-group 7a36a39 audit immutable and all twenty families open until their full obligations close. Semantic acceptance (.4), other component/CVC parity, P0 and mandatory [M13 whole-code review/remediation](m13-review-plan.md) remain required. No npm publication or release tag.[^interactions][^closure][^parity]
 
 # Decisions
 
@@ -121,6 +125,10 @@ Specify M10.9.6.2 interaction/view controls under the [M10.9.6 parent](m10-closu
 
 | 2026-10-24 | M10.9.6.1 final closure | Independent source/API/plan/archive/evidence review approves the selected slice. Changed/full OKF checks pass with 61 concepts, five reserved files and zero errors/warnings. Thirteen reviewed concepts receive verified metadata; fifteen historical concepts preserve bodies and generated/verified dates with fingerprint-only updates. M10.9.6.2 interaction/view controls is next. The parent, remaining parity, P0 and M13 remain required; no omission, npm publication or release tag. |
 
+| 2026-10-24 | M10.9.6.2 frozen gates | Explicit selection toggles, applied search/zero-count choices and authored recovery/action-scroll compositions pass build/strict source/example types, 124 units and 448/448 full cases per engine. JS/TS and five Windows browsers pass one 183-file artifact SHA-256 9beeca3a827f1efde3c5d01911b125a2d1d4d142b186689a01df06de5377df6b. Sixteen final gates share 167 inputs; twelve development records stay separate. Original binding/viewport budgets pass with sixty recomputed medians. Exact evidence and limits belong to [the interaction plan](m10-interactions-plan.md); .3/.4, other parity, P0 and M13 remain required. |
+
+| 2026-10-24 | M10.9.6.2 final closure | Independent source/API/plan/archive/evidence review approves the selected slice. Changed/full OKF checks pass with 62 concepts, five reserved files and zero errors/warnings. Eleven reviewed concepts receive verified metadata; thirteen historical concepts preserve bodies and generated/verified dates with fingerprint-only updates. M10.9.6.3 progressive rendering/completion is next. .4, remaining parity, P0 and M13 stay required; no omission, npm publication or release tag. |
+
 # Open questions
 
 - Accessibility automation covers tested states only. Personal review and manual assistive-technology checks remain open.
@@ -141,3 +149,5 @@ Specify M10.9.6.2 interaction/view controls under the [M10.9.6 parent](m10-closu
 
 [^change-state]: M10.9.6.1 committed-field changes and retained deletions
 [^closure]: Required Grid semantic continuation
+
+[^interactions]: M10.9.6.2 explicit interaction and authored view controls

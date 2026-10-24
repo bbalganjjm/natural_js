@@ -57,14 +57,16 @@
             <button type="button" data-action="next" data-needs-grid>Next</button>
           </div>
           <output data-page-state aria-live="polite">All rows</output>
-          <p>Header sort buttons cycle ascending, descending, then store order. The Team header filters distinct raw values; its search narrows choices without filtering rows. Choice counts exclude the Team header's own filter.</p>
+          <p>Header sort buttons cycle ascending, descending, then store order. The Team header filters distinct raw values; its search narrows choices without filtering rows. Choice counts exclude the Team header's own filter. Apply matches or plain Enter replaces its complete value filter; All clears the search, while Reset keeps it. Active is a second independent column filter.</p>
         </fieldset>
 
         <fieldset>
           <legend>Scroll viewport</legend>
+          <label class="check-label"><input type="checkbox" data-action-scroll> Reveal successful application selection, check, add and append actions</label>
+          <p>This policy centers the last requested eligible row, aligns front/end insertions, and skips rows outside the current page. Vetoed actions do not reveal a row. It does not change native Grid gestures.</p>
           <label class="check-label"><input type="checkbox" data-viewport> Render only rows near the viewport</label>
           <label>Dataset
-            <select data-dataset><option value="6">6 employees</option><option value="5000">5,000 employees</option></select>
+            <select data-dataset><option value="6">6 employees</option><option value="5000">5,000 employees</option><option value="0">Empty store</option></select>
           </label>
           <label>Row number in store order <input type="number" min="1" value="2500" data-reveal-row data-needs-grid></label>
           <label>Reveal alignment
@@ -78,12 +80,27 @@
 
         <fieldset>
           <legend>Columns</legend>
+          <details data-column-chooser open>
+            <summary>Choose visible data columns</summary>
+            <label class="check-label"><input type="checkbox" data-column-all data-needs-grid checked> All data columns</label>
+            <div class="column-choices">
+              <label><input type="checkbox" data-visible-column="name" data-needs-grid checked> Employee</label>
+              <label><input type="checkbox" data-visible-column="email" data-needs-grid checked> Email</label>
+              <label><input type="checkbox" data-visible-column="phone" data-needs-grid checked> Phone</label>
+              <label><input type="checkbox" data-visible-column="team" data-needs-grid checked> Team</label>
+              <label><input type="checkbox" data-visible-column="shift" data-needs-grid checked> Shift</label>
+              <label><input type="checkbox" data-visible-column="active" data-needs-grid checked> Active</label>
+              <label><input type="checkbox" data-visible-column="notes" data-needs-grid checked> Notes</label>
+              <label><input type="checkbox" data-visible-column="salary" data-needs-grid checked> Salary</label>
+            </div>
+            <p>Visible data columns: <output data-column-count aria-live="polite">8 / 8</output>. Actions stays available when every data column is hidden.</p>
+          </details>
           <label>Column
             <select data-column-choice data-needs-grid>
               <option value="name">Employee</option><option value="email">Email</option>
               <option value="phone">Phone</option><option value="team">Team</option>
               <option value="shift">Shift</option><option value="active">Active</option>
-              <option value="notes">Notes</option><option value="salary">Salary</option>
+              <option value="notes">Notes</option><option value="salary">Salary</option><option value="actions">Actions (recovery)</option>
             </select>
           </label>
           <label>Preferred width (CSS pixels)
@@ -98,7 +115,7 @@
             <button type="button" data-action="reset-columns" data-needs-grid>Reset columns</button>
             <button type="button" data-action="invalid-columns" data-needs-grid>Try duplicate column key</button>
           </div>
-          <p>Drag a header resize button, or focus it and use Left/Right (10 pixels), Shift+Left/Right (1 pixel), or Home to restore its initial width. At least one column stays visible.</p>
+          <p>Drag a header resize button, or focus it and use Left/Right (10 pixels), Shift+Left/Right (1 pixel), or Home to restore its initial width. The application chooser keeps Actions visible. The framework still rejects hiding every physical column.</p>
         </fieldset>
 
         <fieldset>
@@ -109,6 +126,7 @@
               <option value="multiple">Multiple</option>
             </select>
           </label>
+          <label class="check-label"><input type="checkbox" data-toggle-selection> Plain activation toggles selection</label>
           <label class="check-label"><input type="checkbox" data-disable-inactive> Disable selection and checks for inactive rows</label>
           <p>Changing mode or the inactive-row policy rebinds the Grid and clears selection, checks and uncommitted edits.</p>
           <label class="check-label"><input type="checkbox" data-veto-active> Veto active-row changes</label>
@@ -120,7 +138,7 @@
             <button type="button" data-action="clear-multiple" data-needs-grid>Clear selection set</button>
           </div>
           <p>Select first store row and Clear selection change only the active row used by store actions. Set first two eligible selections and Clear selection set change only the selection set.</p>
-          <p>In multiple mode: click replaces the selection, Ctrl/Meta-click toggles, and Shift-click selects a visible-page range. Focus a row's select button and use Up/Down, Home/End, Shift+navigation or Space.</p>
+          <p>By default, multiple-mode click replaces the selection. The toggle option adds/removes only the clicked membership; Ctrl/Meta and Shift keep their existing behavior. Focus a row's select button and use Up/Down, Home/End, Shift+navigation or Space.</p>
         </fieldset>
 
         <fieldset>
@@ -159,6 +177,8 @@
             </select>
           </label>
           <label class="check-label"><input type="checkbox" data-reveal-invalid> Reveal and focus the first invalid field</label>
+          <label class="check-label"><input type="checkbox" data-last-invalid> Reveal the last invalid row in visual page order, preserving focus</label>
+          <p>Last-invalid policy disables core first-invalid reveal. Changing validation policy rebinds the Grid and clears drafts; choose it before editing.</p>
           <div class="button-row">
             <button type="button" data-action="validate-selected" data-needs-grid>Validate selected</button>
             <button type="button" data-action="validate-all" data-needs-grid>Validate all</button>
@@ -191,7 +211,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
         <fieldset>
           <legend>Rows store</legend>
           <div class="button-row">
-            <button type="button" data-action="add" data-needs-grid>Add row</button>
+            <button type="button" data-action="add" data-needs-grid>Add row at end</button>
+            <button type="button" data-action="add-first" data-needs-grid>Add row at front</button>
             <button type="button" data-action="append" data-needs-grid>Append 2 loaded employees</button>
             <button type="button" data-action="defaults" data-needs-grid>Read authored defaults</button>
             <button type="button" data-action="create-defaults" data-needs-grid>Create employee from defaults</button>
@@ -254,7 +275,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <table data-grid>
             <caption>Employee assignments with nested shift choices</caption>
             <colgroup span="1"></colgroup><colgroup span="2"></colgroup>
-            <colgroup span="4"></colgroup><colgroup span="1"></colgroup>
+            <colgroup span="4"></colgroup><colgroup span="1"></colgroup><colgroup span="1"></colgroup>
             <thead>
               <tr>
                 <th scope="col" rowspan="2" aria-sort="none" data-column="name"><button type="button" data-sort-column="name" data-needs-grid aria-label="Sort by employee name">Employee</button> <button type="button" data-resize-column="name" data-needs-grid aria-label="Resize Employee column">↔</button>
@@ -262,6 +283,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
                 <th scope="colgroup" colspan="2" data-columns="email phone">Contact</th>
                 <th scope="colgroup" colspan="4" data-columns="team shift active notes">Assignment</th>
                 <th scope="col" rowspan="2" aria-sort="none" data-column="salary"><button type="button" data-sort-column="salary" data-needs-grid aria-label="Sort by salary">Salary</button> <button type="button" data-resize-column="salary" data-needs-grid aria-label="Resize Salary column">↔</button></th>
+                <th scope="col" rowspan="2" data-column="actions">Actions <button type="button" data-action="show-columns" data-needs-grid>Choose columns</button></th>
               </tr>
               <tr>
                 <th scope="col" data-column="email">Email <button type="button" data-resize-column="email" data-needs-grid aria-label="Resize Email column">↔</button></th>
@@ -269,9 +291,15 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
                 <th scope="col" data-column="team">Team <button type="button" data-resize-column="team" data-needs-grid aria-label="Resize Team column">↔</button>
                   <label class="header-filter">Search choices <input type="search" data-filter-search="team" data-needs-grid></label>
                   <label class="header-filter">Distinct teams <select multiple size="2" data-filter-column="team" data-needs-grid></select></label>
-                  <button type="button" data-clear-filter="team" data-needs-grid>All teams</button></th>
+                  <div class="header-actions"><button type="button" data-apply-filter="team" data-needs-grid>Apply</button>
+                    <button type="button" data-action="all-team-values" data-needs-grid>All</button>
+                    <button type="button" data-action="no-team-values" data-needs-grid>None</button>
+                    <button type="button" data-clear-filter="team" data-needs-grid>Reset</button></div>
+                  <span>Selected choices: <output data-filter-count>2 / 2</output></span></th>
                 <th scope="col" data-column="shift">Shift <button type="button" data-resize-column="shift" data-needs-grid aria-label="Resize Shift column">↔</button></th>
-                <th scope="col" data-column="active">Active <button type="button" data-resize-column="active" data-needs-grid aria-label="Resize Active column">↔</button></th>
+                <th scope="col" data-column="active">Active <button type="button" data-resize-column="active" data-needs-grid aria-label="Resize Active column">↔</button>
+                  <label class="header-filter">Active values <select multiple size="2" data-filter-column="active" data-needs-grid></select></label>
+                  <button type="button" data-clear-filter="active" data-needs-grid>All Active values</button></th>
                 <th scope="col" data-column="notes">Notes <button type="button" data-resize-column="notes" data-needs-grid aria-label="Resize Notes column">↔</button></th>
               </tr>
             </thead>
@@ -279,10 +307,6 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
               <tr data-row-template>
                 <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button>
                   <label class="check-label"><input type="checkbox" data-check-row> Check row</label>
-                  <button type="button" data-row-action="inspect">Inspect</button>
-                  <button type="button" data-row-action="detail-popup">Popup details</button>
-                  <button type="button" data-row-action="detail-inline">Inline details</button>
-                  <button type="button" data-row-action="undo" disabled>Undo row changes</button>
                   <small data-demo-row-status></small><small data-demo-changed-fields></small></th>
                 <td data-column="email"><label>Email <input type="email" data-field="email" value="new.employee@example.com" required></label><output data-error-for="email"></output></td>
                 <td data-column="phone"><label>Phone <input type="tel" data-field="phone" value="+1 555 0100" readonly></label></td>
@@ -294,9 +318,15 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
                 <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2">Created from authored defaults</textarea></label></td>
                 <td data-column="salary"><label>Salary <input type="number" min="0" step="1" value="200" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
                   <output data-error-for="salary"></output></td>
+                <td data-column="actions"><div class="row-actions">
+                  <button type="button" data-row-action="inspect">Inspect</button>
+                  <button type="button" data-row-action="detail-popup">Popup details</button>
+                  <button type="button" data-row-action="detail-inline">Inline details</button>
+                  <button type="button" data-row-action="undo" disabled>Undo row changes</button>
+                </div></td>
               </tr>
             </tbody>
-            <tfoot><tr data-empty hidden><td data-columns="name email phone team shift active notes salary" colspan="8"><output role="status">No employees match the current status and filters.</output></td></tr></tfoot>
+            <tfoot><tr data-empty hidden><td data-columns="name email phone team shift active notes salary actions" colspan="9"><output role="status">No employees match the current status and filters.</output></td></tr></tfoot>
           </table>
         </div>
         <button type="button" data-resize-height data-needs-grid aria-label="Resize employee grid height">Resize grid height ↕</button>

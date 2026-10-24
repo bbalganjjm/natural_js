@@ -24,6 +24,13 @@ fieldset textarea { width: 100%; resize: vertical; }
 .button-row { display: flex; flex-wrap: wrap; gap: .4rem; margin: .35rem 0; }
 .button-row button { flex: 1 1 auto; }
 fieldset p { margin: .5rem 0 0; }
+.column-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; margin-top: .5rem; }
+.column-choices label, details > .check-label { display: flex; gap: .35rem; align-items: center; }
+[data-column-chooser] { margin-bottom: .75rem; }
+[data-column-chooser] summary { cursor: pointer; font-weight: 600; }
+.header-actions { display: flex; flex-wrap: wrap; gap: .2rem; }
+.header-actions button { padding: .15rem .3rem; font-size: .8rem; }
+.row-actions { display: grid; gap: .25rem; }
 .table-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
 .grid-scroll { max-width: 100%; max-height: 29rem; overflow: auto; border: 1px solid #9eafc1; }
 .grid-scroll[data-viewport-enabled] { height: 400px; }

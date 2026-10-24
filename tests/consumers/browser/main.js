@@ -20,7 +20,10 @@ function view() {
           <label>Check page <input type="checkbox" data-check-all="visible"></label>
           <button type="button" data-resize-column="person" aria-label="Resize Person column">Resize</button>
         </th>
-        <th scope="col" data-column="choice">Choice</th>
+        <th scope="col" data-column="choice">Choice
+          <label>Find choices <input type="search" data-filter-search="choice"></label>
+          <button type="button" data-apply-filter="choice">Apply choices</button>
+        </th>
       </tr></thead>
       <tbody><tr data-row-template>
         <th scope="row" data-column="person">
@@ -85,7 +88,7 @@ const definition = {
     const idsEvent = kind => ({ ids, previous, event }) =>
       gridEvents.push({ kind, ids, previous, type: event?.type ?? null });
     const grid = bindGrid(root.querySelector("table"), {
-      rows, initialPage: { page: 1, size: 1 }, multiple: true,
+      rows, initialPage: { page: 1, size: 1 }, multiple: true, toggleSelection: true,
       paste: true,
       onPaste: result => pasteEvents.push({
         valid: result.valid,
@@ -105,7 +108,7 @@ const definition = {
       beforeCheckChange: change => { idsEvent("before-check")(change); return true; },
       onCheckChange: idsEvent("check"),
       sorts: { person: (a, b) => a.person.name.localeCompare(b.person.name) },
-      filters: { choice: {
+      filters: { person: { value: row => row.person.name }, choice: {
         value: row => row.choice,
         label: value => choices.find(choice => choice.value === value)?.label ?? String(value)
       } },

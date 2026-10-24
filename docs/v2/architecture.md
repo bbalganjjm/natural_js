@@ -24,7 +24,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
+    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -36,11 +36,11 @@ sources:
   - id: grid-selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid active identity, sets, eligibility, and transitions
-    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
+    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
   - id: grid-filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filter state and choice counts
-    git_blob: 9503e0aa8b72fc577f50b4ef992b9ab60bd84c1c
+    git_blob: a9a6604b72bf9077bf8cbf8f8db91bf0c774f7a8
   - id: grid-viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured Grid window and scroll lifetime
@@ -149,10 +149,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -205,6 +205,12 @@ Rows alone owns loaded baselines. `Rows.original(id)` exposes their immutable re
 A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
 Grid exposes frozen logical row IDs from its existing projection for authored detail navigation. Form, Popup and mountPage keep data editing, dialog lifecycle and page execution; the demo composes them without a framework navigation manager. Private grid-height owns only an authored handle, three height properties and its pointer/keyboard resources, reusing DOM restoration, unique IDs and focus helpers. The existing viewport owner handles alignment, measured correction and both sticky edges. No copied table, second scroller, shared axis engine or public geometry library is introduced.[^grid][^grid-height][^grid-viewport][^form][^popup]
+
+## Grid interaction ownership
+
+The private selection owner implements the optional plain-activation toggle through its existing atomic transition. The filter owner computes typed zero-count choices and rejects stale cache publication; Grid connects an explicitly authored Apply button and native Enter. No parallel selection/filter store is introduced. Enter/Space toggles reuse native click rather than an extra activation handler.[^grid]
+
+The demo composes column chooser/recovery and action-driven reveal through existing handles. It derives checkbox/count state from columns(), retains an authored recovery column, and verifies accepted stable-ID state before scrolling. Labels, whole-row predicates and scroll policy remain application code; core column topology and measured viewport behavior keep their owners. No public chooser registry, auto-scroll subsystem or new dependency is needed.[^grid]
 
 # Related
 

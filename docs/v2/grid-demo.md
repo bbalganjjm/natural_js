@@ -5,14 +5,18 @@ description: Inspect committed field changes, loaded originals and edited deleti
 tags: [ui, grid, example, accessibility]
 status: draft
 sources:
+  - id: interactions-browser
+    resource: ../../tests/browser/m10-interactions.spec.ts
+    title: Authored recovery and action-scroll regressions
+    git_blob: 50f57efa2deec6db6ee90b18890c6242fd69a5f3
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 492c0e3d811501124c2919d7a689dc6920152608
+    git_blob: ccb4937e9119622034bfc288d7fc83ba4d76e733
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 3d8b493c5ae9c4b52a5ea533f9b4d7ccfce92927
+    git_blob: 19da65f5709e547bd1f523b83f1ebee66ac3eeb7
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
@@ -20,7 +24,7 @@ sources:
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
-    git_blob: a26444bad5ab585fc14382d6a30b7c46fac69714
+    git_blob: 996c8fca40309b2d890b777680c31477df26d4cb
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
@@ -40,7 +44,7 @@ sources:
   - id: selection-browser
     resource: ../../tests/browser/grid-selection.spec.ts
     title: Independent selection, checks, authored filters and row actions
-    git_blob: 699235cbb85f7f3aaf0a2ad08d6b875d01786317
+    git_blob: 118e0325d6bf6b6b8b7c723c8c31b2bc2bc0b897
   - id: selection-evidence
     resource: ../implementation/evidence/m106-verification.json
     title: Final M10.6 source, package, browser and performance record
@@ -56,7 +60,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
+    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -76,7 +80,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Independent active row, selection and check state
-    git_blob: eb9ae76806af63029078cb64d5f68acccc62053c
+    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Native groups, typed values, validation and display regressions
@@ -88,15 +92,15 @@ sources:
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Raw column filters and distinct choice counts
-    git_blob: 9503e0aa8b72fc577f50b4ef992b9ab60bd84c1c
+    git_blob: a9a6604b72bf9077bf8cbf8f8db91bf0c774f7a8
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -116,7 +120,7 @@ Run `npm run example` from the repository root and open `/m10/demo.html`. The in
 | `Rows` | Own immutable snapshots, stable IDs, clean batch append, pending changes, retained deletions and subscription events. |
 | Application code | Provide sample rows, comparator, filter predicate, salary parser, custom format/validation rules, and action buttons. |
 
-The demo supplies required `rows`, optional `initialPage`, `viewport`, `columns`, `onColumnsChange`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Selection controls supply `multiple`, `canSelect`, `canCheck`, `checkMode`, `beforeSelect`, `beforeSelectionChange`, `onSelectionChange`, `beforeCheckChange`, and `onCheckChange`; authored headers and row actions use `sorts`, `filters`, and `onRowAction`. Validation controls set `validateOn` and `revealInvalid`. `paste: true` enables direct native plaintext paste, and `onPaste` displays accepted/rejected results. The lower row-block Grids add a `render` factory and range parser. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the complete logical-page default. The custom salary rule, name display formatter, comparators and Team value function are application behavior.[^controller][^grid]
+The demo supplies required `rows`, optional `initialPage`, `viewport`, `columns`, `onColumnsChange`, local `rules` with `format`, `validate`, `messages`, and `locale`, per-field `parse`, and `onSelect`. Selection controls supply `multiple`, `toggleSelection`, `canSelect`, `canCheck`, `checkMode`, `beforeSelect`, `beforeSelectionChange`, `onSelectionChange`, `beforeCheckChange`, and `onCheckChange`; authored headers and row actions use `sorts`, `filters`, and `onRowAction`. Validation controls set `validateOn` and `revealInvalid`. `paste: true` enables direct native plaintext paste, and `onPaste` displays accepted/rejected results. The lower row-block Grids add a `render` factory and range parser. Its initial-page selector can bind directly to page 1 or 2 with two rows per page; leaving it blank preserves the complete logical-page default. The custom salary rule, name display formatter, comparators and Team value function are application behavior.[^controller][^grid]
 
 Row status selects live, modified, deleted, all retained or no statuses through `statusFilter`/`setStatusFilter`. The controller connects `beforeRowBind`, `onRowBind` and `onBind`; resource tracking is optional, while row status labels remain application text. Controls call `defaults()`, create a complete employee through the application's factory, append two loaded employees through `Rows.append`, and retry current bindings through `refresh()`.[^view][^controller][^lifecycle-browser]
 
@@ -132,7 +136,7 @@ The lower **Authored row blocks and adjacent merges** section keeps four separat
 
 The authored header contains `data-sort-column="name"` and `data-sort-column="salary"` buttons, a visible-page `data-check-all="visible"` checkbox, and the Team controls: a multiple `data-filter-column="team"` Select, `data-filter-search="team"` input, and `data-clear-filter="team"` button. Grid binds the filter choices through the existing native Select behavior; the application keeps control of labels and layout.[^view][^grid]
 
-An authored `tfoot tr[data-empty]` contains the empty-result message and declares membership of all eight managed columns. Each repeated record contains an Undo action and a status label populated by `onRowBind`. Observation panels distinguish captured defaults, the last full-bind counts, tracked row resources and current Rows state; no message or widget theme is generated by the framework.[^view][^controller]
+An authored `tfoot tr[data-empty]` contains the empty-result message and declares membership of all nine managed columns, including the authored Actions recovery column. Each repeated record contains an Undo action and a status label populated by `onRowBind`. Observation panels distinguish captured defaults, the last full-bind counts, tracked row resources and current Rows state; no message or widget theme is generated by the framework.[^view][^controller]
 
 # Controller
 
@@ -194,7 +198,7 @@ Changing the viewport toggle rebinds Grid; changing Dataset also replaces Rows w
 
 Choose an initial page before editing to see a bounded first render and `page()` state. Switching this choice rebinds the Grid, clears active selection, both ID sets and uncommitted input, and leaves valid Rows changes intact. A size change clears the initial-page choice and uses `setPage`; choosing no page shows all rows. Change a salary to an invalid value, run validation, and inspect the issue panel: the invalid draft stays outside `Rows.changes()` until corrected. Clear a required email or choice to see HTML validation; set an unavailable shift to see `select-option`. Change the nested team or shift, edit Notes, or toggle Active to see the raw object and status. Switch the built-in-rule locale between English and Korean to inspect its message; the demo rebinds Grid, which clears active selection, checks, selection membership and uncommitted input. Sorting, filtering, and paging retain these states by `RowId`; they do not turn a display position into identity. Programmatic `Rows.set` updates the display and clears stale messages; run validation again to evaluate user rules.[^controller][^grid]
 
-Single mode is the default: row buttons keep the existing active-row behavior. In multiple mode a plain click replaces membership, Ctrl/Meta-click toggles it, and Shift-click selects a range on the current sorted/filtered page. Up/Down and Home/End move focus between eligible row buttons; Shift extends a range, Ctrl/Meta+A selects eligible visible rows, and Escape clears the selection set. Native Enter/Space activates the focused button. These shortcuts stay on row-selection buttons so editable fields keep their native editing behavior.[^controller][^grid][^selection]
+Single mode is the default: row buttons keep the existing active-row behavior. With plain toggling off, multiple-mode plain click replaces membership; Ctrl/Meta-click toggles it, and Shift-click selects a range on the current sorted/filtered page. Up/Down and Home/End move focus between eligible row buttons; Shift extends a range, Ctrl/Meta+A selects eligible visible rows, and Escape clears the selection set. Native Enter/Space activates the focused button. These shortcuts stay on row-selection buttons so editable fields keep their native editing behavior.[^controller][^grid][^selection]
 
 Enable the inactive-row policy to supply `canSelect` and `canCheck` from `row.value.active`; it disables the corresponding controls without disabling unrelated editors. Changing that policy or mode rebinds the demo. Before hooks return `false` to veto a proposed change: `beforeSelect` receives `{ id, row, event }`; `beforeSelectionChange` and `beforeCheckChange` receive `{ ids, previous, event }`. A canceled multiple-mode gesture preserves both its active row and membership. State commits before the change callbacks; programmatic events are `null`. Removing/replacing data or making a row ineligible prunes invalid state without allowing a veto to retain missing rows.[^controller][^selection]
 
@@ -222,7 +226,7 @@ Browser regressions cover initial-page/off-page identity, nested choices and raw
 
 Historical M10.7 final suites pass 219/219 in Chromium, Firefox and WebKit, including 19 focused paste regressions and the added demo case. Installed JS/TS and all five Windows browser consumers pass the same 148-file package, SHA-256 c01c3c2ea819aee418154b69534f5eb053f315fca1471b4b7857299b11bb3e0d. Existing binding budgets pass. Source/log hashes, retained initial failures, the synthetic-event fixture correction and unverified manual/OS-clipboard limits are recorded with that stage; these results do not certify the later viewport implementation or recertify the historical M10.6 artifact.[^paste-browser][^paste-evidence]
 
-The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Row-block regressions add multi-tr identity, cross-row validation references, native spans and raw hierarchical merging, physical ARIA indexes, merged-follower paste, focus pinning, fully merged single-column geometry and hidden boundary rows. Native-control regressions cover group isolation, stable array/raw values, JSON-array paste, disabled constraints, rendering ownership, validation timing and first-error reveal. Lifecycle regressions add status boundaries, captured defaults, callback cleanup/errors, readonly tombstones, focus recovery, append and exact restoration. Current-stage gates belong to the [detail/geometry plan](../implementation/m10-detail-plan.md); the [lifecycle plan](../implementation/m10-lifecycle-plan.md) preserves its preceding slice; interactive use adds no unmeasured performance or token-saving claim.[^viewport-browser][^blocks-browser][^controls-browser][^lifecycle-browser]
+The viewport regressions cover logical scopes, variable heights and anchoring, focused editor/caret/composition, offscreen drafts/typed paste, Select release, hidden roots, resize and teardown. Row-block regressions add multi-tr identity, cross-row validation references, native spans and raw hierarchical merging, physical ARIA indexes, merged-follower paste, focus pinning, fully merged single-column geometry and hidden boundary rows. Native-control regressions cover group isolation, stable array/raw values, JSON-array paste, disabled constraints, rendering ownership, validation timing and first-error reveal. Lifecycle regressions add status boundaries, captured defaults, callback cleanup/errors, readonly tombstones, focus recovery, append and exact restoration. Current-stage gates belong to the [interaction plan](../implementation/m10-interactions-plan.md); the [detail/geometry plan](../implementation/m10-detail-plan.md) preserves its preceding contract; the [lifecycle plan](../implementation/m10-lifecycle-plan.md) preserves its preceding slice; interactive use adds no unmeasured performance or token-saving claim.[^viewport-browser][^blocks-browser][^controls-browser][^lifecycle-browser]
 
 The Rows controls demonstrate Add, Insert before selected, Copy before selected, Copy to end, Move earlier/later and Move to first/end. Insertion/copy activates the new stable ID. Copies use the stored valid values, not an uncommitted editor draft; editing a copy leaves its source unchanged. Movement keeps active identity and selected/checked membership while their returned ID arrays follow store order. Sorting/filtering/paging still controls the displayed projection. Revert all removes inserted copies and restores values while retaining the current order. Business key allocation stays application-owned.[^controller]
 
@@ -231,6 +235,20 @@ Edit a loaded employee, choose **All retained rows**, then remove it and activat
 **Read authored defaults** shows captured input/group/Select values rather than a currently edited employee. **Create employee from defaults** supplies names and shift choices through the typed application factory, then calls Rows.add; the result is inserted. **Append 2 loaded employees** uses Rows.append and keeps loaded records clean. A page/controller still owns requests and cancellation; this button does not introduce a framework loader.[^controller]
 
 Enable **Track row resources** to register a before-binding marker and one native click listener per record. Counters show binding calls, active resources, cleanup and clicks. Rebinding, refresh, virtual departure and disposal release each binding's owned work. Changing tracking rebinds Grid and clears selection/checks/drafts; **Refresh bindings** preserves those states while rerunning current bindings. The **Last onBind result** panel updates only for full binding events, including append, not ordinary edits or viewport movement.[^view][^controller][^lifecycle-browser]
+
+## Explicit interaction policies
+
+The focused interaction suite exercises these authored policies.[^interactions-browser]
+
+Enable **Plain activation toggles selection** to rebind with toggleSelection. In single mode a second native activation clears active detail; in multiple mode it removes only that member and clears active identity. Other memberships and checks survive the gesture. Ctrl/Meta/Shift/Alt and absolute programmatic methods retain their contracts. Changing the policy rebinds, so choose it before creating drafts.[^controller][^grid]
+
+The Columns chooser has eight business checkboxes, native **All data columns**, mixed state and a shown/total output derived from grid.columns(). Width/order values survive. Uncheck All to show 0/8 business columns: the separate Actions column remains. Its **Choose columns** button opens/focuses the authored chooser. Inspect, shared CVC details and Undo remain available in recovery-only rows; check a business column to restore it. Actions is omitted from chooser choices, and the application's manual hide control is disabled for it. The public API still rejects every physical column hidden; it does not impose an arbitrary required-column policy on callers.[^view][^controller][^grid]
+
+In the Team header, input previews choices; **Apply** or plain Enter replaces the filter with matching raw values. **All** clears search and membership; **None** uses an empty set; **Reset** preserves the query. **Selected choices** reads actual state. The authored Active filter can exclude all rows for a Team while that Team choice remains visible, enabled and counted zero; selected raw values stay retained. Clearing Active restores those rows. Completion updates observation output through the existing onBind callback, including programmatic or Enter changes.[^view][^controller][^filters]
+
+Enable **Reveal successful application selection, check, add and append actions** to run the explicit scroll recipes. Selection/checks center the last requested eligible identity only after the complete active/selected/checked result matches. This target can differ from the final ID in store-ordered getters. Veto, failure, opt-out and offpage/filtered targets do not scroll or change page/filter. Front/index/end adds use start/center/end; nonempty append uses end only when the store was already nonempty. **Empty store** exercises the no-jump first batch. These are application actions and do not change native Grid gesture defaults.[^view][^controller][^grid]
+
+Choose **Reveal the last invalid row in visual page order, preserving focus** before editing. It disables core first-invalid reveal, collects validation issue IDs and scans the current visual page in reverse before centered reveal. Issue order alone is insufficient after sorting. Hidden/offpage errors remain recorded; a valid result or a result without a visible issue does not scroll. The normal core first-invalid option remains separately available.[^view][^controller][^grid]
 
 # Variations
 
@@ -262,3 +280,5 @@ Without `initialPage` or `viewport`, Grid creates all initial row clones. Local 
 [^detail-controller]: One authored employee detail page in main content and Popup
 
 [Grid](grid.md) defines exact current public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) preserves earlier measurements and defines the required follow-up stages. The [feature parity ledger](../implementation/feature-parity.md) and [parity implementation plan](../implementation/feature-parity-plan.md) track the full release requirement.
+
+[^interactions-browser]: Authored recovery and action-scroll regressions

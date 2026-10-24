@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 M10.9.6.2 interaction and view controls](implementation/m10-interactions-plan.md) - Add explicit selection toggles, applied distinct-value search and authored column recovery and action-scroll compositions. (draft)
+
 * [Natural-JS 2.0 M10.9.6.1 change presentation](implementation/m10-change-state-plan.md) - Expose immutable loaded originals and bind exact committed-field changes while retaining edited deletion views and original deletion payloads. (draft)
 
 * [Natural-JS 2.0 full feature implementation plan](implementation/feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)

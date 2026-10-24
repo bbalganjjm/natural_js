@@ -84,6 +84,9 @@ const selection = find<HTMLOutputElement>("[data-selection]");
 const pageState = find<HTMLOutputElement>("[data-page-state]");
 const callback = find<HTMLOutputElement>("[data-callback]");
 const selectionMode = find<HTMLSelectElement>("[data-selection-mode]");
+const toggleSelection = find<HTMLInputElement>("[data-toggle-selection]");
+const actionScroll = find<HTMLInputElement>("[data-action-scroll]");
+const lastInvalid = find<HTMLInputElement>("[data-last-invalid]");
 const checkMode = find<HTMLSelectElement>("[data-check-mode]");
 const validateOn = find<HTMLSelectElement>("[data-validate-on]");
 const revealInvalid = find<HTMLInputElement>("[data-reveal-invalid]");
@@ -95,6 +98,7 @@ const checkScope = find<HTMLSelectElement>("[data-check-scope]");
 const selectionState = find<HTMLElement>("[data-selection-state]");
 const filterState = find<HTMLElement>("[data-filter-state]");
 const filterSearch = find<HTMLInputElement>('[data-filter-search="team"]');
+const filterCount = find<HTMLOutputElement>("[data-filter-count]");
 const beforeCallback = find<HTMLOutputElement>("[data-before-callback]");
 const selectionCallback = find<HTMLOutputElement>("[data-selection-callback]");
 const checkCallback = find<HTMLOutputElement>("[data-check-callback]");
@@ -109,12 +113,16 @@ const columnWidth = find<HTMLInputElement>("[data-column-width]");
 const columnHidden = find<HTMLInputElement>("[data-column-hidden]");
 const columnState = find<HTMLElement>("[data-columns-state]");
 const columnCallback = find<HTMLOutputElement>("[data-columns-callback]");
+const columnChooser = find<HTMLDetailsElement>("[data-column-chooser]");
+const columnAll = find<HTMLInputElement>("[data-column-all]");
+const columnCount = find<HTMLOutputElement>("[data-column-count]");
+const columnChoices = [...columnChooser.querySelectorAll<HTMLInputElement>("[data-visible-column]")];
 const nameHeader = find<HTMLTableCellElement>('thead th[data-column="name"]');
 const salaryHeader = find<HTMLTableCellElement>('thead th[data-column="salary"]');
 const defaultColumns: readonly GridColumn[] = [
   { key: "name", width: 180 }, { key: "email", width: 240 }, { key: "phone", width: 160 },
   { key: "team", width: 160 }, { key: "shift", width: 150 }, { key: "active", width: 100 },
-  { key: "notes", width: 240 }, { key: "salary", width: 150 }
+  { key: "notes", width: 240 }, { key: "salary", width: 150 }, { key: "actions", width: 180 }
 ];
 let initialColumns: readonly GridColumn[] = defaultColumns;
 let grid: GridHandle<Employee> | null = null;
@@ -238,12 +246,19 @@ function refresh(): void {
     active: id, selectedIds: grid.selectedIds(), checkedIds: grid.checkedIds(),
     visible: grid.checkState("visible"), filtered: grid.checkState("filtered"), store: grid.checkState("store")
   }, null, 2) : "Grid unbound; selection and checks cleared.";
-  filterState.textContent = grid ? JSON.stringify({
-    team: grid.columnFilter("team"), choices: grid.filterChoices("team", filterSearch.value)
-  }, null, 2) : "Grid unbound; column filters cleared.";
+  refreshFilterState();
   refreshViewport();
   refreshColumns();
   detailChanges.dispatchEvent(new Event("change"));
+}
+
+function refreshFilterState(): void {
+  filterState.textContent = grid ? JSON.stringify({
+    team: grid.columnFilter("team"), active: grid.columnFilter("active"), choices: grid.filterChoices("team", filterSearch.value)
+  }, null, 2) : "Grid unbound; column filters cleared.";
+  const choices = grid?.filterChoices("team") ?? [];
+  const picked = grid?.columnFilter("team") ?? null;
+  filterCount.value = `${picked === null ? choices.length : choices.filter(choice => picked.includes(choice.value)).length} / ${choices.length}`;
 }
 
 function refreshViewport(): void {
@@ -262,14 +277,21 @@ function columnGroup(key: string): string {
 function refreshColumns(): void {
   if (!grid) {
     columnState.textContent = "Grid unbound; authored column layout restored.";
+    columnCount.value = "Grid unbound";
     return;
   }
   const columns = grid.columns();
   columnState.textContent = JSON.stringify(columns, null, 2);
+  for (const input of columnChoices) input.checked = !columns.find(column => column.key === input.dataset.visibleColumn)!.hidden;
+  const shown = columnChoices.filter(input => input.checked).length;
+  columnAll.checked = shown === columnChoices.length;
+  columnAll.indeterminate = shown > 0 && shown < columnChoices.length;
+  columnCount.value = `${shown} / ${columnChoices.length}`;
   const index = columns.findIndex(column => column.key === columnChoice.value);
   const column = columns[index];
   columnWidth.value = column.width === undefined ? "" : String(column.width);
   columnHidden.checked = column.hidden === true;
+  columnHidden.disabled = column.key === "actions";
   find<HTMLButtonElement>('[data-action="column-left"]').disabled = index === 0 ||
     columnGroup(columns[index - 1].key) !== columnGroup(column.key);
   find<HTMLButtonElement>('[data-action="column-right"]').disabled = index === columns.length - 1 ||
@@ -359,6 +381,7 @@ function bind(): void {
     onBind(result) {
       bindState.textContent = JSON.stringify({ calls: ++bindCalls, event: result.event?.type ?? null,
         total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted });
+      queueMicrotask(refreshFilterState);
     },
     viewport: viewportChoice.checked ? { root: scrollRoot, estimate: 150, overscan: 3 } : undefined,
     heightResize: { root: scrollRoot, handle: find<HTMLButtonElement>("[data-resize-height]"), min: 160, max: 800 },
@@ -372,13 +395,15 @@ function bind(): void {
     },
     columns: defaultColumns,
     multiple: selectionMode.value === "multiple",
+    toggleSelection: toggleSelection.checked,
     checkMode: checkMode.value as "multiple" | "single",
     validateOn: validateOn.value as "change" | "blur" | "manual",
-    revealInvalid: revealInvalid.checked,
+    revealInvalid: revealInvalid.checked && !lastInvalid.checked,
     canSelect: disableInactive.checked ? row => row.value.active : undefined,
     canCheck: disableInactive.checked ? row => row.value.active : undefined,
     sorts: { name: (a, b) => a.name.localeCompare(b.name), salary: (a, b) => a.salary - b.salary },
-    filters: { team: { value: row => row.profile.team } },
+    filters: { team: { value: row => row.profile.team },
+      active: { value: row => row.active, label: value => value === true ? "Active" : "Inactive" } },
     rules: employeeRules(),
     parse: employeeParsers,
     beforeSelect({ id, row, event }) {
@@ -451,6 +476,32 @@ function showValidation(result: ValidationResult): void {
     ? JSON.stringify(result.issues.map(({ rowId, field, rule, message }) => ({ rowId, field, rule, message })), null, 2)
     : "No issues.";
   status.textContent = result.valid ? "Validation passed." : `${result.issues.length} validation issue(s).`;
+  if (lastInvalid.checked && grid && !result.valid) {
+    const invalid = new Set(result.issues.map(issue => issue.rowId));
+    revealOnPage(grid.rowIds("visible").filter(id => invalid.has(id)).at(-1), "center");
+  }
+}
+
+function revealOnPage(id: RowId | undefined, block: ScrollLogicalPosition): void {
+  if (id !== undefined && grid?.rowIds("visible").includes(id)) {
+    grid.reveal(id, { block });
+    requestAnimationFrame(refreshViewport);
+  }
+}
+
+function identities(handle: GridHandle<Employee>) {
+  return { active: handle.selected(), selected: handle.selectedIds(), checked: handle.checkedIds() };
+}
+
+function sameIds(left: readonly RowId[], right: readonly RowId[]): boolean {
+  return left.length === right.length && left.every((id, index) => id === right[index]);
+}
+
+function revealCommitted(id: RowId | undefined,
+  expected: { active: RowId | null; selected: readonly RowId[]; checked: readonly RowId[] },
+  block: ScrollLogicalPosition = "center"): void {
+  if (actionScroll.checked && grid && grid.selected() === expected.active &&
+      sameIds(grid.selectedIds(), expected.selected) && sameIds(grid.checkedIds(), expected.checked)) revealOnPage(id, block);
 }
 
 function act(action: string): void {
@@ -469,10 +520,11 @@ function act(action: string): void {
       return;
     }
     case "paste": grid.paste(pasteText.value, { id: selectedId(), field: pasteField.value }); return;
+    case "show-columns": columnChooser.open = true; columnChooser.querySelector("summary")!.focus(); return;
     case "apply-columns": {
       const width = columnWidth.value.trim();
       grid.setColumns(grid.columns().map(column => column.key === columnChoice.value
-        ? { key: column.key, ...(width ? { width: Number(width) } : {}), hidden: columnHidden.checked }
+        ? { key: column.key, ...(width ? { width: Number(width) } : {}), hidden: column.key === "actions" ? false : columnHidden.checked }
         : column));
       break;
     }
@@ -486,42 +538,95 @@ function act(action: string): void {
         columns.findIndex(column => column.key === assignment[0].key);
       grid.setColumns([columns.find(column => column.key === "name")!,
         ...(contactFirst ? [...assignment, ...contact] : [...contact, ...assignment]),
-        columns.find(column => column.key === "salary")!]);
+        columns.find(column => column.key === "salary")!, columns.find(column => column.key === "actions")!]);
       break;
     }
     case "reset-columns": grid.setColumns(initialColumns); break;
     case "invalid-columns": grid.setColumns([...grid.columns(), grid.columns()[0]]); break;
-    case "empty-team-filter": grid.setColumnFilter("team", []); break;
+    case "empty-team-filter":
+    case "no-team-values": grid.setColumnFilter("team", []); break;
+    case "all-team-values":
+      grid.setColumnFilter("team", null);
+      filterSearch.value = ""; filterSearch.dispatchEvent(new Event("input", { bubbles: true }));
+      break;
     case "previous": requestedPage = (grid.page()?.page ?? 1) - 1; applyPage(); return;
     case "next": requestedPage = (grid.page()?.page ?? 1) + 1; applyPage(); return;
-    case "select-first": grid.select(rows.entries()[0]?.id ?? null); break;
+    case "select-first": {
+      const before = identities(grid), id = rows.entries()[0]?.id;
+      grid.select(id ?? null);
+      revealCommitted(id, { ...before, active: id ?? null });
+      break;
+    }
     case "clear-selection": grid.select(null); break;
     case "clear-multiple": grid.setSelected([]); break;
-    case "select-first-two": grid.setSelected(rows.entries()
-      .filter(row => !disableInactive.checked || row.value.active).slice(0, 2).map(row => row.id)); break;
-    case "check-all": grid.checkAll(true, checkScope.value as "visible" | "filtered" | "store"); break;
-    case "uncheck-all": grid.checkAll(false, checkScope.value as "visible" | "filtered" | "store"); break;
-    case "check-selected": grid.setChecked(grid.selectedIds()); break;
+    case "select-first-two": {
+      const before = identities(grid);
+      const ids = rows.entries().filter(row => !disableInactive.checked || row.value.active).slice(0, 2).map(row => row.id);
+      grid.setSelected(ids);
+      revealCommitted(ids.at(-1), { ...before, selected: ids });
+      break;
+    }
+    case "check-all":
+    case "uncheck-all": {
+      const before = identities(grid), scope = checkScope.value as GridRowScope;
+      const ids = grid.rowIds(scope).filter(id => {
+        const row = rows.get(id)!;
+        return row.status !== "delete" && (!disableInactive.checked || row.value.active);
+      });
+      const checked = action === "check-all";
+      const next = new Set(before.checked);
+      if (checked && checkMode.value === "single" && ids.length) next.clear();
+      for (const id of ids) { if (checked) next.add(id); else next.delete(id); }
+      const expected = rows.entries().filter(row => next.has(row.id)).map(row => row.id);
+      grid.checkAll(checked, scope);
+      revealCommitted(ids.at(-1), { ...before, checked: expected });
+      break;
+    }
+    case "check-selected": {
+      const before = identities(grid);
+      grid.setChecked(before.selected);
+      revealCommitted(before.selected.at(-1), { ...before, checked: before.selected });
+      break;
+    }
     case "clear-checks": grid.setChecked([]); break;
     case "validate-selected": showValidation(grid.validate(selectedId())); return;
     case "validate-all": showValidation(grid.validate()); return;
     case "defaults": defaultsOutput.textContent = JSON.stringify(grid.defaults(), null, 2); break;
-    case "create-defaults": {
-      const defaults = grid.defaults();
-      defaultsOutput.textContent = JSON.stringify(defaults, null, 2);
-      grid.select(rows.add(employeeFromDefaults(defaults, rows.entries({ includeDeleted: true }).length)));
+    case "create-defaults":
+    case "add":
+    case "add-first":
+    case "insert-before": {
+      const before = identities(grid);
+      const target = action === "insert-before" ? selectedId() : action === "add-first" ? rows.entries()[0]?.id : undefined;
+      let value = employee(rows.entries().length);
+      if (action === "create-defaults") {
+        const defaults = grid.defaults();
+        defaultsOutput.textContent = JSON.stringify(defaults, null, 2);
+        value = employeeFromDefaults(defaults, rows.entries({ includeDeleted: true }).length);
+      }
+      const id = rows.add(value, target);
+      grid.select(id);
+      revealCommitted(id, { ...before, active: id }, action === "insert-before" ? "center" : action === "add-first" ? "start" : "end");
       break;
     }
     case "append": {
-      const offset = rows.entries({ includeDeleted: true }).length;
-      rows.append([employee(offset), employee(offset + 1)]);
+      const prior = rows.entries({ includeDeleted: true }).length;
+      const ids = rows.append([employee(prior), employee(prior + 1)]);
+      if (actionScroll.checked && prior > 0) {
+        const visible = grid.rowIds("visible");
+        revealOnPage(ids.filter(id => visible.includes(id)).at(-1), "end");
+      }
       break;
     }
     case "refresh": grid.refresh(); break;
-    case "add": grid.select(rows.add(employee(rows.entries().length))); break;
-    case "insert-before": grid.select(rows.add(employee(rows.entries().length), selectedId())); break;
-    case "copy-before": grid.select(rows.copy(selectedId(), selectedId())); break;
-    case "copy-end": grid.select(rows.copy(selectedId())); break;
+    case "copy-before":
+    case "copy-end": {
+      const before = identities(grid), source = selectedId();
+      const id = rows.copy(source, action === "copy-before" ? source : undefined);
+      grid.select(id);
+      revealCommitted(id, { ...before, active: id }, action === "copy-before" ? "center" : "end");
+      break;
+    }
     case "move-first": rows.move(selectedId(), rows.entries()[0]?.id); break;
     case "move-end": rows.move(selectedId()); break;
     case "move-up":
@@ -596,14 +701,14 @@ for (const control of [viewportChoice, datasetChoice]) {
     requestAnimationFrame(refreshViewport);
   });
 }
-for (const control of [selectionMode, disableInactive]) {
+for (const control of [selectionMode, toggleSelection, disableInactive]) {
   control.addEventListener("change", () => {
     if (grid) { disposeGrid(); bind(); }
     status.textContent = "Selection policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
     refresh();
   });
 }
-for (const control of [checkMode, validateOn, revealInvalid]) {
+for (const control of [checkMode, validateOn, revealInvalid, lastInvalid]) {
   control.addEventListener("change", () => {
     if (grid) { disposeGrid(); bind(); }
     status.textContent = "Check or validation policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
@@ -611,6 +716,18 @@ for (const control of [checkMode, validateOn, revealInvalid]) {
   });
 }
 columnChoice.addEventListener("change", refreshColumns);
+columnChooser.addEventListener("change", event => {
+  const input = event.target;
+  if (!grid || !(input instanceof HTMLInputElement) || input.disabled ||
+      !input.matches("[data-visible-column], [data-column-all]")) return;
+  const key = input.dataset.visibleColumn;
+  try {
+    grid.setColumns(grid.columns().map(column => column.key === "actions" ? { ...column, hidden: false }
+      : key === undefined || column.key === key ? { ...column, hidden: !input.checked } : column));
+    status.textContent = "Column visibility applied; Actions remains available.";
+  } catch (cause) { status.textContent = cause instanceof Error ? cause.message : String(cause); }
+  finally { refreshColumns(); }
+});
 filter.addEventListener("change", () => { applyFilter(); requestedPage = 1; applyPage(); });
 statusFilter.addEventListener("change", () => {
   grid?.setStatusFilter(statusViews[statusFilter.value]);
