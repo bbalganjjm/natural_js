@@ -1,0 +1,29 @@
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references
+  1) [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      419 |   expect(result.prefix).toEqual([3]); expect(result.valid).toBe(false); expect(result.message).toMatch(/\S/);
+      420 |   expect(result.issues).toEqual([1, 3].map(id => ({ id, field: "profile.name", rule: "html", message: result.message })));
+    > 421 |   expect(result.references).toBe(0); expect(result.error).toBe("AbortError");
+          |                             ^
+      422 |   expect(result.callbackRestored && result.immediate && result.quiet && result.focus).toBe(true);
+      423 |   expect(result.mutations).toBe(0); expect(result.unhandled).toEqual([]);
+      424 | });
+        at D:\workspace\natural_js\tests\browser\grid-progressive.spec.ts:421:29
+
+    Error Context: test-results\grid-progressive-validatio-8d9e4-released-element-references-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references 
+(node:15948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

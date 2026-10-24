@@ -1,0 +1,293 @@
+
+
+Running 114 tests using 1 worker
+
+
+
+[1/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+[2/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+[3/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+[4/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+[5/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+[6/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+[7/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+[8/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+[9/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+[10/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+[11/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+[12/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+[13/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+[14/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+[15/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+[16/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+[17/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+[18/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+[19/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+[20/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+[21/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+[22/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+[23/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+[24/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+[25/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+[26/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+[27/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+[28/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+[29/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+[30/114] [chromium] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+[31/114] [chromium] › tests\browser\grid-progressive.spec.ts:130:1 › default binding has one frozen eight-field completion and exhausted calls do not repeat it
+[32/114] [chromium] › tests\browser\grid-progressive.spec.ts:144:1 › empty single exact and remainder boundaries count logical chunks and first last flags
+[33/114] [chromium] › tests\browser\grid-progressive.spec.ts:164:1 › two physical rows stay one scheduled record with full logical page ARIA positions
+[34/114] [chromium] › tests\browser\grid-progressive.spec.ts:178:1 › positive delay yields to another Window task while prepared rows remain usable
+[35/114] [chromium] › tests\browser\grid-progressive.spec.ts:192:1 › renderMore shares its pending Promise and advances only one target
+[36/114] [chromium] › tests\browser\grid-progressive.spec.ts:205:1 › size one continuation still gives a queued Window task a turn
+[37/114] [chromium] › tests\browser\grid-progressive.spec.ts:216:1 › canceling the initial operation rejects it and resumes its unfinished target
+[38/114] [chromium] › tests\browser\grid-progressive.spec.ts:230:1 › canceling a continuation retains completed work and does not skip its remaining target
+[39/114] [chromium] › tests\browser\grid-progressive.spec.ts:243:1 › unobserved cancellation is handled internally and repeated cancel stays quiet
+[40/114] [chromium] › tests\browser\grid-progressive.spec.ts:253:1 › refresh supersedes pending work and starts a fresh first chunk
+[41/114] [chromium] › tests\browser\grid-progressive.spec.ts:264:1 › Rows replacement cannot leave old IDs or late completion in the new prefix
+[42/114] [chromium] › tests\browser\grid-progressive.spec.ts:277:1 › explicit sort filter page and status requests reset first completion against the new scope
+[43/114] [chromium] › tests\browser\grid-progressive.spec.ts:292:1 › ordinary data mutations cancel queued work without emitting full bind completion
+[44/114] [chromium] › tests\browser\grid-progressive.spec.ts:315:1 › append during an unfinished prefix preserves old tail records without duplicate binding
+[45/114] [chromium] › tests\browser\grid-progressive.spec.ts:330:1 › append advances one chunk from a complete target and preserves fully admitted rows
+[46/114] [chromium] › tests\browser\grid-progressive.spec.ts:344:1 › empty append and exhausted requests retain cached completion without another callback
+[47/114] [chromium] › tests\browser\grid-progressive.spec.ts:354:1 › explicit reveal synchronously admits its full-page target and supersedes delayed work
+[48/114] [chromium] › tests\browser\grid-progressive.spec.ts:371:1 › full logical-page selection checks paste and validation still include unadmitted IDs
+[49/114] [chromium] › tests\browser\grid-progressive.spec.ts:386:1 › first-invalid reveal uses the same synchronous admission bridge
+[50/114] [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › a focused invalid draft and typed choices survive a sorted prefix reset
+[51/114] [chromium] › tests\browser\grid-progressive.spec.ts:421:1 › a committed column layout cancels pending work and continuation uses the retained state
+[52/114] [chromium] › tests\browser\grid-progressive.spec.ts:437:1 › before-hook failure keeps earlier ready records and releases the failing row for retry
+[53/114] [chromium] › tests\browser\grid-progressive.spec.ts:454:1 › field failure is observable without losing earlier bindings or leaking Select ownership
+[54/114] [chromium] › tests\browser\grid-progressive.spec.ts:470:1 › after-hook failure releases resources in reverse order and retries one uncommitted record
+[55/114] [chromium] › tests\browser\grid-progressive.spec.ts:484:1 › onBind failure keeps committed DOM and the next request does not redeliver that completion
+[56/114] [chromium] › tests\browser\grid-progressive.spec.ts:497:1 › a completion callback starting another view aborts the old observer without stale completion
+[57/114] [chromium] › tests\browser\grid-progressive.spec.ts:513:1 › disposal during completion settles the observer and restores authored ownership exactly
+[58/114] [chromium] › tests\browser\grid-progressive.spec.ts:531:1 › invalid progressive options fail before DOM ownership and allow corrected binding
+[59/114] [chromium] › tests\browser\grid-progressive.spec.ts:552:1 › independent instances cancel separately and remain accessible without duplicate IDs
+[60/114] [chromium] › tests\browser\grid-progressive.spec.ts:574:1 › 5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix
+[61/114] [chromium] › tests\browser\grid-progressive.spec.ts:595:1 › positive viewport delay schedules materialized records rather than thousands of offscreen IDs
+[62/114] [chromium] › tests\browser\grid-progressive.spec.ts:613:1 › cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix
+[63/114] [chromium] › tests\browser\grid-progressive.spec.ts:629:1 › a late viewport field failure publishes an owned error and retries its window without another completion
+[64/114] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+[65/114] [chromium] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[66/114] [chromium] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[67/114] [chromium] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[68/114] [chromium] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[69/114] [chromium] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[70/114] [chromium] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[71/114] [chromium] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[72/114] [chromium] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+[73/114] [chromium] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[74/114] [chromium] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[75/114] [chromium] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[76/114] [chromium] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+[77/114] [chromium] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[78/114] [chromium] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+[79/114] [chromium] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[80/114] [chromium] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[81/114] [chromium] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+[82/114] [chromium] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[83/114] [chromium] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[84/114] [chromium] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[85/114] [chromium] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[86/114] [chromium] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+[87/114] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[88/114] [chromium] › tests\browser\m10-interactions.spec.ts:44:1 › authored column chooser has native mixed state and recovers every hidden business column
+[89/114] [chromium] › tests\browser\m10-interactions.spec.ts:71:1 › chooser retains widths, group order, raw drafts and selection while another store is unchanged
+[90/114] [chromium] › tests\browser\m10-interactions.spec.ts:101:1 › recovery-only rows retain shared CVC details and Undo without duplicate IDs or accessibility errors
+[91/114] [chromium] › tests\browser\m10-interactions.spec.ts:119:1 › column actions restore exact authored table nodes and resynchronize after disposal and rebind
+[92/114] [chromium] › tests\browser\m10-interactions.spec.ts:133:1 › Team preview, Apply and Enter, app All and None expose the exact current choice count
+[93/114] [chromium] › tests\browser\m10-interactions.spec.ts:159:1 › another typed column filter retains enabled selected zero-count Team choices
+[94/114] [chromium] › tests\browser\m10-interactions.spec.ts:175:1 › toggle-policy controls bind native single and multiple activation while checks stay independent
+[95/114] [chromium] › tests\browser\m10-interactions.spec.ts:194:1 › application selection and checks reveal the last requested ID only after the complete state commits
+[96/114] [chromium] › tests\browser\m10-interactions.spec.ts:227:1 › action-scroll opt-out and current-page guards preserve filtering and paging
+[97/114] [chromium] › tests\browser\m10-interactions.spec.ts:244:1 › front, indexed and end insertion use start, center and end after successful selection
+[98/114] [chromium] › tests\browser\m10-interactions.spec.ts:259:1 › append skips an empty prior store and reveals only the last newly loaded current-page row
+[99/114] [chromium] › tests\browser\m10-interactions.spec.ts:280:1 › last-invalid reveal follows visual page order and preserves focus with first-invalid core reveal disabled
+[100/114] [chromium] › tests\browser\m10-interactions.spec.ts:302:1 › application end insertion uses the existing bounded viewport without affecting independent row-block stores
+[101/114] [chromium] › tests\browser\m10-progressive.spec.ts:33:1 › Immediate remains synchronous and prefix Next exposes full logical scope without changing Rows
+[102/114] [chromium] › tests\browser\m10-progressive.spec.ts:52:1 › Yield all keeps Ping responsive and reports first and last chunk without per-row live output
+  1) [chromium] › tests\browser\m10-progressive.spec.ts:52:1 › Yield all keeps Ping responsive and reports first and last chunk without per-row live output 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('[data-grid] [aria-live]')
+    Expected: 0
+    Received: 24
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('[data-grid] [aria-live]') with timeout 5000ms
+      - waiting for locator('[data-grid] [aria-live]')
+        14 × locator resolved to 24 elements
+           - unexpected value "24"
+
+
+      62 |   expect(history.at(-1)).toMatchObject({ first: false, last: true, available: 6, mounted: 6 });
+      63 |   await expect(ping).toBeFocused();
+    > 64 |   await expect(page.locator('[data-grid] [aria-live]')).toHaveCount(0);
+         |                                                         ^
+      65 | });
+      66 |
+      67 | test("Cancel before full preparation returns unfinished snapshot and Resume retains loaded records", async ({ page }) => {
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:64:57
+
+    Error Context: test-results\m10-progressive-Yield-all--72cdf-without-per-row-live-output-chromium\error-context.md
+
+
+
+
+[103/114] [chromium] › tests\browser\m10-progressive.spec.ts:67:1 › Cancel before full preparation returns unfinished snapshot and Resume retains loaded records
+[104/114] [chromium] › tests\browser\m10-progressive.spec.ts:90:1 › a one-shot authored hook failure is observable and Resume retries retained prefix
+[105/114] [chromium] › tests\browser\m10-progressive.spec.ts:104:1 › view supersession and dispose cannot let an old promise overwrite the newer binding UI
+[106/114] [chromium] › tests\browser\m10-progressive.spec.ts:121:1 › bottom-scroll continuation and viewport retain bounded actual widgets for loaded prefixes
+[107/114] [chromium] › tests\browser\m10-progressive.spec.ts:139:1 › late viewport row failure is read through whenBound and resumes without extra completion
+[108/114] [chromium] › tests\browser\m10-progressive.spec.ts:157:1 › empty progressive data completes once without creating rows or enabling continuation
+[109/114] [chromium] › tests\browser\m10-progressive.spec.ts:167:1 › two CVC layouts publish logical chunks and nested raw values without Rows notifications
+  2) [chromium] › tests\browser\m10-progressive.spec.ts:167:1 › two CVC layouts publish logical chunks and nested raw values without Rows notifications 
+
+    Error: page.evaluate: SyntaxError: Unexpected token 'N', "No completed chunk." is not valid JSON
+        at JSON.parse (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at Array.map (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:32
+        at proof (D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:3)
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:168:3
+
+    Error Context: test-results\m10-progressive-two-CVC-la-da475--without-Rows-notifications-chromium\error-context.md
+
+
+
+
+[110/114] [chromium] › tests\browser\m10-progressive.spec.ts:185:1 › native CVC yield keeps Ping available and cancel resume does not affect its neighbour
+  3) [chromium] › tests\browser\m10-progressive.spec.ts:185:1 › native CVC yield keeps Ping available and cancel resume does not affect its neighbour 
+
+    Error: page.evaluate: SyntaxError: Unexpected token 'N', "No completed chunk." is not valid JSON
+        at JSON.parse (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at Array.map (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:32
+        at proof (D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:3)
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:186:3
+
+    Error Context: test-results\m10-progressive-native-CVC-82edf-es-not-affect-its-neighbour-chromium\error-context.md
+
+
+
+
+[111/114] [chromium] › tests\browser\m10-progressive.spec.ts:203:1 › normal deactivate cancels a pending operation and activate resumes the retained instance
+  4) [chromium] › tests\browser\m10-progressive.spec.ts:203:1 › normal deactivate cancels a pending operation and activate resumes the retained instance 
+
+    Error: page.evaluate: SyntaxError: Unexpected token 'N', "No completed chunk." is not valid JSON
+        at JSON.parse (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at Array.map (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:32
+        at proof (D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:3)
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:204:3
+
+    Error Context: test-results\m10-progressive-normal-dea-a5fa0-sumes-the-retained-instance-chromium\error-context.md
+
+
+
+
+[112/114] [chromium] › tests\browser\m10-progressive.spec.ts:222:1 › dispose aborts Grid before asynchronous controller cleanup while the other page continues
+  5) [chromium] › tests\browser\m10-progressive.spec.ts:222:1 › dispose aborts Grid before asynchronous controller cleanup while the other page continues 
+
+    Error: page.evaluate: SyntaxError: Unexpected token 'N', "No completed chunk." is not valid JSON
+        at JSON.parse (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at Array.map (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:32
+        at proof (D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:3)
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:223:3
+
+    Error Context: test-results\m10-progressive-dispose-ab-9ddfb-le-the-other-page-continues-chromium\error-context.md
+
+
+
+
+[113/114] [chromium] › tests\browser\m10-progressive.spec.ts:247:1 › early CVC reload replaces only its instance and suppresses old completion and late writes
+  6) [chromium] › tests\browser\m10-progressive.spec.ts:247:1 › early CVC reload replaces only its instance and suppresses old completion and late writes 
+
+    Error: page.evaluate: SyntaxError: Unexpected token 'N', "No completed chunk." is not valid JSON
+        at JSON.parse (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at Array.map (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:32
+        at proof (D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:3)
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:248:3
+
+    Error Context: test-results\m10-progressive-early-CVC--de5bb--completion-and-late-writes-chromium\error-context.md
+
+
+
+
+[114/114] [chromium] › tests\browser\m10-progressive.spec.ts:267:1 › native CVC Next and two authored layouts retain unique IDs, focus and accessibility
+  7) [chromium] › tests\browser\m10-progressive.spec.ts:267:1 › native CVC Next and two authored layouts retain unique IDs, focus and accessibility 
+
+    Error: page.evaluate: SyntaxError: Unexpected token 'N', "No completed chunk." is not valid JSON
+        at JSON.parse (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at Array.map (<anonymous>)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at eval (eval at evaluate (:311:30), <anonymous>:7:25)
+        at eval (eval at evaluate (:311:30), <anonymous>:3:23)
+        at async <anonymous>:337:30
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:32
+        at proof (D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:26:3)
+        at D:\workspace\natural_js\tests\browser\m10-progressive.spec.ts:268:3
+
+    Error Context: test-results\m10-progressive-native-CVC-5eccf-IDs-focus-and-accessibility-chromium\error-context.md
+
+
+  7 failed
+    [chromium] › tests\browser\m10-progressive.spec.ts:52:1 › Yield all keeps Ping responsive and reports first and last chunk without per-row live output 
+    [chromium] › tests\browser\m10-progressive.spec.ts:167:1 › two CVC layouts publish logical chunks and nested raw values without Rows notifications 
+    [chromium] › tests\browser\m10-progressive.spec.ts:185:1 › native CVC yield keeps Ping available and cancel resume does not affect its neighbour 
+    [chromium] › tests\browser\m10-progressive.spec.ts:203:1 › normal deactivate cancels a pending operation and activate resumes the retained instance 
+    [chromium] › tests\browser\m10-progressive.spec.ts:222:1 › dispose aborts Grid before asynchronous controller cleanup while the other page continues 
+    [chromium] › tests\browser\m10-progressive.spec.ts:247:1 › early CVC reload replaces only its instance and suppresses old completion and late writes 
+    [chromium] › tests\browser\m10-progressive.spec.ts:267:1 › native CVC Next and two authored layouts retain unique IDs, focus and accessibility 
+  107 passed (55.4s)
+[WebServer] (node:7504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:17512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25348) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

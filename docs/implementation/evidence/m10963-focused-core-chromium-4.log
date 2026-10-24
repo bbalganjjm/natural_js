@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\grid-progressive.spec.ts:531:1 › synchronous size-one completion cannot write after its callback disposes the Grid
+  1 passed (1.4s)
+(node:9988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

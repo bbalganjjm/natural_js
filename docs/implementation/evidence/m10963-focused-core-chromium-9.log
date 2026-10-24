@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references
+  1 passed (1.1s)
+(node:18540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

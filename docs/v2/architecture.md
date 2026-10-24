@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
+    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -24,7 +24,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
+    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -149,10 +149,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -211,6 +211,14 @@ Grid exposes frozen logical row IDs from its existing projection for authored de
 The private selection owner implements the optional plain-activation toggle through its existing atomic transition. The filter owner computes typed zero-count choices and rejects stale cache publication; Grid connects an explicitly authored Apply button and native Enter. No parallel selection/filter store is introduced. Enter/Space toggles reuse native click rather than an extra activation handler.[^grid]
 
 The demo composes column chooser/recovery and action-driven reveal through existing handles. It derives checkbox/count state from columns(), retains an authored recovery column, and verifies accepted stable-ID state before scrolling. Labels, whole-row predicates and scroll policy remain application code; core column topology and measured viewport behavior keep their owners. No public chooser registry, auto-scroll subsystem or new dependency is needed.[^grid]
+
+## Cooperative Grid ownership
+
+Progressive binding stays in Grid alongside the existing row preparation and commit path. One optional chunk policy, one readonly GridBindResult and three handle operations share Rows/projection/viewport ownership. A job has one Window timer and a handled public Promise; generation checks after user callbacks prevent an older job from writing or completing a replacement. Ordinary bindings keep the direct synchronous path.[^grid]
+
+Logical admission is separate from actual widget materialization. Viewport receives prefix geometry once per chunk, and row hooks own only mounted records. New records use the same preparation logic without repeated whole-prefix placement per row. onBind remains the final notification; update suppression, rollback-before-prune and post-commit errors retain their existing boundaries. Late window errors use the current owned Promise and retry rather than an uncaught scheduled exception.[^grid][^grid-viewport][^grid-hooks]
+
+Controllers compose bottom-scroll, auto-loop and cancellation with native events/Promises. CVC abort happens before asynchronous cleanup, so its standard abort listener disposes Grid immediately and owned cleanup remains idempotent. Normal deactivate/activate cancel/resume is controller policy. This adds no network loader, second Rows store, global scheduler, generic task type or generated UI.[^grid][^page]
 
 # Related
 

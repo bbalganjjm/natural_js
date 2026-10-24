@@ -1,0 +1,25 @@
+
+
+Running 14 tests using 1 worker
+
+
+
+[1/14] [webkit] › tests\browser\m10-progressive.spec.ts:44:1 › Immediate remains synchronous and prefix Next exposes full logical scope without changing Rows
+[2/14] [webkit] › tests\browser\m10-progressive.spec.ts:63:1 › Yield all keeps Ping responsive and reports first and last chunk without per-row live output
+[3/14] [webkit] › tests\browser\m10-progressive.spec.ts:87:1 › Cancel before full preparation returns unfinished snapshot and Resume retains loaded records
+[4/14] [webkit] › tests\browser\m10-progressive.spec.ts:110:1 › a one-shot authored hook failure is observable and Resume retries retained prefix
+[5/14] [webkit] › tests\browser\m10-progressive.spec.ts:124:1 › view supersession and dispose cannot let an old promise overwrite the newer binding UI
+[6/14] [webkit] › tests\browser\m10-progressive.spec.ts:141:1 › bottom-scroll continuation and viewport retain bounded actual widgets for loaded prefixes
+[7/14] [webkit] › tests\browser\m10-progressive.spec.ts:159:1 › late viewport row failure is read through whenBound and resumes without extra completion
+[8/14] [webkit] › tests\browser\m10-progressive.spec.ts:177:1 › empty progressive data completes once without creating rows or enabling continuation
+[9/14] [webkit] › tests\browser\m10-progressive.spec.ts:187:1 › two CVC layouts publish logical chunks and nested raw values without Rows notifications
+[10/14] [webkit] › tests\browser\m10-progressive.spec.ts:205:1 › native CVC yield keeps Ping available and cancel resume does not affect its neighbour
+[11/14] [webkit] › tests\browser\m10-progressive.spec.ts:223:1 › normal deactivate cancels a pending operation and activate resumes the retained instance
+[12/14] [webkit] › tests\browser\m10-progressive.spec.ts:242:1 › dispose aborts Grid before asynchronous controller cleanup while the other page continues
+[13/14] [webkit] › tests\browser\m10-progressive.spec.ts:267:1 › early CVC reload replaces only its instance and suppresses old completion and late writes
+[14/14] [webkit] › tests\browser\m10-progressive.spec.ts:287:1 › native CVC Next and two authored layouts retain unique IDs, focus and accessibility
+  14 passed (14.2s)
+[WebServer] (node:17596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:23316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

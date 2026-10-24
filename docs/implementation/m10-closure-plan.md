@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 03c34062aa9fed9d5fa461657c8a2487f0b489d2
+    git_blob: c6464f5275c2593902ce7e90f799a6d3d36681b8
   - id: mapping
     resource: evidence/v1-grid-parity.json
     title: Preserved 89-entry and 17-group structural audit
@@ -21,9 +21,9 @@ sources:
     resource: ../../v1/src/natural.ui.js
     title: Legacy Grid, delegated Form and UI workflows
     git_blob: 50229404558dabe92cdea2d02cd1c45a2481cf49
-generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 ---
 
 # Goal
@@ -47,7 +47,7 @@ Before each implementation slice, restore current.md, inspect actual legacy call
 
 # Next action
 
-[Change presentation](m10-change-state-plan.md) is implemented and its sixteen frozen runtime gates pass. Independent source/API/evidence/document review approves that slice. The [M10.9.6.2 interaction/view controls](m10-interactions-plan.md) implementation and sixteen frozen runtime gates are complete; independent source/API/archive/evidence/document review approves the slice. Specify M10.9.6.3 progressive rendering/completion. Selection/check projections, status imports/wire conversion, arbitrary delegated post-edit event order, progressive callbacks and external column/topology inspection need exact acceptance; the old structural audit alone does not close them.
+[Change presentation](m10-change-state-plan.md) is implemented and its sixteen frozen runtime gates pass. Independent source/API/evidence/document review approves that slice. The [M10.9.6.2 interaction/view controls](m10-interactions-plan.md) implementation and sixteen frozen runtime gates are complete; independent source/API/archive/evidence/document review approves the slice. The [M10.9.6.3 progressive binding contract](m10-progressive-plan.md) is implemented and its sixteen frozen runtime gates pass. Continue M10.9.6.4 semantic acceptance before closing any full family. Selection/check projections, status imports/wire conversion, arbitrary delegated post-edit event order, progressive callbacks and external column/topology inspection need exact acceptance; the old structural audit alone does not close them.
 
 # Decisions
 

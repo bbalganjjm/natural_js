@@ -5,7 +5,7 @@ body { margin: 0; }
 button, input, select, textarea { font: inherit; }
 button { border: 1px solid #315f91; border-radius: .35rem; padding: .4rem .65rem; background: #fff; color: #173f70; cursor: pointer; }
 button:hover:not(:disabled) { background: #e3eefb; }
-button:disabled { color: #5b6470; border-color: #aab4c0; cursor: default; }
+button:disabled, [data-render-controls] button[aria-disabled="true"], .progressive-proof button[aria-disabled="true"] { color: #5b6470; border-color: #aab4c0; cursor: default; }
 :focus-visible { outline: 3px solid #bd5f00; outline-offset: 2px; }
 .demo { max-width: 100%; margin: auto; padding: clamp(.75rem, 2vw, 1.5rem); }
 .demo > header { max-width: 70rem; }
@@ -79,3 +79,12 @@ pre { max-height: 16rem; overflow: auto; margin: 0; white-space: pre-wrap; overf
 .future p { margin: 0; }
 @media (max-width: 58rem) { .workspace { grid-template-columns: minmax(0, 1fr); } .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 38rem) { .controls, .observations { grid-template-columns: minmax(0, 1fr); } .controls, .results, .future { padding: .7rem; } }
+
+.progressive-pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-block: 1rem; }
+.progressive-proof { min-width: 0; padding: 1rem; border: 1px solid #9eafc1; background: #fff; }
+.progressive-proof .progressive-scroll { height: 280px; overflow: auto; border: 1px solid #9eafc1; }
+.progressive-proof input, .progressive-proof select { max-width: 100%; min-width: 0; }
+.progressive-proof output { overflow-wrap: anywhere; }
+.progressive-proof pre { min-height: 5rem; }
+.progressive-notebook { border-top: .45rem solid #62795e; }
+@media (max-width: 58rem) { .progressive-pages { grid-template-columns: minmax(0, 1fr); } }

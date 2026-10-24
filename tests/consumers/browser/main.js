@@ -236,6 +236,21 @@ try {
     onRowAction({ action, id }) { if (action === "undo") lifecycleRows.revert(id); }
   });
   lifecycle.stop = lifecycleRows.subscribe(event => lifecycle.events.push(event));
+  const progressiveRoot = document.createElement("section");
+  progressiveRoot.dataset.consumerProgressive = "";
+  progressiveRoot.innerHTML = '<h2>Progressive loaded records</h2><table aria-busy="false"><caption>Loaded prefixes</caption><thead><tr><th scope="col">Name</th><th scope="col">Choice</th></tr></thead><tbody><tr data-row-template><th scope="row"><span data-field="name"></span></th><td><label>Choice <select data-field="choice" data-options="choices" data-option-label="label" data-option-value="value"></select></label></td></tr></tbody></table>';
+  document.querySelector("main").append(progressiveRoot);
+  const progressiveTable = progressiveRoot.querySelector("table");
+  const progressiveRows = createRows(Array.from({ length: 17 }, (_, index) => ({ index,
+    name: 'Loaded ' + (index + 1), choice: 1, choices: [{ label: 'One', value: 1 }, { label: 'Two', value: 2 }] })));
+  const progressive = { root: progressiveRoot, table: progressiveTable, rows: progressiveRows,
+    original: progressiveTable.outerHTML, binds: [], active: 0, grid: null };
+  state.progressive = progressive;
+  progressive.grid = bindGrid(progressiveTable, { rows: progressiveRows, progressive: { size: 5, delay: 0 },
+    onRowBind(context) { progressive.active++; context.own(() => { progressive.active--; }); },
+    onBind(result) { progressive.binds.push({ ...result, event: result.event?.type ?? null }); }
+  });
+
   const geometry = document.createElement("section");
   geometry.dataset.consumerGeometry = "";
   geometry.innerHTML = `<h2>Grid geometry</h2><div style="height:240px;overflow:auto;box-sizing:border-box;border:1px solid">

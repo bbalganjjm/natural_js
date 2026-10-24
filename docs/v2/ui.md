@@ -4,12 +4,12 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle]
+symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
+    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
+    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -29,7 +29,7 @@ sources:
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, native defaults, callback and teardown regressions
-    git_blob: 1f4356df43aaf2c2b14bea4559a577dcb9987972
+    git_blob: 08db552a81aa4efa98268ec803e4d4116ba2ec0d
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -117,9 +117,9 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 
 Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/update. Shown deleted records retain their last committed values and remain noneditable/ineligible; authored row actions can offer Undo. Their delete save payload still uses the loaded original. Every physical record tr gets `data-row-status`, and table `data-changed` reports any pending Rows changes. Author labels and styles.[^grid][^lifecycle-browser]
 
-`beforeRowBind` and `onRowBind` infer `{ row, elements, own }` from the binder signature. The immutable row snapshot and readonly physical-row array identify one binding; `own(() => void)` registers synchronous resources for reverse cleanup on rebind, release, failure and disposal. Before runs on rows attached to their table before values; after runs after binding/placement. Rows are document-connected only when their table root is connected; connect the root before initializing or measuring layout-dependent widgets. No lifecycle manager or row-context type is added to the public UI entry. [Grid](grid.md#row-binding-and-owned-resources) defines late registration, reentrancy, cleanup failures and deletion protection.[^hooks][^grid]
+`beforeRowBind` and `onRowBind` infer `{ row, elements, own }` from the binder signature. The immutable row snapshot and readonly physical-row array identify one binding; `own(() => void)` registers synchronous resources for reverse cleanup on rebind, release, failure and disposal. Before runs on rows attached to their table before values; after runs after field binding and synchronous-mode placement. Progressive rows are attached and fully bound before shared chunk geometry commits; onBind sees the completed chunk layout. Rows are document-connected only when their table root is connected; connect the root before initializing or measuring layout-dependent widgets. No lifecycle manager or row-context type is added to the public UI entry. [Grid](grid.md#row-binding-and-owned-resources) defines late registration, reentrancy, cleanup failures and deletion protection.[^hooks][^grid]
 
-`onBind` infers `{ total, filtered, visible, mounted, event }`: all retained rows, status/filter matches, logical-page rows, logical mounted records, and a replace/append `RowsEvent` or null. It runs once for initial, replace/append, explicit view and refresh binding, including empty results. Ordinary mutations and viewport movement do not emit it. Use application code for counters and loading; `Rows.append` loads clean data while `Rows.add` creates an inserted business row.[^grid][^lifecycle-browser]
+`onBind` receives the frozen eight-field `GridBindResult` defined below. It runs after initial, replace/append, explicit view and refresh binding, including empty results; progressive mode also reports completed chunks and explicit reveal growth. Ordinary mutations, viewport movement and exhausted continuations do not emit it. Use application code for counters and loading; `Rows.append` loads clean data while `Rows.add` creates an inserted business row.[^grid][^lifecycle-browser]
 
 # Field options
 
@@ -160,6 +160,12 @@ Grid accepts toggleSelection?: boolean, default false. True toggles unmodified n
 Distinct filter choices retain zero-count values inside the manual/status domain. An optional authored data-apply-filter button applies matching raw values; input alone still previews choices. Blank Apply clears the filter, while data-clear-filter keeps its existing search-preserving behavior. See [Grid](grid.md#apply-a-choice-search) for keyboard, pure callbacks and failure boundaries.[^filters][^grid]
 
 Column checkboxes/All/mixed/count/recovery and action-driven scrolling compose existing columns/setColumns/onColumnsChange and reveal handles. Business labels and policies stay application-owned; no new public chooser type, scroll controller or utility package is added. The [Grid demo](grid-demo.md) provides the authored contract.
+
+## Progressive Grid result and operations
+
+GridBindResult is a readonly frozen eight-field snapshot: total (all retained store records), filtered (status/manual/column projection), visible (full logical page), mounted (actual logical records in DOM), event (Rows event or null), available (admitted logical prefix), first and last. Every mode uses this shape; default synchronous/empty completion has available equal to visible and first/last true. With viewport, admitted records may have no widget until their window is needed; mounted must not be used as an admission or completion count.[^grid]
+
+Optional progressive: { size, delay? } enables cooperative prefix binding. whenBound(): Promise<GridBindResult> observes current work; renderMore() shares its pending Promise or advances/resumes a chunk. cancelBinding(): GridBindResult returns the retained snapshot and aborts the old pending Promise. Async failures stay observable through whenBound; internal handling prevents an unhandled rejection without converting the public rejection into success. Explicit demand/reveal and lifecycle rules are in [Grid](grid.md#progressive-binding-and-operation-lifetime). No named generic task type or separate Rows store is added.[^grid]
 
 # Related
 

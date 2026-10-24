@@ -4,7 +4,7 @@ import type { RowId, RowStatus } from "@bbalganjjm/natural_js/data";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageHandle } from "@bbalganjjm/natural_js/page";
 import { bindGrid, openPopup } from "@bbalganjjm/natural_js/ui";
-import type { GridColumn, GridHandle, GridRowScope, PopupHandle, RuleSet, ValidationResult } from "@bbalganjjm/natural_js/ui";
+import type { GridBindResult, GridColumn, GridHandle, GridRowScope, PopupHandle, RuleSet, ValidationResult } from "@bbalganjjm/natural_js/ui";
 import { employeeDetail } from "./detail.js";
 import type { Employee } from "./detail.js";
 
@@ -77,6 +77,15 @@ const originalOutput = find<HTMLElement>("[data-original]");
 const changes = find<HTMLElement>("[data-changes]");
 const defaultsOutput = find<HTMLElement>("[data-defaults]");
 const bindState = find<HTMLOutputElement>("[data-bind-state]");
+const renderingMode = find<HTMLSelectElement>("[data-render-mode]");
+const renderingSize = find<HTMLInputElement>("[data-render-size]");
+const renderingDelay = find<HTMLInputElement>("[data-render-delay]");
+const renderingControls = find<HTMLElement>("[data-render-controls]");
+const renderingNotice = find<HTMLOutputElement>("[data-render-notice]");
+const renderingHistory = find<HTMLElement>("[data-render-history]");
+const renderingCurrent = find<HTMLElement>("[data-render-current]");
+const renderingPing = find<HTMLOutputElement>("[data-render-ping]");
+const renderingFail = find<HTMLInputElement>("[data-render-fail]");
 const rowResources = find<HTMLInputElement>("[data-row-resources]");
 const rowResourcesState = find<HTMLElement>("[data-row-resources-state]");
 const issues = find<HTMLElement>("[data-issues]");
@@ -130,6 +139,13 @@ let inspectedId: RowId | null = null;
 let requestedPage = 1;
 let stopRows = () => {};
 let bindCalls = 0;
+let renderingGeneration = 0;
+let renderingOperation = 0;
+let renderingBusy = false;
+let renderingPaused = false;
+let lastBinding: GridBindResult | null = null;
+let completionHistory: object[] = [];
+let pingCount = 0;
 let beforeRows = 0;
 let boundRows = 0;
 let activeRowBindings = 0;
@@ -170,6 +186,11 @@ function stopDetails(): void {
 }
 
 function disposeGrid(): void {
+  renderingGeneration++;
+  renderingOperation++;
+  renderingBusy = false;
+  renderingPaused = false;
+  lastBinding = null;
   stopDetails();
   grid?.dispose();
   grid = null;
@@ -250,6 +271,8 @@ function refresh(): void {
   refreshViewport();
   refreshColumns();
   detailChanges.dispatchEvent(new Event("change"));
+  refreshRendering();
+  if (grid && !renderingBusy && !renderingPaused) void continueBinding(grid, false, renderingMode.value === "all");
 }
 
 function refreshFilterState(): void {
@@ -339,7 +362,69 @@ function applyPage(): void {
   refresh();
 }
 
+function refreshRendering(): void {
+  if (lastBinding) {
+    const { event, ...values } = lastBinding;
+    renderingCurrent.textContent = JSON.stringify({ ...values, event: event?.type ?? null }, null, 2);
+  } else renderingCurrent.textContent = grid ? "Awaiting the current chunk." : "Grid unbound.";
+  const unfinished = lastBinding?.last === false;
+  for (const action of ["next", "resume"]) {
+    const button = find<HTMLButtonElement>('[data-render-action="' + action + '"]');
+    const unavailable = !unfinished || (action === "resume" ? !renderingPaused : renderingPaused);
+    button.disabled = !grid || !renderingBusy && unavailable;
+    button.setAttribute("aria-disabled", String(button.disabled || renderingBusy));
+  }
+  find<HTMLButtonElement>('[data-render-action="cancel"]').disabled = !grid || !renderingBusy;
+}
+
+async function continueBinding(current: GridHandle<Employee>, more: boolean, automatic: boolean): Promise<void> {
+  if (current !== grid || renderingBusy) return;
+  const generation = renderingGeneration, operation = ++renderingOperation;
+  const live = () => current === grid && generation === renderingGeneration && operation === renderingOperation;
+  renderingBusy = true;
+  renderingPaused = false;
+  renderingNotice.value = "Binding a loaded prefix. Ping and Cancel remain available.";
+  refreshRendering();
+  let pending: Promise<GridBindResult> | undefined;
+  try {
+    pending = more ? current.renderMore() : current.whenBound();
+    let result = await pending;
+    while (live()) {
+      lastBinding = result;
+      if (!automatic || result.last) break;
+      pending = current.renderMore();
+      result = await pending;
+    }
+    if (!live()) return;
+    renderingNotice.value = result.last
+      ? "Full logical page available: " + result.available + " records, " + result.mounted + " mounted widgets."
+      : "Available prefix " + result.available + " of " + result.visible + "; " + result.mounted + " mounted widgets. Next continues loaded data.";
+  } catch (cause) {
+    if (!live()) return;
+    if (cause instanceof Error && cause.name === "AbortError" && current.whenBound() !== pending) {
+      renderingBusy = false;
+      void continueBinding(current, false, automatic);
+      return;
+    }
+    lastBinding = current.cancelBinding();
+    renderingPaused = !lastBinding.last;
+    renderingNotice.value = cause instanceof Error && cause.name === "AbortError"
+      ? "Binding canceled; the admitted prefix is retained."
+      : "Binding failed: " + (cause instanceof Error ? cause.message : String(cause)) + ". Resume retries unfinished work.";
+  } finally {
+    if (live()) { renderingBusy = false; refreshRendering(); refreshViewport(); }
+  }
+}
+
 function bind(): void {
+  const generation = ++renderingGeneration;
+  renderingOperation++;
+  renderingBusy = false;
+  renderingPaused = false;
+  lastBinding = null;
+  completionHistory = [];
+  renderingHistory.textContent = "[]";
+  bindState.textContent = "No completed chunk for the current binding.";
   const initialPage = initialPageChoice.value
     ? { page: initialPageChoice.value === "second" ? 2 : 1, size: 2 }
     : undefined;
@@ -347,6 +432,8 @@ function bind(): void {
   grid = bindGrid(table, {
     rows,
     statusFilter: statusViews[statusFilter.value],
+    progressive: renderingMode.value === "immediate" ? undefined
+      : { size: Number(renderingSize.value), delay: Number(renderingDelay.value) },
     beforeRowBind: rowResources.checked ? context => {
       beforeRows++;
       for (const element of context.elements) element.dataset.demoBefore = String(context.row.id);
@@ -354,6 +441,10 @@ function bind(): void {
       refreshRowResources();
     } : undefined,
     onRowBind(context) {
+      if (renderingMode.value !== "immediate" && renderingFail.checked) {
+        renderingFail.checked = false;
+        throw new Error("The authored demo failed one row binding; Resume retries it.");
+      }
       const changedFields = new Set(context.elements.flatMap(element =>
         [...element.querySelectorAll<HTMLElement>('[data-field][data-field-changed="true"]')]
           .map(field => field.getAttribute("data-field")!)));
@@ -379,9 +470,18 @@ function bind(): void {
       refreshRowResources();
     },
     onBind(result) {
-      bindState.textContent = JSON.stringify({ calls: ++bindCalls, event: result.event?.type ?? null,
-        total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted });
-      queueMicrotask(refreshFilterState);
+      if (generation !== renderingGeneration) return;
+      lastBinding = result;
+      const snapshot = { calls: ++bindCalls, event: result.event?.type ?? null,
+        total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted,
+        available: result.available, first: result.first, last: result.last };
+      bindState.textContent = JSON.stringify(snapshot);
+      completionHistory = [...completionHistory.slice(-11), snapshot];
+      renderingHistory.textContent = JSON.stringify(completionHistory, null, 2);
+      queueMicrotask(() => {
+        if (generation !== renderingGeneration) return;
+        refreshFilterState(); refreshRendering(); refreshViewport();
+      });
     },
     viewport: viewportChoice.checked ? { root: scrollRoot, estimate: 150, overscan: 3 } : undefined,
     heightResize: { root: scrollRoot, handle: find<HTMLButtonElement>("[data-resize-height]"), min: 160, max: 800 },
@@ -463,6 +563,9 @@ function bind(): void {
     applyPage();
   }
   status.textContent = "Grid is bound.";
+  scrollRoot.removeEventListener("scroll", onScroll);
+  scrollRoot.addEventListener("scroll", onScroll, { passive: true });
+  void continueBinding(grid, false, renderingMode.value === "all");
 }
 
 function selectedId(): number {
@@ -689,7 +792,41 @@ document.addEventListener("change", event => {
   if (event.target instanceof Element && table.contains(event.target)) refresh();
 });
 filterSearch.addEventListener("input", () => { queueMicrotask(refresh); });
-scrollRoot.addEventListener("scroll", () => { requestAnimationFrame(refreshViewport); }, { passive: true });
+function onScroll(): void {
+  requestAnimationFrame(() => {
+    refreshViewport();
+    if (renderingMode.value !== "immediate" && grid && !renderingBusy && !renderingPaused) {
+      void continueBinding(grid, false, renderingMode.value === "all");
+    }
+  });
+  if (renderingMode.value !== "prefix" || !grid || renderingBusy || renderingPaused || lastBinding?.last !== false) return;
+  if (scrollRoot.clientHeight > 0 && scrollRoot.scrollHeight > scrollRoot.clientHeight &&
+      scrollRoot.scrollTop + scrollRoot.clientHeight >= scrollRoot.scrollHeight - 2) {
+    void continueBinding(grid, true, false);
+  }
+}
+renderingControls.addEventListener("click", event => {
+  const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>("button[data-render-action]") : null;
+  if (!button || button.disabled || button.getAttribute("aria-disabled") === "true") return;
+  if (button.dataset.renderAction === "ping") { renderingPing.value = String(++pingCount); return; }
+  if (!grid) return;
+  if (button.dataset.renderAction === "cancel") {
+    renderingOperation++;
+    lastBinding = grid.cancelBinding();
+    renderingBusy = false;
+    renderingPaused = !lastBinding.last;
+    renderingNotice.value = "Canceled at prefix " + lastBinding.available + "; completion last=" + lastBinding.last + ". Resume retains Rows and drafts.";
+    refreshRendering(); refreshViewport();
+    return;
+  }
+  void continueBinding(grid, true, renderingMode.value === "all");
+});
+for (const control of [renderingMode, renderingSize, renderingDelay]) {
+  control.addEventListener("change", () => {
+    try { disposeGrid(); bind(); refresh(); }
+    catch (cause) { status.textContent = cause instanceof Error ? cause.message : String(cause); refreshRendering(); }
+  });
+}
 for (const control of [viewportChoice, datasetChoice]) {
   control.addEventListener("change", () => {
     disposeGrid();

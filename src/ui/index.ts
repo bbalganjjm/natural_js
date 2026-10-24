@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { RowId, RowStatus, Snapshot } from "../data/index.js";
+import type { RowId, RowStatus, Snapshot, RowsEvent } from "../data/index.js";
 
 export interface RuleContext {
   readonly field: string;
@@ -128,10 +128,24 @@ export interface ListHandle<T extends object> {
   dispose(): void;
 }
 
+export interface GridBindResult {
+  readonly total: number;
+  readonly filtered: number;
+  readonly visible: number;
+  readonly mounted: number;
+  readonly event: RowsEvent | null;
+  readonly available: number;
+  readonly first: boolean;
+  readonly last: boolean;
+}
+
 export interface GridHandle<T extends object> {
   rowIds(scope: GridRowScope): readonly RowId[];
   defaults(): Record<string, unknown>;
   refresh(): void;
+  whenBound(): Promise<GridBindResult>;
+  renderMore(): Promise<GridBindResult>;
+  cancelBinding(): GridBindResult;
   statusFilter(): readonly RowStatus[];
   setStatusFilter(statuses: readonly RowStatus[]): void;
   reveal(id: RowId, options?: { block?: ScrollLogicalPosition }): void;

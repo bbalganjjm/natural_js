@@ -1,0 +1,14 @@
+
+
+Running 3 tests using 1 worker
+
+
+
+[1/3] [chromium] › tests\browser\grid-progressive.spec.ts:531:1 › synchronous size-one completion cannot write after its callback disposes the Grid
+[2/3] [chromium] › tests\browser\grid-progressive.spec.ts:563:1 › synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid
+[3/3] [chromium] › tests\browser\grid-progressive.spec.ts:590:1 › synchronous sort completion failure keeps its committed projection and advances the next chunk once
+  3 passed (2.7s)
+[WebServer] (node:16964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:24052) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

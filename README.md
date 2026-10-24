@@ -18,6 +18,8 @@ The Grid demo uses one authored CVC detail page inline and in Popup, validates p
 
 Grid can opt into native selection toggles with `toggleSelection`; authored filter Apply buttons complement search previews and zero-count choices. The demo composes native column checkboxes, a persistent recovery column and action-driven scrolling through existing Grid handles, without another public component or state store.
 
+Grid can opt into cooperative binding with `progressive: { size, delay }`. `whenBound()`, `renderMore()` and `cancelBinding()` expose completion, continuation and cancellation through one result contract. Logical admission stays separate from bounded viewport widgets; CVC/controllers compose native scroll and abort ownership.
+
 ## Build and check
 
 Run `npm ci`, `npm run build`, `npm run typecheck`, `npm test`, `npm run test:consumers`, and `npm run test:browser` from the repository root. Registry publication is deferred; use the locally packed artifact to test this 2.0 candidate. Browser checks need Playwright binaries installed with `npx playwright install chromium firefox webkit`. `npm run example` starts the authored-HTML Vite fixture.

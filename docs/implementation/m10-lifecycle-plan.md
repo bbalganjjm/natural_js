@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 03c34062aa9fed9d5fa461657c8a2487f0b489d2
+    git_blob: c6464f5275c2593902ce7e90f799a6d3d36681b8
   - id: data
     resource: ../../src/data/index.ts
     title: Shared snapshots, tombstones and atomic notification
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled record binding and view ownership
-    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
+    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
   - id: body
     resource: ../../src/ui/grid-row-blocks.ts
     title: Authored record blocks and native merging
@@ -32,7 +32,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, binding failure, append, focus and empty-state acceptance
-    git_blob: 1f4356df43aaf2c2b14bea4559a577dcb9987972
+    git_blob: 08db552a81aa4efa98268ec803e4d4116ba2ec0d
   - id: units
     resource: ../../tests/grid-hooks.test.ts
     title: Owned resource ordering, sync-only boundaries and failure release
@@ -44,7 +44,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Working Grid controls, statuses, callbacks and native-default factory
-    git_blob: 19da65f5709e547bd1f523b83f1ebee66ac3eeb7
+    git_blob: 399514780b682bbddf1d0c949d3d05fd4682068a
   - id: evidence
     resource: evidence/m1094-verification.json
     title: Frozen commands, source identities, exact artifact and measurements

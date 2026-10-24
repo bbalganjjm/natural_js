@@ -6,6 +6,10 @@ tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
 sources:
+  - id: progressive-browser
+    resource: ../../tests/browser/grid-progressive.spec.ts
+    title: Cooperative completion, cancellation, callback and bounded-work regressions
+    git_blob: 46ea6fc25e2abbccdddb7fbb0e8ad6f96748929f
   - id: filter-browser
     resource: ../../tests/browser/grid-filter-apply.spec.ts
     title: Applied search, zero counts and callback ownership regressions
@@ -17,11 +21,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
+    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
+    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -53,7 +57,7 @@ sources:
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, callbacks, cleanup, empty state and failure regressions
-    git_blob: 1f4356df43aaf2c2b14bea4559a577dcb9987972
+    git_blob: 08db552a81aa4efa98268ec803e4d4116ba2ec0d
   - id: blocks-browser
     resource: ../../tests/browser/grid-row-blocks.spec.ts
     title: Multi-row identity, spans, merging, physical ARIA and bounded geometry
@@ -110,10 +114,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -162,6 +166,7 @@ if (grid.validate().valid) console.log(rows.changes());
 |---|---|
 | `rows` | Required caller-owned store of immutable snapshots and row identities. |
 | `statusFilter` | Optional readonly `RowStatus[]`; defaults to clean/insert/update. Includes retained deleted rows only when explicitly requested. |
+| `progressive` | Optional `{ size: number; delay?: number }`: explicit cooperative logical-prefix binding; omission stays synchronous. See [progressive binding](#progressive-binding-and-operation-lifetime). |
 | `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
 | `viewport` | Optional `{ root: HTMLElement, estimate: number, overscan?: number }`; the distinct same-document ancestor scroll root supplies finite authored height/overflow. Estimate is the positive finite initial height of a complete logical record in CSS pixels; overscan counts logical records, default 3. |
 | `heightResize` | Optional `{ root: HTMLElement, handle: HTMLButtonElement, min: number, max: number }`; connect an authored labelled height button to the ancestor scroll area. The root must equal the viewport root when both options are used. Bounds are positive finite border-box pixels, with min <= max. |
@@ -173,7 +178,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `paste` | Optional boolean, default `false`; enables delegated native `text/plain` paste into bound row fields and safe focusability for plain display fields. The `paste` method is available independently. |
 | `onPaste` | `(result: ValidationResult) => void` after an API or native paste returns a validation result, including rejection. It is not called when preparation or a committed observer throws. |
 | `beforeRowBind`, `onRowBind` | Synchronous callbacks receiving `{ row, elements, own }` for a changed or remounted record; see [row binding](#row-binding-and-owned-resources). |
-| `onBind` | Synchronous `({ total, filtered, visible, mounted, event }) => void` after initial, replace/append, explicit view or refresh binding; see [completion](#bind-completion). |
+| `onBind` | Synchronous `(result: GridBindResult) => void` after completed binding, progressive chunks or explicit progressive reveal growth; see [completion](#bind-completion). |
 | `columns` | Optional full column state; each key appears exactly once in display order. Template `data-column` also enables management with authored defaults. |
 | `onColumnsChange` | Optional callback after committed layout changes; programmatic changes pass `event: null`. |
 | `onSelect` | `({ id, row, event }) => void` after active detail identity changes; `id` and `row` may be `null`. It does not report selected or checked membership. |
@@ -229,6 +234,38 @@ Radio and checkbox members sharing one field path form one logical field, includ
 A row-field `<select multiple>` always stores an array, including zero or one selected item. Row-local `data-options` preserves raw strings, finite numbers, booleans and `null` through the option map. Native date, datetime-local, time, month, week, color and hidden inputs use strings; number/range use the required application parser. When an engine implements an authored type as a text fallback, the effective native control defines its constraints; no date polyfill or new date utility is installed.[^grid][^native][^controls-browser]
 
 # Methods
+
+## Progressive binding and operation lifetime
+
+~~~ts
+const grid = bindGrid(table, {
+  rows, progressive: { size: 100, delay: 0 }, onBind: showCompletion
+});
+let bound = await grid.whenBound();
+while (!bound.last) bound = await grid.renderMore();
+~~~
+
+Size is a positive safe integer of whole logical records, including multi-tr blocks. Delay defaults to zero and accepts finite values from zero through 2147483647; fractional values use native timer precision. Invalid options raise GRID_PROGRESSIVE before ownership. Omission preserves synchronous creation/refresh/view behavior. A new binding may prepare its first record synchronously; follow-up renderMore always yields a Window task, including size one. Positive delay spaces newly materialized chunk records. Zero uses a batch continuation without recursive per-row timers. Existing prepared records are reused; full growing-prefix layout is not repeated for each yielded row.[^grid]
+
+The full logical page still determines rowIds("visible"), checks, ranges, paste and validation. Available counts the admitted prefix, while mounted counts actual DOM records. Viewport updates prefix geometry once per chunk and creates only its bounded current window; offscreen admission creates no widgets or row hooks. Ordinary viewport movement keeps its synchronous bounded materialization path.[^grid][^viewport]
+
+| Operation | Contract |
+|---|---|
+| whenBound() | Returns the current operation Promise; observes initial/view/append work and owned late-window errors. |
+| renderMore() | Returns the same Promise while work runs; otherwise resumes an unfinished target or advances one size. Empty/exhausted calls do not repeat onBind. |
+| cancelBinding() | Clears queued work, rejects its old Promise with AbortError and returns a frozen retained-state snapshot. A later renderMore resumes the unfinished goal. |
+
+Cancel snapshots describe interrupted work, not a completed chunk; last stays false while required work is unfinished. After disposal, newly called methods use GRID_DISPOSED and previously obtained pending Promises reject with AbortError. An internal rejection handler keeps ignored observers quiet while callers still receive the original rejection. Await or catch operations in application/controller code.[^grid]
+
+Replace, sort/filter/status/page changes and refresh cancel the old operation and start a new first chunk. Ordinary set/setMany/add/remove/move/revert cancel queued work and synchronously update the retained prefix without onBind. Append preserves stable identities and an unfinished target; otherwise it advances the next chunk so a previously unrendered tail is never lost. Empty append stays a no-op. Column changes cancel queued binding while retaining their committed layout; continuation uses that state.[^grid]
+
+Reveal stays synchronous for any ID in the full current page. If the target is not admitted, it supersedes queued work and binds at least through that ID (possibly finishing the current target), then uses the current alignment/focus path. Progressive admission growth emits one completion for the new bound extent; default/non-growth reveal emits none. A still-visible focused row keeps enough prefix to preserve its node/caret and row-keyed draft.[^grid][^viewport]
+
+Row hooks remain synchronous and table-attached; they are document-connected when the table root is connected. Refresh, renderMore and cancelBinding inside a row hook raise GRID_BIND_REENTRANT; use the controller operation flow instead. Disposal remains allowed. Preparation failure releases the failing record's resources and leaves earlier ready records for retry; completion failure occurs after commit and does not undo DOM or redeliver that completion. Same-stack completion follows its view owner's commit, including sort headers. User callbacks that replace/dispose binding invalidate the older operation. In progressive mode a late viewport-window failure publishes a new rejected whenBound Promise; renderMore retries that window even after full logical admission, without another logical onBind.[^grid][^hooks][^progressive-browser]
+
+Grid sets aria-busy="true" only while scheduled work is pending and restores the authored attribute on completion/cancel/failure/disposal. Waiting for Next is not busy. Full-page table ARIA counts/indices remain distinct from partial DOM. Put authored progress status outside the busy table and update it per chunk. Progress adds no visual theme, focus stealing or per-row live announcement; existing focus recovery when a control leaves the view still applies.[^grid]
+
+Bottom-scroll and Yield all are controller compositions around awaited renderMore. A native Next button handles keyboard/no-overflow continuation. Scope native listeners to the controller signal and guard late results by handle/operation identity. Register Grid ownership before await; on a CVC abort dispose Grid immediately through a standard signal listener, then retain the idempotent owned disposer. Forced async controller cleanup checks its aborted signal before touching released UI. Normal retained deactivate cancels, and activate may resume; deactivate does not itself abort PageContext.signal.[^grid]
 
 ## `statusFilter()` and `setStatusFilter(values)`
 
@@ -363,7 +400,7 @@ Releases row-owned resources, removes delegated listeners and mounted clones, un
 
 ## Row binding and owned resources
 
-`beforeRowBind` and `onRowBind` receive a frozen context containing the immutable `row` snapshot, a readonly `elements` array for the complete physical tr block, and `own(dispose)`. Before runs on physical rows attached to their table before their field values; after runs after field binding and final placement. The rows are document-connected only when the table root is connected. Standalone detached tables are supported; connect the root before initializing or measuring layout-dependent widgets. Hooks run for changed mounted snapshots, remounted records and explicit refresh, not unchanged rows or movement alone. The table is already claimed before the first hook. Return values do not veto binding; asynchronous callbacks or cleanup are rejected and their promises consumed.[^hooks][^grid][^lifecycle-browser]
+`beforeRowBind` and `onRowBind` receive a frozen context containing the immutable `row` snapshot, a readonly `elements` array for the complete physical tr block, and `own(dispose)`. Before runs on physical rows attached to their table before their field values; after runs after field binding and, in synchronous mode, final placement. During cooperative work the record is attached and fully bound, but shared placement/merge geometry commits at the chunk boundary before onBind. Read final chunk layout from completion rather than onRowBind. The rows are document-connected only when the table root is connected. Standalone detached tables are supported; connect the root before initializing or measuring layout-dependent widgets. Hooks run for changed mounted snapshots, remounted records and explicit refresh, not unchanged rows or movement alone. The table is already claimed before the first hook. Return values do not veto binding; asynchronous callbacks or cleanup are rejected and their promises consumed.[^hooks][^grid][^lifecycle-browser]
 
 Keep compiled field nodes, record structure and column topology intact. These callbacks connect application behavior; they do not recompile arbitrary per-row binding markup. Use the explicit display renderer for its owned target and register widget cleanup with `own`.
 
@@ -373,11 +410,11 @@ Use `own` for widget listeners and disposers. Resources are released in reverse 
 
 ## Bind completion
 
-`onBind({ total, filtered, visible, mounted, event })` runs once after initial binding, `Rows.replace`/`Rows.append`, explicit view binding and refresh, including empty results. `total` counts all retained store rows, `filtered` counts the status/manual/column projection, `visible` counts the logical page, and `mounted` counts logical mounted records. Event is the replace/append Rows event or `null`; ordinary set/setMany/add/remove/revert/move and scroll/resize do not emit this completion callback. Application code owns counters and loading requests.[^grid][^lifecycle-browser]
+onBind(result: GridBindResult) receives a frozen eight-field snapshot. total counts all retained store rows; filtered counts the status/manual/column projection; visible counts the full logical page; mounted counts actual DOM records. available counts logical prefix admission. first identifies an extent beginning at zero; last means its full-page admission and required current bindings completed. Event is the replace/append Rows event or null. Default synchronous and empty completions have available=visible and first/last true, including a locally paged view.[^grid][^lifecycle-browser]
 
-This is not a subscription to every mutation. Use the existing Rows subscription when a counter also needs ordinary edit/add/remove updates; the demo labels these values as the last onBind result.
+It runs after initial/replace/append/view/refresh binding, each completed progressive chunk and explicit progressive reveal growth. Ordinary set/setMany/add/remove/revert/move and normal scroll/resize do not emit it. Empty/exhausted continuation and window-only retry do not duplicate it. This remains completion, not a subscription to every mutation; the demo's output labels the last completed result.[^grid]
 
-Completion is the last outward notification of that binding. A post-bind exception propagates with stored data and completed view retained. If row binding fails, forced selection pruning still commits; its notifications run only after the failed view/setter rolls back. A prune callback may then append or change the view without an older rollback overwriting it; the original binding failure remains the reported error. Initialization failure still releases ownership and restores the source.[^grid][^selection][^lifecycle-browser]
+Completion follows row completion and forced-prune notifications. A post-bind error retains completed data/DOM and is reported through the operation Promise; synchronous default calls still throw as before. A failed view rolls back before delivering forced-prune callbacks, so a callback append or view change is not overwritten by the older rollback. Initialization failure restores source/ownership, and no stale operation may complete a replacement.[^grid][^selection][^lifecycle-browser]
 
 ## Selection, actions and columns
 
@@ -519,6 +556,7 @@ With the default `toggleSelection: false`, single row buttons keep their existin
 | `GRID_ROOT`, `GRID_TEMPLATE`, `GRID_IN_USE` | Wrong table root, missing/duplicate row template, or a second live binding. |
 | `GRID_STATUS`, `GRID_EMPTY` | Invalid status projection or repeated/nonstatic/unsupported empty marker. |
 | `GRID_DEFAULTS` | Ambiguous/conflicting native defaults, failed parser, asynchronous or uncloneable result. |
+| `GRID_PROGRESSIVE` | Invalid prefix size/delay or cooperative binding configuration. |
 | `GRID_BIND` | Row hook, completion callback, resource registration or cleanup failure; includes phase and applicable RowId/cause. |
 | `GRID_BIND_REENTRANT`, `GRID_BIND_STALE` | Reentrant row binding, or Rows/view/column mutation during a row callback. |
 | `DUPLICATE_ID` | A fixed ID appears inside the repeated template. |
@@ -546,7 +584,7 @@ With the default `toggleSelection: false`, single row buttons keep their existin
 | `RULE_DECLARATION`, `RULE_UNKNOWN`, `RULE_ARGUMENT`, `RULE_FAILED` | Invalid, unavailable, malformed, or failed rule. |
 | `FIELD_PATH` | Unsafe path or nested write through a non-object. |
 
-`RowId` is neither a DOM ID nor a display index. Grid edits authored native value controls; file inputs remain outside JSON Rows, and unsupported/button inputs are rejected. Header filter Selects keep their separate column-filter contract. A plain `data-field` display has no generated editor but can receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar or array. A Select owned by Grid cannot also be bound with `bindSelect`. Without either `initialPage` or `viewport`, binding creates all row clones. Local paging limits the logical page; viewport limits its mounted DOM. `setPage(null)` keeps viewport rendering bounded when enabled, otherwise deliberately renders all rows. Offscreen formatter/renderer errors surface when a row mounts; invalid row-local options also surface on validation/paste. Fix the source/rule before retrying a failed mount, scroll or reveal. Progressive loading and transport cancellation stay in the application/page layer; virtualization does not reduce the Rows store itself.[^grid][^owner][^viewport]
+`RowId` is neither a DOM ID nor a display index. Grid edits authored native value controls; file inputs remain outside JSON Rows, and unsupported/button inputs are rejected. Header filter Selects keep their separate column-filter contract. A plain `data-field` display has no generated editor but can receive whole-field clipboard/API paste. `data-format` is only for text-like inputs, textareas and text elements. An error region and field must use the same exact path. A Select's `data-options` names its row-local option array; `data-field` names its selected scalar or array. A Select owned by Grid cannot also be bound with `bindSelect`. Without `initialPage`, `viewport` or `progressive`, binding creates all row clones. Local paging limits the logical page; viewport limits mounted DOM; progressive limits admitted records. `setPage(null)` removes local paging while retaining optional viewport/progressive policies. Offscreen formatter/renderer errors surface when a row mounts; invalid row-local options also surface on validation/paste. Fix the source/rule before retrying a failed mount, scroll or reveal. Loaded-prefix binding belongs to Grid; native scroll/auto-loop policy and transport cancellation stay in the application/page layer. Virtualization does not reduce the Rows store itself.[^grid][^owner][^viewport]
 
 Row insertion/movement/copy use caller-owned Rows: `add(value, before?)`, `move(id, before?)`, `copy(id, before?)`. Targets are live store IDs. Current sort/filter/page still determines displayed order; viewport anchoring follows RowId. Movement preserves drafts/errors and the focused row node, including nonviewport rendering. Selected/checked arrays are reconciled to store order and normal post-change callbacks observe committed DOM, bypassing vetoes for this forced reconciliation. Active identity and membership stay unchanged unless eligibility changes. See [Rows](data.md) for no-ops, value reversion and business-key responsibility.[^grid][^selection]
 
@@ -585,3 +623,4 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^toggle-browser]: Native selection toggle, veto and lifecycle regressions
 
 [^filter-browser]: Applied search, zero counts and callback ownership regressions
+[^progressive-browser]: Cooperative completion, cancellation, callback and bounded-work regressions

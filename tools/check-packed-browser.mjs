@@ -251,6 +251,62 @@ try {
   assert.equal(lifecycle.active, 3);
   assert.deepEqual(lifecycle.cleanup, { active: 0, noLateClick: true, restored: true });
 
+  const progressive = await page.evaluate(async () => {
+    const state = window.packedConsumer, h = state.progressive;
+    const first = await h.grid.whenBound();
+    const initial = { ...first, event: first.event?.type ?? null, active: h.active,
+      frozen: Object.isFrozen(first), fields: Object.keys(first).sort() };
+    const pending = h.grid.renderMore();
+    const same = pending === h.grid.renderMore();
+    const stopped = h.grid.cancelBinding();
+    const aborted = await pending.then(() => "resolved", cause => cause.name);
+    const resumed = await h.grid.renderMore();
+    h.grid.refresh(); const old = h.grid.whenBound();
+    h.grid.setFilter(row => row.index % 2 === 1);
+    const stale = await old.then(() => "resolved", cause => cause.name);
+    const filtered = await h.grid.whenBound();
+    h.grid.setFilter(null);
+    let completed = await h.grid.whenBound();
+    while (!completed.last) completed = await h.grid.renderMore();
+    const beforeExhausted = h.binds.length;
+    const exhausted = await h.grid.renderMore();
+    const noDuplicate = h.binds.length === beforeExhausted;
+    const defaults = h.rows.entries()[0].value;
+    h.rows.append([18, 19].map(index => ({ ...defaults, index, name: 'Loaded ' + index })));
+    const appended = await h.grid.whenBound();
+    const ids = [...h.table.querySelectorAll('tbody [data-field="name"]')].map(field => field.textContent);
+    h.grid.refresh(); const removal = h.grid.whenBound();
+    h.grid.dispose();
+    const removed = await removal.then(() => "resolved", cause => cause.name);
+    const restored = h.table.outerHTML === h.original && h.active === 0;
+    const after = h.table.outerHTML, callbacks = h.binds.length;
+    h.rows.set(h.rows.entries()[0].id, "name", "Late update");
+    await new Promise(resolve => setTimeout(resolve, 20));
+    const quiet = h.table.outerHTML === after && callbacks === h.binds.length;
+    h.rows.dispose(); h.root.remove(); delete state.progressive;
+    return { initial, same, stopped: { available: stopped.available, last: stopped.last }, aborted,
+      resumed: { available: resumed.available, first: resumed.first, last: resumed.last }, stale,
+      filtered: { available: filtered.available, visible: filtered.visible, first: filtered.first, last: filtered.last },
+      completed: { available: completed.available, mounted: completed.mounted, last: completed.last },
+      exhausted: exhausted.available, noDuplicate, appended: { available: appended.available, total: appended.total,
+        first: appended.first, last: appended.last, event: appended.event?.type }, ids, removed, restored, quiet };
+  });
+  assert.deepEqual(progressive.initial, { total: 17, filtered: 17, visible: 17, mounted: 5,
+    available: 5, first: true, last: false, event: null, active: 5, frozen: true,
+    fields: ["available", "event", "filtered", "first", "last", "mounted", "total", "visible"] });
+  assert(progressive.same && progressive.noDuplicate, "Installed continuation must share pending work and avoid exhausted callbacks.");
+  assert.deepEqual(progressive.stopped, { available: 5, last: false });
+  assert.equal(progressive.aborted, "AbortError");
+  assert.deepEqual(progressive.resumed, { available: 10, first: false, last: false });
+  assert.equal(progressive.stale, "AbortError");
+  assert.deepEqual(progressive.filtered, { available: 5, visible: 8, first: true, last: false });
+  assert.deepEqual(progressive.completed, { available: 17, mounted: 17, last: true });
+  assert.equal(progressive.exhausted, 17);
+  assert.deepEqual(progressive.appended, { available: 19, total: 19, first: false, last: true, event: "append" });
+  assert.deepEqual(progressive.ids, Array.from({ length: 19 }, (_, index) => 'Loaded ' + (index + 1)));
+  assert.equal(progressive.removed, "AbortError");
+  assert(progressive.restored && progressive.quiet, "Installed progressive teardown must restore authored markup and stop late work.");
+
   const ordered = await page.evaluate(() => {
     const { rows, grid } = window.packedConsumer.viewport;
     const [first] = rows.entries();
@@ -356,6 +412,12 @@ try {
   assert.deepEqual(geometry.accessible, { role: "separator", controls: true, height: geometry.resized });
   assert.deepEqual(geometry.filtered, { visible: [50], filtered: [50], store: 100, oldSnapshot: 100, active: null });
   assert(geometry.restored && geometry.quiet, "Installed geometry must restore authored markup and release listeners.");
+
+  assert.deepEqual(await page.evaluate(async () => {
+    const result = await window.packedConsumer.screens.a.grid.whenBound();
+    return { ...result, frozen: Object.isFrozen(result) };
+  }), { total: 2, filtered: 2, visible: 1, mounted: 1, available: 1, first: true, last: true, event: null, frozen: true },
+  "Installed default synchronous completion uses the same immutable result contract.");
 
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = page.locator(`[data-host="${slot}"]`);

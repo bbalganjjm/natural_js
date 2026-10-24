@@ -6,7 +6,7 @@ import type { RowId, RowSnapshot, Rows, RowStatus, RowsEvent, Snapshot } from "@
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, GridColumn, GridHandle, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -263,4 +263,14 @@ export function connectShell(notifyRoot: HTMLElement, documentRoot: HTMLElement)
   const dismiss = notifications.show("Opened employee.");
   dismiss();
   return { notifications, documents };
+}
+
+export function connectProgressive(table: HTMLTableElement, rows: Rows<Employee>) {
+  const grid = bindGrid(table, { rows, progressive: { size: 100, delay: 0 },
+    onBind(result) { const bound: GridBindResult = result; void bound.available; } });
+  const pending: Promise<GridBindResult> = grid.whenBound();
+  const continued: Promise<GridBindResult> = grid.renderMore();
+  const stopped: GridBindResult = grid.cancelBinding();
+  void [pending, continued, stopped.first, stopped.last];
+  return grid;
 }

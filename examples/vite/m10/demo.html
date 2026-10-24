@@ -78,6 +78,19 @@
           <p>Drag the labelled handle below the table to resize its scroll area from 160 to 800 pixels, or use Up/Down (10 pixels), Shift (one pixel), Home/End and Escape to cancel a drag.</p>
         </fieldset>
 
+        <fieldset data-render-controls>
+          <legend>Cooperative binding</legend>
+          <label>Binding mode <select data-render-mode><option value="immediate">Immediate</option><option value="prefix">Loaded prefix</option><option value="all">Yield all</option></select></label>
+          <label>Logical records per chunk <input type="number" min="1" step="1" value="2" data-render-size></label>
+          <label>Delay between newly created records (ms) <input type="number" min="0" step="1" value="0" data-render-delay></label>
+          <div class="button-row"><button type="button" data-render-action="next">Next loaded chunk</button><button type="button" data-render-action="cancel">Cancel binding</button><button type="button" data-render-action="resume">Resume binding</button><button type="button" data-render-action="ping">Ping UI</button></div>
+          <p><output data-render-notice role="status" aria-live="polite" aria-atomic="true">Immediate binding.</output></p>
+          <p>Ping count: <output data-render-ping>0</output></p>
+          <label class="check-label"><input type="checkbox" data-render-fail> Fail one newly bound record once, then allow Resume</label>
+          <p>Rows already contains the loaded records. Prefix availability and mounted widgets are different. Changing policy rebinds and clears drafts. Bottom scroll requests the same next chunk; Next also works without overflow.</p>
+          <p><a href="./progressive.html">Open two independent CVC binding layouts</a></p>
+        </fieldset>
+
         <fieldset>
           <legend>Columns</legend>
           <details data-column-chooser open>
@@ -348,6 +361,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <section><h3>Distinct Team filter and counts</h3><pre data-filter-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Authored defaults</h3><pre data-defaults tabindex="0">Use Read authored defaults. The application factory supplies names and shift options.</pre></section>
           <section><h3>Last onBind result</h3><p>Total includes retained deletions; filtered and visible count the projection and logical page. Mounted counts complete records.</p><p><output data-bind-state aria-live="polite">Not bound yet.</output></p></section>
+          <section><h3>Current binding snapshot</h3><pre data-render-current tabindex="0">Not bound yet.</pre></section>
+          <section><h3>Binding completion history</h3><pre data-render-history tabindex="0">[]</pre></section>
           <section><h3>Tracked row resources</h3><pre data-row-resources-state tabindex="0">Tracking is off.</pre></section>
           <section><h3>Callbacks</h3><p>onSelect: <output data-callback>Not fired yet.</output></p>
             <p>beforeSelect / beforeSelectionChange / beforeCheckChange: <output data-before-callback>Not fired yet.</output></p>

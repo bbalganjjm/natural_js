@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature scope and dependency order
-    git_blob: 4257da35d31c0303b536cc02c1e9131d0dd8edfa
+    git_blob: 762a68615866daac0fb14dfa7dd53b437928287d
   - id: coverage
     resource: feature-parity.md
     title: Remaining Grid behavior families
-    git_blob: b944d2e956b0c36d785ce140e156ec3286e1fd23
+    git_blob: 09603c7af0f86e44d5592473b1895cfb9524cf4a
   - id: data
     resource: ../../src/data/index.ts
     title: Shared row identity, order and immutable changes
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid projection, drafts and mounted lifetime
-    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
+    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
   - id: ordering-browser
     resource: ../../tests/browser/rows-ordering.spec.ts
     title: Shared order, draft, focus and viewport regressions
@@ -41,9 +41,9 @@ sources:
     resource: ../../src/ui/grid-viewport.ts
     title: Measured logical-row viewport
     git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
-generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 ---
 
 # Goal
@@ -110,7 +110,7 @@ Work-cost observations: the public surface is one optional add target, two metho
 
 # Next action
 
-M10.9.5's [detail and geometry contract](m10-detail-plan.md) implements logical row scopes, explicit reveal alignment, authored height controls and one validated CVC detail page reused in main content/Popup. Its frozen evidence and source corrections belong to that plan. [M10.9.6](m10-closure-plan.md) now has a complete baseline audit and four required slices. M10.9.6.1 implements original-value access, exact committed-field markers and retained edited deletion display. The reviewed [M10.9.6.2 interaction/view controls](m10-interactions-plan.md) contract implements native toggle policy, applied filter search/zero counts, authored chooser/recovery and explicit action-scroll recipes. Continue progressive rendering/completion (.3) and semantic acceptance (.4); every remaining option/default/callback and dynamic obligation requires concrete acceptance before family closure. Other-component parity and P0 remain required. After required coverage, the [M13 whole-code review/remediation](m13-review-plan.md) remains mandatory before personal acceptance. No new omission, publication, release tag or actual token-saving claim is approved here.
+M10.9.5's [detail and geometry contract](m10-detail-plan.md) implements logical row scopes, explicit reveal alignment, authored height controls and one validated CVC detail page reused in main content/Popup. Its frozen evidence and source corrections belong to that plan. [M10.9.6](m10-closure-plan.md) now has a complete baseline audit and four required slices. M10.9.6.1 implements original-value access, exact committed-field markers and retained edited deletion display. The reviewed [M10.9.6.2 interaction/view controls](m10-interactions-plan.md) contract implements native toggle policy, applied filter search/zero counts, authored chooser/recovery and explicit action-scroll recipes. The implemented [progressive contract](m10-progressive-plan.md) provides .3 prefix admission, yielding, completion and cancellation through existing owners. Continue semantic acceptance (.4); every remaining option/default/callback and dynamic obligation requires concrete acceptance before family closure. Other-component parity and P0 remain required. After required coverage, the [M13 whole-code review/remediation](m13-review-plan.md) remains mandatory before personal acceptance. No new omission, publication, release tag or actual token-saving claim is approved here.
 
 # Open questions
 

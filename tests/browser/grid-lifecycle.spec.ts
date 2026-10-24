@@ -3,13 +3,13 @@ import { fileURLToPath } from "node:url";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import type { RowSnapshot, Rows, RowsEvent } from "../../src/data/index.js";
-import type { GridHandle, RuleContext } from "../../src/ui/index.js";
+import type { GridBindResult, GridHandle, RuleContext } from "../../src/ui/index.js";
 import type { bindGrid } from "../../src/ui/grid.js";
 
 type Item = { key: number; team: string; profile: { name: string; notes: string }; active: boolean; count: number; choice: string | null };
 type Options = Parameters<typeof bindGrid<Item>>[1];
 type RowBinding = { row: RowSnapshot<Item>; elements: readonly HTMLTableRowElement[]; own(dispose: () => void): void };
-type Bound = { total: number; filtered: number; visible: number; mounted: number; event: RowsEvent | null };
+type Bound = GridBindResult;
 declare global {
   interface Window {
     gridLifecycle: {
@@ -17,7 +17,7 @@ declare global {
       original: string; layout: string; options: Options; events: RowsEvent[];
       hooks: { phase: string; id: number; version: number; connected: boolean; name: string }[];
       cleaned: { phase: string; id: number; version: number }[];
-      binds: { total: number; filtered: number; visible: number; mounted: number; event: string | null }[];
+      binds: { total: number; filtered: number; visible: number; mounted: number; available: number; first: boolean; last: boolean; event: string | null }[];
       reset(count?: number, extra?: Partial<Options>): void;
       block(id: number): HTMLTableRowElement[];
       field<E extends HTMLElement = HTMLElement>(id: number, name: string): E;
@@ -589,12 +589,12 @@ test("onBind distinguishes whole binding from ordinary shared changes and report
     return { beforeAppend, afterAppend, appendClean: appended.every(id => h.rows.get(id)!.status === "clean"),
       types: h.binds.map(result => result.event), final: h.binds.at(-1) };
   });
-  expect(result.beforeAppend).toEqual([{ total: 4, filtered: 4, visible: 2, mounted: 2, event: null }]);
-  expect(result.afterAppend).toEqual([{ total: 4, filtered: 4, visible: 2, mounted: 2, event: null },
-    { total: 6, filtered: 5, visible: 2, mounted: 2, event: "append" }]);
+  expect(result.beforeAppend).toEqual([{ total: 4, filtered: 4, visible: 2, mounted: 2, available: 2, first: true, last: true, event: null }]);
+  expect(result.afterAppend).toEqual([{ total: 4, filtered: 4, visible: 2, mounted: 2, available: 2, first: true, last: true, event: null },
+    { total: 6, filtered: 5, visible: 2, mounted: 2, available: 2, first: true, last: true, event: "append" }]);
   expect(result.appendClean).toBe(true);
   expect(result.types).toEqual([null, "append", null, null, null, null, null]);
-  expect(result.final).toEqual({ total: 6, filtered: 6, visible: 2, mounted: 2, event: null });
+  expect(result.final).toEqual({ total: 6, filtered: 6, visible: 2, mounted: 2, available: 2, first: true, last: true, event: null });
 });
 
 test("post-bind failures propagate after clean append without undoing data or blocking other subscribers", async ({ page }) => {

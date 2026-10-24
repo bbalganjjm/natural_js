@@ -40,7 +40,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
+    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -48,7 +48,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 92991d04bfd634f503ab3f56ff30ca718091dd10
+    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -136,15 +136,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: b944d2e956b0c36d785ce140e156ec3286e1fd23
+    git_blob: 09603c7af0f86e44d5592473b1895cfb9524cf4a
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 4257da35d31c0303b536cc02c1e9131d0dd8edfa
-generated: { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+    git_blob: 762a68615866daac0fb14dfa7dd53b437928287d
+generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T11:11:24Z }
+  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -318,9 +318,9 @@ Use `statusFilter`/`setStatusFilter` to include retained deleted rows. Their dis
 
 Replace 1.x `data_changed` presentation with authored CSS/text using each physical row's `data-row-status`, the table's `data-changed`, and each bound field member's `data-field-changed`. Field flags compare committed raw paths against the loaded original, so nested siblings are independent and formatting or invalid drafts cannot mark a field changed. Inserted fields receive `"false"`; show insertion through row status. Grid restores its original template on disposal. Rows-backed Form restores each authored field flag or its absence; a local Form leaves the attribute application-owned. See [Form](form.md#loaded-value-changes) and [Grid](grid.md#field-change-markers) for focus, groups and structured values.[^form][^grid]
 
-Replace template-input extraction with `grid.defaults()` and an application factory that supplies the complete business row before `rows.add`. Defaults contain captured native controls/groups/Selects plus own parser results, not display text/images or a promise that all fields of T exist. Replace rowHandlerBeforeBind/rowHandler with synchronous `beforeRowBind`/`onRowBind` over `{ row, elements, own }`; callbacks use stable RowId and register widget disposal. Before hooks see rows attached to their table; they are document-connected only when the table root is connected. After hooks see final placement. Connect the root before initializing or measuring layout-dependent widgets. The callbacks do not veto or recompile field structure. Use `grid.refresh()` for explicit binding retry while preserving drafts and identity.[^grid]
+Replace template-input extraction with `grid.defaults()` and an application factory that supplies the complete business row before `rows.add`. Defaults contain captured native controls/groups/Selects plus own parser results, not display text/images or a promise that all fields of T exist. Replace rowHandlerBeforeBind/rowHandler with synchronous `beforeRowBind`/`onRowBind` over `{ row, elements, own }`; callbacks use stable RowId and register widget disposal. Before hooks see rows attached to their table; they are document-connected only when the table root is connected. After hooks see bound records; synchronous mode also finishes placement first. Progressive mode commits shared placement/merge geometry before onBind, so layout-position-dependent work belongs in that completion callback. Connect the root before initializing or measuring layout-dependent widgets. The callbacks do not veto or recompile field structure. Use `grid.refresh()` for explicit binding retry while preserving drafts and identity.[^grid]
 
-Replace generated empty HTML with one authored static `tr[data-empty]` or `tbody[data-empty]`. Use `onBind` for completed initial/replace/append/explicit-view/refresh results; it reports retained total, filtered, logical visible and logical mounted counts plus a replace/append event or null. Ordinary mutations and viewport scrolling do not emit completion; use Rows subscriptions for counters needing those updates. The original nonpaged isFirstPage defect is not copied into a boolean compatibility API.[^grid][^rows]
+Replace generated empty HTML with one authored static `tr[data-empty]` or `tbody[data-empty]`. Use `onBind` for completed initial/replace/append/explicit-view/refresh results; it uses the uniform GridBindResult defined in step 9, including available/first/last. Ordinary mutations and viewport scrolling do not emit completion; use Rows subscriptions for counters needing those updates. The original nonpaged isFirstPage defect is not copied into a boolean compatibility API.[^grid][^rows]
 
 An unused helper unrelated to framework behavior may be removed after checking direct and indirect reachability, including authored declarations, configuration, callbacks and shared row forms. That dependency cleanup is separate from excluding supported behavior. A feature retirement requires one consolidated user approval; pending candidates remain support obligations until approved. Native browser APIs, authored CSS and typed callbacks can replace legacy mechanisms only when their required behavior is preserved and verified.[^parity][^parity-plan]
 
@@ -339,6 +339,16 @@ Keep data-filter-search for preview and add a type=button data-apply-filter="key
 Compose a native column chooser from complete columns() state. Exclude an authored actions/recovery column from business choices and force it visible for those writes. This supports hiding every business column without allowing an invalid all-physical-hidden layout. Derive shown/total, All and mixed state from live columns; do not copy the old unmaintained count element or maintain another state store.[^grid]
 
 For action scroll, check successful resulting identity/state and current rowIds("visible") before reveal. Use the last requested ID for selection/check centering, center indexed insertion, start/end for front/end insertion, and end for a nonempty batch appended to a previously nonempty store. Opt-out, veto, errors and offpage/filtered targets do not scroll or change page/filter. To show the last invalid visible row, disable first-invalid reveal, call validate(), collect issue IDs, then scan the current visual page in reverse and reveal its last issue at center. Issue array order is store order and may differ after sorting. Preserve focus; application code owns the policy. The [demo](grid-demo.md) exercises these compositions.[^grid]
+
+## 9. Replace delayed and scroll-prefix binding
+
+Legacy scrollPaging admitted records already in data; it did not fetch them. Use progressive: { size: 100, delay: 0 }, await whenBound(), then await renderMore() from an authored Next button, a scoped bottom-scroll handler or an application auto-loop. Positive delay retains per-created-record yielding during a chunk; default zero uses cooperative batches. With viewport, only materialized records incur work; offscreen IDs are logical admission. Omit progressive to keep default synchronous behavior.[^grid]
+
+onBind now receives one frozen GridBindResult in every mode: existing total/filtered/visible/mounted/event plus available/first/last. Default synchronous and empty results use first/last true and available=visible. Logical records may contain multiple tr; viewport mounted counts must not be substituted for logical prefix completion. This explicitly extends the unpublished 2.0 beta result shape; update exact object comparisons, not just TypeScript aliases.[^grid]
+
+Cancel/replacement rejects the old operation with AbortError. cancelBinding returns a retained snapshot and renderMore resumes; field/hook/late-window failures remain observable and retryable. Register CVC ownership before awaiting, wire the standard abort signal to immediate Grid.dispose, and guard late UI results by current handle/signal. A forced cleanup after abort must not access released UI; ordinary retained deactivate can cancel and activate can resume. See the [progressive contract](../implementation/m10-progressive-plan.md) and [demo](grid-demo.md).[^grid][^page]
+
+Do not copy the old zero-delay recursion, nonpaged first=false anomaly, empty-append rebind, missing-tail append or uncanceled timer/FIFO behavior. The current explicit continuation handles short nonoverflowing content; the same Rows/viewport retain identities, edits, drafts and focus without a second loader.[^grid]
 
 # Verify
 
