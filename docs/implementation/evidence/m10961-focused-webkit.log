@@ -1,0 +1,83 @@
+
+
+Running 72 tests using 1 worker
+
+
+
+[1/72] [webkit] › tests\browser\grid-change-state.spec.ts:110:1 › loaded clean fields are explicit false while errors and unbound cells keep authored markers
+[2/72] [webkit] › tests\browser\grid-change-state.spec.ts:122:1 › binders created after an edit use the loaded baseline rather than their initial display
+[3/72] [webkit] › tests\browser\grid-change-state.spec.ts:129:1 › nested sibling paths change and restore independently in shared Form and Grid
+[4/72] [webkit] › tests\browser\grid-change-state.spec.ts:139:1 › raw array order matters while equivalent JSON and object key order do not
+[5/72] [webkit] › tests\browser\grid-change-state.spec.ts:148:1 › all radio and checkbox group members share their committed field state
+[6/72] [webkit] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes
+[7/72] [webkit] › tests\browser\grid-change-state.spec.ts:167:1 › unchanged formatted text does not hide raw changes on displays, rendered fields and images
+[8/72] [webkit] › tests\browser\grid-change-state.spec.ts:178:1 › Form commits update markers without replacing the focused input or its caret
+[9/72] [webkit] › tests\browser\grid-change-state.spec.ts:186:1 › Grid commits update markers without replacing the focused input or its caret
+[10/72] [webkit] › tests\browser\grid-change-state.spec.ts:194:1 › invalid drafts neither create committed changes nor erase an existing committed field change
+[11/72] [webkit] › tests\browser\grid-change-state.spec.ts:207:1 › inserted and copied records have no original baseline while clean append gains one
+[12/72] [webkit] › tests\browser\grid-change-state.spec.ts:220:1 › retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them
+[13/72] [webkit] › tests\browser\grid-change-state.spec.ts:237:1 › null and stale Form binding clear field flags without changing retained Grid deletion state
+[14/72] [webkit] › tests\browser\grid-change-state.spec.ts:248:1 › owned Form attributes and exact Grid template restore while local Forms never take marker ownership
+[15/72] [webkit] › tests\browser\grid-change-state.spec.ts:261:1 › sort filter page and column changes preserve leaf identity rather than display indexes
+[16/72] [webkit] › tests\browser\grid-change-state.spec.ts:273:1 › offscreen edits and deletion remount with their data-owned baseline and bounded physical rows
+[17/72] [webkit] › tests\browser\grid-change-state.spec.ts:289:1 › shared and independent MDI bindings retain their own baselines and unique accessible IDs
+[18/72] [webkit] › tests\browser\grid-change-state.spec.ts:317:1 › signed zero raw identity is visible as changed even when its formatted display is identical
+[19/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+[20/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+[21/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+[22/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+[23/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+[24/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+[25/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+[26/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+[27/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+[28/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+[29/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+[30/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+[31/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+[32/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+[33/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+[34/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+[35/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+[36/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+[37/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+[38/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+[39/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+[40/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+[41/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+[42/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+[43/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+[44/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+[45/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+[46/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+[47/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+[48/72] [webkit] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+[49/72] [webkit] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+[50/72] [webkit] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[51/72] [webkit] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[52/72] [webkit] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[53/72] [webkit] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[54/72] [webkit] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[55/72] [webkit] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[56/72] [webkit] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[57/72] [webkit] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+[58/72] [webkit] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[59/72] [webkit] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[60/72] [webkit] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[61/72] [webkit] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+[62/72] [webkit] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[63/72] [webkit] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+[64/72] [webkit] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[65/72] [webkit] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[66/72] [webkit] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+[67/72] [webkit] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[68/72] [webkit] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[69/72] [webkit] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[70/72] [webkit] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[71/72] [webkit] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+[72/72] [webkit] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+  72 passed (54.6s)
+[WebServer] (node:12820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:17528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

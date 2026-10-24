@@ -1,0 +1,2545 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-24",
+  "status": "M10.9.6_audit_foundation_not_semantic_closure",
+  "audit_baseline_commit": "7a36a39d1dd16c9ba71bb71d1e8a195f5df50a0c",
+  "scope": {
+    "original_mapping": "docs/implementation/evidence/v1-grid-parity.json",
+    "legacy_class": "NU.grid",
+    "counts": {
+      "classes": 1,
+      "members": 31,
+      "literal_options": 57,
+      "surface_entries": 89,
+      "dynamic_groups": 17,
+      "families": 20
+    },
+    "read_only_behavior_audit": true,
+    "original_mapping_unchanged": true,
+    "snapshot_note": "Facts below describe the 7a36a39 planning baseline. Later M10.9.6 implementation and fresh tests belong to their owning plans/coverage ledger; this snapshot is not a live completion claim.",
+    "contract_resolution": "Each surface/dynamic/family record names one shared contracts key. That record supplies its exact modern counterpart, remaining obligation, acceptance and source paths without copying identical prose into every old option.",
+    "effective_defaults_note": "Per-option constructor_default is not the complete effective default: natural.config.js and global/local deep merging may override it; D02-D04 and defaults-composition retain that review.",
+    "acceptance_resolution": "For each entry, contracts[contract] supplies its concrete counterpart, remaining gap, next slice and focused acceptance. Each profiles ID resolves required acceptance IDs and the frozen original acceptance descriptions through families[profile].acceptance_ref."
+  },
+  "distinctions": {
+    "implemented_contract_with_open_edges": "An implemented modern central contract has code and historical owning tests; default/option/dynamic closure is still required.",
+    "required_gap": "A concrete behavior is missing or differs at the baseline and must be implemented or explicitly resolved.",
+    "integration_recipe": "The outcome can use authored HTML/CSS, standard APIs and existing handles; publish and test the concrete recipe before closing it.",
+    "integration_recipe_with_open_edges": "The replacement is viable but specific defaults/options/callback or author-layout proof remains.",
+    "integration_recipe_with_contract_review": "Current API intentionally separates policy; select and test the minimal replacement contract before closure.",
+    "review_required": "Declared intent and actual legacy defect differ; resolve the owning contract rather than preserving a no-op.",
+    "cross_owner_required_gap": "The owning core/UI milestone must preserve the workflow; Grid alone cannot close it."
+  },
+  "families": {
+    "G01": {
+      "owner": "data/ui-grid",
+      "full_family_status": "open",
+      "contract": "data-projections",
+      "required_acceptance_ids": [
+        "G01-A01",
+        "G01-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G01/acceptance"
+    },
+    "G02": {
+      "owner": "data/ui-grid",
+      "full_family_status": "open",
+      "contract": "row-order",
+      "required_acceptance_ids": [
+        "G02-A01",
+        "G02-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G02/acceptance"
+    },
+    "G03": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "native-topology",
+      "required_acceptance_ids": [
+        "G03-A01",
+        "G03-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G03/acceptance"
+    },
+    "G04": {
+      "owner": "ui-grid/form",
+      "full_family_status": "open",
+      "contract": "native-controls",
+      "required_acceptance_ids": [
+        "G04-A01",
+        "G04-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G04/acceptance"
+    },
+    "G05": {
+      "owner": "ui-grid/form",
+      "full_family_status": "open",
+      "contract": "display",
+      "required_acceptance_ids": [
+        "G05-A01",
+        "G05-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G05/acceptance"
+    },
+    "G06": {
+      "owner": "ui-grid/rules",
+      "full_family_status": "open",
+      "contract": "validation-policy",
+      "required_acceptance_ids": [
+        "G06-A01",
+        "G06-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G06/acceptance"
+    },
+    "G07": {
+      "owner": "data/ui-grid",
+      "full_family_status": "open",
+      "contract": "change-status",
+      "required_acceptance_ids": [
+        "G07-A01",
+        "G07-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G07/acceptance"
+    },
+    "G08": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "row-selection",
+      "required_acceptance_ids": [
+        "G08-A01",
+        "G08-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G08/acceptance"
+    },
+    "G09": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "row-selection",
+      "required_acceptance_ids": [
+        "G09-A01",
+        "G09-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G09/acceptance"
+    },
+    "G10": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "row-checks",
+      "required_acceptance_ids": [
+        "G10-A01",
+        "G10-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G10/acceptance"
+    },
+    "G11": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "header-sort",
+      "required_acceptance_ids": [
+        "G11-A01",
+        "G11-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G11/acceptance"
+    },
+    "G12": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "column-filter",
+      "required_acceptance_ids": [
+        "G12-A01",
+        "G12-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G12/acceptance"
+    },
+    "G13": {
+      "owner": "ui-grid/authored-css",
+      "full_family_status": "open",
+      "contract": "sticky-layout",
+      "required_acceptance_ids": [
+        "G13-A01",
+        "G13-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G13/acceptance"
+    },
+    "G14": {
+      "owner": "ui-grid/columns",
+      "full_family_status": "open",
+      "contract": "column-chooser",
+      "required_acceptance_ids": [
+        "G14-A01",
+        "G14-A02",
+        "G14-A03"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G14/acceptance"
+    },
+    "G15": {
+      "owner": "ui-grid/viewport/authored-css",
+      "full_family_status": "open",
+      "contract": "action-reveal",
+      "required_acceptance_ids": [
+        "G15-A01",
+        "G15-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G15/acceptance"
+    },
+    "G16": {
+      "owner": "ui-grid/form/popup/page",
+      "full_family_status": "open",
+      "contract": "row-details",
+      "required_acceptance_ids": [
+        "G16-A01",
+        "G16-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G16/acceptance"
+    },
+    "G17": {
+      "owner": "ui-grid",
+      "full_family_status": "open",
+      "contract": "row-merge",
+      "required_acceptance_ids": [
+        "G17-A01",
+        "G17-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G17/acceptance"
+    },
+    "G18": {
+      "owner": "ui-grid/data/rules",
+      "full_family_status": "open",
+      "contract": "paste",
+      "required_acceptance_ids": [
+        "G18-A01",
+        "G18-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G18/acceptance"
+    },
+    "G19": {
+      "owner": "ui-grid/viewport/data",
+      "full_family_status": "open",
+      "contract": "progressive-render",
+      "required_acceptance_ids": [
+        "G19-A01",
+        "G19-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G19/acceptance"
+    },
+    "G20": {
+      "owner": "ui-grid/page/authored-css",
+      "full_family_status": "open",
+      "contract": "row-lifecycle",
+      "required_acceptance_ids": [
+        "G20-A01",
+        "G20-A02"
+      ],
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G20/acceptance"
+    }
+  },
+  "surface": [
+    {
+      "id": "class:NU.grid",
+      "kind": "class",
+      "legacy_key": "NU.grid",
+      "legacy_line": 4938,
+      "profiles": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "advanced-capabilities"
+    },
+    {
+      "id": "member:NU.grid.prototype.constructor",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.constructor",
+      "legacy_line": 4940,
+      "profiles": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "defaults-composition"
+    },
+    {
+      "id": "member:NU.grid.tableCells",
+      "kind": "member",
+      "legacy_key": "NU.grid.tableCells",
+      "legacy_line": 5144,
+      "profiles": [
+        "G03",
+        "G13",
+        "G14"
+      ],
+      "semantic_status": "open",
+      "contract": "root-inspection"
+    },
+    {
+      "id": "member:NU.grid.tableMap",
+      "kind": "member",
+      "legacy_key": "NU.grid.tableMap",
+      "legacy_line": 5174,
+      "profiles": [
+        "G03",
+        "G13",
+        "G14"
+      ],
+      "semantic_status": "open",
+      "contract": "root-inspection"
+    },
+    {
+      "id": "member:NU.grid.setTheadCellInfo",
+      "kind": "member",
+      "legacy_key": "NU.grid.setTheadCellInfo",
+      "legacy_line": 5212,
+      "profiles": [
+        "G11",
+        "G12",
+        "G14",
+        "G17"
+      ],
+      "semantic_status": "open",
+      "contract": "native-topology"
+    },
+    {
+      "id": "member:NU.grid.removeColgroup",
+      "kind": "member",
+      "legacy_key": "NU.grid.removeColgroup",
+      "legacy_line": 5247,
+      "profiles": [
+        "G13",
+        "G14"
+      ],
+      "semantic_status": "open",
+      "contract": "native-topology"
+    },
+    {
+      "id": "member:NU.grid.fixColumn",
+      "kind": "member",
+      "legacy_key": "NU.grid.fixColumn",
+      "legacy_line": 5274,
+      "profiles": [
+        "G13",
+        "G14",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "member:NU.grid.fixHeader",
+      "kind": "member",
+      "legacy_key": "NU.grid.fixHeader",
+      "legacy_line": 5363,
+      "profiles": [
+        "G13",
+        "G15",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "member:NU.grid.vResize",
+      "kind": "member",
+      "legacy_key": "NU.grid.vResize",
+      "legacy_line": 5467,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "contract": "height-controls"
+    },
+    {
+      "id": "member:NU.grid.more",
+      "kind": "member",
+      "legacy_key": "NU.grid.more",
+      "legacy_line": 5529,
+      "profiles": [
+        "G14",
+        "G16",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "column-chooser"
+    },
+    {
+      "id": "member:NU.grid.resize",
+      "kind": "member",
+      "legacy_key": "NU.grid.resize",
+      "legacy_line": 5758,
+      "profiles": [
+        "G13",
+        "G14"
+      ],
+      "semantic_status": "open",
+      "contract": "native-topology"
+    },
+    {
+      "id": "member:NU.grid.sort",
+      "kind": "member",
+      "legacy_key": "NU.grid.sort",
+      "legacy_line": 5948,
+      "profiles": [
+        "G11",
+        "G12"
+      ],
+      "semantic_status": "open",
+      "contract": "header-sort"
+    },
+    {
+      "id": "member:NU.grid.dataFilter",
+      "kind": "member",
+      "legacy_key": "NU.grid.dataFilter",
+      "legacy_line": 5983,
+      "profiles": [
+        "G12",
+        "G11",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "column-filter"
+    },
+    {
+      "id": "member:NU.grid.rowSpan",
+      "kind": "member",
+      "legacy_key": "NU.grid.rowSpan",
+      "legacy_line": 6281,
+      "profiles": [
+        "G17",
+        "G03"
+      ],
+      "semantic_status": "open",
+      "contract": "row-merge"
+    },
+    {
+      "id": "member:NU.grid.paste",
+      "kind": "member",
+      "legacy_key": "NU.grid.paste",
+      "legacy_line": 6320,
+      "profiles": [
+        "G18",
+        "G04",
+        "G06"
+      ],
+      "semantic_status": "open",
+      "contract": "paste"
+    },
+    {
+      "id": "member:NU.grid.prototype.data",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.data",
+      "legacy_line": 6376,
+      "profiles": [
+        "G01",
+        "G07",
+        "G09",
+        "G10"
+      ],
+      "semantic_status": "open",
+      "contract": "data-projections"
+    },
+    {
+      "id": "member:NU.grid.prototype.context",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.context",
+      "legacy_line": 6440,
+      "profiles": [
+        "G03",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "root-inspection"
+    },
+    {
+      "id": "member:NU.grid.prototype.contextHead",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.contextHead",
+      "legacy_line": 6444,
+      "profiles": [
+        "G11",
+        "G12",
+        "G13",
+        "G14"
+      ],
+      "semantic_status": "open",
+      "contract": "root-inspection"
+    },
+    {
+      "id": "member:NU.grid.prototype.contextBodyTemplate",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.contextBodyTemplate",
+      "legacy_line": 6448,
+      "profiles": [
+        "G03",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "template-cache"
+    },
+    {
+      "id": "member:NU.grid.prototype.select",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.select",
+      "legacy_line": 6452,
+      "profiles": [
+        "G08",
+        "G09",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "contract": "row-selection"
+    },
+    {
+      "id": "member:NU.grid.prototype.check",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.check",
+      "legacy_line": 6495,
+      "profiles": [
+        "G10",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "contract": "row-checks"
+    },
+    {
+      "id": "member:NU.grid.prototype.bind",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.bind",
+      "legacy_line": 6537,
+      "profiles": [
+        "G01",
+        "G03",
+        "G07",
+        "G11",
+        "G12",
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "row-lifecycle"
+    },
+    {
+      "id": "member:NU.grid.prototype.add",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.add",
+      "legacy_line": 6671,
+      "profiles": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G08",
+        "G15",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "row-defaults"
+    },
+    {
+      "id": "member:NU.grid.prototype.remove",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.remove",
+      "legacy_line": 6763,
+      "profiles": [
+        "G01",
+        "G07",
+        "G10",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "contract": "change-status"
+    },
+    {
+      "id": "member:NU.grid.prototype.revert",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.revert",
+      "legacy_line": 6795,
+      "profiles": [
+        "G01",
+        "G06",
+        "G07",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "change-status"
+    },
+    {
+      "id": "member:NU.grid.prototype.validate",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.validate",
+      "legacy_line": 6840,
+      "profiles": [
+        "G06",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "contract": "validation-policy"
+    },
+    {
+      "id": "member:NU.grid.prototype.val",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.val",
+      "legacy_line": 6870,
+      "profiles": [
+        "G01",
+        "G04",
+        "G06",
+        "G07"
+      ],
+      "semantic_status": "open",
+      "contract": "native-controls"
+    },
+    {
+      "id": "member:NU.grid.prototype.move",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.move",
+      "legacy_line": 6888,
+      "profiles": [
+        "G02",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "contract": "row-order"
+    },
+    {
+      "id": "member:NU.grid.prototype.copy",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.copy",
+      "legacy_line": 6894,
+      "profiles": [
+        "G02",
+        "G03",
+        "G07"
+      ],
+      "semantic_status": "open",
+      "contract": "row-order"
+    },
+    {
+      "id": "member:NU.grid.prototype.show",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.show",
+      "legacy_line": 6900,
+      "profiles": [
+        "G13",
+        "G14",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "native-topology"
+    },
+    {
+      "id": "member:NU.grid.prototype.hide",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.hide",
+      "legacy_line": 6940,
+      "profiles": [
+        "G13",
+        "G14",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "native-topology"
+    },
+    {
+      "id": "member:NU.grid.prototype.update",
+      "kind": "member",
+      "legacy_key": "NU.grid.prototype.update",
+      "legacy_line": 6986,
+      "profiles": [
+        "G01",
+        "G06",
+        "G07",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "contract": "shared-updates"
+    },
+    {
+      "id": "option:data",
+      "kind": "option",
+      "legacy_key": "data",
+      "legacy_line": 4942,
+      "profiles": [
+        "G01",
+        "G07"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "expression_kind": "ConditionalExpression"
+      },
+      "contract": "data-projections"
+    },
+    {
+      "id": "option:row",
+      "kind": "option",
+      "legacy_key": "row",
+      "legacy_line": 4943,
+      "profiles": [
+        "G08",
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": -1
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:beforeRow",
+      "kind": "option",
+      "legacy_key": "beforeRow",
+      "legacy_line": 4944,
+      "profiles": [
+        "G08",
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": -1
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:context",
+      "kind": "option",
+      "legacy_key": "context",
+      "legacy_line": 4945,
+      "profiles": [
+        "G03",
+        "G13",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "root-inspection"
+    },
+    {
+      "id": "option:height",
+      "kind": "option",
+      "legacy_key": "height",
+      "legacy_line": 4946,
+      "profiles": [
+        "G13",
+        "G15",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "height-controls"
+    },
+    {
+      "id": "option:fixedcol",
+      "kind": "option",
+      "legacy_key": "fixedcol",
+      "legacy_line": 4947,
+      "profiles": [
+        "G13",
+        "G14"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:more",
+      "kind": "option",
+      "legacy_key": "more",
+      "legacy_line": 4948,
+      "profiles": [
+        "G14",
+        "G16"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "column-chooser"
+    },
+    {
+      "id": "option:validate",
+      "kind": "option",
+      "legacy_key": "validate",
+      "legacy_line": 4949,
+      "profiles": [
+        "G06",
+        "G04"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "validation-policy"
+    },
+    {
+      "id": "option:html",
+      "kind": "option",
+      "legacy_key": "html",
+      "legacy_line": 4950,
+      "profiles": [
+        "G05",
+        "G04"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "display"
+    },
+    {
+      "id": "option:addTop",
+      "kind": "option",
+      "legacy_key": "addTop",
+      "legacy_line": 4951,
+      "profiles": [
+        "G02",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "row-order"
+    },
+    {
+      "id": "option:addSelect",
+      "kind": "option",
+      "legacy_key": "addSelect",
+      "legacy_line": 4952,
+      "profiles": [
+        "G08",
+        "G02",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "action-reveal"
+    },
+    {
+      "id": "option:filter",
+      "kind": "option",
+      "legacy_key": "filter",
+      "legacy_line": 4953,
+      "profiles": [
+        "G12"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "column-filter"
+    },
+    {
+      "id": "option:resizable",
+      "kind": "option",
+      "legacy_key": "resizable",
+      "legacy_line": 4954,
+      "profiles": [
+        "G14",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "native-topology"
+    },
+    {
+      "id": "option:vResizable",
+      "kind": "option",
+      "legacy_key": "vResizable",
+      "legacy_line": 4955,
+      "profiles": [
+        "G15",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "height-controls"
+    },
+    {
+      "id": "option:sortable",
+      "kind": "option",
+      "legacy_key": "sortable",
+      "legacy_line": 4956,
+      "profiles": [
+        "G11"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "header-sort"
+    },
+    {
+      "id": "option:windowScrollLock",
+      "kind": "option",
+      "legacy_key": "windowScrollLock",
+      "legacy_line": 4957,
+      "profiles": [
+        "G15",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "height-controls"
+    },
+    {
+      "id": "option:select",
+      "kind": "option",
+      "legacy_key": "select",
+      "legacy_line": 4958,
+      "profiles": [
+        "G08"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:unselect",
+      "kind": "option",
+      "legacy_key": "unselect",
+      "legacy_line": 4959,
+      "profiles": [
+        "G08",
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:multiselect",
+      "kind": "option",
+      "legacy_key": "multiselect",
+      "legacy_line": 4960,
+      "profiles": [
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:checkAll",
+      "kind": "option",
+      "legacy_key": "checkAll",
+      "legacy_line": 4961,
+      "profiles": [
+        "G10"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-checks"
+    },
+    {
+      "id": "option:checkAllTarget",
+      "kind": "option",
+      "legacy_key": "checkAllTarget",
+      "legacy_line": 4962,
+      "profiles": [
+        "G10",
+        "G04"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-checks"
+    },
+    {
+      "id": "option:checkSingleTarget",
+      "kind": "option",
+      "legacy_key": "checkSingleTarget",
+      "legacy_line": 4963,
+      "profiles": [
+        "G10"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-checks"
+    },
+    {
+      "id": "option:hover",
+      "kind": "option",
+      "legacy_key": "hover",
+      "legacy_line": 4964,
+      "profiles": [
+        "G20"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "hover"
+    },
+    {
+      "id": "option:revert",
+      "kind": "option",
+      "legacy_key": "revert",
+      "legacy_line": 4965,
+      "profiles": [
+        "G01",
+        "G07",
+        "G06"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "change-status"
+    },
+    {
+      "id": "option:createRowDelay",
+      "kind": "option",
+      "legacy_key": "createRowDelay",
+      "legacy_line": 4966,
+      "profiles": [
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 1
+      },
+      "contract": "progressive-render"
+    },
+    {
+      "id": "option:scrollPaging",
+      "kind": "option",
+      "legacy_key": "scrollPaging",
+      "legacy_line": 4967,
+      "profiles": [
+        "G19"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "expression_kind": "ObjectExpression"
+      },
+      "contract": "progressive-render"
+    },
+    {
+      "id": "option:scrollPaging.idx",
+      "kind": "option",
+      "legacy_key": "scrollPaging.idx",
+      "legacy_line": 4968,
+      "profiles": [
+        "G19"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "progressive-render"
+    },
+    {
+      "id": "option:scrollPaging.size",
+      "kind": "option",
+      "legacy_key": "scrollPaging.size",
+      "legacy_line": 4969,
+      "profiles": [
+        "G19",
+        "G02"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 100
+      },
+      "contract": "progressive-render"
+    },
+    {
+      "id": "option:fRules",
+      "kind": "option",
+      "legacy_key": "fRules",
+      "legacy_line": 4971,
+      "profiles": [
+        "G06",
+        "G04"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "field-rules"
+    },
+    {
+      "id": "option:vRules",
+      "kind": "option",
+      "legacy_key": "vRules",
+      "legacy_line": 4972,
+      "profiles": [
+        "G06",
+        "G04"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "field-rules"
+    },
+    {
+      "id": "option:appendScroll",
+      "kind": "option",
+      "legacy_key": "appendScroll",
+      "legacy_line": 4973,
+      "profiles": [
+        "G15",
+        "G19",
+        "G01"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "action-reveal"
+    },
+    {
+      "id": "option:addScroll",
+      "kind": "option",
+      "legacy_key": "addScroll",
+      "legacy_line": 4974,
+      "profiles": [
+        "G15",
+        "G02"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "action-reveal"
+    },
+    {
+      "id": "option:selectScroll",
+      "kind": "option",
+      "legacy_key": "selectScroll",
+      "legacy_line": 4975,
+      "profiles": [
+        "G15",
+        "G08",
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "action-reveal"
+    },
+    {
+      "id": "option:checkScroll",
+      "kind": "option",
+      "legacy_key": "checkScroll",
+      "legacy_line": 4976,
+      "profiles": [
+        "G15",
+        "G10"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "action-reveal"
+    },
+    {
+      "id": "option:validateScroll",
+      "kind": "option",
+      "legacy_key": "validateScroll",
+      "legacy_line": 4977,
+      "profiles": [
+        "G15",
+        "G06"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "action-reveal"
+    },
+    {
+      "id": "option:cache",
+      "kind": "option",
+      "legacy_key": "cache",
+      "legacy_line": 4978,
+      "profiles": [
+        "G03",
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": true
+      },
+      "contract": "template-cache"
+    },
+    {
+      "id": "option:tpBind",
+      "kind": "option",
+      "legacy_key": "tpBind",
+      "legacy_line": 4979,
+      "profiles": [
+        "G04",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "template-cache"
+    },
+    {
+      "id": "option:pastiable",
+      "kind": "option",
+      "legacy_key": "pastiable",
+      "legacy_line": 4980,
+      "profiles": [
+        "G18"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": false
+      },
+      "contract": "paste"
+    },
+    {
+      "id": "option:rowHandlerBeforeBind",
+      "kind": "option",
+      "legacy_key": "rowHandlerBeforeBind",
+      "legacy_line": 4981,
+      "profiles": [
+        "G20",
+        "G03",
+        "G01"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-lifecycle"
+    },
+    {
+      "id": "option:rowHandler",
+      "kind": "option",
+      "legacy_key": "rowHandler",
+      "legacy_line": 4982,
+      "profiles": [
+        "G20",
+        "G03",
+        "G01"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-lifecycle"
+    },
+    {
+      "id": "option:onBeforeSelect",
+      "kind": "option",
+      "legacy_key": "onBeforeSelect",
+      "legacy_line": 4983,
+      "profiles": [
+        "G08",
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:onSelect",
+      "kind": "option",
+      "legacy_key": "onSelect",
+      "legacy_line": 4984,
+      "profiles": [
+        "G08",
+        "G09"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-selection"
+    },
+    {
+      "id": "option:onBind",
+      "kind": "option",
+      "legacy_key": "onBind",
+      "legacy_line": 4985,
+      "profiles": [
+        "G20",
+        "G19",
+        "G01"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "row-lifecycle"
+    },
+    {
+      "id": "option:misc",
+      "kind": "option",
+      "legacy_key": "misc",
+      "legacy_line": 4986,
+      "profiles": [
+        "G13",
+        "G14",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "expression_kind": "ObjectExpression"
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.resizableCorrectionWidth",
+      "kind": "option",
+      "legacy_key": "misc.resizableCorrectionWidth",
+      "legacy_line": 4987,
+      "profiles": [
+        "G14",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.resizableLastCellCorrectionWidth",
+      "kind": "option",
+      "legacy_key": "misc.resizableLastCellCorrectionWidth",
+      "legacy_line": 4988,
+      "profiles": [
+        "G14",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.resizeBarCorrectionLeft",
+      "kind": "option",
+      "legacy_key": "misc.resizeBarCorrectionLeft",
+      "legacy_line": 4989,
+      "profiles": [
+        "G14",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.resizeBarCorrectionHeight",
+      "kind": "option",
+      "legacy_key": "misc.resizeBarCorrectionHeight",
+      "legacy_line": 4990,
+      "profiles": [
+        "G14",
+        "G13"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolHeadMarginTop",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolHeadMarginTop",
+      "legacy_line": 4991,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolHeadMarginLeft",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolHeadMarginLeft",
+      "legacy_line": 4992,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolHeadHeight",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolHeadHeight",
+      "legacy_line": 4993,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolBodyMarginTop",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolBodyMarginTop",
+      "legacy_line": 4994,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolBodyMarginLeft",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolBodyMarginLeft",
+      "legacy_line": 4995,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolBodyBindHeight",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolBodyBindHeight",
+      "legacy_line": 4996,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 0
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolBodyAddHeight",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolBodyAddHeight",
+      "legacy_line": 4997,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": 1
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:misc.fixedcolRootContainer",
+      "kind": "option",
+      "legacy_key": "misc.fixedcolRootContainer",
+      "legacy_line": 4998,
+      "profiles": [
+        "G13",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": null
+      },
+      "contract": "sticky-layout"
+    },
+    {
+      "id": "option:currMoveToRow",
+      "kind": "option",
+      "legacy_key": "currMoveToRow",
+      "legacy_line": 5000,
+      "profiles": [
+        "G02",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "constructor_default": {
+        "value": -1
+      },
+      "contract": "progressive-render"
+    }
+  ],
+  "dynamic_groups": [
+    {
+      "id": "D01",
+      "legacy_paths": [
+        "N.grid",
+        "N(data).grid",
+        "NU.prototype.grid",
+        "NU.Grid.options",
+        "NU.Grid.tempRowEle",
+        "NU.Grid.tableMap",
+        "NU.Grid.thead",
+        "NU.Grid.contextEle",
+        "NU.Grid.rowSpanIds"
+      ],
+      "profiles": [
+        "G01",
+        "G03",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C13",
+        "C15"
+      ],
+      "contract": "root-inspection"
+    },
+    {
+      "id": "D02",
+      "legacy_paths": [
+        "NA.context.attr(ui).grid",
+        "opts deep merge",
+        "global/local callback composition"
+      ],
+      "profiles": [
+        "G01",
+        "G06",
+        "G08",
+        "G13",
+        "G14",
+        "G16",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C11",
+        "C13"
+      ],
+      "contract": "defaults-composition"
+    },
+    {
+      "id": "D03",
+      "legacy_paths": [
+        "message",
+        "message.ko_KR",
+        "message.ko_KR.empty",
+        "message.ko_KR.search",
+        "message.ko_KR.selectAll",
+        "message.ko_KR.dFilter",
+        "message.ko_KR.more",
+        "message.ko_KR.column",
+        "message.ko_KR.showHide",
+        "message.ko_KR.prev",
+        "message.ko_KR.next",
+        "message.en_US",
+        "message.en_US.empty",
+        "message.en_US.search",
+        "message.en_US.selectAll",
+        "message.en_US.dFilter",
+        "message.en_US.more",
+        "message.en_US.column",
+        "message.en_US.showHide",
+        "message.en_US.prev",
+        "message.en_US.next"
+      ],
+      "profiles": [
+        "G12",
+        "G14",
+        "G16",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C13"
+      ],
+      "contract": "messages"
+    },
+    {
+      "id": "D04",
+      "legacy_paths": [
+        "sortableItem",
+        "sortableItem.asc",
+        "sortableItem.desc"
+      ],
+      "profiles": [
+        "G11"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [],
+      "contract": "header-sort"
+    },
+    {
+      "id": "D05",
+      "legacy_paths": [
+        "tbody id/name field binding",
+        "data-format",
+        "data-validate",
+        "fRules",
+        "vRules",
+        "ND.formatter/validator dynamic catalogs"
+      ],
+      "profiles": [
+        "G04",
+        "G05",
+        "G06"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C11",
+        "C12",
+        "U01"
+      ],
+      "contract": "field-rules"
+    },
+    {
+      "id": "D06",
+      "legacy_paths": [
+        "scrollPaging.limit",
+        "scrollPaging.defSize",
+        "isBinding",
+        "currMoveToRow",
+        "bind callType append/grid.bind/grid.dataFilter/grid.sort/grid.update"
+      ],
+      "profiles": [
+        "G02",
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [],
+      "contract": "progressive-render"
+    },
+    {
+      "id": "D07",
+      "legacy_paths": [
+        "NU.EventHandlers.Grid.RowHandlerBeforeBind",
+        "RowHandler",
+        "OnBeforeSelect",
+        "OnSelect",
+        "OnBind"
+      ],
+      "profiles": [
+        "G01",
+        "G08",
+        "G09",
+        "G19",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C08"
+      ],
+      "contract": "row-lifecycle"
+    },
+    {
+      "id": "D08",
+      "legacy_paths": [
+        "NU.ui.iteration.select",
+        "NU.ui.iteration.checkAll",
+        "NU.ui.iteration.checkSingle",
+        "select(array,isAppend)",
+        "check(array,isAppend)"
+      ],
+      "profiles": [
+        "G08",
+        "G09",
+        "G10",
+        "G15"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [],
+      "contract": "row-selection"
+    },
+    {
+      "id": "D09",
+      "legacy_paths": [
+        "NU.form row instances",
+        "NU.form.add/default values",
+        "NC.prototype.vals",
+        "NC.element.toData",
+        "radio/checkbox groups",
+        "multiple Select",
+        "img.src/html",
+        "readonly/disabled"
+      ],
+      "profiles": [
+        "G01",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "U01",
+        "U02",
+        "C10"
+      ],
+      "contract": "native-controls"
+    },
+    {
+      "id": "D10",
+      "legacy_paths": [
+        "p.grid declarations",
+        "p.select row template code lists",
+        "e.* delegated row actions",
+        "arbitrary selector row events"
+      ],
+      "profiles": [
+        "G03",
+        "G04",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C07",
+        "C08"
+      ],
+      "contract": "row-events"
+    },
+    {
+      "id": "D11",
+      "legacy_paths": [
+        "ND.ds.instance(Grid,true)",
+        "Grid.update(row,key)",
+        "shared Form/Select edits"
+      ],
+      "profiles": [
+        "G01",
+        "G06",
+        "G07",
+        "G20"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C09",
+        "C10"
+      ],
+      "contract": "shared-updates"
+    },
+    {
+      "id": "D12",
+      "legacy_paths": [
+        "NC.json.mapFromKeys",
+        "NC.prototype.vals",
+        "NC.element.toData",
+        "NC.event.windowScrollLock",
+        "NU.ui.draggable.events",
+        "NU.ui.iteration.move/copy",
+        "NU.grid.tableCells/tableMap"
+      ],
+      "profiles": [
+        "G01",
+        "G02",
+        "G06",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G18"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C15"
+      ],
+      "contract": "root-inspection"
+    },
+    {
+      "id": "D13",
+      "legacy_paths": [
+        "more=true field expansion",
+        "more:string[] detail restriction",
+        "generated column chooser/count/check-all",
+        "detail Form/Popup previous/next/close validation"
+      ],
+      "profiles": [
+        "G14",
+        "G16"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "U13",
+        "U15",
+        "U16"
+      ],
+      "contract": "column-chooser"
+    },
+    {
+      "id": "D14",
+      "legacy_paths": [
+        "data-column/data-columns",
+        "authored colgroup/cols",
+        "scope col/colgroup",
+        "header/footer rowspan/colspan"
+      ],
+      "profiles": [
+        "G03",
+        "G13",
+        "G14",
+        "G17"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [],
+      "contract": "native-topology"
+    },
+    {
+      "id": "D15",
+      "legacy_paths": [
+        "Clipboard text/plain",
+        "tab/newline quoted paste",
+        "readonly/disabled skip",
+        "focused field start index"
+      ],
+      "profiles": [
+        "G04",
+        "G06",
+        "G18",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [],
+      "contract": "paste"
+    },
+    {
+      "id": "D16",
+      "legacy_paths": [
+        "required column resize/reorder/hide",
+        "required multiple selection",
+        "required bulk paste",
+        "required real scroll virtualization",
+        "planned range selection"
+      ],
+      "profiles": [
+        "G09",
+        "G14",
+        "G18",
+        "G19"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [],
+      "contract": "advanced-capabilities"
+    },
+    {
+      "id": "D17",
+      "legacy_paths": [
+        "data(false)",
+        "data(modified/insert/update/delete,cols...)",
+        "data(selected/checked,cols...)",
+        "rowStatus insert/update/delete payload"
+      ],
+      "profiles": [
+        "G01",
+        "G07",
+        "G09",
+        "G10"
+      ],
+      "semantic_status": "open",
+      "cross_ledger": [
+        "C05",
+        "C09",
+        "C10"
+      ],
+      "contract": "data-projections"
+    }
+  ],
+  "classification_counts": {
+    "implemented_contract_with_open_edges": 31,
+    "integration_recipe_with_open_edges": 26,
+    "integration_recipe": 6,
+    "required_gap": 22,
+    "integration_recipe_with_contract_review": 2,
+    "review_required": 2
+  },
+  "repaired_legacy_defects": [
+    {
+      "legacy": "onBeforeSelect veto / onSelect after veto",
+      "modern": "Before hooks reject unchanged; post callbacks report committed changes only.",
+      "owner": "G08/D07"
+    },
+    {
+      "legacy": "beforeRow updated before after callback",
+      "modern": "Explicit previous/next IDs and immutable committed payloads; no copied broken bookkeeping.",
+      "owner": "G08/D07"
+    },
+    {
+      "legacy": "check-all removeProp and single-check removeAttr do not clear live checked state",
+      "modern": "Controlled independent checked IDs and native checked/indeterminate state.",
+      "owner": "G10/D08"
+    },
+    {
+      "legacy": "focusout string coercion dirties untouched numeric/boolean values",
+      "modern": "Raw parsing/deep comparison and no-op tracking, not accidental type mutation.",
+      "owner": "G04/G07"
+    },
+    {
+      "legacy": "remove array indexes sort lexicographically",
+      "modern": "Stable-ID removal does not shift a later target; test projected delete batches as application operations.",
+      "owner": "G01/G07"
+    },
+    {
+      "legacy": "copy shares data and cloned form instance",
+      "modern": "Deep independent copy/new inserted ID; retain original snapshot identity for move.",
+      "owner": "G02"
+    },
+    {
+      "legacy": "offscreen val silently skips rowStatus and notification",
+      "modern": "Rows mutation tracks offscreen edits and notifies all shared views.",
+      "owner": "G01/G04"
+    },
+    {
+      "legacy": "full rebind marks every field of an updated row dirty",
+      "modern": "Compare each compiled raw path against immutable original; do not mark unchanged nested siblings.",
+      "owner": "G07"
+    },
+    {
+      "legacy": "Grid declares fRules/vRules/tpBind but omits forwarding them to bound row Forms",
+      "modern": "Keep their intended programmatic-rules outcomes under a consistent contract; declaration no-op is not an omission approval.",
+      "owner": "G04/G06/D05"
+    },
+    {
+      "legacy": "nonpaged onBind first-page flag false above scrollPaging.size",
+      "modern": "Define first/last flags from actual completed rendering/chunk boundaries.",
+      "owner": "G19/G20"
+    }
+  ],
+  "pending_decisions": [
+    {
+      "id": "GR01",
+      "original_kind": "potential_public_mechanism_retirement_scope_only",
+      "profiles": [
+        "G03",
+        "G13",
+        "G14"
+      ],
+      "condition": "Retain all G03/G13/G14 outcomes. Add to the single consolidated user decision only if an actual framework capability remains unsupported; no exclusion is approved here.",
+      "disposition": "No omission approved. First prove an equivalent modern workflow; only an actual unsupported capability belongs in the one consolidated user decision.",
+      "external_group_ref": null
+    },
+    {
+      "id": "GR02",
+      "original_kind": "potential_legacy_geometry_option_retirement_scope_only",
+      "profiles": [
+        "G13",
+        "G14",
+        "G15"
+      ],
+      "condition": "Prove equivalent pinning/footer/resize/reflow outcomes or record exact remaining customization loss in the same complete omission batch. No Grid feature is proposed for omission by this record.",
+      "disposition": "No omission approved. First prove an equivalent modern workflow; only an actual unsupported capability belongs in the one consolidated user decision.",
+      "external_group_ref": null
+    },
+    {
+      "id": "GR03",
+      "original_kind": "cross_scope_parser_retirement_dependency",
+      "profiles": [
+        "G03",
+        "G04",
+        "G20"
+      ],
+      "condition": "Grid templates, code lists, row event context and binding-before-action behavior stay required; no duplicate approval request or unused claim.",
+      "disposition": "No omission approved. First prove an equivalent modern workflow; only an actual unsupported capability belongs in the one consolidated user decision.",
+      "external_group_ref": {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "id": "R03"
+      }
+    }
+  ],
+  "verification": {
+    "runtime_tests_run_in_this_audit": false,
+    "historical_runtime_recertified": false,
+    "full_semantic_closed_surface_entries": 0,
+    "full_semantic_closed_dynamic_groups": 0,
+    "full_families_closed": 0,
+    "omissions_approved": [],
+    "unused_helpers_deleted": [],
+    "set_checks": {
+      "exact_original_member_set": true,
+      "exact_original_option_set": true,
+      "exact_original_dynamic_group_set": true,
+      "unique_surface_ids": true,
+      "all_twenty_families_mapped": true
+    },
+    "note": "Classification is code-backed planning. It does not convert earlier selected-scope tests into exhaustive legacy parity certification. No old helper is classified unused merely because modern implementation does not call it."
+  },
+  "source_normalization": "UTF-8; CRLF normalized to LF",
+  "baseline_source_sha256": {
+    "docs/implementation/evidence/v1-grid-parity.json": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c",
+    "v1/src/natural.ui.js": "ebdee5a5dedbb1ebf27ba4eb801b1c185b9377a94cc5e8df890004bbe276af42",
+    "v1/dist/natural.config.js": "cdece8154b6210bc32d2e17e09789047d8a1ecbcf80168ff860267fc9dede85f",
+    "src/data/index.ts": "d873d16e1163891f8002aa445f4af55d59a2142e993b0358828f38d4d385069c",
+    "src/ui/grid.ts": "467fef74d91af9d9d806fee6688f67144d176f63c443089c69cf0af97d5a1e42",
+    "src/ui/grid-selection.ts": "db28c178a791e4879b1963f2fc04c4ab4d42f54f07190b46c7061cb9f3b4b630",
+    "src/ui/grid-columns.ts": "c5708a4ffb719d84a90dd1fcb94f58f35976e12fc665fe42f3b75ec532957b23",
+    "src/ui/grid-filters.ts": "38c597bbedd0ac999fe4b52af23cc4a216f11d758c9c56c09a2cc77862cedc3b",
+    "src/ui/grid-viewport.ts": "bb740ec59932bf0f8b11bae1be8fbe0323d08ac6c41443518235f264471fb9b1",
+    "src/ui/form.ts": "355744799bfa49e443222087d6637a6505267d21cb80b5ffd0bbd6e2df767286",
+    "src/ui/native-control.ts": "9c006cb1b64cdeb66e92e76e8b807f1308b35658cf8eb37556857da13861ce2c",
+    "src/ui/rules.ts": "cdab1ff5355f66413bc8e3b8746b23ab4bc0a2fbc940e57687732d213934517e"
+  },
+  "contracts": {
+    "advanced-capabilities": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "column resize/reorder/hide",
+        "multiple selection/ranges",
+        "atomic paste",
+        "measured scroll virtualization"
+      ],
+      "remaining_obligation": "All six explicitly requested advanced capabilities have implemented central contracts; exhaustive option/default and dynamic acceptance is still required.",
+      "acceptance": "Replay independent layouts and installed consumers with frozen fixtures; do not infer historical reorder/range/virtualization from legacy multiselect/scrollPaging.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/grid-columns.ts",
+        "src/ui/grid-selection.ts",
+        "src/ui/grid-viewport.ts"
+      ]
+    },
+    "defaults-composition": {
+      "classification": "integration_recipe_with_open_edges",
+      "next_slice": "M10.9.6.4 / core C11,C13",
+      "current_counterpart": [
+        "plain typed application defaults",
+        "explicit option composition"
+      ],
+      "remaining_obligation": "Old deep merge and local-first/global-second callback composition need an exact tested recipe; a local false suppresses global and otherwise global return controls. Do not introduce a generic config registry.",
+      "acceptance": "Test local false, undefined, true, throw and async rejection boundaries plus per-instance isolation and rule/message replacement.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/rules.ts"
+      ]
+    },
+    "root-inspection": {
+      "classification": "integration_recipe",
+      "next_slice": "M10.9.6.4 / core C13/C15",
+      "current_counterpart": [
+        "Caller-owned table/template/thead",
+        "ESM bindGrid(table,options)",
+        "Grid.columns/rowIds",
+        "beforeRowBind/onRowBind context.elements"
+      ],
+      "remaining_obligation": "Publish concrete root/template/native topology inspection recipes. Exposed mutable jQuery instance fields and table matrices are not unused; unsupported external capability requires the single consolidated decision.",
+      "acceptance": "Exercise caller-authored inspection/customization against multi-tr records, spans and columns without copying a private compiler or adding a generic table utility.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/grid-columns.ts",
+        "src/ui/grid-row-blocks.ts"
+      ]
+    },
+    "native-topology": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "native table/colgroup/span ownership",
+        "data-column/data-columns",
+        "private Grid column/body compilers"
+      ],
+      "remaining_obligation": "Core native topology is implemented. Complete remaining authored layout/root/offset correspondence and public helper inspection recipes, without copied headers or a utility package.",
+      "acceptance": "Test spans/groups/footer/pinning/width/reorder/hide and independent layouts plus external native inspection recipes.",
+      "modern_sources": [
+        "src/ui/grid-columns.ts",
+        "examples/vite/m10/columns.ts",
+        "src/ui/grid-row-blocks.ts"
+      ]
+    },
+    "sticky-layout": {
+      "classification": "integration_recipe_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "authored native sticky headers/columns/footer",
+        "viewport root and both sticky occlusion bands",
+        "Grid.columns preferred widths"
+      ],
+      "remaining_obligation": "Old split-table/fixed-column correction numbers and positioned-root selectors need explicit CSS/native layout replacement proof. Do not call actively read misc helpers unused.",
+      "acceptance": "Demonstrate responsive multi-row headers/footer and multiple pinned columns through width/hide/reorder/root containment, or retain an exact unsupported customization for the single decision.",
+      "modern_sources": [
+        "src/ui/grid-viewport.ts",
+        "src/ui/grid-height.ts",
+        "src/ui/grid.ts",
+        "src/ui/grid-columns.ts",
+        "examples/vite/m10/columns.ts"
+      ]
+    },
+    "height-controls": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "heightResize authored root/handle",
+        "pointer/keyboard bounds/cancel",
+        "Grid.reveal block alignment",
+        "native overscroll containment"
+      ],
+      "remaining_obligation": "Owned height behavior is implemented; old initial CSS dimensions and automatic action-scroll flag/default equivalence still need explicit migration acceptance.",
+      "acceptance": "Test authored CSS dimensions/containment and every add/append/select/check/validate scroll policy without adding a second scroller.",
+      "modern_sources": [
+        "src/ui/grid-viewport.ts",
+        "src/ui/grid-height.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "column-chooser": {
+      "classification": "required_gap",
+      "next_slice": "M10.9.6.2",
+      "current_counterpart": [
+        "Grid.columns/setColumns",
+        "authored control HTML"
+      ],
+      "remaining_obligation": "Existing single-column controls do not finish old checkbox chooser/count/select-all workflow. Retain an authored recovery/action column when allowing every business column hidden; do not silently relax the all-columns-hidden guard.",
+      "acceptance": "Build authored chooser with checkbox state/count/all/reset and a visible recovery control, stable focus and meaningful all-business-hidden state.",
+      "modern_sources": [
+        "src/ui/grid-columns.ts",
+        "examples/vite/m10/columns.ts",
+        "examples/vite/m10/demo.html",
+        "examples/vite/m10/demo.ts"
+      ]
+    },
+    "header-sort": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.2 / M10.9.6.4",
+      "current_counterpart": [
+        "sorts",
+        "Grid.setSort",
+        "data-sort-column",
+        "native aria-sort and authored indicators"
+      ],
+      "remaining_obligation": "Modern ascending/descending/clear supports directions; finish legacy two-state/default/rebind/filter/callback correspondence. Marker presentation is authored, not a new HTML-string option.",
+      "acceptance": "Test raw comparators, both directions and explicit clear, sort/filter/reset interactions, stable rows/drafts and authored labels/indicators.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/grid-filters.ts"
+      ]
+    },
+    "column-filter": {
+      "classification": "required_gap",
+      "next_slice": "M10.9.6.2",
+      "current_counterpart": [
+        "Grid.filterChoices/columnFilter/setColumnFilter",
+        "data-filter-column/data-filter-search",
+        "Grid.setFilter"
+      ],
+      "remaining_obligation": "Legacy Search/Enter applies matches immediately and blank restores all; current search only narrows choices. Current choice list drops other-column-filter-excluded values rather than retaining full universe with zero counts.",
+      "acceptance": "Supply authored apply/Enter/clear using existing APIs and seed distinct raw values before counting other filters; test zero counts, reappearance, raw identities, search versus filtering and reset.",
+      "modern_sources": [
+        "src/ui/grid-filters.ts",
+        "src/ui/grid.ts",
+        "examples/vite/m10/demo.ts"
+      ]
+    },
+    "row-merge": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "authored multi-tr records",
+        "data-merge raw hierarchical native spans",
+        "status/page/window/focus boundaries"
+      ],
+      "remaining_obligation": "Core repeated-value presentation is implemented. Complete old dependency/format/default/dynamic correspondence; do not preserve broken row ownership or unbounded virtual windows.",
+      "acceptance": "Test raw scalar identity, hierarchy, edited/status splits, all-scalar templates, remount/page boundaries, hidden columns and exact authored restoration.",
+      "modern_sources": [
+        "src/ui/grid-row-blocks.ts",
+        "src/ui/grid.ts",
+        "src/ui/grid-viewport.ts"
+      ]
+    },
+    "paste": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "Grid.paste",
+        "opt-in native text/plain paste",
+        "Rows.setMany one atomic update",
+        "typed groups/raw nested choices"
+      ],
+      "remaining_obligation": "Core safe paste is implemented. Legacy offscreen direct writes without status/notification and invalid partial edits are defects, not required quirks; complete control/callback/policy correspondence.",
+      "acceptance": "Test quoted tabs/newlines/arrays, protected positions, column order, readonly/disabled fields, precise error, unchanged invalid batch, one event and undo/revert.",
+      "modern_sources": [
+        "src/ui/grid-paste.ts",
+        "src/ui/grid.ts",
+        "src/data/index.ts"
+      ]
+    },
+    "data-projections": {
+      "classification": "required_gap",
+      "next_slice": "M10.9.6.1 / M10.9.6.4",
+      "current_counterpart": [
+        "Rows.get/entries/changes/append/replace",
+        "Grid.rowIds/selected/selectedIds/checkedIds"
+      ],
+      "remaining_obligation": "Retain last-edited deleted snapshots, keep original-valued modern delete changes, and prove separate legacy current-value/status/field projections. Explicitly decide any incoming rowStatus metadata import workflow before claiming equivalence.",
+      "acceptance": "Test live/all/status/modified plus single-active versus batch-selected versus checked projections, nested/raw JSON, own-property field picks and legacy wire rowStatus mapping.",
+      "modern_sources": [
+        "src/data/index.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "template-cache": {
+      "classification": "integration_recipe_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "compile authored fields once",
+        "reuse stable row nodes",
+        "refresh/dispose/rebind"
+      ],
+      "remaining_obligation": "cache=false and template mutation/tpBind event dedup mechanisms need an explicit modern ownership/rebind recipe. No broad mutation observer or runtime selector parser is justified by old switches alone.",
+      "acceptance": "Verify duplicate listeners never accumulate and authored template changes apply through controlled dispose/rebind; retain onBind/revert semantics.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/grid-hooks.ts"
+      ]
+    },
+    "row-selection": {
+      "classification": "required_gap",
+      "next_slice": "M10.9.6.2",
+      "current_counterpart": [
+        "Grid.select/selected",
+        "selectedIds/setSelected",
+        "beforeSelect/onSelect",
+        "data-select-row keyboard gestures"
+      ],
+      "remaining_obligation": "Legacy unselect=true toggles an already selected row on plain click; legacy multiselect also plain-toggles without modifiers. Current single same-ID activation is a no-op and multiple plain click replaces membership. Row-wide click opt-in also needs an explicit policy.",
+      "acceptance": "Add minimal explicit toggle/row activation policy while retaining current default and idempotent programmatic select; prove veto, keyboard, previous/current identity, selection/check independence and interactive-content exclusion.",
+      "modern_sources": [
+        "src/ui/grid-selection.ts",
+        "src/ui/grid.ts",
+        "src/ui/index.ts"
+      ]
+    },
+    "row-checks": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.2 / M10.9.6.4",
+      "current_counterpart": [
+        "checkedIds/setChecked",
+        "checkAll/checkState explicit scope",
+        "checkMode single/multiple",
+        "data-check-row/data-check-all"
+      ],
+      "remaining_obligation": "Core exclusive/multiple/mixed checks are implemented. Finish old selector/append/full-replacement and scope recipes; do not preserve removeProp/removeAttr checked-state defects.",
+      "acceptance": "Test both check-all directions, single-mode ambiguous proposals, zero/one/many eligible targets, outside-scope checks, DOM-data checkbox separation and no selection activation.",
+      "modern_sources": [
+        "src/ui/grid-selection.ts",
+        "src/ui/grid.ts",
+        "src/ui/index.ts"
+      ]
+    },
+    "row-lifecycle": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.3 / M10.9.6.4",
+      "current_counterpart": [
+        "beforeRowBind/onRowBind owned synchronous contexts",
+        "onBind counts/event",
+        "refresh",
+        "authored empty/result markup"
+      ],
+      "remaining_obligation": "Core row resources and completion suppression are explicit. Finish first/last chunk flags, global/local composition and update/revert ordering; old onSelect-after-veto and broken beforeRow bookkeeping are repaired rather than retained.",
+      "acceptance": "Test local/global deterministic composition, before/value/after/action ordering, ordinary mutation versus full completion, reentry/disposal/failure and fresh Rows snapshots.",
+      "modern_sources": [
+        "src/ui/grid-hooks.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "row-defaults": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "Grid.defaults()",
+        "application typed row factory",
+        "Rows.add"
+      ],
+      "remaining_obligation": "Input-only captured defaults are implemented; finish legacy omitted-data versus explicit fields/position semantics and custom parser failure checks without as-T casts or per-row Forms.",
+      "acceptance": "Test primitive/native groups/nested fields, complete application factories, explicit overrides, end insertion and source preservation.",
+      "modern_sources": [
+        "src/data/index.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "change-status": {
+      "classification": "required_gap",
+      "next_slice": "M10.9.6.1",
+      "current_counterpart": [
+        "RowSnapshot.status",
+        "Grid.statusFilter/setStatusFilter",
+        "data-row-status",
+        "table data-changed",
+        "Rows original/current stored values"
+      ],
+      "remaining_obligation": "Per-field changed presentation is absent. remove currently resets current to original, losing last-edited tombstone display and current-value legacy delete projection. Legacy full binding coarsely marked every field in updated rows; do not recreate that defect.",
+      "acceptance": "Compare compiled raw nested leaf paths to immutable originals; verify siblings, arrays/groups, revert-to-original, drafts versus committed values, inserted/deleted policies, offscreen remount and protected tombstones.",
+      "modern_sources": [
+        "src/data/index.ts",
+        "src/ui/grid.ts",
+        "src/ui/form.ts",
+        "src/ui/native-control.ts"
+      ]
+    },
+    "validation-policy": {
+      "classification": "integration_recipe_with_contract_review",
+      "next_slice": "M10.9.6.4 / M5-M6",
+      "current_counterpart": [
+        "Grid.validate(id?)",
+        "validateOn",
+        "revealInvalid",
+        "authored native constraints/rules"
+      ],
+      "remaining_obligation": "Legacy validate=false allowed commits without rule checks and validate() examined changed/already-invalid rendered rows; modern explicit validate checks all live rows. Define tested author/selection-of-validation recipes, never claim manual timing alone disables validation.",
+      "acceptance": "Test chosen validation scopes/policies, explicit changed-ID validation, no untouched false dirtiness, invalid drafts, hidden/off-page fields and failure focus.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/form.ts",
+        "src/ui/rules.ts"
+      ]
+    },
+    "native-controls": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4 / M5-M6",
+      "current_counterpart": [
+        "Shared native scalar/group constraints",
+        "Grid raw row-local Select maps",
+        "parse/rules/render options",
+        "data-format/data-validate"
+      ],
+      "remaining_obligation": "Complete field-to-tuples configuration, readonly/disabled interaction and incoming legacy status edge acceptance. Local Form owns file inputs; JSON Grid file exclusion is an explicit contract, not proof that all old controls are closed.",
+      "acceptance": "Replay radio/checkbox/multiple Select, raw numeric/boolean/null choices, nested edits, offscreen validation/paste and programmatic rule application.",
+      "modern_sources": [
+        "src/ui/native-control.ts",
+        "src/ui/form.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "row-order": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "Rows.add(value,before?)",
+        "Rows.move(id,before?)",
+        "Rows.copy(id,before?)"
+      ],
+      "remaining_obligation": "Review addTop/index positions relative to retained tombstones: current before targets must be live, so leading/all-deleted anchors cannot be used. Keep edit/copy sources nondeleted and preserve modern deep independent copy.",
+      "acceptance": "Test zero/top/end/before/self/no-op, stable IDs, leading and all-deleted stores, sorted/filtered views and subscriber failures; document any anchor contract change.",
+      "modern_sources": [
+        "src/data/index.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "shared-updates": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4 / M5-M6",
+      "current_counterpart": [
+        "caller-owned Rows subscriptions",
+        "Rows.set/setMany",
+        "Form/Grid/List/Tree shared IDs"
+      ],
+      "remaining_obligation": "Modern subscriptions replace DataSync registration/update. Complete exact suppression and field-hook ordering while preserving whole-row/offscreen status tracking and observer failures.",
+      "acceptance": "Test multiple UIs, targeted and whole-row updates, offscreen edits, replace/revert/append/move, committed subscriber failures and no duplicate completion.",
+      "modern_sources": [
+        "src/data/index.ts",
+        "src/ui/grid.ts",
+        "src/ui/form.ts",
+        "src/ui/list.ts"
+      ]
+    },
+    "display": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "native image src",
+        "explicit render returning fresh DOM/text/null",
+        "literal text default"
+      ],
+      "remaining_obligation": "Rich output capability is implemented; finish intended HTML-mode correspondence through explicit application-created trusted DOM. Interactive merged controls remain guarded ownership, not a legacy bug to reproduce.",
+      "acceptance": "Test text literalness, fresh same-document DOM, image alt/source, renderer failure cleanup, nested values and merge ownership.",
+      "modern_sources": [
+        "src/ui/field-render.ts",
+        "src/ui/native-control.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "action-reveal": {
+      "classification": "integration_recipe_with_open_edges",
+      "next_slice": "M10.9.6.2 / M10.9.6.3 / M10.9.6.4",
+      "current_counterpart": [
+        "Grid.reveal(id,{block})",
+        "rowIds visible/filtered/store",
+        "application action handlers"
+      ],
+      "remaining_obligation": "Explicit alignment alone does not prove legacy automatic defaults. Old select/check center last target; indexed add centers; top/end add scrolls even outside addScroll branch; append bottoms only for append start >0; validateScroll reveals last invalid.",
+      "acceptance": "Provide tested action wrappers or minimal owned options for each declared outcome; retain filters/pages and user focus policies explicitly.",
+      "modern_sources": [
+        "src/ui/grid-viewport.ts",
+        "src/ui/grid-height.ts",
+        "src/ui/grid.ts",
+        "examples/vite/m10/demo.ts"
+      ]
+    },
+    "hover": {
+      "classification": "integration_recipe",
+      "next_slice": "M10.9.6.4",
+      "current_counterpart": [
+        "authored CSS hover/focus-visible states"
+      ],
+      "remaining_obligation": "Old hover class is presentation; add explicit authored CSS correspondence and accessible keyboard state rather than a visual theme.",
+      "acceptance": "Check hover/focus-visible on both authored layouts without changing data/selection or creating framework design.",
+      "modern_sources": [
+        "examples/vite/m10/demo.css",
+        "examples/vite/m10/columns.css"
+      ]
+    },
+    "progressive-render": {
+      "classification": "required_gap",
+      "next_slice": "M10.9.6.3",
+      "current_counterpart": [
+        "bounded measured viewport",
+        "Rows.append clean batch",
+        "onBind full-bind result"
+      ],
+      "remaining_obligation": "Legacy progressive prefix rendering, per-row yielding and first/last chunk completion are not implemented by current synchronous bounded virtualization. Old scrollPaging operates on already-loaded data, not network fetching.",
+      "acceptance": "Define optional bounded scheduling/chunk completion through current row/viewport owners, preserve cancellation/reentry/failure and append; do not reintroduce a timer/network engine or claim equivalence from paging alone.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/grid-viewport.ts",
+        "src/ui/grid-hooks.ts"
+      ]
+    },
+    "field-rules": {
+      "classification": "review_required",
+      "next_slice": "M10.9.6.4 / M5-M6 / core C11",
+      "current_counterpart": [
+        "data-format/data-validate tuples",
+        "RuleSet named functions/messages/locale",
+        "application parse/render"
+      ],
+      "remaining_obligation": "Declared legacy fRules/vRules are field-to-tuples, while RuleSet maps rule names to functions; Grid failed to forward old options. Define one tested programmatic-field declaration recipe/contract for all binders, not a silent no-op or duplicated registry.",
+      "acceptance": "Exercise effective per-field rule declarations, custom rule catalog overrides, native constraints and error timing; preserve all framework-reachable rules.",
+      "modern_sources": [
+        "src/ui/rules.ts",
+        "src/ui/form.ts",
+        "src/ui/grid.ts"
+      ]
+    },
+    "messages": {
+      "classification": "integration_recipe_with_open_edges",
+      "next_slice": "M10.9.6.2 / M10.9.6.4",
+      "current_counterpart": [
+        "authored empty/search/filter/chooser/detail labels",
+        "component-local RuleSet messages/locale"
+      ],
+      "remaining_obligation": "Complete all old Grid message outcomes in authored examples, especially apply-search and chooser labels; no application-wide translation engine is required.",
+      "acceptance": "Swap authored labels/rule messages across two layouts while preserving native names and empty/no-results meaning.",
+      "modern_sources": [
+        "examples/vite/m10/demo.html",
+        "examples/vite/m10/demo.ts"
+      ]
+    },
+    "row-events": {
+      "classification": "cross_owner_required_gap",
+      "next_slice": "M10.9.6.3 / core C07,C08,C13",
+      "current_counterpart": [
+        "onRowAction named buttons",
+        "row hooks with own(dispose)",
+        "CVC signal/DOM events"
+      ],
+      "remaining_obligation": "Old e.* delegated arbitrary-selector callbacks ran after direct row Form edits. A row-hook listener now runs before Grid root delegation; button actions alone do not prove general event context/order equivalence.",
+      "acceptance": "Specify typed stable-RowId post-edit event ordering and scoped cleanup before retiring string declarations; verify change/input/nonbutton events and committed/invalid data context.",
+      "modern_sources": [
+        "src/ui/grid.ts",
+        "src/ui/grid-hooks.ts",
+        "src/page/index.ts"
+      ]
+    },
+    "row-details": {
+      "classification": "implemented_contract_with_open_edges",
+      "next_slice": "M10.9.6.2 / M10.9.6.4 / M7",
+      "current_counterpart": [
+        "one authored employeeDetail PageDefinition",
+        "shared Rows/Form",
+        "openPopup",
+        "rowIds scopes"
+      ],
+      "remaining_obligation": "Authored inline/Popup detail/navigation/validation is implemented. Demonstrate old all-fields/chosen-field outcomes and chooser integration; general Popup dragging/retained/guard policy remains M7 ownership.",
+      "acceptance": "Replay hidden fields, shared nested edits, previous/next/close validation, no wrap, stale IDs, raw tombstone page positions, forced cleanup and chosen authored fields.",
+      "modern_sources": [
+        "examples/vite/m10/detail.ts",
+        "examples/vite/m10/demo.ts",
+        "src/ui/popup.ts",
+        "src/ui/form.ts"
+      ]
+    }
+  }
+}

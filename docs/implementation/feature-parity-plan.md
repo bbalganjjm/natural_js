@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 3c56833fbf03d509a739e978312dcb2d181a5ab1
+    git_blob: 5fb336d40e62f53e16ea51ac372517b2e391eceb
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,26 +16,26 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: f73afe51bcc4f77ddfbee26cb46868a41c46f681
+    git_blob: f7475a5575c8f1e9a87157cd0bfe3d180629c798
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: ca976afbdb9644faa87070b0f2a0f0f1d1d6cbae
+    git_blob: 8aa188569c26384cbc3084ac501c0cc2bbde2a41
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -115,7 +115,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. M10.9.1 ordered shared Rows, [M10.9.2 authored row blocks/merging](m10-row-blocks-plan.md), [M10.9.3 native controls/display/validation](m10-controls-plan.md) and [M10.9.4 status/row lifecycle](m10-lifecycle-plan.md) retain separate contracts and frozen evidence under [the detailed M10.9 plan](m10-parity-plan.md). M10.9.5 implements [authored detail navigation and geometry](m10-detail-plan.md) through existing owners. Specify M10.9.6 legacy semantic closure next, then the remaining required component/CVC slices. Per-field dirty presentation, edited-deletion display and scheduler-option equivalence remain explicit obligations. Preserve other stages, the final M13 review/remediation gate and publication deferral.
+Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. M10.9.1 ordered shared Rows, [M10.9.2 authored row blocks/merging](m10-row-blocks-plan.md), [M10.9.3 native controls/display/validation](m10-controls-plan.md) and [M10.9.4 status/row lifecycle](m10-lifecycle-plan.md) retain separate contracts and frozen evidence under [the detailed M10.9 plan](m10-parity-plan.md). M10.9.5 implements [authored detail navigation and geometry](m10-detail-plan.md) through existing owners. [M10.9.6](m10-closure-plan.md) separates change presentation (.1), interaction/view controls (.2), progressive rendering/completion (.3) and semantic acceptance (.4). The .1 contract implements immutable original access, exact committed-field state and edited deletion display; the remaining option/default/callback obligations stay required. Its 89-entry/17-group planning snapshot records the baseline rather than certifying full semantic parity. Continue the remaining required component/CVC slices afterward. Preserve other stages, the final M13 review/remediation gate and publication deferral.
 
 # Decisions
 

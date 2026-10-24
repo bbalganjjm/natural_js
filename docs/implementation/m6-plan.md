@@ -24,11 +24,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
-    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
+    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: list
     resource: ../../src/ui/list.ts
     title: M6 List implementation
@@ -48,7 +48,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: Row identity, mutation, and change tracking
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
   - id: legacy-button
     resource: ../../v1/docs/ui/button.md
     title: Preserved 1.x Button contract

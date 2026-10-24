@@ -1,0 +1,1519 @@
+
+
+Running 72 tests using 1 worker
+
+
+
+[1/72] [firefox] › tests\browser\grid-change-state.spec.ts:110:1 › loaded clean fields are explicit false while errors and unbound cells keep authored markers
+  1) [firefox] › tests\browser\grid-change-state.spec.ts:110:1 › loaded clean fields are explicit false while errors and unbound cells keep authored markers 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-loaded-c-1c5d7-cells-keep-authored-markers-firefox\error-context.md
+
+
+
+
+[2/72] [firefox] › tests\browser\grid-change-state.spec.ts:122:1 › binders created after an edit use the loaded baseline rather than their initial display
+  2) [firefox] › tests\browser\grid-change-state.spec.ts:122:1 › binders created after an edit use the loaded baseline rather than their initial display 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-binders--d6b79--than-their-initial-display-firefox\error-context.md
+
+
+
+
+[3/72] [firefox] › tests\browser\grid-change-state.spec.ts:129:1 › nested sibling paths change and restore independently in shared Form and Grid
+  3) [firefox] › tests\browser\grid-change-state.spec.ts:129:1 › nested sibling paths change and restore independently in shared Form and Grid 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-nested-s-f0006-tly-in-shared-Form-and-Grid-firefox\error-context.md
+
+
+
+
+[4/72] [firefox] › tests\browser\grid-change-state.spec.ts:139:1 › raw array order matters while equivalent JSON and object key order do not
+  4) [firefox] › tests\browser\grid-change-state.spec.ts:139:1 › raw array order matters while equivalent JSON and object key order do not 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-raw-arra-ca6d7-and-object-key-order-do-not-firefox\error-context.md
+
+
+
+
+[5/72] [firefox] › tests\browser\grid-change-state.spec.ts:148:1 › all radio and checkbox group members share their committed field state
+  5) [firefox] › tests\browser\grid-change-state.spec.ts:148:1 › all radio and checkbox group members share their committed field state 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-all-radi-8ee21-their-committed-field-state-firefox\error-context.md
+
+
+
+
+[6/72] [firefox] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes
+  6) [firefox] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-Select-m-d9d1b-bels-or-option-list-changes-firefox\error-context.md
+
+
+
+
+[7/72] [firefox] › tests\browser\grid-change-state.spec.ts:167:1 › unchanged formatted text does not hide raw changes on displays, rendered fields and images
+  7) [firefox] › tests\browser\grid-change-state.spec.ts:167:1 › unchanged formatted text does not hide raw changes on displays, rendered fields and images 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-unchange-eef22--rendered-fields-and-images-firefox\error-context.md
+
+
+
+
+[8/72] [firefox] › tests\browser\grid-change-state.spec.ts:178:1 › Form commits update markers without replacing the focused input or its caret
+  8) [firefox] › tests\browser\grid-change-state.spec.ts:178:1 › Form commits update markers without replacing the focused input or its caret 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-Form-com-fa0b7--focused-input-or-its-caret-firefox\error-context.md
+
+
+
+
+[9/72] [firefox] › tests\browser\grid-change-state.spec.ts:186:1 › Grid commits update markers without replacing the focused input or its caret
+  9) [firefox] › tests\browser\grid-change-state.spec.ts:186:1 › Grid commits update markers without replacing the focused input or its caret 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-Grid-com-f4f5a--focused-input-or-its-caret-firefox\error-context.md
+
+
+
+
+[10/72] [firefox] › tests\browser\grid-change-state.spec.ts:194:1 › invalid drafts neither create committed changes nor erase an existing committed field change
+  10) [firefox] › tests\browser\grid-change-state.spec.ts:194:1 › invalid drafts neither create committed changes nor erase an existing committed field change 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-invalid--26f5c-ting-committed-field-change-firefox\error-context.md
+
+
+
+
+[11/72] [firefox] › tests\browser\grid-change-state.spec.ts:207:1 › inserted and copied records have no original baseline while clean append gains one
+  11) [firefox] › tests\browser\grid-change-state.spec.ts:207:1 › inserted and copied records have no original baseline while clean append gains one 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-inserted-a41bf-hile-clean-append-gains-one-firefox\error-context.md
+
+
+
+
+[12/72] [firefox] › tests\browser\grid-change-state.spec.ts:220:1 › retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them
+  12) [firefox] › tests\browser\grid-change-state.spec.ts:220:1 › retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-retained-c999d-nals-and-Undo-restores-them-firefox\error-context.md
+
+
+
+
+[13/72] [firefox] › tests\browser\grid-change-state.spec.ts:237:1 › null and stale Form binding clear field flags without changing retained Grid deletion state
+  13) [firefox] › tests\browser\grid-change-state.spec.ts:237:1 › null and stale Form binding clear field flags without changing retained Grid deletion state 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-null-and-3f1a1-etained-Grid-deletion-state-firefox\error-context.md
+
+
+
+
+[14/72] [firefox] › tests\browser\grid-change-state.spec.ts:248:1 › owned Form attributes and exact Grid template restore while local Forms never take marker ownership
+  14) [firefox] › tests\browser\grid-change-state.spec.ts:248:1 › owned Form attributes and exact Grid template restore while local Forms never take marker ownership 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-owned-Fo-03899-never-take-marker-ownership-firefox\error-context.md
+
+
+
+
+[15/72] [firefox] › tests\browser\grid-change-state.spec.ts:261:1 › sort filter page and column changes preserve leaf identity rather than display indexes
+  15) [firefox] › tests\browser\grid-change-state.spec.ts:261:1 › sort filter page and column changes preserve leaf identity rather than display indexes 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-sort-fil-08f0d-rather-than-display-indexes-firefox\error-context.md
+
+
+
+
+[16/72] [firefox] › tests\browser\grid-change-state.spec.ts:273:1 › offscreen edits and deletion remount with their data-owned baseline and bounded physical rows
+  16) [firefox] › tests\browser\grid-change-state.spec.ts:273:1 › offscreen edits and deletion remount with their data-owned baseline and bounded physical rows 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-offscree-fba93-e-and-bounded-physical-rows-firefox\error-context.md
+
+
+
+
+[17/72] [firefox] › tests\browser\grid-change-state.spec.ts:289:1 › shared and independent MDI bindings retain their own baselines and unique accessible IDs
+  17) [firefox] › tests\browser\grid-change-state.spec.ts:289:1 › shared and independent MDI bindings retain their own baselines and unique accessible IDs 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-shared-a-038ad-s-and-unique-accessible-IDs-firefox\error-context.md
+
+
+
+
+[18/72] [firefox] › tests\browser\grid-change-state.spec.ts:317:1 › signed zero raw identity is visible as changed even when its formatted display is identical
+  18) [firefox] › tests\browser\grid-change-state.spec.ts:317:1 › signed zero raw identity is visible as changed even when its formatted display is identical 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-change-state-signed-z-e1bef-matted-display-is-identical-firefox\error-context.md
+
+
+
+
+[19/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+  19) [firefox] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-every-physi-eeb39-ithout-owning-visual-design-firefox\error-context.md
+
+
+
+
+[20/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+  20) [firefox] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-status-filt-24d5f-s-preserve-the-current-view-firefox\error-context.md
+
+
+
+
+[21/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+  21) [firefox] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-retained-de-ad187-ndo-actions-retain-identity-firefox\error-context.md
+
+
+
+
+[22/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+  22) [firefox] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-deleted-row-ce8c0-unted-and-offscreen-records-firefox\error-context.md
+
+
+
+
+[23/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+  23) [firefox] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-native-merg-4e114--and-recompute-after-revert-firefox\error-context.md
+
+
+
+
+[24/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+  24) [firefox] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-committed-p-5fb97-en-a-deleted-row-hook-fails-firefox\error-context.md
+
+
+
+
+[25/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+  25) [firefox] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-failed-page-ae363-backs-append-new-clean-rows-firefox\error-context.md
+
+
+
+
+[26/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+  26) [firefox] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-failed-refr-875a5-er-binding-caches-are-reset-firefox\error-context.md
+
+
+
+
+[27/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+  27) [firefox] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-deleting-a--bac5f--an-enabled-visible-control-firefox\error-context.md
+
+
+
+
+[28/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+  28) [firefox] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-a-before-ro-be5e2--it-after-revert-or-refresh-firefox\error-context.md
+
+
+
+
+[29/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+  29) [firefox] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-status-proj-89334-pes-retain-live-eligibility-firefox\error-context.md
+
+
+
+
+[30/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+  30) [firefox] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-defaults-pr-e30ac-ut-claiming-business-fields-firefox\error-context.md
+
+
+
+
+[31/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+  31) [firefox] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-default-par-14259-write-Rows-or-source-markup-firefox\error-context.md
+
+
+
+
+[32/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+  32) [firefox] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-default-par-f098b--fail-without-changing-data-firefox\error-context.md
+
+
+
+
+[33/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+  33) [firefox] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-row-hooks-s-c1ee2--resources-in-reverse-order-firefox\error-context.md
+
+
+
+
+[34/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+  34) [firefox] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-the-table-i-c4885-first-application-hook-runs-firefox\error-context.md
+
+
+
+
+[35/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+  35) [firefox] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-owned-widge-91120-ved-on-release-and-disposal-firefox\error-context.md
+
+
+
+
+[36/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+  36) [firefox] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-failed-init-81515--Select-and-table-ownership-firefox\error-context.md
+
+
+
+
+[37/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+  37) [firefox] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-asynchronou-5677c-mises-or-stranded-ownership-firefox\error-context.md
+
+
+
+
+[38/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+  38) [firefox] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-row-hook-da-40244-ready-committed-inner-write-firefox\error-context.md
+
+
+
+
+[39/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+  39) [firefox] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-direct-recu-c7ce4-d-later-refresh-can-recover-firefox\error-context.md
+
+
+
+
+[40/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+  40) [firefox] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-disposal-in-7fc20--no-late-rollback-mutations-firefox\error-context.md
+
+
+
+
+[41/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+  41) [firefox] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-cleanup-fai-b0893-sposal-or-correct-rebinding-firefox\error-context.md
+
+
+
+
+[42/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+  42) [firefox] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-own-stays-v-f3857-es-registered-after-closure-firefox\error-context.md
+
+
+
+
+[43/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+  43) [firefox] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-onBind-dist-14c90-and-reports-retained-totals-firefox\error-context.md
+
+
+
+
+[44/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+  44) [firefox] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-post-bind-f-fab48--blocking-other-subscribers-firefox\error-context.md
+
+
+
+
+[45/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+  45) [firefox] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-viewport-re-980a3-valid-draft-and-bounded-DOM-firefox\error-context.md
+
+
+
+
+[46/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+  46) [firefox] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-authored-em-a4da8-ns-focus-and-exact-teardown-firefox\error-context.md
+
+
+
+
+[47/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+  47) [firefox] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-ambiguous-o-bf6e9-arkup-or-claiming-the-table-firefox\error-context.md
+
+
+
+
+[48/72] [firefox] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+  48) [firefox] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-two-authore-1767f-state-and-remain-accessible-firefox\error-context.md
+
+
+
+
+[49/72] [firefox] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+  49) [firefox] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-committed-field-h-f7b94-fter-restoring-the-original-firefox\error-context.md
+
+
+
+
+[50/72] [firefox] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+  50) [firefox] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-deleted-row-inspe-a652e-iginal-save-values-and-Undo-firefox\error-context.md
+
+
+
+
+[51/72] [firefox] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+  51) [firefox] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-one-authored-CVC--06a95--independently-of-selection-firefox\error-context.md
+
+
+
+
+[52/72] [firefox] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+  52) [firefox] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-detail-validation-8265c-reserving-the-current-draft-firefox\error-context.md
+
+
+
+
+[53/72] [firefox] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+  53) [firefox] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-detail-scopes-ski-ee7c9-om-raw-projection-positions-firefox\error-context.md
+
+
+
+
+[54/72] [firefox] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+  54) [firefox] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-detail-keeps-iden-d4b82--does-not-clear-that-filter-firefox\error-context.md
+
+
+
+
+[55/72] [firefox] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+  55) [firefox] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-detail-removal-an-76208-out-validating-away-cleanup-firefox\error-context.md
+
+
+
+
+[56/72] [firefox] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+  56) [firefox] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-authored-height-a-fbf62-rid-without-selecting-a-row-firefox\error-context.md
+
+
+
+
+[57/72] [firefox] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+  57) [firefox] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-authored-table-bi-e355b-atter-and-accessible-labels-firefox\error-context.md
+
+
+
+
+[58/72] [firefox] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+  58) [firefox] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-status-views-expo-ad4eb--and-authored-empty-content-firefox\error-context.md
+
+
+
+
+[59/72] [firefox] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+  59) [firefox] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-authored-defaults-b2196--only-its-inserted-employee-firefox\error-context.md
+
+
+
+
+[60/72] [firefox] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+  60) [firefox] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-row-resource-trac-9db7e-resh-disposal-and-rebinding-firefox\error-context.md
+
+
+
+
+[61/72] [firefox] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+  61) [firefox] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-sort-filter-and-l-2fbf3-es-preserve-RowId-selection-firefox\error-context.md
+
+
+
+
+[62/72] [firefox] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+  62) [firefox] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-initial-page-choi-b8b4d-ps-off-page-RowId-selection-firefox\error-context.md
+
+
+
+
+[63/72] [firefox] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+  63) [firefox] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-check-and-validat-a6dac-rebind-working-Grid-options-firefox\error-context.md
+
+
+
+
+[64/72] [firefox] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+  64) [firefox] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-parsing-HTML-cons-e9009-ation-retain-invalid-drafts-firefox\error-context.md
+
+
+
+
+[65/72] [firefox] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+  65) [firefox] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-nested-edits-and--c26d1-ace-changes-stay-observable-firefox\error-context.md
+
+
+
+
+[66/72] [firefox] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+  66) [firefox] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-required-and-unav-b19cf-rebind-restore-the-template-firefox\error-context.md
+
+
+
+
+[67/72] [firefox] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+  67) [firefox] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-bulk-paste-report-d6c07-ls-with-protected-positions-firefox\error-context.md
+
+
+
+
+[68/72] [firefox] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+  68) [firefox] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-viewport-mode-bou-bc34f--a-row-without-selecting-it-firefox\error-context.md
+
+
+
+
+[69/72] [firefox] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+  69) [firefox] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-ordered-row-contr-02511-ue-revert-keeps-store-order-firefox\error-context.md
+
+
+
+
+[70/72] [firefox] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+  70) [firefox] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-two-authored-row--cd2e6-and-hierarchical-merge-keys-firefox\error-context.md
+
+
+
+
+[71/72] [firefox] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+  71) [firefox] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-row-block-store-c-3856a-dently-of-the-employee-demo-firefox\error-context.md
+
+
+
+
+[72/72] [firefox] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+  72) [firefox] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values 
+
+    Error: browserType.launch: Executable doesn't exist at D:\workspace\natural_js\node_modules\.cache\playwright-m6\winldd-1007\PrintDeps.exe
+    ╔═══════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.      ║
+    ║ Please run the following command to download new browser: ║
+    ║                                                           ║
+    ║     npx playwright install winldd                         ║
+    ║                                                           ║
+    ║ <3 Playwright Team                                        ║
+    ╚═══════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\m10-demo-authored-row-bloc-bc229-e-choices-and-native-values-firefox\error-context.md
+
+
+  72 failed
+    [firefox] › tests\browser\grid-change-state.spec.ts:110:1 › loaded clean fields are explicit false while errors and unbound cells keep authored markers 
+    [firefox] › tests\browser\grid-change-state.spec.ts:122:1 › binders created after an edit use the loaded baseline rather than their initial display 
+    [firefox] › tests\browser\grid-change-state.spec.ts:129:1 › nested sibling paths change and restore independently in shared Form and Grid 
+    [firefox] › tests\browser\grid-change-state.spec.ts:139:1 › raw array order matters while equivalent JSON and object key order do not 
+    [firefox] › tests\browser\grid-change-state.spec.ts:148:1 › all radio and checkbox group members share their committed field state 
+    [firefox] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes 
+    [firefox] › tests\browser\grid-change-state.spec.ts:167:1 › unchanged formatted text does not hide raw changes on displays, rendered fields and images 
+    [firefox] › tests\browser\grid-change-state.spec.ts:178:1 › Form commits update markers without replacing the focused input or its caret 
+    [firefox] › tests\browser\grid-change-state.spec.ts:186:1 › Grid commits update markers without replacing the focused input or its caret 
+    [firefox] › tests\browser\grid-change-state.spec.ts:194:1 › invalid drafts neither create committed changes nor erase an existing committed field change 
+    [firefox] › tests\browser\grid-change-state.spec.ts:207:1 › inserted and copied records have no original baseline while clean append gains one 
+    [firefox] › tests\browser\grid-change-state.spec.ts:220:1 › retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them 
+    [firefox] › tests\browser\grid-change-state.spec.ts:237:1 › null and stale Form binding clear field flags without changing retained Grid deletion state 
+    [firefox] › tests\browser\grid-change-state.spec.ts:248:1 › owned Form attributes and exact Grid template restore while local Forms never take marker ownership 
+    [firefox] › tests\browser\grid-change-state.spec.ts:261:1 › sort filter page and column changes preserve leaf identity rather than display indexes 
+    [firefox] › tests\browser\grid-change-state.spec.ts:273:1 › offscreen edits and deletion remount with their data-owned baseline and bounded physical rows 
+    [firefox] › tests\browser\grid-change-state.spec.ts:289:1 › shared and independent MDI bindings retain their own baselines and unique accessible IDs 
+    [firefox] › tests\browser\grid-change-state.spec.ts:317:1 › signed zero raw identity is visible as changed even when its formatted display is identical 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table 
+    [firefox] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible 
+    [firefox] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original 
+    [firefox] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo 
+    [firefox] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection 
+    [firefox] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft 
+    [firefox] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions 
+    [firefox] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter 
+    [firefox] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup 
+    [firefox] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row 
+    [firefox] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels 
+    [firefox] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content 
+    [firefox] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee 
+    [firefox] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding 
+    [firefox] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection 
+    [firefox] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection 
+    [firefox] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options 
+    [firefox] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts 
+    [firefox] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable 
+    [firefox] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template 
+    [firefox] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions 
+    [firefox] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it 
+    [firefox] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order 
+    [firefox] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys 
+    [firefox] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo 
+    [firefox] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values 
+[WebServer] (node:22868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:22004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18288) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25480) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8964) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21052) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:23952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -6,6 +6,46 @@ test.beforeEach(async ({ page }) => {
   await expect(page.locator("[data-grid] tbody tr:not([data-row-template])")).toHaveCount(6);
 });
 
+test("committed field highlights compare loaded originals and clear after restoring the original", async ({ page }) => {
+  const row = page.locator('[data-grid] tbody tr:not([data-row-template])').first();
+  await row.locator("[data-select-row]").click();
+  const email = row.locator('[data-field="email"]');
+  const original = await email.inputValue();
+  await expect(email).toHaveAttribute("data-field-changed", "false");
+  await email.fill("changed@example.com");
+  await expect(email).toHaveAttribute("data-field-changed", "false");
+  await email.blur();
+  await expect(email).toHaveAttribute("data-field-changed", "true");
+  await expect(row.locator("[data-demo-changed-fields]")).toContainText("email");
+  await expect(row.locator('[data-field="phone"]')).toHaveAttribute("data-field-changed", "false");
+  expect(JSON.parse(await page.locator("[data-original]").innerText()).email).toBe(original);
+  await email.fill(original);
+  await email.blur();
+  await expect(email).toHaveAttribute("data-field-changed", "false");
+  await expect(row.locator("[data-demo-changed-fields]")).toHaveText("No changed loaded fields.");
+  await expect(page.locator("[data-changes]")).toHaveText("[]");
+});
+
+test("deleted row inspection keeps edited display separate from original save values and Undo", async ({ page }) => {
+  const row = page.locator('[data-grid] tbody tr:not([data-row-template])').first();
+  await row.locator("[data-select-row]").click();
+  const original = await row.locator('[data-field="email"]').inputValue();
+  await row.locator('[data-field="email"]').fill("edited@example.com");
+  await page.locator('[data-action="remove"]').click();
+  await page.locator("[data-status-filter]").selectOption("deleted");
+  await expect(row.locator('[data-field="email"]')).toHaveValue("edited@example.com");
+  await expect(row.locator('[data-field="email"]')).toBeDisabled();
+  await expect(row.locator('[data-field="email"]')).toHaveAttribute("data-field-changed", "true");
+  expect(JSON.parse(await page.locator("[data-changes]").innerText())[0].value.email).toBe(original);
+  await row.locator('[data-row-action="inspect"]').click();
+  expect(JSON.parse(await page.locator("[data-snapshot]").innerText()).value.email).toBe("edited@example.com");
+  expect(JSON.parse(await page.locator("[data-original]").innerText()).email).toBe(original);
+  await row.locator('[data-row-action="undo"]').click();
+  await page.locator("[data-status-filter]").selectOption("live");
+  await expect(row.locator('[data-field="email"]')).toHaveValue(original);
+  await expect(row.locator('[data-field="email"]')).toHaveAttribute("data-field-changed", "false");
+});
+
 test("one authored CVC detail page edits nested shared values inline and in Popup independently of selection", async ({ page }) => {
   await page.locator("[data-disable-inactive]").check();
   await page.locator("[data-veto-active]").check();

@@ -20,11 +20,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
+    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -124,7 +124,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Row store
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator
@@ -133,6 +133,10 @@ sources:
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
     git_blob: 6930da1fbcfd71733a45dab22a51aec784cafe7f
+  - id: equality
+    resource: ../../src/internal/same-json.ts
+    title: Private committed JSON equality shared by Rows, Form and Grid
+    git_blob: 9468eca7481524f744722eca0c3f4a4dd69111b8
   - id: documents
     resource: ../../src/ui/documents.ts
     title: Dynamic authored document containers
@@ -145,10 +149,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -163,10 +167,10 @@ Keep one definition of each framework behavior without collecting unrelated help
 |---|---|
 | `src/index.ts` | Root public entry; currently re-exports the real `FrameworkError`. |
 | `src/page/` | `mountPage`, CVC lifecycle, authored HTML roots, and per-instance cancellation. |
-| `src/data/` | `createRows`, immutable JSON snapshots, row identity, clean batch append, inclusive tombstone enumeration and change tracking. |
+| `src/data/` | `createRows`, immutable JSON snapshots and loaded originals, row identity, clean batch append, retained last-committed deletion values and change tracking. |
 | `src/ui/` | `bindForm`, `bindGrid`, `bindList`, `bindSelect`, `bindPagination`, `openPopup`, `bindTabs`, `bindTree`, `bindDatePicker`, `bindNotify`, `bindDocuments`, their types, and UI-owned field-path, rule, row-option, Select-ownership and private Grid state helpers. |
 | `src/comm/` | `createCommunicator`, Request/Response hooks, JSON decoding, and cancellation. |
-| `src/internal/` | Private cross-role implementation; currently the common error class only. |
+| `src/internal/` | Private cross-role implementation: the common error class and raw JSON equality used by Rows, Form and Grid. |
 
 # Lifecycle
 
@@ -194,7 +198,9 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 `grid-hooks.ts` owns synchronous before/after callbacks and reverse resource cleanup for each mounted record binding. Grid keeps status projection, captured native defaults, empty-page visibility, placement, reentrancy checkpoints and completion notification with its existing view owner. It restores failed view/setter state before delivering forced pruning callbacks, so a callback's later append is not overwritten. Status presentation does not create a parallel row store; snapshots and clean append remain data-owned, while business factories/loaders/counters remain application-owned. No generic lifecycle, result-template or network-loader registry is added.[^grid-hooks][^grid][^data]
 
-Appended loaded rows share the existing Rows notification path and stay clean. Form ignores append for its already-bound row, preserving drafts, rules and focus; default List/Tree enumeration still hides tombstones. A Grid opts into retained originals through its status projection, protects deleted editors and splits merges at differing statuses. Native defaults are an untyped record for an application factory, not a cast to the complete domain T.[^data][^form][^grid][^grid-blocks]
+Appended loaded rows share the existing Rows notification path and stay clean. Form ignores append for its already-bound row, preserving drafts, rules and focus; default List/Tree enumeration still hides tombstones. A Grid opts into retained last-committed deleted values through its status projection, protects deleted editors and splits merges at differing statuses. `Rows.changes()` uses the loaded original for delete payloads, and `revert` restores it. Native defaults are an untyped record for an application factory, not a cast to the complete domain T.[^data][^form][^grid][^grid-blocks]
+
+Rows alone owns loaded baselines. `Rows.original(id)` exposes their immutable references without extending `RowSnapshot` or copying baselines into UI state. Form and Grid compare committed field paths with those originals and own only their `data-field-changed` attributes; drafts and formatted display stay separate. The existing structural comparison moved to private `internal/same-json.ts` because Data and UI now need identical raw-value equality, including `Object.is` scalar semantics. UI still owns path parsing, DOM references, focus preservation and restoration; Data does not import UI. No public comparison utility or new change-tracking engine is added.[^data][^form][^grid][^equality]
 
 A repeated snippet is not automatically a shared abstraction; first check whether it has identical inputs, outputs, cancellation, and ownership. A private helper must not become public merely because applications might find it useful. The private `field-path.ts` exists because Form, Grid, and List need the same safe object-path reading; Form and Grid also need copy-on-write. It is not a package export. The rule runner exists because Form, Grid, and List need the same declarative lookup, overrides, messages, and errors; individual rule operations remain beside their catalog. The row-option and Select-ownership helpers each have two or more concrete UI callers. Tree reuses safe field paths and the formatter runner. Tree, DatePicker, and Tabs share only attribute restoration and unique-ID allocation in private `dom-state.ts`; hierarchy and calendar calculations stay in their owners. Notify and Documents reuse that DOM-state helper. Static Tabs and dynamic Documents share a private concrete page-tab coordinator, cached page cleanup and manual focus-navigation helpers; mountPage still owns controller execution and cancellation.[^documents][^notify][^tab-pages][^tree][^datepicker][^dom-state][^row-options][^select-owner]
 
@@ -207,6 +213,7 @@ Grid exposes frozen logical row IDs from its existing projection for authored de
 [^package]: Public package boundaries
 [^root]: Root entry
 [^error]: Shared framework error
+[^equality]: Private committed JSON equality shared by Rows, Form and Grid
 
 [^form]: Form binding
 [^grid-columns]: Private Grid column topology and resize ownership

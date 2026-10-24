@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
+import { sameJson } from "../internal/same-json.js";
 import type { RowId, Rows } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
@@ -23,7 +24,7 @@ interface Field {
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
   error?: HTMLElement;
-  originals: { element: HTMLElement; describedBy: string | null; invalid: string | null }[];
+  originals: { element: HTMLElement; describedBy: string | null; invalid: string | null; changed: string | null }[];
 }
 
 interface Candidate {
@@ -109,7 +110,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       existing.elements.push(element);
       existing.originals.push({
         element, describedBy: element.getAttribute("aria-describedby"),
-        invalid: element.getAttribute("aria-invalid")
+        invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
       });
       continue;
     }
@@ -118,7 +119,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       format: [], validate: [], error: errorRegions.get(name),
       originals: [{
         element, describedBy: element.getAttribute("aria-describedby"),
-        invalid: element.getAttribute("aria-invalid")
+        invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
       }]
     };
     fields.push(field);
@@ -315,8 +316,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function render(skipFocused = false): void {
     const source = boundId === null ? null : rowValue(boundId);
+    const original = boundId === null ? undefined : rows!.original(boundId);
     const currentDrafts = boundId === null ? undefined : drafts.get(boundId);
     for (const field of fields) {
+      const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
+      for (const element of field.elements) element.setAttribute("data-field-changed", String(changed));
       const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
       if (skipFocused && focused && field.kind === "single" && formatCapable(field.element)) continue;
       if (currentDrafts?.has(field)) {
@@ -541,6 +545,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
           else original.element.setAttribute("aria-describedby", original.describedBy);
           if (original.invalid === null) original.element.removeAttribute("aria-invalid");
           else original.element.setAttribute("aria-invalid", original.invalid);
+          if (rows) {
+            if (original.changed === null) original.element.removeAttribute("data-field-changed");
+            else original.element.setAttribute("data-field-changed", original.changed);
+          }
         }
       }
       for (const [region, original] of regionState) {

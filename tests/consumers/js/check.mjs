@@ -105,7 +105,11 @@ assert.deepEqual(controls.entries().map(row => row.id), loaded);
 assert.deepEqual(controls.entries({ includeDeleted: true }).map(row => [row.id, row.status]),
   [[existingControl.id, "delete"], [loaded[0], "clean"]]);
 assert.deepEqual(controls.changes().map(row => [row.id, row.status]), [[existingControl.id, "delete"]]);
-assert.deepEqual(controls.get(existingControl.id).value.assignment.selected, [11], "Deletion keeps its original payload.");
+assert.deepEqual(controls.get(existingControl.id).value.assignment.selected, [22, false, null], "A deletion view retains its last committed edits.");
+assert.deepEqual(controls.original(existingControl.id).assignment.selected, [11]);
+assert.equal(controls.changes()[0].value, controls.original(existingControl.id), "Deletion payloads retain the same loaded original.");
+assert(Object.isFrozen(controls.original(existingControl.id).assignment.selected));
+assert.equal(controls.original(999999), undefined);
 controls.dispose();
 
 const originalFetch = globalThis.fetch;

@@ -1,7 +1,7 @@
 ---
 type: UI Component
 title: bindGrid
-description: Bind authored table records with status views, owned row hooks, native defaults, bounded rendering, paste, and accessible validation.
+description: Bind authored table records with status views, raw field-change flags, owned row hooks, native defaults, bounded rendering, paste, and accessible validation.
 tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
@@ -13,7 +13,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -45,7 +45,7 @@ sources:
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, callbacks, cleanup, empty state and failure regressions
-    git_blob: 2898609c1d76b08e218120d55bf56f347650daf5
+    git_blob: 1f4356df43aaf2c2b14bea4559a577dcb9987972
   - id: blocks-browser
     resource: ../../tests/browser/grid-row-blocks.spec.ts
     title: Multi-row identity, spans, merging, physical ARIA and bounded geometry
@@ -102,10 +102,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -197,6 +197,7 @@ Eligibility callbacks must return strict booleans. Keep eligibility, comparator,
 | `data-changed` | Grid table | Runtime-owned `"true"`/`"false"` aggregate for any pending Rows changes, including filtered/off-page changes; original attribute is restored on disposal. |
 | `data-merge="path"` | Display-only direct cell in the first template tr | Raw scalar merge key; the cell must span the entire logical record and contain only matching bound fields. Adjacent equal records share a native rowspan. |
 | `data-field="path"` | Row descendant | Reads a top-level or dot-separated object path. Plain display uses text; native controls edit values, and images receive `src`. |
+| `data-field-changed` | Every rendered field member | Runtime-owned `"true"`/`"false"` comparison of its committed raw path with the loaded original; inserted rows have no baseline and receive `"false"`. |
 | `data-format='[["name", ...args]]'` | Text-like input, textarea, or text element | Applies display-only rules; non-text inputs and Selects reject it. Stored row data stays raw. |
 | `data-validate='[["name", ...args]]'` | Field or Select | Validates raw values with built-in or supplied rules. Rules are parsed once from the template. |
 | `data-error-for="path"` | Row descendant | Displays field issues as text and receives a generated unique ID for `aria-describedby`. |
@@ -225,9 +226,15 @@ The getter returns a frozen readonly `RowStatus[]`. The setter canonicalizes dup
 
 Status filtering precedes manual/column filters, sorting and paging. `filterChoices` counts the same status projection before its ordinary own-column/paging exclusions. A live row hidden by a status filter can retain active/selected/checked state, just as under other filters; deletion still forces pruning. Check/store scopes retain their existing live-row eligibility.[^grid][^filters][^selection]
 
-Shown deleted records use the store's original deletion snapshot. Bound native editors are disabled, and deleted IDs remain ineligible for selection, checks, validation and paste starts. Authored actions can still receive the tombstone's RowId to call `rows.revert(id)`. Reversion does not restore pruned membership automatically. Focus held by an editor or selection control that becomes disabled moves to an enabled visible control or the table fallback. Merge runs split when row statuses differ.[^grid][^blocks][^lifecycle-browser]
+Shown deleted records retain their last committed raw values, including edits made since loading. `Rows.changes()` still supplies the original loaded value for a delete payload; `rows.original(id)` reads that immutable baseline separately. Bound native editors are disabled, and deleted IDs remain ineligible for selection, checks, validation and paste starts. Authored actions can still receive the tombstone's RowId to call `rows.revert(id)`, restoring its original values and clean status. Reversion does not restore pruned membership automatically. Focus held by an editor or selection control that becomes disabled moves to an enabled visible control or the table fallback. Merge runs split when row statuses differ.[^grid][^blocks][^lifecycle-browser]
 
-Only row/table state attributes are supplied. Author CSS and human-readable state text in HTML or row callbacks. Per-field dirty presentation and the 1.x edited-deletion display difference remain P0 obligations; this contract does not approve their omission.
+## Field change markers
+
+Grid sets `data-field-changed` on every rendered `data-field` element, including all members of a radio/checkbox group and fields in different physical rows. It compares that field's committed raw path with `rows.original(id)`. Nested sibling paths compare independently; arrays and objects compare structurally, while scalars use `Object.is`, including distinct `0` and `-0`. Text, image, rich-display and typed Select targets use the raw data rather than rendered DOM; a Select's option list is separate from its selected field.[^grid]
+
+Invalid or deferred drafts do not change these flags. Returning a committed value to its loaded value clears its flag; inserted and copied rows receive `"false"` because no loaded baseline exists. Retained deleted rows keep the flags for their last committed edits. Flags update before the focused-value shortcut, so a control can keep its text/caret while reflecting an external committed change. Rebinding, refresh and viewport remount derive flags from Rows without a second baseline store. Error regions and unmarked parent cells are not field targets.[^grid]
+
+Author CSS and human-readable change text in HTML or row callbacks. The marker supplies no visual design or automatic announcement. Original template nodes and their authored attributes remain untouched and return on disposal. See [Rows](data.md#originalid) and [Form](form.md#loaded-value-changes) for the shared baseline and ownership rules.
 
 ## `defaults()`
 

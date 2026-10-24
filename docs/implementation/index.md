@@ -1,5 +1,9 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.6.1 change presentation](m10-change-state-plan.md) - Expose immutable loaded originals and bind exact committed-field changes while retaining edited deletion views and original deletion payloads. (draft)
+
+* [Natural-JS 2.0 M10.9.6 Grid semantic closure](m10-closure-plan.md) - Resolve legacy Grid options and dynamic workflows through bounded implementation slices and explicit acceptance evidence. (draft)
+
 * [Natural-JS 2.0 M10.9.5 detail navigation and geometry](m10-detail-plan.md) - Compose validated row details through CVC and add authored height controls and occlusion-aware reveal to the existing Grid. (draft)
 
 * [Natural-JS 2.0 M10.9.4 status and row lifecycle](m10-lifecycle-plan.md) - Preserve row identity through explicit status views, authored defaults, row cleanup, clean batch append and empty markup. (draft)

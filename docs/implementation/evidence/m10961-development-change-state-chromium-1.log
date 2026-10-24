@@ -1,0 +1,68 @@
+
+
+Running 18 tests using 1 worker
+
+
+
+[1/18] [chromium] › tests\browser\grid-change-state.spec.ts:110:1 › loaded clean fields are explicit false while errors and unbound cells keep authored markers
+[2/18] [chromium] › tests\browser\grid-change-state.spec.ts:122:1 › binders created after an edit use the loaded baseline rather than their initial display
+[3/18] [chromium] › tests\browser\grid-change-state.spec.ts:129:1 › nested sibling paths change and restore independently in shared Form and Grid
+[4/18] [chromium] › tests\browser\grid-change-state.spec.ts:139:1 › raw array order matters while equivalent JSON and object key order do not
+[5/18] [chromium] › tests\browser\grid-change-state.spec.ts:148:1 › all radio and checkbox group members share their committed field state
+[6/18] [chromium] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes
+  1) [chromium] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -4,11 +4,11 @@
+            "true",
+          ],
+          "true",
+        ],
+        "choicesOnly": Object {
+    -     "count": 3,
+    +     "count": 5,
+          "marker": Array [
+            "false",
+          ],
+          "value": 11,
+        },
+
+      162 |     h.rows.set(1, "chosen", 22); const changed = [h.markers(1, "chosen"), h.formFields("chosen")[0].getAttribute("data-field-changed")];
+      163 |     h.rows.set(1, "chosen", 11); return { choicesOnly, changed, restored: h.markers(1, "chosen"), status: h.rows.get(1)?.status }; });
+    > 164 |   expect(result).toEqual({ choicesOnly: { marker: ["false"], value: 11, count: 3 }, changed: [["true"], "true"], restored: ["false"], status: "update" });
+          |                  ^
+      165 | });
+      166 |
+      167 | test("unchanged formatted text does not hide raw changes on displays, rendered fields and images", async ({ page }) => {
+        at D:\workspace\natural_js\tests\browser\grid-change-state.spec.ts:164:18
+
+    Error Context: test-results\grid-change-state-Select-m-d9d1b-bels-or-option-list-changes-chromium\error-context.md
+
+
+
+
+[7/18] [chromium] › tests\browser\grid-change-state.spec.ts:167:1 › unchanged formatted text does not hide raw changes on displays, rendered fields and images
+[8/18] [chromium] › tests\browser\grid-change-state.spec.ts:178:1 › Form commits update markers without replacing the focused input or its caret
+[9/18] [chromium] › tests\browser\grid-change-state.spec.ts:186:1 › Grid commits update markers without replacing the focused input or its caret
+[10/18] [chromium] › tests\browser\grid-change-state.spec.ts:194:1 › invalid drafts neither create committed changes nor erase an existing committed field change
+[11/18] [chromium] › tests\browser\grid-change-state.spec.ts:207:1 › inserted and copied records have no original baseline while clean append gains one
+[12/18] [chromium] › tests\browser\grid-change-state.spec.ts:220:1 › retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them
+[13/18] [chromium] › tests\browser\grid-change-state.spec.ts:237:1 › null and stale Form binding clear field flags without changing retained Grid deletion state
+[14/18] [chromium] › tests\browser\grid-change-state.spec.ts:248:1 › owned Form attributes and exact Grid template restore while local Forms never take marker ownership
+[15/18] [chromium] › tests\browser\grid-change-state.spec.ts:261:1 › sort filter page and column changes preserve leaf identity rather than display indexes
+[16/18] [chromium] › tests\browser\grid-change-state.spec.ts:273:1 › offscreen edits and deletion remount with their data-owned baseline and bounded physical rows
+[17/18] [chromium] › tests\browser\grid-change-state.spec.ts:289:1 › shared and independent MDI bindings retain their own baselines and unique accessible IDs
+[18/18] [chromium] › tests\browser\grid-change-state.spec.ts:305:1 › signed zero raw identity is visible as changed even when its formatted display is identical
+  1 failed
+    [chromium] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes 
+  17 passed (7.5s)
+[WebServer] (node:9912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:20156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

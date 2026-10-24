@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
+import { sameJson } from "../internal/same-json.js";
 
 export type RowId = number;
 
@@ -32,6 +33,7 @@ export interface Rows<T extends object> {
   replace(values: readonly T[]): void;
   entries(options?: { includeDeleted?: boolean }): readonly RowSnapshot<T>[];
   get(id: RowId): RowSnapshot<T> | undefined;
+  original(id: RowId): Snapshot<T> | undefined;
   append(values: readonly T[]): readonly RowId[];
   add(value: T, before?: RowId): RowId;
   move(id: RowId, before?: RowId): void;
@@ -98,21 +100,6 @@ function cloneRow(value: unknown, api: string): FrozenRow {
     throw rowError(api, "ROW_VALUE", "A row must be a JSON-compatible object.");
   }
   return cloneFrozen(value, api) as FrozenRow;
-}
-
-function sameJson(left: unknown, right: unknown): boolean {
-  if (Object.is(left, right)) return true;
-  if (!left || !right || typeof left !== "object" || typeof right !== "object") return false;
-  if (Array.isArray(left)) {
-    return Array.isArray(right) &&
-      left.length === right.length &&
-      left.every((item, index) => sameJson(item, right[index]));
-  }
-  if (Array.isArray(right)) return false;
-  const keys = Object.keys(left);
-  return keys.length === Object.keys(right).length &&
-    keys.every((key) => Object.hasOwn(right, key) &&
-      sameJson((left as FrozenRow)[key], (right as FrozenRow)[key]));
 }
 
 export function createRows<T extends object>(initial: readonly T[] = []): Rows<T> {
@@ -260,6 +247,10 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       active("Rows.get");
       return rows.get(id)?.view;
     },
+    original(id) {
+      active("Rows.original");
+      return rows.get(id)?.original as Snapshot<T> | undefined;
+    },
     append(values) {
       active("Rows.append");
       const version = revision;
@@ -345,8 +336,6 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       if (row.status === "delete") return;
       if (row.status === "insert") rows.delete(id);
       else {
-        row.current = row.original!;
-        row.dirty.clear();
         row.status = "delete";
         row.view = view(row.id, row.current, row.status);
       }

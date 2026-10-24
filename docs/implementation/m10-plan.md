@@ -16,11 +16,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid rendering, row identity, draft, and lifecycle behavior
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
   - id: old-grid
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Grid options and implementation

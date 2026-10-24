@@ -60,6 +60,8 @@ th, td { overflow-wrap: anywhere; }
 td output { display: block; max-width: 14rem; color: #9a1721; font-size: .9rem; }
 td output:empty { display: none; }
 [aria-invalid="true"] { border-color: #b31a24 !important; }
+[data-field-changed="true"] { background: #fff0bd; }
+[data-demo-changed-fields] { display: block; }
 .status { min-height: 1.6rem; margin: .8rem 0; font-weight: 600; }
 .observations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
 .observations section { min-width: 0; padding: .75rem; background: #f3f6fa; border-radius: .4rem; }

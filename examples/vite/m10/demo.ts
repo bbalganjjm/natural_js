@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { RowStatus } from "@bbalganjjm/natural_js/data";
+import type { RowId, RowStatus } from "@bbalganjjm/natural_js/data";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageHandle } from "@bbalganjjm/natural_js/page";
 import { bindGrid, openPopup } from "@bbalganjjm/natural_js/ui";
@@ -73,6 +73,7 @@ const initialPageChoice = find<HTMLSelectElement>("[data-initial-page]");
 const revealBlock = find<HTMLSelectElement>("[data-reveal-block]");
 const status = find<HTMLOutputElement>("[data-status]");
 const snapshot = find<HTMLElement>("[data-snapshot]");
+const originalOutput = find<HTMLElement>("[data-original]");
 const changes = find<HTMLElement>("[data-changes]");
 const defaultsOutput = find<HTMLElement>("[data-defaults]");
 const bindState = find<HTMLOutputElement>("[data-bind-state]");
@@ -117,6 +118,7 @@ const defaultColumns: readonly GridColumn[] = [
 ];
 let initialColumns: readonly GridColumn[] = defaultColumns;
 let grid: GridHandle<Employee> | null = null;
+let inspectedId: RowId | null = null;
 let requestedPage = 1;
 let stopRows = () => {};
 let bindCalls = 0;
@@ -163,6 +165,7 @@ function disposeGrid(): void {
   stopDetails();
   grid?.dispose();
   grid = null;
+  inspectedId = null;
 }
 
 function openDetail(id: number, place: "inline" | "popup", opener: HTMLButtonElement): void {
@@ -212,9 +215,13 @@ function refreshRowResources(): void {
 function refresh(): void {
   const id = grid?.selected() ?? null;
   const row = id === null ? null : rows.get(id) ?? null;
+  if (inspectedId !== null && !rows.get(inspectedId)) inspectedId = null;
+  const snapshotId = inspectedId ?? id;
+  const inspected = snapshotId === null ? null : rows.get(snapshotId) ?? null;
   const page = grid?.page() ?? null;
   selection.textContent = row ? `Selected RowId ${id}: ${row.value.name}` : "No row selected";
-  snapshot.textContent = row ? JSON.stringify(row, null, 2) : "Select a row.";
+  snapshot.textContent = inspected ? JSON.stringify(inspected, null, 2) : "Select a row.";
+  originalOutput.textContent = snapshotId === null ? "Select or inspect a loaded row." : JSON.stringify(rows.original(snapshotId) ?? null, null, 2);
   changes.textContent = JSON.stringify(rows.changes(), null, 2);
   pageState.textContent = page
     ? `Page ${page.page} of ${page.pages} · ${page.total} filtered rows · size ${page.size}`
@@ -325,9 +332,14 @@ function bind(): void {
       refreshRowResources();
     } : undefined,
     onRowBind(context) {
+      const changedFields = new Set(context.elements.flatMap(element =>
+        [...element.querySelectorAll<HTMLElement>('[data-field][data-field-changed="true"]')]
+          .map(field => field.getAttribute("data-field")!)));
       for (const element of context.elements) {
         const label = element.querySelector<HTMLElement>("[data-demo-row-status]");
         if (label) label.textContent = `Status: ${context.row.status}`;
+        const changed = element.querySelector<HTMLElement>("[data-demo-changed-fields]");
+        if (changed) changed.textContent = changedFields.size ? `Changed fields: ${[...changedFields].join(", ")}` : "No changed loaded fields.";
         const undo = element.querySelector<HTMLButtonElement>('[data-row-action="undo"]');
         if (undo) undo.disabled = context.row.status === "clean";
         for (const action of element.querySelectorAll<HTMLButtonElement>('[data-row-action^="detail-"]')) {
@@ -382,6 +394,7 @@ function bind(): void {
       return !vetoChecks.checked;
     },
     onSelect({ id, row, event }) {
+      inspectedId = null;
       callback.textContent = `RowId ${id ?? "none"}, ${row?.value.name ?? "none"}, event ${event?.type ?? "programmatic"}`;
       refresh();
     },
@@ -399,6 +412,7 @@ function bind(): void {
         return;
       }
       if (action === "undo") rows.revert(id);
+      if (action === "inspect") inspectedId = id;
       actionCallback.textContent = `${action}: RowId ${id}, ${row.value.name}, control ${element.tagName.toLowerCase()}, event ${event.type}`;
       refresh();
     },
@@ -550,6 +564,7 @@ document.addEventListener("click", event => {
   const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>("button[data-action]") : null;
   if (!button) {
     if (event.target instanceof Element && table.contains(event.target)) {
+      if (event.target.closest("[data-select-row]")) inspectedId = null;
       const header = event.target.closest<HTMLButtonElement>("button[data-sort-column]");
       if (header) {
         const direction = header.closest("th")?.getAttribute("aria-sort");

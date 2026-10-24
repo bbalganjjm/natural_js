@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -29,7 +29,7 @@ sources:
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, native defaults, callback and teardown regressions
-    git_blob: 2898609c1d76b08e218120d55bf56f347650daf5
+    git_blob: 1f4356df43aaf2c2b14bea4559a577dcb9987972
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
+    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -115,13 +115,15 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 
 # Grid binding callbacks
 
-Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/update. Shown deleted records use original retained snapshots and remain noneditable/ineligible; authored row actions can offer Undo. Every physical record tr gets `data-row-status`, and table `data-changed` reports any pending Rows changes. Author labels and styles; per-field dirty display and the 1.x edited-deletion display difference remain P0 obligations.[^grid][^lifecycle-browser]
+Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/update. Shown deleted records retain their last committed values and remain noneditable/ineligible; authored row actions can offer Undo. Their delete save payload still uses the loaded original. Every physical record tr gets `data-row-status`, and table `data-changed` reports any pending Rows changes. Author labels and styles.[^grid][^lifecycle-browser]
 
 `beforeRowBind` and `onRowBind` infer `{ row, elements, own }` from the binder signature. The immutable row snapshot and readonly physical-row array identify one binding; `own(() => void)` registers synchronous resources for reverse cleanup on rebind, release, failure and disposal. Before runs on rows attached to their table before values; after runs after binding/placement. Rows are document-connected only when their table root is connected; connect the root before initializing or measuring layout-dependent widgets. No lifecycle manager or row-context type is added to the public UI entry. [Grid](grid.md#row-binding-and-owned-resources) defines late registration, reentrancy, cleanup failures and deletion protection.[^hooks][^grid]
 
 `onBind` infers `{ total, filtered, visible, mounted, event }`: all retained rows, status/filter matches, logical-page rows, logical mounted records, and a replace/append `RowsEvent` or null. It runs once for initial, replace/append, explicit view and refresh binding, including empty results. Ordinary mutations and viewport movement do not emit it. Use application code for counters and loading; `Rows.append` loads clean data while `Rows.add` creates an inserted business row.[^grid][^lifecycle-browser]
 
 # Field options
+
+Grid and Rows-backed Form write `data-field-changed="true"` or `"false"` on every bound field member by comparing its committed raw path with `Rows.original(id)`. Nested paths and grouped values remain independent of formatted display and invalid or deferred drafts. Inserted rows have no baseline and receive `"false"`; deleted Grid rows retain their last committed field flags. A focused field's flag updates even when its entered text is preserved. Local Form leaves this attribute application-owned; Rows-backed Form restores authored values or absence on disposal, while Grid restores untouched template nodes. [Form](form.md#loaded-value-changes) and [Grid](grid.md#field-change-markers) define the complete ownership and comparison rules.[^form][^grid]
 
 Grid accepts inline `validateOn?: "change" | "blur" | "manual"` (default `"change"`) and `revealInvalid?: boolean` (default `false`). They control draft commit timing and optional current-page error reveal/focus; explicit `validate()` remains the save gate. Native groups compile as one field: boolean single checkbox, string-array repeated checkboxes, string/null radio, and an always-array multiple Select whose row-local options retain raw scalar types. [Grid](grid.md) defines native type fallback, Enter, protected groups and quoted JSON-array paste.[^grid][^native]
 

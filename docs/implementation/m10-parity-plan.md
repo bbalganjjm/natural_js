@@ -8,19 +8,19 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature scope and dependency order
-    git_blob: 541cc62e6cf615fa4fe46df5ad2ab6e77236529d
+    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
   - id: coverage
     resource: feature-parity.md
     title: Remaining Grid behavior families
-    git_blob: 3c56833fbf03d509a739e978312dcb2d181a5ab1
+    git_blob: 5fb336d40e62f53e16ea51ac372517b2e391eceb
   - id: data
     resource: ../../src/data/index.ts
     title: Shared row identity, order and immutable changes
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid projection, drafts and mounted lifetime
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: ordering-browser
     resource: ../../tests/browser/rows-ordering.spec.ts
     title: Shared order, draft, focus and viewport regressions
@@ -28,7 +28,7 @@ sources:
   - id: units
     resource: ../../tests/rows.test.ts
     title: Ordered operations, copy independence and reentrant validation
-    git_blob: c39bd3fe3ff177c67c7e3217111d577e700ead2b
+    git_blob: 242dd382b9f75c4240823f2b7373a424a92e3dca
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Settled viewport and identity-preserving move measurements
@@ -41,9 +41,9 @@ sources:
     resource: ../../src/ui/grid-viewport.ts
     title: Measured logical-row viewport
     git_blob: d02fbfe5407b80786733034f2f5aaaea5d71ef55
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 # Goal
@@ -110,7 +110,7 @@ Work-cost observations: the public surface is one optional add target, two metho
 
 # Next action
 
-M10.9.5's [detail and geometry contract](m10-detail-plan.md) implements logical row scopes, explicit reveal alignment, authored height controls and one validated CVC detail page reused in main content/Popup. Its frozen evidence and source corrections belong to that plan. Next, specify M10.9.6 legacy semantic closure: compare all G01-G20 options/defaults/callbacks and dynamic paths, retain explicit per-field dirty, edited-deletion display and scheduler obligations, and implement remaining behavior with representative tests before closing families. Other-component parity and P0 remain required. After required coverage, the [M13 whole-code review/remediation](m13-review-plan.md) remains mandatory before personal acceptance. No new omission, publication, release tag or actual token-saving claim is approved here.
+M10.9.5's [detail and geometry contract](m10-detail-plan.md) implements logical row scopes, explicit reveal alignment, authored height controls and one validated CVC detail page reused in main content/Popup. Its frozen evidence and source corrections belong to that plan. [M10.9.6](m10-closure-plan.md) now has a complete baseline audit and four required slices. M10.9.6.1 implements original-value access, exact committed-field markers and retained edited deletion display. Continue interaction/view controls (.2), progressive rendering/completion (.3) and semantic acceptance (.4); every remaining option/default/callback and dynamic obligation requires concrete acceptance before family closure. Other-component parity and P0 remain required. After required coverage, the [M13 whole-code review/remediation](m13-review-plan.md) remains mandatory before personal acceptance. No new omission, publication, release tag or actual token-saving claim is approved here.
 
 # Open questions
 

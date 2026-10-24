@@ -283,7 +283,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
                   <button type="button" data-row-action="detail-popup">Popup details</button>
                   <button type="button" data-row-action="detail-inline">Inline details</button>
                   <button type="button" data-row-action="undo" disabled>Undo row changes</button>
-                  <small data-demo-row-status></small></th>
+                  <small data-demo-row-status></small><small data-demo-changed-fields></small></th>
                 <td data-column="email"><label>Email <input type="email" data-field="email" value="new.employee@example.com" required></label><output data-error-for="email"></output></td>
                 <td data-column="phone"><label>Phone <input type="tel" data-field="phone" value="+1 555 0100" readonly></label></td>
                 <td data-column="team"><label>Team <input type="text" data-field="profile.team" value="Platform" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
@@ -309,7 +309,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
         </section>
 
         <div class="observations">
-          <section><h3>Active RowId and raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
+          <section><h3>Selected or inspected raw snapshot</h3><pre data-snapshot tabindex="0">Select a row.</pre></section>
+          <section><h3>Rows.original(id)</h3><pre data-original tabindex="0">Select or inspect a loaded row.</pre><p>Highlighted fields differ from the loaded original. Formatting and invalid drafts do not change stored values. New rows use insert status.</p></section>
           <section><h3>Rows.changes()</h3><pre data-changes tabindex="0">[]</pre></section>
           <section><h3>Validation issues</h3><pre data-issues tabindex="0">Not run yet.</pre></section>
           <section><h3>grid.columns()</h3><pre data-columns-state tabindex="0">Not bound yet.</pre></section>

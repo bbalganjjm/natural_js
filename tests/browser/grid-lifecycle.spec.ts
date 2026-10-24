@@ -161,7 +161,9 @@ test("retained deleted rows stay noneditable and ineligible while authored Undo 
     h.rows.remove(2);
     const input = h.field<HTMLInputElement>(2, "profile.name"), count = h.field<HTMLInputElement>(2, "count");
     const readonly = input.disabled && count.disabled && count.readOnly;
-    const originalValue = input.value;
+    const displayedValue = input.value;
+    const original = h.rows.original(2)!.profile.name;
+    const deletionPayload = h.rows.changes().find(row => row.id === 2)!.value.profile.name;
     input.value = "Unwanted write"; input.dispatchEvent(new Event("change", { bubbles: true }));
     const stored = h.rows.get(2)!.value.profile.name;
     const codes = [() => h.grid.select(2), () => h.grid.setChecked([2]), () => h.grid.validate(2),
@@ -172,11 +174,11 @@ test("retained deleted rows stay noneditable and ineligible while authored Undo 
     buttons.querySelector<HTMLButtonElement>("[data-row-action=undo]")!.click();
     const pruned = { active: h.grid.selected(), selected: h.grid.selectedIds(), checked: h.grid.checkedIds() };
     h.rows.revert(2);
-    return { readonly, originalValue, stored, codes, disabled, actions, pruned,
+    return { readonly, displayedValue, original, deletionPayload, stored, codes, disabled, actions, pruned,
       restored: !h.field<HTMLInputElement>(2, "profile.name").disabled && !h.field<HTMLInputElement>(2, "count").disabled && h.field<HTMLInputElement>(2, "count").readOnly,
       authoredDisabled: h.field<HTMLInputElement>(2, "active").disabled, status: h.block(2).map(row => row.dataset.rowStatus) };
   });
-  expect(result).toEqual({ readonly: true, originalValue: "Record 2", stored: "Record 2", codes: ["GRID_ROW", "GRID_ROW", "GRID_ROW", "GRID_PASTE_TARGET"],
+  expect(result).toEqual({ readonly: true, displayedValue: "Edited before delete", original: "Record 2", deletionPayload: "Record 2", stored: "Edited before delete", codes: ["GRID_ROW", "GRID_ROW", "GRID_ROW", "GRID_PASTE_TARGET"],
     disabled: true, actions: [{ id: 2, status: "delete" }], pruned: { active: null, selected: [1], checked: [] },
     restored: true, authoredDisabled: true, status: ["clean", "clean"] });
 });

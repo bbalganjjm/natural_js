@@ -1,18 +1,18 @@
 ---
 type: Example
 title: Interactive Grid contract demo
-description: Exercise authored CVC row details, height controls, aligned reveal, status views, and two Grid layouts with raw Rows inspection.
+description: Inspect committed field changes, loaded originals and edited deletions alongside authored CVC details and two Grid layouts.
 tags: [ui, grid, example, accessibility]
 status: draft
 sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 02434e51c577173a31a293bfea06ae83a60eb591
+    git_blob: 492c0e3d811501124c2919d7a689dc6920152608
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 9292385b3f01a48f31b75c2b70db7a57569577fa
+    git_blob: 3d8b493c5ae9c4b52a5ea533f9b4d7ccfce92927
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
@@ -20,11 +20,11 @@ sources:
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
-    git_blob: 61755db1e75ac726dde2f9509261f72525042a15
+    git_blob: a26444bad5ab585fc14382d6a30b7c46fac69714
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: d68e33ec8fa3a1383a5dc7f6ac91ac59c05e9f54
+    git_blob: e8435d93c659aa574972af902bc0c53996eeb307
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
@@ -56,7 +56,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -84,7 +84,7 @@ sources:
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, callback ownership, focus and failure regressions
-    git_blob: 2898609c1d76b08e218120d55bf56f347650daf5
+    git_blob: 1f4356df43aaf2c2b14bea4559a577dcb9987972
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Raw column filters and distinct choice counts
@@ -93,15 +93,15 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 8d5b7bffa6c796a933d088ddac43ff482685e2ad
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
 
-The expanded `2.0.0` scope requires the remaining 1.x Grid user features before release. Column state, multiple selection, independent row checks, authored header sorting/filtering, stable row actions, atomic bulk paste, measured viewport rendering, authored multi-tr records, native merging, choice groups, explicit display, exclusive checks and validation timing/reveal are implemented. The [feature parity ledger](../implementation/feature-parity.md) records remaining gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines their review and release gates. Extend this same demo as required features arrive; its coverage does not claim complete 1.x parity.[^grid][^viewport][^blocks]
+The expanded `2.0.0` scope requires the remaining 1.x Grid user features before release. Column state, multiple selection, independent row checks, authored header sorting/filtering, stable row actions, atomic bulk paste, measured viewport rendering, authored multi-tr records, native merging, choice groups, explicit display, exclusive checks, validation timing/reveal and raw field-change markers are implemented. The [feature parity ledger](../implementation/feature-parity.md) records remaining gaps, and the [parity implementation plan](../implementation/feature-parity-plan.md) defines their review and release gates. Extend this same demo as required features arrive; its coverage does not claim complete 1.x parity.[^grid][^viewport][^blocks]
 
 # Scenario
 
@@ -142,7 +142,7 @@ The column controls call `columns` and `setColumns` to adjust preferred width, s
 
 `select` and `selected` address only the active row used by the snapshot and store actions. `selectedIds`/`setSelected` address an independent selection set; `checkedIds`/`setChecked` address an independent check set. The set methods replace the complete set and the getters return frozen IDs in store order. Clearing the active row does not clear either set. The demo's first-two and clear-set controls change membership without changing the active row. `checkAll` and `checkState` expose explicit scopes; `columnFilter`, `setColumnFilter`, and `filterChoices` expose the Team filter and its raw values/counts.[^controller][^selection][^filters][^ui]
 
-Other controls call `setSort` with an authored heading and `aria-sort`, `setFilter`, `setPage` and `page`, `reveal(id)`, `validate(id)` and `validate()`, `paste(text, { id, field })`, and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `move`, `copy`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, and `changes()`; accepted paste uses `setMany`. Observation panels show active `RowId`, raw snapshot, both ID sets, scoped check state, filter values/counts, validation issues, before/change callbacks, row actions and the latest Rows event.[^controller]
+Other controls call `setSort` with an authored heading and `aria-sort`, `setFilter`, `setPage` and `page`, `reveal(id)`, `validate(id)` and `validate()`, `paste(text, { id, field })`, and `dispose`. Changing the initial-page selector disposes and rebinds the Grid to show the first-render option; paging controls later use `setPage`. Rebinding after disposal shows template restoration. The Rows controls call `add`, `move`, `copy`, `set`, `remove`, `revert(id)`, `revert()`, `replace`, `original`, and `changes()`; accepted paste uses `setMany`. Observation panels show active `RowId`, the selected or inspected raw snapshot and loaded original, both ID sets, scoped check state, filter values/counts, validation issues, before/change callbacks, row actions and the latest Rows event.[^controller]
 
 ```ts
 const grid = bindGrid(table, {
@@ -210,7 +210,9 @@ In **Validation**, select On blur to defer scalar commits until leaving the fiel
 
 Header sort buttons cycle ascending, descending, then cleared and update `aria-sort`. The Team column filter combines with the manual Team predicate and other column filters using AND. `setColumnFilter("team", null)` means all values; `setColumnFilter("team", [])` means none. The empty-value button demonstrates the latter; All teams in the header clears only the column filter. `filterChoices("team", search)` returns frozen raw `{ value, label, count }` choices after the manual/other column filters, excluding the Team column's own filter and before paging. Search matches choice labels without changing row filtering or clearing selected values hidden by the search.[^controller][^grid][^filters]
 
-Activate Inspect after sorting, filtering or paging to see `onRowAction` receive `{ action, id, row, element, event }` for the current row snapshot and stable ID. It does not change the active row or either ID set.[^controller][^grid]
+Activate Inspect after sorting, filtering or paging to see `onRowAction` receive `{ action, id, row, element, event }` for the current row snapshot and stable ID. It does not change the active row or either ID set. The **Selected or inspected raw snapshot** and **Rows.original(id)** panels follow the inspected ID on later refreshes, including edits and view changes. A row-selection callback or explicit row-selection click clears inspection; a missing inspected ID falls back to the active row, and Dataset reset clears it. An inserted or copied row shows `null` in the original panel because `Rows.original(id)` returns `undefined`.[^controller][^grid]
+
+Edit a loaded field and compare its raw value with the original panel. The authored highlight reads `data-field-changed="true"`; each row also lists **Changed fields:** with distinct bound paths, so color is not the only indication. An unchanged loaded row or an inserted row reports **No changed loaded fields.** Nested paths such as `profile.team` compare separately from their siblings. Formatting and invalid or deferred drafts do not create flags; returning a committed value to its original clears the flag. Refresh and viewport remount read the same baseline from Rows rather than accepting a new original.[^view][^controller][^style][^grid]
 
 The Atomic bulk paste panel provides a Start field selector, TSV textarea, Paste at active row button and live status output. First activate a visible row with at least one following visible row, keep the default column order, and leave Start field at Email. The supplied two-row sample maps Email, protected Phone, nested Team, raw numeric Shift code, Boolean Active, Notes and Salary. The first Notes cell contains a quoted newline. Phone consumes its source cell without changing its stored value. The accepted sample saves both rows in one `setMany` event; the observation panels show the changed snapshots and collected result. Shift matches raw codes `2` and `4`, rather than their labels, and Active requires `true` or `false`.[^view][^controller][^grid]
 
@@ -224,7 +226,7 @@ The viewport regressions cover logical scopes, variable heights and anchoring, f
 
 The Rows controls demonstrate Add, Insert before selected, Copy before selected, Copy to end, Move earlier/later and Move to first/end. Insertion/copy activates the new stable ID. Copies use the stored valid values, not an uncommitted editor draft; editing a copy leaves its source unchanged. Movement keeps active identity and selected/checked membership while their returned ID arrays follow store order. Sorting/filtering/paging still controls the displayed projection. Revert all removes inserted copies and restores values while retaining the current order. Business key allocation stays application-owned.[^controller]
 
-Choose **All retained rows**, remove an existing employee and inspect its original deleted snapshot. Editors and selection/check controls are disabled, but **Undo row changes** can revert the retained ID. Modified and deleted status views use the same logical filtering/paging path. Status text and CSS remain authored; differing statuses split otherwise equal merge runs. The table's data-changed attribute reflects pending changes even when a status filter hides them.[^controller][^grid][^lifecycle-browser]
+Edit a loaded employee, choose **All retained rows**, then remove it and activate Inspect on its retained row. The current snapshot keeps the last committed edit and its field markers; **Rows.original(id)** stays unchanged, and the Changes panel carries that original in the delete payload. Editors and selection/check controls are disabled, but **Undo row changes** restores the loaded value and clears its field markers. Modified and deleted status views use the same logical filtering/paging path. Status text and CSS remain authored; differing statuses split otherwise equal merge runs. The table's data-changed attribute reflects pending changes even when a status filter hides them.[^controller][^grid]
 
 **Read authored defaults** shows captured input/group/Select values rather than a currently edited employee. **Create employee from defaults** supplies names and shift choices through the typed application factory, then calls Rows.add; the result is inserted. **Append 2 loaded employees** uses Rows.append and keeps loaded records clean. A page/controller still owns requests and cancellation; this button does not introduce a framework loader.[^controller]
 
@@ -242,7 +244,7 @@ The earlier [two-layout Grid example](advanced-grid-example.md) tests MDI isolat
 
 # Pitfalls
 
-Remaining Grid parity stays required follow-up work. Status/default/lifecycle, column state, selection/check/filter, atomic bulk paste, measured virtualization, authored row blocks and native control/validation policies have working controls; group topology constrains legal column moves. Merge cells are display-only and must span their complete record. Per-field dirty presentation, the 1.x edited-deletion display difference and remaining scheduling/option semantics are P0 obligations, not approved omissions. Current [Grid](grid.md) markup and cleanup rules apply; the [M10.9 plan](../implementation/m10-parity-plan.md) tracks the remaining slices.[^grid][^viewport][^blocks]
+Remaining Grid parity stays required follow-up work. Status/default/lifecycle, column state, selection/check/filter, atomic bulk paste, measured virtualization, authored row blocks, native control/validation policies and raw field-change presentation have working controls; group topology constrains legal column moves. Merge cells are display-only and must span their complete record. Completing change markers and edited-deletion display does not close remaining interaction, scheduling, callback or option semantics. Current [Grid](grid.md) markup and cleanup rules apply; the [M10.9 plan](../implementation/m10-parity-plan.md) tracks the remaining required slices.[^grid][^viewport][^blocks]
 
 Without `initialPage` or `viewport`, Grid creates all initial row clones. Local paging bounds the logical page; viewport bounds connected DOM and keeps page-wide check/range/paste semantics. The scroll root needs finite authored height and stable table/column widths; its estimate does not force fixed-height rows. Interactive use is not a controlled performance measurement. Rebinding for locale, initial page, mode or eligibility policy also discards active identity, selected/checked sets and uncommitted drafts. Use `setSelected([])` or `setChecked([])` to clear a complete set; `select(null)` clears only the active row. Keep the check checkbox separate from `data-field`, do not send `RowId` as a business key, and do not put a fixed `id` in a repeated row.[^grid][^controller][^selection][^viewport]
 

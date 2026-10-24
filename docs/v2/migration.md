@@ -32,7 +32,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: RowId, changes, and immutable row values
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request payload, decoder, and cancellation
@@ -44,11 +44,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
+    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 14739fc7034efd3a4a04cb2a148081f12e60ff85
+    git_blob: f558c6ff55b3197e68c3b93b6c52c7cd508dd6ab
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -136,15 +136,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 3c56833fbf03d509a739e978312dcb2d181a5ab1
+    git_blob: 5fb336d40e62f53e16ea51ac372517b2e391eceb
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 541cc62e6cf615fa4fe46df5ad2ab6e77236529d
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -314,7 +314,9 @@ For a 1.x multi-row tbody record, mark one authored `<tbody data-row-template>` 
 
 Move loaded-page append to `rows.append(batch)`, which keeps fetched records clean and emits one batch event. Repeated `rows.add` would mark fetched records inserted and change the save payload. Existing IDs, pending edits and tombstones survive append; Form keeps its current row and invalid draft without rebinding. `entries()` remains live-only; use `entries({ includeDeleted: true })` when an application needs retained snapshots. CVC/controller code still owns requests and cancellation. The old scrollPaging progressively rendered already-loaded data rather than fetching it; its scheduling-option equivalence remains open in P0.[^rows][^form][^grid]
 
-Use `statusFilter`/`setStatusFilter` to include original deletion snapshots, and author CSS/status labels from each physical row's `data-row-status` and the table's `data-changed`. Shown deleted editors stay disabled and ineligible; an authored row action can call `rows.revert(id)`. Paste treats intermediate deleted rows as protected lines without shifting later data. The current deleted value/payload is the original snapshot, unlike 1.x's edited-deletion display. That difference and per-field data_changed presentation remain explicit P0 obligations, not approved feature omissions.[^rows][^grid]
+Use `statusFilter`/`setStatusFilter` to include retained deleted rows. Their display keeps the last committed raw values, including edits made before removal; `rows.changes()` deliberately uses the original loaded value for a delete payload. `rows.original(id)` reads that immutable baseline without adding fields to business JSON or `RowSnapshot`. It returns `undefined` for inserted, copied or missing rows. Shown deleted editors stay disabled and ineligible; an authored row action can call `rows.revert(id)` to restore the original value and clean status. Paste treats intermediate deleted rows as protected lines without shifting later data.[^rows][^grid]
+
+Replace 1.x `data_changed` presentation with authored CSS/text using each physical row's `data-row-status`, the table's `data-changed`, and each bound field member's `data-field-changed`. Field flags compare committed raw paths against the loaded original, so nested siblings are independent and formatting or invalid drafts cannot mark a field changed. Inserted fields receive `"false"`; show insertion through row status. Grid restores its original template on disposal. Rows-backed Form restores each authored field flag or its absence; a local Form leaves the attribute application-owned. See [Form](form.md#loaded-value-changes) and [Grid](grid.md#field-change-markers) for focus, groups and structured values.[^form][^grid]
 
 Replace template-input extraction with `grid.defaults()` and an application factory that supplies the complete business row before `rows.add`. Defaults contain captured native controls/groups/Selects plus own parser results, not display text/images or a promise that all fields of T exist. Replace rowHandlerBeforeBind/rowHandler with synchronous `beforeRowBind`/`onRowBind` over `{ row, elements, own }`; callbacks use stable RowId and register widget disposal. Before hooks see rows attached to their table; they are document-connected only when the table root is connected. After hooks see final placement. Connect the root before initializing or measuring layout-dependent widgets. The callbacks do not veto or recompile field structure. Use `grid.refresh()` for explicit binding retry while preserving drafts and identity.[^grid]
 

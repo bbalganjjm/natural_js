@@ -1,7 +1,7 @@
 ---
 type: API Reference
 title: Natural-JS 2.0 rows
-description: Immutable JSON rows with stable identity, clean batch append, ordered edits, retained deletion snapshots, and subscriptions.
+description: Immutable JSON rows with stable identity, loaded originals, clean batch append, ordered edits, retained committed deletion values, and subscriptions.
 tags: [data, rows, typescript]
 status: draft
 symbols: [RowId, Snapshot, RowStatus, RowSnapshot, RowChange, RowsEvent, Rows, createRows]
@@ -9,10 +9,10 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Row store runtime and types
-    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 The `./data` entry exports `createRows` and row types. It stores JSON-compatible rows without adding framework fields to business values, and uses store-local numeric IDs for identity.[^data]
@@ -43,13 +43,14 @@ Accepts an optional array of plain, acyclic JSON-compatible row objects. It clon
 | `replace(values)` | Replaces all rows with clean copies and new IDs; existing IDs are never reused. |
 | `entries(options?)` | Returns non-deleted rows by default; `{ includeDeleted: true }` includes retained deletion snapshots in store order. Each frozen projection has its own cache. |
 | `get(id)` | Returns a row snapshot, including a row marked for deletion, or `undefined`. |
+| `original(id)` | Returns the deeply immutable loaded value, or `undefined` for an inserted, copied or missing row; repeated reads share the same reference. |
 | `append(values)` | Loads a validated batch of clean rows at the end; returns frozen new IDs and preserves existing identities, values and pending changes. |
 | `add(value, before?)` | Adds an inserted row before a live RowId, or appends when omitted; returns a new ID. |
 | `move(id, before?)` | Moves a live row before a live RowId, or to the end when omitted. |
 | `copy(id, before?)` | Deeply copies the committed source value into a new inserted row at the requested position; returns its new ID. |
 | `set(id, field, value)` | Replaces one top-level field. Nested arrays/objects are cloned and frozen as one value. Returning a field to its original value clears its dirty state. |
 | `setMany(updates)` | Validates ordered `{ id, values: Partial<T> }` patches, then applies all effective top-level field changes in one batch. |
-| `remove(id)` | Marks an original row deleted; removes an inserted row immediately. |
+| `remove(id)` | Marks a loaded row deleted while retaining its last committed value; removes an inserted row immediately. |
 | `revert(id?)` | Restores changed values/statuses and discards inserted rows, retaining current store order. |
 | `changes()` | Returns cached frozen `insert`, `update`, and `delete` changes. A deleted row carries its original value. |
 | `subscribe(listener)` | Calls `listener(event)` after a mutation or `revert` attempt and returns an unsubscribe function. An existing no-argument listener remains valid. Disposal during notification stops delivery to remaining listeners. |
@@ -65,13 +66,30 @@ A no-op `set`, net no-op `setMany`, empty `append`, unchanged `move`, and repeat
 
 Application getter side effects follow the same revision/disposal checks as `replace`; a stale outer append fails without undoing the application's inner write. Subscriber failures propagate after the batch commits and later live subscribers receive it. A caught subscriber error is not permission to append the same batch again. CVC/controller code owns requests, cancellation and the decision to append while its page remains active.[^data]
 
-Removing an original row retains its original value with `delete` status, including through `get` and inclusive `entries`; unsaved edited values are not its deletion snapshot. `changes()` also uses the original delete value. Inserted-row removal remains physical. [Grid](grid.md) can explicitly show these retained records. The 1.x edited-deletion display difference remains a P0 obligation, not an approved omission.[^data]
+Removing a loaded row retains its last committed value with `delete` status through `get` and inclusive `entries`, including edits made since loading. Invalid UI drafts are outside that value. `changes()` still carries the original loaded value for a deleted row, so a displayed deletion and its save payload can differ. `revert(id)` restores the original value and clean status. Inserted-row removal remains physical. [Grid](grid.md) can explicitly show these retained records without allowing edits.[^data]
+
+## `original(id)`
+
+`original(id: RowId): Snapshot<T> | undefined` reads the deeply frozen value established by construction, `replace` or `append`. It returns the same reference through edits, movement, deletion and reversion; it does not clone, notify subscribers or change projection caches. Inserted rows, including copies, have no loaded baseline. A missing ID also returns `undefined`; after disposal the call raises `ROWS_DISPOSED` under `Rows.original`. `RowSnapshot` remains exactly `{ id, value, status }`.[^data]
+
+```ts
+const rows = createRows([{ name: "Ada" }]);
+const id = rows.entries()[0].id;
+const original = rows.original(id)!;
+rows.set(id, "name", "Ada Lovelace");
+rows.remove(id);
+console.log(rows.get(id)!.value.name); // "Ada Lovelace": retained display value.
+console.log(rows.changes()[0].value === original); // true: original delete payload.
+rows.revert(id);
+console.log(rows.get(id)!.value === original); // true: restored loaded value.
+rows.dispose();
+```
 
 ## `add(value, before?)`, `move(id, before?)`, `copy(id, before?)`
 
 A before target is a live RowId in the same store. Omit it to append or move to the end. Missing IDs raise `ROW_MISSING`; deleted sources/targets raise `ROW_DELETED`. Validate the source/target and clone all supplied JSON before mutation or ID allocation; preparation failure preserves the current order, snapshots and cached arrays. Getter side effects follow the existing revision/disposal guards and are not rolled back.[^data]
 
-`move` preserves every row snapshot, value, status and dirty field. Moving before itself, before its current immediate stored successor, or the last stored row to the end is a silent no-op. Successful movement emits one `move` event and invalidates order-dependent arrays. Store order includes retained deleted originals; their positions are kept for later reversion. `revert(id?)` restores values/status and removes inserted rows while keeping the current order. Applications persist order through their own payload or fields, including an ordered array from `entries()`; movement adds no save-payload status.[^data]
+`move` preserves every row snapshot, value, status and dirty field. Moving before itself, before its current immediate stored successor, or the last stored row to the end is a silent no-op. Successful movement emits one `move` event and invalidates order-dependent arrays. Store order includes retained deleted rows; their positions are kept for later reversion. `revert(id?)` restores values/status and removes inserted rows while keeping the current order. Applications persist order through their own payload or fields, including an ordered array from `entries()`; movement adds no save-payload status.[^data]
 
 `copy` deeply detaches the committed source JSON, creates a new ID with `insert` status and emits the existing `add` event. It does not copy local UI drafts or source dirty/deletion metadata. Nested snapshots are independent even when the values are equal. A throwing subscriber sees the committed insertion/move; catching its exception does not imply rollback.[^data]
 

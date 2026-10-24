@@ -184,26 +184,40 @@ try {
 
   const lifecycle = await page.evaluate(() => {
     const state = window.packedConsumer, h = state.lifecycle;
+    const originalValue = h.rows.original(1);
+    const markers = root => [...root.querySelectorAll("[data-field]")].map(field => field.getAttribute("data-field-changed"));
+    const cleanFields = { grid: markers(h.table), original: originalValue,
+      frozen: Object.isFrozen(originalValue) };
     const defaults = h.grid.defaults();
     const inserted = h.rows.add(defaults);
     h.grid.setStatusFilter(["insert"]);
     const insertedView = { id: inserted, status: h.table.tBodies[0].rows[0].dataset.rowStatus,
       name: h.table.querySelector('[data-field="name"]').value };
+    const insertedFields = { grid: markers(h.table), noOriginal: h.rows.original(inserted) === undefined };
     const clicks = h.clicks;
     h.grid.refresh(); h.table.tBodies[0].rows[0].click();
     const refreshed = { active: h.active, once: h.clicks === clicks + 1 };
     h.grid.setStatusFilter(["clean", "insert", "update", "delete"]);
+    h.rows.set(1, "name", "Edited before delete");
+    const dirtyFields = { grid: markers(h.table.tBodies[0].rows[0]),
+      originalUnchanged: h.rows.original(1) === originalValue };
     h.rows.remove(1);
     const deleted = h.table.tBodies[0].rows[0];
     const protectedDeletion = deleted.dataset.rowStatus === "delete" && deleted.querySelector("input").disabled &&
       h.rows.entries().length === 1 && h.rows.entries({ includeDeleted: true }).length === 2;
+    const deletedFields = { value: deleted.querySelector('[data-field="name"]').value,
+      stored: h.rows.get(1).value.name, grid: markers(deleted),
+      payload: h.rows.changes().find(row => row.id === 1).value.name, originalUnchanged: h.rows.original(1) === originalValue };
     deleted.querySelector("button").click();
     const undo = h.rows.get(1).status === "clean" && h.rows.get(1).value.name === "Original";
+    const undoFields = { grid: markers(h.table.tBodies[0].rows[0]),
+      value: h.table.querySelector('[data-field="name"]').value, originalUnchanged: h.rows.original(1) === originalValue };
     h.table.tBodies[0].rows[1].querySelector("button").click();
     h.grid.setStatusFilter(["delete"]);
     const empty = !h.table.querySelector("[data-empty]").hidden && h.active === 0;
     const original = h.rows.get(1);
     const ids = h.rows.append([{ name: "Loaded page one", score: 11 }, { name: "Loaded page two", score: 12 }]);
+    const appendedOriginals = ids.map(id => h.rows.original(id));
     const appended = { ids, clean: ids.every(id => h.rows.get(id).status === "clean"), original: h.rows.get(1) === original,
       changes: h.rows.changes(), events: h.events.filter(event => event.type === "append"), bind: h.binds.at(-1) };
     h.grid.setStatusFilter(["clean"]);
@@ -213,15 +227,26 @@ try {
     h.grid.dispose(); row.click();
     const cleanup = { active: h.active, noLateClick: h.clicks === beforeDispose, restored: h.table.outerHTML === h.original };
     h.stop(); h.rows.dispose(); h.root.remove(); delete state.lifecycle;
-    return { defaults, insertedView, refreshed, protectedDeletion, undo, empty, appended, shown, active, cleanup };
+    return { defaults, insertedView, refreshed, protectedDeletion, undo, empty, appended, shown, active, cleanup,
+      cleanFields, insertedFields, dirtyFields, deletedFields, undoFields, appendedOriginals };
   });
+  assert.deepEqual(lifecycle.cleanFields, { grid: ["false", "false"],
+    original: { name: "Original", score: 10 }, frozen: true });
   assert.deepEqual(lifecycle.defaults, { name: "Default employee", score: 25 });
   assert.deepEqual(lifecycle.insertedView, { id: 2, status: "insert", name: "Default employee" });
+  assert.deepEqual(lifecycle.insertedFields, { grid: ["false", "false"], noOriginal: true });
   assert.deepEqual(lifecycle.refreshed, { active: 1, once: true }, "Refresh must replace owned row listeners without accumulating them.");
+  assert.deepEqual(lifecycle.dirtyFields, { grid: ["true", "false"], originalUnchanged: true });
+  assert.deepEqual(lifecycle.deletedFields, { value: "Edited before delete", stored: "Edited before delete",
+    grid: ["true", "false"], payload: "Original", originalUnchanged: true },
+  "Installed deleted views must retain committed edits and dirty flags while changes() sends the loaded original.");
   assert(lifecycle.protectedDeletion && lifecycle.undo && lifecycle.empty, "Installed status views must protect deletions, allow Undo and toggle authored empty markup.");
+  assert.deepEqual(lifecycle.undoFields, { grid: ["false", "false"],
+    value: "Original", originalUnchanged: true });
   assert.deepEqual(lifecycle.appended, { ids: [3, 4], clean: true, original: true, changes: [],
     events: [{ type: "append", ids: [3, 4], changed: true }],
     bind: { total: 3, filtered: 0, visible: 0, mounted: 0, event: "append" } });
+  assert.deepEqual(lifecycle.appendedOriginals, [{ name: "Loaded page one", score: 11 }, { name: "Loaded page two", score: 12 }]);
   assert.deepEqual(lifecycle.shown, ["Original", "Loaded page one", "Loaded page two"]);
   assert.equal(lifecycle.active, 3);
   assert.deepEqual(lifecycle.cleanup, { active: 0, noLateClick: true, restored: true });
@@ -653,11 +678,20 @@ try {
   });
   await expect(first.locator("form input")).toHaveValue("Ada");
   await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveText("Ada");
+  await expect(first.locator("form input")).toHaveAttribute("data-field-changed", "false");
+  await expect(first.locator('[data-consumer-grid] tbody [data-field="person.name"]')).toHaveAttribute("data-field-changed", "false");
 
   await first.locator("form input").fill("Ann");
   await expect(first.locator("[data-consumer-grid] tbody [data-field='person.name']")).toHaveText("Ann");
+  await expect(first.locator("form input")).toHaveAttribute("data-field-changed", "true");
+  await expect(first.locator("[data-consumer-grid] tbody [data-field='person.name']")).toHaveAttribute("data-field-changed", "true");
   await expect(page.locator('[data-host="b"] form input')).toHaveValue("Bea");
+  await expect(page.locator('[data-host="b"] form input')).toHaveAttribute("data-field-changed", "false");
+  assert.deepEqual(await page.evaluate(() => Object.fromEntries(Object.entries(window.packedConsumer.screens)
+    .map(([slot, screen]) => [slot, screen.rows.original(screen.rows.entries()[0].id).person.name]))), { a: "Ada", b: "Bea" },
+  "Installed shared Form/Grid edits must preserve each CVC screen's loaded baseline.");
   await first.locator("select").selectOption("22");
+  await expect(first.locator("select")).toHaveAttribute("data-field-changed", "true");
   assert.equal(await page.evaluate(() => window.packedConsumer.screens.a.rows.entries()[0].value.choice),
     22, "Nested row-local Select must keep its raw number value.");
   await first.locator('[data-action="save"]').click();

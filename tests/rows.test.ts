@@ -29,6 +29,110 @@ describe("createRows", () => {
     rows.dispose();
   });
 
+  it("exposes immutable loaded originals without changing snapshot shape, caches or notifications", () => {
+    const input = [{ profile: { name: "Ada", team: "Platform" }, tags: ["reader"] }];
+    const rows = createRows(input);
+    const first = rows.entries()[0];
+    const original = rows.original(first.id)!;
+    expect(original).toBe(first.value);
+    expect(Object.keys(first)).toEqual(["id", "value", "status"]);
+    input[0].profile.name = "External";
+    input[0].tags.push("external");
+    expect(original).toEqual({ profile: { name: "Ada", team: "Platform" }, tags: ["reader"] });
+    expect(Object.isFrozen(original)).toBe(true);
+    expect(Object.isFrozen(original.profile)).toBe(true);
+    expect(Object.isFrozen(original.tags)).toBe(true);
+    expect(() => { (original.profile as { name: string }).name = "Mutation"; }).toThrow(TypeError);
+    const live = rows.entries(), all = rows.entries({ includeDeleted: true }), changes = rows.changes();
+    const listener = vi.fn();
+    rows.subscribe(listener);
+    expect(rows.original(first.id)).toBe(original);
+    expect(rows.original(-1)).toBeUndefined();
+    expect(rows.entries()).toBe(live);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    expect(rows.changes()).toBe(changes);
+    expect(listener).not.toHaveBeenCalled();
+    rows.dispose();
+  });
+
+  it("distinguishes inserted and copied rows from appended loaded originals", () => {
+    const rows = createRows([{ value: 1 }]);
+    const inserted = rows.add({ value: 2 });
+    const copied = rows.copy(1);
+    const [loaded] = rows.append([{ value: 3 }]);
+    const original = rows.original(loaded);
+    expect(original).toBe(rows.get(loaded)!.value);
+    expect(original).toEqual({ value: 3 });
+    expect(rows.original(inserted)).toBeUndefined();
+    expect(rows.original(copied)).toBeUndefined();
+    rows.set(inserted, "value", 20);
+    rows.set(loaded, "value", 30);
+    rows.move(loaded, 1);
+    expect(rows.original(inserted)).toBeUndefined();
+    expect(rows.original(loaded)).toBe(original);
+    rows.remove(inserted);
+    expect(rows.get(inserted)).toBeUndefined();
+    expect(rows.original(inserted)).toBeUndefined();
+    rows.dispose();
+  });
+
+  it("retains edited deletion views while saving and restoring the immutable loaded original", () => {
+    const rows = createRows([
+      { profile: { name: "Ada", team: "Platform" }, tags: ["reader"] },
+      { profile: { name: "Bea", team: "Support" }, tags: ["writer"] }
+    ]);
+    const first = rows.entries()[0], original = rows.original(first.id);
+    rows.setMany([{ id: first.id, values: { profile: { name: "Grace", team: "Platform" }, tags: ["reader", "editor"] } }]);
+    const edited = rows.get(first.id)!;
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => events.push(event));
+    rows.remove(first.id);
+    const deleted = rows.get(first.id)!;
+    expect(deleted.status).toBe("delete");
+    expect(deleted.value).toBe(edited.value);
+    expect(deleted.value).toEqual({ profile: { name: "Grace", team: "Platform" }, tags: ["reader", "editor"] });
+    expect(rows.original(first.id)).toBe(original);
+    expect(rows.changes()).toEqual([{ id: first.id, status: "delete", value: first.value }]);
+    expect(rows.changes()[0].value).toBe(original);
+    expect(first.status).toBe("clean");
+    expect(edited.status).toBe("update");
+    const live = rows.entries(), all = rows.entries({ includeDeleted: true }), changes = rows.changes();
+    rows.remove(first.id);
+    expect(events).toEqual([{ type: "remove", id: first.id, changed: true }]);
+    expect(rows.entries()).toBe(live);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    expect(rows.changes()).toBe(changes);
+    expect(() => rows.set(first.id, "tags", [])).toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    expect(() => rows.move(first.id)).toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    expect(() => rows.copy(first.id)).toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    rows.append([{ profile: { name: "Loaded", team: "Platform" }, tags: [] }]);
+    rows.move(2);
+    expect(rows.get(first.id)).toBe(deleted);
+    expect(rows.original(first.id)).toBe(original);
+    rows.revert(first.id);
+    expect(rows.get(first.id)!.value).toBe(original);
+    expect(rows.get(first.id)!.status).toBe("clean");
+    expect(rows.original(first.id)).toBe(original);
+    expect(rows.changes()).toEqual([]);
+    expect(deleted.status).toBe("delete");
+    expect(deleted.value).toBe(edited.value);
+    expect(events.map(event => event.type)).toEqual(["remove", "append", "move", "revert"]);
+    rows.dispose();
+  });
+
+  it("keeps original lookup aligned with row replacement and disposal", () => {
+    const rows = createRows([{ value: { nested: [1] } }]);
+    const first = rows.entries()[0], original = rows.original(first.id);
+    rows.replace([{ value: { nested: [2] } }]);
+    const loaded = rows.entries()[0];
+    expect(rows.original(first.id)).toBeUndefined();
+    expect(rows.original(loaded.id)).toBe(loaded.value);
+    expect(original).toBe(first.value);
+    expect(original).toEqual({ value: { nested: [1] } });
+    rows.dispose();
+    expect(() => rows.original(loaded.id)).toThrow(expect.objectContaining({ api: "Rows.original", code: "ROWS_DISPOSED" }));
+  });
+
   it("tracks add, update, delete, and revert without adding metadata to business values", () => {
     const rows = createRows([{ name: "A", count: 1 }, { name: "B", count: 2 }]);
     const [first, second] = rows.entries();
@@ -70,7 +174,7 @@ describe("createRows", () => {
     expect(live).toEqual([second]);
     expect(rows.entries({ includeDeleted: false })).toBe(live);
     expect(rows.entries({ includeDeleted: true })).toBe(all);
-    expect(all).toEqual([{ id: first.id, value: { value: 1 }, status: "delete" }, second]);
+    expect(all).toEqual([{ id: first.id, value: { value: 10 }, status: "delete" }, second]);
     expect(Object.isFrozen(all)).toBe(true);
     expect(all[0]).toBe(rows.get(first.id));
     rows.remove(first.id);

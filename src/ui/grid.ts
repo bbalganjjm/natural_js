@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import type { RowId, RowSnapshot, RowStatus, Rows, RowsEvent, Snapshot } from "../data/index.js";
 import { FrameworkError } from "../internal/framework-error.js";
+import { sameJson } from "../internal/same-json.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import { rowOptions } from "./row-options.js";
@@ -653,7 +654,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function renderRecord(record: RenderedRow<T>, snapshot: RowSnapshot<T>): void {
     if (record.snapshot === snapshot) return;
+    const original = snapshot.status === "update" || snapshot.status === "delete"
+      ? options.rows.original(snapshot.id) : undefined;
     for (const binding of record.texts) {
+      const changed = original !== undefined && !sameJson(
+        readPath(original, binding.descriptor.path), readPath(snapshot.value, binding.descriptor.path));
+      for (const element of binding.elements) element.setAttribute("data-field-changed", String(changed));
       const draft = drafts.get(snapshot.id)?.get(binding.descriptor.name);
       const value = draft ? draft.entered : readPath(snapshot.value, binding.descriptor.path);
       if (!binding.bound || !Object.is(binding.previous, value)) {
@@ -674,7 +680,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         binding.bound = true;
       }
     }
-    for (const binding of record.selects) renderSelect(binding, snapshot.value, snapshot.id);
+    for (const binding of record.selects) {
+      if (binding.descriptor.field) binding.element.setAttribute("data-field-changed", String(original !== undefined &&
+        !sameJson(readPath(original, binding.descriptor.field), readPath(snapshot.value, binding.descriptor.field))));
+      renderSelect(binding, snapshot.value, snapshot.id);
+    }
     record.snapshot = snapshot;
   }
 

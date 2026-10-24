@@ -1,7 +1,7 @@
 ---
 type: UI Component
 title: bindForm
-description: Bind authored Form fields and groups to Rows with row-keyed drafts, explicit display, retained rules, and accessible errors.
+description: Bind authored Form fields and groups to Rows with row-keyed drafts, raw field-change flags, explicit display, retained rules, and accessible errors.
 tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
@@ -13,7 +13,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
+    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -46,10 +46,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -88,6 +88,7 @@ The built-in `required`, `email`, and `commas` rules need no import or registrat
 | Marker | Meaning |
 |---|---|
 | `data-field="path"` | Top-level property or safe dot-separated object path, independent of DOM `id`. The root or a descendant may carry it. |
+| `data-field-changed` | Rows-backed Form owns `"true"`/`"false"` on every member of a bound field; local Forms leave this attribute to the application. |
 | `data-format='[["name",...args]]'` | Ordered display-only formatter calls on text-like inputs, textareas, and text-bound elements. |
 | `data-validate='[["name",...args]]'` | Ordered validator calls on the parsed raw candidate. |
 | `data-error-for="path"` | Authored field error region; its value matches `data-field`. |
@@ -115,6 +116,12 @@ Repeated `data-field` paths are allowed only for radio or checkbox controls. A r
 
 A parser may convert a scalar radio or single Select string. It cannot attach to a boolean checkbox or array-valued checkbox group or multiple Select (`FORM_PARSE_CONTROL`). Multiple Select and checkbox groups retain arrays for empty and single selections. Only own parser/render configuration entries are callable, including a field named `toString`. These authored Selects are owned by Form until disposal, so a second `bindSelect` on the same element raises `SELECT_OWNED`.[^form][^controls-browser]
 
+## Loaded-value changes
+
+A Rows-backed Form compares each field's committed raw path with `rows.original(id)` and writes `data-field-changed="true"` only when they differ. Nested sibling paths compare independently; arrays and objects compare structurally, and scalars use `Object.is`, including distinct `0` and `-0`. Every radio/checkbox group member receives the same flag. Formatters, custom display DOM, option labels and invalid or deferred drafts do not determine it. Returning the committed value to its loaded value clears the flag.[^form]
+
+Inserted and copied rows have no loaded baseline, so their fields receive `"false"`. An unbound or removed/replaced current row also clears the flags. A focused control can keep its entered text and caret while its flag updates from committed Rows data. A local Form neither writes nor restores this attribute. Disposal of a Rows-backed Form restores each field's exact authored attribute value or absence. Use authored CSS and text to present changes; this marker adds no theme or live announcement. See [Rows](data.md#originalid) for the original-value lifetime.[^form]
+
 ## Explicit display
 
 ```ts
@@ -141,7 +148,7 @@ A local Form retains each custom display field's original raw text separately fr
 | `bind(id)` | Shows an existing nondeleted row or clears with `null`. Switching rows retains each row's invalid drafts and restores them on return. A local Form accepts only `null`. |
 | `read()` | Returns a detached nested record of marked fields. A row-bound Form reads stored raw values, excluding invalid drafts; a local Form reads current control values without parsing. |
 | `validate(id?)` | Combines native HTML constraints and declarative rules. Without an ID, checks the bound row and every row with a retained draft. With an ID, checks that row without rebinding; hidden-row issues have no `element`. A draft made valid by another change enters `Rows` before the final result. |
-| `dispose()` | Removes delegated listeners and Rows subscription, releases the root, clears drafts, and restores original error text, field/error ARIA attributes and custom render target child nodes. It does not reset ordinary input values. Repeated disposal is safe. |
+| `dispose()` | Removes delegated listeners and Rows subscription, releases the root, clears drafts, and restores original error text, field/error ARIA attributes and custom render target child nodes. Rows-backed fields also recover authored `data-field-changed` values or absence. It does not reset ordinary input values. Repeated disposal is safe. |
 
 `ValidationIssue` contains `rowId`, `field`, `rule`, `message`, and an `element` only for visible or local fields. Later calls on a disposed handle raise `FORM_DISPOSED`. `Rows.replace`, removal, and `revert(id?)` discard the affected drafts, including a revert of a clean row. External `Rows.set` preserves drafts and clears stale errors for the visible row without calling application validators from the store subscription. An explicit `validate(id?)` rechecks drafts and commits those now valid before reporting the final state. If a `Rows.set` subscriber throws after an input edit was stored, Form clears that committed draft and propagates the original error; a rejected edit keeps its draft.[^form]
 

@@ -2,7 +2,7 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { RowId, RowSnapshot, Rows, RowStatus, RowsEvent } from "@bbalganjjm/natural_js/data";
+import type { RowId, RowSnapshot, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
@@ -133,6 +133,9 @@ export function connectNativeControls(root: HTMLFormElement, table: HTMLTableEle
 }
 
 export function connectRowLifecycle(table: HTMLTableElement, rows: Rows<Employee>) {
+  const first = rows.entries()[0];
+  const original: Snapshot<Employee> | undefined = first && rows.original(first.id);
+  void original;
   const bindings: { event: RowsEvent | null; counts: readonly number[] }[] = [];
   const grid = bindGrid(table, {
     rows, statusFilter: ["clean", "insert", "update", "delete"],

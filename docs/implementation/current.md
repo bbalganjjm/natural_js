@@ -4,6 +4,14 @@ title: Natural-JS 2.0 active plan
 description: Checkpoint, next action, and verification record for the milestone-gated Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: closure
+    resource: m10-closure-plan.md
+    title: Required Grid semantic continuation
+    git_blob: c2748cde7f68f55aa49425c7eb05d1a6d4ca5530
+  - id: change-state
+    resource: m10-change-state-plan.md
+    title: M10.9.6.1 committed-field changes and retained deletions
+    git_blob: 87a11f2c34619f7241c9c0df16d38bb643826cc9
   - id: conventions
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
@@ -19,42 +27,42 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and consolidated omission review
-    git_blob: 541cc62e6cf615fa4fe46df5ad2ab6e77236529d
+    git_blob: 288edc12148a0678a080564aa098c6f7a705eb68
   - id: columns
     resource: m10-columns-plan.md
     title: Implemented column state and final verification
-    git_blob: 6fa416da9250c3fab0059fb383b3678381a2b953
+    git_blob: 8aeeb583fa2fc2d84729771a6fbfecf2d01b5129
   - id: selection
     resource: m10-selection-plan.md
     title: M10.6 independent selection, checks and filters
-    git_blob: 130fecb8d36e87a21d8fbc69fe4602dcca4d70dc
+    git_blob: b5b5a100fc0eed246baa9245822fd290d02b0e37
   - id: paste
     resource: m10-paste-plan.md
     title: M10.7 atomic paste and final verification
-    git_blob: fb085ef25d7f4363507e4a5fc1127e248d35628b
+    git_blob: c4c18d27307ea9cc6f3ffaace2e01bfc16b20be2
   - id: viewport
     resource: m10-viewport-plan.md
     title: M10.8 measured viewport and final verification
-    git_blob: 2ddebf423a5da25b24672745483b8f0a46280bbd
+    git_blob: 2f216a8375df1c3fac82b98ecfa3ab5ab9df7bb9
   - id: grid-parity
     resource: m10-parity-plan.md
     title: M10.9 ordered Rows and remaining Grid continuation
-    git_blob: 7c68ca9af8836650fda3a66c9c5d76b7a7ec47dc
+    git_blob: c878d15741578d8bbb837b78a6d71da5d4d7c545
   - id: controls
     resource: m10-controls-plan.md
     title: M10.9.3 native controls, display and validation gates
-    git_blob: f64ff748a1d8a97ed99b3378e8591acf39f30066
+    git_blob: 58a97fe603c77bd5c1ce940566ff0798ed60e249
   - id: lifecycle
     resource: m10-lifecycle-plan.md
     title: M10.9.4 status and row lifecycle verification
-    git_blob: bc20217a73b0b0d6c736f3d9ae0fa67ba6ace464
+    git_blob: fde3563b7fcbe763caa56bbca280565aecea1487
   - id: detail
     resource: m10-detail-plan.md
     title: M10.9.5 detail navigation and geometry verification
-    git_blob: 0a0033565ccdc09bca5ceedb1c3f9014c0a50061
-generated: { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+    git_blob: 4d9518149a14fa06af41eaf010392e01e55d8600
+generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T07:32:02Z }
+  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order and [the milestone index](index.md) for completed history. The fixed 1.x baseline is b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; its LGPL source and docs stay unchanged under v1/.
@@ -78,7 +86,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 # Next action
 
-[M10.9.5 detail navigation and geometry](m10-detail-plan.md) implements frozen logical row scopes, aligned reveal, an authored height handle and one validated CVC detail page reused in main content/Popup. Next, specify M10.9.6: compare all G01-G20 legacy options/defaults/callbacks and dynamic paths, then implement remaining obligations such as per-field dirty presentation, edited-deletion display and progressive/scheduler semantics before closing families. Preserve other component/CVC parity and P0 review before the single consolidated omission decision. After all required features, complete the mandatory [M13 whole-code review and remediation](m13-review-plan.md) using ponytail-review before personal acceptance or separately requested release work. No npm publication or release tag.[^detail][^parity]
+Specify M10.9.6.2 interaction/view controls under the [M10.9.6 parent](m10-closure-plan.md): exact plain-click toggle policy, zero-count distinct filters and search/application, authored column chooser/recovery and action-scroll outcomes. [M10.9.6.1](m10-change-state-plan.md) implements immutable loaded originals, committed-field markers and retained edited deletion display with the original delete payload. All sixteen frozen runtime gates pass; final independent evidence/document closure is recorded in that plan. The complete 89-entry/17-group audit remains an immutable 7a36a39 planning snapshot, with all twenty families open until their full obligations close. Progressive rendering/completion (.3), semantic acceptance (.4), other component/CVC parity, P0 and the mandatory [M13 whole-code review/remediation](m13-review-plan.md) remain required. No npm publication or release tag.[^change-state][^closure][^parity]
 
 # Decisions
 
@@ -109,6 +117,10 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 | 2026-10-24 | M10.9.5 frozen gates | Immutable row scopes, aligned reveal, authored height controls and validated CVC details pass build/strict source/example types, 120 units and 382/382 full cases in each required engine. Installed JS/TS and all five Windows browsers pass the same 178-file artifact SHA-256 8543ba57452aa6720fbb49765220f075ff713cd65a347dffe75159ec584fda8d. Sixteen final gates match 162 inputs; 23 raw command records retain seven provisional runs; three development logs are preserved separately. All unchanged binding/viewport budgets pass. Independent source/API/plan/archive/evidence review approves the slice; exact measurements and corrections stay in [the detail plan](m10-detail-plan.md). |
 | 2026-10-24 | M10.9.5 final closure | Independent source/API/plan/evidence/document review approves the slice. Changed/full OKF checks pass with 59 concepts, five reserved files and zero errors/warnings. Ten reviewed concepts receive verified metadata; twenty historical concepts preserve bodies and generated/verified dates while fingerprints refresh. M10.9.6 legacy semantic closure is next. Other parity, P0 and M13 remain required; no npm publication or release tag. |
 
+| 2026-10-24 | M10.9.6.1 frozen gates | Immutable loaded originals, exact committed-field markers and retained edited deletion display pass build/strict source/example types, 124 units and 402/402 full cases in each required engine. Installed JS/TS and all five Windows browsers pass one 183-file artifact SHA-256 27bcaca82b1d55b8be2b4f792f76c611eea0139254df2a19f16d57a36948da3a. Sixteen final gates match 164 inputs; six focused development attempts and two independent raw development logs stay separate. All original binding/viewport budgets pass; exact logs, measured limits and continuation boundaries stay in [the change-state plan](m10-change-state-plan.md). |
+
+| 2026-10-24 | M10.9.6.1 final closure | Independent source/API/plan/archive/evidence review approves the selected slice. Changed/full OKF checks pass with 61 concepts, five reserved files and zero errors/warnings. Thirteen reviewed concepts receive verified metadata; fifteen historical concepts preserve bodies and generated/verified dates with fingerprint-only updates. M10.9.6.2 interaction/view controls is next. The parent, remaining parity, P0 and M13 remain required; no omission, npm publication or release tag. |
+
 # Open questions
 
 - Accessibility automation covers tested states only. Personal review and manual assistive-technology checks remain open.
@@ -126,3 +138,6 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 [^controls]: M10.9.3 native controls, display and validation gates
 [^lifecycle]: M10.9.4 status and row lifecycle verification
 [^detail]: M10.9.5 detail navigation and geometry verification
+
+[^change-state]: M10.9.6.1 committed-field changes and retained deletions
+[^closure]: Required Grid semantic continuation
