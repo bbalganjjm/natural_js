@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { RowId, RowSnapshot, Rows, RowsEvent, Snapshot } from "../data/index.js";
+import type { RowId, RowSnapshot, RowStatus, Rows, RowsEvent, Snapshot } from "../data/index.js";
 import { FrameworkError } from "../internal/framework-error.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
@@ -15,6 +15,8 @@ import { createGridViewport, validateGridViewport } from "./grid-viewport.js";
 import { compileGridBody } from "./grid-row-blocks.js";
 import { display, displayField, fieldValue, nativeMessage, disabled as controlDisabled } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
+import { createGridHooks } from "./grid-hooks.js";
+import type { GridRowBinding } from "./grid-hooks.js";
 import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
 
@@ -68,6 +70,7 @@ interface BoundSelect {
 }
 
 interface RenderedRow<T> {
+  id: RowId;
   elements: HTMLTableRowElement[];
   mergeCells: HTMLTableCellElement[];
   errors: Map<string, HTMLElement>;
@@ -79,6 +82,8 @@ interface RenderedRow<T> {
   buttonDisabled: boolean[];
   checks: HTMLInputElement[];
   checkDisabled: boolean[];
+  controls: (HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)[];
+  deletedDisabled?: boolean[];
   releaseColumns: () => void;
 }
 
@@ -111,6 +116,14 @@ function checkedPage(request: PageRequest | null): PageRequest | null {
   return { page: request.page, size: request.size };
 }
 
+const rowStatuses: readonly RowStatus[] = ["clean", "insert", "update", "delete"];
+function checkedStatuses(values: readonly RowStatus[]): readonly RowStatus[] {
+  if (!Array.isArray(values) || values.some(value => !rowStatuses.includes(value))) {
+    throw gridError("GRID_STATUS", "Status filters need an array of clean, insert, update or delete.");
+  }
+  return Object.freeze(rowStatuses.filter(status => values.includes(status)));
+}
+
 function optionValues(value: unknown, descriptor: SelectField, rowId: RowId) {
   if (!descriptor.options) return [];
   return rowOptions(value, descriptor.options, descriptor.label!, descriptor.value!, field => {
@@ -120,6 +133,11 @@ function optionValues(value: unknown, descriptor: SelectField, rowId: RowId) {
 
 export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   rows: Rows<T>;
+  statusFilter?: readonly RowStatus[];
+  beforeRowBind?: (context: GridRowBinding<T>) => void;
+  onRowBind?: (context: GridRowBinding<T>) => void;
+  onBind?: (result: { readonly total: number; readonly filtered: number; readonly visible: number;
+    readonly mounted: number; readonly event: RowsEvent | null }) => void;
   initialPage?: PageRequest;
   viewport?: { root: HTMLElement; estimate: number; overscan?: number };
   rules?: RuleSet;
@@ -151,6 +169,23 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   if (boundRoots.has(root)) throw gridError("GRID_IN_USE", "This table is already bound as a Grid.");
   const body = compileGridBody(root);
   const { templates, authored } = body;
+  const controlIndexes = authored.flatMap((element, index) =>
+    element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement ? [index] : []);
+  let statuses = checkedStatuses(options.statusFilter === undefined ? ["clean", "insert", "update"] : options.statusFilter);
+  if (options.onBind !== undefined && typeof options.onBind !== "function") {
+    throw gridError("GRID_BIND", "onBind must be a synchronous function.");
+  }
+  const cleanupErrors: unknown[] = [];
+  const failedPrunes: (() => void)[] = [];
+  const hooks = createGridHooks(options, cause => cleanupErrors.push(cause));
+  const emptyMarkers = [...root.querySelectorAll<HTMLElement>("[data-empty]")]
+    .filter(element => element.closest("table") === root);
+  if (emptyMarkers.length > 1 || emptyMarkers.some(element =>
+    !["TR", "TBODY"].includes(element.tagName) || templates.some(template => template.contains(element) || element.contains(template)))) {
+    throw gridError("GRID_EMPTY", "Use one static tr or tbody marked data-empty outside the record template.");
+  }
+  const empty = emptyMarkers[0];
+  const restoreEmpty = empty && restoreAttributes(empty, ["hidden"]);
   if (options.viewport !== undefined) validateGridViewport(root, templates, options.viewport);
   body.validate();
   const validateOn = options.validateOn ?? "change";
@@ -290,6 +325,17 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       throw gridError("GRID_ERROR_REGION", "An error region needs a matching data-field.", { field });
     }
   }
+  const authoredDefaults: { name: string; path: readonly string[]; value: unknown }[] = [];
+  for (const field of textFields) if (field.editable) {
+    authoredDefaults.push({ name: field.name, path: field.path, value: fieldValue({
+      element: authored[field.index], elements: field.indexes.map(index => authored[index]), kind: field.kind
+    }) });
+  }
+  for (const field of selectFields) if (field.name && field.field) {
+    const select = authored[field.index] as HTMLSelectElement;
+    const selected = [...select.selectedOptions].map(option => field.authored[option.index]);
+    authoredDefaults.push({ name: field.name, path: field.field, value: field.multiple ? selected : selected[0] ?? null });
+  }
   const renderers = fieldRenderers("bindGrid", [
     ...textFields.map(field => ({ name: field.name, element: authored[field.index] })),
     ...selectFields.flatMap(field => field.name ? [{ name: field.name, element: authored[field.index] }] : [])
@@ -300,7 +346,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     revision: () => { active(); return viewRevision; },
     changed: syncSelection
   });
-  const columnFilters = createGridFilters(options, () => filter, refreshView);
+  const columnFilters = createGridFilters(options, () => filter, refreshView, statusEntries);
   if (options.sorts !== undefined && (!options.sorts || typeof options.sorts !== "object" || Array.isArray(options.sorts))) {
     throw gridError("GRID_SORT", "sorts must be an object of column comparators.");
   }
@@ -369,6 +415,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const staticRowIndexes = staticRows.map(row => row.rowIndex);
   const templatePosition = templates[0].rowIndex;
   const restoreAria = restoreAttributes(root, ["aria-rowcount"]);
+  const restoreChanged = restoreAttributes(root, ["data-changed"]);
   const restoreStaticAria = staticRows.map(row => restoreAttributes(row, ["aria-rowindex"]));
   const anchor = body.mount();
   const records = new Map<RowId, RenderedRow<T>>();
@@ -401,6 +448,73 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   let viewRevision = 0;
   let sortKey: string | null = null;
   let disposed = false;
+  let cachedStatusSource: readonly RowSnapshot<T>[] | undefined;
+  let cachedStatusFilter: readonly RowStatus[] | undefined;
+  let cachedStatusEntries: readonly RowSnapshot<T>[] = [];
+
+  function statusEntries(): readonly RowSnapshot<T>[] {
+    const source = options.rows.entries({ includeDeleted: statuses.includes("delete") });
+    if (statuses.length === 3 && !statuses.includes("delete")) return source;
+    if (source !== cachedStatusSource || statuses !== cachedStatusFilter) {
+      cachedStatusEntries = Object.freeze(source.filter(row => statuses.includes(row.status)));
+      cachedStatusSource = source;
+      cachedStatusFilter = statuses;
+    }
+    return cachedStatusEntries;
+  }
+
+  function bindable(): void {
+    active();
+    if (hooks.running) throw gridError("GRID_BIND_REENTRANT", "A row callback cannot reenter binding.");
+  }
+
+  function cleanupFailure(): void {
+    if (!cleanupErrors.length) return;
+    const cause = cleanupErrors[0];
+    cleanupErrors.length = 0;
+    throw cause;
+  }
+
+  function failBinding(cause: unknown): never {
+    const pending = failedPrunes.splice(0);
+    for (const notify of pending) {
+      if (disposed) break;
+      try { notify(); } catch { /* The failed binding remains the primary error. */ }
+    }
+    throw cause;
+  }
+
+  function defaults(): Record<string, unknown> {
+    active();
+    let values: Record<string, unknown> = {};
+    const names = new Set<string>();
+    for (const field of authoredDefaults) {
+      if (names.has(field.name)) throw gridError("GRID_DEFAULTS", "Defaults need unique native field paths.", { field: field.name });
+      names.add(field.name);
+      try { values = writePath(values, field.path, structuredClone(field.value)); }
+      catch (cause) { throw new FrameworkError({ api: "bindGrid", code: "GRID_DEFAULTS", message: "Native defaults have conflicting paths.", detail: { field: field.name }, cause }); }
+    }
+    let parsed = values;
+    for (const field of textFields) if (field.editable && parsers.has(field.name)) {
+      try {
+        const value = parsers.get(field.name)!(String(readPath(values, field.path) ?? ""), {
+          field: field.name, values, rowId: null, element: authored[field.index]
+        });
+        if (value === undefined) throw new TypeError("A default parser must return a raw value.");
+        if (value !== null && (typeof value === "object" || typeof value === "function") &&
+            typeof (value as { then?: unknown }).then === "function") {
+          void Promise.resolve(value).catch(() => {});
+          throw new TypeError("Default parsers must finish synchronously.");
+        }
+        parsed = writePath(parsed, field.path, value);
+      } catch (cause) {
+        throw new FrameworkError({ api: "bindGrid", code: "GRID_DEFAULTS", message: "A native default could not be parsed.", detail: { field: field.name }, cause });
+      }
+      active();
+    }
+    try { return structuredClone(parsed); }
+    catch (cause) { throw new FrameworkError({ api: "bindGrid", code: "GRID_DEFAULTS", message: "Defaults must contain cloneable raw values.", cause }); }
+  }
 
   function active(): void {
     if (disposed) throw gridError("GRID_DISPOSED", "This Grid has been disposed.");
@@ -471,12 +585,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     const checks = checkIndexes.map(index => nodes[index] as HTMLInputElement);
     for (const element of elements) rowIds.set(element, id);
-    return { elements, mergeCells, errors, hasIssues: false, texts, selects: rowSelects, buttons,
+    return { id, elements, mergeCells, errors, hasIssues: false, texts, selects: rowSelects, buttons,
+      controls: controlIndexes.map(index => nodes[index] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement),
       buttonDisabled: buttons.map(button => button.disabled), checks, checkDisabled: checks.map(check => check.disabled),
       releaseColumns: columns.attach(elements) };
   }
 
   function releaseRecord(record: RenderedRow<T>): void {
+    hooks.release(record.id);
     for (const element of record.elements) element.remove();
     record.releaseColumns();
     for (const select of record.selects) select.release();
@@ -516,6 +632,17 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         binding.previous = current;
         binding.selectedBound = true;
       }
+    }
+  }
+
+  function renderStatus(record: RenderedRow<T>, snapshot: RowSnapshot<T>): void {
+    for (const element of record.elements) element.setAttribute("data-row-status", snapshot.status);
+    if (snapshot.status === "delete") {
+      record.deletedDisabled ??= record.controls.map(control => control.disabled);
+      for (const control of record.controls) control.disabled = true;
+    } else if (record.deletedDisabled) {
+      record.controls.forEach((control, index) => { control.disabled = record.deletedDisabled![index]; });
+      record.deletedDisabled = undefined;
     }
   }
 
@@ -745,7 +872,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     const record = records.get(id);
     if (record) resetRecord(record);
-    render()?.();
+    bindRows();
     const updated = options.rows.get(id);
     if (!updated || updated.status === "delete") {
       throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
@@ -754,6 +881,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   function onRows(event: RowsEvent): void {
+    bindable();
     if (pasteCommit) pasteNotified = true;
     if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
       drafts.clear();
@@ -790,7 +918,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         }
       }
     }
-    if (!pasteCommit) render()?.();
+    if (!pasteCommit) bindRows(event.type === "replace" || event.type === "append" ? event : false);
   }
   function syncSelection(): void {
     if (!buttonIndexes.length && !checkIndexes.length && !headerChecks.length) return;
@@ -844,8 +972,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const previousIndexes = visibleIndexes;
     const previousMergeKeys = mergeKeys;
     const previousScroll = options.viewport?.root.scrollTop;
-    try { return render(); }
+    const restoreEmptyView = empty && restoreAttributes(empty, ["hidden"]);
+    try { return render(null); }
     catch (cause) {
+      if (disposed) throw cause;
       pageRequest = previousRequest;
       pageState = previousState;
       filteredIds = previousFiltered;
@@ -854,6 +984,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       mergeKeys = previousMergeKeys;
       viewport?.set(previousVisible, false);
       if (previousScroll !== undefined) options.viewport!.root.scrollTop = previousScroll;
+      restoreEmptyView?.();
       syncRowIndexes();
       for (const [id, record] of records) {
         if (previousIds.has(id)) continue;
@@ -879,7 +1010,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     sort = compare;
     let notify: (() => void) | undefined;
     try { notify = refreshView(); }
-    catch (cause) { sort = previous; throw cause; }
+    catch (cause) { sort = previous; failBinding(cause); }
     if (sortIndicator) {
       const original = headerOriginals.get(sortIndicator.column) ?? null;
       if (original === null) sortIndicator.column.removeAttribute("aria-sort");
@@ -905,56 +1036,125 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
   }
 
-  function render(): (() => void) | undefined {
+  function render(bindingEvent: RowsEvent | null | false = false): (() => void) | undefined {
     if (disposed) return;
+    bindable();
     viewRevision++;
-    const notify = selection.prune();
+    const priorFocus = root.ownerDocument.activeElement;
+    let notify = selection.prune();
     if (disposed) return;
-    const entries = options.rows.entries();
-    const filtered = entries.filter(row => (!filter || filter(row.value)) && columnFilters.matches(row.value));
-    if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
-    // Evaluate application filter callbacks before changing row DOM.
-    for (const binding of filterBindings) columnFilters.filterChoices(binding.key);
-    const pages = pageRequest ? Math.ceil(filtered.length / pageRequest.size) : 0;
-    const page = pageRequest ? Math.min(pageRequest.page, Math.max(1, pages)) : 0;
-    if (pageRequest && page !== pageRequest.page) pageRequest = { page, size: pageRequest.size };
-    pageState = pageRequest ? Object.freeze({ page, size: pageRequest.size, total: filtered.length, pages }) : null;
-    const displayed = pageRequest ? filtered.slice((page - 1) * pageRequest.size, page * pageRequest.size) : filtered;
-    const nextMergeKeys = body.merged ? new Map(displayed.map(row => [row.id, body.keys(row.value)])) : mergeKeys;
-    const nextIds = displayed.map(row => row.id);
-    viewport?.set(nextIds);
-    visibleIds = nextIds;
-    if (viewport || body.merged || options.revealInvalid) visibleIndexes = new Map(nextIds.map((id, index) => [id, index]));
-    mergeKeys = nextMergeKeys;
-    filteredIds = filtered.map(row => row.id);
-    syncRowIndexes();
-    renderWindow();
-    refreshFilters();
-    return notify;
+    const notifyPruned = () => { const pending = notify; notify = undefined; pending?.(); };
+    try {
+      const entries = statusEntries();
+      const filtered = entries.filter(row => (!filter || filter(row.value)) && columnFilters.matches(row.value));
+      if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
+      // Evaluate application filter callbacks before changing row DOM.
+      for (const binding of filterBindings) columnFilters.filterChoices(binding.key);
+      const pages = pageRequest ? Math.ceil(filtered.length / pageRequest.size) : 0;
+      const page = pageRequest ? Math.min(pageRequest.page, Math.max(1, pages)) : 0;
+      if (pageRequest && page !== pageRequest.page) pageRequest = { page, size: pageRequest.size };
+      pageState = pageRequest ? Object.freeze({ page, size: pageRequest.size, total: filtered.length, pages }) : null;
+      const displayed = pageRequest ? filtered.slice((page - 1) * pageRequest.size, page * pageRequest.size) : filtered;
+      const nextMergeKeys = body.merged ? new Map(displayed.map(row => [row.id, body.keys(row.value)])) : mergeKeys;
+      const nextIds = displayed.map(row => row.id);
+      viewport?.set(nextIds);
+      visibleIds = nextIds;
+      if (viewport || body.merged || options.revealInvalid) visibleIndexes = new Map(nextIds.map((id, index) => [id, index]));
+      mergeKeys = nextMergeKeys;
+      filteredIds = filtered.map(row => row.id);
+      root.setAttribute("data-changed", String(options.rows.changes().length > 0));
+      const emptyFocus = empty?.contains(root.ownerDocument.activeElement) && nextIds.length > 0;
+      if (empty) empty.hidden = nextIds.length > 0;
+      syncRowIndexes();
+      const afterRows = renderWindow(true);
+      focusAfterDisable(priorFocus);
+      refreshFilters();
+      if (emptyFocus) focusContent();
+      if (!notify && !afterRows && (bindingEvent === false || !options.onBind)) return;
+      const revision = viewRevision;
+      return () => {
+        try { afterRows?.(); }
+        catch (cause) {
+          try { if (!disposed) notifyPruned(); } catch { /* Keep the binding failure primary. */ }
+          throw cause;
+        }
+        notifyPruned();
+        if (disposed || revision !== viewRevision || bindingEvent === false || !options.onBind) return;
+        try {
+          const result: unknown = options.onBind({ total: options.rows.entries({ includeDeleted: true }).length,
+            filtered: filteredIds.length, visible: visibleIds.length, mounted: records.size, event: bindingEvent });
+          if (result !== null && (typeof result === "object" || typeof result === "function") &&
+              typeof (result as { then?: unknown }).then === "function") {
+            void Promise.resolve(result).catch(() => {});
+            throw new TypeError("onBind must finish synchronously.");
+          }
+        } catch (cause) {
+          if (cause instanceof FrameworkError && cause.api === "bindGrid") throw cause;
+          throw new FrameworkError({ api: "bindGrid", code: "GRID_BIND", message: "The bind completion callback failed.", detail: { phase: "onBind" }, cause });
+        }
+      };
+    } catch (cause) {
+      if (!disposed && notify) { failedPrunes.push(notify); notify = undefined; }
+      throw cause;
+    }
   }
 
-  function renderWindow(): void {
+  function bindRows(event: RowsEvent | null | false = false): void {
+    let notify: (() => void) | undefined;
+    try { notify = render(event); }
+    catch (cause) { failBinding(cause); }
+    notify?.();
+  }
+
+  function setColumnFilter(key: string, values: readonly SelectValue[] | null): void {
+    active();
+    try { columnFilters.setColumnFilter(key, values); }
+    catch (cause) { failBinding(cause); }
+  }
+
+  function renderWindow(deferHooks = false): (() => void) | undefined {
     if (disposed) return;
+    bindable();
     body.resetMerges();
     const focused = root.ownerDocument.activeElement;
     const focusedRow = focused instanceof Element ? focused.closest("tr") : null;
     const focusedId = focusedRow && rowIds.get(focusedRow);
     const nextIds = viewport ? viewport.window(focusedId ?? null) : visibleIds;
     const existing = new Set(records.keys());
+    const rebound: RenderedRow<T>[] = [];
+    const revision = viewRevision;
+    const source = hooks.enabled ? options.rows.entries({ includeDeleted: true }) : undefined;
+    const layout = hooks.enabled ? columns.columns() : undefined;
+    const check = (id?: RowId) => {
+      active();
+      if (source !== options.rows.entries({ includeDeleted: true }) || revision !== viewRevision || layout !== columns.columns()) {
+        throw gridError("GRID_BIND_STALE", "The rows or view changed during a row callback.", { id });
+      }
+    };
     try {
       for (const id of nextIds) {
         const snapshot = options.rows.get(id);
-        if (!snapshot || snapshot.status === "delete") continue;
+        if (!snapshot) continue;
         let record = records.get(id);
         if (!record) {
           record = createRecord(id);
           records.set(id, record);
+          if (options.beforeRowBind) for (const element of record.elements) anchor.parentNode!.insertBefore(element, anchor);
+        }
+        if (record.snapshot !== snapshot) {
+          renderStatus(record, snapshot);
+          if (hooks.enabled) {
+            hooks.before(snapshot, record.elements, () => check(id));
+            rebound.push(record);
+          }
+          if (snapshot.status === "delete") for (const control of record.controls) control.disabled = true;
         }
         renderRecord(record, snapshot);
         const issues = issueText.get(id);
         if (issues) showIssues(record, issues);
       }
     } catch (cause) {
+      for (const record of rebound) { hooks.release(record.id); resetRecord(record); }
       for (const [id, record] of records) if (!existing.has(id)) {
         releaseRecord(record);
         records.delete(id);
@@ -995,16 +1195,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           focused.setSelectionRange(...selection);
         }
       } else if (moveFocus) {
-        const candidates = [...root.querySelectorAll<HTMLElement>(
-          'tbody button[data-select-row]:not(:disabled), tbody input:not(:disabled), tbody textarea:not(:disabled), tbody select:not(:disabled)'
-        ), ...root.querySelectorAll<HTMLElement>('thead button:not(:disabled)')];
-        if (!candidates.some(focusVisible)) {
-          if (!root.hasAttribute("tabindex")) {
-            root.tabIndex = -1;
-            rootFocusTabIndex = true;
-          }
-          focusVisible(root);
-        }
+        focusContent();
       }
       mountedIds = nextIds;
       for (const [id, record] of records) {
@@ -1016,6 +1207,43 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     mergeRows();
     syncRowIndexes();
     syncSelection();
+    focusAfterDisable(focused);
+    if (!rebound.length && !cleanupErrors.length) return;
+    const complete = () => {
+      const priorFocus = root.ownerDocument.activeElement;
+      try {
+        for (const record of rebound) {
+          hooks.after(record.id, () => check(record.id));
+          if (options.rows.get(record.id)?.status === "delete") for (const control of record.controls) control.disabled = true;
+        }
+        if (hooks.enabled) check();
+        if (rebound.length) { mergeRows(); syncSelection(); viewport?.invalidate(); }
+        focusAfterDisable(priorFocus);
+        cleanupFailure();
+      } catch (cause) {
+        for (const record of rebound) { hooks.release(record.id); resetRecord(record); }
+        cleanupErrors.length = 0;
+        throw cause;
+      }
+    };
+    if (deferHooks) return complete;
+    complete();
+  }
+
+  function focusContent(): void {
+    const candidates = [...root.querySelectorAll<HTMLElement>(
+      'tbody button:not(:disabled), tbody input:not(:disabled), tbody textarea:not(:disabled), tbody select:not(:disabled)'
+    ), ...root.querySelectorAll<HTMLElement>('thead button:not(:disabled)')];
+    if (candidates.some(focusVisible)) return;
+    if (!root.hasAttribute("tabindex")) { root.tabIndex = -1; rootFocusTabIndex = true; }
+    focusVisible(root);
+  }
+
+  function focusAfterDisable(focused: Element | null): void {
+    if (!(focused instanceof HTMLElement) || !focused.matches(":disabled")) return;
+    const row = focused.closest<HTMLTableRowElement>("tr");
+    const active = root.ownerDocument.activeElement;
+    if (row && rowIds.has(row) && (active === focused || active === root.ownerDocument.body)) focusContent();
   }
 
   function mergeRows(): void {
@@ -1023,7 +1251,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     body.merge(mountedIds.flatMap(id => {
       const record = records.get(id);
       return record ? [{ elements: record.elements, mergeCells: record.mergeCells,
-        keys: mergeKeys.get(id)!, index: visibleIndexes.get(id)! }] : [];
+        keys: mergeKeys.get(id)!, index: visibleIndexes.get(id)!, status: options.rows.get(id)?.status }] : [];
     }), root.ownerDocument.activeElement);
   }
 
@@ -1057,14 +1285,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     const reset = target.closest<HTMLButtonElement>("button[data-clear-filter]");
     if (reset && root.tHead?.contains(reset) && !reset.matches(":disabled")) {
-      columnFilters.setColumnFilter(reset.getAttribute("data-clear-filter")!, null);
+      setColumnFilter(reset.getAttribute("data-clear-filter")!, null);
       return;
     }
     const action = target.closest<HTMLButtonElement>("button[data-row-action]");
     if (action && !action.matches(":disabled")) {
       const id = rowIds.get(action.closest("tr")!);
       const row = id === undefined ? undefined : options.rows.get(id);
-      if (row && row.status !== "delete") options.onRowAction?.({ action: action.getAttribute("data-row-action")!, id: row.id, row, element: action, event });
+      if (row) options.onRowAction?.({ action: action.getAttribute("data-row-action")!, id: row.id, row, element: action, event });
       return;
     }
     const button = target.closest<HTMLButtonElement>("button[data-select-row]");
@@ -1076,7 +1304,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   function reveal(id: RowId): void {
     active();
     const row = options.rows.get(id);
-    if (!row || row.status === "delete" || !visibleIds.includes(id)) {
+    if (!row || !visibleIds.includes(id)) {
       throw gridError("GRID_VIEWPORT_ROW", "Reveal needs a row in the current logical page.", { id });
     }
     if (viewport) {
@@ -1285,7 +1513,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (typeof text !== "string") throw gridError("GRID_PASTE_TEXT", "Paste needs clipboard text.");
     const rowIndex = visibleIds.indexOf(start?.id);
     const first = records.get(start?.id);
-    if (rowIndex < 0 || !first && !viewport) throw gridError("GRID_PASTE_TARGET", "Paste needs a visible row.", { id: start?.id });
+    if (rowIndex < 0 || options.rows.get(start?.id)?.status === "delete" || !first && !viewport) throw gridError("GRID_PASTE_TARGET", "Paste needs a visible editable row.", { id: start?.id });
     const binding = (record: RenderedRow<T>, field: typeof pasteFields[number]) =>
       field.text >= 0 ? record.texts[field.text] : record.selects[field.select];
     const layout = columns.columns();
@@ -1360,6 +1588,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (!issues.length) for (const [offset, cells] of matrix.entries()) {
         const id = visibleIds[rowIndex + offset];
         const row = options.rows.get(id)!;
+        if (row.status === "delete") continue;
         const record = records.get(id);
         const pending = new Map(drafts.get(id));
         const pasted = new Set<string>();
@@ -1473,11 +1702,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           catch { committed = true; }
           if (committed) {
             clearPasted();
-            try { if (!disposed) render()?.(); } catch { /* Preserve the committed batch's first error. */ }
+            try { if (!disposed) bindRows(); } catch { /* Preserve the committed batch's first error. */ }
           }
           throw cause;
         } finally { pasteCommit = false; }
-        if (!disposed && staged.size) render()?.();
+        if (!disposed && staged.size) bindRows();
       }
     } finally { pasting = false; }
     const result = validationResult(issues);
@@ -1504,6 +1733,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   root.addEventListener("paste", onPaste);
   root.addEventListener("focusout", onFocusOut);
   let unsubscribe = () => {};
+  boundRoots.add(root);
   try {
     if (options.viewport) viewport = createGridViewport(root, anchor.parentElement as HTMLTableSectionElement,
       anchor, options.viewport, renderWindow);
@@ -1516,17 +1746,19 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         const next = new Set(columnFilters.columnFilter(key) ?? columnFilters.filterChoices(key).map(choice => choice.value));
         for (const choice of binding.shown) next.delete(choice.value);
         for (const value of values) next.add(value);
-        try { columnFilters.setColumnFilter(key, [...next]); }
+        try { setColumnFilter(key, [...next]); }
         catch (cause) { refreshFilters(); throw cause; }
       } });
       binding = { element: select, key, handle, shown: [] };
       filterBindings.push(binding);
     }
     unsubscribe = options.rows.subscribe(onRows);
-    render()?.();
-    boundRoots.add(root);
+    render(null)?.();
   } catch (cause) {
+    boundRoots.delete(root);
     unsubscribe();
+    failedPrunes.length = 0;
+    hooks.dispose();
     root.removeEventListener("click", onClick);
     root.removeEventListener("input", onInput);
     root.removeEventListener("change", onChange);
@@ -1544,11 +1776,34 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     for (const release of templateReleases) release();
     columns.dispose();
+    restoreChanged();
+    restoreEmpty?.();
     body.restore();
     throw cause;
   }
 
   return {
+    defaults,
+    refresh() {
+      bindable();
+      for (const record of records.values()) resetRecord(record);
+      let notify: (() => void) | undefined;
+      try { notify = refreshView(); }
+      catch (cause) { failBinding(cause); }
+      notify?.();
+    },
+    statusFilter() { active(); return statuses; },
+    setStatusFilter(values) {
+      bindable();
+      const next = checkedStatuses(values);
+      if (next.length === statuses.length && next.every((status, index) => status === statuses[index])) return;
+      const previous = statuses;
+      statuses = next;
+      let notify: (() => void) | undefined;
+      try { notify = refreshView(); }
+      catch (cause) { statuses = previous; failBinding(cause); }
+      notify?.();
+    },
     paste,
     reveal,
     columns() {
@@ -1574,7 +1829,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     checkAll(checked, scope) { active(); selection.checkAll(checked, scope); },
     checkState(scope) { active(); return selection.checkState(scope); },
     columnFilter(key) { active(); return columnFilters.columnFilter(key); },
-    setColumnFilter(key, values) { active(); columnFilters.setColumnFilter(key, values); },
+    setColumnFilter,
     filterChoices(key, search) { active(); return columnFilters.filterChoices(key, search); },
     setSort(compare, indicator) {
       active();
@@ -1589,7 +1844,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       filter = predicate;
       let notify: (() => void) | undefined;
       try { notify = refreshView(); }
-      catch (cause) { filter = previous; throw cause; }
+      catch (cause) { filter = previous; failBinding(cause); }
       notify?.();
     },
     setPage(request) {
@@ -1602,7 +1857,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         notify = refreshView();
       } catch (cause) {
         pageRequest = previousRequest;
-        throw cause;
+        failBinding(cause);
       }
       notify?.();
     },
@@ -1624,6 +1879,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (disposed) return;
       disposed = true;
       unsubscribe();
+      failedPrunes.length = 0;
+      hooks.dispose();
       root.removeEventListener("click", onClick);
       root.removeEventListener("input", onInput);
       root.removeEventListener("change", onChange);
@@ -1655,9 +1912,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       headerOriginals.clear();
       authoredHeaders.clear();
       columns.dispose();
+      restoreChanged();
+      restoreEmpty?.();
       if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
       boundRoots.delete(root);
       body.restore();
+      cleanupFailure();
     }
   };
 }

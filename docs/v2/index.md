@@ -2,19 +2,19 @@
 
 * [Tree and DatePicker in two CVC layouts](tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
-* [Interactive Grid contract demo](grid-demo.md) - Exercise Grid controls, validation policies, native choice groups, and two authored row-block layouts while inspecting raw Rows state. (draft)
+* [Interactive Grid contract demo](grid-demo.md) - Exercise Grid status views, clean append, owned row resources, native defaults, and two HTML layouts with raw Rows inspection. (draft)
 * [Authored advanced Grid in two layouts](advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 
 * [Natural-JS 2.0 module boundaries](architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
 * [Natural-JS 2.0 package](package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 communicator](comm.md) - Fetch requests with explicit JSON or body input, response decoding, hooks, and cancellation. (draft)
-* [Natural-JS 2.0 rows](data.md) - Immutable JSON row snapshots with stable identity, ordered insertion, movement and copying, change tracking, and subscriptions. (draft)
+* [Natural-JS 2.0 rows](data.md) - Immutable JSON rows with stable identity, clean batch append, ordered edits, retained deletion snapshots, and subscriptions. (draft)
 * [CVC pages in main content, Popup, and Tabs](page-containers-example.md) - One picker PageDefinition shares Rows across main content, Popup, and People and Preview Tabs in two authored MDI layouts. (draft)
 * [Employee screen in two authored layouts](employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)
 * [Migrating a 1.x screen to Natural-JS 2.0](migration.md) - Move a 1.x search/list/detail screen, changed-row save, and Popup or Tab page to scoped ESM APIs. (draft)
 * [bindForm](form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, explicit display, retained rules, and accessible errors. (draft)
 * [FrameworkError](framework-error.md) - Shared 2.0 error with a stable code, API name, message, cause, and optional detail. (draft)
-* [bindGrid](grid.md) - Bind authored table records to Rows with native choice groups, merging, bounded rendering, atomic paste, and accessible validation. (draft)
+* [bindGrid](grid.md) - Bind authored table records with status views, owned row hooks, native defaults, bounded rendering, paste, and accessible validation. (draft)
 * [bindList](list.md) - Bind an authored native list to Rows with read-only fields, row-local choices, selection, and paging. (draft)
 * [bindPagination](pagination.md) - Connect authored page buttons to explicit one-based page state and change requests. (draft)
 * [openPopup](popup.md) - Run one CVC page in an authored native dialog and settle its result after close and cleanup. (draft)

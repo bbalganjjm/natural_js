@@ -1,7 +1,7 @@
 ---
 type: API Reference
 title: Natural-JS 2.0 rows
-description: Immutable JSON row snapshots with stable identity, ordered insertion, movement and copying, change tracking, and subscriptions.
+description: Immutable JSON rows with stable identity, clean batch append, ordered edits, retained deletion snapshots, and subscriptions.
 tags: [data, rows, typescript]
 status: draft
 symbols: [RowId, Snapshot, RowStatus, RowSnapshot, RowChange, RowsEvent, Rows, createRows]
@@ -9,10 +9,10 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Row store runtime and types
-    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
-generated: { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
+generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T11:46:43Z }
+  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 ---
 
 The `./data` entry exports `createRows` and row types. It stores JSON-compatible rows without adding framework fields to business values, and uses store-local numeric IDs for identity.[^data]
@@ -41,8 +41,9 @@ Accepts an optional array of plain, acyclic JSON-compatible row objects. It clon
 | Store member | Behavior |
 |---|---|
 | `replace(values)` | Replaces all rows with clean copies and new IDs; existing IDs are never reused. |
-| `entries()` | Returns non-deleted rows in store order. The returned frozen array is cached until a change. |
+| `entries(options?)` | Returns non-deleted rows by default; `{ includeDeleted: true }` includes retained deletion snapshots in store order. Each frozen projection has its own cache. |
 | `get(id)` | Returns a row snapshot, including a row marked for deletion, or `undefined`. |
+| `append(values)` | Loads a validated batch of clean rows at the end; returns frozen new IDs and preserves existing identities, values and pending changes. |
 | `add(value, before?)` | Adds an inserted row before a live RowId, or appends when omitted; returns a new ID. |
 | `move(id, before?)` | Moves a live row before a live RowId, or to the end when omitted. |
 | `copy(id, before?)` | Deeply copies the committed source value into a new inserted row at the requested position; returns its new ID. |
@@ -54,7 +55,17 @@ Accepts an optional array of plain, acyclic JSON-compatible row objects. It clon
 | `subscribe(listener)` | Calls `listener(event)` after a mutation or `revert` attempt and returns an unsubscribe function. An existing no-argument listener remains valid. Disposal during notification stops delivery to remaining listeners. |
 | `dispose()` | Clears rows and listeners; later operations fail with `ROWS_DISPOSED`. Repeated disposal is safe. |
 
-A no-op `set`, net no-op `setMany`, unchanged `move`, and repeated `remove` of a deleted row do not notify. A clean-row `revert(id)` or an all-clean `revert()` sends an event with `changed: false` so subscribers can clear local drafts without invalidating the cached `entries()` and `changes()` arrays. Row snapshots remain stable until that row changes.[^data]
+A no-op `set`, net no-op `setMany`, empty `append`, unchanged `move`, and repeated `remove` of a deleted row do not notify. A clean-row `revert(id)` or an all-clean `revert()` sends an event with `changed: false` so subscribers can clear local drafts without invalidating the cached entry projections and `changes()` arrays. Row snapshots remain stable until that row changes.[^data]
+
+## `entries(options?)` and `append(values)`
+
+`entries({ includeDeleted: true })` returns all retained snapshots in Map order. It shares row snapshot objects with the live projection but uses a separate frozen-array cache. Omission or `false` preserves the existing live-only contract. Invalid option objects or a nonboolean `includeDeleted` raise `ROW_VALUE` under `Rows.entries`.[^data]
+
+`append(values: readonly T[]): readonly RowId[]` loads clean records, unlike `add` and `copy`, which create inserted records. It validates and clones the complete batch before allocating IDs or changing state. An invalid later value leaves the batch unapplied; successful append assigns new monotonic IDs, preserves all prior snapshots/order/edits/tombstones, and emits one frozen `append` event carrying those IDs. An empty array returns frozen empty IDs without invalidating caches or notifying. Appended values do not enter `changes()` until edited or removed.[^data]
+
+Application getter side effects follow the same revision/disposal checks as `replace`; a stale outer append fails without undoing the application's inner write. Subscriber failures propagate after the batch commits and later live subscribers receive it. A caught subscriber error is not permission to append the same batch again. CVC/controller code owns requests, cancellation and the decision to append while its page remains active.[^data]
+
+Removing an original row retains its original value with `delete` status, including through `get` and inclusive `entries`; unsaved edited values are not its deletion snapshot. `changes()` also uses the original delete value. Inserted-row removal remains physical. [Grid](grid.md) can explicitly show these retained records. The 1.x edited-deletion display difference remains a P0 obligation, not an approved omission.[^data]
 
 ## `add(value, before?)`, `move(id, before?)`, `copy(id, before?)`
 
@@ -74,7 +85,7 @@ Scalar equality uses `Object.is`, including distinct `0` and `-0`; nested arrays
 
 # Events
 
-`RowsEvent` has `type: "replace" | "add" | "move" | "set" | "setMany" | "remove" | "revert"` and `changed: boolean`. `replace` has no target; `add`, `move`, `set`, and `remove` carry their target `id`; `setMany` carries a frozen `ids: readonly RowId[]` instead of `id`. `revert(id)` carries that `id`, while `revert()` omits it. Actual value/order mutations have `changed: true`; only a clean `revert` has `changed: false`. Events are frozen and delivered synchronously. If a subscriber throws, later live subscribers still receive the same event, then the first thrown value is propagated to the caller. The data mutation has already happened and is not rolled back. Unsubscription and disposal still stop delivery to affected listeners.[^data]
+`RowsEvent` has `type: "replace" | "append" | "add" | "move" | "set" | "setMany" | "remove" | "revert"` and `changed: boolean`. `replace` has no target; `add`, `move`, `set`, and `remove` carry their target `id`; `append` and `setMany` carry frozen `ids: readonly RowId[]` instead of `id`. Append lists all newly loaded IDs; setMany lists only effective updates. `revert(id)` carries that `id`, while `revert()` omits it. Actual value/order mutations have `changed: true`; only a clean `revert` has `changed: false`. Events are frozen and delivered synchronously. If a subscriber throws, later live subscribers still receive the same event, then the first thrown value is propagated to the caller. The data mutation has already happened and is not rolled back. Unsubscription and disposal still stop delivery to affected listeners.[^data]
 
 # Pitfalls
 
@@ -93,6 +104,7 @@ const rows = createRows([
   { name: "Ada", options: [{ label: "First", value: 1 }] }
 ]);
 const id = rows.entries()[0].id;
+rows.append([{ name: "Grace", options: [{ label: "First", value: 1 }] }]); // Clean loaded record.
 const unsubscribe = rows.subscribe(event => {
   if (event.changed) console.log(rows.entries().length);
 });

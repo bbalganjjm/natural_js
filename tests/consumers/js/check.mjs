@@ -94,6 +94,18 @@ controls.setMany([{ id: controls.entries()[0].id,
 assert.deepEqual(controls.changes()[0].value.assignment,
   { mode: "remote", tags: [], selected: [22, false, null] }, "Grouped control values remain raw JSON in the installed save payload.");
 assert.throws(() => controls.entries()[0].value.assignment.selected.push("Bypass control snapshot"), TypeError);
+const existingControl = controls.entries()[0];
+const loaded = controls.append([{ assignment: { mode: "remote", tags: [], selected: [22, false, null] } }]);
+assert(Object.isFrozen(loaded));
+assert.equal(controls.get(existingControl.id), existingControl, "A loaded page preserves existing snapshots.");
+assert.equal(controls.get(loaded[0]).status, "clean");
+assert.deepEqual(controls.changes().map(row => row.status), ["update"], "Loaded rows cannot become inserted save changes.");
+controls.remove(existingControl.id);
+assert.deepEqual(controls.entries().map(row => row.id), loaded);
+assert.deepEqual(controls.entries({ includeDeleted: true }).map(row => [row.id, row.status]),
+  [[existingControl.id, "delete"], [loaded[0], "clean"]]);
+assert.deepEqual(controls.changes().map(row => [row.id, row.status]), [[existingControl.id, "delete"]]);
+assert.deepEqual(controls.get(existingControl.id).value.assignment.selected, [11], "Deletion keeps its original payload.");
 controls.dispose();
 
 const originalFetch = globalThis.fetch;
@@ -123,5 +135,8 @@ await assert.rejects(import("@bbalganjjm/natural_js/ui/native-control"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });
 await assert.rejects(import("@bbalganjjm/natural_js/ui/field-render"), {
+  code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
+});
+await assert.rejects(import("@bbalganjjm/natural_js/ui/grid-hooks"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });

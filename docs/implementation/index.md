@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.4 status and row lifecycle](m10-lifecycle-plan.md) - Preserve row identity through explicit status views, authored defaults, row cleanup, clean batch append and empty markup. (draft)
+
 * [Natural-JS 2.0 M10.9.3 controls and validation](m10-controls-plan.md) - Complete Grid control values, explicit display, exclusive checks and validation interaction using shared native field semantics. (draft)
 
 * [Natural-JS 2.0 M13 whole-code review and remediation](m13-review-plan.md) - Required whole-code review and verified remediation after feature parity and before personal testing or release preparation. (draft)

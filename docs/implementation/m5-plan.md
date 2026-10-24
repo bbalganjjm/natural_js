@@ -15,11 +15,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
-    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
+    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid pilot
-    git_blob: f1194e961ddbd2881c365362b45731c694a01716
+    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
   - id: legacy-data
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator implementation

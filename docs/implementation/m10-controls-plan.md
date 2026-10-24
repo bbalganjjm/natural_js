@@ -8,15 +8,15 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 5336f2f7e289a16e7d44b0d084fee32998c8c762
+    git_blob: 87470e331d6c6c551c1787cd48a52cdddc1c8108
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
-    git_blob: f1194e961ddbd2881c365362b45731c694a01716
+    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
-    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
+    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics
@@ -48,11 +48,11 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Live all-options Grid and two authored record layouts
-    git_blob: 45f0dceff456a17899ef36c6bbf9f44fbe5d5004
+    git_blob: b97ee4c4cbea81aaabb4e3c8ceb2bcb5ed1cafd7
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Unchanged flat, nested and multi-tr viewport budgets
-    git_blob: 3e720fc86181e9f6d61422c575390a626946b643
+    git_blob: 7370923a46bd5960e8803319da24777f1128262c
   - id: evidence
     resource: evidence/m1093-verification.json
     title: Frozen execution inputs, raw gates, exact artifact and measurements

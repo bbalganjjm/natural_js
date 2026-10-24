@@ -31,6 +31,97 @@ test("authored table binds raw nested choices, formatter, and accessible labels"
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
 
+test("status views expose protected deletions, Undo, clean append and authored empty content", async ({ page }) => {
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
+  await page.locator('[data-action="select-first"]').click();
+  await page.locator('[data-action="set-salary"]').click();
+  await page.locator("[data-status-filter]").selectOption("modified");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toHaveAttribute("data-row-status", "update");
+  await expect(rows.first().locator("[data-demo-row-status]")).toHaveText("Status: update");
+  await rows.first().locator('[data-row-action="undo"]').click();
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("[data-grid] [data-empty]")).toBeVisible();
+  await expect(page.locator("[data-grid]")).toHaveAttribute("data-changed", "false");
+
+  await page.locator("[data-status-filter]").selectOption("live");
+  await expect(rows).toHaveCount(6);
+  await page.locator('[data-action="remove"]').click();
+  await expect(rows).toHaveCount(5);
+  await page.locator("[data-status-filter]").selectOption("deleted");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toHaveAttribute("data-row-status", "delete");
+  await expect(rows.first().locator("[data-select-row]")).toBeDisabled();
+  await expect(rows.first().locator('[data-field="salary"]')).toBeDisabled();
+  await rows.first().locator('[data-row-action="undo"]').click();
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("[data-grid] [data-empty]")).toBeVisible();
+  await page.locator("[data-status-filter]").selectOption("all");
+  await expect(rows).toHaveCount(6);
+  await page.locator('[data-action="append"]').click();
+  await expect(rows).toHaveCount(8);
+  await expect(rows.nth(6)).toHaveAttribute("data-row-status", "clean");
+  await expect(page.locator("[data-changes]")).toHaveText("[]");
+  await expect(page.locator("[data-event]")).toContainText("append RowIds 7, 8");
+  expect(JSON.parse(await page.locator("[data-bind-state]").textContent() ?? "{}"))
+    .toMatchObject({ event: "append", total: 8, filtered: 8, visible: 8, mounted: 8 });
+  await page.locator("[data-status-filter]").selectOption("empty");
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("[data-grid] [data-empty]")).toContainText("No employees match");
+  await page.locator("[data-status-filter]").selectOption("live");
+  await expect(rows).toHaveCount(8);
+});
+
+test("authored defaults feed a typed application factory and Undo removes only its inserted employee", async ({ page }) => {
+  await page.locator('[data-action="defaults"]').click();
+  const defaults = JSON.parse(await page.locator("[data-defaults]").textContent() ?? "{}");
+  expect(defaults).toEqual({ email: "new.employee@example.com", phone: "+1 555 0100", profile: { team: "Platform" },
+    assignment: { chosen: null }, active: true, notes: "Created from authored defaults", salary: 200 });
+  expect(defaults).not.toHaveProperty("name");
+  await page.locator('[data-action="create-defaults"]').click();
+  const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
+  await expect(rows).toHaveCount(7);
+  await expect(rows.last()).toHaveAttribute("data-row-status", "insert");
+  await expect(rows.last().locator('[data-field="salary"]')).toHaveValue("200");
+  await expect(rows.last().locator('[data-field="assignment.chosen"]')).toHaveValue("1");
+  expect(JSON.parse(await page.locator("[data-snapshot]").textContent() ?? "{}"))
+    .toMatchObject({ id: 7, status: "insert", value: { name: "New employee 7", email: defaults.email, salary: 200,
+      notes: defaults.notes, assignment: { chosen: 1 } } });
+  await page.locator('[data-action="validate-selected"]').click();
+  await expect(page.locator("[data-status]")).toHaveText("Validation passed.");
+  await rows.last().locator('[data-row-action="undo"]').click();
+  await expect(rows).toHaveCount(6);
+  await expect(page.locator("[data-changes]")).toHaveText("[]");
+});
+
+test("row resource tracking releases native listeners through refresh, disposal and rebinding", async ({ page }) => {
+  const state = async () => JSON.parse(await page.locator("[data-row-resources-state]").textContent() ?? "{}");
+  await page.locator("[data-row-resources]").check();
+  expect(await state()).toMatchObject({ active: 6, clicks: 0 });
+  await expect(page.locator("[data-grid] tbody tr[data-demo-before]")).toHaveCount(6);
+  const label = page.locator("[data-grid] tbody [data-demo-row-status]").first();
+  await label.click();
+  expect(await state()).toMatchObject({ active: 6, clicks: 1 });
+  const previous = JSON.parse(await page.locator("[data-bind-state]").textContent() ?? "{}");
+  await page.locator('[data-action="refresh"]').click();
+  expect(JSON.parse(await page.locator("[data-bind-state]").textContent() ?? "{}"))
+    .toMatchObject({ calls: previous.calls + 1, event: null, visible: 6, mounted: 6 });
+  expect(await state()).toMatchObject({ active: 6, clicks: 1 });
+  await label.click();
+  expect(await state()).toMatchObject({ active: 6, clicks: 2 });
+  await page.locator('[data-action="dispose"]').click();
+  expect(await state()).toMatchObject({ active: 0, clicks: 2 });
+  await expect(page.locator("[data-grid] [data-demo-before]")).toHaveCount(0);
+  await page.locator('[data-action="rebind"]').click();
+  expect(await state()).toMatchObject({ active: 6, clicks: 2 });
+  await label.click();
+  expect(await state()).toMatchObject({ active: 6, clicks: 3 });
+  await page.locator("[data-row-resources]").uncheck();
+  expect(await state()).toMatchObject({ active: 0, clicks: 3 });
+  await label.click();
+  expect(await state()).toMatchObject({ active: 0, clicks: 3 });
+});
+
 test("sort, filter, and local pages preserve RowId selection", async ({ page }) => {
   const rows = page.locator("[data-grid] tbody tr:not([data-row-template])");
   await page.locator('[data-action="select-first"]').click();
@@ -290,7 +381,7 @@ test("viewport mode bounds a 5,000-row dataset and reveals a row without selecti
   await expect(page.locator("[data-viewport-state]")).toContainText("5,000 store rows");
   await expect(page.locator("[data-viewport-state]")).toContainText("viewport on");
   expect(await rows.count()).toBeLessThan(80);
-  await expect(page.locator("[data-grid]")).toHaveAttribute("aria-rowcount", "5002");
+  await expect(page.locator("[data-grid]")).toHaveAttribute("aria-rowcount", "5003");
   await page.locator("[data-reveal-row]").fill("2500");
   await page.locator('[data-action="reveal"]').click();
   await expect.poll(() => rows.locator('[data-field="name"]').allTextContents()).toContain("NEW EMPLOYEE 2500");
@@ -371,8 +462,10 @@ test("two authored row-block layouts share edits, nested choices and hierarchica
   await expect(three.locator('[data-merge="team"]:visible')).toHaveCount(4);
   await page.locator("[data-block-department]").fill("Engineering");
   await page.locator('[data-block-action="keys"]').click();
-  await expect(two.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "6");
-  await expect(three.locator('[data-merge="team"]:visible')).toHaveCount(3);
+  await expect(two.locator("tbody tr").first()).toHaveAttribute("data-row-status", "update");
+  await expect(two.locator('[data-merge="department"]').first()).toHaveAttribute("rowspan", "2");
+  await expect(two.locator('[data-merge="department"]').nth(1)).toHaveAttribute("rowspan", "4");
+  await expect(three.locator('[data-merge="team"]:visible')).toHaveCount(4);
   await expect(page.locator("[data-grid] tbody tr")).toHaveCount(6);
   await expect(page.locator("[data-selection]")).toHaveText("No row selected");
 });

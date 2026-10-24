@@ -182,6 +182,50 @@ try {
   assert.equal(blocks.value.choice, 22);
   assert.equal(blocks.value.note, "Pasted note");
 
+  const lifecycle = await page.evaluate(() => {
+    const state = window.packedConsumer, h = state.lifecycle;
+    const defaults = h.grid.defaults();
+    const inserted = h.rows.add(defaults);
+    h.grid.setStatusFilter(["insert"]);
+    const insertedView = { id: inserted, status: h.table.tBodies[0].rows[0].dataset.rowStatus,
+      name: h.table.querySelector('[data-field="name"]').value };
+    const clicks = h.clicks;
+    h.grid.refresh(); h.table.tBodies[0].rows[0].click();
+    const refreshed = { active: h.active, once: h.clicks === clicks + 1 };
+    h.grid.setStatusFilter(["clean", "insert", "update", "delete"]);
+    h.rows.remove(1);
+    const deleted = h.table.tBodies[0].rows[0];
+    const protectedDeletion = deleted.dataset.rowStatus === "delete" && deleted.querySelector("input").disabled &&
+      h.rows.entries().length === 1 && h.rows.entries({ includeDeleted: true }).length === 2;
+    deleted.querySelector("button").click();
+    const undo = h.rows.get(1).status === "clean" && h.rows.get(1).value.name === "Original";
+    h.table.tBodies[0].rows[1].querySelector("button").click();
+    h.grid.setStatusFilter(["delete"]);
+    const empty = !h.table.querySelector("[data-empty]").hidden && h.active === 0;
+    const original = h.rows.get(1);
+    const ids = h.rows.append([{ name: "Loaded page one", score: 11 }, { name: "Loaded page two", score: 12 }]);
+    const appended = { ids, clean: ids.every(id => h.rows.get(id).status === "clean"), original: h.rows.get(1) === original,
+      changes: h.rows.changes(), events: h.events.filter(event => event.type === "append"), bind: h.binds.at(-1) };
+    h.grid.setStatusFilter(["clean"]);
+    const shown = [...h.table.querySelectorAll('tbody [data-field="name"]')].map(input => input.value);
+    const active = h.active;
+    const row = h.table.tBodies[0].rows[0], beforeDispose = h.clicks;
+    h.grid.dispose(); row.click();
+    const cleanup = { active: h.active, noLateClick: h.clicks === beforeDispose, restored: h.table.outerHTML === h.original };
+    h.stop(); h.rows.dispose(); h.root.remove(); delete state.lifecycle;
+    return { defaults, insertedView, refreshed, protectedDeletion, undo, empty, appended, shown, active, cleanup };
+  });
+  assert.deepEqual(lifecycle.defaults, { name: "Default employee", score: 25 });
+  assert.deepEqual(lifecycle.insertedView, { id: 2, status: "insert", name: "Default employee" });
+  assert.deepEqual(lifecycle.refreshed, { active: 1, once: true }, "Refresh must replace owned row listeners without accumulating them.");
+  assert(lifecycle.protectedDeletion && lifecycle.undo && lifecycle.empty, "Installed status views must protect deletions, allow Undo and toggle authored empty markup.");
+  assert.deepEqual(lifecycle.appended, { ids: [3, 4], clean: true, original: true, changes: [],
+    events: [{ type: "append", ids: [3, 4], changed: true }],
+    bind: { total: 3, filtered: 0, visible: 0, mounted: 0, event: "append" } });
+  assert.deepEqual(lifecycle.shown, ["Original", "Loaded page one", "Loaded page two"]);
+  assert.equal(lifecycle.active, 3);
+  assert.deepEqual(lifecycle.cleanup, { active: 0, noLateClick: true, restored: true });
+
   const ordered = await page.evaluate(() => {
     const { rows, grid } = window.packedConsumer.viewport;
     const [first] = rows.entries();

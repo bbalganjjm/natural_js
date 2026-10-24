@@ -96,6 +96,42 @@ test("shared row moves preserve nested drafts errors and the attached focused Gr
     sameSnapshot: true, stored: "Ada", formats: 0, order: [2, 3, 4, 1], invalid: ["true", "true", "true"] });
 });
 
+test("clean page append updates shared views without replacing Form or Grid drafts and focused nodes", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.rowOrdering;
+    h.form.bind(1); h.grid.select(1); h.grid.setSelected([1]); h.grid.setChecked([1]); h.list.select(1);
+    const snapshot = h.rows.get(1);
+    const detail = h.formRoot.querySelector<HTMLInputElement>("input")!;
+    detail.value = "x"; detail.dispatchEvent(new Event("input", { bubbles: true }));
+    const editor = h.table.querySelector<HTMLInputElement>("tbody input")!;
+    editor.value = "g"; editor.dispatchEvent(new Event("input", { bubbles: true })); h.grid.validate(1); h.list.validate(2);
+    const row = editor.closest("tr")!;
+    const errors = [h.formRoot.querySelector("output")!, row.querySelector("output")!, h.listRoot.children[1].querySelector("output")!];
+    const messages = errors.map(error => error.textContent);
+    const formats = h.formFormats;
+    detail.focus(); detail.setSelectionRange(1, 1);
+    let blur = 0; detail.addEventListener("blur", () => blur++);
+    const observer = new MutationObserver(() => {}); observer.observe(h.table.tBodies[0], { childList: true });
+    const events: { event: RowsEvent; grid: string[]; list: string[] }[] = [];
+    h.rows.subscribe(event => events.push({ event,
+      grid: [...h.table.querySelectorAll('[data-field="key"]')].map(element => element.textContent!),
+      list: [...h.listRoot.querySelectorAll('[data-field="key"]')].map(element => element.textContent!) }));
+    const ids = h.rows.append(["Edith", "Frances"].map((name, index) => ({ key: index === 0 ? "E" : "F", rank: index + 5,
+      profile: { name, choice: 1, options: [{ label: "One", value: 1 }] } })));
+    const detached = observer.takeRecords().some(change => [...change.removedNodes].includes(row)); observer.disconnect();
+    return { ids, statuses: ids.map(id => h.rows.get(id)!.status), events, sameSnapshot: h.rows.get(1) === snapshot,
+      focus: document.activeElement === detail, caret: [detail.selectionStart, detail.selectionEnd], blur, detached,
+      drafts: [detail.value, editor.value], messages, after: errors.map(error => error.textContent), formats: h.formFormats - formats,
+      changes: h.rows.changes(), active: h.grid.selected(), selected: h.grid.selectedIds(), checked: h.grid.checkedIds(), list: h.list.selected() };
+  });
+  expect(result.messages.every(Boolean)).toBe(true);
+  expect(result.after).toEqual(result.messages);
+  expect(result).toMatchObject({ ids: [5, 6], statuses: ["clean", "clean"], sameSnapshot: true, focus: true,
+    caret: [1, 1], blur: 0, detached: false, drafts: ["x", "g"], formats: 0, changes: [],
+    active: 1, selected: [1], checked: [1], list: 1,
+    events: [{ event: { type: "append", ids: [5, 6], changed: true }, grid: ["A", "B", "C", "D", "E", "F"], list: ["A", "B", "C", "D", "E", "F"] }] });
+});
+
 test("a focused List control stays attached through moves and view sorting and recovers after filtering", async ({ page }) => {
   const result = await page.evaluate(() => {
     const h = window.rowOrdering; h.list.select(2); h.list.validate(2);

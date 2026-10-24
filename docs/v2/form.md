@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
+    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
+    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -46,10 +46,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -177,7 +177,7 @@ These are the changes needed when moving a Form declaration. The full applicatio
 - `data-field` is not a DOM `id`. Repeated and simultaneous authored views must avoid duplicate fixed IDs.[^path]
 - Form radio groups keep their authored native name/form-owner contract; [Grid](grid.md) allocates isolated clone names for repeated logical records. Explicit render factories must not mutate Rows or take another field's DOM.[^form][^render]
 
-A shared Rows `move` changes order only. Form retains its bound RowId, draft, validation message and current control focus without rerendering or rerunning formatters. Independent copied rows are separate snapshots; Form switches to one only through an explicit `bind(id)`. See [Rows](data.md) for order and copy semantics.[^form]
+A shared Rows `move` changes order only, and `append` adds separate clean records. Form retains its bound RowId, draft, validation message and current control focus for both notifications without rerendering or rerunning formatters. Independent copied or appended rows are separate snapshots; Form switches to one only through an explicit `bind(id)`. Form still rejects binding a deleted row even when another Grid shows retained deletion snapshots. See [Rows](data.md) for loaded-row, order and copy semantics.[^form]
 
 # Related
 

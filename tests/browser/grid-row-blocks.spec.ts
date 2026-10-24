@@ -200,7 +200,8 @@ test("native merges follow raw hierarchical values and projected page boundaries
     [{ span: 4, visible: true }, { span: 2, visible: true }],
     [{ span: 2, visible: false }, { span: 2, visible: true }]
   ]);
-  expect(result.edited[1].cells).toEqual([{ span: 6, visible: true }, { span: 4, visible: true }]);
+  expect(result.edited[1].cells).toEqual([{ span: 2, visible: true }, { span: 2, visible: true }]);
+  expect(result.edited[2].cells).toEqual([{ span: 4, visible: true }, { span: 2, visible: true }]);
   expect(result.firstPage.map(row => row.key)).toEqual(["4", "3"]);
   expect(result.firstPage[0].cells).toEqual([{ span: 4, visible: true }, { span: 2, visible: true }]);
   expect(result.secondPage).toEqual([{ key: "2", cells: [{ span: 2, visible: true }, { span: 2, visible: true }] }]);
@@ -382,7 +383,7 @@ test("scalar merge validation is atomic and direct cell fields retain column own
     let code = "none";
     try { bindGrid(table, { rows }); } catch (cause) { code = (cause as { code: string }).code; }
     const unchanged = table.outerHTML === original;
-    rows.set(1, "group", "A");
+    rows.replace([{ group: "A", name: "One" }, { group: "A", name: "Two" }]);
     const grid = bindGrid(table, { rows, columns: [{ key: "group" }, { key: "name" }], paste: true });
     const first = table.tBodies[0].rows[0].cells[0]; const second = table.tBodies[0].rows[1].cells[0];
     const initial = first.rowSpan === 2 && second.style.display === "none";

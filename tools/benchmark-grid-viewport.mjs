@@ -8,10 +8,11 @@ import { createServer } from "vite";
 
 const schema = "natural-js-grid-viewport-benchmark/v1";
 const count = 5000;
-const stages = ["initial", "reveal", "scroll", "columns", "paste", "move", "dispose"];
-const budgets = { flat: { initial: 120, reveal: 100, scroll: 100, columns: 150, paste: 2000, move: 100 },
-  nested: { initial: 180, reveal: 100, scroll: 100, columns: 150, paste: 2000, move: 100 },
-  blocks: { initial: 35, reveal: 100, scroll: 120, columns: 100, paste: 85, move: 100 } };
+const appendCount = 250;
+const stages = ["initial", "reveal", "scroll", "columns", "paste", "move", "append", "dispose"];
+const budgets = { flat: { initial: 120, reveal: 100, scroll: 100, columns: 150, paste: 2000, move: 100, append: 100 },
+  nested: { initial: 180, reveal: 100, scroll: 100, columns: 150, paste: 2000, move: 100, append: 100 },
+  blocks: { initial: 35, reveal: 100, scroll: 120, columns: 100, paste: 85, move: 100, append: 100 } };
 const cleanupBudget = { nodes: 8, jsEventListeners: 0, documents: 0 };
 function argumentsFrom(args) {
   const values = new Map();
@@ -69,7 +70,7 @@ async function main() {
       const samples = [];
       for (let run = 0; run < options.runs + options.warmup; run++) {
         const beforeFixture = await counters();
-        const sample = await page.evaluate(async ({ kind, count }) => {
+        const sample = await page.evaluate(async ({ kind, count, appendCount }) => {
           const { bindGrid, createRows } = window.viewportBenchmarkModules;
           const assert = (condition, message) => { if (!condition) throw new Error(message); };
           const blocks = kind === "blocks";
@@ -102,13 +103,13 @@ async function main() {
             section[aria-label="Benchmark employees"] output {display:block} section[aria-label="Benchmark employees"] output:empty {display:none}`;
           document.head.append(style); document.querySelector("main").append(root);
           const table = root.querySelector("table"); const original = table.outerHTML;
-          const data = Array.from({ length: count }, (_, index) => {
+          const rowValue = index => {
             const name = `Employee ${index + 1}` + (index % 7 === 0 ? " with an authored name wrapping over several lines in its row header" : "");
             return kind === "nested" ? { name, profile: { score: index, choice: 10,
               choices: [{ label: "Ten", value: 10 }, { label: "Twenty", value: 20 }] } }
               : { name, score: index, note: `Note ${index + 1}`, ...(blocks ? { group: `Group ${Math.floor(index / 25)}` } : {}) };
-          });
-          const rows = createRows(data); const ids = rows.entries().map(row => row.id);
+          };
+          const rows = createRows(Array.from({ length: count }, (_, index) => rowValue(index))); const ids = rows.entries().map(row => row.id);
           const scoreField = kind === "nested" ? "profile.score" : "score";
           const paste = Array.from({ length: pasteCount }, (_, index) => `${index + 100}\t${kind === "nested" ? "20" : `Pasted ${index + 1}`}`).join("\n");
           const events = []; const stop = rows.subscribe(event => events.push(event));
@@ -228,9 +229,47 @@ async function main() {
             "A moved viewport window must preserve the unrelated focused draft and caret.");
           const metrics = { initial, reveal, scroll, columns, paste: pasteMetric, move };
           window.viewportBenchmark = { root, table, rows, grid, style, original, authoredRoot, settled, inspect, metrics, stop,
+            append: async () => {
+              const previous = rows.entries();
+              const changesBefore = rows.changes();
+              const checkedBefore = grid.checkedIds();
+              const eventCount = events.length;
+              const bounds = root.getBoundingClientRect();
+              const anchor = mounted().find(row => {
+                const rect = row.getBoundingClientRect();
+                return rect.bottom > bounds.top + root.clientTop && rect.top < bounds.top + root.clientTop + root.clientHeight;
+              });
+              assert(anchor, "Append needs an existing intersecting scroll anchor.");
+              const top = anchor.getBoundingClientRect().top, scrollTop = root.scrollTop;
+              const values = Array.from({ length: appendCount }, (_, index) => rowValue(count + index));
+              let appended;
+              const metric = await timed(() => { appended = rows.append(values); });
+              const entries = rows.entries();
+              assert(appended.length === appendCount && entries.length === count + appendCount &&
+                previous.every((row, index) => entries[index] === row), "Append must preserve every existing snapshot and row position.");
+              assert(entries.slice(count).every((row, index) => row.id === appended[index] && row.status === "clean"),
+                "Loaded records must have new IDs and clean status.");
+              assert(events.length === eventCount + 1 && events.at(-1).type === "append" && events.at(-1).ids === appended &&
+                Object.isFrozen(appended) && Object.isFrozen(events.at(-1)), "Append must publish exactly one frozen batch.");
+              const changes = rows.changes();
+              assert(changes.length === changesBefore.length && changes.every((row, index) => row.id === changesBefore[index].id &&
+                row.status === changesBefore[index].status && row.value === changesBefore[index].value), "Loaded records cannot become inserted save changes.");
+              assert(document.activeElement === input && input.isConnected && input.value === "-" && input.selectionStart === 0 && input.selectionEnd === 1,
+                "Append must preserve the focused editor, invalid draft and caret.");
+              assert(grid.checkedIds() === checkedBefore, "Appending clean records must not change existing checked membership.");
+              const afterTop = anchor.getBoundingClientRect().top;
+              assert(anchor.isConnected && Math.abs(afterTop - top) <= 1 && Math.abs(root.scrollTop - scrollTop) <= 1,
+                "Append must preserve the existing scroll anchor within one CSS pixel.");
+              assert(table.getAttribute("aria-rowcount") === String((count + appendCount) * physicalRows + 1),
+                "Append must update the logical native table count.");
+              return { ...metric, appendedCount: appended.length, firstId: appended[0], lastId: appended.at(-1),
+                snapshotsPreserved: true, cleanRows: true, changesPreserved: true, focusedDraftPreserved: true, appendEvents: 1,
+                anchor: { rowIndex: Number(anchor.getAttribute("aria-rowindex")), beforeTop: top, afterTop, beforeScrollTop: scrollTop, afterScrollTop: root.scrollTop },
+                maximumMounted, maximumElements };
+            },
             get maximumMounted() { return maximumMounted; }, get maximumElements() { return maximumElements; } };
           return { ...metrics };
-        }, { kind, count });
+        }, { kind, count, appendCount });
         const beforeCycles = await counters();
         const cycles = await page.evaluate(async () => {
           const h = window.viewportBenchmark;
@@ -246,6 +285,20 @@ async function main() {
           return { count: 20, maximumMounted: h.maximumMounted, maximumElements: h.maximumElements, windows };
         });
         const afterCycles = await counters();
+        if (cdp) {
+          assert(afterCycles.nodes <= beforeCycles.nodes + cycles.maximumElements * 2,
+            "Post-GC DOM node growth exceeds two live viewport windows after twenty cycles.");
+          assert(afterCycles.jsEventListeners <= beforeCycles.jsEventListeners + 20,
+            "Post-GC event listener growth exceeds twenty after repeated scrolling.");
+        }
+        sample.append = await page.evaluate(() => window.viewportBenchmark.append());
+        const afterAppend = await counters();
+        if (cdp) {
+          assert(afterAppend.nodes <= afterCycles.nodes + sample.append.maximumElements * 2,
+            "Clean append DOM node growth exceeds two live viewport windows.");
+          assert(afterAppend.jsEventListeners <= afterCycles.jsEventListeners + 20,
+            "Clean append event listener growth exceeds twenty.");
+        }
         const disposed = await page.evaluate(async () => {
           const h = window.viewportBenchmark; h.root.dispatchEvent(new Event("scroll"));
           const start = performance.now(); h.grid.dispose(); await h.settled(); const metric = h.inspect(performance.now() - start);
@@ -280,15 +333,11 @@ async function main() {
         sample.cycling = cycles;
         sample.cleanup = { exactAuthoredMarkup: disposed.exactAuthoredMarkup, quietAfterLateEvents: disposed.quietAfterLateEvents,
           observedLateMutations: disposed.observedLateMutations };
-        sample.domCounters = { beforeFixture, beforeCycles, afterCycles, beforeFocusRelease, afterDispose };
+        sample.domCounters = { beforeFixture, beforeCycles, afterCycles, afterAppend, beforeFocusRelease, afterDispose };
         if (cdp) {
-          assert(afterCycles.nodes <= beforeCycles.nodes + cycles.maximumElements * 2,
-            "Post-GC DOM node growth exceeds two live viewport windows after twenty cycles.");
-          assert(afterCycles.jsEventListeners <= beforeCycles.jsEventListeners + 20,
-            "Post-GC event listener growth exceeds twenty after repeated scrolling.");
           for (const [counter, allowance] of Object.entries(cleanupBudget)) {
             assert(afterDispose[counter] <= beforeFixture[counter] + allowance,
-              `Post-disposal ${counter} ${afterDispose[counter]} exceed pre-fixture ${beforeFixture[counter]} plus ${allowance}; counters=${JSON.stringify({ beforeFixture, beforeCycles, afterCycles, beforeFocusRelease, afterDispose })}.`);
+              `Post-disposal ${counter} ${afterDispose[counter]} exceed pre-fixture ${beforeFixture[counter]} plus ${allowance}; counters=${JSON.stringify({ beforeFixture, beforeCycles, afterCycles, afterAppend, beforeFocusRelease, afterDispose })}.`);
           }
         }
         if (run >= options.warmup) samples.push(sample);
@@ -317,6 +366,8 @@ async function main() {
         focus: "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
         paste: "Flat/nested paste one thousand offscreen records; blocks paste one hundred. Each changes two fields in one atomic event; nested detail uses numeric Select values.",
         move: "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
+        append: { count: appendCount, medianBudgetMs: 100, anchorTolerancePx: 1,
+          operation: "After original operations and twenty scroll-cycle assertions, append 250 clean records in one event. Preserve every old snapshot/order, save changes, checks, focused node/draft/caret and scroll anchor. Dispose all 5,250 records under the original cleanup budget." },
         geometry: "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies the complete requested record rectangle and forward scroll advances logical intersection. Blocks record native physical-row heights, record bounds and merge spans; twenty cycle windows record actual intersections.",
         cleanup: "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
         memory: cdp ? "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim."

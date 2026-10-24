@@ -24,13 +24,15 @@ export interface RowChange<T> {
 export type RowsEvent =
   | { readonly type: "replace"; readonly changed: true }
   | { readonly type: "add" | "move" | "set" | "remove"; readonly id: RowId; readonly changed: true }
+  | { readonly type: "append"; readonly ids: readonly RowId[]; readonly changed: true }
   | { readonly type: "setMany"; readonly ids: readonly RowId[]; readonly changed: true }
   | { readonly type: "revert"; readonly id?: RowId; readonly changed: boolean };
 
 export interface Rows<T extends object> {
   replace(values: readonly T[]): void;
-  entries(): readonly RowSnapshot<T>[];
+  entries(options?: { includeDeleted?: boolean }): readonly RowSnapshot<T>[];
   get(id: RowId): RowSnapshot<T> | undefined;
+  append(values: readonly T[]): readonly RowId[];
   add(value: T, before?: RowId): RowId;
   move(id: RowId, before?: RowId): void;
   copy(id: RowId, before?: RowId): RowId;
@@ -118,6 +120,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
   let disposed = false;
   let revision = 0;
   let entryCache: readonly RowSnapshot<T>[] | undefined;
+  let allEntryCache: readonly RowSnapshot<T>[] | undefined;
   let changeCache: readonly RowChange<T>[] | undefined;
   const rows = new Map<RowId, StoredRow<T>>();
   const listeners = new Set<(event: RowsEvent) => void>();
@@ -134,6 +137,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     if (event.changed) {
       revision++;
       entryCache = undefined;
+      allEntryCache = undefined;
       changeCache = undefined;
     }
     Object.freeze(event);
@@ -236,8 +240,17 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       nextId = id;
       notify({ type: "replace", changed: true });
     },
-    entries() {
+    entries(options) {
       active("Rows.entries");
+      if (options !== undefined && (!options || typeof options !== "object" || Array.isArray(options))) {
+        throw rowError("Rows.entries", "ROW_VALUE", "Row entry options require an object.");
+      }
+      const includeDeleted = options?.includeDeleted;
+      if (includeDeleted !== undefined && typeof includeDeleted !== "boolean") {
+        throw rowError("Rows.entries", "ROW_VALUE", "includeDeleted must be a boolean.");
+      }
+      active("Rows.entries");
+      if (includeDeleted) return allEntryCache ??= Object.freeze([...rows.values()].map(row => row.view));
       entryCache ??= Object.freeze([...rows.values()]
         .filter((row) => row.status !== "delete")
         .map((row) => row.view));
@@ -246,6 +259,23 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     get(id) {
       active("Rows.get");
       return rows.get(id)?.view;
+    },
+    append(values) {
+      active("Rows.append");
+      const version = revision;
+      if (!Array.isArray(values)) throw rowError("Rows.append", "ROW_VALUE", "Appended rows require an array.");
+      const prepared: FrozenRow[] = [];
+      for (const value of values) prepared.push(cloneRow(value, "Rows.append"));
+      unchanged(version, "Rows.append");
+      const ids: RowId[] = [];
+      for (const current of prepared) {
+        const id = nextId++;
+        rows.set(id, makeRow(id, current, false));
+        ids.push(id);
+      }
+      const appended = Object.freeze(ids);
+      if (appended.length) notify({ type: "append", ids: appended, changed: true });
+      return appended;
     },
     add(value, before) {
       active("Rows.add");
@@ -364,6 +394,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       listeners.clear();
       rows.clear();
       entryCache = undefined;
+      allEntryCache = undefined;
       changeCache = undefined;
     }
   };

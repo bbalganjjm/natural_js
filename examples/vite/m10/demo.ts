@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createRows } from "@bbalganjjm/natural_js/data";
+import type { RowStatus } from "@bbalganjjm/natural_js/data";
 import { bindGrid } from "@bbalganjjm/natural_js/ui";
 import type { GridColumn, GridHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 
@@ -43,6 +44,25 @@ function employee(index: number): Employee {
   };
 }
 
+function employeeFromDefaults(defaults: Record<string, unknown>, index: number): Employee {
+  const value = employee(index);
+  const profile = defaults.profile;
+  const team = profile && typeof profile === "object" && "team" in profile ? profile.team : undefined;
+  const assignment = defaults.assignment;
+  const chosen = assignment && typeof assignment === "object" && "chosen" in assignment ? assignment.chosen : undefined;
+  return {
+    ...value,
+    email: typeof defaults.email === "string" ? defaults.email : value.email,
+    phone: typeof defaults.phone === "string" ? defaults.phone : value.phone,
+    profile: { team: typeof team === "string" ? team : value.profile.team },
+    assignment: { shifts: value.assignment.shifts,
+      chosen: typeof chosen === "number" && value.assignment.shifts.some(shift => shift.code === chosen) ? chosen : value.assignment.chosen },
+    active: typeof defaults.active === "boolean" ? defaults.active : value.active,
+    notes: typeof defaults.notes === "string" ? defaults.notes : value.notes,
+    salary: typeof defaults.salary === "number" && Number.isFinite(defaults.salary) ? defaults.salary : value.salary
+  };
+}
+
 const rows = createRows<Employee>(Array.from({ length: 6 }, (_, index) => employee(index)));
 const table = find<HTMLTableElement>("[data-grid]");
 const scrollRoot = find<HTMLElement>("[data-scroll-root]");
@@ -52,12 +72,21 @@ const revealRow = find<HTMLInputElement>("[data-reveal-row]");
 const viewportState = find<HTMLOutputElement>("[data-viewport-state]");
 const sort = find<HTMLSelectElement>("[data-sort]");
 const filter = find<HTMLSelectElement>("[data-filter]");
+const statusFilter = find<HTMLSelectElement>("[data-status-filter]");
+const statusViews: Record<string, readonly RowStatus[]> = {
+  live: ["clean", "insert", "update"], modified: ["insert", "update", "delete"],
+  deleted: ["delete"], all: ["clean", "insert", "update", "delete"], empty: []
+};
 const size = find<HTMLSelectElement>("[data-size]");
 const locale = find<HTMLSelectElement>("[data-locale]");
 const initialPageChoice = find<HTMLSelectElement>("[data-initial-page]");
 const status = find<HTMLOutputElement>("[data-status]");
 const snapshot = find<HTMLElement>("[data-snapshot]");
 const changes = find<HTMLElement>("[data-changes]");
+const defaultsOutput = find<HTMLElement>("[data-defaults]");
+const bindState = find<HTMLOutputElement>("[data-bind-state]");
+const rowResources = find<HTMLInputElement>("[data-row-resources]");
+const rowResourcesState = find<HTMLElement>("[data-row-resources-state]");
 const issues = find<HTMLElement>("[data-issues]");
 const selection = find<HTMLOutputElement>("[data-selection]");
 const pageState = find<HTMLOutputElement>("[data-page-state]");
@@ -99,6 +128,15 @@ let initialColumns: readonly GridColumn[] = defaultColumns;
 let grid: GridHandle<Employee> | null = null;
 let requestedPage = 1;
 let stopRows = () => {};
+let bindCalls = 0;
+let beforeRows = 0;
+let boundRows = 0;
+let activeRowBindings = 0;
+let rowClicks = 0;
+
+function refreshRowResources(): void {
+  rowResourcesState.textContent = JSON.stringify({ before: beforeRows, bound: boundRows, active: activeRowBindings, clicks: rowClicks }, null, 2);
+}
 
 function refresh(): void {
   const id = grid?.selected() ?? null;
@@ -207,6 +245,34 @@ function bind(): void {
   find<HTMLInputElement>("[data-check-all]").disabled = false;
   grid = bindGrid(table, {
     rows,
+    statusFilter: statusViews[statusFilter.value],
+    beforeRowBind: rowResources.checked ? context => {
+      beforeRows++;
+      for (const element of context.elements) element.dataset.demoBefore = String(context.row.id);
+      context.own(() => { for (const element of context.elements) delete element.dataset.demoBefore; });
+      refreshRowResources();
+    } : undefined,
+    onRowBind(context) {
+      for (const element of context.elements) {
+        const label = element.querySelector<HTMLElement>("[data-demo-row-status]");
+        if (label) label.textContent = `Status: ${context.row.status}`;
+        const undo = element.querySelector<HTMLButtonElement>('[data-row-action="undo"]');
+        if (undo) undo.disabled = context.row.status === "clean";
+      }
+      if (!rowResources.checked) return;
+      boundRows++; activeRowBindings++;
+      const onClick = () => { rowClicks++; refreshRowResources(); };
+      for (const element of context.elements) element.addEventListener("click", onClick);
+      context.own(() => {
+        for (const element of context.elements) element.removeEventListener("click", onClick);
+        activeRowBindings--; refreshRowResources();
+      });
+      refreshRowResources();
+    },
+    onBind(result) {
+      bindState.textContent = JSON.stringify({ calls: ++bindCalls, event: result.event?.type ?? null,
+        total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted });
+    },
     viewport: viewportChoice.checked ? { root: scrollRoot, estimate: 150, overscan: 3 } : undefined,
     initialPage,
     paste: true,
@@ -257,6 +323,7 @@ function bind(): void {
       refresh();
     },
     onRowAction({ action, id, row, element, event }) {
+      if (action === "undo") rows.revert(id);
       actionCallback.textContent = `${action}: RowId ${id}, ${row.value.name}, control ${element.tagName.toLowerCase()}, event ${event.type}`;
       refresh();
     },
@@ -349,6 +416,19 @@ function act(action: string): void {
     case "clear-checks": grid.setChecked([]); break;
     case "validate-selected": showValidation(grid.validate(selectedId())); return;
     case "validate-all": showValidation(grid.validate()); return;
+    case "defaults": defaultsOutput.textContent = JSON.stringify(grid.defaults(), null, 2); break;
+    case "create-defaults": {
+      const defaults = grid.defaults();
+      defaultsOutput.textContent = JSON.stringify(defaults, null, 2);
+      grid.select(rows.add(employeeFromDefaults(defaults, rows.entries({ includeDeleted: true }).length)));
+      break;
+    }
+    case "append": {
+      const offset = rows.entries({ includeDeleted: true }).length;
+      rows.append([employee(offset), employee(offset + 1)]);
+      break;
+    }
+    case "refresh": grid.refresh(); break;
     case "add": grid.select(rows.add(employee(rows.entries().length))); break;
     case "insert-before": grid.select(rows.add(employee(rows.entries().length), selectedId())); break;
     case "copy-before": grid.select(rows.copy(selectedId(), selectedId())); break;
@@ -442,6 +522,16 @@ for (const control of [checkMode, validateOn, revealInvalid]) {
 }
 columnChoice.addEventListener("change", refreshColumns);
 filter.addEventListener("change", () => { applyFilter(); requestedPage = 1; applyPage(); });
+statusFilter.addEventListener("change", () => {
+  grid?.setStatusFilter(statusViews[statusFilter.value]);
+  refresh();
+});
+rowResources.addEventListener("change", () => {
+  if (grid) { grid.dispose(); grid = null; bind(); }
+  status.textContent = "Row resource tracking changed; selection, checks and drafts were cleared.";
+  refreshRowResources();
+  refresh();
+});
 size.addEventListener("change", () => { initialPageChoice.value = ""; requestedPage = 1; applyPage(); });
 initialPageChoice.addEventListener("change", () => {
   size.value = initialPageChoice.value ? "2" : "";

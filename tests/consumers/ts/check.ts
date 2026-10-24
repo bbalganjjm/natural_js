@@ -2,7 +2,7 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { RowId, RowSnapshot, Rows } from "@bbalganjjm/natural_js/data";
+import type { RowId, RowSnapshot, Rows, RowStatus, RowsEvent } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
@@ -130,6 +130,38 @@ export function connectNativeControls(root: HTMLFormElement, table: HTMLTableEle
   const selected: readonly SelectValue[] = rows.get(id)!.value.assignment.selected;
   void checkedWrite;
   return { rows, form, grid, result, selected };
+}
+
+export function connectRowLifecycle(table: HTMLTableElement, rows: Rows<Employee>) {
+  const bindings: { event: RowsEvent | null; counts: readonly number[] }[] = [];
+  const grid = bindGrid(table, {
+    rows, statusFilter: ["clean", "insert", "update", "delete"],
+    beforeRowBind(context) {
+      const row: RowSnapshot<Employee> = context.row;
+      const elements: readonly HTMLTableRowElement[] = context.elements;
+      for (const element of elements) element.dataset.consumerRow = String(row.id);
+      context.own(() => { for (const element of elements) delete element.dataset.consumerRow; });
+    },
+    onRowBind(context) {
+      const element = context.elements[0];
+      const onClick = () => { element.dataset.consumerStatus = context.row.status; };
+      element.addEventListener("click", onClick);
+      context.own(() => element.removeEventListener("click", onClick));
+    },
+    onBind(result) {
+      bindings.push({ event: result.event, counts: [result.total, result.filtered, result.visible, result.mounted] });
+    }
+  });
+  const all: readonly RowSnapshot<Employee>[] = rows.entries({ includeDeleted: true });
+  const statuses: readonly RowStatus[] = grid.statusFilter();
+  grid.setStatusFilter(["insert", "update", "delete"]);
+  const defaults: Record<string, unknown> = grid.defaults();
+  const employee: Employee = { name: typeof defaults.name === "string" ? defaults.name : "New employee" };
+  const inserted: RowId = rows.add(employee);
+  const loaded: readonly RowId[] = rows.append([{ name: "Loaded employee" }]);
+  const refreshed: void = grid.refresh();
+  void refreshed;
+  return { grid, all, statuses, defaults, inserted, loaded, bindings };
 }
 
 export function pasteEmployees(grid: GridHandle<Employee>, id: RowId, text: string): ValidationResult {

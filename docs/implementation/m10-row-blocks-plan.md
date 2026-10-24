@@ -8,11 +8,11 @@ sources:
   - id: continuation
     resource: m10-parity-plan.md
     title: Required Grid continuation and prior ordered Rows gates
-    git_blob: 5336f2f7e289a16e7d44b0d084fee32998c8c762
+    git_blob: 87470e331d6c6c551c1787cd48a52cdddc1c8108
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding, logical identities, drafts and paste
-    git_blob: f1194e961ddbd2881c365362b45731c694a01716
+    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Authored column topology and layout ownership
@@ -28,19 +28,19 @@ sources:
   - id: body
     resource: ../../src/ui/grid-row-blocks.ts
     title: Private authored record structure and native merge ownership
-    git_blob: bc21fd1cc985184a332034bf26bfddd40f1434a3
+    git_blob: 71d2218d3cf773d875bb423f8a324d5db70077ab
   - id: browser
     resource: ../../tests/browser/grid-row-blocks.spec.ts
     title: Multi-tr binding, native geometry, ownership and logical paste regressions
-    git_blob: 04da68b796a5b2a0066f715fdacc8e10d1dbd58d
+    git_blob: 29925f3b06132277a2628b258db900ed6669bc98
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Original viewport budgets and declared two-tr merged measurements
-    git_blob: 3e720fc86181e9f6d61422c575390a626946b643
+    git_blob: 7370923a46bd5960e8803319da24777f1128262c
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Two authored layouts sharing nested record state
-    git_blob: 45f0dceff456a17899ef36c6bbf9f44fbe5d5004
+    git_blob: b97ee4c4cbea81aaabb4e3c8ceb2bcb5ed1cafd7
   - id: artifact-audit
     resource: evidence/m1092-artifact-audit.json
     title: Independent byte-exact package and private-entry audit

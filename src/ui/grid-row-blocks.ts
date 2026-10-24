@@ -92,7 +92,7 @@ export function compileGridBody(table: HTMLTableElement) {
     },
     resetMerges,
     merge(groups: readonly { elements: readonly HTMLTableRowElement[]; mergeCells: readonly HTMLTableCellElement[];
-      keys: readonly unknown[]; index: number }[], focused: Element | null): void {
+      keys: readonly unknown[]; index: number; status?: string }[], focused: Element | null): void {
       resetMerges();
       if (!declarations.length || groups.length < 2) return;
       const runs: { cell: HTMLTableCellElement; followers: HTMLTableCellElement[]; first: number; end: number }[] = [];
@@ -103,7 +103,7 @@ export function compileGridBody(table: HTMLTableElement) {
           const previous = groups[end - 1];
           const next = groups[end];
           const cell = groups[first].mergeCells[column];
-          let same = Boolean(next && next.index === previous.index + 1 && !cell.hidden &&
+          let same = Boolean(next && next.status === previous.status && next.index === previous.index + 1 && !cell.hidden &&
             !previous.mergeCells[column].contains(focused) && !next.mergeCells[column].contains(focused) &&
             (end - first + 1) * templates.length <= 65534);
           for (let key = 0; same && key <= column; key++) same = Object.is(previous.keys[key], next.keys[key]);

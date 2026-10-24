@@ -13,7 +13,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: Caller-owned Rows and stable row identity
-    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
+    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
   - id: paths
     resource: ../../src/ui/field-path.ts
     title: Private safe nested field paths

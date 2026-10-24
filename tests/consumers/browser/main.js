@@ -200,6 +200,39 @@ try {
   blockForm.bind(blockRows.entries()[0].id);
   state.blocks = { root: blockRoot, table: blockTable, rows: blockRows, grid: blockGrid, original: originalBlock,
     form: blockForm, detail: blockDetail, originalDetail };
+  const lifecycleRoot = document.createElement("section");
+  lifecycleRoot.dataset.consumerLifecycle = "";
+  lifecycleRoot.innerHTML = `<h2>Row lifecycle</h2><table><caption>Loaded and edited employees</caption>
+    <thead><tr><th scope="col" data-column="name">Name</th><th scope="col" data-column="score">Score</th></tr></thead>
+    <tbody><tr data-row-template><th scope="row" data-column="name"><label>Name <input data-field="name" value="Default employee" required></label>
+      <button type="button" data-row-action="undo">Undo row changes</button></th>
+      <td data-column="score"><label>Score <input type="number" data-field="score" value="25" min="0"></label></td></tr></tbody>
+    <tfoot><tr data-empty hidden><td data-columns="name score" colspan="2">No matching employees</td></tr></tfoot></table>`;
+  document.querySelector("main").append(lifecycleRoot);
+  const lifecycleTable = lifecycleRoot.querySelector("table");
+  const lifecycleRows = createRows([{ name: "Original", score: 10 }]);
+  const lifecycle = { root: lifecycleRoot, table: lifecycleTable, rows: lifecycleRows, original: lifecycleTable.outerHTML,
+    active: 0, clicks: 0, before: 0, bound: 0, binds: [], events: [] };
+  state.lifecycle = lifecycle;
+  lifecycle.grid = bindGrid(lifecycleTable, { rows: lifecycleRows, parse: { score: Number },
+    beforeRowBind(context) {
+      lifecycle.before++;
+      for (const element of context.elements) element.dataset.lifecycleBefore = String(context.row.id);
+      context.own(() => { for (const element of context.elements) delete element.dataset.lifecycleBefore; });
+    },
+    onRowBind(context) {
+      lifecycle.bound++; lifecycle.active++;
+      const click = () => lifecycle.clicks++;
+      for (const element of context.elements) element.addEventListener("click", click);
+      context.own(() => {
+        for (const element of context.elements) element.removeEventListener("click", click);
+        lifecycle.active--;
+      });
+    },
+    onBind(result) { lifecycle.binds.push({ total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted, event: result.event?.type ?? null }); },
+    onRowAction({ action, id }) { if (action === "undo") lifecycleRows.revert(id); }
+  });
+  lifecycle.stop = lifecycleRows.subscribe(event => lifecycle.events.push(event));
   const scrollRoot = document.createElement("section");
   scrollRoot.dataset.consumerViewport = "";
   scrollRoot.setAttribute("aria-label", "Viewport assignments");

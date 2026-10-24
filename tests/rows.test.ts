@@ -60,6 +60,107 @@ describe("createRows", () => {
     rows.dispose();
   });
 
+  it("enumerates retained deletions explicitly without changing the default live view", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }]);
+    const [first, second] = rows.entries();
+    rows.set(first.id, "value", 10);
+    rows.remove(first.id);
+    const live = rows.entries();
+    const all = rows.entries({ includeDeleted: true });
+    expect(live).toEqual([second]);
+    expect(rows.entries({ includeDeleted: false })).toBe(live);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    expect(all).toEqual([{ id: first.id, value: { value: 1 }, status: "delete" }, second]);
+    expect(Object.isFrozen(all)).toBe(true);
+    expect(all[0]).toBe(rows.get(first.id));
+    rows.remove(first.id);
+    rows.revert(second.id);
+    expect(rows.entries()).toBe(live);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    rows.revert(first.id);
+    expect(rows.entries().map(row => row.id)).toEqual([first.id, second.id]);
+    expect(rows.entries({ includeDeleted: true })).not.toBe(all);
+    expect(all[0].status).toBe("delete");
+    rows.dispose();
+  });
+
+  it("validates deleted-view options and honors disposal during an option read", () => {
+    const rows = createRows([{ value: 1 }]);
+    for (const options of [null, false, [], { includeDeleted: null }, { includeDeleted: "yes" }]) {
+      expect(() => rows.entries(options as never)).toThrow(expect.objectContaining({ api: "Rows.entries", code: "ROW_VALUE" }));
+    }
+    expect(() => rows.entries({ get includeDeleted() { rows.dispose(); return true; } }))
+      .toThrow(expect.objectContaining({ api: "Rows.entries", code: "ROWS_DISPOSED" }));
+  });
+
+  it("appends detached clean rows in one frozen batch without changing existing row state", () => {
+    const rows = createRows([{ value: { nested: [1] } }, { value: { nested: [2] } }]);
+    rows.set(1, "value", { nested: [10] }); rows.remove(2);
+    const inserted = rows.add({ value: { nested: [3] } });
+    const previous = rows.entries({ includeDeleted: true });
+    const input = [{ value: { nested: [4] } }, { value: { nested: [5] } }];
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => {
+      events.push(event);
+      expect(rows.entries({ includeDeleted: true }).map(row => row.id)).toEqual([1, 2, inserted, 4, 5]);
+    });
+    const ids = rows.append(input);
+    expect(ids).toEqual([4, 5]);
+    expect(Object.isFrozen(ids)).toBe(true);
+    expect(events).toEqual([{ type: "append", ids, changed: true }]);
+    expect(Object.isFrozen(events[0])).toBe(true);
+    expect(events[0].type === "append" && events[0].ids).toBe(ids);
+    for (const row of previous) expect(rows.get(row.id)).toBe(row);
+    input[0].value.nested[0] = 99;
+    expect(rows.get(4)).toEqual({ id: 4, status: "clean", value: { value: { nested: [4] } } });
+    expect(Object.isFrozen(rows.get(4)!.value.value.nested)).toBe(true);
+    expect(rows.changes().map(row => [row.id, row.status])).toEqual([[1, "update"], [2, "delete"], [inserted, "insert"]]);
+    rows.dispose();
+  });
+
+  it("keeps empty and invalid append calls from changing caches or consuming IDs", () => {
+    const rows = createRows([{ value: 1 }]);
+    const live = rows.entries(), all = rows.entries({ includeDeleted: true }), changes = rows.changes();
+    const listener = vi.fn(); rows.subscribe(listener);
+    const empty = rows.append([]);
+    expect(empty).toEqual([]); expect(Object.isFrozen(empty)).toBe(true);
+    for (const input of [null, {}, [{ value: 2 }, { value: undefined }], new Array(1), [{ value: new Date() }]]) {
+      expect(() => rows.append(input as never)).toThrow(expect.objectContaining({ api: "Rows.append", code: "ROW_VALUE" }));
+    }
+    expect(rows.entries()).toBe(live);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    expect(rows.changes()).toBe(changes);
+    expect(listener).not.toHaveBeenCalled();
+    expect(rows.add({ value: 2 })).toBe(2);
+    rows.dispose();
+  });
+
+  it("rejects stale append values while retaining getter side effects and their IDs", () => {
+    const rows = createRows([{ value: 1 }]);
+    const input = { get value() { rows.append([{ value: 2 }]); return 3; } };
+    expect(() => rows.append([input])).toThrow(expect.objectContaining({ api: "Rows.append", code: "ROW_VALUE" }));
+    expect(rows.entries().map(row => [row.id, row.value.value, row.status])).toEqual([[1, 1, "clean"], [2, 2, "clean"]]);
+    expect(rows.add({ value: 4 })).toBe(3);
+    expect(() => rows.append([{ get value() { rows.dispose(); return 5; } }]))
+      .toThrow(expect.objectContaining({ api: "Rows.append", code: "ROWS_DISPOSED" }));
+  });
+
+  it("retains complete append commits when a subscriber throws and restores loaded originals", () => {
+    const rows = createRows([{ value: 1 }]);
+    const cause = new Error("append subscriber failed");
+    const release = rows.subscribe(() => { throw cause; });
+    const later = vi.fn(); rows.subscribe(later);
+    expect(() => rows.append([{ value: 2 }, { value: 3 }])).toThrow(cause);
+    expect(later).toHaveBeenCalledExactlyOnceWith({ type: "append", ids: [2, 3], changed: true });
+    expect(rows.entries().map(row => row.status)).toEqual(["clean", "clean", "clean"]);
+    release();
+    rows.set(2, "value", 20); rows.remove(3);
+    rows.revert();
+    expect(rows.entries().map(row => row.value.value)).toEqual([1, 2, 3]);
+    expect(rows.changes()).toEqual([]);
+    rows.dispose();
+  });
+
   it("inserts before live IDs and publishes each complete order once", () => {
     const rows = createRows([{ value: 1 }, { value: 2 }]);
     const [first, second] = rows.entries();

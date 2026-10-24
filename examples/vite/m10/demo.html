@@ -35,6 +35,15 @@
               <option value="Support">Support</option>
             </select>
           </label>
+          <label>Row status
+            <select data-status-filter data-needs-grid>
+              <option value="live">Live rows (default)</option>
+              <option value="modified">Pending changes</option>
+              <option value="deleted">Deleted rows</option>
+              <option value="all">All retained rows</option>
+              <option value="empty">No statuses</option>
+            </select>
+          </label>
           <div class="button-row"><button type="button" data-action="empty-team-filter" data-needs-grid>Set empty Team value filter</button></div>
           <label>Page size
             <select data-size data-needs-grid>
@@ -179,6 +188,9 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <legend>Rows store</legend>
           <div class="button-row">
             <button type="button" data-action="add" data-needs-grid>Add row</button>
+            <button type="button" data-action="append" data-needs-grid>Append 2 loaded employees</button>
+            <button type="button" data-action="defaults" data-needs-grid>Read authored defaults</button>
+            <button type="button" data-action="create-defaults" data-needs-grid>Create employee from defaults</button>
             <button type="button" data-action="insert-before" data-needs-grid>Insert before selected</button>
             <button type="button" data-action="copy-before" data-needs-grid>Copy before selected</button>
             <button type="button" data-action="copy-end" data-needs-grid>Copy to end</button>
@@ -219,9 +231,12 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           </label>
           <p>Changing locale rebinds the Grid and clears selection and uncommitted edits.</p>
           <div class="button-row">
+            <button type="button" data-action="refresh" data-needs-grid>Refresh bindings</button>
             <button type="button" data-action="dispose" data-needs-grid>Dispose Grid</button>
             <button type="button" data-action="rebind" disabled>Bind Grid again</button>
           </div>
+          <label class="check-label"><input type="checkbox" data-row-resources> Track row resources</label>
+          <p>Each row shows its status through onRowBind. Tracking adds a before-binding marker and one native click listener per record; own releases them on rebind, viewport departure and disposal. Changing tracking rebinds the Grid and clears selection and drafts.</p>
           <p>The caller-owned Rows store remains alive while the Grid is unbound.</p>
         </fieldset>
       </section>
@@ -260,19 +275,22 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
               <tr data-row-template>
                 <th scope="row" data-column="name"><button type="button" data-select-row><span data-field="name" data-format='[["displayName"]]'></span></button>
                   <label class="check-label"><input type="checkbox" data-check-row> Check row</label>
-                  <button type="button" data-row-action="inspect">Inspect</button></th>
-                <td data-column="email"><label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output></td>
-                <td data-column="phone"><label>Phone <input type="tel" data-field="phone" readonly></label></td>
-                <td data-column="team"><label>Team <input type="text" data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
+                  <button type="button" data-row-action="inspect">Inspect</button>
+                  <button type="button" data-row-action="undo" disabled>Undo row changes</button>
+                  <small data-demo-row-status></small></th>
+                <td data-column="email"><label>Email <input type="email" data-field="email" value="new.employee@example.com" required></label><output data-error-for="email"></output></td>
+                <td data-column="phone"><label>Phone <input type="tel" data-field="phone" value="+1 555 0100" readonly></label></td>
+                <td data-column="team"><label>Team <input type="text" data-field="profile.team" value="Platform" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
                 <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
                   data-option-label="meta.label" data-option-value="code" required><option value="">Choose</option></select></label>
                   <output data-error-for="assignment.chosen"></output></td>
-                <td data-column="active"><label><input type="checkbox" data-field="active"> Active</label></td>
-                <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2"></textarea></label></td>
-                <td data-column="salary"><label>Salary <input type="number" min="0" step="1" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
+                <td data-column="active"><label><input type="checkbox" data-field="active" checked> Active</label></td>
+                <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2">Created from authored defaults</textarea></label></td>
+                <td data-column="salary"><label>Salary <input type="number" min="0" step="1" value="200" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
                   <output data-error-for="salary"></output></td>
               </tr>
             </tbody>
+            <tfoot><tr data-empty hidden><td data-columns="name email phone team shift active notes salary" colspan="8"><output role="status">No employees match the current status and filters.</output></td></tr></tfoot>
           </table>
         </div>
         <p class="status"><output data-status role="status">Grid is bound.</output></p>
@@ -284,6 +302,9 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <section><h3>grid.columns()</h3><pre data-columns-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Selection and independent checks</h3><pre data-selection-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Distinct Team filter and counts</h3><pre data-filter-state tabindex="0">Not bound yet.</pre></section>
+          <section><h3>Authored defaults</h3><pre data-defaults tabindex="0">Use Read authored defaults. The application factory supplies names and shift options.</pre></section>
+          <section><h3>Last onBind result</h3><p>Total includes retained deletions; filtered and visible count the projection and logical page. Mounted counts complete records.</p><p><output data-bind-state aria-live="polite">Not bound yet.</output></p></section>
+          <section><h3>Tracked row resources</h3><pre data-row-resources-state tabindex="0">Tracking is off.</pre></section>
           <section><h3>Callbacks</h3><p>onSelect: <output data-callback>Not fired yet.</output></p>
             <p>beforeSelect / beforeSelectionChange / beforeCheckChange: <output data-before-callback>Not fired yet.</output></p>
             <p>onSelectionChange: <output data-selection-callback>Not fired yet.</output></p>
@@ -297,7 +318,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
 
     <section class="future" data-block-demo aria-label="Authored row blocks and adjacent merges">
       <h2>Authored row blocks and adjacent merges</h2>
-      <p>Each record occupies two rows in the first layout and three in the second. Edit any field in either table to update the other, including radio and checkbox groups, typed nested choices, dates and ranges. Avatars retain their authored alternative text; Team labels are rendered with an application-created strong element. Adjacent Department values merge first; Team values merge only within the same Department. Store actions use the last record selected in either layout.</p>
+      <p>Each record occupies two rows in the first layout and three in the second. Edit any field in either table to update the other, including radio and checkbox groups, typed nested choices, dates and ranges. Avatars retain their authored alternative text; Team labels are rendered with an application-created strong element. Adjacent Department values merge first; Team values merge only within the same Department. Different row statuses keep separate merge cells. Store actions use the last record selected in either layout.</p>
       <fieldset>
         <legend>Shared record actions</legend>
         <label>Department <input data-block-department value="Engineering" data-block-needs-selection disabled></label>

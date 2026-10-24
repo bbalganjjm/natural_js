@@ -1,0 +1,17 @@
+{
+  "purpose": "Two ignored Vite metadata files from the source-consumer probe were included in every raw 160-entry gate map. They contain no executable optimized modules; retain their exact contents separately from the 158 source/configuration files.",
+  "files": {
+    "tests/consumers/browser/node_modules/.vite/deps/_metadata.json": {
+      "sha256": "e79d7a4551aae17a115b6b53d42146ca7660741971c78d3d69aa373fcb2721f8",
+      "normalized_sha256": "e79d7a4551aae17a115b6b53d42146ca7660741971c78d3d69aa373fcb2721f8",
+      "bytes": 146,
+      "utf8": "{\n  \"hash\": \"5f4e68e1\",\n  \"configHash\": \"3125a0cb\",\n  \"lockfileHash\": \"ef654bc6\",\n  \"browserHash\": \"27fb7ad3\",\n  \"optimized\": {},\n  \"chunks\": {}\n}"
+    },
+    "tests/consumers/browser/node_modules/.vite/deps/package.json": {
+      "sha256": "3ca9d4afd21425087cf31893b8f9f63c81b0b8408db5e343ca76e5f8aa26ab9a",
+      "normalized_sha256": "3ca9d4afd21425087cf31893b8f9f63c81b0b8408db5e343ca76e5f8aa26ab9a",
+      "bytes": 23,
+      "utf8": "{\n  \"type\": \"module\"\n}\n"
+    }
+  }
+}

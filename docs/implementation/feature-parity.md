@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
+    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: f1194e961ddbd2881c365362b45731c694a01716
+    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -56,7 +56,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
+    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -64,7 +64,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Current shared Rows contract
-    git_blob: fd3a3668649af8c7c270be5f7250bd01759823e8
+    git_blob: ec509c2fe5274334a07f69b4c098a217262a1c6b
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks
@@ -81,9 +81,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -114,13 +114,13 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 
 | ID | Legacy behavior / evidence | Current status and required work |
 |---|---|---|
-| G01 | data, bind, add, remove, revert, val, update | Partial: shared CRUD/change tracking exists; selected/checked projections, append completion and template-default creation need coverage. |
-| G02 | addTop, indexed add, move, copy | M10.9.1 adds insertion before a live RowId, identity-preserving movement and deeply independent committed-value copy in shared Rows. Native order, tombstones, no-ops, one notification and value reversion are explicit in [the detailed plan](m10-parity-plan.md). Template defaults and UI/dynamic option closure remain required; this does not close the entire family. |
+| G01 | data, bind, add, remove, revert, val, update | M10.9.4 adds atomic clean loaded append, explicit Grid refresh and captured native defaults combined with application-owned typed factories. Existing shared CRUD/change tracking remains. Legacy projections, callback/options and dynamic semantic closure remain required; see [the lifecycle contract](m10-lifecycle-plan.md). |
+| G02 | addTop, indexed add, move, copy | M10.9.1 adds insertion before a live RowId, identity-preserving movement and deeply independent committed-value copy in shared Rows. M10.9.4 exposes input-only defaults while retaining typed business factories and Rows.add ownership. Native order, tombstones, no-ops and one notification remain explicit. UI/options/dynamic closure remains required; this does not close the entire family. |
 | G03 | tbody template, contextBodyTemplate | M10.9.2 implements authored tbody multi-tr records alongside the existing single tr form. One RowId owns the complete block, nested fields, actions, drafts, columns and measured viewport lifetime; see [the row-block contract](m10-row-blocks-plan.md). Remaining dynamic template-option equivalence still needs P0 semantic closure. |
 | G04 | Row Form radio/checkbox groups, multiple Select and input types | M10.9.3 adds cross-tr radio/repeated-checkbox groups, document-unique native radio names, raw typed multiple Select arrays and native string/date/range/hidden inputs through shared private field semantics. Mixed native radio form owners fail before binding. File remains local Form only; legacy option/dynamic closure remains required. See [the control contract](m10-controls-plan.md). |
 | G05 | Row Form img.src and html rendering | M10.9.3 binds native image src and explicit synchronous Form/Grid render functions returning fresh same-document nodes, text or null. Plain strings remain text; authored control/error ownership and exact Form child-node restoration are enforced. No string-to-HTML option or renderer registry is added. Legacy option/dynamic closure remains required. |
 | G06 | validate, declarative rules, focusout/Enter and validate-scroll | M10.9.3 shares programmatic/native disabled/length/sanitization constraints and adds change/blur/manual timing, native-aware Enter and current-page first-error reveal/focus. Released invalid rows lose stale element references after reveal. Existing rule/draft and off-page contracts remain; full legacy option/dynamic closure remains required. |
-| G07 | row_data_changed__, row_data_deleted__, data_changed__ | Missing visible status/deletion policies. Rows tracks changes, but entries excludes removed rows; marked deleted-row views require an explicit contract. |
+| G07 | row_data_changed__, row_data_deleted__, data_changed__ | M10.9.4 adds canonical status projection, every physical tr's data-row-status and the table's pending data-changed flag. Explicit deleted views use inclusive enumeration, protect native editing/selection/checks/validation/paste, split status merge boundaries and allow authored Undo actions. The current original-valued tombstone contract stays unchanged. Per-field dirty presentation and the legacy last-edited deletion display difference remain required P0 semantic obligations, not approved omissions. |
 | G08 | select, unselect, onBeforeSelect, row-click toggle | Partial: active-detail API, clear and atomic before-veto exist. The default same-ID no-op preserves current callers; legacy row-click-toggle policy/edge closure remains required. |
 | G09 | multiselect, selected projection, array select | Core: independent frozen selected IDs, full replacement, Ctrl/Meta toggle, Shift range and scoped keyboard gestures in M10.6. Legacy projections/option/callback semantic closure remains open. |
 | G10 | check, checkAll/checkAllTarget/checkSingleTarget | M10.9.3 adds zero-or-one exclusive checks through the existing atomic veto/callback paths; scoped check-all preserves/replaces/rejects for zero/one/multiple eligible IDs. Active, selected and data-checkbox state stay independent. Existing scope/eligibility/mixed controls remain; legacy option/callback/dynamic closure is still required. |
@@ -130,10 +130,10 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G14 | resizable/resize, show/hide, more column chooser | Partial: M10.5 implements state, preferred width, pointer/keyboard resize, reorder and show/hide with authored controls. Legacy chooser/options/callback edge closure remains open; no omission approved. Reorder is an explicit added requirement. |
 | G15 | vResizable/vResize, scroll lock and action-driven scroll | Missing height-resize interaction and reveal policies; authored CSS may supply dimensions/containment. |
 | G16 | more detail Form/Popup, previous/next validation | Missing integrated row detail behavior. Existing Popup/Form are its foundations. |
-| G17 | data-rowspan, rowSpanIds, grid.rowSpan | M10.9.2 implements display-only raw-key hierarchical native merging, recomputed on the current projection and split at mounted/page/focus boundaries. Natural physical-row heights are preserved without expanding equal-value runs. The [row-block contract](m10-row-blocks-plan.md) retains later legacy option/dynamic semantic closure. |
+| G17 | data-rowspan, rowSpanIds, grid.rowSpan | M10.9.2 implements display-only raw-key hierarchical native merging, recomputed on the current projection and split at mounted/page/focus boundaries. M10.9.4 also splits differing row statuses without changing raw hierarchical keys. Natural physical-row heights are preserved without expanding equal-value runs. The [row-block contract](m10-row-blocks-plan.md) retains later legacy option/dynamic semantic closure. |
 | G18 | pastiable, grid.paste, readonly/disabled handling | M10.7 implements quoted plaintext paste through existing raw parsing/rules, typed nested choices, protected field positions and one atomic Rows batch. Explicit overflow, stale preparation and validation failures preserve stored values and drafts; see [the detailed plan](m10-paste-plan.md). Full option/dynamic parity remains subject to P0 closure. |
-| G19 | createRowDelay, scrollPaging, append binding | M10.8 adds measured variable-height viewport rendering, bounded mounted rows with one focused pin, logical-page checks/paste and append-compatible RowId anchoring. See [the detailed contract](m10-viewport-plan.md). Data loading remains application-owned; legacy scheduling/progressive-loading option and dynamic closure remain open. initialPage and cache release alone are not virtualization. |
-| G20 | rowHandlerBeforeBind/rowHandler/onBind, empty display, hover | Partial lifetime/CSS behavior exists; row hooks and empty/result/status markup need contracts. |
+| G19 | createRowDelay, scrollPaging, append binding | M10.9.4 adds one clean batch append notification without replacing existing IDs/edits and verifies its bounded viewport/anchor integration. M10.8's measured rendering and focused pin remain. Networking/cancellation use existing application CVC/communication; legacy scrollPaging rendered already-loaded data. Scheduler options, progressive completion flags and dynamic equivalence remain open for P0; no timer/fetch engine or omission is introduced. |
+| G20 | rowHandlerBeforeBind/rowHandler/onBind, empty display, hover | M10.9.4 adds synchronous callbacks on table-attached rows with CVC-style owned cleanup, explicit full-bind completion, authored empty markup, application counters and resource-safe refresh/retry. Document connection depends on the table root. Callback failure/disposal/reentry preserves committed data and notifications; failed rollback cannot overwrite newer work. Hover styling remains authored. Full legacy option/callback/dynamic equivalence stays open. |
 
 ## Other data UI and containers
 
@@ -191,7 +191,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 
 # Next action
 
-Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. [M10.9.1](m10-parity-plan.md) ordered Rows and [M10.9.2](m10-row-blocks-plan.md) indivisible authored row blocks/merging are complete. Prepare M10.9.3 native control/display/validation contracts next. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance.
+Continue P0 options/dynamic closure and prepare one complete retirement proposal before requesting that decision. M10.5 column state and the M10.6 selected/check/filter contract are implemented; their detailed plans preserve gates and boundaries. M10.7 adds atomic paste and M10.8 adds measured viewport rendering within their detailed contracts. [M10.9.1](m10-parity-plan.md) ordered Rows, [M10.9.2](m10-row-blocks-plan.md) authored row blocks/merging, [M10.9.3](m10-controls-plan.md) controls/display/validation and [M10.9.4](m10-lifecycle-plan.md) status/row lifecycle retain their own completion evidence. Specify M10.9.5 detail/geometry next. New public contracts receive representative HTML/TS and tests before code. Use [the execution plan](feature-parity-plan.md) for order and acceptance; full family closure and M13 remain required.
 
 # Decisions
 

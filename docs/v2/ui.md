@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 6610eb68f3b484b5eccd323c116ceef61d21b8db
+    git_blob: 74ddf1877ebfa9a45c20d4f69baa0efe5d429d8b
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -17,11 +17,19 @@ sources:
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filters and choice counts
-    git_blob: fd1b4b22060a716b1351e8c3029f76c0b0ca3964
+    git_blob: 9503e0aa8b72fc577f50b4ef992b9ab60bd84c1c
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: f1194e961ddbd2881c365362b45731c694a01716
+    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
+  - id: hooks
+    resource: ../../src/ui/grid-hooks.ts
+    title: Private row callback and resource ownership contract
+    git_blob: 628b69014fd77f0f18e5e8c84d2953c1a9401bb9
+  - id: lifecycle-browser
+    resource: ../../tests/browser/grid-lifecycle.spec.ts
+    title: Status, native defaults, callback and teardown regressions
+    git_blob: 2898609c1d76b08e218120d55bf56f347650daf5
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring and lifetime
@@ -33,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 8c703966458830609cdda07e398009795ef5fbcf
+    git_blob: cf97e4f21033e353f9a5aaafddec1b9623d05267
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -42,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+generated: { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+  - { by: codex/gpt-6, at: 2026-10-24T05:58:18Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -77,7 +85,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit check scope |
 | `GridCheckState` | Readonly booleans `checked`, `indeterminate`; numbers `total`, `count` | Eligible scope aggregate |
 | `GridFilterChoice` | Readonly `value: SelectValue`, `label: string`, `count: number` | One raw column choice and matching-row count |
-| `GridHandle<T>` | Column state, active identity, independent selected/checked membership, sort, column/manual filters, page, reveal, validation, atomic paste, disposal | Grid handle |
+| `GridHandle<T>` | Status/column state, native defaults, explicit refresh, active identity, selected/checked membership, sort/filter/page, reveal, validation, paste, disposal | Grid handle |
 
 # Grid state methods
 
@@ -85,6 +93,10 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 
 | Method | Result or effect |
 |---|---|
+| `statusFilter(): readonly RowStatus[]` | Frozen canonical status projection; RowStatus is the existing data-entry type. |
+| `setStatusFilter(values: readonly RowStatus[]): void` | Canonicalize known statuses before other view filters; empty hides all rows and an equivalent proposal preserves bindings/focus. |
+| `defaults(): Record<string, unknown>` | Detached authored native defaults with own parsers; the application factory supplies a complete business row. |
+| `refresh(): void` | Retry/re-evaluate current bindings without replacing Rows or discarding drafts, selection and identity. |
 | `selectedIds(): readonly RowId[]` | Selected membership in store order. |
 | `setSelected(ids: readonly RowId[]): void` | Replace the selected set after complete ID/eligibility validation. |
 | `checkedIds(): readonly RowId[]` | Checked membership in store order. |
@@ -93,13 +105,21 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 | `checkState(scope: GridRowScope): GridCheckState` | `total` eligible scope rows, `count` checked, full/mixed flags; an empty scope has both flags false. |
 | `columnFilter(key: string): readonly SelectValue[] \| null` | Raw filter state: `null` all, `[]` none, `[null]` raw null only. |
 | `setColumnFilter(key: string, values: readonly SelectValue[] \| null): void` | Replace one configured column filter; columns and the manual filter combine with AND. |
-| `filterChoices(key: string, search?: string): readonly GridFilterChoice[]` | Choices/counts under manual and other-column filters, excluding this column's filter and paging; optional label search only narrows choices. |
+| `filterChoices(key: string, search?: string): readonly GridFilterChoice[]` | Choices/counts under status, manual and other-column filters, excluding this column's filter and paging; optional label search only narrows choices. |
 
 `visible` means the complete current filtered page, including unmounted rows with viewport rendering; `filtered` means all matching rows before paging, and `store` means every nondeleted row. `canCheck` determines eligibility for these aggregates and operations; a disabled native checkbox only blocks its own UI gesture. Number `1` and string `"1"` remain different filter values. Binder options and native markers are listed in [Grid](grid.md), alongside keyboard and restoration rules.[^selection][^filters][^grid]
 
-`GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after visible rows and scopes commit.[^selection]
+`GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after the view commits or a failed view/setter rolls back. A subsequent callback append keeps its new page totals; active/selected eligibility never implicitly clears independent eligible checks.[^selection][^grid][^lifecycle-browser]
 
 `checkMode?: "multiple" | "single"` is an inline Grid option, separate from `multiple` selection gestures. Multiple mode is the default. Single checking replaces the previous ID atomically through the same hooks; `setChecked` and `checkAll(true, scope)` never silently pick a first row. [Grid](grid.md) defines empty/one/many scope behavior and disabled header checks; no new public check-mode type or getter is added.[^grid][^selection]
+
+# Grid binding callbacks
+
+Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/update. Shown deleted records use original retained snapshots and remain noneditable/ineligible; authored row actions can offer Undo. Every physical record tr gets `data-row-status`, and table `data-changed` reports any pending Rows changes. Author labels and styles; per-field dirty display and the 1.x edited-deletion display difference remain P0 obligations.[^grid][^lifecycle-browser]
+
+`beforeRowBind` and `onRowBind` infer `{ row, elements, own }` from the binder signature. The immutable row snapshot and readonly physical-row array identify one binding; `own(() => void)` registers synchronous resources for reverse cleanup on rebind, release, failure and disposal. Before runs on rows attached to their table before values; after runs after binding/placement. Rows are document-connected only when their table root is connected; connect the root before initializing or measuring layout-dependent widgets. No lifecycle manager or row-context type is added to the public UI entry. [Grid](grid.md#row-binding-and-owned-resources) defines late registration, reentrancy, cleanup failures and deletion protection.[^hooks][^grid]
+
+`onBind` infers `{ total, filtered, visible, mounted, event }`: all retained rows, status/filter matches, logical-page rows, logical mounted records, and a replace/append `RowsEvent` or null. It runs once for initial, replace/append, explicit view and refresh binding, including empty results. Ordinary mutations and viewport movement do not emit it. Use application code for counters and loading; `Rows.append` loads clean data while `Rows.add` creates an inserted business row.[^grid][^lifecycle-browser]
 
 # Field options
 
@@ -111,7 +131,7 @@ Form and Grid accept `render?: Record<string, (value: unknown, context: RuleCont
 
 `GridHandle<T>.paste(text: string, start: { readonly id: RowId; readonly field: string }): ValidationResult` validates a whole-field TSV matrix and commits its writable cells through one `Rows.setMany`. It starts at a visible store-local ID and exact field path, follows current sorted/filtered page and visible bound-field order, and rejects overflow without creating rows. It reuses `ValidationResult`; there is no separate public clipboard or transaction type.[^ui]
 
-The binder's optional `paste: true` enables native `text/plain` handling; the method is always available. `onPaste?: (result: ValidationResult) => void` receives accepted or rejected completed attempts and has no event argument. Native paste replaces whole fields rather than inserting at the caret. Complete candidate validation includes retained drafts, but only pasted fields are saved. Protected controls consume positions without writes, typed Select matches retain raw values, and invalid attempts preserve data/input while updating accessible issues. [Grid](grid.md) defines quoting, disabled/ambiguous choices, cancellation, stale preparation and observer-error rules. Catching a post-commit exception does not imply rollback.[^ui]
+The binder's optional `paste: true` enables native `text/plain` handling; the method is always available. `onPaste?: (result: ValidationResult) => void` receives accepted or rejected completed attempts and has no event argument. Native paste replaces whole fields rather than inserting at the caret. Complete candidate validation includes retained drafts, but only pasted fields are saved. Protected controls and shown deleted lines consume positions without writes; a deleted starting ID fails. Typed Select matches retain raw values, and invalid attempts preserve data/input while updating accessible issues. [Grid](grid.md) defines quoting, disabled/ambiguous choices, cancellation, stale preparation and observer-error rules. Catching a post-commit exception does not imply rollback.[^ui][^lifecycle-browser]
 
 # Grid viewport
 
@@ -142,3 +162,5 @@ A parser sees one snapshot of all currently entered, still unparsed drafts in `R
 [^form]: Form field options and explicit display
 [^native]: Private shared native field values and constraints
 [^render]: Private explicit render preflight and DOM ownership
+[^hooks]: Private row callback and resource ownership contract
+[^lifecycle-browser]: Status, native defaults, callback and teardown regressions

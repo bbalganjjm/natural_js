@@ -8,15 +8,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field, view, draft and selection integration
-    git_blob: f1194e961ddbd2881c365362b45731c694a01716
+    git_blob: e9e6c3bdcaa81e4f99d98c7b7100f7f13263ef26
   - id: paste
     resource: m10-paste-plan.md
     title: Completed atomic paste contract
-    git_blob: 736b701d5ccb317ecccf15cf675e45cca2f0fe78
+    git_blob: 1eadfc1bd38f917132078aeeeece4237a58d76ff
   - id: parity
     resource: feature-parity-plan.md
     title: Required viewport and remaining parity
-    git_blob: 5ba1d09c171ba5d80fe51d529f6110c686cc2300
+    git_blob: 9ca475cb85b77b2b2cdec35b1525a91c1359a1e1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured window and scroll ownership
@@ -32,7 +32,7 @@ sources:
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Completed operation timing, live geometry and post-GC DOM counters
-    git_blob: 3e720fc86181e9f6d61422c575390a626946b643
+    git_blob: 7370923a46bd5960e8803319da24777f1128262c
   - id: evidence
     resource: evidence/m108-verification.json
     title: Frozen M10.8 source, commands, artifact and results

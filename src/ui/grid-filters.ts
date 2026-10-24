@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { Rows, Snapshot } from "../data/index.js";
+import type { RowSnapshot, Rows, Snapshot } from "../data/index.js";
 import type { GridFilterChoice, SelectValue } from "./index.js";
 import { FrameworkError } from "../internal/framework-error.js";
 
@@ -16,7 +16,8 @@ function scalar(value: unknown): value is SelectValue {
 export function createGridFilters<T extends object>(options: {
   rows: Rows<T>;
   filters?: Record<string, { value: (row: Snapshot<T>) => SelectValue; label?: (value: SelectValue) => string }>;
-}, manual: () => ((row: Snapshot<T>) => boolean) | null, changed: () => (() => void) | undefined) {
+}, manual: () => ((row: Snapshot<T>) => boolean) | null, changed: () => (() => void) | undefined,
+  project: () => readonly RowSnapshot<T>[]) {
   if (options.filters !== undefined && (!options.filters || typeof options.filters !== "object" || Array.isArray(options.filters))) {
     fail("", "filters must be an object of scalar value functions.");
   }
@@ -52,7 +53,7 @@ export function createGridFilters<T extends object>(options: {
   function filterChoices(key: string, search = ""): readonly GridFilterChoice[] {
     const config = definition(key);
     if (typeof search !== "string") fail(key, "Filter search must be a string.");
-    const entries = options.rows.entries();
+    const entries = project();
     const predicate = manual();
     if (entries !== cacheRows || predicate !== cacheManual) {
       cacheRows = entries;
