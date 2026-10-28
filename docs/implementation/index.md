@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.6.4 Grid semantic acceptance](m10-acceptance-plan.md) - Verify mapped Grid outcomes with native row activation and tested application compositions while retaining cross-owner obligations. (draft)
+
 * [Natural-JS 2.0 M10.9.6.3 progressive binding](m10-progressive-plan.md) - Bind already-loaded logical prefixes cooperatively with owned completion, cancellation and the existing viewport and CVC contracts. (draft)
 
 * [Natural-JS 2.0 M10.9.6.2 interaction and view controls](m10-interactions-plan.md) - Add explicit selection toggles, applied distinct-value search and authored column recovery and action-scroll compositions. (draft)

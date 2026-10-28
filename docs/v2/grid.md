@@ -25,7 +25,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -114,10 +114,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -160,7 +160,7 @@ if (grid.validate().valid) console.log(rows.changes());
 
 # Constructor
 
-`bindGrid<T extends object>(root, options): GridHandle<T>` requires an `HTMLTableElement` with exactly one `<tr data-row-template>` inside a tbody, or one `<tbody data-row-template>` containing the physical rows of one logical record. Mixing forms or an empty template body fails before ownership changes. The options below require `rows: Rows<T>`. Repeated rows and their descendants must not have fixed DOM IDs. The runtime replaces the authored rows with comment anchors and repeats their clones within the same tbody; it never creates a tbody per record. It reuses mounted clones and releases departing row elements and Select ownership. Without `viewport`, the mounted set is the complete logical page. Disposal restores the exact original template nodes and leaves other authored rows in place. A second live binding raises `GRID_IN_USE`.[^grid][^blocks]
+`bindGrid<T extends object>(root, options): GridHandle<T>` requires an `HTMLTableElement` with exactly one `<tr data-row-template>` inside a tbody, or one `<tbody data-row-template>` containing the physical rows of one logical record. Mixing forms or an empty template body fails before ownership changes. The options below require `rows: Rows<T>`. Repeated rows and their descendants must not have fixed DOM IDs. The runtime replaces the authored rows with comment anchors and repeats their clones within the same tbody; it never creates a tbody per record. It reuses mounted clones and releases departing row elements and Select ownership. Without `viewport` or `progressive`, the mounted set is the complete logical page; progressive alone mounts its admitted prefix. Disposal restores the exact original template nodes and leaves other authored rows in place. A second live binding raises `GRID_IN_USE`.[^grid][^blocks]
 
 | Option | Behavior |
 |---|---|
@@ -184,6 +184,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `onSelect` | `({ id, row, event }) => void` after active detail identity changes; `id` and `row` may be `null`. It does not report selected or checked membership. |
 | `multiple` | Optional boolean, default `false`. Enables batch mouse/keyboard gestures on row selection buttons; full-set methods work in both modes. |
 | `toggleSelection` | Optional boolean, default `false`. Unmodified select-button activation toggles single active identity or clicked multiple membership; see [explicit toggles](#explicit-selection-toggles). |
+| `selectOnRowClick` | Optional boolean, default `false`. Noninteractive record areas use the same selection transition. Requires an authored `button[data-select-row]`; at event time the record must have a visible enabled non-inert selection button with `tabIndex >= 0`. Labels, editors, checks, actions, links, editable/focusable content, prevented events and nested tables do not enter this added path. |
 | `canSelect` | `(row: RowSnapshot<T>) => boolean`; eligibility for active detail and selected membership, default all nondeleted rows. |
 | `canCheck` | `(row: RowSnapshot<T>) => boolean`; checked membership eligibility, default all nondeleted rows. |
 | `checkMode` | `"multiple"` (default) or `"single"`; single mode permits zero or one checked ID and atomically replaces the previous ID when another row is checked. |
@@ -440,7 +441,7 @@ Deleting/replacing Rows or changing eligibility prunes unavailable state without
 
 Set toggleSelection: true to enable plain activation toggles while preserving the existing default. In single mode, activating the active row clears it. In multiple mode, activating an unselected row adds and activates it; activating any selected member removes only that member and sets active identity to null, preserving other members and checks. This uses the existing atomic before hooks and callback order. A veto leaves state and DOM unchanged; post-callback errors retain the committed state.[^selection]
 
-Ctrl/Meta/Shift/Alt gestures keep their existing behavior. Native Enter/Space on the authored selection button produces one ordinary click and follows the same policy. Programmatic select(id) stays idempotent and active-only; setSelected and setChecked remain absolute independent set operations. No row-wide click handler or extra keyboard activation handler is added.[^selection][^grid][^toggle-browser]
+Ctrl/Meta/Shift/Alt gestures keep their existing behavior. Native Enter/Space on the authored selection button produces one ordinary click and follows the same policy. Programmatic select(id) stays idempotent and active-only; setSelected and setChecked remain absolute independent set operations. toggleSelection alone does not enable row-area activation; use selectOnRowClick for that. No extra keyboard activation handler is added.[^selection][^grid][^toggle-browser]
 
 ## Apply a choice search
 
@@ -593,6 +594,8 @@ Row insertion/movement/copy use caller-owned Rows: `add(value, before?)`, `move(
 A CSS-only font/line-height reduction that leaves table and scroll-root dimensions unchanged can be masked by the active merge height floors and produce no resize notification. The smaller natural heights take effect on the next normal data/view/column/scroll/geometry update.[^blocks][^viewport]
 
 # Related
+
+[Grid compositions](grid-compositions.md) gives tested current-value projections, native post-edit observation and authored template/topology inspection. Keep those application choices outside the public API.
 
 [Rows](data.md) owns identity and changes. [UI contracts](ui.md) defines `RuleSet`, handles, and results. [Form](form.md) shares the private rule runner. [Pagination](pagination.md) can use `grid.page()`. [The M6 plan](../implementation/m6-plan.md) records this milestone's migration scope. [The interactive Grid demo](grid-demo.md) exercises every implemented option, method, and declarative marker. [The two-layout example](advanced-grid-example.md) shows grouped headings and sticky positioning with authored HTML/CSS and no new API.
 

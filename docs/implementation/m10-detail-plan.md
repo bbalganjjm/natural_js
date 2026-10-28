@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: c6464f5275c2593902ce7e90f799a6d3d36681b8
+    git_blob: 48179a8890dedf49039118ea799bf7a06c662ffa
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy more, vertical resize and action-driven scrolling
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical projection, stable identity and reveal
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured row windows and sticky occlusion

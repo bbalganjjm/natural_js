@@ -94,6 +94,7 @@ const pageState = find<HTMLOutputElement>("[data-page-state]");
 const callback = find<HTMLOutputElement>("[data-callback]");
 const selectionMode = find<HTMLSelectElement>("[data-selection-mode]");
 const toggleSelection = find<HTMLInputElement>("[data-toggle-selection]");
+const selectOnRowClick = find<HTMLInputElement>("[data-select-on-row-click]");
 const actionScroll = find<HTMLInputElement>("[data-action-scroll]");
 const lastInvalid = find<HTMLInputElement>("[data-last-invalid]");
 const checkMode = find<HTMLSelectElement>("[data-check-mode]");
@@ -112,6 +113,7 @@ const beforeCallback = find<HTMLOutputElement>("[data-before-callback]");
 const selectionCallback = find<HTMLOutputElement>("[data-selection-callback]");
 const checkCallback = find<HTMLOutputElement>("[data-check-callback]");
 const actionCallback = find<HTMLOutputElement>("[data-action-callback]");
+const postEdit = find<HTMLOutputElement>("[data-post-edit]");
 const eventOutput = find<HTMLOutputElement>("[data-event]");
 const salaryInput = find<HTMLInputElement>("[data-new-salary]");
 const pasteText = find<HTMLTextAreaElement>("[data-paste-text]");
@@ -138,6 +140,8 @@ let grid: GridHandle<Employee> | null = null;
 let inspectedId: RowId | null = null;
 let requestedPage = 1;
 let stopRows = () => {};
+let stopGridEvents = () => {};
+const eventRows = new WeakMap<HTMLTableRowElement, RowId>();
 let bindCalls = 0;
 let renderingGeneration = 0;
 let renderingOperation = 0;
@@ -192,8 +196,10 @@ function disposeGrid(): void {
   renderingPaused = false;
   lastBinding = null;
   stopDetails();
-  grid?.dispose();
+  stopGridEvents();
+  const current = grid;
   grid = null;
+  current?.dispose();
   inspectedId = null;
 }
 
@@ -441,6 +447,8 @@ function bind(): void {
       refreshRowResources();
     } : undefined,
     onRowBind(context) {
+      for (const element of context.elements) eventRows.set(element, context.row.id);
+      context.own(() => { for (const element of context.elements) eventRows.delete(element); });
       if (renderingMode.value !== "immediate" && renderingFail.checked) {
         renderingFail.checked = false;
         throw new Error("The authored demo failed one row binding; Resume retries it.");
@@ -496,6 +504,7 @@ function bind(): void {
     columns: defaultColumns,
     multiple: selectionMode.value === "multiple",
     toggleSelection: toggleSelection.checked,
+    selectOnRowClick: selectOnRowClick.checked,
     checkMode: checkMode.value as "multiple" | "single",
     validateOn: validateOn.value as "change" | "blur" | "manual",
     revealInvalid: revealInvalid.checked && !lastInvalid.checked,
@@ -547,6 +556,19 @@ function bind(): void {
       if (grid) refreshColumns();
     }
   });
+  const events = new AbortController();
+  stopGridEvents = () => events.abort();
+  const observe = (event: Event) => {
+    const target = event.target;
+    if (!(target instanceof Element) || target.closest("table") !== table) return;
+    const element = target.closest("tr");
+    const id = element ? eventRows.get(element) : undefined;
+    const row = id === undefined ? undefined : rows.get(id);
+    if (row) postEdit.textContent = JSON.stringify({ event: event.type, id: row.id,
+      field: target.getAttribute("data-field"), status: row.status, value: row.value });
+  };
+  table.addEventListener("input", observe, { signal: events.signal });
+  table.addEventListener("change", observe, { signal: events.signal });
   initialColumns = grid.columns().map(column => ({ ...column }));
   stopRows();
   stopRows = rows.subscribe(event => {
@@ -838,7 +860,7 @@ for (const control of [viewportChoice, datasetChoice]) {
     requestAnimationFrame(refreshViewport);
   });
 }
-for (const control of [selectionMode, toggleSelection, disableInactive]) {
+for (const control of [selectionMode, toggleSelection, selectOnRowClick, disableInactive]) {
   control.addEventListener("change", () => {
     if (grid) { disposeGrid(); bind(); }
     status.textContent = "Selection policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";

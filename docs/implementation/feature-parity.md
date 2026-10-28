@@ -5,6 +5,10 @@ description: Source-backed legacy behavior gaps, required additions, and pending
 tags: [meta, plan, migration, parity]
 status: draft
 sources:
+  - id: grid-acceptance
+    resource: evidence/m10964-grid-acceptance.json
+    title: Current Grid contract witnesses and retained obligations
+    git_blob: bdaa8758faef962ea527f5cf505a5148a265a684
   - id: surface
     resource: evidence/v1-surface-inventory.json
     title: Eight-file AST surface checklist and extraction limits
@@ -48,7 +52,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -81,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -121,12 +125,12 @@ Legacy symbols are in natural.ui.js; current equivalents are bindGrid, GridHandl
 | G05 | Row Form img.src and html rendering | M10.9.3 binds native image src and explicit synchronous Form/Grid render functions returning fresh same-document nodes, text or null. Plain strings remain text; authored control/error ownership and exact Form child-node restoration are enforced. No string-to-HTML option or renderer registry is added. Legacy option/dynamic closure remains required. |
 | G06 | validate, declarative rules, focusout/Enter and validate-scroll | M10.9.3 shares programmatic/native disabled/length/sanitization constraints and adds change/blur/manual timing, native-aware Enter and current-page first-error reveal/focus. Released invalid rows lose stale element references after reveal. Existing rule/draft and off-page contracts remain; full legacy option/dynamic closure remains required. |
 | G07 | row_data_changed__, row_data_deleted__, data_changed__ | M10.9.4 adds canonical status projection, every physical tr's data-row-status and the table's pending data-changed flag. Explicit deleted views use inclusive enumeration, protect native editing/selection/checks/validation/paste, split status merge boundaries and allow authored Undo actions. M10.9.6.1 retains the last committed edited value for display and exposes its immutable loaded original separately; deletion payloads still use the original. Rows-backed Form/Grid mark exact committed raw field paths, including nested siblings/groups/Selects, and clear state on revert. The [change-state contract](m10-change-state-plan.md) records acceptance. Remaining G07 options and dynamic semantics stay required; this foundation does not close the family. |
-| G08 | select, unselect, onBeforeSelect, row-click toggle | M10.9.6.2 adds explicit native-button toggleSelection while default and programmatic same-ID selection remain idempotent. Existing atomic veto/reentrancy contracts are reused. Row-wide activation and full callback/default equivalence remain required under .4; this does not close the family. |
-| G09 | multiselect, selected projection, array select | Independent selected IDs, absolute replacement, Ctrl/Meta toggle, Shift range and scoped keyboard remain. M10.9.6.2 optionally toggles plain membership; removing any member clears active identity, preserving other members/checks. Legacy projections and remaining option/callback semantics stay open. |
+| G08 | select, unselect, onBeforeSelect, row-click toggle | M10.9.6.4 adds selectOnRowClick through the existing atomic selection owner, with native exclusions, original events, every physical record row and an available keyboard alternative. toggleSelection retains its explicit policy; programmatic select stays absolute. Full default/global-callback equivalence remains cross-owner work; this does not close the family. |
+| G09 | multiselect, selected projection, array select | Independent selected IDs, absolute replacement, Ctrl/Meta toggle, Shift range and scoped keyboard remain. M10.9.6.4 tests current raw active/batch/checked projections, own-key field picks, scope intersection and append versus replacement through existing APIs. Remaining shared default/callback semantics stay open. |
 | G10 | check, checkAll/checkAllTarget/checkSingleTarget | M10.9.3 adds zero-or-one exclusive checks through the existing atomic veto/callback paths; scoped check-all preserves/replaces/rejects for zero/one/multiple eligible IDs. Active, selected and data-checkbox state stay independent. Existing scope/eligibility/mixed controls remain; legacy option/callback/dynamic closure is still required. |
 | G11 | sortable, sortableItem, grid.sort | Core: application comparator, aria-sort and authored ascending/descending/clear header activation are implemented; legacy option/edge closure remains open. |
 | G12 | filter, data-filter, grid.dataFilter | M10.9.6.2 retains zero-count choices within the manual/status domain and adds authored Apply/Enter matching-value replacement while preserving preview-only input and the old Clear contract. Raw scalar/count/cache/failure boundaries remain explicit. Legacy indicators/options and full semantic acceptance stay required. |
-| G13 | height, fixedcol, fixHeader/fixColumn, fixed footer | M10.9.5 measures top and bottom sticky bands through the existing viewport, including multi-row footers, managed columns, resized roots and multi-tr records. Native nonvirtual scrolling uses authored scroll-padding/margins. Native tables/headings/footers remain intact; full legacy option/dynamic closure remains required. |
+| G13 | height, fixedcol, fixHeader/fixColumn, fixed footer | M10.9.5 measures top and bottom sticky bands through the existing viewport, including multi-row footers, managed columns, resized roots and multi-tr records. Native nonvirtual scrolling uses authored scroll-padding/margins. M10.9.6.4 retains specific acceptance for two or more horizontally pinned columns: cumulative offsets after resize/hide/reorder in grouped and responsive positioned-root layouts. Native table structure stays intact; full legacy option/dynamic closure remains required. |
 | G14 | resizable/resize, show/hide, more column chooser | M10.5 retains native topology, resize/reorder/show/hide. M10.9.6.2 composes authored business-column checkboxes/All/mixed/count with a separate retained actions/recovery column. All business columns can hide; all physical columns cannot. Chooser state derives from columns(), with no new public component. Full legacy options/callback closure remains open. |
 | G15 | vResizable/vResize, scroll lock and action-driven scroll | M10.9.5 retains authored height controls and aligned reveal. M10.9.6.2 adds tested application recipes for accepted select/check/indexed/front/end add, nonempty append and last-invalid visual-page reveal, with opt-out/veto/offpage guards. Exact remaining default/flag, CSS dimension and dynamic semantics remain required; no automatic retirement. |
 | G16 | more detail Form/Popup, previous/next validation | M10.9.5 composes one authored CVC detail page in main content and Popup, sharing Form/Rows and current Grid rowIds scopes. Previous/next and authored close/native cancel validate; navigation skips tombstones, re-reads projection and handles paging, stale IDs and focus restoration independently of Grid selection. General Popup guard/dragging and full more/options/dynamic equivalence remain with their owning parity work. |
@@ -180,7 +184,7 @@ The existing explicit runtime and shared store are retained. These rows distingu
 | C05 | Default POST, GET q=JSON, dataIsArray, old server payloads | Partial explicit methods/body exist; supply tested transport/payload migration recipes. Existing server workflows must work without a generic utility package. |
 | C06 | Controller before/after/around/error AOP and pointcuts | Review: arbitrary global interception is absent. Compare typed lifecycle/wrapper alternatives before any exclusion. |
 | C07 | TEMPLATE p/c/e assembly, code loading, deferred init/search wiring | Review of runtime parser; preserve useful typed declarations, async ordering and code-data loading. Do not call this framework-reachable module unused. |
-| C08 | Arbitrary delegated actions inside Grid/List rows | Missing stable RowId context for events beyond onSelect; add a typed row-action/event hook. Native listeners alone cannot recover private identity maps. |
+| C08 | Arbitrary delegated actions inside Grid/List rows | Grid onRowAction supplies typed button context. M10.9.6.4 composes arbitrary native post-edit observation from onRowBind-owned physical-row identity and a root listener installed after Grid delegation; invalid/manual drafts do not imply commits. Generic declaration assembly and List event/edit behavior remain required. No extra Grid event engine is needed for the tested outcome. |
 | C09 | DataSync shared editing/subscription lifetime | Core caller-owned Rows supplies the behavior; verify remaining use cases without a DOM/global registry. |
 | C10 | rowStatus/revert/save projection and data values | Core changes/revert exists; old payload conversion and JSON-compatible value boundaries need explicit equivalence/review. |
 | C11 | Dynamic formatter/validator catalogs/local extensions | Core retained rules exist; protect indirect HTML/configuration/row-form reachability. Global registration/configuration gets a crosswalk. |
@@ -212,9 +216,13 @@ Continue P0 options/dynamic closure and prepare one complete retirement proposal
 
 # Open questions
 
+The [current Grid acceptance ledger](evidence/m10964-grid-acceptance.json) resolves every frozen surface/dynamic record through thirty current contracts with exact test witnesses. Tested local compositions do not settle shared configuration, programmatic field rules, incoming status/wire formats or arbitrary runtime discovery. Keep their owning obligations explicit rather than repeating already implemented Grid work.[^grid-acceptance]
+
 P0 must close behavior equivalence for mapped literal/merged options, dynamic dispatch and callback edge cases, then finish the consolidated retirement proposal. Manual assistive-technology review and actual token telemetry remain open. Structural mapping is complete for the eight-file checklist; exhaustive behavioral closure and current 2.0 parity are incomplete.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
+
+[^grid-acceptance]: Current Grid contract witnesses and retained obligations
 [^extractor]: Reproducible private development audit
 [^legacy-ui]: Preserved data and page component behavior
 [^legacy-shell]: Preserved notification and document behavior

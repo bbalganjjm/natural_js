@@ -41,6 +41,7 @@ thead { position: sticky; top: 0; z-index: 2; }
 thead th { background: #e2edf5; }
 .notebook thead th, .notebook tfoot { background: #f3e9d7; }
 tbody tr:nth-child(even) { background: #f7fafc; }
+tbody tr:hover, tbody tr:focus-within { outline: 2px solid #376589; outline-offset: -2px; }
 .notebook tbody tr:nth-child(even) { background: #fff5e4; }
 tbody tr[data-row-template], [hidden] { display: none !important; }
 td input:not([type="checkbox"]), td select, td textarea { width: 100%; }

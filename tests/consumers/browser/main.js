@@ -88,7 +88,7 @@ const definition = {
     const idsEvent = kind => ({ ids, previous, event }) =>
       gridEvents.push({ kind, ids, previous, type: event?.type ?? null });
     const grid = bindGrid(root.querySelector("table"), {
-      rows, initialPage: { page: 1, size: 1 }, multiple: true, toggleSelection: true,
+      rows, initialPage: { page: 1, size: 1 }, multiple: true, toggleSelection: true, selectOnRowClick: true,
       paste: true,
       onPaste: result => pasteEvents.push({
         valid: result.valid,

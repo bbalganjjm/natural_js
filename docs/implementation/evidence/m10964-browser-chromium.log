@@ -1,0 +1,560 @@
+
+
+Running 522 tests using 1 worker
+
+
+
+[1/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener
+[2/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:99:1 › two MDI workspaces keep unique IDs and resolvable ARIA references
+[3/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:112:1 › vertical Tabs skip disabled buttons and keep manual activation
+[4/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › side MDI and open Popup pass automated WCAG-tagged checks
+[5/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › stack MDI and open Popup pass automated WCAG-tagged checks
+[6/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › side Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[7/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › side data UI remains keyboard-operable at 320px
+[8/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › stack Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[9/522] [chromium] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › stack data UI remains keyboard-operable at 320px
+[10/522] [chromium] › tests\browser\datepicker.spec.ts:24:1 › DatePicker compiles authored weeks once and restores markup, IDs, and ownership
+[11/522] [chromium] › tests\browser\datepicker.spec.ts:61:1 › calendar keyboard preserves leap-day intent, week order, selection, and roving focus
+[12/522] [chromium] › tests\browser\datepicker.spec.ts:95:1 › limits constrain keyboard and pointer selection without emitting programmatic changes
+[13/522] [chromium] › tests\browser\datepicker.spec.ts:134:1 › Monday weeks and extreme years use UTC calendar days across daylight-saving dates
+[14/522] [chromium] › tests\browser\datepicker.spec.ts:169:1 › locale labels retain the Gregorian ISO calendar
+[15/522] [chromium] › tests\browser\datepicker.spec.ts:192:1 › invalid dates, locale, markup, and repeated IDs fail before changing authored nodes
+[16/522] [chromium] › tests\browser\datepicker.spec.ts:229:1 › application date selection updates nested Form rows through native input events
+[17/522] [chromium] › tests\browser\datepicker.spec.ts:259:1 › authored calendar exposes an accessible grid before and after keyboard navigation
+[18/522] [chromium] › tests\browser\documents.spec.ts:21:1 › documents reuse keys, reload with the original factory, isolate MDI, and restore authored markup
+[19/522] [chromium] › tests\browser\documents.spec.ts:84:1 › malformed page handles release their partial work and Tabs restores authored alert nodes
+[20/522] [chromium] › tests\browser\documents.spec.ts:152:1 › close during reload waits for the original page cleanup before removing its panel
+[21/522] [chromium] › tests\browser\documents.spec.ts:188:1 › superseded documents abort, failures recover the previous page, and retained entries retry
+[22/522] [chromium] › tests\browser\documents.spec.ts:235:1 › close guards deduplicate, refusal and errors preserve pages, and disposal cancels a pending guard
+[23/522] [chromium] › tests\browser\documents.spec.ts:296:1 › closing an inactive document does not wait for or cancel another pending selection
+[24/522] [chromium] › tests\browser\documents.spec.ts:326:1 › a present close guard must explicitly return a boolean before a document is removed
+[25/522] [chromium] › tests\browser\documents.spec.ts:353:1 › horizontal document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[26/522] [chromium] › tests\browser\documents.spec.ts:353:1 › vertical document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[27/522] [chromium] › tests\browser\documents.spec.ts:388:1 › invalid repeated templates fail atomically before binding and the root can be corrected
+[28/522] [chromium] › tests\browser\field-render.spec.ts:16:1 › renderer declarations use only own functions, including a field named toString
+[29/522] [chromium] › tests\browser\field-render.spec.ts:34:1 › configuration rejects ambiguous fields and owned native content before mutation or execution
+[30/522] [chromium] › tests\browser\field-render.spec.ts:71:1 › rendered strings remain text while fresh native nodes, fragments and null replace content
+[31/522] [chromium] › tests\browser\field-render.spec.ts:100:1 › invalid ownership and async returns preserve field content without unhandled rejections
+[32/522] [chromium] › tests\browser\field-render.spec.ts:123:1 › factory exceptions and same-target reentry stay structured, release their guard and allow independent targets
+[33/522] [chromium] › tests\browser\field-render.spec.ts:145:1 › local Form renders from raw values, refreshes dependent display and restores authored nodes
+[34/522] [chromium] › tests\browser\form-m6.spec.ts:3:1 › Form keeps choice groups raw, accessible, and scoped to their MDI forms
+[35/522] [chromium] › tests\browser\form-m6.spec.ts:99:1 › local Form reads group values and rejects ambiguous declarations
+[36/522] [chromium] › tests\browser\form.spec.ts:6:1 › Form keeps invalid edits out of Rows and exposes authored errors accessibly
+[37/522] [chromium] › tests\browser\form.spec.ts:109:1 › local Form reads nested fields and row validation leaves another bound row alone
+[38/522] [chromium] › tests\browser\form.spec.ts:150:1 › Form retains invalid drafts by row and resolves cross-field candidates
+[39/522] [chromium] › tests\browser\form.spec.ts:214:1 › built-in Form rules keep raw values and direct fill replaces formatted text
+[40/522] [chromium] › tests\browser\form.spec.ts:244:1 › parser failures retain drafts and null raw values can format
+[41/522] [chromium] › tests\browser\form.spec.ts:294:1 › local file input validates its filename and row-bound file input fails clearly
+[42/522] [chromium] › tests\browser\form.spec.ts:345:1 › built-in required rejects an unchecked checkbox and custom required can override it
+[43/522] [chromium] › tests\browser\form.spec.ts:379:1 › visible and hidden Form drafts obey native text length constraints
+[44/522] [chromium] › tests\browser\form.spec.ts:416:1 › Form clears a committed draft after a subscriber error but keeps a rejected draft
+[45/522] [chromium] › tests\browser\form.spec.ts:472:1 › Form rejects display formatters on controls without text display semantics
+
+
+[46/522] [chromium] › tests\browser\form.spec.ts:494:1 › hidden Form length checks use entered text before parsing
+[47/522] [chromium] › tests\browser\form.spec.ts:529:1 › external Rows.set clears stale Form errors without running validators in its subscriber
+[48/522] [chromium] › tests\browser\form.spec.ts:581:1 › untouched stored text has the same visible and hidden length result
+[49/522] [chromium] › tests\browser\form.spec.ts:610:1 › validate commits a draft made valid by an external row update without rebinding
+[50/522] [chromium] › tests\browser\form.spec.ts:638:1 › native Form constraints reject sanitized values and respect disabled fieldsets
+[51/522] [chromium] › tests\browser\form.spec.ts:670:1 › Form parsers only run explicitly declared own field functions
+[52/522] [chromium] › tests\browser\form.spec.ts:686:1 › Form and List bind authored image sources and retain alternative text
+[53/522] [chromium] › tests\browser\grid-acceptance.spec.ts:85:1 › row-wide activation is opt-in and preserves native table and button defaults
+[54/522] [chromium] › tests\browser\grid-acceptance.spec.ts:99:1 › invalid row activation flags and missing keyboard alternatives reject before ownership
+[55/522] [chromium] › tests\browser\grid-acceptance.spec.ts:122:1 › single row clicks reuse toggles, current snapshots and committed callback order
+[56/522] [chromium] › tests\browser\grid-acceptance.spec.ts:143:1 › row-wide multiple gestures share eligible ranges and independent checks
+[57/522] [chromium] › tests\browser\grid-acceptance.spec.ts:156:1 › row-wide veto and unavailable records keep atomic selection and native pressed state
+[58/522] [chromium] › tests\browser\grid-acceptance.spec.ts:173:1 › interactive descendants and label text never become row activation
+[59/522] [chromium] › tests\browser\grid-acceptance.spec.ts:188:1 › prevented, hidden and inert record clicks leave selection unchanged
+[60/522] [chromium] › tests\browser\grid-acceptance.spec.ts:203:1 › row clicks require a currently usable keyboard selection alternative
+[61/522] [chromium] › tests\browser\grid-acceptance.spec.ts:222:1 › every physical row resolves current identity after sorting, paging and column movement
+[62/522] [chromium] › tests\browser\grid-acceptance.spec.ts:236:1 › native selection buttons activate once by pointer, Enter and Space with row clicks enabled
+[63/522] [chromium] › tests\browser\grid-acceptance.spec.ts:252:1 › independent row activation and repeated disposal retain exact authored ownership
+[64/522] [chromium] › tests\browser\grid-acceptance.spec.ts:274:1 › row activation follows progressive and recycled viewport records without growing mounted DOM
+[65/522] [chromium] › tests\browser\grid-acceptance.spec.ts:289:1 › 10,000 loaded records reach the last progressive identity with bounded DOM and quiet disposal
+[66/522] [chromium] › tests\browser\grid-change-state.spec.ts:110:1 › loaded clean fields are explicit false while errors and unbound cells keep authored markers
+[67/522] [chromium] › tests\browser\grid-change-state.spec.ts:122:1 › binders created after an edit use the loaded baseline rather than their initial display
+[68/522] [chromium] › tests\browser\grid-change-state.spec.ts:129:1 › nested sibling paths change and restore independently in shared Form and Grid
+[69/522] [chromium] › tests\browser\grid-change-state.spec.ts:139:1 › raw array order matters while equivalent JSON and object key order do not
+[70/522] [chromium] › tests\browser\grid-change-state.spec.ts:148:1 › all radio and checkbox group members share their committed field state
+[71/522] [chromium] › tests\browser\grid-change-state.spec.ts:158:1 › Select markers compare selected raw values instead of option labels or option-list changes
+[72/522] [chromium] › tests\browser\grid-change-state.spec.ts:167:1 › unchanged formatted text does not hide raw changes on displays, rendered fields and images
+[73/522] [chromium] › tests\browser\grid-change-state.spec.ts:178:1 › Form commits update markers without replacing the focused input or its caret
+[74/522] [chromium] › tests\browser\grid-change-state.spec.ts:186:1 › Grid commits update markers without replacing the focused input or its caret
+[75/522] [chromium] › tests\browser\grid-change-state.spec.ts:194:1 › invalid drafts neither create committed changes nor erase an existing committed field change
+[76/522] [chromium] › tests\browser\grid-change-state.spec.ts:207:1 › inserted and copied records have no original baseline while clean append gains one
+[77/522] [chromium] › tests\browser\grid-change-state.spec.ts:220:1 › retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them
+[78/522] [chromium] › tests\browser\grid-change-state.spec.ts:237:1 › null and stale Form binding clear field flags without changing retained Grid deletion state
+[79/522] [chromium] › tests\browser\grid-change-state.spec.ts:248:1 › owned Form attributes and exact Grid template restore while local Forms never take marker ownership
+[80/522] [chromium] › tests\browser\grid-change-state.spec.ts:261:1 › sort filter page and column changes preserve leaf identity rather than display indexes
+[81/522] [chromium] › tests\browser\grid-change-state.spec.ts:273:1 › offscreen edits and deletion remount with their data-owned baseline and bounded physical rows
+[82/522] [chromium] › tests\browser\grid-change-state.spec.ts:289:1 › shared and independent MDI bindings retain their own baselines and unique accessible IDs
+[83/522] [chromium] › tests\browser\grid-change-state.spec.ts:317:1 › signed zero raw identity is visible as changed even when its formatted display is identical
+[84/522] [chromium] › tests\browser\grid-columns.spec.ts:80:1 › column changes keep field nodes, nested raw choices, selection and caret
+[85/522] [chromium] › tests\browser\grid-columns.spec.ts:104:1 › hidden columns keep drafts across row release and preserve native visible groups
+[86/522] [chromium] › tests\browser\grid-columns.spec.ts:129:1 › invalid replacement is atomic and returned state is immutable
+[87/522] [chromium] › tests\browser\grid-columns.spec.ts:155:1 › width-only updates leave row topology, focus and data untouched
+[88/522] [chromium] › tests\browser\grid-columns.spec.ts:173:1 › sort indicators on hidden headers and exact dispose restoration work
+[89/522] [chromium] › tests\browser\grid-columns.spec.ts:190:1 › keyboard resize reports one coherent change and resets preferred width
+[90/522] [chromium] › tests\browser\grid-columns.spec.ts:205:1 › pointer resize commits once, cancellation restores state and teardown releases capture
+[91/522] [chromium] › tests\browser\grid-columns.spec.ts:230:1 › malformed topology and bind failures leave original markup available for retry
+[92/522] [chromium] › tests\browser\grid-columns.spec.ts:258:1 › returning the resize pointer to its start restores the preview without notifying
+[93/522] [chromium] › tests\browser\grid-columns.spec.ts:273:1 › callback failures keep the successful state and failed data binding can be retried
+[94/522] [chromium] › tests\browser\grid-columns.spec.ts:297:1 › no-column tables retain their behavior and state methods have clear bounds
+[95/522] [chromium] › tests\browser\grid-columns.spec.ts:319:1 › column hiding and paging skip hidden, inert and CSS-hidden focus candidates
+[96/522] [chromium] › tests\browser\grid-columns.spec.ts:351:1 › two CVC layouts expose working column tools and remain isolated and accessible
+[97/522] [chromium] › tests\browser\grid-columns.spec.ts:376:1 › flat columns move freely and late rows use current topology without rebinding fields
+[98/522] [chromium] › tests\browser\grid-columns.spec.ts:401:1 › authored row blocks preserve focused span cells through column changes
+[99/522] [chromium] › tests\browser\grid-columns.spec.ts:444:1 › body span topology fails before column ownership and allows a corrected retry
+[100/522] [chromium] › tests\browser\grid-columns.spec.ts:474:1 › column attachment owns and releases an entire authored row block
+[101/522] [chromium] › tests\browser\grid-columns.spec.ts:521:1 › implicit columns do not add ordering restrictions around an authored middle group
+[102/522] [chromium] › tests\browser\grid-controls.spec.ts:106:1 › radio groups with different native form owners fail before binding owns the authored table
+[103/522] [chromium] › tests\browser\grid-controls.spec.ts:128:1 › a partly hidden choice group consumes one protected paste position in mounted and offscreen rows
+[104/522] [chromium] › tests\browser\grid-controls.spec.ts:147:1 › a hidden viewport or ancestor protects mounted and offscreen paste targets equally
+[105/522] [chromium] › tests\browser\grid-controls.spec.ts:169:1 › required radio validation checks entered null before a parser can supply a raw default
+[106/522] [chromium] › tests\browser\grid-controls.spec.ts:181:1 › cross-tr native groups keep per-row values and stable identity without a native form
+[107/522] [chromium] › tests\browser\grid-controls.spec.ts:199:1 › multiple Select keeps empty and single arrays and distinguishes nested raw scalar types
+[108/522] [chromium] › tests\browser\grid-controls.spec.ts:214:1 › radio names isolate two MDI Grids and every record inside one outer form
+[109/522] [chromium] › tests\browser\grid-controls.spec.ts:239:1 › date time month week color and hidden stay strings while range uses its parser
+[110/522] [chromium] › tests\browser\grid-controls.spec.ts:253:1 › native value sanitization reports stored invalid values without silently rewriting them
+[111/522] [chromium] › tests\browser\grid-controls.spec.ts:274:1 › blur defers scalar commits and commits group and Select changes exactly once
+[112/522] [chromium] › tests\browser\grid-controls.spec.ts:292:1 › manual timing retains scalar radio checkbox and Select drafts until explicit validate
+[113/522] [chromium] › tests\browser\grid-controls.spec.ts:309:1 › Enter commits one scalar but composition modifiers and textarea Enter remain native
+[114/522] [chromium] › tests\browser\grid-controls.spec.ts:329:1 › quoted JSON array TSV applies two logical rows atomically and preserves unrelated drafts
+[115/522] [chromium] › tests\browser\grid-controls.spec.ts:344:1 › typed array paste preserves Object.is identity for negative and positive zero
+[116/522] [chromium] › tests\browser\grid-controls.spec.ts:360:1 › invalid JSON arrays unavailable choices and radio values reject the entire paste
+[117/522] [chromium] › tests\browser\grid-controls.spec.ts:378:1 › offscreen array paste keeps the two-tr viewport bounded and a focused draft attached
+[118/522] [chromium] › tests\browser\grid-controls.spec.ts:398:1 › partially disabled readonly or inert groups consume one protected logical position
+[119/522] [chromium] › tests\browser\grid-controls.spec.ts:413:1 › Grid Form and List apply programmatic text lengths and authored disabled constraints consistently
+[120/522] [chromium] › tests\browser\grid-controls.spec.ts:432:1 › only own parser and renderer keys are invoked including a field named toString
+[121/522] [chromium] › tests\browser\grid-controls.spec.ts:455:1 › images preserve alt and explicit Grid and Form renderers use fresh DOM or literal text
+[122/522] [chromium] › tests\browser\grid-controls.spec.ts:486:1 › merged render output stays display-only while ordinary display can render native interactive nodes
+[123/522] [chromium] › tests\browser\grid-controls.spec.ts:519:1 › invalid render targets fail before taking Grid Form or nested Select ownership
+[124/522] [chromium] › tests\browser\grid-controls.spec.ts:541:1 › connected foreign reused and asynchronous render nodes reject with exact binding recovery
+[125/522] [chromium] › tests\browser\grid-controls.spec.ts:574:1 › revealing the first error removes stale element references from other released invalid rows
+[126/522] [chromium] › tests\browser\grid-controls.spec.ts:592:1 › validation and rejected paste reveal the current-page invalid row and return connected focused fields
+[127/522] [chromium] › tests\browser\grid-controls.spec.ts:613:1 › off-page and filtered validation keeps the application page filter and focus unchanged
+[128/522] [chromium] › tests\browser\grid-controls.spec.ts:628:1 › single checks remain independent in two accessible MDI Grids and disposal restores authored DOM
+[129/522] [chromium] › tests\browser\grid-detail.spec.ts:72:1 › row scopes expose sorted projection, logical page and live store independently of eligibility
+[130/522] [chromium] › tests\browser\grid-detail.spec.ts:89:1 › projected scopes include explicitly shown tombstones while store remains live
+[131/522] [chromium] › tests\browser\grid-detail.spec.ts:104:1 › row identity snapshots are frozen and old results survive ordering and data changes
+[132/522] [chromium] › tests\browser\grid-detail.spec.ts:119:1 › identity lookup includes unmounted page rows without DOM queries, rendering or focus changes
+[133/522] [chromium] › tests\browser\grid-detail.spec.ts:147:1 › identity snapshots follow pre-bind rollback and post-bind commit while rejecting invalid scopes
+[134/522] [chromium] › tests\browser\grid-detail.spec.ts:177:1 › reveal accepts all logical alignments without selecting, checking or committing drafts
+[135/522] [chromium] › tests\browser\grid-detail.spec.ts:195:1 › malformed reveal options fail before row lookup, scrolling or view changes
+[136/522] [chromium] › tests\browser\grid-detail.spec.ts:209:1 › reveal stays inside the current page and permits only explicitly projected tombstones
+[137/522] [chromium] › tests\browser\grid-detail.spec.ts:224:1 › alignment getters run once and their failures or disposal cannot trigger stale scrolling
+[138/522] [chromium] › tests\browser\grid-detail.spec.ts:242:1 › row-hook disposal during virtual reveal restores height and authored table ownership
+[139/522] [chromium] › tests\browser\grid-detail.spec.ts:259:1 › combined viewport and height cleanup restores a stylesheet-sized root without adding inline style
+[140/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:62:1 › choices keep occurrence order and zero counts inside manual and status domains
+[141/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:80:1 › preview stays separate and Apply replaces the complete raw filter
+[142/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:90:1 › no matches means none and whitespace Apply clears the column and preview
+[143/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:100:1 › boolean and null choices keep raw identities while applying labels
+[144/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:110:1 › plain Enter applies without implicit form submission
+[145/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:116:1 › composing modifier and disabled gestures do not apply or prevent defaults
+[146/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:134:1 › a search without an authored Apply keeps Enter preview-only
+[147/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:148:1 › blank no-op refreshes choices and Clear preserves its search contract
+[148/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:159:1 › Apply preserves other filters paging identities checks and hidden drafts
+[149/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:181:1 › invalid Apply declarations fail before DOM ownership
+[150/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:201:1 › preparation failures retain the previous filter view page and data
+[151/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:217:1 › post-commit bind failure retains the committed state and query
+[152/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:229:1 › one-shot Rows manual and column mutations cannot publish stale choices
+[153/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:255:1 › independent native headers stay accessible and exact disposal leaves late controls quiet
+[154/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:273:1 › Enter uses an enabled matching Apply when another matching button is disabled
+[155/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:285:1 › zero-count raw values and labels retain synchronous scalar validation
+[156/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:307:1 › completion disposal leaves restored application input state untouched
+[157/522] [chromium] › tests\browser\grid-filter-apply.spec.ts:321:1 › completion callbacks retain a newer live query and a replacement Grid owner
+[158/522] [chromium] › tests\browser\grid-geometry.spec.ts:71:1 › authored height handle exposes actual geometry and bounded native keyboard controls
+[159/522] [chromium] › tests\browser\grid-geometry.spec.ts:88:1 › height controls preserve modified shortcuts and blocked authored interactions
+[160/522] [chromium] › tests\browser\grid-geometry.spec.ts:101:1 › pointer previews coalesce and commit with content-box conversion and exact priority restoration
+[161/522] [chromium] › tests\browser\grid-geometry.spec.ts:120:1 › Escape, pointer cancellation, lost capture and a second pointer leave the original drag intact
+[162/522] [chromium] › tests\browser\grid-geometry.spec.ts:140:1 › native captured pointer dragging commits measured height and releases capture
+[163/522] [chromium] › tests\browser\grid-geometry.spec.ts:157:1 › a mouse movement without the primary button cancels a stranded drag and ignores its late release
+[164/522] [chromium] › tests\browser\grid-geometry.spec.ts:173:1 › disposal during a queued drag restores source and rejects all late pointer or keyboard writes
+[165/522] [chromium] › tests\browser\grid-geometry.spec.ts:188:1 › invalid height configurations fail before markup ownership
+[166/522] [chromium] › tests\browser\grid-geometry.spec.ts:202:1 › root and handle ownership cannot be shared and failure cleanup permits a retry
+[167/522] [chromium] › tests\browser\grid-geometry.spec.ts:218:1 › hidden preparation measures when shown and external dimensions announce honest current values
+[168/522] [chromium] › tests\browser\grid-geometry.spec.ts:231:1 › an unmeasurable root leaves no incomplete focusable separator and preserves authored inert state
+[169/522] [chromium] › tests\browser\grid-geometry.spec.ts:247:1 › height changes retain nested drafts, focused editors and a bounded logical viewport
+[170/522] [chromium] › tests\browser\grid-geometry.spec.ts:262:1 › reveal start center end and nearest use sticky multi-row header and footer space
+[171/522] [chromium] › tests\browser\grid-geometry.spec.ts:280:1 › last-row reveal stays above a sticky footer after height and managed column changes
+[172/522] [chromium] › tests\browser\grid-geometry.spec.ts:294:1 › explicit alignment survives remeasurement of a cached row after virtual remount
+[173/522] [chromium] › tests\browser\grid-geometry.spec.ts:318:1 › multi-tr oversized records use one identity and nearest alignment keeps their start visible
+[174/522] [chromium] › tests\browser\grid-geometry.spec.ts:333:1 › nonvirtual height resizing and all reveal alignments preserve logical rows and selection
+[175/522] [chromium] › tests\browser\grid-geometry.spec.ts:356:1 › independent MDI height handles keep unique ARIA references and accessible controls
+[176/522] [chromium] › tests\browser\grid-initial-page.spec.ts:13:1 › initialPage renders only its slice, copies input, clamps, and preserves the no-option default
+[177/522] [chromium] › tests\browser\grid-initial-page.spec.ts:77:1 › invalid initialPage leaves authored template and Select ownership untouched; setPage failure is atomic
+[178/522] [chromium] › tests\browser\grid-initial-page.spec.ts:128:1 › initialPage keeps off-page identity and validation while deferring invalid row options
+[179/522] [chromium] › tests\browser\grid-initial-page.spec.ts:181:1 › two initial-page Grids keep nested choices and generated error IDs isolated, then rebind cleanly
+[180/522] [chromium] › tests\browser\grid-initial-page.spec.ts:243:1 › off-page formatter failure rolls back page and releases its new Select before retry
+[181/522] [chromium] › tests\browser\grid-initial-page.spec.ts:299:1 › off-page Select option failure rolls back and releases its new clone before retry
+[182/522] [chromium] › tests\browser\grid-initial-page.spec.ts:350:1 › initial-page draft and focus survive a page-away and return without duplicate IDs
+[183/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+[184/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+[185/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+[186/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+[187/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+[188/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+[189/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+[190/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+[191/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+[192/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+[193/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+[194/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+[195/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+[196/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+[197/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+[198/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+[199/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+[200/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+[201/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+[202/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+[203/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+[204/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+[205/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+[206/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+[207/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+[208/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+[209/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+[210/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+[211/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+[212/522] [chromium] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+[213/522] [chromium] › tests\browser\grid-lifetime.spec.ts:13:1 › Grid releases visited pages while restoring the selected row, draft, and error
+[214/522] [chromium] › tests\browser\grid-lifetime.spec.ts:105:1 › offscreen validation text clears on external set, revert, remove, and replace
+[215/522] [chromium] › tests\browser\grid-m6.spec.ts:14:1 › Grid text and checkbox edits keep typed nested raw values
+[216/522] [chromium] › tests\browser\grid-m6.spec.ts:61:1 › Grid parse failure stays with RowId through paging and clears on revert
+[217/522] [chromium] › tests\browser\grid-m6.spec.ts:118:1 › Grid sort and page state use authored headings and restore focus
+[218/522] [chromium] › tests\browser\grid-m6.spec.ts:163:1 › Grid rejects ambiguous controls before changing authored markup
+[219/522] [chromium] › tests\browser\grid-m6.spec.ts:195:1 › Form and Grid parsers see one unparsed input snapshot
+[220/522] [chromium] › tests\browser\grid-m6.spec.ts:240:1 › Grid and List keep keyboard focus when a disabled row leaves the page
+[221/522] [chromium] › tests\browser\grid-paste.spec.ts:119:1 › a matrix preserves IDs and untouched snapshots and publishes one complete batch
+[222/522] [chromium] › tests\browser\grid-paste.spec.ts:139:1 › an invalid last cell rejects every write and preserves current input and draft state
+[223/522] [chromium] › tests\browser\grid-paste.spec.ts:156:1 › all parsers see entered values and all validators see the complete parsed candidate
+[224/522] [chromium] › tests\browser\grid-paste.spec.ts:176:1 › unrelated nested drafts participate in validation without being committed
+[225/522] [chromium] › tests\browser\grid-paste.spec.ts:190:1 › quoted TSV handles tabs, escaped quotes, multiline values, CRLF and one final terminator
+[226/522] [chromium] › tests\browser\grid-paste.spec.ts:203:1 › malformed, overflowing and HTML-invalid matrices never truncate or partially write
+[227/522] [chromium] › tests\browser\grid-paste.spec.ts:218:1 › current column order, hidden fields, filtered order and page bounds determine mapping
+[228/522] [chromium] › tests\browser\grid-paste.spec.ts:239:1 › protected positions consume clipboard cells while typed nested choices retain their raw type
+[229/522] [chromium] › tests\browser\grid-paste.spec.ts:258:1 › unknown, disabled, ambiguous choices and non-boolean checkbox text fail without coercion
+[230/522] [chromium] › tests\browser\grid-paste.spec.ts:274:1 › serialized negative zero preserves raw identity and rejects an ambiguous positive-zero choice
+[231/522] [chromium] › tests\browser\grid-paste.spec.ts:293:1 › opt-in native paste replaces whole fields, reports results and honors earlier cancellation
+[232/522] [chromium] › tests\browser\grid-paste.spec.ts:319:1 › disabled native ownership stays untouched and disposal restores authored markup and listeners
+[233/522] [chromium] › tests\browser\grid-paste.spec.ts:342:1 › parser side effects invalidate stale preparation and nested paste cannot interleave
+[234/522] [chromium] › tests\browser\grid-paste.spec.ts:378:1 › observer errors are postcommit and do not resurrect successful pasted drafts
+[235/522] [chromium] › tests\browser\grid-paste.spec.ts:398:1 › a postcommit subscriber's newer draft survives cleanup of the pasted draft
+[236/522] [chromium] › tests\browser\grid-paste.spec.ts:420:1 › error recovery does not resurrect a row removed by the active-selection callback
+[237/522] [chromium] › tests\browser\grid-paste.spec.ts:447:1 › a parser returning a non-JSON value fails before changing the store or current draft
+[238/522] [chromium] › tests\browser\grid-paste.spec.ts:469:1 › one batch updates shared Form, List and Tree while preserving unrelated drafts and keyed nodes
+[239/522] [chromium] › tests\browser\grid-paste.spec.ts:502:1 › a thousand-row paste is coherent, retains focus and generates document-unique error IDs
+[240/522] [chromium] › tests\browser\grid-progressive.spec.ts:130:1 › default binding has one frozen eight-field completion and exhausted calls do not repeat it
+[241/522] [chromium] › tests\browser\grid-progressive.spec.ts:144:1 › empty single exact and remainder boundaries count logical chunks and first last flags
+[242/522] [chromium] › tests\browser\grid-progressive.spec.ts:164:1 › two physical rows stay one scheduled record with full logical page ARIA positions
+[243/522] [chromium] › tests\browser\grid-progressive.spec.ts:178:1 › positive delay yields to another Window task while prepared rows remain usable
+[244/522] [chromium] › tests\browser\grid-progressive.spec.ts:192:1 › renderMore shares its pending Promise and advances only one target
+[245/522] [chromium] › tests\browser\grid-progressive.spec.ts:205:1 › size one continuation still gives a queued Window task a turn
+[246/522] [chromium] › tests\browser\grid-progressive.spec.ts:216:1 › canceling the initial operation rejects it and resumes its unfinished target
+[247/522] [chromium] › tests\browser\grid-progressive.spec.ts:230:1 › canceling a continuation retains completed work and does not skip its remaining target
+[248/522] [chromium] › tests\browser\grid-progressive.spec.ts:243:1 › unobserved cancellation is handled internally and repeated cancel stays quiet
+[249/522] [chromium] › tests\browser\grid-progressive.spec.ts:253:1 › refresh supersedes pending work and starts a fresh first chunk
+[250/522] [chromium] › tests\browser\grid-progressive.spec.ts:264:1 › Rows replacement cannot leave old IDs or late completion in the new prefix
+[251/522] [chromium] › tests\browser\grid-progressive.spec.ts:277:1 › explicit sort filter page and status requests reset first completion against the new scope
+[252/522] [chromium] › tests\browser\grid-progressive.spec.ts:292:1 › ordinary data mutations cancel queued work without emitting full bind completion
+[253/522] [chromium] › tests\browser\grid-progressive.spec.ts:315:1 › append during an unfinished prefix preserves old tail records without duplicate binding
+[254/522] [chromium] › tests\browser\grid-progressive.spec.ts:330:1 › append advances one chunk from a complete target and preserves fully admitted rows
+[255/522] [chromium] › tests\browser\grid-progressive.spec.ts:344:1 › empty append and exhausted requests retain cached completion without another callback
+[256/522] [chromium] › tests\browser\grid-progressive.spec.ts:354:1 › explicit reveal synchronously admits its full-page target and supersedes delayed work
+[257/522] [chromium] › tests\browser\grid-progressive.spec.ts:371:1 › full logical-page selection checks paste and validation still include unadmitted IDs
+[258/522] [chromium] › tests\browser\grid-progressive.spec.ts:386:1 › first-invalid reveal uses the same synchronous admission bridge
+[259/522] [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references
+[260/522] [chromium] › tests\browser\grid-progressive.spec.ts:426:1 › a focused invalid draft and typed choices survive a sorted prefix reset
+[261/522] [chromium] › tests\browser\grid-progressive.spec.ts:450:1 › a committed column layout cancels pending work and continuation uses the retained state
+[262/522] [chromium] › tests\browser\grid-progressive.spec.ts:466:1 › before-hook failure keeps earlier ready records and releases the failing row for retry
+[263/522] [chromium] › tests\browser\grid-progressive.spec.ts:483:1 › field failure is observable without losing earlier bindings or leaking Select ownership
+[264/522] [chromium] › tests\browser\grid-progressive.spec.ts:499:1 › after-hook failure releases resources in reverse order and retries one uncommitted record
+[265/522] [chromium] › tests\browser\grid-progressive.spec.ts:513:1 › onBind failure keeps committed DOM and the next request does not redeliver that completion
+[266/522] [chromium] › tests\browser\grid-progressive.spec.ts:526:1 › a completion callback starting another view aborts the old observer without stale completion
+[267/522] [chromium] › tests\browser\grid-progressive.spec.ts:542:1 › disposal during completion settles the observer and restores authored ownership exactly
+[268/522] [chromium] › tests\browser\grid-progressive.spec.ts:560:1 › synchronous size-one completion cannot write after its callback disposes the Grid
+[269/522] [chromium] › tests\browser\grid-progressive.spec.ts:592:1 › synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid
+[270/522] [chromium] › tests\browser\grid-progressive.spec.ts:619:1 › synchronous sort completion failure keeps its committed projection and advances the next chunk once
+[271/522] [chromium] › tests\browser\grid-progressive.spec.ts:642:1 › invalid progressive options fail before DOM ownership and allow corrected binding
+[272/522] [chromium] › tests\browser\grid-progressive.spec.ts:663:1 › independent instances cancel separately and remain accessible without duplicate IDs
+[273/522] [chromium] › tests\browser\grid-progressive.spec.ts:685:1 › 5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix
+[274/522] [chromium] › tests\browser\grid-progressive.spec.ts:706:1 › positive viewport delay schedules materialized records rather than thousands of offscreen IDs
+[275/522] [chromium] › tests\browser\grid-progressive.spec.ts:724:1 › cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix
+[276/522] [chromium] › tests\browser\grid-progressive.spec.ts:756:1 › a late viewport field failure publishes an owned error and retries its window without another completion
+[277/522] [chromium] › tests\browser\grid-recipes.spec.ts:90:1 › application projections read current raw values with own keys and independent active batch checked scopes
+[278/522] [chromium] › tests\browser\grid-recipes.spec.ts:120:1 › application membership append and replacement preserve independent sets and discard replaced row identities
+[279/522] [chromium] › tests\browser\grid-recipes.spec.ts:139:1 › native listeners registered after Grid observe drafts commits validation failures and latest custom-event snapshots
+[280/522] [chromium] › tests\browser\grid-recipes.spec.ts:167:1 › manual validation keeps native observations uncommitted until explicit validation
+[281/522] [chromium] › tests\browser\grid-recipes.spec.ts:181:1 › row-hook identities and abort-owned observations survive refresh recycling and rebind without stale callbacks
+[282/522] [chromium] › tests\browser\grid-recipes.spec.ts:205:1 › authored templates headers and native column topology support controlled dispose edit rebind
+[283/522] [chromium] › tests\browser\grid-recipes.spec.ts:238:1 › authored native defaults compose row creation without inheriting current edits or mutable output
+[284/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:101:1 › two authored block layouts keep native spans, nested options and exact teardown
+[285/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:118:1 › independent instances keep unique cross-row validation references and accessible native markup
+[286/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:136:1 › secondary row actions and edits share one identity and preserve focused drafts on moves
+[287/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:162:1 › column changes update every physical row without replacing nested fields
+[288/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:183:1 › native merges follow raw hierarchical values and projected page boundaries
+[289/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:210:1 › equal display strings cannot merge distinct raw values
+[290/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:221:1 › merging never hides the currently focused display field
+[291/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:234:1 › paste retains logical fields hidden only by merging and uses row-major nested order
+[292/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:251:1 › virtual blocks stay bounded with physical native row positions and far reveal
+[293/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:272:1 › a focused secondary row pins its complete block while offscreen paste stays logical
+[294/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:293:1 › invalid block and merge declarations fail before changing authored HTML or ownership
+[295/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:324:1 › a fully merged bare viewport preserves measurable rows and exact authored styles
+[296/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:351:1 › record blocks share nested values and stable identities with Form and List
+[297/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:375:1 › scalar merge validation is atomic and direct cell fields retain column ownership
+[298/522] [chromium] › tests\browser\grid-row-blocks.spec.ts:400:1 › hidden boundary rows remain in indivisible blocks without inflating measured height
+[299/522] [chromium] › tests\browser\grid-selection.spec.ts:106:1 › active detail stays independent from immutable store-ordered membership and checks
+[300/522] [chromium] › tests\browser\grid-selection.spec.ts:127:1 › default row activation still synchronizes List and Form without creating batch membership
+[301/522] [chromium] › tests\browser\grid-selection.spec.ts:151:1 › plain, Ctrl, Shift and Ctrl+Shift gestures use the eligible visible order
+[302/522] [chromium] › tests\browser\grid-selection.spec.ts:169:1 › native keyboard navigation skips ineligible rows and leaves editing shortcuts intact
+[303/522] [chromium] › tests\browser\grid-selection.spec.ts:202:1 › veto preserves active row, membership, focus and the range anchor
+[304/522] [chromium] › tests\browser\grid-selection.spec.ts:226:1 › invalid ID batches fail atomically and unavailable rows disable only their own operations
+[305/522] [chromium] › tests\browser\grid-selection.spec.ts:249:1 › scoped check-all preserves outside checks and native mixed states apart from Boolean fields
+[306/522] [chromium] › tests\browser\grid-selection.spec.ts:286:1 › header checks use native Space activation and veto restores their DOM state
+[307/522] [chromium] › tests\browser\grid-selection.spec.ts:305:1 › data removal and eligibility changes force pruning despite vetoes
+[308/522] [chromium] › tests\browser\grid-selection.spec.ts:324:1 › prune callbacks may change Rows or the view and throwing callbacks leave cleanup committed
+[309/522] [chromium] › tests\browser\grid-selection.spec.ts:387:1 › before hooks reject view changes even when every projected row ID stays the same
+[310/522] [chromium] › tests\browser\grid-selection.spec.ts:404:1 › post callbacks see committed DOM and before-hook reentrancy rejects stale proposals
+[311/522] [chromium] › tests\browser\grid-selection.spec.ts:442:1 › authored sorts cycle ascending, descending and clear while preserving focus and state
+[312/522] [chromium] › tests\browser\grid-selection.spec.ts:460:1 › column choices keep raw scalar identity and count other filters before pagination
+[313/522] [chromium] › tests\browser\grid-selection.spec.ts:492:1 › authored filter selects retain raw values and search narrows only the choices
+[314/522] [chromium] › tests\browser\grid-selection.spec.ts:515:1 › row actions resolve the current identity and retained drafts survive filtering, paging and layout
+[315/522] [chromium] › tests\browser\grid-selection.spec.ts:541:1 › two instances remain accessible and exact disposal releases authored filter ownership for retry
+[316/522] [chromium] › tests\browser\grid-selection.spec.ts:580:1 › single checks replace one row atomically and keep selection and Boolean fields independent
+[317/522] [chromium] › tests\browser\grid-selection.spec.ts:611:1 › single mode rejects ambiguous check proposals after ordinary ID validation without changing state
+[318/522] [chromium] › tests\browser\grid-selection.spec.ts:626:1 › single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope
+[319/522] [chromium] › tests\browser\grid-selection.spec.ts:645:1 › single checks retain reentrant commits and prune only unavailable rows
+[320/522] [chromium] › tests\browser\grid-selection.spec.ts:661:1 › invalid check modes fail before DOM ownership and permit corrected binding
+[321/522] [chromium] › tests\browser\grid-toggle.spec.ts:87:1 › default and explicit false keep repeated single activation and independent absolute sets
+[322/522] [chromium] › tests\browser\grid-toggle.spec.ts:103:1 › default and explicit false retain replacement rather than plain membership toggling
+[323/522] [chromium] › tests\browser\grid-toggle.spec.ts:117:1 › single toggle clears detail through existing Form and List callbacks without changing sets
+[324/522] [chromium] › tests\browser\grid-toggle.spec.ts:142:1 › multiple plain toggles retain other members and clear active when any member is removed
+[325/522] [chromium] › tests\browser\grid-toggle.spec.ts:160:1 › native Enter and Space activate exactly one toggle without replacing focus
+[326/522] [chromium] › tests\browser\grid-toggle.spec.ts:174:1 › Ctrl, Meta, Shift and Alt retain existing gestures when plain toggling is enabled
+[327/522] [chromium] › tests\browser\grid-toggle.spec.ts:195:1 › programmatic activation and full-set writes stay absolute and idempotent with toggling
+[328/522] [chromium] › tests\browser\grid-toggle.spec.ts:211:1 › single deselection veto leaves committed detail, membership and DOM unchanged
+[329/522] [chromium] › tests\browser\grid-toggle.spec.ts:226:1 › both multiple vetoes preserve state and the range anchor before any post callback
+[330/522] [chromium] › tests\browser\grid-toggle.spec.ts:250:1 › toggle before-hook reentrancy preserves inner commits and rejects the stale outer proposal
+[331/522] [chromium] › tests\browser\grid-toggle.spec.ts:280:1 › invalid and throwing before hooks reject toggles while post failure keeps the committed DOM
+[332/522] [chromium] › tests\browser\grid-toggle.spec.ts:304:1 › ineligible, deleted, checked and editable targets never manufacture row activation
+[333/522] [chromium] › tests\browser\grid-toggle.spec.ts:323:1 › sort, filter, page and range keys keep stable identity and existing clear shortcuts
+[334/522] [chromium] › tests\browser\grid-toggle.spec.ts:344:1 › invalid toggle flags fail before DOM ownership and permit corrected binding
+[335/522] [chromium] › tests\browser\grid-toggle.spec.ts:359:1 › independent instances preserve focus, unique IDs and exact quiet teardown
+[336/522] [chromium] › tests\browser\grid-viewport.spec.ts:78:1 › 5,000 nested rows have bounded mounted DOM and complete native table positions
+[337/522] [chromium] › tests\browser\grid-viewport.spec.ts:89:1 › rapid bidirectional scrolling settles at the correct logical rows without accumulating DOM
+[338/522] [chromium] › tests\browser\grid-viewport.spec.ts:103:1 › reveal uses sorted filtered page identity and never changes focus or selection
+[339/522] [chromium] › tests\browser\grid-viewport.spec.ts:117:1 › visible checks and selection ranges span the whole logical page
+[340/522] [chromium] › tests\browser\grid-viewport.spec.ts:127:1 › Home End and adjacent keyboard navigation reveal logical neighbors
+[341/522] [chromium] › tests\browser\grid-viewport.spec.ts:138:1 › Tab and Shift Tab cross a mounted boundary without skipping logical rows
+[342/522] [chromium] › tests\browser\grid-viewport.spec.ts:152:1 › a distant focused editor retains its exact node caret and composition without retaining the gap
+[343/522] [chromium] › tests\browser\grid-viewport.spec.ts:170:1 › offscreen drafts and validation issues survive release and remount
+[344/522] [chromium] › tests\browser\grid-viewport.spec.ts:183:1 › 1,000 offscreen nested rows paste atomically without cloning every target
+[345/522] [chromium] › tests\browser\grid-viewport.spec.ts:204:1 › released nested Selects relinquish ownership while current controls stay typed
+[346/522] [chromium] › tests\browser\grid-viewport.spec.ts:218:1 › measured wrapping and column resize retain the visible row anchor
+[347/522] [chromium] › tests\browser\grid-viewport.spec.ts:235:1 › hidden preparation wakes on display and column hide reorder keeps the current window
+[348/522] [chromium] › tests\browser\grid-viewport.spec.ts:248:1 › append remove revert replace and filtering retain identity and recover a valid viewport
+[349/522] [chromium] › tests\browser\grid-viewport.spec.ts:264:1 › invalid viewport options and rowspans fail before taking ownership; pending frames dispose cleanly
+[350/522] [chromium] › tests\browser\grid-viewport.spec.ts:290:1 › authored static body and footer rows keep their positions in the logical ARIA count
+[351/522] [chromium] › tests\browser\grid-viewport.spec.ts:306:1 › nonvirtual reveal scrolls an authored row and preserves selection and focus
+[352/522] [chromium] › tests\browser\grid-viewport.spec.ts:321:1 › two authored MDI instances keep unique IDs native ARIA and keyboard accessibility
+[353/522] [chromium] › tests\browser\grid-viewport.spec.ts:338:1 › reveal keeps the first row below an authored sticky header
+[354/522] [chromium] › tests\browser\grid-viewport.spec.ts:357:1 › formatter failures restore logical state DOM ARIA and scroll after queued viewport work
+[355/522] [chromium] › tests\browser\grid-viewport.spec.ts:406:1 › inherited disabled fields and first legend exemption agree for mounted and offscreen rows
+[356/522] [chromium] › tests\browser\grid-viewport.spec.ts:443:3 › Shift End abandons stale navigation after a filter post callback
+[357/522] [chromium] › tests\browser\grid-viewport.spec.ts:443:3 › Shift End abandons stale navigation after a dispose post callback
+[358/522] [chromium] › tests\browser\grid.spec.ts:12:1 › nested row options keep raw values, row identity, and native table markup
+[359/522] [chromium] › tests\browser\grid.spec.ts:103:1 › a repeated fixed id is rejected before cloning
+[360/522] [chromium] › tests\browser\grid.spec.ts:123:1 › nested field paths preserve a number apart from the same DOM string
+[361/522] [chromium] › tests\browser\grid.spec.ts:166:1 › rule arguments fail before binding and custom Grid rules run
+[362/522] [chromium] › tests\browser\grid.spec.ts:196:1 › formatted text, validators, and cloned error regions stay accessible across filtering
+[363/522] [chromium] › tests\browser\grid.spec.ts:258:1 › failed Select edits stay with RowId and clear on revert, remove, and replace
+[364/522] [chromium] › tests\browser\grid.spec.ts:349:1 › external row updates do not run user validators after the value commits
+[365/522] [chromium] › tests\browser\grid.spec.ts:382:1 › cross-field Select drafts validate together and commit on change or explicit validation
+[366/522] [chromium] › tests\browser\grid.spec.ts:448:1 › programmatic lengths, checkbox state, stale errors, and unsupported inputs are explicit
+[367/522] [chromium] › tests\browser\grid.spec.ts:526:1 › a thrown Select validator keeps its draft until explicit validation succeeds
+[368/522] [chromium] › tests\browser\import.spec.ts:3:1 › ESM package loads in two authored views without duplicate IDs
+[369/522] [chromium] › tests\browser\list.spec.ts:13:1 › authored list keeps nested raw choices and RowId selection through sort, filter, and page
+[370/522] [chromium] › tests\browser\list.spec.ts:101:1 › List validates hidden rows and links errors without changing raw data
+[371/522] [chromium] › tests\browser\list.spec.ts:164:1 › List rejects duplicate template IDs before mutation
+[372/522] [chromium] › tests\browser\list.spec.ts:184:1 › List multiple Select validation requires a raw array
+[373/522] [chromium] › tests\browser\m10-acceptance.spec.ts:12:1 › demo row-area activation is opt-in, excludes editors and survives policy rebind
+[374/522] [chromium] › tests\browser\m10-acceptance.spec.ts:36:1 › demo root observation follows Grid commits and invalid drafts without accumulating listeners
+[375/522] [chromium] › tests\browser\m10-acceptance.spec.ts:60:1 › authored row hover and keyboard focus remain presentation in both independent layouts
+[376/522] [chromium] › tests\browser\m10-agent-screen.spec.ts:57:1 › a docs-first authored Grid keeps row identity and drafts across local views
+[377/522] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+[378/522] [chromium] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[379/522] [chromium] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[380/522] [chromium] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[381/522] [chromium] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[382/522] [chromium] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[383/522] [chromium] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[384/522] [chromium] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[385/522] [chromium] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+[386/522] [chromium] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[387/522] [chromium] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[388/522] [chromium] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[389/522] [chromium] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+[390/522] [chromium] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[391/522] [chromium] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+[392/522] [chromium] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[393/522] [chromium] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[394/522] [chromium] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+[395/522] [chromium] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[396/522] [chromium] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[397/522] [chromium] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[398/522] [chromium] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[399/522] [chromium] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+[400/522] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[401/522] [chromium] › tests\browser\m10-grid.spec.ts:10:3 › side keeps grouped headings, nested choices, and MDI rows independent
+[402/522] [chromium] › tests\browser\m10-grid.spec.ts:45:3 › side keeps fixed headings visible and the narrow document reflowed
+[403/522] [chromium] › tests\browser\m10-grid.spec.ts:10:3 › stack keeps grouped headings, nested choices, and MDI rows independent
+[404/522] [chromium] › tests\browser\m10-grid.spec.ts:45:3 › stack keeps fixed headings visible and the narrow document reflowed
+[405/522] [chromium] › tests\browser\m10-interactions.spec.ts:44:1 › authored column chooser has native mixed state and recovers every hidden business column
+[406/522] [chromium] › tests\browser\m10-interactions.spec.ts:71:1 › chooser retains widths, group order, raw drafts and selection while another store is unchanged
+[407/522] [chromium] › tests\browser\m10-interactions.spec.ts:101:1 › recovery-only rows retain shared CVC details and Undo without duplicate IDs or accessibility errors
+[408/522] [chromium] › tests\browser\m10-interactions.spec.ts:119:1 › column actions restore exact authored table nodes and resynchronize after disposal and rebind
+[409/522] [chromium] › tests\browser\m10-interactions.spec.ts:133:1 › Team preview, Apply and Enter, app All and None expose the exact current choice count
+[410/522] [chromium] › tests\browser\m10-interactions.spec.ts:159:1 › another typed column filter retains enabled selected zero-count Team choices
+[411/522] [chromium] › tests\browser\m10-interactions.spec.ts:175:1 › toggle-policy controls bind native single and multiple activation while checks stay independent
+[412/522] [chromium] › tests\browser\m10-interactions.spec.ts:194:1 › application selection and checks reveal the last requested ID only after the complete state commits
+[413/522] [chromium] › tests\browser\m10-interactions.spec.ts:227:1 › action-scroll opt-out and current-page guards preserve filtering and paging
+[414/522] [chromium] › tests\browser\m10-interactions.spec.ts:244:1 › front, indexed and end insertion use start, center and end after successful selection
+[415/522] [chromium] › tests\browser\m10-interactions.spec.ts:259:1 › append skips an empty prior store and reveals only the last newly loaded current-page row
+[416/522] [chromium] › tests\browser\m10-interactions.spec.ts:280:1 › last-invalid reveal follows visual page order and preserves focus with first-invalid core reveal disabled
+[417/522] [chromium] › tests\browser\m10-interactions.spec.ts:302:1 › application end insertion uses the existing bounded viewport without affecting independent row-block stores
+[418/522] [chromium] › tests\browser\m10-progressive.spec.ts:44:1 › Immediate remains synchronous and prefix Next exposes full logical scope without changing Rows
+[419/522] [chromium] › tests\browser\m10-progressive.spec.ts:63:1 › Yield all keeps Ping responsive and reports first and last chunk without per-row live output
+[420/522] [chromium] › tests\browser\m10-progressive.spec.ts:87:1 › Cancel before full preparation returns unfinished snapshot and Resume retains loaded records
+[421/522] [chromium] › tests\browser\m10-progressive.spec.ts:110:1 › a one-shot authored hook failure is observable and Resume retries retained prefix
+[422/522] [chromium] › tests\browser\m10-progressive.spec.ts:124:1 › view supersession and dispose cannot let an old promise overwrite the newer binding UI
+[423/522] [chromium] › tests\browser\m10-progressive.spec.ts:141:1 › bottom-scroll continuation and viewport retain bounded actual widgets for loaded prefixes
+[424/522] [chromium] › tests\browser\m10-progressive.spec.ts:159:1 › late viewport row failure is read through whenBound and resumes without extra completion
+[425/522] [chromium] › tests\browser\m10-progressive.spec.ts:177:1 › empty progressive data completes once without creating rows or enabling continuation
+[426/522] [chromium] › tests\browser\m10-progressive.spec.ts:187:1 › two CVC layouts publish logical chunks and nested raw values without Rows notifications
+[427/522] [chromium] › tests\browser\m10-progressive.spec.ts:205:1 › native CVC yield keeps Ping available and cancel resume does not affect its neighbour
+[428/522] [chromium] › tests\browser\m10-progressive.spec.ts:223:1 › normal deactivate cancels a pending operation and activate resumes the retained instance
+[429/522] [chromium] › tests\browser\m10-progressive.spec.ts:242:1 › dispose aborts Grid before asynchronous controller cleanup while the other page continues
+[430/522] [chromium] › tests\browser\m10-progressive.spec.ts:267:1 › early CVC reload replaces only its instance and suppresses old completion and late writes
+[431/522] [chromium] › tests\browser\m10-progressive.spec.ts:287:1 › native CVC Next and two authored layouts retain unique IDs, focus and accessibility
+[432/522] [chromium] › tests\browser\m12-shell.spec.ts:5:3 › side shares one editor definition and Rows while retaining and guarding documents
+[433/522] [chromium] › tests\browser\m12-shell.spec.ts:86:3 › side retries failure, cancels pending pages, and releases an independent shell
+[434/522] [chromium] › tests\browser\m12-shell.spec.ts:146:3 › side preserves accessible authored empty and populated shell states at 320px
+[435/522] [chromium] › tests\browser\m12-shell.spec.ts:5:3 › stack shares one editor definition and Rows while retaining and guarding documents
+[436/522] [chromium] › tests\browser\m12-shell.spec.ts:86:3 › stack retries failure, cancels pending pages, and releases an independent shell
+[437/522] [chromium] › tests\browser\m12-shell.spec.ts:146:3 › stack preserves accessible authored empty and populated shell states at 320px
+[438/522] [chromium] › tests\browser\m4-screen.spec.ts:5:3 › side preserves authored HTML through search, edit, nested choice, and save
+[439/522] [chromium] › tests\browser\m4-screen.spec.ts:45:3 › side keeps two pages ID-clean and independent
+[440/522] [chromium] › tests\browser\m4-screen.spec.ts:73:3 › side keeps unsaved edits when Enter is pressed in the local filter
+[441/522] [chromium] › tests\browser\m4-screen.spec.ts:86:3 › side keeps invalid drafts by row while navigating and adding
+[442/522] [chromium] › tests\browser\m4-screen.spec.ts:107:3 › side restores focus to a hidden row with an unavailable choice
+[443/522] [chromium] › tests\browser\m4-screen.spec.ts:122:3 › side handles empty, failed, and replaced searches
+[444/522] [chromium] › tests\browser\m4-screen.spec.ts:144:3 › side validates hidden changes and recovers from save failure
+[445/522] [chromium] › tests\browser\m4-screen.spec.ts:5:3 › stack preserves authored HTML through search, edit, nested choice, and save
+[446/522] [chromium] › tests\browser\m4-screen.spec.ts:45:3 › stack keeps two pages ID-clean and independent
+[447/522] [chromium] › tests\browser\m4-screen.spec.ts:73:3 › stack keeps unsaved edits when Enter is pressed in the local filter
+[448/522] [chromium] › tests\browser\m4-screen.spec.ts:86:3 › stack keeps invalid drafts by row while navigating and adding
+[449/522] [chromium] › tests\browser\m4-screen.spec.ts:107:3 › stack restores focus to a hidden row with an unavailable choice
+[450/522] [chromium] › tests\browser\m4-screen.spec.ts:122:3 › stack handles empty, failed, and replaced searches
+[451/522] [chromium] › tests\browser\m4-screen.spec.ts:144:3 › stack validates hidden changes and recovers from save failure
+[452/522] [chromium] › tests\browser\m4-screen.spec.ts:171:1 › a saved insert is not resent when the post-save refresh fails
+[453/522] [chromium] › tests\browser\m4-screen.spec.ts:192:1 › save locks editing while keeping Close available and aborts after removal
+[454/522] [chromium] › tests\browser\m4-screen.spec.ts:214:1 › the development mock rejects an entire conflicting save
+[455/522] [chromium] › tests\browser\m4-screen.spec.ts:233:1 › closing during a delayed search does not update a removed page
+[456/522] [chromium] › tests\browser\m4-screen.spec.ts:246:1 › server HTML runs the same employee controller in two ID-clean pages
+[457/522] [chromium] › tests\browser\m6-screen.spec.ts:5:3 › side keeps Grid, List, Select, Pagination, and Form in one row flow
+[458/522] [chromium] › tests\browser\m6-screen.spec.ts:69:3 › side keeps two paged instances separate and ID-clean
+[459/522] [chromium] › tests\browser\m6-screen.spec.ts:5:3 › stack keeps Grid, List, Select, Pagination, and Form in one row flow
+[460/522] [chromium] › tests\browser\m6-screen.spec.ts:69:3 › stack keeps two paged instances separate and ID-clean
+[461/522] [chromium] › tests\browser\m6-screen.spec.ts:92:1 › a hidden invalid Grid choice reopens its page before focusing
+[462/522] [chromium] › tests\browser\m7-screen.spec.ts:4:3 › side shares one page definition across main, Tab, and Popup
+[463/522] [chromium] › tests\browser\m7-screen.spec.ts:114:3 › side keeps two MDI workspaces and Popup results separate
+[464/522] [chromium] › tests\browser\m7-screen.spec.ts:4:3 › stack shares one page definition across main, Tab, and Popup
+[465/522] [chromium] › tests\browser\m7-screen.spec.ts:114:3 › stack keeps two MDI workspaces and Popup results separate
+[466/522] [chromium] › tests\browser\m7-screen.spec.ts:172:1 › immediate workspace removal treats page readiness cancellation as normal
+[467/522] [chromium] › tests\browser\m7-screen.spec.ts:186:1 › slow Popup close and parent removal settle once and release the page
+[468/522] [chromium] › tests\browser\notify.spec.ts:19:1 › notifications retain authored markup, announce through stable channels, and insert safe text without focus
+[469/522] [chromium] › tests\browser\notify.spec.ts:75:1 › dismissal follows native keyboard activation and keeps focused removal inside the region
+[470/522] [chromium] › tests\browser\notify.spec.ts:110:1 › dismissal skips unavailable close controls and clear remains scoped to one MDI region
+[471/522] [chromium] › tests\browser\notify.spec.ts:139:1 › invalid notification markup and label references fail before mutation or ownership
+[472/522] [chromium] › tests\browser\notify.spec.ts:192:1 › invalid show arguments remain atomic and disposal releases ownership and returned dismissals
+[473/522] [chromium] › tests\browser\notify.spec.ts:228:1 › an authored notification without close controls is dismissed through its returned function
+[474/522] [chromium] › tests\browser\notify.spec.ts:249:1 › notification insertion and dismissal pass automated A and AA checks
+[475/522] [chromium] › tests\browser\page.spec.ts:3:1 › two pages keep separate roots, outputs, and reload input
+[476/522] [chromium] › tests\browser\page.spec.ts:61:1 › pending initialization aborts immediately and releases resources
+[477/522] [chromium] › tests\browser\page.spec.ts:101:1 › fetched HTML has one root and duplicate IDs are rejected
+[478/522] [chromium] › tests\browser\page.spec.ts:138:1 › fetched HTML rejects executable attributes before insertion
+[479/522] [chromium] › tests\browser\page.spec.ts:163:1 › factory roots are checked against the insertion document
+[480/522] [chromium] › tests\browser\page.spec.ts:190:1 › late own registration disposes a resource after cancellation
+[481/522] [chromium] › tests\browser\page.spec.ts:226:1 › output stops when a listener reloads its page
+[482/522] [chromium] › tests\browser\popup.spec.ts:3:1 › output waits for page cleanup, restores focus, and permits immediate reopening
+[483/522] [chromium] › tests\browser\popup.spec.ts:67:1 › closing during initialization aborts ready but resolves an ordinary result
+[484/522] [chromium] › tests\browser\popup.spec.ts:121:1 › native cancellation, detached host, and cleanup failure keep one terminal result
+[485/522] [chromium] › tests\browser\popup.spec.ts:169:1 › malformed dialogs fail synchronously and failed initialization leaves a reusable host
+[486/522] [chromium] › tests\browser\popup.spec.ts:210:1 › nested popup restores focus to the next authored control when its opener disappears
+[487/522] [chromium] › tests\browser\popup.spec.ts:238:1 › direct open-attribute removal still aborts page work and settles the result
+[488/522] [chromium] › tests\browser\popup.spec.ts:262:1 › twenty openings leave no page DOM or Popup listeners behind
+[489/522] [chromium] › tests\browser\popup.spec.ts:316:1 › close wins over same-task output without beforetoggle notification
+[490/522] [chromium] › tests\browser\rows-ordering.spec.ts:65:1 › shared row moves preserve nested drafts errors and the attached focused Grid editor
+[491/522] [chromium] › tests\browser\rows-ordering.spec.ts:99:1 › clean page append updates shared views without replacing Form or Grid drafts and focused nodes
+[492/522] [chromium] › tests\browser\rows-ordering.spec.ts:135:1 › a focused List control stays attached through moves and view sorting and recovers after filtering
+[493/522] [chromium] › tests\browser\rows-ordering.spec.ts:156:1 › forced order callbacks bypass vetoes and see the committed DOM while old arrays remain frozen
+[494/522] [chromium] › tests\browser\rows-ordering.spec.ts:174:1 › row moves inside before hooks reject only the stale outer membership proposal
+[495/522] [chromium] › tests\browser\rows-ordering.spec.ts:185:1 › copies publish committed nested values to every view without copying a source draft
+[496/522] [chromium] › tests\browser\rows-ordering.spec.ts:206:1 › a Tree business-key subscriber error retains the committed copy and reaches later subscribers
+[497/522] [chromium] › tests\browser\rows-ordering.spec.ts:223:1 › viewport insertion and movement preserve the measured anchor and follow the current sorted filtered page
+[498/522] [chromium] › tests\browser\select-pagination.spec.ts:13:1 › Select preserves authored raw strings and generated typed choices
+[499/522] [chromium] › tests\browser\select-pagination.spec.ts:52:1 › multiple Select keeps scalar identity, order, ownership, and disposal
+[500/522] [chromium] › tests\browser\select-pagination.spec.ts:94:1 › Pagination is controlled, bounded, accessible, focus-safe, and reversible
+[501/522] [chromium] › tests\browser\select-pagination.spec.ts:154:1 › Pagination rejects invalid state and repeated IDs before changing the HTML
+[502/522] [chromium] › tests\browser\select-pagination.spec.ts:185:1 › Pagination state snapshot cannot change its internal page
+[503/522] [chromium] › tests\browser\tabs.spec.ts:3:1 › authored tabs keep IDs, navigate manually, and isolate two instances
+[504/522] [chromium] › tests\browser\tabs.spec.ts:100:1 › superseded loads abort, failed pages restore the previous tab, and retry remounts
+[505/522] [chromium] › tests\browser\tabs.spec.ts:179:1 › initial failure is retryable, borrowed HTML stays, and invalid markup is rejected
+[506/522] [chromium] › tests\browser\tabs.spec.ts:248:1 › native Enter and Space activate once after arrow focus
+[507/522] [chromium] › tests\browser\tabs.spec.ts:311:1 › failed cached activation is evicted and a later visit creates a fresh page
+[508/522] [chromium] › tests\browser\tabs.spec.ts:371:1 › dispose during initial loading aborts without an unhandled ready rejection
+[509/522] [chromium] › tests\browser\tabs.spec.ts:418:1 › superseding a slow deactivation retains the previous controller for revisit
+[510/522] [chromium] › tests\browser\tree-date-screen.spec.ts:5:3 › side connects Tree and DatePicker to independent CVC Forms
+[511/522] [chromium] › tests\browser\tree-date-screen.spec.ts:80:3 › side keeps authored MDI labels clean through modal use and repeated disposal
+[512/522] [chromium] › tests\browser\tree-date-screen.spec.ts:5:3 › stack connects Tree and DatePicker to independent CVC Forms
+[513/522] [chromium] › tests\browser\tree-date-screen.spec.ts:80:3 › stack keeps authored MDI labels clean through modal use and repeated disposal
+[514/522] [chromium] › tests\browser\tree.spec.ts:11:1 › Tree resolves unordered parents, binds nested text, and reuses nodes on updates
+[515/522] [chromium] › tests\browser\tree.spec.ts:90:1 › Tree keyboard separates focus and selection and collapses focused descendants safely
+[516/522] [chromium] › tests\browser\tree.spec.ts:146:1 › Tree validates markup and hierarchy and rolls back failed initial binding
+[517/522] [chromium] › tests\browser\tree.spec.ts:217:1 › Tree keeps the last valid DOM on hierarchy and formatter failures and recovers
+[518/522] [chromium] › tests\browser\tree.spec.ts:261:1 › two Trees keep generated label IDs unique and their state independent
+[519/522] [chromium] › tests\browser\tree.spec.ts:300:1 › Tree can reverse prior DOM ancestry while keeping RowIds and selected focus
+[520/522] [chromium] › tests\browser\tree.spec.ts:330:1 › Tree measured binding updates preserve records for 1,000 flat and nested rows
+[521/522] [chromium] › tests\browser\tree.spec.ts:370:1 › Tree handles a deep hierarchy without recursive traversal
+[522/522] [chromium] › tests\browser\tree.spec.ts:395:1 › authored Tree states pass automated A and AA checks
+  522 passed (3.2m)
+[WebServer] (node:13448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:20872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 오후 10:03:38 [vite] (client) [Unhandled error] Error: subscriber failed
+[WebServer]  > notify ../../src/data/index.ts:136:12
+[WebServer]     134 |        if (disposed) break;
+[WebServer]     135 |        if (!listeners.has(listener)) continue;
+[WebServer]     136 |        try { listener(event); }
+[WebServer]         |              ^
+[WebServer]     137 |        catch (cause) {
+[WebServer]     138 |          if (!failed) {
+[WebServer]  > Object.set ../../src/data/index.ts:309:6
+[WebServer]  > reconcile ../../src/ui/form.ts:353:16
+[WebServer]  > HTMLFormElement.onInput ../../src/ui/form.ts:393:6
+[WebServer] 
+[WebServer] 오후 10:03:38 [vite] (client) [Unhandled error] FrameworkError: Rows require acyclic JSON-compatible values.
+[WebServer]  > rowError ../../src/data/index.ts:62:9
+[WebServer]     60 |  
+[WebServer]     61 |  function rowError(api: string, code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
+[WebServer]     62 |    return new FrameworkError({ api, code, message, detail });
+[WebServer]        |           ^
+[WebServer]     63 |  }
+[WebServer]     64 |  
+[WebServer]  > cloneFrozen ../../src/data/index.ts:74:10
+[WebServer]  > Object.set ../../src/data/index.ts:306:19
+[WebServer]  > reconcile ../../src/ui/form.ts:353:16
+[WebServer]  > HTMLFormElement.onInput ../../src/ui/form.ts:393:6
+[WebServer] 

@@ -14,7 +14,7 @@ import { focusVisible, restoreAttributes } from "./dom-state.js";
 import { readClipboard } from "./grid-paste.js";
 import { createGridViewport, validateGridViewport } from "./grid-viewport.js";
 import { compileGridBody } from "./grid-row-blocks.js";
-import { display, displayField, fieldValue, nativeMessage, disabled as controlDisabled } from "./native-control.js";
+import { display, displayField, fieldValue, nativeMessage, interactiveContent, disabled as controlDisabled } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createGridHooks } from "./grid-hooks.js";
 import { bindGridHeight, validateGridHeight } from "./grid-height.js";
@@ -151,6 +151,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
   multiple?: boolean;
   toggleSelection?: boolean;
+  selectOnRowClick?: boolean;
   checkMode?: "multiple" | "single";
   validateOn?: "change" | "blur" | "manual";
   revealInvalid?: boolean;
@@ -310,6 +311,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         editable: element instanceof HTMLTextAreaElement || element instanceof HTMLInputElement,
         checkbox: element instanceof HTMLInputElement && element.type === "checkbox" });
     }
+  }
+
+  if (options.selectOnRowClick !== undefined && typeof options.selectOnRowClick !== "boolean" ||
+      options.selectOnRowClick && !buttonIndexes.length) {
+    throw gridError("GRID_SELECT", "selectOnRowClick needs a boolean and an authored row selection button when enabled.");
   }
 
   for (const field of textFields) if (field.kind !== "single") {
@@ -1614,7 +1620,18 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const button = target.closest<HTMLButtonElement>("button[data-select-row]");
     const row = button?.closest<HTMLTableRowElement>("tr");
     const id = row ? rowIds.get(row) : undefined;
-    if (button && id !== undefined && !button.matches(":disabled")) selection.choose(id, event);
+    if (button) {
+      if (id !== undefined && !button.matches(":disabled")) selection.choose(id, event);
+      return;
+    }
+    if (!options.selectOnRowClick || event.defaultPrevented || target.closest("[hidden], [inert]")) return;
+    const record = target.closest<HTMLTableRowElement>("tr");
+    const interactive = target.closest(`${interactiveContent}, label, [role="button"], [role="link"]`);
+    if (interactive && record?.contains(interactive)) return;
+    const recordId = record ? rowIds.get(record) : undefined;
+    if (recordId !== undefined && records.get(recordId)?.buttons.some(button => button.tabIndex >= 0 && !button.matches(":disabled") &&
+        !button.closest("[hidden], [inert]") && button.getClientRects().length > 0 &&
+        bindingWindow.getComputedStyle(button).visibility === "visible")) selection.choose(recordId, event);
   }
 
   function reveal(id: RowId, request?: { block?: ScrollLogicalPosition }): void {

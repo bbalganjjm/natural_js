@@ -1,0 +1,1393 @@
+{
+  "schema_version": 1,
+  "milestone": "M10.9.6.4",
+  "recorded_at": "2026-10-28",
+  "status": "selected_acceptance_verified_full_grid_parity_open",
+  "workspace_baseline_commit": "f97888964338101356a4a7ec7b86152b026121bd",
+  "immutable_audit": {
+    "path": "docs/implementation/evidence/m1096-grid-audit.json",
+    "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8",
+    "baseline_commit": "7a36a39d1dd16c9ba71bb71d1e8a195f5df50a0c"
+  },
+  "coverage_resolution": {
+    "surface": {
+      "source": "docs/implementation/evidence/m1096-grid-audit.json#/surface",
+      "count": 89,
+      "resolve_each": "contracts[entry.contract]"
+    },
+    "dynamic_groups": {
+      "source": "docs/implementation/evidence/m1096-grid-audit.json#/dynamic_groups",
+      "count": 17,
+      "resolve_each": "contracts[entry.contract]",
+      "retain_cross_ledger": true
+    },
+    "families": {
+      "source": "docs/implementation/evidence/v1-grid-parity.json#/profiles",
+      "count": 20,
+      "resolve_each": "families[id].contracts and original acceptance IDs"
+    },
+    "contracts": 30,
+    "witnesses_are_partial": true,
+    "existing_witness_status": "All current source witnesses ran in the fresh full suites. Historical stage evidence remains unchanged and is not recertified.",
+    "family_closures": 0,
+    "approved_omissions": 0,
+    "current_witnesses": 23,
+    "current_witness_status": "All exact witness paths/titles resolve in source; all23 new cases and existing witnesses pass in fresh full522-case suites per required engine. Historical stage evidence is unchanged.",
+    "obligation_kinds": {
+      "cross_owner_contract": "Concrete contract resolved by the named core/data/Form/Popup owner.",
+      "grid_local_composition_acceptance": "A specific Grid-local authored outcome still needs implementation or an equivalent tested composition.",
+      "additional_native_composition_witness": "Existing source replacement needs a focused browser witness; no absent engine is inferred.",
+      "additional_authored_recipe_witness": "Existing public contracts support the outcome; add its concrete authored example/test."
+    },
+    "pending_witness_status": "All 23 new exact witnesses passed in each required engine on the final frozen inputs."
+  },
+  "contracts": {
+    "advanced-capabilities": {
+      "classification": "aggregate_acceptance_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/advanced-capabilities",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-columns.spec.ts",
+          "test": "column changes keep field nodes, nested raw choices, selection and caret"
+        },
+        {
+          "file": "tests/browser/grid-viewport.spec.ts",
+          "test": "5,000 nested rows have bounded mounted DOM and complete native table positions"
+        }
+      ],
+      "unresolved": [],
+      "current_witnesses": [
+        "A13"
+      ],
+      "implementation_note": "Resize/reorder/hide, multiple selection, atomic bulk paste and bounded virtualization exist. Aggregate closure depends only on the specific remaining contracts below, not an inferred additional engine."
+    },
+    "defaults-composition": {
+      "classification": "cross_owner_required",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/defaults-composition",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "asynchronous row and completion callbacks reject without unhandled promises or stranded ownership"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C11/C13",
+          "obligation": "Publish and test typed local-first/shared-second callback composition, false short-circuit, return precedence, throw/async boundaries and per-instance options. Preserve configuration outcomes without requiring a mutable global registry."
+        }
+      ]
+    },
+    "root-inspection": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/root-inspection",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-row-blocks.spec.ts",
+          "test": "two authored block layouts keep native spans, nested options and exact teardown"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C13/C15",
+          "obligation": "Resolve arbitrary legacy instance discovery/global assembly under P0. Native root/header/template/topology inspection is implemented and does not need another Grid utility."
+        }
+      ],
+      "current_witnesses": [
+        "A19"
+      ],
+      "implemented_local_outcome": "Caller-held table/head/restored template and native rows/cells/rowSpan/colSpan/data-column(s), together with columns(), support inspected managed topology and controlled template changes."
+    },
+    "native-topology": {
+      "classification": "implemented_local_outcome_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/native-topology",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-columns.spec.ts",
+          "test": "authored row blocks preserve focused span cells through column changes"
+        },
+        {
+          "file": "tests/browser/grid-columns.spec.ts",
+          "test": "implicit columns do not add ordering restrictions around an authored middle group"
+        }
+      ],
+      "unresolved": [],
+      "current_witnesses": [
+        "A09",
+        "A19"
+      ],
+      "implemented_local_outcome": "Native grouped header/span and multi-tr template inspection remain available before binding, during managed column changes and after exact dispose/edit/rebind.",
+      "implementation_note": "Authored groups, native spans, managed show/hide/reorder/width and external inspection/dispose-edit-rebind are implemented and witnessed. Multiple horizontal pinned offsets belong to sticky-layout; discovery/configuration belongs to core."
+    },
+    "sticky-layout": {
+      "classification": "specific_grid_local_acceptance_required",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/sticky-layout",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-geometry.spec.ts",
+          "test": "reveal start center end and nearest use sticky multi-row header and footer space"
+        },
+        {
+          "file": "tests/browser/grid-geometry.spec.ts",
+          "test": "last-row reveal stays above a sticky footer after height and managed column changes"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "grid_local_composition_acceptance",
+          "owner": "ui-grid/authored-css",
+          "obligation": "Demonstrate at least two horizontally pinned columns with correct cumulative offsets after width changes, hiding and reordering, under grouped native headers/body/footer, responsive dimensions and a positioned authored root. Current demo pins only name at left:0; columns.css has no horizontal pin recipe and grid-columns owns no pinned-offset state. Start with an authored CSS/controller composition; add framework ownership only if that cannot preserve the required outcome."
+        }
+      ],
+      "implementation_note": "Vertical sticky header/footer bands, resizing and reveal are already covered. Old numeric misc corrections compensate split/absolute tables; they are not independent requirements for new correction options or a new layout engine."
+    },
+    "height-controls": {
+      "classification": "implemented_local_outcome_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/height-controls",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-detail.spec.ts",
+          "test": "combined viewport and height cleanup restores a stylesheet-sized root without adding inline style"
+        },
+        {
+          "file": "tests/browser/grid-geometry.spec.ts",
+          "test": "authored height handle exposes actual geometry and bounded native keyboard controls"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Authored initial CSS dimensions, finite height controls, containment, focus, cancellation and exact restoration have existing witnesses. No additional height implementation is identified."
+    },
+    "column-chooser": {
+      "classification": "implemented_recipe_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/column-chooser",
+      "witnesses": [
+        {
+          "file": "tests/browser/m10-interactions.spec.ts",
+          "test": "authored column chooser has native mixed state and recovers every hidden business column"
+        },
+        {
+          "file": "tests/browser/m10-interactions.spec.ts",
+          "test": "recovery-only rows retain shared CVC details and Undo without duplicate IDs or accessibility errors"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Full state, native checkboxes, count/mixed/All/reset, every-business-hidden recovery and details access are implemented. Chosen-field detail proof remains under row-details; global labels/configuration remain under messages/defaults-composition."
+    },
+    "header-sort": {
+      "classification": "implemented_local_outcome_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/header-sort",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-selection.spec.ts",
+          "test": "authored sorts cycle ascending, descending and clear while preserving focus and state"
+        },
+        {
+          "file": "tests/browser/grid-progressive.spec.ts",
+          "test": "synchronous sort completion failure keeps its committed projection and advances the next chunk once"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Raw comparators, ascending/descending/clear, reset and indicators exist. columns.ts act(sort) already composes a two-state ascending/descending control through setSort; no separate two-state engine is missing. Shared configuration belongs to defaults-composition/messages."
+    },
+    "column-filter": {
+      "classification": "implemented_recipe_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/column-filter",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-filter-apply.spec.ts",
+          "test": "choices keep occurrence order and zero counts inside manual and status domains"
+        },
+        {
+          "file": "tests/browser/grid-filter-apply.spec.ts",
+          "test": "Apply preserves other filters paging identities checks and hidden drafts"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Raw universe/zero counts, preview, Apply/Enter, blank/none/All, shared scopes, rebind and failure boundaries are witnessed. Generic old option-crosswalk wording is not another filter feature."
+    },
+    "row-merge": {
+      "classification": "implemented_local_outcome_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-merge",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-row-blocks.spec.ts",
+          "test": "native merges follow raw hierarchical values and projected page boundaries"
+        },
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "native merge runs split at status boundaries and recompute after revert"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Raw scalar hierarchical merging, formatted-value separation, status/edit/page/window/focus splits and exact restoration are implemented. No additional local merge engine is identified."
+    },
+    "paste": {
+      "classification": "implemented_local_outcome_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/paste",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-paste.spec.ts",
+          "test": "quoted TSV handles tabs, escaped quotes, multiline values, CRLF and one final terminator"
+        },
+        {
+          "file": "tests/browser/grid-paste.spec.ts",
+          "test": "protected positions consume clipboard cells while typed nested choices retain their raw type"
+        },
+        {
+          "file": "tests/browser/grid-paste.spec.ts",
+          "test": "observer errors are postcommit and do not resurrect successful pasted drafts"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Quoted TSV, current columns/order/scopes, raw typed controls, protected positions, errors, one atomic notification, drafts, revert and postcommit callbacks have existing witnesses. The stronger modern atomic contract fixes old partial-write/offscreen-status defects; no extra paste option or engine is identified."
+    },
+    "data-projections": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/data-projections",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-detail.spec.ts",
+          "test": "row scopes expose sorted projection, logical page and live store independently of eligibility"
+        },
+        {
+          "file": "tests/browser/grid-change-state.spec.ts",
+          "test": "retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "data/core C05/C09/C10",
+          "obligation": "Preserve incoming insert/update/delete metadata and legacy wire/status conversion. Current raw active/selected/checked/status/changed projection recipes are implemented; a business rowStatus property alone does not set Rows status."
+        }
+      ],
+      "current_witnesses": [
+        "A14",
+        "A15"
+      ],
+      "implemented_local_outcome": "Current raw snapshots project active/batch/checked and visible/filtered scopes with own-property field picks. Explicit append/replacement and deletion pruning preserve independent identity sets."
+    },
+    "template-cache": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/template-cache",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "owned widget listeners do not duplicate on rebind and are removed on release and disposal"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C07/C08",
+          "obligation": "Finish typed cross-owner component/event assembly and declaration contracts. Controlled dispose/edit/rebind and listener deduplication are implemented; cache/tpBind do not imply a missing Grid cache engine."
+        }
+      ],
+      "current_witnesses": [
+        "A11",
+        "A18",
+        "A19",
+        "A22"
+      ],
+      "implemented_local_outcome": "Controlled dispose/edit/rebind recompiles the restored authored template. Row identity resources and abort-owned listeners release on recycling, refresh, replacement and disposal without duplicate observers."
+    },
+    "row-selection": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-selection",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-selection.spec.ts",
+          "test": "veto preserves active row, membership, focus and the range anchor"
+        },
+        {
+          "file": "tests/browser/grid-selection.spec.ts",
+          "test": "post callbacks see committed DOM and before-hook reentrancy rejects stale proposals"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C08/C13",
+          "obligation": "Finish local/shared callback defaults and typed declaration composition. Row-wide activation, usable keyboard alternatives, modifiers, vetoes, event-time snapshots and independent sets have current acceptance."
+        }
+      ],
+      "current_witnesses": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "A14",
+        "A15",
+        "A21"
+      ],
+      "implemented_local_outcome": "Opt-in selectOnRowClick reuses the atomic gesture path for all physical record rows while preserving native buttons, toggles/modifiers, independent checks, vetoes and bounded recycling. A visible enabled noninert selection alternative is required at activation."
+    },
+    "row-checks": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-checks",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-selection.spec.ts",
+          "test": "scoped check-all preserves outside checks and native mixed states apart from Boolean fields"
+        },
+        {
+          "file": "tests/browser/grid-selection.spec.ts",
+          "test": "single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C08",
+          "obligation": "Finish shared callback/declaration composition. Existing handles and native authored controls already preserve multiple/exclusive check, arbitrary application-controlled proposals, scoped state and append/replacement data workflows; no new selector engine is required."
+        }
+      ],
+      "current_witnesses": [
+        "A04",
+        "A14",
+        "A15"
+      ],
+      "implemented_local_outcome": "Existing multiple/exclusive scoped checks are joined by current checked-value and explicit append/replacement recipes, preserving independence from active/batch selection and data checkboxes."
+    },
+    "row-lifecycle": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-lifecycle",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "row hooks see connected blocks before and after values and clean resources in reverse order"
+        },
+        {
+          "file": "tests/browser/grid-progressive.spec.ts",
+          "test": "onBind failure keeps committed DOM and the next request does not redeliver that completion"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C08/C13",
+          "obligation": "Finish local/shared callback and typed declaration composition. Before/value/after ownership, native post-edit observation, chunk completion and cleanup already have witnesses. Progressive onRowBind versus final chunk layout is an explicit implemented timing contract."
+        }
+      ],
+      "current_witnesses": [
+        "A03",
+        "A18"
+      ]
+    },
+    "row-defaults": {
+      "classification": "implemented_recipe_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-defaults",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "defaults preserve captured native groups and own parsers without claiming business fields"
+        },
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "default parser failures and ambiguous native fields never write Rows or source markup"
+        },
+        {
+          "file": "tests/browser/m10-demo.spec.ts",
+          "test": "authored defaults feed a typed application factory and Undo removes only its inserted employee"
+        }
+      ],
+      "unresolved": [],
+      "current_witnesses": [
+        "A20"
+      ],
+      "implemented_local_outcome": "Captured native defaults feed a complete application-owned row factory and ordered insertion without inheriting current edits, shared mutable output or display-only business fields.",
+      "implementation_note": "Captured native scalar/group defaults, own parsers, explicit application factory overrides and ordered Rows.add creation are implemented, including parser/ambiguity/async failures. Form-specific creation parity remains with Form rather than a missing Grid default engine."
+    },
+    "change-status": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/change-status",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-change-state.spec.ts",
+          "test": "nested sibling paths change and restore independently in shared Form and Grid"
+        },
+        {
+          "file": "tests/browser/grid-change-state.spec.ts",
+          "test": "retained deletion keeps edited fields and dirty markers but transmits loaded originals and Undo restores them"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "data/core C05/C10",
+          "obligation": "Preserve incoming legacy status import and selected current-value/original-valued server payload conversions. Local committed field markers, retained edited tombstones, originals and revert already have acceptance."
+        }
+      ]
+    },
+    "validation-policy": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/validation-policy",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "manual timing retains scalar radio checkbox and Select drafts until explicit validate"
+        },
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "off-page and filtered validation keeps the application page filter and focus unchanged"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "form/rules/ui-grid",
+          "obligation": "Resolve the shared legacy validate=false outcome: user editing could commit without rule checks, whereas manual timing only defers validation. The explicit changed-ID validation recipe already uses validate(id); do not mislabel that scope as an absent Grid engine."
+        }
+      ],
+      "current_witnesses": [
+        "A17"
+      ]
+    },
+    "native-controls": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/native-controls",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "cross-tr native groups keep per-row values and stable identity without a native form"
+        },
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "multiple Select keeps empty and single arrays and distinguishes nested raw scalar types"
+        },
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "Grid Form and List apply programmatic text lengths and authored disabled constraints consistently"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "form/rules/core C11/C12",
+          "obligation": "Finish one shared programmatic per-field rule declaration contract. Native/group/Select/raw value/readonly/disabled handling is implemented; file input belongs to local Form and JSON Rows retains its stated domain."
+        }
+      ]
+    },
+    "row-order": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-order",
+      "witnesses": [
+        {
+          "file": "tests/browser/rows-ordering.spec.ts",
+          "test": "shared row moves preserve nested drafts errors and the attached focused Grid editor"
+        },
+        {
+          "file": "tests/browser/rows-ordering.spec.ts",
+          "test": "copies publish committed nested values to every view without copying a source draft"
+        },
+        {
+          "file": "tests/browser/m10-demo.spec.ts",
+          "test": "ordered row controls insert and copy by identity while value revert keeps store order"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "data/ui-grid",
+          "obligation": "Resolve the exact raw-position outcome for insertion/move/copy before a retained deleted anchor: modern before targets must be live and reject ROW_DELETED, whereas legacy raw indices could address those positions. First-live/undefined recipes preserve visible top/end, but not every raw tombstone order. This is a data contract decision, not a missing Grid order engine."
+        }
+      ],
+      "current_witnesses": [
+        "A20"
+      ],
+      "implemented_local_outcome": "Existing ordered add/move/copy accepts application-created complete values; the authored-default recipe inserts before a stable live ID while preserving existing edits."
+    },
+    "shared-updates": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/shared-updates",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-paste.spec.ts",
+          "test": "one batch updates shared Form, List and Tree while preserving unrelated drafts and keyed nodes"
+        },
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "onBind distinguishes whole binding from ordinary shared changes and reports retained totals"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C07/C08/C09/C10",
+          "obligation": "Finish cross-owner typed declarations, observation/synchronization context and incoming state contracts. Shared Rows updates and native post-edit snapshots are implemented; do not add a duplicate Grid synchronization engine."
+        }
+      ],
+      "current_witnesses": [
+        "A15",
+        "A16"
+      ]
+    },
+    "display": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/display",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "images preserve alt and explicit Grid and Form renderers use fresh DOM or literal text"
+        },
+        {
+          "file": "tests/browser/grid-controls.spec.ts",
+          "test": "connected foreign reused and asynchronous render nodes reject with exact binding recovery"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "form/rules/core C11",
+          "obligation": "Finish shared per-field formatter/configuration declaration correspondence. Images, literal text and explicit fresh trusted native DOM already preserve the local rich-display outcome; no string-to-HTML engine is needed."
+        }
+      ]
+    },
+    "action-reveal": {
+      "classification": "implemented_recipe_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/action-reveal",
+      "witnesses": [
+        {
+          "file": "tests/browser/m10-interactions.spec.ts",
+          "test": "application selection and checks reveal the last requested ID only after the complete state commits"
+        },
+        {
+          "file": "tests/browser/m10-interactions.spec.ts",
+          "test": "front, indexed and end insertion use start, center and end after successful selection"
+        },
+        {
+          "file": "tests/browser/m10-interactions.spec.ts",
+          "test": "last-invalid reveal follows visual page order and preserves focus with first-invalid core reveal disabled"
+        }
+      ],
+      "unresolved": [],
+      "implementation_note": "Application select/check/add/append/validation scroll policies are implemented and witnessed. Authored overscroll-behavior:contain replaces the old wheel-boundary interceptor; no second scroller or automatic policy engine is missing.",
+      "remaining_acceptance": [
+        {
+          "kind": "additional_native_composition_witness",
+          "owner": "ui-grid/authored-css",
+          "obligation": "The source contains overscroll-behavior:contain, but current browser witnesses do not explicitly compare native wheel chaining at scroll boundaries against an enclosing scrollable page. This is a focused composition proof to include with sticky/containment acceptance, not an identified absent algorithm."
+        }
+      ]
+    },
+    "hover": {
+      "classification": "implemented_authored_recipe_verified_for_selected_outcomes",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/hover",
+      "witnesses": [],
+      "unresolved": [],
+      "current_witnesses": [
+        "A23"
+      ],
+      "implemented_local_outcome": "Authored row hover and focus-within supply presentation in two independent layouts without changing selection, data or native table semantics."
+    },
+    "progressive-render": {
+      "classification": "implemented_local_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/progressive-render",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-progressive.spec.ts",
+          "test": "positive viewport delay schedules materialized records rather than thousands of offscreen IDs"
+        },
+        {
+          "file": "tests/browser/grid-progressive.spec.ts",
+          "test": "a completion callback starting another view aborts the old observer without stale completion"
+        },
+        {
+          "file": "tests/browser/m10-progressive.spec.ts",
+          "test": "dispose aborts Grid before asynchronous controller cleanup while the other page continues"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C08/C13",
+          "obligation": "Finish shared callback/default/declaration composition. Chunk admission, task yielding, first/last, cancellation, retry, append, CVC abort and bounded 10,000-record last-identity correctness already have acceptance; no additional progressive engine is missing."
+        }
+      ],
+      "current_witnesses": [
+        "A12",
+        "A13"
+      ],
+      "implemented_local_outcome": "The .3 scheduling contract is joined by source-authored 10,000-record last-identity acceptance for progressive admission, bounded mounted DOM and quiet disposal. This adds scale correctness, not a new timing budget.",
+      "measurement_limits": [
+        "The 10,000-record test measures mounted physical rows and row-bind calls, last identity and quiet disposal. It does not produce 10,000-record timing medians.",
+        "Historical timing budgets remain the unchanged 1,000-record binding and 5,000-record viewport fixtures. Missing 10,000-record timing medians are a claim limit, not an automatic release or implementation blocker."
+      ]
+    },
+    "field-rules": {
+      "classification": "cross_owner_required",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/field-rules",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid.spec.ts",
+          "test": "rule arguments fail before binding and custom Grid rules run"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "form/rules/core C11/C12/U01",
+          "obligation": "Provide one tested field-to-rule-tuples declaration contract across binders. RuleSet maps rule names to functions, not fields to tuples; old Grid forwarding defects do not justify dropping the intended declaration capability."
+        }
+      ]
+    },
+    "messages": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/messages",
+      "witnesses": [
+        {
+          "file": "tests/browser/m10-interactions.spec.ts",
+          "test": "Team preview, Apply and Enter, app All and None expose the exact current choice count"
+        },
+        {
+          "file": "tests/browser/m10-demo.spec.ts",
+          "test": "detail validation blocks navigation, authored close and Escape while preserving the current draft"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C13/rules",
+          "obligation": "Finish local/shared locale and rule-message configuration/replacement contracts. Authored labels cover the local Grid outcomes; no framework-wide translation engine is required."
+        }
+      ]
+    },
+    "row-events": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-events",
+      "witnesses": [
+        {
+          "file": "tests/browser/grid-selection.spec.ts",
+          "test": "row actions resolve the current identity and retained drafts survive filtering, paging and layout"
+        },
+        {
+          "file": "tests/browser/grid-lifecycle.spec.ts",
+          "test": "owned widget listeners do not duplicate on rebind and are removed on release and disposal"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "core C07/C08",
+          "obligation": "Finish generic typed component/event declaration/context across Grid/List/CVC. Current native same-root registration-order recipe already covers synchronous draft/commit/invalid/manual/custom-event observations and cleanup, so do not add a Grid event engine merely for this proof."
+        }
+      ],
+      "current_witnesses": [
+        "A16",
+        "A17",
+        "A18",
+        "A22"
+      ],
+      "implemented_local_outcome": "Native root listeners registered after bindGrid observe synchronous draft/commit/invalid/manual processing and current custom-event snapshots through an owned physical-row-to-RowId WeakMap; rebind aborts and re-registers listeners."
+    },
+    "row-details": {
+      "classification": "implemented_recipe_with_cross_owner_contract",
+      "audit_contract_ref": "docs/implementation/evidence/m1096-grid-audit.json#/contracts/row-details",
+      "witnesses": [
+        {
+          "file": "tests/browser/m10-demo.spec.ts",
+          "test": "one authored CVC detail page edits nested shared values inline and in Popup independently of selection"
+        },
+        {
+          "file": "tests/browser/m10-demo.spec.ts",
+          "test": "detail validation blocks navigation, authored close and Escape while preserving the current draft"
+        },
+        {
+          "file": "tests/browser/m10-demo.spec.ts",
+          "test": "detail scopes skip tombstones and compute filtered pages from raw projection positions"
+        }
+      ],
+      "unresolved": [
+        {
+          "kind": "cross_owner_contract",
+          "owner": "popup/page U13/U15/U16",
+          "obligation": "Finish general retained/preloaded/drag/guard Popup and cross-owner declaration policies. Current authored shared-Form detail, hidden fields, navigation, validation and cleanup are implemented."
+        }
+      ],
+      "remaining_acceptance": [
+        {
+          "kind": "additional_authored_recipe_witness",
+          "owner": "ui-grid/form/page",
+          "obligation": "Demonstrate a deliberately reduced authored detail-field set, alongside the existing complete detail template and chooser access. Form/Page already accept authored HTML; no missing Grid detail engine is identified."
+        }
+      ]
+    }
+  },
+  "families": {
+    "G01": {
+      "status": "open",
+      "owner": "data/ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G01/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "change-status",
+        "data-projections",
+        "defaults-composition",
+        "native-controls",
+        "root-inspection",
+        "row-defaults",
+        "row-lifecycle",
+        "shared-updates"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "change-status",
+        "data-projections",
+        "defaults-composition",
+        "native-controls",
+        "root-inspection",
+        "row-lifecycle",
+        "shared-updates"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G02": {
+      "status": "open",
+      "owner": "data/ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G02/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "defaults-composition",
+        "progressive-render",
+        "root-inspection",
+        "row-defaults",
+        "row-order"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "defaults-composition",
+        "progressive-render",
+        "root-inspection",
+        "row-order"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G03": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G03/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "native-controls",
+        "native-topology",
+        "root-inspection",
+        "row-defaults",
+        "row-events",
+        "row-lifecycle",
+        "row-merge",
+        "row-order",
+        "template-cache"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "native-controls",
+        "root-inspection",
+        "row-events",
+        "row-lifecycle",
+        "row-order",
+        "template-cache"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G04": {
+      "status": "open",
+      "owner": "ui-grid/form",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G04/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "display",
+        "field-rules",
+        "native-controls",
+        "paste",
+        "row-checks",
+        "row-defaults",
+        "row-events",
+        "template-cache",
+        "validation-policy"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "display",
+        "field-rules",
+        "native-controls",
+        "row-checks",
+        "row-events",
+        "template-cache",
+        "validation-policy"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G05": {
+      "status": "open",
+      "owner": "ui-grid/form",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G05/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "display",
+        "field-rules",
+        "native-controls"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "display",
+        "field-rules",
+        "native-controls"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G06": {
+      "status": "open",
+      "owner": "ui-grid/rules",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G06/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "change-status",
+        "defaults-composition",
+        "field-rules",
+        "native-controls",
+        "paste",
+        "root-inspection",
+        "shared-updates",
+        "validation-policy"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "change-status",
+        "defaults-composition",
+        "field-rules",
+        "native-controls",
+        "root-inspection",
+        "shared-updates",
+        "validation-policy"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G07": {
+      "status": "open",
+      "owner": "data/ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G07/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "change-status",
+        "data-projections",
+        "defaults-composition",
+        "native-controls",
+        "row-lifecycle",
+        "row-order",
+        "shared-updates"
+      ],
+      "open_contracts": [
+        "change-status",
+        "data-projections",
+        "defaults-composition",
+        "native-controls",
+        "row-lifecycle",
+        "row-order",
+        "shared-updates"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G08": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G08/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "defaults-composition",
+        "row-defaults",
+        "row-lifecycle",
+        "row-selection"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "defaults-composition",
+        "row-lifecycle",
+        "row-selection"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G09": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G09/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "data-projections",
+        "defaults-composition",
+        "row-lifecycle",
+        "row-selection"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "data-projections",
+        "defaults-composition",
+        "row-lifecycle",
+        "row-selection"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G10": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G10/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "change-status",
+        "data-projections",
+        "defaults-composition",
+        "row-checks",
+        "row-selection"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "change-status",
+        "data-projections",
+        "defaults-composition",
+        "row-checks",
+        "row-selection"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G11": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G11/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "column-filter",
+        "defaults-composition",
+        "header-sort",
+        "native-topology",
+        "root-inspection",
+        "row-lifecycle"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "root-inspection",
+        "row-lifecycle"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G12": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G12/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "column-filter",
+        "defaults-composition",
+        "header-sort",
+        "messages",
+        "native-topology",
+        "root-inspection",
+        "row-lifecycle"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "messages",
+        "root-inspection",
+        "row-lifecycle"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G13": {
+      "status": "open",
+      "owner": "ui-grid/authored-css",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G13/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "height-controls",
+        "native-topology",
+        "root-inspection",
+        "sticky-layout"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "root-inspection",
+        "sticky-layout"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G14": {
+      "status": "open",
+      "owner": "ui-grid/columns",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G14/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "column-chooser",
+        "defaults-composition",
+        "messages",
+        "native-topology",
+        "root-inspection",
+        "sticky-layout"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "messages",
+        "root-inspection",
+        "sticky-layout"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G15": {
+      "status": "open",
+      "owner": "ui-grid/viewport/authored-css",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G15/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "defaults-composition",
+        "height-controls",
+        "root-inspection",
+        "row-checks",
+        "row-defaults",
+        "row-selection",
+        "sticky-layout",
+        "validation-policy"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "defaults-composition",
+        "root-inspection",
+        "row-checks",
+        "row-selection",
+        "sticky-layout",
+        "validation-policy"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G16": {
+      "status": "open",
+      "owner": "ui-grid/form/popup/page",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G16/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "column-chooser",
+        "defaults-composition",
+        "messages"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "messages"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G17": {
+      "status": "open",
+      "owner": "ui-grid",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G17/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "native-topology",
+        "row-merge"
+      ],
+      "open_contracts": [
+        "defaults-composition"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G18": {
+      "status": "open",
+      "owner": "ui-grid/data/rules",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G18/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "paste",
+        "root-inspection"
+      ],
+      "open_contracts": [
+        "defaults-composition",
+        "root-inspection"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G19": {
+      "status": "open",
+      "owner": "ui-grid/viewport/data",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G19/acceptance",
+      "contracts": [
+        "action-reveal",
+        "advanced-capabilities",
+        "change-status",
+        "defaults-composition",
+        "height-controls",
+        "paste",
+        "progressive-render",
+        "row-lifecycle",
+        "row-order",
+        "sticky-layout",
+        "template-cache"
+      ],
+      "open_contracts": [
+        "action-reveal",
+        "change-status",
+        "defaults-composition",
+        "progressive-render",
+        "row-lifecycle",
+        "row-order",
+        "sticky-layout",
+        "template-cache"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    },
+    "G20": {
+      "status": "open",
+      "owner": "ui-grid/page/authored-css",
+      "acceptance_ref": "docs/implementation/evidence/v1-grid-parity.json#/profiles/G20/acceptance",
+      "contracts": [
+        "advanced-capabilities",
+        "change-status",
+        "column-chooser",
+        "column-filter",
+        "defaults-composition",
+        "hover",
+        "messages",
+        "native-topology",
+        "progressive-render",
+        "root-inspection",
+        "row-defaults",
+        "row-events",
+        "row-lifecycle",
+        "shared-updates",
+        "template-cache"
+      ],
+      "open_contracts": [
+        "change-status",
+        "defaults-composition",
+        "messages",
+        "progressive-render",
+        "root-inspection",
+        "row-events",
+        "row-lifecycle",
+        "shared-updates",
+        "template-cache"
+      ],
+      "closure_note": "Retained specific local/cross-owner obligations and final acceptance remain; current implemented local witnesses are not labeled missing capabilities."
+    }
+  },
+  "next_priorities": [
+    "Continue the specifically retained Grid-local and shared-owner obligations after the selected activation/composition acceptance.",
+    "Next Grid-local acceptance: demonstrate two or more pinned-column cumulative offsets after resize/hide/reorder in grouped native layouts, responsive dimensions and positioned authored roots; add focused native boundary-scroll proof and a reduced-field detail recipe. Prefer current HTML/CSS/handles; do not infer another engine.",
+    "Resolve core C07/C08/C11/C13 typed declarations, local/shared callbacks, per-field rules and localized configuration, including shared validation-disable policy.",
+    "Resolve data/core C05/C09/C10 incoming status and legacy wire payloads; decide exact retained-deleted-anchor ordering at the data owner while other component parity continues.",
+    "Close original Grid acceptance IDs only after specific remaining obligations resolve; preserve frozen audits and prepare the single whole-framework omission proposal.",
+    "Perform mandatory M13 whole-code ponytail-review/remediation after required parity; personal testing precedes separately requested publication or release tags."
+  ],
+  "current_acceptance": {
+    "A01": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "row-wide activation is opt-in and preserves native table and button defaults",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A02": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "invalid row activation flags and missing keyboard alternatives reject before ownership",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A03": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "single row clicks reuse toggles, current snapshots and committed callback order",
+      "contracts": [
+        "row-selection",
+        "row-lifecycle"
+      ]
+    },
+    "A04": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "row-wide multiple gestures share eligible ranges and independent checks",
+      "contracts": [
+        "row-selection",
+        "row-checks"
+      ]
+    },
+    "A05": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "row-wide veto and unavailable records keep atomic selection and native pressed state",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A06": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "interactive descendants and label text never become row activation",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A07": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "prevented, hidden and inert record clicks leave selection unchanged",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A08": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "row clicks require a currently usable keyboard selection alternative",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A09": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "every physical row resolves current identity after sorting, paging and column movement",
+      "contracts": [
+        "row-selection",
+        "native-topology"
+      ]
+    },
+    "A10": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "native selection buttons activate once by pointer, Enter and Space with row clicks enabled",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A11": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "independent row activation and repeated disposal retain exact authored ownership",
+      "contracts": [
+        "row-selection",
+        "template-cache"
+      ]
+    },
+    "A12": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "row activation follows progressive and recycled viewport records without growing mounted DOM",
+      "contracts": [
+        "row-selection",
+        "progressive-render"
+      ]
+    },
+    "A13": {
+      "file": "tests/browser/grid-acceptance.spec.ts",
+      "test": "10,000 loaded records reach the last progressive identity with bounded DOM and quiet disposal",
+      "contracts": [
+        "progressive-render",
+        "advanced-capabilities"
+      ]
+    },
+    "A14": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "application projections read current raw values with own keys and independent active batch checked scopes",
+      "contracts": [
+        "data-projections",
+        "row-selection",
+        "row-checks"
+      ]
+    },
+    "A15": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "application membership append and replacement preserve independent sets and discard replaced row identities",
+      "contracts": [
+        "data-projections",
+        "row-selection",
+        "row-checks",
+        "shared-updates"
+      ]
+    },
+    "A16": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "native listeners registered after Grid observe drafts commits validation failures and latest custom-event snapshots",
+      "contracts": [
+        "row-events",
+        "shared-updates"
+      ]
+    },
+    "A17": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "manual validation keeps native observations uncommitted until explicit validation",
+      "contracts": [
+        "row-events",
+        "validation-policy"
+      ]
+    },
+    "A18": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "row-hook identities and abort-owned observations survive refresh recycling and rebind without stale callbacks",
+      "contracts": [
+        "row-events",
+        "template-cache",
+        "row-lifecycle"
+      ]
+    },
+    "A19": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "authored templates headers and native column topology support controlled dispose edit rebind",
+      "contracts": [
+        "root-inspection",
+        "native-topology",
+        "template-cache"
+      ]
+    },
+    "A20": {
+      "file": "tests/browser/grid-recipes.spec.ts",
+      "test": "authored native defaults compose row creation without inheriting current edits or mutable output",
+      "contracts": [
+        "row-defaults",
+        "row-order"
+      ]
+    },
+    "A21": {
+      "file": "tests/browser/m10-acceptance.spec.ts",
+      "test": "demo row-area activation is opt-in, excludes editors and survives policy rebind",
+      "contracts": [
+        "row-selection"
+      ]
+    },
+    "A22": {
+      "file": "tests/browser/m10-acceptance.spec.ts",
+      "test": "demo root observation follows Grid commits and invalid drafts without accumulating listeners",
+      "contracts": [
+        "row-events",
+        "template-cache"
+      ]
+    },
+    "A23": {
+      "file": "tests/browser/m10-acceptance.spec.ts",
+      "test": "authored row hover and keyboard focus remain presentation in both independent layouts",
+      "contracts": [
+        "hover"
+      ]
+    }
+  },
+  "runtime_verification": {
+    "status": "fresh_frozen_gates_passed",
+    "receipt": "m10964-verification.json",
+    "input_entries": 174,
+    "final_gates": 16,
+    "unit": 124,
+    "browser_cases_per_engine": 522,
+    "required_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "note": "Selected outcomes verified; unresolved local and cross-owner contracts and all20 full families remain open."
+  }
+}

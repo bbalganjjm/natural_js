@@ -1,5 +1,7 @@
 # Concepts
 
+* [Grid compositions](grid-compositions.md) - Use current Rows values, native events and authored table structure without adding Grid utility APIs. (draft)
+
 * [Tree and DatePicker in two CVC layouts](tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
 
 * [Interactive Grid contract demo](grid-demo.md) - Inspect committed field changes, loaded originals and edited deletions alongside authored CVC details and two Grid layouts. (draft)

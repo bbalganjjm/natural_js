@@ -59,6 +59,7 @@ thead .check-label, tbody th .check-label { margin: .45rem 0; font-weight: 400; 
 tbody [data-select-row] { width: 100%; text-align: left; }
 tbody th[scope="row"] { position: sticky; left: 0; z-index: 1; background: #f5f9fe; }
 tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:hover, tbody tr:focus-within { outline: 2px solid #315f91; outline-offset: -2px; }
 tbody tr[data-row-template] { display: none; }
 tbody button[aria-pressed="true"] { background: #1b4f86; color: #fff; }
 td label { display: grid; gap: .2rem; }

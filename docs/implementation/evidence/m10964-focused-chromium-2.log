@@ -1,0 +1,33 @@
+
+
+Running 22 tests using 1 worker
+
+
+
+[1/22] [chromium] › tests\browser\grid-acceptance.spec.ts:85:1 › row-wide activation is opt-in and preserves native table and button defaults
+[2/22] [chromium] › tests\browser\grid-acceptance.spec.ts:99:1 › invalid row activation flags and missing keyboard alternatives reject before ownership
+[3/22] [chromium] › tests\browser\grid-acceptance.spec.ts:122:1 › single row clicks reuse toggles, current snapshots and committed callback order
+[4/22] [chromium] › tests\browser\grid-acceptance.spec.ts:143:1 › row-wide multiple gestures share eligible ranges and independent checks
+[5/22] [chromium] › tests\browser\grid-acceptance.spec.ts:156:1 › row-wide veto and unavailable records keep atomic selection and native pressed state
+[6/22] [chromium] › tests\browser\grid-acceptance.spec.ts:173:1 › interactive descendants and label text never become row activation
+[7/22] [chromium] › tests\browser\grid-acceptance.spec.ts:188:1 › prevented, hidden and inert record clicks leave selection unchanged
+[8/22] [chromium] › tests\browser\grid-acceptance.spec.ts:203:1 › row clicks require a currently usable keyboard selection alternative
+[9/22] [chromium] › tests\browser\grid-acceptance.spec.ts:221:1 › every physical row resolves current identity after sorting, paging and column movement
+[10/22] [chromium] › tests\browser\grid-acceptance.spec.ts:235:1 › native selection buttons activate once by pointer, Enter and Space with row clicks enabled
+[11/22] [chromium] › tests\browser\grid-acceptance.spec.ts:251:1 › independent row activation and repeated disposal retain exact authored ownership
+[12/22] [chromium] › tests\browser\grid-acceptance.spec.ts:273:1 › row activation follows progressive and recycled viewport records without growing mounted DOM
+[13/22] [chromium] › tests\browser\grid-recipes.spec.ts:90:1 › application projections read current raw values with own keys and independent active batch checked scopes
+[14/22] [chromium] › tests\browser\grid-recipes.spec.ts:120:1 › application membership append and replacement preserve independent sets and discard replaced row identities
+[15/22] [chromium] › tests\browser\grid-recipes.spec.ts:139:1 › native listeners registered after Grid observe drafts commits validation failures and latest custom-event snapshots
+[16/22] [chromium] › tests\browser\grid-recipes.spec.ts:167:1 › manual validation keeps native observations uncommitted until explicit validation
+[17/22] [chromium] › tests\browser\grid-recipes.spec.ts:181:1 › row-hook identities and abort-owned observations survive refresh recycling and rebind without stale callbacks
+[18/22] [chromium] › tests\browser\grid-recipes.spec.ts:205:1 › authored templates headers and native column topology support controlled dispose edit rebind
+[19/22] [chromium] › tests\browser\grid-recipes.spec.ts:238:1 › authored native defaults compose row creation without inheriting current edits or mutable output
+[20/22] [chromium] › tests\browser\m10-acceptance.spec.ts:12:1 › demo row-area activation is opt-in, excludes editors and survives policy rebind
+[21/22] [chromium] › tests\browser\m10-acceptance.spec.ts:36:1 › demo root observation follows Grid commits and invalid drafts without accumulating listeners
+[22/22] [chromium] › tests\browser\m10-acceptance.spec.ts:60:1 › authored row hover and keyboard focus remain presentation in both independent layouts
+  22 passed (9.5s)
+[WebServer] (node:21360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:22860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

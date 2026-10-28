@@ -24,11 +24,11 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: f939bea2cf1d6926d6642506d0ceb95b27d40695
+    git_blob: 901eb9c78d20bfd906252565c0d4b15c6f703f9e
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 399514780b682bbddf1d0c949d3d05fd4682068a
+    git_blob: df8b5ed51c4ac04c22a462ca02e9159b158fe516
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
@@ -36,7 +36,7 @@ sources:
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
-    git_blob: ea12110cac504d5008786bbe0f460bae348ef02f
+    git_blob: 9c64636295c7b6cf904560d8098f9f0b39473311
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
@@ -72,7 +72,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -109,10 +109,10 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -273,6 +273,8 @@ Enable **Reveal successful application selection, check, add and append actions*
 Choose **Reveal the last invalid row in visual page order, preserving focus** before editing. It disables core first-invalid reveal, collects validation issue IDs and scans the current visual page in reverse before centered reveal. Issue order alone is insufficient after sorting. Hidden/offpage errors remain recorded; a valid result or a result without a visible issue does not scroll. The normal core first-invalid option remains separately available.[^view][^controller][^grid]
 
 # Variations
+
+Enable **Select from noninteractive row areas** to use the same selection policy from a record's plain cells. Labels and interactive controls remain independent; the existing selection button remains the keyboard alternative. Hiding its column disables the added click path. **Native event after Grid handling** shows the latest committed Rows snapshot after input/change handling; invalid and manual drafts can retain entered text while Rows stays unchanged. Rebinding replaces the native listener rather than accumulating earlier registrations. See [Grid compositions](grid-compositions.md).[^controller][^grid]
 
 In the row-block section, edit Name, Notes or Shift in either layout to update the shared record in both. Select a record in either table, then use **Apply merge keys**, **Move to first**, **Move to end** or **Copy to end**. Department merges first; Team merges only within the same Department and row status. Editing one record can split a formerly equal run until reversion. The status and shared snapshots show the committed RowId/value changes. **Reset shared records** replaces this separate store and clears its selected identity; the main explorer's Dataset/viewport controls do not control these two small layouts.[^view][^controller]
 

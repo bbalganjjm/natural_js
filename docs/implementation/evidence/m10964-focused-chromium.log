@@ -1,0 +1,120 @@
+
+
+
+Running 22 tests using 1 worker
+
+
+
+[1/22] [chromium] › tests\browser\grid-acceptance.spec.ts:85:1 › row-wide activation is opt-in and preserves native table and button defaults
+[2/22] [chromium] › tests\browser\grid-acceptance.spec.ts:99:1 › invalid row activation flags and missing keyboard alternatives reject before ownership
+[3/22] [chromium] › tests\browser\grid-acceptance.spec.ts:122:1 › single row clicks reuse toggles, current snapshots and committed callback order
+[4/22] [chromium] › tests\browser\grid-acceptance.spec.ts:143:1 › row-wide multiple gestures share eligible ranges and independent checks
+[5/22] [chromium] › tests\browser\grid-acceptance.spec.ts:156:1 › row-wide veto and unavailable records keep atomic selection and native pressed state
+[6/22] [chromium] › tests\browser\grid-acceptance.spec.ts:173:1 › interactive descendants and label text never become row activation
+[7/22] [chromium] › tests\browser\grid-acceptance.spec.ts:188:1 › prevented, hidden and inert record clicks leave selection unchanged
+[8/22] [chromium] › tests\browser\grid-acceptance.spec.ts:203:1 › row clicks require a currently usable keyboard selection alternative
+[9/22] [chromium] › tests\browser\grid-acceptance.spec.ts:221:1 › every physical row resolves current identity after sorting, paging and column movement
+[10/22] [chromium] › tests\browser\grid-acceptance.spec.ts:235:1 › native selection buttons activate once by pointer, Enter and Space with row clicks enabled
+[11/22] [chromium] › tests\browser\grid-acceptance.spec.ts:251:1 › independent row activation and repeated disposal retain exact authored ownership
+[12/22] [chromium] › tests\browser\grid-acceptance.spec.ts:273:1 › row activation follows progressive and recycled viewport records without growing mounted DOM
+[13/22] [chromium] › tests\browser\grid-recipes.spec.ts:90:1 › application projections read current raw values with own keys and independent active batch checked scopes
+[14/22] [chromium] › tests\browser\grid-recipes.spec.ts:120:1 › application membership append and replacement preserve independent sets and discard replaced row identities
+[15/22] [chromium] › tests\browser\grid-recipes.spec.ts:139:1 › native listeners registered after Grid observe drafts commits validation failures and latest custom-event snapshots
+[16/22] [chromium] › tests\browser\grid-recipes.spec.ts:167:1 › manual validation keeps native observations uncommitted until explicit validation
+[17/22] [chromium] › tests\browser\grid-recipes.spec.ts:181:1 › row-hook identities and abort-owned observations survive refresh recycling and rebind without stale callbacks
+[18/22] [chromium] › tests\browser\grid-recipes.spec.ts:205:1 › authored templates headers and native column topology support controlled dispose edit rebind
+[19/22] [chromium] › tests\browser\grid-recipes.spec.ts:238:1 › authored native defaults compose row creation without inheriting current edits or mutable output
+[20/22] [chromium] › tests\browser\m10-acceptance.spec.ts:5:1 › demo row-area activation is opt-in, excludes editors and survives policy rebind
+[21/22] [chromium] › tests\browser\m10-acceptance.spec.ts:29:1 › demo root observation follows Grid commits and invalid drafts without accumulating listeners
+[22/22] [chromium] › tests\browser\m10-acceptance.spec.ts:53:1 › authored row hover and keyboard focus remain presentation in both independent layouts
+
+  1) [chromium] › tests\browser\m10-acceptance.spec.ts:53:1 › authored row hover and keyboard focus remain presentation in both independent layouts 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('table').first().locator('tbody tr').first()
+    Timeout: 5000ms
+    - Expected  - 15
+    + Received  + 10
+
+    - Ledger 01	
+    - Email
+    - 	+1 555 0101	
+    - Team
+    - 	
+    - Shift
+    - Choose
+    - Morning
+    - Evening
+    +
+    +                 Ledger 01
+    +                 Email 
+    +                 +1 555 0101
+    +                 Team 
+    +                 Shift ChooseMorningEvening
+    - 	
+    - Active
+    - 	
+    - Notes
+    - 	
+    - Salary
+    +                  Active
+    +                 Notes 
+    +                 Salary 
+    +               
+
+    Call log:
+      - Expect "toHaveText" locator('table').first().locator('tbody tr').first() with timeout 5000ms
+      - waiting for locator('table').first().locator('tbody tr').first()
+        14 × locator resolved to <tr data-row-status="clean">…</tr>
+           - unexpected value "
+                    Ledger 01
+                    Email 
+                    +1 555 0101
+                    Team 
+                    Shift ChooseMorningEvening
+                     Active
+                    Notes 
+                    Salary 
+                  "
+
+
+      65 |     await expect(row).toHaveCSS("outline-style", "solid");
+      66 |     await expect(button).toHaveAttribute("aria-pressed", "false");
+    > 67 |     await expect(row).toHaveText(before);
+         |                       ^
+      68 |     await expect(row).not.toHaveAttribute("role", "gridcell");
+      69 |   }
+      70 | });
+        at D:\workspace\natural_js\tests\browser\m10-acceptance.spec.ts:67:23
+
+    Error Context: test-results\m10-acceptance-authored-ro-e1140-in-both-independent-layouts-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\m10-acceptance.spec.ts:53:1 › authored row hover and keyboard focus remain presentation in both independent layouts 
+  21 passed (22.5s)
+[WebServer] (node:17516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:22544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:14208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 오후 9:58:32 [vite] (client) [Unhandled error] FrameworkError: This Grid has been disposed.
+[WebServer]  > gridError ../../src/ui/grid.ts:110:9
+[WebServer]     108 |  
+[WebServer]     109 |  function gridError(code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
+[WebServer]     110 |    return new FrameworkError({ api: "bindGrid", code, message, detail });
+[WebServer]         |           ^
+[WebServer]     111 |  }
+[WebServer]     112 |  
+[WebServer]  > active ../../src/ui/grid.ts:562:24
+[WebServer]  > Object.selected ../../src/ui/grid.ts:2219:6
+[WebServer]  > refresh m10/demo.ts:250:19
+[WebServer]  > HTMLDocument.<anonymous> m10/demo.ts:813:71
+[WebServer]  > releaseRecord ../../src/ui/grid.ts:638:51
+[WebServer]  > Object.dispose ../../src/ui/grid.ts:2296:8
+[WebServer]  > disposeGrid m10/demo.ts:200:8
+[WebServer]  > act m10/demo.ts:785:20
+[WebServer]  > HTMLDocument.<anonymous> m10/demo.ts:807:8
+[WebServer] 

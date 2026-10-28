@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required Grid continuation and full feature obligations
-    git_blob: 762a68615866daac0fb14dfa7dd53b437928287d
+    git_blob: f21dc30191205e687f1ab6d8e85a5fa050893a98
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row ownership and existing active-detail contract
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts
@@ -36,7 +36,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m10/demo.ts
     title: Full Grid contract explorer
-    git_blob: 399514780b682bbddf1d0c949d3d05fd4682068a
+    git_blob: df8b5ed51c4ac04c22a462ca02e9159b158fe516
   - id: evidence
     resource: evidence/m106-verification.json
     title: Final source, commands, package, browser and performance identity

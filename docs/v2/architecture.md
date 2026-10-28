@@ -24,7 +24,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership

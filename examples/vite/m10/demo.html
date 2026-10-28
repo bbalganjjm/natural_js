@@ -140,6 +140,7 @@
             </select>
           </label>
           <label class="check-label"><input type="checkbox" data-toggle-selection> Plain activation toggles selection</label>
+          <label class="check-label"><input type="checkbox" data-select-on-row-click> Select from noninteractive row areas</label>
           <label class="check-label"><input type="checkbox" data-disable-inactive> Disable selection and checks for inactive rows</label>
           <p>Changing mode or the inactive-row policy rebinds the Grid and clears selection, checks and uncommitted edits.</p>
           <label class="check-label"><input type="checkbox" data-veto-active> Veto active-row changes</label>
@@ -369,6 +370,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
             <p>onSelectionChange: <output data-selection-callback>Not fired yet.</output></p>
             <p>onCheckChange: <output data-check-callback>Not fired yet.</output></p>
             <p>onRowAction: <output data-action-callback>Not fired yet.</output></p>
+            <p>Native event after Grid handling: <output data-post-edit>Not fired yet.</output></p>
             <p>onColumnsChange: <output data-columns-callback>Not fired yet.</output></p>
             <p>Rows.subscribe: <output data-event>Not fired yet.</output></p></section>
         </div>

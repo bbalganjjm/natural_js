@@ -1,3 +1,11 @@
+## 2026-10-28
+
+* **Verification** M10.9.6.4's selected activation/composition slice passes sixteen final gates on 174 frozen inputs: 124 units; 522 full cases each in Chromium/Firefox/WebKit; exact JS/TS and five-browser installation; original binding/viewport budgets. The 183-file tar SHA-256 is acb0a3edfe6c53415df4de91d9c8c3b7f20e489bb735f456dddc55d241513cbd. [Evidence](implementation/evidence/m10964-verification.json) preserves all twenty-two command records, including six development attempts, actual archive checks and sixty recomputed medians. Independent connected source/API/archive/evidence/document review approves the selected outcomes. Remaining pinned-column/shared-owner parity, P0 and M13 stay required.
+
+* **Creation** [M10.9.6.4](implementation/m10-acceptance-plan.md) reviews native record-area activation and application compositions against the frozen Grid audit. [Grid compositions](v2/grid-compositions.md) documents current-value projection, post-edit native event order and controlled template inspection/rebind. The new acceptance ledger preserves unresolved cross-owner obligations; no omission or full-family closure is inferred.
+
+* **Update** [Grid](v2/grid.md) and its [demo](v2/grid-demo.md) add opt-in noninteractive row clicks with an available keyboard selection button, native observation output and authored hover/focus feedback. Fresh runtime and independent verification are pending in the owning plan.
+
 ## 2026-10-24
 
 * **Verification** M10.9.6.3 independent source/API/archive/evidence/document review approves its contracted slice. Changed/full OKF checks pass with 63 concepts, five reserved files, zero errors and zero warnings. Eleven reviewed semantic concepts receive verified metadata; twenty-three historical concepts preserve bodies and generated/verified dates with fingerprint-only updates. M10.9.6.4, other parity, P0 and M13 remain required; no publication, tag or feature omission.

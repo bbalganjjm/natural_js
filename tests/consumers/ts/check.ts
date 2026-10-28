@@ -83,7 +83,7 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
     rows, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
     viewport: scrollRoot ? { root: scrollRoot, estimate: 48, overscan: 3 } : undefined,
     paste: true, onPaste: result => pastes.push(result),
-    multiple: true, toggleSelection: true,
+    multiple: true, toggleSelection: true, selectOnRowClick: true,
     canSelect: row => row.status !== "delete",
     canCheck: row => row.status !== "delete",
     beforeSelect: ({ id, row, event }) => {

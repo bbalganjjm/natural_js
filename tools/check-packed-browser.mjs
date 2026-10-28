@@ -440,6 +440,23 @@ try {
     form.querySelector("input").getAttribute("aria-describedby") === form.querySelector("output").id));
   assert(described, "Form errors must be described by unique, connected regions.");
 
+  assert.deepEqual(await page.evaluate(() => {
+    const screen = window.packedConsumer.screens.a;
+    const table = document.querySelector('[data-host="a"] [data-consumer-grid]');
+    const cell = table.tBodies[0].rows[0].cells[1];
+    table.tabIndex = -1;
+    cell.click();
+    const activated = { active: screen.grid.selected(), ids: screen.grid.selectedIds() };
+    cell.click();
+    const cleared = { active: screen.grid.selected(), ids: screen.grid.selectedIds() };
+    cell.querySelector("label").click();
+    table.removeAttribute("tabindex");
+    return { activated, cleared, afterLabel: screen.grid.selected(), checks: screen.grid.checkedIds(),
+      other: window.packedConsumer.screens.b.grid.selected() };
+  }), { activated: { active: 1, ids: [1] }, cleared: { active: null, ids: [] },
+    afterLabel: null, checks: [], other: null },
+  "Installed row activation must use current identity, toggle once and exclude labels independently of table focusability.");
+
   const first = page.locator('[data-host="a"]');
   const selectionButton = first.locator("[data-select-row]");
   await selectionButton.click();

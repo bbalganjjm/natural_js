@@ -1,0 +1,27 @@
+{
+  "semantic_concepts": 7,
+  "historical_fingerprint_only": 20,
+  "preserved_historical_bodies_and_generated_verified_dates": true,
+  "historical": [
+    "docs/implementation/feature-parity-plan.md",
+    "docs/implementation/m10-change-state-plan.md",
+    "docs/implementation/m10-columns-plan.md",
+    "docs/implementation/m10-controls-plan.md",
+    "docs/implementation/m10-detail-plan.md",
+    "docs/implementation/m10-interactions-plan.md",
+    "docs/implementation/m10-lifecycle-plan.md",
+    "docs/implementation/m10-parity-plan.md",
+    "docs/implementation/m10-paste-plan.md",
+    "docs/implementation/m10-plan.md",
+    "docs/implementation/m10-progressive-plan.md",
+    "docs/implementation/m10-row-blocks-plan.md",
+    "docs/implementation/m10-selection-plan.md",
+    "docs/implementation/m10-viewport-plan.md",
+    "docs/implementation/m13-review-plan.md",
+    "docs/implementation/m5-plan.md",
+    "docs/implementation/m6-plan.md",
+    "docs/v2/architecture.md",
+    "docs/v2/migration.md",
+    "docs/v2/ui.md"
+  ]
+}

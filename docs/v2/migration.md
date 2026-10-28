@@ -48,7 +48,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 87c70d9ca2a4d566dbdd25dd80c734d2dce16314
+    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -136,11 +136,11 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 09603c7af0f86e44d5592473b1895cfb9524cf4a
+    git_blob: 3685a8bafa18e201e2eb251508dd150e167c88d6
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 762a68615866daac0fb14dfa7dd53b437928287d
+    git_blob: f21dc30191205e687f1ab6d8e85a5fa050893a98
 generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
