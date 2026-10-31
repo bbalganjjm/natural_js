@@ -1,7 +1,7 @@
 ---
 type: Playbook
 title: Repository workflow
-description: How agents work in this repository and keep the docs/ bundle current, llm-wiki style - query before coding, ingest every code change, lint before finishing.
+description: How agents answer from scoped evidence, keep the docs/ bundle current, and check documentation changes.
 tags: [meta, governance, llm-wiki]
 sources:
   - id: llm-wiki
@@ -14,10 +14,10 @@ sources:
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: knowledge-docs checker and stamper
     git_blob: 6e58994a0f2fe00466fb67c1f047036e8f150e6a
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:45:16Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:36:34Z }
 ---
 
-This is the working contract for agents in the Natural-JS repository. It applies the LLM wiki pattern[^llm-wiki] to an OKF v0.2 bundle[^okf-spec]: the root 2.0 code is the raw source, `docs/` is the active wiki that agents write and keep current, and this page plus the repository's agent instructions are the schema. "Automatic" upkeep means the agent does it without being asked, inside the scope of the approved task; there are no hooks or CI jobs.
+This is the working contract for agents in the Natural-JS repository. It applies the LLM wiki pattern[^llm-wiki] to an OKF v0.2 bundle[^okf-spec]: the root 2.0 code is the raw source, `docs/` is the active wiki that agents write and keep current, and this page plus the repository's agent instructions are the schema. It also defines how agents answer questions from evidence. "Automatic" upkeep means the agent does it without being asked, inside the scope of the approved task; there are no hooks or CI jobs.
 
 # Scope
 
@@ -54,12 +54,24 @@ This is the working contract for agents in the Natural-JS repository. It applies
 
 ## Query
 
-Use this when writing Natural-JS code or answering a question about it.
+Use this for Natural-JS questions, claim checks, comparisons and code work. Apply R1 to 2.0 and preserved 1.x claims, and stay within the user's permitted sources and requested scope.
 
-1. Start at [docs/index.md](../index.md), open the folder `index.md`, then the concept. Titles of API and component pages identify public exports (for example `FrameworkError`), and `symbols` in frontmatter lists every name worth grepping. For historical 1.x usage, begin at [the preserved 1.x index](../../v1/docs/index.md).
-2. Check the concept's `# Pitfalls` and `# Known issues` before copying an example.
-3. When the answer matters, confirm it in the code named by the concept's `sources` (`symbol` points at the exact class or method).
-4. If you discover something reusable that the bundle lacks (a comparison, a recipe, a pitfall), propose adding it (R3).
+1. Identify the target, each requested item or list member, applicability and exclusions, comparison basis, numbers and units, as-of date, and whether each claim or decision is final. Keep the user's terms and distinguish the requested facts from assumptions.
+2. Start at [docs/index.md](../index.md), choose the topic in its folder `index.md`, then read the relevant concept sections and their scope, conditions, exclusions and confirmation state; check `# Pitfalls` and `# Known issues` where applicable. Follow `sources` to the corresponding code or evidence sections; `symbols` identify public exports and their source declarations. For 1.x, start at [the preserved index](../../v1/docs/index.md). Reuse paths, instructions and evidence already read for this request, and reopen only a missing or changed source passage. Search results, indexes and prior answers locate material but do not prove a claim; if output is truncated, read the missing range directly.
+3. For each requested item, pair the directly read source and section with a checked or unchecked state. Check the same criteria separately for each comparison target. When combining documents, distinguish each source's facts from the relationship or conclusion inferred from them. Keep confirmed findings even if another item is unchecked, and name the gap.
+4. Judge each claim together with all its conditions:
+
+   | Verdict | Use when |
+   |---|---|
+   | `일치` (match) | Directly read evidence supports every asserted element and condition. |
+   | `불일치` (mismatch) | Directly read evidence contradicts an asserted element or condition; identify it. |
+   | `확인 필요` (needs verification) | Evidence is incomplete or conflicting without resolution, or the decision or status is not final. |
+   | `확인할 수 없습니다` (cannot verify) | Required information is absent from permitted sources; state what is missing. |
+
+   A concept's `status: draft` describes the document, not whether an operational decision has been approved. For evaluation questions, preserve fixed answer criteria, prior results and allowed evidence boundaries in their owning evaluation records. Distinguish automated scoring from semantic accuracy. Do not copy answer keys or past answers into operational concepts or example answers. Do not run response-generation tests or performance evaluations or make model calls without a separate request; do not invent unmeasured models, settings, scores or improvements.
+5. Answer the requested result first and connect each claim to its actual source. Quote only an exact, directly read span from one source, preserving scope, exclusions and role boundaries. Do not join fragments into one purported quote or copy a whole document instead of identifying sufficient evidence. For a calculation, show each original value, its unit and source, plus the formula; do not fill missing inputs by assumption.
+6. Before sending, check the requested items, conditions and states, claim-to-source links, quotes, verdicts, uncertainty and calculations. Re-read only evidence needed for a missing item or unresolved contradiction; do not repeat a completed check without a reason.
+7. If new evidence or a correction changes reusable knowledge within the approved scope, update the affected concept, its sources and links, the relevant index descriptions and `docs/log.md` through Ingest. An answer is not a factual source. Propose unrelated additions or drift fixes before editing them (R3).
 
 ## Ingest
 

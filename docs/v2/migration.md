@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -76,7 +76,7 @@ sources:
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Explicit field rendering without HTML string evaluation
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Native groups, validation timing, display and isolation regressions
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: df8499eee811832af6173926e930f39cbd8fc93c
+    git_blob: 21563bb16f801ddd28aac7ad87bed0e92aa690e4
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 7be0f7523a04d1541846b5ae36363541d71e51eb
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+    git_blob: 6d58dbcb019a01df38547f94313713703aeed768
+generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -392,6 +392,24 @@ onBind now receives one frozen GridBindResult in every mode: existing total/filt
 Cancel/replacement rejects the old operation with AbortError. cancelBinding returns a retained snapshot and renderMore resumes; field/hook/late-window failures remain observable and retryable. Register CVC ownership before awaiting, wire the standard abort signal to immediate Grid.dispose, and guard late UI results by current handle/signal. A forced cleanup after abort must not access released UI; ordinary retained deactivate can cancel and activate can resume. See the [progressive contract](../implementation/m10-progressive-plan.md) and [demo](grid-demo.md).[^grid][^page]
 
 Do not copy the old zero-delay recursion, nonpaged first=false anomaly, empty-append rebind, missing-tail append or uncanceled timer/FIFO behavior. The current explicit continuation handles short nonoverflowing content; the same Rows/viewport retain identities, edits, drafts and focus without a second loader.[^grid]
+
+## 10. Separate Form display callbacks from source normalization
+
+Replace onBeforeBindValue/onBindValue with beforeBindValue/onBindValue on a Rows-backed Form. Both receive value and FormValueContext: phase is bind/val, rowId is explicit and element is the primary native field member. Before runs before display; after observes it and may replace projected raw once. Undefined keeps the current value; false, zero, null and empty string are actual replacements. No this/jQuery collection or global registry is supplied.[^form][^legacy-ui]
+
+Returns now affect display only. The old bind loop also visited unbound keys and wrote callback returns into its mutable dataset. Its val-before received old data; val-after could change data after notification without another DOM write. Preserve intentional business normalization in application receive/decode/parse code or an explicit Rows write instead of relying on those inconsistent side effects. Native boolean checkboxes and numeric choice maps need no old number/boolean-to-string workaround.[^form][^rows][^legacy-ui]
+
+```ts
+// Decode the server's business code before loading; normalization includes unbound keys.
+const received = response.map(row => ({ ...row, active: row.active === "Y" }));
+rows.replace(received);
+// An intentional later source change participates in tracking and notification.
+rows.set(id, "active", true);
+```
+
+For legacy shared/local composition, call the local function, keep its result unless undefined, then call the shared function with that effective value. Keep the shared result unless undefined. Decide explicitly whether local false should skip the shared function; false remains a replacement, not an automatic veto. Do not copy the old wrapper's lost phase or undefined overwrite. A callback attached to a local DOM-only Form is not covered by this slice; retain its migration obligation until that source contract is implemented or explicitly retired.[^form][^legacy-ui]
+
+Use Form's existing render for structured/custom DOM and format for text display. Value callbacks accept only checked native-compatible projections; they do not define inverse parsing. Focused text shows source raw, and callbacks defer until blur. Validation/save still sees actual raw and invalid drafts. The reduced Grid detail template demonstrates a boolean employment label without modifying its stored boolean.[^form]
 
 # Verify
 

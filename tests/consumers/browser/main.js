@@ -332,6 +332,31 @@ try {
   const ruleGrid = bindGrid(ruleRoot.querySelector("table"), { rows: ruleRows, rules, parse, autoValidate: false, paste: true });
   const ruleList = bindList(ruleRoot.querySelector("ul"), { rows: ruleRows, rules });
   state.sharedRules = { root: ruleRoot, rows: ruleRows, form: ruleForm, grid: ruleGrid, list: ruleList, original: originalRules };
+  const valueRoot = document.createElement("section");
+  valueRoot.innerHTML = `<h2>Form value callbacks</h2><form><p>Summary <span data-field="summary"></span></p>
+    <label>Name <input data-field="name" minlength="3"></label><output data-error-for="name"></output>
+    <label><input type="checkbox" data-field="active" required>Active</label><output data-error-for="active"></output>
+    <label>Choice <select data-field="choice" data-options="choices" data-option-label="label" data-option-value="code"></select></label></form>`;
+  document.querySelector("main").append(valueRoot);
+  const valueRows = createRows([{ summary: "ada", name: "ab", active: false, choice: 1,
+    choices: [{ label: "One", code: 1 }, { label: "Two", code: 2 }] }]);
+  const valueCalls = [];
+  const valueForm = bindForm(valueRoot.querySelector("form"), { rows: valueRows,
+    beforeBindValue(value, context) {
+      valueCalls.push(["before", context.field, context.phase, value]);
+      if (context.field === "summary") return String(value).toUpperCase();
+      if (context.field === "name") return "display:" + value;
+      if (context.field === "active") return true;
+      if (context.field === "choice") return 2;
+    },
+    onBindValue(value, context) {
+      valueCalls.push(["after", context.field, context.phase, value,
+        context.field === "summary" ? context.element.textContent : null]);
+      if (context.field === "summary") return value + "!";
+    }
+  });
+  valueForm.bind(valueRows.entries()[0].id);
+  state.formValues = { root: valueRoot, rows: valueRows, form: valueForm, calls: valueCalls };
   state.incoming = createRows();
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = document.querySelector(`[data-host="${slot}"]`);

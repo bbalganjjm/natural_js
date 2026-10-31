@@ -22,7 +22,7 @@ sources:
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Same-task OKF source and verification rules
-    git_blob: a8d61fb373b6ade2fc623216378de623324609c8
+    git_blob: a42962520d3f0c575a58fbeee3afb68ea9fc65f9
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:59:01Z }
 ---
 

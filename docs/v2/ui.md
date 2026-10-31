@@ -4,12 +4,12 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
+symbols: [RuleContext, FormValueContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -49,11 +49,11 @@ sources:
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
+generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -63,6 +63,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | Symbol | Signature | Returns |
 |---|---|---|
 | `RuleContext` | Field, values snapshot, row identity, optional field element | Rule context |
+| `FormValueContext` | RuleContext with bind/val phase, nonnull RowId and primary HTMLElement | Rows-backed Form value callback context |
 | `FormatRule` | Value, arguments, context | Display string |
 | `ValidateRule` | Value, arguments, context | Boolean or message |
 | `ParseInput` | Entered string and context | Raw candidate |
@@ -113,6 +114,10 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 `GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after the view commits or a failed view/setter rolls back. A subsequent callback append keeps its new page totals; active/selected eligibility never implicitly clears independent eligible checks.[^selection][^grid][^lifecycle-browser]
 
 `checkMode?: "multiple" | "single"` is an inline Grid option, separate from `multiple` selection gestures. Multiple mode is the default. Single checking replaces the previous ID atomically through the same hooks; `setChecked` and `checkAll(true, scope)` never silently pick a first row. [Grid](grid.md) defines empty/one/many scope behavior and disabled header checks; no new public check-mode type or getter is added.[^grid][^selection]
+
+# Form value callbacks
+
+Rows-backed Form has separate beforeBindValue/onBindValue callbacks receiving unknown and FormValueContext. This context extends RuleContext with phase "bind" or "val", nonnull rowId and the primary bound HTMLElement. Undefined preserves the projected value; all other supported returns, including false, replace presentation without changing Rows. Local Forms reject these options. See [Form value callbacks](form.md#value-callbacks) for raw validation, caching, focus and error rules.[^ui][^form]
 
 # Grid binding callbacks
 

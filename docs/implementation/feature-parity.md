@@ -48,7 +48,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
@@ -60,7 +60,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -223,6 +223,8 @@ The [M5.2 continuation](m5-state-plan.md) adds selected incoming-state/checkpoin
 P0 must close behavior equivalence for mapped literal/merged options, dynamic dispatch and callback edge cases, then finish the consolidated retirement proposal. Manual assistive-technology review and actual token telemetry remain open. Structural mapping is complete for the eight-file checklist; exhaustive behavioral closure and current 2.0 parity are incomplete.
 
 The [M5.3 continuation](m5-form-options-plan.md) adds selected Rows-backed nested Form choices and shared Form/Grid/List occurrence handling. It removes manual detail-screen option conversion while preserving unmarked/local Forms. Wider bind-value callbacks, Form raw rendering, List editing, Tree validation and remaining owner/P0/M13 obligations stay required; no full-family closure or omission is inferred.
+
+The [M5.4 continuation](m5-form-values-plan.md) adds selected Rows-backed Form value projection/observation contracts with raw validation and source ownership. It does not close local-source callbacks, unbound-key/global wrapper equivalence, wider Form raw rendering or any full family. Failed cycles, native shapes, focus and stale work have exact witnesses; all remaining owner/P0/M13 obligations stay required.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
 

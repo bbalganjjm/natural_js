@@ -8,7 +8,7 @@ sources:
   - id: acceptance
     resource: m10-acceptance-plan.md
     title: Current semantic acceptance and retained obligations
-    git_blob: a21ba718824d7a1a58a386b23fea38dde9f3d858
+    git_blob: 5b526b4a3fdb2b8b8ced12024b17a04b17ba83f0
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Existing native topology, resizing and restoration owner
@@ -20,7 +20,7 @@ sources:
   - id: types
     resource: ../../src/ui/index.ts
     title: Existing GridColumn and GridHandle contracts
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Preserved physical-left fixedcol behavior
@@ -40,7 +40,7 @@ sources:
   - id: demo-browser
     resource: ../../tests/browser/m10-pinned.spec.ts
     title: Authored layout, detail and trusted wheel regressions
-    git_blob: e0949941c47303eee082207c84258ab3a9caead2
+    git_blob: 554f8c595057bab392eaa3f9b69aa47a6a61181e
   - id: acceptance-delta
     resource: evidence/m10964p-grid-acceptance.json
     title: Selected pin, wheel and reduced-detail witnesses

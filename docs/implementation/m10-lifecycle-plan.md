@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 4fb60ba17d16e5f2f52bc91797e619df1642114f
+    git_blob: e5b9e0760d85cb10e2a3bd5160888d6dbc36dd71
   - id: data
     resource: ../../src/data/index.ts
     title: Shared snapshots, tombstones and atomic notification

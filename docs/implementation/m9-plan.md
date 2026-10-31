@@ -25,7 +25,7 @@ sources:
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Source, documentation, and verification workflow
-    git_blob: a8d61fb373b6ade2fc623216378de623324609c8
+    git_blob: a42962520d3f0c575a58fbeee3afb68ea9fc65f9
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2

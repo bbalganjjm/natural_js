@@ -127,6 +127,43 @@ try {
     { employeeNo: "C", name: "Pending", rowStatus: "insert" }
   ], restored: [["Pending", "insert"], ["Received removal", "delete"], ["Received revision", "update"]], insertedOriginal: null, ordinaryCopyRemoved: true });
 
+  const formValues = await page.evaluate(() => {
+    const h = window.packedConsumer.formValues, id = h.rows.entries()[0].id;
+    const input = h.root.querySelector('[data-field="name"]');
+    const summary = h.root.querySelector('[data-field="summary"]');
+    const initial = { text: summary.textContent, input: input.value,
+      checked: h.root.querySelector('[data-field="active"]').checked,
+      selected: h.root.querySelector('select').selectedOptions[0].textContent, raw: h.form.read() };
+    const count = h.calls.length;
+    const issues = h.form.validate().issues.map(issue => issue.field).sort();
+    const quietValidation = h.calls.length === count;
+    const observed = h.calls.find(call => call[0] === "after" && call[1] === "summary");
+    h.rows.set(id, "name", "Ada");
+    const val = h.calls.filter(call => call[1] === "name").map(call => call.slice(0, 4));
+    const beforeFocus = h.calls.length;
+    input.focus(); const focused = input.value; input.blur();
+    const unfocused = input.value;
+    const quietFocus = h.calls.length === beforeFocus;
+    const source = { original: h.rows.original(id).name, value: h.rows.get(id).value.name,
+      changes: h.rows.changes().map(change => change.status) };
+    h.form.dispose(); const stopped = h.calls.length;
+    h.rows.set(id, "summary", "late");
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    const quietDispose = h.calls.length === stopped && summary.textContent === initial.text;
+    h.rows.dispose(); h.root.remove(); delete window.packedConsumer.formValues;
+    return { initial, issues, quietValidation, observed, val, focused, unfocused, quietFocus, source, quietDispose };
+  });
+  assert.deepEqual(formValues, {
+    initial: { text: "ADA!", input: "display:ab", checked: true, selected: "Two",
+      raw: { summary: "ada", name: "ab", active: false, choice: 1 } },
+    issues: ["active", "name"], quietValidation: true,
+    observed: ["after", "summary", "bind", "ADA", "ADA"],
+    val: [["before", "name", "bind", "ab"], ["after", "name", "bind", "display:ab"],
+      ["before", "name", "val", "Ada"], ["after", "name", "val", "display:Ada"]],
+    focused: "Ada", unfocused: "display:Ada", quietFocus: true,
+    source: { original: "ab", value: "Ada", changes: ["update"] }, quietDispose: true
+  }, "Installed Form callbacks must project views while preserving raw validation, changes and owned lifetime.");
+
   const formChoices = await page.evaluate(() => {
     const h = window.packedConsumer.sharedRules, id = h.rows.entries()[0].id;
     const single = h.root.querySelector('form [data-field="assignment.chosen"]');

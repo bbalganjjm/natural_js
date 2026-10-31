@@ -6,6 +6,10 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
 sources:
+  - id: values-browser
+    resource: ../../tests/browser/form-values.spec.ts
+    title: Value projection, raw validation, focus and stale callback regressions
+    git_blob: 8b4cc588a9e80407dba1fc545d4a0773e4b3120e
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared row option extraction, DOM, selection and availability
@@ -17,11 +21,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -29,7 +33,7 @@ sources:
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit field rendering and DOM ownership
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native constraints, Form rendering and binding recovery regressions
@@ -54,10 +58,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -91,7 +95,7 @@ The built-in `required`, `email`, and `commas` rules need no import or registrat
 
 # Constructor and markers
 
-`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean` and `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
+`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: FormValueContext) => unknown` and `onBindValue?: (value: unknown, context: FormValueContext) => unknown`. Value callbacks require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
 
 The [shared rule contract](rules.md) defines RuleSet.fields, per-kind TS/HTML precedence, empty-list overrides and shared/local composition. autoValidate defaults to true; false bypasses automatic native/business constraints while retaining parse/JSON/native-value integrity and disabled/readOnly edit guards. It clears stale row constraint results at automatic evaluation. Explicit validate() still performs full precommit checks. This is independent of native value conversion and the application-owned scalar choice parser.[^form][^rules]
 
@@ -146,7 +150,37 @@ Availability uses the target row's effective values and its own option source, i
 
 Options refresh before displaying the committed value or raw draft, and unchanged source references retain option nodes. Removing an option preserves an invalid draft rather than replacing it with a prompt. Direct bind prepares every marked source before changing the binding or DOM, so a malformed later source preserves the previous selection. A nonarray source raises FORM_OPTIONS; absent/null lists are empty. Subscription errors remain post-commit and do not roll back Rows. A Form-owned render guard stops stale later-field work after callback replacement/rebind/disposal.[^form][^options-browser]
 
-bind(null) removes generated row choices without writing data. Initialization failure or disposal restores the exact authored children and initial selection and releases Select ownership. Repeated disposal and late events are quiet. Local and unmarked authored Selects keep their existing string/scalar-parser behavior; wider bind-value callbacks and Form raw rendering retain separate follow-up scope.[^form][^options-browser]
+bind(null) removes generated row choices without writing data. Initialization failure or disposal restores the exact authored children and initial selection and releases Select ownership. Repeated disposal and late events are quiet. Local and unmarked authored Selects keep their existing string/scalar-parser behavior. Local callbacks and wider Form raw rendering retain separate follow-up scope.[^form][^options-browser]
+
+## Value callbacks
+
+Rows-backed Form accepts synchronous beforeBindValue and onBindValue functions. One frozen FormValueContext extends RuleContext with phase "bind" or "val", a nonnull rowId and the primary bound HTMLElement. Its values snapshot contains source raw fields, not display projections. Grouped controls use their first member as element. Functions receive explicit arguments; Form supplies no special this or global wrapper.[^entry][^form][^values-browser]
+
+```ts
+const form = bindForm(root, {
+  rows,
+  beforeBindValue(value, context) {
+    if (context.field === "active" && context.element.tagName === "SPAN") {
+      return value ? "Active" : "Inactive";
+    }
+  },
+  onBindValue(value, context) {
+    console.log(context.field, context.phase, value, context.element);
+  }
+});
+```
+
+beforeBindValue receives source raw. Its effective result goes through the existing native, formatter or display writer. onBindValue then receives that projected raw and observes the written view. Undefined preserves the current value; false, null, zero and empty string replace it. A changed after result is checked and written once without replaying either callback. Formatter/render callbacks may run twice when an after result changes their input. An unchanged cached projection still uses the existing whole-row formatter/render behavior.[^form][^values-browser]
+
+Explicit replacements accept finite JSON scalars or scalar arrays for array controls. A single checkbox requires a boolean. Marked Select replacements require matching raw option occurrences; unmarked native controls retain string coercion. Rejected shapes, async/thenable, structured object or DOM returns raise FORM_VALUE. Use render for structured/DOM display. Scalar-array replacements are copied and frozen. Undefined leaves existing source-display behavior intact, including an unavailable loaded choice. Every explicit replacement is checked even with autoValidate:false. A cached explicit choice is checked again against current options without replaying the callbacks; an unavailable projection raises FORM_VALUE until an explicit bind refreshes it.[^form][^native][^values-browser]
+
+These callbacks change presentation only. Form.read(), Rows source/originals/status/changes, save payloads and data-field-changed retain actual raw data. Native and business validation use raw/candidate values; raw false projected true still fails required, and display padding cannot satisfy raw minlength. Callback options on local Forms or nonfunctions fail preflight with FORM_VALUE_OPTIONS before ownership/ARIA changes. Local Forms retain their existing DOM-owned contract.[^form][^values-browser]
+
+An explicit bind(id) starts a bind cycle even when raw is equal. A changed raw restored by revert uses bind; committed updates and valid draft commits use val with the NEW raw. Per-field raw/row caching prevents callback replay for read, validation without a commit, move/append, unrelated rows or sibling paths, and focus-only restoration. Use explicit bind to refresh a projection depending on another field. An unchanged reset restores an applied projection or preserves its unapplied focused cycle.[^form][^values-browser]
+
+A focused editable text field shows source raw and defers both callbacks until blur. Readonly text stays projected and binds immediately while focused. Explicit rebind shows the new row's raw immediately; unrelated updates retain the pending phase. Blur runs the latest pending cycle once, or restores the applied projection without callbacks. An invalid draft stays visible and cannot replace stored data. Unbind, current-row removal/replacement and disposal clear pending projections without callbacks.[^form][^values-browser]
+
+Failures identify field, row, phase, callback and cause. During an active before/after value cycle, recursive work on the same field/row fails FORM_VALUE. Rebinding another row during that cycle may complete that row; generation/source checks suppress stale results, including formatter/render results before DOM commit. Ordinary cached, null or no-callback renderer recursion retains UI_RENDER. This is not a whole-Form transaction: earlier DOM writes, committed Rows changes and application side effects are not rolled back. An unchanged failed cycle stays quiet on unrelated repaint; explicit bind or a real row/raw change retries it. Callback output supplies no automatic inverse mapping for edited controls; normalize business values explicitly before loading or through a Rows write.[^form][^render][^values-browser]
 
 ## Loaded-value changes
 
@@ -223,6 +257,7 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [Rows](data.md) owns row identity and events. [DatePicker](datepicker.md) provides explicit ISO calendar selection. [Select](select.md) describes standalone typed choices; Form owns marked Select fields. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
 
 [^entry]: Public UI entry and Form types
+[^values-browser]: Value projection, raw validation, focus and stale callback regressions
 [^form]: Form binding runtime
 [^options]: Shared row option extraction, DOM, selection and availability
 [^options-browser]: Typed Form choices, occurrence identity and owned lifetime regressions

@@ -7,7 +7,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
-import type { FieldRules, RuleSet } from "@bbalganjjm/natural_js/ui";
+import type { FieldRules, FormValueContext, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -296,4 +296,21 @@ export function connectRowChoices(root: HTMLFormElement, rows: Rows<{
   form.bind(rows.entries()[0].id);
   const result: ValidationResult = form.validate();
   return { form, result, raw: form.read() };
+}
+
+export function connectFormValues(root: HTMLFormElement, rows: Rows<Employee>) {
+  return bindForm(root, { rows,
+    beforeBindValue(value, context: FormValueContext) {
+      const rule: RuleContext = context;
+      const id: RowId = context.rowId;
+      const phase: "bind" | "val" = context.phase;
+      const element: HTMLElement = context.element;
+      void [rule, id, phase, element];
+      if (context.field === "name") return String(value).toUpperCase();
+    },
+    onBindValue(value, context) {
+      const sameContext: FormValueContext = context;
+      void [value, sameContext];
+    }
+  });
 }

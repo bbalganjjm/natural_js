@@ -1,0 +1,91 @@
+
+
+Running 80 tests using 1 worker
+
+
+
+[1/80] [firefox] › tests\browser\form-options.spec.ts:72:1 › Form binds nested typed choices with safe text and retained authored option nodes
+[2/80] [firefox] › tests\browser\form-options.spec.ts:91:1 › single Form changes preserve zero signs number-string booleans null and generated empty-string identities
+[3/80] [firefox] › tests\browser\form-options.spec.ts:107:1 › Form Grid and List consume duplicate raw occurrences without normalizing unrepresentable arrays
+[4/80] [firefox] › tests\browser\form-options.spec.ts:125:1 › Grid array paste enforces available duplicate counts atomically across shared Form and List
+[5/80] [firefox] › tests\browser\form-options.spec.ts:140:1 › typed Form selection updates shared owners and unrelated writes retain option identity and focus
+[6/80] [firefox] › tests\browser\form-options.spec.ts:153:1 › removed and reintroduced choices retain a raw invalid draft until explicit validation can commit it
+[7/80] [firefox] › tests\browser\form-options.spec.ts:171:1 › hidden Form validation uses the target row choices without changing visible native options focus or errors
+[8/80] [firefox] › tests\browser\form-options.spec.ts:189:1 › required raw blanks and empty arrays remain full checks while automatic bypass preserves typed integrity
+[9/80] [firefox] › tests\browser\form-options.spec.ts:204:1 › foreign and disabled option gestures stay drafts while native custom validity remains an explicit constraint
+[10/80] [firefox] › tests\browser\form-options.spec.ts:218:1 › hidden typed Select validation does not inherit the visible control custom error or mutate its DOM
+[11/80] [firefox] › tests\browser\form-options.spec.ts:232:1 › Form and Grid reject foreign equal-string and mapped disabled option gestures even with automatic checks disabled
+[12/80] [firefox] › tests\browser\form-options.spec.ts:248:1 › typed marker and parser failures release ownership while unmarked authored Select conversion stays unchanged
+[13/80] [firefox] › tests\browser\form-options.spec.ts:274:1 › a malformed second option source leaves the previous binding drafts and authored nodes intact
+[14/80] [firefox] › tests\browser\form-options.spec.ts:291:1 › null binding and Rows lifetime operations clear generated choices without rewriting raw data
+[15/80] [firefox] › tests\browser\form-options.spec.ts:305:1 › a formatter that changes Rows cannot install stale later-field choices
+[16/80] [firefox] › tests\browser\form-options.spec.ts:319:1 › formatter disposal stops stale choice work and releases exact authored Select ownership
+[17/80] [firefox] › tests\browser\form-options.spec.ts:333:1 › ready Form writes recheck changed choice sources and stop after a subscriber rebinds the Form
+[18/80] [firefox] › tests\browser\form-options.spec.ts:370:1 › independent Forms expose unique accessible errors and dispose quietly with original option selection
+[19/80] [firefox] › tests\browser\form-options.spec.ts:387:1 › full inline and popup CVC details share typed shift choices with the main Grid
+[20/80] [firefox] › tests\browser\form-values.spec.ts:56:1 › Form value callbacks preserve real replacements and observe native DOM without changing Rows
+[21/80] [firefox] › tests\browser\form-values.spec.ts:93:1 › after projections run the existing formatter or renderer once more only when their raw input changes
+[22/80] [firefox] › tests\browser\form-values.spec.ts:117:1 › projection caching preserves whole-row formatter and renderer reactivity without replaying value callbacks
+[23/80] [firefox] › tests\browser\form-values.spec.ts:136:1 › callback phases follow actual field changes while unrelated rows movement nested siblings and unchanged resets stay quiet
+[24/80] [firefox] › tests\browser\form-values.spec.ts:153:1 › focused text defers explicit binding and preserves its pending reason through unchanged resets until blur
+[25/80] [firefox] › tests\browser\form-values.spec.ts:174:1 › invalid drafts never become binding events and a focused successful commit projects its new raw once on blur
+[26/80] [firefox] › tests\browser\form-values.spec.ts:191:1 › raw constraints and hidden validation ignore display projections and another row native custom validity
+[27/80] [firefox] › tests\browser\form-values.spec.ts:209:1 › parsers and business validation receive committed candidate raw while projections leave originals and save changes intact
+[28/80] [firefox] › tests\browser\form-values.spec.ts:229:1 › native groups typed duplicate choices and unmarked Selects preserve their distinct projection contracts
+[29/80] [firefox] › tests\browser\form-values.spec.ts:256:1 › undefined callbacks preserve structured display and unavailable loaded choices without normalizing their source
+[30/80] [firefox] › tests\browser\form-values.spec.ts:271:1 › callback option errors reject before Form ownership or accessibility changes and leave local Forms unchanged
+[31/80] [firefox] › tests\browser\form-values.spec.ts:292:1 › explicit invalid projections fail synchronously with automatic validation disabled and permit a fresh retry
+[32/80] [firefox] › tests\browser\form-values.spec.ts:324:1 › typed projection guards consume duplicate occurrences and reject an unavailable final replacement before its write
+[33/80] [firefox] › tests\browser\form-values.spec.ts:344:1 › cached explicit typed projections recheck changed options without replaying hooks or changing the received raw
+[34/80] [firefox] › tests\browser\form-values.spec.ts:360:1 › callback failures identify their field row phase and cause without pretending DOM binding is transactional
+[35/80] [firefox] › tests\browser\form-values.spec.ts:386:1 › different-row callback reentry completes the newer binding and rejects same-pair cycles with a recoverable error
+[36/80] [firefox] › tests\browser\form-values.spec.ts:414:1 › formatter and renderer row reentry cannot commit an older returned view over the completed new binding
+[37/80] [firefox] › tests\browser\form-values.spec.ts:435:1 › source removal null binding and replacement clear callback state without stale after work or resurrection
+[38/80] [firefox] › tests\browser\form-values.spec.ts:465:1 › disposal from either callback restores authored render nodes and suppresses every later value write
+[39/80] [firefox] › tests\browser\form-values.spec.ts:486:1 › a callback failure after a committed Rows update keeps the actual change and supports an explicit retry
+[40/80] [firefox] › tests\browser\form-values.spec.ts:501:1 › independent authored Forms share raw data with unique accessible errors and release callbacks without retained ownership
+[41/80] [firefox] › tests\browser\form-values.spec.ts:522:1 › array replacement accessors are materialized once before validation freezing and cached reuse
+[42/80] [firefox] › tests\browser\form-values.spec.ts:536:1 › same-target renderer recursion stays bounded without hooks during cached repaint and after null binding
+[43/80] [firefox] › tests\browser\form-values.spec.ts:557:1 › failed value cycles remain quiet on sibling updates until explicit binding or a real raw change retries them
+[44/80] [firefox] › tests\browser\form-values.spec.ts:575:1 › focused read-only text projects immediately while ordinary formatter-only focus behavior stays compatible
+[45/80] [firefox] › tests\browser\m10-demo.spec.ts:9:1 › shared TS rules reach Grid and CVC details while automatic validation remains an independent option
+[46/80] [firefox] › tests\browser\m10-demo.spec.ts:39:1 › committed field highlights compare loaded originals and clear after restoring the original
+[47/80] [firefox] › tests\browser\m10-demo.spec.ts:59:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[48/80] [firefox] › tests\browser\m10-demo.spec.ts:79:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[49/80] [firefox] › tests\browser\m10-demo.spec.ts:115:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[50/80] [firefox] › tests\browser\m10-demo.spec.ts:141:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[51/80] [firefox] › tests\browser\m10-demo.spec.ts:166:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[52/80] [firefox] › tests\browser\m10-demo.spec.ts:184:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[53/80] [firefox] › tests\browser\m10-demo.spec.ts:230:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[54/80] [firefox] › tests\browser\m10-demo.spec.ts:251:1 › authored table binds raw nested choices, formatter, and accessible labels
+[55/80] [firefox] › tests\browser\m10-demo.spec.ts:276:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[56/80] [firefox] › tests\browser\m10-demo.spec.ts:317:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[57/80] [firefox] › tests\browser\m10-demo.spec.ts:339:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[58/80] [firefox] › tests\browser\m10-demo.spec.ts:367:1 › sort, filter, and local pages preserve RowId selection
+[59/80] [firefox] › tests\browser\m10-demo.spec.ts:391:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[60/80] [firefox] › tests\browser\m10-demo.spec.ts:412:1 › check and validation policy controls rebind working Grid options
+[61/80] [firefox] › tests\browser\m10-demo.spec.ts:455:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[62/80] [firefox] › tests\browser\m10-demo.spec.ts:498:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[63/80] [firefox] › tests\browser\m10-demo.spec.ts:540:1 › required and unavailable choices validate; dispose and rebind restore the template
+[64/80] [firefox] › tests\browser\m10-demo.spec.ts:579:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[65/80] [firefox] › tests\browser\m10-demo.spec.ts:619:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[66/80] [firefox] › tests\browser\m10-demo.spec.ts:643:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[67/80] [firefox] › tests\browser\m10-demo.spec.ts:679:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[68/80] [firefox] › tests\browser\m10-demo.spec.ts:715:1 › row-block store controls move and copy whole records independently of the employee demo
+[69/80] [firefox] › tests\browser\m10-demo.spec.ts:745:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[70/80] [firefox] › tests\browser\m10-pinned.spec.ts:42:3 › ledger pinned controls retain actual positions through hide and group reorder without changing data
+[71/80] [firefox] › tests\browser\m10-pinned.spec.ts:42:3 › notebook pinned controls retain actual positions through hide and group reorder without changing data
+[72/80] [firefox] › tests\browser\m10-pinned.spec.ts:83:1 › authored pointer resize preview updates the next pinned column and Escape restores its position
+[73/80] [firefox] › tests\browser\m10-pinned.spec.ts:106:1 › main explorer applies current visible pin counts and restores its authored default on rebind
+[74/80] [firefox] › tests\browser\m10-pinned.spec.ts:130:1 › full and reduced details share edits while omitted fields stay intact across popup reopen
+[75/80] [firefox] › tests\browser\m10-pinned.spec.ts:174:1 › reduced details retain validation and visible filtered store navigation contracts
+[76/80] [firefox] › tests\browser\m10-pinned.spec.ts:206:3 › native x wheel containment stops start chaining while auto permits the positive control
+[77/80] [firefox] › tests\browser\m10-pinned.spec.ts:206:3 › native x wheel containment stops end chaining while auto permits the positive control
+[78/80] [firefox] › tests\browser\m10-pinned.spec.ts:206:3 › native y wheel containment stops start chaining while auto permits the positive control
+[79/80] [firefox] › tests\browser\m10-pinned.spec.ts:206:3 › native y wheel containment stops end chaining while auto permits the positive control
+[80/80] [firefox] › tests\browser\m10-pinned.spec.ts:257:1 › owned wheel boundary handling preserves Ctrl interior nested scrolling and releases an aborted listener
+  80 passed (57.8s)
+[WebServer] (node:8612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:24124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

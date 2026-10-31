@@ -8,14 +8,25 @@ import type { RuleCall } from "./rules.js";
 import { claimSelect } from "./select-owner.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import type { RowOption } from "./row-options.js";
-import { control, disabled, display, displayField, fieldValue, formatCapable, nativeMessage } from "./native-control.js";
+import { control, disabled, display, displayField, fieldValue, formatCapable, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import type {
-  FormHandle, FormatRule, ParseInput, RuleContext, RuleSet,
+  FormHandle, FormValueContext, FormatRule, ParseInput, RuleContext, RuleSet,
   ValidateRule, ValidationIssue, ValidationResult
 } from "./index.js";
 
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+type ValuePhase = FormValueContext["phase"];
+type ValueCallback = "beforeBindValue" | "onBindValue";
+
+interface Projection {
+  id: RowId;
+  raw: unknown;
+  value: unknown;
+  phase: ValuePhase;
+  state: "pending" | "applied" | "failed";
+  callback?: ValueCallback;
+}
 
 interface Choices {
   options: readonly string[];
@@ -39,6 +50,7 @@ interface Field {
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
   choices?: Choices;
+  projection?: Projection;
   error?: HTMLElement;
   originals: { element: HTMLElement; describedBy: string | null; invalid: string | null; changed: string | null }[];
 }
@@ -69,6 +81,8 @@ function errorId(element: HTMLElement): string {
 export function bindForm<T extends object = Record<string, unknown>>(
   root: HTMLElement,
   options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; autoValidate?: boolean;
+    beforeBindValue?: (value: unknown, context: FormValueContext) => unknown;
+    onBindValue?: (value: unknown, context: FormValueContext) => unknown;
     render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null> } = {}
 ): FormHandle<T> {
   if (!root || root.nodeType !== 1) {
@@ -82,6 +96,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
   const autoValidate = options.autoValidate ?? true;
   const { rows, rules, parse } = options;
+  const { beforeBindValue, onBindValue } = options;
+  const valueCallbacks = beforeBindValue !== undefined || onBindValue !== undefined;
+  if (valueCallbacks && (!rows || beforeBindValue !== undefined && typeof beforeBindValue !== "function" ||
+      onBindValue !== undefined && typeof onBindValue !== "function")) {
+    throw formError("FORM_VALUE_OPTIONS", "Value callbacks need Rows and synchronous functions.");
+  }
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
@@ -232,6 +252,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let renderVersion = 0;
   const drafts = new Map<RowId, Map<Field, unknown>>();
   const issues = new Map<Field, readonly ValidationIssue[]>();
+  const activeValues = new Map<Field, Set<RowId>>();
 
   function active(): void {
     if (disposed) throw formError("FORM_DISPOSED", "This Form has been disposed.");
@@ -356,9 +377,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (validate && required && !selected) found.push(issue(field, id, "html", "Select an option."));
     } else if (control(field.element)) {
       const visible = id === null || id === boundId;
-      const probe = visible ? field.element : field.element.cloneNode(true) as Control;
+      const probe = visible && !valueCallbacks ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
-      if (!visible) { probe.disabled = disabled(field.element, root); display(probe, entered); }
+      if (probe !== field.element) {
+        probe.disabled = disabled(field.element, root);
+        display(probe, entered);
+        if (visible && field.element.validity.customError) probe.setCustomValidity(field.element.validationMessage);
+      }
       const message = nativeMessage(probe, entered, validate);
       if (message) found.push(issue(field, id, "html", message));
     }
@@ -395,7 +420,135 @@ export function bindForm<T extends object = Record<string, unknown>>(
     for (const region of regionState.keys()) region.textContent = (messages.get(region) ?? []).join(" ");
   }
 
-  function render(skipFocused = false, prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>): void {
+  function valueError(context: FormValueContext, callback: ValueCallback, message: string, cause?: unknown): FrameworkError {
+    return new FrameworkError({ api: "bindForm", code: "FORM_VALUE", message, cause,
+      detail: { field: context.field, rowId: context.rowId, phase: context.phase, callback } });
+  }
+
+  function replacement(field: Field, value: unknown, context: FormValueContext,
+    callback: ValueCallback, copy = true): unknown {
+    const scalar = (item: unknown) => item === null || typeof item === "string" || typeof item === "boolean" ||
+      typeof item === "number" && Number.isFinite(item);
+    const array = field.kind === "multiple" || field.kind === "checkbox" && field.elements.length > 1;
+    let selected: unknown[] | undefined;
+    if (array && Array.isArray(value)) {
+      try { selected = copy ? Array.from(value) : value; }
+      catch (cause) { throw valueError(context, callback, "The value replacement could not be read.", cause); }
+    }
+    if (array ? !selected || !selected.every(scalar) : !scalar(value) ||
+        field.kind === "checkbox" && typeof value !== "boolean") {
+      throw valueError(context, callback, "Return a native scalar value or a scalar array for a multiple-value control; use render for structured display.");
+    }
+    const projected = selected ?? value;
+    if (field.choices && !rowOptionAvailable([
+      ...field.choices.authored, ...choiceOptions(field, context.values, context.rowId).map(option => option.raw)
+    ], projected, array)) {
+      throw valueError(context, callback, "A projected choice needs available raw option occurrences.");
+    }
+    if (!array && field.kind === "single" && control(field.element)) {
+      const probe = field.element.cloneNode(true) as Control;
+      probe.disabled = false;
+      if (probe instanceof HTMLInputElement || probe instanceof HTMLTextAreaElement) probe.readOnly = false;
+      display(probe, projected);
+      const message = nativeMessage(probe, projected, false);
+      if (message) throw valueError(context, callback, message);
+    }
+    return selected && copy ? Object.freeze(selected) : projected;
+  }
+
+  function writeValue(field: Field, value: unknown, source: Record<string, unknown> | null,
+    id: RowId | null, focused: boolean, current: () => boolean): void {
+    if (!current()) return;
+    const renderer = renderers.get(field.name);
+    if (renderer) renderField("bindForm", field.element, value, context(field, id, source ?? {}), renderer, false,
+      id !== null && activeValues.get(field)?.has(id) ? current : undefined);
+    else if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, value);
+    else {
+      const shown = source && !focused && field.format.length
+        ? runner.format(field.format, value, context(field, id, source)) : value;
+      if (!current()) return;
+      displayField(field, shown);
+    }
+  }
+
+  function projectValue(field: Field, raw: unknown, source: Record<string, unknown>, id: RowId,
+    phase: ValuePhase, force: boolean, focused: boolean, current: () => boolean): void {
+    const active = activeValues.get(field);
+    if (active?.has(id)) {
+      throw valueError(Object.freeze({ ...context(field, id, source), rowId: id, element: field.element, phase }),
+        beforeBindValue ? "beforeBindValue" : "onBindValue", "A value callback cannot recursively bind the same field and row.");
+    }
+    const previous = field.projection;
+    const changed = !previous || previous.id !== id || !sameJson(previous.raw, raw);
+    if (force || changed) field.projection = { id, raw, value: raw, phase, state: "pending" };
+    const projection = field.projection!;
+    if (projection.state === "failed") return;
+    const editable = field.kind === "single" && control(field.element) && textLengthControl(field.element) && !field.element.readOnly;
+    if (focused && editable) {
+      if (force) writeValue(field, raw, source, id, true, current);
+      return;
+    }
+    focused = false;
+    const valueContext: FormValueContext = Object.freeze({ ...context(field, id, source),
+      rowId: id, element: field.element, phase: projection.phase });
+    if (projection.state === "applied") {
+      try {
+        const value = projection.callback ? replacement(field, projection.value, valueContext, projection.callback, false) : raw;
+        if (current()) writeValue(field, value, source, id, focused, current);
+      } catch (cause) {
+        if (cause instanceof FrameworkError && cause.code === "FORM_VALUE" && field.projection === projection) projection.state = "failed";
+        throw cause;
+      }
+      return;
+    }
+    const running = active ?? new Set<RowId>();
+    activeValues.set(field, running);
+    running.add(id);
+    function invoke(callback: ValueCallback, value: unknown): unknown {
+      const run = callback === "beforeBindValue" ? beforeBindValue : onBindValue;
+      if (!run) return undefined;
+      try {
+        const result = run(value, valueContext);
+        if (result !== null && (typeof result === "object" || typeof result === "function") &&
+            typeof (result as { then?: unknown }).then === "function") {
+          void Promise.resolve(result).catch(() => {});
+          if (current()) throw valueError(valueContext, callback, "Value callbacks must finish synchronously.");
+          return undefined;
+        }
+        return result;
+      }
+      catch (cause) { throw valueError(valueContext, callback, "The value callback failed.", cause); }
+    }
+    try {
+      let value = raw, callback: ValueCallback | undefined;
+      const before = invoke("beforeBindValue", value);
+      if (!current()) return;
+      if (before !== undefined) { value = replacement(field, before, valueContext, "beforeBindValue"); callback = "beforeBindValue"; }
+      if (!current()) return;
+      writeValue(field, value, source, id, focused, current);
+      if (!current()) return;
+      const after = invoke("onBindValue", value);
+      if (!current()) return;
+      if (after !== undefined) {
+        const final = replacement(field, after, valueContext, "onBindValue");
+        if (!current()) return;
+        if (!sameJson(value, final)) writeValue(field, final, source, id, focused, current);
+        value = final;
+        callback = "onBindValue";
+      }
+      if (!current()) return;
+      field.projection = { id, raw, value, phase: projection.phase, state: "applied", callback };
+    } catch (cause) {
+      if (field.projection === projection) projection.state = "failed";
+      throw cause;
+    } finally {
+      running.delete(id);
+      if (!running.size) activeValues.delete(field);
+    }
+  }
+
+  function render(phase: ValuePhase = "val", skipFocused = false, force = false,
+    prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>): void {
     const version = ++renderVersion, id = boundId;
     const snapshot = id === null ? undefined : rows!.get(id);
     const source = id === null ? null : rowValue(id);
@@ -404,6 +557,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id) : undefined);
     const current = () => !disposed && version === renderVersion && boundId === id &&
       (id === null || rows!.get(id) === snapshot);
+    if (id === null && valueCallbacks) for (const field of fields) field.projection = undefined;
     for (const field of fields) {
       if (!current()) return;
       if (field.choices) {
@@ -418,21 +572,21 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
       for (const element of field.elements) element.setAttribute("data-field-changed", String(changed));
       const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
-      if (skipFocused && focused && field.kind === "single" && formatCapable(field.element)) continue;
       if (currentDrafts?.has(field)) {
+        if (valueCallbacks && id !== null) {
+          const raw = readPath(source, field.path), previous = field.projection;
+          if (force || !previous || previous.id !== id || !sameJson(previous.raw, raw)) {
+            field.projection = { id, raw, value: raw, phase, state: "pending" };
+          }
+        }
         if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
         else displayField(field, currentDrafts.get(field));
         continue;
       }
       const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
-      const renderer = renderers.get(field.name);
-      if (renderer) renderField("bindForm", field.element, raw, context(field, boundId, source ?? {}), renderer);
-      else if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, raw);
-      else {
-        const value = source && !focused && field.format.length
-          ? runner.format(field.format, raw, context(field, boundId, source)) : raw;
-        if (!current()) return;
-        displayField(field, value);
+      if (valueCallbacks && id !== null) projectValue(field, raw, source!, id, phase, force, focused, current);
+      else if (!(skipFocused && focused && field.kind === "single" && formatCapable(field.element))) {
+        writeValue(field, raw, source, id, focused, current);
       }
     }
   }
@@ -482,7 +636,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (id === boundId) {
         const checked = evaluate(id, rowValue(id), currentDrafts, validate);
         for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
-        render(true);
+        render("val", true);
         showIssues();
       }
     } catch (cause) {
@@ -523,8 +677,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const field = byElement.get(event.target);
     const pointed = field !== undefined && pointerField === field;
     pointerField = undefined;
-    if (!field || !field.format.length || !control(field.element) ||
+    if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
+        field.kind !== "single" || !formatCapable(field.element) ||
         !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
+    if (valueCallbacks && textLengthControl(field.element) && field.element.readOnly) return;
     const element = field.element;
     const before = element.value;
     const raw = readPath(rowValue(boundId), field.path);
@@ -546,11 +702,19 @@ export function bindForm<T extends object = Record<string, unknown>>(
   function onFocusOut(event: FocusEvent): void {
     if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
     const field = byElement.get(event.target);
-    if (!field || !field.format.length || !control(field.element) ||
+    if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
+        field.kind !== "single" || !formatCapable(field.element) ||
         !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
-    const source = rowValue(boundId);
+    if (valueCallbacks && textLengthControl(field.element) && field.element.readOnly) return;
+    const id = boundId, snapshot = rows.get(id), version = renderVersion;
+    const source = rowValue(id);
     const raw = readPath(source, field.path);
-    display(field.element, runner.format(field.format, raw, context(field, boundId, source)));
+    const current = () => !disposed && boundId === id && version === renderVersion && rows.get(id) === snapshot;
+    if (valueCallbacks) projectValue(field, raw, source, id, "val", false, false, current);
+    else {
+      const shown = runner.format(field.format, raw, context(field, id, source));
+      if (current()) display(field.element, shown);
+    }
   }
 
   root.addEventListener("input", onInput);
@@ -571,14 +735,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (!row || row.status === "delete") {
       boundId = null;
       issues.clear();
-      render();
+      render("bind");
       showIssues();
       return;
     }
     const reset = event.type === "replace" ||
       event.type === "revert" && (event.id === undefined || event.id === boundId);
     if (reset || event.type === "set" || event.type === "setMany") issues.clear();
-    render(!reset);
+    render(reset ? "bind" : "val", !reset);
     showIssues();
   });
 
@@ -593,7 +757,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       boundId = id;
       issues.clear();
       if (rows) {
-        render(false, prepared);
+        render("bind", false, true, prepared);
         if (disposed || boundId !== id) return;
         const currentDrafts = id === null ? undefined : drafts.get(id);
         if (id !== null && currentDrafts?.size) {
@@ -643,6 +807,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (disposed) return;
       disposed = true;
       renderVersion++;
+      activeValues.clear();
+      for (const field of fields) field.projection = undefined;
       boundRoots.delete(root);
       unsubscribe?.();
       for (const release of releaseSelects) release();

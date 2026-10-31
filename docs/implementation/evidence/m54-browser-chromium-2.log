@@ -1,0 +1,5 @@
+{"shard":1,"passed":213,"identities_match":true,"retries":0,"skips":0}
+{"shard":2,"passed":217,"identities_match":true,"retries":0,"skips":0}
+{"shard":3,"passed":200,"identities_match":true,"retries":0,"skips":0}
+630 passed (3 sequential Chromium shards, 202.4s)
+{"shard_manifest":"m54-chromium-shards-2.json","sha256":"ffc287cadcb3d8274e94c4b4f086481e05d19923b7a59594ad01ec62c10c43aa","complete":true}

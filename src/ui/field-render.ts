@@ -4,7 +4,7 @@ import type { RuleContext } from "./index.js";
 import { interactiveContent } from "./native-control.js";
 
 type Renderer = (value: unknown, context: RuleContext) => Node | string | null;
-const rendering = new WeakSet<HTMLElement>();
+const rendering = new WeakMap<HTMLElement, { current?: () => boolean }>();
 const protectedContent = `${interactiveContent}, [data-field], [data-error-for], [data-select-row], [data-check-row], [data-row-action], [data-check-all], [data-filter-column], [data-filter-search], [data-clear-filter], [data-sort-column], [data-resize-column]`;
 
 function renderError(api: string, field: string, message: string, cause?: unknown): FrameworkError {
@@ -35,14 +35,22 @@ export function fieldRenderers(api: string, targets: readonly { name: string; el
 
 /** Keep existing field content until the returned value passes ownership checks. */
 export function renderField(api: string, element: HTMLElement, value: unknown, context: RuleContext,
-  renderer: Renderer, displayOnly = false): void {
+  renderer: Renderer, displayOnly = false, current?: () => boolean): void {
   const field = context.field;
-  if (rendering.has(element)) throw renderError(api, field, "A field renderer cannot recursively update its own target.");
-  rendering.add(element);
+  const previous = rendering.get(element);
+  if (previous && (!previous.current || previous.current())) {
+    throw renderError(api, field, "A field renderer cannot recursively update its own target.");
+  }
+  const invocation = { current };
+  rendering.set(element, invocation);
   try {
     let result: ReturnType<Renderer>;
     try { result = renderer(value, context); }
     catch (cause) { throw renderError(api, field, "The field renderer failed.", cause); }
+    if (current && !current()) {
+      void Promise.resolve(result).catch(() => {});
+      return;
+    }
     if (result !== null && typeof result !== "string") {
       const NodeType = element.ownerDocument.defaultView?.Node ?? Node;
       if (!(result instanceof NodeType) || result.ownerDocument !== element.ownerDocument ||
@@ -58,9 +66,10 @@ export function renderField(api: string, element: HTMLElement, value: unknown, c
         }
       }
     }
+    if (current && !current()) return;
     try {
       if (result === null) element.replaceChildren();
       else element.replaceChildren(result);
     } catch (cause) { throw renderError(api, field, "The rendered content could not replace this field.", cause); }
-  } finally { rendering.delete(element); }
+  } finally { if (rendering.get(element) === invocation) rendering.delete(element); }
 }

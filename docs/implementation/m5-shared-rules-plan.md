@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m10-pinned-plan.md
     title: Completed pinned-column continuation
-    git_blob: ea79ed6395d47ed140d478eb03420829a2211f07
+    git_blob: 52bcb0dd54815359753fe52dd92b6db24074c587
   - id: baseline
     resource: evidence/m10964p-verification.json
     title: Preserved a0f837a runtime baseline
@@ -20,11 +20,11 @@ sources:
   - id: types
     resource: ../../src/ui/index.ts
     title: Shared rule and UI contracts
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: form
     resource: ../../src/ui/form.ts
     title: Form candidates, drafts and validation ownership
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid candidates, commit timing and validated paste
@@ -40,7 +40,7 @@ sources:
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Existing display renderer preflight
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Preserved fRules, vRules and automatic validation behavior

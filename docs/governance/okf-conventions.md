@@ -14,10 +14,10 @@ sources:
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: knowledge-docs checker and stamper
     git_blob: 6e58994a0f2fe00466fb67c1f047036e8f150e6a
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:45:16Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:36:34Z }
 ---
 
-`docs/` is an OKF v0.2 knowledge bundle[^okf-spec] maintained as an LLM wiki[^llm-wiki]. The primary reader is an AI coding agent writing Natural-JS code, so every rule below favors fast, unambiguous lookup over prose. The maintenance workflow (when to update what) lives in [Repository workflow](repository-workflow.md); this page defines the format.
+`docs/` is an OKF v0.2 knowledge bundle[^okf-spec] maintained as an LLM wiki[^llm-wiki]. The primary reader is an AI coding agent writing Natural-JS code, so every rule below favors fast, unambiguous lookup over prose. The query and maintenance procedures live in [Repository workflow](repository-workflow.md); this page defines the format.
 
 # Bundle layout
 
@@ -104,6 +104,7 @@ Global rules:
 - Fenced code blocks always carry a language tag (`js`, `html`, `json`, `ts`, `css`, `sh`).
 - No manual table of contents, no emoji, no `<!-- filepath -->` comments, no images that do not exist in the repository.
 - Refer to code by symbol (`NU.grid.prototype.add`, `NC.element.toOpts`), never by line number.
+- Keep definitions, lists, roles, applicability, exclusions and confirmation state in the same section or directly linked sections. Put shared scope in the lead, item-specific state beside the item, and link the evidence page while naming its relevant section or symbol.
 
 | Type | Section order |
 |---|---|

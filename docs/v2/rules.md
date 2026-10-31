@@ -8,7 +8,7 @@ sources:
   - id: types
     resource: ../../src/ui/index.ts
     title: RuleSet, FieldRules and rule callback types
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Shared per-binder declaration compiler and execution
@@ -20,7 +20,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form automatic and explicit validation
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid timing, typed options and atomic paste

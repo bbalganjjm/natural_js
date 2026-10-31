@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 4fb60ba17d16e5f2f52bc91797e619df1642114f
+    git_blob: e5b9e0760d85cb10e2a3bd5160888d6dbc36dd71
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics
@@ -36,7 +36,7 @@ sources:
   - id: rendering
     resource: ../../src/ui/field-render.ts
     title: Private explicit display and DOM ownership checks
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Groups, raw arrays, timing, protected paste and invalid reveal

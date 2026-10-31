@@ -1,0 +1,530 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.4 Rows-backed Form value projections and observations",
+  "recorded_at": "2026-10-31",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "workspace_baseline_commit": "d923434ea9776e3978596e53a8da21c3daf6a642",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m53-verification.json",
+      "sha256": "c97c8e77498ed81a61ab69c670f165f0e3825ea5dca7d034dc19de7ca4dcbefc",
+      "preserved_in_commit": "d923434ea9776e3978596e53a8da21c3daf6a642"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m53-form-options.json",
+      "sha256": "fb1ab16511bae1fc737bb51516a0cb00cf04574c22dbf1a94fae98857047fc3b"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and unclosed owner obligation through immutable M5.3 evidence and the original audit. This selected Form value delta neither replaces parent ledgers nor reruns or recertifies historical runtime.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "preexisting_documentation": {
+    "status": "received_preexisting_documentation_separate_from_m54_runtime",
+    "baseline_commit": "d923434ea9776e3978596e53a8da21c3daf6a642",
+    "initial_files": {
+      "docs/governance/index.md": {
+        "raw_sha256": "bc015936794c909cd8aff00c75b947f105ef114ae90906c3f6c6bd91a8c2c4c4",
+        "normalized_body_sha256": "e66a3a6b99db098484b2e3fac96d7298d42ed78723c06f96940133cfcd964fea",
+        "generated": null,
+        "verified": null
+      },
+      "docs/governance/okf-conventions.md": {
+        "raw_sha256": "405ecd2e2a5055fa641e3c4f87676b9d3537a73d8d34ab77976053d2d22880d6",
+        "normalized_body_sha256": "62868d9d01507c1db95278204d1a302d3bb54f9bec4fb292e3db37f0cc8c494e",
+        "generated": "generated: { by: codex/gpt-6, at: 2026-10-31T08:36:34Z }",
+        "verified": null
+      },
+      "docs/governance/repository-workflow.md": {
+        "raw_sha256": "5805f074299b5f56d62b5870c1ea6646fd34fdfd2dbc964b12ea0701ee16849b",
+        "normalized_body_sha256": "15132d6d43cd93151a34df60956391fab729dcd273c2b76f0b7a81d5388112b3",
+        "generated": "generated: { by: codex/gpt-6, at: 2026-10-31T08:36:34Z }",
+        "verified": null
+      },
+      "docs/implementation/current.md": {
+        "raw_sha256": "b26efa8f31b93217cc692e1e655d4916fdc8f84489328564450da85a3c1865b3",
+        "normalized_body_sha256": "7dc40ed486dc817524fa822b29cb326e5b9722411b7dbad84471e8e8089400b9",
+        "generated": "generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }",
+        "verified": "verified:\n  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }"
+      },
+      "docs/implementation/m13-review-plan.md": {
+        "raw_sha256": "479de50d1336d1fcdc445695dfbc0c8c31a6d0e8372df0d15b66c7b1593a0d10",
+        "normalized_body_sha256": "12abeac79b85c8cd00f53f35972968930be5529e009e5914660725051b5b5c20",
+        "generated": "generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }",
+        "verified": "verified:\n  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }"
+      },
+      "docs/implementation/m8-plan.md": {
+        "raw_sha256": "404f0b1d56da2c3b7f3333827bc85bd94494b83cdeff175749f29d4e68558fb6",
+        "normalized_body_sha256": "1904b1b8caeb049a3e67e96f6e74a70e21dcdeadce81e79f4fde1041d8016bee",
+        "generated": "generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:59:01Z }",
+        "verified": null
+      },
+      "docs/implementation/m9-beta-report.md": {
+        "raw_sha256": "1bebbb37e9e3f997205a7243e670d5c885f77c4212244aba9a1deebae4bc5b1c",
+        "normalized_body_sha256": "58acfd0c27fe8d4021cd1111e50bcd565753ba38d9ee82984d172faa9874b524",
+        "generated": "generated: { by: codex/gpt-6, at: 2026-10-05T07:27:09Z }",
+        "verified": "verified:\n  - { by: codex/gpt-6-sol, at: 2026-09-25T01:11:51Z }\n  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }"
+      },
+      "docs/implementation/m9-plan.md": {
+        "raw_sha256": "393fc3ceb4241f349f54961b4210dd6e627c37f0075299d0ca83d81cdb3bac35",
+        "normalized_body_sha256": "9aea9ccee0cd636253dfd7336581390dfd45ca7714cdad97022c517e349f4ced",
+        "generated": "generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }",
+        "verified": "verified:\n  - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }"
+      },
+      "docs/index.md": {
+        "raw_sha256": "9a409efd42a90d66f6f7e495f59effc1c8d8e47ab90abcc02a6296c913f29a7d",
+        "normalized_body_sha256": "4a2369470ba4fcc58a6fb33de7b45b53e9c65fb1bf2c997e588a3198fbcd177b",
+        "generated": null,
+        "verified": null
+      },
+      "docs/log.md": {
+        "raw_sha256": "0ffaf5284298bbec69a30cce51ddae3ae276bb4944f33e0422252875f5445128",
+        "normalized_body_sha256": "0ffaf5284298bbec69a30cce51ddae3ae276bb4944f33e0422252875f5445128",
+        "generated": null,
+        "verified": null
+      }
+    },
+    "body_normalization": "UTF-8; CRLF normalized to LF; YAML frontmatter excluded from body hashes",
+    "ignored_snapshot": {
+      "path": "node_modules/.cache/m54-preexisting-docs.json",
+      "sha256": "eb752f9aa10712ae0104c9dedac713280f1bdd456a8c719250c6703a42416e04",
+      "bytes": 233563
+    },
+    "ignored_patch": {
+      "path": "node_modules/.cache/m54-preexisting-docs.patch",
+      "sha256": "096477ebd5e07e87382ba0f8bdb1b128d94095a70580318e11353952dcd0945e",
+      "bytes": 14831
+    },
+    "provenance": "The parent captured the ten preexisting modified documents before M5.4 implementation. Independent read-only inspection verified every decoded snapshot byte payload against its recorded raw SHA. Full raw snapshots and patch remain only in the named ignored cache files; no tracked raw-copy claim is made.",
+    "scope": "Initial dirty documentation is preserved as received and is not attributed to M5.4 runtime/code work. Approved same-task document upkeep may change overlapping current files; final history audit compares against this initial state and records the distinction. These hashes do not claim model-response evaluation or historical runtime recertification."
+  },
+  "public_delta": {
+    "new_public_named_types": [
+      "FormValueContext"
+    ],
+    "new_public_options": [
+      "bindForm beforeBindValue(value, context)",
+      "bindForm onBindValue(value, context)"
+    ],
+    "new_public_methods": 0,
+    "new_public_entries": 0,
+    "new_shared_framework_modules": 0,
+    "new_runtime_dependencies": 0,
+    "note": "Reuse compiled Form fields, source/generation guards and existing native/formatter/render writers. Callbacks are synchronous, plain functions with presentation-only unknown returns. Local Forms reject these options. No inverse-value mapper, setter, registration or lifecycle engine."
+  },
+  "selected_contracts": {
+    "before_after": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Run beforeBindValue with raw source and onBindValue with effective projected raw after the actual DOM writer. Undefined preserves the current projection; false/null/zero/empty string replace it. Reapply a changed after result once without recursively invoking hooks. Context supplies phase bind/val, nonnull RowId, raw values and primary bound element. Reject invalid callback options or missing Rows before ownership.",
+      "source_refs": [
+        "src/ui/form.ts#bindForm",
+        "src/ui/index.ts#FormValueContext"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B02",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "B15",
+        "B22",
+        "I01",
+        "I03"
+      ],
+      "remaining": "Global/local wrappers, unbound-key processing and wider row lifecycle compatibility remain required."
+    },
+    "raw_ownership": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Keep projection returns out of Form.read, Rows originals/status/changes, parsers, validators and committed field flags. Native constraints use detached raw probes, including custom validity only for the bound row. Enforce explicit native replacement shapes, typed option occurrences, scalar-array copy/freeze and async/unsupported-return errors even when automatic validation is disabled. Recheck cached explicit choices against current availability without replaying hooks.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/native-control.ts",
+        "src/ui/row-options.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "B01",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B12",
+        "B13",
+        "B14",
+        "B22",
+        "I02",
+        "I03"
+      ],
+      "remaining": "Business source normalization belongs in receive/decode/parse or explicit Rows writes; no inverse projection or implicit dataset mutation parity is claimed."
+    },
+    "cache_focus": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Cache only projection state by compiled field, RowId and sameJson raw value. Explicit bind forces bind; real reset changes use bind; successful updates/commits use val with new raw. Keep existing whole-row formatter/render reactivity. Read, validation, move/append, unrelated source values and focus-only repaint do not replay hooks. Focused editable text shows raw and defers callback pairs until blur; preserve unapplied pending reasons through unchanged resets and invalid drafts.",
+      "source_refs": [
+        "src/ui/form.ts#render",
+        "src/ui/form.ts#onFocusIn",
+        "src/ui/form.ts#onFocusOut"
+      ],
+      "witnesses": [
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B14",
+        "B23",
+        "B24",
+        "B25",
+        "I03"
+      ],
+      "remaining": "Explicit bind refreshes projections that depend on another field. This is not a generic reactive dependency or local raw-state engine."
+    },
+    "lifecycle": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Guard generation, source, row identity and disposal around hooks and writers, including freshness after formatter/renderer callbacks before DOM commit. During actual before/after value cycles, A-to-B may complete B while suppressing stale A; active same Field/RowId recursion fails with FORM_VALUE. Ordinary cached, null-bound or no-hook renderer recursion retains UI_RENDER. Before/after failures carry field/row/phase/callback/cause and permit fresh explicit retry. Null binding/removal/replacement clear state and the view without hooks. Disposal clears pending callback state, retains ordinary displayed values and restores authored renderer nodes through existing cleanup.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/field-render.ts"
+      ],
+      "witnesses": [
+        "B11",
+        "B15",
+        "B16",
+        "B17",
+        "B18",
+        "B19",
+        "B20",
+        "B21",
+        "B23",
+        "I03"
+      ],
+      "remaining": "No whole-Form transaction or rollback of earlier DOM/Rows/application side effects is promised. Wider callback/row lifecycle closure remains open."
+    },
+    "migration": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Document legacy dataset-mutating bind/val callbacks and old-data setter-before behavior separately from modern presentation hooks. Use explicit application normalization and ordinary callback composition; native boolean/numeric controls remove old string-conversion workarounds. Exercise the current CVC detail through existing authored HTML and shared Rows.",
+      "source_refs": [
+        "v1/src/natural.ui.js",
+        "v1/docs/examples/edit-form-data.md",
+        "examples/vite/m10/detail.ts"
+      ],
+      "witnesses": [
+        "D01",
+        "S01",
+        "B09",
+        "B10",
+        "I01",
+        "I03"
+      ],
+      "remaining": "Legacy global/local wrappers, unbound row-key iteration and complete owner equivalence stay required; no historical source behavior is silently retired."
+    },
+    "installed": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use one exact artifact in isolated JavaScript and TypeScript consumers and Chromium/Firefox/WebKit/actual Windows Chrome/Edge. Exercise new callback contracts, raw/projection separation, native validation and cleanup through existing public Form APIs; retain complete fresh browser coverage and original performance budgets.",
+      "source_refs": [
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No publication/tag. Chromium may use proven built-in shards without skips/retries; actual macOS/iOS Safari remains excluded."
+    }
+  },
+  "witnesses": {
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "Form value callbacks preserve real replacements and observe native DOM without changing Rows"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "after projections run the existing formatter or renderer once more only when their raw input changes"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "projection caching preserves whole-row formatter and renderer reactivity without replaying value callbacks"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "callback phases follow actual field changes while unrelated rows movement nested siblings and unchanged resets stay quiet"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "focused text defers explicit binding and preserves its pending reason through unchanged resets until blur"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "invalid drafts never become binding events and a focused successful commit projects its new raw once on blur"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "raw constraints and hidden validation ignore display projections and another row native custom validity"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "parsers and business validation receive committed candidate raw while projections leave originals and save changes intact"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "native groups typed duplicate choices and unmarked Selects preserve their distinct projection contracts"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "undefined callbacks preserve structured display and unavailable loaded choices without normalizing their source"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "callback option errors reject before Form ownership or accessibility changes and leave local Forms unchanged"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "explicit invalid projections fail synchronously with automatic validation disabled and permit a fresh retry"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "typed projection guards consume duplicate occurrences and reject an unavailable final replacement before its write"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "cached explicit typed projections recheck changed options without replaying hooks or changing the received raw"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "callback failures identify their field row phase and cause without pretending DOM binding is transactional"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "different-row callback reentry completes the newer binding and rejects same-pair cycles with a recoverable error"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "formatter and renderer row reentry cannot commit an older returned view over the completed new binding"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "source removal null binding and replacement clear callback state without stale after work or resurrection"
+    },
+    "B19": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "disposal from either callback restores authored render nodes and suppresses every later value write"
+    },
+    "B20": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "a callback failure after a committed Rows update keeps the actual change and supports an explicit retry"
+    },
+    "B21": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "independent authored Forms share raw data with unique accessible errors and release callbacks without retained ownership"
+    },
+    "B22": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "array replacement accessors are materialized once before validation freezing and cached reuse"
+    },
+    "B23": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "same-target renderer recursion stays bounded without hooks during cached repaint and after null binding"
+    },
+    "B24": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "failed value cycles remain quiet on sibling updates until explicit binding or a real raw change retries them"
+    },
+    "B25": {
+      "kind": "browser",
+      "file": "tests/browser/form-values.spec.ts",
+      "title": "focused read-only text projects immediately while ordinary formatter-only focus behavior stays compatible"
+    },
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "The compiled Rows-backed Form owns projection cache, raw validation and guarded native writers",
+      "marker": "function projectValue("
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "Form value contexts refine the existing rule context with a required row, element and phase",
+      "marker": "export interface FormValueContext extends RuleContext"
+    },
+    "D01": {
+      "kind": "example",
+      "file": "examples/vite/m10/detail.ts",
+      "title": "The shared CVC detail controller projects boolean employment only for the reduced authored span",
+      "marker": "if (context.field === \"active\" && context.element.tagName === \"SPAN\")"
+    },
+    "I01": {
+      "kind": "consumer",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript uses the public FormValueContext and synchronous before/after callbacks",
+      "marker": "export function connectFormValues("
+    },
+    "I02": {
+      "kind": "consumer",
+      "file": "tests/consumers/browser/main.js",
+      "title": "The installed browser fixture connects projected displays to raw Rows through the public Form handle",
+      "marker": "state.formValues ="
+    },
+    "I03": {
+      "kind": "consumer",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Installed browsers assert projection/raw separation, native constraints, focus, cache and disposal",
+      "marker": "const formValues = await page.evaluate("
+    }
+  },
+  "witness_counts": {
+    "status": "exact_source_witnesses_fresh_runtime_confirmed",
+    "unit_delta": 0,
+    "browser_delta": 25,
+    "source_witnesses": 2,
+    "example_source_witnesses": 1,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 605,
+    "expected_full_cases_per_engine": 630,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 630
+  },
+  "verification": {
+    "status": "fresh_final_canonical_gates_independently_reviewed",
+    "gate_record": "docs/implementation/evidence/m54-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m54-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful DOM callback/ownership validation; unchanged unit count is allowed",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF document checks",
+      "Independent connected production-code and raw-evidence reviews"
+    ],
+    "limitations": [
+      "Historical runtime is not rerun or recertified.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory.",
+      "No model-response generation/evaluation or token-saving measurement is requested."
+    ],
+    "actual_frozen_input_entries": 182,
+    "actual_canonical_gate_groups": 16,
+    "actual_execution_stage_commands": 18,
+    "actual_collection_commands": 4,
+    "actual_gate_records": 36,
+    "actual_development_gate_records": 12,
+    "actual_superseded_final_records": 8,
+    "actual_input_manifests": 4,
+    "actual_child_raw_files": 24,
+    "actual_unit_cases": 138,
+    "actual_full_cases_per_engine": 630,
+    "artifact_sha256": "14fe023753933d17cb35c6de7b9b41ea80a5fc3674aeeec4f0809c7f5e56a9fd",
+    "chromium_method": "One canonical gate verifies the disjoint full630-test union of three built-in shards213+217+200, each in a fresh sequential Playwright process. Four collection commands prove identity coverage. The incomplete earlier attempt and its ten raw child files remain failed/superseded evidence; no skip, retry or monolithic pass is claimed.",
+    "reviewed_conclusions": [
+      "Independent connected production, caller, example and consumer review confirms synchronous presentation-only hooks, raw validation and Rows ownership, single materialized array replacements, quiet failed-cycle caches, editable/read-only focus boundaries and guarded reentry. Ordinary cached/null/no-hook renderer recursion retains UI_RENDER.",
+      "All36 top-level raw logs and four input manifests match recorded hashes. The latest sixteen canonical groups all exit zero against the unchanged current182-input map. Twelve development and eight superseded final records retain all four failed commands.",
+      "The final Chromium manifest verifies630 identities exactly once across213+217+200 built-in shards with zero retry/skip/flaky results. Firefox and WebKit each pass630 unsharded cases. Twenty-four raw child JSON/stderr files across complete and incomplete attempts match hashes; incomplete coverage is not certified.",
+      "All183 actual tar members match workspace payloads and individual sizes:314268 packed and1565831 unpacked bytes. The exact artifact passes isolated JS/TS and all five available Windows browser consumers with five public exports and zero runtime dependencies.",
+      "The independently approved acceptance_mapping raw performance review confirms60 medians from300 durations, all original nine binding and twenty-one viewport budgets, bounded viewport ownership and quiet cleanup. No benchmark runtime is rerun by this reviewer and no universal speed, heap-retention or token-saving result is inferred.",
+      "All six immutable evidence parents, preserved v1 and the ignored legacy lock remain unchanged. The ten initial dirty documentation snapshots and patch retain their original hashes. Current failed-import cause remains unconfirmed; historical M5.3 ERR_NO_BUFFER_SPACE evidence is not assigned to this failure.",
+      "Selected Form outcomes are accepted. Full owner families,P0,M13,manual assistive technology and final fixed-agent/token evaluation remain open. No omission, npm publication or release tag is approved by this record."
+    ],
+    "document_gate_note": "Final semantic document-body review and changed/full OKF checks are recorded with completed documentation. This metadata accepts selected source/runtime outcomes and closes no full owner family."
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Raw choice/render mapping, bind-value hooks and full control/option/callback/dynamic workflows."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected outcomes can receive acceptance after implementation, fresh final gates and independent review. No full owner family, P0, M13 or parent milestone closure is claimed."
+  }
+}

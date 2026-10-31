@@ -8,6 +8,12 @@ export interface RuleContext {
   readonly element?: HTMLElement;
 }
 
+export interface FormValueContext extends RuleContext {
+  readonly rowId: RowId;
+  readonly element: HTMLElement;
+  readonly phase: "bind" | "val";
+}
+
 export type FormatRule = (
   value: string,
   args: readonly unknown[],

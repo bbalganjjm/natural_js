@@ -144,7 +144,8 @@ test("full and reduced details share edits while omitted fields stay intact acro
   const dialog = page.locator("[data-detail-dialog]");
   await expect(dialog.locator('[aria-label="Reduced employee details"]')).toBeVisible();
   await expect(dialog.locator("[data-detail-row]")).toHaveAttribute("data-detail-row", "1");
-  await expect(dialog.locator("[data-field]")).toHaveCount(2);
+  await expect(dialog.locator("[data-field]")).toHaveCount(3);
+  await expect(dialog.locator('[data-field="active"]')).toHaveText(omitted.find(field => field.field === "active")!.checked ? "Active" : "Inactive");
   await dialog.locator('[data-field="name"]').fill("Reduced Ada");
   await dialog.locator('[data-field="salary"]').fill("275");
   await dialog.locator("[data-detail-close]").click();

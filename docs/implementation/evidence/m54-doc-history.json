@@ -1,0 +1,172 @@
+{
+  "semantic_concepts": 7,
+  "historical_fingerprint_only": 38,
+  "preserved_historical_bodies_and_generated_verified_dates": true,
+  "historical": [
+    {
+      "file": "docs/governance/okf-conventions.md",
+      "comparison": "initial raw document snapshot"
+    },
+    {
+      "file": "docs/governance/repository-workflow.md",
+      "comparison": "initial raw document snapshot"
+    },
+    {
+      "file": "docs/implementation/feature-parity-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-acceptance-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-change-state-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-closure-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-columns-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-controls-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-detail-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-interactions-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-lifecycle-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-parity-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-paste-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-pinned-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-progressive-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-row-blocks-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-selection-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m10-viewport-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m11-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m12-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m13-review-plan.md",
+      "comparison": "initial raw document snapshot"
+    },
+    {
+      "file": "docs/implementation/m5-form-options-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m5-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m5-shared-rules-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m5-state-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m6-plan.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/implementation/m8-plan.md",
+      "comparison": "initial raw document snapshot"
+    },
+    {
+      "file": "docs/implementation/m9-beta-report.md",
+      "comparison": "initial raw document snapshot"
+    },
+    {
+      "file": "docs/implementation/m9-plan.md",
+      "comparison": "initial raw document snapshot"
+    },
+    {
+      "file": "docs/v2/architecture.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/grid.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/list.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/package.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/pagination.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/popup.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/rules.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/select.md",
+      "comparison": "pushed baseline"
+    },
+    {
+      "file": "docs/v2/tabs.md",
+      "comparison": "pushed baseline"
+    }
+  ],
+  "preexisting_docs": {
+    "count": 10,
+    "comparison": "Initial10 document edits are preserved as existing work; historical documents use their initial raw snapshot, not HEAD, for body/date preservation. M5.4 semantic updates to current/log/index are additive or replace only the active resume scope.",
+    "raw_snapshot_cache": "node_modules/.cache/m54-preexisting-docs.json"
+  },
+  "resume_context": {
+    "scope": "Only the active resume document; UTF-8 with CRLF normalized to LF. Not total context or actual token usage.",
+    "baseline_commit": "d923434ea9776e3978596e53a8da21c3daf6a642",
+    "before_bytes": 6484,
+    "after_bytes": 5543,
+    "before_lines": 73,
+    "after_lines": 72
+  }
+}

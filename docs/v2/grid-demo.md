@@ -12,7 +12,7 @@ sources:
   - id: pinned-browser
     resource: ../../tests/browser/m10-pinned.spec.ts
     title: Pin controls, reduced details and trusted native wheel regressions
-    git_blob: e0949941c47303eee082207c84258ab3a9caead2
+    git_blob: 554f8c595057bab392eaa3f9b69aa47a6a61181e
   - id: progressive-view
     resource: ../../examples/vite/m10/progressive.html
     title: Two authored progressive CVC layouts
@@ -32,7 +32,7 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 172d29e7f90a91362cc7d2e77605445ba1cb57ae
+    git_blob: ada1c52168781751bf266a776ec5824d6ff3dfbe
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
@@ -40,7 +40,7 @@ sources:
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
-    git_blob: e319f47ac49efaa9538ee355d415c9f914af54eb
+    git_blob: 92f3a841d3d96b90eb2d2f3cfa9baf66f23f628f
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -116,11 +116,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
+generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -322,6 +322,8 @@ Without `initialPage`, `viewport` or `progressive`, Grid creates all initial row
 [^controls-browser]: Native groups, typed values, validation and display regressions
 [^lifecycle-browser]: Status, defaults, callback ownership, focus and failure regressions
 [^detail-controller]: One authored employee detail page in main content and Popup
+
+Reduced details also show an authored employment span. The shared detail controller projects its raw active boolean to Active/Inactive through beforeBindValue; full details keep the native checkbox. Both views retain the same Rows value, validation and change tracking. See [Form value callbacks](form.md#value-callbacks).[^detail-controller]
 
 The Rows controls include Load received row states and Append received changes. Full loading starts with a deletion followed by clean/update/insert records; choose All retained rows to inspect it. Revert restores received values AND statuses. Ordinary added/copied inserts are discarded. Add/move to first uses the first retained row, including a deletion. Application payload samples explicitly select Name/Salary and compare received-original with current-value deletion projection; they make no request and expose no store IDs.
 

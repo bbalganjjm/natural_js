@@ -1,5 +1,6 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.4 Form value callbacks](m5-form-values-plan.md) - Apply scoped Form value projections and observations without implicit Rows mutation or repeated validation callbacks. (draft)
 * [Natural-JS 2.0 M5.3 Form row-local choices](m5-form-options-plan.md) - Bind nested typed Form choices through existing option owners and remove manual detail-screen option conversion. (draft)
 
 * [Natural-JS 2.0 M5.2 incoming row state](m5-state-plan.md) - Receive explicit row state and preserve checkpoint reversion, retained ordering and application-owned wire projection. (draft)

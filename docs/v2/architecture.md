@@ -16,11 +16,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
+    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
@@ -104,7 +104,7 @@ sources:
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit render configuration and DOM ownership
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private Form/Grid rule runner

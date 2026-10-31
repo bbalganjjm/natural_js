@@ -1,0 +1,88 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test:packed-browser
+> node tools/check-packed-browser.mjs --tarball D:\workspace\natural_js\node_modules\.cache\m54-artifact\bbalganjjm-natural_js-2.0.0-beta.0.tgz --sha256 14fe023753933d17cb35c6de7b9b41ea80a5fc3674aeeec4f0809c7f5e56a9fd --browser chromium
+
+
+added 1 package in 1s
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Installed Form callbacks must project views while preserving raw validation, changes and owned lifetime.
++ actual - expected
+... Skipped lines
+
+  {
+    focused: 'Ada',
+    initial: {
+      checked: true,
+      input: 'display:ab',
+...
+        'display:ab',
+-       null
+      ],
+      [
+        'before',
+        'name',
+        'val',
+...
+        'display:Ada',
+-       null
+      ]
+    ]
+  }
+
+    at file:///D:/workspace/natural_js/tools/check-packed-browser.mjs:156:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: {
+    initial: {
+      text: 'ADA!',
+      input: 'display:ab',
+      checked: true,
+      selected: 'Two',
+      raw: { summary: 'ada', name: 'ab', active: false, choice: 1 }
+    },
+    issues: [ 'active', 'name' ],
+    quietValidation: true,
+    observed: [ 'after', 'summary', 'bind', 'ADA', 'ADA' ],
+    val: [
+      [ 'before', 'name', 'bind', 'ab' ],
+      [ 'after', 'name', 'bind', 'display:ab' ],
+      [ 'before', 'name', 'val', 'Ada' ],
+      [ 'after', 'name', 'val', 'display:Ada' ]
+    ],
+    focused: 'Ada',
+    unfocused: 'display:Ada',
+    quietFocus: true,
+    source: { original: 'ab', value: 'Ada', changes: [ 'update' ] },
+    quietDispose: true
+  },
+  expected: {
+    initial: {
+      text: 'ADA!',
+      input: 'display:ab',
+      checked: true,
+      selected: 'Two',
+      raw: { summary: 'ada', name: 'ab', active: false, choice: 1 }
+    },
+    issues: [ 'active', 'name' ],
+    quietValidation: true,
+    observed: [ 'after', 'summary', 'bind', 'ADA', 'ADA' ],
+    val: [
+      [ 'before', 'name', 'bind', 'ab' ],
+      [ 'after', 'name', 'bind', 'display:ab', null ],
+      [ 'before', 'name', 'val', 'Ada' ],
+      [ 'after', 'name', 'val', 'display:Ada', null ]
+    ],
+    focused: 'Ada',
+    unfocused: 'display:Ada',
+    quietFocus: true,
+    source: { original: 'ab', value: 'Ada', changes: [ 'update' ] },
+    quietDispose: true
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

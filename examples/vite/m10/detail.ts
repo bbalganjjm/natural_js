@@ -79,7 +79,11 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     function cleanup(): void { unsubscribe?.(); form?.dispose(); }
     own(cleanup);
     signal.addEventListener("abort", cleanup, { once: true });
-    form = bindForm(formRoot, { rows: input.rows, rules: input.rules, parse: input.parse });
+    form = bindForm(formRoot, { rows: input.rows, rules: input.rules, parse: input.parse,
+      beforeBindValue(value, context) {
+        if (context.field === "active" && context.element.tagName === "SPAN") return value ? "Active" : "Inactive";
+      }
+    });
     unsubscribe = input.rows.subscribe(refresh);
 
     function showFailure(cause: unknown): void {

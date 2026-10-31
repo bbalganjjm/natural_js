@@ -32,4 +32,4 @@ okf_version: "0.2"
 
 * [Natural-JS 2.0](v2/index.md) - Implemented package, type contracts, and module boundaries.
 * [Implementation](implementation/index.md) - Natural-JS 2.0 roadmap, public contract, and active milestone status.
-* [Governance](governance/index.md) - OKF format and repository upkeep rules.
+* [Governance](governance/index.md) - OKF format, evidence-based answers, and repository upkeep rules.

@@ -25,7 +25,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
@@ -93,7 +93,7 @@ sources:
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit field rendering and DOM ownership
-    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+    git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Native groups, values, validation timing, display and MDI regressions
