@@ -1,0 +1,85 @@
+
+
+Running 37 tests using 1 worker
+
+
+
+[1/37] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › shared TS rules reach Grid and CVC details while automatic validation remains an independent option
+[2/37] [chromium] › tests\browser\m10-demo.spec.ts:39:1 › committed field highlights compare loaded originals and clear after restoring the original
+[3/37] [chromium] › tests\browser\m10-demo.spec.ts:59:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[4/37] [chromium] › tests\browser\m10-demo.spec.ts:79:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[5/37] [chromium] › tests\browser\m10-demo.spec.ts:115:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[6/37] [chromium] › tests\browser\m10-demo.spec.ts:141:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[7/37] [chromium] › tests\browser\m10-demo.spec.ts:166:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[8/37] [chromium] › tests\browser\m10-demo.spec.ts:184:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[9/37] [chromium] › tests\browser\m10-demo.spec.ts:230:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[10/37] [chromium] › tests\browser\m10-demo.spec.ts:251:1 › authored table binds raw nested choices, formatter, and accessible labels
+[11/37] [chromium] › tests\browser\m10-demo.spec.ts:276:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[12/37] [chromium] › tests\browser\m10-demo.spec.ts:317:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[13/37] [chromium] › tests\browser\m10-demo.spec.ts:339:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[14/37] [chromium] › tests\browser\m10-demo.spec.ts:367:1 › sort, filter, and local pages preserve RowId selection
+[15/37] [chromium] › tests\browser\m10-demo.spec.ts:391:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[16/37] [chromium] › tests\browser\m10-demo.spec.ts:412:1 › check and validation policy controls rebind working Grid options
+[17/37] [chromium] › tests\browser\m10-demo.spec.ts:455:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[18/37] [chromium] › tests\browser\m10-demo.spec.ts:498:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[19/37] [chromium] › tests\browser\m10-demo.spec.ts:540:1 › required and unavailable choices validate; dispose and rebind restore the template
+[20/37] [chromium] › tests\browser\m10-demo.spec.ts:579:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[21/37] [chromium] › tests\browser\m10-demo.spec.ts:619:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[22/37] [chromium] › tests\browser\m10-demo.spec.ts:643:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[23/37] [chromium] › tests\browser\m10-demo.spec.ts:679:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[24/37] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › row-block store controls move and copy whole records independently of the employee demo
+[25/37] [chromium] › tests\browser\m10-demo.spec.ts:745:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[26/37] [chromium] › tests\browser\row-state.spec.ts:91:1 › state replacement resets shared identities and displays received flags without business metadata
+[27/37] [chromium] › tests\browser\row-state.spec.ts:113:1 › state append preserves shared drafts focus snapshots membership and one frozen append event
+[28/37] [chromium] › tests\browser\row-state.spec.ts:137:1 › received pending checkpoints revert values and flags while ordinary inserts remain cancellable
+[29/37] [chromium] › tests\browser\row-state.spec.ts:163:1 › received tombstones stay protected in native editors membership Forms and paste after checkpoint reversion
+[30/37] [chromium] › tests\browser\row-state.spec.ts:185:1 › first-position add and move use retained deleted anchors and preserve their order when ordinary deletions revert
+[31/37] [chromium] › tests\browser\row-state.spec.ts:204:1 › invalid later state records preserve all shared DOM caches events and the next committed identity
+[32/37] [chromium] › tests\browser\row-state.spec.ts:225:1 › unchanged received checkpoint reversion keeps caches but clears local Form and Grid drafts
+[33/37] [chromium] › tests\browser\row-state.spec.ts:240:1 › state loading and append retain bounded viewport ownership and become quiet after all views dispose
+[34/37] [chromium] › tests\browser\row-state.spec.ts:259:1 › independent received stores keep document-unique error IDs and unaffected native Form ownership
+[35/37] [chromium] › tests\browser\row-state.spec.ts:282:1 › application POST projections choose current or received deletion values and scalar or array bodies without RowId leakage
+[36/37] [chromium] › tests\browser\row-state.spec.ts:307:1 › application GET decoding explicitly maps statuses and cancellation prevents late state publication
+[37/37] [chromium] › tests\browser\row-state.spec.ts:343:1 › the Grid explorer loads and appends received states and contrasts received and current deletion payloads
+  1) [chromium] › tests\browser\row-state.spec.ts:343:1 › the Grid explorer loads and appends received states and contrasts received and current deletion payloads 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.selectOption: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('[data-status-filter]')
+        - locator resolved to <select data-needs-grid="" data-status-filter="">…</select>
+      - attempting select option action
+        2 × waiting for element to be visible and enabled
+          - did not find some options
+        - retrying select option action
+        - waiting 20ms
+        2 × waiting for element to be visible and enabled
+          - did not find some options
+        - retrying select option action
+          - waiting 100ms
+        58 × waiting for element to be visible and enabled
+           - did not find some options
+         - retrying select option action
+           - waiting 500ms
+
+
+      345 |   await page.locator('[data-action="load-state"]').click();
+      346 |   const states = page.locator('[data-grid] tbody tr[data-row-status]');
+    > 347 |   await page.locator('[data-status-filter]').selectOption(["clean", "insert", "update", "delete"]);
+          |                                              ^
+      348 |   await expect(states).toHaveCount(4);
+      349 |   expect(await states.evaluateAll(rows => rows.map(row => row.getAttribute("data-row-status")))).toEqual(["delete", "clean", "update", "insert"]);
+      350 |   await page.locator('[data-action="append-state"]').click();
+        at D:\workspace\natural_js\tests\browser\row-state.spec.ts:347:46
+
+    Error Context: test-results\row-state-the-Grid-explore-ada40-d-current-deletion-payloads-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\row-state.spec.ts:343:1 › the Grid explorer loads and appends received states and contrasts received and current deletion payloads 
+  36 passed (54.3s)
+[WebServer] (node:14432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:7200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

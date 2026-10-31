@@ -324,6 +324,7 @@ try {
   const ruleGrid = bindGrid(ruleRoot.querySelector("table"), { rows: ruleRows, rules, parse, autoValidate: false, paste: true });
   const ruleList = bindList(ruleRoot.querySelector("ul"), { rows: ruleRows, rules });
   state.sharedRules = { root: ruleRoot, rows: ruleRows, form: ruleForm, grid: ruleGrid, list: ruleList, original: originalRules };
+  state.incoming = createRows();
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = document.querySelector(`[data-host="${slot}"]`);
     const page = mountPage(host, definition, { slot, name });

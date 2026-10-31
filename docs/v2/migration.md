@@ -36,7 +36,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: RowId, changes, and immutable row values
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request payload, decoder, and cancellation
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 69018bd7cb374de2f5d1932d0aea3b11e6e25364
+    git_blob: f76003ac92114f0c24249c8c38d2825e1ca4f37d
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: db7e1e1b8b5bf9ae04e4abafea96e3dc71d324be
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+    git_blob: e27c90edaec8f4ae0986444bd46c5163990d43c3
+generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -251,7 +251,40 @@ This is an abridged flow from `examples/vite/m4/employees.ts`; the full file han
 
 The JSON above shows the 2.0 envelope shape, not the full M4 fixture. Adapt an existing server that expects a 1.x row with embedded `rowStatus`; current createCommunicator does not automatically convert legacy payloads. `RowId` stays out of the body, while a business `value.id` remains available. Form formatting changes display text only, so the payload contains raw typed values. The exact M4 body is [expected-save.json](../../examples/vite/m4/expected-save.json).[^rows][^employee][^comm]
 
-Tested migration recipes for the old default POST, GET q=JSON, dataIsArray and rowStatus payload workflows remain required gaps C05/C10. This M4 JSON POST example does not cover the complete legacy protocol range; the coverage review must preserve those server workflows without introducing a generic convenience library.[^parity][^parity-plan]
+For incoming legacy rows, separate framework metadata explicitly. The application below accepts absent rowStatus as clean and rejects other noncanonical flags. The data core never interprets a business rowStatus property.[^rows][^comm]
+
+```ts
+import type { RowState } from "@bbalganjjm/natural_js/data";
+
+function receive(input: { employeeNo: string; name: string; rowStatus?: unknown }[]): RowState<{ employeeNo: string; name: string }>[] {
+  return input.map(({ employeeNo, name, rowStatus }) => {
+    const status = rowStatus === undefined ? "clean" : rowStatus;
+    if (status !== "clean" && status !== "insert" && status !== "update" && status !== "delete") {
+      throw new Error("Unsupported employee rowStatus");
+    }
+    return { value: { employeeNo, name }, status };
+  });
+}
+rows.replaceState(receive(response)); // appendState for an additional received page.
+```
+
+State loaders preserve the received value AND status as the revert checkpoint. Reverting a received update/insert/deletion retains that status; no earlier server value is invented. Ordinary add/copy inserts still disappear on revert. For full-store first-position insertion/movement, use entries({ includeDeleted: true })[0]?.id so a leading deletion remains an ordering anchor.[^rows]
+
+Choose the server's payload with plain objects. A legacy server that expects current deleted values can use the explicit branch below; modern received-original deletion uses change.value for every status. Project business keys, never spread RowSnapshot or send its internal id. A business employeeNo is independent of RowId.[^rows][^comm]
+
+```ts
+const payload = rows.changes().map(change => {
+  const value = change.status === "delete" ? rows.get(change.id)!.value : change.value;
+  return { employeeNo: value.employeeNo, name: value.name, rowStatus: change.status };
+});
+await communicator.request({ url: "employees", method: "POST", json: payload, signal });
+// A scalar endpoint instead receives json: payload[0], after checking its count.
+const query = new URLSearchParams({ q: JSON.stringify(payload) });
+await communicator.request({ url: "employees?" + query, method: "GET", signal,
+  decode: response => response.text() });
+```
+
+There is no implicit first-row truncation, default POST or custom URI escaping. The existing communicator owns HTTP, decoding, errors and cancellation. Selected POST array/scalar, GET q=JSON, state decoding and cancelled-request recipes are covered in M5.2; full legacy protocol/general value-equivalence and remaining C05/C10 obligations still need their owner review.[^rows][^comm][^parity][^parity-plan]
 
 ## 4. Move rules without dropping Form behavior
 
@@ -320,7 +353,7 @@ For a 1.x multi-row tbody record, mark one authored `<tbody data-row-template>` 
 
 Move loaded-page append to `rows.append(batch)`, which keeps fetched records clean and emits one batch event. Repeated `rows.add` would mark fetched records inserted and change the save payload. Existing IDs, pending edits and tombstones survive append; Form keeps its current row and invalid draft without rebinding. `entries()` remains live-only; use `entries({ includeDeleted: true })` when an application needs retained snapshots. CVC/controller code still owns requests and cancellation. The old scrollPaging progressively rendered already-loaded data rather than fetching it; its scheduling-option equivalence remains open in P0.[^rows][^form][^grid]
 
-Use `statusFilter`/`setStatusFilter` to include retained deleted rows. Their display keeps the last committed raw values, including edits made before removal; `rows.changes()` deliberately uses the original loaded value for a delete payload. `rows.original(id)` reads that immutable baseline without adding fields to business JSON or `RowSnapshot`. It returns `undefined` for inserted, copied or missing rows. Shown deleted editors stay disabled and ineligible; an authored row action can call `rows.revert(id)` to restore the original value and clean status. Paste treats intermediate deleted rows as protected lines without shifting later data.[^rows][^grid]
+Use `statusFilter`/`setStatusFilter` to include retained deleted rows. Their display keeps the last committed raw values, including edits made before removal; `rows.changes()` deliberately uses the original loaded value for a delete payload. `rows.original(id)` reads that immutable baseline without adding fields to business JSON or `RowSnapshot`. It returns `undefined` for inserted, copied or missing rows. Shown deleted editors stay disabled and ineligible; an authored row action can call `rows.revert(id)` to restore the received checkpoint. Clean loads return to clean; explicit state loads retain their received status. Paste treats intermediate deleted rows as protected lines without shifting later data.[^rows][^grid]
 
 Replace 1.x `data_changed` presentation with authored CSS/text using each physical row's `data-row-status`, the table's `data-changed`, and each bound field member's `data-field-changed`. Field flags compare committed raw paths against the loaded original, so nested siblings are independent and formatting or invalid drafts cannot mark a field changed. Inserted fields receive `"false"`; show insertion through row status. Grid restores its original template on disposal. Rows-backed Form restores each authored field flag or its absence; a local Form leaves the attribute application-owned. See [Form](form.md#loaded-value-changes) and [Grid](grid.md#field-change-markers) for focus, groups and structured values.[^form][^grid]
 

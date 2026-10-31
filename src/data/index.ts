@@ -10,6 +10,11 @@ export type Snapshot<T> = T extends readonly (infer Item)[]
 
 export type RowStatus = "clean" | "insert" | "update" | "delete";
 
+export interface RowState<T> {
+  readonly value: T;
+  readonly status: RowStatus;
+}
+
 export interface RowSnapshot<T> {
   readonly id: RowId;
   readonly value: Snapshot<T>;
@@ -31,10 +36,12 @@ export type RowsEvent =
 
 export interface Rows<T extends object> {
   replace(values: readonly T[]): void;
+  replaceState(states: readonly RowState<T>[]): void;
   entries(options?: { includeDeleted?: boolean }): readonly RowSnapshot<T>[];
   get(id: RowId): RowSnapshot<T> | undefined;
   original(id: RowId): Snapshot<T> | undefined;
   append(values: readonly T[]): readonly RowId[];
+  appendState(states: readonly RowState<T>[]): readonly RowId[];
   add(value: T, before?: RowId): RowId;
   move(id: RowId, before?: RowId): void;
   copy(id: RowId, before?: RowId): RowId;
@@ -53,6 +60,7 @@ interface StoredRow<T> {
   id: RowId;
   current: FrozenRow;
   original?: FrozenRow;
+  checkpoint?: RowStatus;
   dirty: Set<string>;
   status: RowStatus;
   view: RowSnapshot<T>;
@@ -161,7 +169,7 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
   function editableRow(id: RowId, api: string): StoredRow<T> {
     const row = requireRow(id, api);
     if (row.status === "delete") {
-      throw rowError(api, "ROW_DELETED", "Revert a deleted row before editing it.", { id });
+      throw rowError(api, "ROW_DELETED", "A deleted row cannot be edited.", { id });
     }
     return row;
   }
@@ -175,22 +183,61 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
         if (sameJson(row.original[field], values[field])) row.dirty.delete(field);
         else row.dirty.add(field);
       }
-      row.status = row.dirty.size ? "update" : "clean";
+      row.status = row.checkpoint === "insert" ? "insert" : row.dirty.size ? "update" : row.checkpoint ?? "clean";
     }
     row.view = view(row.id, row.current, row.status);
     return true;
   }
 
-  function makeRow(id: RowId, current: FrozenRow, inserted: boolean): StoredRow<T> {
-    const status = inserted ? "insert" : "clean";
+  function makeRow(id: RowId, current: FrozenRow, inserted: boolean, checkpoint?: RowStatus): StoredRow<T> {
+    const status = checkpoint ?? (inserted ? "insert" : "clean");
     return {
       id,
       current,
-      original: inserted ? undefined : current,
+      original: inserted && checkpoint === undefined ? undefined : current,
+      checkpoint,
       dirty: new Set(),
       status,
       view: view(id, current, status)
     };
+  }
+
+  function load(values: readonly unknown[], api: string, state: boolean, append: boolean): readonly RowId[] {
+    active(api);
+    const version = revision;
+    if (!Array.isArray(values)) throw rowError(api, "ROW_VALUE", "Loaded rows require an array.");
+    const prepared: { current: FrozenRow; checkpoint?: RowStatus }[] = [];
+    for (let index = 0; index < values.length; index++) {
+      if (!Object.hasOwn(values, index)) {
+        throw rowError(api, "ROW_VALUE", "Loaded rows cannot contain missing entries.", { index });
+      }
+      const value = values[index];
+      if (state) {
+        if (!value || typeof value !== "object" || Array.isArray(value) || !isPlainObject(value) ||
+            Reflect.ownKeys(value).some(key => key !== "value" && key !== "status") ||
+            !Object.hasOwn(value, "value") || !Object.hasOwn(value, "status")) {
+          throw rowError(api, "ROW_VALUE", "A row state needs only own value and status properties.", { index });
+        }
+        const record = value as RowState<unknown>;
+        const status = record.status;
+        if (!["clean", "insert", "update", "delete"].includes(status)) {
+          throw rowError(api, "ROW_VALUE", "Use clean, insert, update or delete row status.", { index });
+        }
+        prepared.push({ current: cloneRow(record.value, api), checkpoint: status });
+      } else prepared.push({ current: cloneRow(value, api) });
+    }
+    unchanged(version, api);
+    if (!append) rows.clear();
+    const ids: RowId[] = [];
+    for (const { current, checkpoint } of prepared) {
+      const id = nextId++;
+      rows.set(id, makeRow(id, current, false, checkpoint));
+      if (append) ids.push(id);
+    }
+    const appended = Object.freeze(ids);
+    if (!append) notify({ type: "replace", changed: true });
+    else if (appended.length) notify({ type: "append", ids: appended, changed: true });
+    return appended;
   }
 
   function place(row: StoredRow<T>, before?: RowId): boolean {
@@ -213,19 +260,10 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
 
   const store: Rows<T> = {
     replace(values) {
-      active("Rows.replace");
-      const version = revision;
-      const nextRows = new Map<RowId, StoredRow<T>>();
-      let id = nextId;
-      for (const value of values) {
-        nextRows.set(id, makeRow(id, cloneRow(value, "Rows.replace"), false));
-        id++;
-      }
-      unchanged(version, "Rows.replace");
-      rows.clear();
-      for (const [key, row] of nextRows) rows.set(key, row);
-      nextId = id;
-      notify({ type: "replace", changed: true });
+      load(values, "Rows.replace", false, false);
+    },
+    replaceState(states) {
+      load(states, "Rows.replaceState", true, false);
     },
     entries(options) {
       active("Rows.entries");
@@ -249,29 +287,19 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     },
     original(id) {
       active("Rows.original");
-      return rows.get(id)?.original as Snapshot<T> | undefined;
+      const row = rows.get(id);
+      return row?.status === "insert" ? undefined : row?.original as Snapshot<T> | undefined;
     },
     append(values) {
-      active("Rows.append");
-      const version = revision;
-      if (!Array.isArray(values)) throw rowError("Rows.append", "ROW_VALUE", "Appended rows require an array.");
-      const prepared: FrozenRow[] = [];
-      for (const value of values) prepared.push(cloneRow(value, "Rows.append"));
-      unchanged(version, "Rows.append");
-      const ids: RowId[] = [];
-      for (const current of prepared) {
-        const id = nextId++;
-        rows.set(id, makeRow(id, current, false));
-        ids.push(id);
-      }
-      const appended = Object.freeze(ids);
-      if (appended.length) notify({ type: "append", ids: appended, changed: true });
-      return appended;
+      return load(values, "Rows.append", false, true);
+    },
+    appendState(states) {
+      return load(states, "Rows.appendState", true, true);
     },
     add(value, before) {
       active("Rows.add");
       const version = revision;
-      if (before !== undefined) editableRow(before, "Rows.add");
+      if (before !== undefined) requireRow(before, "Rows.add");
       const current = cloneRow(value, "Rows.add");
       unchanged(version, "Rows.add");
       const row = makeRow(nextId++, current, true);
@@ -281,14 +309,14 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
     },
     move(id, before) {
       const row = editableRow(id, "Rows.move");
-      if (before !== undefined) editableRow(before, "Rows.move");
+      if (before !== undefined) requireRow(before, "Rows.move");
       if (place(row, before)) notify({ type: "move", id, changed: true });
     },
     copy(id, before) {
       active("Rows.copy");
       const version = revision;
       const source = editableRow(id, "Rows.copy");
-      if (before !== undefined) editableRow(before, "Rows.copy");
+      if (before !== undefined) requireRow(before, "Rows.copy");
       const current = cloneRow(source.current, "Rows.copy");
       unchanged(version, "Rows.copy");
       const row = makeRow(nextId++, current, true);
@@ -346,13 +374,14 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
       const targets = id === undefined ? [...rows.values()] : [requireRow(id, "Rows.revert")];
       let modified = false;
       for (const row of targets) {
-        if (row.status === "clean") continue;
+        const status = row.checkpoint ?? "clean";
+        if (row.status === status && !row.dirty.size) continue;
         modified = true;
-        if (row.status === "insert") rows.delete(row.id);
+        if (row.status === "insert" && row.checkpoint === undefined) rows.delete(row.id);
         else {
           row.current = row.original!;
           row.dirty.clear();
-          row.status = "clean";
+          row.status = status;
           row.view = view(row.id, row.current, row.status);
         }
       }

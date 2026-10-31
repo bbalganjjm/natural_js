@@ -101,6 +101,32 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const incoming = await page.evaluate(() => {
+    const rows = window.packedConsumer.incoming;
+    rows.replaceState([
+      { value: { employeeNo: "A", name: "Received removal" }, status: "delete" },
+      { value: { employeeNo: "B", name: "Received revision" }, status: "update" }
+    ]);
+    const [deleted, updated] = rows.entries({ includeDeleted: true });
+    const [inserted] = rows.appendState([{ value: { employeeNo: "C", name: "Pending" }, status: "insert" }]);
+    rows.set(updated.id, "name", "Local revision"); rows.remove(updated.id);
+    const payload = rows.changes().map(change => {
+      const value = change.status === "delete" ? rows.get(change.id).value : change.value;
+      return { employeeNo: value.employeeNo, name: value.name, rowStatus: change.status };
+    });
+    rows.move(inserted, deleted.id); rows.set(inserted, "name", "Local pending");
+    const ordinaryCopy = rows.copy(inserted); rows.revert();
+    const result = { payload, restored: rows.entries({ includeDeleted: true }).map(row => [row.value.name, row.status]),
+      insertedOriginal: rows.original(inserted) ?? null, ordinaryCopyRemoved: rows.get(ordinaryCopy) === undefined };
+    rows.dispose(); delete window.packedConsumer.incoming;
+    return result;
+  });
+  assert.deepEqual(incoming, { payload: [
+    { employeeNo: "A", name: "Received removal", rowStatus: "delete" },
+    { employeeNo: "B", name: "Local revision", rowStatus: "delete" },
+    { employeeNo: "C", name: "Pending", rowStatus: "insert" }
+  ], restored: [["Pending", "insert"], ["Received removal", "delete"], ["Received revision", "update"]], insertedOriginal: null, ordinaryCopyRemoved: true });
+
   const sharedRules = await page.evaluate(() => {
     const h = window.packedConsumer.sharedRules, id = h.rows.entries()[0].id;
     const fields = [...h.root.querySelectorAll('[data-field="profile.name"]')];

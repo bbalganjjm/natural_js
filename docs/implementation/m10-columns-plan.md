@@ -8,7 +8,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required full framework and Grid scope
-    git_blob: db7e1e1b8b5bf9ae04e4abafea96e3dc71d324be
+    git_blob: e27c90edaec8f4ae0986444bd46c5163990d43c3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field ownership and row lifetime

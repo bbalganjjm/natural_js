@@ -18,7 +18,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Data type contract
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communication type contract

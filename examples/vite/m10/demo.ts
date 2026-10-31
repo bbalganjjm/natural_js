@@ -76,6 +76,7 @@ const status = find<HTMLOutputElement>("[data-status]");
 const snapshot = find<HTMLElement>("[data-snapshot]");
 const originalOutput = find<HTMLElement>("[data-original]");
 const changes = find<HTMLElement>("[data-changes]");
+const wire = find<HTMLElement>("[data-wire]");
 const defaultsOutput = find<HTMLElement>("[data-defaults]");
 const bindState = find<HTMLOutputElement>("[data-bind-state]");
 const renderingMode = find<HTMLSelectElement>("[data-render-mode]");
@@ -267,6 +268,13 @@ function refresh(): void {
   snapshot.textContent = inspected ? JSON.stringify(inspected, null, 2) : "Select a row.";
   originalOutput.textContent = snapshotId === null ? "Select or inspect a loaded row." : JSON.stringify(rows.original(snapshotId) ?? null, null, 2);
   changes.textContent = JSON.stringify(rows.changes(), null, 2);
+  wire.textContent = JSON.stringify({
+    receivedDeletion: rows.changes().map(change => ({ name: change.value.name, salary: change.value.salary, rowStatus: change.status })),
+    currentDeletion: rows.changes().map(change => {
+      const value = change.status === "delete" ? rows.get(change.id)!.value : change.value;
+      return { name: value.name, salary: value.salary, rowStatus: change.status };
+    })
+  }, null, 2);
   pageState.textContent = page
     ? `Page ${page.page} of ${page.pages} · ${page.total} filtered rows · size ${page.size}`
     : `${rows.entries().length} store rows · paging off`;
@@ -755,7 +763,7 @@ function act(action: string): void {
     case "add-first":
     case "insert-before": {
       const before = identities(grid);
-      const target = action === "insert-before" ? selectedId() : action === "add-first" ? rows.entries()[0]?.id : undefined;
+      const target = action === "insert-before" ? selectedId() : action === "add-first" ? rows.entries({ includeDeleted: true })[0]?.id : undefined;
       let value = employee(rows.entries().length);
       if (action === "create-defaults") {
         const defaults = grid.defaults();
@@ -776,6 +784,14 @@ function act(action: string): void {
       }
       break;
     }
+    case "load-state":
+      rows.replaceState((["delete", "clean", "update", "insert"] as const).map((status, index) => ({ value: employee(index), status })));
+      break;
+    case "append-state": {
+      const offset = rows.entries({ includeDeleted: true }).length;
+      rows.appendState((["update", "insert"] as const).map((status, index) => ({ value: employee(offset + index), status })));
+      break;
+    }
     case "refresh": grid.refresh(); break;
     case "copy-before":
     case "copy-end": {
@@ -785,7 +801,7 @@ function act(action: string): void {
       revealCommitted(id, { ...before, active: id }, action === "copy-before" ? "center" : "end");
       break;
     }
-    case "move-first": rows.move(selectedId(), rows.entries()[0]?.id); break;
+    case "move-first": rows.move(selectedId(), rows.entries({ includeDeleted: true })[0]?.id); break;
     case "move-end": rows.move(selectedId()); break;
     case "move-up":
     case "move-down": {
@@ -1017,7 +1033,7 @@ blockRoot.addEventListener("click", event => {
     if (blockId === null) throw new Error("Select a record in either layout first.");
     switch (button.dataset.blockAction) {
       case "keys": blockRows.setMany([{ id: blockId, values: { department: blockDepartment.value, team: blockTeam.value } }]); break;
-      case "first": blockRows.move(blockId, blockRows.entries()[0]?.id); break;
+      case "first": blockRows.move(blockId, blockRows.entries({ includeDeleted: true })[0]?.id); break;
       case "last": blockRows.move(blockId); break;
       case "copy": {
         const id = blockRows.copy(blockId);

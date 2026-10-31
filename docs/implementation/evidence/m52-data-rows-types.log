@@ -1,0 +1,3 @@
+tests/rows.test.ts(502,32): error TS2741: Property 'value' is missing in type '{ self?: object | undefined; }' but required in type '{ value: number; }'.
+tests/rows.test.ts(504,29): error TS2322: Type 'Date' is not assignable to type 'number'.
+tests/rows.test.ts(839,11): error TS2322: Type 'string' is not assignable to type 'RowStatus'.

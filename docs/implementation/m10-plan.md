@@ -20,7 +20,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: old-grid
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Grid options and implementation

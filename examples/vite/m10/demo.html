@@ -232,6 +232,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
             <button type="button" data-action="add" data-needs-grid>Add row at end</button>
             <button type="button" data-action="add-first" data-needs-grid>Add row at front</button>
             <button type="button" data-action="append" data-needs-grid>Append 2 loaded employees</button>
+            <button type="button" data-action="load-state" data-needs-grid>Load received row states</button>
+            <button type="button" data-action="append-state" data-needs-grid>Append received changes</button>
             <button type="button" data-action="defaults" data-needs-grid>Read authored defaults</button>
             <button type="button" data-action="create-defaults" data-needs-grid>Create employee from defaults</button>
             <button type="button" data-action="insert-before" data-needs-grid>Insert before selected</button>
@@ -249,6 +251,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <label>Programmatic salary
             <input type="number" min="0" step="1" value="250" data-new-salary data-needs-grid>
           </label>
+          <p>Received states start with a retained deletion, then clean, update and insert. Revert restores each received value and status; ordinary added copies are discarded. Choose All statuses to inspect deletions. The payload sample below selects Name and Salary explicitly and sends no store IDs.</p>
           <div class="button-row">
             <button type="button" data-action="set-salary" data-needs-grid>Rows.set salary</button>
             <button type="button" data-action="missing-choice" data-needs-grid>Set unavailable shift</button>
@@ -363,6 +366,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <section><h3>Rows.original(id)</h3><pre data-original tabindex="0">Select or inspect a loaded row.</pre><p>Highlighted fields differ from the loaded original. Formatting and invalid drafts do not change stored values. New rows use insert status.</p></section>
           <section><h3>Rows.changes()</h3><pre data-changes tabindex="0">[]</pre></section>
           <section><h3>Validation issues</h3><pre data-issues tabindex="0">Not run yet.</pre></section>
+          <section><h3>Application payload samples</h3><p>Received deletion uses its checkpoint; current deletion uses its last committed value. This preview sends no request.</p><pre data-wire tabindex="0">[]</pre></section>
           <section><h3>grid.columns()</h3><pre data-columns-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Selection and independent checks</h3><pre data-selection-state tabindex="0">Not bound yet.</pre></section>
           <section><h3>Distinct Team filter and counts</h3><pre data-filter-state tabindex="0">Not bound yet.</pre></section>

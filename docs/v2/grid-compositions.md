@@ -12,7 +12,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: Immutable snapshots and independent store identity
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: recipes
     resource: ../../tests/browser/grid-recipes.spec.ts
     title: Projections, native event order and authored topology regressions
@@ -24,7 +24,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Rebind-safe native event observation
-    git_blob: 79ebd9d83a7c40bb15c43651190a25074eb87e92
+    git_blob: c026da7f07812031e363e604265f74b7afbf6640
 generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }

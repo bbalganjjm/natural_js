@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.2 incoming row state",
+  "recorded_at": "2026-10-31",
+  "status": "development_observations_not_final_gates",
+  "files_sha256": {
+    "m52-data-rows-units.log": "04621754655c5c6c097fd1938d311e9ce473de3cd54ac8ff56031e9700fe8530",
+    "m52-data-rows-types.log": "18d0af24ffbfcc868373fdced34e0c53b23886ce84ed12a0ac23cd45a097a498",
+    "m52-data-rows-types-2.log": "2d942d9c69846ae85ea2c0374e7290489ef9d21530de39066c19c4a84a0326d6"
+  },
+  "captured": [
+    {
+      "file": "m52-data-rows-units.log",
+      "observed": "Vitest records one test file and 39 passed Rows tests.",
+      "scope": "Focused development run only. The source owner reports this as a post-fix 39/39 run; a later edit only annotated the status getter return type.",
+      "gate_record": false
+    },
+    {
+      "file": "m52-data-rows-types.log",
+      "observed": "Standalone test-file TypeScript output contains three diagnostics: two existing intentionally invalid negative inputs and one new status getter inferred as string instead of RowStatus.",
+      "gate_record": false
+    },
+    {
+      "file": "m52-data-rows-types-2.log",
+      "observed": "After annotating the getter type, standalone test-file TypeScript output retains the two existing intentionally invalid negative inputs and no getter diagnostic.",
+      "gate_record": false
+    }
+  ],
+  "uncaptured": [
+    {
+      "reported": "An earlier focused Rows run reported 38 passed and 1 failed; a subsequent rerun reported 39 passed.",
+      "raw_output": "Those initial outputs were present only in chat. They were not captured as files and are not reconstructed or assigned invented hashes, commands, exit codes or input manifests."
+    }
+  ],
+  "limits": [
+    "These three raw logs are retained outside the frozen sixteen-gate JSONL record. They do not create additional final gates or final-gate failures.",
+    "Exact command/exit-code/frozen-input metadata is unavailable for these extra development outputs; only the captured bytes and visible result are hashed.",
+    "Fresh final source, browser, package and performance gates remain authoritative for the final frozen input map."
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.2 incoming row state, checkpoints and application wire projection",
+  "recorded_at": "2026-10-31",
+  "status": "selected_outcomes_verified_full_families_open",
+  "workspace_baseline_commit": "73f5a8809356a1a3d26bff12732669a18cbdfb20",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m51-verification.json",
+      "sha256": "399739ff8c9aabf5a5656572a005d7f3cf5e8b9b179306a8465df82de5fe1343",
+      "preserved_in_commit": "73f5a8809356a1a3d26bff12732669a18cbdfb20"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m51-shared-rules.json",
+      "sha256": "6b5108667a3a48983b09b2f572bffc4b238918eba7e75471aca6ebdecf4efde2"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and unclosed owner obligation through the immutable M5.1 evidence and original audit. This selected state delta neither replaces prior ledgers nor reruns or recertifies historical runtime.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "public_delta": {
+    "new_public_named_types": [
+      "RowState"
+    ],
+    "properties": [
+      "RowState<T>.value: T",
+      "RowState<T>.status: RowStatus"
+    ],
+    "methods": [
+      "Rows.replaceState(states: readonly RowState<T>[]): void",
+      "Rows.appendState(states: readonly RowState<T>[]): readonly RowId[]"
+    ],
+    "new_public_entries": 0,
+    "new_framework_source_modules": 0,
+    "new_runtime_dependencies": 0,
+    "note": "Reuse createRows preparation, immutable JSON values, revision/disposal guards, existing replace/append events and full retained Map ordering. Ordinary clean loaders never infer rowStatus/status/value business properties."
+  },
+  "selected_contracts": {
+    "checkpoint": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Preserve the received immutable value and canonical status as a private checkpoint. Imported updates stay pending after local edits return to the received value. Imported inserts reset to their received value while present; ordinary add/copy inserts still cancel on revert. Imported deletes remain deleted after revert. Unchanged checkpoints preserve snapshots/caches and notify changed:false. Public original() remains undefined for every insert; deletion changes keep checkpoint-valued payloads while get() retains committed deletion display.",
+      "source_refs": [
+        "src/data/index.ts#Rows.original",
+        "src/data/index.ts#Rows.revert",
+        "src/data/index.ts#Rows.changes"
+      ],
+      "witnesses": [
+        "U01",
+        "U02",
+        "U04",
+        "U09",
+        "B03",
+        "B07",
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No earlier server original or pre-receive field history is invented. General data-value/schema equivalence remains required."
+    },
+    "state_load": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Receive explicit plain own value/status descriptors with exactly those keys and one of clean/insert/update/delete. Prepare every descriptor and JSON value before committing IDs/order/caches/events. Reject malformed late records, sparse arrays, imported IDs and extra own protocol keys. Preserve reentrant inner effects while rejecting stale outer preparation or disposal. Reuse clean-loader preparation and post-commit subscriber delivery.",
+      "source_refs": [
+        "src/data/index.ts#RowState",
+        "src/data/index.ts#Rows.replaceState",
+        "src/data/index.ts#Rows.appendState"
+      ],
+      "witnesses": [
+        "U01",
+        "U03",
+        "U04",
+        "U05",
+        "U06",
+        "U07",
+        "B01",
+        "B02",
+        "B06",
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No automatic legacy flag inference, imported identity, status registry or generic metadata adapter is provided."
+    },
+    "anchors": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Permit existing retained delete rows as add/move/copy before anchors while keeping move/copy sources live. Preserve full raw Map order, snapshots and successor no-op caches. First-position application recipes use the first retained entry, including leading/all-deleted states.",
+      "source_refs": [
+        "src/data/index.ts#Rows.add",
+        "src/data/index.ts#Rows.move",
+        "src/data/index.ts#Rows.copy",
+        "examples/vite/m10/demo.ts"
+      ],
+      "witnesses": [
+        "U08",
+        "B05",
+        "I01",
+        "I03"
+      ],
+      "remaining": "This does not introduce a second ordering engine or close unrelated Grid reorder/drag workflows."
+    },
+    "app_wire": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Application code removes the legacy rowStatus key, explicitly maps allowed statuses and projects only business keys plus protocol status. Modern deletion projection uses change.value; an explicit legacy current-value recipe uses rows.get(change.id).value. Scalar/array choice, method, standard query encoding, response decode and cancellation remain explicit through the existing communicator.",
+      "source_refs": [
+        "examples/vite/m10/demo.ts",
+        "src/comm/index.ts#createCommunicator"
+      ],
+      "witnesses": [
+        "B10",
+        "B11",
+        "I01",
+        "I03"
+      ],
+      "remaining": "Rows does not own HTTP policy, rowStatus parsing, automatic payload conversion or RowId transmission. Remaining transport/CVC contracts stay required."
+    },
+    "shared_ui": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Exercise received statuses and checkpoint reversion through the existing Form/Grid/List/Tree replace/append subscriptions. Preserve existing row identities and UI state on append; reset old identities/drafts on replacement; retain loaded tombstone editing guards and authored accessibility cleanup.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/grid.ts",
+        "src/ui/list.ts",
+        "src/ui/tree.ts"
+      ],
+      "witnesses": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B06",
+        "B07",
+        "B08",
+        "B09"
+      ],
+      "remaining": "List editing, general Tree validation, Form choice/render mapping and remaining UI workflows stay open."
+    },
+    "demo": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Expose authored controls for incoming state, checkpoint edits/reversion and retained ordering in the existing Grid demo. Keep controller/CVC ownership, shared Rows, application rule/wire functions and authored HTML/CSS; add no second demo framework.",
+      "source_refs": [
+        "examples/vite/m10/demo.html",
+        "examples/vite/m10/demo.ts"
+      ],
+      "witnesses": [
+        "D01"
+      ],
+      "remaining": "The demo is selected acceptance coverage, not completion of every legacy UI/CVC behavior."
+    },
+    "installed": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Install one exact package in isolated JavaScript and TypeScript consumers and exercise the same artifact in Chromium, Firefox, WebKit, actual Windows Chrome and Edge. Cover explicit state entry points, checkpoint/cancellation distinction, retained anchors and immutable/shared values.",
+      "source_refs": [
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js"
+      ],
+      "witnesses": [
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No npm publication or release tag. Actual macOS/iOS Safari remains excluded; available WebKit is mandatory."
+    }
+  },
+  "witnesses": {
+    "U01": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "loads canonical states without interpreting business metadata or inventing earlier originals"
+    },
+    "U02": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "restores received pending checkpoints while ordinary inserted copies still cancel"
+    },
+    "U03": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "appends mixed states in one frozen event while preserving existing snapshots and edits"
+    },
+    "U04": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "preserves checkpoint caches for no-op reverts and empty append but resets on empty replacement"
+    },
+    "U05": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "rejects noncanonical or invalid state batches before writes events or ID allocation"
+    },
+    "U06": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "rejects stale descriptor and JSON preparation while preserving inner writes and disposal"
+    },
+    "U07": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "keeps complete state commits when subscribers throw and stops delivery on disposal"
+    },
+    "U08": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "uses retained deleted anchors for add copy and live moves without changing tombstone identity"
+    },
+    "U09": {
+      "kind": "unit",
+      "file": "tests/rows.test.ts",
+      "title": "tracks checkpoint signed zero and extra fields while preserving unaffected snapshots"
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "state replacement resets shared identities and displays received flags without business metadata"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "state append preserves shared drafts focus snapshots membership and one frozen append event"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "received pending checkpoints revert values and flags while ordinary inserts remain cancellable"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "received tombstones stay protected in native editors membership Forms and paste after checkpoint reversion"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "first-position add and move use retained deleted anchors and preserve their order when ordinary deletions revert"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "invalid later state records preserve all shared DOM caches events and the next committed identity"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "unchanged received checkpoint reversion keeps caches but clears local Form and Grid drafts"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "state loading and append retain bounded viewport ownership and become quiet after all views dispose"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "independent received stores keep document-unique error IDs and unaffected native Form ownership"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "application POST projections choose current or received deletion values and scalar or array bodies without RowId leakage"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "application GET decoding explicitly maps statuses and cancellation prevents late state publication"
+    },
+    "D01": {
+      "kind": "browser",
+      "file": "tests/browser/row-state.spec.ts",
+      "title": "the Grid explorer loads and appends received states and contrasts received and current deletion payloads"
+    },
+    "I01": {
+      "kind": "consumer",
+      "file": "tests/consumers/js/check.mjs",
+      "title": "Installed JavaScript state checkpoints and original-valued deletion projection",
+      "marker": "const received = createRows();"
+    },
+    "I02": {
+      "kind": "consumer",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript RowState and state loader signatures",
+      "marker": "export function receiveEmployees("
+    },
+    "I03": {
+      "kind": "consumer",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Installed browser received-state checkpoint and current-valued deletion projection",
+      "marker": "const incoming = await page.evaluate("
+    }
+  },
+  "witness_counts": {
+    "status": "exact_source_witnesses_fresh_runtime_confirmed",
+    "unit_delta": 9,
+    "browser_delta": 12,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 574,
+    "expected_full_cases_per_engine": 586,
+    "expected_unit_pass_count": 136,
+    "actual_unit_pass_count": 136,
+    "actual_full_cases_per_engine": 586
+  },
+  "verification": {
+    "status": "fresh_final_sixteen_gates_independently_reviewed",
+    "gate_record": "docs/implementation/evidence/m52-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m52-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful data-state units",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF document checks",
+      "Independent connected-code and raw-evidence reviews"
+    ],
+    "limitations": [
+      "Historical runtime is not rerun or recertified.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory."
+    ],
+    "development_observations": "docs/implementation/evidence/m52-development-observations.json",
+    "actual_frozen_input_entries": 180,
+    "actual_final_gate_records": 16,
+    "actual_gate_records": 28,
+    "actual_development_gate_records": 12,
+    "actual_input_manifests": 4,
+    "additional_development_raw_logs": 3,
+    "actual_unit_cases": 136,
+    "actual_full_cases_per_engine": 586,
+    "artifact_sha256": "489521f17da4f0837dd44e3fd83b2cac5461764d019ec751920c50b0cc576728",
+    "reviewed_conclusions": [
+      "Connected source, rule/UI subscribers, examples, tests and installed consumers preserve the selected state/checkpoint/anchor/wire contracts; the inherited sparse outer array slot defect is fixed and covered.",
+      "Independent raw review matches 28 gate-record logs, four input manifests, three separate CRLF development outputs and every current frozen input. Only the sixteen final passing gates certify the 180-input map.",
+      "Every actual archive payload and individual member size matches the workspace: 183 files, 305404 packed bytes and 1518453 unpacked bytes; installed JS/TS and all five Windows browsers use the same archive hash.",
+      "All 60 medians recompute from 300 raw durations. Original nine binding and twenty-one viewport budgets pass, with 105 live checkpoints, 300 scroll windows, fifteen append and exact quiet-disposal samples, and bounded physical-row maxima 14/14/24.",
+      "Six inherited evidence parents, original Grid counts, v1 files and the ignored legacy lock remain unchanged. No historical runtime is rerun or recertified."
+    ],
+    "document_gate_note": "Root final semantic document review and changed/full OKF checks are recorded with the completed documentation; this metadata accepts selected source/runtime outcomes and does not close any full owner family."
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Raw choice/render mapping, bind-value hooks and full control/option/callback/dynamic workflows."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected outcomes can receive acceptance after implementation, fresh final gates and independent review. No family, P0, M13 or parent milestone closure is claimed."
+  }
+}

@@ -113,6 +113,31 @@ assert.equal(controls.original(999999), undefined);
 controls.dispose();
 
 const originalFetch = globalThis.fetch;
+const received = createRows();
+received.replaceState([
+  { value: { employeeNo: "A", name: "Received removal" }, status: "delete" },
+  { value: { employeeNo: "B", name: "Received revision" }, status: "update" }
+]);
+const [removed, revised] = received.entries({ includeDeleted: true });
+const [pending] = received.appendState([{ value: { employeeNo: "C", name: "Pending" }, status: "insert" }]);
+received.set(revised.id, "name", "Local revision");
+received.remove(revised.id);
+const receivedPayload = received.changes().map(change => ({ employeeNo: change.value.employeeNo, name: change.value.name, rowStatus: change.status }));
+assert.deepEqual(receivedPayload, [
+  { employeeNo: "A", name: "Received removal", rowStatus: "delete" },
+  { employeeNo: "B", name: "Received revision", rowStatus: "delete" },
+  { employeeNo: "C", name: "Pending", rowStatus: "insert" }
+]);
+assert.equal(received.get(revised.id).value.name, "Local revision");
+received.move(pending, removed.id);
+received.set(pending, "name", "Local pending");
+const ordinaryCopy = received.copy(pending);
+received.revert();
+assert.deepEqual(received.entries({ includeDeleted: true }).map(row => row.status), ["insert", "delete", "update"]);
+assert.equal(received.get(pending).value.name, "Pending");
+assert.equal(received.original(pending), undefined);
+assert.equal(received.get(ordinaryCopy), undefined);
+received.dispose();
 globalThis.fetch = async request => {
   assert.equal(request.url, "https://example.test/api/employees");
   assert.equal(request.method, "POST");

@@ -32,11 +32,11 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 061e6f8d057b3e019751d265083cbe745f95a79d
+    git_blob: cf2050f8556a470d02294eb55bed73bde4623504
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: 79ebd9d83a7c40bb15c43651190a25074eb87e92
+    git_blob: c026da7f07812031e363e604265f74b7afbf6640
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
@@ -117,10 +117,10 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -320,6 +320,8 @@ Without `initialPage`, `viewport` or `progressive`, Grid creates all initial row
 [^controls-browser]: Native groups, typed values, validation and display regressions
 [^lifecycle-browser]: Status, defaults, callback ownership, focus and failure regressions
 [^detail-controller]: One authored employee detail page in main content and Popup
+
+The Rows controls include Load received row states and Append received changes. Full loading starts with a deletion followed by clean/update/insert records; choose All retained rows to inspect it. Revert restores received values AND statuses. Ordinary added/copied inserts are discarded. Add/move to first uses the first retained row, including a deletion. Application payload samples explicitly select Name/Salary and compare received-original with current-value deletion projection; they make no request and expose no store IDs.
 
 [Grid](grid.md) defines exact current public behavior. [Rows](data.md) defines identity and changes. [M10 plan](../implementation/m10-plan.md) preserves earlier measurements and defines the required follow-up stages. The [feature parity ledger](../implementation/feature-parity.md) and [parity implementation plan](../implementation/feature-parity-plan.md) track the full release requirement.
 

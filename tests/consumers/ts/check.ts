@@ -2,7 +2,7 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { RowId, RowSnapshot, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
+import type { RowId, RowSnapshot, RowState, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
@@ -12,6 +12,16 @@ import type { FieldRules, RuleSet } from "@bbalganjjm/natural_js/ui";
 interface Employee {
   name: string;
   options?: { value: string }[];
+}
+
+export function receiveEmployees(rows: Rows<Employee>, states: readonly RowState<Employee>[]) {
+  const replaced: void = rows.replaceState(states);
+  const appended: readonly RowId[] = rows.appendState(states);
+  const payload: { name: string; rowStatus: Exclude<RowStatus, "clean"> }[] = rows.changes().map(change => ({
+    name: change.value.name, rowStatus: change.status
+  }));
+  void replaced;
+  return { appended, payload };
 }
 
 export const definition = {

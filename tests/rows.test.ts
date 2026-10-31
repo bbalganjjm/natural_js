@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { createRows } from "../src/data/index.js";
-import type { RowsEvent } from "../src/data/index.js";
+import type { RowState, RowsEvent } from "../src/data/index.js";
 
 describe("createRows", () => {
   it("keeps row identity stable and exposes detached, immutable nested snapshots", () => {
@@ -406,9 +406,7 @@ describe("createRows", () => {
       ["move", (before: number) => rows.move(first.id, before)],
       ["copy", (before: number) => rows.copy(first.id, before)]
     ] as const) {
-      for (const [target, code] of [[999, "ROW_MISSING"], [second.id, "ROW_DELETED"]] as const) {
-        expect(() => write(target)).toThrow(expect.objectContaining({ code, api: `Rows.${operation}` }));
-      }
+      expect(() => write(999)).toThrow(expect.objectContaining({ code: "ROW_MISSING", api: `Rows.${operation}` }));
     }
     for (const operation of ["move", "copy"] as const) {
       expect(() => rows[operation](999, first.id))
@@ -753,5 +751,275 @@ describe("createRows", () => {
     rows.setMany([{ id: first.id, values: { value: 100 } }]);
     expect(afterDisposal).not.toHaveBeenCalled();
     expect(() => rows.setMany([])).toThrow(/disposed/);
+  });
+
+  it("loads canonical states without interpreting business metadata or inventing earlier originals", () => {
+    const rows = createRows([{ status: "business", rowStatus: "insert", value: { nested: [0] } }]);
+    expect(rows.get(1)!.status).toBe("clean");
+    const input = ["clean", "insert", "update", "delete"].map((status, index) => ({
+      status, value: { status: "business", rowStatus: "insert", value: { nested: [index + 1] } }
+    })) as RowState<{ status: string; rowStatus: string; value: { nested: number[] } }>[];
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => events.push(event));
+    rows.replaceState(input);
+    const all = rows.entries({ includeDeleted: true });
+    expect(all.map(row => [row.id, row.status])).toEqual([[2, "clean"], [3, "insert"], [4, "update"], [5, "delete"]]);
+    expect(rows.entries().map(row => row.id)).toEqual([2, 3, 4]);
+    expect(rows.get(1)).toBeUndefined();
+    expect(events).toEqual([{ type: "replace", changed: true }]);
+    for (const row of all) {
+      expect(Object.keys(row)).toEqual(["id", "value", "status"]);
+      expect(Object.keys(row.value)).toEqual(["status", "rowStatus", "value"]);
+      expect(Object.isFrozen(row.value.value.nested)).toBe(true);
+      expect(rows.original(row.id)).toBe(row.status === "insert" ? undefined : row.value);
+    }
+    input[0].value.value.nested[0] = 99;
+    expect(all[0].value.value.nested).toEqual([1]);
+    expect(rows.changes().map(row => [row.id, row.status])).toEqual([[3, "insert"], [4, "update"], [5, "delete"]]);
+    expect(rows.changes()[2].value).toBe(rows.original(5));
+    const [plain] = rows.append([{ status: "update", rowStatus: "delete", value: { nested: [6] } }]);
+    expect(rows.get(plain)!.status).toBe("clean");
+    rows.replace([{ status: "insert", rowStatus: "delete", value: { nested: [7] } }]);
+    expect(rows.entries()[0]).toMatchObject({ id: 7, status: "clean" });
+    rows.dispose();
+  });
+
+  it("restores received pending checkpoints while ordinary inserted copies still cancel", () => {
+    const rows = createRows<{ value: { nested: number[] } }>();
+    rows.replaceState(["clean", "insert", "update", "delete"].map((status, index) => ({
+      status, value: { value: { nested: [index + 1] } }
+    })) as RowState<{ value: { nested: number[] } }>[]);
+    const original = rows.original(3)!;
+    rows.set(3, "value", { nested: [30] });
+    rows.set(3, "value", { nested: [3] });
+    expect(rows.get(3)!.status).toBe("update");
+    rows.set(3, "value", { nested: [31] });
+    rows.remove(3);
+    expect(rows.get(3)!.value.value.nested).toEqual([31]);
+    expect(rows.changes().find(row => row.id === 3)!.value).toBe(original);
+    rows.set(2, "value", { nested: [20] });
+    expect(rows.get(2)!.status).toBe("insert");
+    expect(rows.original(2)).toBeUndefined();
+    const copy = rows.copy(2), local = rows.add({ value: { nested: [8] } });
+    expect(rows.get(copy)!.value.value.nested).toEqual([20]);
+    expect(rows.original(copy)).toBeUndefined();
+    rows.remove(1);
+    rows.revert();
+    expect(rows.entries({ includeDeleted: true }).map(row => [row.id, row.status, row.value.value.nested]))
+      .toEqual([[1, "clean", [1]], [2, "insert", [2]], [3, "update", [3]], [4, "delete", [4]]]);
+    expect(rows.get(3)!.value).toBe(original);
+    expect(rows.get(copy)).toBeUndefined();
+    expect(rows.get(local)).toBeUndefined();
+    expect(rows.changes().map(row => [row.id, row.status])).toEqual([[2, "insert"], [3, "update"], [4, "delete"]]);
+    rows.remove(2);
+    expect(rows.get(2)).toBeUndefined();
+    expect(() => rows.revert(2)).toThrow(expect.objectContaining({ code: "ROW_MISSING" }));
+    for (const operation of [() => rows.set(4, "value", { nested: [] }), () => rows.move(4), () => rows.copy(4)]) {
+      expect(operation).toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    }
+    rows.dispose();
+  });
+
+  it("appends mixed states in one frozen event while preserving existing snapshots and edits", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }]);
+    rows.set(1, "value", 10); rows.remove(2);
+    const previous = rows.entries({ includeDeleted: true });
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => {
+      events.push(event);
+      expect(rows.entries({ includeDeleted: true }).map(row => row.status))
+        .toEqual(["update", "delete", "clean", "insert", "update", "delete"]);
+    });
+    const states = ["clean", "insert", "update", "delete"].map((status, index) => ({
+      status, value: { value: index + 3 }
+    })) as RowState<{ value: number }>[];
+    let valueReads = 0, statusReads = 0;
+    states[2] = {
+      get value() { valueReads++; return { value: 5 }; },
+      get status(): "update" { statusReads++; return "update"; }
+    };
+    const ids = rows.appendState(states);
+    expect([valueReads, statusReads]).toEqual([1, 1]);
+    expect(ids).toEqual([3, 4, 5, 6]);
+    expect(Object.isFrozen(ids)).toBe(true);
+    expect(events).toEqual([{ type: "append", ids, changed: true }]);
+    expect(Object.isFrozen(events[0])).toBe(true);
+    expect(events[0].type === "append" && events[0].ids).toBe(ids);
+    for (const row of previous) expect(rows.get(row.id)).toBe(row);
+    expect(rows.original(4)).toBeUndefined();
+    expect(rows.original(5)).toBe(rows.get(5)!.value);
+    expect(rows.changes().map(row => row.id)).toEqual([1, 2, 4, 5, 6]);
+    rows.dispose();
+  });
+
+  it("preserves checkpoint caches for no-op reverts and empty append but resets on empty replacement", () => {
+    const rows = createRows<{ value: number }>();
+    rows.replaceState(["clean", "insert", "update", "delete"].map((status, index) => ({
+      status, value: { value: index }
+    })) as RowState<{ value: number }>[]);
+    const live = rows.entries(), all = rows.entries({ includeDeleted: true }), changes = rows.changes();
+    const events: RowsEvent[] = [];
+    rows.subscribe(event => events.push(event));
+    for (const row of all) rows.revert(row.id);
+    rows.revert();
+    const empty = rows.appendState([]);
+    expect(empty).toEqual([]); expect(Object.isFrozen(empty)).toBe(true);
+    expect(rows.entries()).toBe(live);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    expect(rows.changes()).toBe(changes);
+    for (const row of all) expect(rows.get(row.id)).toBe(row);
+    expect(events).toEqual([
+      ...all.map(row => ({ type: "revert", id: row.id, changed: false })), { type: "revert", changed: false }
+    ]);
+    rows.replaceState([]);
+    expect(rows.entries()).toEqual([]);
+    expect(events.at(-1)).toEqual({ type: "replace", changed: true });
+    expect(rows.add({ value: 5 })).toBe(5);
+    rows.dispose();
+  });
+
+  it("rejects noncanonical or invalid state batches before writes events or ID allocation", () => {
+    for (const operation of ["replaceState", "appendState"] as const) {
+      const rows = createRows([{ value: 1 }]);
+      const live = rows.entries(), all = rows.entries({ includeDeleted: true }), changes = rows.changes();
+      const listener = vi.fn(); rows.subscribe(listener);
+      const valid = { value: { value: 2 }, status: "update" };
+      const hidden = Object.defineProperty({ ...valid }, "id", { value: 99 });
+      const malformed = [null, [], {}, { value: { value: 2 } }, { status: "clean" },
+        { ...valid, status: "modified" }, { ...valid, status: undefined }, { ...valid, id: 99 }, hidden,
+        { ...valid, [Symbol("wire")]: true }, Object.create(valid)];
+      for (const value of malformed) {
+        expect(() => rows[operation]([valid, value] as never)).toThrow(expect.objectContaining({
+          api: `Rows.${operation}`, code: "ROW_VALUE", detail: { index: 1 }
+        }));
+      }
+      for (const values of [null, {}, "rows", new Set([valid]), new Array(1)]) {
+        expect(() => rows[operation](values as never)).toThrow(expect.objectContaining({ api: `Rows.${operation}`, code: "ROW_VALUE" }));
+      }
+      const inherited = Object.setPrototypeOf(new Array(1), Object.assign(Object.create(Array.prototype), { 0: valid }));
+      expect(() => rows[operation](inherited)).toThrow(expect.objectContaining({
+        api: `Rows.${operation}`, code: "ROW_VALUE", detail: { index: 0 }
+      }));
+      const cyclic: { self?: object } = {}; cyclic.self = cyclic;
+      for (const value of [undefined, NaN, Infinity, new Date(), () => {}, 1n, cyclic,
+        { [Symbol("hidden")]: true }, new Array(1)]) {
+        expect(() => rows[operation]([valid, { value: { value }, status: "clean" }] as never))
+          .toThrow(expect.objectContaining({ api: `Rows.${operation}`, code: "ROW_VALUE" }));
+      }
+      const cause = new Error("descriptor failed");
+      expect(() => rows[operation]([{ get value() { throw cause; }, status: "clean" }] as never)).toThrow(cause);
+      expect(rows.entries()).toBe(live);
+      expect(rows.entries({ includeDeleted: true })).toBe(all);
+      expect(rows.changes()).toBe(changes);
+      expect(rows.get(1)).toBe(live[0]);
+      expect(listener).not.toHaveBeenCalled();
+      expect(rows.add({ value: 3 })).toBe(2);
+      rows.dispose();
+    }
+    const rows = createRows([{ value: 1 }]);
+    for (const value of [new Set([{ value: 2 }]), {}, null]) {
+      expect(() => rows.replace(value as never)).toThrow(expect.objectContaining({ api: "Rows.replace", code: "ROW_VALUE" }));
+    }
+    for (const operation of ["replace", "append"] as const) {
+      const inherited = Object.setPrototypeOf(new Array(1), Object.assign(Object.create(Array.prototype), { 0: { value: 2 } }));
+      expect(() => rows[operation](inherited)).toThrow(expect.objectContaining({
+        api: `Rows.${operation}`, code: "ROW_VALUE", detail: { index: 0 }
+      }));
+    }
+    expect(rows.get(1)!.value.value).toBe(1);
+    rows.dispose();
+  });
+
+  it("rejects stale descriptor and JSON preparation while preserving inner writes and disposal", () => {
+    for (const operation of ["replaceState", "appendState"] as const) {
+      for (const location of ["status", "value", "nested"] as const) {
+        const rows = createRows([{ value: 1 }, { value: 2 }]);
+        const effect = () => rows.append([{ value: 3 }]);
+        const record = location === "status" ? { value: { value: 4 }, get status() { effect(); return "update"; } } :
+          location === "value" ? { get value() { effect(); return { value: 4 }; }, status: "update" } :
+            { value: { get value() { effect(); return 4; } }, status: "update" };
+        expect(() => rows[operation]([record] as never))
+          .toThrow(expect.objectContaining({ api: `Rows.${operation}`, code: "ROW_VALUE" }));
+        expect(rows.entries().map(row => [row.id, row.value.value])).toEqual([[1, 1], [2, 2], [3, 3]]);
+        expect(rows.add({ value: 5 })).toBe(4);
+        rows.dispose();
+      }
+      const moved = createRows([{ value: 1 }, { value: 2 }]);
+      expect(() => moved[operation]([{ value: { value: 3 }, get status() { moved.move(2, 1); return "update"; } }] as never))
+        .toThrow(expect.objectContaining({ code: "ROW_VALUE" }));
+      expect(moved.entries().map(row => row.id)).toEqual([2, 1]);
+      moved.dispose();
+      const disposed = createRows([{ value: 1 }]);
+      expect(() => disposed[operation]([{ get value() { disposed.dispose(); return { value: 3 }; }, status: "delete" }]))
+        .toThrow(expect.objectContaining({ api: `Rows.${operation}`, code: "ROWS_DISPOSED" }));
+    }
+  });
+
+  it("keeps complete state commits when subscribers throw and stops delivery on disposal", () => {
+    for (const operation of ["replaceState", "appendState"] as const) {
+      const rows = createRows([{ value: 1 }]);
+      const cause = new Error("state subscriber failed");
+      const release = rows.subscribe(() => { throw cause; });
+      const later = vi.fn(); rows.subscribe(later);
+      expect(() => rows[operation]([{ value: { value: 2 }, status: "insert" }, { value: { value: 3 }, status: "delete" }])).toThrow(cause);
+      expect(rows.get(2)!.status).toBe("insert");
+      expect(rows.get(3)!.status).toBe("delete");
+      expect(rows.original(2)).toBeUndefined();
+      expect(later).toHaveBeenCalledExactlyOnceWith(operation === "replaceState"
+        ? { type: "replace", changed: true } : { type: "append", ids: [2, 3], changed: true });
+      release();
+      rows.subscribe(() => rows.dispose());
+      const after = vi.fn(); rows.subscribe(after);
+      rows[operation]([{ value: { value: 4 }, status: "update" }]);
+      expect(after).not.toHaveBeenCalled();
+      expect(() => rows[operation]([])).toThrow(expect.objectContaining({ code: "ROWS_DISPOSED" }));
+    }
+  });
+
+  it("uses retained deleted anchors for add copy and live moves without changing tombstone identity", () => {
+    const rows = createRows([{ value: 1 }, { value: 2 }, { value: 3 }]);
+    rows.remove(1); rows.remove(2);
+    const first = rows.get(1), second = rows.get(2), third = rows.get(3);
+    const events: RowsEvent[] = []; rows.subscribe(event => events.push(event));
+    const added = rows.add({ value: 4 }, 1), copied = rows.copy(3, 2);
+    rows.move(3, 1);
+    expect(rows.entries({ includeDeleted: true }).map(row => row.id)).toEqual([added, 3, 1, copied, 2]);
+    for (const row of [first, second, third]) expect(rows.get(row!.id)).toBe(row);
+    const all = rows.entries({ includeDeleted: true }), changes = rows.changes();
+    rows.move(3, 1);
+    expect(rows.entries({ includeDeleted: true })).toBe(all);
+    expect(rows.changes()).toBe(changes);
+    expect(events.map(event => event.type)).toEqual(["add", "add", "move"]);
+    expect(() => rows.move(1, 2)).toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    expect(() => rows.copy(2, 1)).toThrow(expect.objectContaining({ code: "ROW_DELETED" }));
+    rows.revert();
+    expect(rows.entries().map(row => row.id)).toEqual([3, 1, 2]);
+    rows.remove(3); rows.remove(1); rows.remove(2);
+    expect(rows.entries()).toEqual([]);
+    const top = rows.add({ value: 5 }, rows.entries({ includeDeleted: true })[0].id);
+    expect(rows.entries({ includeDeleted: true }).map(row => row.id)).toEqual([top, 3, 1, 2]);
+    rows.revert();
+    expect(rows.entries().map(row => row.id)).toEqual([3, 1, 2]);
+    rows.dispose();
+  });
+
+  it("tracks checkpoint signed zero and extra fields while preserving unaffected snapshots", () => {
+    const rows = createRows<Record<string, unknown>>();
+    rows.replaceState([{ value: { value: 0, nested: [0] }, status: "update" },
+      { value: { value: 0, nested: [0] }, status: "insert" }]);
+    const second = rows.get(2)!;
+    rows.setMany([{ id: 1, values: { value: -0, extra: "local" } }]);
+    expect(Object.is(rows.get(1)!.value.value, -0)).toBe(true);
+    expect(Object.is(rows.original(1)!.value, 0)).toBe(true);
+    expect(rows.get(2)).toBe(second);
+    rows.setMany([{ id: 1, values: { value: 0, nested: [-0] } }, { id: 2, values: { value: -0 } }]);
+    expect(rows.get(1)!.status).toBe("update");
+    expect(rows.get(2)!.status).toBe("insert");
+    rows.revert();
+    expect(rows.get(1)!.value).toEqual({ value: 0, nested: [0] });
+    expect(Object.hasOwn(rows.get(1)!.value, "extra")).toBe(false);
+    expect(rows.get(2)!.value).toEqual({ value: 0, nested: [0] });
+    expect(rows.original(2)).toBeUndefined();
+    rows.dispose();
   });
 });

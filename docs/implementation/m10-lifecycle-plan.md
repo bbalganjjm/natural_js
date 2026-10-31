@@ -8,11 +8,11 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: ba7566d70c2ff29f7db383236a51571f0fffa3ad
+    git_blob: 29fd7ca35bff0c58027d705390bc6446d2cc6000
   - id: data
     resource: ../../src/data/index.ts
     title: Shared snapshots, tombstones and atomic notification
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled record binding and view ownership
@@ -44,7 +44,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Working Grid controls, statuses, callbacks and native-default factory
-    git_blob: 79ebd9d83a7c40bb15c43651190a25074eb87e92
+    git_blob: c026da7f07812031e363e604265f74b7afbf6640
   - id: evidence
     resource: evidence/m1094-verification.json
     title: Frozen commands, source identities, exact artifact and measurements

@@ -12,11 +12,11 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable row store
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion
-    git_blob: db7e1e1b8b5bf9ae04e4abafea96e3dc71d324be
+    git_blob: e27c90edaec8f4ae0986444bd46c5163990d43c3
   - id: evidence
     resource: evidence/m107-verification.json
     title: Frozen M10.7 source, commands, artifact and results
@@ -28,7 +28,7 @@ sources:
   - id: unit
     resource: ../../tests/rows.test.ts
     title: Atomic batches, identity and reentrant JSON boundaries
-    git_blob: 242dd382b9f75c4240823f2b7373a424a92e3dca
+    git_blob: 157ea198e633e1d6ec4a7de6efa6581627e95c87
 generated: { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-18T10:42:16Z }

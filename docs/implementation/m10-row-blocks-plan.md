@@ -8,7 +8,7 @@ sources:
   - id: continuation
     resource: m10-parity-plan.md
     title: Required Grid continuation and prior ordered Rows gates
-    git_blob: ba7566d70c2ff29f7db383236a51571f0fffa3ad
+    git_blob: 29fd7ca35bff0c58027d705390bc6446d2cc6000
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding, logical identities, drafts and paste
@@ -40,7 +40,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Two authored layouts sharing nested record state
-    git_blob: 79ebd9d83a7c40bb15c43651190a25074eb87e92
+    git_blob: c026da7f07812031e363e604265f74b7afbf6640
   - id: artifact-audit
     resource: evidence/m1092-artifact-audit.json
     title: Independent byte-exact package and private-entry audit

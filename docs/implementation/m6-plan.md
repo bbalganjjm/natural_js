@@ -48,7 +48,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: Row identity, mutation, and change tracking
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: legacy-button
     resource: ../../v1/docs/ui/button.md
     title: Preserved 1.x Button contract

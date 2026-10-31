@@ -19,7 +19,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: M3 shared row store
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: comm
     resource: ../../src/comm/index.ts
     title: M3 request implementation

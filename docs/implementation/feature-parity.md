@@ -68,7 +68,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Current shared Rows contract
-    git_blob: 8316515489ad2fda7b04bdd88bb5772abc1c6cd9
+    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -217,6 +217,8 @@ Continue P0 options/dynamic closure and prepare one complete retirement proposal
 # Open questions
 
 The [current Grid acceptance ledger](evidence/m10964-grid-acceptance.json) resolves every frozen surface/dynamic record through thirty current contracts with exact test witnesses. The [pinned-column continuation](m10-pinned-plan.md) adds selected pin, wheel-boundary and reduced-detail witnesses without changing that historical ledger. Tested local compositions do not settle shared configuration, programmatic field rules, incoming status/wire formats or arbitrary runtime discovery. Keep their owning obligations explicit rather than repeating already implemented Grid work.[^grid-acceptance]
+
+The [M5.2 continuation](m5-state-plan.md) adds selected incoming-state/checkpoint, retained-anchor and application wire witnesses at the existing Data/communication owners. It preserves all inherited surface/dynamic records and full-family obligations. General value/schema equivalence, remaining hooks/default lifecycles, other UI/CVC parity and unvalidated-paste policy remain open.
 
 P0 must close behavior equivalence for mapped literal/merged options, dynamic dispatch and callback edge cases, then finish the consolidated retirement proposal. Manual assistive-technology review and actual token telemetry remain open. Structural mapping is complete for the eight-file checklist; exhaustive behavioral closure and current 2.0 parity are incomplete.
 
