@@ -127,7 +127,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       if (optionsName !== null && (labelName === null || valueName === null)) {
         throw listError("LIST_OPTIONS", "A row-local Select needs data-option-label and data-option-value.");
       }
-      if (select.hasAttribute("data-format")) {
+      if (runner.formats(select, name ?? "").length) {
         throw listError("LIST_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.",
           { field: name ?? "" });
       }
@@ -141,6 +141,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         validate: name === null ? [] : runner.validators(select, name)
       });
     } else if (name !== null) {
+      const format = runner.formats(element, name);
       if (element.isContentEditable) {
         throw listError("LIST_CONTROL", "A bound List field cannot be contenteditable; use Form to edit.", { field: name });
       }
@@ -152,13 +153,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         if (type === "radio") {
           throw listError("LIST_CONTROL", "Radio groups need a selected-value binding; use Form.", { field: name });
         }
-        if (element.hasAttribute("data-format") &&
+        if (format.length &&
             !["text", "search", "tel", "url", "email", "password"].includes(type)) {
           throw listError("LIST_FORMAT", "Only text-like inputs can display formatted text.", { field: name });
         }
       }
       textFields.push({ index, name, path: parsePath(name),
-        format: runner.formats(element, name), validate: runner.validators(element, name) });
+        format, validate: runner.validators(element, name) });
     }
   }
   const known = new Set([...textFields.map(field => field.name),

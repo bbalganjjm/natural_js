@@ -32,11 +32,11 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 1abaaddf1efc60924a12d26946426a81cc3294d3
+    git_blob: 061e6f8d057b3e019751d265083cbe745f95a79d
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: e9e807d4ee582f4345358c8c838ce1d8c7789bdd
+    git_blob: 79ebd9d83a7c40bb15c43651190a25074eb87e92
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
@@ -48,7 +48,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
-    git_blob: e8435d93c659aa574972af902bc0c53996eeb307
+    git_blob: b369b9d24d57b6d8ae929cf18746d8e1aaf5730b
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
@@ -80,7 +80,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -116,11 +116,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
-generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -148,9 +148,11 @@ Row status selects live, modified, deleted, all retained or no statuses through 
 
 The row's Inline detail and Popup detail actions share one authored template and employeeDetail PageDefinition. Their editors include fields hidden from the current Grid column state. The nested Shift Select is native application markup populated before Form's subscriber, with an application parser retaining numeric codes. No competing Select binder or new Form option-map contract is used.[^view][^controller][^detail-controller]
 
-The labelled height button connects heightResize to the existing scroll region. ArrowUp/Down, Shift, Home/End and pointer dragging adjust the area; the reveal control accepts nearest/start/center/end. Scroll containment stays in authored CSS. These controls work with or without the optional measured viewport.[^view][^controller][^style]
+The labelled height button connects heightResize to the existing scroll region. ArrowUp/Down, Shift, Home/End and pointer dragging adjust the area; the reveal control accepts nearest/start/center/end. Authored CSS and the existing page-owned wheel guard provide scroll containment. These controls work with or without the optional measured viewport.[^view][^controller][^style]
 
-The main explorer's `<tr data-row-template>` contains `data-field` paths for plain text, email, nested team, checkbox, textarea, number, and Select fields. `data-format` formats the display name; `data-validate` invokes both built-in `required` and the custom salary rule. The same row includes `data-error-for` regions, a `data-select-row` button, and a row-local Select with `data-options="assignment.shifts"`, `data-option-label="meta.label"`, and `data-option-value="code"`. The independent check uses `<input type="checkbox" data-check-row>` without `data-field`; the Active editor remains a separate Boolean data field. `<button type="button" data-row-action="inspect">` exposes the current row to the application. The repeated row contains no fixed DOM ID. Native email/required constraints work alongside the declared rules.[^view]
+The main explorer's `<tr data-row-template>` contains `data-field` paths for plain text, email, nested team, checkbox, textarea, number, and Select fields. `data-format` formats the display name; the application-owned employeeRuleDefaults supplies Team/Salary validators through RuleSet.fields to both Grid and full/reduced CVC details. The same row includes `data-error-for` regions, a `data-select-row` button, and a row-local Select with `data-options="assignment.shifts"`, `data-option-label="meta.label"`, and `data-option-value="code"`. The independent check uses `<input type="checkbox" data-check-row>` without `data-field`; the Active editor remains a separate Boolean data field. `<button type="button" data-row-action="inspect">` exposes the current row to the application. The repeated row contains no fixed DOM ID. Native email/required constraints work alongside the declared rules.[^view][^controller]
+
+Automatically validate Grid edits controls autoValidate independently of existing change/blur/manual timing. Unchecking permits parsed edits that fail business/native constraints; explicit Validate and paste still check completely. Changing this option uses the existing disposal/rebind path and preserves committed Rows changes. Detail Forms retain their own default automatic policy. See [shared rules](rules.md) for precedence and composition.[^controller][^detail-controller]
 
 The lower **Authored row blocks and adjacent merges** section keeps four separate shared records in two tables: `[data-block-grid="two"]` places Name/Shift above Notes, while `[data-block-grid="three"]` places Notes first, Name/Shift second, and Inspect/check controls last. Each `<tbody data-row-template>` repeats the full record. Both include Work mode radio groups, Contact channels checkbox groups, nested Available shifts multiple Selects, Start date, Daily hours range and avatar images. Department and Team are display-only full-block `data-merge` cells; the two-row layout also demonstrates source `rowspan="0"`. Team uses an application-created `<strong>` renderer, and nested Shift choices retain raw numeric codes. Exact markup and merge boundaries are defined once in [Grid](grid.md).[^view][^controller][^blocks]
 
@@ -183,6 +185,7 @@ const grid = bindGrid(table, {
   multiple: selectionMode.value === "multiple",
   checkMode: checkMode.value as "multiple" | "single",
   validateOn: validateOn.value as "change" | "blur" | "manual",
+  autoValidate: autoValidate.checked,
   revealInvalid: revealInvalid.checked,
   canSelect: disableInactive.checked ? row => row.value.active : undefined,
   canCheck: disableInactive.checked ? row => row.value.active : undefined,
@@ -193,6 +196,7 @@ const grid = bindGrid(table, {
     format: { displayName: value => value.toUpperCase() },
     validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
     messages: { payAtLeast: "Salary must be at least {0}." },
+    fields: { salary: { validate: [["payAtLeast", 100]] }, "profile.team": { validate: [["required"]] } },
     locale: locale.value
   },
   parse: { salary: input => input.trim() ? Number(input) : undefined },

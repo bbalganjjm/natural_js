@@ -6,6 +6,36 @@ test.beforeEach(async ({ page }) => {
   await expect(page.locator("[data-grid] tbody tr:not([data-row-template])")).toHaveCount(6);
 });
 
+test("shared TS rules reach Grid and CVC details while automatic validation remains an independent option", async ({ page }) => {
+  const automatic = page.getByRole("checkbox", { name: "Automatically validate Grid edits" });
+  const row = page.locator('[data-grid] tbody tr:not([data-row-template])').first();
+  const salary = row.locator('[data-field="salary"]');
+  await expect(automatic).toBeChecked();
+  expect(await salary.getAttribute("data-validate")).toBeNull();
+  await salary.fill("50"); await salary.blur();
+  await expect(salary).toHaveAttribute("aria-invalid", "true");
+  await expect(salary).toHaveAttribute("data-field-changed", "false");
+  await automatic.uncheck();
+  await expect(salary).toHaveValue("150");
+  await salary.fill("50"); await salary.blur();
+  await expect(salary).toHaveAttribute("data-field-changed", "true");
+  await expect(salary).not.toHaveAttribute("aria-invalid", "true");
+  await page.locator('[data-action="validate-all"]').click();
+  await expect(salary).toHaveAttribute("aria-invalid", "true");
+  await row.locator('[data-row-action="detail-inline"]').click();
+  const detail = page.locator('[data-detail-inline-host] [data-detail-row]');
+  const detailSalary = detail.locator('[data-field="salary"]');
+  expect(await detailSalary.getAttribute("data-validate")).toBeNull();
+  await detailSalary.fill("40"); await detailSalary.blur();
+  await expect(detailSalary).toHaveAttribute("aria-invalid", "true");
+  await expect(salary).toHaveValue("50");
+  await detailSalary.fill("200"); await detailSalary.blur();
+  await expect(salary).toHaveValue("200");
+  await expect(detailSalary).not.toHaveAttribute("aria-invalid", "true");
+  await detail.locator('[data-detail-close]').click();
+  await expect(detail).toHaveCount(0);
+});
+
 test("committed field highlights compare loaded originals and clear after restoring the original", async ({ page }) => {
   const row = page.locator('[data-grid] tbody tr:not([data-row-template])').first();
   await row.locator("[data-select-row]").click();

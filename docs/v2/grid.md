@@ -25,11 +25,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -85,15 +85,15 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Shared Form/Grid rule runner
-    git_blob: 967142342d060056cd3f124db29f6893a2875d48
+    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit field rendering and DOM ownership
-    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Native groups, values, validation timing, display and MDI regressions
@@ -118,10 +118,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -174,10 +174,11 @@ if (grid.validate().valid) console.log(rows.changes());
 | `initialPage` | Optional `{ page, size }` applied before the first render. Defaults to all rows; use it to bound initial local DOM work. |
 | `viewport` | Optional `{ root: HTMLElement, estimate: number, overscan?: number }`; the distinct same-document ancestor scroll root supplies finite authored height/overflow. Estimate is the positive finite initial height of a complete logical record in CSS pixels; overscan counts logical records, default 3. |
 | `heightResize` | Optional `{ root: HTMLElement, handle: HTMLButtonElement, min: number, max: number }`; connect an authored labelled height button to the ancestor scroll area. The root must equal the viewport root when both options are used. Bounds are positive finite border-box pixels, with min <= max. |
-| `rules` | Optional component-local formatter/validator overrides, messages, and locale. The shared rule runner also resolves retained built-in names. |
+| `rules` | Optional RuleSet catalogs, messages, locale and field declarations; see the [shared rule contract](rules.md). The existing runner resolves retained built-ins. |
 | `parse` | Optional application parser per unique scalar text/display or radio field path, used to turn an entered string into a raw JSON value. Number and range inputs require one. Boolean checkbox and array-valued controls reject string parsers. |
 | `render` | Optional `Record<string, (value: unknown, context: RuleContext) => Node \| string \| null>` for explicit display fields; see [display rendering](#display-rendering). |
 | `validateOn` | `"change"` (default), `"blur"`, or `"manual"`; controls draft validation/commit timing. Explicit `validate()` remains the save gate. |
+| `autoValidate` | Optional boolean, default true. False bypasses automatic native/business constraints at existing commit points; parsers, JSON/native-value integrity, choice identity and disabled/readOnly guards remain. Manual timing still defers drafts. Explicit validate() and paste() retain full checks. |
 | `revealInvalid` | Optional boolean, default `false`; explicit validation and rejected paste reveal the first current-page invalid row and try to focus its visible enabled field. |
 | `paste` | Optional boolean, default `false`; enables delegated native `text/plain` paste into bound row fields and safe focusability for plain display fields. The `paste` method is available independently. |
 | `onPaste` | `(result: ValidationResult) => void` after an API or native paste returns a validation result, including rejection. It is not called when preparation or a committed observer throws. |
@@ -217,7 +218,7 @@ Eligibility callbacks must return strict booleans. Keep eligibility, comparator,
 | `data-merge="path"` | Display-only direct cell in the first template tr | Raw scalar merge key; the cell must span the entire logical record and contain only matching bound fields. Adjacent equal records share a native rowspan. |
 | `data-field="path"` | Row descendant | Reads a top-level or dot-separated object path. Plain display uses text; native controls edit values, and images receive `src`. |
 | `data-field-changed` | Every rendered field member | Runtime-owned `"true"`/`"false"` comparison of its committed raw path with the loaded original; inserted rows have no baseline and receive `"false"`. |
-| `data-format='[["name", ...args]]'` | Text-like input, textarea, or text element | Applies display-only rules; non-text inputs and Selects reject it. Stored row data stays raw. |
+| `data-format='[["name", ...args]]'` | Text-like input, textarea, or text element | Applies effective display-only rules; non-text inputs and Selects reject nonempty formatters. Stored row data stays raw. |
 | `data-validate='[["name", ...args]]'` | Field or Select | Validates raw values with built-in or supplied rules. Rules are parsed once from the template. |
 | `data-error-for="path"` | Row descendant | Displays field issues as text and receives a generated unique ID for `aria-describedby`. |
 | `data-select-row` | Row button | `type="button"`; activates detail identity, with batch gestures when `multiple: true`. `aria-pressed` reflects active identity in default mode and batch membership in multiple mode; multiple mode also marks the active button with `aria-current="true"`. |
@@ -547,7 +548,7 @@ Widths follow native CSS table/minimum-content constraints. When all visible col
 
 Text formatting is one-way: rules transform displayed text while the row snapshot and save payload retain the raw value. Validation invokes the shared UI rule runner on raw values. A Select option's DOM `value` is a string, but its row-local mapping preserves a raw string, finite number, boolean, or `null`. Authored empty options map to `null`; nonempty authored options remain strings. A missing selected raw value shows no selected option and yields `select-option`. A multiple Select keeps an array for every selection count.[^grid][^rules]
 
-`validateOn: "change"` retains and validates text drafts on input, then commits valid candidates on native change. `"blur"` defers scalar draft commits until focus leaves that logical field; native group/Select changes still commit once. `"manual"` retains every draft until explicit `validate()`. In change/blur mode, unmodified Enter commits a scalar text-like or number input; textarea newlines, composition and modified shortcuts remain native. This does not add a second blur commit after a successful change or Enter.[^grid][^controls-browser]
+With default autoValidate: true, `validateOn: "change"` retains and validates text drafts on input, then commits valid candidates on native change. `"blur"` defers scalar draft commits until focus leaves that logical field; native group/Select changes still commit once. `"manual"` retains every draft until explicit `validate()`. In change/blur mode, unmodified Enter commits a scalar text-like or number input; textarea newlines, composition and modified shortcuts remain native. This does not add a second blur commit after a successful change or Enter. autoValidate: false preserves these commit points, discards stale row constraint results and checks only integrity automatically; explicit validation and paste still check all constraints. See [shared rules](rules.md#automatic-versus-explicit-validation).[^grid][^controls-browser]
 
 A parser receives the entered string and one snapshot of all unparsed row drafts, independent of parser order; declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. Only own parser/render configuration keys are used, including a field named `toString`. A throw or `undefined` from a parser creates a `parse` issue and preserves the draft. The Grid checks all fields against the row value plus every draft for that row. A choice that fails stays visible as a draft under that row ID and field path, while `Rows` remains unchanged. A later field change can make cross-field drafts valid and commit them. Programmatic `Rows` updates refresh the display and clear stale error text without invoking user validators; call `validate()` before saving. Validation message text is kept by `RowId` without DOM references, so a failing off-page row shows its issue again when it returns. An external replacement of a drafted field, `replace`, `remove`, `revert`, or `dispose` clears the affected drafts. Filtering, sorting, and paging keep them. `validate(id)` checks drafts even without a rendered row.[^grid][^controls-browser]
 
@@ -559,7 +560,7 @@ Form, Grid and List share private native value/constraint operations. Programmat
 
 Form and Grid accept `render: { summary(value, context) { /* return fresh DOM, text or null */ } }`. The callback receives the raw field and `RuleContext`; it must return synchronously. A string stays literal text and `null` clears the target. A Node must be a fresh, disconnected, parentless Element, Text or DocumentFragment from the target's document. Returning a connected/reused/foreign node, the target, its ancestor, an async result or another value raises `UI_RENDER`. Callback failures preserve their cause; errors identify the binder API and field. Recursive updates to the same target also fail with `UI_RENDER`.[^render][^render-browser]
 
-Configuration is checked before binding ownership: each own entry must name exactly one display target and a function. A target cannot be a native value control, image, editable region, error region, or have `data-format`; it cannot contain another bound field, error region, framework interaction marker or native interactive/focusable content, including links, controlled media, frames and `tabindex`. The application creates and sanitizes any trusted rich DOM and keeps factories free of store-changing side effects. No string-to-HTML switch, sanitizer or renderer registry is provided. Grid disposal restores the untouched authored template; [Form](form.md) restores the original children of its custom render targets.[^render][^grid][^controls-browser]
+Configuration is checked before binding ownership: each own entry must name exactly one display target and a function. A target cannot be a native value control, image, editable region, error region, or have nonempty effective formatters; it cannot contain another bound field, error region, framework interaction marker or native interactive/focusable content, including links, controlled media, frames and `tabindex`. The application creates and sanitizes any trusted rich DOM and keeps factories free of store-changing side effects. No string-to-HTML switch, sanitizer or renderer registry is provided. Grid disposal restores the untouched authored template; [Form](form.md) restores the original children of its custom render targets.[^render][^grid][^controls-browser]
 
 Inside a `data-merge` cell, returned DOM must also stay display-only: native interactive/focusable content, field/error declarations and framework interaction markers raise `UI_RENDER` before replacement. Text and ordinary display nodes such as `strong` remain allowed. This prevents record-specific controls from disappearing into an adjacent merge; ordinary nonmerged Grid and Form display can still return application-owned interactive DOM.[^render][^controls-browser]
 
@@ -583,7 +584,7 @@ With the default `toggleSelection: false`, single row buttons keep their existin
 | `GRID_MERGE` | A malformed/non-display merge cell, a cell not spanning its complete block, or a nonscalar merge key. |
 | `GRID_FILE_ROWS`, `GRID_CONTROL` | Bound file input, unsupported native type, or malformed/mixed/repeated choice group. |
 | `GRID_PARSE_FIELD` | A number/range input lacks a parser, or a parser is not a function or names a missing/ambiguous field or boolean/array control. |
-| `GRID_VALIDATE` | Invalid validation timing or nonboolean invalid-row reveal option. |
+| `GRID_VALIDATE` | Invalid validation timing or nonboolean autoValidate/revealInvalid option. |
 | `GRID_CHECK_MODE` | Unknown check mode or a single-check proposal with more than one eligible ID. |
 | `UI_RENDER` | Invalid explicit render configuration, callback failure, recursive rendering, or an invalid/owned/async returned value. |
 | `GRID_COLUMNS`, `GRID_COLUMN_MARKUP` | Invalid full state/callback, broken column keys/group membership/spans, or malformed resize control. |

@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Tabs exports
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: tabs
     resource: ../../src/ui/tabs.ts
     title: Tabs lifecycle and ARIA binding

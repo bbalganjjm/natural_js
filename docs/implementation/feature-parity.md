@@ -48,19 +48,19 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
+    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -187,9 +187,9 @@ The existing explicit runtime and shared store are retained. These rows distingu
 | C08 | Arbitrary delegated actions inside Grid/List rows | Grid onRowAction supplies typed button context. M10.9.6.4 composes arbitrary native post-edit observation from onRowBind-owned physical-row identity and a root listener installed after Grid delegation; invalid/manual drafts do not imply commits. Generic declaration assembly and List event/edit behavior remain required. No extra Grid event engine is needed for the tested outcome. |
 | C09 | DataSync shared editing/subscription lifetime | Core caller-owned Rows supplies the behavior; verify remaining use cases without a DOM/global registry. |
 | C10 | rowStatus/revert/save projection and data values | Core changes/revert exists; old payload conversion and JSON-compatible value boundaries need explicit equivalence/review. |
-| C11 | Dynamic formatter/validator catalogs/local extensions | Core retained rules exist; protect indirect HTML/configuration/row-form reachability. Global registration/configuration gets a crosswalk. |
+| C11 | Dynamic formatter/validator catalogs/local extensions | M5.1 adds RuleSet.fields declarations through existing Form/Grid/List/Tree rule callers, effective HTML overrides and explicit shared/local composition. Retained catalogs remain private; global registration/configuration and full dynamic closure still require their crosswalk. |
 | C12 | Date formatter attaches date/month picker | Partial explicit calendar exists; automatic/declarative attachment remains open and depends on U20/U21. |
-| C13 | Global locale/defaults/context/instance discovery | Review global registry mechanism; preserve consistent app configuration/localized results and typed handle/service workflows. |
+| C13 | Global locale/defaults/context/instance discovery | M5.1 supplies explicit application-owned shared/local RuleSet composition and scoped locale/messages. Arbitrary global callbacks/default lifecycles, context and instance discovery remain required for review. |
 | C14 | N.code runtime inspection/custom findings/sourceURL | Review optional shipped inspector; evaluate build-time checks and ESM maps with explicit lost custom/runtime behavior. |
 | C15 | Handler enumeration/priority, expression filters, helper families | Review public introspection/evaluation workflows; preserve owning UI event/filter behavior with standards and private code. Unrelated convenience helpers use the separate removal rule below. |
 

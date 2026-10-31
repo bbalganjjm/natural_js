@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.1 shared field rules](m5-shared-rules-plan.md) - Compile shared typed field rules through existing UI owners and separate automatic validation from explicit checks. (draft)
+
 * [Natural-JS 2.0 M10.9.6.4 pinned columns](m10-pinned-plan.md) - Extend the existing column owner with measured leading-column pinning and verify native scroll and reduced-detail compositions. (draft)
 
 * [Natural-JS 2.0 M10.9.6.4 Grid semantic acceptance](m10-acceptance-plan.md) - Verify mapped Grid outcomes with native row activation and tested application compositions while retaining cross-owner obligations. (draft)
@@ -31,7 +33,7 @@
 * [Natural-JS 2.0 full feature implementation plan](feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)
 * [Natural-JS 2.0 framework feature coverage](feature-parity.md) - Source-backed legacy behavior gaps, required additions, and pending consolidated retirement review. (draft)
 
-* [Natural-JS 2.0 active plan](current.md) - Checkpoint, next action, and verification record for the milestone-gated Natural-JS 2.0 migration.
+* [Natural-JS 2.0 active plan](current.md) - Current checkpoint, remaining gates and next owner for the Natural-JS 2.0 migration.
 * [Natural-JS 2.0 M0 baseline](m0-baseline.md) - Code-backed 1.x design intent, minimum 2.0 migration inventory, and representative evaluation screen.
 * [Natural-JS 2.0 M1 contract plan](m1-plan.md) - Detailed review plan for the public usage examples and minimum architecture contracts required before implementation.
 * [Natural-JS 2.0 M1 public contract](m1-contract.md) - Approved 2.0 page, data, Form rule, communication, and container contracts with representative usage.

@@ -8,7 +8,7 @@ sources:
   - id: acceptance
     resource: m10-acceptance-plan.md
     title: Current semantic acceptance and retained obligations
-    git_blob: 48ee7bd30057dc4884734a48edfa5336b20a5c46
+    git_blob: 34855c315da2af0693821536d75ca483937f371a
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Existing native topology, resizing and restoration owner
@@ -16,11 +16,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid column and row-hook integration
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: types
     resource: ../../src/ui/index.ts
     title: Existing GridColumn and GridHandle contracts
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Preserved physical-left fixedcol behavior

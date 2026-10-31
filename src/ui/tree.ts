@@ -146,7 +146,7 @@ export function bindTree<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (element === template || element === groups[0] || element === toggles[0] || element.children.length) {
       throw treeError("TREE_FIELD", "A Tree data-field must be a text-only descendant.", { field: name });
     }
-    if (element.hasAttribute("data-validate")) {
+    if (runner.validators(element, name).length) {
       throw treeError("TREE_FIELD", "Tree is read-only; validate edited values with Form.", { field: name });
     }
     fields.push({ index, name, path: parsePath(name), format: runner.formats(element, name) });

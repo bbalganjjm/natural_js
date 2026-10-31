@@ -12,11 +12,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI entry
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree implementation
-    git_blob: 730aec4bc38bd3f001cea36677825ee1b4d15cd0
+    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
   - id: datepicker
     resource: ../../src/ui/datepicker.ts
     title: DatePicker implementation

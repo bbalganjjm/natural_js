@@ -22,11 +22,17 @@ export type ValidateRule = (
 
 export type ParseInput = (input: string, context: RuleContext) => unknown;
 
+export interface FieldRules {
+  readonly format?: readonly (readonly [name: string, ...args: unknown[]])[];
+  readonly validate?: readonly (readonly [name: string, ...args: unknown[]])[];
+}
+
 export interface RuleSet {
   format?: Record<string, FormatRule>;
   validate?: Record<string, ValidateRule>;
   messages?: Record<string, string>;
   locale?: string;
+  fields?: Record<string, FieldRules>;
 }
 
 export interface ValidationIssue {

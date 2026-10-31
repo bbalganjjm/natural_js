@@ -7,6 +7,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
+import type { FieldRules, RuleSet } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -73,14 +74,16 @@ export function loadEmployees(comm: Communicator = createCommunicator({
 }
 
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {
-  const form = bindForm(root, { rows });
+  const nameRules: FieldRules = { validate: [["minlength", 2]] };
+  const rules = { fields: { name: nameRules } } satisfies RuleSet;
+  const form = bindForm(root, { rows, rules, autoValidate: false });
   const columns: readonly GridColumn[] = [{ key: "person", width: 180, pinned: true }, { key: "choice", width: 120 }];
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
   const selectionChanges: GridIdsChange[] = [];
   const checkChanges: GridIdsChange[] = [];
   const pastes: ValidationResult[] = [];
   const grid: GridHandle<Employee> = bindGrid(table, {
-    rows, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
+    rows, rules, autoValidate: false, columns, initialPage: { page: 1, size: 5 }, onSelect: ({ id }) => form.bind(id),
     viewport: scrollRoot ? { root: scrollRoot, estimate: 48, overscan: 3 } : undefined,
     paste: true, onPaste: result => pastes.push(result),
     multiple: true, toggleSelection: true, selectOnRowClick: true,

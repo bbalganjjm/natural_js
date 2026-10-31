@@ -16,15 +16,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -56,7 +56,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
+    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -76,7 +76,7 @@ sources:
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree hierarchy and authored-list binding
-    git_blob: 730aec4bc38bd3f001cea36677825ee1b4d15cd0
+    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
   - id: datepicker
     resource: ../../src/ui/datepicker.ts
     title: Controlled authored-calendar binding
@@ -100,15 +100,15 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native values, display and constraints
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit render configuration and DOM ownership
-    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private Form/Grid rule runner
-    git_blob: 967142342d060056cd3f124db29f6893a2875d48
+    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Private retained formatter rules
@@ -149,10 +149,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -180,7 +180,7 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 - Import downward and directly: UI may depend on data and the page runtime/types; data and communication do not import UI. Runtime modules may use private internal code. No internal module imports the package root or another role's public package specifier.
 - Start a helper inside its owning feature. Move it to `internal/` only after at least two roles need the same semantics, lifetime, error behavior, and tests. Small operations with different meaning stay local.
-- Form, Grid, and List use one UI-owned declaration parser and dispatcher, native field value/display/constraint operations, and Select ownership with standalone Select. Built-in formatter and validator implementations remain private. Grid and List share row-local options; Form and Grid share explicit field rendering. Do not turn these concrete contracts into a generic formatting, validation or utility package.
+- Form, Grid, and List use one UI-owned declaration parser and dispatcher for HTML and typed field lists; Tree reuses its formatter path. Native value/display/constraint operations and Select ownership remain shared. Built-in rules stay private. Grid/List share row-local options; Form/Grid share explicit field rendering and automatic-versus-explicit validation policy. Application object composition supplies shared/local RuleSet defaults without a registry or deep-merge engine. See [shared rules](rules.md). Do not turn these contracts into a generic utility package.
 - Keep DOM references and row identity local to their mounted root and row store. Standard browser operations remain direct calls; no selector, event, date, or collection wrapper is added for convenience.
 - A shared error code has one implementation. `FrameworkError` is the first cross-role contract, implemented privately and re-exported only at the root.[^root][^error]
 

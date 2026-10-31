@@ -154,6 +154,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   selectOnRowClick?: boolean;
   checkMode?: "multiple" | "single";
   validateOn?: "change" | "blur" | "manual";
+  autoValidate?: boolean;
   revealInvalid?: boolean;
   render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>;
   canSelect?: (row: RowSnapshot<T>) => boolean;
@@ -205,9 +206,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   if (options.heightResize !== undefined) validateGridHeight(root, options.heightResize, options.viewport?.root);
   body.validate();
   const validateOn = options.validateOn ?? "change";
+  const autoValidate = options.autoValidate ?? true;
   if (!["change", "blur", "manual"].includes(validateOn) ||
+      options.autoValidate !== undefined && typeof options.autoValidate !== "boolean" ||
       options.revealInvalid !== undefined && typeof options.revealInvalid !== "boolean") {
-    throw gridError("GRID_VALIDATE", "Use change, blur or manual validation and a boolean revealInvalid.");
+    throw gridError("GRID_VALIDATE", "Use change, blur or manual validation and boolean autoValidate/revealInvalid options.");
   }
   const parsers = new Map(Object.entries(options.parse ?? {}));
 
@@ -261,7 +264,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (optionsName !== null && (labelName === null || valueName === null)) {
         throw gridError("GRID_OPTIONS", "A row-local Select needs data-option-label and data-option-value.");
       }
-      if (select.hasAttribute("data-format")) {
+      if (runner.formats(select, fieldName ?? "").length) {
         throw gridError("GRID_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.", { field: fieldName ?? "" });
       }
       selectFields.push({
@@ -276,12 +279,13 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         multiple: select.multiple
       });
     } else if (fieldName !== null) {
+      const format = runner.formats(element, fieldName);
       if (element instanceof HTMLInputElement) {
         const type = element.getAttribute("type")?.toLowerCase() ?? element.type;
         if (type === "file") {
           throw gridError("GRID_FILE_ROWS", "File inputs cannot bind to JSON Rows.", { field: fieldName });
         }
-        if (element.hasAttribute("data-format") &&
+        if (format.length &&
             !["text", "search", "tel", "url", "email", "password"].includes(type)) {
           throw gridError("GRID_FORMAT", "Only text-like inputs can display formatted text.", { field: fieldName });
         }
@@ -307,7 +311,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         continue;
       }
       textFields.push({ index, indexes: [index], kind, name: fieldName, path: parsePath(fieldName),
-        format: runner.formats(element, fieldName), validate: runner.validators(element, fieldName),
+        format, validate: runner.validators(element, fieldName),
         editable: element instanceof HTMLTextAreaElement || element instanceof HTMLInputElement,
         checkbox: element instanceof HTMLInputElement && element.type === "checkbox" });
     }
@@ -323,13 +327,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       throw gridError("GRID_CONTROL", "A group field cannot also bind another control.", { field: field.name });
     }
     for (const attribute of ["data-format", "data-validate"] as const) {
+      if (runner.configured(field.name, attribute)) continue;
       const values = field.indexes.map(index => authored[index].getAttribute(attribute)).filter(value => value !== null);
       if (new Set(values).size > 1) throw gridError("GRID_CONTROL", "One group needs one rule declaration.", { field: field.name });
     }
-    if (field.indexes.some(index => authored[index].hasAttribute("data-format"))) {
+    if (field.format.length) {
       throw gridError("GRID_FORMAT", "A choice group cannot display formatted text.", { field: field.name });
     }
-    const validate = field.indexes.find(index => authored[index].hasAttribute("data-validate")) ?? field.index;
+    const validate = runner.configured(field.name, "data-validate") ? field.index
+      : field.indexes.find(index => authored[index].hasAttribute("data-validate")) ?? field.index;
     field.validate = runner.validators(authored[validate], field.name);
   }
 
@@ -358,7 +364,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     authoredDefaults.push({ name: field.name, path: field.field, value: field.multiple ? selected : selected[0] ?? null });
   }
   const renderers = fieldRenderers("bindGrid", [
-    ...textFields.map(field => ({ name: field.name, element: authored[field.index] })),
+    ...textFields.map(field => ({ name: field.name, element: authored[field.index], formatted: field.format.length > 0 })),
     ...selectFields.flatMap(field => field.name ? [{ name: field.name, element: authored[field.index] }] : [])
   ], options.render);
   const selection = createGridSelection(options, {
@@ -762,7 +768,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     };
   }
 
-  function validateRow(row: RowSnapshot<T>, candidate = candidateValues(row),
+  function validateRow(row: RowSnapshot<T>, full = true, candidate = candidateValues(row),
     pending = drafts.get(row.id), publish = true): ValidationIssue[] {
     const record = records.get(row.id);
     const { values, parseErrors } = candidate;
@@ -789,7 +795,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (selected.some(item => !available.includes(String(item))) || descriptor.kind === "checkbox" && !Array.isArray(entered) && entered != null) {
           issues.push({ rowId: row.id, field: descriptor.name, rule: "select-option", message: "Choose available group values.", ...(element ? { element } : {}) });
         }
-        if (required && !selected.length) issues.push({ rowId: row.id, field: descriptor.name, rule: "html", message: "Select an option.", ...(element ? { element } : {}) });
+        if (full && required && !selected.length) issues.push({ rowId: row.id, field: descriptor.name, rule: "html", message: "Select an option.", ...(element ? { element } : {}) });
       } else if (original instanceof HTMLInputElement || original instanceof HTMLTextAreaElement) {
         let source = bound ? original.cloneNode(true) as HTMLInputElement | HTMLTextAreaElement
           : validationControls.get(descriptor.index);
@@ -799,7 +805,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         }
         source.disabled = disabled(original);
         display(source, pending?.get(descriptor.name)?.entered ?? value);
-        const message = nativeMessage(source, pending?.get(descriptor.name)?.entered ?? value);
+        const message = nativeMessage(source, pending?.get(descriptor.name)?.entered ?? value, full);
         if (message) {
           issues.push({
             rowId: row.id, field: descriptor.name, rule: "html",
@@ -807,7 +813,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           });
         }
       }
-      issues.push(...runner.validate(descriptor.validate, value, context));
+      if (full) issues.push(...runner.validate(descriptor.validate, value, context));
     }
     for (const [index, descriptor] of selectFields.entries()) {
       if (!descriptor.field || !descriptor.name) continue;
@@ -822,14 +828,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           message: "Choose an available option.", ...(element ? { element } : {})
         });
       }
-      if (!disabled(bound?.element ?? authored[descriptor.index]) && (authored[descriptor.index] as HTMLSelectElement).required &&
+      if (full && !disabled(bound?.element ?? authored[descriptor.index]) && (authored[descriptor.index] as HTMLSelectElement).required &&
           (descriptor.multiple ? !selected.length : value === null || value === "" || value === undefined)) {
         issues.push({
           rowId: row.id, field: descriptor.name, rule: "html",
           message: "Choose an option.", ...(element ? { element } : {})
         });
       }
-      issues.push(...runner.validate(descriptor.validate, value,
+      if (full) issues.push(...runner.validate(descriptor.validate, value,
         ruleContext(row, descriptor.name, values, element)));
     }
     const byField = new Map<string, string[]>();
@@ -879,16 +885,16 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     showIssues(record, new Map());
   }
 
-  function reconcile(id: RowId): ValidationIssue[] {
+  function reconcile(id: RowId, full = true): ValidationIssue[] {
     const row = options.rows.get(id);
     if (!row || row.status === "delete") {
       throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
     }
     const pending = drafts.get(id);
-    if (!pending?.size || reconciling) return validateRow(row);
+    if (!pending?.size || reconciling) return validateRow(row, full);
 
     const candidate = candidateValues(row);
-    const issues = validateRow(row, candidate);
+    const issues = validateRow(row, full, candidate, pending);
     const failed = new Set(issues.map(issue => issue.field));
     const ready = [...pending.keys()].filter(field => !failed.has(field));
     if (!ready.length) return issues;
@@ -928,7 +934,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (!updated || updated.status === "delete") {
       throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
     }
-    return validateRow(updated);
+    return validateRow(updated, full);
   }
 
   function onRows(event: RowsEvent): void {
@@ -1716,7 +1722,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const entry = edits.get(event.target);
       const next = event.relatedTarget;
       if (entry && !(next instanceof HTMLElement && entry.binding.elements.includes(next)) && drafts.get(entry.id)?.has(entry.binding.descriptor.name)) {
-        reconcile(entry.id);
+        reconcile(entry.id, autoValidate);
       }
     }
     if (!viewport || focusCleanup) return;
@@ -1825,8 +1831,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const baseline = pending.get(field)?.baseline ?? readPath(row.value, path);
     pending.set(field, { entered, baseline, path });
     drafts.set(id, pending);
-    if (commit) reconcile(id);
-    else if (validateOn === "change") validateRow(row);
+    if (commit) reconcile(id, autoValidate);
+    else if (validateOn === "change") validateRow(row, autoValidate);
   }
 
   function onInput(event: Event): void {
@@ -2028,7 +2034,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
       if (!issues.length) for (const [id, prepared] of staged) {
         const candidate = candidateValues(prepared.row, prepared.pending);
-        issues.push(...validateRow(prepared.row, candidate, prepared.pending, false));
+        issues.push(...validateRow(prepared.row, true, candidate, prepared.pending, false));
         let values = prepared.row.value as Readonly<Record<string, unknown>>;
         const patch: Record<string, unknown> = {};
         for (const field of prepared.pasted) {

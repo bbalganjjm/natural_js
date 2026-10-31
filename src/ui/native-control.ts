@@ -85,13 +85,9 @@ export function displayField(field: Field, value: unknown): void {
 }
 
 /** The binder supplies the entered value and a native probe with effective disabled state. */
-export function nativeMessage(probe: Control, entered: unknown): string | null {
+export function nativeMessage(probe: Control, entered: unknown, validate = true): string | null {
   if (!probe.willValidate) return null;
   const text = String(entered ?? "");
-  if (textLengthControl(probe)) {
-    if (probe.minLength >= 0 && text.length > 0 && text.length < probe.minLength) return `Use at least ${probe.minLength} characters.`;
-    if (probe.maxLength >= 0 && text.length > probe.maxLength) return `Use at most ${probe.maxLength} characters.`;
-  }
   if (probe.localName === "input") {
     const input = probe as HTMLInputElement;
     const scalar = ["number", "range"].includes(input.type);
@@ -99,6 +95,11 @@ export function nativeMessage(probe: Control, entered: unknown): string | null {
       input.type === "color" ? text.toLowerCase() !== input.value.toLowerCase() :
         ["date", "datetime-local", "time", "month", "week"].includes(input.type) && text !== "" && input.value === "";
     if (altered && (input.type === "range" || input.type === "color" || text !== "")) return "Use a value allowed by this input.";
+  }
+  if (!validate) return null;
+  if (textLengthControl(probe)) {
+    if (probe.minLength >= 0 && text.length > 0 && text.length < probe.minLength) return `Use at least ${probe.minLength} characters.`;
+    if (probe.maxLength >= 0 && text.length > probe.maxLength) return `Use at most ${probe.maxLength} characters.`;
   }
   return probe.validity.valid ? null : probe.validationMessage || "Invalid input.";
 }

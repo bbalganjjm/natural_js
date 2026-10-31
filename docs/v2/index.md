@@ -1,5 +1,7 @@
 # Concepts
 
+* [Shared field rules and automatic validation](rules.md) - Supply typed field declarations and shared rule catalogs without global registration or changing authored HTML. (draft)
+
 * [Grid compositions](grid-compositions.md) - Use current Rows values, native events and authored table structure without adding Grid utility APIs. (draft)
 
 * [Tree and DatePicker in two CVC layouts](tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)

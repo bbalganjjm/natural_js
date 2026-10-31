@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.1 shared field rules and automatic validation policy",
+  "recorded_at": "2026-10-31",
+  "status": "selected_outcomes_verified_full_families_open",
+  "workspace_baseline_commit": "a0f837a4f6dfa1cbc6a2b8205fe86f0df7b60528",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m10964p-verification.json",
+      "sha256": "3d11a44f4df54fb6656f23b6bba641a39d245656aff7351c52bbed11af8eaccf",
+      "preserved_in_commit": "a0f837a4f6dfa1cbc6a2b8205fe86f0df7b60528"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m10964p-grid-acceptance.json",
+      "sha256": "a1b7aeebfe27b2be82f013053125861019cf3b6323d290344dbca9ddd35dbf68"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and owner obligation. This delta adds witnesses to selected field-rules, validation-policy and defaults-composition outcomes; it does not replace the frozen audit or re-certify historical runtime.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "public_delta": {
+    "new_public_named_types": [
+      "FieldRules"
+    ],
+    "properties": [
+      "RuleSet.fields?: Record<string, FieldRules>",
+      "bindForm options.autoValidate?: boolean",
+      "bindGrid options.autoValidate?: boolean"
+    ],
+    "field_rules": "Optional format/validate readonly rule-tuple lists. Per kind, a supplied list overrides HTML, undefined falls back to HTML and [] clears declared rules. Native HTML constraints remain independent.",
+    "automatic_default": true,
+    "new_handle_methods": 0,
+    "new_public_entries": 0,
+    "new_framework_source_modules": 0,
+    "new_runtime_dependencies": 0,
+    "note": "Reuse existing rule compilation, candidate evaluation, native controls and binder ownership. Rule catalogs remain functions; field maps remain declarations. No registry, deep-merge engine, callback combinator or utility package."
+  },
+  "selected_contracts": {
+    "field-rules": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "inherited_owners": [
+        "C11",
+        "C13",
+        "U01",
+        "G04",
+        "G06"
+      ],
+      "outcome": "Compile and copy all own supplied field declarations before UI ownership, including valid unbound fields for full/reduced templates. Validate paths, shapes, names and built-in arguments. Resolve HTML and TS through the same catalogs, normalization, messages and errors; never serialize declarations into DOM attributes. Copy tuple/list containers while referenced custom argument objects remain application-owned.",
+      "source_refs": [
+        "src/ui/index.ts#FieldRules",
+        "src/ui/rules.ts#createRuleRunner",
+        "src/ui/form.ts#bindForm",
+        "src/ui/grid.ts#bindGrid",
+        "src/ui/list.ts#bindList",
+        "src/ui/tree.ts#bindTree"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S09",
+        "S10",
+        "D01"
+      ],
+      "remaining": "Full dynamic/global configuration and retained-rule semantic parity stay open in the original owners. Automatic date-picker attachment and general Tree validation are not implemented by this declaration contract."
+    },
+    "effective-rule-guards": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Ignore overridden HTML only for that rule kind. Retain grouped fallback consistency, reject effective formatting on unsupported native controls, preserve formatter/render exclusivity, and reject nonempty effective bound Tree validation. Empty overrides clear ignored HTML without editing authored attributes.",
+      "source_refs": [
+        "src/ui/form.ts#bindForm",
+        "src/ui/grid.ts#bindGrid",
+        "src/ui/list.ts#bindList",
+        "src/ui/tree.ts#bindTree",
+        "src/ui/field-render.ts#fieldRenderers"
+      ],
+      "witnesses": [
+        "S02",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09"
+      ],
+      "remaining": "This does not add List editing, Tree validation or new widgets to reduced templates."
+    },
+    "validation-policy": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "inherited_owners": [
+        "G04",
+        "G06",
+        "U01"
+      ],
+      "outcome": "autoValidate defaults to true. False skips automatic HTML constraints and business validators at existing commit points; parsers, JSON storage, effective native-value integrity, existing Grid choice identities and disabled/readOnly boundaries remain active. An automatic evaluation clears prior row constraint results and publishes only current integrity failures. Explicit validate() and atomic paste() run full precommit checks. Grid validateOn remains independent; manual still defers drafts.",
+      "source_refs": [
+        "src/ui/form.ts#candidates/check/evaluate/reconcile",
+        "src/ui/grid.ts#candidateValues/validateRow/reconcile/paste",
+        "src/ui/native-control.ts#nativeMessage"
+      ],
+      "witnesses": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "A11",
+        "A12",
+        "S10",
+        "S11",
+        "D01"
+      ],
+      "form_choice_boundary": "Form retains application-owned scalar parsing for native choice controls. This slice does not impose Grid's typed row-option identity mapping on Form or claim that Form raw choice/render mapping is complete. The mandatory typed option-identity rejection witness A05 is Grid-only.",
+      "browser_control_boundary": "A07 checks effective input.type. Supported date controls reject an unrepresentable date; a browser's native text fallback remains text. Range sanitization integrity, preserved raw values and unrelated note commits are mandatory in every engine. No test is skipped and no date polyfill is introduced.",
+      "remaining": "Legacy unvalidated-paste equivalence remains required for owning contract review: current paste stays fully validated. Legacy changed/already-invalid rendered-row scope differs from modern explicit all-live-row validation; existing explicit-ID selection recipes and remaining scope review stay inherited."
+    },
+    "defaults-composition": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "inherited_owners": [
+        "C11",
+        "C13"
+      ],
+      "outcome": "Application-owned typed spreads compose rule catalogs/messages/locale, then field entries, then per-field format/validate kinds. Replacing a tuple list preserves its order; [] explicitly clears it. A shared bundle reaches Grid and full/reduced CVC detail Forms without automatic discovery or shared mutable registration.",
+      "source_refs": [
+        "src/ui/rules.ts#createRuleRunner",
+        "examples/vite/m10/demo.ts#employeeRules",
+        "examples/vite/m10/detail.ts#employeeDetail",
+        "docs/v2/ui.md"
+      ],
+      "witnesses": [
+        "S03",
+        "S04",
+        "S11",
+        "D01"
+      ],
+      "remaining": "This is a rule-bundle recipe, not complete replacement of v1 deep option defaults or local-first/global-second callbacks. Bind-value transformation/hooks, callback veto/throw/async behavior, instance/service discovery and their lifecycle ordering remain required."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "one typed field bundle formats Form Grid and List without rule attributes or raw-value mutation"
+    },
+    "S02": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "typed kinds override ignored HTML while undefined falls back and empty lists retain native constraints"
+    },
+    "S03": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "explicit nested composition preserves shared formatters and local messages across full and reduced templates"
+    },
+    "S04": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "rule compilation copies tuple containers and uses own field entries without serializing custom arguments"
+    },
+    "S05": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "invalid unbound typed declarations fail every binder before ownership and permit corrected retry"
+    },
+    "S06": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "effective grouped declarations ignore only overridden kinds and preserve fallback conflict checks"
+    },
+    "S07": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "programmatic formatters obey native control restrictions and empty overrides clear ignored HTML"
+    },
+    "S08": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "effective formatting and render ownership remain exclusive without DOM attribute mutation"
+    },
+    "S09": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "Tree uses typed display rules and rejects only nonempty effective bound validators"
+    },
+    "S10": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "typed validators see current nested raw candidates for hidden Grid and List rows"
+    },
+    "S11": {
+      "file": "tests/browser/shared-rules.spec.ts",
+      "title": "typed rules keep paste atomic and independent accessible Form instances quiet after disposal"
+    },
+    "A01": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "automatic validation remains enabled by default for native and declared constraints in Form and Grid"
+    },
+    "A02": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "disabling automatic validation commits typed native and business failures while explicit validation still reports them"
+    },
+    "A03": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "local Form skips automatic callbacks but retains native errors and custom rules at explicit validation"
+    },
+    "A04": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "automatic bypass still rejects parser failures and non-JSON values without committing either draft"
+    },
+    "A05": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "automatic bypass permits an available empty choice but rejects injected unknown Grid choices"
+    },
+    "A06": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "automatic bypass respects readonly disabled controls and native first-legend exceptions"
+    },
+    "A07": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "automatic bypass still reports native value sanitization in an unrelated edited row"
+    },
+    "A08": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "manual Grid timing keeps bypassed drafts deferred and explicit validation commits only valid candidates"
+    },
+    "A09": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "blur and Enter remain Grid commit points when automatic validation is disabled"
+    },
+    "A10": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "a bypassed edit clears prior row constraint errors while retaining current parser integrity errors"
+    },
+    "A11": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "disabled automatic checks do not weaken full atomic paste or hidden explicit Grid validation"
+    },
+    "A12": {
+      "file": "tests/browser/auto-validation.spec.ts",
+      "title": "invalid policy values fail before ownership and independent instance disposal restores authored accessibility"
+    },
+    "D01": {
+      "file": "tests/browser/m10-demo.spec.ts",
+      "title": "shared TS rules reach Grid and CVC details while automatic validation remains an independent option"
+    }
+  },
+  "witness_counts": {
+    "shared_rule_cases": 11,
+    "automatic_policy_cases": 12,
+    "new_case_in_existing_demo_spec": 1,
+    "delta_cases": 24,
+    "inherited_full_cases_per_engine": 550,
+    "expected_full_cases_per_engine": 574
+  },
+  "verification": {
+    "status": "fresh_final_sixteen_gates_independently_reviewed",
+    "expected_frozen_input_entries": 179,
+    "expected_final_gate_records": 16,
+    "gate_record": "docs/implementation/evidence/m51-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m51-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball installed in isolated JavaScript and TypeScript consumers and exercised in Chromium, Firefox, WebKit, actual Windows Chrome and Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful rule units",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF document checks",
+      "Independent connected-code review"
+    ],
+    "preserved_attempt": "The initial Windows WebKit A07 failure assumed that type=date remained a native date control. It fell back to text. The corrected witness checks actual control support while retaining mandatory range integrity. The original failed log remains m51-focused-webkit.log.",
+    "limitations": [
+      "Same-host measurements belong to the final receipt. No universal speed, total-context saving or actual-token claim is made.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory."
+    ],
+    "actual_frozen_input_entries": 179,
+    "actual_final_gate_records": 16,
+    "actual_full_cases_per_engine": 574,
+    "actual_unit_cases": 127,
+    "artifact_sha256": "57c14d906608ef425a4a30915fd9ba43f529896408662840993db8f9cf926769"
+  },
+  "retained_obligations": [
+    {
+      "owner": "Form / U01,U03",
+      "required": "Raw choice/render mapping, bind-value hooks and full control/option/callback/dynamic workflows."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "Data / C10",
+      "required": "Incoming statuses, wire payload conversion, reversion/save projection and remaining data-value boundaries."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected implemented outcomes may receive final acceptance after the fresh receipt. No full family, P0, M13 or parent milestone closure is claimed."
+  }
+}

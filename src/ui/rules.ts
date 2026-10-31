@@ -2,6 +2,7 @@
 import { FrameworkError } from "../internal/framework-error.js";
 import { builtinFormats, assertFormatArgs } from "./format-rules.js";
 import { builtinValidators, builtinMessages, assertValidateArgs } from "./validate-rules.js";
+import { parsePath } from "./field-path.js";
 import type { FormatRule, RuleContext, RuleSet, ValidateRule, ValidationIssue } from "./index.js";
 
 export interface RuleCall<Run> {
@@ -12,6 +13,7 @@ export interface RuleCall<Run> {
 }
 
 export interface RuleRunner {
+  configured(field: string, attribute: "data-format" | "data-validate"): boolean;
   formats(element: Element, field: string): readonly RuleCall<FormatRule>[];
   validators(element: Element, field: string): readonly RuleCall<ValidateRule>[];
   format(calls: readonly RuleCall<FormatRule>[], value: unknown, context: RuleContext): string;
@@ -47,19 +49,22 @@ function supplied<Run>(api: string, entries: Record<string, Run> | undefined): M
   return result;
 }
 
-function parse(element: Element, field: string, attribute: "data-format" | "data-validate",
-  api: string): readonly { name: string; key: string; args: readonly unknown[] }[] {
+function html(element: Element, field: string, attribute: "data-format" | "data-validate",
+  api: string): unknown {
   const source = element.getAttribute(attribute);
   if (source === null) return [];
-  let declarations: unknown;
-  try { declarations = JSON.parse(source); }
+  try { return JSON.parse(source); }
   catch (cause) {
     throw ruleError(api, "RULE_DECLARATION", `${attribute} must be a JSON rule list.`, field, undefined, cause);
   }
+}
+
+function parse(declarations: unknown, field: string, attribute: "data-format" | "data-validate",
+  api: string): readonly { name: string; key: string; args: readonly unknown[] }[] {
   if (!Array.isArray(declarations)) {
-    throw ruleError(api, "RULE_DECLARATION", `${attribute} must be a JSON rule list.`, field);
+    throw ruleError(api, "RULE_DECLARATION", `${attribute} must be a rule list.`, field);
   }
-  return declarations.map((entry: unknown) => {
+  return Array.from(declarations, (entry: unknown) => {
     if (!Array.isArray(entry) || typeof entry[0] !== "string" || !entry[0].trim()) {
       throw ruleError(api, "RULE_DECLARATION", `${attribute} contains an invalid rule.`, field);
     }
@@ -68,10 +73,10 @@ function parse(element: Element, field: string, attribute: "data-format" | "data
   });
 }
 
-function compile<Run>(element: Element, field: string, attribute: "data-format" | "data-validate",
+function compile<Run>(declarations: unknown, field: string, attribute: "data-format" | "data-validate",
   api: string, custom: Map<string, Run>, builtins: Readonly<Record<string, Run>>,
   assertArgs: (name: string, args: readonly unknown[]) => void): readonly RuleCall<Run>[] {
-  return parse(element, field, attribute, api).map(({ name, key, args }) => {
+  return parse(declarations, field, attribute, api).map(({ name, key, args }) => {
     const override = custom.get(key);
     const run = override ?? (Object.hasOwn(builtins, key) ? builtins[key] : undefined);
     if (typeof run !== "function") {
@@ -92,6 +97,26 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
   const validators = supplied(api, rules?.validate);
   const messages = suppliedMessages(api, rules?.messages);
   const locale: "ko_KR" | "en_US" = rules?.locale?.toLowerCase().startsWith("ko") ? "ko_KR" : "en_US";
+  const fields = new Map<string, { format?: readonly RuleCall<FormatRule>[]; validate?: readonly RuleCall<ValidateRule>[] }>();
+  if (rules?.fields !== undefined) {
+    if (!rules.fields || typeof rules.fields !== "object" || Array.isArray(rules.fields)) {
+      throw ruleError(api, "RULE_DECLARATION", "fields must be a field-to-rule object.");
+    }
+    for (const [field, value] of Object.entries(rules.fields)) {
+      try { parsePath(field); }
+      catch (cause) { throw ruleError(api, "RULE_DECLARATION", "Field rules need a safe data-field path.", field, undefined, cause); }
+      if (!value || typeof value !== "object" || Array.isArray(value) ||
+          Object.keys(value).some(key => key !== "format" && key !== "validate")) {
+        throw ruleError(api, "RULE_DECLARATION", "A field rule entry accepts format and validate lists.", field);
+      }
+      fields.set(field, {
+        ...(Object.hasOwn(value, "format") && value.format !== undefined
+          ? { format: compile(value.format, field, "data-format", api, formats, builtinFormats, assertFormatArgs) } : {}),
+        ...(Object.hasOwn(value, "validate") && value.validate !== undefined
+          ? { validate: compile(value.validate, field, "data-validate", api, validators, builtinValidators, assertValidateArgs) } : {})
+      });
+    }
+  }
 
   function message(call: RuleCall<ValidateRule>, field: string): string {
     const template = messages.get(call.key) ??
@@ -101,9 +126,10 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
   }
 
   return {
-    formats: (element, field) => compile(element, field, "data-format", api,
+    configured: (field, attribute) => fields.get(field)?.[attribute === "data-format" ? "format" : "validate"] !== undefined,
+    formats: (element, field) => fields.get(field)?.format ?? compile(html(element, field, "data-format", api), field, "data-format", api,
       formats, builtinFormats, assertFormatArgs),
-    validators: (element, field) => compile(element, field, "data-validate", api,
+    validators: (element, field) => fields.get(field)?.validate ?? compile(html(element, field, "data-validate", api), field, "data-validate", api,
       validators, builtinValidators, assertValidateArgs),
     format(calls, value, context) {
       let text = String(value ?? "");

@@ -1,0 +1,43 @@
+{
+  "semantic_concepts": 12,
+  "historical_fingerprint_only": 28,
+  "preserved_historical_bodies_and_generated_verified_dates": true,
+  "historical": [
+    "docs/implementation/feature-parity-plan.md",
+    "docs/implementation/m10-acceptance-plan.md",
+    "docs/implementation/m10-change-state-plan.md",
+    "docs/implementation/m10-closure-plan.md",
+    "docs/implementation/m10-columns-plan.md",
+    "docs/implementation/m10-controls-plan.md",
+    "docs/implementation/m10-detail-plan.md",
+    "docs/implementation/m10-interactions-plan.md",
+    "docs/implementation/m10-lifecycle-plan.md",
+    "docs/implementation/m10-parity-plan.md",
+    "docs/implementation/m10-paste-plan.md",
+    "docs/implementation/m10-pinned-plan.md",
+    "docs/implementation/m10-plan.md",
+    "docs/implementation/m10-progressive-plan.md",
+    "docs/implementation/m10-row-blocks-plan.md",
+    "docs/implementation/m10-selection-plan.md",
+    "docs/implementation/m10-viewport-plan.md",
+    "docs/implementation/m11-plan.md",
+    "docs/implementation/m12-plan.md",
+    "docs/implementation/m13-review-plan.md",
+    "docs/implementation/m5-plan.md",
+    "docs/implementation/m6-plan.md",
+    "docs/v2/grid-compositions.md",
+    "docs/v2/package.md",
+    "docs/v2/pagination.md",
+    "docs/v2/popup.md",
+    "docs/v2/select.md",
+    "docs/v2/tabs.md"
+  ],
+  "resume_context": {
+    "scope": "Only the active resume document; UTF-8 with CRLF normalized to LF. This is not total agent context or actual token usage.",
+    "baseline_commit": "a0f837a4f6dfa1cbc6a2b8205fe86f0df7b60528",
+    "before_bytes": 22036,
+    "after_bytes": 6183,
+    "before_lines": 177,
+    "after_lines": 78
+  }
+}

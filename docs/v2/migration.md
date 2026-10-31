@@ -44,15 +44,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -72,11 +72,11 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native value, display and constraint contracts
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Explicit field rendering without HTML string evaluation
-    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Native groups, validation timing, display and isolation regressions
@@ -84,11 +84,11 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
-    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
+    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private declarative rule dispatch
-    git_blob: 967142342d060056cd3f124db29f6893a2875d48
+    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Retained formatter and internal mask/date operations
@@ -136,19 +136,19 @@ sources:
   - id: rules-test
     resource: ../../tests/rules.test.ts
     title: Declarative dispatch and combined-name checks
-    git_blob: 70f1881b500b99c138c04c834258ed57eb6021be
+    git_blob: 70a8f3fbcdaa75a51e0334c1cc74c59697974606
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: beb332780c23cd31dbcc9e39931730158010bf8e
+    git_blob: 69018bd7cb374de2f5d1932d0aea3b11e6e25364
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 2a57d93c19ea2fb43eefe0fd669ffeac9cbf4a6c
-generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+    git_blob: db7e1e1b8b5bf9ae04e4abafea96e3dc71d324be
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -309,6 +309,8 @@ Cascading Tree checks, month-only/holiday DatePicker behavior, editable and mult
 Replace row-local radio names/duplicate field IDs with `data-field` groups: Grid compiles members across the record and allocates a unique native radio name per clone, while Form keeps its explicit authored form/name contract. One checkbox is boolean, repeated checkboxes and multiple Selects always use arrays, and radio is string/null. This removes 1.x's selection-count-dependent scalar/array shape. Nested Grid Select options preserve raw scalar types. Native date/time/month/week/color/hidden values are strings; Grid number/range inputs require application parsers, and unsupported types follow the engine's native text fallback. File upload stays outside JSON Rows. Array clipboard values use a JSON array inside one normally quoted TSV cell; protected groups still consume one field position. See [Grid](grid.md) for the complete value/paste contract.[^grid][^form][^native][^controls-browser]
 
 Move 1.x `checkSingleTarget` behavior to `checkMode: "single"`, which atomically replaces one checked ID through existing hooks; proposals containing multiple eligible IDs fail unchanged. Use Grid `validateOn: "blur"` for focus-out scalar commits or `"manual"` for explicit validation; the default `"change"` preserves input drafts and change commits. `revealInvalid: true` reveals the first current-page error without changing page/filter. Native programmatic text limits, effective disabled state and value sanitization are shared with Form/List.[^grid][^native][^controls-browser]
+
+Move fRules/vRules field declarations to RuleSet.fields, keeping named custom functions in RuleSet.format/validate. A supplied kind replaces that field's HTML list; [] clears it and omission falls back. Shared/local object composition must merge catalogs and individual field kinds explicitly. Form/Grid autoValidate: false preserves normal parsed edit commits without automatic constraints; it does not mean manual timing, and explicit validate()/Grid paste() still check fully. General legacy unvalidated paste, global callback/default lifecycles and Form raw choice/render mapping retain their owning parity review. See [shared rules](rules.md).[^ui][^grid]
 
 Replace 1.x `html: true` display with a Form/Grid `render` callback returning application-created fresh same-document DOM, literal text or `null`. Strings are never evaluated as HTML; application code owns trusted content and sanitization. Preflight protects other fields/controls/errors, and `UI_RENDER` identifies configuration, ownership, callback or asynchronous-return failures. Form restores original custom-render children on disposal without resetting ordinary inputs; List has no public rich-render option. An image `data-field` writes `src` and preserves `alt`, removing `src` for null/empty values.[^render][^form][^list][^native]
 

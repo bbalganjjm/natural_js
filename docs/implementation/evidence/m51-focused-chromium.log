@@ -1,0 +1,34 @@
+
+
+Running 23 tests using 1 worker
+
+
+
+[1/23] [chromium] › tests\browser\auto-validation.spec.ts:67:1 › automatic validation remains enabled by default for native and declared constraints in Form and Grid
+[2/23] [chromium] › tests\browser\auto-validation.spec.ts:82:1 › disabling automatic validation commits typed native and business failures while explicit validation still reports them
+[3/23] [chromium] › tests\browser\auto-validation.spec.ts:98:1 › local Form skips automatic callbacks but retains native errors and custom rules at explicit validation
+[4/23] [chromium] › tests\browser\auto-validation.spec.ts:117:1 › automatic bypass still rejects parser failures and non-JSON values without committing either draft
+[5/23] [chromium] › tests\browser\auto-validation.spec.ts:138:1 › automatic bypass permits an available empty choice but rejects injected unknown Grid choices
+[6/23] [chromium] › tests\browser\auto-validation.spec.ts:153:1 › automatic bypass respects readonly disabled controls and native first-legend exceptions
+[7/23] [chromium] › tests\browser\auto-validation.spec.ts:175:1 › automatic bypass still reports native value sanitization in an unrelated edited row
+[8/23] [chromium] › tests\browser\auto-validation.spec.ts:193:1 › manual Grid timing keeps bypassed drafts deferred and explicit validation commits only valid candidates
+[9/23] [chromium] › tests\browser\auto-validation.spec.ts:208:1 › blur and Enter remain Grid commit points when automatic validation is disabled
+[10/23] [chromium] › tests\browser\auto-validation.spec.ts:223:1 › a bypassed edit clears prior row constraint errors while retaining current parser integrity errors
+[11/23] [chromium] › tests\browser\auto-validation.spec.ts:243:1 › disabled automatic checks do not weaken full atomic paste or hidden explicit Grid validation
+[12/23] [chromium] › tests\browser\auto-validation.spec.ts:257:1 › invalid policy values fail before ownership and independent instance disposal restores authored accessibility
+[13/23] [chromium] › tests\browser\shared-rules.spec.ts:61:1 › one typed field bundle formats Form Grid and List without rule attributes or raw-value mutation
+[14/23] [chromium] › tests\browser\shared-rules.spec.ts:75:1 › typed kinds override ignored HTML while undefined falls back and empty lists retain native constraints
+[15/23] [chromium] › tests\browser\shared-rules.spec.ts:91:1 › explicit nested composition preserves shared formatters and local messages across full and reduced templates
+[16/23] [chromium] › tests\browser\shared-rules.spec.ts:113:1 › rule compilation copies tuple containers and uses own field entries without serializing custom arguments
+[17/23] [chromium] › tests\browser\shared-rules.spec.ts:131:1 › invalid unbound typed declarations fail every binder before ownership and permit corrected retry
+[18/23] [chromium] › tests\browser\shared-rules.spec.ts:158:1 › effective grouped declarations ignore only overridden kinds and preserve fallback conflict checks
+[19/23] [chromium] › tests\browser\shared-rules.spec.ts:179:1 › programmatic formatters obey native control restrictions and empty overrides clear ignored HTML
+[20/23] [chromium] › tests\browser\shared-rules.spec.ts:204:1 › effective formatting and render ownership remain exclusive without DOM attribute mutation
+[21/23] [chromium] › tests\browser\shared-rules.spec.ts:225:1 › Tree uses typed display rules and rejects only nonempty effective bound validators
+[22/23] [chromium] › tests\browser\shared-rules.spec.ts:242:1 › typed validators see current nested raw candidates for hidden Grid and List rows
+[23/23] [chromium] › tests\browser\shared-rules.spec.ts:263:1 › typed rules keep paste atomic and independent accessible Form instances quiet after disposal
+  23 passed (6.7s)
+[WebServer] (node:9620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:11016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -1,0 +1,59 @@
+
+
+Running 48 tests using 1 worker
+
+
+
+[1/48] [webkit] › tests\browser\auto-validation.spec.ts:67:1 › automatic validation remains enabled by default for native and declared constraints in Form and Grid
+[2/48] [webkit] › tests\browser\auto-validation.spec.ts:82:1 › disabling automatic validation commits typed native and business failures while explicit validation still reports them
+[3/48] [webkit] › tests\browser\auto-validation.spec.ts:98:1 › local Form skips automatic callbacks but retains native errors and custom rules at explicit validation
+[4/48] [webkit] › tests\browser\auto-validation.spec.ts:117:1 › automatic bypass still rejects parser failures and non-JSON values without committing either draft
+[5/48] [webkit] › tests\browser\auto-validation.spec.ts:138:1 › automatic bypass permits an available empty choice but rejects injected unknown Grid choices
+[6/48] [webkit] › tests\browser\auto-validation.spec.ts:153:1 › automatic bypass respects readonly disabled controls and native first-legend exceptions
+[7/48] [webkit] › tests\browser\auto-validation.spec.ts:175:1 › automatic bypass still reports native value sanitization in an unrelated edited row
+[8/48] [webkit] › tests\browser\auto-validation.spec.ts:202:1 › manual Grid timing keeps bypassed drafts deferred and explicit validation commits only valid candidates
+[9/48] [webkit] › tests\browser\auto-validation.spec.ts:217:1 › blur and Enter remain Grid commit points when automatic validation is disabled
+[10/48] [webkit] › tests\browser\auto-validation.spec.ts:232:1 › a bypassed edit clears prior row constraint errors while retaining current parser integrity errors
+[11/48] [webkit] › tests\browser\auto-validation.spec.ts:252:1 › disabled automatic checks do not weaken full atomic paste or hidden explicit Grid validation
+[12/48] [webkit] › tests\browser\auto-validation.spec.ts:266:1 › invalid policy values fail before ownership and independent instance disposal restores authored accessibility
+[13/48] [webkit] › tests\browser\m10-demo.spec.ts:9:1 › shared TS rules reach Grid and CVC details while automatic validation remains an independent option
+[14/48] [webkit] › tests\browser\m10-demo.spec.ts:39:1 › committed field highlights compare loaded originals and clear after restoring the original
+[15/48] [webkit] › tests\browser\m10-demo.spec.ts:59:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[16/48] [webkit] › tests\browser\m10-demo.spec.ts:79:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[17/48] [webkit] › tests\browser\m10-demo.spec.ts:115:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[18/48] [webkit] › tests\browser\m10-demo.spec.ts:141:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[19/48] [webkit] › tests\browser\m10-demo.spec.ts:166:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[20/48] [webkit] › tests\browser\m10-demo.spec.ts:184:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[21/48] [webkit] › tests\browser\m10-demo.spec.ts:230:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[22/48] [webkit] › tests\browser\m10-demo.spec.ts:251:1 › authored table binds raw nested choices, formatter, and accessible labels
+[23/48] [webkit] › tests\browser\m10-demo.spec.ts:276:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[24/48] [webkit] › tests\browser\m10-demo.spec.ts:317:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[25/48] [webkit] › tests\browser\m10-demo.spec.ts:339:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[26/48] [webkit] › tests\browser\m10-demo.spec.ts:367:1 › sort, filter, and local pages preserve RowId selection
+[27/48] [webkit] › tests\browser\m10-demo.spec.ts:391:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[28/48] [webkit] › tests\browser\m10-demo.spec.ts:412:1 › check and validation policy controls rebind working Grid options
+[29/48] [webkit] › tests\browser\m10-demo.spec.ts:455:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[30/48] [webkit] › tests\browser\m10-demo.spec.ts:498:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[31/48] [webkit] › tests\browser\m10-demo.spec.ts:540:1 › required and unavailable choices validate; dispose and rebind restore the template
+[32/48] [webkit] › tests\browser\m10-demo.spec.ts:579:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[33/48] [webkit] › tests\browser\m10-demo.spec.ts:619:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[34/48] [webkit] › tests\browser\m10-demo.spec.ts:643:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[35/48] [webkit] › tests\browser\m10-demo.spec.ts:679:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[36/48] [webkit] › tests\browser\m10-demo.spec.ts:715:1 › row-block store controls move and copy whole records independently of the employee demo
+[37/48] [webkit] › tests\browser\m10-demo.spec.ts:745:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[38/48] [webkit] › tests\browser\shared-rules.spec.ts:61:1 › one typed field bundle formats Form Grid and List without rule attributes or raw-value mutation
+[39/48] [webkit] › tests\browser\shared-rules.spec.ts:75:1 › typed kinds override ignored HTML while undefined falls back and empty lists retain native constraints
+[40/48] [webkit] › tests\browser\shared-rules.spec.ts:91:1 › explicit nested composition preserves shared formatters and local messages across full and reduced templates
+[41/48] [webkit] › tests\browser\shared-rules.spec.ts:113:1 › rule compilation copies tuple containers and uses own field entries without serializing custom arguments
+[42/48] [webkit] › tests\browser\shared-rules.spec.ts:131:1 › invalid unbound typed declarations fail every binder before ownership and permit corrected retry
+[43/48] [webkit] › tests\browser\shared-rules.spec.ts:158:1 › effective grouped declarations ignore only overridden kinds and preserve fallback conflict checks
+[44/48] [webkit] › tests\browser\shared-rules.spec.ts:179:1 › programmatic formatters obey native control restrictions and empty overrides clear ignored HTML
+[45/48] [webkit] › tests\browser\shared-rules.spec.ts:204:1 › effective formatting and render ownership remain exclusive without DOM attribute mutation
+[46/48] [webkit] › tests\browser\shared-rules.spec.ts:225:1 › Tree uses typed display rules and rejects only nonempty effective bound validators
+[47/48] [webkit] › tests\browser\shared-rules.spec.ts:242:1 › typed validators see current nested raw candidates for hidden Grid and List rows
+[48/48] [webkit] › tests\browser\shared-rules.spec.ts:263:1 › typed rules keep paste atomic and independent accessible Form instances quiet after disposal
+  48 passed (49.9s)
+[WebServer] (node:23224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:22548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

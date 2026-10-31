@@ -8,19 +8,19 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 8f0d17d80872883272cff4ca058e28945c7c46b2
+    git_blob: ba7566d70c2ff29f7db383236a51571f0fffa3ad
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics
-    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
+    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
   - id: checks
     resource: ../../src/ui/grid-selection.ts
     title: Atomic checked-ID transitions and vetoes
@@ -32,11 +32,11 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native values, display and constraints
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: rendering
     resource: ../../src/ui/field-render.ts
     title: Private explicit display and DOM ownership checks
-    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Groups, raw arrays, timing, protected paste and invalid reveal
@@ -48,7 +48,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Live all-options Grid and two authored record layouts
-    git_blob: e9e807d4ee582f4345358c8c838ce1d8c7789bdd
+    git_blob: 79ebd9d83a7c40bb15c43651190a25074eb87e92
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Unchanged flat, nested and multi-tr viewport budgets

@@ -1,6 +1,6 @@
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import { bindForm, bindGrid, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
 const state = { ready: false, screens: {}, handles: {}, outputs: [], allowClose: false, documentControllers: 0 };
 window.packedConsumer = state;
@@ -305,6 +305,25 @@ try {
   const viewportGrid = bindGrid(viewportTable, { rows: viewportRows,
     viewport: { root: scrollRoot, estimate: 48, overscan: 3 }, paste: true, multiple: true });
   state.viewport = { root: scrollRoot, table: viewportTable, rows: viewportRows, grid: viewportGrid, original: originalViewport };
+  const ruleRoot = document.createElement("section");
+  ruleRoot.innerHTML = `<h2>Shared rules</h2><form><label>Name <input data-field="profile.name"></label>
+    <label>Salary <input data-field="salary" required></label><output data-error-for="salary"></output></form>
+    <table><caption>Rule-backed employees</caption><tbody><tr data-row-template><td data-field="profile.name"></td>
+      <td><label>Salary <input type="number" data-field="salary" required></label><output data-error-for="salary"></output></td></tr></tbody></table>
+    <ul><li data-row-template><span data-field="profile.name"></span><span data-field="salary"></span><output data-error-for="salary"></output></li></ul>`;
+  document.querySelector("main").append(ruleRoot);
+  const originalRules = ruleRoot.outerHTML;
+  const ruleRows = createRows([{ profile: { name: "Ada" }, salary: 150 }]);
+  const rules = { format: { upper: value => value.toUpperCase() }, fields: {
+    "profile.name": { format: [["upper"]] }, salary: { validate: [["minvalue", 100]] },
+    "profile.unbound": { validate: [["required"]] }
+  } };
+  const parse = { salary: value => value.trim() && Number.isFinite(Number(value)) ? Number(value) : undefined };
+  const ruleForm = bindForm(ruleRoot.querySelector("form"), { rows: ruleRows, rules, parse, autoValidate: false });
+  ruleForm.bind(ruleRows.entries()[0].id);
+  const ruleGrid = bindGrid(ruleRoot.querySelector("table"), { rows: ruleRows, rules, parse, autoValidate: false, paste: true });
+  const ruleList = bindList(ruleRoot.querySelector("ul"), { rows: ruleRows, rules });
+  state.sharedRules = { root: ruleRoot, rows: ruleRows, form: ruleForm, grid: ruleGrid, list: ruleList, original: originalRules };
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = document.querySelector(`[data-host="${slot}"]`);
     const page = mountPage(host, definition, { slot, name });

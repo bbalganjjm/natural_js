@@ -12,7 +12,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: UI runtime exports
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: compiler
     resource: ../../tsconfig.json
     title: 2.0 TypeScript build settings

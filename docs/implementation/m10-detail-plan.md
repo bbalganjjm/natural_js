@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 8f0d17d80872883272cff4ca058e28945c7c46b2
+    git_blob: ba7566d70c2ff29f7db383236a51571f0fffa3ad
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy more, vertical resize and action-driven scrolling
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical projection, stable identity and reveal
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured row windows and sticky occlusion
@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Shared row drafts, native constraints and validation
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Existing CVC Popup lifecycle and focus restoration
@@ -48,7 +48,7 @@ sources:
   - id: demo-browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Old Grid demo and six detail/height acceptance additions
-    git_blob: e8435d93c659aa574972af902bc0c53996eeb307
+    git_blob: b369b9d24d57b6d8ae929cf18746d8e1aaf5730b
   - id: evidence
     resource: evidence/m1095-verification.json
     title: Frozen source, exact artifact, commands and unchanged benchmark evidence

@@ -12,7 +12,7 @@ function renderError(api: string, field: string, message: string, cause?: unknow
 }
 
 /** Compile only explicit field renderers; ordinary text binding has no extra work. */
-export function fieldRenderers(api: string, targets: readonly { name: string; element: HTMLElement }[],
+export function fieldRenderers(api: string, targets: readonly { name: string; element: HTMLElement; formatted?: boolean }[],
   render?: Record<string, Renderer>): ReadonlyMap<string, Renderer> {
   const configured = new Map<string, Renderer>();
   if (render === undefined) return configured;
@@ -24,8 +24,8 @@ export function fieldRenderers(api: string, targets: readonly { name: string; el
     if (typeof renderer !== "function" || matches.length !== 1) {
       throw renderError(api, name, "A renderer needs exactly one bound display field and a function.");
     }
-    const element = matches[0].element;
-    if (element.isContentEditable || element.matches("input, select, textarea, img, [data-format], [data-error-for]") || element.querySelector(protectedContent)) {
+    const { element, formatted = element.hasAttribute("data-format") } = matches[0];
+    if (formatted || element.isContentEditable || element.matches("input, select, textarea, img, [data-error-for]") || element.querySelector(protectedContent)) {
       throw renderError(api, name, "A render target cannot own formatting, native values or another field/control/error region.");
     }
     configured.set(name, renderer);

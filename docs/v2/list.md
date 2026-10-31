@@ -9,11 +9,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public List handle and export
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 578c0619b9262c497a11d078d07832d0f1fdf4b6
+    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
@@ -25,19 +25,19 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private UI rule runner
-    git_blob: 967142342d060056cd3f124db29f6893a2875d48
+    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native display and authored-template constraint regressions
     git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
-generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -88,7 +88,7 @@ rows.dispose();
 | Option | Behavior |
 |---|---|
 | `rows` | Required caller-owned Rows store; List never disposes it. |
-| `rules` | Optional component-local formatter/validator overrides, messages, and locale. Retained UI built-ins also resolve. |
+| `rules` | Optional RuleSet catalogs, messages, locale and field declarations; see [shared rules](rules.md). Retained UI built-ins also resolve. |
 | `onSelect` | Receives changed row ID, row snapshot or `null`, and the source event; programmatic changes pass `event: null`. |
 
 # Declarative options
@@ -98,7 +98,7 @@ rows.dispose();
 | `data-row-template` | One direct `li` | Defines the repeated authored markup. |
 | `data-empty` | Optional direct `li` | Shown when the visible slice is empty; prior hidden state returns on disposal. |
 | `data-field="path"` | Row descendant | Reads a safe dot-separated object path; ordinary display uses text, and images receive native `src`. |
-| `data-format='[["name",...args]]'` | Text-like input, textarea, or text element | Formats display only; non-text inputs and Selects reject it. |
+| `data-format='[["name",...args]]'` | Text-like input, textarea, or text element | Formats display only; non-text inputs and Selects reject nonempty effective formatters. |
 | `data-validate='[["name",...args]]'` | Field | Validates the stored raw value. |
 | `data-error-for="path"` | Row descendant | Displays issues as text and associates with a matching field. |
 | `data-select-row` | Button with `type="button"` | Changes selected row and reflects it with `aria-pressed`. |

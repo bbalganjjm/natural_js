@@ -100,6 +100,7 @@ const actionScroll = find<HTMLInputElement>("[data-action-scroll]");
 const lastInvalid = find<HTMLInputElement>("[data-last-invalid]");
 const checkMode = find<HTMLSelectElement>("[data-check-mode]");
 const validateOn = find<HTMLSelectElement>("[data-validate-on]");
+const autoValidate = find<HTMLInputElement>("[data-auto-validate]");
 const revealInvalid = find<HTMLInputElement>("[data-reveal-invalid]");
 const disableInactive = find<HTMLInputElement>("[data-disable-inactive]");
 const vetoActive = find<HTMLInputElement>("[data-veto-active]");
@@ -171,13 +172,13 @@ let inlineDetail: PageHandle | null = null;
 let popupDetail: PopupHandle<unknown> | null = null;
 const employeeParsers = { salary: (value: string) => value.trim() ? Number(value) : undefined };
 
-function employeeRules(): RuleSet {
-  return {
-    format: { displayName: value => value.toUpperCase() },
-    validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
-    messages: { payAtLeast: "Salary must be at least {0}." }, locale: locale.value
-  };
-}
+const employeeRuleDefaults: RuleSet = {
+  format: { displayName: value => value.toUpperCase() },
+  validate: { payAtLeast: (value, args) => Number(value) >= Number(args[0]) },
+  messages: { payAtLeast: "Salary must be at least {0}." },
+  fields: { salary: { validate: [["payAtLeast", 100]] }, "profile.team": { validate: [["required"]] } }
+};
+function employeeRules(): RuleSet { return { ...employeeRuleDefaults, locale: locale.value }; }
 
 function reportDetail(cause: unknown): void {
   if (cause instanceof Error && cause.name === "AbortError") return;
@@ -530,6 +531,7 @@ function bind(): void {
     selectOnRowClick: selectOnRowClick.checked,
     checkMode: checkMode.value as "multiple" | "single",
     validateOn: validateOn.value as "change" | "blur" | "manual",
+    autoValidate: autoValidate.checked,
     revealInvalid: revealInvalid.checked && !lastInvalid.checked,
     canSelect: disableInactive.checked ? row => row.value.active : undefined,
     canCheck: disableInactive.checked ? row => row.value.active : undefined,
@@ -894,14 +896,14 @@ for (const control of [viewportChoice, datasetChoice]) {
 for (const control of [selectionMode, toggleSelection, selectOnRowClick, disableInactive]) {
   control.addEventListener("change", () => {
     if (grid) { disposeGrid(); bind(); }
-    status.textContent = "Selection policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
+    status.textContent = "Selection policy changed; selection, checks and uncommitted edits were cleared. Committed Rows changes remain.";
     refresh();
   });
 }
-for (const control of [checkMode, validateOn, revealInvalid, lastInvalid]) {
+for (const control of [checkMode, validateOn, autoValidate, revealInvalid, lastInvalid]) {
   control.addEventListener("change", () => {
     if (grid) { disposeGrid(); bind(); }
-    status.textContent = "Check or validation policy changed; selection, checks and uncommitted edits were cleared. Valid Rows changes remain.";
+    status.textContent = "Check or validation policy changed; selection, checks and uncommitted edits were cleared. Committed Rows changes remain.";
     refresh();
   });
 }

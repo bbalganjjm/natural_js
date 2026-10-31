@@ -101,6 +101,30 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const sharedRules = await page.evaluate(() => {
+    const h = window.packedConsumer.sharedRules, id = h.rows.entries()[0].id;
+    const fields = [...h.root.querySelectorAll('[data-field="profile.name"]')];
+    const formatted = fields.map(element => element instanceof HTMLInputElement ? element.value : element.textContent);
+    const salary = h.root.querySelector('form [data-field="salary"]');
+    salary.value = "50"; salary.dispatchEvent(new Event("input", { bubbles: true }));
+    const raw = h.rows.get(id).value.salary;
+    const validation = [h.form, h.grid, h.list].map(owner => owner.validate(id).issues.map(issue => issue.rule));
+    const rejected = h.grid.paste("25", { id, field: "salary" });
+    salary.value = "bad"; salary.dispatchEvent(new Event("input", { bubbles: true }));
+    const parse = h.form.validate(id).issues.some(issue => issue.rule === "parse");
+    const preserved = h.rows.get(id).value.salary === raw;
+    h.list.dispose(); h.grid.dispose(); h.form.dispose();
+    const restored = h.root.outerHTML === h.original;
+    salary.value = "Late"; salary.dispatchEvent(new Event("input", { bubbles: true }));
+    h.rows.set(id, "salary", 200);
+    const quiet = h.root.outerHTML === h.original;
+    h.rows.dispose(); h.root.remove(); delete window.packedConsumer.sharedRules;
+    return { formatted, raw, validation, rejected: !rejected.valid, parse, preserved, restored, quiet };
+  });
+  assert.deepEqual(sharedRules, { formatted: ["ADA", "ADA", "ADA"], raw: 50,
+    validation: [["minvalue"], ["minvalue"], ["minvalue"]], rejected: true, parse: true,
+    preserved: true, restored: true, quiet: true });
+
   const controls = await page.evaluate(() => {
     const b = window.packedConsumer.blocks;
     const [first, second] = b.rows.entries();

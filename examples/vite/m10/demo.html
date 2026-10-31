@@ -186,6 +186,7 @@
 
         <fieldset>
           <legend>Validation</legend>
+          <label class="check-label"><input type="checkbox" data-auto-validate checked> Automatically validate Grid edits</label>
           <label>Validate edits
             <select data-validate-on>
               <option value="change">On change</option>
@@ -200,7 +201,7 @@
             <button type="button" data-action="validate-selected" data-needs-grid>Validate selected</button>
             <button type="button" data-action="validate-all" data-needs-grid>Validate all</button>
           </div>
-          <p>Type in the table to see HTML and application validation. Invalid drafts stay outside Rows.</p>
+          <p>Automatic checks keep invalid drafts outside Rows. Turn them off to commit parsed edits before checking business constraints. Validate and paste always run complete checks.</p>
           <p>Manual mode keeps edits as drafts until Validate selected or Validate all succeeds. Changing a check or validation policy rebinds the Grid and clears selection, checks and drafts.</p>
         </fieldset>
 
@@ -327,13 +328,13 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
                   <small data-demo-row-status></small><small data-demo-changed-fields></small></th>
                 <td data-column="email"><label>Email <input type="email" data-field="email" value="new.employee@example.com" required></label><output data-error-for="email"></output></td>
                 <td data-column="phone"><label>Phone <input type="tel" data-field="phone" value="+1 555 0100" readonly></label></td>
-                <td data-column="team"><label>Team <input type="text" data-field="profile.team" value="Platform" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output></td>
+                <td data-column="team"><label>Team <input type="text" data-field="profile.team" value="Platform" required></label><output data-error-for="profile.team"></output></td>
                 <td data-column="shift"><label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
                   data-option-label="meta.label" data-option-value="code" required><option value="">Choose</option></select></label>
                   <output data-error-for="assignment.chosen"></output></td>
                 <td data-column="active"><label><input type="checkbox" data-field="active" checked> Active</label></td>
                 <td data-column="notes"><label>Notes <textarea data-field="notes" rows="2">Created from authored defaults</textarea></label></td>
-                <td data-column="salary"><label>Salary <input type="number" min="0" step="1" value="200" data-field="salary" data-validate='[["payAtLeast",100]]' required></label>
+                <td data-column="salary"><label>Salary <input type="number" min="0" step="1" value="200" data-field="salary" required></label>
                   <output data-error-for="salary"></output></td>
                 <td data-column="actions"><div class="row-actions">
                   <button type="button" data-row-action="inspect">Inspect</button>
@@ -496,11 +497,11 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <label>Name <input data-field="name" required></label><output data-error-for="name"></output>
           <label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output>
           <label>Phone <input type="tel" data-field="phone" readonly></label>
-          <label>Team <input data-field="profile.team" data-validate='[["required"]]' required></label><output data-error-for="profile.team"></output>
+          <label>Team <input data-field="profile.team" required></label><output data-error-for="profile.team"></output>
           <label>Shift <select data-field="assignment.chosen" required><option value="">Choose a shift</option></select></label><output data-error-for="assignment.chosen"></output>
           <label class="check-label"><input type="checkbox" data-field="active"> Active</label>
           <label>Notes <textarea data-field="notes" rows="2"></textarea></label>
-          <label>Salary <input type="text" inputmode="decimal" data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output>
+          <label>Salary <input type="text" inputmode="decimal" data-field="salary" required></label><output data-error-for="salary"></output>
         </fieldset>
       </form>
       <p><output data-detail-error role="status"></output></p>
@@ -516,7 +517,7 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
       <form novalidate>
         <fieldset><legend>Name and salary</legend>
           <label>Name <input data-field="name" required></label><output data-error-for="name"></output>
-          <label>Salary <input type="text" inputmode="decimal" data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output>
+          <label>Salary <input type="text" inputmode="decimal" data-field="salary" required></label><output data-error-for="salary"></output>
         </fieldset>
       </form>
       <p><output data-detail-error role="status"></output></p>

@@ -4,12 +4,12 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
+symbols: [RuleContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
+    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -41,19 +41,19 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
-    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -66,7 +66,8 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `FormatRule` | Value, arguments, context | Display string |
 | `ValidateRule` | Value, arguments, context | Boolean or message |
 | `ParseInput` | Entered string and context | Raw candidate |
-| `RuleSet` | Formatter, validator, message, locale maps | Per-component rules |
+| `FieldRules` | Optional readonly format/validate tuple lists | One field's declarations |
+| `RuleSet` | Formatter/validator catalogs, messages, locale and optional fields map | Per-component rules |
 | `ValidationIssue` | Row, field, rule, message, optional element | One failure |
 | `ValidationResult` | `valid` plus `issues` | Collected failures |
 | `PageRequest` | One-based `page`, positive `size` | Requested slice |
@@ -126,6 +127,8 @@ Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/u
 Grid and Rows-backed Form write `data-field-changed="true"` or `"false"` on every bound field member by comparing its committed raw path with `Rows.original(id)`. Nested paths and grouped values remain independent of formatted display and invalid or deferred drafts. Inserted rows have no baseline and receive `"false"`; deleted Grid rows retain their last committed field flags. A focused field's flag updates even when its entered text is preserved. Local Form leaves this attribute application-owned; Rows-backed Form restores authored values or absence on disposal, while Grid restores untouched template nodes. [Form](form.md#loaded-value-changes) and [Grid](grid.md#field-change-markers) define the complete ownership and comparison rules.[^form][^grid]
 
 Grid accepts inline `validateOn?: "change" | "blur" | "manual"` (default `"change"`) and `revealInvalid?: boolean` (default `false`). They control draft commit timing and optional current-page error reveal/focus; explicit `validate()` remains the save gate. Native groups compile as one field: boolean single checkbox, string-array repeated checkboxes, string/null radio, and an always-array multiple Select whose row-local options retain raw scalar types. [Grid](grid.md) defines native type fallback, Enter, protected groups and quoted JSON-array paste.[^grid][^native]
+
+Form/Grid also accept autoValidate?: boolean, default true. False bypasses automatic constraints while preserving existing timing/integrity and complete explicit validation/paste. RuleSet.fields supplies typed declarations independently of the function catalogs. [Shared rules](rules.md) defines precedence, empty overrides and application-owned shared/local composition.[^form][^grid][^native]
 
 Form and Grid accept `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`. A configured display callback is synchronous and returns literal text, `null`, or a fresh disconnected same-document Element/Text/DocumentFragment. `UI_RENDER` reports invalid targets/results, callback causes and recursive target updates. No public renderer type, registry, HTML parser or sanitizer is added. [Form](form.md#explicit-display) and [Grid](grid.md#display-rendering) define preflight and restoration. List shares native value/constraint operations but has no `render` option.[^form][^grid][^render][^native]
 

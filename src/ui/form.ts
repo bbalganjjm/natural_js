@@ -52,7 +52,7 @@ function errorId(element: HTMLElement): string {
 
 export function bindForm<T extends object = Record<string, unknown>>(
   root: HTMLElement,
-  options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>;
+  options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; autoValidate?: boolean;
     render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null> } = {}
 ): FormHandle<T> {
   if (!root || root.nodeType !== 1) {
@@ -61,6 +61,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
   if (boundRoots.has(root)) {
     throw formError("FORM_IN_USE", "This Form root is already bound.");
   }
+  if (options.autoValidate !== undefined && typeof options.autoValidate !== "boolean") {
+    throw formError("FORM_VALIDATE", "autoValidate must be boolean.");
+  }
+  const autoValidate = options.autoValidate ?? true;
   const { rows, rules, parse } = options;
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
@@ -127,6 +131,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
   for (const field of fields) {
     for (const attribute of ["data-format", "data-validate"] as const) {
+      if (runner.configured(field.name, attribute)) continue;
       const declarations = field.elements.map(element => element.getAttribute(attribute))
         .filter((value): value is string => value !== null);
       if (new Set(declarations).size > 1) {
@@ -144,7 +149,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
       throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert boolean or array controls.", { field: field.name });
     }
   }
-  const renderers = fieldRenderers("bindForm", fields.map(field => ({ name: field.name, element: field.element })), options.render);
+  const renderers = fieldRenderers("bindForm", fields.map(field => ({
+    name: field.name, element: field.element, formatted: field.format.length > 0
+  })), options.render);
   const renderedOriginals = fields.filter(field => renderers.has(field.name)).map(field => ({ element: field.element, children: [...field.element.childNodes] }));
   const localRenderedValues = new Map(rows ? [] : fields.filter(field => renderers.has(field.name)).map(field => [field, fieldValue(field)] as const));
   const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
@@ -262,7 +269,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function check(field: Field, id: RowId | null, candidate: Candidate,
-    values: Record<string, unknown>): readonly ValidationIssue[] {
+    values: Record<string, unknown>, validate: boolean): readonly ValidationIssue[] {
     if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
     if (field.kind === "radio" || field.kind === "checkbox" && field.elements.length > 1) {
@@ -273,25 +280,25 @@ export function bindForm<T extends object = Record<string, unknown>>(
         entered != null && field.elements.some(element => (element as HTMLInputElement).value === String(entered)) :
         Array.isArray(entered) && field.elements.some(element =>
           entered.some(value => String(value) === (element as HTMLInputElement).value));
-      if (required && !selected) found.push(issue(field, id, "html", "Select an option."));
+      if (validate && required && !selected) found.push(issue(field, id, "html", "Select an option."));
     } else if (control(field.element)) {
       const visible = id === null || id === boundId;
       const probe = visible ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
       if (!visible) { probe.disabled = disabled(field.element, root); display(probe, entered); }
-      const message = nativeMessage(probe, entered);
+      const message = nativeMessage(probe, entered, validate);
       if (message) found.push(issue(field, id, "html", message));
     }
-    found.push(...runner.validate(field.validate, candidate.value, context(field, id, values)));
+    if (validate) found.push(...runner.validate(field.validate, candidate.value, context(field, id, values)));
     return found;
   }
 
-  function evaluate(id: RowId | null, source: Record<string, unknown>, entered: ReadonlyMap<Field, unknown>) {
+  function evaluate(id: RowId | null, source: Record<string, unknown>, entered: ReadonlyMap<Field, unknown>, validate = true) {
     const { values, parsed } = candidates(id, source, entered);
     const byField = new Map<Field, readonly ValidationIssue[]>();
     for (const field of fields) {
       const candidate = parsed.get(field) ?? { value: readPath(values, field.path) };
-      byField.set(field, check(field, id, candidate, values));
+      byField.set(field, check(field, id, candidate, values, validate));
     }
     return { byField, parsed };
   }
@@ -335,10 +342,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
   }
 
-  function reconcile(id: RowId): void {
+  function reconcile(id: RowId, validate = true): void {
     const currentDrafts = drafts.get(id);
     if (!currentDrafts?.size || reconciling) return;
-    const result = evaluate(id, rowValue(id), currentDrafts);
+    const result = evaluate(id, rowValue(id), currentDrafts, validate);
     const ready = [...currentDrafts.keys()].filter(field => !result.byField.get(field)?.length);
     let failed = false;
     let failure: unknown;
@@ -371,7 +378,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (!currentDrafts.size) drafts.delete(id);
     try {
       if (id === boundId) {
-        const checked = evaluate(id, rowValue(id), currentDrafts);
+        const checked = evaluate(id, rowValue(id), currentDrafts, validate);
         for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
         render(true);
         showIssues();
@@ -385,16 +392,18 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
     const field = byElement.get(event.target);
     if (!field || !control(field.element)) return;
+    if (disabled(event.target, root) ||
+        (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
     if (rows) {
       if (boundId === null) return;
       const currentDrafts = drafts.get(boundId) ?? new Map<Field, unknown>();
       currentDrafts.set(field, fieldValue(field));
       drafts.set(boundId, currentDrafts);
-      reconcile(boundId);
+      reconcile(boundId, autoValidate);
       return;
     }
     const entered = new Map(fields.map(item => [item, localFieldValue(item)] as const));
-    const checked = evaluate(null, localValues(), entered);
+    const checked = evaluate(null, localValues(), entered, autoValidate);
     for (const item of fields) {
       if (item === field || issues.has(item)) issues.set(item, checked.byField.get(item) ?? []);
     }
@@ -484,7 +493,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         render();
         const currentDrafts = id === null ? undefined : drafts.get(id);
         if (id !== null && currentDrafts?.size) {
-          const checked = evaluate(id, rowValue(id), currentDrafts);
+          const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
           for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
         }
       }

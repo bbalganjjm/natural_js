@@ -9,7 +9,7 @@ sources:
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree hierarchy, field binding, keyboard, and disposal implementation
-    git_blob: 730aec4bc38bd3f001cea36677825ee1b4d15cd0
+    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
   - id: rows
     resource: ../../src/data/index.ts
     title: Caller-owned Rows and stable row identity
@@ -21,9 +21,9 @@ sources:
   - id: apg
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
     title: WAI-ARIA treeview pattern
-generated: { by: codex/gpt-6, at: 2026-10-05T07:27:08Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-05T07:43:44Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 `bindTree` turns an authored list template into a single-selection hierarchy over caller-owned `Rows`. Tree displays text and controls focus, expansion, and selection; edit the selected record through a Form.[^tree]
@@ -73,7 +73,7 @@ Selection of a collapsed descendant expands its ancestors. `key` and `parent` de
 | `rows` | `Rows<T>` | — | Caller-owned store; Tree subscribes without disposing it. |
 | `key` | `(row: Snapshot<T>) => string \| number` | — | Unique, nonempty string or finite numeric domain key. |
 | `parent` | `(row: Snapshot<T>) => string \| number \| null` | — | Existing parent domain key; `null` means a root. |
-| `rules` | `RuleSet` | None | Component-local display formatters, messages, and locale. |
+| `rules` | `RuleSet` | None | Component-local display formatters, messages, locale and field declarations; see [shared rules](rules.md). Nonempty effective validators on bound Tree fields remain unsupported. |
 | `onSelect` | `({ id, row, event }) => void` | None | Changed selection with `RowId \| null`, `RowSnapshot<T> \| null`, and `Event \| null`. |
 
 Rows insertion order determines sibling order. String and numeric keys remain distinct. Missing parents, duplicate keys, and cycles raise `TREE_PARENT`, `TREE_KEY`, or `TREE_CYCLE`; Tree does not infer roots from missing parents.[^tree]
@@ -90,7 +90,7 @@ Rows insertion order determines sibling order. String and numeric keys remain di
 | `data-format='[["name",...args]]'` | Text field | Uses retained UI formatters or `rules.format` overrides. |
 | `data-empty` | Optional direct `li` | Appears when Rows has no nodes. |
 
-The repeated template cannot contain fixed IDs or interactive controls other than its optional toggle. A field cannot be the node root, child group, toggle, or an element containing children. Tree rejects `data-validate`; use Form validation for edits. Safe field paths reject prototype keys, numeric array indexes, and expressions.[^tree][^paths]
+The repeated template cannot contain fixed IDs or interactive controls other than its optional toggle. A field cannot be the node root, child group, toggle, or an element containing children. Tree rejects nonempty effective validators; [] can clear an authored declaration through RuleSet.fields. Use Form validation for edits. Safe field paths reject prototype keys, numeric array indexes, and expressions.[^tree][^paths]
 
 # Methods
 

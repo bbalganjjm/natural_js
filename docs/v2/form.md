@@ -9,19 +9,19 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+    git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 21df9a8451977f5d180d4a1170fd004da0c6dad9
+    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
-    git_blob: 24943c238ebb41954764f4ab45306d5e7808b572
+    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit field rendering and DOM ownership
-    git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
+    git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native constraints, Form rendering and binding recovery regressions
@@ -33,7 +33,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private Form and Grid rule runner
-    git_blob: 967142342d060056cd3f124db29f6893a2875d48
+    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Retained Form formatter behavior
@@ -46,10 +46,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-24T10:10:43Z }
+  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -83,7 +83,9 @@ The built-in `required`, `email`, and `commas` rules need no import or registrat
 
 # Constructor and markers
 
-`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, and `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
+`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean` and `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
+
+The [shared rule contract](rules.md) defines RuleSet.fields, per-kind TS/HTML precedence, empty-list overrides and shared/local composition. autoValidate defaults to true; false bypasses automatic native/business constraints while retaining parse/JSON/native-value integrity and disabled/readOnly edit guards. It clears stale row constraint results at automatic evaluation. Explicit validate() still performs full precommit checks. This is independent of native value conversion and the application-owned scalar choice parser.[^form][^rules]
 
 | Marker | Meaning |
 |---|---|
@@ -95,13 +97,13 @@ The built-in `required`, `email`, and `commas` rules need no import or registrat
 
 An image field writes the raw value to native `src`; `null` or empty text removes the attribute and leaves authored `alt` unchanged. Ordinary display fields remain text. Explicit rich display uses the `render` option described below.[^native][^render]
 
-Rule names are case-insensitive. Combined validators accept the retained `+` and underscore spellings. Malformed JSON/name tuples raise `RULE_DECLARATION`, unknown names raise `RULE_UNKNOWN`, and invalid built-in arguments raise `RULE_ARGUMENT` at binding. `RuleSet.format` and `RuleSet.validate` can override built-ins per Form; `RuleSet.messages` replaces built-in messages. Built-in messages default to English; a locale beginning with `ko` selects Korean. Domain rules belong in `RuleSet`, not a framework utility package.[^rules]
+Rule names are case-insensitive. Combined validators accept the retained `+` and underscore spellings. For effective declarations, malformed JSON/name tuples raise `RULE_DECLARATION`, unknown names raise `RULE_UNKNOWN`, and invalid built-in arguments raise `RULE_ARGUMENT` at binding. `RuleSet.format` and `RuleSet.validate` can override built-ins per Form; `RuleSet.messages` replaces built-in messages. Built-in messages default to English; a locale beginning with `ko` selects Korean. Domain rules belong in `RuleSet`, not a framework utility package.[^rules]
 
 A path is parsed once. It rejects prototype keys, numeric array indexes, and expressions; a nested write copies that object path and replaces its top-level `Rows` field. Array values can still be stored or replaced as whole fields.[^path][^form]
 
-A nonempty `data-format` list on a Select or non-text input (including radio, checkbox, file, and number) raises `FORM_FORMAT_CONTROL` at binding; changing those controls to display strings would corrupt their value semantics. A file input may bind only to a local Form (`FORM_FILE_ROWS` for Rows); `multiple` file selection is outside this field contract (`FORM_FILE_MULTIPLE`).[^form]
+A nonempty effective formatter list on a Select or non-text input (including radio, checkbox, file, and number) raises `FORM_FORMAT_CONTROL` at binding; changing those controls to display strings would corrupt their value semantics. A file input may bind only to a local Form (`FORM_FILE_ROWS` for Rows); `multiple` file selection is outside this field contract (`FORM_FILE_MULTIPLE`).[^form]
 
-Repeated `data-field` paths are allowed only for radio or checkbox controls. A radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. A native `<select multiple>` produces a string array. Group choices must have distinct values, and all declarations of the same rule attribute in one group must match. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
+Repeated `data-field` paths are allowed only for radio or checkbox controls. A radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. A native `<select multiple>` produces a string array. Group choices must have distinct values. For each kind falling back to HTML, all declarations of that attribute in one group must match; a typed override ignores that kind's HTML. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
 
 ```html
 <form data-role="preferences">
@@ -137,7 +139,7 @@ const form = bindForm(root, {
 
 Each configured field must have exactly one display target. The synchronous callback receives its raw value and `RuleContext`; return literal text, `null` to clear, or a fresh disconnected parentless Element, Text or DocumentFragment from the target's document. Configuration, callback failures, recursive updates, async results and invalid/owned returned nodes raise `UI_RENDER` with the binder API, field and callback cause when present. The application creates and sanitizes any trusted DOM; strings are never interpreted as HTML.[^render]
 
-Preflight rejects native value/image controls, editable regions, error regions, simultaneous `data-format`, and targets containing other bound fields/controls/error regions or framework interaction markers. [Grid's shared rendering contract](grid.md#display-rendering) details the same ownership rules. On Form disposal, only custom render targets recover their exact original child nodes; ordinary control values keep the existing Form disposal behavior. There is no new renderer registry or general utility API.[^render][^form][^controls-browser]
+Preflight rejects native value/image controls, editable regions, error regions, simultaneous nonempty effective formatters, and targets containing other bound fields/controls/error regions or framework interaction markers. [Grid's shared rendering contract](grid.md#display-rendering) details the same ownership rules. On Form disposal, only custom render targets recover their exact original child nodes; ordinary control values keep the existing Form disposal behavior. There is no new renderer registry or general utility API.[^render][^form][^controls-browser]
 
 A local Form retains each custom display field's original raw text separately from generated DOM. Native input updates reevaluate its display using the current field snapshot; `read()` and validation use the retained raw value, not the renderer's text output. This keeps a display prefix or rich child from becoming application input.[^form]
 
@@ -154,7 +156,7 @@ A local Form retains each custom display field's original raw text separately fr
 
 # Input and accessibility
 
-For a scalar field with a parser, Form passes one snapshot of all unparsed entered fields through `RuleContext.values`, then checks native constraints against entered control values. Declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. Grouped radio and checkbox fields use their shared selected-value and `required` check. Candidates from all drafts of one row are combined before cross-field checks such as `equalTo`. Valid candidates enter `Rows`; an invalid or unparseable input remains visible as a row-keyed draft and cannot change its stored raw field. An edit through the same Form rechecks drafts immediately, so an `equalTo` draft can enter `Rows` after its peer changes. After an external `Rows.set`, call `validate()` before saving to recheck and commit any newly valid draft.[^form]
+With default automatic validation, Form passes one snapshot of all unparsed entered fields through `RuleContext.values`, then checks native constraints against entered control values. Declared validators receive each parsed field value as a string, with the combined typed candidate in `RuleContext.values`. Grouped radio and checkbox fields use their shared selected-value and `required` check. Candidates from all drafts of one row are combined before cross-field checks such as `equalTo`. Valid candidates enter `Rows`; an invalid or unparseable input remains visible as a row-keyed draft and cannot change its stored raw field. An edit through the same Form rechecks drafts immediately, so an `equalTo` draft can enter `Rows` after its peer changes. After an external `Rows.set`, call `validate()` before saving to recheck and commit any newly valid draft.[^form]
 
 Visible, local and hidden-row native checks share the same candidate rules. Programmatically bound text obeys `minlength`/`maxlength`, as do entered drafts; hidden-row probes need no rebinding. Effective native disabled state and `willValidate` apply, including disabled fieldsets and their first-legend exception. Invalid stored date/time, number/range or color candidates that the native input sanitizes report an issue rather than rewriting stored data. An unsupported authored input type follows its effective browser-native fallback; no date polyfill is added.[^native][^form][^controls-browser]
 
