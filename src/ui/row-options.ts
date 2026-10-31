@@ -33,3 +33,46 @@ export function rowOptions(
   }
   return result;
 }
+
+export function renderRowOptions(
+  element: HTMLSelectElement, authoredNodes: readonly Node[], authoredOptions: readonly HTMLOptionElement[],
+  authored: readonly (string | null)[], choices: readonly RowOption[]
+): Map<HTMLOptionElement, unknown> {
+  const raw = new Map<HTMLOptionElement, unknown>();
+  const children = [...authoredNodes];
+  authoredOptions.forEach((option, index) => raw.set(option, authored[index]));
+  for (const choice of choices) {
+    const option = element.ownerDocument.createElement("option");
+    option.value = String(choice.raw ?? "");
+    option.textContent = choice.label;
+    raw.set(option, choice.raw);
+    children.push(option);
+  }
+  element.replaceChildren(...children);
+  return raw;
+}
+
+export function selectRowOptions(element: HTMLSelectElement, raw: ReadonlyMap<HTMLOptionElement, unknown>, value: unknown): void {
+  if (!element.multiple) {
+    element.selectedIndex = [...element.options].findIndex(option => raw.has(option) && Object.is(raw.get(option), value));
+    return;
+  }
+  const remaining = Array.isArray(value) ? [...value] : [];
+  for (const option of element.options) {
+    const index = raw.has(option) ? remaining.findIndex(item => Object.is(item, raw.get(option))) : -1;
+    option.selected = index >= 0;
+    if (index >= 0) remaining.splice(index, 1);
+  }
+}
+
+export function rowOptionAvailable(available: readonly unknown[], value: unknown, multiple: boolean): boolean {
+  if (!multiple) return available.some(option => Object.is(option, value));
+  if (!Array.isArray(value)) return false;
+  const remaining = [...available];
+  for (const item of value) {
+    const index = remaining.findIndex(option => Object.is(option, item));
+    if (index < 0) return false;
+    remaining.splice(index, 1);
+  }
+  return true;
+}

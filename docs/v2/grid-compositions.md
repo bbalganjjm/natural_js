@@ -8,7 +8,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid delegation and current row identity
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: rows
     resource: ../../src/data/index.ts
     title: Immutable snapshots and independent store identity

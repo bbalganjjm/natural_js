@@ -2,7 +2,7 @@
 import type { RowId, RowSnapshot, Rows, Snapshot } from "../data/index.js";
 import { FrameworkError } from "../internal/framework-error.js";
 import { parsePath, readPath } from "./field-path.js";
-import { rowOptions } from "./row-options.js";
+import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
 import { createRuleRunner } from "./rules.js";
 import { disabled, display, nativeMessage } from "./native-control.js";
@@ -261,20 +261,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     const { field, element } = binding;
     const source = field.options ? readPath(value, field.options) : null;
     if (!binding.optionsBound || !Object.is(binding.source, source)) {
-      const raw = new Map<HTMLOptionElement, unknown>();
-      const children = [...binding.authoredNodes];
-      for (const [index, option] of binding.authoredOptions.entries()) raw.set(option, field.authored[index]);
-      if (field.options) {
-        for (const choice of rowOptions(value, field.options, field.label!, field.value!, invalidOptions(id))) {
-          const option = root.ownerDocument.createElement("option");
-          option.value = String(choice.raw ?? "");
-          option.textContent = choice.label;
-          raw.set(option, choice.raw);
-          children.push(option);
-        }
-      }
-      element.replaceChildren(...children);
-      binding.rawByOption = raw;
+      binding.rawByOption = renderRowOptions(element, binding.authoredNodes, binding.authoredOptions, field.authored,
+        field.options ? rowOptions(value, field.options, field.label!, field.value!, invalidOptions(id)) : []);
       binding.source = source;
       binding.optionsBound = true;
       binding.selectedBound = false;
@@ -282,17 +270,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (field.field) {
       const current = readPath(value, field.field);
       if (!binding.selectedBound || !Object.is(binding.previous, current)) {
-        if (element.multiple) {
-          const remaining = Array.isArray(current) ? [...current] : [];
-          for (const option of element.options) {
-            const index = remaining.findIndex(item => Object.is(item, binding.rawByOption.get(option)));
-            option.selected = index >= 0;
-            if (index >= 0) remaining.splice(index, 1);
-          }
-        } else {
-          element.selectedIndex = [...element.options].findIndex(option =>
-            Object.is(binding.rawByOption.get(option), current));
-        }
+        selectRowOptions(element, binding.rawByOption, current);
         binding.previous = current;
         binding.selectedBound = true;
       }
@@ -350,11 +328,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const available = [...field.authored, ...(field.options ?
         rowOptions(values, field.options, field.label!, field.value!, invalidOptions(row.id))
           .map(choice => choice.raw) : [])];
-      const present = (candidate: unknown) => available.some(option => Object.is(option, candidate));
-      const validOption = (authored[field.index] as HTMLSelectElement).multiple
-        ? Array.isArray(value) && value.every(present)
-        : present(value);
-      if (!validOption) {
+      if (!rowOptionAvailable(available, value, (authored[field.index] as HTMLSelectElement).multiple)) {
         issues.push({ rowId: row.id, field: field.name, rule: "select-option",
           message: "Choose an available option.", ...(element ? { element } : {}) });
       }

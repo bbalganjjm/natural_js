@@ -29,7 +29,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -113,15 +113,15 @@ sources:
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
-    git_blob: 72facd6bc5b30845938731897f1f5aadd257a7fa
+    git_blob: 4d7359d7fdafb0fda5fafb0ee81372b26722538a
   - id: owner
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -237,7 +237,7 @@ Field and option paths reject array indices, expressions, prototype keys, and em
 
 Radio and checkbox members sharing one field path form one logical field, including members in different physical rows of a record. One checkbox stores a boolean; repeated checkboxes store a string array; radio stores a string or `null`. Choices must have distinct values, matching control kinds and consistent rule declarations. Radio members must share one native form owner; all-null owners are allowed, while mixed owners fail before mutation. Every cloned radio group receives a document-unique native name, so records and simultaneous MDI Grids remain independent inside or outside a native form. The authored template names are unchanged and restored with the template. Use wrapping labels and a fieldset/legend for group meaning.[^grid][^controls-browser]
 
-A row-field `<select multiple>` always stores an array, including zero or one selected item. Row-local `data-options` preserves raw strings, finite numbers, booleans and `null` through the option map. Native date, datetime-local, time, month, week, color and hidden inputs use strings; number/range use the required application parser. When an engine implements an authored type as a text fallback, the effective native control defines its constraints; no date polyfill or new date utility is installed.[^grid][^native][^controls-browser]
+A row-field `<select multiple>` always stores an array, including zero or one selected item. Row-local `data-options` preserves raw strings, finite numbers, booleans and `null` through the option map. Repeated raw values consume one option per requested occurrence: [1] selects one of two raw-1 options, while [1,1] needs both. Availability rejects excess occurrences without normalizing the stored array. Native date, datetime-local, time, month, week, color and hidden inputs use strings; number/range use the required application parser. When an engine implements an authored type as a text fallback, the effective native control defines its constraints; no date polyfill or new date utility is installed.[^grid][^native][^controls-browser]
 
 # Methods
 
@@ -401,7 +401,7 @@ The example requires Email and Team to be consecutive bound fields in the curren
 
 Disabled native controls, readonly inputs/textareas and fields under `inert` or `aria-readonly="true"` consume a clipboard position but are not written. Any protected member protects its entire radio/checkbox group. Shown deleted records inside the rectangle consume protected lines without writes, including offscreen records; they do not shift later lines. A deleted starting ID raises `GRID_PASTE_TARGET`. A single checkbox accepts exactly `true` or `false`; radio accepts an available choice string or empty text for `null`. A scalar Select matches text to `String(rawValue ?? "")` among enabled options, preserving its raw type. Unknown or disabled values fail; two different raw values with the same serialization, such as number `1` and string `"1"`, are ambiguous and fail. Raw identity uses `Object.is`, including the distinction between `0` and `-0`. Display labels are not converters.[^grid][^controls-browser][^lifecycle-browser]
 
-Repeated checkboxes and multiple Selects accept a JSON array in one TSV cell, including `[]`. Apply ordinary TSV quoting around JSON quotes: the cell for `["mail","sms"]` is `"[""mail"",""sms""]"`. Checkbox members require available strings; typed Select arrays match available raw scalar values, so `[1,"1",null]` can retain three distinct choices. Duplicate, unavailable or disabled choices reject the complete paste. Row-local nested option arrays use the normal Select mapping; no array-index path syntax or clipboard rule engine is added.[^grid][^controls-browser]
+Repeated checkboxes and multiple Selects accept a JSON array in one TSV cell, including `[]`. Apply ordinary TSV quoting around JSON quotes: the cell for `["mail","sms"]` is `"[""mail"",""sms""]"`. Checkbox members require available strings; typed Select arrays match available raw scalar values, so `[1,"1",null]` can retain three distinct choices. Duplicate checkbox choices, unavailable or disabled choices reject the complete paste. Typed Select arrays may repeat a raw value only when enough enabled matching options exist; [1,1] needs two raw-1 options. Row-local nested option arrays use the normal Select mapping; no array-index path syntax or clipboard rule engine is added.[^grid][^controls-browser]
 
 Pasted fields overlay existing drafts for each affected row. Existing parsers see one combined unparsed candidate; native constraints check entered values while business rules receive the complete parsed row, including unrelated drafts and bound fields outside the pasted range. Only supplied writable fields are committed, with copied nested paths preserving other stored values. An unrelated valid draft is considered during validation but is not saved by paste. Validation failure leaves stored values, drafts, entered input and selection intact. Focus stays unchanged by default; `revealInvalid: true` may reveal and focus the first current-page error. Returned issues identify `rowId`, `field`, `rule`, `message` and a currently connected `element` when present; released rows retain no stale reference. Accessible messages merge with existing field errors instead of erasing them.[^grid]
 

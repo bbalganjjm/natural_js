@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required Grid continuation and full feature obligations
-    git_blob: e27c90edaec8f4ae0986444bd46c5163990d43c3
+    git_blob: 7be0f7523a04d1541846b5ae36363541d71e51eb
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row ownership and existing active-detail contract
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts

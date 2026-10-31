@@ -52,15 +52,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
+    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
+    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -221,6 +221,8 @@ The [current Grid acceptance ledger](evidence/m10964-grid-acceptance.json) resol
 The [M5.2 continuation](m5-state-plan.md) adds selected incoming-state/checkpoint, retained-anchor and application wire witnesses at the existing Data/communication owners. It preserves all inherited surface/dynamic records and full-family obligations. General value/schema equivalence, remaining hooks/default lifecycles, other UI/CVC parity and unvalidated-paste policy remain open.
 
 P0 must close behavior equivalence for mapped literal/merged options, dynamic dispatch and callback edge cases, then finish the consolidated retirement proposal. Manual assistive-technology review and actual token telemetry remain open. Structural mapping is complete for the eight-file checklist; exhaustive behavioral closure and current 2.0 parity are incomplete.
+
+The [M5.3 continuation](m5-form-options-plan.md) adds selected Rows-backed nested Form choices and shared Form/Grid/List occurrence handling. It removes manual detail-screen option conversion while preserving unmarked/local Forms. Wider bind-value callbacks, Form raw rendering, List editing, Tree validation and remaining owner/P0/M13 obligations stay required; no full-family closure or omission is inferred.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
 

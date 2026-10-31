@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.3 Form row-local typed choices and shared option occurrences",
+  "recorded_at": "2026-10-31",
+  "status": "selected_outcomes_verified_full_families_open",
+  "workspace_baseline_commit": "4660cd6d2590f9df2e2dfa55ef4a7542c181d9e8",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m52-verification.json",
+      "sha256": "7cd6b3ad7de7e1d987578c60ba2a3cd40f08b786a0c7765e02f254e3019fd7be",
+      "preserved_in_commit": "4660cd6d2590f9df2e2dfa55ef4a7542c181d9e8"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m52-row-state.json",
+      "sha256": "39c01607fbbe8ccaba925b8c5d7defd9942edc83f2cf3c0e92176ba707c6cc48"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and unclosed owner obligation through immutable M5.2 evidence and the original audit. This selected Form option delta neither replaces prior ledgers nor reruns or recertifies historical runtime.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "public_delta": {
+    "new_public_named_types": [],
+    "new_public_options": 0,
+    "new_public_methods": 0,
+    "new_public_entries": 0,
+    "new_framework_source_modules": 0,
+    "new_runtime_dependencies": 0,
+    "existing_markers": [
+      "data-field",
+      "data-options",
+      "data-option-label",
+      "data-option-value"
+    ],
+    "private_shared_helpers": 3,
+    "note": "Use three small private option DOM/raw-map, raw-selection and occurrence-availability functions in the existing row-options owner at Form/Grid/List callers. Existing binders retain caches, rules, drafts, errors and lifetimes. No typed-mode option, local-source API, registry, separate binder or public utility."
+  },
+  "selected_contracts": {
+    "typed_form": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Recognize all required row-local option markers only on Rows-backed Form Select fields. Prepare safe nested label/value paths, authored nodes and raw values; generate textContent options through existing rowOptions. Reject missing/unsupported markers, marked local Forms and typed-choice string parsers before ownership. Preserve every unmarked/local scalar-parser contract.",
+      "source_refs": [
+        "src/ui/form.ts#bindForm",
+        "src/ui/row-options.ts#rowOptions"
+      ],
+      "witnesses": [
+        "U01",
+        "B01",
+        "B02",
+        "B05",
+        "B12",
+        "B13",
+        "D01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "Wider Form raw rendering, bind-value transformations and full control/callback/dynamic workflows stay required."
+    },
+    "identity_occurrences": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use Object.is for string/number/boolean/null values, including signed zero. Single selection chooses the first match; multiple selection consumes one option per requested occurrence and reads in DOM order. Availability consumes the same counts: [1,1] requires two raw-1 choices. Apply the same actual functions to Form/Grid/List and full Grid paste validation; no serialized HTML value determines raw identity.",
+      "source_refs": [
+        "src/ui/row-options.ts",
+        "src/ui/form.ts",
+        "src/ui/grid.ts",
+        "src/ui/list.ts"
+      ],
+      "witnesses": [
+        "U01",
+        "U02",
+        "B02",
+        "B03",
+        "B04",
+        "B11",
+        "I03"
+      ],
+      "remaining": "Standalone Select public behavior stays unchanged. No generic collection, normalization or selection engine is introduced."
+    },
+    "validation": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Keep typed-choice integrity mandatory with autoValidate:false. Unmapped/foreign or disabled selected options remain invalid drafts without undefined writes. Validate each target row against its own candidate/source without visible-row map leakage or DOM changes. Null needs a real null option; full required validation rejects null/empty scalar and empty arrays while [null] or [empty string] can represent actual multiple choices. Preserve disabled/custom-validity and business-rule boundaries.",
+      "source_refs": [
+        "src/ui/form.ts#check",
+        "src/ui/form.ts#evaluate",
+        "src/ui/grid.ts#validateRow",
+        "src/ui/grid.ts#paste",
+        "src/ui/list.ts#validateRow"
+      ],
+      "witnesses": [
+        "U01",
+        "U02",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B17",
+        "I03"
+      ],
+      "remaining": "Legacy unvalidated paste and broader validation-scope equivalence remain open. Ordinary unmarked Form choices retain their existing application parsing boundary."
+    },
+    "lifecycle": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Prepare all marked fields before changing direct-bind identity or option DOM, so a malformed later field preserves the prior binding. Cache source identity; preserve raw drafts when options change. Stop stale later-field work after callback reentry/replacement/rebinding/disposal with a Form-owned source/render guard. Null binding removes generated options without data writes. Restore exact authored nodes and initial selection on failure/disposal and release all claims/events/ARIA ownership quietly.",
+      "source_refs": [
+        "src/ui/form.ts#bindForm",
+        "src/ui/form.ts#render",
+        "src/ui/form.ts#dispose",
+        "src/ui/select-owner.ts#claimSelect"
+      ],
+      "witnesses": [
+        "B05",
+        "B06",
+        "B07",
+        "B10",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B16",
+        "B17",
+        "B18",
+        "I03"
+      ],
+      "remaining": "This does not claim complete callback lifecycle closure or introduce a generic rendering transaction."
+    },
+    "detail": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use the existing full detail template row-option paths and remove manual option updates, code maps, numeric conversion and subscriber-order glue. Preserve the reduced template, shared Rows, CVC ownership, validation and existing native accessible HTML/CSS.",
+      "source_refs": [
+        "examples/vite/m10/demo.html",
+        "examples/vite/m10/detail.ts"
+      ],
+      "witnesses": [
+        "D01"
+      ],
+      "remaining": "Other authored screens and remaining UI/CVC workflows remain required; no second demo engine is added."
+    },
+    "installed": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use one exact package in isolated JavaScript and TypeScript consumers and the same artifact in Chromium/Firefox/WebKit/actual Windows Chrome/Edge. Exercise marked Form typed choices and occurrence/integrity/restoration behavior through existing public APIs.",
+      "source_refs": [
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No npm publication or release tag. Actual macOS/iOS Safari stays excluded; available WebKit is mandatory."
+    }
+  },
+  "witnesses": {
+    "U01": {
+      "kind": "unit",
+      "file": "tests/row-options.test.ts",
+      "title": "tests single choices with Object.is instead of serialized values"
+    },
+    "U02": {
+      "kind": "unit",
+      "file": "tests/row-options.test.ts",
+      "title": "consumes multiple raw occurrences without changing either input"
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "Form binds nested typed choices with safe text and retained authored option nodes"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "single Form changes preserve zero signs number-string booleans null and generated empty-string identities"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "Form Grid and List consume duplicate raw occurrences without normalizing unrepresentable arrays"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "Grid array paste enforces available duplicate counts atomically across shared Form and List"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "typed Form selection updates shared owners and unrelated writes retain option identity and focus"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "removed and reintroduced choices retain a raw invalid draft until explicit validation can commit it"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "hidden Form validation uses the target row choices without changing visible native options focus or errors"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "required raw blanks and empty arrays remain full checks while automatic bypass preserves typed integrity"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "foreign and disabled option gestures stay drafts while native custom validity remains an explicit constraint"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "hidden typed Select validation does not inherit the visible control custom error or mutate its DOM"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "Form and Grid reject foreign equal-string and mapped disabled option gestures even with automatic checks disabled"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "typed marker and parser failures release ownership while unmarked authored Select conversion stays unchanged"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "a malformed second option source leaves the previous binding drafts and authored nodes intact"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "null binding and Rows lifetime operations clear generated choices without rewriting raw data"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "a formatter that changes Rows cannot install stale later-field choices"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "formatter disposal stops stale choice work and releases exact authored Select ownership"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "ready Form writes recheck changed choice sources and stop after a subscriber rebinds the Form"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "independent Forms expose unique accessible errors and dispose quietly with original option selection"
+    },
+    "D01": {
+      "kind": "browser",
+      "file": "tests/browser/form-options.spec.ts",
+      "title": "full inline and popup CVC details share typed shift choices with the main Grid"
+    },
+    "I01": {
+      "kind": "consumer",
+      "file": "tests/consumers/js/check.mjs",
+      "title": "Installed JavaScript rejects private row-options deep imports",
+      "marker": "await assert.rejects(import(\"@bbalganjjm/natural_js/ui/row-options\")"
+    },
+    "I02": {
+      "kind": "consumer",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript uses existing Form contract for typed nested choice rows",
+      "marker": "export function connectRowChoices("
+    },
+    "I03": {
+      "kind": "consumer",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Installed browsers preserve marked Form raw types target-row availability and occurrence counts",
+      "marker": "const formChoices = await page.evaluate("
+    }
+  },
+  "witness_counts": {
+    "status": "exact_source_witnesses_fresh_runtime_confirmed",
+    "unit_delta": 2,
+    "browser_delta": 19,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 586,
+    "expected_full_cases_per_engine": 605,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 605
+  },
+  "verification": {
+    "status": "fresh_final_canonical_gates_independently_reviewed",
+    "gate_record": "docs/implementation/evidence/m53-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m53-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful option identity/occurrence units",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF document checks",
+      "Independent connected-code and raw-evidence reviews"
+    ],
+    "limitations": [
+      "Historical runtime is not rerun or recertified.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory."
+    ],
+    "development_observations": "docs/implementation/evidence/m53-development-observations.json",
+    "actual_frozen_input_entries": 181,
+    "actual_canonical_gate_groups": 16,
+    "actual_execution_stage_commands": 18,
+    "actual_collection_commands": 4,
+    "actual_gate_records": 32,
+    "actual_development_gate_records": 13,
+    "actual_superseded_final_records": 3,
+    "actual_input_manifests": 3,
+    "actual_child_raw_files": 14,
+    "actual_unit_cases": 138,
+    "actual_full_cases_per_engine": 605,
+    "artifact_sha256": "acebbba6bb10a70ab1a9195fc285d37d4a1ccc35b08213c37b267ae083f18335",
+    "chromium_method": "One canonical gate verifies the disjoint full605-test union of three built-in shards206+199+200, each in a fresh sequential Playwright process. Four collection commands prove identity coverage; no skip/retry or monolithic pass is claimed.",
+    "reviewed_conclusions": [
+      "Independent connected source/caller/example/consumer review confirms typed option occurrences, per-target validation, exact authored restoration and stale-work guards. Grid foreign/disabled node identity, hidden Form custom-error isolation, current availability and subscriber-rebind regressions are covered.",
+      "All32 top-level execution logs, three input maps and fourteen shard child JSON/stderr files match recorded hashes. Sixteen canonical final groups share the same current181-input map; three failed monolithic Chromium attempts remain superseded evidence.",
+      "All605 Chromium identities run exactly once across206+199+200 built-in shards; Firefox and WebKit each pass605 unsharded cases. One exact183-file archive matches every actual member payload/size and passes JS/TS plus all five Windows consumers.",
+      "All60 medians recompute from300 durations. Original nine binding and twenty-one viewport budgets and four fixtures remain unchanged;105live checkpoints,300scroll windows,fifteen append/quiet-disposal samples and bounded14/14/24physical rows pass ownership checks.",
+      "The actual captured trace records grid.ts HTTP200 and row-options.ts net::ERR_NO_BUFFER_SPACE. No Vite/HMR/HTTP504 cause is inferred. Two uncaptured compiler attempts remain reported metadata without fabricated raw files or timestamps.",
+      "Six inherited evidence parents,v1 and ignored legacy lock remain unchanged. Full owner families,P0,M13,manual assistive technology and final token evaluation remain open; no omission or publication."
+    ],
+    "document_gate_note": "Final semantic document-body review and changed/full OKF checks are recorded with completed documentation. This metadata accepts selected source/runtime outcomes and closes no full owner family."
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Raw choice/render mapping, bind-value hooks and full control/option/callback/dynamic workflows."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected outcomes can receive acceptance after implementation, fresh final gates and independent review. No full owner family, P0, M13 or parent milestone closure is claimed."
+  }
+}

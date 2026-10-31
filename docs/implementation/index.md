@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.3 Form row-local choices](m5-form-options-plan.md) - Bind nested typed Form choices through existing option owners and remove manual detail-screen option conversion. (draft)
+
 * [Natural-JS 2.0 M5.2 incoming row state](m5-state-plan.md) - Receive explicit row state and preserve checkpoint reversion, retained ordering and application-owned wire projection. (draft)
 
 * [Natural-JS 2.0 M5.1 shared field rules](m5-shared-rules-plan.md) - Compile shared typed field rules through existing UI owners and separate automatic validation from explicit checks. (draft)

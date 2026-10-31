@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.3 Form row-local typed choices",
+  "recorded_at": "2026-10-31",
+  "status": "reported_development_attempts_not_final_gates",
+  "reported_attempts": [
+    {
+      "ordinal": 1,
+      "command": "node node_modules/typescript/bin/tsc --ignoreConfig --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext --lib ES2022,DOM,DOM.Iterable tests/browser/form-options.spec.ts",
+      "working_directory": "D:/workspace/natural_js",
+      "reported_executable": "C:/Program Files/nodejs/node.exe",
+      "reported_exit_code": 1,
+      "reported_diagnostics": [
+        "TS2591: existing missing node:url declaration.",
+        "TS2345: new test assignment.selected mutability disagreed with readonly Snapshot arrays.",
+        "TS2571: new test accessed assignment through unknown Form.read() output."
+      ],
+      "reported_resolution": "Corrected the new test types to readonly selected arrays and an explicit known read shape.",
+      "raw_output_captured": false
+    },
+    {
+      "ordinal": 2,
+      "command": "node node_modules/typescript/bin/tsc --ignoreConfig --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext --lib ES2022,DOM,DOM.Iterable tests/browser/form-options.spec.ts",
+      "working_directory": "D:/workspace/natural_js",
+      "reported_executable": "C:/Program Files/nodejs/node.exe",
+      "reported_exit_code": 1,
+      "reported_diagnostics": [
+        "TS2591: existing missing node:url declaration remained."
+      ],
+      "raw_output_captured": false
+    }
+  ],
+  "limits": [
+    "The two standalone compiler attempts are reported transcript metadata; no raw log, raw-output hash, timestamp or input manifest exists for those attempts. The separately listed Playwright trace is an actual captured artifact.",
+    "Exact diagnostic wording and missing raw bytes are not reconstructed. These observations are not runtime or final-gate records.",
+    "The root runner captures future development and final executions in m53-gates.jsonl; only the final sixteen frozen gates certify the implementation.",
+    "Fresh-context diagnostic stress on a separate Vite port was reported to pass but used a port0/HMR-unsafe setup; it is diagnostic only and is not a final gate or proof of full-suite coverage."
+  ],
+  "captured_artifacts": [
+    {
+      "file": "m53-chromium-import-trace.zip",
+      "sha256": "fb84f3194a4260ac1181e48cc79ecaad3569612594ce54d7cb11d9e85a78e0c0",
+      "bytes": 55339,
+      "kind": "Playwright Chromium failure trace",
+      "independently_read": true
+    }
+  ],
+  "network_observation": {
+    "source": "m53-chromium-import-trace.zip",
+    "network_entry": "1-trace.network",
+    "console_entry": "1-trace.trace",
+    "grid_module": {
+      "path": "/src/ui/grid.ts",
+      "started_at": "2026-10-31T08:00:53.351Z",
+      "status": 200,
+      "status_text": "OK"
+    },
+    "failed_dependency": {
+      "path": "/src/ui/row-options.ts",
+      "started_at": "2026-10-31T08:00:53.358Z",
+      "status": -1,
+      "failure_text": "net::ERR_NO_BUFFER_SPACE"
+    },
+    "console": "Failed to load resource: net::ERR_NO_BUFFER_SPACE",
+    "inference": "The recorded Chromium request failed with a network-buffer resource error after its parent module returned HTTP 200. This trace does not show an HTTP 504 or establish Vite/HMR as the cause.",
+    "scope": "One captured full-suite attempt. Other uncaptured or differently failed attempts are not assigned this exact cause without their own trace."
+  },
+  "validation_mitigation": {
+    "status": "verified_disjoint_full_union",
+    "method": "Use Playwright built-in --shard=1/3,2/3,3/3 for Chromium only, each in a fresh sequential Playwright process; Firefox and WebKit remain unsharded.",
+    "proof_required": [
+      "List all unsharded Chromium test identities and each partition; prove disjoint union equals every expected test exactly once.",
+      "Require each actual execution report to match its listed partition with zero skips, retries or failures.",
+      "Preserve all child raw reports/logs/input hashes and report a canonical aggregate gate with its actual child command count."
+    ],
+    "scope": "No source/config/test modification or omitted test. A successful partitioned run certifies the full union; it is not described as a successful monolithic browser process.",
+    "manifest": "m53-chromium-shards.json",
+    "manifest_sha256": "f70edf2701fa87a194b866085b54e60c37d3de8fe8bc6b5495937958c6297c34",
+    "runner": "m53-chromium-shards.mjs",
+    "runner_sha256": "0abb28335d3a079e6fc4b03ebf73c10d5472ef2dc6df285d046d66d80f9b7cf1",
+    "canonical_log": "m53-browser-chromium-4.log",
+    "partition_counts": [
+      206,
+      199,
+      200
+    ],
+    "unique_test_ids": 605,
+    "retries": 0,
+    "skips": 0,
+    "canonical_gate_groups": 16,
+    "execution_stage_commands": 18,
+    "collection_commands": 4,
+    "input_manifest": "m53-inputs-70001758ca02.json",
+    "input_manifest_sha256": "70001758ca02474e5eaf64ee851383805d0da247ae97488de72360548a8e6318",
+    "input_proof": "The enclosing canonical gate fingerprints all181 source inputs before and after its seven sequential children; no child-specific source fingerprint is invented."
+  }
+}

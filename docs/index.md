@@ -18,7 +18,7 @@ okf_version: "0.2"
 
 * [Interactive Grid contract demo](v2/grid-demo.md) - Inspect committed field changes, loaded originals and edited deletions alongside authored CVC details and two Grid layouts. (draft)
 * [bindGrid](v2/grid.md) - Bind authored table records with status views, raw field-change flags, owned row hooks, native defaults, bounded rendering, paste, and accessible validation. (draft)
-* [bindForm](v2/form.md) - Bind authored Form fields and groups to Rows with row-keyed drafts, raw field-change flags, explicit display, retained rules, and accessible errors. (draft)
+* [bindForm](v2/form.md) - Bind authored Form fields, groups and nested typed choices to Rows with drafts, retained rules and accessible errors. (draft)
 * [Authored advanced Grid in two layouts](v2/advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
 * [Natural-JS 2.0 package](v2/package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
 * [Natural-JS 2.0 module boundaries](v2/architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)

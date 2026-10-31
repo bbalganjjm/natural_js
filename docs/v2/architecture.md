@@ -20,11 +20,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
+    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -56,7 +56,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
+    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -88,7 +88,7 @@ sources:
   - id: row-options
     resource: ../../src/ui/row-options.ts
     title: Private row-local choice extraction
-    git_blob: 72facd6bc5b30845938731897f1f5aadd257a7fa
+    git_blob: 4d7359d7fdafb0fda5fafb0ee81372b26722538a
   - id: select-owner
     resource: ../../src/ui/select-owner.ts
     title: Private Select ownership
@@ -149,10 +149,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -219,6 +219,8 @@ Progressive binding stays in Grid alongside the existing row preparation and com
 Logical admission is separate from actual widget materialization. Viewport receives prefix geometry once per chunk, and row hooks own only mounted records. New records use the same preparation logic without repeated whole-prefix placement per row. onBind remains the final notification; update suppression, rollback-before-prune and post-commit errors retain their existing boundaries. Late window errors use the current owned Promise and retry rather than an uncaught scheduled exception.[^grid][^grid-viewport][^grid-hooks]
 
 Controllers compose bottom-scroll, auto-loop and cancellation with native events/Promises. CVC abort happens before asynchronous cleanup, so its standard abort listener disposes Grid immediately and owned cleanup remains idempotent. Normal deactivate/activate cancel/resume is controller policy. This adds no network loader, second Rows store, global scheduler, generic task type or generated UI.[^grid][^page]
+
+Form/Grid/List share row-local extraction plus three small private functions in row-options.ts: option DOM/raw-map creation, Object.is occurrence selection and occurrence availability. Callers still own source caches, drafts, errors, events and cleanup. Form prepares all marked sources before direct bind and guards stale later-field work after callbacks. The detail controller delegates nested shift choices to Form instead of generating options, parsing codes or relying on subscriber order. No option-binding engine, registry, module or public API is added.[^row-options][^form][^grid][^list]
 
 # Related
 

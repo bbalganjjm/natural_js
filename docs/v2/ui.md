@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
+    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 803eaea983b60a34972c563520038bd6e9b9c7cf
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -131,6 +131,8 @@ Grid accepts inline `validateOn?: "change" | "blur" | "manual"` (default `"chang
 Form/Grid also accept autoValidate?: boolean, default true. False bypasses automatic constraints while preserving existing timing/integrity and complete explicit validation/paste. RuleSet.fields supplies typed declarations independently of the function catalogs. [Shared rules](rules.md) defines precedence, empty overrides and application-owned shared/local composition.[^form][^grid][^native]
 
 Form and Grid accept `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`. A configured display callback is synchronous and returns literal text, `null`, or a fresh disconnected same-document Element/Text/DocumentFragment. `UI_RENDER` reports invalid targets/results, callback causes and recursive target updates. No public renderer type, registry, HTML parser or sanitizer is added. [Form](form.md#explicit-display) and [Grid](grid.md#display-rendering) define preflight and restoration. List shares native value/constraint operations but has no `render` option.[^form][^grid][^render][^native]
+
+Rows-backed Form accepts the same explicit data-options/data-option-label/data-option-value markers as Grid/List. Option-node maps preserve raw types and consume one matching option per requested occurrence. Marked choices reject string parsers; unmarked/local Select contracts remain unchanged. [Form](form.md#row-local-typed-choices) defines target-row validation, raw drafts, source preparation and exact authored restoration. These operations add no public type, option or handle method.[^form]
 
 # Grid paste
 

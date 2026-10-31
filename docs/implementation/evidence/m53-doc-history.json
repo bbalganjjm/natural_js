@@ -1,0 +1,39 @@
+{
+  "semantic_concepts": 10,
+  "historical_fingerprint_only": 24,
+  "preserved_historical_bodies_and_generated_verified_dates": true,
+  "historical": [
+    "docs/implementation/feature-parity-plan.md",
+    "docs/implementation/m10-acceptance-plan.md",
+    "docs/implementation/m10-change-state-plan.md",
+    "docs/implementation/m10-closure-plan.md",
+    "docs/implementation/m10-columns-plan.md",
+    "docs/implementation/m10-controls-plan.md",
+    "docs/implementation/m10-detail-plan.md",
+    "docs/implementation/m10-interactions-plan.md",
+    "docs/implementation/m10-lifecycle-plan.md",
+    "docs/implementation/m10-parity-plan.md",
+    "docs/implementation/m10-paste-plan.md",
+    "docs/implementation/m10-pinned-plan.md",
+    "docs/implementation/m10-plan.md",
+    "docs/implementation/m10-progressive-plan.md",
+    "docs/implementation/m10-row-blocks-plan.md",
+    "docs/implementation/m10-selection-plan.md",
+    "docs/implementation/m10-viewport-plan.md",
+    "docs/implementation/m13-review-plan.md",
+    "docs/implementation/m5-plan.md",
+    "docs/implementation/m5-shared-rules-plan.md",
+    "docs/implementation/m5-state-plan.md",
+    "docs/implementation/m6-plan.md",
+    "docs/v2/grid-compositions.md",
+    "docs/v2/rules.md"
+  ],
+  "resume_context": {
+    "scope": "Only the active resume document; UTF-8 with CRLF normalized to LF. This is not total agent context or actual token usage.",
+    "baseline_commit": "4660cd6d2590f9df2e2dfa55ef4a7542c181d9e8",
+    "before_bytes": 6563,
+    "after_bytes": 6484,
+    "before_lines": 78,
+    "after_lines": 73
+  }
+}

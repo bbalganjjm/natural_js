@@ -48,11 +48,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
+    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -84,7 +84,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
-    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
+    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private declarative rule dispatch
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: f76003ac92114f0c24249c8c38d2825e1ca4f37d
+    git_blob: df8499eee811832af6173926e930f39cbd8fc93c
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: e27c90edaec8f4ae0986444bd46c5163990d43c3
-generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+    git_blob: 7be0f7523a04d1541846b5ae36363541d71e51eb
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -365,7 +365,7 @@ An unused helper unrelated to framework behavior may be removed after checking d
 
 ## 7. Compose row details and resize authored areas
 
-For legacy Grid more/detail workflows, author a detail view and run it through the same PageDefinition in main content or openPopup. Share Rows with bindForm, validate the current ID before previous/next and authored close/native cancel, then re-read grid.rowIds(scope) because validation can commit edits that change ordering/filter membership. Skip tombstones before Form binding; filtered cross-page placement uses the raw filtered array, including shown tombstones. Keep detail identity independent of selection/veto rules, and leave store-scope filters intact. Removal/replacement unbinds stale details; forced disposal always cleans up. The runnable Grid demo supplies native row-local options in application code before Form renders; no new Form option-map API or navigation manager is introduced.[^grid][^form][^page][^containers]
+For legacy Grid more/detail workflows, author a detail view and run it through the same PageDefinition in main content or openPopup. Share Rows with bindForm, validate the current ID before previous/next and authored close/native cancel, then re-read grid.rowIds(scope) because validation can commit edits that change ordering/filter membership. Skip tombstones before Form binding; filtered cross-page placement uses the raw filtered array, including shown tombstones. Keep detail identity independent of selection/veto rules, and leave store-scope filters intact. Removal/replacement unbinds stale details; forced disposal always cleans up. The runnable Grid demo marks its detail Select with the same nested data-options/data-option-label/data-option-value paths as Grid. Form owns option refresh, raw numeric selection and target-row validation; remove manual option generation, string-to-code maps and pre-Form subscription ordering. A marked Form requires Rows and rejects string parsers; local/unmarked authored choices keep their existing contract. No new public option-map API or navigation manager is introduced.[^grid][^form][^page][^containers]
 
 Replace vertical-resize wrappers with heightResize on an authored ancestor and labelled type=button handle, with explicit min/max border-box pixels. The framework owns pointer/keyboard cleanup and three height properties; authors own CSS and visual design. Use reveal(id, { block: "center" }) explicitly from selection/check/add handlers when desired. The measured viewport accounts for both sticky edges; native nonvirtual scrolling uses authored scroll-padding/margins. Use authored CSS containment plus the page-owned wheel boundary recipe for available engines that do not enforce it. Available APIs do not retire legacy flag/default obligations; those remain in the parity ledger.[^grid][^viewport][^parity][^scroll-example]
 

@@ -8,15 +8,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field, view, draft and selection integration
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: paste
     resource: m10-paste-plan.md
     title: Completed atomic paste contract
-    git_blob: ea23fdc1f4a1bc22f9152b7a94396da19a3890fd
+    git_blob: 343b922c3afa736e1b9d553ac74be4240220f1a5
   - id: parity
     resource: feature-parity-plan.md
     title: Required viewport and remaining parity
-    git_blob: e27c90edaec8f4ae0986444bd46c5163990d43c3
+    git_blob: 7be0f7523a04d1541846b5ae36363541d71e51eb
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured window and scroll ownership

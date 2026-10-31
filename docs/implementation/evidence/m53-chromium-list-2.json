@@ -1,0 +1,4187 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\workspace\\natural_js\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "tests/playwright.config.ts",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--reporter=json",
+      "--list",
+      "--shard=2/3"
+    ],
+    "configFile": "D:\\workspace\\natural_js\\tests\\playwright.config.ts",
+    "rootDir": "D:/workspace/natural_js/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": {
+      "current": 2,
+      "total": 3
+    },
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run example",
+      "cwd": "D:\\workspace\\natural_js\\",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "grid-initial-page.spec.ts",
+      "file": "grid-initial-page.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "initialPage renders only its slice, copies input, clamps, and preserves the no-option default",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-5f6e000bd5c60ee29763",
+          "file": "grid-initial-page.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "invalid initialPage leaves authored template and Select ownership untouched; setPage failure is atomic",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-091d72ae844f05b6689f",
+          "file": "grid-initial-page.spec.ts",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "initialPage keeps off-page identity and validation while deferring invalid row options",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-d950380e07412cf2cb44",
+          "file": "grid-initial-page.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "two initial-page Grids keep nested choices and generated error IDs isolated, then rebind cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-69feac9c2b289076587c",
+          "file": "grid-initial-page.spec.ts",
+          "line": 181,
+          "column": 1
+        },
+        {
+          "title": "off-page formatter failure rolls back page and releases its new Select before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-12df3f7ad9a38e303114",
+          "file": "grid-initial-page.spec.ts",
+          "line": 243,
+          "column": 1
+        },
+        {
+          "title": "off-page Select option failure rolls back and releases its new clone before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-738c49479eef45b161b2",
+          "file": "grid-initial-page.spec.ts",
+          "line": 299,
+          "column": 1
+        },
+        {
+          "title": "initial-page draft and focus survive a page-away and return without duplicate IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a2b0f3e1c62c58c16fd-63a47873c6f677490ddf",
+          "file": "grid-initial-page.spec.ts",
+          "line": 350,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-lifecycle.spec.ts",
+      "file": "grid-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "every physical row reflects status and table dirty state without owning visual design",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-45415a48ea916a0e3ff0",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 104,
+          "column": 1
+        },
+        {
+          "title": "status filters are canonical detached state and invalid proposals preserve the current view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-a430f14e8d3d18d9e6f3",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-e7ef248fe2d2634ea89d",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 154,
+          "column": 1
+        },
+        {
+          "title": "deleted rows consume protected paste lines in mounted and offscreen records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-2959f2b18b639c0b15be",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 186,
+          "column": 1
+        },
+        {
+          "title": "native merge runs split at status boundaries and recompute after revert",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-84eda96b4e6a79a8a517",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 208,
+          "column": 1
+        },
+        {
+          "title": "committed pruning still notifies once when a deleted-row hook fails",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-707452926cdcb4d20a49",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 222,
+          "column": 1
+        },
+        {
+          "title": "failed page binding finishes rollback before prune callbacks append new clean rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-a592c45cee063e5041c3",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "failed refresh cannot merge clean and deleted rows after binding caches are reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-fc5f8ff94d9405b2efbd",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "deleting a shown row moves focused native editors and selection buttons to an enabled visible control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-29eae59bfb22c11ecb01",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 292,
+          "column": 1
+        },
+        {
+          "title": "a before-row hook can apply deleted-state disabling without preserving it after revert or refresh",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-133506b2d9e20ff40488",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 311,
+          "column": 1
+        },
+        {
+          "title": "status projection precedes text filters and paging while check scopes retain live eligibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-6fe60971848b364bd498",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 331,
+          "column": 1
+        },
+        {
+          "title": "defaults preserve captured native groups and own parsers without claiming business fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-4d11cce328fed01a307d",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 347,
+          "column": 1
+        },
+        {
+          "title": "default parser failures and ambiguous native fields never write Rows or source markup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-a3e9e74362c1efc23320",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 375,
+          "column": 1
+        },
+        {
+          "title": "default parser promises are consumed and fail without changing data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-0ec23bc029fed8280757",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 394,
+          "column": 1
+        },
+        {
+          "title": "row hooks see connected blocks before and after values and clean resources in reverse order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-5565154f14e20a56cd11",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 408,
+          "column": 1
+        },
+        {
+          "title": "the table is already claimed when the first application hook runs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-974bbdafeb3edcb014a6",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 423,
+          "column": 1
+        },
+        {
+          "title": "owned widget listeners do not duplicate on rebind and are removed on release and disposal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-bbcc9d27c6253771b6f1",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 435,
+          "column": 1
+        },
+        {
+          "title": "failed initial before/after hooks restore authored nodes and release Select and table ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-870dec3971ad91b16412",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 453,
+          "column": 1
+        },
+        {
+          "title": "asynchronous row and completion callbacks reject without unhandled promises or stranded ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-e192e9ba07c958d5499e",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 478,
+          "column": 1
+        },
+        {
+          "title": "row-hook data mutations reject stale work while retaining the already committed inner write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-7421e92e680995b15f68",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 497,
+          "column": 1
+        },
+        {
+          "title": "direct recursive refresh rejects before a second binding and later refresh can recover",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-521031a7e7744eee84f5",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 513,
+          "column": 1
+        },
+        {
+          "title": "disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-4c8894591312a7097b68",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 526,
+          "column": 1
+        },
+        {
+          "title": "cleanup failures do not prevent later resources, framework disposal or correct rebinding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-6b93a7e47b3ed3d8c367",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 543,
+          "column": 1
+        },
+        {
+          "title": "own stays valid for an active binding and immediately releases resources registered after closure",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-34c4b5b3bf2421031332",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 565,
+          "column": 1
+        },
+        {
+          "title": "onBind distinguishes whole binding from ordinary shared changes and reports retained totals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-47ad5effde7cf0eb8dff",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 577,
+          "column": 1
+        },
+        {
+          "title": "post-bind failures propagate after clean append without undoing data or blocking other subscribers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-37c69ca83f08711b3018",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 600,
+          "column": 1
+        },
+        {
+          "title": "viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-de42846181c7748c0eee",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 614,
+          "column": 1
+        },
+        {
+          "title": "authored empty markup follows the logical view, column spans, focus and exact teardown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-b1be7c68562af773be9d",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 632,
+          "column": 1
+        },
+        {
+          "title": "ambiguous or invalid empty markers fail before modifying authored markup or claiming the table",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-d6b29abe6a9907278934",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 653,
+          "column": 1
+        },
+        {
+          "title": "two authored status views share Rows without sharing view state and remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "50e693cdf4e4ad43edb6-02c68cc0f9ef82818318",
+          "file": "grid-lifecycle.spec.ts",
+          "line": 676,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-lifetime.spec.ts",
+      "file": "grid-lifetime.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Grid releases visited pages while restoring the selected row, draft, and error",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dc3a55202b68f67840f0-2c5ae00c05f2c0c8497c",
+          "file": "grid-lifetime.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "offscreen validation text clears on external set, revert, remove, and replace",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dc3a55202b68f67840f0-6a64b790ddadf972d0ba",
+          "file": "grid-lifetime.spec.ts",
+          "line": 105,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-m6.spec.ts",
+      "file": "grid-m6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Grid text and checkbox edits keep typed nested raw values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c7594d7455d8e26b79d-7ff3555d538f6ce373cd",
+          "file": "grid-m6.spec.ts",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "Grid parse failure stays with RowId through paging and clears on revert",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c7594d7455d8e26b79d-b492d65bab9a4932cfd1",
+          "file": "grid-m6.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "Grid sort and page state use authored headings and restore focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c7594d7455d8e26b79d-c12453d7d41c7b2ab988",
+          "file": "grid-m6.spec.ts",
+          "line": 118,
+          "column": 1
+        },
+        {
+          "title": "Grid rejects ambiguous controls before changing authored markup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c7594d7455d8e26b79d-db99faf1c223a052b5ce",
+          "file": "grid-m6.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "Form and Grid parsers see one unparsed input snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c7594d7455d8e26b79d-874264b0bfa3869e8eb8",
+          "file": "grid-m6.spec.ts",
+          "line": 195,
+          "column": 1
+        },
+        {
+          "title": "Grid and List keep keyboard focus when a disabled row leaves the page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c7594d7455d8e26b79d-d6d087e82d2f016016b3",
+          "file": "grid-m6.spec.ts",
+          "line": 240,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-paste.spec.ts",
+      "file": "grid-paste.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a matrix preserves IDs and untouched snapshots and publishes one complete batch",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-8a208b55d5c06cfe4691",
+          "file": "grid-paste.spec.ts",
+          "line": 119,
+          "column": 1
+        },
+        {
+          "title": "an invalid last cell rejects every write and preserves current input and draft state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-c1e7f6a743fb3b707b66",
+          "file": "grid-paste.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "all parsers see entered values and all validators see the complete parsed candidate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-aa4c36270ba760eac1ea",
+          "file": "grid-paste.spec.ts",
+          "line": 156,
+          "column": 1
+        },
+        {
+          "title": "unrelated nested drafts participate in validation without being committed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-aac7074c941133fc3e60",
+          "file": "grid-paste.spec.ts",
+          "line": 176,
+          "column": 1
+        },
+        {
+          "title": "quoted TSV handles tabs, escaped quotes, multiline values, CRLF and one final terminator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-09a6ab1f3a1ae56ac365",
+          "file": "grid-paste.spec.ts",
+          "line": 190,
+          "column": 1
+        },
+        {
+          "title": "malformed, overflowing and HTML-invalid matrices never truncate or partially write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-46440e8000241d7d4cde",
+          "file": "grid-paste.spec.ts",
+          "line": 203,
+          "column": 1
+        },
+        {
+          "title": "current column order, hidden fields, filtered order and page bounds determine mapping",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-d24fa07cf76bfa393b89",
+          "file": "grid-paste.spec.ts",
+          "line": 218,
+          "column": 1
+        },
+        {
+          "title": "protected positions consume clipboard cells while typed nested choices retain their raw type",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-3989f722b7aeb0458c70",
+          "file": "grid-paste.spec.ts",
+          "line": 239,
+          "column": 1
+        },
+        {
+          "title": "unknown, disabled, ambiguous choices and non-boolean checkbox text fail without coercion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-01fefd4c8e8508e3d6ed",
+          "file": "grid-paste.spec.ts",
+          "line": 258,
+          "column": 1
+        },
+        {
+          "title": "serialized negative zero preserves raw identity and rejects an ambiguous positive-zero choice",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-ae964c952f625baa7354",
+          "file": "grid-paste.spec.ts",
+          "line": 274,
+          "column": 1
+        },
+        {
+          "title": "opt-in native paste replaces whole fields, reports results and honors earlier cancellation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-901bbd4100e36e78b691",
+          "file": "grid-paste.spec.ts",
+          "line": 293,
+          "column": 1
+        },
+        {
+          "title": "disabled native ownership stays untouched and disposal restores authored markup and listeners",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-b4584ec92fe238b69607",
+          "file": "grid-paste.spec.ts",
+          "line": 319,
+          "column": 1
+        },
+        {
+          "title": "parser side effects invalidate stale preparation and nested paste cannot interleave",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-505f1743b4f1df298152",
+          "file": "grid-paste.spec.ts",
+          "line": 342,
+          "column": 1
+        },
+        {
+          "title": "observer errors are postcommit and do not resurrect successful pasted drafts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-4a7ed67cf7c3d32d7f7e",
+          "file": "grid-paste.spec.ts",
+          "line": 378,
+          "column": 1
+        },
+        {
+          "title": "a postcommit subscriber's newer draft survives cleanup of the pasted draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-321a94826b9d7ee06f8a",
+          "file": "grid-paste.spec.ts",
+          "line": 398,
+          "column": 1
+        },
+        {
+          "title": "error recovery does not resurrect a row removed by the active-selection callback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-e8856913a861b2c12330",
+          "file": "grid-paste.spec.ts",
+          "line": 420,
+          "column": 1
+        },
+        {
+          "title": "a parser returning a non-JSON value fails before changing the store or current draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-24b37f1bd9c838bbe2b2",
+          "file": "grid-paste.spec.ts",
+          "line": 447,
+          "column": 1
+        },
+        {
+          "title": "one batch updates shared Form, List and Tree while preserving unrelated drafts and keyed nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-b71a7e4fd41a8d3c4f5b",
+          "file": "grid-paste.spec.ts",
+          "line": 469,
+          "column": 1
+        },
+        {
+          "title": "a thousand-row paste is coherent, retains focus and generates document-unique error IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c83e072d113553bbfa-b55ad2828d9a76fa8836",
+          "file": "grid-paste.spec.ts",
+          "line": 502,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-pinned.spec.ts",
+      "file": "grid-pinned.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-c5953a89b52d44ba758a",
+          "file": "grid-pinned.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "mixed native spans remain in normal flow while wholly pinned spans retain native structure",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-ee73b086f7ebf7a9683f",
+          "file": "grid-pinned.spec.ts",
+          "line": 110,
+          "column": 1
+        },
+        {
+          "title": "unpinned grids allocate no pin observer frame or owned cell presentation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-24babc3d572b10ab5446",
+          "file": "grid-pinned.spec.ts",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-38fa1d5f09af1f6bee40",
+          "file": "grid-pinned.spec.ts",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-9d0ae4212881d3c5b238",
+          "file": "grid-pinned.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "pointer width previews and every cancellation update measured pin offsets before callbacks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-78f7aff1760ec7774a48",
+          "file": "grid-pinned.spec.ts",
+          "line": 183,
+          "column": 1
+        },
+        {
+          "title": "invalid state does not cancel an active resize and pointer commit keeps pin flags",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-08982ba7fb17d4801d15",
+          "file": "grid-pinned.spec.ts",
+          "line": 203,
+          "column": 1
+        },
+        {
+          "title": "keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-be85adc1caae3dc5f8f5",
+          "file": "grid-pinned.spec.ts",
+          "line": 220,
+          "column": 1
+        },
+        {
+          "title": "responsive and hidden-to-visible positioned roots use native widths rather than preferred values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-89752c3c0dd0a14cecb2",
+          "file": "grid-pinned.spec.ts",
+          "line": 236,
+          "column": 1
+        },
+        {
+          "title": "spanning-only headers and empty data acquire exact body pin geometry before bind completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-5d3338a9bb1a07928f3d",
+          "file": "grid-pinned.spec.ts",
+          "line": 254,
+          "column": 1
+        },
+        {
+          "title": "viewport and progressive row blocks inherit current offsets after release and far reveal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-bcb1c9d518c4c9e5f61a",
+          "file": "grid-pinned.spec.ts",
+          "line": 277,
+          "column": 1
+        },
+        {
+          "title": "independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-cf73695a89d5d922adbf",
+          "file": "grid-pinned.spec.ts",
+          "line": 298,
+          "column": 1
+        },
+        {
+          "title": "leaf probes detect native width redistribution hidden by unchanged table and spanning-cell widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-0705cd6e34988e911c33",
+          "file": "grid-pinned.spec.ts",
+          "line": 340,
+          "column": 1
+        },
+        {
+          "title": "probe preference uses visible membership after hidden keys reduce an authored header span",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-5e158c56a13626ad924c",
+          "file": "grid-pinned.spec.ts",
+          "line": 381,
+          "column": 1
+        },
+        {
+          "title": "bind completion sees native pin offsets after row hooks widen an automatic-layout column",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-9cb3a3e4ce73bf58d62e",
+          "file": "grid-pinned.spec.ts",
+          "line": 421,
+          "column": 1
+        },
+        {
+          "title": "bind completion sees content-driven native pin widths without row hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-65b8c08e8f631a842708",
+          "file": "grid-pinned.spec.ts",
+          "line": 454,
+          "column": 1
+        },
+        {
+          "title": "literal authored pin styles survive unpin disposal and retry while foreign changes remain owned by the application",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c889b08a23758c55de93-1bd5b5c5f308f328d592",
+          "file": "grid-pinned.spec.ts",
+          "line": 485,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-progressive.spec.ts",
+      "file": "grid-progressive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "default binding has one frozen eight-field completion and exhausted calls do not repeat it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-37b94152c928603538a5",
+          "file": "grid-progressive.spec.ts",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "empty single exact and remainder boundaries count logical chunks and first last flags",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-c82af15f97486caf1d27",
+          "file": "grid-progressive.spec.ts",
+          "line": 144,
+          "column": 1
+        },
+        {
+          "title": "two physical rows stay one scheduled record with full logical page ARIA positions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-d7ca7e06aade4b149117",
+          "file": "grid-progressive.spec.ts",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "positive delay yields to another Window task while prepared rows remain usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-efb548c042b3d3998585",
+          "file": "grid-progressive.spec.ts",
+          "line": 178,
+          "column": 1
+        },
+        {
+          "title": "renderMore shares its pending Promise and advances only one target",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-1e8fbe9bc542bb6f3830",
+          "file": "grid-progressive.spec.ts",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "title": "size one continuation still gives a queued Window task a turn",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-28d37194d548b2ec1288",
+          "file": "grid-progressive.spec.ts",
+          "line": 205,
+          "column": 1
+        },
+        {
+          "title": "canceling the initial operation rejects it and resumes its unfinished target",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-ac8c2d6241ad461b8d4c",
+          "file": "grid-progressive.spec.ts",
+          "line": 216,
+          "column": 1
+        },
+        {
+          "title": "canceling a continuation retains completed work and does not skip its remaining target",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-57c14fc026c146b249a9",
+          "file": "grid-progressive.spec.ts",
+          "line": 230,
+          "column": 1
+        },
+        {
+          "title": "unobserved cancellation is handled internally and repeated cancel stays quiet",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-2312350ed92905a93a6b",
+          "file": "grid-progressive.spec.ts",
+          "line": 243,
+          "column": 1
+        },
+        {
+          "title": "refresh supersedes pending work and starts a fresh first chunk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-26a42d0c6d28969d6e99",
+          "file": "grid-progressive.spec.ts",
+          "line": 253,
+          "column": 1
+        },
+        {
+          "title": "Rows replacement cannot leave old IDs or late completion in the new prefix",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-a6c65cd5abe43a4d4658",
+          "file": "grid-progressive.spec.ts",
+          "line": 264,
+          "column": 1
+        },
+        {
+          "title": "explicit sort filter page and status requests reset first completion against the new scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-57d67d107bd3b52e4ba8",
+          "file": "grid-progressive.spec.ts",
+          "line": 277,
+          "column": 1
+        },
+        {
+          "title": "ordinary data mutations cancel queued work without emitting full bind completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-414faff1e345110e4e01",
+          "file": "grid-progressive.spec.ts",
+          "line": 292,
+          "column": 1
+        },
+        {
+          "title": "append during an unfinished prefix preserves old tail records without duplicate binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-b2f9469b729e28343067",
+          "file": "grid-progressive.spec.ts",
+          "line": 315,
+          "column": 1
+        },
+        {
+          "title": "append advances one chunk from a complete target and preserves fully admitted rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-d47efc286742538f7d5e",
+          "file": "grid-progressive.spec.ts",
+          "line": 330,
+          "column": 1
+        },
+        {
+          "title": "empty append and exhausted requests retain cached completion without another callback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-72213cd2f9b3cee5a356",
+          "file": "grid-progressive.spec.ts",
+          "line": 344,
+          "column": 1
+        },
+        {
+          "title": "explicit reveal synchronously admits its full-page target and supersedes delayed work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-fef328c0f86a1c413584",
+          "file": "grid-progressive.spec.ts",
+          "line": 354,
+          "column": 1
+        },
+        {
+          "title": "full logical-page selection checks paste and validation still include unadmitted IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-eac17c837530c68218f1",
+          "file": "grid-progressive.spec.ts",
+          "line": 371,
+          "column": 1
+        },
+        {
+          "title": "first-invalid reveal uses the same synchronous admission bridge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-9f2b119900db27734945",
+          "file": "grid-progressive.spec.ts",
+          "line": 386,
+          "column": 1
+        },
+        {
+          "title": "validation reveal disposal retains issues without returning released element references",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-4541bdac05febbc08578",
+          "file": "grid-progressive.spec.ts",
+          "line": 397,
+          "column": 1
+        },
+        {
+          "title": "a focused invalid draft and typed choices survive a sorted prefix reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-84cba2b19a0b8c13550d",
+          "file": "grid-progressive.spec.ts",
+          "line": 426,
+          "column": 1
+        },
+        {
+          "title": "a committed column layout cancels pending work and continuation uses the retained state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-b8e50926e89928e93c8e",
+          "file": "grid-progressive.spec.ts",
+          "line": 450,
+          "column": 1
+        },
+        {
+          "title": "before-hook failure keeps earlier ready records and releases the failing row for retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-c4be525ae0e2371292b1",
+          "file": "grid-progressive.spec.ts",
+          "line": 466,
+          "column": 1
+        },
+        {
+          "title": "field failure is observable without losing earlier bindings or leaking Select ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-1420c44da2a15993f6f2",
+          "file": "grid-progressive.spec.ts",
+          "line": 483,
+          "column": 1
+        },
+        {
+          "title": "after-hook failure releases resources in reverse order and retries one uncommitted record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-c9019af8befeb0f85bd6",
+          "file": "grid-progressive.spec.ts",
+          "line": 499,
+          "column": 1
+        },
+        {
+          "title": "onBind failure keeps committed DOM and the next request does not redeliver that completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-965a3cc6c2cf34e1619e",
+          "file": "grid-progressive.spec.ts",
+          "line": 513,
+          "column": 1
+        },
+        {
+          "title": "a completion callback starting another view aborts the old observer without stale completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-61d03b3d3e3926571157",
+          "file": "grid-progressive.spec.ts",
+          "line": 526,
+          "column": 1
+        },
+        {
+          "title": "disposal during completion settles the observer and restores authored ownership exactly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-aa4da54e561f6ab79640",
+          "file": "grid-progressive.spec.ts",
+          "line": 542,
+          "column": 1
+        },
+        {
+          "title": "synchronous size-one completion cannot write after its callback disposes the Grid",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-a329242fe327294b1531",
+          "file": "grid-progressive.spec.ts",
+          "line": 560,
+          "column": 1
+        },
+        {
+          "title": "synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-d8191fb517ae2cb08f80",
+          "file": "grid-progressive.spec.ts",
+          "line": 592,
+          "column": 1
+        },
+        {
+          "title": "synchronous sort completion failure keeps its committed projection and advances the next chunk once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-61d5793625c936d81e3d",
+          "file": "grid-progressive.spec.ts",
+          "line": 619,
+          "column": 1
+        },
+        {
+          "title": "invalid progressive options fail before DOM ownership and allow corrected binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-04114ccf14688deba35b",
+          "file": "grid-progressive.spec.ts",
+          "line": 642,
+          "column": 1
+        },
+        {
+          "title": "independent instances cancel separately and remain accessible without duplicate IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-7886ab8e6c4c0b83e375",
+          "file": "grid-progressive.spec.ts",
+          "line": 663,
+          "column": 1
+        },
+        {
+          "title": "5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-591437a9e162fb54940c",
+          "file": "grid-progressive.spec.ts",
+          "line": 685,
+          "column": 1
+        },
+        {
+          "title": "positive viewport delay schedules materialized records rather than thousands of offscreen IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-267302619ab5fc5dc32f",
+          "file": "grid-progressive.spec.ts",
+          "line": 706,
+          "column": 1
+        },
+        {
+          "title": "cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-49a9f36de563dcd85e9e",
+          "file": "grid-progressive.spec.ts",
+          "line": 724,
+          "column": 1
+        },
+        {
+          "title": "a late viewport field failure publishes an owned error and retries its window without another completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2cd60924d33f0ac20566-cca15dba741b69e25e8c",
+          "file": "grid-progressive.spec.ts",
+          "line": 756,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-recipes.spec.ts",
+      "file": "grid-recipes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "application projections read current raw values with own keys and independent active batch checked scopes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-3ed922a2289b0a7ef2aa",
+          "file": "grid-recipes.spec.ts",
+          "line": 90,
+          "column": 1
+        },
+        {
+          "title": "application membership append and replacement preserve independent sets and discard replaced row identities",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-3f6fdb2a6f174a238951",
+          "file": "grid-recipes.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "native listeners registered after Grid observe drafts commits validation failures and latest custom-event snapshots",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-709247603c7b83cbee51",
+          "file": "grid-recipes.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "manual validation keeps native observations uncommitted until explicit validation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-7d95032a3b0475f7b67d",
+          "file": "grid-recipes.spec.ts",
+          "line": 167,
+          "column": 1
+        },
+        {
+          "title": "row-hook identities and abort-owned observations survive refresh recycling and rebind without stale callbacks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-aa638bb3629a3c8aba09",
+          "file": "grid-recipes.spec.ts",
+          "line": 181,
+          "column": 1
+        },
+        {
+          "title": "authored templates headers and native column topology support controlled dispose edit rebind",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-06d3a2f63cb848904a66",
+          "file": "grid-recipes.spec.ts",
+          "line": 205,
+          "column": 1
+        },
+        {
+          "title": "authored native defaults compose row creation without inheriting current edits or mutable output",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1065c3e86d9801f5cc1e-0bcb06efa22383071533",
+          "file": "grid-recipes.spec.ts",
+          "line": 238,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-row-blocks.spec.ts",
+      "file": "grid-row-blocks.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two authored block layouts keep native spans, nested options and exact teardown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-b9add900d76ca7e60bf7",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "independent instances keep unique cross-row validation references and accessible native markup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-13780ce5db856b3fae46",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 118,
+          "column": 1
+        },
+        {
+          "title": "secondary row actions and edits share one identity and preserve focused drafts on moves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-a8ebcec677e2f95fd906",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 136,
+          "column": 1
+        },
+        {
+          "title": "column changes update every physical row without replacing nested fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-47219e05090ce4127b89",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 162,
+          "column": 1
+        },
+        {
+          "title": "native merges follow raw hierarchical values and projected page boundaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-f5dd72c51b5ab9c64beb",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 183,
+          "column": 1
+        },
+        {
+          "title": "equal display strings cannot merge distinct raw values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-1a81ba23c8abea0d7eb5",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "merging never hides the currently focused display field",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-eac4f5a00ab64d3ed5cd",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 221,
+          "column": 1
+        },
+        {
+          "title": "paste retains logical fields hidden only by merging and uses row-major nested order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-1c336c277bbddc01d270",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 234,
+          "column": 1
+        },
+        {
+          "title": "virtual blocks stay bounded with physical native row positions and far reveal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-670176975ee7f7aff9e3",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 251,
+          "column": 1
+        },
+        {
+          "title": "a focused secondary row pins its complete block while offscreen paste stays logical",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-df1cd21374549e37e735",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 272,
+          "column": 1
+        },
+        {
+          "title": "invalid block and merge declarations fail before changing authored HTML or ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-f1ae51996623266959b1",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 293,
+          "column": 1
+        },
+        {
+          "title": "a fully merged bare viewport preserves measurable rows and exact authored styles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-aa496c9885d5c5832629",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 324,
+          "column": 1
+        },
+        {
+          "title": "record blocks share nested values and stable identities with Form and List",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-261e0c57ceeea116a87e",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 351,
+          "column": 1
+        },
+        {
+          "title": "scalar merge validation is atomic and direct cell fields retain column ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-c82120624fe343cab1e3",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 375,
+          "column": 1
+        },
+        {
+          "title": "hidden boundary rows remain in indivisible blocks without inflating measured height",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "19168eb430d395907bdd-040dbc7c1e01c409b233",
+          "file": "grid-row-blocks.spec.ts",
+          "line": 400,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-selection.spec.ts",
+      "file": "grid-selection.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "active detail stays independent from immutable store-ordered membership and checks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-797df8e8855a804e3f43",
+          "file": "grid-selection.spec.ts",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "default row activation still synchronizes List and Form without creating batch membership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-488c2530d911bba8b27c",
+          "file": "grid-selection.spec.ts",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "plain, Ctrl, Shift and Ctrl+Shift gestures use the eligible visible order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-076aea3d46ae80edb4f1",
+          "file": "grid-selection.spec.ts",
+          "line": 151,
+          "column": 1
+        },
+        {
+          "title": "native keyboard navigation skips ineligible rows and leaves editing shortcuts intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-9f60abe5a14a9854a087",
+          "file": "grid-selection.spec.ts",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "title": "veto preserves active row, membership, focus and the range anchor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-88888e69cf853e3ba0c5",
+          "file": "grid-selection.spec.ts",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "invalid ID batches fail atomically and unavailable rows disable only their own operations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-0fd2aa40c807d09b5c69",
+          "file": "grid-selection.spec.ts",
+          "line": 226,
+          "column": 1
+        },
+        {
+          "title": "scoped check-all preserves outside checks and native mixed states apart from Boolean fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-83e7daee342be60c87df",
+          "file": "grid-selection.spec.ts",
+          "line": 249,
+          "column": 1
+        },
+        {
+          "title": "header checks use native Space activation and veto restores their DOM state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-a2351d9d4b241b024ba3",
+          "file": "grid-selection.spec.ts",
+          "line": 286,
+          "column": 1
+        },
+        {
+          "title": "data removal and eligibility changes force pruning despite vetoes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-cd6ff95f44e441b85c8d",
+          "file": "grid-selection.spec.ts",
+          "line": 305,
+          "column": 1
+        },
+        {
+          "title": "prune callbacks may change Rows or the view and throwing callbacks leave cleanup committed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-cf00380c93b60032829b",
+          "file": "grid-selection.spec.ts",
+          "line": 324,
+          "column": 1
+        },
+        {
+          "title": "before hooks reject view changes even when every projected row ID stays the same",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-c60dfac69b5b7b0966a3",
+          "file": "grid-selection.spec.ts",
+          "line": 387,
+          "column": 1
+        },
+        {
+          "title": "post callbacks see committed DOM and before-hook reentrancy rejects stale proposals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-46034f921f78ce33ec8d",
+          "file": "grid-selection.spec.ts",
+          "line": 404,
+          "column": 1
+        },
+        {
+          "title": "authored sorts cycle ascending, descending and clear while preserving focus and state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-d5addfef90c53a8b97fc",
+          "file": "grid-selection.spec.ts",
+          "line": 442,
+          "column": 1
+        },
+        {
+          "title": "column choices keep raw scalar identity and count other filters before pagination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-e9623839ef31bd7ceb4f",
+          "file": "grid-selection.spec.ts",
+          "line": 460,
+          "column": 1
+        },
+        {
+          "title": "authored filter selects retain raw values and search narrows only the choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-1c90b39ab295d48475cb",
+          "file": "grid-selection.spec.ts",
+          "line": 492,
+          "column": 1
+        },
+        {
+          "title": "row actions resolve the current identity and retained drafts survive filtering, paging and layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-65c8611829e2c7a1aa65",
+          "file": "grid-selection.spec.ts",
+          "line": 515,
+          "column": 1
+        },
+        {
+          "title": "two instances remain accessible and exact disposal releases authored filter ownership for retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-d90f11baf961800d7c2c",
+          "file": "grid-selection.spec.ts",
+          "line": 541,
+          "column": 1
+        },
+        {
+          "title": "single checks replace one row atomically and keep selection and Boolean fields independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-0211270766e7f9f5fe2b",
+          "file": "grid-selection.spec.ts",
+          "line": 580,
+          "column": 1
+        },
+        {
+          "title": "single mode rejects ambiguous check proposals after ordinary ID validation without changing state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-3c29232114b132539d09",
+          "file": "grid-selection.spec.ts",
+          "line": 611,
+          "column": 1
+        },
+        {
+          "title": "single scoped check-all replaces one eligible row, preserves empty scopes and clears only its scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-cb7ddf2ca790fa7f8593",
+          "file": "grid-selection.spec.ts",
+          "line": 626,
+          "column": 1
+        },
+        {
+          "title": "single checks retain reentrant commits and prune only unavailable rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-c71824791f29115f2f93",
+          "file": "grid-selection.spec.ts",
+          "line": 645,
+          "column": 1
+        },
+        {
+          "title": "invalid check modes fail before DOM ownership and permit corrected binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f0528e1afbb3847c44c1-6487fa10a10dd564bdcb",
+          "file": "grid-selection.spec.ts",
+          "line": 661,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-toggle.spec.ts",
+      "file": "grid-toggle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "default and explicit false keep repeated single activation and independent absolute sets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-ce1f8443bb4e332e4398",
+          "file": "grid-toggle.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "default and explicit false retain replacement rather than plain membership toggling",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-274bd100b3e81ca3d6e5",
+          "file": "grid-toggle.spec.ts",
+          "line": 103,
+          "column": 1
+        },
+        {
+          "title": "single toggle clears detail through existing Form and List callbacks without changing sets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-c455928f7aba17913aa7",
+          "file": "grid-toggle.spec.ts",
+          "line": 117,
+          "column": 1
+        },
+        {
+          "title": "multiple plain toggles retain other members and clear active when any member is removed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-bbf1b8f36c9455699c7c",
+          "file": "grid-toggle.spec.ts",
+          "line": 142,
+          "column": 1
+        },
+        {
+          "title": "native Enter and Space activate exactly one toggle without replacing focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-bb03b372f4a08800deda",
+          "file": "grid-toggle.spec.ts",
+          "line": 160,
+          "column": 1
+        },
+        {
+          "title": "Ctrl, Meta, Shift and Alt retain existing gestures when plain toggling is enabled",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-4f2bf2c88c1ba3719247",
+          "file": "grid-toggle.spec.ts",
+          "line": 174,
+          "column": 1
+        },
+        {
+          "title": "programmatic activation and full-set writes stay absolute and idempotent with toggling",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-d184cfe3ac883b32f9c8",
+          "file": "grid-toggle.spec.ts",
+          "line": 195,
+          "column": 1
+        },
+        {
+          "title": "single deselection veto leaves committed detail, membership and DOM unchanged",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-dc9a31a8ff8903af47f0",
+          "file": "grid-toggle.spec.ts",
+          "line": 211,
+          "column": 1
+        },
+        {
+          "title": "both multiple vetoes preserve state and the range anchor before any post callback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-2b9b99ca55177b35df40",
+          "file": "grid-toggle.spec.ts",
+          "line": 226,
+          "column": 1
+        },
+        {
+          "title": "toggle before-hook reentrancy preserves inner commits and rejects the stale outer proposal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-8b691a1ee3c803c0508f",
+          "file": "grid-toggle.spec.ts",
+          "line": 250,
+          "column": 1
+        },
+        {
+          "title": "invalid and throwing before hooks reject toggles while post failure keeps the committed DOM",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-694892b2a55d02f0fa9f",
+          "file": "grid-toggle.spec.ts",
+          "line": 280,
+          "column": 1
+        },
+        {
+          "title": "ineligible, deleted, checked and editable targets never manufacture row activation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-67f636cc0aa922b73207",
+          "file": "grid-toggle.spec.ts",
+          "line": 304,
+          "column": 1
+        },
+        {
+          "title": "sort, filter, page and range keys keep stable identity and existing clear shortcuts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-3dd468bc5788e7602609",
+          "file": "grid-toggle.spec.ts",
+          "line": 323,
+          "column": 1
+        },
+        {
+          "title": "invalid toggle flags fail before DOM ownership and permit corrected binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-280abbc20788425d7631",
+          "file": "grid-toggle.spec.ts",
+          "line": 344,
+          "column": 1
+        },
+        {
+          "title": "independent instances preserve focus, unique IDs and exact quiet teardown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c784a766cdaeb717d2c-feb46576878de426ac9a",
+          "file": "grid-toggle.spec.ts",
+          "line": 359,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "grid-viewport.spec.ts",
+      "file": "grid-viewport.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "5,000 nested rows have bounded mounted DOM and complete native table positions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-821fb6fb808e9350d39f",
+          "file": "grid-viewport.spec.ts",
+          "line": 78,
+          "column": 1
+        },
+        {
+          "title": "rapid bidirectional scrolling settles at the correct logical rows without accumulating DOM",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-9bbb103cbf28df4004b3",
+          "file": "grid-viewport.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "reveal uses sorted filtered page identity and never changes focus or selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-bce9dcedf6443c8a41ad",
+          "file": "grid-viewport.spec.ts",
+          "line": 103,
+          "column": 1
+        },
+        {
+          "title": "visible checks and selection ranges span the whole logical page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-1596babe103c620a3f5c",
+          "file": "grid-viewport.spec.ts",
+          "line": 117,
+          "column": 1
+        },
+        {
+          "title": "Home End and adjacent keyboard navigation reveal logical neighbors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-8ddd6e788d069a4ece9d",
+          "file": "grid-viewport.spec.ts",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "Tab and Shift Tab cross a mounted boundary without skipping logical rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-e1cc29c6462073a88f41",
+          "file": "grid-viewport.spec.ts",
+          "line": 138,
+          "column": 1
+        },
+        {
+          "title": "a distant focused editor retains its exact node caret and composition without retaining the gap",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-d6b2f61b43a83accc367",
+          "file": "grid-viewport.spec.ts",
+          "line": 152,
+          "column": 1
+        },
+        {
+          "title": "offscreen drafts and validation issues survive release and remount",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-75e522acbc3c3bebfdda",
+          "file": "grid-viewport.spec.ts",
+          "line": 170,
+          "column": 1
+        },
+        {
+          "title": "1,000 offscreen nested rows paste atomically without cloning every target",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-c525abea6edd32ced71a",
+          "file": "grid-viewport.spec.ts",
+          "line": 183,
+          "column": 1
+        },
+        {
+          "title": "released nested Selects relinquish ownership while current controls stay typed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-deefa90f291b8b42164b",
+          "file": "grid-viewport.spec.ts",
+          "line": 204,
+          "column": 1
+        },
+        {
+          "title": "measured wrapping and column resize retain the visible row anchor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-d1a9ef264828866c5c37",
+          "file": "grid-viewport.spec.ts",
+          "line": 218,
+          "column": 1
+        },
+        {
+          "title": "hidden preparation wakes on display and column hide reorder keeps the current window",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-3736c8e93a0938531bd2",
+          "file": "grid-viewport.spec.ts",
+          "line": 235,
+          "column": 1
+        },
+        {
+          "title": "append remove revert replace and filtering retain identity and recover a valid viewport",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-ecc988699816e7da86d1",
+          "file": "grid-viewport.spec.ts",
+          "line": 248,
+          "column": 1
+        },
+        {
+          "title": "invalid viewport options and rowspans fail before taking ownership; pending frames dispose cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-62c38ff3047806de916d",
+          "file": "grid-viewport.spec.ts",
+          "line": 264,
+          "column": 1
+        },
+        {
+          "title": "authored static body and footer rows keep their positions in the logical ARIA count",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-23141e85a54db5574602",
+          "file": "grid-viewport.spec.ts",
+          "line": 290,
+          "column": 1
+        },
+        {
+          "title": "nonvirtual reveal scrolls an authored row and preserves selection and focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-f8c21798c564ceeb96c1",
+          "file": "grid-viewport.spec.ts",
+          "line": 306,
+          "column": 1
+        },
+        {
+          "title": "two authored MDI instances keep unique IDs native ARIA and keyboard accessibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-3f80a9671accd612b0d6",
+          "file": "grid-viewport.spec.ts",
+          "line": 321,
+          "column": 1
+        },
+        {
+          "title": "reveal keeps the first row below an authored sticky header",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-f94d2dec5325407c1bf4",
+          "file": "grid-viewport.spec.ts",
+          "line": 338,
+          "column": 1
+        },
+        {
+          "title": "formatter failures restore logical state DOM ARIA and scroll after queued viewport work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-650afe5a4d03c72e6082",
+          "file": "grid-viewport.spec.ts",
+          "line": 357,
+          "column": 1
+        },
+        {
+          "title": "inherited disabled fields and first legend exemption agree for mounted and offscreen rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-2aa3b82574688074c119",
+          "file": "grid-viewport.spec.ts",
+          "line": 406,
+          "column": 1
+        },
+        {
+          "title": "Shift End abandons stale navigation after a filter post callback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-01a8d42c762a9891fb4c",
+          "file": "grid-viewport.spec.ts",
+          "line": 443,
+          "column": 3
+        },
+        {
+          "title": "Shift End abandons stale navigation after a dispose post callback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "10f8fa8ccacddf3973cd-18787d5efbcf124d0892",
+          "file": "grid-viewport.spec.ts",
+          "line": 443,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T08:09:32.763Z",
+    "duration": 714.364,
+    "expected": 0,
+    "skipped": 199,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

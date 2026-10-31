@@ -6,6 +6,8 @@ import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
 import { claimSelect } from "./select-owner.js";
+import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
+import type { RowOption } from "./row-options.js";
 import { control, disabled, display, displayField, fieldValue, formatCapable, nativeMessage } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import type {
@@ -15,6 +17,19 @@ import type {
 
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
+interface Choices {
+  options: readonly string[];
+  label: readonly string[];
+  value: readonly string[];
+  authoredNodes: Node[];
+  authoredOptions: HTMLOptionElement[];
+  authored: (string | null)[];
+  selection: boolean[];
+  raw: Map<HTMLOptionElement, unknown>;
+  source?: unknown;
+  bound: boolean;
+}
+
 interface Field {
   element: HTMLElement;
   elements: HTMLElement[];
@@ -23,6 +38,7 @@ interface Field {
   path: readonly string[];
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
+  choices?: Choices;
   error?: HTMLElement;
   originals: { element: HTMLElement; describedBy: string | null; invalid: string | null; changed: string | null }[];
 }
@@ -69,6 +85,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
+  for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-options]")]) {
+    if (!element.hasAttribute("data-options")) continue;
+    if (!rows || !(element instanceof HTMLSelectElement) || !element.hasAttribute("data-field") ||
+        !element.hasAttribute("data-option-label") || !element.hasAttribute("data-option-value")) {
+      throw formError("FORM_OPTIONS", "Row-local choices need Rows and a Select with data-field, data-options, data-option-label and data-option-value.",
+        { field: element.getAttribute("data-field") ?? "" });
+    }
+  }
   const errorRegions = new Map<string, HTMLElement>();
   const regionState = new Map<HTMLElement, { id: string | null; live: string | null; text: string | null }>();
   for (const region of root.querySelectorAll<HTMLElement>("[data-error-for]")) {
@@ -126,6 +150,18 @@ export function bindForm<T extends object = Record<string, unknown>>(
         invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
       }]
     };
+    if (element instanceof HTMLSelectElement && element.hasAttribute("data-options")) {
+      const authoredOptions = [...element.options];
+      const authored = authoredOptions.map(option => option.value === "" ? null : option.value);
+      field.choices = {
+        options: parsePath(element.getAttribute("data-options")!),
+        label: parsePath(element.getAttribute("data-option-label")!),
+        value: parsePath(element.getAttribute("data-option-value")!),
+        authoredNodes: [...element.childNodes], authoredOptions, authored,
+        selection: authoredOptions.map(option => option.selected),
+        raw: new Map(authoredOptions.map((option, index) => [option, authored[index]])), bound: false
+      };
+    }
     fields.push(field);
     byName.set(name, field);
   }
@@ -145,14 +181,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (field.format.length && !formatCapable(field.element)) {
       throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
     }
-    if (parsers.get(field.name) && (field.kind === "checkbox" || field.kind === "multiple")) {
-      throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert boolean or array controls.", { field: field.name });
+    if (parsers.get(field.name) && (field.choices || field.kind === "checkbox" || field.kind === "multiple")) {
+      throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert typed choices, boolean or array controls.", { field: field.name });
     }
   }
   const renderers = fieldRenderers("bindForm", fields.map(field => ({
     name: field.name, element: field.element, formatted: field.format.length > 0
   })), options.render);
   const renderedOriginals = fields.filter(field => renderers.has(field.name)).map(field => ({ element: field.element, children: [...field.element.childNodes] }));
+  const choiceFields = fields.filter(field => field.choices);
   const localRenderedValues = new Map(rows ? [] : fields.filter(field => renderers.has(field.name)).map(field => [field, fieldValue(field)] as const));
   const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
   const releaseSelects: (() => void)[] = [];
@@ -192,6 +229,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let disposed = false;
   let reconciling = false;
   let pointerField: Field | undefined;
+  let renderVersion = 0;
   const drafts = new Map<RowId, Map<Field, unknown>>();
   const issues = new Map<Field, readonly ValidationIssue[]>();
 
@@ -215,6 +253,28 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function localFieldValue(field: Field): unknown {
     return localRenderedValues.has(field) ? localRenderedValues.get(field) : fieldValue(field);
+  }
+
+  function choiceOptions(field: Field, values: unknown, id: RowId | null): readonly RowOption[] {
+    const choices = field.choices!;
+    return rowOptions(values, choices.options, choices.label, choices.value, options => {
+      throw formError("FORM_OPTIONS", "A row-local Select needs an array of options.", { field: field.name, rowId: id, options });
+    });
+  }
+
+  function prepareChoices(values: Record<string, unknown> | null, id: RowId | null) {
+    return new Map(choiceFields.map(field => [field, {
+      source: readPath(values, field.choices!.options), options: choiceOptions(field, values, id)
+    }] as const));
+  }
+
+  function enteredValue(field: Field): unknown {
+    if (!field.choices) return fieldValue(field);
+    const element = field.element as HTMLSelectElement;
+    const selected = [...element.selectedOptions];
+    if (selected.some(option => !field.choices!.raw.has(option) || option.matches(":disabled"))) return undefined;
+    const values = selected.map(option => field.choices!.raw.get(option));
+    return element.multiple ? values : values[0] ?? null;
   }
 
   function renderLocal(): void {
@@ -272,7 +332,20 @@ export function bindForm<T extends object = Record<string, unknown>>(
     values: Record<string, unknown>, validate: boolean): readonly ValidationIssue[] {
     if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
-    if (field.kind === "radio" || field.kind === "checkbox" && field.elements.length > 1) {
+    if (field.choices) {
+      const element = field.element as HTMLSelectElement;
+      const available = [...field.choices.authored, ...choiceOptions(field, values, id).map(option => option.raw)];
+      if (!rowOptionAvailable(available, candidate.value, element.multiple)) {
+        found.push(issue(field, id, "select-option", "Choose an available option."));
+      }
+      if (validate && !disabled(element, root) && element.willValidate) {
+        const missing = element.required && (element.multiple ? !Array.isArray(candidate.value) || !candidate.value.length
+          : candidate.value === null || candidate.value === "" || candidate.value === undefined);
+        const message = (id === null || id === boundId) && element.validity.customError
+          ? element.validationMessage : missing ? "Choose an option." : null;
+        if (message) found.push(issue(field, id, "html", message));
+      }
+    } else if (field.kind === "radio" || field.kind === "checkbox" && field.elements.length > 1) {
       const required = field.elements.some(element => (element as HTMLInputElement).required) &&
         field.elements.some(element => !disabled(element, root));
       const entered = candidate.entered === undefined ? candidate.value : candidate.entered;
@@ -304,6 +377,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function showIssues(): void {
+    if (disposed) return;
     const messages = new Map<HTMLElement, string[]>();
     for (const field of fields) {
       const fieldIssues = issues.get(field) ?? [];
@@ -321,39 +395,67 @@ export function bindForm<T extends object = Record<string, unknown>>(
     for (const region of regionState.keys()) region.textContent = (messages.get(region) ?? []).join(" ");
   }
 
-  function render(skipFocused = false): void {
-    const source = boundId === null ? null : rowValue(boundId);
-    const original = boundId === null ? undefined : rows!.original(boundId);
-    const currentDrafts = boundId === null ? undefined : drafts.get(boundId);
+  function render(skipFocused = false, prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>): void {
+    const version = ++renderVersion, id = boundId;
+    const snapshot = id === null ? undefined : rows!.get(id);
+    const source = id === null ? null : rowValue(id);
+    const original = id === null ? undefined : rows!.original(id);
+    const currentDrafts = id === null ? undefined : drafts.get(id);
+    const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id) : undefined);
+    const current = () => !disposed && version === renderVersion && boundId === id &&
+      (id === null || rows!.get(id) === snapshot);
     for (const field of fields) {
+      if (!current()) return;
+      if (field.choices) {
+        const next = choices!.get(field)!;
+        if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
+          field.choices.raw = renderRowOptions(field.element as HTMLSelectElement, field.choices.authoredNodes,
+            field.choices.authoredOptions, field.choices.authored, next.options);
+          field.choices.source = next.source;
+          field.choices.bound = true;
+        }
+      }
       const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
       for (const element of field.elements) element.setAttribute("data-field-changed", String(changed));
       const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
       if (skipFocused && focused && field.kind === "single" && formatCapable(field.element)) continue;
       if (currentDrafts?.has(field)) {
-        displayField(field, currentDrafts.get(field));
+        if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
+        else displayField(field, currentDrafts.get(field));
         continue;
       }
-      const raw = source ? readPath(source, field.path) : field.kind === "radio" ? null : "";
+      const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
       const renderer = renderers.get(field.name);
       if (renderer) renderField("bindForm", field.element, raw, context(field, boundId, source ?? {}), renderer);
-      else displayField(field, source && !focused && field.format.length
-        ? runner.format(field.format, raw, context(field, boundId, source)) : raw);
+      else if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, raw);
+      else {
+        const value = source && !focused && field.format.length
+          ? runner.format(field.format, raw, context(field, boundId, source)) : raw;
+        if (!current()) return;
+        displayField(field, value);
+      }
     }
   }
 
   function reconcile(id: RowId, validate = true): void {
     const currentDrafts = drafts.get(id);
     if (!currentDrafts?.size || reconciling) return;
+    const snapshot = rows!.get(id), version = renderVersion;
     const result = evaluate(id, rowValue(id), currentDrafts, validate);
+    if (disposed || version !== renderVersion || rows!.get(id) !== snapshot) return;
     const ready = [...currentDrafts.keys()].filter(field => !result.byField.get(field)?.length);
     let failed = false;
     let failure: unknown;
     reconciling = true;
     try {
       for (const field of ready) {
+        if (disposed || version !== renderVersion) return;
         const source = rowValue(id);
-        const next = writePath(source, field.path, result.parsed.get(field)!.value);
+        const value = result.parsed.get(field)!.value;
+        if (field.choices && !rowOptionAvailable([
+          ...field.choices.authored, ...choiceOptions(field, source, id).map(option => option.raw)
+        ], value, (field.element as HTMLSelectElement).multiple)) continue;
+        const next = writePath(source, field.path, value);
         const key = field.path[0] as keyof T;
         const before = rows!.get(id);
         try {
@@ -397,7 +499,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (rows) {
       if (boundId === null) return;
       const currentDrafts = drafts.get(boundId) ?? new Map<Field, unknown>();
-      currentDrafts.set(field, fieldValue(field));
+      currentDrafts.set(field, enteredValue(field));
       drafts.set(boundId, currentDrafts);
       reconcile(boundId, autoValidate);
       return;
@@ -486,11 +588,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (id !== null && !rows) {
         throw formError("ROW_MISSING", "This Form has no row store.", { id });
       }
-      if (id !== null) rowValue(id);
+      const source = id === null ? null : rowValue(id);
+      const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
       boundId = id;
       issues.clear();
       if (rows) {
-        render();
+        render(false, prepared);
+        if (disposed || boundId !== id) return;
         const currentDrafts = id === null ? undefined : drafts.get(id);
         if (id !== null && currentDrafts?.size) {
           const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
@@ -538,6 +642,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     dispose() {
       if (disposed) return;
       disposed = true;
+      renderVersion++;
       boundRoots.delete(root);
       unsubscribe?.();
       for (const release of releaseSelects) release();
@@ -568,6 +673,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
         region.textContent = original.text;
       }
       for (const original of renderedOriginals) original.element.replaceChildren(...original.children);
+      for (const field of choiceFields) {
+        const choices = field.choices!;
+        (field.element as HTMLSelectElement).replaceChildren(...choices.authoredNodes);
+        choices.authoredOptions.forEach((option, index) => { option.selected = choices.selection[index]; });
+        choices.raw.clear();
+      }
       localRenderedValues.clear();
       drafts.clear();
       issues.clear();

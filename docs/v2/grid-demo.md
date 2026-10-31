@@ -32,7 +32,7 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: cf2050f8556a470d02294eb55bed73bde4623504
+    git_blob: 172d29e7f90a91362cc7d2e77605445ba1cb57ae
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
@@ -40,7 +40,7 @@ sources:
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
-    git_blob: 18d920e324e6e0487392defd211f1f5c1380775c
+    git_blob: e319f47ac49efaa9538ee355d415c9f914af54eb
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -80,7 +80,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -117,10 +117,10 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: 6dae7f254a9f274e495941fb84da08963f8f2db3
-generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -283,6 +283,8 @@ In the Team header, input previews choices; **Apply** or plain Enter replaces th
 Enable **Reveal successful application selection, check, add and append actions** to run the explicit scroll recipes. Selection/checks center the last requested eligible identity only after the complete active/selected/checked result matches. This target can differ from the final ID in store-ordered getters. Veto, failure, opt-out and offpage/filtered targets do not scroll or change page/filter. Front/index/end adds use start/center/end; nonempty append uses end only when the store was already nonempty. **Empty store** exercises the no-jump first batch. These are application actions and do not change native Grid gesture defaults.[^view][^controller][^grid]
 
 Choose **Reveal the last invalid row in visual page order, preserving focus** before editing. It disables core first-invalid reveal, collects validation issue IDs and scans the current visual page in reverse before centered reveal. Issue order alone is insufficient after sorting. Hidden/offpage errors remain recorded; a valid result or a result without a visible issue does not scroll. The normal core first-invalid option remains separately available.[^view][^controller][^grid]
+
+The full detail template delegates assignment.shifts and assignment.chosen to Form through the existing row-local choice markers. Native changes preserve numeric codes, option refresh precedes raw draft/selection display, and hidden validation uses the target employee's own shifts. The shared CVC controller has no option generation, code parser or subscription-order adapter; the reduced template simply omits that field.
 
 # Variations
 

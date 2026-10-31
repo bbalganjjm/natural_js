@@ -24,7 +24,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required semantic slices and boundaries
-    git_blob: 6049100c0d0170af566b965b089118c8daebcae3
+    git_blob: 2079d8b9856927de1dea9f7db1bb51a5514655a3
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable complete Grid planning snapshot
@@ -36,7 +36,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Authored events, filters, reveal and lifecycle
-    git_blob: 5f4cc1b5a2b4df9f07bc1d43d3521cb653dcb8e1
+    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Atomic active and selection-set transitions

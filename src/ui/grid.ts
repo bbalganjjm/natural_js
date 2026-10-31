@@ -4,7 +4,7 @@ import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
-import { rowOptions } from "./row-options.js";
+import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
 import { bindGridColumns } from "./grid-columns.js";
 import { createGridSelection } from "./grid-selection.js";
@@ -22,8 +22,6 @@ import type { GridRowBinding } from "./grid-hooks.js";
 import type { GridHeightOptions } from "./grid-height.js";
 import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridBindResult, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
-
-const negativeZero = Symbol();
 
 interface TextField {
   index: number;
@@ -650,20 +648,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const { descriptor, element } = binding;
     const source = descriptor.options ? readPath(value, descriptor.options) : null;
     if (!binding.optionsBound || !Object.is(binding.optionSource, source)) {
-      const rawByOption = new Map<HTMLOptionElement, unknown>();
-      const children = [...binding.authoredNodes];
-      for (const [index, option] of binding.authoredOptions.entries()) {
-        rawByOption.set(option, descriptor.authored[index]);
-      }
-      for (const item of optionValues(value, descriptor, id)) {
-        const option = root.ownerDocument.createElement("option");
-        option.value = String(item.raw ?? "");
-        option.textContent = item.label;
-        rawByOption.set(option, item.raw);
-        children.push(option);
-      }
-      element.replaceChildren(...children);
-      binding.rawByOption = rawByOption;
+      binding.rawByOption = renderRowOptions(element, binding.authoredNodes, binding.authoredOptions,
+        descriptor.authored, optionValues(value, descriptor, id));
       binding.optionSource = source;
       binding.optionsBound = true;
       binding.selectedBound = false;
@@ -672,11 +658,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const draft = descriptor.name ? drafts.get(id)?.get(descriptor.name) : undefined;
       const current = draft ? draft.entered : readPath(value, descriptor.field);
       if (!binding.selectedBound || !Object.is(binding.previous, current)) {
-        if (descriptor.multiple) {
-          const selected = Array.isArray(current) ? current : [];
-          for (const option of element.options) option.selected = selected.some(value => Object.is(binding.rawByOption.get(option), value));
-        } else element.selectedIndex = [...element.options].findIndex(option =>
-          Object.is(binding.rawByOption.get(option), current));
+        selectRowOptions(element, binding.rawByOption, current);
         binding.previous = current;
         binding.selectedBound = true;
       }
@@ -822,7 +804,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const value = readPath(values, descriptor.field);
       const available = [...descriptor.authored, ...optionValues(values, descriptor, row.id).map(item => item.raw)];
       const selected = descriptor.multiple ? Array.isArray(value) ? value : [] : [value];
-      if (descriptor.multiple && !Array.isArray(value) || selected.some(item => !available.some(option => Object.is(option, item)))) {
+      if (!rowOptionAvailable(available, value, descriptor.multiple)) {
         issues.push({
           rowId: row.id, field: descriptor.name, rule: "select-option",
           message: "Choose an available option.", ...(element ? { element } : {})
@@ -1873,9 +1855,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const path = entry?.binding.descriptor.field;
       const field = entry?.binding.descriptor.name;
       if (!entry || !path || !field) return;
-      const selected = [...target.selectedOptions].map(option =>
-        entry.binding.rawByOption.has(option) ? entry.binding.rawByOption.get(option) : option.value);
-      const value = entry.binding.descriptor.multiple ? selected : selected[0] ?? null;
+      const selected = [...target.selectedOptions];
+      const invalid = selected.some(option => !entry.binding.rawByOption.has(option) || option.matches(":disabled"));
+      const values = selected.map(option => entry.binding.rawByOption.get(option));
+      const value = invalid ? undefined : entry.binding.descriptor.multiple ? values : values[0] ?? null;
       draft(entry.id, field, path, value, validateOn !== "manual");
       return;
     }
@@ -1990,10 +1973,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
             try {
               const value: unknown = JSON.parse(text);
               if (!Array.isArray(value) || value.some(item => item !== null && !["string", "number", "boolean"].includes(typeof item)) ||
-                  new Set(value.map(item => Object.is(item, -0) ? negativeZero : item)).size !== value.length) throw Error();
+                  field.select < 0 && new Set(value).size !== value.length) throw Error();
               requested = value;
             } catch {
-              issue(id, field.name, "Paste a JSON array of distinct option values into this field.");
+              issue(id, field.name, field.select >= 0 ? "Paste a JSON array of option values into this field."
+                : "Paste a JSON array of distinct option values into this field.");
               continue;
             }
           }
@@ -2007,7 +1991,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
                 .flatMap((option, index) => option.matches(":disabled") ? [] : [descriptor.authored[index]]),
                 ...optionValues(row.value, descriptor, id).map(option => option.raw)];
             const values = array ? requested : available.filter(value => String(value ?? "") === text);
-            if (array ? values.some(value => !available.some(option => Object.is(option, value))) :
+            if (array ? !rowOptionAvailable(available, values, true) :
                 !values.length || values.some(value => !Object.is(value, values[0]))) {
               issue(id, field.name, "Clipboard text must identify one enabled raw option value.");
               continue;

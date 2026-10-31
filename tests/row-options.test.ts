@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it } from "vitest";
-import { rowOptions } from "../src/ui/row-options.js";
+import { rowOptionAvailable, rowOptions } from "../src/ui/row-options.js";
 
 const invalid = (field: string): never => { throw new Error(field); };
 
@@ -22,5 +22,29 @@ describe("rowOptions", () => {
     expect(rowOptions({}, ["choices"], ["label"], ["value"], invalid)).toEqual([]);
     expect(() => rowOptions({ choices: {} }, ["choices"], ["label"], ["value"], invalid))
       .toThrow("choices");
+  });
+
+  it("tests single choices with Object.is instead of serialized values", () => {
+    for (const value of [1, "1", false, "false", null, "", 0, -0]) {
+      expect(rowOptionAvailable([value], value, false)).toBe(true);
+    }
+    for (const [available, value] of [
+      [[1], "1"], [[false], "false"], [[null], ""], [[""], null], [[0], -0], [[-0], 0], [[], null], [[1], undefined]
+    ] as const) {
+      expect(rowOptionAvailable(available, value, false)).toBe(false);
+    }
+  });
+
+  it("consumes multiple raw occurrences without changing either input", () => {
+    const available = Object.freeze([1, 1, "1", false, null, "", 0, -0]);
+    const selected = Object.freeze([1, "1", 1, false, null, "", -0, 0]);
+    expect(rowOptionAvailable(available, selected, true)).toBe(true);
+    expect(rowOptionAvailable([1], [1, 1], true)).toBe(false);
+    expect(rowOptionAvailable([1, 1], [1, 1], true)).toBe(true);
+    expect(rowOptionAvailable([0, 0], [0, -0], true)).toBe(false);
+    expect(rowOptionAvailable([], [], true)).toBe(true);
+    expect(rowOptionAvailable([null], null, true)).toBe(false);
+    expect(available).toEqual([1, 1, "1", false, null, "", 0, -0]);
+    expect(selected).toEqual([1, "1", 1, false, null, "", -0, 0]);
   });
 });

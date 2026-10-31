@@ -40,7 +40,6 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     }
     const formRoot = find<HTMLFormElement>("form");
     const fields = find<HTMLFieldSetElement>("fieldset");
-    const choices = root.querySelector<HTMLSelectElement>('[data-field="assignment.chosen"]');
     const scope = find<HTMLSelectElement>("[data-detail-scope]");
     const previous = find<HTMLButtonElement>("[data-detail-previous]");
     const next = find<HTMLButtonElement>("[data-detail-next]");
@@ -48,27 +47,11 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     const error = find<HTMLOutputElement>("[data-detail-error]");
     let current: RowId | null = null;
     let form: FormHandle<Employee> | undefined;
-    let options: Employee["assignment"]["shifts"] | undefined;
-    const codes = new Map<string, number>();
     scope.value = input.scope;
 
     function ids(): readonly RowId[] {
       return input.grid.rowIds(scope.value as GridRowScope)
         .filter(id => input.rows.get(id)?.status !== "delete");
-    }
-
-    function updateChoices(id: RowId | null): void {
-      if (!choices) return;
-      const shifts = id === null ? undefined : input.rows.get(id)?.value.assignment.shifts;
-      if (shifts === options) return;
-      options = shifts;
-      codes.clear();
-      const prompt = new Option("Choose a shift", "");
-      const items = (shifts ?? []).map(shift => {
-        codes.set(String(shift.code), shift.code);
-        return new Option(shift.meta.label, String(shift.code));
-      });
-      choices.replaceChildren(prompt, ...items);
     }
 
     function refresh(): void {
@@ -77,7 +60,6 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
       if (!row || row.status === "delete") {
         current = null;
         form?.bind(null);
-        updateChoices(null);
         delete root.dataset.detailRow;
         fields.disabled = true;
         previous.disabled = next.disabled = true;
@@ -86,7 +68,6 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
       }
       fields.disabled = false;
       root.dataset.detailRow = String(current);
-      updateChoices(current);
       const available = ids();
       const index = available.indexOf(current!);
       previous.disabled = index <= 0;
@@ -94,13 +75,12 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
       state.textContent = `RowId ${current}: ${row.value.name} · ${index < 0 ? "outside" : `${index + 1} of ${available.length}`} ${scope.value} scope`;
     }
 
-    // Update native choices before Form's subscriber renders shared row changes.
-    const unsubscribe = input.rows.subscribe(refresh);
-    function cleanup(): void { unsubscribe(); form?.dispose(); }
+    let unsubscribe: (() => void) | undefined;
+    function cleanup(): void { unsubscribe?.(); form?.dispose(); }
     own(cleanup);
     signal.addEventListener("abort", cleanup, { once: true });
-    form = bindForm(formRoot, { rows: input.rows, rules: input.rules,
-      parse: { ...input.parse, ...(choices ? { "assignment.chosen": (value: string) => value === "" ? null : codes.get(value) } : {}) } });
+    form = bindForm(formRoot, { rows: input.rows, rules: input.rules, parse: input.parse });
+    unsubscribe = input.rows.subscribe(refresh);
 
     function showFailure(cause: unknown): void {
       error.textContent = cause instanceof Error ? cause.message : String(cause);
@@ -110,7 +90,6 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
       if (signal.aborted) return;
       const row = input.rows.get(id);
       if (!row || row.status === "delete") { refresh(); return; }
-      updateChoices(id);
       form!.bind(id);
       if (signal.aborted) return;
       current = id;

@@ -307,13 +307,21 @@ try {
   state.viewport = { root: scrollRoot, table: viewportTable, rows: viewportRows, grid: viewportGrid, original: originalViewport };
   const ruleRoot = document.createElement("section");
   ruleRoot.innerHTML = `<h2>Shared rules</h2><form><label>Name <input data-field="profile.name"></label>
-    <label>Salary <input data-field="salary" required></label><output data-error-for="salary"></output></form>
+    <label>Salary <input data-field="salary" required></label><output data-error-for="salary"></output>
+    <label>Raw choice <select data-field="assignment.chosen" data-options="assignment.choices"
+      data-option-label="meta.label" data-option-value="code"><option value="">Choose</option></select></label><output data-error-for="assignment.chosen"></output>
+    <label>Raw choices <select multiple data-field="assignment.selected" data-options="assignment.choices"
+      data-option-label="meta.label" data-option-value="code"></select></label><output data-error-for="assignment.selected"></output></form>
     <table><caption>Rule-backed employees</caption><tbody><tr data-row-template><td data-field="profile.name"></td>
       <td><label>Salary <input type="number" data-field="salary" required></label><output data-error-for="salary"></output></td></tr></tbody></table>
     <ul><li data-row-template><span data-field="profile.name"></span><span data-field="salary"></span><output data-error-for="salary"></output></li></ul>`;
   document.querySelector("main").append(ruleRoot);
   const originalRules = ruleRoot.outerHTML;
-  const ruleRows = createRows([{ profile: { name: "Ada" }, salary: 150 }]);
+  const ruleRows = createRows([{ profile: { name: "Ada" }, salary: 150, assignment: {
+    choices: [{ meta: { label: "Number one" }, code: 1 }, { meta: { label: "Text one" }, code: "1" },
+      { meta: { label: "Off" }, code: false }, { meta: { label: "Empty string" }, code: "" }],
+    chosen: false, selected: [1, "1"]
+  } }]);
   const rules = { format: { upper: value => value.toUpperCase() }, fields: {
     "profile.name": { format: [["upper"]] }, salary: { validate: [["minvalue", 100]] },
     "profile.unbound": { validate: [["required"]] }

@@ -287,3 +287,13 @@ export function connectProgressive(table: HTMLTableElement, rows: Rows<Employee>
   void [pending, continued, stopped.first, stopped.last];
   return grid;
 }
+
+export function connectRowChoices(root: HTMLFormElement, rows: Rows<{
+  assignment: { choices: { meta: { label: string }; code: string | number | boolean | null }[];
+    chosen: string | number | boolean | null; selected: (string | number | boolean | null)[] };
+}>) {
+  const form = bindForm(root, { rows, autoValidate: false });
+  form.bind(rows.entries()[0].id);
+  const result: ValidationResult = form.validate();
+  return { form, result, raw: form.read() };
+}

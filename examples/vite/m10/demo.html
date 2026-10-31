@@ -502,7 +502,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <label>Email <input type="email" data-field="email" required></label><output data-error-for="email"></output>
           <label>Phone <input type="tel" data-field="phone" readonly></label>
           <label>Team <input data-field="profile.team" required></label><output data-error-for="profile.team"></output>
-          <label>Shift <select data-field="assignment.chosen" required><option value="">Choose a shift</option></select></label><output data-error-for="assignment.chosen"></output>
+          <label>Shift <select data-field="assignment.chosen" data-options="assignment.shifts"
+            data-option-label="meta.label" data-option-value="code" required><option value="">Choose a shift</option></select></label><output data-error-for="assignment.chosen"></output>
           <label class="check-label"><input type="checkbox" data-field="active"> Active</label>
           <label>Notes <textarea data-field="notes" rows="2"></textarea></label>
           <label>Salary <input type="text" inputmode="decimal" data-field="salary" required></label><output data-error-for="salary"></output>

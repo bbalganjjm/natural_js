@@ -169,3 +169,6 @@ await assert.rejects(import("@bbalganjjm/natural_js/ui/field-render"), {
 await assert.rejects(import("@bbalganjjm/natural_js/ui/grid-hooks"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });
+await assert.rejects(import("@bbalganjjm/natural_js/ui/row-options"), {
+  code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
+});

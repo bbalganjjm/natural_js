@@ -1,11 +1,19 @@
 ---
 type: UI Component
 title: bindForm
-description: Bind authored Form fields and groups to Rows with row-keyed drafts, raw field-change flags, explicit display, retained rules, and accessible errors.
+description: Bind authored Form fields, groups and nested typed choices to Rows with drafts, retained rules and accessible errors.
 tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
 sources:
+  - id: options
+    resource: ../../src/ui/row-options.ts
+    title: Shared row option extraction, DOM, selection and availability
+    git_blob: 4d7359d7fdafb0fda5fafb0ee81372b26722538a
+  - id: options-browser
+    resource: ../../tests/browser/form-options.spec.ts
+    title: Typed Form choices, occurrence identity and owned lifetime regressions
+    git_blob: 2361a6ce248a83450a1d4465f5d5ea1dc5eaaa28
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
@@ -13,7 +21,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: dfc469e9c118292c41e804b80ebcc563a1c6d26c
+    git_blob: 199f3b8772468bf5477797c7b8e4fe9d745b8907
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -46,10 +54,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -103,7 +111,7 @@ A path is parsed once. It rejects prototype keys, numeric array indexes, and exp
 
 A nonempty effective formatter list on a Select or non-text input (including radio, checkbox, file, and number) raises `FORM_FORMAT_CONTROL` at binding; changing those controls to display strings would corrupt their value semantics. A file input may bind only to a local Form (`FORM_FILE_ROWS` for Rows); `multiple` file selection is outside this field contract (`FORM_FILE_MULTIPLE`).[^form]
 
-Repeated `data-field` paths are allowed only for radio or checkbox controls. A radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. A native `<select multiple>` produces a string array. Group choices must have distinct values. For each kind falling back to HTML, all declarations of that attribute in one group must match; a typed override ignores that kind's HTML. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
+Repeated `data-field` paths are allowed only for radio or checkbox controls. A radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. An unmarked native `<select multiple>` produces a string array. Group choices must have distinct values. For each kind falling back to HTML, all declarations of that attribute in one group must match; a typed override ignores that kind's HTML. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
 
 ```html
 <form data-role="preferences">
@@ -116,7 +124,29 @@ Repeated `data-field` paths are allowed only for radio or checkbox controls. A r
 </form>
 ```
 
-A parser may convert a scalar radio or single Select string. It cannot attach to a boolean checkbox or array-valued checkbox group or multiple Select (`FORM_PARSE_CONTROL`). Multiple Select and checkbox groups retain arrays for empty and single selections. Only own parser/render configuration entries are callable, including a field named `toString`. These authored Selects are owned by Form until disposal, so a second `bindSelect` on the same element raises `SELECT_OWNED`.[^form][^controls-browser]
+A parser may convert a scalar radio or unmarked single Select string. Marked row-local choices already supply raw values and reject string parsers. It cannot attach to a boolean checkbox or array-valued checkbox group or multiple Select (`FORM_PARSE_CONTROL`). Multiple Select and checkbox groups retain arrays for empty and single selections. Only own parser/render configuration entries are callable, including a field named `toString`. These authored Selects are owned by Form until disposal, so a second `bindSelect` on the same element raises `SELECT_OWNED`.[^form][^controls-browser]
+
+## Row-local typed choices
+
+A Rows-backed Form recognizes a native Select with data-field, data-options, data-option-label and data-option-value. The selected value and option source may use different nested paths. All three option paths compile through the existing safe path owner. Marked local Forms, unsupported elements, missing markers and string parsers on marked choices fail before ownership or ARIA changes. An effective formatter still requires a text-like field. No public option, type or method is added.[^form][^options]
+
+```html
+<label>Shift
+  <select data-field="assignment.chosen" data-options="assignment.shifts"
+    data-option-label="meta.label" data-option-value="code" required>
+    <option value="">Choose a shift</option>
+  </select>
+</label>
+<output data-error-for="assignment.chosen"></output>
+```
+
+Options use literal text labels. Authored empty values map to null; other authored values remain strings. Generated options retain raw strings, finite numbers, booleans or null, including a generated empty string distinct from null. Single selection uses the first Object.is match. Multiple selection consumes one matching option per array item and reads in DOM order. A duplicate request such as [1,1] needs two raw-1 options. Rendering never rewrites the stored array. Declare every supported raw value type in the application's row type; HTML choices do not widen an inferred TypeScript field type.[^options][^form]
+
+Availability uses the target row's effective values and its own option source, including validate(otherId) and hidden-row drafts. Null needs a real null option. Full validation rejects required scalar null/empty-string and empty multiple arrays; [null] and [""] are selections when their matching options exist. Foreign/unmapped and disabled selected options cannot enter Rows through events. Raw identity and occurrence checks remain mandatory with autoValidate:false; explicit validation also runs required/native and business rules.[^form][^options-browser]
+
+Options refresh before displaying the committed value or raw draft, and unchanged source references retain option nodes. Removing an option preserves an invalid draft rather than replacing it with a prompt. Direct bind prepares every marked source before changing the binding or DOM, so a malformed later source preserves the previous selection. A nonarray source raises FORM_OPTIONS; absent/null lists are empty. Subscription errors remain post-commit and do not roll back Rows. A Form-owned render guard stops stale later-field work after callback replacement/rebind/disposal.[^form][^options-browser]
+
+bind(null) removes generated row choices without writing data. Initialization failure or disposal restores the exact authored children and initial selection and releases Select ownership. Repeated disposal and late events are quiet. Local and unmarked authored Selects keep their existing string/scalar-parser behavior; wider bind-value callbacks and Form raw rendering retain separate follow-up scope.[^form][^options-browser]
 
 ## Loaded-value changes
 
@@ -194,6 +224,8 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 
 [^entry]: Public UI entry and Form types
 [^form]: Form binding runtime
+[^options]: Shared row option extraction, DOM, selection and availability
+[^options-browser]: Typed Form choices, occurrence identity and owned lifetime regressions
 [^native]: Shared native field values, display and constraints
 [^render]: Private explicit field rendering and DOM ownership
 [^controls-browser]: Shared native constraints, Form rendering and binding recovery regressions

@@ -127,6 +127,39 @@ try {
     { employeeNo: "C", name: "Pending", rowStatus: "insert" }
   ], restored: [["Pending", "insert"], ["Received removal", "delete"], ["Received revision", "update"]], insertedOriginal: null, ordinaryCopyRemoved: true });
 
+  const formChoices = await page.evaluate(() => {
+    const h = window.packedConsumer.sharedRules, id = h.rows.entries()[0].id;
+    const single = h.root.querySelector('form [data-field="assignment.chosen"]');
+    const multiple = h.root.querySelector('form [data-field="assignment.selected"]');
+    const initial = { chosen: single.selectedOptions[0].textContent,
+      selected: [...multiple.selectedOptions].map(option => option.textContent) };
+    single.selectedIndex = [...single.options].findIndex(option => option.textContent === "Text one");
+    single.dispatchEvent(new Event("change", { bubbles: true }));
+    const chosen = h.rows.get(id).value.assignment.chosen;
+    for (const option of multiple.options) option.selected = option.textContent === "Number one" || option.textContent === "Off";
+    multiple.dispatchEvent(new Event("change", { bubbles: true }));
+    const selected = h.rows.get(id).value.assignment.selected;
+    const assignment = h.rows.get(id).value.assignment;
+    const other = h.rows.add({ profile: { name: "Other" }, salary: 150,
+      assignment: { ...assignment, choices: [{ meta: { label: "Other only" }, code: 99 }], chosen: "1" } });
+    const before = [...single.options];
+    const hidden = h.form.validate(other);
+    const hiddenSafe = hidden.issues.some(issue => issue.field === "assignment.chosen" && issue.rule === "select-option" && !issue.element) &&
+      before.every((option, index) => single.options[index] === option);
+    h.rows.remove(other);
+    h.rows.set(id, "assignment", { ...h.rows.get(id).value.assignment, selected: [1, 1] });
+    const duplicateRejected = h.form.validate(id).issues.some(issue => issue.field === "assignment.selected" && issue.rule === "select-option");
+    h.rows.revert();
+    return { initial, chosen, selected, hiddenSafe, duplicateRejected, restored: h.form.read().assignment };
+  });
+  assert.deepEqual(formChoices.initial, { chosen: "Off", selected: ["Number one", "Text one"] });
+  assert.equal(formChoices.chosen, "1");
+  assert.deepEqual(formChoices.selected, [1, false]);
+  assert(formChoices.hiddenSafe && formChoices.duplicateRejected,
+    "Installed Form choices must use target-row availability and preserve raw occurrence counts.");
+  assert.equal(formChoices.restored.chosen, false);
+  assert.deepEqual(formChoices.restored.selected, [1, "1"]);
+
   const sharedRules = await page.evaluate(() => {
     const h = window.packedConsumer.sharedRules, id = h.rows.entries()[0].id;
     const fields = [...h.root.querySelectorAll('[data-field="profile.name"]')];

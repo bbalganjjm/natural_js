@@ -13,11 +13,11 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 851b940ae5aa42f60dee1dbac6e98c433409b6f5
+    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
-    git_blob: 72facd6bc5b30845938731897f1f5aadd257a7fa
+    git_blob: 4d7359d7fdafb0fda5fafb0ee81372b26722538a
   - id: path
     resource: ../../src/ui/field-path.ts
     title: Safe nested field paths
@@ -34,10 +34,10 @@ sources:
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native display and authored-template constraint regressions
     git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -105,7 +105,7 @@ rows.dispose();
 | `data-options="path"` | Select | Reads a row-local array of option objects. |
 | `data-option-label="path"`, `data-option-value="path"` | Select with `data-options` | Read an option label and raw scalar value. |
 
-Nested field and option paths reject array indices, expressions, prototype keys, and empty segments. For `{ teams: [{ id: 2, name: "Platform" }] }`, `data-options="teams"` binds the nested array directly into that row's Select. The selected `data-field` may be a different nested scalar. Authored options remain; generated choices preserve raw string, finite number, boolean, or `null` values. A row-local `<select multiple>` displays an array of raw choices without editing it; validation requires the stored field to be an array whose values are available options. Repeated equal raw values select one matching option per array item.[^list][^options][^path]
+Nested field and option paths reject array indices, expressions, prototype keys, and empty segments. For `{ teams: [{ id: 2, name: "Platform" }] }`, `data-options="teams"` binds the nested array directly into that row's Select. The selected `data-field` may be a different nested scalar. Authored options remain; generated choices preserve raw string, finite number, boolean, or `null` values. A row-local `<select multiple>` displays an array of raw choices without editing it; validation requires the stored field to be an array whose values are available options. Repeated equal raw values select one matching option per array item. Validation also counts available occurrences: [1,1] needs two raw-1 options; an excess occurrence reports select-option without rewriting the stored value.[^list][^options][^path]
 
 # Methods
 
