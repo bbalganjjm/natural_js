@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 48179a8890dedf49039118ea799bf7a06c662ffa
+    git_blob: 8f0d17d80872883272cff4ca058e28945c7c46b2
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy more, vertical resize and action-driven scrolling
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical projection, stable identity and reveal
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured row windows and sticky occlusion
@@ -44,7 +44,7 @@ sources:
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: Shared authored CVC details and validated identity navigation
-    git_blob: 8f3c9c4b74b6155a190b4289ddb8b7b777ed6955
+    git_blob: 18d920e324e6e0487392defd211f1f5c1380775c
   - id: demo-browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Old Grid demo and six detail/height acceptance additions

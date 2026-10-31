@@ -1,0 +1,673 @@
+{
+  "engine": "webkit",
+  "version": "26.6",
+  "date": "2026-10-31T02:06:45.143Z",
+  "navigation": "fresh file document",
+  "idleMs": 1800,
+  "results": [
+    {
+      "axis": "x",
+      "boundary": "start",
+      "policy": "contain",
+      "interior": {
+        "inner": [
+          130,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              80,
+              0
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          0,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          0,
+          50
+        ],
+        "outer": [
+          0,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              -300,
+              0
+            ],
+            "inner": [
+              0,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "x",
+      "boundary": "start",
+      "policy": "auto",
+      "interior": {
+        "inner": [
+          130,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              80,
+              0
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          0,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          0,
+          50
+        ],
+        "outer": [
+          0,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              -300,
+              0
+            ],
+            "inner": [
+              0,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "x",
+      "boundary": "end",
+      "policy": "contain",
+      "interior": {
+        "inner": [
+          130,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              80,
+              0
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          540,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          540,
+          50
+        ],
+        "outer": [
+          420,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              300,
+              0
+            ],
+            "inner": [
+              540,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "x",
+      "boundary": "end",
+      "policy": "auto",
+      "interior": {
+        "inner": [
+          130,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              80,
+              0
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          540,
+          50
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          540,
+          50
+        ],
+        "outer": [
+          420,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              300,
+              0
+            ],
+            "inner": [
+              540,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "y",
+      "boundary": "start",
+      "policy": "contain",
+      "interior": {
+        "inner": [
+          50,
+          130
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              80
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          50,
+          0
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          50,
+          0
+        ],
+        "outer": [
+          120,
+          0
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              -300
+            ],
+            "inner": [
+              50,
+              0
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "y",
+      "boundary": "start",
+      "policy": "auto",
+      "interior": {
+        "inner": [
+          50,
+          130
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              80
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          50,
+          0
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          50,
+          0
+        ],
+        "outer": [
+          120,
+          0
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              -300
+            ],
+            "inner": [
+              50,
+              0
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "y",
+      "boundary": "end",
+      "policy": "contain",
+      "interior": {
+        "inner": [
+          50,
+          130
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              80
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          50,
+          480
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          50,
+          480
+        ],
+        "outer": [
+          120,
+          420
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              300
+            ],
+            "inner": [
+              50,
+              480
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "axis": "y",
+      "boundary": "end",
+      "policy": "auto",
+      "interior": {
+        "inner": [
+          50,
+          130
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              80
+            ],
+            "inner": [
+              50,
+              50
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      },
+      "before": {
+        "hit": "content",
+        "supported": false,
+        "computed": [
+          null,
+          null
+        ],
+        "inner": [
+          50,
+          480
+        ],
+        "outer": [
+          120,
+          120
+        ],
+        "max": [
+          540,
+          480
+        ]
+      },
+      "after": {
+        "inner": [
+          50,
+          480
+        ],
+        "outer": [
+          120,
+          420
+        ],
+        "events": [
+          {
+            "trusted": true,
+            "target": "content",
+            "inside": true,
+            "delta": [
+              0,
+              300
+            ],
+            "inner": [
+              50,
+              480
+            ],
+            "outer": [
+              120,
+              120
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

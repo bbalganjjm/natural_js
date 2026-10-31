@@ -93,6 +93,9 @@
 
         <fieldset>
           <legend>Columns</legend>
+          <label>Pin first visible columns <input type="number" min="0" max="9" step="1" value="1" data-column-pins data-needs-grid></label>
+          <button type="button" data-action="pin-columns" data-needs-grid>Apply pinned count</button>
+          <p>Pinned visible columns: <output data-pinned-count>1 / 9</output>. Hidden columns do not count. A spanning cell crossing the pinned boundary scrolls normally.</p>
           <details data-column-chooser open>
             <summary>Choose visible data columns</summary>
             <label class="check-label"><input type="checkbox" data-column-all data-needs-grid checked> All data columns</label>
@@ -349,6 +352,8 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
         <section class="employee-details" aria-label="Inline employee details">
           <h3>Inline employee details</h3>
           <p>Use a row's Inline details or Popup details button. Both run the same authored CVC page and share Rows; detail identity is independent of selection. Hidden Grid fields remain editable here.</p>
+          <label class="check-label"><input type="checkbox" data-detail-reduced> New details show only Name and Salary</label>
+          <p>The reduced authored template uses the same controller, navigation and validation. Omitted employee fields remain unchanged.</p>
           <div data-detail-inline-host></div>
         </section>
 
@@ -495,6 +500,22 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
           <label>Shift <select data-field="assignment.chosen" required><option value="">Choose a shift</option></select></label><output data-error-for="assignment.chosen"></output>
           <label class="check-label"><input type="checkbox" data-field="active"> Active</label>
           <label>Notes <textarea data-field="notes" rows="2"></textarea></label>
+          <label>Salary <input type="text" inputmode="decimal" data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output>
+        </fieldset>
+      </form>
+      <p><output data-detail-error role="status"></output></p>
+      <div class="button-row"><button type="button" data-detail-previous>Previous employee</button><button type="button" data-detail-next>Next employee</button><button type="button" data-detail-close>Close details</button></div>
+    </section>
+  </template>
+  <template data-detail-reduced-template>
+    <section class="employee-detail-page" aria-label="Reduced employee details">
+      <label>Navigation scope
+        <select data-detail-scope><option value="visible">Current logical page</option><option value="filtered" selected>Sorted and filtered rows</option><option value="store">Live store order</option></select>
+      </label>
+      <p><output data-detail-state aria-live="polite"></output></p>
+      <form novalidate>
+        <fieldset><legend>Name and salary</legend>
+          <label>Name <input data-field="name" required></label><output data-error-for="name"></output>
           <label>Salary <input type="text" inputmode="decimal" data-field="salary" data-validate='[["payAtLeast",100]]' required></label><output data-error-for="salary"></output>
         </fieldset>
       </form>

@@ -1,0 +1,113 @@
+
+
+Running 12 tests using 1 worker
+
+
+
+[1/12] [chromium] › tests\browser\grid-pinned.spec.ts:89:1 › pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing
+[2/12] [chromium] › tests\browser\grid-pinned.spec.ts:110:1 › mixed native spans remain in normal flow while wholly pinned spans retain native structure
+[3/12] [chromium] › tests\browser\grid-pinned.spec.ts:130:1 › unpinned grids allocate no pin observer frame or owned cell presentation
+[4/12] [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry
+  1) [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -7,8 +7,8 @@
+          "GRID_COLUMNS",
+          "GRID_COLUMNS",
+        ],
+        "initial": "GRID_COLUMNS",
+        "restored": true,
+    -   "retried": true,
+    +   "retried": false,
+        "unchanged": true,
+      }
+
+      158 |     return { codes, unchanged, initial, restored, retried: h.table.outerHTML === original };
+      159 |   }, modules);
+    > 160 |   expect(result).toEqual({ codes: Array(6).fill("GRID_COLUMNS"), unchanged: true, initial: "GRID_COLUMNS", restored: true, retried: true });
+          |                  ^
+      161 | });
+      162 |
+      163 | test("hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes", async ({ page }) => {
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:160:18
+
+    Error Context: test-results\grid-pinned-invalid-pin-fl-4d087-c-and-allow-corrected-retry-chromium\error-context.md
+
+
+
+
+[5/12] [chromium] › tests\browser\grid-pinned.spec.ts:163:1 › hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes
+[6/12] [chromium] › tests\browser\grid-pinned.spec.ts:180:1 › pointer width previews and every cancellation update measured pin offsets before callbacks
+[7/12] [chromium] › tests\browser\grid-pinned.spec.ts:200:1 › invalid state does not cancel an active resize and pointer commit keeps pin flags
+[8/12] [chromium] › tests\browser\grid-pinned.spec.ts:217:1 › keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans
+[9/12] [chromium] › tests\browser\grid-pinned.spec.ts:233:1 › responsive and hidden-to-visible positioned roots use native widths rather than preferred values
+[10/12] [chromium] › tests\browser\grid-pinned.spec.ts:251:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion
+  2) [chromium] › tests\browser\grid-pinned.spec.ts:251:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      267 |   expect(Math.abs(result.completions[1].delta!)).toBeLessThan(1);
+      268 |   expect(result.columns).toEqual([{ key: "key", pinned: true }, { key: "name", pinned: true }, { key: "team", pinned: false }, { key: "note", pinned: false }, { key: "amount", pinned: false }]);
+    > 269 |   expect(result.restored).toBe(true);
+          |                           ^
+      270 | });
+      271 |
+      272 | test("viewport and progressive row blocks inherit current offsets after release and far reveal", async ({ page }) => {
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:269:27
+
+    Error Context: test-results\grid-pinned-spanning-only--ed516-etry-before-bind-completion-chromium\error-context.md
+
+
+
+
+[11/12] [chromium] › tests\browser\grid-pinned.spec.ts:272:1 › viewport and progressive row blocks inherit current offsets after release and far reveal
+[12/12] [chromium] › tests\browser\grid-pinned.spec.ts:293:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+  3) [chromium] › tests\browser\grid-pinned.spec.ts:293:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "changes": 0,
+        "independent": true,
+        "observers": 0,
+        "restored": true,
+    -   "restoredOther": true,
+    +   "restoredOther": false,
+        "retry": true,
+        "unpinRestored": true,
+      }
+
+      325 |       observers: h.observations.filter(record => record.targets.size).length };
+      326 |   }, { modules, markup });
+    > 327 |   expect(result).toEqual({ independent: true, restoredOther: true, unpinRestored: true, restored: true, retry: true, changes: 0, observers: 0 });
+          |                  ^
+      328 | });
+      329 |
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:327:18
+
+    Error Context: test-results\grid-pinned-independent-pi-4b80c--and-active-resize-disposal-chromium\error-context.md
+
+
+  3 failed
+    [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry 
+    [chromium] › tests\browser\grid-pinned.spec.ts:251:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion 
+    [chromium] › tests\browser\grid-pinned.spec.ts:293:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal 
+  9 passed (9.6s)
+[WebServer] (node:4832) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:13032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

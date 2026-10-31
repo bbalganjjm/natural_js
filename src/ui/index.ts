@@ -94,6 +94,7 @@ export interface GridColumn {
   readonly key: string;
   readonly width?: number;
   readonly hidden?: boolean;
+  readonly pinned?: boolean;
 }
 
 export type GridRowScope = "visible" | "filtered" | "store";

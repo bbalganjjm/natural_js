@@ -31,6 +31,9 @@
           </select></label>
           <label>Preferred width (CSS pixels) <input type="number" min="1" step="1" data-column-width data-needs-grid></label>
           <label class="check"><input type="checkbox" data-column-hidden data-needs-grid> Hide column</label>
+          <label>Pin first visible columns <input type="number" min="0" max="8" step="1" value="0" data-column-pins data-needs-grid></label>
+          <button type="button" data-column-action="pin" data-needs-grid>Apply pinned count</button>
+          <p>Pinned visible columns: <output data-pinned-count>0 / 8</output>. Hidden columns do not count. A spanning cell crossing the pinned boundary scrolls normally.</p>
           <div class="actions">
             <button type="button" data-column-action="apply" data-needs-grid>Apply</button>
             <button type="button" data-column-action="earlier" data-needs-grid>Earlier in group</button>
@@ -166,6 +169,9 @@
           </select></label>
           <label>Preferred width (CSS pixels) <input type="number" min="1" step="1" data-column-width data-needs-grid></label>
           <label class="check"><input type="checkbox" data-column-hidden data-needs-grid> Hide column</label>
+          <label>Pin first visible columns <input type="number" min="0" max="8" step="1" value="0" data-column-pins data-needs-grid></label>
+          <button type="button" data-column-action="pin" data-needs-grid>Apply pinned count</button>
+          <p>Pinned visible columns: <output data-pinned-count>0 / 8</output>. Hidden columns do not count. A spanning cell crossing the pinned boundary scrolls normally.</p>
           <div class="actions">
             <button type="button" data-column-action="apply" data-needs-grid>Apply</button>
             <button type="button" data-column-action="earlier" data-needs-grid>Earlier in group</button>

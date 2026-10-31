@@ -8,6 +8,7 @@ interface CellPlan {
   keys: readonly string[];
   grouped: boolean;
   restore: () => void;
+  pin?: { slot: number; restore: () => void };
 }
 interface RowPlan {
   row: HTMLTableRowElement;
@@ -62,6 +63,8 @@ export function bindGridColumns(
         if (!Array.isArray(columns) || columns.length) fail("GRID_COLUMNS", "This Grid has no managed columns.");
       },
       attach: (_rows: readonly HTMLTableRowElement[]) => noop,
+      measurePinned: noop,
+      invalidatePinned: noop,
       dispose: noop
     };
   }
@@ -219,14 +222,22 @@ export function bindGridColumns(
     const next = Array.from(input, column => {
       if (!column || !keySet.has(column.key) || seen.has(column.key) ||
           column.width !== undefined && (typeof column.width !== "number" || !Number.isFinite(column.width) || column.width <= 0) ||
-          column.hidden !== undefined && typeof column.hidden !== "boolean") {
-        fail("GRID_COLUMNS", "Column state needs unique known keys, positive finite widths and boolean hidden values.", column?.key ? [column.key] : []);
+          column.hidden !== undefined && typeof column.hidden !== "boolean" ||
+          column.pinned !== undefined && typeof column.pinned !== "boolean") {
+        fail("GRID_COLUMNS", "Column state needs unique known keys, positive finite widths and boolean hidden/pinned values.", column?.key ? [column.key] : []);
       }
       seen.add(column.key);
       return Object.freeze({ key: column.key, ...(column.width === undefined ? {} : { width: column.width }),
-        ...(column.hidden === undefined ? {} : { hidden: column.hidden }) });
+        ...(column.hidden === undefined ? {} : { hidden: column.hidden }),
+        ...(column.pinned === undefined ? {} : { pinned: column.pinned }) });
     });
     if (next.every(column => column.hidden === true)) fail("GRID_COLUMNS", "At least one column must remain visible.", keys);
+    let unpinned = false;
+    for (const column of next) {
+      if (column.hidden) continue;
+      if (column.pinned && unpinned) fail("GRID_COLUMNS", "Visible pinned columns must form a leading prefix.", [column.key]);
+      if (!column.pinned) unpinned = true;
+    }
     const order = new Map(next.map((column, index) => [column.key, index]));
     for (const members of cellGroups) checkContinuity(members, order);
     for (const group of groups) checkContinuity(group.keys, order);
@@ -244,6 +255,144 @@ export function bindGridColumns(
   const columnPlans = new Map(groups.flatMap(group => group.cols.map(col => [col.key, col] as const)));
   let drag: { button: HTMLButtonElement; key: string; pointer: number; start: number; width: number;
     prior: readonly GridColumn[]; pending: number; frame?: number } | undefined;
+  const view = document.defaultView!;
+  const pinnedCells = new Set<CellPlan>();
+  const probes = new Map<number, CellPlan>();
+  const pinProperties = new Map<string, { value: string; priority: string }>();
+  let pinSlots = new Map<string, number>();
+  let pinObserver: ResizeObserver | undefined;
+  let pinFrame: number | undefined;
+  let pinDirty = false;
+  let probeDirty = false;
+
+  function invalidatePinned(): void { if (pinSlots.size) pinDirty = true; }
+
+  function schedulePins(): void {
+    if (disposed || !pinSlots.size) return;
+    invalidatePinned();
+    if (pinFrame === undefined) pinFrame = view.requestAnimationFrame(() => {
+      pinFrame = undefined;
+      measurePinned();
+    });
+  }
+  function unpin(cell: CellPlan): void {
+    if (!cell.pin) return;
+    const slot = cell.pin.slot;
+    cell.pin.restore();
+    cell.pin = undefined;
+    pinnedCells.delete(cell);
+    if (probes.get(slot) === cell) {
+      pinObserver?.unobserve(cell.element);
+      probes.delete(slot);
+      probeDirty = true;
+      schedulePins();
+    }
+  }
+  function probeCell(cell: CellPlan, size: number): void {
+    const slot = cell.pin!.slot;
+    const previous = probes.get(slot);
+    if (previous && previous.keys.filter(key => visibleKeys.has(key)).length <= size) return;
+    if (previous) pinObserver?.unobserve(previous.element);
+    probes.set(slot, cell);
+    pinObserver?.observe(cell.element);
+    pinDirty = true;
+  }
+  function pinCell(cell: CellPlan): void {
+    const visible = cell.keys.filter(key => visibleKeys.has(key));
+    const slot = visible.length > 0 && visible.every(key => pinSlots.has(key))
+      ? Math.min(...visible.map(key => pinSlots.get(key)!)) : undefined;
+    if (slot === undefined) { unpin(cell); return; }
+    if (cell.pin?.slot === slot) { probeCell(cell, visible.length); return; }
+    unpin(cell);
+    const element = cell.element;
+    const originalStyle = element.getAttribute("style");
+    const originalCssText = element.style.cssText;
+    const original = ["position", "left"].map(name => ({ name, value: element.style.getPropertyValue(name), priority: element.style.getPropertyPriority(name) }));
+    const restoreMarker = restoreAttributes(element, ["data-pinned-column"]);
+    cell.pin = { slot, restore() {
+      for (const { name, value, priority } of original) {
+        if (value) element.style.setProperty(name, value, priority);
+        else element.style.removeProperty(name);
+      }
+      if (element.style.cssText === originalCssText) {
+        if (originalStyle === null) {
+          // Reset WebKit's pending CSSOM serialization before restoring absence.
+          element.setAttribute("style", "");
+          element.removeAttribute("style");
+        } else element.setAttribute("style", originalStyle);
+      }
+      restoreMarker();
+    } };
+    element.style.setProperty("position", "sticky", "important");
+    element.style.setProperty("left", `var(--natural-grid-pin-${slot}, 0px)`, "important");
+    element.setAttribute("data-pinned-column", "true");
+    pinnedCells.add(cell);
+    probeCell(cell, visible.length);
+  }
+  function measurePinned(): void {
+    if (disposed || !pinSlots.size) return;
+    if (!pinDirty || !root.getClientRects().length) return;
+    if (pinFrame !== undefined) { view.cancelAnimationFrame(pinFrame); pinFrame = undefined; }
+    for (const [slot, cell] of probes) if (!cell.element.isConnected || !cell.element.getClientRects().length) {
+      pinObserver?.unobserve(cell.element);
+      probes.delete(slot);
+      probeDirty = true;
+    }
+    if (probeDirty) {
+      for (const cell of pinnedCells) if (cell.element.isConnected && cell.element.getClientRects().length) {
+        probeCell(cell, cell.keys.filter(key => visibleKeys.has(key)).length);
+      }
+      probeDirty = false;
+    }
+    const measured = [...probes].filter(([, cell]) => cell.element.isConnected && cell.element.getClientRects().length);
+    const positions = measured.map(([, cell]) => ({ element: cell.element,
+      value: cell.element.style.getPropertyValue("position"), priority: cell.element.style.getPropertyPriority("position") }));
+    const offsets: [number, number][] = [];
+    // Measure static cell starts because WebKit reports zero COL geometry.
+    for (const { element } of positions) element.style.setProperty("position", "static", "important");
+    try {
+      const left = root.getBoundingClientRect().left;
+      for (const [slot, cell] of measured) offsets.push([slot, cell.element.getBoundingClientRect().left - left]);
+    } finally {
+      for (const { element, value, priority } of positions) element.style.setProperty("position", value, priority);
+    }
+    for (const [slot, offset] of offsets) {
+      const name = `--natural-grid-pin-${slot}`;
+      if (!pinProperties.has(name)) pinProperties.set(name, { value: root.style.getPropertyValue(name), priority: root.style.getPropertyPriority(name) });
+      if (root.style.getPropertyValue(name) !== `${offset}px`) root.style.setProperty(name, `${offset}px`);
+    }
+    pinDirty = false;
+  }
+  function stopPins(): void {
+    pinObserver?.disconnect(); pinObserver = undefined;
+    if (pinFrame !== undefined) view.cancelAnimationFrame(pinFrame);
+    pinFrame = undefined;
+    probes.clear();
+    for (const [name, { value, priority }] of pinProperties) {
+      if (value) root.style.setProperty(name, value, priority);
+      else root.style.removeProperty(name);
+    }
+    pinProperties.clear();
+    pinDirty = probeDirty = false;
+  }
+  let visibleKeys = new Set<string>();
+  function applyPins(next: readonly GridColumn[], previous: readonly GridColumn[] | undefined): void {
+    const changed = !previous || previous.some((column, index) => column.key !== next[index].key ||
+      Boolean(column.hidden) !== Boolean(next[index].hidden) || Boolean(column.pinned) !== Boolean(next[index].pinned));
+    if (changed) {
+      const visible = next.filter(column => !column.hidden);
+      visibleKeys = new Set(visible.map(column => column.key));
+      pinSlots = new Map(visible.filter(column => column.pinned).map((column, index) => [column.key, index]));
+      if (pinSlots.size) {
+        if (!pinObserver) { pinObserver = new view.ResizeObserver(schedulePins); pinObserver.observe(root); }
+        for (const plan of rows) for (const cell of plan.cells) pinCell(cell);
+      } else {
+        stopPins();
+        for (const cell of [...pinnedCells]) unpin(cell);
+      }
+    }
+    if (pinSlots.size) { pinDirty = true; measurePinned(); }
+  }
 
   function focus(element: HTMLElement): boolean {
     try { element.focus({ preventScroll: true }); } catch { return false; }
@@ -296,6 +445,7 @@ export function bindGridColumns(
     applied = undefined;
     if (topologyMatches) {
       applyWidths(next, previous);
+      applyPins(next, previous);
       applied = next;
       return;
     }
@@ -330,6 +480,7 @@ export function bindGridColumns(
     }
     anchor.before(fragment);
     applyWidths(next, previous);
+    applyPins(next, previous);
     if (focused && activeCell && !activeCell.keys.some(key => !values.get(key)!.hidden)) {
       const targetIndex = Math.min(...activeCell.keys.map(key => order.get(key)!));
       const candidates = (activePlan!.group ?? [activePlan!]).flatMap(plan => plan.cells).filter(cell => cell.element.isConnected && !cell.element.hidden)
@@ -352,15 +503,14 @@ export function bindGridColumns(
   function commit(next: readonly GridColumn[], event: Event | null): void {
     const prior = state;
     if (prior.every((column, index) => column.key === next[index].key && column.width === next[index].width &&
-        Boolean(column.hidden) === Boolean(next[index].hidden))) { state = next; return; }
+        Boolean(column.hidden) === Boolean(next[index].hidden) &&
+        Boolean(column.pinned) === Boolean(next[index].pinned))) { state = next; return; }
     try { apply(next); } catch (cause) { apply(prior); throw cause; }
     state = next;
     onChange?.({ columns: state, event });
   }
   function withWidth(prior: readonly GridColumn[], key: string, width: number | undefined): readonly GridColumn[] {
-    return checked(prior.map(column => column.key !== key ? column : {
-      key: column.key, ...(column.hidden === undefined ? {} : { hidden: column.hidden }), ...(width === undefined ? {} : { width })
-    }));
+    return checked(prior.map(column => column.key !== key ? column : { ...column, width }));
   }
   function measured(key: string): number {
     const column = state.find(column => column.key === key)!;
@@ -438,11 +588,13 @@ export function bindGridColumns(
     commit(withWidth(state, key, width), event);
   }
   function restoreRow(plan: RowPlan): void {
-    for (const cell of plan.cells) cell.restore();
+    for (const cell of plan.cells) { unpin(cell); cell.restore(); }
     plan.row.replaceChildren(...plan.children);
     ownedRows.delete(plan.row);
   }
   function restoreAll(): void {
+    pinSlots.clear();
+    stopPins();
     for (const plan of rows) restoreRow(plan);
     for (const group of groups) {
       for (const col of group.cols) col.restore();
@@ -480,6 +632,8 @@ export function bindGridColumns(
   } catch (cause) { restoreAll(); throw cause; }
   return {
     columns(): readonly GridColumn[] { active(); return state; },
+    measurePinned,
+    invalidatePinned,
     setColumns(input: readonly GridColumn[]): void {
       active();
       const next = checked(input);
@@ -505,7 +659,10 @@ export function bindGridColumns(
       try {
         const order = new Map(state.map((column, index) => [column.key, index]));
         const values = new Map(state.map(column => [column.key, column]));
-        for (const plan of plans) applyRow(plan, order, values);
+        for (const plan of plans) {
+          applyRow(plan, order, values);
+          if (pinSlots.size) for (const cell of plan.cells) pinCell(cell);
+        }
       } catch (cause) { for (const plan of plans) { rows.delete(plan); restoreRow(plan); } throw cause; }
       let released = false;
       return () => {

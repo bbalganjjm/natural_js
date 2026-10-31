@@ -5,6 +5,7 @@ import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageContext, PageHandle } from "@bbalganjjm/natural_js/page";
 import { bindGrid } from "@bbalganjjm/natural_js/ui";
 import type { GridColumn, GridHandle } from "@bbalganjjm/natural_js/ui";
+import { containWheel } from "./scroll-boundary.js";
 
 type Employee = {
   name: string; email: string; phone: string; profile: { team: string };
@@ -45,10 +46,13 @@ function controller({ root, own, signal, input }: PageContext<{ layout: string }
     active: index % 3 !== 2, notes: "Independent " + input.layout + " draft", salary: 150 + index * 25
   })));
   own(() => rows.dispose());
+  containWheel(find<HTMLElement>(root, ".grid-scroll"), signal);
   const table = find<HTMLTableElement>(root, "[data-grid]");
   const choice = find<HTMLSelectElement>(root, "[data-column-choice]");
   const width = find<HTMLInputElement>(root, "[data-column-width]");
   const hidden = find<HTMLInputElement>(root, "[data-column-hidden]");
+  const pins = find<HTMLInputElement>(root, "[data-column-pins]");
+  const pinnedCount = find<HTMLOutputElement>(root, "[data-pinned-count]");
   const state = find<HTMLElement>(root, "[data-columns-state]");
   const rowState = find<HTMLElement>(root, "[data-row-state]");
   const status = find<HTMLOutputElement>(root, "[data-column-status]");
@@ -65,6 +69,18 @@ function controller({ root, own, signal, input }: PageContext<{ layout: string }
   let paged = true;
   const columnEvents: ColumnScreen["columnEvents"] = [];
 
+  function pinFirst(columns: readonly GridColumn[],
+    count = grid?.columns().filter(column => !column.hidden && column.pinned).length ?? 0): GridColumn[] {
+    let remaining = count;
+    return columns.map(column => {
+      if (column.hidden) return column;
+      if (remaining-- > 0) return column.pinned ? column : { ...column, pinned: true };
+      if (!column.pinned) return column;
+      const { pinned, ...value } = column;
+      return value;
+    });
+  }
+
   function button(action: string): HTMLButtonElement {
     return find(root, `[data-column-action="${action}"]`);
   }
@@ -77,9 +93,11 @@ function controller({ root, own, signal, input }: PageContext<{ layout: string }
     const selected = grid?.selected() ?? null;
     rowState.textContent = JSON.stringify({ selected, row: selected === null ? null : rows.get(selected),
       page: grid?.page() ?? null, changes: rows.changes() }, null, 2);
-    if (!grid) { state.textContent = "Grid unbound; authored table restored."; return; }
+    if (!grid) { state.textContent = "Grid unbound; authored table restored."; pinnedCount.value = "Grid unbound"; return; }
     const columns = grid.columns();
     state.textContent = JSON.stringify(columns, null, 2);
+    pins.value = String(columns.filter(column => !column.hidden && column.pinned).length);
+    pinnedCount.value = `${columns.filter(column => !column.hidden && column.pinned).length} / ${columns.filter(column => !column.hidden).length}`;
     const index = columns.findIndex(column => column.key === choice.value);
     const column = columns[index];
     width.value = column.width === undefined ? "" : String(column.width);
@@ -89,7 +107,8 @@ function controller({ root, own, signal, input }: PageContext<{ layout: string }
   }
 
   function disposeGrid(): void {
-    grid?.dispose(); grid = null;
+    const current = grid; grid = null;
+    current?.dispose();
     status.textContent = "Grid disposed; Rows remains available.";
     refresh();
   }
@@ -124,21 +143,28 @@ function controller({ root, own, signal, input }: PageContext<{ layout: string }
     const columns = [...grid.columns()];
     const index = columns.findIndex(column => column.key === choice.value);
     switch (action) {
-      case "apply": grid.setColumns(columns.map(column => column.key === choice.value
-        ? { key: column.key, ...(width.value.trim() ? { width: Number(width.value) } : {}), hidden: hidden.checked } : column)); break;
+      case "pin": {
+        const count = Number(pins.value);
+        if (!pins.value.trim() || !Number.isSafeInteger(count) || count < 0 || count > columns.length) {
+          throw new Error(`Enter a pin count from 0 to ${columns.length}.`);
+        }
+        grid.setColumns(pinFirst(columns, count)); break;
+      }
+      case "apply": grid.setColumns(pinFirst(columns.map(column => column.key === choice.value
+        ? { ...column, width: width.value.trim() ? Number(width.value) : undefined, hidden: hidden.checked } : column))); break;
       case "earlier": case "later": {
         const next = index + (action === "earlier" ? -1 : 1);
         if (!columns[next] || group(columns[index].key) !== group(columns[next].key)) return;
         [columns[index], columns[next]] = [columns[next], columns[index]];
-        grid.setColumns(columns); break;
+        grid.setColumns(pinFirst(columns)); break;
       }
       case "swap": {
         const contact = columns.filter(column => group(column.key) === "contact");
         const assignment = columns.filter(column => group(column.key) === "assignment");
         const contactFirst = columns.indexOf(contact[0]) < columns.indexOf(assignment[0]);
-        grid.setColumns([columns.find(column => column.key === "name")!,
+        grid.setColumns(pinFirst([columns.find(column => column.key === "name")!,
           ...(contactFirst ? [...assignment, ...contact] : [...contact, ...assignment]),
-          columns.find(column => column.key === "salary")!]); break;
+          columns.find(column => column.key === "salary")!])); break;
       }
       case "reset": grid.setColumns(initial); break;
       case "invalid": grid.setColumns([...columns, columns[0]]); break;
@@ -166,7 +192,7 @@ function controller({ root, own, signal, input }: PageContext<{ layout: string }
   }, { signal });
   choice.addEventListener("change", refresh, { signal });
   own(rows.subscribe(refresh));
-  own(() => { grid?.dispose(); grid = null; columnScreens.delete(input.layout); });
+  own(() => { const current = grid; grid = null; current?.dispose(); columnScreens.delete(input.layout); });
   bind();
   columnScreens.set(input.layout, { root, table, rows, get grid() { return grid; }, columnEvents, disposeGrid, rebind: bind });
   return {};

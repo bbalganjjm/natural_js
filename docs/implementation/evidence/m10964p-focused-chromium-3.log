@@ -1,0 +1,23 @@
+
+
+Running 12 tests using 1 worker
+
+
+
+[1/12] [chromium] › tests\browser\grid-pinned.spec.ts:89:1 › pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing
+[2/12] [chromium] › tests\browser\grid-pinned.spec.ts:110:1 › mixed native spans remain in normal flow while wholly pinned spans retain native structure
+[3/12] [chromium] › tests\browser\grid-pinned.spec.ts:130:1 › unpinned grids allocate no pin observer frame or owned cell presentation
+[4/12] [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry
+[5/12] [chromium] › tests\browser\grid-pinned.spec.ts:166:1 › hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes
+[6/12] [chromium] › tests\browser\grid-pinned.spec.ts:183:1 › pointer width previews and every cancellation update measured pin offsets before callbacks
+[7/12] [chromium] › tests\browser\grid-pinned.spec.ts:203:1 › invalid state does not cancel an active resize and pointer commit keeps pin flags
+[8/12] [chromium] › tests\browser\grid-pinned.spec.ts:220:1 › keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans
+[9/12] [chromium] › tests\browser\grid-pinned.spec.ts:236:1 › responsive and hidden-to-visible positioned roots use native widths rather than preferred values
+[10/12] [chromium] › tests\browser\grid-pinned.spec.ts:254:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion
+[11/12] [chromium] › tests\browser\grid-pinned.spec.ts:277:1 › viewport and progressive row blocks inherit current offsets after release and far reveal
+[12/12] [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+  12 passed (6.1s)
+[WebServer] (node:5032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:3620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

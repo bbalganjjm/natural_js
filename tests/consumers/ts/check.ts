@@ -74,7 +74,7 @@ export function loadEmployees(comm: Communicator = createCommunicator({
 
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {
   const form = bindForm(root, { rows });
-  const columns: readonly GridColumn[] = [{ key: "person", width: 180 }, { key: "choice", width: 120 }];
+  const columns: readonly GridColumn[] = [{ key: "person", width: 180, pinned: true }, { key: "choice", width: 120 }];
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
   const selectionChanges: GridIdsChange[] = [];
   const checkChanges: GridIdsChange[] = [];

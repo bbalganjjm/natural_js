@@ -7,6 +7,7 @@ import { bindGrid, openPopup } from "@bbalganjjm/natural_js/ui";
 import type { GridBindResult, GridColumn, GridHandle, GridRowScope, PopupHandle, RuleSet, ValidationResult } from "@bbalganjjm/natural_js/ui";
 import { employeeDetail } from "./detail.js";
 import type { Employee } from "./detail.js";
+import { containWheel } from "./scroll-boundary.js";
 
 function find<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
@@ -122,6 +123,8 @@ const pasteStatus = find<HTMLOutputElement>("[data-paste-status]");
 const columnChoice = find<HTMLSelectElement>("[data-column-choice]");
 const columnWidth = find<HTMLInputElement>("[data-column-width]");
 const columnHidden = find<HTMLInputElement>("[data-column-hidden]");
+const columnPins = find<HTMLInputElement>("[data-column-pins]");
+const pinnedCount = find<HTMLOutputElement>("[data-pinned-count]");
 const columnState = find<HTMLElement>("[data-columns-state]");
 const columnCallback = find<HTMLOutputElement>("[data-columns-callback]");
 const columnChooser = find<HTMLDetailsElement>("[data-column-chooser]");
@@ -131,7 +134,7 @@ const columnChoices = [...columnChooser.querySelectorAll<HTMLInputElement>("[dat
 const nameHeader = find<HTMLTableCellElement>('thead th[data-column="name"]');
 const salaryHeader = find<HTMLTableCellElement>('thead th[data-column="salary"]');
 const defaultColumns: readonly GridColumn[] = [
-  { key: "name", width: 180 }, { key: "email", width: 240 }, { key: "phone", width: 160 },
+  { key: "name", width: 180, pinned: true }, { key: "email", width: 240 }, { key: "phone", width: 160 },
   { key: "team", width: 160 }, { key: "shift", width: 150 }, { key: "active", width: 100 },
   { key: "notes", width: 240 }, { key: "salary", width: 150 }, { key: "actions", width: 180 }
 ];
@@ -158,7 +161,12 @@ const detailChanges = new EventTarget();
 const detailDialog = find<HTMLDialogElement>("[data-detail-dialog]");
 const detailHost = find<HTMLElement>("[data-detail-inline-host]");
 const detailTemplate = find<HTMLTemplateElement>("[data-detail-template]");
-const detailPage = employeeDetail(() => detailTemplate.content.firstElementChild!.cloneNode(true) as HTMLElement);
+const reducedDetailTemplate = find<HTMLTemplateElement>("[data-detail-reduced-template]");
+const reducedDetail = find<HTMLInputElement>("[data-detail-reduced]");
+const detailPage = employeeDetail(() => {
+  const template = reducedDetail.checked ? reducedDetailTemplate : detailTemplate;
+  return template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+});
 let inlineDetail: PageHandle | null = null;
 let popupDetail: PopupHandle<unknown> | null = null;
 const employeeParsers = { salary: (value: string) => value.trim() ? Number(value) : undefined };
@@ -303,14 +311,29 @@ function columnGroup(key: string): string {
   return key;
 }
 
+function pinFirst(columns: readonly GridColumn[],
+  count = grid?.columns().filter(column => !column.hidden && column.pinned).length ?? 0): GridColumn[] {
+  let remaining = count;
+  return columns.map(column => {
+    if (column.hidden) return column;
+    if (remaining-- > 0) return column.pinned ? column : { ...column, pinned: true };
+    if (!column.pinned) return column;
+    const { pinned, ...value } = column;
+    return value;
+  });
+}
+
 function refreshColumns(): void {
   if (!grid) {
     columnState.textContent = "Grid unbound; authored column layout restored.";
     columnCount.value = "Grid unbound";
+    pinnedCount.value = "Grid unbound";
     return;
   }
   const columns = grid.columns();
   columnState.textContent = JSON.stringify(columns, null, 2);
+  columnPins.value = String(columns.filter(column => !column.hidden && column.pinned).length);
+  pinnedCount.value = `${columns.filter(column => !column.hidden && column.pinned).length} / ${columns.filter(column => !column.hidden).length}`;
   for (const input of columnChoices) input.checked = !columns.find(column => column.key === input.dataset.visibleColumn)!.hidden;
   const shown = columnChoices.filter(input => input.checked).length;
   columnAll.checked = shown === columnChoices.length;
@@ -334,7 +357,7 @@ function moveColumn(direction: -1 | 1): void {
   const next = index + direction;
   if (!columns[next] || columnGroup(columns[index].key) !== columnGroup(columns[next].key)) return;
   [columns[index], columns[next]] = [columns[next], columns[index]];
-  grid.setColumns(columns);
+  grid.setColumns(pinFirst(columns));
 }
 
 function applySort(): void {
@@ -558,6 +581,7 @@ function bind(): void {
   });
   const events = new AbortController();
   stopGridEvents = () => events.abort();
+  containWheel(scrollRoot, events.signal);
   const observe = (event: Event) => {
     const target = event.target;
     if (!(target instanceof Element) || target.closest("table") !== table) return;
@@ -646,11 +670,18 @@ function act(action: string): void {
     }
     case "paste": grid.paste(pasteText.value, { id: selectedId(), field: pasteField.value }); return;
     case "show-columns": columnChooser.open = true; columnChooser.querySelector("summary")!.focus(); return;
+    case "pin-columns": {
+      const count = Number(columnPins.value);
+      if (!columnPins.value.trim() || !Number.isSafeInteger(count) || count < 0 || count > grid.columns().length) {
+        throw new Error(`Enter a pin count from 0 to ${grid.columns().length}.`);
+      }
+      grid.setColumns(pinFirst(grid.columns(), count)); break;
+    }
     case "apply-columns": {
       const width = columnWidth.value.trim();
-      grid.setColumns(grid.columns().map(column => column.key === columnChoice.value
-        ? { key: column.key, ...(width ? { width: Number(width) } : {}), hidden: column.key === "actions" ? false : columnHidden.checked }
-        : column));
+      grid.setColumns(pinFirst(grid.columns().map(column => column.key === columnChoice.value
+        ? { ...column, width: width ? Number(width) : undefined, hidden: column.key === "actions" ? false : columnHidden.checked }
+        : column)));
       break;
     }
     case "column-left": moveColumn(-1); break;
@@ -661,9 +692,9 @@ function act(action: string): void {
       const assignment = columns.filter(column => columnGroup(column.key) === "assignment");
       const contactFirst = columns.findIndex(column => column.key === contact[0].key) <
         columns.findIndex(column => column.key === assignment[0].key);
-      grid.setColumns([columns.find(column => column.key === "name")!,
+      grid.setColumns(pinFirst([columns.find(column => column.key === "name")!,
         ...(contactFirst ? [...assignment, ...contact] : [...contact, ...assignment]),
-        columns.find(column => column.key === "salary")!, columns.find(column => column.key === "actions")!]);
+        columns.find(column => column.key === "salary")!, columns.find(column => column.key === "actions")!]));
       break;
     }
     case "reset-columns": grid.setColumns(initialColumns); break;
@@ -881,8 +912,8 @@ columnChooser.addEventListener("change", event => {
       !input.matches("[data-visible-column], [data-column-all]")) return;
   const key = input.dataset.visibleColumn;
   try {
-    grid.setColumns(grid.columns().map(column => column.key === "actions" ? { ...column, hidden: false }
-      : key === undefined || column.key === key ? { ...column, hidden: !input.checked } : column));
+    grid.setColumns(pinFirst(grid.columns().map(column => column.key === "actions" ? { ...column, hidden: false }
+      : key === undefined || column.key === key ? { ...column, hidden: !input.checked } : column)));
     status.textContent = "Column visibility applied; Actions remains available.";
   } catch (cause) { status.textContent = cause instanceof Error ? cause.message : String(cause); }
   finally { refreshColumns(); }
@@ -953,6 +984,7 @@ function refreshBlocks(): void {
 
 const blockGrids = [...blockRoot.querySelectorAll<HTMLTableElement>("[data-block-grid]")].map(element => bindGrid(element, {
   rows: blockRows,
+  columns: [{ key: "record", pinned: true }, { key: "department" }, { key: "team" }, { key: "person" }, { key: "shift" }],
   paste: true,
   parse: { hours: Number },
   render: {

@@ -377,6 +377,46 @@ try {
   });
   assert(viewportCleanup, "Installed viewport disposal must restore the exact authored table with pending work.");
 
+  const pinned = await page.evaluate(async () => {
+    const h = window.packedConsumer.pinned;
+    const settle = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await settle(); h.root.scrollLeft = 180; await settle();
+    const first = h.table.tBodies[0].rows[0].cells[0], second = h.table.tBodies[0].rows[0].cells[1];
+    const input = first.querySelector("input"); input.focus(); input.value = "Pinned draft"; input.setSelectionRange(1, 4);
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    const gap = () => second.getBoundingClientRect().left - first.getBoundingClientRect().right;
+    const initialGap = gap(), initialLeft = first.getBoundingClientRect().left;
+    h.grid.setColumns(h.grid.columns().map(column => column.key === "name" ? { ...column, width: 185 } : column));
+    await settle();
+    const resizedGap = gap();
+    const stableLeft = Math.abs(first.getBoundingClientRect().left - initialLeft) < 1;
+    const kept = document.activeElement === input && input.value === "Pinned draft" && input.selectionStart === 1 && input.selectionEnd === 4;
+    const state = h.grid.columns();
+    h.grid.setColumns([state[1], state[0], state[2]]); await settle();
+    const reordered = h.grid.columns().map(column => column.key);
+    const copied = h.grid.columns().map(column => ({ ...column }));
+    let invalid = "";
+    try { h.grid.setColumns(copied.map((column, index) => ({ ...column, pinned: index === 1 }))); }
+    catch (cause) { invalid = cause.code; }
+    const protectedState = h.grid.columns().every((column, index) => column.key === copied[index].key && column.pinned === copied[index].pinned);
+    const result = { initialGap, resizedGap, stableLeft,
+      kept, pinned: state.map(column => column.pinned ?? false), reordered, invalid, protectedState,
+      mixed: !h.table.tFoot.querySelector("td").hasAttribute("data-pinned-column"), changes: h.rows.changes().length };
+    h.grid.dispose(); await settle();
+    result.restored = h.table.outerHTML === h.original;
+    h.root.dispatchEvent(new Event("scroll")); h.rows.set(1, "name", "After disposal"); await settle();
+    result.quiet = h.table.outerHTML === h.original;
+    h.rows.dispose(); h.root.remove();
+    return result;
+  });
+  assert(Math.abs(pinned.initialGap - 2) < 1 && Math.abs(pinned.resizedGap - 2) < 1,
+    "Installed pinned columns must use measured native starts, including spacing, before and after width changes.");
+  assert(pinned.stableLeft && pinned.kept && pinned.mixed && pinned.protectedState && pinned.restored && pinned.quiet);
+  assert.deepEqual(pinned.pinned, [true, true, false]);
+  assert.deepEqual(pinned.reordered, ["note", "name", "amount"]);
+  assert.equal(pinned.invalid, "GRID_COLUMNS");
+  assert.equal(pinned.changes, 0);
+
   const geometry = await page.evaluate(async () => {
     const h = window.packedConsumer.geometry;
     const ids = h.grid.rowIds("visible");

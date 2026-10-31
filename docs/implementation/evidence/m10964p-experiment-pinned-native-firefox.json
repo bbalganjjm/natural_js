@@ -1,0 +1,418 @@
+{
+  "browser": "firefox",
+  "version": "155.0",
+  "date": "2026-10-31T01:34:22.227Z",
+  "stages": [
+    {
+      "stage": "initial",
+      "tableWidth": 600,
+      "rootWidth": 374,
+      "columnWidths": [
+        100,
+        200,
+        300
+      ],
+      "headerWidths": [
+        100,
+        200,
+        300
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "root",
+          "width": 360,
+          "border": 374
+        },
+        {
+          "target": "table",
+          "width": 600,
+          "border": 600
+        },
+        {
+          "target": "col:a",
+          "width": 100,
+          "border": 100
+        },
+        {
+          "target": "col:b",
+          "width": 200,
+          "border": 200
+        },
+        {
+          "target": "col:c",
+          "width": 300,
+          "border": 300
+        },
+        {
+          "target": "th:a",
+          "width": 93,
+          "border": 100
+        },
+        {
+          "target": "th:b",
+          "width": 193,
+          "border": 200
+        },
+        {
+          "target": "th:c",
+          "width": 293,
+          "border": 300
+        }
+      ]
+    },
+    {
+      "stage": "balanced-fixed-total",
+      "tableWidth": 600,
+      "rootWidth": 374,
+      "columnWidths": [
+        150,
+        150,
+        300
+      ],
+      "headerWidths": [
+        150,
+        150,
+        300
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "col:a",
+          "width": 150,
+          "border": 150
+        },
+        {
+          "target": "col:b",
+          "width": 150,
+          "border": 150
+        },
+        {
+          "target": "th:a",
+          "width": 143,
+          "border": 150
+        },
+        {
+          "target": "th:b",
+          "width": 143,
+          "border": 150
+        }
+      ]
+    },
+    {
+      "stage": "auto-360",
+      "tableWidth": 360,
+      "rootWidth": 374,
+      "columnWidths": [
+        120,
+        120,
+        120
+      ],
+      "headerWidths": [
+        120,
+        120,
+        120
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "table",
+          "width": 360,
+          "border": 360
+        },
+        {
+          "target": "col:a",
+          "width": 120,
+          "border": 120
+        },
+        {
+          "target": "col:b",
+          "width": 120,
+          "border": 120
+        },
+        {
+          "target": "col:c",
+          "width": 120,
+          "border": 120
+        },
+        {
+          "target": "th:a",
+          "width": 113,
+          "border": 120
+        },
+        {
+          "target": "th:b",
+          "width": 113,
+          "border": 120
+        },
+        {
+          "target": "th:c",
+          "width": 113,
+          "border": 120
+        }
+      ]
+    },
+    {
+      "stage": "auto-430",
+      "tableWidth": 430,
+      "rootWidth": 444,
+      "columnWidths": [
+        143.3333282470703,
+        143.33334350585938,
+        143.3333282470703
+      ],
+      "headerWidths": [
+        143.3333282470703,
+        143.33334350585938,
+        143.3333282470703
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "root",
+          "width": 430,
+          "border": 444
+        },
+        {
+          "target": "table",
+          "width": 430,
+          "border": 430
+        },
+        {
+          "target": "col:a",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "col:b",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "col:c",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:a",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:b",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:c",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        }
+      ]
+    },
+    {
+      "stage": "root-hidden",
+      "tableWidth": 0,
+      "rootWidth": 0,
+      "columnWidths": [
+        0,
+        0,
+        0
+      ],
+      "headerWidths": [
+        0,
+        0,
+        0
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "root",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "table",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "col:a",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "col:b",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "col:c",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "th:a",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "th:b",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "th:c",
+          "width": 0,
+          "border": 0
+        }
+      ]
+    },
+    {
+      "stage": "root-shown",
+      "tableWidth": 430,
+      "rootWidth": 444,
+      "columnWidths": [
+        143.3333282470703,
+        143.33334350585938,
+        143.3333282470703
+      ],
+      "headerWidths": [
+        143.3333282470703,
+        143.33334350585938,
+        143.3333282470703
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "root",
+          "width": 430,
+          "border": 444
+        },
+        {
+          "target": "table",
+          "width": 430,
+          "border": 430
+        },
+        {
+          "target": "col:a",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "col:b",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "col:c",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:a",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:b",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:c",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        }
+      ]
+    },
+    {
+      "stage": "remove-column-b",
+      "tableWidth": 430,
+      "rootWidth": 444,
+      "columnWidths": [
+        143.3333282470703,
+        0,
+        143.33334350585938
+      ],
+      "headerWidths": [
+        143.3333282470703,
+        0,
+        143.33334350585938
+      ],
+      "columnConnected": [
+        true,
+        false,
+        true
+      ],
+      "events": [
+        {
+          "target": "col:b",
+          "width": 0,
+          "border": 0
+        },
+        {
+          "target": "th:b",
+          "width": 0,
+          "border": 0
+        }
+      ]
+    },
+    {
+      "stage": "restore-column-b",
+      "tableWidth": 430,
+      "rootWidth": 444,
+      "columnWidths": [
+        143.3333282470703,
+        143.33334350585938,
+        143.3333282470703
+      ],
+      "headerWidths": [
+        143.3333282470703,
+        143.33334350585938,
+        143.3333282470703
+      ],
+      "columnConnected": [
+        true,
+        true,
+        true
+      ],
+      "events": [
+        {
+          "target": "col:b",
+          "width": 143.3333282470703,
+          "border": 143.3333282470703
+        },
+        {
+          "target": "th:b",
+          "width": 136.3333282470703,
+          "border": 143.3333282470703
+        }
+      ]
+    }
+  ]
+}

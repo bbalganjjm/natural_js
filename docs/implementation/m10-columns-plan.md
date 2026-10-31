@@ -8,15 +8,15 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required full framework and Grid scope
-    git_blob: f21dc30191205e687f1ab6d8e85a5fa050893a98
+    git_blob: 2a57d93c19ea2fb43eefe0fd669ffeac9cbf4a6c
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field ownership and row lifetime
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
-    git_blob: 874fca4953ffe70a2ef3b8e7001968da66bf89c4
+    git_blob: 002de08f3bc3f822bd39bb2d1f52bfee6f516d6e
   - id: dom-state
     resource: ../../src/ui/dom-state.ts
     title: Shared restoration and available-control focus
@@ -28,7 +28,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m10/columns.ts
     title: Two independent column CVC instances
-    git_blob: 258c4e7a7ec55304a826ea7fe2059e5d82d43ea4
+    git_blob: ebb417c6e833f9ecdfbbc2004dc6f09f203da329
   - id: evidence
     resource: evidence/m10-columns-verification.json
     title: Final column source, logs, package and measurement record
@@ -40,7 +40,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Grid handle and column state
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
   - id: tables
     resource: https://www.w3.org/WAI/tutorials/tables/irregular/
     title: WAI grouped header and native column associations

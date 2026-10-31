@@ -1,0 +1,1504 @@
+{
+  "browser": "webkit",
+  "version": "26.6",
+  "date": "2026-10-31T01:41:54.929Z",
+  "results": [
+    {
+      "header": "leaves",
+      "stages": [
+        {
+          "stage": "initial-native-offset",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": false,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 83,
+              "requested": 70
+            },
+            {
+              "key": "b",
+              "actual": 209,
+              "requested": 196
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:a",
+            "THEAD:b c"
+          ]
+        },
+        {
+          "stage": "scroll-native-offset",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": false,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 83,
+              "requested": 70
+            },
+            {
+              "key": "b",
+              "actual": 209,
+              "requested": 196
+            }
+          ],
+          "roCallbacks": 0,
+          "roEvents": []
+        },
+        {
+          "stage": "scroll-origin-adjusted",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 222,
+              "requested": 209
+            }
+          ],
+          "roCallbacks": 0,
+          "roEvents": []
+        },
+        {
+          "stage": "balanced-fixed-total",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "THEAD:a",
+            "THEAD:b c"
+          ]
+        },
+        {
+          "stage": "hide-a",
+          "offsets": {
+            "b": 11,
+            "c": 199
+          },
+          "tableOrigin": 13,
+          "tableWidth": 600,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ],
+            [
+              "c",
+              "THEAD",
+              "c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "b",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "c",
+              "actual": 117,
+              "requested": 271
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:b c",
+            "THEAD:c"
+          ]
+        },
+        {
+          "stage": "show-a",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:b c",
+            "THEAD:a"
+          ]
+        },
+        {
+          "stage": "auto-responsive-360",
+          "offsets": {
+            "a": 11,
+            "b": 125.65625
+          },
+          "tableOrigin": 13,
+          "tableWidth": 360,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 210.65625,
+              "requested": 197.65625
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:b c",
+            "THEAD:a"
+          ]
+        },
+        {
+          "stage": "auto-responsive-430",
+          "offsets": {
+            "a": 11,
+            "b": 149
+          },
+          "tableOrigin": 13,
+          "tableWidth": 430,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 234,
+              "requested": 221
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:b c",
+            "THEAD:a"
+          ]
+        },
+        {
+          "stage": "root-hidden",
+          "offsets": {
+            "a": 0,
+            "b": 0
+          },
+          "tableOrigin": 0,
+          "tableWidth": 0,
+          "restored": true,
+          "rootLeft": 0,
+          "viewportEdge": 0,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 0,
+              "requested": 0
+            },
+            {
+              "key": "b",
+              "actual": 0,
+              "requested": 0
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:b c",
+            "THEAD:a"
+          ]
+        },
+        {
+          "stage": "root-shown",
+          "offsets": {
+            "a": 11,
+            "b": 149
+          },
+          "tableOrigin": 13,
+          "tableWidth": 430,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 234,
+              "requested": 221
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:b c",
+            "THEAD:a"
+          ]
+        },
+        {
+          "stage": "second-scroll-origin-adjusted",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 37,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a"
+            ],
+            [
+              "b",
+              "THEAD",
+              "b c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:b c",
+            "THEAD:a"
+          ]
+        }
+      ],
+      "callbacks": 9,
+      "measurements": 15,
+      "errors": [
+        "probe position style was not restored"
+      ]
+    },
+    {
+      "header": "groups-only",
+      "stages": [
+        {
+          "stage": "initial-native-offset",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": false,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 83,
+              "requested": 70
+            },
+            {
+              "key": "b",
+              "actual": 209,
+              "requested": 196
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "scroll-native-offset",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": false,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 83,
+              "requested": 70
+            },
+            {
+              "key": "b",
+              "actual": 209,
+              "requested": 196
+            }
+          ],
+          "roCallbacks": 0,
+          "roEvents": []
+        },
+        {
+          "stage": "scroll-origin-adjusted",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 222,
+              "requested": 209
+            }
+          ],
+          "roCallbacks": 0,
+          "roEvents": []
+        },
+        {
+          "stage": "balanced-fixed-total",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "hide-a",
+          "offsets": {
+            "b": 11,
+            "c": 199
+          },
+          "tableOrigin": 13,
+          "tableWidth": 600,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "b",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "c",
+              "TBODY",
+              "c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "b",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "c",
+              "actual": 117,
+              "requested": 271
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:a b c",
+            "TBODY:c"
+          ]
+        },
+        {
+          "stage": "show-a",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "auto-responsive-360",
+          "offsets": {
+            "a": 11,
+            "b": 125.65625
+          },
+          "tableOrigin": 13,
+          "tableWidth": 360,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 210.65625,
+              "requested": 197.65625
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "auto-responsive-430",
+          "offsets": {
+            "a": 11,
+            "b": 149
+          },
+          "tableOrigin": 13,
+          "tableWidth": 430,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 234,
+              "requested": 221
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "root-hidden",
+          "offsets": {
+            "a": 0,
+            "b": 0
+          },
+          "tableOrigin": 0,
+          "tableWidth": 0,
+          "restored": true,
+          "rootLeft": 0,
+          "viewportEdge": 0,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 0,
+              "requested": 0
+            },
+            {
+              "key": "b",
+              "actual": 0,
+              "requested": 0
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "root-shown",
+          "offsets": {
+            "a": 11,
+            "b": 149
+          },
+          "tableOrigin": 13,
+          "tableWidth": 430,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 234,
+              "requested": 221
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "second-scroll-origin-adjusted",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 37,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "THEAD",
+              "a b c"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "THEAD:a b c",
+            "TBODY:b"
+          ]
+        }
+      ],
+      "callbacks": 9,
+      "measurements": 15,
+      "errors": [
+        "probe position style was not restored"
+      ]
+    },
+    {
+      "header": "none",
+      "stages": [
+        {
+          "stage": "initial-native-offset",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": false,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 83,
+              "requested": 70
+            },
+            {
+              "key": "b",
+              "actual": 209,
+              "requested": 196
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "TBODY:a",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "scroll-native-offset",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": false,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 83,
+              "requested": 70
+            },
+            {
+              "key": "b",
+              "actual": 209,
+              "requested": 196
+            }
+          ],
+          "roCallbacks": 0,
+          "roEvents": []
+        },
+        {
+          "stage": "scroll-origin-adjusted",
+          "offsets": {
+            "a": 11,
+            "b": 137
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 222,
+              "requested": 209
+            }
+          ],
+          "roCallbacks": 0,
+          "roEvents": []
+        },
+        {
+          "stage": "balanced-fixed-total",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "TBODY:a",
+            "TBODY:b"
+          ]
+        },
+        {
+          "stage": "hide-a",
+          "offsets": {
+            "b": 11,
+            "c": 199
+          },
+          "tableOrigin": 13,
+          "tableWidth": 600,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "b",
+              "TBODY",
+              "b"
+            ],
+            [
+              "c",
+              "TBODY",
+              "c"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "b",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "c",
+              "actual": 117,
+              "requested": 271
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "TBODY:b",
+            "TBODY:c"
+          ]
+        },
+        {
+          "stage": "show-a",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 160,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "TBODY:b",
+            "TBODY:a"
+          ]
+        },
+        {
+          "stage": "auto-responsive-360",
+          "offsets": {
+            "a": 11,
+            "b": 125.65625
+          },
+          "tableOrigin": 13,
+          "tableWidth": 360,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 210.65625,
+              "requested": 197.65625
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "TBODY:b",
+            "TBODY:a"
+          ]
+        },
+        {
+          "stage": "auto-responsive-430",
+          "offsets": {
+            "a": 11,
+            "b": 149
+          },
+          "tableOrigin": 13,
+          "tableWidth": 430,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 234,
+              "requested": 221
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "TBODY:b",
+            "TBODY:a"
+          ]
+        },
+        {
+          "stage": "root-hidden",
+          "offsets": {
+            "a": 0,
+            "b": 0
+          },
+          "tableOrigin": 0,
+          "tableWidth": 0,
+          "restored": true,
+          "rootLeft": 0,
+          "viewportEdge": 0,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 0,
+              "requested": 0
+            },
+            {
+              "key": "b",
+              "actual": 0,
+              "requested": 0
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "TBODY:b",
+            "TBODY:a"
+          ]
+        },
+        {
+          "stage": "root-shown",
+          "offsets": {
+            "a": 11,
+            "b": 149
+          },
+          "tableOrigin": 13,
+          "tableWidth": 430,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 0,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 234,
+              "requested": 221
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "root",
+            "TBODY:b",
+            "TBODY:a"
+          ]
+        },
+        {
+          "stage": "second-scroll-origin-adjusted",
+          "offsets": {
+            "a": 11,
+            "b": 177
+          },
+          "tableOrigin": 13,
+          "tableWidth": 634,
+          "restored": true,
+          "rootLeft": 52,
+          "viewportEdge": 59,
+          "scrollLeft": 37,
+          "originAware": true,
+          "probeCount": 2,
+          "probes": [
+            [
+              "a",
+              "TBODY",
+              "a"
+            ],
+            [
+              "b",
+              "TBODY",
+              "b"
+            ]
+          ],
+          "bodyLeft": [
+            {
+              "key": "a",
+              "actual": 96,
+              "requested": 83
+            },
+            {
+              "key": "b",
+              "actual": 262,
+              "requested": 249
+            }
+          ],
+          "roCallbacks": 1,
+          "roEvents": [
+            "table",
+            "TBODY:b",
+            "TBODY:a"
+          ]
+        }
+      ],
+      "callbacks": 9,
+      "measurements": 15,
+      "errors": []
+    }
+  ]
+}

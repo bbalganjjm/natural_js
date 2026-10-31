@@ -1,0 +1,51 @@
+
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [webkit] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+  1) [webkit] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      <table data-pinned-table="" tabindex="-1" style=""><caption>Measured pinned records</caption><colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="1"></colgroup>
+    -   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2">Identity group</th>
+    +   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2" style="">Identity group</th>
+          <th scope="colgroup" data-columns="team note" colspan="2">Assignment group</th><th scope="col" data-column="amount" rowspan="2">Amount</th></tr>
+    -     <tr><th scope="col" data-column="key">Record <button type="button" data-resize-column="key" aria-label="Resize Record column">Resize</button></th>
+    +     <tr><th scope="col" data-column="key" style="">Record <button type="button" data-resize-column="key" aria-label="Resize Record column">Resize</button></th>
+    -       <th scope="col" data-column="name">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="note">Note</th></tr></thead>
+    +       <th scope="col" data-column="name" style="">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="note">Note</th></tr></thead>
+        <tbody data-row-template=""><tr><th scope="row" data-column="key" rowspan="2" data-pinned-column="authored" style="position: relative !important; left: 7px !important; background-color: rgb(1, 2, 3);"><button type="button" data-select-row="">Select <span data-field="key"></span></button></th>
+          <td data-column="name"><label>Name <input data-field="name" required=""></label><output data-error-for="name"></output></td>
+          <td data-columns="team note" colspan="2"><span data-field="team"></span></td>
+          <td data-column="amount" rowspan="2"><label>Amount <input type="number" data-field="amount" required="" min="1"></label></td></tr>
+          <tr><td data-column="name"><span data-field="name"></span></td><td data-column="team"><span data-field="team"></span></td>
+            <td data-column="note"><label>Note <textarea data-field="note"></textarea></label></td></tr></tbody>
+        <tfoot><tr><td data-columns="key name team note amount" colspan="5">Full native summary</td></tr>
+    -     <tr><th scope="row" data-columns="key name" colspan="2">Identity summary</th><td data-columns="team note" colspan="2">Assignment summary</td>
+    +     <tr><th scope="row" data-columns="key name" colspan="2" style="">Identity summary</th><td data-columns="team note" colspan="2">Assignment summary</td>
+            <td data-column="amount">Application amount</td></tr></tfoot></table>
+
+      333 |   const { expectedOtherHTML, actualOtherHTML, expectedOwnHTML, actualOwnHTML, retryHTML, ...state } = result;
+      334 |   expect(actualOtherHTML).toBe(expectedOtherHTML);
+    > 335 |   expect(actualOwnHTML).toBe(expectedOwnHTML);
+          |                         ^
+      336 |   expect(retryHTML).toBe(expectedOwnHTML);
+      337 |   expect(state).toEqual({ independent: true, restoredOther: true, unpinRestored: true, restored: true, retry: true, changes: 0, observers: 0 });
+      338 | });
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:335:25
+
+    Error Context: test-results\grid-pinned-independent-pi-4b80c--and-active-resize-disposal-webkit\error-context.md
+
+
+  1 failed
+    [webkit] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal 
+[WebServer] (node:19748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:1200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

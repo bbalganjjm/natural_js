@@ -5,6 +5,10 @@ description: Move a 1.x search/list/detail screen, changed-row save, and Popup o
 tags: [project, migration, cvc, form]
 status: draft
 sources:
+  - id: scroll-example
+    resource: ../../examples/vite/m10/scroll-boundary.ts
+    title: Page-owned native wheel boundary composition
+    git_blob: 9020af886692a4c39440b62055749b8670f2ec18
   - id: legacy-screen
     resource: ../../v1/docs/examples/template/search-grid-detail-horizontal.md
     title: Preserved 1.x search, grid, detail, and save example
@@ -40,7 +44,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -48,7 +52,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -136,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 3685a8bafa18e201e2eb251508dd150e167c88d6
+    git_blob: beb332780c23cd31dbcc9e39931730158010bf8e
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: f21dc30191205e687f1ab6d8e85a5fa050893a98
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+    git_blob: 2a57d93c19ea2fb43eefe0fd669ffeac9cbf4a6c
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -328,15 +332,19 @@ An unused helper unrelated to framework behavior may be removed after checking d
 
 For legacy Grid more/detail workflows, author a detail view and run it through the same PageDefinition in main content or openPopup. Share Rows with bindForm, validate the current ID before previous/next and authored close/native cancel, then re-read grid.rowIds(scope) because validation can commit edits that change ordering/filter membership. Skip tombstones before Form binding; filtered cross-page placement uses the raw filtered array, including shown tombstones. Keep detail identity independent of selection/veto rules, and leave store-scope filters intact. Removal/replacement unbinds stale details; forced disposal always cleans up. The runnable Grid demo supplies native row-local options in application code before Form renders; no new Form option-map API or navigation manager is introduced.[^grid][^form][^page][^containers]
 
-Replace vertical-resize wrappers with heightResize on an authored ancestor and labelled type=button handle, with explicit min/max border-box pixels. The framework owns pointer/keyboard cleanup and three height properties; authors own CSS and visual design. Use reveal(id, { block: "center" }) explicitly from selection/check/add handlers when desired. The measured viewport accounts for both sticky edges; native nonvirtual scrolling uses authored scroll-padding/margins. Use overscroll-behavior: contain rather than old wheel interception. Available APIs do not retire legacy flag/default obligations; those remain in the parity ledger.[^grid][^viewport][^parity]
+Replace vertical-resize wrappers with heightResize on an authored ancestor and labelled type=button handle, with explicit min/max border-box pixels. The framework owns pointer/keyboard cleanup and three height properties; authors own CSS and visual design. Use reveal(id, { block: "center" }) explicitly from selection/check/add handlers when desired. The measured viewport accounts for both sticky edges; native nonvirtual scrolling uses authored scroll-padding/margins. Use authored CSS containment plus the page-owned wheel boundary recipe for available engines that do not enforce it. Available APIs do not retire legacy flag/default obligations; those remain in the parity ledger.[^grid][^viewport][^parity][^scroll-example]
 
 ## 8. Preserve selection, filter and recovery workflows
 
-For legacy single selection with unselect enabled, use toggleSelection: true; for legacy multiselect use multiple: true with toggleSelection: true. Native unmodified activation toggles active identity in single mode. In multiple mode it toggles the clicked membership and clears active identity when removing any member. Existing programmatic select remains absolute. Modifier gestures use the documented modern range/toggle behavior. Row-wide activation and full callback/default equivalence remain required in the semantic review.[^grid]
+For legacy single selection with unselect enabled, use toggleSelection: true; for legacy multiselect use multiple: true with toggleSelection: true. Native unmodified activation toggles active identity in single mode. In multiple mode it toggles the clicked membership and clears active identity when removing any member. Existing programmatic select remains absolute. Modifier gestures use the documented modern range/toggle behavior. Use selectOnRowClick: true for row-area activation; native controls keep their own behavior. Shared callback/default equivalence remains required in the semantic review.[^grid]
 
 Keep data-filter-search for preview and add a type=button data-apply-filter="key" for explicit matching-value application and plain Enter. Blank Apply clears; no match selects none. Other-column exclusions now remain visible as zero-count choices, and explicit selections survive. Legacy All that also clears search is an application handler that clears the input and calls setColumnFilter(key,null); the existing clear marker alone still preserves search.[^grid]
 
 Compose a native column chooser from complete columns() state. Exclude an authored actions/recovery column from business choices and force it visible for those writes. This supports hiding every business column without allowing an invalid all-physical-hidden layout. Derive shown/total, All and mixed state from live columns; do not copy the old unmaintained count element or maintain another state store.[^grid]
+
+Replace legacy `fixedcol` correction values and split-table positioning with `GridColumn.pinned: true` on a leading visible prefix. Retain flags when changing widths; supply intended pin flags when reordering. Hidden keys retain flags but do not consume visible slots. A native group/empty/detail cell crossing the pin boundary scrolls normally; author separate cells if its parts need independent pinning. The existing column owner measures actual cell starts and restores only its owned geometry/marker. Author backgrounds/stacking and ordinary overflow; do not copy headers, calculate preferred-width offsets in application code or add per-row observers. The same detail controller can use a reduced authored field template; omitted fields remain unchanged.[^grid]
+
+The Grid demo retains native `overscroll-behavior: contain` and a small page-owned wheel boundary listener because the tested Windows Firefox/WebKit engines do not enforce CSS-only containment. It follows the dominant axis, preserves interior/nested scrolling and Ctrl zoom, and uses the page's abort signal for cleanup. This preserves the old wheel-boundary workflow without a public input engine. It is a bounded wheel recipe, not a full touch/overscroll polyfill; keyboard and touch retain native behavior.[^scroll-example]
 
 For action scroll, check successful resulting identity/state and current rowIds("visible") before reveal. Use the last requested ID for selection/check centering, center indexed insertion, start/end for front/end insertion, and end for a nonempty batch appended to a previously nonempty store. Opt-out, veto, errors and offpage/filtered targets do not scroll or change page/filter. To show the last invalid visible row, disable first-invalid reveal, call validate(), collect issue IDs, then scan the current visual page in reverse and reveal its last issue at center. Issue array order is store order and may differ after sorting. Preserve focus; application code owns the policy. The [demo](grid-demo.md) exercises these compositions.[^grid]
 
@@ -411,3 +419,5 @@ Use [page](page.md), [Rows](data.md), [Form](form.md), [communication](comm.md),
 [^rules-test]: Declarative dispatch and combined-name checks
 [^parity]: Required 1.x framework behavior and current 2.0 gaps
 [^parity-plan]: Full framework feature coverage execution plan
+
+[^scroll-example]: Page-owned native wheel boundary composition

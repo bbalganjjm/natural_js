@@ -1,0 +1,3266 @@
+{
+  "date": "2026-10-31",
+  "milestone": "M10.9.6.4 pinned-column continuation",
+  "baseline_commit": "e0f3b96217d08a5fff67eda62e4ceaa32f0e8631",
+  "input_manifest": "m10964p-inputs-a4d62963c954.json",
+  "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+  "input_entries": 177,
+  "source_normalization": "UTF-8; CRLF normalized to LF",
+  "commands": {
+    "record_file": "m10964p-gates.jsonl",
+    "records": 50,
+    "final_gate_records": 16,
+    "development_records": [
+      {
+        "label": "focused-build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-10-31T01:44:48.099Z",
+        "finished": "2026-10-31T01:44:48.487Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-2064515b8cd3.json",
+        "input_manifest_sha256": "2064515b8cd3a60263d6c48bcb5feb9c123a061f0f143e064d6e4e7be1598a65",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-10-31T01:44:48.530Z",
+        "finished": "2026-10-31T01:44:48.842Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-2064515b8cd3.json",
+        "input_manifest_sha256": "2064515b8cd3a60263d6c48bcb5feb9c123a061f0f143e064d6e4e7be1598a65",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-10-31T01:44:48.865Z",
+        "finished": "2026-10-31T01:44:49.225Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-example-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-2064515b8cd3.json",
+        "input_manifest_sha256": "2064515b8cd3a60263d6c48bcb5feb9c123a061f0f143e064d6e4e7be1598a65",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T01:45:54.152Z",
+        "finished": "2026-10-31T01:46:04.658Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-chromium.log",
+        "log_sha256": "f384f10b8b6a97443f57de539ee482ee957255e2a6e52f1baecc677604e4be09",
+        "input_manifest": "m10964p-inputs-ab712bb66a9f.json",
+        "input_manifest_sha256": "ab712bb66a9f9ff97616f791565c78aa1d176cb588ae6b70fb6de88e9de721b6",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T01:48:25.066Z",
+        "finished": "2026-10-31T01:48:33.038Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-chromium-2.log",
+        "log_sha256": "9d2ba158aec3d044f396d1c42a79359968667025372b57512aa2ff2f6a158823",
+        "input_manifest": "m10964p-inputs-dc5d654e23c8.json",
+        "input_manifest_sha256": "dc5d654e23c8797dcf32474f297bac0bac396d43d8c3e6896bb0ffd18424902f",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T01:48:55.747Z",
+        "finished": "2026-10-31T01:49:02.327Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-chromium-3.log",
+        "log_sha256": "efd1dd921c2140369e5d27a3b348d2a50ffb52f7300bc43716f7305f9e5d248e",
+        "input_manifest": "m10964p-inputs-fc46e5b7aa4c.json",
+        "input_manifest_sha256": "fc46e5b7aa4c95e47fedfaf910ed19fc896e049cde2f9191d9796dddfd192625",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T01:53:01.742Z",
+        "finished": "2026-10-31T01:54:03.455Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-chromium-4.log",
+        "log_sha256": "428991d35147a454c0840a4820005d63b6a477b7ed94927cbda9fce638ee2bb4",
+        "input_manifest": "m10964p-inputs-4718a2aae52f.json",
+        "input_manifest_sha256": "4718a2aae52fbf95060cbc81ded69a1907a82c1328c985e76e2e3945ecf8c8dc",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": false,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T01:58:31.701Z",
+        "finished": "2026-10-31T01:59:33.324Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-chromium-5.log",
+        "log_sha256": "a8e8ba781565b02c2203e7c445fcbab7a399c4647814d6bd6fd12780812501be",
+        "input_manifest": "m10964p-inputs-2cb916b6f924.json",
+        "input_manifest_sha256": "2cb916b6f9240693318778f12033b6a9b973af4dcbc6617e38ff4bc26ef03569",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-10-31T02:13:15.178Z",
+        "finished": "2026-10-31T02:13:15.695Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-build-2.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-5365a5f58958.json",
+        "input_manifest_sha256": "5365a5f58958ba4d105d9c221e698c7b98b459af55bb65601f5a876ad1e8259b",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-10-31T02:13:15.719Z",
+        "finished": "2026-10-31T02:13:16.025Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-types-2.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-5365a5f58958.json",
+        "input_manifest_sha256": "5365a5f58958ba4d105d9c221e698c7b98b459af55bb65601f5a876ad1e8259b",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m10/scroll-boundary.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-10-31T02:13:16.047Z",
+        "finished": "2026-10-31T02:13:16.420Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-example-types-2.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-5365a5f58958.json",
+        "input_manifest_sha256": "5365a5f58958ba4d105d9c221e698c7b98b459af55bb65601f5a876ad1e8259b",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:13:22.662Z",
+        "finished": "2026-10-31T02:13:59.900Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-chromium-6.log",
+        "log_sha256": "f059b4c1bdae7d1fe17dba0a1e271e1aab8b300aa0df81e136bf7328efb9faa2",
+        "input_manifest": "m10964p-inputs-5365a5f58958.json",
+        "input_manifest_sha256": "5365a5f58958ba4d105d9c221e698c7b98b459af55bb65601f5a876ad1e8259b",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:13:59.926Z",
+        "finished": "2026-10-31T02:14:58.453Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-firefox.log",
+        "log_sha256": "b08ec18203704b11c029095bb60026f1759f15346c7bdf475a4f888dd7d08560",
+        "input_manifest": "m10964p-inputs-5365a5f58958.json",
+        "input_manifest_sha256": "5365a5f58958ba4d105d9c221e698c7b98b459af55bb65601f5a876ad1e8259b",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:14:58.479Z",
+        "finished": "2026-10-31T02:16:02.965Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-webkit.log",
+        "log_sha256": "d989373cafc7508c7f603feec00c9744f1607ca5598d5bc5faa930ad7b423ac9",
+        "input_manifest": "m10964p-inputs-5365a5f58958.json",
+        "input_manifest_sha256": "5365a5f58958ba4d105d9c221e698c7b98b459af55bb65601f5a876ad1e8259b",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=independent pin owners",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:20:11.621Z",
+        "finished": "2026-10-31T02:20:15.014Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-webkit-2.log",
+        "log_sha256": "ca0fbcd36d9a1be95abe7c72607d00d06de8680ab66b87f5e292804cad68dda3",
+        "input_manifest": "m10964p-inputs-b06e2d8092f7.json",
+        "input_manifest_sha256": "b06e2d8092f7f4c936bc8162af160e0cf010d1add4999bc705e9eb09a9acb245",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=independent pin owners",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:22:12.948Z",
+        "finished": "2026-10-31T02:22:16.132Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-webkit-3.log",
+        "log_sha256": "dedf33132fb763f3418a2aefba0cfb3b1fbd11a78d97641b24ca20e1f372753e",
+        "input_manifest": "m10964p-inputs-d5bf21ad9d15.json",
+        "input_manifest_sha256": "d5bf21ad9d15d0d9055edcf68985893b9f59752e026846b13cee02bea1ed20a0",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=independent pin owners",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:24:50.006Z",
+        "finished": "2026-10-31T02:24:53.158Z",
+        "exit_code": 1,
+        "log": "m10964p-focused-webkit-4.log",
+        "log_sha256": "6b675c5e8342ecc1200af16146a99ff193ef26394d017c62adcf224e3a7852d6",
+        "input_manifest": "m10964p-inputs-090438c7f42f.json",
+        "input_manifest_sha256": "090438c7f42fb78f434943d62c3ef798e0514fdfa502b6353feaabe0ded1ce4c",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-10-31T02:34:35.398Z",
+        "finished": "2026-10-31T02:34:35.756Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-build-3.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-090438c7f42f.json",
+        "input_manifest_sha256": "090438c7f42fb78f434943d62c3ef798e0514fdfa502b6353feaabe0ded1ce4c",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-10-31T02:34:35.780Z",
+        "finished": "2026-10-31T02:34:36.124Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-types-3.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-090438c7f42f.json",
+        "input_manifest_sha256": "090438c7f42fb78f434943d62c3ef798e0514fdfa502b6353feaabe0ded1ce4c",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m10/scroll-boundary.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-10-31T02:34:36.148Z",
+        "finished": "2026-10-31T02:34:36.525Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-example-types-3.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-090438c7f42f.json",
+        "input_manifest_sha256": "090438c7f42fb78f434943d62c3ef798e0514fdfa502b6353feaabe0ded1ce4c",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=independent pin owners",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:35:55.857Z",
+        "finished": "2026-10-31T02:35:58.677Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-webkit-5.log",
+        "log_sha256": "04838d5182927ddf4c3ed6552f1f9ae4a9795ba3b78e7a79f8b32d4fa500d513",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:36:12.587Z",
+        "finished": "2026-10-31T02:36:48.888Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-chromium-7.log",
+        "log_sha256": "ef2537fa683ed083f45b7e52c5ac34caa8c3f370dd5d54b13027ece26f6347fd",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:36:48.913Z",
+        "finished": "2026-10-31T02:37:47.243Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-firefox-2.log",
+        "log_sha256": "26d3db483e5233dec25e7d1b35633ae622246ed03a57c2b3988ef45c4d4a3944",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "tests/browser/m10-pinned.spec.ts",
+          "tests/browser/m10-demo.spec.ts",
+          "tests/browser/grid-columns.spec.ts",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:37:47.269Z",
+        "finished": "2026-10-31T02:38:49.562Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-webkit-6.log",
+        "log_sha256": "9ca68f15fc9a3cf75c9527799b1f99d0725bd9ea04399186ddedbfd61a57710a",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=literal authored pin styles|independent pin owners",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:48:44.588Z",
+        "finished": "2026-10-31T02:48:47.902Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-chromium-8.log",
+        "log_sha256": "30057b76fdcbbbd7970bbc63368b6cec78b68c664d4435c577dffb7e45d56490",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=literal authored pin styles|independent pin owners",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:48:47.935Z",
+        "finished": "2026-10-31T02:48:53.276Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-firefox-3.log",
+        "log_sha256": "3e872cc412a664007d77847b615625b33b5079585f12323b2cbcbb1a046ed6c9",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-pinned.spec.ts",
+          "--grep=literal authored pin styles|independent pin owners",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:48:53.300Z",
+        "finished": "2026-10-31T02:48:56.483Z",
+        "exit_code": 0,
+        "log": "m10964p-focused-webkit-7.log",
+        "log_sha256": "3897141494add110f6d6859aa617daba8fb71454e07b8565aef8aaec5c138419",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      }
+    ],
+    "final_gates": [
+      {
+        "label": "build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-10-31T02:45:20.771Z",
+        "finished": "2026-10-31T02:45:21.240Z",
+        "exit_code": 0,
+        "log": "m10964p-build-2.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-10-31T02:45:21.267Z",
+        "finished": "2026-10-31T02:45:21.655Z",
+        "exit_code": 0,
+        "log": "m10964p-types-2.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m10/scroll-boundary.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-10-31T02:45:21.679Z",
+        "finished": "2026-10-31T02:45:22.075Z",
+        "exit_code": 0,
+        "log": "m10964p-example-types-2.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "unit",
+        "args": [
+          "node_modules/vitest/vitest.mjs",
+          "run"
+        ],
+        "started": "2026-10-31T02:45:22.099Z",
+        "finished": "2026-10-31T02:45:23.321Z",
+        "exit_code": 0,
+        "log": "m10964p-unit-2.log",
+        "log_sha256": "a47f8c4912e18165e2a273453cd1d6f4d6172e792b71e0b7886839fa50a8a619",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:49:13.687Z",
+        "finished": "2026-10-31T02:52:21.599Z",
+        "exit_code": 0,
+        "log": "m10964p-browser-chromium-2.log",
+        "log_sha256": "7ab74702529777459040484a01ee2b8b0ad5a00659beb1dfed0a6641cd220051",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:52:21.627Z",
+        "finished": "2026-10-31T02:58:01.392Z",
+        "exit_code": 0,
+        "log": "m10964p-browser-firefox-2.log",
+        "log_sha256": "07c8ffa91d9ba2b32cd8be9dae673e64b2686325aa8e0276202c5bbd6f79f25b",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:58:01.419Z",
+        "finished": "2026-10-31T03:03:08.257Z",
+        "exit_code": 0,
+        "log": "m10964p-browser-webkit.log",
+        "log_sha256": "1422373d634146fb795a9b12aa36cfe32d0a6c3e0f6fe6c7f7d6a69f57f1e758",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "pack",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "pack",
+          "--json",
+          "--pack-destination",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact"
+        ],
+        "started": "2026-10-31T02:45:28.549Z",
+        "finished": "2026-10-31T02:45:29.988Z",
+        "exit_code": 0,
+        "log": "m10964p-pack-2.log",
+        "log_sha256": "ab3f7325f0fb2ba5257e318af9bf98ef868093dd0a2743c5f8faafbba2f65d3c",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "consumers",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:consumers",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893"
+        ],
+        "started": "2026-10-31T03:03:30.461Z",
+        "finished": "2026-10-31T03:03:35.307Z",
+        "exit_code": 0,
+        "log": "m10964p-consumers.log",
+        "log_sha256": "782bf1dbcd562339da2e8da950af346fbf01049fba9946981e95cb019646845e",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-chromium",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893",
+          "--browser",
+          "chromium"
+        ],
+        "started": "2026-10-31T03:03:35.332Z",
+        "finished": "2026-10-31T03:03:39.688Z",
+        "exit_code": 0,
+        "log": "m10964p-packed-chromium.log",
+        "log_sha256": "85119329eaf9915dbb54f21f019c72fb82d4138cec316cee22c65ccf5709626f",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-firefox",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893",
+          "--browser",
+          "firefox"
+        ],
+        "started": "2026-10-31T03:03:39.712Z",
+        "finished": "2026-10-31T03:03:45.939Z",
+        "exit_code": 0,
+        "log": "m10964p-packed-firefox.log",
+        "log_sha256": "d1bc86e39c8cd569b440cc9e1a2e3925b6a1eb3664d0254dc86c0a974c7be75d",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-webkit",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893",
+          "--browser",
+          "webkit"
+        ],
+        "started": "2026-10-31T03:03:45.963Z",
+        "finished": "2026-10-31T03:03:51.771Z",
+        "exit_code": 0,
+        "log": "m10964p-packed-webkit.log",
+        "log_sha256": "8a66ac596ed1adaeb86ce401591621e19724b036a6b594553016087e65f0066e",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-chrome",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893",
+          "--browser",
+          "chrome"
+        ],
+        "started": "2026-10-31T03:03:51.795Z",
+        "finished": "2026-10-31T03:03:56.528Z",
+        "exit_code": 0,
+        "log": "m10964p-packed-chrome.log",
+        "log_sha256": "90e8d2c2c73a06ce35cf6bc296b9ac5956dccaff4c399c41b9ee7a628a3ecea3",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-edge",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893",
+          "--browser",
+          "edge"
+        ],
+        "started": "2026-10-31T03:03:56.552Z",
+        "finished": "2026-10-31T03:04:01.598Z",
+        "exit_code": 0,
+        "log": "m10964p-packed-edge.log",
+        "log_sha256": "dfc479f9f0bac888c19d7edbc16a135d8924d67557dad6239e37cd0f358bdb38",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "binding-performance",
+        "args": [
+          "tools/benchmark-m4.mjs",
+          "--browser=chromium",
+          "--runs=5",
+          "--warmup=2"
+        ],
+        "started": "2026-10-31T03:04:24.440Z",
+        "finished": "2026-10-31T03:04:33.514Z",
+        "exit_code": 0,
+        "log": "m10964p-binding-performance.log",
+        "log_sha256": "353f6cab91ccdae3f3174da45f52721ecea035108c176ebe2b5099c8dde8ba08",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "viewport-performance",
+        "args": [
+          "tools/benchmark-grid-viewport.mjs",
+          "--browser=chromium",
+          "--runs=5",
+          "--warmup=2"
+        ],
+        "started": "2026-10-31T03:04:40.557Z",
+        "finished": "2026-10-31T03:05:18.133Z",
+        "exit_code": 0,
+        "log": "m10964p-viewport-performance.log",
+        "log_sha256": "c19e4ddf7289aa5911e65692c97aff9a4024e994d75e598409c8d04d38917efa",
+        "input_manifest": "m10964p-inputs-a4d62963c954.json",
+        "input_manifest_sha256": "a4d62963c9544fae0268d0b748562bfe7a226d3028fe8ae2daf75728026f6eda",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      }
+    ],
+    "superseded": [
+      {
+        "label": "build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-10-31T02:37:48.543Z",
+        "finished": "2026-10-31T02:37:48.961Z",
+        "exit_code": 0,
+        "log": "m10964p-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-10-31T02:37:48.987Z",
+        "finished": "2026-10-31T02:37:49.403Z",
+        "exit_code": 0,
+        "log": "m10964p-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m10/scroll-boundary.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-10-31T02:37:49.428Z",
+        "finished": "2026-10-31T02:37:49.971Z",
+        "exit_code": 0,
+        "log": "m10964p-example-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "unit",
+        "args": [
+          "node_modules/vitest/vitest.mjs",
+          "run"
+        ],
+        "started": "2026-10-31T02:37:49.996Z",
+        "finished": "2026-10-31T02:37:52.509Z",
+        "exit_code": 0,
+        "log": "m10964p-unit.log",
+        "log_sha256": "fbba28ea189379efdd22a089322a2081da7a183f58862d3aadceba550ebc748d",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "pack",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "pack",
+          "--json",
+          "--pack-destination",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m10964p-artifact"
+        ],
+        "started": "2026-10-31T02:38:00.295Z",
+        "finished": "2026-10-31T02:38:03.854Z",
+        "exit_code": 0,
+        "log": "m10964p-pack.log",
+        "log_sha256": "1f1154b488c53df44685ae8e2f308bc37afde90986c62f121c08222204ab0709",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:38:57.463Z",
+        "finished": "2026-10-31T02:42:06.823Z",
+        "exit_code": 0,
+        "log": "m10964p-browser-chromium.log",
+        "log_sha256": "23682c4c3a6aee5f33cfc3b05cff0b5607502dca1dba30996efd35f85f017866",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-10-31T02:42:06.850Z",
+        "finished": "2026-10-31T02:48:00.015Z",
+        "exit_code": 1,
+        "log": "m10964p-browser-firefox.log",
+        "log_sha256": "020d8714b36028a5b0e44227cdf6f934e42ada8b5ac8223e7ad0fa40fdcdc4b3",
+        "input_manifest": "m10964p-inputs-858d92987dce.json",
+        "input_manifest_sha256": "858d92987dced276a6d7efb9fd6f096dd2f8990327b4cca23c8486e177b2a974",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": false,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      }
+    ],
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true,
+    "note": "Only the latest sixteen final gates certify the frozen map. Development failures/source-change observations and every available raw native experiment remain separate; no historical runtime is recertified."
+  },
+  "artifact": {
+    "sha256": "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893",
+    "files": 183,
+    "packed_bytes": 302534,
+    "unpacked_bytes": 1503179,
+    "all_actual_members_match_workspace": true,
+    "actual_listing_matches_manifest": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "publication": "not performed"
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "example_types": "pass; existing Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 124,
+      "new_cases": 0
+    },
+    "new_browser_cases": {
+      "pinned": 17,
+      "demo": 11
+    },
+    "full_suites": {
+      "chromium": {
+        "passed": 550,
+        "elapsed": "3.1m",
+        "log": "m10964p-browser-chromium-2.log"
+      },
+      "firefox": {
+        "passed": 550,
+        "elapsed": "5.7m",
+        "log": "m10964p-browser-firefox-2.log"
+      },
+      "webkit": {
+        "passed": 550,
+        "elapsed": "5.1m",
+        "log": "m10964p-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "log": "m10964p-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "log": "m10964p-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "log": "m10964p-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "156.0.8078.76",
+        "passed": true,
+        "log": "m10964p-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "156.0.4314.50",
+        "passed": true,
+        "log": "m10964p-packed-edge.log"
+      }
+    ],
+    "installed_pinning": "Current pinned flags, actual native starts/spacing, width change, preserved editor/caret/drafts, valid reorder, atomic prefix error, mixed native span, exact disposal and quiet late events in the same tar on all five Windows browsers."
+  },
+  "semantic_acceptance": {
+    "file": "m10964p-grid-acceptance.json",
+    "sha256": "a1b7aeebfe27b2be82f013053125861019cf3b6323d290344dbca9ddd35dbf68",
+    "contracts": 30,
+    "surface_entries": 89,
+    "dynamic_groups": 17,
+    "families": 20,
+    "selected_contracts": [
+      "sticky-layout",
+      "native-topology",
+      "height-controls",
+      "action-reveal",
+      "row-details",
+      "row-lifecycle"
+    ],
+    "new_cases": 28,
+    "full_families_closed": 0,
+    "omissions_approved": 0,
+    "immutable_audit": {
+      "file": "m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8",
+      "baseline_commit": "7a36a39d1dd16c9ba71bb71d1e8a195f5df50a0c"
+    }
+  },
+  "performance": {
+    "recomputed_raw_medians": 60,
+    "unchanged_fixtures": {
+      "tools/benchmark-m4.mjs": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+      "tools/benchmark-grid-viewport.mjs": "87570e023afb814627329fad003783fcefe2f8915ad086c0d209f977aa05de92",
+      "examples/vite/benchmark.ts": "0e4d4b89c4170ad720e979a468b8b1698db1307e0bba7e0a326fbcf69c127a1e",
+      "examples/vite/benchmark.html": "30b8eb3cb1bb0549d7765d91cd83f35dab6a445f797aef83e9caa9388505d55c"
+    },
+    "binding": {
+      "log": "m10964p-binding-performance.log",
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 22,
+            "rebind": 21.59999999962747,
+            "edit": 1,
+            "sort": 2.600000001490116,
+            "filter": 1.300000000745058
+          },
+          "budgets_ms": {
+            "initial": 30,
+            "rebind": 35,
+            "edit": 5,
+            "sort": 10,
+            "filter": 8
+          }
+        },
+        {
+          "kind": "nested-auto",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 44.69999999925494,
+            "rebind": 50.69999999925494,
+            "sort": 5.899999998509884,
+            "filter": 2.699999999254942
+          },
+          "budgets_ms": {
+            "initial": 90,
+            "rebind": 100,
+            "sort": 25,
+            "filter": 18
+          }
+        }
+      ]
+    },
+    "viewport": {
+      "log": "m10964p-viewport-performance.log",
+      "method": {
+        "count": 5000,
+        "kinds": [
+          "flat",
+          "nested",
+          "blocks"
+        ],
+        "runs": 5,
+        "warmup": 2,
+        "rootHeight": 400,
+        "estimate": 48,
+        "overscan": 3,
+        "mountedBound": 80,
+        "blocks": {
+          "physicalRowsPerRecord": 2,
+          "estimate": 80,
+          "mountedBound": 64,
+          "pasteRecords": 100,
+          "merge": "Adjacent scalar group keys span complete two-row records; each native merge stays inside a consecutive mounted segment."
+        },
+        "timing": "Rows and authored HTML prepared outside timing. Each operation includes two successive stable animation-frame geometry observations; fail after fifteen frames.",
+        "focus": "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
+        "paste": "Flat/nested paste one thousand offscreen records; blocks paste one hundred. Each changes two fields in one atomic event; nested detail uses numeric Select values.",
+        "move": "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
+        "append": {
+          "count": 250,
+          "medianBudgetMs": 100,
+          "anchorTolerancePx": 1,
+          "operation": "After original operations and twenty scroll-cycle assertions, append 250 clean records in one event. Preserve every old snapshot/order, save changes, checks, focused node/draft/caret and scroll anchor. Dispose all 5,250 records under the original cleanup budget."
+        },
+        "geometry": "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies the complete requested record rectangle and forward scroll advances logical intersection. Blocks record native physical-row heights, record bounds and merge spans; twenty cycle windows record actual intersections.",
+        "cleanup": "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
+        "memory": "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim.",
+        "cleanupBudget": {
+          "nodes": 8,
+          "jsEventListeners": 0,
+          "documents": 0
+        },
+        "budgets": "Host-relative Chromium medians declared before measurement; other engines report samples without applying Chromium thresholds."
+      },
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 17.799999998882413,
+            "reveal": 65.89999999850988,
+            "scroll": 83.69999999925494,
+            "columns": 49.59999999962747,
+            "paste": 33.29999999888241,
+            "move": 63.09999999962747,
+            "append": 22.09999999962747,
+            "dispose": 24.90000000037253
+          },
+          "budgets_ms": {
+            "initial": 120,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100,
+            "append": 100
+          },
+          "maximum_physical_rows": 14,
+          "append_samples": [
+            {
+              "durationMs": 23,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 22.09999999962747,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 23.200000001117587,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 22.09999999962747,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 21.5,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "nested",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 8.599999999627471,
+            "reveal": 64.5,
+            "scroll": 83.20000000111759,
+            "columns": 50,
+            "paste": 33.09999999962747,
+            "move": 63.19999999925494,
+            "append": 20.09999999962747,
+            "dispose": 25
+          },
+          "budgets_ms": {
+            "initial": 180,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100,
+            "append": 100
+          },
+          "maximum_physical_rows": 14,
+          "append_samples": [
+            {
+              "durationMs": 19.90000000037253,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 20.09999999962747,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 19.300000000745058,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 20.59999999962747,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 20.09999999962747,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "blocks",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 17.200000001117587,
+            "reveal": 65.59999999962747,
+            "scroll": 49.20000000111759,
+            "columns": 50.59999999962747,
+            "paste": 33.69999999925494,
+            "move": 62.09999999962747,
+            "append": 9.900000000372529,
+            "dispose": 23.800000000745058
+          },
+          "budgets_ms": {
+            "initial": 35,
+            "reveal": 100,
+            "scroll": 120,
+            "columns": 100,
+            "paste": 85,
+            "move": 100,
+            "append": 100
+          },
+          "maximum_physical_rows": 24,
+          "append_samples": [
+            {
+              "durationMs": 31.300000000745058,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 7.599999999627471,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 9.900000000372529,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 7.099999999627471,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 35.80000000074506,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        }
+      ]
+    },
+    "limits": "Unchanged same-host Chromium default fixtures/warmups/samples/budgets. Pin tests separately prove bounded observers/native measurements and record identity; no universal speed, heap or actual-token claim."
+  },
+  "development_experiments": {
+    "files_sha256": {
+      "m10964p-experiment-cssom-full-webkit-all.json": "f9def1e30ea7240d242aec1b7d56ad3012f2af770c7ba882558fc17a7e95ae5d",
+      "m10964p-experiment-cssom-full-webkit-cssText.json": "6cb684f6b0060dfe0776f431b2c8f6bfa8efeb9c31ab8d236cfb02af8869936f",
+      "m10964p-experiment-cssom-full-webkit-flushBefore.json": "6cb684f6b0060dfe0776f431b2c8f6bfa8efeb9c31ab8d236cfb02af8869936f",
+      "m10964p-experiment-cssom-full-webkit-none.json": "6cb684f6b0060dfe0776f431b2c8f6bfa8efeb9c31ab8d236cfb02af8869936f",
+      "m10964p-experiment-cssom-full-webkit-root.json": "da7d9bc230df25fb65c7b1c7f76268d9481d9cf97bb69a7f4c0195590c60a1c8",
+      "m10964p-experiment-cssom-full-webkit-row.json": "70bba147f496aae60de9c58d4c1cbbee27408c825afd9402a36a18a95be8f814",
+      "m10964p-experiment-cssom-full-webkit-setEmpty.json": "5a752f9b5989227857b105fb581163b6c907532540f54a126eabfda9d72385a1",
+      "m10964p-experiment-cssom-full-webkit.json": "f9def1e30ea7240d242aec1b7d56ad3012f2af770c7ba882558fc17a7e95ae5d",
+      "m10964p-experiment-cssom-literal-style-webkit.json": "8dbda43b8d9a49d926a90e16947766015acf0fa47138a2aaa60f3fcee5341bb0",
+      "m10964p-experiment-cssom-marker-webkit.json": "d066e7567c3191bf5696ae79b21c45972127a5c884091d355a868c31440905bb",
+      "m10964p-experiment-cssom-owner-webkit.json": "8d7e20fc82b04fdda483bad396d245cdfbe7ae8fe9ca8330b88711888b50ca66",
+      "m10964p-experiment-cssom-pin-webkit.json": "c81dbc3e9964e5b8bb90e66f7a1393d4ad93804ee39b34fb3df35ae22a7bde17",
+      "m10964p-experiment-native-wheel-chromium-debug.json": "9a6ebe37c0539e65b6a7c332d497518d77868c35e81e690b2b1383dd8fc88139",
+      "m10964p-experiment-native-wheel-chromium-final.json": "39fef9b4c1b77693e98196b365d99ade36369739706665751698057dc347eae2",
+      "m10964p-experiment-native-wheel-firefox-final.json": "8a6f3783780725dc9a4ebe1c3e18a7cdf502711492e883a11cffa1cc2baf6b7c",
+      "m10964p-experiment-native-wheel-ready-firefox.json": "8097d959a15db19e28ee8f60f8315a3f18f17bdb492b8fa4f69e7bdc1980f394",
+      "m10964p-experiment-native-wheel-ready-webkit.json": "0828cdc7643762bc45de6431d79bbd1193ffb17f39ca00f0ec85ab9616819baa",
+      "m10964p-experiment-native-wheel-webkit-final.json": "e8797f3cedfd62342ebc3fa674044c52a6caa85a6a8b02bf631f5cdc7ce1cc1f",
+      "m10964p-experiment-pinned-cell-chromium-attempt1.json": "9cdd392a0abe2bd5c99e36b83687bf7d2babcfe293ce95fe0d7840a4814461da",
+      "m10964p-experiment-pinned-cell-chromium.json": "fdd7a36e87e4fe413184addf6647118ebbfb000fd0971249e6f9420e02ce01c5",
+      "m10964p-experiment-pinned-cell-firefox-attempt1.json": "eca584c11f9a88e550fb63df4b7a508d0c02ea9ee5b1eb7841a14ce8511b21f4",
+      "m10964p-experiment-pinned-cell-firefox.json": "fd77f5f253f876317562da0ef872ed4888f73b5aff417bb1e1ae0a2dd438e831",
+      "m10964p-experiment-pinned-cell-webkit-attempt1.json": "52b3bfcdf623d8862a85acc3985e5a2ec423efef2347cdae4ced61559faa73b8",
+      "m10964p-experiment-pinned-cell-webkit.json": "c2a6230139a1caba3c05f88be6930d3d409cf7ac98fd809e00add420d51fd730",
+      "m10964p-experiment-pinned-native-chromium.json": "d8705f330bf4aabf5b7a683a618aad761d4cb743c1ee29a16fa35f1fd0506d31",
+      "m10964p-experiment-pinned-native-firefox.json": "7d882a391f112d6534e188b18882e6bb7f834ad7a77658424564ab75fe355025",
+      "m10964p-experiment-pinned-native-webkit.json": "a36a1eff8074bd6979a8bb98ea11b569720c9a56df3a86afd861854f79e51d7f"
+    },
+    "note": "Available raw native geometry, CSSOM and wheel observations include failed/negative controls. They are development evidence outside the final source-gate certificate; overwritten/unavailable interim execution is not reconstructed."
+  },
+  "review": {
+    "baseline": "Independent e0f3b96 recovery matched174 inputs,22 logs,16 latest final gates and every actual183-file package member. Historical runtime was not rerun or recertified.",
+    "source": "Independent connected Ponytail source/callers/demo/consumer/document review. Narrow visible probes, completion after data/row hooks, atomic pin prefix and conditional literal/foreign style restoration are reviewed.",
+    "evidence": "Independent review matches all fifty raw records, twelve manifests, twenty-seven available experiment files, actual archive bytes/individual sizes and sixty medians recomputed from 300 durations; original budgets, live checkpoints, scroll windows, append and quiet cleanup invariants pass.",
+    "scope": "One GridColumn flag extends the existing owner. Private page wheel composition is outside package exports/files; no new framework source module, public type, handle or dependency.",
+    "reviewers": [
+      "acceptance_selection",
+      "acceptance_mapping",
+      "acceptance_baseline"
+    ]
+  },
+  "logs_sha256": {
+    "m10964p-focused-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-chromium.log": "f384f10b8b6a97443f57de539ee482ee957255e2a6e52f1baecc677604e4be09",
+    "m10964p-focused-chromium-2.log": "9d2ba158aec3d044f396d1c42a79359968667025372b57512aa2ff2f6a158823",
+    "m10964p-focused-chromium-3.log": "efd1dd921c2140369e5d27a3b348d2a50ffb52f7300bc43716f7305f9e5d248e",
+    "m10964p-focused-chromium-4.log": "428991d35147a454c0840a4820005d63b6a477b7ed94927cbda9fce638ee2bb4",
+    "m10964p-focused-chromium-5.log": "a8e8ba781565b02c2203e7c445fcbab7a399c4647814d6bd6fd12780812501be",
+    "m10964p-focused-build-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-example-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-chromium-6.log": "f059b4c1bdae7d1fe17dba0a1e271e1aab8b300aa0df81e136bf7328efb9faa2",
+    "m10964p-focused-firefox.log": "b08ec18203704b11c029095bb60026f1759f15346c7bdf475a4f888dd7d08560",
+    "m10964p-focused-webkit.log": "d989373cafc7508c7f603feec00c9744f1607ca5598d5bc5faa930ad7b423ac9",
+    "m10964p-focused-webkit-2.log": "ca0fbcd36d9a1be95abe7c72607d00d06de8680ab66b87f5e292804cad68dda3",
+    "m10964p-focused-webkit-3.log": "dedf33132fb763f3418a2aefba0cfb3b1fbd11a78d97641b24ca20e1f372753e",
+    "m10964p-focused-webkit-4.log": "6b675c5e8342ecc1200af16146a99ff193ef26394d017c62adcf224e3a7852d6",
+    "m10964p-focused-build-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-types-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-example-types-3.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-focused-webkit-5.log": "04838d5182927ddf4c3ed6552f1f9ae4a9795ba3b78e7a79f8b32d4fa500d513",
+    "m10964p-focused-chromium-7.log": "ef2537fa683ed083f45b7e52c5ac34caa8c3f370dd5d54b13027ece26f6347fd",
+    "m10964p-focused-firefox-2.log": "26d3db483e5233dec25e7d1b35633ae622246ed03a57c2b3988ef45c4d4a3944",
+    "m10964p-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-unit.log": "fbba28ea189379efdd22a089322a2081da7a183f58862d3aadceba550ebc748d",
+    "m10964p-pack.log": "1f1154b488c53df44685ae8e2f308bc37afde90986c62f121c08222204ab0709",
+    "m10964p-focused-webkit-6.log": "9ca68f15fc9a3cf75c9527799b1f99d0725bd9ea04399186ddedbfd61a57710a",
+    "m10964p-browser-chromium.log": "23682c4c3a6aee5f33cfc3b05cff0b5607502dca1dba30996efd35f85f017866",
+    "m10964p-build-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-example-types-2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m10964p-unit-2.log": "a47f8c4912e18165e2a273453cd1d6f4d6172e792b71e0b7886839fa50a8a619",
+    "m10964p-pack-2.log": "ab3f7325f0fb2ba5257e318af9bf98ef868093dd0a2743c5f8faafbba2f65d3c",
+    "m10964p-browser-firefox.log": "020d8714b36028a5b0e44227cdf6f934e42ada8b5ac8223e7ad0fa40fdcdc4b3",
+    "m10964p-focused-chromium-8.log": "30057b76fdcbbbd7970bbc63368b6cec78b68c664d4435c577dffb7e45d56490",
+    "m10964p-focused-firefox-3.log": "3e872cc412a664007d77847b615625b33b5079585f12323b2cbcbb1a046ed6c9",
+    "m10964p-focused-webkit-7.log": "3897141494add110f6d6859aa617daba8fb71454e07b8565aef8aaec5c138419",
+    "m10964p-browser-chromium-2.log": "7ab74702529777459040484a01ee2b8b0ad5a00659beb1dfed0a6641cd220051",
+    "m10964p-browser-firefox-2.log": "07c8ffa91d9ba2b32cd8be9dae673e64b2686325aa8e0276202c5bbd6f79f25b",
+    "m10964p-browser-webkit.log": "1422373d634146fb795a9b12aa36cfe32d0a6c3e0f6fe6c7f7d6a69f57f1e758",
+    "m10964p-consumers.log": "782bf1dbcd562339da2e8da950af346fbf01049fba9946981e95cb019646845e",
+    "m10964p-packed-chromium.log": "85119329eaf9915dbb54f21f019c72fb82d4138cec316cee22c65ccf5709626f",
+    "m10964p-packed-firefox.log": "d1bc86e39c8cd569b440cc9e1a2e3925b6a1eb3664d0254dc86c0a974c7be75d",
+    "m10964p-packed-webkit.log": "8a66ac596ed1adaeb86ce401591621e19724b036a6b594553016087e65f0066e",
+    "m10964p-packed-chrome.log": "90e8d2c2c73a06ce35cf6bc296b9ac5956dccaff4c399c41b9ee7a628a3ecea3",
+    "m10964p-packed-edge.log": "dfc479f9f0bac888c19d7edbc16a135d8924d67557dad6239e37cd0f358bdb38",
+    "m10964p-binding-performance.log": "353f6cab91ccdae3f3174da45f52721ecea035108c176ebe2b5099c8dde8ba08",
+    "m10964p-viewport-performance.log": "c19e4ddf7289aa5911e65692c97aff9a4024e994d75e598409c8d04d38917efa"
+  },
+  "limits": [
+    "Only selected pin/wheel/reduced-detail outcomes are certified; shared rules/declarations/defaults, incoming statuses/wire formats, other parity, P0 and mandatory M13 remain required.",
+    "Physical-left/LTR ordinary untransformed native tables; mixed spans stay in flow and a prefix wider than its scrollport retains native clipping. Wheel recipe uses the dominant axis and native keyboard/touch behavior, not a general overscroll polyfill.",
+    "Actual macOS/iOS Safari is excluded. Manual assistive technology, personal acceptance and final fixed agent-task/token evaluation remain unverified. No publication, release tag, master/v1 change or feature omission."
+  ]
+}

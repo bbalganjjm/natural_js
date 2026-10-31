@@ -1,0 +1,3153 @@
+{
+  "same": true,
+  "expected": "<table data-pinned-table=\"\" tabindex=\"-1\" style=\"\"><caption>Measured pinned records</caption><colgroup span=\"2\"></colgroup><colgroup span=\"2\"></colgroup><colgroup span=\"1\"></colgroup>\n  <thead><tr><th scope=\"colgroup\" data-columns=\"key name\" colspan=\"2\">Identity group</th>\n    <th scope=\"colgroup\" data-columns=\"team note\" colspan=\"2\">Assignment group</th><th scope=\"col\" data-column=\"amount\" rowspan=\"2\">Amount</th></tr>\n    <tr><th scope=\"col\" data-column=\"key\">Record <button type=\"button\" data-resize-column=\"key\" aria-label=\"Resize Record column\">Resize</button></th>\n      <th scope=\"col\" data-column=\"name\">Name</th><th scope=\"col\" data-column=\"team\">Team</th><th scope=\"col\" data-column=\"note\">Note</th></tr></thead>\n  <tbody data-row-template=\"\"><tr><th scope=\"row\" data-column=\"key\" rowspan=\"2\" data-pinned-column=\"authored\" style=\"position: relative !important; left: 7px !important; background-color: rgb(1, 2, 3);\"><button type=\"button\" data-select-row=\"\">Select <span data-field=\"key\"></span></button></th>\n    <td data-column=\"name\"><label>Name <input data-field=\"name\" required=\"\"></label><output data-error-for=\"name\"></output></td>\n    <td data-columns=\"team note\" colspan=\"2\"><span data-field=\"team\"></span></td>\n    <td data-column=\"amount\" rowspan=\"2\"><label>Amount <input type=\"number\" data-field=\"amount\" required=\"\" min=\"1\"></label></td></tr>\n    <tr><td data-column=\"name\"><span data-field=\"name\"></span></td><td data-column=\"team\"><span data-field=\"team\"></span></td>\n      <td data-column=\"note\"><label>Note <textarea data-field=\"note\"></textarea></label></td></tr></tbody>\n  <tfoot><tr><td data-columns=\"key name team note amount\" colspan=\"5\">Full native summary</td></tr>\n    <tr><th scope=\"row\" data-columns=\"key name\" colspan=\"2\">Identity summary</th><td data-columns=\"team note\" colspan=\"2\">Assignment summary</td>\n      <td data-column=\"amount\">Application amount</td></tr></tfoot></table>",
+  "actual": "<table data-pinned-table=\"\" tabindex=\"-1\" style=\"\"><caption>Measured pinned records</caption><colgroup span=\"2\"></colgroup><colgroup span=\"2\"></colgroup><colgroup span=\"1\"></colgroup>\n  <thead><tr><th scope=\"colgroup\" data-columns=\"key name\" colspan=\"2\">Identity group</th>\n    <th scope=\"colgroup\" data-columns=\"team note\" colspan=\"2\">Assignment group</th><th scope=\"col\" data-column=\"amount\" rowspan=\"2\">Amount</th></tr>\n    <tr><th scope=\"col\" data-column=\"key\">Record <button type=\"button\" data-resize-column=\"key\" aria-label=\"Resize Record column\">Resize</button></th>\n      <th scope=\"col\" data-column=\"name\">Name</th><th scope=\"col\" data-column=\"team\">Team</th><th scope=\"col\" data-column=\"note\">Note</th></tr></thead>\n  <tbody data-row-template=\"\"><tr><th scope=\"row\" data-column=\"key\" rowspan=\"2\" data-pinned-column=\"authored\" style=\"position: relative !important; left: 7px !important; background-color: rgb(1, 2, 3);\"><button type=\"button\" data-select-row=\"\">Select <span data-field=\"key\"></span></button></th>\n    <td data-column=\"name\"><label>Name <input data-field=\"name\" required=\"\"></label><output data-error-for=\"name\"></output></td>\n    <td data-columns=\"team note\" colspan=\"2\"><span data-field=\"team\"></span></td>\n    <td data-column=\"amount\" rowspan=\"2\"><label>Amount <input type=\"number\" data-field=\"amount\" required=\"\" min=\"1\"></label></td></tr>\n    <tr><td data-column=\"name\"><span data-field=\"name\"></span></td><td data-column=\"team\"><span data-field=\"team\"></span></td>\n      <td data-column=\"note\"><label>Note <textarea data-field=\"note\"></textarea></label></td></tr></tbody>\n  <tfoot><tr><td data-columns=\"key name team note amount\" colspan=\"5\">Full native summary</td></tr>\n    <tr><th scope=\"row\" data-columns=\"key name\" colspan=\"2\">Identity summary</th><td data-columns=\"team note\" colspan=\"2\">Assignment summary</td>\n      <td data-column=\"amount\">Application amount</td></tr></tfoot></table>",
+  "unpinRestored": true,
+  "trace": [
+    {
+      "phase": "first",
+      "text": "Identity group",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Record Resize",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Identity summary",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "first",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Identity group",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Record Resize",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Identity summary",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Select",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "other",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 1",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 1",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 2",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 2",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 3",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 3",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 3",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 3",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 4",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 4",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 4",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 4",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 5",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 5",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 5",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 5",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 6",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 6",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 6",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 6",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 7",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 7",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 7",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 7",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 8",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 8",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 8",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 8",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 9",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 9",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 9",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 9",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 10",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 10",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 10",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 10",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 11",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 11",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 11",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 11",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Select 12",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Select 12",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record 12",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record 12",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Identity group",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Identity group",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Assignment group",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Record Resize",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Record Resize",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Team",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Full native summary",
+      "attr": null
+    },
+    {
+      "phase": "other restored",
+      "text": "Identity summary",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Identity summary",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Assignment summary",
+      "attr": null
+    },
+    {
+      "phase": "other row-replaced",
+      "text": "Application amount",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Identity group",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Assignment group",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Record Resize",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Team",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "other root-restored",
+      "text": "Identity summary",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 1",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 1",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 2",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 2",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 3",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 3",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 3",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 3",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 4",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 4",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 4",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 4",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 5",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 5",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 5",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 5",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 6",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 6",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 6",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 6",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 7",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 7",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 7",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 7",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 8",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 8",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 8",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 8",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 9",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 9",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 9",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 9",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 10",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 10",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 10",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 10",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 11",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 11",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 11",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 11",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Select 12",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Select 12",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record 12",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record 12",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Identity group",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Identity group",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Assignment group",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Record Resize",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Record Resize",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Team",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Full native summary",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose restored",
+      "text": "Identity summary",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Identity summary",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Assignment summary",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose row-replaced",
+      "text": "Application amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Identity group",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Assignment group",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Record Resize",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Team",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "first-dispose root-restored",
+      "text": "Identity summary",
+      "attr": null
+    },
+    {
+      "phase": "own",
+      "text": "Identity group",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Record Resize",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Identity summary",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "Select",
+      "hadStyle": true
+    },
+    {
+      "phase": "own",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "own",
+      "text": "",
+      "hadStyle": false
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Identity group",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record Resize",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Identity summary",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 1",
+      "attr": "background-color: rgb(4, 5, 6); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 1",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 2",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 2",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 3",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 3",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 4",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 4",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 5",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 5",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 6",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 6",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 7",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 7",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 8",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 8",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 9",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 9",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 10",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 10",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 11",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 11",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Select 12",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "unpin restored",
+      "text": "Record 12",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "repin",
+      "text": "Identity group",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record Resize",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Identity summary",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 1",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 1",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 2",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 2",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 3",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 3",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 4",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 4",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 5",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 5",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 6",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 6",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 7",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 7",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 8",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 8",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 9",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 9",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 10",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 10",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 11",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 11",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Select 12",
+      "hadStyle": true
+    },
+    {
+      "phase": "repin",
+      "text": "Name",
+      "hadStyle": false
+    },
+    {
+      "phase": "repin",
+      "text": "Record 12",
+      "hadStyle": false
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 1",
+      "attr": "background-color: rgb(4, 5, 6); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 1",
+      "attr": "background-color: rgb(4, 5, 6); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 1",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 2",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 2",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 2",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 3",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 3",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 3",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 3",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 4",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 4",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 4",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 4",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 5",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 5",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 5",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 5",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 6",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 6",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 6",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 6",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 7",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 7",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 7",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 7",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 8",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 8",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 8",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 8",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 9",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 9",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 9",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 9",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 10",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 10",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 10",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 10",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 0",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 11",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 11",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 11",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 11",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 1",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Select 12",
+      "attr": "background-color: rgb(1, 2, 3); position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Select 12",
+      "attr": "background-color: rgb(1, 2, 3); position: relative !important; left: 7px !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record 12",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record 12",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team 2",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Identity group",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Identity group",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Assignment group",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Record Resize",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Name",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-1, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Record Resize",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Team",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Full native summary",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose restored",
+      "text": "Identity summary",
+      "attr": "position: sticky !important; left: var(--natural-grid-pin-0, 0px) !important;"
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Identity summary",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Assignment summary",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose row-replaced",
+      "text": "Application amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Identity group",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Assignment group",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Amount",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Record Resize",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Name",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Team",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Note",
+      "attr": null
+    },
+    {
+      "phase": "own-dispose root-restored",
+      "text": "Identity summary",
+      "attr": null
+    }
+  ]
+}

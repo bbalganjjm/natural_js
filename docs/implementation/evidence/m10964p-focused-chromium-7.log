@@ -1,0 +1,80 @@
+
+
+Running 69 tests using 1 worker
+
+
+
+[1/69] [chromium] › tests\browser\grid-columns.spec.ts:80:1 › column changes keep field nodes, nested raw choices, selection and caret
+[2/69] [chromium] › tests\browser\grid-columns.spec.ts:104:1 › hidden columns keep drafts across row release and preserve native visible groups
+[3/69] [chromium] › tests\browser\grid-columns.spec.ts:129:1 › invalid replacement is atomic and returned state is immutable
+[4/69] [chromium] › tests\browser\grid-columns.spec.ts:155:1 › width-only updates leave row topology, focus and data untouched
+[5/69] [chromium] › tests\browser\grid-columns.spec.ts:173:1 › sort indicators on hidden headers and exact dispose restoration work
+[6/69] [chromium] › tests\browser\grid-columns.spec.ts:190:1 › keyboard resize reports one coherent change and resets preferred width
+[7/69] [chromium] › tests\browser\grid-columns.spec.ts:205:1 › pointer resize commits once, cancellation restores state and teardown releases capture
+[8/69] [chromium] › tests\browser\grid-columns.spec.ts:230:1 › malformed topology and bind failures leave original markup available for retry
+[9/69] [chromium] › tests\browser\grid-columns.spec.ts:258:1 › returning the resize pointer to its start restores the preview without notifying
+[10/69] [chromium] › tests\browser\grid-columns.spec.ts:273:1 › callback failures keep the successful state and failed data binding can be retried
+[11/69] [chromium] › tests\browser\grid-columns.spec.ts:297:1 › no-column tables retain their behavior and state methods have clear bounds
+[12/69] [chromium] › tests\browser\grid-columns.spec.ts:319:1 › column hiding and paging skip hidden, inert and CSS-hidden focus candidates
+[13/69] [chromium] › tests\browser\grid-columns.spec.ts:351:1 › two CVC layouts expose working column tools and remain isolated and accessible
+[14/69] [chromium] › tests\browser\grid-columns.spec.ts:376:1 › flat columns move freely and late rows use current topology without rebinding fields
+[15/69] [chromium] › tests\browser\grid-columns.spec.ts:401:1 › authored row blocks preserve focused span cells through column changes
+[16/69] [chromium] › tests\browser\grid-columns.spec.ts:444:1 › body span topology fails before column ownership and allows a corrected retry
+[17/69] [chromium] › tests\browser\grid-columns.spec.ts:474:1 › column attachment owns and releases an entire authored row block
+[18/69] [chromium] › tests\browser\grid-columns.spec.ts:521:1 › implicit columns do not add ordering restrictions around an authored middle group
+[19/69] [chromium] › tests\browser\grid-pinned.spec.ts:89:1 › pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing
+[20/69] [chromium] › tests\browser\grid-pinned.spec.ts:110:1 › mixed native spans remain in normal flow while wholly pinned spans retain native structure
+[21/69] [chromium] › tests\browser\grid-pinned.spec.ts:130:1 › unpinned grids allocate no pin observer frame or owned cell presentation
+[22/69] [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry
+[23/69] [chromium] › tests\browser\grid-pinned.spec.ts:166:1 › hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes
+[24/69] [chromium] › tests\browser\grid-pinned.spec.ts:183:1 › pointer width previews and every cancellation update measured pin offsets before callbacks
+[25/69] [chromium] › tests\browser\grid-pinned.spec.ts:203:1 › invalid state does not cancel an active resize and pointer commit keeps pin flags
+[26/69] [chromium] › tests\browser\grid-pinned.spec.ts:220:1 › keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans
+[27/69] [chromium] › tests\browser\grid-pinned.spec.ts:236:1 › responsive and hidden-to-visible positioned roots use native widths rather than preferred values
+[28/69] [chromium] › tests\browser\grid-pinned.spec.ts:254:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion
+[29/69] [chromium] › tests\browser\grid-pinned.spec.ts:277:1 › viewport and progressive row blocks inherit current offsets after release and far reveal
+[30/69] [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+[31/69] [chromium] › tests\browser\grid-pinned.spec.ts:340:1 › leaf probes detect native width redistribution hidden by unchanged table and spanning-cell widths
+[32/69] [chromium] › tests\browser\grid-pinned.spec.ts:381:1 › probe preference uses visible membership after hidden keys reduce an authored header span
+[33/69] [chromium] › tests\browser\grid-pinned.spec.ts:421:1 › bind completion sees native pin offsets after row hooks widen an automatic-layout column
+[34/69] [chromium] › tests\browser\grid-pinned.spec.ts:454:1 › bind completion sees content-driven native pin widths without row hooks
+[35/69] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+[36/69] [chromium] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[37/69] [chromium] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[38/69] [chromium] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[39/69] [chromium] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[40/69] [chromium] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[41/69] [chromium] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[42/69] [chromium] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[43/69] [chromium] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+[44/69] [chromium] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[45/69] [chromium] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[46/69] [chromium] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[47/69] [chromium] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+[48/69] [chromium] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[49/69] [chromium] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+[50/69] [chromium] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[51/69] [chromium] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[52/69] [chromium] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+[53/69] [chromium] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[54/69] [chromium] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[55/69] [chromium] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[56/69] [chromium] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[57/69] [chromium] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+[58/69] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[59/69] [chromium] › tests\browser\m10-pinned.spec.ts:42:3 › ledger pinned controls retain actual positions through hide and group reorder without changing data
+[60/69] [chromium] › tests\browser\m10-pinned.spec.ts:42:3 › notebook pinned controls retain actual positions through hide and group reorder without changing data
+[61/69] [chromium] › tests\browser\m10-pinned.spec.ts:83:1 › authored pointer resize preview updates the next pinned column and Escape restores its position
+[62/69] [chromium] › tests\browser\m10-pinned.spec.ts:106:1 › main explorer applies current visible pin counts and restores its authored default on rebind
+[63/69] [chromium] › tests\browser\m10-pinned.spec.ts:130:1 › full and reduced details share edits while omitted fields stay intact across popup reopen
+[64/69] [chromium] › tests\browser\m10-pinned.spec.ts:173:1 › reduced details retain validation and visible filtered store navigation contracts
+[65/69] [chromium] › tests\browser\m10-pinned.spec.ts:205:3 › native x wheel containment stops start chaining while auto permits the positive control
+[66/69] [chromium] › tests\browser\m10-pinned.spec.ts:205:3 › native x wheel containment stops end chaining while auto permits the positive control
+[67/69] [chromium] › tests\browser\m10-pinned.spec.ts:205:3 › native y wheel containment stops start chaining while auto permits the positive control
+[68/69] [chromium] › tests\browser\m10-pinned.spec.ts:205:3 › native y wheel containment stops end chaining while auto permits the positive control
+[69/69] [chromium] › tests\browser\m10-pinned.spec.ts:256:1 › owned wheel boundary handling preserves Ctrl interior nested scrolling and releases an aborted listener
+  69 passed (35.8s)
+[WebServer] (node:1164) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:22172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

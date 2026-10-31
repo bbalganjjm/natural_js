@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 6cee41e892540ca138affb9988ab708506f6cb20
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -80,7 +80,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `FormHandle<T>` | `bind`, `read`, `validate`, `dispose` | Form handle |
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
-| `GridColumn` | Readonly `key`, optional positive preferred `width`, optional `hidden` | Column state |
+| `GridColumn` | Readonly `key`, optional positive preferred `width`, optional boolean `hidden`/`pinned`; visible pins form a leading prefix | Column state |
 | `GridIdsChange` | Readonly `ids: readonly RowId[]`, `previous: readonly RowId[]`, `event: Event \| null` | Membership transition |
 | `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit row-identity or check scope |
 | `GridCheckState` | Readonly booleans `checked`, `indeterminate`; numbers `total`, `count` | Eligible scope aggregate |

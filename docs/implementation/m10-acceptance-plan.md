@@ -8,7 +8,7 @@ sources:
   - id: closure
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: 9297be6a74038feb050264600576c87da31ff697
+    git_blob: dcb1591ce3731b6661469ca7b378956e299f9f13
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable 7a36a39 Grid audit
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and delegated native events
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Existing active, selected and checked transitions
@@ -33,9 +33,9 @@ sources:
     resource: evidence/m10964-verification.json
     title: Frozen runtime, archive and performance gates
     git_blob: 66c29b19e5ad2fd138cca86c860c7a0d46f61aff
-generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 # Goal
@@ -60,7 +60,7 @@ The test and package changes reach `grid.ts`, its existing public inferred optio
 
 # Next action
 
-Continue Grid-local acceptance with two or more horizontally pinned columns: cumulative offsets must follow actual widths, hide/reorder, grouped header/body/footer, responsive dimensions and a positioned authored root. Prefer ancestor CSS variables, existing column callbacks and one header/root ResizeObserver for preview/responsive geometry; do not observe each row. Specify the presentation of a native spanning cell crossed by the pinned boundary before implementation. Add focused boundary-scroll containment and reduced-field detail compositions through current owners. Then resolve shared declarations/rules/default composition and incoming status/wire contracts at their owners. Keep every incomplete family open; this selected acceptance does not complete parent M10.9.6 or whole-framework parity.[^acceptance]
+The [pinned-column continuation](m10-pinned-plan.md) implements the selected local pin/scroll/detail work and passes its sixteen frozen runtime gates. Independent source review found the existing column owner smaller than duplicating membership, preview, record lifetime and restoration in application code. It adds one flag to the same full state, keeps mixed native spans in flow and measures actual cell starts for WebKit. Next, shared declarations/rules/default composition and incoming status/wire contracts retain their owners. Keep every incomplete family open; selected acceptance does not complete parent M10.9.6 or whole-framework parity.[^acceptance]
 
 # Decisions
 

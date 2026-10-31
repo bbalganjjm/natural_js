@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "milestone": "M10.9.6.4 pinned-column continuation",
+  "recorded_at": "2026-10-31",
+  "status": "selected_outcomes_verified_full_families_open",
+  "workspace_baseline_commit": "e0f3b96217d08a5fff67eda62e4ceaa32f0e8631",
+  "inheritance": {
+    "immutable_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8",
+      "baseline_commit": "7a36a39d1dd16c9ba71bb71d1e8a195f5df50a0c"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m10964-grid-acceptance.json",
+      "sha256": "087ad46a109202ba1ed54a717d7ae570918312158835091f70609b3929f21c30"
+    },
+    "counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    },
+    "resolver": "Inherit every surface/dynamic/contract/family mapping and original acceptance ID from the two hash-locked ledgers. Add only these selected local outcomes/witnesses; historical evidence remains unchanged.",
+    "closure_rule": "After final frozen gates and independent review, resolve only the selected local obligation pointers listed below. All other shared-owner obligations and every full-family status remain inherited/open."
+  },
+  "public_delta": {
+    "property": "GridColumn.pinned?:boolean",
+    "default": false,
+    "new_public_named_types": 0,
+    "new_handle_methods": 0,
+    "new_public_entries": 0,
+    "new_framework_source_modules": 0,
+    "new_runtime_dependencies": 0,
+    "private_application_module": "examples/vite/m10/scroll-boundary.ts",
+    "note": "Example-only helper outside package exports/files; no public wheel engine or browser polyfill."
+  },
+  "selected_contracts": {
+    "sticky-layout": {
+      "outcome": "Existing native column owner implements measured leading physical-left pinning, actual cell starts/spacing, preview/cancel, hidden/reordered prefix, responsive roots, narrow visible representatives, bounded viewport/progressive row reuse and owned cleanup. Literal authored style text is restored only when nonowned styles are unchanged after owned property restoration.",
+      "witnesses": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "E01",
+        "E02",
+        "E03",
+        "P17"
+      ],
+      "status": "selected_outcomes_verified_full_family_obligations_retained"
+    },
+    "native-topology": {
+      "outcome": "Immutable full column state adds pinned without splitting/cloning native header/body/footer cells. All visible members must be pinned for a cell to stick; mixed spans stay in normal flow. Existing nodes, spans and editable identities remain.",
+      "witnesses": [
+        "P01",
+        "P02",
+        "P04",
+        "P05",
+        "P07",
+        "P10",
+        "P11",
+        "E01",
+        "E03",
+        "P17"
+      ],
+      "status": "selected_outcomes_verified_full_family_obligations_retained"
+    },
+    "height-controls": {
+      "outcome": "Existing height geometry remains inherited unchanged. This delta adds primary-axis wheel-boundary acceptance only, with no new height owner.",
+      "witnesses": [
+        "E06",
+        "E07"
+      ],
+      "status": "selected_outcomes_verified_full_family_obligations_retained"
+    },
+    "action-reveal": {
+      "outcome": "Authored CSS plus the page-owned wheel guard preserves both primary-axis boundary directions. Trusted native-auto positive controls establish that parent scrolling is possible without the guard.",
+      "witnesses": [
+        "E06",
+        "E07"
+      ],
+      "supersedes": "Inherited CSS-only containment wording is not evidence of the tested Windows Firefox/WebKit wheel outcome.",
+      "status": "selected_outcomes_verified_full_family_obligations_retained"
+    },
+    "row-details": {
+      "outcome": "Full and reduced Name/Salary authored templates reuse employeeDetail(view), shared Rows, validation/navigation and Popup lifetime; omitted fields stay unchanged and reopened pages use current values.",
+      "witnesses": [
+        "E04",
+        "E05"
+      ],
+      "retained_cross_owner": "General Popup retained/preloaded/drag/guard and declaration parity stays with popup/page U13/U15/U16.",
+      "status": "selected_outcomes_verified_full_family_obligations_retained"
+    },
+    "row-lifecycle": {
+      "outcome": "Row resources release narrow probes with their records. Hooks mark geometry dirty without per-yield forced reads; final placement measures before bind completion. Independent owners restore their properties/markers and cancel queued work. After restoring owned position/left values and priorities, literal authored style text is restored only if the remaining normalized style matches the original; foreign application style changes survive.",
+      "witnesses": [
+        "P08",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17"
+      ],
+      "retained_cross_owner": "Local/shared callback and declaration composition stays with core C08/C13.",
+      "status": "selected_outcomes_verified_full_family_obligations_retained"
+    }
+  },
+  "selected_local_obligations": {
+    "candidates_after_final_verification": [
+      "docs/implementation/evidence/m10964-grid-acceptance.json#/contracts/sticky-layout/unresolved/0",
+      "docs/implementation/evidence/m10964-grid-acceptance.json#/contracts/action-reveal/remaining_acceptance/0",
+      "docs/implementation/evidence/m10964-grid-acceptance.json#/contracts/row-details/remaining_acceptance/0"
+    ],
+    "state": "Final frozen verification pending. Local outcomes alone do not close a complete family."
+  },
+  "witnesses": {
+    "core": {
+      "declarations": 17,
+      "expanded_cases": 17,
+      "records": {
+        "P01": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing"
+        },
+        "P02": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "mixed native spans remain in normal flow while wholly pinned spans retain native structure"
+        },
+        "P03": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "unpinned grids allocate no pin observer frame or owned cell presentation"
+        },
+        "P04": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry"
+        },
+        "P05": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes"
+        },
+        "P06": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "pointer width previews and every cancellation update measured pin offsets before callbacks"
+        },
+        "P07": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "invalid state does not cancel an active resize and pointer commit keeps pin flags"
+        },
+        "P08": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans"
+        },
+        "P09": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "responsive and hidden-to-visible positioned roots use native widths rather than preferred values"
+        },
+        "P10": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "spanning-only headers and empty data acquire exact body pin geometry before bind completion"
+        },
+        "P11": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "viewport and progressive row blocks inherit current offsets after release and far reveal"
+        },
+        "P12": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal"
+        },
+        "P13": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "leaf probes detect native width redistribution hidden by unchanged table and spanning-cell widths"
+        },
+        "P14": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "probe preference uses visible membership after hidden keys reduce an authored header span"
+        },
+        "P15": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "bind completion sees native pin offsets after row hooks widen an automatic-layout column"
+        },
+        "P16": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "bind completion sees content-driven native pin widths without row hooks"
+        },
+        "P17": {
+          "file": "tests/browser/grid-pinned.spec.ts",
+          "test": "literal authored pin styles survive unpin disposal and retry while foreign changes remain owned by the application"
+        }
+      }
+    },
+    "application": {
+      "declarations": 7,
+      "expanded_cases": 11,
+      "records": {
+        "E01": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "title_template": "${layout} pinned controls retain actual positions through hide and group reorder without changing data",
+          "dimensions": {
+            "layout": [
+              "ledger",
+              "notebook"
+            ]
+          },
+          "expansion_count": 2,
+          "instances": [
+            "ledger pinned controls retain actual positions through hide and group reorder without changing data",
+            "notebook pinned controls retain actual positions through hide and group reorder without changing data"
+          ]
+        },
+        "E02": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "test": "authored pointer resize preview updates the next pinned column and Escape restores its position",
+          "expansion_count": 1,
+          "instances": [
+            "authored pointer resize preview updates the next pinned column and Escape restores its position"
+          ]
+        },
+        "E03": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "test": "main explorer applies current visible pin counts and restores its authored default on rebind",
+          "expansion_count": 1,
+          "instances": [
+            "main explorer applies current visible pin counts and restores its authored default on rebind"
+          ]
+        },
+        "E04": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "test": "full and reduced details share edits while omitted fields stay intact across popup reopen",
+          "expansion_count": 1,
+          "instances": [
+            "full and reduced details share edits while omitted fields stay intact across popup reopen"
+          ]
+        },
+        "E05": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "test": "reduced details retain validation and visible filtered store navigation contracts",
+          "expansion_count": 1,
+          "instances": [
+            "reduced details retain validation and visible filtered store navigation contracts"
+          ]
+        },
+        "E06": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "title_template": "native ${axis} wheel containment stops ${boundary} chaining while auto permits the positive control",
+          "dimensions": {
+            "axis": [
+              "x",
+              "y"
+            ],
+            "boundary": [
+              "start",
+              "end"
+            ]
+          },
+          "expansion_count": 4,
+          "instances": [
+            "native x wheel containment stops start chaining while auto permits the positive control",
+            "native x wheel containment stops end chaining while auto permits the positive control",
+            "native y wheel containment stops start chaining while auto permits the positive control",
+            "native y wheel containment stops end chaining while auto permits the positive control"
+          ]
+        },
+        "E07": {
+          "file": "tests/browser/m10-pinned.spec.ts",
+          "test": "owned wheel boundary handling preserves Ctrl interior nested scrolling and releases an aborted listener",
+          "expansion_count": 1,
+          "instances": [
+            "owned wheel boundary handling preserves Ctrl interior nested scrolling and releases an aborted listener"
+          ]
+        }
+      }
+    },
+    "new_expanded_cases": 28,
+    "title_validation": "Exact literal titles/templates resolve in current source; dimension lists explicitly expand every generated instance. Source presence is not an execution pass."
+  },
+  "native_css_boundary_evidence": {
+    "scope": "Observed Windows Playwright Firefox155.0 and WebKit26.6 only; no universal browser/future-version claim.",
+    "conclusion": "Firefox accepted/computed contain but still chained trusted targeted boundary wheel input. Windows WebKit reported no CSS support and also chained. CSS-only success was not assumed or waived.",
+    "css_only_experiments": [
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "at": "2026-10-31T02:03:52.203Z",
+        "raw_sha256": "8a6f3783780725dc9a4ebe1c3e18a7cdf502711492e883a11cffa1cc2baf6b7c",
+        "raw_location_at_review": "node_modules/.cache/native-wheel-firefox-final.json",
+        "observations": [
+          {
+            "axis": "x",
+            "boundary": "start",
+            "css_supports": true,
+            "computed": [
+              "contain",
+              "contain"
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              0,
+              120
+            ],
+            "css_only_containment_held": false
+          },
+          {
+            "axis": "x",
+            "boundary": "end",
+            "css_supports": true,
+            "computed": [
+              "contain",
+              "contain"
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              420,
+              120
+            ],
+            "css_only_containment_held": false
+          },
+          {
+            "axis": "y",
+            "boundary": "start",
+            "css_supports": true,
+            "computed": [
+              "contain",
+              "contain"
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              120,
+              0
+            ],
+            "css_only_containment_held": false
+          },
+          {
+            "axis": "y",
+            "boundary": "end",
+            "css_supports": true,
+            "computed": [
+              "contain",
+              "contain"
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              120,
+              372
+            ],
+            "css_only_containment_held": false
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "at": "2026-10-31T02:03:59.333Z",
+        "raw_sha256": "e8797f3cedfd62342ebc3fa674044c52a6caa85a6a8b02bf631f5cdc7ce1cc1f",
+        "raw_location_at_review": "node_modules/.cache/native-wheel-webkit-final.json",
+        "observations": [
+          {
+            "axis": "x",
+            "boundary": "start",
+            "css_supports": false,
+            "computed": [
+              null,
+              null
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              0,
+              120
+            ],
+            "css_only_containment_held": false
+          },
+          {
+            "axis": "x",
+            "boundary": "end",
+            "css_supports": false,
+            "computed": [
+              null,
+              null
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              420,
+              120
+            ],
+            "css_only_containment_held": false
+          },
+          {
+            "axis": "y",
+            "boundary": "start",
+            "css_supports": false,
+            "computed": [
+              null,
+              null
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              120,
+              0
+            ],
+            "css_only_containment_held": false
+          },
+          {
+            "axis": "y",
+            "boundary": "end",
+            "css_supports": false,
+            "computed": [
+              null,
+              null
+            ],
+            "outer_before": [
+              120,
+              120
+            ],
+            "outer_after": [
+              120,
+              420
+            ],
+            "css_only_containment_held": false
+          }
+        ]
+      }
+    ],
+    "raw_preservation": "Compact measured facts and raw SHA-256 values are retained here. Complete raw experiment preservation belongs to the final verification receipt; listed cache paths describe their location at review.",
+    "implemented_recipe": {
+      "source": "examples/vite/m10/scroll-boundary.ts",
+      "owner": "Existing page/controller AbortSignal lifetime",
+      "primary_axis": "Larger absolute wheel delta; ties use vertical.",
+      "preserves": [
+        "Ctrl wheel",
+        "already prevented events",
+        "native interior scrolling",
+        "nested auto/scroll descendants with primary-axis capacity",
+        "keyboard and touch input"
+      ],
+      "blocks": "Prevent wheel default only when the root and eligible descendants cannot move in the primary direction.",
+      "limits": "Bounded wheel example; no general touch/overscroll/RTL input polyfill or public utility package.",
+      "consumers": [
+        "examples/vite/m10/columns.ts controller signal",
+        "examples/vite/m10/demo.ts existing Grid/post-edit AbortController"
+      ]
+    }
+  },
+  "geometry_limits": [
+    "Physical-left/LTR, ordinary untransformed native tables and one horizontal sticky owner. Ancestor row groups may have separate vertical stickiness.",
+    "A pin prefix wider than the scrollport retains native clipping/containing-block limits. Preferred widths are not measured offsets.",
+    "A narrower mounted representative can replace a wider static group. No COL geometry or new leaf-header requirement is imposed."
+  ],
+  "retained_required": {
+    "all_inherited_full_families": "open",
+    "family_closures": 0,
+    "approved_omissions": 0,
+    "owners": [
+      "core typed declarations and local/shared callback/default composition",
+      "shared Form rules and validation-disable policy",
+      "data incoming statuses, legacy wire conversion and retained-deleted-anchor ordering",
+      "remaining component/CVC parity and P0 dynamic acceptance",
+      "one consolidated whole-framework omission decision",
+      "mandatory M13 whole-code ponytail-review/remediation"
+    ],
+    "publication": "No npm publication, release tag, master/v1 change or personal acceptance is inferred."
+  },
+  "runtime_verification": {
+    "status": "fresh_final_sixteen_gates_independently_reviewed",
+    "expected_frozen_input_files": 177,
+    "expected_final_gate_count": 16,
+    "receipt": "docs/implementation/evidence/m10964p-verification.json",
+    "raw_attempt_ledger": "docs/implementation/evidence/m10964p-gates.jsonl",
+    "required_source_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "required_package_consumers": [
+      "isolated JavaScript",
+      "isolated TypeScript",
+      "chromium",
+      "firefox",
+      "webkit",
+      "installed Chrome",
+      "installed Edge"
+    ],
+    "note": "Independent source, API, document and raw-evidence reviews approve these selected outcomes. Latest sixteen gates share the current 177-input map; fifty attempts and all available native experiments stay separate. No full-family closure or omission is approved.",
+    "expected_final_source_cases_per_engine": 550,
+    "actual_frozen_input_files": 177,
+    "actual_final_gate_count": 16,
+    "actual_source_cases_per_engine": 550,
+    "artifact_sha256": "3f05b59df8bad480454c36b2dfa652569c7f039e3feade87e297c2fba673f893"
+  }
+}

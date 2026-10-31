@@ -268,6 +268,25 @@ try {
     viewport: { root: geometryRoot, estimate: 48 }, heightResize: { root: geometryRoot, handle: geometryHandle, min: 160, max: 640 } });
   state.geometry = { container: geometry, root: geometryRoot, table: geometryTable, handle: geometryHandle,
     grid: geometryGrid, rows: geometryRows, original: originalGeometry };
+  const pinnedRoot = document.createElement("section");
+  pinnedRoot.dataset.consumerPinned = "";
+  pinnedRoot.style.cssText = "position:relative;width:420px;height:200px;overflow:auto;border:2px solid;padding:4px";
+  pinnedRoot.innerHTML = `<table style="table-layout:fixed;border-collapse:separate;border-spacing:2px">
+    <caption>Installed pinned records</caption><colgroup span="2"></colgroup><colgroup span="1"></colgroup>
+    <thead><tr><th scope="col" data-column="name">Name <button type="button" data-resize-column="name" aria-label="Resize pinned Name">Resize</button></th>
+      <th scope="col" data-column="note">Note</th><th scope="col" data-column="amount">Amount</th></tr></thead>
+    <tbody><tr data-row-template><th scope="row" data-column="name"><button type="button" data-select-row>Select</button><label>Name <input data-field="name"></label></th>
+      <td data-column="note" data-field="note"></td><td data-column="amount" data-field="amount"></td></tr></tbody>
+    <tfoot><tr><td colspan="3" data-columns="name note amount">Native spanning summary</td></tr></tfoot></table>`;
+  document.querySelector("main").append(pinnedRoot);
+  const pinnedTable = pinnedRoot.querySelector("table");
+  const originalPinned = pinnedTable.outerHTML;
+  const pinnedRows = createRows(Array.from({ length: 24 }, (_, index) => ({ name: "Pinned " + (index + 1), note: "Note " + (index + 1), amount: index })));
+  const pinnedEvents = [];
+  const pinnedGrid = bindGrid(pinnedTable, { rows: pinnedRows,
+    columns: [{ key: "name", width: 150, pinned: true }, { key: "note", width: 170, pinned: true }, { key: "amount", width: 420 }],
+    onColumnsChange: change => pinnedEvents.push(change) });
+  state.pinned = { root: pinnedRoot, table: pinnedTable, rows: pinnedRows, grid: pinnedGrid, original: originalPinned, events: pinnedEvents };
   const scrollRoot = document.createElement("section");
   scrollRoot.dataset.consumerViewport = "";
   scrollRoot.setAttribute("aria-label", "Viewport assignments");

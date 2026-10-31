@@ -1,0 +1,278 @@
+{
+  "engine": "chromium",
+  "version": "153.0.8010.12",
+  "mode": "debug",
+  "date": "2026-10-31T02:01:36.830Z",
+  "results": [
+    {
+      "variant": "same-frame",
+      "axis": "y",
+      "boundary": "start",
+      "policy": "contain",
+      "point": {
+        "x": 156,
+        "y": 136,
+        "hit": "content",
+        "inner": [
+          82,
+          82,
+          246,
+          206
+        ],
+        "outer": [
+          20,
+          20,
+          344,
+          304
+        ]
+      },
+      "events": [
+        {
+          "trusted": true,
+          "tag": "DIV",
+          "class": "content",
+          "x": 156,
+          "y": 136,
+          "deltaX": 0,
+          "deltaY": -300,
+          "atInner": true
+        }
+      ],
+      "innerEvents": [
+        true
+      ],
+      "outer": [
+        120,
+        120
+      ],
+      "inner": [
+        0,
+        0
+      ]
+    },
+    {
+      "variant": "same-frame",
+      "axis": "y",
+      "boundary": "start",
+      "policy": "auto",
+      "point": {
+        "x": 156,
+        "y": 136,
+        "hit": "content",
+        "inner": [
+          82,
+          82,
+          246,
+          206
+        ],
+        "outer": [
+          20,
+          20,
+          344,
+          304
+        ]
+      },
+      "events": [
+        {
+          "trusted": true,
+          "tag": "DIV",
+          "class": "spacer",
+          "x": 156,
+          "y": 136,
+          "deltaX": 0,
+          "deltaY": -300,
+          "atInner": false
+        }
+      ],
+      "innerEvents": [],
+      "outer": [
+        120,
+        0
+      ],
+      "inner": [
+        0,
+        0
+      ]
+    },
+    {
+      "variant": "idle-600",
+      "axis": "y",
+      "boundary": "start",
+      "policy": "contain",
+      "point": {
+        "x": 156,
+        "y": 136,
+        "hit": "content",
+        "inner": [
+          82,
+          82,
+          246,
+          206
+        ],
+        "outer": [
+          20,
+          20,
+          344,
+          304
+        ]
+      },
+      "events": [
+        {
+          "trusted": true,
+          "tag": "DIV",
+          "class": "content",
+          "x": 156,
+          "y": 136,
+          "deltaX": 0,
+          "deltaY": -300,
+          "atInner": true
+        }
+      ],
+      "innerEvents": [
+        true
+      ],
+      "outer": [
+        120,
+        120
+      ],
+      "inner": [
+        0,
+        0
+      ]
+    },
+    {
+      "variant": "idle-600",
+      "axis": "y",
+      "boundary": "start",
+      "policy": "auto",
+      "point": {
+        "x": 156,
+        "y": 136,
+        "hit": "content",
+        "inner": [
+          82,
+          82,
+          246,
+          206
+        ],
+        "outer": [
+          20,
+          20,
+          344,
+          304
+        ]
+      },
+      "events": [
+        {
+          "trusted": true,
+          "tag": "DIV",
+          "class": "spacer",
+          "x": 156,
+          "y": 136,
+          "deltaX": 0,
+          "deltaY": -300,
+          "atInner": false
+        }
+      ],
+      "innerEvents": [],
+      "outer": [
+        120,
+        0
+      ],
+      "inner": [
+        0,
+        0
+      ]
+    },
+    {
+      "variant": "fresh-page",
+      "axis": "y",
+      "boundary": "start",
+      "policy": "contain",
+      "point": {
+        "x": 156,
+        "y": 136,
+        "hit": "content",
+        "inner": [
+          82,
+          82,
+          246,
+          206
+        ],
+        "outer": [
+          20,
+          20,
+          344,
+          304
+        ]
+      },
+      "events": [
+        {
+          "trusted": true,
+          "tag": "DIV",
+          "class": "content",
+          "x": 156,
+          "y": 136,
+          "deltaX": 0,
+          "deltaY": -300,
+          "atInner": true
+        }
+      ],
+      "innerEvents": [
+        true
+      ],
+      "outer": [
+        120,
+        120
+      ],
+      "inner": [
+        0,
+        0
+      ]
+    },
+    {
+      "variant": "fresh-page",
+      "axis": "y",
+      "boundary": "start",
+      "policy": "auto",
+      "point": {
+        "x": 156,
+        "y": 136,
+        "hit": "content",
+        "inner": [
+          82,
+          82,
+          246,
+          206
+        ],
+        "outer": [
+          20,
+          20,
+          344,
+          304
+        ]
+      },
+      "events": [
+        {
+          "trusted": true,
+          "tag": "DIV",
+          "class": "spacer",
+          "x": 156,
+          "y": 136,
+          "deltaX": 0,
+          "deltaY": -300,
+          "atInner": false
+        }
+      ],
+      "innerEvents": [],
+      "outer": [
+        120,
+        0
+      ],
+      "inner": [
+        0,
+        0
+      ]
+    }
+  ]
+}

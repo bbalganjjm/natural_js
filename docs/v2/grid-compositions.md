@@ -8,7 +8,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid delegation and current row identity
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: rows
     resource: ../../src/data/index.ts
     title: Immutable snapshots and independent store identity
@@ -24,7 +24,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Rebind-safe native event observation
-    git_blob: df8b5ed51c4ac04c22a462ca02e9159b158fe516
+    git_blob: e9e807d4ee582f4345358c8c838ce1d8c7789bdd
 generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }

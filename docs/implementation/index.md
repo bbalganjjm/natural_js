@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M10.9.6.4 pinned columns](m10-pinned-plan.md) - Extend the existing column owner with measured leading-column pinning and verify native scroll and reduced-detail compositions. (draft)
+
 * [Natural-JS 2.0 M10.9.6.4 Grid semantic acceptance](m10-acceptance-plan.md) - Verify mapped Grid outcomes with native row activation and tested application compositions while retaining cross-owner obligations. (draft)
 
 * [Natural-JS 2.0 M10.9.6.3 progressive binding](m10-progressive-plan.md) - Bind already-loaded logical prefixes cooperatively with owned completion, cancellation and the existing viewport and CVC contracts. (draft)

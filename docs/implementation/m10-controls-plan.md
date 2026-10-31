@@ -8,11 +8,11 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 48179a8890dedf49039118ea799bf7a06c662ffa
+    git_blob: 8f0d17d80872883272cff4ca058e28945c7c46b2
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
@@ -48,7 +48,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Live all-options Grid and two authored record layouts
-    git_blob: df8b5ed51c4ac04c22a462ca02e9159b158fe516
+    git_blob: e9e807d4ee582f4345358c8c838ce1d8c7789bdd
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Unchanged flat, nested and multi-tr viewport budgets

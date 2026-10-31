@@ -1,0 +1,452 @@
+[
+  {
+    "initial": null,
+    "mutation": "none",
+    "cleanup": "before",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "none",
+    "cleanup": "after",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "none",
+    "cleanup": "both",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "marker",
+    "cleanup": "before",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "marker",
+    "cleanup": "after",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "marker",
+    "cleanup": "both",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "hidden",
+    "cleanup": "before",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "hidden",
+    "cleanup": "after",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "hidden",
+    "cleanup": "both",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "colspan",
+    "cleanup": "before",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "colspan",
+    "cleanup": "after",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "colspan",
+    "cleanup": "both",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "all",
+    "cleanup": "before",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "all",
+    "cleanup": "after",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": null,
+    "mutation": "all",
+    "cleanup": "both",
+    "captures": [
+      false,
+      false
+    ],
+    "final": null
+  },
+  {
+    "initial": "",
+    "mutation": "none",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "none",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "none",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "marker",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "marker",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "marker",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "hidden",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "hidden",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "hidden",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "colspan",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "colspan",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "colspan",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "all",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "all",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "",
+    "mutation": "all",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": ""
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "none",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "none",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "none",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "marker",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "marker",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "marker",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "hidden",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "hidden",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "hidden",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "colspan",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "colspan",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "colspan",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "all",
+    "cleanup": "before",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "all",
+    "cleanup": "after",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  },
+  {
+    "initial": "background-color: rgb(1, 2, 3);",
+    "mutation": "all",
+    "cleanup": "both",
+    "captures": [
+      true,
+      true
+    ],
+    "final": "background-color: rgb(1, 2, 3);"
+  }
+]

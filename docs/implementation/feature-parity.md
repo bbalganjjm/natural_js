@@ -48,11 +48,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -216,7 +216,7 @@ Continue P0 options/dynamic closure and prepare one complete retirement proposal
 
 # Open questions
 
-The [current Grid acceptance ledger](evidence/m10964-grid-acceptance.json) resolves every frozen surface/dynamic record through thirty current contracts with exact test witnesses. Tested local compositions do not settle shared configuration, programmatic field rules, incoming status/wire formats or arbitrary runtime discovery. Keep their owning obligations explicit rather than repeating already implemented Grid work.[^grid-acceptance]
+The [current Grid acceptance ledger](evidence/m10964-grid-acceptance.json) resolves every frozen surface/dynamic record through thirty current contracts with exact test witnesses. The [pinned-column continuation](m10-pinned-plan.md) adds selected pin, wheel-boundary and reduced-detail witnesses without changing that historical ledger. Tested local compositions do not settle shared configuration, programmatic field rules, incoming status/wire formats or arbitrary runtime discovery. Keep their owning obligations explicit rather than repeating already implemented Grid work.[^grid-acceptance]
 
 P0 must close behavior equivalence for mapped literal/merged options, dynamic dispatch and callback edge cases, then finish the consolidated retirement proposal. Manual assistive-technology review and actual token telemetry remain open. Structural mapping is complete for the eight-file checklist; exhaustive behavioral closure and current 2.0 parity are incomplete.
 

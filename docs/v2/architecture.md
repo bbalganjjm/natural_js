@@ -16,7 +16,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -24,7 +24,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -32,7 +32,7 @@ sources:
   - id: grid-columns
     resource: ../../src/ui/grid-columns.ts
     title: Private Grid column topology and resize ownership
-    git_blob: 874fca4953ffe70a2ef3b8e7001968da66bf89c4
+    git_blob: 002de08f3bc3f822bd39bb2d1f52bfee6f516d6e
   - id: grid-selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid active identity, sets, eligibility, and transitions
@@ -149,10 +149,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -186,7 +186,7 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 # Pitfalls
 
-`grid-columns.ts` owns native cell/colgroup topology and resize lifetime only for Grid. Field references are captured before column attachment, and cloned rows release this owner with Select ownership. Layout changes never mutate Rows or rebind data. The public contract is one state type, two handle methods and two binder options; application HTML provides show/move controls. The module reuses `dom-state.ts` attribute restoration and available-control focus for row/column transitions, including synchronization of pending CSSOM serialization before absent-style restoration. No generic drag, layout or persistence package was introduced.[^grid-columns][^grid][^dom-state]
+`grid-columns.ts` owns native cell/colgroup topology, resizing and leading pin geometry only for Grid. Field references are captured before column attachment, and cloned rows release this owner with Select ownership. Layout changes never mutate Rows or rebind data. `GridColumn.pinned` extends the same state and setter; no pin handle or separate compiler is added. One observer and one frame update table-scoped offsets from narrow visible cell representatives, including WebKit and spanning/header-free layouts. Row hooks invalidate geometry; placement flushes it after synchronous or progressive row completion. Defaults allocate no pin observer. Application HTML/CSS supplies controls, backgrounds and stacking. The module reuses `dom-state.ts` restoration and available-control focus, including pending CSSOM serialization before absent-style restoration. No generic drag, layout or persistence package was introduced.[^grid-columns][^grid][^dom-state]
 
 `grid-selection.ts` owns active detail identity, independent selected/checked ID sets, eligibility, full-set validation, scoped checks, range anchors, vetoes and commit ordering. `grid.ts` owns authored native controls, delegated events, row/draft/Select lifetime, projection and focus. A private view revision detects a sort/filter/page change during a before hook even when the resulting IDs match. Forced pruning commits state first and returns its notifications to Grid; Grid finishes row DOM and scope updates before calling them. A callback exception leaves that committed cleanup in place. These contracts expose `GridIdsChange`, `GridRowScope` and `GridCheckState`, not a shared transaction engine.[^grid-selection][^grid][^ui]
 

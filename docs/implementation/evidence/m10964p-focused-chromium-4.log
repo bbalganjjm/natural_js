@@ -1,0 +1,228 @@
+
+
+Running 64 tests using 1 worker
+
+
+
+[1/64] [chromium] › tests\browser\grid-columns.spec.ts:80:1 › column changes keep field nodes, nested raw choices, selection and caret
+[2/64] [chromium] › tests\browser\grid-columns.spec.ts:104:1 › hidden columns keep drafts across row release and preserve native visible groups
+[3/64] [chromium] › tests\browser\grid-columns.spec.ts:129:1 › invalid replacement is atomic and returned state is immutable
+[4/64] [chromium] › tests\browser\grid-columns.spec.ts:155:1 › width-only updates leave row topology, focus and data untouched
+[5/64] [chromium] › tests\browser\grid-columns.spec.ts:173:1 › sort indicators on hidden headers and exact dispose restoration work
+[6/64] [chromium] › tests\browser\grid-columns.spec.ts:190:1 › keyboard resize reports one coherent change and resets preferred width
+[7/64] [chromium] › tests\browser\grid-columns.spec.ts:205:1 › pointer resize commits once, cancellation restores state and teardown releases capture
+[8/64] [chromium] › tests\browser\grid-columns.spec.ts:230:1 › malformed topology and bind failures leave original markup available for retry
+[9/64] [chromium] › tests\browser\grid-columns.spec.ts:258:1 › returning the resize pointer to its start restores the preview without notifying
+[10/64] [chromium] › tests\browser\grid-columns.spec.ts:273:1 › callback failures keep the successful state and failed data binding can be retried
+[11/64] [chromium] › tests\browser\grid-columns.spec.ts:297:1 › no-column tables retain their behavior and state methods have clear bounds
+[12/64] [chromium] › tests\browser\grid-columns.spec.ts:319:1 › column hiding and paging skip hidden, inert and CSS-hidden focus candidates
+[13/64] [chromium] › tests\browser\grid-columns.spec.ts:351:1 › two CVC layouts expose working column tools and remain isolated and accessible
+[14/64] [chromium] › tests\browser\grid-columns.spec.ts:376:1 › flat columns move freely and late rows use current topology without rebinding fields
+[15/64] [chromium] › tests\browser\grid-columns.spec.ts:401:1 › authored row blocks preserve focused span cells through column changes
+[16/64] [chromium] › tests\browser\grid-columns.spec.ts:444:1 › body span topology fails before column ownership and allows a corrected retry
+[17/64] [chromium] › tests\browser\grid-columns.spec.ts:474:1 › column attachment owns and releases an entire authored row block
+[18/64] [chromium] › tests\browser\grid-columns.spec.ts:521:1 › implicit columns do not add ordering restrictions around an authored middle group
+[19/64] [chromium] › tests\browser\grid-pinned.spec.ts:89:1 › pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing
+[20/64] [chromium] › tests\browser\grid-pinned.spec.ts:110:1 › mixed native spans remain in normal flow while wholly pinned spans retain native structure
+[21/64] [chromium] › tests\browser\grid-pinned.spec.ts:130:1 › unpinned grids allocate no pin observer frame or owned cell presentation
+[22/64] [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry
+[23/64] [chromium] › tests\browser\grid-pinned.spec.ts:166:1 › hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes
+[24/64] [chromium] › tests\browser\grid-pinned.spec.ts:183:1 › pointer width previews and every cancellation update measured pin offsets before callbacks
+[25/64] [chromium] › tests\browser\grid-pinned.spec.ts:203:1 › invalid state does not cancel an active resize and pointer commit keeps pin flags
+[26/64] [chromium] › tests\browser\grid-pinned.spec.ts:220:1 › keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans
+[27/64] [chromium] › tests\browser\grid-pinned.spec.ts:236:1 › responsive and hidden-to-visible positioned roots use native widths rather than preferred values
+[28/64] [chromium] › tests\browser\grid-pinned.spec.ts:254:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion
+[29/64] [chromium] › tests\browser\grid-pinned.spec.ts:277:1 › viewport and progressive row blocks inherit current offsets after release and far reveal
+[30/64] [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+[31/64] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › committed field highlights compare loaded originals and clear after restoring the original
+[32/64] [chromium] › tests\browser\m10-demo.spec.ts:29:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[33/64] [chromium] › tests\browser\m10-demo.spec.ts:49:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[34/64] [chromium] › tests\browser\m10-demo.spec.ts:85:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[35/64] [chromium] › tests\browser\m10-demo.spec.ts:111:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[36/64] [chromium] › tests\browser\m10-demo.spec.ts:136:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[37/64] [chromium] › tests\browser\m10-demo.spec.ts:154:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[38/64] [chromium] › tests\browser\m10-demo.spec.ts:200:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[39/64] [chromium] › tests\browser\m10-demo.spec.ts:221:1 › authored table binds raw nested choices, formatter, and accessible labels
+[40/64] [chromium] › tests\browser\m10-demo.spec.ts:246:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[41/64] [chromium] › tests\browser\m10-demo.spec.ts:287:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[42/64] [chromium] › tests\browser\m10-demo.spec.ts:309:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[43/64] [chromium] › tests\browser\m10-demo.spec.ts:337:1 › sort, filter, and local pages preserve RowId selection
+[44/64] [chromium] › tests\browser\m10-demo.spec.ts:361:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[45/64] [chromium] › tests\browser\m10-demo.spec.ts:382:1 › check and validation policy controls rebind working Grid options
+[46/64] [chromium] › tests\browser\m10-demo.spec.ts:425:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[47/64] [chromium] › tests\browser\m10-demo.spec.ts:468:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[48/64] [chromium] › tests\browser\m10-demo.spec.ts:510:1 › required and unavailable choices validate; dispose and rebind restore the template
+[49/64] [chromium] › tests\browser\m10-demo.spec.ts:549:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[50/64] [chromium] › tests\browser\m10-demo.spec.ts:589:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[51/64] [chromium] › tests\browser\m10-demo.spec.ts:613:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[52/64] [chromium] › tests\browser\m10-demo.spec.ts:649:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[53/64] [chromium] › tests\browser\m10-demo.spec.ts:685:1 › row-block store controls move and copy whole records independently of the employee demo
+[54/64] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › authored row blocks share grouped controls, typed multiple choices and native values
+[55/64] [chromium] › tests\browser\m10-pinned.spec.ts:29:3 › ledger pinned controls retain actual positions through hide and group reorder without changing data
+  1) [chromium] › tests\browser\m10-pinned.spec.ts:29:3 › ledger pinned controls retain actual positions through hide and group reorder without changing data 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      56 |     const moved = await pinnedPositions(screen, page);
+      57 |     expect(moved.before.map(cell => cell.key)).toEqual(layout === "ledger" ? ["team", "shift"] : ["email", "phone"]);
+    > 58 |     expect(moved.scrolled).toBeGreaterThan(0);
+         |                            ^
+      59 |     for (let index = 0; index < 2; index++) expect(Math.abs(moved.after[index].left - moved.before[index].left)).toBeLessThan(1);
+      60 |     await expect(first.locator('[data-field="email"]')).toHaveValue("Uncommitted invalid email");
+      61 |     expect(JSON.parse(await screen.locator("[data-row-state]").innerText())).toEqual(state);
+        at D:\workspace\natural_js\tests\browser\m10-pinned.spec.ts:58:28
+
+    Error Context: test-results\m10-pinned-ledger-pinned-c-e26af-order-without-changing-data-chromium\error-context.md
+
+
+
+
+[56/64] [chromium] › tests\browser\m10-pinned.spec.ts:29:3 › notebook pinned controls retain actual positions through hide and group reorder without changing data
+[57/64] [chromium] › tests\browser\m10-pinned.spec.ts:70:1 › authored pointer resize preview updates the next pinned column and Escape restores its position
+[58/64] [chromium] › tests\browser\m10-pinned.spec.ts:93:1 › main explorer applies current visible pin counts and restores its authored default on rebind
+[59/64] [chromium] › tests\browser\m10-pinned.spec.ts:117:1 › full and reduced details share edits while omitted fields stay intact across popup reopen
+[60/64] [chromium] › tests\browser\m10-pinned.spec.ts:160:1 › reduced details retain validation and visible filtered store navigation contracts
+[61/64] [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native x wheel containment stops start chaining while auto permits the positive control
+  2) [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native x wheel containment stops start chaining while auto permits the positive control 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-policy="auto"]').locator('.inner')
+    Expected: "true"
+    Received: "none"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('[data-policy="auto"]').locator('.inner') with timeout 5000ms
+      - waiting for locator('[data-policy="auto"]').locator('.inner')
+        14 × locator resolved to <div class="inner" data-wheel="none">…</div>
+           - unexpected value "none"
+
+
+      209 |       const delta = boundary === "start" ? -300 : 300;
+      210 |       await page.mouse.wheel(axis === "x" ? delta : 0, axis === "y" ? delta : 0);
+    > 211 |       await expect(inner).toHaveAttribute("data-wheel", "true");
+          |                           ^
+      212 |       if (policy === "auto") {
+      213 |         if (boundary === "start") await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeLessThan(120);
+      214 |         else await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeGreaterThan(120);
+        at D:\workspace\natural_js\tests\browser\m10-pinned.spec.ts:211:27
+
+    Error Context: test-results\m10-pinned-native-x-wheel--76577-ermits-the-positive-control-chromium\error-context.md
+
+
+
+
+[62/64] [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native x wheel containment stops end chaining while auto permits the positive control
+  3) [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native x wheel containment stops end chaining while auto permits the positive control 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-policy="auto"]').locator('.inner')
+    Expected: "true"
+    Received: "none"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('[data-policy="auto"]').locator('.inner') with timeout 5000ms
+      - waiting for locator('[data-policy="auto"]').locator('.inner')
+        14 × locator resolved to <div class="inner" data-wheel="none">…</div>
+           - unexpected value "none"
+
+
+      209 |       const delta = boundary === "start" ? -300 : 300;
+      210 |       await page.mouse.wheel(axis === "x" ? delta : 0, axis === "y" ? delta : 0);
+    > 211 |       await expect(inner).toHaveAttribute("data-wheel", "true");
+          |                           ^
+      212 |       if (policy === "auto") {
+      213 |         if (boundary === "start") await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeLessThan(120);
+      214 |         else await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeGreaterThan(120);
+        at D:\workspace\natural_js\tests\browser\m10-pinned.spec.ts:211:27
+
+    Error Context: test-results\m10-pinned-native-x-wheel--4a942-ermits-the-positive-control-chromium\error-context.md
+
+
+
+
+[63/64] [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native y wheel containment stops start chaining while auto permits the positive control
+  4) [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native y wheel containment stops start chaining while auto permits the positive control 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-policy="auto"]').locator('.inner')
+    Expected: "true"
+    Received: "none"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('[data-policy="auto"]').locator('.inner') with timeout 5000ms
+      - waiting for locator('[data-policy="auto"]').locator('.inner')
+        14 × locator resolved to <div class="inner" data-wheel="none">…</div>
+           - unexpected value "none"
+
+
+      209 |       const delta = boundary === "start" ? -300 : 300;
+      210 |       await page.mouse.wheel(axis === "x" ? delta : 0, axis === "y" ? delta : 0);
+    > 211 |       await expect(inner).toHaveAttribute("data-wheel", "true");
+          |                           ^
+      212 |       if (policy === "auto") {
+      213 |         if (boundary === "start") await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeLessThan(120);
+      214 |         else await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeGreaterThan(120);
+        at D:\workspace\natural_js\tests\browser\m10-pinned.spec.ts:211:27
+
+    Error Context: test-results\m10-pinned-native-y-wheel--cf33f-ermits-the-positive-control-chromium\error-context.md
+
+
+
+
+[64/64] [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native y wheel containment stops end chaining while auto permits the positive control
+  5) [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native y wheel containment stops end chaining while auto permits the positive control 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('[data-policy="auto"]').locator('.inner')
+    Expected: "true"
+    Received: "none"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('[data-policy="auto"]').locator('.inner') with timeout 5000ms
+      - waiting for locator('[data-policy="auto"]').locator('.inner')
+        14 × locator resolved to <div class="inner" data-wheel="none">…</div>
+           - unexpected value "none"
+
+
+      209 |       const delta = boundary === "start" ? -300 : 300;
+      210 |       await page.mouse.wheel(axis === "x" ? delta : 0, axis === "y" ? delta : 0);
+    > 211 |       await expect(inner).toHaveAttribute("data-wheel", "true");
+          |                           ^
+      212 |       if (policy === "auto") {
+      213 |         if (boundary === "start") await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeLessThan(120);
+      214 |         else await expect.poll(() => outer.evaluate((element, axis) => axis === "x" ? element.scrollLeft : element.scrollTop, axis)).toBeGreaterThan(120);
+        at D:\workspace\natural_js\tests\browser\m10-pinned.spec.ts:211:27
+
+    Error Context: test-results\m10-pinned-native-y-wheel--f57cf-ermits-the-positive-control-chromium\error-context.md
+
+
+  5 failed
+    [chromium] › tests\browser\m10-pinned.spec.ts:29:3 › ledger pinned controls retain actual positions through hide and group reorder without changing data 
+    [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native x wheel containment stops start chaining while auto permits the positive control 
+    [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native x wheel containment stops end chaining while auto permits the positive control 
+    [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native y wheel containment stops start chaining while auto permits the positive control 
+    [chromium] › tests\browser\m10-pinned.spec.ts:192:3 › native y wheel containment stops end chaining while auto permits the positive control 
+  59 passed (1.0m)
+[WebServer] (node:21312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:21044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

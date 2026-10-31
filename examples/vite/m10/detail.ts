@@ -40,7 +40,7 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     }
     const formRoot = find<HTMLFormElement>("form");
     const fields = find<HTMLFieldSetElement>("fieldset");
-    const choices = find<HTMLSelectElement>('[data-field="assignment.chosen"]');
+    const choices = root.querySelector<HTMLSelectElement>('[data-field="assignment.chosen"]');
     const scope = find<HTMLSelectElement>("[data-detail-scope]");
     const previous = find<HTMLButtonElement>("[data-detail-previous]");
     const next = find<HTMLButtonElement>("[data-detail-next]");
@@ -58,6 +58,7 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     }
 
     function updateChoices(id: RowId | null): void {
+      if (!choices) return;
       const shifts = id === null ? undefined : input.rows.get(id)?.value.assignment.shifts;
       if (shifts === options) return;
       options = shifts;
@@ -99,7 +100,7 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     own(cleanup);
     signal.addEventListener("abort", cleanup, { once: true });
     form = bindForm(formRoot, { rows: input.rows, rules: input.rules,
-      parse: { ...input.parse, "assignment.chosen": value => value === "" ? null : codes.get(value) } });
+      parse: { ...input.parse, ...(choices ? { "assignment.chosen": (value: string) => value === "" ? null : codes.get(value) } : {}) } });
 
     function showFailure(cause: unknown): void {
       error.textContent = cause instanceof Error ? cause.message : String(cause);

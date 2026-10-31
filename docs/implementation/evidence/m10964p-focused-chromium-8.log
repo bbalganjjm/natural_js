@@ -1,0 +1,13 @@
+
+
+Running 2 tests using 1 worker
+
+
+
+[1/2] [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+[2/2] [chromium] › tests\browser\grid-pinned.spec.ts:485:1 › literal authored pin styles survive unpin disposal and retry while foreign changes remain owned by the application
+  2 passed (2.8s)
+[WebServer] (node:21400) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:2476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

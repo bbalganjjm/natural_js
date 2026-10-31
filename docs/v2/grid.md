@@ -6,6 +6,10 @@ tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
 sources:
+  - id: scroll-example
+    resource: ../../examples/vite/m10/scroll-boundary.ts
+    title: Page-owned wheel boundary composition
+    git_blob: 9020af886692a4c39440b62055749b8670f2ec18
   - id: progressive-browser
     resource: ../../tests/browser/grid-progressive.spec.ts
     title: Cooperative completion, cancellation, callback and bounded-work regressions
@@ -21,15 +25,15 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
-    git_blob: 874fca4953ffe70a2ef3b8e7001968da66bf89c4
+    git_blob: 002de08f3bc3f822bd39bb2d1f52bfee6f516d6e
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, anchoring, spacers and lifetime
@@ -114,10 +118,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -303,16 +307,29 @@ Re-evaluates the current projection and mounted bindings without replacing Rows,
 
 ## `columns()` and `setColumns(columns)`
 
-`columns()` returns a frozen array of frozen `GridColumn` objects: `{ key, width?, hidden? }`. `setColumns` replaces the full ordered state; keys must be known, unique and complete. Width is a positive finite preferred CSS-pixel value; omitted width restores the authored preference, and omitted `hidden` means visible. At least one column must be visible. Flat tables allow arbitrary order; grouped cells and authored colgroups require contiguous members, allowing within-group order or whole-group movement. Invalid input fails before changing state or DOM. Without column markup/option, the state is `[]`; nonempty replacement raises `GRID_COLUMNS`.[^columns]
+`columns()` returns a frozen array of frozen `GridColumn` objects: `{ key, width?, hidden?, pinned? }`. `setColumns` replaces the full ordered state; keys must be known, unique and complete. Width is a positive finite preferred CSS-pixel value; omitted width restores the authored preference. Omitted `hidden` means visible; omitted `pinned` means no owned horizontal pinning. Both flags must be boolean when provided. At least one column must be visible. Visible pinned columns must form a leading prefix. Grouped cells and authored colgroups also require contiguous members, allowing within-group order or whole-group movement. Invalid input fails before changing state/DOM or cancelling an active resize. Without column markup/option, the state is `[]`; nonempty replacement raises `GRID_COLUMNS`.[^columns]
 
 ```ts
 const next = grid.columns().map(column => column.key === "team"
   ? { ...column, width: 200, hidden: true } : column);
 grid.setColumns(next);
-grid.setColumns([...grid.columns()].reverse()); // Only valid if groups stay contiguous.
+grid.setColumns([...grid.columns()].reverse()); // Groups and the visible pinned prefix must stay valid.
 ```
 
 For width-only changes, the column owner updates native col/table widths without row/header/footer movement or focus/scroll work. Grid then recalculates active merges and invalidates viewport measurements for the new geometry. Other column state changes reuse existing cells/controls and do not change Rows, identity, selection or drafts. Application controls can call this method to move/show/hide/reset and persist serialized state. Hidden nodes stay privately owned for reappearance and restoration. No column chooser, drag-to-reorder UI or persistence registry is generated.[^columns]
+
+Pin physical-left columns by including `pinned: true` in that same full state. Hidden keys retain their flag but consume no visible prefix slot. A native cell sticks only when all of its visible member keys are pinned; a spanning cell crossing the boundary scrolls in normal native flow. Native header/body/footer cells and spans are never split or cloned. Reordering must provide a valid visible prefix, including intended flag changes. Pin-state changes use the existing committed `onColumnsChange` contract; resize previews/cancellation retain the flags.[^columns]
+
+The existing owner supplies measured `left` and `position: sticky` plus `data-pinned-column="true"`. Author background and stacking styles, for example:
+
+```css
+tbody [data-pinned-column="true"] { background: white; z-index: 1; }
+thead [data-pinned-column="true"] { background: #eef; z-index: 3; }
+```
+
+Offsets use actual native cell starts, including borders/spacing; preferred widths are not measurements. One observer watches the table and at most one representative per needed start, preferring narrower visible membership and retaining the current candidate on ties. Initial static cells are visited first; narrower mounted cells support spanning-only or absent headers. Cached representatives briefly return to native flow for one batched measurement, then regain owned positions before paint. Table-owned CSS variables share offsets with new/recycled multi-tr records. Width changes do not scan/rebind every record. Changed data and row hooks invalidate geometry; completed placement measures it before synchronous/progressive completion. Ordinary observer updates coalesce into one frame. Default unpinned grids allocate no pin observer/frame or cell presentation.[^columns][^grid]
+
+Unpin, record release and disposal restore owned position/left values and priorities and the original marker. When nonowned declarations are unchanged, the original style attribute text is restored too; other owners' live cell styles survive. Author a prefix that fits the scrollport; wider prefixes retain native clipping/containing-block limits. This contract covers physical-left/LTR, ordinary untransformed native tables and one horizontal sticky owner. Keep horizontal sticky positioning off ancestor row groups. A header/footer may still use independent authored vertical stickiness.[^columns]
 
 ## `select(id)` and `selected()`
 
@@ -366,7 +383,7 @@ Returns frozen `readonly RowId[]` snapshots without scanning the DOM or applying
 
 Scrolls a row in the current logical page without changing active identity, membership or focus. `options.block` accepts native `nearest` (default), `start`, `center` or `end`; malformed options raise `GRID_VIEWPORT_ALIGN` before scrolling. A filtered-out, off-page or missing ID raises `GRID_VIEWPORT_ROW`; explicitly shown deleted rows may be revealed read-only. The caller changes filtering/paging explicitly. With viewport, estimates and measured corrections align the entire logical record between top-sticky header and bottom-sticky footer bands. Left/right-only stickiness does not reduce usable height. Oversized records use their start for nearest alignment. Without viewport, native `scrollIntoView` receives the same block; authors use scroll-padding/scroll-margin for sticky content.[^grid][^viewport][^geometry-browser]
 
-Application selection/check/add handlers may call centered reveal when desired. Authored `overscroll-behavior: contain` keeps scroll-boundary gestures inside the area without wheel interception. These explicit operations do not silently change action-scroll defaults or close remaining legacy flag/option equivalence.[^grid][^viewport]
+Application selection/check/add handlers may call centered reveal when desired. Author `overscroll-behavior: contain`; the examples also use a page-owned wheel boundary listener for the tested Windows engines where CSS-only containment fails. The listener follows the dominant axis and preserves native interior/nested scrolling, Ctrl zoom and signal-owned cleanup. These explicit operations do not silently change action-scroll defaults or close remaining legacy flag/option equivalence.[^grid][^viewport][^scroll-example]
 
 ## `paste(text, { id, field })`
 
@@ -457,7 +474,7 @@ Filter value/label callbacks must be synchronous and pure. Choice calculation re
 
 ## Authored column recovery
 
-Compose labeled checkboxes with columns(), setColumns() and onColumnsChange. Derive checked, mixed and shown/total output from current columns; keep no second selection store. Map the full current state and change only hidden so widths, order and topology survive. The demo keeps an authored actions/recovery column out of business-column choices and forces it visible for chooser writes. All business columns may hide, while that physical column and the external chooser still allow recovery. Arbitrary all-physical-hidden API writes still raise GRID_COLUMNS.[^columns]
+Compose labeled checkboxes with columns(), setColumns() and onColumnsChange. Derive checked, mixed and shown/total output from current columns; keep no second selection store. Map the full current state so widths, order and topology survive. When changing visibility, keep a valid visible pinned prefix: revealing an earlier unpinned key before a pinned key requires intended flag changes in the same proposal. The demo reapplies its current first-N-visible policy for chooser writes. It keeps an authored actions/recovery column out of business choices and forces it visible for those writes. All business columns may hide while the recovery column and external chooser remain. All-physical-hidden API writes still raise GRID_COLUMNS.[^columns]
 
 Synchronize from committed state before outward application callbacks, or in the handler's finally refresh. Invalid layout/preparation fails before a layout commit; an onColumnsChange error occurs afterward. Native checkbox focus remains in the chooser; hiding an editor uses the existing visible same-record/header/table fallback. These are application compositions using the current layout owner, not a new public chooser component.[^columns][^grid]
 
@@ -620,6 +637,7 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^path]: Safe nested field paths
 [^options]: Shared private row-local options
 [^owner]: Shared Select ownership
+[^scroll-example]: Page-owned wheel boundary composition
 [^hooks]: Private synchronous row binding and resource ownership
 [^lifecycle-browser]: Status, defaults, callbacks, cleanup, empty state and failure regressions
 

@@ -4,26 +4,30 @@ title: Natural-JS 2.0 active plan
 description: Checkpoint, next action, and verification record for the milestone-gated Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: pinned
+    resource: m10-pinned-plan.md
+    title: Measured pinned-column continuation
+    git_blob: 0df62f142094e308620cea90e961980aca6ee5f4
   - id: acceptance
     resource: m10-acceptance-plan.md
     title: M10.9.6.4 native activation and semantic acceptance
-    git_blob: 60def0cdf359860a15ef43874603827769d0f1d8
+    git_blob: 48ee7bd30057dc4884734a48edfa5336b20a5c46
   - id: progressive
     resource: m10-progressive-plan.md
     title: M10.9.6.3 cooperative logical binding and cancellation
-    git_blob: bee07e04038986e4f826e47810f0fca6b8ae69c1
+    git_blob: 2bf8e60838d3a10d11d1a085fa55afd982d0c0f3
   - id: interactions
     resource: m10-interactions-plan.md
     title: M10.9.6.2 explicit interaction and authored view controls
-    git_blob: ccafb442efb582961847af2816fe21591c0b4596
+    git_blob: e55ce4930be4b9367e46d437fcf4a7ba8b1878ca
   - id: closure
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: 9297be6a74038feb050264600576c87da31ff697
+    git_blob: dcb1591ce3731b6661469ca7b378956e299f9f13
   - id: change-state
     resource: m10-change-state-plan.md
     title: M10.9.6.1 committed-field changes and retained deletions
-    git_blob: 304facd30d3ca97bfc46e88e48984646542478ab
+    git_blob: a9f490b22469d3572222039f9de3e11d1c7c6c47
   - id: conventions
     resource: ../governance/okf-conventions.md
     title: OKF conventions for the Natural-JS bundle
@@ -31,50 +35,50 @@ sources:
   - id: m11
     resource: m11-plan.md
     title: M11 implementation and verification
-    git_blob: 1245b0bd40ca4ce9237c33381e33072e4fce0f13
+    git_blob: 548ed7711cfe81af1fbe57576d635ae5b52f641c
   - id: m12
     resource: m12-plan.md
     title: M12 notification and document shell implementation
-    git_blob: 24a02a1493a37a562e0472e4d63225d7ca10aca3
+    git_blob: 4a4eb000fa3e8217c042a8f3dc09b6a1458de616
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and consolidated omission review
-    git_blob: f21dc30191205e687f1ab6d8e85a5fa050893a98
+    git_blob: 2a57d93c19ea2fb43eefe0fd669ffeac9cbf4a6c
   - id: columns
     resource: m10-columns-plan.md
     title: Implemented column state and final verification
-    git_blob: 00dacf3180048e2c2587dff0fb0265207d90b745
+    git_blob: 060d9e4dd7bb9aff7484d6ce195618b007225327
   - id: selection
     resource: m10-selection-plan.md
     title: M10.6 independent selection, checks and filters
-    git_blob: c102fa7e7918999a28c14749def05d5c8cbf28eb
+    git_blob: 9680ada57840ad5d243bbc8fc261e5770dd81089
   - id: paste
     resource: m10-paste-plan.md
     title: M10.7 atomic paste and final verification
-    git_blob: b21bb57ab1e0abf5ee3b200693b8888d5d4db299
+    git_blob: 3c2b6de5ae3a9f34ace0216430d0574955b66e28
   - id: viewport
     resource: m10-viewport-plan.md
     title: M10.8 measured viewport and final verification
-    git_blob: 3957a3f1087053581b62c1e651bc071b0b52572b
+    git_blob: e4ab17f62b37b327af076a18660b44616c50a037
   - id: grid-parity
     resource: m10-parity-plan.md
     title: M10.9 ordered Rows and remaining Grid continuation
-    git_blob: 48179a8890dedf49039118ea799bf7a06c662ffa
+    git_blob: 8f0d17d80872883272cff4ca058e28945c7c46b2
   - id: controls
     resource: m10-controls-plan.md
     title: M10.9.3 native controls, display and validation gates
-    git_blob: 782edee0bcb916c9929d34d45fd971344a97d808
+    git_blob: 94ac9016632e2d1d7120ac66586622ba09a54943
   - id: lifecycle
     resource: m10-lifecycle-plan.md
     title: M10.9.4 status and row lifecycle verification
-    git_blob: 0c84639a877e5ebc9acb5223009d04e070b8a94d
+    git_blob: 740bc0037823f6f3a5dad2d2ad9c6e9077418a02
   - id: detail
     resource: m10-detail-plan.md
     title: M10.9.5 detail navigation and geometry verification
-    git_blob: dc1335e0b0bde27292f15d7de93417c9a9cf362a
-generated: { by: codex/gpt-6, at: 2026-10-28T13:26:38Z }
+    git_blob: 3d866c702f19a39392a99e82af474b6e9c6a2214
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-28T13:26:38Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 Use [the roadmap](roadmap.md) for milestone order and [the milestone index](index.md) for completed history. The fixed 1.x baseline is b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6; its LGPL source and docs stay unchanged under v1/.
@@ -98,7 +102,7 @@ Complete all 1.x framework capabilities and the required advanced Grid features 
 
 # Next action
 
-Continue [M10.9.6.4 semantic acceptance](m10-acceptance-plan.md) with multiple horizontally pinned columns: actual cumulative offsets after resize/hide/reorder, grouped native header/body/footer, responsive/positioned roots, native boundary-scroll containment and reduced-field details. Its selected row-area activation/projection/native-event/template slice passes 124 units, 522 cases per required engine, exact JS/TS/five-browser consumers and unchanged budgets on 174 frozen inputs. The thirty-contract ledger distinguishes implemented outcomes from specific remaining obligations; all twenty full families remain open. Resolve shared rules/defaults/declarations and status/wire contracts at their owners. Other component/CVC parity, P0 and mandatory [M13 whole-code review/remediation](m13-review-plan.md) remain required. No npm publication or release tag.[^acceptance][^closure][^parity]
+The [pinned-column continuation](m10-pinned-plan.md) implements measured leading pins and the authored wheel/reduced-detail compositions. Its sixteen latest gates pass on 177 inputs: 124 units, 550 full cases per required engine, exact JS/TS and five-browser package consumers, and unchanged performance budgets. Next, plan shared typed declarations, rule/default composition and validation policy across existing Form/Grid/List owners; then incoming statuses/wire contracts. Compare legacy reachability, specify concise representative HTML/TS and add the missing outcomes at existing owners. Other component parity, P0 and mandatory [M13 whole-code review/remediation](m13-review-plan.md) remain required. No full Grid-family closure, omission, publication or release tag.[^pinned][^parity]
 
 # Decisions
 
@@ -113,6 +117,8 @@ Continue [M10.9.6.4 semantic acceptance](m10-acceptance-plan.md) with multiple h
 
 | Date | Check | Result |
 |---|---|---|
+| 2026-10-31 | Pinned-column independent closure | Independent connected source/API/document and raw-log/archive/measurement review approves the selected outcomes. Changed/full OKF: 66 concepts, five reserved files, zero errors/warnings. Ten semantic concepts receive verified metadata; twenty-seven historical concepts retain bodies and generated/verified dates with fingerprint-only updates. Next: shared declarations/rules/defaults; full families, P0 and M13 stay open. |
+| 2026-10-31 | Pinned-column frozen gates | All sixteen latest gates share 177 inputs: 124 units; 550 full cases each in Chromium/Firefox/WebKit; one 183-file tar in JS/TS and all five Windows browsers; unchanged nine binding/twenty-one viewport budgets. The owning plan preserves fifty command records, twenty-seven native experiment files, sixty recomputed medians and the selected twenty-eight new cases. Shared-owner parity, all full families, P0 and M13 remain required. |
 | 2026-10-28 | M10.9.6.4 selected independent review | Connected source/API/archive/evidence/document review approves the selected activation/composition outcomes. Original audit/master/v1 and historical runtime records remain unchanged. Continue multiple-pinned-column/boundary-scroll/reduced-detail acceptance, then shared-owner contracts; no full Grid-family, P0 or M13 completion is claimed. |
 | 2026-10-28 | M10.9.6.4 selected frozen gates | All sixteen final gates share 174 inputs: 124 units; 522 full cases each in Chromium/Firefox/WebKit; one 183-file tar in JS/TS and all five Windows browsers; original binding/viewport budgets pass. Twenty-three new acceptance cases and current thirty-contract witnesses are recorded in the owning plan. Remaining pinned-column/shared-owner acceptance, all full families, P0 and M13 remain required. |
 | 2026-10-24 | M10.9.6.3 final closure | Independent source/API/archive/evidence/document review approves the contracted slice. Changed/full OKF: 63 concepts, five reserved files, zero errors/warnings. Eleven reviewed semantic concepts receive verified metadata; twenty-three historical concepts retain bodies and generated/verified dates with fingerprint-only updates. Next: M10.9.6.4; other parity, P0 and M13 remain required. |
@@ -167,3 +173,5 @@ Continue [M10.9.6.4 semantic acceptance](m10-acceptance-plan.md) with multiple h
 [^progressive]: M10.9.6.3 cooperative logical binding and cancellation
 
 [^acceptance]: M10.9.6.4 native activation and semantic acceptance
+
+[^pinned]: Measured pinned-column continuation

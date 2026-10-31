@@ -5,6 +5,14 @@ description: Inspect committed field changes, loaded originals and edited deleti
 tags: [ui, grid, example, accessibility]
 status: draft
 sources:
+  - id: scroll
+    resource: ../../examples/vite/m10/scroll-boundary.ts
+    title: Page-owned native wheel boundary composition
+    git_blob: 9020af886692a4c39440b62055749b8670f2ec18
+  - id: pinned-browser
+    resource: ../../tests/browser/m10-pinned.spec.ts
+    title: Pin controls, reduced details and trusted native wheel regressions
+    git_blob: e0949941c47303eee082207c84258ab3a9caead2
   - id: progressive-view
     resource: ../../examples/vite/m10/progressive.html
     title: Two authored progressive CVC layouts
@@ -24,19 +32,19 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: 901eb9c78d20bfd906252565c0d4b15c6f703f9e
+    git_blob: 1abaaddf1efc60924a12d26946426a81cc3294d3
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: df8b5ed51c4ac04c22a462ca02e9159b158fe516
+    git_blob: e9e807d4ee582f4345358c8c838ce1d8c7789bdd
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
-    git_blob: 8f3c9c4b74b6155a190b4289ddb8b7b777ed6955
+    git_blob: 18d920e324e6e0487392defd211f1f5c1380775c
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
-    git_blob: 9c64636295c7b6cf904560d8098f9f0b39473311
+    git_blob: b2c1cacb6c27f07c1b53a864c1d5f81de073c375
   - id: browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Interactive Grid behavior and accessibility checks
@@ -44,11 +52,11 @@ sources:
   - id: columns-view
     resource: ../../examples/vite/m10/columns.html
     title: Two authored column layouts
-    git_blob: 18ab9065fed63f3ef29b99dc03396636e6361efb
+    git_blob: aaccb0b3bbb5de4d59a25746c30a11784c33a5bd
   - id: columns-controller
     resource: ../../examples/vite/m10/columns.ts
     title: Independent CVC column controllers
-    git_blob: 258c4e7a7ec55304a826ea7fe2059e5d82d43ea4
+    git_blob: ebb417c6e833f9ecdfbbc2004dc6f09f203da329
   - id: columns-browser
     resource: ../../tests/browser/grid-columns.spec.ts
     title: Native column state, lifetime and accessibility regressions
@@ -72,7 +80,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 625fc54b599da36705208cb7ad4df45029e619c4
+    git_blob: 0a3fe6f4fa2fce0d9799059a8de06fd6e5ba6b6f
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -108,11 +116,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 319506aca6ac79028701b31fba51239ed8e3d9d0
-generated: { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+    git_blob: 1103ae56fd526609452e9c54e578d6f924d043ca
+generated: { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-28T13:26:39Z }
+  - { by: codex/gpt-6, at: 2026-10-31T03:10:58Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -274,6 +282,12 @@ Choose **Reveal the last invalid row in visual page order, preserving focus** be
 
 # Variations
 
+**Pin first visible columns** uses the same full column state and reports the actual visible pin count. The main explorer starts with one pin, retaining its previous fixed Record/Employee appearance. Ledger and Notebook start with zero; set two or more to inspect native grouped header/body/footer behavior through resize preview, cancellation, hide and group reorder. Application actions derive count from current state rather than keeping a second pin store. Hidden-key flags remain intact; current visible prefix policy is reapplied for user hide/reorder actions. Mixed pinned/unpinned spanning cells scroll normally. Backgrounds and stacking remain authored CSS; examples do not measure geometry.[^controller][^columns-controller][^grid]
+
+Enable **New details show only Name and Salary** before opening Inline or Popup details to select another authored template through the same `employeeDetail(view)` controller. Only present fields are edited and validated. Omitted fields retain their existing raw values. Scope/navigation, validation guards, unique IDs, focus restoration and page lifetime use the same CVC/Form/Popup paths. Existing full details remain the default.[^controller][^detail-controller]
+
+The scroll regions retain authored CSS containment and use one page-owned wheel boundary listener. It follows the dominant delta axis, permits interior/nested native scrolling and Ctrl zoom, and aborts with its existing page/Grid event lifetime. This covers the available Windows Firefox/WebKit engines where CSS-only containment did not stop parent scrolling. Trusted wheel tests retain an unbound native-auto positive control. The recipe does not intercept keyboard/touch or implement a general overscroll polyfill.[^scroll][^pinned-browser]
+
 Enable **Select from noninteractive row areas** to use the same selection policy from a record's plain cells. Labels and interactive controls remain independent; the existing selection button remains the keyboard alternative. Hiding its column disables the added click path. **Native event after Grid handling** shows the latest committed Rows snapshot after input/change handling; invalid and manual drafts can retain entered text while Rows stays unchanged. Rebinding replaces the native listener rather than accumulating earlier registrations. See [Grid compositions](grid-compositions.md).[^controller][^grid]
 
 In the row-block section, edit Name, Notes or Shift in either layout to update the shared record in both. Select a record in either table, then use **Apply merge keys**, **Move to first**, **Move to end** or **Copy to end**. Department merges first; Team merges only within the same Department and row status. Editing one record can split a formerly equal run until reversion. The status and shared snapshots show the committed RowId/value changes. **Reset shared records** replaces this separate store and clears its selected identity; the main explorer's Dataset/viewport controls do not control these two small layouts.[^view][^controller]
@@ -309,3 +323,6 @@ Without `initialPage`, `viewport` or `progressive`, Grid creates all initial row
 [^progressive-view]: Two authored progressive CVC layouts
 [^progressive-controller]: Independent prefix operations and immediate abort ownership
 [^progressive-browser]: Interactive prefix, keyboard, failure and CVC regressions
+
+[^scroll]: Page-owned native wheel boundary composition
+[^pinned-browser]: Pin controls, reduced details and trusted native wheel regressions

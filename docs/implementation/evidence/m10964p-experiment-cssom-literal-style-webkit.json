@@ -1,0 +1,98 @@
+{
+  "browser": "webkit",
+  "version": "26.6",
+  "date": "2026-10-31T02:41:42.759Z",
+  "results": [
+    {
+      "name": "literal-owned",
+      "beforeStyle": "position:relative;left:7px;color:red",
+      "beforeCSS": "position: relative; left: 7px; color: red;",
+      "afterUnpin": "position: relative; left: 7px; color: red;",
+      "afterCSS": "position: relative; left: 7px; color: red;",
+      "afterDispose": "position: relative; left: 7px; color: red;",
+      "exactHTML": false,
+      "color": "red",
+      "position": "relative",
+      "left": "7px",
+      "inset": ""
+    },
+    {
+      "name": "literal-color",
+      "beforeStyle": "color:red",
+      "beforeCSS": "color: red;",
+      "afterUnpin": "color: red;",
+      "afterCSS": "color: red;",
+      "afterDispose": "color: red;",
+      "exactHTML": false,
+      "color": "red",
+      "position": "",
+      "left": "",
+      "inset": ""
+    },
+    {
+      "name": "literal-inset",
+      "beforeStyle": "inset:1px 2px 3px 4px;color:red",
+      "beforeCSS": "inset: 1px 2px 3px 4px; color: red;",
+      "afterUnpin": "inset: 1px 2px 3px 4px; color: red;",
+      "afterCSS": "inset: 1px 2px 3px 4px; color: red;",
+      "afterDispose": "inset: 1px 2px 3px 4px; color: red;",
+      "exactHTML": false,
+      "color": "red",
+      "position": "",
+      "left": "4px",
+      "inset": "1px 2px 3px 4px"
+    },
+    {
+      "name": "literal-priority",
+      "beforeStyle": "position:relative!important;left:7px!important;color:red",
+      "beforeCSS": "color: red; position: relative !important; left: 7px !important;",
+      "afterUnpin": "color: red; position: relative !important; left: 7px !important;",
+      "afterCSS": "color: red; position: relative !important; left: 7px !important;",
+      "afterDispose": "color: red; position: relative !important; left: 7px !important;",
+      "exactHTML": false,
+      "color": "red",
+      "position": "relative",
+      "left": "7px",
+      "inset": ""
+    },
+    {
+      "name": "literal-other-owner",
+      "beforeStyle": "position:relative;left:7px;color:red",
+      "beforeCSS": "position: relative; left: 7px; color: red;",
+      "afterUnpin": "position: relative; left: 7px; color: blue;",
+      "afterCSS": "position: relative; left: 7px; color: blue;",
+      "afterDispose": "position: relative; left: 7px; color: blue;",
+      "exactHTML": false,
+      "color": "blue",
+      "position": "relative",
+      "left": "7px",
+      "inset": ""
+    },
+    {
+      "name": "empty",
+      "beforeStyle": "",
+      "beforeCSS": "",
+      "afterUnpin": "",
+      "afterCSS": "",
+      "afterDispose": "",
+      "exactHTML": true,
+      "color": "",
+      "position": "",
+      "left": "",
+      "inset": ""
+    },
+    {
+      "name": "absent",
+      "beforeStyle": null,
+      "beforeCSS": "",
+      "afterUnpin": null,
+      "afterCSS": "",
+      "afterDispose": null,
+      "exactHTML": true,
+      "color": "",
+      "position": "",
+      "left": "",
+      "inset": ""
+    }
+  ]
+}

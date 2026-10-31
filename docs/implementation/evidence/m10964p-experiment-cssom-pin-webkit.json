@@ -1,0 +1,727 @@
+{
+  "cases": [
+    {
+      "authored": null,
+      "read": "none",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "hasAttribute",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "getAttribute",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "styleLength",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "getProperty",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "computed",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "rect",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "outerHTML",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "getThenProperty",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": null,
+      "read": "propertyThenGet",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "afterRead",
+          "attribute": null
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": false,
+          "attribute": null
+        },
+        {
+          "phase": "final",
+          "attribute": null
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "none",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "hasAttribute",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "getAttribute",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "styleLength",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "getProperty",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "computed",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "rect",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "outerHTML",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "getThenProperty",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "",
+      "read": "propertyThenGet",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "afterRead",
+          "attribute": ""
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": ""
+        },
+        {
+          "phase": "final",
+          "attribute": ""
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "none",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "hasAttribute",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "getAttribute",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "styleLength",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "getProperty",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "computed",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "rect",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "outerHTML",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "getThenProperty",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    },
+    {
+      "authored": "background-color: rgb(1, 2, 3);",
+      "read": "propertyThenGet",
+      "states": [
+        {
+          "phase": "restored1",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "afterRead",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "restored2",
+          "hadStyle": true,
+          "attribute": "background-color: rgb(1, 2, 3);"
+        },
+        {
+          "phase": "final",
+          "attribute": "background-color: rgb(1, 2, 3);"
+        }
+      ]
+    }
+  ],
+  "ro": [
+    ""
+  ]
+}

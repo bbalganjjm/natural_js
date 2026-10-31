@@ -1431,6 +1431,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const nextIds = requested ?? windowIds();
     const existing = new Set(nextIds.filter(id => records.has(id)));
     const rebound: RenderedRow<T>[] = [];
+    let pinLayoutChanged = false;
     const revision = viewRevision;
     const source = hooks.enabled ? options.rows.entries({ includeDeleted: true }) : undefined;
     const layout = hooks.enabled ? columns.columns() : undefined;
@@ -1451,6 +1452,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           if (options.beforeRowBind || !place) for (const element of record.elements) anchor.parentNode!.insertBefore(element, anchor);
         }
         if (record.snapshot !== snapshot) {
+          pinLayoutChanged = true;
           renderStatus(record, snapshot);
           if (hooks.enabled) {
             hooks.before(snapshot, record.elements, () => check(id));
@@ -1477,6 +1479,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
       throw cause;
     }
+    if (pinLayoutChanged) columns.invalidatePinned();
     if (place && (viewport || nextIds.length !== mountedIds.length || nextIds.some((id, index) => id !== mountedIds[index]))) {
       const nextSet = new Set(nextIds);
       const restoreFocus = focused instanceof HTMLElement && focusedId !== undefined &&
@@ -1520,7 +1523,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         records.delete(id);
       }
     }
-    if (place) { mergeRows(); syncRowIndexes(); syncSelection(); }
+    if (place) { mergeRows(); syncRowIndexes(); syncSelection(); if (!rebound.length) columns.measurePinned(); }
     focusAfterDisable(focused);
     if (!rebound.length && !cleanupErrors.length) return;
     const complete = () => {
@@ -1532,7 +1535,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           if (!place) syncRecordSelection(record.id, record);
         }
         if (hooks.enabled) check();
-        if (place && rebound.length) { mergeRows(); syncSelection(); viewport?.invalidate(); }
+        if (rebound.length) columns.invalidatePinned();
+        if (place && rebound.length) { mergeRows(); syncSelection(); viewport?.invalidate(); columns.measurePinned(); }
         focusAfterDisable(priorFocus);
         cleanupFailure();
       } catch (cause) {

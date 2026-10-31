@@ -1,0 +1,140 @@
+
+
+Running 12 tests using 1 worker
+
+
+
+[1/12] [chromium] › tests\browser\grid-pinned.spec.ts:89:1 › pinned leaf and grouped native cells use actual cumulative widths including horizontal spacing
+[2/12] [chromium] › tests\browser\grid-pinned.spec.ts:110:1 › mixed native spans remain in normal flow while wholly pinned spans retain native structure
+[3/12] [chromium] › tests\browser\grid-pinned.spec.ts:130:1 › unpinned grids allocate no pin observer frame or owned cell presentation
+[4/12] [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry
+  1) [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      <table data-pinned-table="" tabindex="-1" style=""><caption>Measured pinned records</caption><colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="1"></colgroup>
+    -   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2">Identity group</th>
+    +   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2" style="">Identity group</th>
+          <th scope="colgroup" data-columns="team note" colspan="2">Assignment group</th><th scope="col" data-column="amount" rowspan="2">Amount</th></tr>
+    -     <tr><th scope="col" data-column="key">Record <button type="button" data-resize-column="key" aria-label="Resize Record column">Resize</button></th>
+    +     <tr><th scope="col" data-column="key" style="">Record <button type="button" data-resize-column="key" aria-label="Resize Record column">Resize</button></th>
+    -       <th scope="col" data-column="name">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="note">Note</th></tr></thead>
+    +       <th scope="col" data-column="name" style="">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="note">Note</th></tr></thead>
+        <tbody data-row-template=""><tr><th scope="row" data-column="key" rowspan="2"><button type="button" data-select-row="">Select <span data-field="key"></span></button></th>
+          <td data-column="name"><label>Name <input data-field="name" required=""></label><output data-error-for="name"></output></td>
+          <td data-columns="team note" colspan="2"><span data-field="team"></span></td>
+          <td data-column="amount" rowspan="2"><label>Amount <input type="number" data-field="amount" required="" min="1"></label></td></tr>
+          <tr><td data-column="name"><span data-field="name"></span></td><td data-column="team"><span data-field="team"></span></td>
+            <td data-column="note"><label>Note <textarea data-field="note"></textarea></label></td></tr></tbody>
+        <tfoot><tr><td data-columns="key name team note amount" colspan="5">Full native summary</td></tr>
+    -     <tr><th scope="row" data-columns="key name" colspan="2">Identity summary</th><td data-columns="team note" colspan="2">Assignment summary</td>
+    +     <tr><th scope="row" data-columns="key name" colspan="2" style="">Identity summary</th><td data-columns="team note" colspan="2">Assignment summary</td>
+            <td data-column="amount">Application amount</td></tr></tfoot></table>
+
+      160 |   }, modules);
+      161 |   const { expectedHTML, actualHTML, ...state } = result;
+    > 162 |   expect(actualHTML).toBe(expectedHTML);
+          |                      ^
+      163 |   expect(state).toEqual({ codes: Array(6).fill("GRID_COLUMNS"), unchanged: true, initial: "GRID_COLUMNS", restored: true, retried: true });
+      164 | });
+      165 |
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:162:22
+
+    Error Context: test-results\grid-pinned-invalid-pin-fl-4d087-c-and-allow-corrected-retry-chromium\error-context.md
+
+
+
+
+[5/12] [chromium] › tests\browser\grid-pinned.spec.ts:166:1 › hidden pinned keys retain flags without consuming prefix slots and valid reorder preserves editable nodes
+[6/12] [chromium] › tests\browser\grid-pinned.spec.ts:183:1 › pointer width previews and every cancellation update measured pin offsets before callbacks
+[7/12] [chromium] › tests\browser\grid-pinned.spec.ts:203:1 › invalid state does not cancel an active resize and pointer commit keeps pin flags
+[8/12] [chromium] › tests\browser\grid-pinned.spec.ts:220:1 › keyboard resizing preserves pin state and native focus while width-only changes avoid row geometry scans
+[9/12] [chromium] › tests\browser\grid-pinned.spec.ts:236:1 › responsive and hidden-to-visible positioned roots use native widths rather than preferred values
+[10/12] [chromium] › tests\browser\grid-pinned.spec.ts:254:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion
+  2) [chromium] › tests\browser\grid-pinned.spec.ts:254:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -1,7 +1,7 @@
+      <table data-pinned-table="" tabindex="-1" style=""><caption>Measured pinned records</caption><colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="1"></colgroup>
+    -   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2">Identity</th><th scope="colgroup" data-columns="team note" colspan="2">Assignment</th><th scope="col" data-column="amount">Amount</th></tr></thead>
+    +   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2" style="">Identity</th><th scope="colgroup" data-columns="team note" colspan="2">Assignment</th><th scope="col" data-column="amount">Amount</th></tr></thead>
+        <tbody data-row-template=""><tr><th scope="row" data-column="key" rowspan="2"><button type="button" data-select-row="">Select <span data-field="key"></span></button></th>
+          <td data-column="name"><label>Name <input data-field="name" required=""></label><output data-error-for="name"></output></td>
+          <td data-columns="team note" colspan="2"><span data-field="team"></span></td>
+          <td data-column="amount" rowspan="2"><label>Amount <input type="number" data-field="amount" required="" min="1"></label></td></tr>
+          <tr><td data-column="name"><span data-field="name"></span></td><td data-column="team"><span data-field="team"></span></td>
+
+      271 |   expect(Math.abs(result.completions[1].delta!)).toBeLessThan(1);
+      272 |   expect(result.columns).toEqual([{ key: "key", pinned: true }, { key: "name", pinned: true }, { key: "team", pinned: false }, { key: "note", pinned: false }, { key: "amount", pinned: false }]);
+    > 273 |   expect(result.actualHTML).toBe(result.expectedHTML);
+          |                             ^
+      274 |   expect(result.restored).toBe(true);
+      275 | });
+      276 |
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:273:29
+
+    Error Context: test-results\grid-pinned-spanning-only--ed516-etry-before-bind-completion-chromium\error-context.md
+
+
+
+
+[11/12] [chromium] › tests\browser\grid-pinned.spec.ts:277:1 › viewport and progressive row blocks inherit current offsets after release and far reveal
+[12/12] [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal
+  3) [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      <table data-pinned-table=""><caption>Measured pinned records</caption><colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="1"></colgroup>
+    -   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2">Identity group</th>
+    +   <thead><tr><th scope="colgroup" data-columns="key name" colspan="2" style="">Identity group</th>
+          <th scope="colgroup" data-columns="team note" colspan="2">Assignment group</th><th scope="col" data-column="amount" rowspan="2">Amount</th></tr>
+    -     <tr><th scope="col" data-column="key">Record <button type="button" data-resize-column="key" aria-label="Resize Record column">Resize</button></th>
+    +     <tr><th scope="col" data-column="key" style="">Record <button type="button" data-resize-column="key" aria-label="Resize Record column">Resize</button></th>
+    -       <th scope="col" data-column="name">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="note">Note</th></tr></thead>
+    +       <th scope="col" data-column="name" style="">Name</th><th scope="col" data-column="team">Team</th><th scope="col" data-column="note">Note</th></tr></thead>
+        <tbody data-row-template=""><tr><th scope="row" data-column="key" rowspan="2"><button type="button" data-select-row="">Select <span data-field="key"></span></button></th>
+          <td data-column="name"><label>Name <input data-field="name" required=""></label><output data-error-for="name"></output></td>
+          <td data-columns="team note" colspan="2"><span data-field="team"></span></td>
+          <td data-column="amount" rowspan="2"><label>Amount <input type="number" data-field="amount" required="" min="1"></label></td></tr>
+          <tr><td data-column="name"><span data-field="name"></span></td><td data-column="team"><span data-field="team"></span></td>
+            <td data-column="note"><label>Note <textarea data-field="note"></textarea></label></td></tr></tbody>
+        <tfoot><tr><td data-columns="key name team note amount" colspan="5">Full native summary</td></tr>
+    -     <tr><th scope="row" data-columns="key name" colspan="2">Identity summary</th><td data-columns="team note" colspan="2">Assignment summary</td>
+    +     <tr><th scope="row" data-columns="key name" colspan="2" style="">Identity summary</th><td data-columns="team note" colspan="2">Assignment summary</td>
+            <td data-column="amount">Application amount</td></tr></tfoot></table>
+
+      332 |   }, { modules, markup });
+      333 |   const { expectedOtherHTML, actualOtherHTML, ...state } = result;
+    > 334 |   expect(actualOtherHTML).toBe(expectedOtherHTML);
+          |                           ^
+      335 |   expect(state).toEqual({ independent: true, restoredOther: true, unpinRestored: true, restored: true, retry: true, changes: 0, observers: 0 });
+      336 | });
+      337 |
+        at D:\workspace\natural_js\tests\browser\grid-pinned.spec.ts:334:27
+
+    Error Context: test-results\grid-pinned-independent-pi-4b80c--and-active-resize-disposal-chromium\error-context.md
+
+
+  3 failed
+    [chromium] › tests\browser\grid-pinned.spec.ts:145:1 › invalid pin flags and nonleading visible pin proposals are atomic and allow corrected retry 
+    [chromium] › tests\browser\grid-pinned.spec.ts:254:1 › spanning-only headers and empty data acquire exact body pin geometry before bind completion 
+    [chromium] › tests\browser\grid-pinned.spec.ts:298:1 › independent pin owners restore authored styles and remain quiet after queued measurement and active resize disposal 
+  9 passed (7.4s)
+[WebServer] (node:21688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:22508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
