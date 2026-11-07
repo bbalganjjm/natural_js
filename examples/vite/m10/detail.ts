@@ -80,6 +80,11 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
     own(cleanup);
     signal.addEventListener("abort", cleanup, { once: true });
     form = bindForm(formRoot, { rows: input.rows, rules: input.rules, parse: input.parse,
+      onBind({ row }) {
+        current = row.id;
+        error.textContent = "";
+        refresh();
+      },
       beforeBindValue(value, context) {
         if (context.field === "active" && context.element.tagName === "SPAN") return value ? "Active" : "Inactive";
       }
@@ -95,10 +100,6 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
       const row = input.rows.get(id);
       if (!row || row.status === "delete") { refresh(); return; }
       form!.bind(id);
-      if (signal.aborted) return;
-      current = id;
-      error.textContent = "";
-      refresh();
     }
 
     function valid(): boolean {

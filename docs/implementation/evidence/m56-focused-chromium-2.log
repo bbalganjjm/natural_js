@@ -1,0 +1,132 @@
+
+
+Running 121 tests using 1 worker
+
+
+
+[1/121] [chromium] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+[2/121] [chromium] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+[3/121] [chromium] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+[4/121] [chromium] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+[5/121] [chromium] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+[6/121] [chromium] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+[7/121] [chromium] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+[8/121] [chromium] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+[9/121] [chromium] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+[10/121] [chromium] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+[11/121] [chromium] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+[12/121] [chromium] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+[13/121] [chromium] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+[14/121] [chromium] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+[15/121] [chromium] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+[16/121] [chromium] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+[17/121] [chromium] › tests\browser\form-binding.spec.ts:346:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+[18/121] [chromium] › tests\browser\form-binding.spec.ts:360:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+[19/121] [chromium] › tests\browser\form-binding.spec.ts:378:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+[20/121] [chromium] › tests\browser\form-binding.spec.ts:400:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+[21/121] [chromium] › tests\browser\form-binding.spec.ts:417:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+[22/121] [chromium] › tests\browser\form-binding.spec.ts:435:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+[23/121] [chromium] › tests\browser\form-binding.spec.ts:451:1 › an empty local selection can finish native reset without adding selected writes or validation
+[24/121] [chromium] › tests\browser\form-binding.spec.ts:465:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+[25/121] [chromium] › tests\browser\form-local.spec.ts:46:1 › local compiled formats display authored raw values without becoming read or rule input
+[26/121] [chromium] › tests\browser\form-local.spec.ts:65:1 › typed local declarations override their HTML kind and retain own named formatter functions
+[27/121] [chromium] › tests\browser\form-local.spec.ts:79:1 › local property writes remain observable without events and an explicit event can enter the previous projection
+[28/121] [chromium] › tests\browser\form-local.spec.ts:106:1 › local parsers affect validation candidates while reads and dependent rendering retain entered strings
+[29/121] [chromium] › tests\browser\form-local.spec.ts:127:1 › formatted local native checks use raw text and preserve custom validity and effective disabled state
+[30/121] [chromium] › tests\browser\form-local.spec.ts:147:1 › local focus reveals raw and retains entered text and caret through dependent updates
+[31/121] [chromium] › tests\browser\form-local.spec.ts:165:1 › pointer focus preserves the clicked selection while readonly local text remains formatted
+[32/121] [chromium] › tests\browser\form-local.spec.ts:186:1 › invalid local edits remain visible through blur and valid replacements format without changing raw
+[33/121] [chromium] › tests\browser\form-local.spec.ts:204:1 › local autoValidate false formats entered raw but explicit validation still checks that raw
+[34/121] [chromium] › tests\browser\form-local.spec.ts:218:1 › local bind null refreshes static formats and dependent renderers from retained raw
+[35/121] [chromium] › tests\browser\form-local.spec.ts:234:1 › native reset restores current native defaults and group choices before local refresh
+[36/121] [chromium] › tests\browser\form-local.spec.ts:265:1 › a native reset button refreshes formatted defaults without a later Form call
+[37/121] [chromium] › tests\browser\form-local.spec.ts:290:1 › synthetic reset follows native behavior while canceled native reset preserves raw and errors
+[38/121] [chromium] › tests\browser\form-local.spec.ts:329:1 › a local div observes its ancestor native form reset and refreshes dependent display
+[39/121] [chromium] › tests\browser\form-local.spec.ts:342:1 › external native form owners reset only their own raw and errors and preserve another owner focus
+[40/121] [chromium] › tests\browser\form-local.spec.ts:368:1 › read inside reset dispatch sees old raw and immediate read after default action sees restored raw
+[41/121] [chromium] › tests\browser\form-local.spec.ts:379:1 › explicit validation immediately after reset survives queued reset cleanup
+[42/121] [chromium] › tests\browser\form-local.spec.ts:396:1 › coalesced resets never adopt a written projection or erase validation performed after the reset
+[43/121] [chromium] › tests\browser\form-local.spec.ts:416:1 › an edit after native reset takes precedence over pending reset rendering and cleanup
+[44/121] [chromium] › tests\browser\form-local.spec.ts:432:1 › formatted local siblings keep file validation on the real input and native reset clears the file
+[45/121] [chromium] › tests\browser\form-local.spec.ts:452:1 › local constructor failures restore written values exact authored children and Select ownership
+[46/121] [chromium] › tests\browser\form-local.spec.ts:496:1 › local disposal releases latest raw and exact display children and suppresses queued reset work
+[47/121] [chromium] › tests\browser\form-local.spec.ts:513:1 › recursive local formatter and renderer refresh fails without losing root ownership or retry
+[48/121] [chromium] › tests\browser\form-local.spec.ts:531:1 › a disposed local callback cannot overwrite its replacement Form or run stale later fields
+[49/121] [chromium] › tests\browser\form-local.spec.ts:560:1 › local image formats retain raw src and alt through direct writes disposal and failed initialization
+[50/121] [chromium] › tests\browser\form-local.spec.ts:588:1 › one-record Rows recipes retain unbound raw keys and distinguish received insert checkpoints from ordinary additions
+[51/121] [chromium] › tests\browser\form-local.spec.ts:611:3 › side CVC local search sends raw lowercase and resets native fields without a request or changes to another page
+[52/121] [chromium] › tests\browser\form-local.spec.ts:611:3 › stack CVC local search sends raw lowercase and resets native fields without a request or changes to another page
+[53/121] [chromium] › tests\browser\form-options.spec.ts:72:1 › Form binds nested typed choices with safe text and retained authored option nodes
+[54/121] [chromium] › tests\browser\form-options.spec.ts:91:1 › single Form changes preserve zero signs number-string booleans null and generated empty-string identities
+[55/121] [chromium] › tests\browser\form-options.spec.ts:107:1 › Form Grid and List consume duplicate raw occurrences without normalizing unrepresentable arrays
+[56/121] [chromium] › tests\browser\form-options.spec.ts:125:1 › Grid array paste enforces available duplicate counts atomically across shared Form and List
+[57/121] [chromium] › tests\browser\form-options.spec.ts:140:1 › typed Form selection updates shared owners and unrelated writes retain option identity and focus
+[58/121] [chromium] › tests\browser\form-options.spec.ts:153:1 › removed and reintroduced choices retain a raw invalid draft until explicit validation can commit it
+[59/121] [chromium] › tests\browser\form-options.spec.ts:171:1 › hidden Form validation uses the target row choices without changing visible native options focus or errors
+[60/121] [chromium] › tests\browser\form-options.spec.ts:189:1 › required raw blanks and empty arrays remain full checks while automatic bypass preserves typed integrity
+[61/121] [chromium] › tests\browser\form-options.spec.ts:204:1 › foreign and disabled option gestures stay drafts while native custom validity remains an explicit constraint
+[62/121] [chromium] › tests\browser\form-options.spec.ts:218:1 › hidden typed Select validation does not inherit the visible control custom error or mutate its DOM
+[63/121] [chromium] › tests\browser\form-options.spec.ts:232:1 › Form and Grid reject foreign equal-string and mapped disabled option gestures even with automatic checks disabled
+[64/121] [chromium] › tests\browser\form-options.spec.ts:248:1 › typed marker and parser failures release ownership while unmarked authored Select conversion stays unchanged
+[65/121] [chromium] › tests\browser\form-options.spec.ts:274:1 › a malformed second option source leaves the previous binding drafts and authored nodes intact
+[66/121] [chromium] › tests\browser\form-options.spec.ts:291:1 › null binding and Rows lifetime operations clear generated choices without rewriting raw data
+[67/121] [chromium] › tests\browser\form-options.spec.ts:305:1 › a formatter that changes Rows cannot install stale later-field choices
+[68/121] [chromium] › tests\browser\form-options.spec.ts:319:1 › formatter disposal stops stale choice work and releases exact authored Select ownership
+[69/121] [chromium] › tests\browser\form-options.spec.ts:333:1 › ready Form writes recheck changed choice sources and stop after a subscriber rebinds the Form
+[70/121] [chromium] › tests\browser\form-options.spec.ts:370:1 › independent Forms expose unique accessible errors and dispose quietly with original option selection
+[71/121] [chromium] › tests\browser\form-options.spec.ts:387:1 › full inline and popup CVC details share typed shift choices with the main Grid
+[72/121] [chromium] › tests\browser\form-values.spec.ts:56:1 › Form value callbacks preserve real replacements and observe native DOM without changing Rows
+[73/121] [chromium] › tests\browser\form-values.spec.ts:93:1 › after projections run the existing formatter or renderer once more only when their raw input changes
+[74/121] [chromium] › tests\browser\form-values.spec.ts:117:1 › projection caching preserves whole-row formatter and renderer reactivity without replaying value callbacks
+[75/121] [chromium] › tests\browser\form-values.spec.ts:136:1 › callback phases follow actual field changes while unrelated rows movement nested siblings and unchanged resets stay quiet
+[76/121] [chromium] › tests\browser\form-values.spec.ts:153:1 › focused text defers explicit binding and preserves its pending reason through unchanged resets until blur
+[77/121] [chromium] › tests\browser\form-values.spec.ts:174:1 › invalid drafts never become binding events and a focused successful commit projects its new raw once on blur
+[78/121] [chromium] › tests\browser\form-values.spec.ts:191:1 › raw constraints and hidden validation ignore display projections and another row native custom validity
+[79/121] [chromium] › tests\browser\form-values.spec.ts:209:1 › parsers and business validation receive committed candidate raw while projections leave originals and save changes intact
+[80/121] [chromium] › tests\browser\form-values.spec.ts:229:1 › native groups typed duplicate choices and unmarked Selects preserve their distinct projection contracts
+[81/121] [chromium] › tests\browser\form-values.spec.ts:256:1 › undefined callbacks preserve structured display and unavailable loaded choices without normalizing their source
+[82/121] [chromium] › tests\browser\form-values.spec.ts:271:1 › callback option errors reject before Form ownership or accessibility changes and leave local Forms unchanged
+[83/121] [chromium] › tests\browser\form-values.spec.ts:292:1 › explicit invalid projections fail synchronously with automatic validation disabled and permit a fresh retry
+[84/121] [chromium] › tests\browser\form-values.spec.ts:332:1 › typed projection guards consume duplicate occurrences and reject an unavailable final replacement before its write
+[85/121] [chromium] › tests\browser\form-values.spec.ts:352:1 › cached explicit typed projections recheck changed options without replaying hooks or changing the received raw
+[86/121] [chromium] › tests\browser\form-values.spec.ts:368:1 › callback failures identify their field row phase and cause without pretending DOM binding is transactional
+[87/121] [chromium] › tests\browser\form-values.spec.ts:394:1 › different-row callback reentry completes the newer binding and rejects same-pair cycles with a recoverable error
+[88/121] [chromium] › tests\browser\form-values.spec.ts:422:1 › formatter and renderer row reentry cannot commit an older returned view over the completed new binding
+[89/121] [chromium] › tests\browser\form-values.spec.ts:443:1 › source removal null binding and replacement clear callback state without stale after work or resurrection
+[90/121] [chromium] › tests\browser\form-values.spec.ts:473:1 › disposal from either callback restores authored render nodes and suppresses every later value write
+[91/121] [chromium] › tests\browser\form-values.spec.ts:494:1 › a callback failure after a committed Rows update keeps the actual change and supports an explicit retry
+[92/121] [chromium] › tests\browser\form-values.spec.ts:509:1 › independent authored Forms share raw data with unique accessible errors and release callbacks without retained ownership
+[93/121] [chromium] › tests\browser\form-values.spec.ts:530:1 › array replacement accessors are materialized once before validation freezing and cached reuse
+[94/121] [chromium] › tests\browser\form-values.spec.ts:544:1 › same-target renderer recursion stays bounded without hooks during cached repaint and after null binding
+[95/121] [chromium] › tests\browser\form-values.spec.ts:565:1 › failed value cycles remain quiet on sibling updates until explicit binding or a real raw change retries them
+[96/121] [chromium] › tests\browser\form-values.spec.ts:583:1 › focused read-only text projects immediately while ordinary formatter-only focus behavior stays compatible
+[97/121] [chromium] › tests\browser\m10-demo.spec.ts:9:1 › shared TS rules reach Grid and CVC details while automatic validation remains an independent option
+[98/121] [chromium] › tests\browser\m10-demo.spec.ts:39:1 › committed field highlights compare loaded originals and clear after restoring the original
+[99/121] [chromium] › tests\browser\m10-demo.spec.ts:59:1 › deleted row inspection keeps edited display separate from original save values and Undo
+[100/121] [chromium] › tests\browser\m10-demo.spec.ts:79:1 › one authored CVC detail page edits nested shared values inline and in Popup independently of selection
+[101/121] [chromium] › tests\browser\m10-demo.spec.ts:115:1 › detail validation blocks navigation, authored close and Escape while preserving the current draft
+[102/121] [chromium] › tests\browser\m10-demo.spec.ts:141:1 › detail scopes skip tombstones and compute filtered pages from raw projection positions
+[103/121] [chromium] › tests\browser\m10-demo.spec.ts:166:1 › detail keeps identity after an edit leaves the filter and store navigation does not clear that filter
+[104/121] [chromium] › tests\browser\m10-demo.spec.ts:184:1 › detail removal and force disposal release Forms and stale controls without validating away cleanup
+[105/121] [chromium] › tests\browser\m10-demo.spec.ts:230:1 › authored height and reveal controls operate the measured Grid without selecting a row
+[106/121] [chromium] › tests\browser\m10-demo.spec.ts:251:1 › authored table binds raw nested choices, formatter, and accessible labels
+[107/121] [chromium] › tests\browser\m10-demo.spec.ts:276:1 › status views expose protected deletions, Undo, clean append and authored empty content
+[108/121] [chromium] › tests\browser\m10-demo.spec.ts:317:1 › authored defaults feed a typed application factory and Undo removes only its inserted employee
+[109/121] [chromium] › tests\browser\m10-demo.spec.ts:339:1 › row resource tracking releases native listeners through refresh, disposal and rebinding
+[110/121] [chromium] › tests\browser\m10-demo.spec.ts:367:1 › sort, filter, and local pages preserve RowId selection
+[111/121] [chromium] › tests\browser\m10-demo.spec.ts:391:1 › initial page choice rebinds a bounded view and keeps off-page RowId selection
+[112/121] [chromium] › tests\browser\m10-demo.spec.ts:412:1 › check and validation policy controls rebind working Grid options
+[113/121] [chromium] › tests\browser\m10-demo.spec.ts:455:1 › parsing, HTML constraints, and application validation retain invalid drafts
+[114/121] [chromium] › tests\browser\m10-demo.spec.ts:498:1 › nested edits and Rows add, set, remove, revert, replace, changes stay observable
+[115/121] [chromium] › tests\browser\m10-demo.spec.ts:540:1 › required and unavailable choices validate; dispose and rebind restore the template
+[116/121] [chromium] › tests\browser\m10-demo.spec.ts:579:1 › bulk paste reports atomic rejection and applies typed cells with protected positions
+[117/121] [chromium] › tests\browser\m10-demo.spec.ts:619:1 › viewport mode bounds a 5,000-row dataset and reveals a row without selecting it
+[118/121] [chromium] › tests\browser\m10-demo.spec.ts:643:1 › ordered row controls insert and copy by identity while value revert keeps store order
+[119/121] [chromium] › tests\browser\m10-demo.spec.ts:679:1 › two authored row-block layouts share edits, nested choices and hierarchical merge keys
+[120/121] [chromium] › tests\browser\m10-demo.spec.ts:715:1 › row-block store controls move and copy whole records independently of the employee demo
+[121/121] [chromium] › tests\browser\m10-demo.spec.ts:745:1 › authored row blocks share grouped controls, typed multiple choices and native values
+  121 passed (36.7s)
+[WebServer] (node:15048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:4988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

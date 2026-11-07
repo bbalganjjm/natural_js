@@ -197,6 +197,50 @@ try {
     source: { original: "ab", value: "Ada", changes: ["update"] }, quietDispose: true
   }, "Installed Form callbacks must project views while preserving raw validation, changes and owned lifetime.");
 
+  const formBinding = await page.evaluate(() => {
+    const h = window.packedConsumer.formBinding, [first, second] = h.rows.entries();
+    const input = h.root.querySelector("input"), summary = h.root.querySelector("span"), select = h.root.querySelector("select");
+    const constructed = h.calls.length === 0;
+    h.form.bind(first.id);
+    const initial = [...h.calls];
+    input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true }));
+    const invalid = !h.form.validate().valid, option = select.firstChild;
+    summary.textContent = "Changed display";
+    h.form.refresh(["summary", "summary"]);
+    const partial = { display: summary.textContent, raw: h.form.read().name, entered: input.value, invalid: input.getAttribute("aria-invalid"),
+      option: select.firstChild === option, calls: h.calls.length };
+    let rejected = false;
+    summary.textContent = "Preserved";
+    try { h.form.refresh(["summary", "unknown"]); } catch (cause) { rejected = cause.code === "FORM_BIND"; }
+    const preflight = rejected && summary.textContent === "Preserved";
+    input.value = "Anne"; input.dispatchEvent(new Event("input", { bubbles: true }));
+    const commitsSilent = h.calls.length === 2;
+    h.rows.revert(first.id);
+    const revert = h.calls.slice(2);
+    h.form.refresh();
+    const refreshed = h.calls.slice(4);
+    h.form.bind(second.id);
+    input.value = "Beth"; input.dispatchEvent(new Event("input", { bubbles: true }));
+    const identity = h.rows.get(first.id).value.name === "Ada" && h.rows.get(second.id).value.name === "Beth";
+    h.form.dispose(); const stopped = h.calls.length;
+    h.rows.revert();
+    let disposed = false;
+    try { h.form.refresh([]); } catch (cause) { disposed = cause.code === "FORM_DISPOSED"; }
+    const quiet = stopped === h.calls.length;
+    h.rows.dispose(); h.root.remove(); delete window.packedConsumer.formBinding;
+    return { constructed, initial, invalid, partial, preflight, commitsSilent, revert, refreshed, identity, disposed, quiet,
+      ids: [first.id, second.id] };
+  });
+  const firstBindingId = formBinding.ids[0];
+  assert.deepEqual(formBinding, { constructed: true,
+    initial: [["before", firstBindingId, null, "A", true], ["after", firstBindingId, null, "Ada"]],
+    invalid: true, partial: { display: "First", raw: "Ada", entered: "", invalid: "true", option: true, calls: 2 },
+    preflight: true, commitsSilent: true,
+    revert: [["before", firstBindingId, "revert", "A", true], ["after", firstBindingId, "revert", "Ada"]],
+    refreshed: [["before", firstBindingId, null, "A", true], ["after", firstBindingId, null, "Ada"]],
+    identity: true, disposed: true, quiet: true, ids: formBinding.ids },
+  "Installed Form whole hooks and same-row refresh must preserve immutable raw context, drafts, errors, choices and lifetime.");
+
   const formChoices = await page.evaluate(() => {
     const h = window.packedConsumer.sharedRules, id = h.rows.entries()[0].id;
     const single = h.root.querySelector('form [data-field="assignment.chosen"]');

@@ -7,7 +7,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
-import type { FieldRules, FormValueContext, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
+import type { FieldRules, FormBindContext, FormValueContext, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
@@ -86,7 +86,19 @@ export function loadEmployees(comm: Communicator = createCommunicator({
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {
   const nameRules: FieldRules = { validate: [["minlength", 2]] };
   const rules = { fields: { name: nameRules } } satisfies RuleSet;
-  const form = bindForm(root, { rows, rules, autoValidate: false });
+  const bindings: FormBindContext<Employee>[] = [];
+  const form = bindForm(root, { rows, rules, autoValidate: false,
+    beforeBind(context) {
+      const row: RowSnapshot<Employee> = context.row;
+      const event: RowsEvent | null = context.event;
+      const element: HTMLElement = context.root;
+      void row; void event; void element;
+    },
+    onBind: context => { bindings.push(context); }
+  });
+  const refreshed: void = form.refresh(["name"]);
+  form.refresh();
+  void refreshed;
   const columns: readonly GridColumn[] = [{ key: "person", width: 180, pinned: true }, { key: "choice", width: 120 }];
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];
   const selectionChanges: GridIdsChange[] = [];
@@ -119,7 +131,7 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
     },
     onColumnsChange: change => columnChanges.push(change)
   });
-  return { form, grid, columnChanges, selectionChanges, checkChanges, pastes };
+  return { form, grid, bindings, columnChanges, selectionChanges, checkChanges, pastes };
 }
 
 export function connectNativeControls(root: HTMLFormElement, table: HTMLTableElement, scrollRoot: HTMLElement) {

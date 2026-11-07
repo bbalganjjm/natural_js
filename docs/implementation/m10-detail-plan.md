@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 9d4e34798cc65418a4713626c8c1e99bc0967d54
+    git_blob: b0e15d2c6a73296c6795c25b241ca4a1d452a2c3
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy more, vertical resize and action-driven scrolling
@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Shared row drafts, native constraints and validation
-    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
+    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Existing CVC Popup lifecycle and focus restoration
@@ -44,7 +44,7 @@ sources:
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: Shared authored CVC details and validated identity navigation
-    git_blob: 92f3a841d3d96b90eb2d2f3cfa9baf66f23f628f
+    git_blob: 9d474350f98980252acf1bf5174a9f42f5c419bd
   - id: demo-browser
     resource: ../../tests/browser/m10-demo.spec.ts
     title: Old Grid demo and six detail/height acceptance additions

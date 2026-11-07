@@ -6,6 +6,10 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
 sources:
+  - id: binding-browser
+    resource: ../../tests/browser/form-binding.spec.ts
+    title: Whole-row lifecycle and same-row selected refresh regressions
+    git_blob: 871b7dd1055123b008978f792688eb78b544fef5
   - id: local-browser
     resource: ../../tests/browser/form-local.spec.ts
     title: Local raw formatting, native reset, lifecycle and CVC regressions
@@ -25,11 +29,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
+    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
+    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -62,10 +66,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -99,7 +103,7 @@ The built-in `required`, `email`, and `commas` rules need no import or registrat
 
 # Constructor and markers
 
-`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: FormValueContext) => unknown` and `onBindValue?: (value: unknown, context: FormValueContext) => unknown`. Value callbacks require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
+`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: FormValueContext) => unknown`, `onBindValue?: (value: unknown, context: FormValueContext) => unknown`, `beforeBind?: (context: FormBindContext<T>) => unknown` and `onBind?: (context: FormBindContext<T>) => unknown`. Both callback pairs require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
 
 The [shared rule contract](rules.md) defines RuleSet.fields, per-kind TS/HTML precedence, empty-list overrides and shared/local composition. autoValidate defaults to true; false bypasses automatic native/business constraints while retaining parse/JSON/native-value integrity and disabled/readOnly edit guards. It clears stale row constraint results at automatic evaluation. Explicit validate() still performs full precommit checks. This is independent of native value conversion and the application-owned scalar choice parser.[^form][^rules]
 
@@ -186,6 +190,31 @@ A focused editable text field shows source raw and defers both callbacks until b
 
 Failures identify field, row, phase, callback and cause. During an active before/after value cycle, recursive work on the same field/row fails FORM_VALUE. Rebinding another row during that cycle may complete that row; generation/source checks suppress stale results, including formatter/render results before DOM commit. Ordinary cached, null or no-callback renderer recursion retains UI_RENDER. This is not a whole-Form transaction: earlier DOM writes, committed Rows changes and application side effects are not rolled back. An unchanged failed cycle stays quiet on unrelated repaint; explicit bind or a real row/raw change retries it. Callback output supplies no automatic inverse mapping for edited controls; normalize business values explicitly before loading or through a Rows write.[^form][^render][^values-browser]
 
+## Whole-row binding and refresh
+
+Whole-row hooks observe full binding through one context: readonly root: HTMLElement, row: RowSnapshot<T> and event: RowsEvent | null. The immutable raw row includes unbound keys, identity and status. Constructor rendering does not call the hooks. Both options require Rows and functions; invalid options fail FORM_BIND before root/Select ownership or ARIA changes.[^entry][^form][^binding-browser]
+
+```ts
+const form = bindForm(root, {
+  rows,
+  beforeBind({ row }) { console.log("Binding", row.id, row.value); },
+  onBind({ row }) { console.log("Bound", row.id, row.value); }
+});
+form.bind(id);                  // Full identity switch; before, fields/errors, after.
+form.refresh();                 // Full refresh of the same row.
+form.refresh(["salary"]);       // Refresh this compiled field; keep the current row.
+```
+
+Explicit nonnull bind and full refresh run beforeBind, the existing full field/draft/error pass, then onBind with event null. Reverting the current live row runs the same whole hooks with its original RowsEvent, even when changed:false; unchanged value callbacks are not forced by revert. A focused editable text projection may still wait for blur: onBind reports the completed synchronous pass. Keyed edits, input commits, validation, focus repaint, append/move/unrelated rows and local/unbound rendering do not run whole hooks. A vanished/deleted current row clears through the existing unbound path.[^form][^binding-browser]
+
+Whole hooks ignore ordinary returns, including false. They cannot veto or replace raw values. Throwing or returning an async/thenable result raises FORM_BIND with callback, rowId and cause; rejected async work is drained. A before failure preserves the previous association, Form DOM and visible issues. An after failure keeps completed writes. Rows.revert has already committed source and invalidated reverted drafts before its hook; source and application side effects are not rolled back. A nested newer bind supersedes the old pass and suppresses its after hook; same-row/cyclic whole-hook entry fails and releases its guard for later recovery.[^form][^binding-browser]
+
+A renderer cannot recursively refresh the same active field/RowId; this fails UI_RENDER and releases its private marker for retry. A failure propagating through a whole-row hook is wrapped as FORM_BIND with the renderer failure as its cause. During an active whole-row or value callback pass, different-row nested binding remains allowed; ordinary cached/no-hook/null rendering retains its existing recursion policy. Selected refresh from whole hooks outside that active renderer pair remains allowed. A newer render generation suppresses the older pass rather than publishing its stale renderer result.[^form][^binding-browser]
+
+refresh(fields) accepts only an array of exact compiled data-field paths. It preflights all names and every selected typed option source before writing any selected field. Duplicates collapse and groups update atomically in DOM compilation order. An empty array does nothing after the disposal check, apart from already-completed local native reset cleanup. Invalid field names or a nonarray argument raise FORM_BIND; malformed selected option sources retain FORM_OPTIONS. Neither preflight failure partially refreshes selected fields. The selection never changes RowId, commits/parses input, validates or clears drafts/issues. Selecting every field still suppresses whole hooks.[^form][^binding-browser]
+
+Only selected writers/value projections and option sources run. Focused editable text/caret follows the existing deferral policy; unselected input, errors, option nodes and drafts remain untouched. A malformed unselected choice source does not block another field. Local selected refresh uses existing raw/display ownership without whole hooks. Full unbound refresh reuses bind(null); selected unbound Rows refresh repaints only its selected empty fields. Refresh uses already compiled fields: dynamic field discovery and live-default unbind remain separate required work.[^form][^binding-browser]
+
 ## Loaded-value changes
 
 A Rows-backed Form compares each field's committed raw path with `rows.original(id)` and writes `data-field-changed="true"` only when they differ. Nested sibling paths compare independently; arrays and objects compare structurally, and scalars use `Object.is`, including distinct `0` and `-0`. Every radio/checkbox group member receives the same flag. Formatters, custom display DOM, option labels and invalid or deferred drafts do not determine it. Returning the committed value to its loaded value clears the flag.[^form]
@@ -248,6 +277,7 @@ Received/business records, full unbound keys and received insert checkpoints bel
 | Method | Behavior |
 |---|---|
 | `bind(id)` | Shows an existing nondeleted row or clears with `null`. Switching rows retains each row's invalid drafts and restores them on return. Local Form accepts only null to refresh current raw display and clear visible errors. |
+| `refresh(fields?)` | Full current-row refresh when omitted; otherwise refresh only compiled paths with no identity switch, validation or issue clearing. Whole hooks run only for a nonnull full row. |
 | `read()` | Returns a detached nested record of marked fields. A row-bound Form reads stored raw values, excluding invalid drafts; a local Form reads current control values without parsing. |
 | `validate(id?)` | Combines native HTML constraints and declarative rules. Without an ID, checks the bound row and every row with a retained draft. With an ID, checks that row without rebinding; hidden-row issues have no `element`. A draft made valid by another change enters `Rows` before the final result. |
 | `dispose()` | Removes listeners, pending local reset work and Rows subscription, releases ownership and restores error/ARIA state. Rows-backed fields recover authored change markers and custom render children. Local formatted controls/images recover latest raw; local static display recovers authored children. Other ordinary input values remain. Repeated disposal is safe. |
@@ -306,3 +336,4 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [^formats]: Retained Form formatter behavior
 [^validators]: Retained Form validator behavior
 [^legacy]: Preserved 1.x formatter and validator behavior
+[^binding-browser]: Whole-row lifecycle and same-row selected refresh regressions

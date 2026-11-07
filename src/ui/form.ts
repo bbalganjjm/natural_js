@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
-import type { RowId, Rows } from "../data/index.js";
+import type { RowId, Rows, RowsEvent } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
@@ -11,7 +11,7 @@ import type { RowOption } from "./row-options.js";
 import { control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import type {
-  FormHandle, FormValueContext, FormatRule, ParseInput, RuleContext, RuleSet,
+  FormBindContext, FormHandle, FormValueContext, FormatRule, ParseInput, RuleContext, RuleSet,
   ValidateRule, ValidationIssue, ValidationResult
 } from "./index.js";
 
@@ -51,6 +51,7 @@ interface Field {
   validate: readonly RuleCall<ValidateRule>[];
   choices?: Choices;
   projection?: Projection;
+  renderingId?: RowId;
   error?: HTMLElement;
   originals: { element: HTMLElement; describedBy: string | null; invalid: string | null; changed: string | null }[];
 }
@@ -81,6 +82,8 @@ function errorId(element: HTMLElement): string {
 export function bindForm<T extends object = Record<string, unknown>>(
   root: HTMLElement,
   options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; autoValidate?: boolean;
+    beforeBind?: (context: FormBindContext<T>) => unknown;
+    onBind?: (context: FormBindContext<T>) => unknown;
     beforeBindValue?: (value: unknown, context: FormValueContext) => unknown;
     onBindValue?: (value: unknown, context: FormValueContext) => unknown;
     render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null> } = {}
@@ -96,6 +99,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
   const autoValidate = options.autoValidate ?? true;
   const { rows, rules, parse } = options;
+  const { beforeBind, onBind } = options;
+  const bindCallbacks = beforeBind !== undefined || onBind !== undefined;
+  if (bindCallbacks && (!rows || beforeBind !== undefined && typeof beforeBind !== "function" ||
+      onBind !== undefined && typeof onBind !== "function")) {
+    throw formError("FORM_BIND", "Whole-row callbacks need Rows and synchronous functions.");
+  }
   const { beforeBindValue, onBindValue } = options;
   const valueCallbacks = beforeBindValue !== undefined || onBindValue !== undefined;
   if (valueCallbacks && (!rows || beforeBindValue !== undefined && typeof beforeBindValue !== "function" ||
@@ -239,6 +248,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const drafts = new Map<RowId, Map<Field, unknown>>();
   const issues = new Map<Field, readonly ValidationIssue[]>();
   const activeValues = new Map<Field, Set<RowId>>();
+  const activeBindings = new Set<RowId>();
   let localRenderStarted = false;
   try {
     for (const field of fields) {
@@ -316,8 +326,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
-  function prepareChoices(values: Record<string, unknown> | null, id: RowId | null) {
-    return new Map(choiceFields.map(field => [field, {
+  function prepareChoices(values: Record<string, unknown> | null, id: RowId | null, selected?: ReadonlySet<Field>) {
+    return new Map((selected ? choiceFields.filter(field => selected.has(field)) : choiceFields).map(field => [field, {
       source: readPath(values, field.choices!.options), options: choiceOptions(field, values, id)
     }] as const));
   }
@@ -331,13 +341,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     return element.multiple ? values : values[0] ?? null;
   }
 
-  function renderLocal(preserve?: Field, blurred?: Field): void {
+  function renderLocal(preserve?: Field, blurred?: Field, selected?: ReadonlySet<Field>): void {
     if (localRendering) throw formError("FORM_RENDER", "A local Form cannot recursively refresh its display.");
     const version = ++renderVersion;
     localRendering = true;
     try {
       const values = localValues();
       for (const [field, retained] of localRenderedValues) {
+        if (selected && !selected.has(field)) continue;
         const raw = readPath(values, field.path);
         const current = () => {
           if (disposed || version !== renderVersion) return false;
@@ -569,9 +580,17 @@ export function bindForm<T extends object = Record<string, unknown>>(
     id: RowId | null, focused: boolean, current: () => boolean): void {
     if (!current()) return;
     const renderer = renderers.get(field.name);
-    if (renderer) renderField("bindForm", field.element, value, context(field, id, source ?? {}), renderer, false,
-      !rows || id !== null && activeValues.get(field)?.has(id) ? current : undefined);
-    else if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, value);
+    if (renderer) {
+      const previous = field.renderingId;
+      if (id !== null && activeBindings.has(id) && previous === id) {
+        throw formError("UI_RENDER", "A field renderer cannot recursively update its own target.", { field: field.name });
+      }
+      field.renderingId = id ?? undefined;
+      try {
+        renderField("bindForm", field.element, value, context(field, id, source ?? {}), renderer, false,
+          !rows || id !== null && (activeValues.get(field)?.has(id) || activeBindings.has(id)) ? current : undefined);
+      } finally { field.renderingId = previous; }
+    } else if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, value);
     else {
       const shown = source && !focused && field.format.length
         ? runner.format(field.format, value, context(field, id, source)) : value;
@@ -581,7 +600,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function projectValue(field: Field, raw: unknown, source: Record<string, unknown>, id: RowId,
-    phase: ValuePhase, force: boolean, focused: boolean, current: () => boolean): void {
+    phase: ValuePhase, force: boolean, focused: boolean, current: () => boolean, preserveFocused = false): void {
     const active = activeValues.get(field);
     if (active?.has(id)) {
       throw valueError(Object.freeze({ ...context(field, id, source), rowId: id, element: field.element, phase }),
@@ -594,7 +613,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (projection.state === "failed") return;
     const editable = field.kind === "single" && control(field.element) && textLengthControl(field.element) && !field.element.readOnly;
     if (focused && editable) {
-      if (force) writeValue(field, raw, source, id, true, current);
+      if (force && !preserveFocused) writeValue(field, raw, source, id, true, current);
       return;
     }
     focused = false;
@@ -657,18 +676,18 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function render(phase: ValuePhase = "val", skipFocused = false, force = false,
-    prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>): void {
+    prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>): number {
     const version = ++renderVersion, id = boundId;
     const snapshot = id === null ? undefined : rows!.get(id);
     const source = id === null ? null : rowValue(id);
     const original = id === null ? undefined : rows!.original(id);
     const currentDrafts = id === null ? undefined : drafts.get(id);
-    const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id) : undefined);
+    const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id, selected) : undefined);
     const current = () => !disposed && version === renderVersion && boundId === id &&
       (id === null || rows!.get(id) === snapshot);
-    if (id === null && valueCallbacks) for (const field of fields) field.projection = undefined;
-    for (const field of fields) {
-      if (!current()) return;
+    if (id === null && valueCallbacks) for (const field of selected ?? fields) field.projection = undefined;
+    for (const field of selected ?? fields) {
+      if (!current()) return version;
       if (field.choices) {
         const next = choices!.get(field)!;
         if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
@@ -681,6 +700,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
       for (const element of field.elements) element.setAttribute("data-field-changed", String(changed));
       const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
+      if (selected && focused && field.kind === "single" && control(field.element) &&
+          textLengthControl(field.element) && !field.element.readOnly) {
+        if (valueCallbacks && id !== null) projectValue(field, readPath(source, field.path), source!, id,
+          phase, force, true, current, true);
+        continue;
+      }
       if (currentDrafts?.has(field)) {
         if (valueCallbacks && id !== null) {
           const raw = readPath(source, field.path), previous = field.projection;
@@ -698,6 +723,66 @@ export function bindForm<T extends object = Record<string, unknown>>(
         writeValue(field, raw, source, id, focused, current);
       }
     }
+    return version;
+  }
+
+  function bindRow(id: RowId | null, event: RowsEvent | null, force: boolean): void {
+    if (bindCallbacks && id !== null && activeBindings.has(id)) {
+      throw formError("FORM_BIND", "A whole-row callback cannot recursively bind an active row.", { rowId: id });
+    }
+    const source = id === null ? null : rowValue(id);
+    const snapshot = id === null ? undefined : rows!.get(id)!;
+    const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
+    const version = ++renderVersion;
+    const current = (generation: number) => !disposed && generation === renderVersion &&
+      (id === null || rows!.get(id) === snapshot);
+    const binding: FormBindContext<T> | undefined = snapshot ? Object.freeze({ root, row: snapshot, event }) : undefined;
+    function invoke(callback: "beforeBind" | "onBind"): void {
+      const run = callback === "beforeBind" ? beforeBind : onBind;
+      if (!run || !binding) return;
+      try {
+        const result = run(binding);
+        if (result !== null && (typeof result === "object" || typeof result === "function") &&
+            typeof (result as { then?: unknown }).then === "function") {
+          void Promise.resolve(result).catch(() => {});
+          throw new TypeError("Whole-row callbacks must finish synchronously.");
+        }
+      } catch (cause) {
+        throw new FrameworkError({ api: "bindForm", code: "FORM_BIND", message: "The whole-row callback failed.",
+          detail: { rowId: id, callback }, cause });
+      }
+    }
+    if (bindCallbacks && id !== null) activeBindings.add(id);
+    try {
+      invoke("beforeBind");
+      if (!current(version)) return;
+      boundId = id;
+      issues.clear();
+      const rendered = render("bind", false, force, prepared);
+      if (!current(rendered) || boundId !== id) return;
+      const currentDrafts = id === null ? undefined : drafts.get(id);
+      if (id !== null && currentDrafts?.size) {
+        const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
+        if (!current(rendered) || boundId !== id) return;
+        for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
+      }
+      showIssues();
+      invoke("onBind");
+    } finally {
+      if (bindCallbacks && id !== null) activeBindings.delete(id);
+    }
+  }
+
+  function bind(id: RowId | null): void {
+    active();
+    if (rows) { bindRow(id, null, true); return; }
+    if (id !== null) throw formError("ROW_MISSING", "This Form has no row store.", { id });
+    flushLocalResets();
+    active();
+    renderLocal();
+    if (disposed) return;
+    issues.clear();
+    showIssues();
   }
 
   function reconcile(id: RowId, validate = true): void {
@@ -872,39 +957,36 @@ export function bindForm<T extends object = Record<string, unknown>>(
       showIssues();
       return;
     }
-    const reset = event.type === "replace" ||
-      event.type === "revert" && (event.id === undefined || event.id === boundId);
+    if (event.type === "revert" && (event.id === undefined || event.id === boundId)) {
+      bindRow(boundId, event, false);
+      return;
+    }
+    const reset = event.type === "replace";
     if (reset || event.type === "set" || event.type === "setMany") issues.clear();
     render(reset ? "bind" : "val", !reset);
     showIssues();
   });
 
   return {
-    bind(id) {
+    bind,
+    refresh(names) {
       active();
-      if (id !== null && !rows) {
-        throw formError("ROW_MISSING", "This Form has no row store.", { id });
-      }
-      if (!rows) {
-        flushLocalResets();
-        active();
-        renderLocal();
-        if (disposed) return;
-      }
-      const source = id === null ? null : rowValue(id);
-      const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
-      boundId = id;
-      issues.clear();
-      if (rows) {
-        render("bind", false, true, prepared);
-        if (disposed || boundId !== id) return;
-        const currentDrafts = id === null ? undefined : drafts.get(id);
-        if (id !== null && currentDrafts?.size) {
-          const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
-          for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
+      if (names === undefined) { bind(boundId); return; }
+      if (!Array.isArray(names)) throw formError("FORM_BIND", "Refresh fields must be an array of compiled field paths.");
+      const requested = new Set<string>();
+      for (const name of names) {
+        if (typeof name !== "string" || !byName.has(name)) {
+          throw formError("FORM_BIND", "Refresh needs an existing compiled field path.", { field: name });
         }
+        requested.add(name);
       }
-      showIssues();
+      const selected = new Set(fields.filter(field => requested.has(field.name)));
+      if (!rows) { flushLocalResets(); active(); }
+      if (!selected.size) return;
+      if (!rows) { renderLocal(undefined, undefined, selected); return; }
+      const source = boundId === null ? null : rowValue(boundId);
+      const prepared = prepareChoices(source, boundId, selected);
+      render("bind", true, true, prepared, selected);
     },
     read() {
       active();
@@ -959,6 +1041,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       disposed = true;
       renderVersion++;
       activeValues.clear();
+      activeBindings.clear();
       for (const field of fields) field.projection = undefined;
       boundRoots.delete(root);
       unsubscribe?.();

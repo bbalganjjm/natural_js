@@ -40,7 +40,7 @@ sources:
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
-    git_blob: 92f3a841d3d96b90eb2d2f3cfa9baf66f23f628f
+    git_blob: 9d474350f98980252acf1bf5174a9f42f5c419bd
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -116,11 +116,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
-generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -163,6 +163,8 @@ An authored `tfoot tr[data-empty]` contains the empty-result message and declare
 # Controller
 
 Details use rowIds with visible, filtered or store scope. Previous/next validates the current Form, re-reads ordered IDs and skips tombstones; filtered navigation computes pages from the raw filtered projection. Opening detail does not require Grid selection or pass through its veto/eligibility rules. Native cancel, authored close and replacement of an inline page validate first; forced disposal always releases resources. Removal/replacement of the current record exposes an authored no-row state. Repeated open/close and switching pages preserve shared Rows and restore focus to an available opener or the connected employee-region fallback.[^detail-controller][^controller][^browser]
+
+The shared detail controller establishes its current RowId, clears the prior operation error and refreshes navigation in Form.onBind. Explicit navigation and source revert therefore share the same completed-binding path. Source subscription still handles ordinary edits and row removal; forced page disposal releases the Form and subscription through CVC ownership.[^detail-controller]
 
 The column controls call `columns` and `setColumns` to adjust preferred width, show/hide, move within a group, swap groups, reset, and deliberately reject invalid state. Resize buttons support pointer drag, ArrowLeft/ArrowRight, Shift for 1-pixel steps, Home and Escape cancellation. State and callback panels distinguish committed layout changes from Rows changes.[^controller]
 

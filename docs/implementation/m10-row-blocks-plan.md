@@ -8,7 +8,7 @@ sources:
   - id: continuation
     resource: m10-parity-plan.md
     title: Required Grid continuation and prior ordered Rows gates
-    git_blob: 9d4e34798cc65418a4713626c8c1e99bc0967d54
+    git_blob: b0e15d2c6a73296c6795c25b241ca4a1d452a2c3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding, logical identities, drafts and paste

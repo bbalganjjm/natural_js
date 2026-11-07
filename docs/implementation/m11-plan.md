@@ -12,7 +12,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI entry
-    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
+    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree implementation

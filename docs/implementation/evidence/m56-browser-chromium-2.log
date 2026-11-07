@@ -1,0 +1,23 @@
+{"shard":1,"passed":119,"identities_match":true,"retries":0,"skips":0}
+{"shard":2,"passed":118,"identities_match":true,"retries":0,"skips":0}
+{"shard_manifest":"m56-chromium-six-shards-2.json","sha256":"03227c59dde7d6232a7147f315d49649d5c25e19b2acdfaf9927d10091f9bf01","complete":false}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Failed Chromium run-3
+
+1 !== 0
+
+    at command (file:///D:/workspace/natural_js/docs/implementation/evidence/m56-chromium-six-shards.mjs:18:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///D:/workspace/natural_js/docs/implementation/evidence/m56-chromium-six-shards.mjs:31:16 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

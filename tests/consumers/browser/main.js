@@ -357,6 +357,25 @@ try {
   });
   valueForm.bind(valueRows.entries()[0].id);
   state.formValues = { root: valueRoot, rows: valueRows, form: valueForm, calls: valueCalls };
+  const bindingRoot = document.createElement("form");
+  bindingRoot.innerHTML = `<label>Name <input data-field="name" required></label><output data-error-for="name"></output>
+    <p>Summary <span data-field="summary"></span></p>
+    <label>Choice <select data-field="choice" data-options="options" data-option-label="label" data-option-value="value"></select></label>`;
+  document.querySelector("main").append(bindingRoot);
+  const bindingRows = createRows([
+    { name: "Ada", summary: "First", choice: 1, options: [{ label: "One", value: 1 }], hidden: { code: "A" } },
+    { name: "Bea", summary: "Second", choice: 2, options: [{ label: "Two", value: 2 }], hidden: { code: "B" } }
+  ]);
+  const bindingCalls = [];
+  const bindingForm = bindForm(bindingRoot, { rows: bindingRows,
+    beforeBind({ root, row, event }) {
+      bindingCalls.push(["before", row.id, event?.type ?? null, row.value.hidden.code,
+        root === bindingRoot && Object.isFrozen(row) && Object.isFrozen(row.value.hidden)]);
+      return false;
+    },
+    onBind({ row, event }) { bindingCalls.push(["after", row.id, event?.type ?? null, bindingRoot.querySelector("input").value]); }
+  });
+  state.formBinding = { root: bindingRoot, rows: bindingRows, form: bindingForm, calls: bindingCalls };
   const localContainer = document.createElement("section");
   localContainer.innerHTML = `<h2>Local Form</h2><form><div data-local-root>
     <label>Amount <input data-field="amount" value="1200" data-format='[["commas"]]' pattern="[0-9]+"></label>

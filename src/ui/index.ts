@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { RowId, RowStatus, Snapshot, RowsEvent } from "../data/index.js";
+import type { RowId, RowSnapshot, RowStatus, Snapshot, RowsEvent } from "../data/index.js";
 
 export interface RuleContext {
   readonly field: string;
@@ -12,6 +12,12 @@ export interface FormValueContext extends RuleContext {
   readonly rowId: RowId;
   readonly element: HTMLElement;
   readonly phase: "bind" | "val";
+}
+
+export interface FormBindContext<T extends object> {
+  readonly root: HTMLElement;
+  readonly row: RowSnapshot<T>;
+  readonly event: RowsEvent | null;
 }
 
 export type FormatRule = (
@@ -92,6 +98,7 @@ export interface PaginationHandle {
 
 export interface FormHandle<T extends object> {
   bind(id: RowId | null): void;
+  refresh(fields?: readonly string[]): void;
   read(): Record<string, unknown>;
   validate(id?: RowId): ValidationResult;
   dispose(): void;

@@ -24,7 +24,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required semantic slices and boundaries
-    git_blob: 0d53da8672bfae6856e2917c28d9a1201005db7e
+    git_blob: bee6828ba2b59db66b46bad5d4d1534da03c1322
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable complete Grid planning snapshot

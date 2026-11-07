@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature scope and dependency order
-    git_blob: 4075c72f0255afe98a55e435a327eb30346c12fd
+    git_blob: ed3427c2322fb85ccdc370f0abfeb23901c74abe
   - id: coverage
     resource: feature-parity.md
     title: Remaining Grid behavior families
-    git_blob: 52b39d14958425940697600e3252cd5787b8c5e4
+    git_blob: 8e0afafbc69ea094a6de0868d8ec87b3a2cffc21
   - id: data
     resource: ../../src/data/index.ts
     title: Shared row identity, order and immutable changes

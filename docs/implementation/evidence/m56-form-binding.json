@@ -1,0 +1,1205 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.6 Form binding lifecycle and selective refresh",
+  "recorded_at": "2026-11-07",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "workspace_baseline_commit": "bbc767b7e6e5a94ae555c640182c69041fb4cbcf",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m55-verification.json",
+      "sha256": "80fb06311d1bbe2ed7a788acf04abc75c64838e2d974094cef842c739964fdef",
+      "preserved_in_commit": "bbc767b7e6e5a94ae555c640182c69041fb4cbcf"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m55-local-form.json",
+      "sha256": "55f6b1a75fdee0493e189f217da9d1ff1a633afd4c027c0de191a718c96cd507"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and unclosed owner obligation through immutable M5.5 evidence and the original audit. This selected whole-row observer/same-ID compiled refresh delta does not replace parent ledgers or rerun/recertify historical runtime. Prior local raw/native-reset acceptance remains in its dated M5.5 parent; this stage starts clean.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "bbc767b7e6e5a94ae555c640182c69041fb4cbcf",
+    "scope": "No initial dirty documentation or inherited earlier-stage snapshot provenance is attributed to M5.6."
+  },
+  "public_delta": {
+    "new_public_named_types": [
+      "FormBindContext<T>"
+    ],
+    "new_public_options": [
+      "bindForm beforeBind(context: FormBindContext<T>)",
+      "bindForm onBind(context: FormBindContext<T>)"
+    ],
+    "new_public_methods": 1,
+    "new_public_method_signatures": [
+      "FormHandle.refresh(fields?: readonly string[]): void"
+    ],
+    "new_public_entries": 0,
+    "new_shared_framework_modules": 0,
+    "new_runtime_dependencies": 0,
+    "note": "Reuse the existing Form compiled fields, source/render guards, value projection, draft/error state and typed choice owners. Whole hooks observe Rows snapshots and ignore ordinary return values; selected refresh never changes RowId or commits/validates inputs. No new data owner, registry or lifecycle module."
+  },
+  "selected_contracts": {
+    "whole_row_observers": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Add synchronous beforeBind/onBind observers around explicit nonnull bind, full current-row refresh and current-live-row revert. Supply readonly root, immutable complete raw RowSnapshot<T> including unbound keys and original revert event or null for explicit calls. Ignore ordinary results including false; reject/drain thenables and report FORM_BIND API/hook/row/cause.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/index.ts",
+        "src/data/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B02",
+        "B03",
+        "B06",
+        "B08",
+        "B10"
+      ],
+      "remaining": "Local/shared/global hook/default composition, per-unbound-key observation and complete row lifecycle parity remain required."
+    },
+    "ordering_and_lifecycle": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Run before before association/DOM/visible-issue changes; then preserve existing full render/value/draft/error ordering and invoke after only for the current completed synchronous pass. Revert source and draft invalidation are already committed; failures do not roll them back. Guard source identity, render generation and disposal; allow completed different-row nested binds, reject active same-row/cyclic hook entry, drain async returns even after supersession, and release guards after failures. A private Field/RowId renderer marker rejects same-pair/cross-field selected recursion with UI_RENDER (wrapped by FORM_BIND if it propagates through a whole hook), restores its prior value in finally and preserves nonrecursive whole-hook selection and different-row nested binding.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S04",
+        "B04",
+        "B05",
+        "B07",
+        "B09",
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B16",
+        "B17",
+        "B18"
+      ],
+      "remaining": "Application side effects are not transactional. After means the synchronous pass finished; focused editable value projection may wait for blur. No new generic lifecycle engine or full-family closure is claimed."
+    },
+    "same_id_selected_refresh": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Refresh exact existing compiled field paths without changing RowId, parsing/committing/validating inputs or clearing any retained drafts/issues. Preflight the entire array, reject unknown/nonstring names, deduplicate, use compiled DOM order and keep groups atomic. Empty selection is a disposal-checked no-op except existing completed local reset work. Selecting every field still suppresses whole hooks.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/index.ts"
+      ],
+      "witnesses": [
+        "S03",
+        "S02",
+        "B02",
+        "B19",
+        "B20",
+        "B22",
+        "B23",
+        "B24",
+        "B25"
+      ],
+      "remaining": "Dynamic field add/remove rediscovery, cross-row partial binding and all remaining general selective-binding equivalence remain required. Cross-row stale-display writes are not reproduced."
+    },
+    "selected_writer_ownership": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Prepare every selected typed option source before any selected writer; ignore invalid unselected sources and leave their choices untouched. Reuse existing Rows/local field loops with a mask, selected forced value projections, focused editable/caret deferral, readonly/group/Select/custom-render behavior and raw row context. Selected unbound refresh repaints only the selected existing empty/local view; full unbound refresh uses bind(null).",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/row-options.ts",
+        "src/ui/field-render.ts"
+      ],
+      "witnesses": [
+        "S03",
+        "S04",
+        "B17",
+        "B18",
+        "B20",
+        "B21",
+        "B22",
+        "B23",
+        "B24",
+        "B25"
+      ],
+      "remaining": "Only already compiled fields participate. Local/native reset behavior remains inherited; no new default, unbind, dynamic discovery or second binding engine is introduced."
+    },
+    "migration": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Map legacy full whole-row hooks to explicit observer options while preserving full raw source ownership in Rows. Replace legacy selective bind that changed row association before filtering fields with same-current-ID refresh. Exercise the existing CVC detail caller and document source/event/focus timing and scope boundaries.",
+      "source_refs": [
+        "v1/src/natural.ui.js",
+        "examples/vite/m10/detail.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "D01",
+        "S01",
+        "B01",
+        "B02",
+        "B08",
+        "B12",
+        "B22"
+      ],
+      "remaining": "M5.7 live captured defaults/unbind, shared/global composition and dynamic discovery remain required; native defaults and Rows originals do not substitute for captured live defaults."
+    },
+    "installed": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use one exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge, exercising the new whole observers/context and full/selected refresh through public handles with complete fresh three-engine coverage and unchanged performance budgets.",
+      "source_refs": [
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No npm publication or release tag. Actual macOS/iOS Safari remains excluded; available WebKit and installed Windows Chrome/Edge remain mandatory."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "The existing Form wraps full binding in source/generation guarded whole-row observers",
+      "marker": "function bindRow("
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "The public Form entry defines typed whole-row context and existing-handle refresh",
+      "marker": "export interface FormBindContext"
+    },
+    "S03": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "The existing Form handle preflights and masks selected compiled fields while retaining drafts/issues",
+      "marker": "refresh(names) {"
+    },
+    "D01": {
+      "kind": "example",
+      "file": "examples/vite/m10/detail.ts",
+      "title": "The existing CVC detail receives current-row state from its Form onBind callback",
+      "marker": "onBind({ row }) {"
+    },
+    "I01": {
+      "kind": "consumer",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript checks public FormBindContext and full/selected refresh signatures",
+      "marker": "const bindings: FormBindContext<Employee>[] = [];"
+    },
+    "I02": {
+      "kind": "consumer",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Installed browser fixture creates Rows-backed whole-row observers with full immutable context",
+      "marker": "state.formBinding ="
+    },
+    "I03": {
+      "kind": "consumer",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Installed browsers assert whole hook timing, immutable context and selected refresh preservation",
+      "marker": "const formBinding = await page.evaluate("
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "whole hook option errors reject before root Select or accessibility ownership"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a failing before hook preserves the previous row view draft and visible errors before a later retry"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a failing after hook retains completed association and display and releases its guard for retry"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "whole hooks reject and drain asynchronous results and permit a synchronous recovery"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a superseded hook still drains its rejected asynchronous result without overwriting the nested binding"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "revert commits source and drops its draft even when the before hook fails before visible changes"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a source mutation during before binding supersedes that pass and suppresses its stale after hook"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a completed different-row nested bind replaces its outer pass without a stale after hook"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "same-row and cyclic whole-hook entry fail without poisoning the next explicit binding"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "disposal during a before hook suppresses field work and after hooks and releases ownership"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "formatter and renderer row replacement during full binding cannot publish an older view or after hook"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "whole after hooks finish synchronously while full and selected refresh defer focused text projection"
+    },
+    "B19": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order"
+    },
+    "B20": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "selected refresh treats native groups atomically and keeps focused readonly projection immediate"
+    },
+    "B21": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "selected typed choices prepare only selected sources and reject a later malformed selected source before any writer"
+    },
+    "B22": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "selected refresh preserves invalid drafts and issues without parsing validating or committing inputs"
+    },
+    "B23": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "local selected refresh uses raw context while leaving unselected native display and validation errors alone"
+    },
+    "B24": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "an empty local selection can finish native reset without adding selected writes or validation"
+    },
+    "B25": {
+      "kind": "browser",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "unbound selected refresh only clears selected compiled fields and never emits whole hooks"
+    },
+    "S04": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "A private Field/RowId renderer marker bounds whole-pass subset recursion and restores the prior marker on exit",
+      "marker": "const previous = field.renderingId;"
+    }
+  },
+  "witness_counts": {
+    "status": "exact_source_witnesses_fresh_runtime_independently_confirmed",
+    "unit_delta": 0,
+    "browser_delta": 25,
+    "source_witnesses": 4,
+    "example_source_witnesses": 1,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 658,
+    "expected_full_cases_per_engine": 683,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 683
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m56-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m56-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful whole-row observer/same-ID selection DOM regressions; a zero unit delta is legitimate",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF document checks",
+      "Independent connected production-code, raw-evidence and final semantic-document reviews"
+    ],
+    "limitations": [
+      "Historical runtime is not rerun or recertified.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory.",
+      "No model-response generation/evaluation or token-saving measurement is requested."
+    ],
+    "baseline_input_entries": 183,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 658,
+    "setup_observations": [
+      {
+        "command": "Inline source-witness mapping assert",
+        "reported_runs": 1,
+        "reported_result": "Stopped before writing when the concurrently updated test inventory grew from23 to24; the subsequent mapping uses its actual count.",
+        "raw_output_retained": false,
+        "counted_as_gate": false,
+        "independently_recertified": false
+      },
+      {
+        "command": "node --check node_modules/.cache/m56-evidence.mjs",
+        "reported_runs": 1,
+        "reported_result": "passed after all16 final runtime groups completed",
+        "raw_output_retained": false,
+        "counted_as_gate": false,
+        "independently_recertified": false
+      },
+      {
+        "command": "node --check node_modules/.cache/m56-git-audit.mjs",
+        "reported_runs": 1,
+        "reported_result": "passed after all16 final runtime groups completed",
+        "raw_output_retained": false,
+        "counted_as_gate": false,
+        "independently_recertified": false
+      }
+    ],
+    "independent_reviews": {
+      "baseline": "passed_read_only_bbc767b_m55_source_raw_archive_preservation_audit",
+      "source": "passed_final_independent_connected_source_caller_review_and_corrected122_case_three_engine_acceptance",
+      "evidence": "passed_final_independent_raw_all_attempts_archive_performance_three_engine_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_recovery",
+        "helper": "node_modules/.cache/m56-baseline-audit.mjs",
+        "head": "bbc767b7e6e5a94ae555c640182c69041fb4cbcf",
+        "inputs": 183,
+        "raw_evidence_files": 74,
+        "immutable_parents": 6,
+        "records": 31,
+        "input_maps": 3,
+        "canonical_groups": 16,
+        "execution_commands": 21,
+        "collection_commands": 7,
+        "unit_cases": 138,
+        "full_cases_per_engine": 658,
+        "chromium_partitions": [
+          119,
+          104,
+          117,
+          118,
+          92,
+          108
+        ],
+        "actual_tar": {
+          "sha256": "94a942395623a3f4200874416113167a77d2f1269c24f5e65167b1348ab310ce",
+          "files": 183,
+          "packed_bytes": 318064,
+          "unpacked_bytes": 1587409
+        },
+        "historical_bodies_dates_preserved": 25,
+        "remote_master": "b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6",
+        "scope": "Retained source/evidence bytes only; historical runtime was not rerun."
+      },
+      "contract": {
+        "status": "bounded_contract_independently_accepted_before_runtime_implementation",
+        "clarifications_applied": [
+          "Callback signatures are explicit single-context unknown-returning functions.",
+          "All selected typed option sources preflight before the first selected DOM writer."
+        ],
+        "remaining": "Defaults/unbind M5.7 and dynamic discovery are required later contracts."
+      },
+      "preliminary_source_review": {
+        "status": "superseded_by_final_corrected122_case_source_review",
+        "confirmed": [
+          "Complete selected names and selected typed choice preparation precede selected writes.",
+          "Whole binding increments render generation before beforeBind; older parser/validator reconciliation cannot commit after a newer failed-before generation.",
+          "Focused selected text queues forced bind-phase value callbacks through preserveFocused without a value/caret write.",
+          "Active whole binding now supplies renderField freshness; superseded renderer results are suppressed and different-row nested renderer binding can complete.",
+          "Selected paths preserve association/drafts/issues and reuse existing local/Rows writers; unselected typed sources and nodes stay untouched."
+        ],
+        "reported_issue_resolution": "Root corrected installed partial expectation to committed raw Ada plus separately preserved entered draft, and added activeBindings renderer freshness with a dedicated caught-before-failure regression.",
+        "risky_omission": "Resolved: existing before-failure witness now includes parser-triggered newer bind failure and proves sibling raw cannot commit or replace prior visible issues.",
+        "normalized_sha256": {
+          "src/ui/form.ts": "4f4fecc167afa49fbd8b599bd1d657f1fda2d88de1306bd583681dfef8328eeb",
+          "src/ui/index.ts": "d40c153b379e245ccecc08ec102d08dde5b308b957c12eb203118847dd6512be",
+          "tests/browser/form-binding.spec.ts": "1a6f606602c65d9dd6d8c794c382d928b34b2f291ae7d84f313c918dca23c889"
+        },
+        "final_acceptance_condition": "Satisfied by all three corrected122-case focused passes on the unchanged184-input map."
+      },
+      "source": {
+        "status": "approved_independently_for_corrected_whole_row_and_safe_same_id_refresh_scope",
+        "reviewed_at": "2026-11-07",
+        "normalized_review_time_sha256": {
+          "src/ui/form.ts": "c7193b4be47a07a36dfb9ec3ae232a9f8664f92411cbadfb792ba42496826688",
+          "src/ui/index.ts": "d40c153b379e245ccecc08ec102d08dde5b308b957c12eb203118847dd6512be",
+          "examples/vite/m10/detail.ts": "07b260b82f7db815b8a8164ada45fc106075d6ffd78cbd62195c5bf55b6b8754",
+          "tests/consumers/ts/check.ts": "47ebef90e287d75b06ceb8694028dbf0d9ca0ff46196eb9147e510e787309e30",
+          "tests/consumers/browser/main.js": "f741f2a5a3bec3cdbc962b38d81c926afc007d3718883d7f6a24a2294613d06f",
+          "tools/check-packed-browser.mjs": "869a40ba96880527ed5800adea200c27c5bb39d792f3f549ed5a7f759014298c",
+          "tests/browser/form-binding.spec.ts": "79f51c2326773bd50c631a607086f7b2fdb646d63f509b78f6dd84dacf77afd5"
+        },
+        "review_time_hash_scope": "UTF-8/CRLF-to-LF hashes of settled production/public/test/CVC/installed/tool files at this independent source review; no post-stamp whole-document or future-commit hashes are claimed.",
+        "focused_source_map": {
+          "file": "m56-inputs-86abb649bc66.json",
+          "sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+          "entries": 184,
+          "current_sources_match": true
+        },
+        "corrected_focused_gates": [
+          {
+            "engine": "chromium",
+            "passed": 122,
+            "log": "m56-focused-chromium-3.log",
+            "log_sha256": "9ce8c1c505315efa4503b7b589b635720762e320842d98874ed6ae8e32d5ee42",
+            "input_manifest": "m56-inputs-86abb649bc66.json",
+            "input_manifest_sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+            "sources_unchanged": true,
+            "exit_code": 0,
+            "arguments": [
+              "node_modules/@playwright/test/cli.js",
+              "test",
+              "-c",
+              "tests/playwright.config.ts",
+              "tests/browser/form-binding.spec.ts",
+              "tests/browser/form-values.spec.ts",
+              "tests/browser/form-options.spec.ts",
+              "tests/browser/form-local.spec.ts",
+              "tests/browser/m10-demo.spec.ts",
+              "--project=chromium",
+              "--workers=1",
+              "--reporter=line"
+            ]
+          },
+          {
+            "engine": "firefox",
+            "passed": 122,
+            "log": "m56-focused-firefox-2.log",
+            "log_sha256": "aff2b0813a6efd699bf5cb1e5f24bf3669ad204b0283d5ebcc50b0d3cc472056",
+            "input_manifest": "m56-inputs-86abb649bc66.json",
+            "input_manifest_sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+            "sources_unchanged": true,
+            "exit_code": 0,
+            "arguments": [
+              "node_modules/@playwright/test/cli.js",
+              "test",
+              "-c",
+              "tests/playwright.config.ts",
+              "tests/browser/form-binding.spec.ts",
+              "tests/browser/form-values.spec.ts",
+              "tests/browser/form-options.spec.ts",
+              "tests/browser/form-local.spec.ts",
+              "tests/browser/m10-demo.spec.ts",
+              "--project=firefox",
+              "--workers=1",
+              "--reporter=line"
+            ]
+          },
+          {
+            "engine": "webkit",
+            "passed": 122,
+            "log": "m56-focused-webkit-2.log",
+            "log_sha256": "2ffd3c6f4b2c51c5eb08165ba9f76b87deae8d7c4ad13ea25a4e8e434406cb53",
+            "input_manifest": "m56-inputs-86abb649bc66.json",
+            "input_manifest_sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+            "sources_unchanged": true,
+            "exit_code": 0,
+            "arguments": [
+              "node_modules/@playwright/test/cli.js",
+              "test",
+              "-c",
+              "tests/playwright.config.ts",
+              "tests/browser/form-binding.spec.ts",
+              "tests/browser/form-values.spec.ts",
+              "tests/browser/form-options.spec.ts",
+              "tests/browser/form-local.spec.ts",
+              "tests/browser/m10-demo.spec.ts",
+              "--project=webkit",
+              "--workers=1",
+              "--reporter=line"
+            ]
+          }
+        ],
+        "confirmed": [
+          "Whole observer option/context/return/error/preflight contracts and complete immutable raw/event ownership align with public FormBindContext and existing Rows snapshots.",
+          "Generation advances before beforeBind; source/association/render checks suppress obsolete parser/validator writes even when a newer before failure is caught. Current-live-row revert retains committed source/draft invalidation and exact event timing without forced unchanged value callbacks.",
+          "Active whole bindings share renderer freshness for legitimate different-row nested completion. A private Field.renderingId saves/restores the active row in finally and rejects same-pair/cross-field subset cycles before a second renderer call; ordinary hook composition and inherited local/null/cached/no-hook checks remain allowed.",
+          "Selected refresh preflights every name/selected typed source before writing, preserves identity/drafts/issues and focused raw/caret with pending bind-phase callbacks, skips unselected choice rebuilding and reuses local/native-reset owners.",
+          "The25 fixed new witnesses include bounded same/cross-field cycles, retry, permitted before/onBind selection, different-row renderer completion, parser-before-failure supersession and exact selected ownership boundaries.",
+          "CVC detail and installed type/browser/tool callers align with one context/two options/one method; invalid entered drafts stay separate from committed Form.read raw. No new module/dependency/registry or second binding engine was added."
+        ],
+        "scope_limit": "This approves corrected connected source/caller behavior and the recorded122-case focused passes on all three engines. Complete final canonical runtime, exact fresh artifact/performance evidence and semantic document review remain separate pending gates. Superseded121-case/682-case source attempts and the manual Firefox stop receive no corrected-source credit; defaults/unbind M5.7, dynamic discovery, shared/global composition and all full-family/P0/M13 obligations remain required."
+      },
+      "retained_development_failure": {
+        "label": "focused-chromium",
+        "log": "m56-focused-chromium.log",
+        "log_sha256": "07d56f8c1c9779467f3fb5a289bd0f811e3b74dfb6916a8889ab5074160ba125",
+        "input_manifest": "m56-inputs-ee8fd87e5688.json",
+        "input_manifest_sha256": "ee8fd87e5688318d487bbc010e31a7cb6bbaef197052185f463c6076a0ddd80c",
+        "exit_code": 1,
+        "passed": 119,
+        "total": 120,
+        "scope": "Original failed Chromium development attempt on the old frozen map, retained as failure; the corrected121-case three-engine run supplies focused acceptance."
+      },
+      "source_before_renderer_recursion_fix": {
+        "status": "superseded_prior_source_focused_review_reopened_for_renderer_recursion_fix",
+        "reviewed_at": "2026-11-07",
+        "normalized_review_time_sha256": {
+          "src/ui/form.ts": "4f4fecc167afa49fbd8b599bd1d657f1fda2d88de1306bd583681dfef8328eeb",
+          "src/ui/index.ts": "d40c153b379e245ccecc08ec102d08dde5b308b957c12eb203118847dd6512be",
+          "examples/vite/m10/detail.ts": "07b260b82f7db815b8a8164ada45fc106075d6ffd78cbd62195c5bf55b6b8754",
+          "tests/consumers/ts/check.ts": "47ebef90e287d75b06ceb8694028dbf0d9ca0ff46196eb9147e510e787309e30",
+          "tests/consumers/browser/main.js": "f741f2a5a3bec3cdbc962b38d81c926afc007d3718883d7f6a24a2294613d06f",
+          "tools/check-packed-browser.mjs": "869a40ba96880527ed5800adea200c27c5bb39d792f3f549ed5a7f759014298c",
+          "tests/browser/form-binding.spec.ts": "1a6f606602c65d9dd6d8c794c382d928b34b2f291ae7d84f313c918dca23c889"
+        },
+        "review_time_hash_scope": "UTF-8/CRLF-to-LF hashes of the settled source/test/CVC/installed/tool files at independent review time; these are not post-stamp whole-document hashes or later-commit claims.",
+        "focused_source_map": {
+          "file": "m56-inputs-9a922875ed5a.json",
+          "sha256": "9a922875ed5a4d10cbfb09a1c8d1e3f0a9a31b92ab7ade238760252ad81fc35a",
+          "entries": 184,
+          "current_sources_match": true
+        },
+        "corrected_focused_gates": [
+          {
+            "engine": "chromium",
+            "passed": 121,
+            "log": "m56-focused-chromium-2.log",
+            "log_sha256": "f595abd18ffe2c424aeedb30cf9e2626c72ddde3dbd03c70d1daebed9e4bda8b",
+            "input_manifest": "m56-inputs-9a922875ed5a.json",
+            "input_manifest_sha256": "9a922875ed5a4d10cbfb09a1c8d1e3f0a9a31b92ab7ade238760252ad81fc35a",
+            "sources_unchanged": true,
+            "exit_code": 0,
+            "arguments": [
+              "node_modules/@playwright/test/cli.js",
+              "test",
+              "-c",
+              "tests/playwright.config.ts",
+              "tests/browser/form-binding.spec.ts",
+              "tests/browser/form-values.spec.ts",
+              "tests/browser/form-options.spec.ts",
+              "tests/browser/form-local.spec.ts",
+              "tests/browser/m10-demo.spec.ts",
+              "--project=chromium",
+              "--workers=1",
+              "--reporter=line"
+            ]
+          },
+          {
+            "engine": "firefox",
+            "passed": 121,
+            "log": "m56-focused-firefox.log",
+            "log_sha256": "03bb1f5561ca2af2d1b1b65779fad88dff72944ce51dd1565a8dedff1e97df57",
+            "input_manifest": "m56-inputs-9a922875ed5a.json",
+            "input_manifest_sha256": "9a922875ed5a4d10cbfb09a1c8d1e3f0a9a31b92ab7ade238760252ad81fc35a",
+            "sources_unchanged": true,
+            "exit_code": 0,
+            "arguments": [
+              "node_modules/@playwright/test/cli.js",
+              "test",
+              "-c",
+              "tests/playwright.config.ts",
+              "tests/browser/form-binding.spec.ts",
+              "tests/browser/form-values.spec.ts",
+              "tests/browser/form-options.spec.ts",
+              "tests/browser/form-local.spec.ts",
+              "tests/browser/m10-demo.spec.ts",
+              "--project=firefox",
+              "--workers=1",
+              "--reporter=line"
+            ]
+          },
+          {
+            "engine": "webkit",
+            "passed": 121,
+            "log": "m56-focused-webkit.log",
+            "log_sha256": "8f9cc084d90477516ec646fbce0e80898adfc735db481f076b82bf3743c472ec",
+            "input_manifest": "m56-inputs-9a922875ed5a.json",
+            "input_manifest_sha256": "9a922875ed5a4d10cbfb09a1c8d1e3f0a9a31b92ab7ade238760252ad81fc35a",
+            "sources_unchanged": true,
+            "exit_code": 0,
+            "arguments": [
+              "node_modules/@playwright/test/cli.js",
+              "test",
+              "-c",
+              "tests/playwright.config.ts",
+              "tests/browser/form-binding.spec.ts",
+              "tests/browser/form-values.spec.ts",
+              "tests/browser/form-options.spec.ts",
+              "tests/browser/form-local.spec.ts",
+              "tests/browser/m10-demo.spec.ts",
+              "--project=webkit",
+              "--workers=1",
+              "--reporter=line"
+            ]
+          }
+        ],
+        "confirmed": [
+          "Whole observers are Rows-only synchronous unknown-returning functions. Full raw row/root/event context is immutable; ordinary returns do not veto and thenables are drained/rejected with FORM_BIND details.",
+          "Before callbacks run before association/DOM/issue changes; source identity and the pre-before render generation suppress obsolete parser/validator commits, including a caught newer before failure. After callbacks follow the current completed render/draft/error pass only.",
+          "Active same-row/cyclic whole entry rejects and releases guards; different-row nested whole/formatter/renderer work can complete and suppress older writes/after hooks. Existing renderField freshness now covers active whole passes while ordinary no-hook/cached/null recursion behavior stays inherited.",
+          "Current-live-row revert observers receive the original immutable event even for unchanged source; source/draft invalidation is already committed and unchanged value callbacks are not forced. Keyed edits, input/validation/focus, unrelated rows and vanished bindings do not emit whole callbacks.",
+          "Selected refresh preflights the complete name array and every selected typed source before its first writer, visits deduplicated DOM order and keeps groups atomic. It cannot retarget identity, parse/commit/validate input, clear drafts/issues or rebuild unselected choices.",
+          "Focused selected text retains raw/caret while a forced bind-phase projection remains pending until blur. Local/unbound masks and completed native-reset exception reuse existing owners without whole callbacks.",
+          "CVC detail onBind owns current-row display bookkeeping; installed JS/TS/browser callers preserve the distinction between committed raw and invalid entered drafts. Public delta stays one context/two options/one method with no module/dependency/registry."
+        ],
+        "scope_limit": "This approves connected source/caller behavior supported by corrected focused gates; full canonical runtime, exact package/performance evidence and final semantic document review remain separate pending gates. Live defaults/unbind M5.7, dynamic discovery, shared/global composition, all full owner families/P0/M13 and user acceptance remain required."
+      },
+      "superseded_old_frozen_stage": {
+        "input_manifest": "m56-inputs-9a922875ed5a.json",
+        "completed_nonbrowser_canonical_groups": 13,
+        "completed_chromium_cases": 682,
+        "artifact_sha256": "f84f98b47bd17eafd4b345915b55e9a827509b77ad7950c8a97b6ab4358e1abc",
+        "final_source_credit": false,
+        "reason": "A confirmed source correctness issue required a new frozen source map and complete final gate set; the old completed Chromium/package/nonbrowser receipts remain superseded historical attempts.",
+        "artifact_backup": {
+          "kind": "ignored_superseded_artifact_backup",
+          "input_manifest": "m56-inputs-9a922875ed5a.json",
+          "descriptor": "node_modules/.cache/m56-superseded-artifact-9a922875ed5a/artifact.json",
+          "descriptor_sha256": "466d73ed3d3c1cb3f054b8f2d3be68228fe71a8c6569e030320e1e7478ce3c6f",
+          "tarball": "node_modules/.cache/m56-superseded-artifact-9a922875ed5a/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "sha256": "f84f98b47bd17eafd4b345915b55e9a827509b77ad7950c8a97b6ab4358e1abc",
+          "packed_bytes": 320284,
+          "unpacked_bytes": 1600885,
+          "files": 183,
+          "tracked": false,
+          "certifies_final_frozen_package": false,
+          "scope": "Root copied the previous exact tar and original descriptor before regenerating the corrected-source package. This ignored backup is historical proof for the superseded old input map, not a new distribution/publication or final package acceptance.",
+          "descriptor_path_note": "The copied original descriptor retains its original tarball property; the explicit backup tarball path identifies the preserved bytes."
+        }
+      },
+      "renderer_recursion_fix_review": {
+        "status": "approved_independent_static_and_corrected122_case_focused_review",
+        "normalized_review_time_sha256": {
+          "src/ui/form.ts": "c7193b4be47a07a36dfb9ec3ae232a9f8664f92411cbadfb792ba42496826688",
+          "src/ui/index.ts": "d40c153b379e245ccecc08ec102d08dde5b308b957c12eb203118847dd6512be",
+          "tests/browser/form-binding.spec.ts": "79f51c2326773bd50c631a607086f7b2fdb646d63f509b78f6dd84dacf77afd5"
+        },
+        "guard": "Field.renderingId records the active renderer RowId at the existing Field owner; active whole same-pair entry fails UI_RENDER, and finally restores the prior marker.",
+        "safe_compositions": [
+          "Different-row nested rendering sees a different previous RowId and may complete.",
+          "Direct selected refresh from before/onBind has no active same renderer pair and remains allowed.",
+          "Cross-field cycles return to an already active Field/RowId and fail before another renderer invocation.",
+          "Marker restoration permits retry and does not replace inherited local/null/cached/no-hook field-render checks."
+        ],
+        "witness": "B17",
+        "remaining": "Complete final frozen canonical gates, independent raw archive/performance/three-engine evidence and final semantic documents remain pending.",
+        "document_wording": "Form docs now state UI_RENDER may be wrapped as FORM_BIND when it propagates through a whole-row hook."
+      },
+      "preliminary_documents": {
+        "status": "superseded_by_final_independent_semantic_approval",
+        "reviewed_at": "2026-11-07",
+        "files": [
+          "docs/implementation/m5-form-binding-plan.md",
+          "docs/implementation/feature-parity.md",
+          "docs/v2/form.md",
+          "docs/v2/ui.md",
+          "docs/v2/migration.md",
+          "docs/v2/grid-demo.md"
+        ],
+        "confirmed": [
+          "U01/U02/U03 distinguish implemented local raw/native reset and whole-row/selected refresh outcomes from remaining M5.7 live-default/unbind, dynamic discovery and global/per-unbound-key obligations.",
+          "Whole hooks are immutable-context synchronous observers with ignored ordinary returns, original revert events and before/after failure boundaries; no whole-hook veto is claimed.",
+          "Compiled same-ID selected refresh preserves drafts/issues/focus and preflights selected typed sources; FORM_BIND field-list errors stay distinct from FORM_OPTIONS source errors.",
+          "Private renderer same-pair cycles fail UI_RENDER and may be wrapped by FORM_BIND through a whole hook; marker cleanup and allowed nonrecursive/different-row compositions align with settled source.",
+          "CVC detail uses onBind for current-row/navigation bookkeeping; source subscriptions and page disposal keep existing ownership.",
+          "The final-document template derives all source/unit/browser/command/artifact counts from the final receipt rather than certifying superseded attempts."
+        ],
+        "clarification_reported": "Applied and read-verified: different-row renderer reentry is limited to active whole-row/value callback passes; ordinary cached/no-hook/null recursion policy remains inherited.",
+        "final_acceptance_condition": "Review final receipt-generated current/plan/coverage/index/log and seven final semantic bodies, then record review-time hash scope. Do not treat this preliminary note as final document or zero-warning check acceptance."
+      },
+      "runtime_summary": {
+        "status": "latest16_fresh_frozen_gates_and_independent_raw_evidence_review_passed_documents_pending",
+        "input_manifest": "m56-inputs-86abb649bc66.json",
+        "input_manifest_sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+        "unit_cases": 138,
+        "unit_delta": 0,
+        "new_browser_cases": 25,
+        "full_suites": {
+          "chromium": {
+            "passed": 683,
+            "elapsed": "6 sequential Chromium shards, 226.9s",
+            "log": "m56-browser-chromium-3.log"
+          },
+          "firefox": {
+            "passed": 683,
+            "elapsed": "6.6m",
+            "log": "m56-browser-firefox-2.log"
+          },
+          "webkit": {
+            "passed": 683,
+            "elapsed": "5.6m",
+            "log": "m56-browser-webkit.log"
+          }
+        },
+        "chromium_manifest": "m56-chromium-six-shards-3.json",
+        "chromium_partitions": [
+          119,
+          118,
+          111,
+          113,
+          114,
+          108
+        ],
+        "gate_records": 43,
+        "development_records": 11,
+        "superseded_final_records": 16,
+        "input_manifests": 4,
+        "raw_child_files": 66,
+        "retained_attempts": [
+          {
+            "manifest": "m56-chromium-six-shards-2.json",
+            "complete": false,
+            "passed": null,
+            "final_coverage_credit": false
+          },
+          {
+            "manifest": "m56-chromium-six-shards-3.json",
+            "complete": true,
+            "passed": 683,
+            "final_coverage_credit": true
+          },
+          {
+            "manifest": "m56-chromium-six-shards.json",
+            "complete": true,
+            "passed": 682,
+            "final_coverage_credit": false
+          }
+        ],
+        "artifact": {
+          "sha256": "7a871478a1b9acfe254969533482706819d5f55953086b13e22db1e243b27d8b",
+          "files": 183,
+          "packed_bytes": 320529,
+          "unpacked_bytes": 1602110
+        },
+        "limit": "Independent raw evidence and final semantic review pass. Actual final document stamps/checks and root mechanical completion remain pending."
+      },
+      "final_raw_evidence": {
+        "status": "approved_independently",
+        "audit_log": "node_modules/.cache/m56-independent-audit.log",
+        "audit_log_sha256": "efa99c29f53c1aa1f399d1ffc15d9311f4877ef60f2b7d1c1040fea653cd02ca",
+        "audit_helper": "node_modules/.cache/m56-independent-audit.mjs",
+        "audit_helper_sha256": "412e3e7c7549ac9a16e2b807350c23b78086a5688a54244e304e2db8ae0a5a1a",
+        "reviewed_snapshots": {
+          "scope": "These are the exact receipt/ledger bytes audited before this review-status update. Subsequent metadata regeneration changes their whole-file hashes; these values do not claim a final self hash or create a receipt/ledger hash cycle.",
+          "receipt": {
+            "path": "docs/implementation/evidence/m56-verification.json",
+            "sha256": "8a9cbe3925d195d32e0a1c465de5e20681e8ac3b83ba8b4c0f98c358a6cb132b"
+          },
+          "ledger": {
+            "path": "docs/implementation/evidence/m56-form-binding.json",
+            "sha256": "cf6569bf53986bb97b7b35366b3d53ff9a3e33829e92586e9fcfcc21d607fd31"
+          }
+        },
+        "verified": {
+          "gate_records": 43,
+          "development_records": 11,
+          "superseded_final_records": 16,
+          "latest_canonical_groups": 16,
+          "input_manifests": 4,
+          "manifest_entry_counts": [
+            183,
+            184,
+            184,
+            184
+          ],
+          "current_frozen_inputs": 184,
+          "execution_stage_commands": 21,
+          "collection_commands": 7,
+          "unit_cases": 138,
+          "new_browser_cases": 25,
+          "full_cases_per_engine": 683,
+          "chromium_partitions": [
+            119,
+            118,
+            111,
+            113,
+            114,
+            108
+          ],
+          "raw_child_files": 66,
+          "current_artifact": {
+            "sha256": "7a871478a1b9acfe254969533482706819d5f55953086b13e22db1e243b27d8b",
+            "files": 183,
+            "packed_bytes": 320529,
+            "unpacked_bytes": 1602110
+          },
+          "old_artifact": {
+            "sha256": "f84f98b47bd17eafd4b345915b55e9a827509b77ad7950c8a97b6ab4358e1abc",
+            "files": 183,
+            "old_map_payloads_verified": true,
+            "corrected_source_credit": false
+          },
+          "performance": {
+            "recomputed_medians": 60,
+            "durations": 300,
+            "binding_budgets": 9,
+            "viewport_budgets": 21,
+            "recorded_viewport_invariants": true
+          },
+          "immutable_git_parents": 6,
+          "protected_raw_tar_fixtures": 3,
+          "v1_legacy_lock_and_remote_master": "unchanged"
+        },
+        "retained_attempt_limits": "Old complete682-case26-child attempt and incomplete683-case14-child attempt stay separate from latest full683-case26-child coverage. Manually stopped Firefox72 is last started progress, not pass count. Chromium import failure and isolated pass establish no cause or coverage credit.",
+        "method": "Read-only assertions over retained raw inputs/logs/archives/reports and Git provenance. No browser/compiler/benchmark/model runtime was rerun.",
+        "remaining": "Independent final seven-body/receipt/index/log semantics are now approved separately. Root must finish actual verified stamps, unchanged-runtime-fact proof, changed/full OKF and historical preservation checks before final mechanical status."
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "reviewed_at": "2026-11-07",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_whole_file_sha256": "d6bd5d9f1f361589cc9ac1a099c0aec138b6e087f4c83855638382d49c6999fe",
+            "normalized_body_sha256": "ad9270f45a6455f9a0831a9f4ee58850901800600e6f7b1c7a845d39f9873774"
+          },
+          "docs/implementation/feature-parity.md": {
+            "normalized_whole_file_sha256": "49f65b9cca4835b45f4221d936fb0144169518a54238415e00360413a87b979d",
+            "normalized_body_sha256": "e95a2873f160e3dfbc2cdea07f1d07bafc61bea72c0e729869256e1cebea263f"
+          },
+          "docs/implementation/m5-form-binding-plan.md": {
+            "normalized_whole_file_sha256": "5e95b44cdf20954d08b746b837dacd62915bbd4c5aa3368c674dd2b1eb50fe58",
+            "normalized_body_sha256": "be9a972626afbd2c397bda49499467cf5976d104649927ed15f8ad1ff1d8c25e"
+          },
+          "docs/v2/form.md": {
+            "normalized_whole_file_sha256": "0222398dc340a73b743cf14884037cc2bc2f4e5c15ff55529847f903c257a53b",
+            "normalized_body_sha256": "a72c25e1dbfb7658a3a86fadeed3266954c46a5782bdb56b7db577dcc6a6edc3"
+          },
+          "docs/v2/ui.md": {
+            "normalized_whole_file_sha256": "c713bf645bf4d899041477d8484f0e6b523f78ffc18ec2b75f79908cde5fe89d",
+            "normalized_body_sha256": "5184f2f1c1240cf400393e3c84c83982699d366c13d9b1f5e19abd4413fcbefe"
+          },
+          "docs/v2/migration.md": {
+            "normalized_whole_file_sha256": "bd509492eaf14f73e2f885db5379ac48377aafc71030a42d91eb1b2428eeb43c",
+            "normalized_body_sha256": "7db5b2d4199e3e6b214acb714bd99cad83e704753a4eef680dccbdd038233abb"
+          },
+          "docs/v2/grid-demo.md": {
+            "normalized_whole_file_sha256": "72fcf1f2664287dc42f00aef6c8d846c95f5c64ffee0552ebd4fcee98cfb8980",
+            "normalized_body_sha256": "6fcd1b0a1570f1e0c9ec70587dfec7b4e091d489f703a03f08772beb8f603628"
+          }
+        },
+        "hash_scope": "PRE-final-verified-stamp semantic-review snapshots: whole-file hashes normalize UTF-8 CRLF to LF; body hashes also exclude YAML frontmatter. Whole-file hashes are not claimed as post-stamp/final hashes. Fingerprint/generated/verified metadata may settle mechanically; reviewed body hashes must remain unchanged unless independently reviewed again.",
+        "reviewed_receipt_snapshot": {
+          "path": "docs/implementation/evidence/m56-verification.json",
+          "sha256": "d0d1c66f0c3c31efcf6db65b55d739690443ac31bfea1f2dac5af8eb30420b59",
+          "scope": "Receipt bytes at semantic review; later permitted metadata/semantic-ledger SHA regeneration changes its whole-file hash. This is not a final self hash."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m56-runtime-invariance-reviewed.json",
+          "sha256": "b1e24d58ffd52006c6a4cfb3b77ab72c98c2e081084e0b9552d79931120065eb",
+          "audited_receipt_sha256": "8a9cbe3925d195d32e0a1c465de5e20681e8ac3b83ba8b4c0f98c358a6cb132b",
+          "unchanged": true,
+          "excluded": [
+            "review metadata",
+            "reviewed semantic-ledger SHA-256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under a separate snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "additional_review_scope": [
+          "docs/implementation/index.md",
+          "docs/log.md",
+          "docs/implementation/evidence/m56-verification.json"
+        ],
+        "confirmed": [
+          "Final current/plan/coverage and public Form/UI/migration/CVC bodies align with settled source, original raw audit and184/138/25/683/43/16/21+7 counts and the exact7a871 final artifact.",
+          "Plan Steps2 now puts beforeBind/onBind in bindForm options and only refresh in FormHandle. Context/return/event/focus/preflight/error/recursion/retained-draft ownership and new public delta match declarations and implementation.",
+          "U01/U02/U03 and resume/next actions preserve M5.7 defaults/unbind, dynamic discovery, global composition and all full owner/P0/M13 obligations without claiming a veto or approved omission.",
+          "Source/subscription ownership and CVC onBind navigation behavior are accurate. Selected refresh is same-ID and compiled-only; ordinary cached/null/no-hook renderer recursion retains inherited rules.",
+          "Prior complete/failed/manual-stop/diagnostic runs stay outside latest corrected-source credit. Failure cause remains unconfirmed; no historical runtime, model/token, Safari/manual/personal result is recertified.",
+          "Implementation index routes to the new plan. Existing same-day M5.5 log entries and all older dated entries remain exact normalized text; the date heading is retained."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "authorized_actions": [
+            "Apply verified metadata only to these seven independently reviewed semantic concepts.",
+            "Refresh source fingerprints and regenerate receipt/ledger metadata hashes while proving all audited runtime facts invariant.",
+            "Run actual changed/full OKF checks and historical body/nonfingerprint-date preservation checks; retain their exact measured output.",
+            "After successful actual zero-error/zero-warning checks, record mechanical results and update documents/final overall selected-verification status without another semantic roundtrip."
+          ],
+          "conditions": [
+            "Do not change reviewed body semantics or production/runtime facts.",
+            "Do not mark mechanical checks passed before their actual successful output.",
+            "Keep raw-audit pre-review snapshot hashes and semantic-review pre-stamp hashes scoped as snapshots; do not relabel them final/self hashes.",
+            "If semantic bodies or runtime facts change, obtain fresh scoped review instead of using this authorization."
+          ]
+        },
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m56-docs-changed.log",
+              "sha256": "bbcf6f1d77779e4d6c10de53557755d85c0c4cdec6d0a213a517805781ba0f1c",
+              "concepts": 73,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m56-docs-full.log",
+              "sha256": "642e1260144ca6de4988bdd90ec0da4a94310edeaa31646392dc251cdc1719ab",
+              "concepts": 73,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m56-doc-history.json",
+            "sha256": "e670773f6fa8187c05ac261165138b8a75a14dec0ce6cb1feede42d3862225a4",
+            "historical_fingerprint_only": 35,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 7,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "operator_dispositions": [
+      {
+        "kind": "manual_stop_after_confirmed_source_correctness_issue",
+        "label": "browser-firefox",
+        "log": "m56-browser-firefox.log",
+        "log_sha256": "1cd90313c4e339f240546836ac4be9abbf6dfc1cbc47226a1442ce9c8dce83ba",
+        "input_manifest": "m56-inputs-9a922875ed5a.json",
+        "input_manifest_sha256": "9a922875ed5a4d10cbfb09a1c8d1e3f0a9a31b92ab7ade238760252ad81fc35a",
+        "sources_unchanged": true,
+        "exit_code": 4294967295,
+        "stopped_process": {
+          "pid": 20320,
+          "parent_pid": 5636,
+          "parent": "m56-run",
+          "scope": "Root verified the owned Firefox Playwright CLI command before stopping only that process."
+        },
+        "last_reported_progress": {
+          "position": 72,
+          "total": 682
+        },
+        "certifies_full_suite": false,
+        "source_of_disposition": "Root explicitly reported stopping the owned run after independent source review confirmed same-pair renderer recursion. The exit code alone is not interpreted as a spontaneous Firefox failure.",
+        "note": "Progress is the last recorded test position, not a complete pass count or coverage proof. Retain all original bytes and the original unchanged old-map flag."
+      }
+    ],
+    "superseded_artifacts": [
+      {
+        "kind": "ignored_superseded_artifact_backup",
+        "input_manifest": "m56-inputs-9a922875ed5a.json",
+        "descriptor": "node_modules/.cache/m56-superseded-artifact-9a922875ed5a/artifact.json",
+        "descriptor_sha256": "466d73ed3d3c1cb3f054b8f2d3be68228fe71a8c6569e030320e1e7478ce3c6f",
+        "tarball": "node_modules/.cache/m56-superseded-artifact-9a922875ed5a/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+        "sha256": "f84f98b47bd17eafd4b345915b55e9a827509b77ad7950c8a97b6ab4358e1abc",
+        "packed_bytes": 320284,
+        "unpacked_bytes": 1600885,
+        "files": 183,
+        "tracked": false,
+        "certifies_final_frozen_package": false,
+        "scope": "Root copied the previous exact tar and original descriptor before regenerating the corrected-source package. This ignored backup is historical proof for the superseded old input map, not a new distribution/publication or final package acceptance.",
+        "descriptor_path_note": "The copied original descriptor retains its original tarball property; the explicit backup tarball path identifies the preserved bytes."
+      }
+    ],
+    "retained_failed_browser_attempts": [
+      {
+        "kind": "incomplete_chromium_canonical_attempt",
+        "manifest": "m56-chromium-six-shards-2.json",
+        "manifest_sha256": "03227c59dde7d6232a7147f315d49649d5c25e19b2acdfaf9927d10091f9bf01",
+        "runner": "m56-chromium-six-shards.mjs",
+        "runner_sha256": "21bcc5a9faa39a9bd6ae7f308d48942b68d6eaa43fbfd2c99b430758a0b2d009",
+        "shard_count": 6,
+        "parent_log": "m56-browser-chromium-2.log",
+        "parent_log_sha256": "0f1973aa5fcdada87d0a9c1b3736e4f78cb56127554fcceda542cde745e4f03c",
+        "parent_exit_code": 1,
+        "parent_input_manifest": "m56-inputs-86abb649bc66.json",
+        "parent_input_manifest_sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+        "parent_sources_unchanged": true,
+        "complete": false,
+        "certifies_full_suite": false,
+        "expected_full_id_count": 683,
+        "completed_partitions": [
+          {
+            "shard": 1,
+            "passed": 119
+          },
+          {
+            "shard": 2,
+            "passed": 118
+          }
+        ],
+        "failed_partition": {
+          "shard": 3,
+          "listed_cases": 111,
+          "expected": 110,
+          "unexpected": 1,
+          "skipped": 0,
+          "flaky": 0,
+          "report": "m56-chromium-six-run-3-2.json",
+          "report_sha256": "821e01cdf7c1491e1407d5ef7690dc2e91afbf78e353b3319e189ddd9a81fcf4",
+          "stderr": "m56-chromium-six-run-3-2-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "raw_child_files": 14,
+        "observed_failure": "grid-geometry.spec.ts root and handle ownership cannot be shared and failure cleanup permits a retry failed in beforeEach while dynamically importing grid.ts; current cause is unconfirmed.",
+        "note": "Neither the completed prefix nor the110 passed results inside the failed111-case partition grant final coverage. Source/configuration/budgets stayed unchanged; a fresh complete six-shard/full-engine attempt is required."
+      }
+    ],
+    "diagnostic_dispositions": [
+      {
+        "kind": "isolated_exact_case_diagnostic_not_coverage_or_cause_proof",
+        "log": "m56-focused-core-chromium.log",
+        "log_sha256": "ed6d2efe870bb900c371c0b1259d8fcc7356cd19dcb762da5ad0cc2f98fe2fbd",
+        "input_manifest": "m56-inputs-86abb649bc66.json",
+        "input_manifest_sha256": "86abb649bc6608c776a25a1a0b3ae7e064d8a04a9714d507cdb7084c908b748e",
+        "sources_unchanged": true,
+        "exit_code": 0,
+        "passed": 1,
+        "elapsed": "2.1s",
+        "arguments": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/grid-geometry.spec.ts",
+          "--grep=root and handle ownership cannot be shared and failure cleanup permits a retry",
+          "--project=chromium",
+          "--workers=1",
+          "--trace=retain-on-failure",
+          "--reporter=line"
+        ],
+        "trace_policy": "retain-on-failure",
+        "retained_trace_zip": false,
+        "conclusion": "The isolated exact case passed unchanged. This supplies no full-suite credit and establishes neither a cause nor an ERR_NO_BUFFER_SPACE diagnosis for the failed beforeEach import."
+      }
+    ],
+    "actual_frozen_input_entries": 184,
+    "actual_canonical_gate_groups": 16,
+    "actual_execution_stage_commands": 21,
+    "actual_collection_commands": 7,
+    "actual_gate_records": 43,
+    "actual_development_gate_records": 11,
+    "actual_superseded_final_records": 16,
+    "actual_input_manifests": 4,
+    "actual_child_raw_files": 66,
+    "actual_chromium_attempt_manifests": 3,
+    "actual_unit_cases": 138,
+    "actual_full_cases_per_engine": 683,
+    "actual_failed_gate_records": 3,
+    "artifact_sha256": "7a871478a1b9acfe254969533482706819d5f55953086b13e22db1e243b27d8b",
+    "chromium_method": "One latest canonical gate records all683 identities across six fresh sequential built-in shards119+118+111+113+114+108 with seven collection and six execution commands. Earlier complete682-case old-map and incomplete683-case attempts remain separate without corrected-source coverage credit.",
+    "reviewed_conclusions": [
+      "Independent corrected connected source/caller review and122-case focused passes on all three engines accept whole-row observer timing/context/returns/errors, source/generation/parser guards, private renderer-pair recursion/recovery and safe hook composition, and same-ID selected refresh without disturbing drafts/issues/unselected choices.",
+      "All43 captured runner records and four recorded source maps pass raw hash/provenance review. Their inventories legitimately contain183/184/184/184 entries; only the latest sixteen canonical groups share the final current184-input map. Eleven development and sixteen superseded final records remain visible.",
+      "All three final engines pass683 cases. Latest Chromium119+118+111+113+114+108 proves exact once-only full identity/metadata coverage with no skips/retries/flaky results; Firefox/WebKit are unsharded. All66 raw child files include prior complete old-source and failed current-source attempts without final coverage credit.",
+      "The exact183-member final tar SHA7a871478a1b9acfe254969533482706819d5f55953086b13e22db1e243b27d8b has320529 packed/1602110 unpacked bytes and exact workspace payloads/list sizes. Isolated JS/TS and five available Windows browsers use the same tar. The ignored old f84 artifact matches its superseded map and grants no corrected-source package credit.",
+      "All60 raw medians from300 durations and original nine binding/twenty-one viewport budgets pass, including recorded viewport geometry/anchors/cleanup invariants. No universal speed, heap-retention or actual-token result is inferred.",
+      "Six immutable Git parents, three protected raw tar fixtures, v1, ignored original legacy lock and remote master remain unchanged. Earlier failed diagnostics and the manual Firefox stop retain their actual disposition; no unconfirmed import cause is assigned.",
+      "Selected source/runtime outcomes and independent raw evidence are accepted. Final seven semantic documents/receipt/index/log are independently approved before verified stamping; mechanical document checks remain pending. Full owner families, M5.7 live defaults/unbind, dynamic discovery, shared/global composition, P0/M13, manual assistive technology and personal/fixed-agent acceptance stay open; no omission/publication/tag is approved."
+    ],
+    "document_gate_note": "Independent final semantics/body approval is complete. Root may apply seven verified stamps, refresh fingerprints/receipt metadata, prove all audited runtime facts invariant, run changed/full OKF and historical-preservation checks, then record actual successful mechanical results/final status without another review roundtrip. Reviewed semantic body hashes must remain unchanged."
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Live captured defaults/unbind, dynamic field discovery, local/shared/global callback/default composition, unbound-key per-value observation and remaining control/source/dynamic equivalence outside these selected whole observers and safe same-ID compiled refresh outcomes."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected outcomes can receive acceptance after implementation, fresh final gates and independent review. No full owner family, P0, M13 or parent milestone closure is claimed."
+  }
+}

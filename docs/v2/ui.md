@@ -4,12 +4,12 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormValueContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
+symbols: [RuleContext, FormBindContext, FormValueContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
+    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
+    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -63,6 +63,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | Symbol | Signature | Returns |
 |---|---|---|
 | `RuleContext` | Field, values snapshot, row identity, optional field element | Rule context |
+| `FormBindContext<T>` | Readonly root HTMLElement, immutable row: RowSnapshot<T>, event: RowsEvent \| null | Rows-backed whole-Form callback context |
 | `FormValueContext` | RuleContext with bind/val phase, nonnull RowId and primary HTMLElement | Rows-backed Form value callback context |
 | `FormatRule` | Value, arguments, context | Display string |
 | `ValidateRule` | Value, arguments, context | Boolean or message |
@@ -79,7 +80,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `SelectSelection<V>` | `V | string | null` | Raw choice or authored string |
 | `SelectHandle<V>` | `setChoices`, `setValue`, `value`, `dispose` | Select handle |
 | `PaginationHandle` | `set`, `state`, `dispose` | Pagination handle |
-| `FormHandle<T>` | `bind`, `read`, `validate`, `dispose` | Form handle |
+| `FormHandle<T>` | `bind`, `refresh`, `read`, `validate`, `dispose` | Form handle |
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
 | `GridColumn` | Readonly `key`, optional positive preferred `width`, optional boolean `hidden`/`pinned`; visible pins form a leading prefix | Column state |
@@ -122,6 +123,12 @@ DOM-local Form applies effective formatters through the existing rules. Local re
 # Form value callbacks
 
 Rows-backed Form has separate beforeBindValue/onBindValue callbacks receiving unknown and FormValueContext. This context extends RuleContext with phase "bind" or "val", nonnull rowId and the primary bound HTMLElement. Undefined preserves the projected value; all other supported returns, including false, replace presentation without changing Rows. Local Forms reject these options. See [Form value callbacks](form.md#value-callbacks) for raw validation, caching, focus and error rules.[^ui][^form]
+
+# Form whole-row callbacks and refresh
+
+beforeBind?: (context: FormBindContext<T>) => unknown and onBind?: (context: FormBindContext<T>) => unknown require Rows and synchronous functions. They surround explicit full binding/current-row refresh and current live-row revert, with null event for explicit calls. Ordinary returns are ignored. Errors, thenables, nested supersession and disposal follow the existing Form lifecycle; a focused value projection may still defer until blur.[^ui][^form]
+
+FormHandle.refresh(fields?: readonly string[]): void refreshes the current identity. Omit fields for the full pass; provide exact compiled paths for an atomic preflight and selected rendering without whole hooks, parsing, validation or issue/draft clearing. Duplicate paths collapse; [] does no selected work. Selected choices preflight together, while unselected choice sources/nodes remain untouched. Local/unbound refresh has no whole-row hook. See [Form binding](form.md#whole-row-binding-and-refresh) for timing and failure boundaries.[^ui][^form]
 
 # Grid binding callbacks
 

@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-state-plan.md
     title: Completed received-state continuation
-    git_blob: c6862677a5bce2ad6f861838cce82e74e1e93053
+    git_blob: c2537d458efcf8d73f6f3abb0948e76e15acea35
   - id: baseline
     resource: evidence/m52-verification.json
     title: Preserved 4660cd6 source and runtime evidence
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, candidates, drafts, validation and lifetime
-    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
+    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Existing row-local option extraction
@@ -36,7 +36,7 @@ sources:
   - id: detail
     resource: ../../examples/vite/m10/detail.ts
     title: Existing manual nested shift-option conversion
-    git_blob: 92f3a841d3d96b90eb2d2f3cfa9baf66f23f628f
+    git_blob: 9d474350f98980252acf1bf5174a9f42f5c419bd
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Preserved Form and Select intent

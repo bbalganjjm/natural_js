@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 30196434ef6930be3b021b0879f87e5287b5d932
+    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
+    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 52b39d14958425940697600e3252cd5787b8c5e4
+    git_blob: 8e0afafbc69ea094a6de0868d8ec87b3a2cffc21
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 4075c72f0255afe98a55e435a327eb30346c12fd
-generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+    git_blob: ed3427c2322fb85ccdc370f0abfeb23901c74abe
+generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -436,7 +436,11 @@ rows.revert(id); // Retains id and insert status; restores the received insert v
 
 Choose ordinary add when cancellation should remove the inserted row. A legacy live InitialData snapshot is not automatically a native default: before binding, set defaultValue/defaultChecked/defaultSelected when Reset fields must restore a preset. Otherwise capture an explicit application default record/checkpoint as above. Rows-backed native reset policy remains application-owned; use explicit data operations rather than implying a row-wide write from the browser reset event.[^rows][^form][^legacy-ui]
 
-The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Local display ownership introduces no second dataset or callback registry. Whole-row/global hooks, unbound-key callback observation, partial binding and dynamic discovery retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
+The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Local display ownership introduces no second dataset or callback registry. Global composition, live-default unbind and dynamic discovery retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
+
+Legacy Form onBeforeBind/onBind becomes beforeBind/onBind with explicit FormBindContext<T>: root, immutable full raw row and original revert event or null. Ordinary returns do not cancel binding. Use beforeBindValue/onBindValue for field presentation; normalize source explicitly through Rows. Whole hooks surround full bind/refresh and current live-row revert, not construction, field edits or selected refresh. The CVC employee detail updates its current-row state through onBind.[^form][^legacy-ui]
+
+Replace legacy selective bind(row,data,cols) with a full bind(id) for an identity switch, then refresh(["field.path"]) only when refreshing the current row. This prevents untouched old controls from writing into another record. Selection preflights every field/selected typed option source, keeps drafts/errors and focused entered text, and skips unselected choice rebuilding. Refresh uses compiled fields; it does not rediscover inserted/removed markup or restore captured live defaults.[^form][^legacy-ui]
 
 # Verify
 
