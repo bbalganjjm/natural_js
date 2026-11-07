@@ -64,6 +64,19 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     }
   });
   own(() => detail.dispose());
+  const departmentFields = find<HTMLElement>(detailRoot, '[data-role="department-fields"]');
+  const departmentHost = departmentFields.parentElement!;
+  const departmentNext = departmentFields.nextSibling;
+  const departmentToggle = find<HTMLButtonElement>(detailRoot, '[data-action="toggle-department"]');
+  departmentToggle.addEventListener("click", () => {
+    const visible = departmentHost.contains(departmentFields);
+    if (visible) departmentFields.remove();
+    else departmentHost.insertBefore(departmentFields, departmentNext);
+    detail.rescan();
+    if (!visible) detail.refresh(["profile.department"]);
+    departmentToggle.setAttribute("aria-expanded", String(!visible));
+    departmentToggle.textContent = visible ? "Show department" : "Hide department";
+  }, { signal });
   let list: ListHandle<Employee>;
   const grid = bindGrid(table, {
     rows,

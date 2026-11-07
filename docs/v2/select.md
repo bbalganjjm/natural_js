@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Select types and export
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: select
     resource: ../../src/ui/select.ts
     title: Select binding runtime

@@ -37,8 +37,9 @@
               <div><label>Email <input data-field="email" type="email" required data-validate='[["email"],["companyEmail"]]'></label><small data-error-for="email"></small></div>
               <div><label>Salary <input data-field="salary" inputmode="decimal" required data-format='[["commas"]]' data-validate='[["integer"],["minvalue",0]]'></label><small data-error-for="salary"></small></div>
               <div><label>Team <input data-field="profile.team" required></label><small data-error-for="profile.team"></small></div>
-              <div><label>Department <input data-field="profile.department"></label><small data-error-for="profile.department"></small></div>
+              <div data-role="department-fields"><label>Department <input data-field="profile.department"></label><small data-error-for="profile.department"></small></div>
             </div>
+            <button type="button" data-action="toggle-department" aria-expanded="true">Hide department</button>
           </form>
           <button type="button" data-action="save">Save changes</button>
         </section>

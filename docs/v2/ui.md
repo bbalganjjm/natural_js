@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -80,7 +80,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `SelectSelection<V>` | `V | string | null` | Raw choice or authored string |
 | `SelectHandle<V>` | `setChoices`, `setValue`, `value`, `dispose` | Select handle |
 | `PaginationHandle` | `set`, `state`, `dispose` | Pagination handle |
-| `FormHandle<T>` | `bind`, `refresh`, `defaults`, `unbind`, `read`, `validate`, `dispose` | Form handle |
+| `FormHandle<T>` | `bind`, `refresh`, `rescan`, `defaults`, `unbind`, `read`, `validate`, `dispose` | Form handle |
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
 | `GridColumn` | Readonly `key`, optional positive preferred `width`, optional boolean `hidden`/`pinned`; visible pins form a leading prefix | Column state |
@@ -120,7 +120,7 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 
 DOM-local Form applies effective formatters through the existing rules. Local read retains unparsed raw; validation and defaults parse separate candidates. Native reset uses effective form owners, post-default cleanup and synchronous flushing before later public/input work. FormValueContext remains Rows-backed and nonnull. See [Form local input](form.md#local-raw-input-and-native-reset) for cache, focus, image/file, native-default and disposal rules.[^form][^native]
 
-FormHandle.defaults(): Record<string, unknown> returns detached construction-time native values with applicable own parsers. Static/image values and unbound business properties are excluded; it does not claim complete T. FormHandle.unbind(): void restores captured UI/files without Rows writes, drops the current association/draft and suspends automatic behavior while retaining ownership and unrelated drafts. Full bind/refresh resumes; explicit read/validate and selected refresh do not resume it. Capture, native reset and received Rows reversion remain separate. See [Form](form.md) for exact selection/node/file, failure and reentry boundaries.[^ui][^form]
+FormHandle.defaults(): Record<string, unknown> returns detached native creation values for active adopted bindings with applicable own parsers. Initial fields capture at construction; explicit rescan captures new bindings and drops retired ones while preserving compatible captures. Static/image values and unbound business properties are excluded; it does not claim complete T. FormHandle.unbind(): void restores captured UI/files without Rows writes, drops the current association/draft and suspends automatic behavior while retaining ownership and unrelated drafts. Full bind/refresh resumes; explicit read/validate, rescan and selected refresh do not resume it. Capture, native reset and received Rows reversion remain separate. See [Form](form.md) for exact selection/node/file, failure and reentry boundaries.[^ui][^form]
 
 # Form value callbacks
 
@@ -131,6 +131,8 @@ Rows-backed Form has separate beforeBindValue/onBindValue callbacks receiving un
 beforeBind?: (context: FormBindContext<T>) => unknown and onBind?: (context: FormBindContext<T>) => unknown require Rows and synchronous functions. They surround explicit full binding/current-row refresh and current live-row revert, with null event for explicit calls. Ordinary returns are ignored. Errors, thenables, nested supersession and disposal follow the existing Form lifecycle; a focused value projection may still defer until blur.[^ui][^form]
 
 FormHandle.refresh(fields?: readonly string[]): void refreshes the current identity. Omit fields for the full pass; provide exact compiled paths for an atomic preflight and selected rendering without whole hooks, parsing, validation or issue/draft clearing. Duplicate paths collapse; [] does no selected work. Selected choices preflight together, while unselected choice sources/nodes remain untouched. Local/unbound refresh has no whole-row hook. See [Form binding](form.md#whole-row-binding-and-refresh) for timing and failure boundaries.[^ui][^form]
+
+FormHandle.rescan(): void explicitly reconciles authored field/error/reset ownership without projecting values or running callbacks/rules. Compatible bindings retain raw/drafts/captures; new bindings capture once and retired bindings release resources. Retained drafts/known-invalid local fields block affected retirement, replacement or reshaping with FORM_RESCAN; compatible bindings keep them. Active work, pending reset cleanup and direct owned-annotation changes also fail FORM_RESCAN. Call refresh separately for new values. The [Form rediscovery contract](form.md#field-rediscovery) owns preflight, fixed catalogs, release/re-adoption and native-failure retry/disposal.[^ui][^form]
 
 # Grid binding callbacks
 

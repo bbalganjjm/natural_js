@@ -1,0 +1,1519 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\workspace\\natural_js\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "tests/playwright.config.ts",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--reporter=json",
+      "--list",
+      "--shard=10/12"
+    ],
+    "configFile": "D:\\workspace\\natural_js\\tests\\playwright.config.ts",
+    "rootDir": "D:/workspace/natural_js/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": {
+      "current": 10,
+      "total": 12
+    },
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run example",
+      "cwd": "D:\\workspace\\natural_js\\",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "m10-agent-screen.spec.ts",
+      "file": "m10-agent-screen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a docs-first authored Grid keeps row identity and drafts across local views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4bbbcbab480bc47dd41b-c1f583638622f928fcab",
+          "file": "m10-agent-screen.spec.ts",
+          "line": 57,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m10-demo.spec.ts",
+      "file": "m10-demo.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "shared TS rules reach Grid and CVC details while automatic validation remains an independent option",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-d78ed36869fcd365f562",
+          "file": "m10-demo.spec.ts",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "committed field highlights compare loaded originals and clear after restoring the original",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-2a7cbd7bb49fe48d3c69",
+          "file": "m10-demo.spec.ts",
+          "line": 39,
+          "column": 1
+        },
+        {
+          "title": "deleted row inspection keeps edited display separate from original save values and Undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-1ddfee684a514653b14f",
+          "file": "m10-demo.spec.ts",
+          "line": 59,
+          "column": 1
+        },
+        {
+          "title": "one authored CVC detail page edits nested shared values inline and in Popup independently of selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-1eb5594a30963bda4d38",
+          "file": "m10-demo.spec.ts",
+          "line": 79,
+          "column": 1
+        },
+        {
+          "title": "detail validation blocks navigation, authored close and Escape while preserving the current draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-d284a16fdddba0c8a166",
+          "file": "m10-demo.spec.ts",
+          "line": 115,
+          "column": 1
+        },
+        {
+          "title": "detail scopes skip tombstones and compute filtered pages from raw projection positions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-deeb8c9736f3a38dedba",
+          "file": "m10-demo.spec.ts",
+          "line": 141,
+          "column": 1
+        },
+        {
+          "title": "detail keeps identity after an edit leaves the filter and store navigation does not clear that filter",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-54228ec553db003e003b",
+          "file": "m10-demo.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "detail removal and force disposal release Forms and stale controls without validating away cleanup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-833a764c1408628c41b3",
+          "file": "m10-demo.spec.ts",
+          "line": 184,
+          "column": 1
+        },
+        {
+          "title": "authored height and reveal controls operate the measured Grid without selecting a row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-9285eef618a96fbf7982",
+          "file": "m10-demo.spec.ts",
+          "line": 230,
+          "column": 1
+        },
+        {
+          "title": "authored table binds raw nested choices, formatter, and accessible labels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-8ddfaf1f3d3a325bc1ed",
+          "file": "m10-demo.spec.ts",
+          "line": 251,
+          "column": 1
+        },
+        {
+          "title": "status views expose protected deletions, Undo, clean append and authored empty content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-9830f668b287db6a0a19",
+          "file": "m10-demo.spec.ts",
+          "line": 276,
+          "column": 1
+        },
+        {
+          "title": "authored defaults feed a typed application factory and Undo removes only its inserted employee",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-691567a4c5f8e3ebcb10",
+          "file": "m10-demo.spec.ts",
+          "line": 317,
+          "column": 1
+        },
+        {
+          "title": "row resource tracking releases native listeners through refresh, disposal and rebinding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-763f597b75f3f9683f08",
+          "file": "m10-demo.spec.ts",
+          "line": 339,
+          "column": 1
+        },
+        {
+          "title": "sort, filter, and local pages preserve RowId selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-9f8c62a80ee44262dbb3",
+          "file": "m10-demo.spec.ts",
+          "line": 367,
+          "column": 1
+        },
+        {
+          "title": "initial page choice rebinds a bounded view and keeps off-page RowId selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-5c69ec9d4435be76a739",
+          "file": "m10-demo.spec.ts",
+          "line": 391,
+          "column": 1
+        },
+        {
+          "title": "check and validation policy controls rebind working Grid options",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-6dc62e6662e5980cfe60",
+          "file": "m10-demo.spec.ts",
+          "line": 412,
+          "column": 1
+        },
+        {
+          "title": "parsing, HTML constraints, and application validation retain invalid drafts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-f8416eeb93518f77b255",
+          "file": "m10-demo.spec.ts",
+          "line": 455,
+          "column": 1
+        },
+        {
+          "title": "nested edits and Rows add, set, remove, revert, replace, changes stay observable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-71e2b7090dc0b6ee760f",
+          "file": "m10-demo.spec.ts",
+          "line": 498,
+          "column": 1
+        },
+        {
+          "title": "required and unavailable choices validate; dispose and rebind restore the template",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-8b0f92ea94f96bccb1b0",
+          "file": "m10-demo.spec.ts",
+          "line": 540,
+          "column": 1
+        },
+        {
+          "title": "bulk paste reports atomic rejection and applies typed cells with protected positions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-dbc3b20adb9dc6d8e09c",
+          "file": "m10-demo.spec.ts",
+          "line": 579,
+          "column": 1
+        },
+        {
+          "title": "viewport mode bounds a 5,000-row dataset and reveals a row without selecting it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-b556057a86da2458e92a",
+          "file": "m10-demo.spec.ts",
+          "line": 619,
+          "column": 1
+        },
+        {
+          "title": "ordered row controls insert and copy by identity while value revert keeps store order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-393648ac9d4c6534fb8b",
+          "file": "m10-demo.spec.ts",
+          "line": 643,
+          "column": 1
+        },
+        {
+          "title": "two authored row-block layouts share edits, nested choices and hierarchical merge keys",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-cf1c5b204050919f4ceb",
+          "file": "m10-demo.spec.ts",
+          "line": 679,
+          "column": 1
+        },
+        {
+          "title": "row-block store controls move and copy whole records independently of the employee demo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-66d841e794c4970b7145",
+          "file": "m10-demo.spec.ts",
+          "line": 715,
+          "column": 1
+        },
+        {
+          "title": "authored row blocks share grouped controls, typed multiple choices and native values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7e7b467c836388ebc653-d1020c41699e059b6323",
+          "file": "m10-demo.spec.ts",
+          "line": 745,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m10-grid.spec.ts",
+      "file": "m10-grid.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "side keeps grouped headings, nested choices, and MDI rows independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "936b2491ab8ccae4614b-e902e4d30750cd02c43f",
+          "file": "m10-grid.spec.ts",
+          "line": 10,
+          "column": 3
+        },
+        {
+          "title": "side keeps fixed headings visible and the narrow document reflowed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "936b2491ab8ccae4614b-d356d0d1a612e1d1e448",
+          "file": "m10-grid.spec.ts",
+          "line": 45,
+          "column": 3
+        },
+        {
+          "title": "stack keeps grouped headings, nested choices, and MDI rows independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "936b2491ab8ccae4614b-5078f8745e2cf10f63f5",
+          "file": "m10-grid.spec.ts",
+          "line": 10,
+          "column": 3
+        },
+        {
+          "title": "stack keeps fixed headings visible and the narrow document reflowed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "936b2491ab8ccae4614b-8f3438f59a1d6e1b732c",
+          "file": "m10-grid.spec.ts",
+          "line": 45,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "m10-interactions.spec.ts",
+      "file": "m10-interactions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authored column chooser has native mixed state and recovers every hidden business column",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-325fb4d2604f4ae8fa6d",
+          "file": "m10-interactions.spec.ts",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "title": "chooser retains widths, group order, raw drafts and selection while another store is unchanged",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-949bed98686d46161479",
+          "file": "m10-interactions.spec.ts",
+          "line": 71,
+          "column": 1
+        },
+        {
+          "title": "recovery-only rows retain shared CVC details and Undo without duplicate IDs or accessibility errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-7788ed62f0b31ca56235",
+          "file": "m10-interactions.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "column actions restore exact authored table nodes and resynchronize after disposal and rebind",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-c7420054c4812f826014",
+          "file": "m10-interactions.spec.ts",
+          "line": 119,
+          "column": 1
+        },
+        {
+          "title": "Team preview, Apply and Enter, app All and None expose the exact current choice count",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-922b8eaa64e1f3acd4d3",
+          "file": "m10-interactions.spec.ts",
+          "line": 133,
+          "column": 1
+        },
+        {
+          "title": "another typed column filter retains enabled selected zero-count Team choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-903e2c0696aa239650d2",
+          "file": "m10-interactions.spec.ts",
+          "line": 159,
+          "column": 1
+        },
+        {
+          "title": "toggle-policy controls bind native single and multiple activation while checks stay independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-9043f498209f6980a15a",
+          "file": "m10-interactions.spec.ts",
+          "line": 175,
+          "column": 1
+        },
+        {
+          "title": "application selection and checks reveal the last requested ID only after the complete state commits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-e0b5d62c34254a115590",
+          "file": "m10-interactions.spec.ts",
+          "line": 194,
+          "column": 1
+        },
+        {
+          "title": "action-scroll opt-out and current-page guards preserve filtering and paging",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-4bad5ee743716d6a94ed",
+          "file": "m10-interactions.spec.ts",
+          "line": 227,
+          "column": 1
+        },
+        {
+          "title": "front, indexed and end insertion use start, center and end after successful selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-3fa621226d1290b8c1ed",
+          "file": "m10-interactions.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "append skips an empty prior store and reveals only the last newly loaded current-page row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-aad204717007183b19ee",
+          "file": "m10-interactions.spec.ts",
+          "line": 259,
+          "column": 1
+        },
+        {
+          "title": "last-invalid reveal follows visual page order and preserves focus with first-invalid core reveal disabled",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-086a90c2e0a79b585ce3",
+          "file": "m10-interactions.spec.ts",
+          "line": 280,
+          "column": 1
+        },
+        {
+          "title": "application end insertion uses the existing bounded viewport without affecting independent row-block stores",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3984bad83593186b32f8-52f9478396ed7590945b",
+          "file": "m10-interactions.spec.ts",
+          "line": 302,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m10-pinned.spec.ts",
+      "file": "m10-pinned.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ledger pinned controls retain actual positions through hide and group reorder without changing data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-430bc89b2ab6808ca159",
+          "file": "m10-pinned.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "notebook pinned controls retain actual positions through hide and group reorder without changing data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-3b8570251841ba8d0609",
+          "file": "m10-pinned.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "authored pointer resize preview updates the next pinned column and Escape restores its position",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-8b1186b9290ccba8ae1b",
+          "file": "m10-pinned.spec.ts",
+          "line": 83,
+          "column": 1
+        },
+        {
+          "title": "main explorer applies current visible pin counts and restores its authored default on rebind",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-cc266107ac0b61359a4a",
+          "file": "m10-pinned.spec.ts",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "full and reduced details share edits while omitted fields stay intact across popup reopen",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-6f70da621bf9a591505f",
+          "file": "m10-pinned.spec.ts",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "reduced details retain validation and visible filtered store navigation contracts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-3c55cc9147be8d31c920",
+          "file": "m10-pinned.spec.ts",
+          "line": 174,
+          "column": 1
+        },
+        {
+          "title": "native x wheel containment stops start chaining while auto permits the positive control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-df64142fe6732e38a3ba",
+          "file": "m10-pinned.spec.ts",
+          "line": 206,
+          "column": 3
+        },
+        {
+          "title": "native x wheel containment stops end chaining while auto permits the positive control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-c154e424591cf5d4fabd",
+          "file": "m10-pinned.spec.ts",
+          "line": 206,
+          "column": 3
+        },
+        {
+          "title": "native y wheel containment stops start chaining while auto permits the positive control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-582b5887bc5f62a5fa86",
+          "file": "m10-pinned.spec.ts",
+          "line": 206,
+          "column": 3
+        },
+        {
+          "title": "native y wheel containment stops end chaining while auto permits the positive control",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-709829dd39cb000bb965",
+          "file": "m10-pinned.spec.ts",
+          "line": 206,
+          "column": 3
+        },
+        {
+          "title": "owned wheel boundary handling preserves Ctrl interior nested scrolling and releases an aborted listener",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b79a7fcfb77e759e30bd-2e6091ba135970301acb",
+          "file": "m10-pinned.spec.ts",
+          "line": 257,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m10-progressive.spec.ts",
+      "file": "m10-progressive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Immediate remains synchronous and prefix Next exposes full logical scope without changing Rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-85f83e45f3e3723f2c54",
+          "file": "m10-progressive.spec.ts",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "title": "Yield all keeps Ping responsive and reports first and last chunk without per-row live output",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-9c1c62d9a9d5a6c5928f",
+          "file": "m10-progressive.spec.ts",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "title": "Cancel before full preparation returns unfinished snapshot and Resume retains loaded records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-6a77211626945121bf04",
+          "file": "m10-progressive.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "a one-shot authored hook failure is observable and Resume retries retained prefix",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-468bbe4aead668454cd1",
+          "file": "m10-progressive.spec.ts",
+          "line": 110,
+          "column": 1
+        },
+        {
+          "title": "view supersession and dispose cannot let an old promise overwrite the newer binding UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-4d052664ea39fcd7ddfa",
+          "file": "m10-progressive.spec.ts",
+          "line": 124,
+          "column": 1
+        },
+        {
+          "title": "bottom-scroll continuation and viewport retain bounded actual widgets for loaded prefixes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-f20ab030e5bc749ddd93",
+          "file": "m10-progressive.spec.ts",
+          "line": 141,
+          "column": 1
+        },
+        {
+          "title": "late viewport row failure is read through whenBound and resumes without extra completion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-e05978ce1092b065a944",
+          "file": "m10-progressive.spec.ts",
+          "line": 159,
+          "column": 1
+        },
+        {
+          "title": "empty progressive data completes once without creating rows or enabling continuation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-79947f75030788f7e72d",
+          "file": "m10-progressive.spec.ts",
+          "line": 177,
+          "column": 1
+        },
+        {
+          "title": "two CVC layouts publish logical chunks and nested raw values without Rows notifications",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-ea01f63a802015069e03",
+          "file": "m10-progressive.spec.ts",
+          "line": 187,
+          "column": 1
+        },
+        {
+          "title": "native CVC yield keeps Ping available and cancel resume does not affect its neighbour",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-c561af83435a7905a8ac",
+          "file": "m10-progressive.spec.ts",
+          "line": 205,
+          "column": 1
+        },
+        {
+          "title": "normal deactivate cancels a pending operation and activate resumes the retained instance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-3841c3ea1c90f82f6061",
+          "file": "m10-progressive.spec.ts",
+          "line": 223,
+          "column": 1
+        },
+        {
+          "title": "dispose aborts Grid before asynchronous controller cleanup while the other page continues",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-3098b9eed4629a45b2e0",
+          "file": "m10-progressive.spec.ts",
+          "line": 242,
+          "column": 1
+        },
+        {
+          "title": "early CVC reload replaces only its instance and suppresses old completion and late writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-0f3329d12884f6ac5ea7",
+          "file": "m10-progressive.spec.ts",
+          "line": 267,
+          "column": 1
+        },
+        {
+          "title": "native CVC Next and two authored layouts retain unique IDs, focus and accessibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "292f41ba48c63ba7d96a-fb9a1390a3a17c4fc655",
+          "file": "m10-progressive.spec.ts",
+          "line": 287,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-07T11:21:23.896Z",
+    "duration": 998.732,
+    "expected": 0,
+    "skipped": 68,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

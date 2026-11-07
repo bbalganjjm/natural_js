@@ -1,0 +1,52 @@
+
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\form-discovery.spec.ts:532:1 › rescan clears obsolete errors after native publication removes the current row
+  1) [chromium] › tests\browser\form-discovery.spec.ts:532:1 › rescan clears obsolete errors after native publication removes the current row 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+    @@ -1,15 +1,15 @@
+      Object {
+        "calls": 1,
+        "code": null,
+        "count": "7",
+        "detached": true,
+    -   "error": "",
+    +   "error": "Select an option.",
+        "hooks": 0,
+        "invalid": Array [
+    -     null,
+    -     null,
+    +     "true",
+    +     "true",
+        ],
+        "name": "Ada",
+        "originalPreserved": true,
+        "remaining": 1,
+        "sentinel": false,
+
+      555 |   const { known, ...after } = result;
+      556 |   expect(known.invalid).toEqual(["true", "true"]); expect(known.error).not.toBe(""); expect(known.valid).toBe(false);
+    > 557 |   expect(after).toEqual({ code: null, calls: 1, sentinel: false, invalid: [null, null], error: "", detached: true,
+          |                 ^
+      558 |     status: "delete", originalPreserved: true, remaining: 1, hooks: 0, name: "Ada", count: "7" });
+      559 | });
+      560 |
+        at D:\workspace\natural_js\tests\browser\form-discovery.spec.ts:557:17
+
+    Error Context: test-results\form-discovery-rescan-clea-84bc6-ion-removes-the-current-row-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\form-discovery.spec.ts:532:1 › rescan clears obsolete errors after native publication removes the current row 
+[WebServer] (node:17240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:20180) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

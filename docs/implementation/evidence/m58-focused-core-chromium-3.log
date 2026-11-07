@@ -1,0 +1,147 @@
+
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\form-discovery.spec.ts:582:1 › known local display issues block retirement until explicit validation resolves them
+  1) [chromium] › tests\browser\form-discovery.spec.ts:582:1 › known local display issues block retirement until explicit validation resolves them 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 21
+    + Received  + 18
+
+    @@ -1,14 +1,14 @@
+      Array [
+        Object {
+    -     "code": "FORM_RESCAN",
+    +     "code": undefined,
+          "defaults": Object {
+            "name": "Capture",
+          },
+          "described": null,
+          "exact": true,
+    -     "field": "note",
+    +     "field": undefined,
+          "initiallyInvalid": true,
+          "invalid": null,
+          "mode": "plain",
+          "raw": Object {
+            "name": "Capture",
+    @@ -17,30 +17,29 @@
+          "resolved": true,
+          "retained": Object {
+            "defaults": Object {
+              "name": "Capture",
+            },
+    -       "invalid": "true",
+    -       "message": "Known display issue",
+    +       "invalid": null,
+    +       "message": "Authored hint",
+            "raw": Object {
+              "name": "Capture",
+    -         "note": "bad",
+            },
+    -       "unchanged": true,
+    +       "unchanged": false,
+            "validations": 1,
+          },
+          "retry": null,
+    -     "validations": 2,
+    +     "validations": 1,
+        },
+        Object {
+    -     "code": "FORM_RESCAN",
+    +     "code": undefined,
+          "defaults": Object {
+            "name": "Capture",
+          },
+          "described": null,
+          "exact": true,
+    -     "field": "note",
+    +     "field": undefined,
+          "initiallyInvalid": true,
+          "invalid": null,
+          "mode": "formatted",
+          "raw": Object {
+            "name": "Capture",
+    @@ -49,30 +48,29 @@
+          "resolved": true,
+          "retained": Object {
+            "defaults": Object {
+              "name": "Capture",
+            },
+    -       "invalid": "true",
+    -       "message": "Known display issue",
+    +       "invalid": null,
+    +       "message": "Authored hint",
+            "raw": Object {
+              "name": "Capture",
+    -         "note": "bad",
+            },
+    -       "unchanged": true,
+    +       "unchanged": false,
+            "validations": 1,
+          },
+          "retry": null,
+    -     "validations": 2,
+    +     "validations": 1,
+        },
+        Object {
+    -     "code": "FORM_RESCAN",
+    +     "code": undefined,
+          "defaults": Object {
+            "name": "Capture",
+          },
+          "described": null,
+          "exact": true,
+    -     "field": "note",
+    +     "field": undefined,
+          "initiallyInvalid": true,
+          "invalid": null,
+          "mode": "rendered",
+          "raw": Object {
+            "name": "Capture",
+    @@ -81,18 +79,17 @@
+          "resolved": true,
+          "retained": Object {
+            "defaults": Object {
+              "name": "Capture",
+            },
+    -       "invalid": "true",
+    -       "message": "Known display issue",
+    +       "invalid": null,
+    +       "message": "Authored hint",
+            "raw": Object {
+              "name": "Capture",
+    -         "note": "bad",
+            },
+    -       "unchanged": true,
+    +       "unchanged": false,
+            "validations": 1,
+          },
+          "retry": null,
+    -     "validations": 2,
+    +     "validations": 1,
+        },
+      ]
+
+      598 |     });
+      599 |   });
+    > 600 |   expect(result).toEqual(["plain", "formatted", "rendered"].map(mode => ({ mode, initiallyInvalid: true, code: "FORM_RESCAN", field: "note",
+          |                  ^
+      601 |     retained: { raw: { note: "bad", name: "Capture" }, defaults: { name: "Capture" }, message: "Known display issue", invalid: "true", validations: 1, unchanged: true },
+      602 |     resolved: true, retry: null, validations: 2, raw: { name: "Capture" }, defaults: { name: "Capture" }, exact: true, invalid: null, described: null,
+      603 |     region: '<output data-error-for="note">Authored hint</output>' })));
+        at D:\workspace\natural_js\tests\browser\form-discovery.spec.ts:600:18
+
+    Error Context: test-results\form-discovery-known-local-6f081-it-validation-resolves-them-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\form-discovery.spec.ts:582:1 › known local display issues block retirement until explicit validation resolves them 
+[WebServer] (node:17360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:16868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

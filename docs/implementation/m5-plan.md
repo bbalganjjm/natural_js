@@ -15,7 +15,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid pilot

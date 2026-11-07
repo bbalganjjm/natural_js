@@ -115,114 +115,118 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
-  for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-options]")]) {
-    if (!element.hasAttribute("data-options")) continue;
-    if (!rows || !(element instanceof HTMLSelectElement) || !element.hasAttribute("data-field") ||
-        !element.hasAttribute("data-option-label") || !element.hasAttribute("data-option-value")) {
-      throw formError("FORM_OPTIONS", "Row-local choices need Rows and a Select with data-field, data-options, data-option-label and data-option-value.",
-        { field: element.getAttribute("data-field") ?? "" });
-    }
-  }
-  const errorRegions = new Map<string, HTMLElement>();
-  const regionState = new Map<HTMLElement, { id: string | null; live: string | null; text: string | null }>();
-  for (const region of root.querySelectorAll<HTMLElement>("[data-error-for]")) {
-    const name = region.getAttribute("data-error-for")!;
-    if (errorRegions.has(name)) {
-      throw formError("FORM_ERROR_REGION", "An error region is repeated for one field.", { field: name });
-    }
-    errorRegions.set(name, region);
-  }
-
-  const elements = [root, ...root.querySelectorAll<HTMLElement>("[data-field]")]
-    .filter(element => element.hasAttribute("data-field"));
-  const fields: Field[] = [];
-  const byName = new Map<string, Field>();
-  for (const element of elements) {
-    const name = element.getAttribute("data-field")!;
-    const input = element.localName === "input" ? element as HTMLInputElement : null;
-    const kind = input?.type === "radio" ? "radio" :
-      input?.type === "checkbox" ? "checkbox" :
-        element.localName === "select" && (element as HTMLSelectElement).multiple ? "multiple" : "single";
-    if (input?.type === "file") {
-      if (rows) throw formError("FORM_FILE_ROWS", "File inputs require a local Form; Rows store JSON values.", { field: name });
-      if (input.multiple) throw formError("FORM_FILE_MULTIPLE", "Validate multiple files in application code.", { field: name });
-    }
-    if (kind === "radio" && (!input?.form || !input.name ||
-        input.form !== root && !root.contains(input.form))) {
-      throw formError("FORM_RADIO_OWNER", "Radio fields need a name and a form owner inside this Form root.", { field: name });
-    }
-    const existing = byName.get(name);
-    if (existing) {
-      if ((kind !== "radio" && kind !== "checkbox") || existing.kind !== kind) {
-        throw formError("FORM_FIELD_REPEAT", "Only radio or checkbox controls may repeat a field.", { field: name });
+  function compileFields() {
+    for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-options]")]) {
+      if (!element.hasAttribute("data-options")) continue;
+      if (!rows || !(element instanceof HTMLSelectElement) || !element.hasAttribute("data-field") ||
+          !element.hasAttribute("data-option-label") || !element.hasAttribute("data-option-value")) {
+        throw formError("FORM_OPTIONS", "Row-local choices need Rows and a Select with data-field, data-options, data-option-label and data-option-value.",
+          { field: element.getAttribute("data-field") ?? "" });
       }
-      if (kind === "radio") {
-        const first = existing.element as HTMLInputElement;
-        if (first.form !== input!.form || first.name !== input!.name) {
-          throw formError("FORM_RADIO_OWNER", "One radio field must share a form owner and name.", { field: name });
+    }
+    const errorRegions = new Map<string, HTMLElement>();
+    for (const region of root.querySelectorAll<HTMLElement>("[data-error-for]")) {
+      const name = region.getAttribute("data-error-for")!;
+      if (errorRegions.has(name)) {
+        throw formError("FORM_ERROR_REGION", "An error region is repeated for one field.", { field: name });
+      }
+      errorRegions.set(name, region);
+    }
+
+    const elements = [root, ...root.querySelectorAll<HTMLElement>("[data-field]")]
+      .filter(element => element.hasAttribute("data-field"));
+    const fields: Field[] = [];
+    const byName = new Map<string, Field>();
+    for (const element of elements) {
+      const name = element.getAttribute("data-field")!;
+      const input = element.localName === "input" ? element as HTMLInputElement : null;
+      const kind = input?.type === "radio" ? "radio" :
+        input?.type === "checkbox" ? "checkbox" :
+          element.localName === "select" && (element as HTMLSelectElement).multiple ? "multiple" : "single";
+      if (input?.type === "file") {
+        if (rows) throw formError("FORM_FILE_ROWS", "File inputs require a local Form; Rows store JSON values.", { field: name });
+        if (input.multiple) throw formError("FORM_FILE_MULTIPLE", "Validate multiple files in application code.", { field: name });
+      }
+      if (kind === "radio" && (!input?.form || !input.name ||
+          input.form !== root && !root.contains(input.form))) {
+        throw formError("FORM_RADIO_OWNER", "Radio fields need a name and a form owner inside this Form root.", { field: name });
+      }
+      const existing = byName.get(name);
+      if (existing) {
+        if ((kind !== "radio" && kind !== "checkbox") || existing.kind !== kind) {
+          throw formError("FORM_FIELD_REPEAT", "Only radio or checkbox controls may repeat a field.", { field: name });
+        }
+        if (kind === "radio") {
+          const first = existing.element as HTMLInputElement;
+          if (first.form !== input!.form || first.name !== input!.name) {
+            throw formError("FORM_RADIO_OWNER", "One radio field must share a form owner and name.", { field: name });
+          }
+        }
+        if (existing.elements.some(member => (member as HTMLInputElement).value === input!.value)) {
+          throw formError("FORM_GROUP_VALUE", "Group choices need distinct values.", { field: name });
+        }
+        existing.elements.push(element);
+        existing.originals.push({
+          element, describedBy: element.getAttribute("aria-describedby"),
+          invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
+        });
+        continue;
+      }
+      const field: Field = {
+        element, elements: [element], kind, name, path: parsePath(name),
+        format: [], validate: [], error: errorRegions.get(name),
+        originals: [{
+          element, describedBy: element.getAttribute("aria-describedby"),
+          invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
+        }]
+      };
+      if (element instanceof HTMLSelectElement && element.hasAttribute("data-options")) {
+        const authoredOptions = [...element.options];
+        const authored = authoredOptions.map(option => option.value === "" ? null : option.value);
+        field.choices = {
+          options: parsePath(element.getAttribute("data-options")!),
+          label: parsePath(element.getAttribute("data-option-label")!),
+          value: parsePath(element.getAttribute("data-option-value")!),
+          authoredNodes: [...element.childNodes], authoredOptions, authored,
+          selection: authoredOptions.map(option => option.selected),
+          raw: new Map(authoredOptions.map((option, index) => [option, authored[index]])), bound: false
+        };
+      }
+      fields.push(field);
+      byName.set(name, field);
+    }
+    for (const field of fields) {
+      for (const attribute of ["data-format", "data-validate"] as const) {
+        if (runner.configured(field.name, attribute)) continue;
+        const declarations = field.elements.map(element => element.getAttribute(attribute))
+          .filter((value): value is string => value !== null);
+        if (new Set(declarations).size > 1) {
+          throw formError("FORM_GROUP_RULES", "One field group needs one rule declaration.", { field: field.name });
         }
       }
-      if (existing.elements.some(member => (member as HTMLInputElement).value === input!.value)) {
-        throw formError("FORM_GROUP_VALUE", "Group choices need distinct values.", { field: name });
+      const formatElement = field.elements.find(element => element.hasAttribute("data-format")) ?? field.element;
+      const validateElement = field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
+      field.format = runner.formats(formatElement, field.name);
+      field.validate = runner.validators(validateElement, field.name);
+      if (field.format.length && !formatCapable(field.element)) {
+        throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
       }
-      existing.elements.push(element);
-      existing.originals.push({
-        element, describedBy: element.getAttribute("aria-describedby"),
-        invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
-      });
-      continue;
-    }
-    const field: Field = {
-      element, elements: [element], kind, name, path: parsePath(name),
-      format: [], validate: [], error: errorRegions.get(name),
-      originals: [{
-        element, describedBy: element.getAttribute("aria-describedby"),
-        invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
-      }]
-    };
-    if (element instanceof HTMLSelectElement && element.hasAttribute("data-options")) {
-      const authoredOptions = [...element.options];
-      const authored = authoredOptions.map(option => option.value === "" ? null : option.value);
-      field.choices = {
-        options: parsePath(element.getAttribute("data-options")!),
-        label: parsePath(element.getAttribute("data-option-label")!),
-        value: parsePath(element.getAttribute("data-option-value")!),
-        authoredNodes: [...element.childNodes], authoredOptions, authored,
-        selection: authoredOptions.map(option => option.selected),
-        raw: new Map(authoredOptions.map((option, index) => [option, authored[index]])), bound: false
-      };
-    }
-    fields.push(field);
-    byName.set(name, field);
-  }
-  for (const field of fields) {
-    for (const attribute of ["data-format", "data-validate"] as const) {
-      if (runner.configured(field.name, attribute)) continue;
-      const declarations = field.elements.map(element => element.getAttribute(attribute))
-        .filter((value): value is string => value !== null);
-      if (new Set(declarations).size > 1) {
-        throw formError("FORM_GROUP_RULES", "One field group needs one rule declaration.", { field: field.name });
+      if (!rows && field.format.length && !control(field.element) && (field.element.isContentEditable ||
+          field.element.matches("[data-error-for]") || field.element.querySelector(`${interactiveContent}, [data-field], [data-error-for]`))) {
+        throw formError("FORM_FORMAT_CONTROL", "Local formatting cannot replace editable or bound content.", { field: field.name });
+      }
+      if (parsers.get(field.name) && (field.choices || field.kind === "checkbox" || field.kind === "multiple")) {
+        throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert typed choices, boolean or array controls.", { field: field.name });
       }
     }
-    const formatElement = field.elements.find(element => element.hasAttribute("data-format")) ?? field.element;
-    const validateElement = field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
-    field.format = runner.formats(formatElement, field.name);
-    field.validate = runner.validators(validateElement, field.name);
-    if (field.format.length && !formatCapable(field.element)) {
-      throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
-    }
-    if (!rows && field.format.length && !control(field.element) && (field.element.isContentEditable ||
-        field.element.matches("[data-error-for]") || field.element.querySelector(`${interactiveContent}, [data-field], [data-error-for]`))) {
-      throw formError("FORM_FORMAT_CONTROL", "Local formatting cannot replace editable or bound content.", { field: field.name });
-    }
-    if (parsers.get(field.name) && (field.choices || field.kind === "checkbox" || field.kind === "multiple")) {
-      throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert typed choices, boolean or array controls.", { field: field.name });
-    }
+    return { fields, byName };
   }
+  const regionState = new Map<HTMLElement, { id: string | null; live: string | null; text: string | null }>();
+  let { fields, byName } = compileFields();
   const renderers = fieldRenderers("bindForm", fields.map(field => ({
     name: field.name, element: field.element, formatted: field.format.length > 0
   })), options.render);
-  const initial = fields.map(field => {
+  function capture(field: Field) {
     const element = field.element;
     const files = element instanceof HTMLInputElement && element.type === "file" ? [...element.files ?? []] : undefined;
     const selection = element instanceof HTMLSelectElement
@@ -239,15 +243,29 @@ export function bindForm<T extends object = Record<string, unknown>>(
         ? field.elements.map(element => ({ input: element as HTMLInputElement, checked: (element as HTMLInputElement).checked })) : undefined,
       selection, files
     };
-  });
-  const renderedOriginals = initial.filter(({ field, element }) => renderers.has(field.name) ||
+  }
+  function annotation(element: HTMLElement): string {
+    return JSON.stringify([
+      element.localName, element.getAttribute("data-field"), element.getAttribute("data-format"),
+      element.getAttribute("data-validate"), element.getAttribute("data-options"),
+      element.getAttribute("data-option-label"), element.getAttribute("data-option-value"),
+      element instanceof HTMLInputElement ? element.type : null,
+      element instanceof HTMLInputElement && ["radio", "checkbox"].includes(element.type) ? [element.name, element.value] : null,
+      element instanceof HTMLSelectElement || element instanceof HTMLInputElement && element.type === "file" ? element.multiple : null
+    ]);
+  }
+  let initial = fields.map(capture);
+  let renderedOriginals = initial.filter(({ field, element }) => renderers.has(field.name) ||
     !rows && field.format.length && !control(element));
-  const choiceFields = fields.filter(field => field.choices);
+  let choiceFields = fields.filter(field => field.choices);
   const localRenderedValues = new Map<Field, { raw: unknown; shown: unknown; invalid: boolean }>(rows ? [] :
     initial.filter(({ field }) => renderers.has(field.name) || field.format.length)
     .map(({ field, value }) => [field, { raw: value, shown: value, invalid: false }] as const));
-  const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
-  const releaseSelects: (() => void)[] = [];
+  let byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
+  const releaseSelects = new Map<HTMLSelectElement, () => void>();
+  const pendingSelects = new Map<HTMLSelectElement, () => void>();
+  let annotations = new Map(fields.flatMap(field => field.elements.map(element => [element, annotation(element)] as const)));
+  const errorIds = new Map<Field, string>();
   const resetOwners = new Set<HTMLFormElement>();
   if (!rows) for (const field of fields) for (const element of field.elements) {
     const owner = nativeOwner(element);
@@ -257,6 +275,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let resetTimer: ReturnType<typeof setTimeout> | undefined;
   let boundId: RowId | null = null;
   let disposed = false;
+  let scanning = false;
+  let rescanIncomplete = false;
+  let workDepth = 0;
   let automatic = true;
   let restoring = false;
   let reconciling = false;
@@ -267,22 +288,25 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const issues = new Map<Field, readonly ValidationIssue[]>();
   const activeValues = new Map<Field, Set<RowId>>();
   const activeBindings = new Set<RowId>();
-  const defaults = createNativeDefaults("bindForm", initial.filter(state => control(state.element)).map(state => ({
+  function nativeEntries(states: readonly ReturnType<typeof capture>[]) { return states.filter(state => control(state.element)).map(state => ({
     name: state.field.name, path: state.field.path, value: state.value, element: state.element,
     ...(!state.field.choices && parsers.has(state.field.name) ? { parse: parsers.get(state.field.name)! } : {})
-  })), active);
+  })); }
+  const defaultEntries = nativeEntries(initial);
+  const readDefaults = createNativeDefaults("bindForm", defaultEntries, active);
+  function defaults() { return working(readDefaults); }
   let localRenderStarted = false;
   try {
     for (const field of fields) {
       if (field.element instanceof HTMLSelectElement) {
-        releaseSelects.push(claimSelect(field.element, "bindForm"));
+        releaseSelects.set(field.element, claimSelect(field.element, "bindForm"));
       }
     }
     boundRoots.add(root);
     if (localRenderedValues.size) { localRenderStarted = true; renderLocal(); }
   } catch (cause) {
     boundRoots.delete(root);
-    for (const release of releaseSelects) release();
+    for (const release of releaseSelects.values()) release();
     if (localRenderStarted) {
       for (const [field, value] of localRenderedValues) if (control(field.element)) display(field.element, value.raw);
       restoreRendered(true);
@@ -299,6 +323,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (!region.hasAttribute("aria-live")) region.setAttribute("aria-live", "polite");
     }
     const id = errorId(region);
+    errorIds.set(field, id);
     for (const original of field.originals) {
       const tokens = new Set((original.describedBy ?? "").split(/\s+/).filter(Boolean));
       tokens.add(id);
@@ -306,8 +331,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
   }
 
+  function working<Result>(run: () => Result): Result {
+    workDepth++;
+    try { return run(); } finally { workDepth--; }
+  }
+
   function active(): void {
     if (disposed) throw formError("FORM_DISPOSED", "This Form has been disposed.");
+    if (scanning) throw formError("FORM_RESCAN", "This Form is reconciling its fields.");
   }
 
   function rowValue(id: RowId): Record<string, unknown> {
@@ -319,9 +350,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function localValues(): Record<string, unknown> {
-    let values: Record<string, unknown> = {};
-    for (const field of fields) values = writePath(values, field.path, localFieldValue(field));
-    return values;
+    return working(() => {
+      let values: Record<string, unknown> = {};
+      for (const field of fields) values = writePath(values, field.path, localFieldValue(field));
+      return values;
+    });
   }
 
   function localFieldValue(field: Field): unknown {
@@ -364,36 +397,38 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function renderLocal(preserve?: Field, blurred?: Field, selected?: ReadonlySet<Field>): number {
-    if (localRendering) throw formError("FORM_RENDER", "A local Form cannot recursively refresh its display.");
-    const version = ++renderVersion;
-    localRendering = true;
-    try {
-      const values = localValues();
-      for (const [field, retained] of localRenderedValues) {
-        if (selected && !selected.has(field)) continue;
-        const raw = readPath(values, field.path);
-        const current = () => {
-          if (disposed || version !== renderVersion) return false;
-          for (const events of pendingResets.values()) {
-            if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) return false;
-          }
-          if (Object.is(raw, localFieldValue(field))) return true;
-          renderVersion++;
-          return false;
-        };
-        if (!current()) return version;
-        const element = field.element;
-        const focused = field !== blurred && control(element) && textLengthControl(element) &&
-          !element.readOnly && element === root.ownerDocument.activeElement;
-        if (field === preserve || control(element) && (focused || retained.invalid)) continue;
-        writeValue(field, raw, values, null, false, current);
-        if (disposed || version !== renderVersion) return version;
-        const shown = fieldValue(field);
-        if (disposed || version !== renderVersion) return version;
-        retained.shown = shown;
-      }
-      return version;
-    } finally { localRendering = false; }
+    return working(() => {
+      if (localRendering) throw formError("FORM_RENDER", "A local Form cannot recursively refresh its display.");
+      const version = ++renderVersion;
+      localRendering = true;
+      try {
+        const values = localValues();
+        for (const [field, retained] of localRenderedValues) {
+          if (selected && !selected.has(field)) continue;
+          const raw = readPath(values, field.path);
+          const current = () => {
+            if (disposed || version !== renderVersion) return false;
+            for (const events of pendingResets.values()) {
+              if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) return false;
+            }
+            if (Object.is(raw, localFieldValue(field))) return true;
+            renderVersion++;
+            return false;
+          };
+          if (!current()) return version;
+          const element = field.element;
+          const focused = field !== blurred && control(element) && textLengthControl(element) &&
+            !element.readOnly && element === root.ownerDocument.activeElement;
+          if (field === preserve || control(element) && (focused || retained.invalid)) continue;
+          writeValue(field, raw, values, null, false, current);
+          if (disposed || version !== renderVersion) return version;
+          const shown = fieldValue(field);
+          if (disposed || version !== renderVersion) return version;
+          retained.shown = shown;
+        }
+        return version;
+      } finally { localRendering = false; }
+    });
   }
 
   function restoreRendered(rollback = false): void {
@@ -408,36 +443,38 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function flushLocalResets(preserve?: Field, repaint = true): number {
-    const completed = new Set<HTMLFormElement>();
-    for (const [owner, events] of pendingResets) {
-      const dispatching = events.filter(event => event.eventPhase !== Event.NONE);
-      if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) completed.add(owner);
-      if (dispatching.length) pendingResets.set(owner, dispatching);
-      else pendingResets.delete(owner);
-    }
-    if (!pendingResets.size && resetTimer !== undefined) {
-      clearTimeout(resetTimer);
-      resetTimer = undefined;
-    }
-    if (!completed.size) return renderVersion;
-    for (const field of fields) {
-      if (!field.elements.some(element => {
-        const owner = nativeOwner(element);
-        return owner !== null && completed.has(owner);
-      })) continue;
-      const retained = localRenderedValues.get(field);
-      if (retained) {
-        if (control(field.element)) retained.raw = retained.shown = fieldValue(field);
-        retained.invalid = false;
+    return working(() => {
+      const completed = new Set<HTMLFormElement>();
+      for (const [owner, events] of pendingResets) {
+        const dispatching = events.filter(event => event.eventPhase !== Event.NONE);
+        if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) completed.add(owner);
+        if (dispatching.length) pendingResets.set(owner, dispatching);
+        else pendingResets.delete(owner);
       }
-      issues.delete(field);
-    }
-    if (repaint) {
-      const rendered = renderLocal(preserve);
-      showIssues(() => !disposed && rendered === renderVersion);
-      return rendered;
-    }
-    return renderVersion;
+      if (!pendingResets.size && resetTimer !== undefined) {
+        clearTimeout(resetTimer);
+        resetTimer = undefined;
+      }
+      if (!completed.size) return renderVersion;
+      for (const field of fields) {
+        if (!field.elements.some(element => {
+          const owner = nativeOwner(element);
+          return owner !== null && completed.has(owner);
+        })) continue;
+        const retained = localRenderedValues.get(field);
+        if (retained) {
+          if (control(field.element)) retained.raw = retained.shown = fieldValue(field);
+          retained.invalid = false;
+        }
+        issues.delete(field);
+      }
+      if (repaint) {
+        const rendered = renderLocal(preserve);
+        showIssues(() => !disposed && rendered === renderVersion);
+        return rendered;
+      }
+      return renderVersion;
+    });
   }
 
   function onReset(event: Event): void {
@@ -539,38 +576,42 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function evaluate(id: RowId | null, source: Record<string, unknown>, entered: ReadonlyMap<Field, unknown>, validate = true) {
-    const { values, parsed } = candidates(id, source, entered);
-    const byField = new Map<Field, readonly ValidationIssue[]>();
-    for (const field of fields) {
-      const candidate = parsed.get(field) ?? { value: readPath(values, field.path) };
-      byField.set(field, check(field, id, candidate, values, validate));
-    }
-    return { byField, parsed };
+    return working(() => {
+      const { values, parsed } = candidates(id, source, entered);
+      const byField = new Map<Field, readonly ValidationIssue[]>();
+      for (const field of fields) {
+        const candidate = parsed.get(field) ?? { value: readPath(values, field.path) };
+        byField.set(field, check(field, id, candidate, values, validate));
+      }
+      return { byField, parsed };
+    });
   }
 
   function showIssues(current?: () => boolean): void {
-    if (disposed) return;
-    const version = renderVersion;
-    const applies = current ?? (() => !disposed && version === renderVersion);
-    const messages = new Map<HTMLElement, string[]>();
-    for (const field of fields) {
-      const fieldIssues = issues.get(field) ?? [];
-      for (const original of field.originals) {
+    return working(() => {
+      if (disposed) return;
+      const version = renderVersion;
+      const applies = current ?? (() => !disposed && version === renderVersion);
+      const messages = new Map<HTMLElement, string[]>();
+      for (const field of fields) {
+        const fieldIssues = issues.get(field) ?? [];
+        for (const original of field.originals) {
+          if (!applies()) return;
+          if (fieldIssues.length) original.element.setAttribute("aria-invalid", "true");
+          else if (original.invalid === null) original.element.removeAttribute("aria-invalid");
+          else original.element.setAttribute("aria-invalid", original.invalid);
+        }
+        if (field.error && fieldIssues.length) {
+          const list = messages.get(field.error) ?? [];
+          list.push(...fieldIssues.map(item => item.message));
+          messages.set(field.error, list);
+        }
+      }
+      for (const region of regionState.keys()) {
         if (!applies()) return;
-        if (fieldIssues.length) original.element.setAttribute("aria-invalid", "true");
-        else if (original.invalid === null) original.element.removeAttribute("aria-invalid");
-        else original.element.setAttribute("aria-invalid", original.invalid);
+        region.textContent = (messages.get(region) ?? []).join(" ");
       }
-      if (field.error && fieldIssues.length) {
-        const list = messages.get(field.error) ?? [];
-        list.push(...fieldIssues.map(item => item.message));
-        messages.set(field.error, list);
-      }
-    }
-    for (const region of regionState.keys()) {
-      if (!applies()) return;
-      region.textContent = (messages.get(region) ?? []).join(" ");
-    }
+    });
   }
 
   function valueError(context: FormValueContext, callback: ValueCallback, message: string, cause?: unknown): FrameworkError {
@@ -710,102 +751,106 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function render(phase: ValuePhase = "val", skipFocused = false, force = false,
     prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>): number {
-    const version = ++renderVersion, id = boundId;
-    const snapshot = id === null ? undefined : rows!.get(id);
-    const source = id === null ? null : rowValue(id);
-    const original = id === null ? undefined : rows!.original(id);
-    const currentDrafts = id === null ? undefined : drafts.get(id);
-    const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id, selected) : undefined);
-    const current = () => !disposed && version === renderVersion && boundId === id &&
-      (id === null || rows!.get(id) === snapshot);
-    if (id === null && valueCallbacks) for (const field of selected ?? fields) field.projection = undefined;
-    for (const field of selected ?? fields) {
-      if (!current()) return version;
-      if (field.choices) {
-        const next = choices!.get(field)!;
-        if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
-          field.choices.raw = renderRowOptions(field.element as HTMLSelectElement, field.choices.authoredNodes,
-            field.choices.authoredOptions, field.choices.authored, next.options);
-          field.choices.source = next.source;
-          field.choices.bound = true;
-        }
-      }
-      const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
-      for (const element of field.elements) element.setAttribute("data-field-changed", String(changed));
-      const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
-      if (selected && focused && field.kind === "single" && control(field.element) &&
-          textLengthControl(field.element) && !field.element.readOnly) {
-        if (valueCallbacks && id !== null) projectValue(field, readPath(source, field.path), source!, id,
-          phase, force, true, current, true);
-        continue;
-      }
-      if (currentDrafts?.has(field)) {
-        if (valueCallbacks && id !== null) {
-          const raw = readPath(source, field.path), previous = field.projection;
-          if (force || !previous || previous.id !== id || !sameJson(previous.raw, raw)) {
-            field.projection = { id, raw, value: raw, phase, state: "pending" };
+    return working(() => {
+      const version = ++renderVersion, id = boundId;
+      const snapshot = id === null ? undefined : rows!.get(id);
+      const source = id === null ? null : rowValue(id);
+      const original = id === null ? undefined : rows!.original(id);
+      const currentDrafts = id === null ? undefined : drafts.get(id);
+      const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id, selected) : undefined);
+      const current = () => !disposed && version === renderVersion && boundId === id &&
+        (id === null || rows!.get(id) === snapshot);
+      if (id === null && valueCallbacks) for (const field of selected ?? fields) field.projection = undefined;
+      for (const field of selected ?? fields) {
+        if (!current()) return version;
+        if (field.choices) {
+          const next = choices!.get(field)!;
+          if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
+            field.choices.raw = renderRowOptions(field.element as HTMLSelectElement, field.choices.authoredNodes,
+              field.choices.authoredOptions, field.choices.authored, next.options);
+            field.choices.source = next.source;
+            field.choices.bound = true;
           }
         }
-        if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
-        else displayField(field, currentDrafts.get(field));
-        continue;
+        const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
+        for (const element of field.elements) element.setAttribute("data-field-changed", String(changed));
+        const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
+        if (selected && focused && field.kind === "single" && control(field.element) &&
+            textLengthControl(field.element) && !field.element.readOnly) {
+          if (valueCallbacks && id !== null) projectValue(field, readPath(source, field.path), source!, id,
+            phase, force, true, current, true);
+          continue;
+        }
+        if (currentDrafts?.has(field)) {
+          if (valueCallbacks && id !== null) {
+            const raw = readPath(source, field.path), previous = field.projection;
+            if (force || !previous || previous.id !== id || !sameJson(previous.raw, raw)) {
+              field.projection = { id, raw, value: raw, phase, state: "pending" };
+            }
+          }
+          if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
+          else displayField(field, currentDrafts.get(field));
+          continue;
+        }
+        const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
+        if (valueCallbacks && id !== null) projectValue(field, raw, source!, id, phase, force, focused, current);
+        else if (!(skipFocused && focused && field.kind === "single" && formatCapable(field.element))) {
+          writeValue(field, raw, source, id, focused, current);
+        }
       }
-      const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
-      if (valueCallbacks && id !== null) projectValue(field, raw, source!, id, phase, force, focused, current);
-      else if (!(skipFocused && focused && field.kind === "single" && formatCapable(field.element))) {
-        writeValue(field, raw, source, id, focused, current);
-      }
-    }
-    return version;
+      return version;
+    });
   }
 
   function bindRow(id: RowId | null, event: RowsEvent | null, force: boolean): void {
-    if (bindCallbacks && id !== null && activeBindings.has(id)) {
-      throw formError("FORM_BIND", "A whole-row callback cannot recursively bind an active row.", { rowId: id });
-    }
-    const source = id === null ? null : rowValue(id);
-    const snapshot = id === null ? undefined : rows!.get(id)!;
-    const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
-    const version = ++renderVersion;
-    const current = (generation: number) => !disposed && generation === renderVersion &&
-      (id === null || rows!.get(id) === snapshot);
-    const binding: FormBindContext<T> | undefined = snapshot ? Object.freeze({ root, row: snapshot, event }) : undefined;
-    function invoke(callback: "beforeBind" | "onBind"): void {
-      const run = callback === "beforeBind" ? beforeBind : onBind;
-      if (!run || !binding) return;
-      try {
-        const result = run(binding);
-        if (result !== null && (typeof result === "object" || typeof result === "function") &&
-            typeof (result as { then?: unknown }).then === "function") {
-          void Promise.resolve(result).catch(() => {});
-          throw new TypeError("Whole-row callbacks must finish synchronously.");
+    return working(() => {
+      if (bindCallbacks && id !== null && activeBindings.has(id)) {
+        throw formError("FORM_BIND", "A whole-row callback cannot recursively bind an active row.", { rowId: id });
+      }
+      const source = id === null ? null : rowValue(id);
+      const snapshot = id === null ? undefined : rows!.get(id)!;
+      const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
+      const version = ++renderVersion;
+      const current = (generation: number) => !disposed && generation === renderVersion &&
+        (id === null || rows!.get(id) === snapshot);
+      const binding: FormBindContext<T> | undefined = snapshot ? Object.freeze({ root, row: snapshot, event }) : undefined;
+      function invoke(callback: "beforeBind" | "onBind"): void {
+        const run = callback === "beforeBind" ? beforeBind : onBind;
+        if (!run || !binding) return;
+        try {
+          const result = run(binding);
+          if (result !== null && (typeof result === "object" || typeof result === "function") &&
+              typeof (result as { then?: unknown }).then === "function") {
+            void Promise.resolve(result).catch(() => {});
+            throw new TypeError("Whole-row callbacks must finish synchronously.");
+          }
+        } catch (cause) {
+          throw new FrameworkError({ api: "bindForm", code: "FORM_BIND", message: "The whole-row callback failed.",
+            detail: { rowId: id, callback }, cause });
         }
-      } catch (cause) {
-        throw new FrameworkError({ api: "bindForm", code: "FORM_BIND", message: "The whole-row callback failed.",
-          detail: { rowId: id, callback }, cause });
       }
-    }
-    if (bindCallbacks && id !== null) activeBindings.add(id);
-    try {
-      invoke("beforeBind");
-      if (!current(version)) return;
-      automatic = true;
-      boundId = id;
-      issues.clear();
-      const rendered = render("bind", false, force, prepared);
-      if (!current(rendered) || boundId !== id) return;
-      const currentDrafts = id === null ? undefined : drafts.get(id);
-      if (id !== null && currentDrafts?.size) {
-        const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
+      if (bindCallbacks && id !== null) activeBindings.add(id);
+      try {
+        invoke("beforeBind");
+        if (!current(version)) return;
+        automatic = true;
+        boundId = id;
+        issues.clear();
+        const rendered = render("bind", false, force, prepared);
         if (!current(rendered) || boundId !== id) return;
-        for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
+        const currentDrafts = id === null ? undefined : drafts.get(id);
+        if (id !== null && currentDrafts?.size) {
+          const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
+          if (!current(rendered) || boundId !== id) return;
+          for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
+        }
+        showIssues(() => current(rendered) && boundId === id);
+        if (!current(rendered) || boundId !== id) return;
+        invoke("onBind");
+      } finally {
+        if (bindCallbacks && id !== null) activeBindings.delete(id);
       }
-      showIssues(() => current(rendered) && boundId === id);
-      if (!current(rendered) || boundId !== id) return;
-      invoke("onBind");
-    } finally {
-      if (bindCallbacks && id !== null) activeBindings.delete(id);
-    }
+    });
   }
 
   function bind(id: RowId | null): void {
@@ -821,6 +866,196 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (disposed || rendered !== renderVersion) return;
     issues.clear();
     showIssues(() => !disposed && rendered === renderVersion);
+  }
+
+  function rescan(): void {
+    active();
+    if (workDepth || restoring || reconciling || pendingResets.size) {
+      throw formError("FORM_RESCAN", "Finish current Form work before reconciling its fields.");
+    }
+    let version = renderVersion, committing = false, published = false;
+    const retrying = rescanIncomplete;
+    const current = () => !disposed && version === renderVersion;
+    const adopted: ReturnType<typeof capture>[] = [];
+    scanning = true;
+    try {
+      for (const [element, declaration] of annotations) {
+        if (element.hasAttribute("data-field") && annotation(element) !== declaration) {
+          throw formError("FORM_RESCAN", "Release this field before changing its binding declarations.",
+            { field: byElement.get(element)?.name });
+        }
+      }
+      const candidate = compileFields();
+      if (!current()) return;
+      fieldRenderers("bindForm", candidate.fields.map(field => ({
+        name: field.name, element: field.element, formatted: field.format.length > 0
+      })), Object.fromEntries([...renderers].filter(([name]) => candidate.byName.has(name))));
+      const originals = new Map(fields.flatMap(field => field.originals.map(original => [original.element, original] as const)));
+      const nextErrors = new Map<Field, HTMLElement | undefined>();
+      const nextFields = candidate.fields.map(field => {
+        const previous = byName.get(field.name);
+        const retained = previous && previous.kind === field.kind && previous.elements.length === field.elements.length &&
+          previous.elements.every((element, index) => element === field.elements[index]) ? previous : field;
+        if (retained === field) field.originals = field.originals.map(original => originals.get(original.element) ?? original);
+        nextErrors.set(retained, field.error);
+        return retained;
+      });
+      const nextSet = new Set(nextFields);
+      const retired = fields.filter(field => !nextSet.has(field));
+      for (const field of retired) {
+        for (const [rowId, pending] of drafts) if (pending.has(field)) {
+          throw formError("FORM_RESCAN", "Resolve or discard the retained input before releasing this field.", { field: field.name, rowId });
+        }
+        if (!rows && (issues.get(field)?.length || localRenderedValues.get(field)?.invalid)) {
+          throw formError("FORM_RESCAN", "Resolve or discard invalid local input before releasing this field.", { field: field.name });
+        }
+      }
+      const captures = new Map(initial.map(state => [state.field, state] as const));
+      const nextInitial = nextFields.map(field => {
+        const retained = captures.get(field);
+        if (retained) return retained;
+        const state = capture(field);
+        adopted.push(state);
+        return state;
+      });
+      const nextRegions = new Map<HTMLElement, { id: string | null; live: string | null; text: string | null }>();
+      for (const region of nextErrors.values()) if (region && !nextRegions.has(region)) {
+        nextRegions.set(region, regionState.get(region) ?? {
+          id: region.getAttribute("id"), live: region.getAttribute("aria-live"), text: region.textContent
+        });
+      }
+      const nextOwners = new Set<HTMLFormElement>();
+      if (!rows) for (const field of nextFields) for (const element of field.elements) {
+        const owner = nativeOwner(element);
+        if (owner) nextOwners.add(owner);
+      }
+      const nextAnnotations = new Map(nextFields.flatMap(field => field.elements.map(element => [element, annotation(element)] as const)));
+      if (!current()) return;
+      const unchanged = !rescanIncomplete && nextFields.length === fields.length && nextFields.every((field, index) => field === fields[index] &&
+        nextErrors.get(field) === field.error && (!field.error || errorIds.get(field) === field.error.id)) &&
+        nextOwners.size === resetOwners.size && [...nextOwners].every(owner => resetOwners.has(owner));
+      if (unchanged) return;
+      for (const field of nextFields) if (field.element instanceof HTMLSelectElement && !releaseSelects.has(field.element)) {
+        pendingSelects.set(field.element, claimSelect(field.element, "bindForm"));
+      }
+      if (!current()) return;
+      committing = true;
+      version = ++renderVersion;
+      rescanIncomplete = true;
+      const attribute = (element: HTMLElement, name: string, value: string | null) => {
+        if (!current()) return;
+        if (value === null) element.removeAttribute(name);
+        else element.setAttribute(name, value);
+      };
+      for (const field of retired) {
+        for (const original of field.originals) {
+          attribute(original.element, "aria-describedby", original.describedBy);
+          attribute(original.element, "aria-invalid", original.invalid);
+          if (rows) attribute(original.element, "data-field-changed", original.changed);
+        }
+        if (!current()) return;
+        if (!rows && localRenderedValues.has(field) && (control(field.element) || field.element.localName === "img")) {
+          const raw = localFieldValue(field);
+          if (!current()) return;
+          display(field.element, raw);
+        } else if (renderers.has(field.name) || !rows && field.format.length && !control(field.element)) {
+          const state = captures.get(field)!;
+          if (!current()) return;
+          field.element.replaceChildren(...state.children);
+        }
+        if (!current()) return;
+        if (field.choices) {
+          (field.element as HTMLSelectElement).replaceChildren(...field.choices.authoredNodes);
+          for (let index = 0; index < field.choices.authoredOptions.length; index++) {
+            if (!current()) return;
+            field.choices.authoredOptions[index].selected = field.choices.selection[index];
+          }
+        }
+        if (!current()) return;
+      }
+      for (const [region, original] of regionState) if (!nextRegions.has(region)) {
+        attribute(region, "id", original.id);
+        attribute(region, "aria-live", original.live);
+        if (!current()) return;
+        region.textContent = original.text;
+      }
+      if (!current()) return;
+      for (const field of retired) {
+        localRenderedValues.delete(field);
+        issues.delete(field);
+        field.projection = undefined;
+        field.choices?.raw.clear();
+        const state = captures.get(field);
+        if (state?.files) state.files.length = 0;
+        if (field.element instanceof HTMLSelectElement) {
+          releaseSelects.get(field.element)?.();
+          releaseSelects.delete(field.element);
+        }
+        errorIds.delete(field);
+      }
+      for (const [element, release] of pendingSelects) releaseSelects.set(element, release);
+      pendingSelects.clear();
+      fields = nextFields;
+      byName = new Map(fields.map(field => [field.name, field]));
+      byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
+      annotations = nextAnnotations;
+      initial = nextInitial;
+      choiceFields = fields.filter(field => field.choices);
+      renderedOriginals = initial.filter(({ field, element }) => renderers.has(field.name) || !rows && field.format.length && !control(element));
+      defaultEntries.length = 0;
+      for (const entry of nativeEntries(initial)) defaultEntries.push(entry);
+      regionState.clear();
+      for (const [region, original] of nextRegions) regionState.set(region, original);
+      for (const state of adopted) if (!rows && (renderers.has(state.field.name) || state.field.format.length)) {
+        localRenderedValues.set(state.field, { raw: state.value, shown: state.value, invalid: false });
+      }
+      if (pointerField && !nextSet.has(pointerField)) pointerField = undefined;
+      for (const field of fields) field.error = nextErrors.get(field);
+      published = true;
+      for (const owner of resetOwners) if (!nextOwners.has(owner)) {
+        if (!current()) return;
+        owner.removeEventListener("reset", onReset);
+        resetOwners.delete(owner);
+      }
+      for (const owner of nextOwners) if (!resetOwners.has(owner) || retrying) {
+        if (!current()) return;
+        resetOwners.add(owner);
+        try { owner.addEventListener("reset", onReset); }
+        finally { if (disposed) owner.removeEventListener("reset", onReset); }
+      }
+      for (const field of fields) {
+        if (!current()) return;
+        const region = field.error;
+        let id: string | undefined;
+        if (region) {
+          if (!region.hasAttribute("aria-live")) attribute(region, "aria-live", "polite");
+          if (!current()) return;
+          id = errorId(region);
+          if (!current()) return;
+        }
+        for (const original of field.originals) {
+          const tokens = new Set((original.describedBy ?? "").split(/\s+/).filter(Boolean));
+          if (id) tokens.add(id);
+          attribute(original.element, "aria-describedby", tokens.size ? [...tokens].join(" ") : original.describedBy);
+        }
+        if (!current()) return;
+        if (id) errorIds.set(field, id);
+        else errorIds.delete(field);
+      }
+      const hadIssues = issues.size > 0;
+      showIssues(current);
+      if (hadIssues && !issues.size && current()) showIssues(current);
+      if (current()) rescanIncomplete = false;
+    } catch (cause) {
+      if (disposed) return;
+      if (!committing && cause instanceof FrameworkError) throw cause;
+      throw new FrameworkError({ api: "bindForm", code: "FORM_RESCAN", message: "The Form fields could not be reconciled.", cause });
+    } finally {
+      for (const release of pendingSelects.values()) release();
+      pendingSelects.clear();
+      if (!published) for (const state of adopted) if (state.files) state.files.length = 0;
+      scanning = false;
+    }
   }
 
   function unbind(): void {
@@ -966,101 +1201,107 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (failed) throw failure;
   }
   function onInput(event: Event): void {
-    if (disposed || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
-    const field = byElement.get(event.target);
-    if (!field || !control(field.element)) return;
-    const flushed = rows ? renderVersion : flushLocalResets(field);
-    if (disposed || !automatic || flushed !== renderVersion) return;
-    if (disabled(event.target, root) ||
-        (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
-    if (rows) {
-      if (boundId === null) return;
-      const currentDrafts = drafts.get(boundId) ?? new Map<Field, unknown>();
-      currentDrafts.set(field, enteredValue(field));
-      drafts.set(boundId, currentDrafts);
-      reconcile(boundId, autoValidate);
-      return;
-    }
-    const retained = localRenderedValues.get(field);
-    if (retained) {
-      retained.raw = retained.shown = fieldValue(field);
-      retained.invalid = false;
-    }
-    const version = ++renderVersion;
-    const entered = new Map(fields.map(item => [item, localFieldValue(item)] as const));
-    const checked = evaluate(null, localValues(), entered, autoValidate);
-    if (disposed || version !== renderVersion) return;
-    for (const item of fields) {
-      if (item === field || issues.has(item)) {
-        const found = checked.byField.get(item) ?? [];
-        issues.set(item, found);
-        const value = localRenderedValues.get(item);
-        if (value) value.invalid = found.length > 0;
+    return working(() => {
+      if (disposed || scanning || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+      const field = byElement.get(event.target);
+      if (!field || !control(field.element)) return;
+      const flushed = rows ? renderVersion : flushLocalResets(field);
+      if (disposed || !automatic || flushed !== renderVersion) return;
+      if (disabled(event.target, root) ||
+          (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
+      if (rows) {
+        if (boundId === null) return;
+        const currentDrafts = drafts.get(boundId) ?? new Map<Field, unknown>();
+        currentDrafts.set(field, enteredValue(field));
+        drafts.set(boundId, currentDrafts);
+        reconcile(boundId, autoValidate);
+        return;
       }
-    }
-    showIssues(() => !disposed && version === renderVersion);
-    if (disposed || version !== renderVersion) return;
-    if (localRenderedValues.size) renderLocal();
+      const retained = localRenderedValues.get(field);
+      if (retained) {
+        retained.raw = retained.shown = fieldValue(field);
+        retained.invalid = false;
+      }
+      const version = ++renderVersion;
+      const entered = new Map(fields.map(item => [item, localFieldValue(item)] as const));
+      const checked = evaluate(null, localValues(), entered, autoValidate);
+      if (disposed || version !== renderVersion) return;
+      for (const item of fields) {
+        if (item === field || issues.has(item)) {
+          const found = checked.byField.get(item) ?? [];
+          issues.set(item, found);
+          const value = localRenderedValues.get(item);
+          if (value) value.invalid = found.length > 0;
+        }
+      }
+      showIssues(() => !disposed && version === renderVersion);
+      if (disposed || version !== renderVersion) return;
+      if (localRenderedValues.size) renderLocal();
+    });
   }
 
   function onPointerDown(event: PointerEvent): void {
-    if (!automatic) return;
+    if (scanning || !automatic) return;
     pointerField = event.target instanceof HTMLElement ? byElement.get(event.target) : undefined;
   }
-  function onPointerEnd(): void { pointerField = undefined; }
+  function onPointerEnd(): void { if (!scanning) pointerField = undefined; }
 
   function onFocusIn(event: FocusEvent): void {
-    if (disposed || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
-    const flushed = rows ? renderVersion : flushLocalResets();
-    if (disposed || !automatic || flushed !== renderVersion) return;
-    const field = byElement.get(event.target);
-    const pointed = field !== undefined && pointerField === field;
-    pointerField = undefined;
-    if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
-        field.kind !== "single" || !formatCapable(field.element) ||
-        rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
-    if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
-    const element = field.element;
-    const before = element.value;
-    const raw = rows ? readPath(rowValue(boundId!), field.path) : localFieldValue(field);
-    if (before === (raw == null ? "" : String(raw))) return;
-    const selection = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
-      ? { start: element.selectionStart, end: element.selectionEnd, direction: element.selectionDirection }
-      : null;
-    display(element, raw);
-    if (!rows) {
-      localRenderedValues.get(field)!.shown = fieldValue(field);
-      renderVersion++;
-    }
-    if (selection && selection.start !== null && selection.end !== null) {
-      const selectAll = selection.start === 0 &&
-        (selection.end === before.length || !pointed && selection.end === 0);
-      const length = element.value.length;
-      (element as HTMLInputElement | HTMLTextAreaElement).setSelectionRange(
-        selectAll ? 0 : Math.min(selection.start, length),
-        selectAll ? length : Math.min(selection.end, length), selection.direction ?? undefined);
-    }
+    return working(() => {
+      if (disposed || scanning || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+      const flushed = rows ? renderVersion : flushLocalResets();
+      if (disposed || !automatic || flushed !== renderVersion) return;
+      const field = byElement.get(event.target);
+      const pointed = field !== undefined && pointerField === field;
+      pointerField = undefined;
+      if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
+          field.kind !== "single" || !formatCapable(field.element) ||
+          rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
+      if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
+      const element = field.element;
+      const before = element.value;
+      const raw = rows ? readPath(rowValue(boundId!), field.path) : localFieldValue(field);
+      if (before === (raw == null ? "" : String(raw))) return;
+      const selection = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
+        ? { start: element.selectionStart, end: element.selectionEnd, direction: element.selectionDirection }
+        : null;
+      display(element, raw);
+      if (!rows) {
+        localRenderedValues.get(field)!.shown = fieldValue(field);
+        renderVersion++;
+      }
+      if (selection && selection.start !== null && selection.end !== null) {
+        const selectAll = selection.start === 0 &&
+          (selection.end === before.length || !pointed && selection.end === 0);
+        const length = element.value.length;
+        (element as HTMLInputElement | HTMLTextAreaElement).setSelectionRange(
+          selectAll ? 0 : Math.min(selection.start, length),
+          selectAll ? length : Math.min(selection.end, length), selection.direction ?? undefined);
+      }
+    });
   }
 
   function onFocusOut(event: FocusEvent): void {
-    if (disposed || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
-    const flushed = rows ? renderVersion : flushLocalResets();
-    if (disposed || !automatic || flushed !== renderVersion) return;
-    const field = byElement.get(event.target);
-    if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
-        field.kind !== "single" || !formatCapable(field.element) ||
-        rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
-    if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
-    if (!rows) { renderLocal(undefined, field); return; }
-    const id = boundId!, snapshot = rows.get(id), version = renderVersion;
-    const source = rowValue(id);
-    const raw = readPath(source, field.path);
-    const current = () => !disposed && boundId === id && version === renderVersion && rows.get(id) === snapshot;
-    if (valueCallbacks) projectValue(field, raw, source, id, "val", false, false, current);
-    else {
-      const shown = runner.format(field.format, raw, context(field, id, source));
-      if (current()) display(field.element, shown);
-    }
+    return working(() => {
+      if (disposed || scanning || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+      const flushed = rows ? renderVersion : flushLocalResets();
+      if (disposed || !automatic || flushed !== renderVersion) return;
+      const field = byElement.get(event.target);
+      if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
+          field.kind !== "single" || !formatCapable(field.element) ||
+          rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
+      if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
+      if (!rows) { renderLocal(undefined, field); return; }
+      const id = boundId!, snapshot = rows.get(id), version = renderVersion;
+      const source = rowValue(id);
+      const raw = readPath(source, field.path);
+      const current = () => !disposed && boundId === id && version === renderVersion && rows.get(id) === snapshot;
+      if (valueCallbacks) projectValue(field, raw, source, id, "val", false, false, current);
+      else {
+        const shown = runner.format(field.format, raw, context(field, id, source));
+        if (current()) display(field.element, shown);
+      }
+    });
   }
 
   root.addEventListener("input", onInput);
@@ -1082,8 +1323,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (!row || row.status === "delete") {
       boundId = null;
       issues.clear();
+      if (scanning) return;
       render("bind");
       showIssues();
+      return;
+    }
+    if (scanning) {
+      if (event.type === "set" || event.type === "setMany" || event.type === "replace" ||
+          event.type === "revert" && (event.id === undefined || event.id === boundId)) issues.clear();
       return;
     }
     if (event.type === "revert" && (event.id === undefined || event.id === boundId)) {
@@ -1098,6 +1345,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   return {
     bind,
+    rescan,
     defaults,
     unbind,
     refresh(names) {
@@ -1171,15 +1419,17 @@ export function bindForm<T extends object = Record<string, unknown>>(
     },
     dispose() {
       if (disposed) return;
-      if (!rows) flushLocalResets(undefined, false);
+      if (!rows && !scanning) flushLocalResets(undefined, false);
       disposed = true;
       renderVersion++;
       activeValues.clear();
       activeBindings.clear();
       for (const field of fields) field.projection = undefined;
+      for (const release of pendingSelects.values()) release();
+      pendingSelects.clear();
       boundRoots.delete(root);
       unsubscribe?.();
-      for (const release of releaseSelects) release();
+      for (const release of releaseSelects.values()) release();
       root.removeEventListener("input", onInput);
       root.removeEventListener("change", onInput);
       root.removeEventListener("pointerdown", onPointerDown);

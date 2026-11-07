@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-options-plan.md
     title: Completed typed-choice continuation
-    git_blob: 92d8098ba284183ed8ecd5a4f92ef360133ea94e
+    git_blob: df185dd592f9f32a1c58320a5edb8451ffb02b77
   - id: baseline
     resource: evidence/m53-verification.json
     title: Preserved d923434 runtime and code baseline
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Compiled fields, render generations, candidates, drafts and subscriptions
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: ui
     resource: ../../src/ui/index.ts
     title: Existing RuleContext and public Form contract
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Native shape, display and raw constraint operations

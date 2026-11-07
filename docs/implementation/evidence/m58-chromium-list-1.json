@@ -1,0 +1,1559 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\workspace\\natural_js\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "tests/playwright.config.ts",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--reporter=json",
+      "--list",
+      "--shard=1/12"
+    ],
+    "configFile": "D:\\workspace\\natural_js\\tests\\playwright.config.ts",
+    "rootDir": "D:/workspace/natural_js/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": {
+      "current": 1,
+      "total": 12
+    },
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run example",
+      "cwd": "D:\\workspace\\natural_js\\",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "a11y-popup-tabs.spec.ts",
+      "file": "a11y-popup-tabs.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "native Popup keeps keyboard focus inside and Escape restores the opener",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-50f2ffc8256d9c792cf8",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 66,
+          "column": 1
+        },
+        {
+          "title": "two MDI workspaces keep unique IDs and resolvable ARIA references",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-fd114e447e1232f251a1",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 99,
+          "column": 1
+        },
+        {
+          "title": "vertical Tabs skip disabled buttons and keep manual activation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-21b5b1ebe02d3c77c168",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "side MDI and open Popup pass automated WCAG-tagged checks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-c98dcba0354376138157",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 160,
+          "column": 3
+        },
+        {
+          "title": "stack MDI and open Popup pass automated WCAG-tagged checks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-8f3b5c34ac87608e78d6",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 160,
+          "column": 3
+        },
+        {
+          "title": "side Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-455d8546da53882c1e27",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 175,
+          "column": 3
+        },
+        {
+          "title": "side data UI remains keyboard-operable at 320px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-98854057179db382d2f1",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 200,
+          "column": 3
+        },
+        {
+          "title": "stack Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-393fa0abe91792bbd397",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 175,
+          "column": 3
+        },
+        {
+          "title": "stack data UI remains keyboard-operable at 320px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3d70640ef9e187663acc-8ddff671e7bb21fd0e68",
+          "file": "a11y-popup-tabs.spec.ts",
+          "line": 200,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "auto-validation.spec.ts",
+      "file": "auto-validation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "automatic validation remains enabled by default for native and declared constraints in Form and Grid",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-18324b013f455fd4e6e0",
+          "file": "auto-validation.spec.ts",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "disabling automatic validation commits typed native and business failures while explicit validation still reports them",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-1e6dd8f9099c1d25792c",
+          "file": "auto-validation.spec.ts",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "title": "local Form skips automatic callbacks but retains native errors and custom rules at explicit validation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-663f576baa9dc9175d29",
+          "file": "auto-validation.spec.ts",
+          "line": 98,
+          "column": 1
+        },
+        {
+          "title": "automatic bypass still rejects parser failures and non-JSON values without committing either draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-90ac5e0646d62f7eb3ef",
+          "file": "auto-validation.spec.ts",
+          "line": 117,
+          "column": 1
+        },
+        {
+          "title": "automatic bypass permits an available empty choice but rejects injected unknown Grid choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-97274faa0d6dc38d24b3",
+          "file": "auto-validation.spec.ts",
+          "line": 138,
+          "column": 1
+        },
+        {
+          "title": "automatic bypass respects readonly disabled controls and native first-legend exceptions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-18ec05321c3ae6af21b2",
+          "file": "auto-validation.spec.ts",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "automatic bypass still reports native value sanitization in an unrelated edited row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-99ea11b7400ea77aa2c7",
+          "file": "auto-validation.spec.ts",
+          "line": 175,
+          "column": 1
+        },
+        {
+          "title": "manual Grid timing keeps bypassed drafts deferred and explicit validation commits only valid candidates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-c14b1b1a1698093325ea",
+          "file": "auto-validation.spec.ts",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "blur and Enter remain Grid commit points when automatic validation is disabled",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-665cd7bacf5296e71ba3",
+          "file": "auto-validation.spec.ts",
+          "line": 217,
+          "column": 1
+        },
+        {
+          "title": "a bypassed edit clears prior row constraint errors while retaining current parser integrity errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-d99f86122b4cf4ca815a",
+          "file": "auto-validation.spec.ts",
+          "line": 232,
+          "column": 1
+        },
+        {
+          "title": "disabled automatic checks do not weaken full atomic paste or hidden explicit Grid validation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-46987c434837158f2a7a",
+          "file": "auto-validation.spec.ts",
+          "line": 252,
+          "column": 1
+        },
+        {
+          "title": "invalid policy values fail before ownership and independent instance disposal restores authored accessibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a8d30a7532ecd1392b4e-618169370d8ec172e7d2",
+          "file": "auto-validation.spec.ts",
+          "line": 266,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "datepicker.spec.ts",
+      "file": "datepicker.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "DatePicker compiles authored weeks once and restores markup, IDs, and ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-b370d9c8c7ac9dc146df",
+          "file": "datepicker.spec.ts",
+          "line": 24,
+          "column": 1
+        },
+        {
+          "title": "calendar keyboard preserves leap-day intent, week order, selection, and roving focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-b3cd83f54eafa744e38a",
+          "file": "datepicker.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "limits constrain keyboard and pointer selection without emitting programmatic changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-dbbb133fff718016b26c",
+          "file": "datepicker.spec.ts",
+          "line": 95,
+          "column": 1
+        },
+        {
+          "title": "Monday weeks and extreme years use UTC calendar days across daylight-saving dates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-cd881309df5cb9a54523",
+          "file": "datepicker.spec.ts",
+          "line": 134,
+          "column": 1
+        },
+        {
+          "title": "locale labels retain the Gregorian ISO calendar",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-8d67d12e08e7cbc8d495",
+          "file": "datepicker.spec.ts",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "title": "invalid dates, locale, markup, and repeated IDs fail before changing authored nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-86889be2f1075d4aad21",
+          "file": "datepicker.spec.ts",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "title": "application date selection updates nested Form rows through native input events",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-f5478ccb6ce7ddd77293",
+          "file": "datepicker.spec.ts",
+          "line": 229,
+          "column": 1
+        },
+        {
+          "title": "authored calendar exposes an accessible grid before and after keyboard navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "00c0da6a2dccf2f65d02-5e64ad32d7a5f16a9f3e",
+          "file": "datepicker.spec.ts",
+          "line": 259,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "documents.spec.ts",
+      "file": "documents.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "documents reuse keys, reload with the original factory, isolate MDI, and restore authored markup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-7de520a39900795b73e7",
+          "file": "documents.spec.ts",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "malformed page handles release their partial work and Tabs restores authored alert nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-871444e3fdba018a89f6",
+          "file": "documents.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "close during reload waits for the original page cleanup before removing its panel",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-707150fe49dfc8ed235e",
+          "file": "documents.spec.ts",
+          "line": 152,
+          "column": 1
+        },
+        {
+          "title": "superseded documents abort, failures recover the previous page, and retained entries retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-1d811f43bff676057617",
+          "file": "documents.spec.ts",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "close guards deduplicate, refusal and errors preserve pages, and disposal cancels a pending guard",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-8f4f5dfd1124edcc0e4b",
+          "file": "documents.spec.ts",
+          "line": 235,
+          "column": 1
+        },
+        {
+          "title": "closing an inactive document does not wait for or cancel another pending selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-245dc58e1cb76b0dd7a5",
+          "file": "documents.spec.ts",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "a present close guard must explicitly return a boolean before a document is removed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-5140899e1a1fce4b9981",
+          "file": "documents.spec.ts",
+          "line": 326,
+          "column": 1
+        },
+        {
+          "title": "horizontal document keyboard activation, contextual close names, empty focus, and ARIA remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-a4eda9c6b0ca6072141a",
+          "file": "documents.spec.ts",
+          "line": 353,
+          "column": 1
+        },
+        {
+          "title": "vertical document keyboard activation, contextual close names, empty focus, and ARIA remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-2643115194ce7251cb4b",
+          "file": "documents.spec.ts",
+          "line": 353,
+          "column": 1
+        },
+        {
+          "title": "invalid repeated templates fail atomically before binding and the root can be corrected",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9111b41e0f82b685c9ea-87416dce2301135707ac",
+          "file": "documents.spec.ts",
+          "line": 388,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "field-render.spec.ts",
+      "file": "field-render.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "renderer declarations use only own functions, including a field named toString",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-5ef4608d8a2a3e838f71",
+          "file": "field-render.spec.ts",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "configuration rejects ambiguous fields and owned native content before mutation or execution",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-a8417d518db805cd27b3",
+          "file": "field-render.spec.ts",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "rendered strings remain text while fresh native nodes, fragments and null replace content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-0087b4819cfd2632c575",
+          "file": "field-render.spec.ts",
+          "line": 71,
+          "column": 1
+        },
+        {
+          "title": "invalid ownership and async returns preserve field content without unhandled rejections",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-21754fc7e4827ab65303",
+          "file": "field-render.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "factory exceptions and same-target reentry stay structured, release their guard and allow independent targets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-4f20db3cf5d99130253f",
+          "file": "field-render.spec.ts",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "title": "local Form renders from raw values, refreshes dependent display and restores authored nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-8c93a22b6f60ee794462",
+          "file": "field-render.spec.ts",
+          "line": 145,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "form-binding.spec.ts",
+      "file": "form-binding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-5e9f91bf4955b6903049",
+          "file": "form-binding.spec.ts",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-5287d1b8448c8e4df8c5",
+          "file": "form-binding.spec.ts",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "whole hook option errors reject before root Select or accessibility ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-785d4bf625f69a2a0542",
+          "file": "form-binding.spec.ts",
+          "line": 94,
+          "column": 1
+        },
+        {
+          "title": "a failing before hook preserves the previous row view draft and visible errors before a later retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-5483dd0aa5b73779fbe8",
+          "file": "form-binding.spec.ts",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "a failing after hook retains completed association and display and releases its guard for retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-e68160f2a7c2517e499f",
+          "file": "form-binding.spec.ts",
+          "line": 144,
+          "column": 1
+        },
+        {
+          "title": "whole hooks reject and drain asynchronous results and permit a synchronous recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-adaf5d1447b4f2ae05e7",
+          "file": "form-binding.spec.ts",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "a superseded hook still drains its rejected asynchronous result without overwriting the nested binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-444ff99e8616a534e3ad",
+          "file": "form-binding.spec.ts",
+          "line": 176,
+          "column": 1
+        },
+        {
+          "title": "unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-ac645bebbd2d2bbfab60",
+          "file": "form-binding.spec.ts",
+          "line": 193,
+          "column": 1
+        },
+        {
+          "title": "revert commits source and drops its draft even when the before hook fails before visible changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-9e117a5392801ccb2321",
+          "file": "form-binding.spec.ts",
+          "line": 208,
+          "column": 1
+        },
+        {
+          "title": "keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-9a505ef7abebf8d0254e",
+          "file": "form-binding.spec.ts",
+          "line": 227,
+          "column": 1
+        },
+        {
+          "title": "a source mutation during before binding supersedes that pass and suppresses its stale after hook",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-41a25212873430f38ba3",
+          "file": "form-binding.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "a completed different-row nested bind replaces its outer pass without a stale after hook",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-42aa6a21c6a048860251",
+          "file": "form-binding.spec.ts",
+          "line": 260,
+          "column": 1
+        },
+        {
+          "title": "same-row and cyclic whole-hook entry fail without poisoning the next explicit binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-64a887d6bdc5277a1ef4",
+          "file": "form-binding.spec.ts",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "disposal during a before hook suppresses field work and after hooks and releases ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-70797f41798c42a31c47",
+          "file": "form-binding.spec.ts",
+          "line": 290,
+          "column": 1
+        },
+        {
+          "title": "formatter and renderer row replacement during full binding cannot publish an older view or after hook",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-28009634cee875800f5b",
+          "file": "form-binding.spec.ts",
+          "line": 305,
+          "column": 1
+        },
+        {
+          "title": "a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-7eb50fffa35394516714",
+          "file": "form-binding.spec.ts",
+          "line": 321,
+          "column": 1
+        },
+        {
+          "title": "whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-25c34be3b252001ae941",
+          "file": "form-binding.spec.ts",
+          "line": 346,
+          "column": 1
+        },
+        {
+          "title": "whole after hooks finish synchronously while full and selected refresh defer focused text projection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-4481531ffd62bc6c23d7",
+          "file": "form-binding.spec.ts",
+          "line": 389,
+          "column": 1
+        },
+        {
+          "title": "selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-c6015f213fcac3407624",
+          "file": "form-binding.spec.ts",
+          "line": 403,
+          "column": 1
+        },
+        {
+          "title": "selected refresh treats native groups atomically and keeps focused readonly projection immediate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-a9cefdddd7fd801227f6",
+          "file": "form-binding.spec.ts",
+          "line": 421,
+          "column": 1
+        },
+        {
+          "title": "selected typed choices prepare only selected sources and reject a later malformed selected source before any writer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-4a94e736bd3f34ce1681",
+          "file": "form-binding.spec.ts",
+          "line": 443,
+          "column": 1
+        },
+        {
+          "title": "selected refresh preserves invalid drafts and issues without parsing validating or committing inputs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-825d4e81af62ce290e63",
+          "file": "form-binding.spec.ts",
+          "line": 460,
+          "column": 1
+        },
+        {
+          "title": "local selected refresh uses raw context while leaving unselected native display and validation errors alone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-438d4eea1223e3e3aacb",
+          "file": "form-binding.spec.ts",
+          "line": 478,
+          "column": 1
+        },
+        {
+          "title": "an empty local selection can finish native reset without adding selected writes or validation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-d34fd4d002ef06dafb98",
+          "file": "form-binding.spec.ts",
+          "line": 494,
+          "column": 1
+        },
+        {
+          "title": "unbound selected refresh only clears selected compiled fields and never emits whole hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-d72a3baee06244aeefb8",
+          "file": "form-binding.spec.ts",
+          "line": 508,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-07T11:18:24.707Z",
+    "duration": 992.1299999999999,
+    "expected": 0,
+    "skipped": 70,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

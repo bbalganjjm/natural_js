@@ -92,8 +92,11 @@
               <small data-error-for="salary"></small>
               <label>Team <input data-field="profile.team" required></label>
               <small data-error-for="profile.team"></small>
-              <label>Department <input data-field="profile.department"></label>
-              <small data-error-for="profile.department"></small>
+              <div data-role="department-fields">
+                <label>Department <input data-field="profile.department"></label>
+                <small data-error-for="profile.department"></small>
+              </div>
+              <button type="button" data-action="toggle-department" aria-expanded="true">Hide department</button>
             </form>
             <button type="button" data-action="save">Save changes</button>
           </section>

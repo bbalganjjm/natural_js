@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m10-pinned-plan.md
     title: Completed pinned-column continuation
-    git_blob: 3f28a413751545efacc304a4f0408bef645525dc
+    git_blob: dc1d95d7d964fbdf640152494bc3f012b48df11f
   - id: baseline
     resource: evidence/m10964p-verification.json
     title: Preserved a0f837a runtime baseline
@@ -20,11 +20,11 @@ sources:
   - id: types
     resource: ../../src/ui/index.ts
     title: Shared rule and UI contracts
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: form
     resource: ../../src/ui/form.ts
     title: Form candidates, drafts and validation ownership
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid candidates, commit timing and validated paste

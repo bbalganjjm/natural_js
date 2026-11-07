@@ -2,6 +2,37 @@
 import { expect, test } from "@playwright/test";
 
 for (const layout of ["side", "stack"] as const) {
+  test(layout + " releases and rediscovers authored department fields without losing shared edits", async ({ page }) => {
+    const errors: Error[] = [];
+    page.on("pageerror", error => errors.push(error));
+    await page.goto("/m4/" + layout + ".html");
+    const screen = page.locator('[data-page="employees"]').first();
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    const department = screen.locator('[data-role="detail"] [data-field="profile.department"]');
+    const toggle = screen.locator('[data-action="toggle-department"]');
+    await department.fill("Infrastructure");
+    await screen.locator('[data-role="detail"] [data-field="email"]').fill("invalid");
+    await expect(screen.locator('[data-error-for="email"]')).not.toBeEmpty();
+    await toggle.focus();
+    await page.keyboard.press("Enter");
+    await expect(department).toHaveCount(0);
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await page.keyboard.press("Enter");
+    await expect(department).toHaveValue("Infrastructure");
+    await expect(toggle).toBeFocused();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await expect(screen.locator('[data-role="detail"] [data-field="email"]')).toHaveValue("invalid");
+    await expect(screen.locator('[data-error-for="email"]')).not.toBeEmpty();
+    await screen.locator('[data-role="detail"] [data-field="email"]').fill("ada@example.com");
+    const request = page.waitForRequest(value => value.url().includes("/api/employees/save"));
+    await screen.locator('[data-action="save"]').click();
+    const payload = (await request).postDataJSON();
+    expect(payload[0].value.profile.department).toBe("Infrastructure");
+    await expect(screen.locator('[data-role="status"]')).toHaveText("Saved");
+    expect(errors).toEqual([]);
+  });
+
   test(layout + " preserves authored HTML through search, edit, nested choice, and save", async ({ page }) => {
     const errors: Error[] = [];
     page.on("pageerror", error => errors.push(error));

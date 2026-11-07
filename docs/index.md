@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 M5.8 Form field rediscovery](implementation/m5-form-discovery-plan.md) - Explicitly reconcile authored Form fields while preserving retained input, data and resource ownership. (draft)
+
 * [Natural-JS 2.0 M5.7 Form captured defaults and unbind](implementation/m5-form-defaults-plan.md) - Return captured native creation values and restore the authored Form view without changing shared Rows data. (draft)
 
 * [Natural-JS 2.0 M5.6 Form binding lifecycle and selective refresh](implementation/m5-form-binding-plan.md) - Add synchronous whole-row Form hooks and refresh compiled fields without changing row identity or unselected input. (draft)

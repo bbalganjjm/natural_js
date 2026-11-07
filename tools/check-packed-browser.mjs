@@ -250,6 +250,70 @@ try {
       notifications: 0, binds: 2, defaults: { name: "Initial field" } }, codes: ["FORM_DISPOSED", "FORM_DISPOSED"]
   }, "Installed Form defaults/unbind must restore captured UI/files and preserve Rows and explicit inactive/resume ownership.");
 
+  const formDiscovery = await page.evaluate(async () => {
+    const h = window.packedConsumer.formDiscovery;
+    const code = document.createElement("label");
+    code.innerHTML = 'Code <input data-field="profile.code" value="ab" data-format=\'[["upper"]]\'>';
+    h.local.append(code);
+    h.form.rescan();
+    const input = code.querySelector("input");
+    const adopted = { shown: input.value, raw: h.form.read().profile.code, defaults: h.form.defaults().profile.code };
+    h.form.refresh(["profile.code"]);
+    const projected = input.value;
+    const fileLabel = document.createElement("label"), file = document.createElement("input");
+    file.type = "file"; file.dataset.field = "attachment"; fileLabel.append("Attachment", file);
+    const transfer = new DataTransfer(); transfer.items.add(new File(["adopted"], "late.txt")); file.files = transfer.files;
+    h.local.append(fileLabel); h.form.rescan();
+    file.value = ""; input.value = "edited";
+    h.form.unbind();
+    const restored = { code: input.value, file: file.files[0].name, content: await file.files[0].text() };
+    const extra = document.createElement("input"); extra.dataset.field = "extra"; extra.dataset.format = '[["upper"]]'; extra.value = "xy";
+    h.local.append(extra); h.form.rescan();
+    extra.value = "pq"; extra.dispatchEvent(new Event("input", { bubbles: true }));
+    const inactive = extra.value === "pq";
+    h.form.refresh(["extra"]); const subset = extra.value;
+    extra.value = "rs"; extra.dispatchEvent(new Event("input", { bubbles: true }));
+    const subsetInactive = extra.value === "rs";
+    h.form.refresh(); extra.focus(); const focused = extra.value; extra.blur();
+    const resumed = extra.value;
+    fileLabel.remove(); h.form.rescan(); file.value = ""; h.form.unbind();
+    const retired = !Object.hasOwn(h.form.defaults(), "attachment") && file.files.length === 0;
+
+    const [row] = h.rows.entries(), original = h.rows.get(row.id), calls = h.calls.length;
+    const fields = document.createElement("div");
+    fields.innerHTML = '<label>Code <input data-field="profile.code" value="Authored code"></label><label>Choice <select data-field="choice" data-options="options" data-option-label="label" data-option-value="code"><option value="">Choose</option></select></label>';
+    h.rowRoot.append(fields); h.rowForm.rescan();
+    const rowCode = fields.querySelector("input"), select = fields.querySelector("select");
+    const quiet = rowCode.value === "Authored code" && select.options.length === 1 && h.calls.length === calls && h.rows.get(row.id) === original;
+    h.rowForm.refresh(["profile.code", "choice"]);
+    const rowProjected = { code: rowCode.value, choice: select.value, calls: h.calls.length };
+    const name = h.rowRoot.querySelector('[data-field="name"]'), nameLabel = name.closest("label");
+    name.value = ""; name.dispatchEvent(new Event("input", { bubbles: true }));
+    h.rowForm.rescan();
+    const retainedDraft = name.value === "" && name.getAttribute("aria-invalid") === "true";
+    nameLabel.remove(); let rejected;
+    try { h.rowForm.rescan(); } catch (error) { rejected = error.code; }
+    h.rowRoot.prepend(nameLabel); h.rowForm.rescan();
+    const retry = name.value === "" && h.rows.get(row.id) === original;
+    h.rowForm.unbind(); h.rowForm.bind(row.id);
+    const rowRestored = { name: name.value, code: rowCode.value, choice: select.value,
+      original: h.rows.original(row.id).name, changes: h.rows.changes().length };
+    h.form.dispose(); h.rowForm.dispose();
+    const disposed = [];
+    for (const form of [h.form, h.rowForm]) try { form.rescan(); } catch (error) { disposed.push(error.code); }
+    h.rows.dispose(); h.root.remove(); delete window.packedConsumer.formDiscovery;
+    return { adopted, projected, restored, inactive, subset, subsetInactive, focused, resumed, retired,
+      quiet, rowProjected, retainedDraft, rejected, retry, rowRestored, disposed };
+  });
+  assert.deepEqual(formDiscovery, {
+    adopted: { shown: "ab", raw: "ab", defaults: "ab" }, projected: "AB",
+    restored: { code: "ab", file: "late.txt", content: "adopted" }, inactive: true, subset: "PQ", subsetInactive: true,
+    focused: "rs", resumed: "RS", retired: true, quiet: true,
+    rowProjected: { code: "Stored code", choice: "1", calls: 2 }, retainedDraft: true, rejected: "FORM_RESCAN", retry: true,
+    rowRestored: { name: "Loaded name", code: "Stored code", choice: "1", original: "Loaded name", changes: 0 },
+    disposed: ["FORM_DISPOSED", "FORM_DISPOSED"]
+  }, "Installed Form rescan must reconcile late fields/files without projection, draft loss, source writes or implicit resume.");
+
   const formBinding = await page.evaluate(() => {
     const h = window.packedConsumer.formBinding, [first, second] = h.rows.entries();
     const input = h.root.querySelector("input"), summary = h.root.querySelector("span"), select = h.root.querySelector("select");

@@ -20,7 +20,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Grid semantic closure and required continuation
-    git_blob: 1f844d2f881bd08898200972d6221664235e7f0b
+    git_blob: c1813d2aa99863c2535206450da4f482c672c93b
   - id: data
     resource: ../../src/data/index.ts
     title: Current values, immutable originals, deletion payloads and restoration
@@ -28,7 +28,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Rows-backed fields, drafts, formatting and restoration
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled fields, retained tombstones and mounted ownership

@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -100,7 +100,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: 2355f21ec715d66f908ddfa392a65c85336b4bdd
+    git_blob: af1ca1f7d75737eb2e45c2bf12748450031a550b
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
@@ -108,7 +108,7 @@ sources:
   - id: employee-view
     resource: ../../examples/vite/m4/side.html
     title: Authored employee screen markers
-    git_blob: 0e94c26ab286abeb646695cde8b1f15d4f5a93bb
+    git_blob: aa957ca7e9c6099d91ab37d4776aee8065e8f2b6
   - id: containers
     resource: ../../examples/vite/m7/main.ts
     title: Runnable main, Popup, and keyed Tab page flow
@@ -120,7 +120,7 @@ sources:
   - id: employee-test
     resource: ../../tests/browser/m4-screen.spec.ts
     title: Search, validation, payload, and cancellation browser checks
-    git_blob: 068f35a366cad8dec2bcb563d12e59aaec45f3ac
+    git_blob: 0e11a8c4117126675f6b5e65ad68d3f397f54a2d
   - id: containers-test
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Popup and Tab browser checks
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: c33f9b637702cd7daa614752037f7623bfb6b6e5
+    git_blob: 5ba9f0b0b0d1bf36a27b199c5873d5f15338f74d
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 23bd853dba1680a4fae0e3cafb1837a0b6a49d8c
-generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+    git_blob: 8dd085ce6e878a969c1f3cf81876acb89d97497c
+generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -436,15 +436,27 @@ rows.revert(id); // Retains id and insert status; restores the received insert v
 
 Choose ordinary add when cancellation should remove the inserted row. A legacy live InitialData snapshot is not automatically a native default: before binding, set defaultValue/defaultChecked/defaultSelected when Reset fields must restore a preset. Otherwise capture an explicit application default record/checkpoint as above. Rows-backed native reset policy remains application-owned; use explicit data operations rather than implying a row-wide write from the browser reset event.[^rows][^form][^legacy-ui]
 
-The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Restore captured fields calls unbind followed by full refresh: restoration and automatic resume are explicit, without a request or Rows write. Local display ownership introduces no second dataset or callback registry. Global composition and dynamic discovery retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
+The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Restore captured fields calls unbind followed by full refresh: restoration and automatic resume are explicit, without a request or Rows write. Local display ownership introduces no second dataset or callback registry. Global composition and wider dynamic declaration/catalog behavior retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
 
-Form.defaults returns captured native creation values with own parsers; it excludes static/images, option-source lists and business-only keys. Use an application factory to supply complete T before Rows.add or appendState. Unbind restores the live construction view and selected native files, clears the current draft/errors and detaches the current RowId without modifying committed Rows. Unlike legacy's retained row index, the restored view cannot write defaults into the old record. Keep the RowId and Rows when source access is needed; explicitly bind an ID to resume. Other-row drafts survive. Full local refresh resumes automatic handling, while selected refresh and explicit read/validate do not.[^form][^rows][^legacy-ui]
+Form.defaults returns captured native creation values of active adopted bindings with own parsers; it excludes static/images, option-source lists and business-only keys. Use an application factory to supply complete T before Rows.add or appendState. Unbind restores the live captured binding view and selected native files, clears the current draft/errors and detaches the current RowId without modifying committed Rows. Unlike legacy's retained row index, the restored view cannot write defaults into the old record. Keep the RowId and Rows when source access is needed; explicitly bind an ID to resume. Other-row drafts survive. Full local refresh resumes automatic handling, while rescan, selected refresh and explicit read/validate do not.[^form][^rows][^legacy-ui]
 
-Captured UI restoration preserves authored nodes, image attribute absence and selected option occurrences rather than flattening markup or coercing arrays. Native file references remain private restoration metadata; uploads use application File/FormData. No nonempty filename assignment, hidden dataset, autoUnbind option or implicit row-creation API is added. Native reset still uses current native defaults and Rows.revert still uses the received checkpoint. Dynamic field/configuration rediscovery remains separate required work.[^form][^legacy-ui][^parity]
+Captured UI restoration preserves authored nodes, image attribute absence and selected option occurrences rather than flattening markup or coercing arrays. Native file references remain private restoration metadata; uploads use application File/FormData. No nonempty filename assignment, hidden dataset, autoUnbind option or implicit row-creation API is added. Native reset still uses current native defaults and Rows.revert still uses the received checkpoint. Explicit rescan adds captures for new bindings and removes retired bindings; compatible fields keep their prior capture. Hot declaration/configuration equivalence remains required separately.[^form][^legacy-ui][^parity]
 
 Legacy Form onBeforeBind/onBind becomes beforeBind/onBind with explicit FormBindContext<T>: root, immutable full raw row and original revert event or null. Ordinary returns do not cancel binding. Use beforeBindValue/onBindValue for field presentation; normalize source explicitly through Rows. Whole hooks surround full bind/refresh and current live-row revert, not construction, field edits or selected refresh. The CVC employee detail updates its current-row state through onBind.[^form][^legacy-ui]
 
 Replace legacy selective bind(row,data,cols) with a full bind(id) for an identity switch, then refresh(["field.path"]) only when refreshing the current row. This prevents untouched old controls from writing into another record. Selection preflights every field/selected typed option source, keeps drafts/errors and focused entered text, and skips unselected choice rebuilding. Refresh uses compiled fields; it does not rediscover inserted/removed markup or restore captured live defaults.[^form][^legacy-ui]
+
+## 12. Rediscover authored fields explicitly
+
+Replace legacy cache:false lookup with rescan at the application DOM-change boundary, followed by refresh when values should be projected. There is no cache flag or per-bind query. The department toggle in both employee layouts removes/reinserts authored HTML while preserving stored department edits and other fields' invalid input.[^form][^legacy-ui][^employee][^employee-test]
+
+```ts
+departmentHost.append(departmentFields);
+detail.rescan();
+detail.refresh(["profile.department"]);
+```
+
+Resolve/discard any affected row draft or known local issue before removing/replacing its binding. Rescan retains compatible fields and inactive state, with current RowId unchanged unless application Rows removal/replacement detaches it. It does not invoke Form hooks/rules/parsers/renderers or write Rows. Error associations may publish existing issues. A pending native reset must finish/flush before the graph changes. To change owned annotations, detach, rescan to release, edit while detached, reattach and rescan to adopt. Leaving data-options without data-field is still invalid. Fixed catalogs, preflight errors and native-failure retry/disposal are defined in [Form rediscovery](form.md#field-rediscovery); direct hot declarations and List/Grid rediscovery remain required parity work.[^form][^parity]
 
 # Verify
 

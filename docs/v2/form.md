@@ -6,6 +6,10 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
 sources:
+  - id: discovery-browser
+    resource: ../../tests/browser/form-discovery.spec.ts
+    title: Explicit field adoption, retirement, ownership and recovery regressions
+    git_blob: 08086d812c18dc6c0699e2c6b5277db4e272d313
   - id: defaults
     resource: ../../src/ui/native-defaults.ts
     title: Private native creation record and synchronous parser builder
@@ -37,11 +41,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -74,10 +78,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -221,11 +225,36 @@ A renderer cannot recursively refresh the same active field/RowId; this fails UI
 
 refresh(fields) accepts only an array of exact compiled data-field paths. It preflights all names and every selected typed option source before writing any selected field. Duplicates collapse and groups update atomically in DOM compilation order. An empty array does nothing after the disposal check, apart from already-completed local native reset cleanup. Invalid field names or a nonarray argument raise FORM_BIND; malformed selected option sources retain FORM_OPTIONS. Neither preflight failure partially refreshes selected fields. The selection never changes RowId, commits/parses input, validates or clears drafts/issues. Selecting every field still suppresses whole hooks.[^form][^binding-browser]
 
-Only selected writers/value projections and option sources run. Focused editable text/caret follows the existing deferral policy; unselected input, errors, option nodes and drafts remain untouched. A malformed unselected choice source does not block another field. Local selected refresh uses existing raw/display ownership without whole hooks. Full unbound refresh reuses bind(null); selected unbound Rows refresh repaints only its selected empty fields. Refresh uses already compiled fields; dynamic field discovery remains separate required work.[^form][^binding-browser]
+Only selected writers/value projections and option sources run. Focused editable text/caret follows the existing deferral policy; unselected input, errors, option nodes and drafts remain untouched. A malformed unselected choice source does not block another field. Local selected refresh uses existing raw/display ownership without whole hooks. Full unbound refresh reuses bind(null); selected unbound Rows refresh repaints only its selected empty fields. Refresh uses already compiled fields; use rescan for explicit field discovery. Direct hot-declaration equivalence remains required.[^form][^binding-browser]
+
+## Field rediscovery
+
+`rescan(): void` explicitly reconciles the marked fields and error/reset ownership in the current authored HTML. It does not project data values, run hooks/rules/parsers/renderers, commit input, select a row, write Rows or resume automatic binding. Ordinary bind/refresh/read/validate keep using compiled fields. After inserting markup, discover it and request only the projection you need:[^form][^discovery-browser]
+
+```ts
+departmentHost.append(departmentFields);
+detail.rescan();
+detail.refresh(["profile.department"]);
+// Later, release that authored subtree without changing its stored value.
+departmentFields.remove();
+detail.rescan();
+```
+
+Compatible bindings retain the exact Field, raw/projection, issues, current/other-row drafts and creation capture: the path, native shape, ordered members and binding annotations stay the same. Reordering independent fields or moving unchanged controls between valid native form owners preserves those values. Error-region replacement preserves the control/draft and publishes already-known issues to the new region. Generated error IDs remain document-unique; original ARIA and old-region state are restored.[^form][^discovery-browser]
+
+New bindings capture their complete live native/UI state once at adoption. A clean reshaped group is one new binding with the complete current native group capture. Retired bindings disappear from read/defaults and release Select, display, error/reset, raw/projection and private File resources. Retained captures do not change. Any retained row draft, including a valid uncommitted candidate, blocks retirement/replacement/reshaping with FORM_RESCAN and field/row identity. Known local issues or invalid raw caches also block retirement, including static displays; resolve or explicitly discard them first. Rescan does not validate to decide whether a draft is safe.[^form][^discovery-browser]
+
+Binding annotations on owned nodes are fixed: data-field, format/validate/choice declarations, native type/multiple and grouped name/value metadata. Direct changes fail FORM_RESCAN. Detach the element/subtree, rescan to release, edit while detached, then reattach and rescan to adopt. Marker-only release must remove all binding/choice annotations; orphan data-options retains FORM_OPTIONS. New HTML rules use the existing captured catalogs/parsers. Function catalogs stay fixed; known render targets may temporarily disappear, while constructor rejection of unknown renderer targets remains.[^form][^discovery-browser]
+
+Rescan rejects active Form work and pending native reset cleanup with FORM_RESCAN. Let reset cleanup finish, or flush through read/refresh after dispatch completes and before changing markup. During reconciliation, other public work is blocked except dispose; synthetic input and subscription projection/hooks are suppressed. Rows structural bookkeeping still prunes drafts and detaches a removed/replaced current row. These application mutations may clear obsolete issues; they do not trigger a stale value projection.[^form][^discovery-browser]
+
+Structural/claim preflight completes before old ownership changes, retaining specific existing error codes. An unexpected native commit failure reports FORM_RESCAN with cause; the retained or published graph keeps drafts and can retry rescan or dispose. Reset listener retry uses the same native handler identity. Earlier DOM/application side effects are not rolled back. No-op rescan does not repaint or clear input/errors. There is no observer or automatic per-bind query.[^form][^discovery-browser]
 
 ## Captured defaults and unbind
 
 Form captures live marked native values and the authored restoration view once, before its initial local formatting/rendering. Programmatic presets established before construction belong to this capture; later bind, refresh, native reset and Rows.revert do not replace it. Native default properties, captured values and received row originals are separate checkpoints.[^form][^defaults-browser]
+
+An explicit rescan adds one capture for each newly adopted binding and removes retired captures. Defaults/unbind use the active adopted bindings; compatible fields keep their original capture. Callers that never rescan retain the construction-time behavior above.[^form][^discovery-browser]
 
 defaults(): Record<string, unknown> returns detached native creation values, including readonly/disabled controls, nested paths and stable group shapes. Static/image fields and unbound business keys are excluded. Marked Selects use captured authored raw mappings; files contribute the first captured filename, without exposing private File references. Applicable own parsers see one complete unparsed native record, rowId null and the authored element. No formatting, validation, DOM/Rows write, error/draft change, native-reset flush or automatic resume occurs.[^form][^defaults]
 
@@ -315,6 +344,7 @@ Received/business records, full unbound keys and received insert checkpoints bel
 | `bind(id)` | Shows an existing nondeleted row or clears with `null`. Switching rows retains each row's invalid drafts and restores them on return. Local Form accepts only null to refresh current raw display and clear visible errors. |
 | `refresh(fields?)` | Full current-row refresh when omitted; otherwise refresh only compiled paths with no identity switch, validation or issue clearing. Whole hooks run only for a nonnull full row. |
 | `defaults()` | Detached captured native creation values with applicable own parsers; does not alter the current view/source. |
+| `rescan()` | Reconcile authored fields and resource ownership without data projection, input commits or automatic resume. |
 | `unbind()` | Restore the captured view, discard the current row association/draft and suspend automatic binding; retain the reusable owner and unrelated drafts. |
 | `read()` | Returns a detached nested record of marked fields. A row-bound Form reads stored raw values, excluding invalid drafts; a local Form reads current control values without parsing. |
 | `validate(id?)` | Combines native HTML constraints and declarative rules. Without an ID, checks the bound row and every row with a retained draft. With an ID, checks that row without rebinding; hidden-row issues have no `element`. A draft made valid by another change enters `Rows` before the final result. |
@@ -377,3 +407,4 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [^binding-browser]: Whole-row lifecycle and same-row selected refresh regressions
 [^defaults]: Private native creation record and synchronous parser builder
 [^defaults-browser]: Captured defaults, unbind, native files and inactive ownership regressions
+[^discovery-browser]: Explicit field adoption, retirement, ownership and recovery regressions

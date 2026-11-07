@@ -1,0 +1,87 @@
+
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\form-discovery.spec.ts:606:1 › reset listener commit failures preserve retry and disposal ownership
+  1) [chromium] › tests\browser\form-discovery.spec.ts:606:1 › reset listener commit failures preserve retry and disposal ownership 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 7
+    + Received  + 7
+
+    @@ -1,46 +1,46 @@
+      Array [
+        Object {
+    -     "balance": 0,
+    +     "balance": 1,
+          "closed": "FORM_DISPOSED",
+          "code": "FORM_RESCAN",
+          "mode": "remove-before",
+          "newFormats": 1,
+    -     "oldFormats": 0,
+    +     "oldFormats": 1,
+          "registered": Array [
+    -       0,
+            1,
+    +       1,
+          ],
+          "retry": null,
+          "sentinel": false,
+          "value": "[Native]",
+        },
+        Object {
+          "balance": 0,
+          "closed": "FORM_DISPOSED",
+          "code": "FORM_RESCAN",
+          "mode": "add-before",
+    -     "newFormats": 1,
+    +     "newFormats": 0,
+          "oldFormats": 0,
+          "registered": Array [
+            0,
+    -       1,
+    +       0,
+          ],
+          "retry": null,
+          "sentinel": false,
+    -     "value": "[Native]",
+    +     "value": "Native",
+        },
+        Object {
+          "balance": 0,
+          "closed": "FORM_DISPOSED",
+          "code": null,
+          "formats": 0,
+          "mode": "add-dispose-after",
+          "sentinel": false,
+        },
+        Object {
+    -     "balance": 0,
+    +     "balance": 1,
+          "closed": "FORM_DISPOSED",
+          "code": null,
+          "formats": 0,
+          "mode": "add-dispose-before",
+          "sentinel": false,
+
+      660 |     return results;
+      661 |   });
+    > 662 |   expect(result).toEqual([
+          |                  ^
+      663 |     ...["remove-before", "add-before"].map(mode => ({ mode, code: "FORM_RESCAN", retry: null, registered: [0, 1], oldFormats: 0, newFormats: 1, value: "[Native]", balance: 0, closed: "FORM_DISPOSED", sentinel: false })),
+      664 |     ...["add-dispose-after", "add-dispose-before"].map(mode => ({ mode, code: null, balance: 0, formats: 0, closed: "FORM_DISPOSED", sentinel: false }))
+      665 |   ]);
+        at D:\workspace\natural_js\tests\browser\form-discovery.spec.ts:662:18
+
+    Error Context: test-results\form-discovery-reset-liste-334d4-etry-and-disposal-ownership-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › tests\browser\form-discovery.spec.ts:606:1 › reset listener commit failures preserve retry and disposal ownership 
+[WebServer] (node:11480) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:9640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

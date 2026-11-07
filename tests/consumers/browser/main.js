@@ -401,6 +401,21 @@ try {
   defaultsRowForm.bind(defaultsRows.entries()[0].id);
   state.formDefaults = { root: defaultsRoot, local: defaultsLocal, form: defaultsForm, renders: defaultRenders, capturedSummary,
     rowRoot: defaultsRowRoot, rows: defaultsRows, rowForm: defaultsRowForm, bindings: defaultsBindings, capturedNote };
+  const discoveryRoot = document.createElement("section");
+  discoveryRoot.innerHTML = `<h2>Form field rediscovery</h2>
+    <form data-discovery-local><label>Amount <input data-field="amount" value="1200" data-format='[["commas"]]'></label></form>
+    <form data-discovery-rows><label>Name <input data-field="name" value="Initial name" required></label><output data-error-for="name"></output></form>`;
+  document.querySelector("main").append(discoveryRoot);
+  const discoveryLocal = discoveryRoot.querySelector("[data-discovery-local]");
+  const discoveryForm = bindForm(discoveryLocal, { parse: { amount: Number } });
+  const discoveryRowRoot = discoveryRoot.querySelector("[data-discovery-rows]");
+  const discoveryRows = createRows([{ name: "Loaded name", profile: { code: "Stored code" }, choice: 1, options: [{ label: "One", code: 1 }] }]);
+  const discoveryCalls = [];
+  const discoveryRowForm = bindForm(discoveryRowRoot, { rows: discoveryRows,
+    beforeBind: () => { discoveryCalls.push("before"); }, onBind: () => { discoveryCalls.push("after"); } });
+  discoveryRowForm.bind(discoveryRows.entries()[0].id);
+  state.formDiscovery = { root: discoveryRoot, local: discoveryLocal, form: discoveryForm,
+    rowRoot: discoveryRowRoot, rows: discoveryRows, rowForm: discoveryRowForm, calls: discoveryCalls };
   const localContainer = document.createElement("section");
   localContainer.innerHTML = `<h2>Local Form</h2><form><div data-local-root>
     <label>Amount <input data-field="amount" value="1200" data-format='[["commas"]]' pattern="[0-9]+"></label>

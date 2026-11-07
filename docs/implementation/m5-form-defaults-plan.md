@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-binding-plan.md
     title: Completed whole-row observers and same-ID refresh scope
-    git_blob: faba68a4adca194ac7d62ed5cd1c995d8b97147d
+    git_blob: 9ea264b3f8c1517474a86dd52620b955e2e0d585
   - id: baseline
     resource: evidence/m56-verification.json
     title: Frozen c4aacd0 runtime and installed package receipt
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing compiled fields, local raw cache, drafts and lifecycle
-    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
+    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form and native creation contracts
-    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
+    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Existing native creation snapshot and default parser owner

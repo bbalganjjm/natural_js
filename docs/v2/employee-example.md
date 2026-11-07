@@ -8,7 +8,7 @@ sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: 2355f21ec715d66f908ddfa392a65c85336b4bdd
+    git_blob: af1ca1f7d75737eb2e45c2bf12748450031a550b
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
@@ -20,11 +20,11 @@ sources:
   - id: side
     resource: ../../examples/vite/m4/side.html
     title: Side-by-side authored view
-    git_blob: 0e94c26ab286abeb646695cde8b1f15d4f5a93bb
+    git_blob: aa957ca7e9c6099d91ab37d4776aee8065e8f2b6
   - id: stack
     resource: ../../examples/vite/m4/stack.html
     title: Stacked authored view
-    git_blob: af4be939727ca43b19a41117c700b8b17eb1df39
+    git_blob: 96a3d375f46e84dc02a3b37f4b21f2973b41b7db
   - id: side-css
     resource: ../../examples/vite/m4/side.css
     title: Side-by-side authored styling
@@ -48,15 +48,15 @@ sources:
   - id: m4-test
     resource: ../../tests/browser/m4-screen.spec.ts
     title: Original screen and server-HTML browser regression
-    git_blob: 068f35a366cad8dec2bcb563d12e59aaec45f3ac
+    git_blob: 0e11a8c4117126675f6b5e65ad68d3f397f54a2d
   - id: m6-test
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -81,6 +81,8 @@ Search employees, select a row in either a native table or compact list, edit it
 The native action buttons and their event handlers belong to the page controller; there is no Button binder or theme.[^controller][^side][^stack]
 
 The search input declares the built-in upper formatter in both layouts. Its DOM-local Form shows uppercase while unfocused, exposes entered raw on focus and submits raw query text. Reset fields is a native reset button: it restores input defaults without requesting data or changing another CVC screen. Existing results remain until the next Search. Local display/raw state and reset cleanup share the [Form](form.md) owner; the controller adds no formatter or reset helper.[^controller][^side][^stack]
+
+Hide department removes the authored department subtree and calls detail.rescan() to release its field/error ownership. Show department reinserts that same subtree, rescans and refreshes only profile.department from Rows. Committed department edits and other fields' invalid drafts/errors survive the toggle; no search/save request or component reconstruction runs. The native button exposes aria-expanded and stays inside the Form's existing inert request lock. Both layouts use the same controller and signal-owned handler.[^controller][^side][^stack]
 
 # View
 
