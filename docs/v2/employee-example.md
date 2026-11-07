@@ -8,7 +8,7 @@ sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: c15ab21168b93cb5675d2ddbf1c3fa18bfef557c
+    git_blob: 2355f21ec715d66f908ddfa392a65c85336b4bdd
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
@@ -20,11 +20,11 @@ sources:
   - id: side
     resource: ../../examples/vite/m4/side.html
     title: Side-by-side authored view
-    git_blob: 16680df0e9ae8f0453915ead086d930daa5743f0
+    git_blob: 0e94c26ab286abeb646695cde8b1f15d4f5a93bb
   - id: stack
     resource: ../../examples/vite/m4/stack.html
     title: Stacked authored view
-    git_blob: 55eda774d31ba57eff84a4fd0da0c4cef3c555ab
+    git_blob: af4be939727ca43b19a41117c700b8b17eb1df39
   - id: side-css
     resource: ../../examples/vite/m4/side.css
     title: Side-by-side authored styling
@@ -53,10 +53,10 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
+  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -110,6 +110,8 @@ The table has native headers, including a name header with `aria-sort`; its repe
 # Controller
 
 `createEmployees` receives one `PageContext` per screen and registers every handle, subscription, and store with `own`. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
+
+Both search views offer native Reset fields and explicit Restore captured fields. Native reset uses native default properties. Restore calls search.unbind() to restore the construction-time values, then search.refresh() to resume automatic formatting/validation. It sends no request, changes no shared employee row and does not recreate the CVC controller. The action listener uses the same page signal as other authored controls.[^controller][^side][^stack]
 
 Grid and List use one `Rows<Employee>` instance. A List selection calls `grid.select(id)`; Grid's selection callback selects the same ID in List, binds the detail Form, and updates the live selected-name output. The standalone Select offers typed sizes 2 and 5. Page requests go through the controller, which sets Grid and List to the same slice, reads Grid's normalized state, and calls `pagination.set(state)`. Filtering and sorting apply to both views before page slicing. The application resets to page 1 on a new search, filter, or sort; `Rows` subscriptions recalculate totals after edits.[^controller]
 

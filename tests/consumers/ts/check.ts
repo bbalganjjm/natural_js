@@ -98,6 +98,9 @@ export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, ro
   });
   const refreshed: void = form.refresh(["name"]);
   form.refresh();
+  const defaults: Record<string, unknown> = form.defaults();
+  const unbound: void = form.unbind();
+  void defaults; void unbound;
   void refreshed;
   const columns: readonly GridColumn[] = [{ key: "person", width: 180, pinned: true }, { key: "choice", width: 120 }];
   const columnChanges: { columns: readonly GridColumn[]; event: Event | null }[] = [];

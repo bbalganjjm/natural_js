@@ -48,11 +48,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
@@ -60,7 +60,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
+    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -146,7 +146,7 @@ Legacy symbols are NU.* in natural.ui.js and NUS.* in natural.ui.shell.js. Curre
 | ID | Legacy behavior / evidence | Current status and required work |
 |---|---|---|
 | U01 | form.bind/val; grouped inputs and image/rich display | Shared native controls, nested raw/display/drafts and explicit rich display exist. M5.5 adds local formatting/native reset; M5.6 adds same-ID compiled-field refresh preserving unselected input/errors/choices. Complete control/source/dynamic parity stays open with G04/G05. |
-| U02 | form.unbind/add/remove/revert/update, initial defaults | Shared Rows CRUD/revert and explicit received insert checkpoints exist. Native reset uses native defaults; captured live InitialData/unbind and complete insertion/source workflows remain required for M5.7. Dynamic discovery remains separate. |
+| U02 | form.unbind/add/remove/revert/update, initial defaults | M5.7 adds detached native creation defaults and captured live UI/file restoration through explicit unbind. Current association/draft cleanup, unrelated draft retention and full bind/refresh resume are defined without Rows writes. Shared Rows CRUD and received insert checkpoints remain. Global/default-source and dynamic workflow equivalence stay required; no full-family closure follows. |
 | U03 | onBeforeBindValue/onBindValue/onBeforeBind/onBind | M5.4 implements Rows-backed value projection/observation; M5.6 adds whole-row observers with full immutable raw context, ordering, reentry and synchronous failure rules. Whole-hook ordinary returns are ignored, as in legacy Form. Global/local composition and per-unbound-key value observation remain required; no full-family closure follows. |
 | U04 | list.bind/select/data/validate, unselect | Core single selection/display; row-click and deselection policy remain open. |
 | U05 | Editable List row Form, list.val/update | Missing inline editing: current List disables bound controls and rejects radio fields. Share Form/Grid semantics. |
@@ -229,6 +229,8 @@ The [M5.4 continuation](m5-form-values-plan.md) adds selected Rows-backed Form v
 The [M5.5 continuation](m5-local-form-plan.md) implements selected local raw formatting, native-owner reset and lifecycle protection through existing Form/native/render owners. Source-backed legacy workflows remain Rows-owned, including full unbound values and explicit received insert checkpoints. Fresh runtime/document checks accept these selected outcomes; this slice closes no full family, global/whole-row callback, unbound-key observation, partial binding, dynamic discovery or other owner/P0/M13 obligation.
 
 The [M5.6 continuation](m5-form-binding-plan.md) adds selected whole-row before/after observers with immutable full raw context and same-identity compiled-field refresh. It preserves field projection, focus, drafts/errors and unselected choices; the CVC detail uses the completed-binding hook. Fresh runtime/document checks accept these selected outcomes; this slice closes no full family, live-default unbind, dynamic discovery, global composition or other owner/P0/M13 obligation.
+
+The [M5.7 continuation](m5-form-defaults-plan.md) adds captured native creation records and exact reusable Form unbind, including native files and explicit inactive/resume ownership. Its shared private native builder corrects both-order path conflicts and recursive getters for Form/Grid without adding a public utility. M5.7 selected runtime/document checks pass. Global/default-source/dynamic parity, all full families/P0/M13 and the consolidated omission decision remain open.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
 

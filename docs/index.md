@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 M5.7 Form captured defaults and unbind](implementation/m5-form-defaults-plan.md) - Return captured native creation values and restore the authored Form view without changing shared Rows data. (draft)
+
 * [Natural-JS 2.0 M5.6 Form binding lifecycle and selective refresh](implementation/m5-form-binding-plan.md) - Add synchronous whole-row Form hooks and refresh compiled fields without changing row identity or unselected input. (draft)
 
 * [Natural-JS 2.0 M10.9.6.3 progressive binding](implementation/m10-progressive-plan.md) - Bind already-loaded logical prefixes cooperatively with owned completion, cancellation and the existing viewport and CVC contracts. (draft)

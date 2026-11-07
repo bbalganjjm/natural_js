@@ -197,6 +197,59 @@ try {
     source: { original: "ab", value: "Ada", changes: ["update"] }, quietDispose: true
   }, "Installed Form callbacks must project views while preserving raw validation, changes and owned lifetime.");
 
+  const formDefaults = await page.evaluate(async () => {
+    const h = window.packedConsumer.formDefaults, amount = h.local.querySelector('[data-field="amount"]');
+    const attachment = h.local.querySelector('[type="file"]'), summary = h.local.querySelector("span");
+    const initial = h.form.defaults(); initial.amount = 99;
+    const detached = h.form.defaults();
+    h.local.reset(); const resetRaw = h.form.read();
+    const native = { amount: resetRaw.amount, attachment: resetRaw.attachment };
+    const before = h.renders.length; h.form.unbind();
+    const raw = h.form.read();
+    const restored = { shown: amount.value, amount: raw.amount, attachment: raw.attachment, summary: raw.summary,
+      node: summary.firstChild === h.capturedSummary, quiet: h.renders.length === before,
+      payload: await attachment.files[0].text(), modified: attachment.files[0].lastModified };
+    amount.value = "2300"; amount.dispatchEvent(new Event("input", { bubbles: true }));
+    const inactive = { shown: amount.value, raw: h.form.read().amount, quiet: h.renders.length === before };
+    h.form.refresh(["summary"]); const selectedText = summary.textContent, selectedCalls = h.renders.length;
+    amount.value = "2400"; amount.dispatchEvent(new Event("input", { bubbles: true }));
+    const selected = { text: selectedText, shown: amount.value, quiet: h.renders.length === selectedCalls };
+    h.form.refresh(); const resumed = amount.value;
+    amount.value = "3400"; amount.dispatchEvent(new Event("input", { bubbles: true }));
+    const automatic = amount.value;
+    h.form.unbind(); const repeated = { raw: h.form.read().amount, file: attachment.files[0].name };
+    const id = h.rows.entries()[0].id, name = h.rowRoot.querySelector("input");
+    name.value = "Committed"; name.dispatchEvent(new Event("input", { bubbles: true }));
+    name.value = ""; name.dispatchEvent(new Event("input", { bubbles: true }));
+    const invalid = !h.rowForm.validate().valid, source = h.rows.entries();
+    let notifications = 0; const stop = h.rows.subscribe(() => notifications++);
+    h.rowForm.unbind();
+    const rowView = { name: name.value, raw: h.rowForm.read(), node: h.rowRoot.querySelector("em") === h.capturedNote,
+      changed: name.getAttribute("data-field-changed"), cleared: name.getAttribute("aria-invalid") !== "true" && h.rowRoot.querySelector("output").textContent === "" };
+    h.rowForm.bind(id);
+    const row = { value: h.rows.get(id).value.name, original: h.rows.original(id).name, status: h.rows.get(id).status,
+      visible: name.value, unchanged: h.rows.entries() === source, notifications, binds: h.bindings.length,
+      defaults: h.rowForm.defaults() };
+    stop(); h.rowForm.dispose(); h.form.dispose();
+    const codes = [];
+    for (const action of [() => h.form.defaults(), () => h.rowForm.unbind()]) {
+      try { action(); } catch (cause) { codes.push(cause.code); }
+    }
+    h.rows.dispose(); h.root.remove(); delete window.packedConsumer.formDefaults;
+    return { detached, native, restored, inactive, selected, resumed, automatic, repeated, invalid, rowView, row, codes };
+  });
+  assert.deepEqual(formDefaults, {
+    detached: { amount: 1200, attachment: "captured.txt" }, native: { amount: "1000", attachment: "" },
+    restored: { shown: "1200", amount: "1200", attachment: "captured.txt", summary: "Authored summary", node: true,
+      quiet: true, payload: "Captured payload", modified: 1 },
+    inactive: { shown: "2300", raw: "2300", quiet: true },
+    selected: { text: "Authored summary:2300", shown: "2400", quiet: true }, resumed: "2,400", automatic: "3,400",
+    repeated: { raw: "1200", file: "captured.txt" }, invalid: true,
+    rowView: { name: "Initial field", raw: { name: undefined, note: undefined }, node: true, changed: "false", cleared: true },
+    row: { value: "Committed", original: "Loaded", status: "update", visible: "Committed", unchanged: true,
+      notifications: 0, binds: 2, defaults: { name: "Initial field" } }, codes: ["FORM_DISPOSED", "FORM_DISPOSED"]
+  }, "Installed Form defaults/unbind must restore captured UI/files and preserve Rows and explicit inactive/resume ownership.");
+
   const formBinding = await page.evaluate(() => {
     const h = window.packedConsumer.formBinding, [first, second] = h.rows.entries();
     const input = h.root.querySelector("input"), summary = h.root.querySelector("span"), select = h.root.querySelector("select");

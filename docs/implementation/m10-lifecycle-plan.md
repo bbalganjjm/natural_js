@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: b0e15d2c6a73296c6795c25b241ca4a1d452a2c3
+    git_blob: 72435d682fb664a07915a7ed2ab9588ee720633a
   - id: data
     resource: ../../src/data/index.ts
     title: Shared snapshots, tombstones and atomic notification
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled record binding and view ownership
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: body
     resource: ../../src/ui/grid-row-blocks.ts
     title: Authored record blocks and native merging

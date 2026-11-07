@@ -16,6 +16,7 @@ import { createGridViewport, validateGridViewport } from "./grid-viewport.js";
 import { compileGridBody } from "./grid-row-blocks.js";
 import { display, displayField, fieldValue, nativeMessage, interactiveContent, disabled as controlDisabled } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
+import { createNativeDefaults } from "./native-defaults.js";
 import { createGridHooks } from "./grid-hooks.js";
 import { bindGridHeight, validateGridHeight } from "./grid-height.js";
 import type { GridRowBinding } from "./grid-hooks.js";
@@ -350,16 +351,17 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       throw gridError("GRID_ERROR_REGION", "An error region needs a matching data-field.", { field });
     }
   }
-  const authoredDefaults: { name: string; path: readonly string[]; value: unknown }[] = [];
+  const authoredDefaults: { name: string; path: readonly string[]; value: unknown; element: HTMLElement; parse?: ParseInput }[] = [];
   for (const field of textFields) if (field.editable) {
-    authoredDefaults.push({ name: field.name, path: field.path, value: fieldValue({
+    authoredDefaults.push({ name: field.name, path: field.path, element: authored[field.index],
+      ...(parsers.has(field.name) ? { parse: parsers.get(field.name)! } : {}), value: fieldValue({
       element: authored[field.index], elements: field.indexes.map(index => authored[index]), kind: field.kind
     }) });
   }
   for (const field of selectFields) if (field.name && field.field) {
     const select = authored[field.index] as HTMLSelectElement;
     const selected = [...select.selectedOptions].map(option => field.authored[option.index]);
-    authoredDefaults.push({ name: field.name, path: field.field, value: field.multiple ? selected : selected[0] ?? null });
+    authoredDefaults.push({ name: field.name, path: field.field, element: select, value: field.multiple ? selected : selected[0] ?? null });
   }
   const renderers = fieldRenderers("bindGrid", [
     ...textFields.map(field => ({ name: field.name, element: authored[field.index], formatted: field.format.length > 0 })),
@@ -530,37 +532,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     throw cause;
   }
 
-  function defaults(): Record<string, unknown> {
-    active();
-    let values: Record<string, unknown> = {};
-    const names = new Set<string>();
-    for (const field of authoredDefaults) {
-      if (names.has(field.name)) throw gridError("GRID_DEFAULTS", "Defaults need unique native field paths.", { field: field.name });
-      names.add(field.name);
-      try { values = writePath(values, field.path, structuredClone(field.value)); }
-      catch (cause) { throw new FrameworkError({ api: "bindGrid", code: "GRID_DEFAULTS", message: "Native defaults have conflicting paths.", detail: { field: field.name }, cause }); }
-    }
-    let parsed = values;
-    for (const field of textFields) if (field.editable && parsers.has(field.name)) {
-      try {
-        const value = parsers.get(field.name)!(String(readPath(values, field.path) ?? ""), {
-          field: field.name, values, rowId: null, element: authored[field.index]
-        });
-        if (value === undefined) throw new TypeError("A default parser must return a raw value.");
-        if (value !== null && (typeof value === "object" || typeof value === "function") &&
-            typeof (value as { then?: unknown }).then === "function") {
-          void Promise.resolve(value).catch(() => {});
-          throw new TypeError("Default parsers must finish synchronously.");
-        }
-        parsed = writePath(parsed, field.path, value);
-      } catch (cause) {
-        throw new FrameworkError({ api: "bindGrid", code: "GRID_DEFAULTS", message: "A native default could not be parsed.", detail: { field: field.name }, cause });
-      }
-      active();
-    }
-    try { return structuredClone(parsed); }
-    catch (cause) { throw new FrameworkError({ api: "bindGrid", code: "GRID_DEFAULTS", message: "Defaults must contain cloneable raw values.", cause }); }
-  }
+  const defaults = createNativeDefaults("bindGrid", authoredDefaults, active);
 
   function active(): void {
     if (disposed) throw gridError("GRID_DISPOSED", "This Grid has been disposed.");

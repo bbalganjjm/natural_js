@@ -1,0 +1,94 @@
+
+Running 86 tests using 1 worker
+
+
+
+[1/86] [firefox] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+[2/86] [firefox] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+[3/86] [firefox] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+[4/86] [firefox] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+[5/86] [firefox] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+[6/86] [firefox] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+[7/86] [firefox] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+[8/86] [firefox] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+[9/86] [firefox] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+[10/86] [firefox] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+[11/86] [firefox] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+[12/86] [firefox] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+[13/86] [firefox] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+[14/86] [firefox] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+[15/86] [firefox] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+[16/86] [firefox] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+[17/86] [firefox] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry
+[18/86] [firefox] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+[19/86] [firefox] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+[20/86] [firefox] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+[21/86] [firefox] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+[22/86] [firefox] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+[23/86] [firefox] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+[24/86] [firefox] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation
+[25/86] [firefox] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+[26/86] [firefox] › tests\browser\form-defaults.spec.ts:52:1 › Form defaults capture live native values including root readonly disabled and hidden fields but exclude display and business data
+[27/86] [firefox] › tests\browser\form-defaults.spec.ts:67:1 › captured defaults native reset and received Rows originals remain three independent checkpoints
+[28/86] [firefox] › tests\browser\form-defaults.spec.ts:82:1 › defaults return detached nested records and arrays without recapturing edits binding refresh or reset
+[29/86] [firefox] › tests\browser\form-defaults.spec.ts:94:1 › Form default parsers use own native fields in compiled order and one unparsed captured context
+[30/86] [firefox] › tests\browser\form-defaults.spec.ts:111:1 › default parser errors undefined async and uncloneable results fail without changing DOM and release guards
+[31/86] [firefox] › tests\browser\form-defaults.spec.ts:133:1 › Form and Grid default getter recursion is bounded per owner recoverable and permits another owner
+[32/86] [firefox] › tests\browser\form-defaults.spec.ts:152:1 › native default paths reject parent-child conflicts in both DOM orders for Form and Grid
+[33/86] [firefox] › tests\browser\form-defaults.spec.ts:167:1 › shared default assembly preserves Grid readonly disabled groups parser order and Select parser exclusion
+[34/86] [firefox] › tests\browser\form-defaults.spec.ts:180:1 › disposing from a default parser prevents a late result without affecting another live owner
+[35/86] [firefox] › tests\browser\form-defaults.spec.ts:196:1 › Rows unbind restores captured UI without callbacks notifications or business changes and retains ownership
+[36/86] [firefox] › tests\browser\form-defaults.spec.ts:213:1 › unbind discards only the current row draft detaches updates and retains other row drafts for reuse
+[37/86] [firefox] › tests\browser\form-defaults.spec.ts:227:1 › unbind restores exact static nodes and image src attributes while preserving current native configuration and alt
+[38/86] [firefox] › tests\browser\form-defaults.spec.ts:244:1 › captured group checkedness restores stable shapes without mutating checkbox values or native defaults
+[39/86] [firefox] › tests\browser\form-defaults.spec.ts:259:1 › unmarked Select restore follows captured option identities while preserving reordered added and removed application options
+[40/86] [firefox] › tests\browser\form-defaults.spec.ts:273:1 › marked Select unbind restores owned authored nodes selection and raw mapping before another row binds
+[41/86] [firefox] › tests\browser\form-defaults.spec.ts:287:1 › local unbind suspends automatic work while read validate and selected refresh remain usable without resuming it
+[42/86] [firefox] › tests\browser\form-defaults.spec.ts:307:1 › defaults neither flush pending native reset display nor resume an inactive local Form
+[43/86] [firefox] › tests\browser\form-defaults.spec.ts:320:1 › unbind cancels older completed native reset cleanup before it can repaint the restored view
+[44/86] [firefox] › tests\browser\form-defaults.spec.ts:357:1 › native reset default action after in-dispatch unbind wins unless the reset is canceled
+[45/86] [firefox] › tests\browser\form-defaults.spec.ts:372:1 › unbind from whole value formatter renderer and parser callbacks suppresses older writes and sibling commits
+[46/86] [firefox] › tests\browser\form-defaults.spec.ts:394:1 › native setter reentry rejects same-owner unbind once and releases the restoration guard for retry
+[47/86] [firefox] › tests\browser\form-defaults.spec.ts:410:1 › newer binding local full refresh and disposal during a native setter stop stale sibling restoration
+[48/86] [firefox] › tests\browser\form-defaults.spec.ts:452:1 › file restoration privately preserves every captured File while defaults expose only the first filename
+[49/86] [firefox] › tests\browser\form-defaults.spec.ts:471:1 › empty file capture clears later selection while disposal keeps current files and existing restrictions
+[50/86] [firefox] › tests\browser\form-defaults.spec.ts:484:1 › file reconstruction failure precedes DOM error or inactive changes and preflight recursion stays bounded
+[51/86] [firefox] › tests\browser\form-defaults.spec.ts:509:1 › newer full refresh or disposal during file preflight prevents all older restoration writes
+[52/86] [firefox] › tests\browser\form-defaults.spec.ts:529:1 › Form creation defaults feed an explicit complete Rows factory and a received insert checkpoint
+[53/86] [firefox] › tests\browser\form-defaults.spec.ts:542:1 › native validation publication stops after unbind during an ARIA write and leaves automatic work inactive
+[54/86] [firefox] › tests\browser\form-defaults.spec.ts:579:1 › a canceled local render cannot erase newer validation or resume handlers through a rejected nested bind
+[55/86] [firefox] › tests\browser\form-defaults.spec.ts:601:3 › side CVC restores captured search fields without a request or changes to another page then resumes formatting
+[56/86] [firefox] › tests\browser\form-defaults.spec.ts:601:3 › stack CVC restores captured search fields without a request or changes to another page then resumes formatting
+[57/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+[58/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+[59/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+[60/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+[61/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+[62/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+[63/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+[64/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+[65/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+[66/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+[67/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+[68/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+[69/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+[70/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+[71/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+[72/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+[73/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+[74/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+[75/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+[76/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+[77/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+[78/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+[79/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+[80/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+[81/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+[82/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+[83/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+[84/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+[85/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+[86/86] [firefox] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+  86 passed (42.7s)
+(node:9332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

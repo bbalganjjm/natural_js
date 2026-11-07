@@ -80,7 +80,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -116,7 +116,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
 generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }

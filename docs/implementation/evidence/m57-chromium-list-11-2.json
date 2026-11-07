@@ -1,0 +1,1327 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\workspace\\natural_js\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "tests/playwright.config.ts",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--reporter=json",
+      "--list",
+      "--shard=11/12"
+    ],
+    "configFile": "D:\\workspace\\natural_js\\tests\\playwright.config.ts",
+    "rootDir": "D:/workspace/natural_js/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": {
+      "current": 11,
+      "total": 12
+    },
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run example",
+      "cwd": "D:\\workspace\\natural_js\\",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "m12-shell.spec.ts",
+      "file": "m12-shell.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "side shares one editor definition and Rows while retaining and guarding documents",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7fc5af84d02db743a6b0-266fca9ba965159b1898",
+          "file": "m12-shell.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "side retries failure, cancels pending pages, and releases an independent shell",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7fc5af84d02db743a6b0-4e2c396c61ed923ee6ce",
+          "file": "m12-shell.spec.ts",
+          "line": 86,
+          "column": 3
+        },
+        {
+          "title": "side preserves accessible authored empty and populated shell states at 320px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7fc5af84d02db743a6b0-f93f7bde9404a98a2b6d",
+          "file": "m12-shell.spec.ts",
+          "line": 146,
+          "column": 3
+        },
+        {
+          "title": "stack shares one editor definition and Rows while retaining and guarding documents",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7fc5af84d02db743a6b0-78d17ed5b079fa5a14df",
+          "file": "m12-shell.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "stack retries failure, cancels pending pages, and releases an independent shell",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7fc5af84d02db743a6b0-9e263cc0374f42217ce5",
+          "file": "m12-shell.spec.ts",
+          "line": 86,
+          "column": 3
+        },
+        {
+          "title": "stack preserves accessible authored empty and populated shell states at 320px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7fc5af84d02db743a6b0-946756f5adbd8a2034d6",
+          "file": "m12-shell.spec.ts",
+          "line": 146,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "m4-screen.spec.ts",
+      "file": "m4-screen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "side preserves authored HTML through search, edit, nested choice, and save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-35005bbc0d2ac86a0580",
+          "file": "m4-screen.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "side keeps two pages ID-clean and independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-245b58d9f6956c860137",
+          "file": "m4-screen.spec.ts",
+          "line": 45,
+          "column": 3
+        },
+        {
+          "title": "side keeps unsaved edits when Enter is pressed in the local filter",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-da5308f106fd803dde0d",
+          "file": "m4-screen.spec.ts",
+          "line": 73,
+          "column": 3
+        },
+        {
+          "title": "side keeps invalid drafts by row while navigating and adding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-31147ecfaf2b2b163904",
+          "file": "m4-screen.spec.ts",
+          "line": 86,
+          "column": 3
+        },
+        {
+          "title": "side restores focus to a hidden row with an unavailable choice",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-098890a71fcffd08f7a2",
+          "file": "m4-screen.spec.ts",
+          "line": 107,
+          "column": 3
+        },
+        {
+          "title": "side handles empty, failed, and replaced searches",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-e42f15295601819371de",
+          "file": "m4-screen.spec.ts",
+          "line": 122,
+          "column": 3
+        },
+        {
+          "title": "side validates hidden changes and recovers from save failure",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-e78ecbb39cb57af31466",
+          "file": "m4-screen.spec.ts",
+          "line": 144,
+          "column": 3
+        },
+        {
+          "title": "stack preserves authored HTML through search, edit, nested choice, and save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-d8e5bdbe9de1ac0f5856",
+          "file": "m4-screen.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "stack keeps two pages ID-clean and independent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-1829f5b8e41557407586",
+          "file": "m4-screen.spec.ts",
+          "line": 45,
+          "column": 3
+        },
+        {
+          "title": "stack keeps unsaved edits when Enter is pressed in the local filter",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-fdacd79cbeafd895b8f6",
+          "file": "m4-screen.spec.ts",
+          "line": 73,
+          "column": 3
+        },
+        {
+          "title": "stack keeps invalid drafts by row while navigating and adding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-f1a9556e915ccc750bb6",
+          "file": "m4-screen.spec.ts",
+          "line": 86,
+          "column": 3
+        },
+        {
+          "title": "stack restores focus to a hidden row with an unavailable choice",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-2ccf94746465c9cb8b14",
+          "file": "m4-screen.spec.ts",
+          "line": 107,
+          "column": 3
+        },
+        {
+          "title": "stack handles empty, failed, and replaced searches",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-735f9b5fd825a567627e",
+          "file": "m4-screen.spec.ts",
+          "line": 122,
+          "column": 3
+        },
+        {
+          "title": "stack validates hidden changes and recovers from save failure",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-00efe65f1eca12befda9",
+          "file": "m4-screen.spec.ts",
+          "line": 144,
+          "column": 3
+        },
+        {
+          "title": "a saved insert is not resent when the post-save refresh fails",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-1bfa7ae4a947e69dfe29",
+          "file": "m4-screen.spec.ts",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "title": "save locks editing while keeping Close available and aborts after removal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-df5d69258255908da3e2",
+          "file": "m4-screen.spec.ts",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "title": "the development mock rejects an entire conflicting save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-50ed8317a018f21fc485",
+          "file": "m4-screen.spec.ts",
+          "line": 214,
+          "column": 1
+        },
+        {
+          "title": "closing during a delayed search does not update a removed page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-b44f40c5a6f643c938d2",
+          "file": "m4-screen.spec.ts",
+          "line": 233,
+          "column": 1
+        },
+        {
+          "title": "server HTML runs the same employee controller in two ID-clean pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fc9bf41374a5cd233f45-d9a8bda6a67c045c80a4",
+          "file": "m4-screen.spec.ts",
+          "line": 246,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m6-screen.spec.ts",
+      "file": "m6-screen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "side keeps Grid, List, Select, Pagination, and Form in one row flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0bcb8aed21a2479b320b-6c7095aade36e94d46ae",
+          "file": "m6-screen.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "side keeps two paged instances separate and ID-clean",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0bcb8aed21a2479b320b-b66c799784d9c2af8086",
+          "file": "m6-screen.spec.ts",
+          "line": 69,
+          "column": 3
+        },
+        {
+          "title": "stack keeps Grid, List, Select, Pagination, and Form in one row flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0bcb8aed21a2479b320b-29acde630215d109e2de",
+          "file": "m6-screen.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "stack keeps two paged instances separate and ID-clean",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0bcb8aed21a2479b320b-e31924ba3dd6cf72d98e",
+          "file": "m6-screen.spec.ts",
+          "line": 69,
+          "column": 3
+        },
+        {
+          "title": "a hidden invalid Grid choice reopens its page before focusing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0bcb8aed21a2479b320b-1324d52d820590020e63",
+          "file": "m6-screen.spec.ts",
+          "line": 92,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m7-screen.spec.ts",
+      "file": "m7-screen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "side shares one page definition across main, Tab, and Popup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1eb012ae40448dae885c-268d383fab7ebefdd1fc",
+          "file": "m7-screen.spec.ts",
+          "line": 4,
+          "column": 3
+        },
+        {
+          "title": "side keeps two MDI workspaces and Popup results separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1eb012ae40448dae885c-2d3f49721bf7f8d42f95",
+          "file": "m7-screen.spec.ts",
+          "line": 114,
+          "column": 3
+        },
+        {
+          "title": "stack shares one page definition across main, Tab, and Popup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1eb012ae40448dae885c-32858741e77c6c8f1619",
+          "file": "m7-screen.spec.ts",
+          "line": 4,
+          "column": 3
+        },
+        {
+          "title": "stack keeps two MDI workspaces and Popup results separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1eb012ae40448dae885c-2e979c31d3784fa064f5",
+          "file": "m7-screen.spec.ts",
+          "line": 114,
+          "column": 3
+        },
+        {
+          "title": "immediate workspace removal treats page readiness cancellation as normal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1eb012ae40448dae885c-8dcd39cf2109eb7470aa",
+          "file": "m7-screen.spec.ts",
+          "line": 172,
+          "column": 1
+        },
+        {
+          "title": "slow Popup close and parent removal settle once and release the page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1eb012ae40448dae885c-db6c1a836600fa90a19e",
+          "file": "m7-screen.spec.ts",
+          "line": 186,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "notify.spec.ts",
+      "file": "notify.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "notifications retain authored markup, announce through stable channels, and insert safe text without focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-35f942911b713ad0c2ff",
+          "file": "notify.spec.ts",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "title": "dismissal follows native keyboard activation and keeps focused removal inside the region",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-8996bba9ac6e8a50ad12",
+          "file": "notify.spec.ts",
+          "line": 75,
+          "column": 1
+        },
+        {
+          "title": "dismissal skips unavailable close controls and clear remains scoped to one MDI region",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-a3e0e61fc05695bbc875",
+          "file": "notify.spec.ts",
+          "line": 110,
+          "column": 1
+        },
+        {
+          "title": "invalid notification markup and label references fail before mutation or ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-895a3a38903a8d1631fa",
+          "file": "notify.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "invalid show arguments remain atomic and disposal releases ownership and returned dismissals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-8dfbba8ffcf5949c9bfa",
+          "file": "notify.spec.ts",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "title": "an authored notification without close controls is dismissed through its returned function",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-2d8d6daeee579c18353c",
+          "file": "notify.spec.ts",
+          "line": 228,
+          "column": 1
+        },
+        {
+          "title": "notification insertion and dismissal pass automated A and AA checks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "440fb4652cdc1147a137-350db738e82e98dca763",
+          "file": "notify.spec.ts",
+          "line": 249,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "page.spec.ts",
+      "file": "page.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two pages keep separate roots, outputs, and reload input",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-337d768a835ec8c0599c",
+          "file": "page.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "pending initialization aborts immediately and releases resources",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-156173a25901a7efa5ff",
+          "file": "page.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "fetched HTML has one root and duplicate IDs are rejected",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-03d63e2ae2107da5b2ed",
+          "file": "page.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "fetched HTML rejects executable attributes before insertion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-6ab92a876c27b5b0cb29",
+          "file": "page.spec.ts",
+          "line": 138,
+          "column": 1
+        },
+        {
+          "title": "factory roots are checked against the insertion document",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-eb59b4276a438ea44522",
+          "file": "page.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "late own registration disposes a resource after cancellation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-01420de1d2cf0d49d7b5",
+          "file": "page.spec.ts",
+          "line": 190,
+          "column": 1
+        },
+        {
+          "title": "output stops when a listener reloads its page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ea7f5a6ac9463218d2f1-55af35711e3b117a343f",
+          "file": "page.spec.ts",
+          "line": 226,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "popup.spec.ts",
+      "file": "popup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "output waits for page cleanup, restores focus, and permits immediate reopening",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-61be29c5fc44f1de8293",
+          "file": "popup.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "closing during initialization aborts ready but resolves an ordinary result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-fc0f5e0877ed55c7f22f",
+          "file": "popup.spec.ts",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "native cancellation, detached host, and cleanup failure keep one terminal result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-64ee74ee068510551f57",
+          "file": "popup.spec.ts",
+          "line": 121,
+          "column": 1
+        },
+        {
+          "title": "malformed dialogs fail synchronously and failed initialization leaves a reusable host",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-0948221e03202dc1abb4",
+          "file": "popup.spec.ts",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "title": "nested popup restores focus to the next authored control when its opener disappears",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-4ab36a94cc1e5ffa2ce0",
+          "file": "popup.spec.ts",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "direct open-attribute removal still aborts page work and settles the result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-f0613546155e5b14131f",
+          "file": "popup.spec.ts",
+          "line": 238,
+          "column": 1
+        },
+        {
+          "title": "twenty openings leave no page DOM or Popup listeners behind",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-5213e2d8f257f2211c5c",
+          "file": "popup.spec.ts",
+          "line": 262,
+          "column": 1
+        },
+        {
+          "title": "close wins over same-task output without beforetoggle notification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "237c25f9a8c1b5f30613-117e6fc30a52664707f9",
+          "file": "popup.spec.ts",
+          "line": 316,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-07T09:45:13.993Z",
+    "duration": 944.218,
+    "expected": 0,
+    "skipped": 58,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

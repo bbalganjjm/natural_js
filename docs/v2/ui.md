@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
+    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -80,7 +80,7 @@ The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Po
 | `SelectSelection<V>` | `V | string | null` | Raw choice or authored string |
 | `SelectHandle<V>` | `setChoices`, `setValue`, `value`, `dispose` | Select handle |
 | `PaginationHandle` | `set`, `state`, `dispose` | Pagination handle |
-| `FormHandle<T>` | `bind`, `refresh`, `read`, `validate`, `dispose` | Form handle |
+| `FormHandle<T>` | `bind`, `refresh`, `defaults`, `unbind`, `read`, `validate`, `dispose` | Form handle |
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
 | `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
 | `GridColumn` | Readonly `key`, optional positive preferred `width`, optional boolean `hidden`/`pinned`; visible pins form a leading prefix | Column state |
@@ -118,7 +118,9 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 
 # Local Form input
 
-DOM-local Form applies effective formatters through the existing rules. Local read retains unparsed raw; parse is validation-only. Native reset uses effective form owners, post-default cleanup and synchronous flushing before later public/input work. It adds no public API or nullable FormValueContext. See [Form local input](form.md#local-raw-input-and-native-reset) for cache, focus, image/file, native-default and disposal rules.[^form][^native]
+DOM-local Form applies effective formatters through the existing rules. Local read retains unparsed raw; validation and defaults parse separate candidates. Native reset uses effective form owners, post-default cleanup and synchronous flushing before later public/input work. FormValueContext remains Rows-backed and nonnull. See [Form local input](form.md#local-raw-input-and-native-reset) for cache, focus, image/file, native-default and disposal rules.[^form][^native]
+
+FormHandle.defaults(): Record<string, unknown> returns detached construction-time native values with applicable own parsers. Static/image values and unbound business properties are excluded; it does not claim complete T. FormHandle.unbind(): void restores captured UI/files without Rows writes, drops the current association/draft and suspends automatic behavior while retaining ownership and unrelated drafts. Full bind/refresh resumes; explicit read/validate and selected refresh do not resume it. Capture, native reset and received Rows reversion remain separate. See [Form](form.md) for exact selection/node/file, failure and reentry boundaries.[^ui][^form]
 
 # Form value callbacks
 
@@ -172,7 +174,7 @@ A `PageRequest` does not carry `total`; read `list.page()` or `grid.page()` afte
 
 Use an authored native `<button type="button">` and a page/controller event handler for ordinary actions. M6 has no `bindButton` export or framework button theme.
 
-A parser sees one snapshot of all currently entered, still unparsed drafts in `RuleContext.values`; parser order does not change that snapshot. Validator `RuleContext.values` uses typed candidates for successfully parsed fields; a field whose parser fails retains its entered draft there and reports a parse issue. Each `ValidateRule` receives its own field value as a string. Formatters see stored row values. A rule's `element` may still be detached when the component initializes; use `element.isConnected` if connection matters. Form, Grid, and List resolve JSON `data-format` and `data-validate` tuples through one private UI rule runner; the tuple shape is not a separate public type. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
+During editing or validation, a parser sees one snapshot of all currently entered, still unparsed drafts in `RuleContext.values`; parser order does not change that snapshot. Validator `RuleContext.values` uses typed candidates for successfully parsed fields; a field whose parser fails retains its entered draft there and reports a parse issue. Each `ValidateRule` receives its own field value as a string. Formatters see stored row values. A rule's `element` may still be detached when the component initializes; use `element.isConnected` if connection matters. Form, Grid, and List resolve JSON `data-format` and `data-validate` tuples through one private UI rule runner; the tuple shape is not a separate public type. A per-component `RuleSet` may override a retained built-in name. Unknown names and invalid built-in arguments fail at binding. Formatters and validators used by the UI remain; they are not a public utility package.[^ui]
 
 ## Grid interaction policy
 

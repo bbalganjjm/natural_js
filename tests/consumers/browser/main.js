@@ -376,6 +376,31 @@ try {
     onBind({ row, event }) { bindingCalls.push(["after", row.id, event?.type ?? null, bindingRoot.querySelector("input").value]); }
   });
   state.formBinding = { root: bindingRoot, rows: bindingRows, form: bindingForm, calls: bindingCalls };
+  const defaultsRoot = document.createElement("section");
+  defaultsRoot.innerHTML = `<h2>Captured defaults</h2><form data-defaults-local>
+    <label>Amount <input data-field="amount" value="1000" data-format='[["commas"]]' required></label>
+    <output data-error-for="amount"></output><label>Attachment <input type="file" data-field="attachment"></label>
+    <span data-field="summary"><em>Authored summary</em></span></form>
+    <form data-defaults-rows><label>Name <input data-field="name" value="Initial field" required></label>
+    <output data-error-for="name"></output><span data-field="note"><em>Authored note</em></span></form>`;
+  document.querySelector("main").append(defaultsRoot);
+  const defaultsLocal = defaultsRoot.querySelector("[data-defaults-local]");
+  defaultsLocal.querySelector('[data-field="amount"]').value = "1200";
+  const capturedFile = new File(["Captured payload"], "captured.txt", { type: "text/plain", lastModified: 1 });
+  const capturedFiles = new DataTransfer(); capturedFiles.items.add(capturedFile);
+  defaultsLocal.querySelector('[type="file"]').files = capturedFiles.files;
+  const capturedSummary = defaultsLocal.querySelector("em");
+  const defaultRenders = [];
+  const defaultsForm = bindForm(defaultsLocal, { parse: { amount: Number }, render: { summary(value, context) {
+    defaultRenders.push(context.values.amount); return `${value}:${context.values.amount}`;
+  } } });
+  const defaultsRowRoot = defaultsRoot.querySelector("[data-defaults-rows]"), capturedNote = defaultsRowRoot.querySelector("em");
+  const defaultsRows = createRows([{ name: "Loaded", note: "Loaded note" }]);
+  const defaultsBindings = [];
+  const defaultsRowForm = bindForm(defaultsRowRoot, { rows: defaultsRows, onBind: ({ row }) => { defaultsBindings.push(row.id); } });
+  defaultsRowForm.bind(defaultsRows.entries()[0].id);
+  state.formDefaults = { root: defaultsRoot, local: defaultsLocal, form: defaultsForm, renders: defaultRenders, capturedSummary,
+    rowRoot: defaultsRowRoot, rows: defaultsRows, rowForm: defaultsRowForm, bindings: defaultsBindings, capturedNote };
   const localContainer = document.createElement("section");
   localContainer.innerHTML = `<h2>Local Form</h2><form><div data-local-root>
     <label>Amount <input data-field="amount" value="1200" data-format='[["commas"]]' pattern="[0-9]+"></label>

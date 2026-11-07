@@ -6,6 +6,14 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
 sources:
+  - id: defaults
+    resource: ../../src/ui/native-defaults.ts
+    title: Private native creation record and synchronous parser builder
+    git_blob: 52fef0da7eb41701170a48d4cbf4c2e7febd498e
+  - id: defaults-browser
+    resource: ../../tests/browser/form-defaults.spec.ts
+    title: Captured defaults, unbind, native files and inactive ownership regressions
+    git_blob: 27c73285a0c4eb8fb3cd9297bff9ac6fe91e4888
   - id: binding-browser
     resource: ../../tests/browser/form-binding.spec.ts
     title: Whole-row lifecycle and same-row selected refresh regressions
@@ -29,11 +37,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
+    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -66,10 +74,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -213,7 +221,35 @@ A renderer cannot recursively refresh the same active field/RowId; this fails UI
 
 refresh(fields) accepts only an array of exact compiled data-field paths. It preflights all names and every selected typed option source before writing any selected field. Duplicates collapse and groups update atomically in DOM compilation order. An empty array does nothing after the disposal check, apart from already-completed local native reset cleanup. Invalid field names or a nonarray argument raise FORM_BIND; malformed selected option sources retain FORM_OPTIONS. Neither preflight failure partially refreshes selected fields. The selection never changes RowId, commits/parses input, validates or clears drafts/issues. Selecting every field still suppresses whole hooks.[^form][^binding-browser]
 
-Only selected writers/value projections and option sources run. Focused editable text/caret follows the existing deferral policy; unselected input, errors, option nodes and drafts remain untouched. A malformed unselected choice source does not block another field. Local selected refresh uses existing raw/display ownership without whole hooks. Full unbound refresh reuses bind(null); selected unbound Rows refresh repaints only its selected empty fields. Refresh uses already compiled fields: dynamic field discovery and live-default unbind remain separate required work.[^form][^binding-browser]
+Only selected writers/value projections and option sources run. Focused editable text/caret follows the existing deferral policy; unselected input, errors, option nodes and drafts remain untouched. A malformed unselected choice source does not block another field. Local selected refresh uses existing raw/display ownership without whole hooks. Full unbound refresh reuses bind(null); selected unbound Rows refresh repaints only its selected empty fields. Refresh uses already compiled fields; dynamic field discovery remains separate required work.[^form][^binding-browser]
+
+## Captured defaults and unbind
+
+Form captures live marked native values and the authored restoration view once, before its initial local formatting/rendering. Programmatic presets established before construction belong to this capture; later bind, refresh, native reset and Rows.revert do not replace it. Native default properties, captured values and received row originals are separate checkpoints.[^form][^defaults-browser]
+
+defaults(): Record<string, unknown> returns detached native creation values, including readonly/disabled controls, nested paths and stable group shapes. Static/image fields and unbound business keys are excluded. Marked Selects use captured authored raw mappings; files contribute the first captured filename, without exposing private File references. Applicable own parsers see one complete unparsed native record, rowId null and the authored element. No formatting, validation, DOM/Rows write, error/draft change, native-reset flush or automatic resume occurs.[^form][^defaults]
+
+Undefined, async/thenable, uncloneable, throwing or recursively entered parsers raise FORM_DEFAULTS; rejected promises are drained and guards release for retry. Duplicate native paths and parent/child conflicts fail before parsing in either order. Results do not claim complete T: the application supplies business identifiers, option sources, omitted properties and supported Rows JSON values.[^defaults][^defaults-browser]
+
+```ts
+const initial = form.defaults();
+form.unbind(); // Restore the construction view; leave Rows unchanged.
+const id = rows.add({
+  email: typeof initial.email === "string" ? initial.email : "",
+  salary: typeof initial.salary === "number" ? initial.salary : 0
+});
+form.bind(id); // Explicitly bind the new row and resume automatic behavior.
+```
+
+unbind(): void restores captured native values/checkedness, selected option occurrences, exact static/custom-rendered child nodes and exact image src attribute presence/value. It leaves alt, application disabled/readOnly state and native default properties unchanged. Marked choices recover their authored nodes/mapping; unmarked option structure stays application-owned and only still-present captured selected options are restored. No whole/value hook, formatter, renderer, parser or Rows notification runs from restoration itself.[^form][^defaults-browser]
+
+The current Rows association and its invalid draft are dropped; other-row drafts and all committed Rows values/status/originals/changes remain. Rows-backed data-field-changed becomes false while unbound; local markers stay application-owned. Root, Select and error/ARIA ownership remain until dispose. Framework errors clear; native custom validity remains application-owned. Rows read() keeps marked paths with undefined values when no row is bound; use the caller-held RowId and Rows for the source record.[^form][^defaults-browser]
+
+Automatic input/change, focus formatting, pointer tracking and framework reset cleanup stop after unbind. Explicit local read/validate still work; selected refresh remains display-only and does not resume automatic behavior. Full bind/refresh resumes it. For Rows, bind(id) chooses a new source; bind(null)/full unbound refresh clears the view. For a local Form, bind(null)/full refresh resumes the current raw display. These operations do not restore captured values themselves.[^form][^defaults-browser]
+
+Native file restoration keeps actual captured File references privately, reconstructs a native FileList and assigns files; it never writes a nonempty filename. Empty captured selection clears the control. Reconstruction preflights before association/reset/DOM changes; failure raises FORM_UNBIND with field/cause. Uploads remain application File/FormData code, and existing Rows/multiple-file restrictions remain. Disposal releases the private restoration references and keeps its existing normal restoration behavior.[^form][^defaults-browser]
+
+Unbind invalidates older binding/render/candidate work and pending reset cleanup. Recursive same-owner restoration fails FORM_UNBIND and releases its guard; newer full work can supersede restoration outside an active same-owner local display frame. The inherited FORM_RENDER guard still bounds local renderer → unbind → nested local resume. Superseded tails cannot clear newer issues. Native reset default action still runs after an in-dispatch unbind unless the application cancels it; application/native side effects are not rolled back.[^form][^defaults-browser]
 
 ## Loaded-value changes
 
@@ -242,7 +278,7 @@ A local Form retains each custom display field's original raw text separately fr
 
 ## Local raw input and native reset
 
-A Form without Rows also applies effective formatters. It retains raw only for fields whose formatter/renderer writes display; other controls, groups, Select and files stay native. Formatted text controls and images remember the last Form-written value/src so a later direct property/attribute write is read as new raw. Static renderer/formatted text retains its authored raw separately. An input event explicitly establishes entered raw, even when it equals the previous projection. Local read() returns unparsed native values; parse functions affect validation only. RuleContext.rowId is null.[^form][^local-browser]
+A Form without Rows also applies effective formatters. It retains raw only for fields whose formatter/renderer writes display; other controls, groups, Select and files stay native. Formatted text controls and images remember the last Form-written value/src so a later direct property/attribute write is read as new raw. Static renderer/formatted text retains its authored raw separately. An input event explicitly establishes entered raw, even when it equals the previous projection. Local read() returns unparsed native values; validation and defaults() apply parsers to their separate candidate records. RuleContext.rowId is null.[^form][^local-browser][^defaults]
 
 ```html
 <form>
@@ -278,6 +314,8 @@ Received/business records, full unbound keys and received insert checkpoints bel
 |---|---|
 | `bind(id)` | Shows an existing nondeleted row or clears with `null`. Switching rows retains each row's invalid drafts and restores them on return. Local Form accepts only null to refresh current raw display and clear visible errors. |
 | `refresh(fields?)` | Full current-row refresh when omitted; otherwise refresh only compiled paths with no identity switch, validation or issue clearing. Whole hooks run only for a nonnull full row. |
+| `defaults()` | Detached captured native creation values with applicable own parsers; does not alter the current view/source. |
+| `unbind()` | Restore the captured view, discard the current row association/draft and suspend automatic binding; retain the reusable owner and unrelated drafts. |
 | `read()` | Returns a detached nested record of marked fields. A row-bound Form reads stored raw values, excluding invalid drafts; a local Form reads current control values without parsing. |
 | `validate(id?)` | Combines native HTML constraints and declarative rules. Without an ID, checks the bound row and every row with a retained draft. With an ID, checks that row without rebinding; hidden-row issues have no `element`. A draft made valid by another change enters `Rows` before the final result. |
 | `dispose()` | Removes listeners, pending local reset work and Rows subscription, releases ownership and restores error/ARIA state. Rows-backed fields recover authored change markers and custom render children. Local formatted controls/images recover latest raw; local static display recovers authored children. Other ordinary input values remain. Repeated disposal is safe. |
@@ -337,3 +375,5 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [^validators]: Retained Form validator behavior
 [^legacy]: Preserved 1.x formatter and validator behavior
 [^binding-browser]: Whole-row lifecycle and same-row selected refresh regressions
+[^defaults]: Private native creation record and synchronous parser builder
+[^defaults-browser]: Captured defaults, unbind, native files and inactive ownership regressions

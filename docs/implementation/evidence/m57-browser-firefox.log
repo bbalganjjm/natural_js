@@ -1,0 +1,162 @@
+
+
+Running 713 tests using 1 worker
+
+
+
+[1/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:66:1 › native Popup keeps keyboard focus inside and Escape restores the opener
+[2/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:99:1 › two MDI workspaces keep unique IDs and resolvable ARIA references
+[3/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:112:1 › vertical Tabs skip disabled buttons and keep manual activation
+[4/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › side MDI and open Popup pass automated WCAG-tagged checks
+[5/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:160:3 › stack MDI and open Popup pass automated WCAG-tagged checks
+[6/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › side Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[7/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › side data UI remains keyboard-operable at 320px
+[8/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:175:3 › stack Form, Grid, List, and Pagination pass automated WCAG checks in two MDI screens
+[9/713] [firefox] › tests\browser\a11y-popup-tabs.spec.ts:200:3 › stack data UI remains keyboard-operable at 320px
+[10/713] [firefox] › tests\browser\auto-validation.spec.ts:67:1 › automatic validation remains enabled by default for native and declared constraints in Form and Grid
+[11/713] [firefox] › tests\browser\auto-validation.spec.ts:82:1 › disabling automatic validation commits typed native and business failures while explicit validation still reports them
+[12/713] [firefox] › tests\browser\auto-validation.spec.ts:98:1 › local Form skips automatic callbacks but retains native errors and custom rules at explicit validation
+[13/713] [firefox] › tests\browser\auto-validation.spec.ts:117:1 › automatic bypass still rejects parser failures and non-JSON values without committing either draft
+[14/713] [firefox] › tests\browser\auto-validation.spec.ts:138:1 › automatic bypass permits an available empty choice but rejects injected unknown Grid choices
+[15/713] [firefox] › tests\browser\auto-validation.spec.ts:153:1 › automatic bypass respects readonly disabled controls and native first-legend exceptions
+[16/713] [firefox] › tests\browser\auto-validation.spec.ts:175:1 › automatic bypass still reports native value sanitization in an unrelated edited row
+[17/713] [firefox] › tests\browser\auto-validation.spec.ts:202:1 › manual Grid timing keeps bypassed drafts deferred and explicit validation commits only valid candidates
+[18/713] [firefox] › tests\browser\auto-validation.spec.ts:217:1 › blur and Enter remain Grid commit points when automatic validation is disabled
+[19/713] [firefox] › tests\browser\auto-validation.spec.ts:232:1 › a bypassed edit clears prior row constraint errors while retaining current parser integrity errors
+[20/713] [firefox] › tests\browser\auto-validation.spec.ts:252:1 › disabled automatic checks do not weaken full atomic paste or hidden explicit Grid validation
+[21/713] [firefox] › tests\browser\auto-validation.spec.ts:266:1 › invalid policy values fail before ownership and independent instance disposal restores authored accessibility
+[22/713] [firefox] › tests\browser\datepicker.spec.ts:24:1 › DatePicker compiles authored weeks once and restores markup, IDs, and ownership
+[23/713] [firefox] › tests\browser\datepicker.spec.ts:61:1 › calendar keyboard preserves leap-day intent, week order, selection, and roving focus
+[24/713] [firefox] › tests\browser\datepicker.spec.ts:95:1 › limits constrain keyboard and pointer selection without emitting programmatic changes
+[25/713] [firefox] › tests\browser\datepicker.spec.ts:134:1 › Monday weeks and extreme years use UTC calendar days across daylight-saving dates
+[26/713] [firefox] › tests\browser\datepicker.spec.ts:169:1 › locale labels retain the Gregorian ISO calendar
+[27/713] [firefox] › tests\browser\datepicker.spec.ts:192:1 › invalid dates, locale, markup, and repeated IDs fail before changing authored nodes
+[28/713] [firefox] › tests\browser\datepicker.spec.ts:229:1 › application date selection updates nested Form rows through native input events
+[29/713] [firefox] › tests\browser\datepicker.spec.ts:259:1 › authored calendar exposes an accessible grid before and after keyboard navigation
+[30/713] [firefox] › tests\browser\documents.spec.ts:21:1 › documents reuse keys, reload with the original factory, isolate MDI, and restore authored markup
+[31/713] [firefox] › tests\browser\documents.spec.ts:84:1 › malformed page handles release their partial work and Tabs restores authored alert nodes
+[32/713] [firefox] › tests\browser\documents.spec.ts:152:1 › close during reload waits for the original page cleanup before removing its panel
+[33/713] [firefox] › tests\browser\documents.spec.ts:188:1 › superseded documents abort, failures recover the previous page, and retained entries retry
+[34/713] [firefox] › tests\browser\documents.spec.ts:235:1 › close guards deduplicate, refusal and errors preserve pages, and disposal cancels a pending guard
+[35/713] [firefox] › tests\browser\documents.spec.ts:296:1 › closing an inactive document does not wait for or cancel another pending selection
+[36/713] [firefox] › tests\browser\documents.spec.ts:326:1 › a present close guard must explicitly return a boolean before a document is removed
+[37/713] [firefox] › tests\browser\documents.spec.ts:353:1 › horizontal document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[38/713] [firefox] › tests\browser\documents.spec.ts:353:1 › vertical document keyboard activation, contextual close names, empty focus, and ARIA remain accessible
+[39/713] [firefox] › tests\browser\documents.spec.ts:388:1 › invalid repeated templates fail atomically before binding and the root can be corrected
+[40/713] [firefox] › tests\browser\field-render.spec.ts:16:1 › renderer declarations use only own functions, including a field named toString
+[41/713] [firefox] › tests\browser\field-render.spec.ts:34:1 › configuration rejects ambiguous fields and owned native content before mutation or execution
+[42/713] [firefox] › tests\browser\field-render.spec.ts:71:1 › rendered strings remain text while fresh native nodes, fragments and null replace content
+[43/713] [firefox] › tests\browser\field-render.spec.ts:100:1 › invalid ownership and async returns preserve field content without unhandled rejections
+[44/713] [firefox] › tests\browser\field-render.spec.ts:123:1 › factory exceptions and same-target reentry stay structured, release their guard and allow independent targets
+[45/713] [firefox] › tests\browser\field-render.spec.ts:145:1 › local Form renders from raw values, refreshes dependent display and restores authored nodes
+[46/713] [firefox] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+[47/713] [firefox] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+[48/713] [firefox] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+[49/713] [firefox] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+[50/713] [firefox] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+[51/713] [firefox] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+[52/713] [firefox] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+[53/713] [firefox] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+[54/713] [firefox] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+[55/713] [firefox] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+[56/713] [firefox] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+[57/713] [firefox] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+[58/713] [firefox] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+[59/713] [firefox] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+[60/713] [firefox] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+[61/713] [firefox] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+[62/713] [firefox] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry
+[63/713] [firefox] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+[64/713] [firefox] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+[65/713] [firefox] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+[66/713] [firefox] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+[67/713] [firefox] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+[68/713] [firefox] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+[69/713] [firefox] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation
+[70/713] [firefox] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+[71/713] [firefox] › tests\browser\form-defaults.spec.ts:52:1 › Form defaults capture live native values including root readonly disabled and hidden fields but exclude display and business data
+[72/713] [firefox] › tests\browser\form-defaults.spec.ts:67:1 › captured defaults native reset and received Rows originals remain three independent checkpoints
+[73/713] [firefox] › tests\browser\form-defaults.spec.ts:82:1 › defaults return detached nested records and arrays without recapturing edits binding refresh or reset
+[74/713] [firefox] › tests\browser\form-defaults.spec.ts:94:1 › Form default parsers use own native fields in compiled order and one unparsed captured context
+[75/713] [firefox] › tests\browser\form-defaults.spec.ts:111:1 › default parser errors undefined async and uncloneable results fail without changing DOM and release guards
+[76/713] [firefox] › tests\browser\form-defaults.spec.ts:133:1 › Form and Grid default getter recursion is bounded per owner recoverable and permits another owner
+[77/713] [firefox] › tests\browser\form-defaults.spec.ts:152:1 › native default paths reject parent-child conflicts in both DOM orders for Form and Grid
+[78/713] [firefox] › tests\browser\form-defaults.spec.ts:167:1 › shared default assembly preserves Grid readonly disabled groups parser order and Select parser exclusion
+[79/713] [firefox] › tests\browser\form-defaults.spec.ts:180:1 › disposing from a default parser prevents a late result without affecting another live owner
+[80/713] [firefox] › tests\browser\form-defaults.spec.ts:196:1 › Rows unbind restores captured UI without callbacks notifications or business changes and retains ownership
+[81/713] [firefox] › tests\browser\form-defaults.spec.ts:213:1 › unbind discards only the current row draft detaches updates and retains other row drafts for reuse
+[82/713] [firefox] › tests\browser\form-defaults.spec.ts:227:1 › unbind restores exact static nodes and image src attributes while preserving current native configuration and alt
+[83/713] [firefox] › tests\browser\form-defaults.spec.ts:244:1 › captured group checkedness restores stable shapes without mutating checkbox values or native defaults
+[84/713] [firefox] › tests\browser\form-defaults.spec.ts:259:1 › unmarked Select restore follows captured option identities while preserving reordered added and removed application options
+[85/713] [firefox] › tests\browser\form-defaults.spec.ts:273:1 › marked Select unbind restores owned authored nodes selection and raw mapping before another row binds
+[86/713] [firefox] › tests\browser\form-defaults.spec.ts:287:1 › local unbind suspends automatic work while read validate and selected refresh remain usable without resuming it
+[87/713] [firefox] › tests\browser\form-defaults.spec.ts:307:1 › defaults neither flush pending native reset display nor resume an inactive local Form
+[88/713] [firefox] › tests\browser\form-defaults.spec.ts:320:1 › unbind cancels older completed native reset cleanup before it can repaint the restored view
+[89/713] [firefox] › tests\browser\form-defaults.spec.ts:357:1 › native reset default action after in-dispatch unbind wins unless the reset is canceled
+[90/713] [firefox] › tests\browser\form-defaults.spec.ts:372:1 › unbind from whole value formatter renderer and parser callbacks suppresses older writes and sibling commits
+[91/713] [firefox] › tests\browser\form-defaults.spec.ts:394:1 › native setter reentry rejects same-owner unbind once and releases the restoration guard for retry
+[92/713] [firefox] › tests\browser\form-defaults.spec.ts:410:1 › newer binding local full refresh and disposal during a native setter stop stale sibling restoration
+[93/713] [firefox] › tests\browser\form-defaults.spec.ts:452:1 › file restoration privately preserves every captured File while defaults expose only the first filename
+[94/713] [firefox] › tests\browser\form-defaults.spec.ts:471:1 › empty file capture clears later selection while disposal keeps current files and existing restrictions
+[95/713] [firefox] › tests\browser\form-defaults.spec.ts:484:1 › file reconstruction failure precedes DOM error or inactive changes and preflight recursion stays bounded
+[96/713] [firefox] › tests\browser\form-defaults.spec.ts:509:1 › newer full refresh or disposal during file preflight prevents all older restoration writes
+[97/713] [firefox] › tests\browser\form-defaults.spec.ts:529:1 › Form creation defaults feed an explicit complete Rows factory and a received insert checkpoint
+[98/713] [firefox] › tests\browser\form-defaults.spec.ts:542:1 › a canceled local render cannot erase newer validation or resume handlers through a rejected nested bind
+[99/713] [firefox] › tests\browser\form-defaults.spec.ts:564:3 › side CVC restores captured search fields without a request or changes to another page then resumes formatting
+[100/713] [firefox] › tests\browser\form-defaults.spec.ts:564:3 › stack CVC restores captured search fields without a request or changes to another page then resumes formatting
+[101/713] [firefox] › tests\browser\form-local.spec.ts:46:1 › local compiled formats display authored raw values without becoming read or rule input
+[102/713] [firefox] › tests\browser\form-local.spec.ts:65:1 › typed local declarations override their HTML kind and retain own named formatter functions
+[103/713] [firefox] › tests\browser\form-local.spec.ts:79:1 › local property writes remain observable without events and an explicit event can enter the previous projection
+[104/713] [firefox] › tests\browser\form-local.spec.ts:106:1 › local parsers affect validation candidates while reads and dependent rendering retain entered strings
+[105/713] [firefox] › tests\browser\form-local.spec.ts:127:1 › formatted local native checks use raw text and preserve custom validity and effective disabled state
+[106/713] [firefox] › tests\browser\form-local.spec.ts:147:1 › local focus reveals raw and retains entered text and caret through dependent updates
+[107/713] [firefox] › tests\browser\form-local.spec.ts:165:1 › pointer focus preserves the clicked selection while readonly local text remains formatted
+[108/713] [firefox] › tests\browser\form-local.spec.ts:186:1 › invalid local edits remain visible through blur and valid replacements format without changing raw
+[109/713] [firefox] › tests\browser\form-local.spec.ts:204:1 › local autoValidate false formats entered raw but explicit validation still checks that raw
+[110/713] [firefox] › tests\browser\form-local.spec.ts:218:1 › local bind null refreshes static formats and dependent renderers from retained raw
+[111/713] [firefox] › tests\browser\form-local.spec.ts:234:1 › native reset restores current native defaults and group choices before local refresh
+[112/713] [firefox] › tests\browser\form-local.spec.ts:265:1 › a native reset button refreshes formatted defaults without a later Form call
+[113/713] [firefox] › tests\browser\form-local.spec.ts:290:1 › synthetic reset follows native behavior while canceled native reset preserves raw and errors
+[114/713] [firefox] › tests\browser\form-local.spec.ts:329:1 › a local div observes its ancestor native form reset and refreshes dependent display
+[115/713] [firefox] › tests\browser\form-local.spec.ts:342:1 › external native form owners reset only their own raw and errors and preserve another owner focus
+[116/713] [firefox] › tests\browser\form-local.spec.ts:368:1 › read inside reset dispatch sees old raw and immediate read after default action sees restored raw
+[117/713] [firefox] › tests\browser\form-local.spec.ts:379:1 › explicit validation immediately after reset survives queued reset cleanup
+[118/713] [firefox] › tests\browser\form-local.spec.ts:396:1 › coalesced resets never adopt a written projection or erase validation performed after the reset
+[119/713] [firefox] › tests\browser\form-local.spec.ts:416:1 › an edit after native reset takes precedence over pending reset rendering and cleanup
+[120/713] [firefox] › tests\browser\form-local.spec.ts:432:1 › formatted local siblings keep file validation on the real input and native reset clears the file
+[121/713] [firefox] › tests\browser\form-local.spec.ts:452:1 › local constructor failures restore written values exact authored children and Select ownership
+[122/713] [firefox] › tests\browser\form-local.spec.ts:496:1 › local disposal releases latest raw and exact display children and suppresses queued reset work
+[123/713] [firefox] › tests\browser\form-local.spec.ts:513:1 › recursive local formatter and renderer refresh fails without losing root ownership or retry
+[124/713] [firefox] › tests\browser\form-local.spec.ts:531:1 › a disposed local callback cannot overwrite its replacement Form or run stale later fields
+[125/713] [firefox] › tests\browser\form-local.spec.ts:560:1 › local image formats retain raw src and alt through direct writes disposal and failed initialization
+[126/713] [firefox] › tests\browser\form-local.spec.ts:588:1 › one-record Rows recipes retain unbound raw keys and distinguish received insert checkpoints from ordinary additions
+[127/713] [firefox] › tests\browser\form-local.spec.ts:611:3 › side CVC local search sends raw lowercase and resets native fields without a request or changes to another page
+[128/713] [firefox] › tests\browser\form-local.spec.ts:611:3 › stack CVC local search sends raw lowercase and resets native fields without a request or changes to another page
+[129/713] [firefox] › tests\browser\form-m6.spec.ts:3:1 › Form keeps choice groups raw, accessible, and scoped to their MDI forms
+[130/713] [firefox] › tests\browser\form-m6.spec.ts:99:1 › local Form reads group values and rejects ambiguous declarations
+[131/713] [firefox] › tests\browser\form-options.spec.ts:72:1 › Form binds nested typed choices with safe text and retained authored option nodes
+[132/713] [firefox] › tests\browser\form-options.spec.ts:91:1 › single Form changes preserve zero signs number-string booleans null and generated empty-string identities
+[133/713] [firefox] › tests\browser\form-options.spec.ts:107:1 › Form Grid and List consume duplicate raw occurrences without normalizing unrepresentable arrays
+[134/713] [firefox] › tests\browser\form-options.spec.ts:125:1 › Grid array paste enforces available duplicate counts atomically across shared Form and List
+[135/713] [firefox] › tests\browser\form-options.spec.ts:140:1 › typed Form selection updates shared owners and unrelated writes retain option identity and focus
+[136/713] [firefox] › tests\browser\form-options.spec.ts:153:1 › removed and reintroduced choices retain a raw invalid draft until explicit validation can commit it
+[137/713] [firefox] › tests\browser\form-options.spec.ts:171:1 › hidden Form validation uses the target row choices without changing visible native options focus or errors
+[138/713] [firefox] › tests\browser\form-options.spec.ts:189:1 › required raw blanks and empty arrays remain full checks while automatic bypass preserves typed integrity
+[139/713] [firefox] › tests\browser\form-options.spec.ts:204:1 › foreign and disabled option gestures stay drafts while native custom validity remains an explicit constraint
+[140/713] [firefox] › tests\browser\form-options.spec.ts:218:1 › hidden typed Select validation does not inherit the visible control custom error or mutate its DOM
+[141/713] [firefox] › tests\browser\form-options.spec.ts:232:1 › Form and Grid reject foreign equal-string and mapped disabled option gestures even with automatic checks disabled
+[142/713] [firefox] › tests\browser\form-options.spec.ts:248:1 › typed marker and parser failures release ownership while unmarked authored Select conversion stays unchanged
+[143/713] [firefox] › tests\browser\form-options.spec.ts:274:1 › a malformed second option source leaves the previous binding drafts and authored nodes intact
+[144/713] [firefox] › tests\browser\form-options.spec.ts:291:1 › null binding and Rows lifetime operations clear generated choices without rewriting raw data
+[145/713] [firefox] › tests\browser\form-options.spec.ts:305:1 › a formatter that changes Rows cannot install stale later-field choices
+[146/713] [firefox] › tests\browser\form-options.spec.ts:319:1 › formatter disposal stops stale choice work and releases exact authored Select ownership
+[147/713] [firefox] › tests\browser\form-options.spec.ts:333:1 › ready Form writes recheck changed choice sources and stop after a subscriber rebinds the Form
+[148/713] [firefox] › tests\browser\form-options.spec.ts:370:1 › independent Forms expose unique accessible errors and dispose quietly with original option selection
+[149/713] [firefox] › tests\browser\form-options.spec.ts:387:1 › full inline and popup CVC details share typed shift choices with the main Grid
+[150/713] [firefox] › tests\browser\form-values.spec.ts:56:1 › Form value callbacks preserve real replacements and observe native DOM without changing Rows
+[151/713] [firefox] › tests\browser\form-values.spec.ts:93:1 › after projections run the existing formatter or renderer once more only when their raw input changes
+[152/713] [firefox] › tests\browser\form-values.spec.ts:117:1 › projection caching preserves whole-row formatter and renderer reactivity without replaying value callbacks
+[WebServer] (node:9256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:3848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

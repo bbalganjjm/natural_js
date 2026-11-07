@@ -6,6 +6,10 @@ tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
 sources:
+  - id: defaults
+    resource: ../../src/ui/native-defaults.ts
+    title: Private shared native creation record and parser builder
+    git_blob: 52fef0da7eb41701170a48d4cbf4c2e7febd498e
   - id: scroll-example
     resource: ../../examples/vite/m10/scroll-boundary.ts
     title: Page-owned wheel boundary composition
@@ -25,11 +29,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -118,10 +122,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -293,7 +297,7 @@ Author CSS and human-readable change text in HTML or row callbacks. The marker s
 
 Returns detached `Record<string, unknown>` values from native inputs, groups and Selects captured in the authored source at binding time. It does not read a currently edited record. One checkbox is boolean, repeated checkboxes/multiple Selects are arrays, and radio is string/null. Static Select values use the compiled raw mapping. Display spans/images contribute no defaults; application code supplies row-local option lists and business properties.[^grid][^native][^lifecycle-browser]
 
-Own parser functions receive each entered string and one complete unparsed candidate in `RuleContext.values`, with `rowId: null` and the authored field element. Parser order cannot change that input snapshot. An undefined/asynchronous/uncloneable result, thrown parser, repeated native field path or parent/child path conflict raises `GRID_DEFAULTS`. The method writes neither Rows nor bound fields; keep application parsers free of side effects.[^grid][^lifecycle-browser]
+Own parser functions receive each entered string and one complete unparsed candidate in `RuleContext.values`, with `rowId: null` and the authored field element. Parser order cannot change that input snapshot. An undefined/asynchronous/uncloneable result, thrown parser, repeated native field path or parent/child path conflict raises `GRID_DEFAULTS`. Both parent/child orders fail before parsing; this corrects the earlier silent child-before-parent overwrite. Recursive same-owner defaults calls fail and release their guard for retry; another owner's independent getter remains usable. The private builder is shared with Form, while Grid retains its existing capture and text-field parser eligibility/order. The method writes neither Rows nor bound fields; keep application parsers free of side effects.[^grid][^defaults][^lifecycle-browser]
 
 ```ts
 const native = grid.defaults();
@@ -641,6 +645,7 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^scroll-example]: Page-owned wheel boundary composition
 [^hooks]: Private synchronous row binding and resource ownership
 [^lifecycle-browser]: Status, defaults, callbacks, cleanup, empty state and failure regressions
+[^defaults]: Private shared native creation record and parser builder
 
 [^toggle-browser]: Native selection toggle, veto and lifecycle regressions
 

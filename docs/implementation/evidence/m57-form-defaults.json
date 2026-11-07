@@ -1,0 +1,1293 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.7 Form captured defaults and unbind",
+  "recorded_at": "2026-11-07",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "workspace_baseline_commit": "c4aacd00cf5631524a3015397f0a9fe22ca9493d",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m56-verification.json",
+      "sha256": "c09932a87cce1303ca47a4d711dc5fbe539fa57112800b53ec5e2f6db1d782da",
+      "preserved_in_commit": "c4aacd00cf5631524a3015397f0a9fe22ca9493d"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m56-form-binding.json",
+      "sha256": "d217f47befe30fcd05a8aa69762774680743b8c092f8a51cb39941e6498c42cc"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and unclosed owner obligation through immutable M5.6 evidence and the original audit. Captured defaults/unbind acceptance does not replace parent ledgers, rerun historical runtime or recertify earlier source/package scopes. M5.7 starts clean; prior failed/operator/backup facts stay in their dated parents unless a new actual attempt is recorded here.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "c4aacd00cf5631524a3015397f0a9fe22ca9493d",
+    "scope": "No inherited earlier-stage dirty-document snapshot or failure disposition is attributed to this M5.7 start."
+  },
+  "public_delta": {
+    "new_public_named_types": [],
+    "new_public_options": [],
+    "new_public_methods": 2,
+    "new_public_method_signatures": [
+      "FormHandle.defaults(): Record<string, unknown>",
+      "FormHandle.unbind(): void"
+    ],
+    "new_public_entries": 0,
+    "new_shared_framework_modules": 1,
+    "new_private_framework_modules": 1,
+    "new_private_module": "src/ui/native-defaults.ts",
+    "private_module_actual_owners": [
+      "Form.defaults",
+      "Grid.defaults"
+    ],
+    "new_runtime_dependencies": 0,
+    "note": "Two existing-handle Form methods distinguish detached native creation data from exact UI restoration. One narrow private native record/parser builder has actual Form/Grid callers; no public helper/type/option/module, business dataset or registry is added. Grid default path-conflict and recursion fixes are explicit selected outcomes.",
+    "shared_module_visibility": "One private shared module; the private-module count names that same module, not a second addition."
+  },
+  "selected_contracts": {
+    "capture_and_creation": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Capture live native creation values and separate UI restoration metadata once after preflight and before local format/render. Return detached native-only defaults including readonly/disabled fields, nested paths and stable group/Select shapes, authored raw mappings for marked choices and first filename for files. Exclude static/image fields, unbound business keys, option-source lists and private File references. Do not recapture on bind/refresh/reset/revert.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/native-control.ts",
+        "src/ui/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S03",
+        "S04",
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B09",
+        "B27"
+      ],
+      "remaining": "The application factory supplies full T and received status. Native defaults, live captured restoration and Rows originals remain distinct; general schema/source/dynamic equivalence is not closed."
+    },
+    "shared_native_builder": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Share actual native record/parser assembly with Grid while retaining caller-owned capture/lifecycles. Form uses applicable own parsers against one complete unparsed record with null rowId/authored element. Preserve Grid capture eligibility, text parser eligibility/order, error codes, contexts and active checks; Select fields do not acquire Grid text parsers. Both owners reject duplicate and parent/child paths in either order before parsing, undefined/async/uncloneable results and per-owner recursive getter entry, drain rejected promises and release guards for recovery.",
+      "source_refs": [
+        "src/ui/native-defaults.ts",
+        "src/ui/form.ts",
+        "src/ui/grid.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "S04",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09"
+      ],
+      "remaining": "Only the documented Grid silent-overwrite and getter recursion defects are corrected. Broader Grid family/default/source and shared/global lifecycle equivalence remain required."
+    },
+    "detach_and_restore": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Preflight file reconstruction before invalidating generation or changing reset/association/DOM state. Unbind drops the current Rows association and only its invalid draft, clears owned pointer/projection/visible errors/reset work and sets Rows change flags false, while preserving unrelated drafts and every source snapshot/status/original/change/subscription. Keep root/Select/error/ARIA ownership reusable; local field-change markers remain application-owned. Restoration invokes no parser, formatter, renderer, whole/value hook or Rows notification itself.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S03",
+        "B10",
+        "B11",
+        "B20",
+        "B21",
+        "B22",
+        "B29",
+        "I02",
+        "I03",
+        "B28"
+      ],
+      "remaining": "Unbind is not a business-data reset, removal, disposal or received checkpoint operation; applications keep caller-held RowId/Rows for full source access."
+    },
+    "native_and_static_ownership": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Restore native values/checkedness and Select selection by captured option identity/occurrence. Marked Selects reuse owned authored nodes/raw maps and discard generated-source state; unmarked option structure stays application-owned and only surviving captured selections are restored. Restore exact authored static/custom child nodes and exact absent/empty/relative image src while leaving alt and native defaults/disabled/readOnly configuration unchanged.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/row-options.ts",
+        "src/ui/native-control.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B25",
+        "I02",
+        "I03"
+      ],
+      "remaining": "Dynamic markup/configuration reconciliation remains required later work. Normal disposal keeps its existing latest-local-raw/Rows-custom-child semantics and releases captured metadata/File references."
+    },
+    "files_inactive_and_reentry": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Retain initial local File references privately, reconstruct native FileList through DataTransfer and assign files rather than nonempty filename; empty capture clears natively. Unsupported reconstruction fails FORM_UNBIND with field/cause before state changes. After local unbind, automatic input/change/focus/pointer/reset work stays inactive; read/validate remain explicit, selected refresh is display-only and full bind(null)/refresh resumes. A per-owner restoring flag covers preflight/writes and releases in finally; entry/new generation and disposal checks stop later stale writes while active callback/renderer guards remain intact.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S03",
+        "B16",
+        "B17",
+        "B18",
+        "B19",
+        "B20",
+        "B21",
+        "B22",
+        "B23",
+        "B24",
+        "B25",
+        "B26",
+        "B29",
+        "I02",
+        "I03",
+        "B28"
+      ],
+      "remaining": "Rows-backed/multiple-file restrictions remain unchanged. Native reset default action and already executing application setters/callback effects are not transactional; no generic restore/store engine is introduced."
+    },
+    "migration_and_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Exercise a real CVC search restore action and explicit application creation factory using captured native values. Use one exact tar in isolated JS/TS and all five available Windows browsers for public signatures, captured creation values, restored native files and exact children, retained Rows/ownership, inactive/resume behavior and disposed-method errors. Source-browser regressions separately exercise reconstruction failure, callback supersession and reentry guards. Require complete fresh three-engine coverage and unchanged original performance budgets.",
+      "source_refs": [
+        "v1/src/natural.ui.js",
+        "v1/docs/examples/template/search-grid-detail-vertical.md",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "D01",
+        "D02",
+        "D03",
+        "I01",
+        "I02",
+        "I03",
+        "B27",
+        "B30",
+        "B31"
+      ],
+      "remaining": "No full family or historical runtime closure, omission, npm publication or tag follows; actual macOS/iOS Safari remains excluded."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "Form owns captured native values and guarded exact UI restoration without replacing its Rows/local lifecycle",
+      "marker": "function unbind(): void {"
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/grid.ts",
+      "title": "Grid passes its existing authored captures and eligible parsers to the shared native builder",
+      "marker": "const defaults = createNativeDefaults(\"bindGrid\", authoredDefaults, active);"
+    },
+    "S03": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "The existing FormHandle exposes only defaults and unbind method additions",
+      "marker": "defaults(): Record<string, unknown>;"
+    },
+    "S04": {
+      "kind": "source",
+      "file": "src/ui/native-defaults.ts",
+      "title": "One private two-owner builder assembles detached native records with path, parser and recursion checks",
+      "marker": "export function createNativeDefaults("
+    },
+    "D01": {
+      "kind": "example",
+      "file": "examples/vite/m4/employees.ts",
+      "title": "The real CVC search explicitly restores captured UI and then resumes automatic handling under its page signal",
+      "marker": "search.unbind();"
+    },
+    "D02": {
+      "kind": "example",
+      "file": "examples/vite/m4/side.html",
+      "title": "The side CVC search exposes an explicit captured-field restore button",
+      "marker": "data-action=\"restore-search\""
+    },
+    "D03": {
+      "kind": "example",
+      "file": "examples/vite/m4/stack.html",
+      "title": "The stack CVC search exposes an explicit captured-field restore button",
+      "marker": "data-action=\"restore-search\""
+    },
+    "I01": {
+      "kind": "consumer",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript checks the detached defaults record and void unbind signatures",
+      "marker": "const unbound: void = form.unbind();"
+    },
+    "I02": {
+      "kind": "consumer",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Installed browser fixture captures a real File and exact native/custom UI before binding Rows",
+      "marker": "state.formDefaults ="
+    },
+    "I03": {
+      "kind": "consumer",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "The exact installed package asserts captured values and files, native reset distinction, Rows preservation and inactive/resumed handling",
+      "marker": "const formDefaults = await page.evaluate("
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "Form defaults capture live native values including root readonly disabled and hidden fields but exclude display and business data"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "captured defaults native reset and received Rows originals remain three independent checkpoints"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "defaults return detached nested records and arrays without recapturing edits binding refresh or reset"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "Form default parsers use own native fields in compiled order and one unparsed captured context"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "default parser errors undefined async and uncloneable results fail without changing DOM and release guards"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "Form and Grid default getter recursion is bounded per owner recoverable and permits another owner"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "native default paths reject parent-child conflicts in both DOM orders for Form and Grid"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "shared default assembly preserves Grid readonly disabled groups parser order and Select parser exclusion"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "disposing from a default parser prevents a late result without affecting another live owner"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "Rows unbind restores captured UI without callbacks notifications or business changes and retains ownership"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "unbind discards only the current row draft detaches updates and retains other row drafts for reuse"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "unbind restores exact static nodes and image src attributes while preserving current native configuration and alt"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "captured group checkedness restores stable shapes without mutating checkbox values or native defaults"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "unmarked Select restore follows captured option identities while preserving reordered added and removed application options"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "marked Select unbind restores owned authored nodes selection and raw mapping before another row binds"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "local unbind suspends automatic work while read validate and selected refresh remain usable without resuming it"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "defaults neither flush pending native reset display nor resume an inactive local Form"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "unbind cancels older completed native reset cleanup before it can repaint the restored view"
+    },
+    "B19": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "native reset default action after in-dispatch unbind wins unless the reset is canceled"
+    },
+    "B20": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "unbind from whole value formatter renderer and parser callbacks suppresses older writes and sibling commits"
+    },
+    "B21": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "native setter reentry rejects same-owner unbind once and releases the restoration guard for retry"
+    },
+    "B22": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "newer binding local full refresh and disposal during a native setter stop stale sibling restoration"
+    },
+    "B23": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "file restoration privately preserves every captured File while defaults expose only the first filename"
+    },
+    "B24": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "empty file capture clears later selection while disposal keeps current files and existing restrictions"
+    },
+    "B25": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "file reconstruction failure precedes DOM error or inactive changes and preflight recursion stays bounded"
+    },
+    "B26": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "newer full refresh or disposal during file preflight prevents all older restoration writes"
+    },
+    "B27": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "Form creation defaults feed an explicit complete Rows factory and a received insert checkpoint"
+    },
+    "B28": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "native validation publication stops after unbind during an ARIA write and leaves automatic work inactive"
+    },
+    "B29": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "a canceled local render cannot erase newer validation or resume handlers through a rejected nested bind"
+    },
+    "B30": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "side CVC restores captured search fields without a request or changes to another page then resumes formatting",
+      "marker": "test(layout + \" CVC restores captured search fields without a request or changes to another page then resumes formatting\""
+    },
+    "B31": {
+      "kind": "browser",
+      "file": "tests/browser/form-defaults.spec.ts",
+      "title": "stack CVC restores captured search fields without a request or changes to another page then resumes formatting",
+      "marker": "test(layout + \" CVC restores captured search fields without a request or changes to another page then resumes formatting\""
+    }
+  },
+  "witness_counts": {
+    "status": "exact31_witnesses_and_fresh_full714_runtime_independently_raw_confirmed",
+    "unit_delta": 0,
+    "browser_delta": 31,
+    "source_witnesses": 4,
+    "example_source_witnesses": 3,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 683,
+    "expected_full_cases_per_engine": 714,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 714
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m57-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m57-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful Form/Grid defaults, native-file restoration, inactive/resume and call-stack guard regressions; DOM-only coverage may leave unit count unchanged",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF checks after independent semantic review",
+      "Independent connected source/caller, raw evidence and final semantic document reviews"
+    ],
+    "limitations": [
+      "Historical runtime is not rerun or recertified.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory.",
+      "No model-response generation/evaluation or token-saving measurement is requested."
+    ],
+    "baseline_input_entries": 184,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 683,
+    "setup_observations": [
+      {
+        "kind": "root_reported_preparatory_helper_syntax_checks",
+        "helpers": [
+          "node_modules/.cache/m57-runtime-invariance.mjs",
+          "node_modules/.cache/m57-complete.mjs"
+        ],
+        "reported_result": "Both syntax checks passed according to root.",
+        "command_scope": "node --check for each of these two prepared helpers; exact reported helper scope only.",
+        "captured_gate": false,
+        "raw_output_retained": false,
+        "qualification": "This is a root-reported setup observation, not a captured runner gate, project runtime/browser test, model evaluation or independent execution by this reviewer."
+      }
+    ],
+    "operator_dispositions": [
+      {
+        "kind": "owned_full_firefox_cli_manually_stopped_after_source_review_blocker",
+        "gate_log": "docs/implementation/evidence/m57-browser-firefox.log",
+        "gate_log_sha256": "60b318e76616cdbdb1b20bd293d083e2b59d1a140195bf9eff29df4283ab6328",
+        "input_manifest": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+        "input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+        "exit_code": 4294967295,
+        "last_started_progress": {
+          "position": 152,
+          "expected": 713,
+          "meaning": "Started line-reporter position only; not a passed count."
+        },
+        "operator_scope": "Root reported verifying command ownership and stopping only Playwright CLI PID2820, child of its m57-run PID11360, after the independent error-publication blocker was confirmed.",
+        "reason": "Corrected source required a default generation/disposal guard for bare showIssues calls; old source gates cannot certify the corrected map.",
+        "full_suite_credit": false,
+        "completed_old_scope": {
+          "nonbrowser_gate_groups": 13,
+          "chromium": {
+            "passed": 713,
+            "shard_count": 12,
+            "summary": "12 sequential Chromium shards, 259.0s",
+            "manifest": "docs/implementation/evidence/m57-chromium-shards.json",
+            "manifest_sha256": "2820af08a31dad3d1535c63ef83ecc5cb4a69ebf470b887ad32b54c6b65ed272",
+            "records": 25,
+            "scope": "Complete prior-map runtime result retained; no corrected-source coverage credit."
+          }
+        },
+        "note": "This M5.7 operator stop is separate from immutable earlier-stage incidents. No spontaneous browser/source failure cause is asserted."
+      }
+    ],
+    "diagnostic_dispositions": [
+      {
+        "kind": "retained_development_fixture_failure",
+        "log": "docs/implementation/evidence/m57-focused-chromium.log",
+        "log_sha256": "c2f3618fa843064f56143cd81a899f3b2f855a6a5ac483458719eb43414800c1",
+        "input_manifest": "docs/implementation/evidence/m57-inputs-c19bf7495eb2.json",
+        "input_manifest_sha256": "c19bf7495eb22ffb1655fa90ddf07936ea81fc96ca54a2ffd7d16b6b19c3b865",
+        "passed": 83,
+        "failed": 2,
+        "only_changed_file": "tests/browser/form-defaults.spec.ts",
+        "production_source_unchanged": true,
+        "final_coverage_credit": false,
+        "causes": [
+          "The first development Chromium focus retained83passes/2fixturefailures. Grid fixture illegally configured a Select parser and hit unchanged GRID_PARSE_FIELD; corrected fixture first asserts rejection, then exercises eligible text parsers and native Select defaults.",
+          "The reset-flush fixture expected a custom validator on blank input without a required declaration; unchanged rules.ts skips that validator. Adding the explicit required tuple makes its intended validator eligible. Only this new test file differs between failed and corrected focused input maps; production source did not change."
+        ],
+        "note": "Failed development evidence remains preserved; corrected focused results are separate captures, with no production fix after the failed capture."
+      },
+      {
+        "kind": "receipt_builder_cross_process_wallclock_assumption_rejected",
+        "runtime_or_source_failure": false,
+        "raw_evidence_changed": false,
+        "latest_observed_boundary_ms": 5,
+        "superseded_observed_boundary_ms": -4,
+        "note": "First receipt generation stopped on an unsupported parent/child timestamp enclosure assertion. Only ignored builder bookkeeping changed: exact timestamps and deltas are retained, strict sibling/duration checks remain and completion uses awaited close plus hashed manifest marker/result evidence. No clock cause is established."
+      }
+    ],
+    "superseded_artifacts": [
+      {
+        "directory": "node_modules/.cache/m57-superseded-artifact-1",
+        "descriptor": {
+          "path": "node_modules/.cache/m57-superseded-artifact-1/artifact.json",
+          "sha256": "056c03de2ccc17e2659662c59085d923d80fc1d1e07218415b248bdc1d5c94f9",
+          "original_tarball_path": "D:\\workspace\\natural_js\\node_modules\\.cache\\m57-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz"
+        },
+        "tarball": {
+          "path": "node_modules/.cache/m57-superseded-artifact-1/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "sha256": "9bd9da0c986a73f9b42749679e079358c3c7a67cc65239cae8e47fea75324cfd",
+          "files": 188,
+          "packed_bytes": 325773,
+          "unpacked_bytes": 1629602
+        },
+        "input_manifest": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+        "input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+        "scope": "Ignored byte-preserved prior artifact proof only. Descriptor retains its original tar path, which later current packaging may overwrite; this explicit backup tar path owns retained bytes. Not a new package/distribution or corrected-source artifact. Final independent payload/source-map audit remains separate."
+      }
+    ],
+    "independent_reviews": {
+      "baseline": "passed_read_only_c4aacd0_m56_source_raw_archive_preservation_audit",
+      "contract": "bounded_contract_independently_approved_before_source_edits",
+      "source": "passed_independent_connected_source_caller_test_review_and_latest_focused86_each_three_engines",
+      "evidence": "passed_independent_raw_gate_source_map_archive_shard_performance_parent_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_recovery",
+        "helper": "node_modules/.cache/m57-baseline-audit.mjs",
+        "head": "c4aacd00cf5631524a3015397f0a9fe22ca9493d",
+        "inputs": 184,
+        "raw_evidence_files": 121,
+        "records": 43,
+        "input_manifest_entry_counts": [
+          183,
+          184,
+          184,
+          184
+        ],
+        "immutable_parents": 6,
+        "canonical_groups": 16,
+        "execution_commands": 21,
+        "collection_commands": 7,
+        "raw_child_files": 66,
+        "unit_cases": 138,
+        "full_cases_per_engine": 683,
+        "chromium_partitions": [
+          119,
+          118,
+          111,
+          113,
+          114,
+          108
+        ],
+        "actual_artifact": {
+          "sha256": "7a871478a1b9acfe254969533482706819d5f55953086b13e22db1e243b27d8b",
+          "files": 183,
+          "packed_bytes": 320529,
+          "unpacked_bytes": 1602110
+        },
+        "remote_master": "b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6",
+        "semantic_reviewed_bodies_unchanged": 7,
+        "scope": "Retained source/evidence/archive bytes only; historical runtime was not rerun."
+      },
+      "contract": {
+        "status": "bounded_approval_with_explicit_native_restore_and_shared_builder_boundaries",
+        "clarifications": [
+          "Rows-backed unbind change flags become false; local markers stay application-owned and dispose retains original restoration behavior.",
+          "Both Form/Grid native parent-child path conflicts fail in either order; fixing Grid silent child-before-parent overwrite is authorized.",
+          "Defaults getter recursion is per owner, with Grid parser eligibility/order and active checks preserved.",
+          "Recursive unbind is bounded by a restoring flag covering preflight/writes; entry-generation/disposal checks prevent stale later writes without clearing active call-stack guards."
+        ],
+        "native_file_sources": [
+          "https://html.spec.whatwg.org/multipage/input.html#dom-input-files-dev",
+          "https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface"
+        ],
+        "limits": "Native reset default action and application side effects are not transactional. All planned file/lifecycle outcomes require browser acceptance.",
+        "inherited_local_display_reentry_policy": {
+          "status": "bounded_contract_accepted_source_verification_pending",
+          "policy": "Preserve FORM_RENDER for renderer→unbind→restoration reaction→same-owner bind(null) while the original local display frame is active. unbind does not clear localRendering or active callback/renderer stacks. A normal full local bind outside that active frame resumes the reusable owner.",
+          "required_state_guards": [
+            "Reject the inherited local display recursion before mutating automatic-resume state, so a failed nested bind cannot reactivate an unbound owner.",
+            "Reuse renderLocal returned generation/renderVersion to suppress the older local bind issue-clearing tail after callback unbind()+validate().",
+            "Do not add a general lifecycle engine or extra generation counter."
+          ],
+          "parity_scope": "All legacy Forms own datasets; retaining this existing modern-local cycle error is not an approved omission of the selected Rows-backed live-default/unbind workflow."
+        }
+      },
+      "connected_pre_review": {
+        "status": "passed_independent_connected_source_caller_test_review_with_latest_focused86_three_engine_evidence",
+        "reviewed_at": "2026-11-07T09:42:13.486Z",
+        "hash_scope": "Normalized LF whole-file review-time bytes of the settled production/caller/test scope. These are static review hashes, not a runtime source-map certification or final documentation-stamp hashes.",
+        "reviewed_normalized_sha256": {
+          "src/ui/form.ts": "9b169ed8c3df1bd477547ff292dffa6007757d835617208791196c67dd78e5e2",
+          "src/ui/index.ts": "8f95f35aad9db8068e4e9d96a4e2b0a617e6fdeef705f8a7a85efe0bf3458ea6",
+          "src/ui/grid.ts": "30789cbc480fb64d7fb2263dece889b1e2a9f03291ee7f5f3edeff43e8506f41",
+          "src/ui/native-defaults.ts": "902042418d6be81564305493837934bba68d9d8af6b4cd74967a193f069981ed",
+          "src/ui/native-control.ts": "67d5b7a9078b9b2a3e297b20d6383971df4cc66a504e4230631f3168e817f837",
+          "src/ui/row-options.ts": "d7a3a2e84d249b885122d5683f39b0a064245d8ae178a0eeace14b3c31a98dd1",
+          "src/ui/field-render.ts": "4035a412a3ba9ff1cb9e23bae8cb42984b567e1605021fc1ec962e2092ce2b1d",
+          "examples/vite/m4/employees.ts": "222b0a2ea54f5e2fcfd2a59a45742f1b39c7386e7146d9ab88c481b10195a616",
+          "examples/vite/m4/side.html": "20a4055c238052d3f3054359f8fb24c4db7acfb781ee89cd759a40a0711a26c5",
+          "examples/vite/m4/stack.html": "0fca27ba5ff83dd464beb3d275c6ce1b86cece3852cf1a11ae05d1054eacbaf5",
+          "tests/consumers/browser/main.js": "feb0be8ec4d1919529e71566d3468487d237d1b28a9a7a8bbd5167497f606c4b",
+          "tests/consumers/ts/check.ts": "c6fb05bb5952bb05f00ec83590709fb50a28262305685413d074eeb40b17591a",
+          "tools/check-packed-browser.mjs": "54790805a26784d87c09ac5971be550015b16dfd85e00dadaf11eaf91bac320a",
+          "tests/browser/form-defaults.spec.ts": "4e2a040b5ad4e629677e64dc030c4e36695a72d1ac027edf31b8fc492cc4a355"
+        },
+        "actual_authored_browser_cases": 31,
+        "inventory": "29 fixed literal cases plus side/stack CVC loop, total31. The new native radio ARIA publication case raises full expected scope from713 to714 (=683+31).",
+        "acceptance": [
+          "Native creation capture precedes local formatting/rendering and remains separate from exact UI restoration metadata. Native values/groups/select identities, authored choices, exact children/src and current native configuration follow the approved ownership boundary.",
+          "Actual private native-defaults builder has Form/Grid callers, preserves Grid capture/text-parser eligibility/order and plain-call receiver, rejects both native path orders and per-owner recursion, drains asynchronous results, clones outputs and keeps active disposal checks outside parser error wrapping.",
+          "Private File[] references and native DataTransfer/probe reconstruction remain separated from filename-only defaults. Reconstruction preflights before reset/association/DOM mutations; disposal clears captured references without replacing prior normal-disposal semantics.",
+          "Unbind deletes only the current Rows draft/association and preserves other drafts, immutable business data and subscriptions. Owned error/change-marker writes and native reads are generation/disposal guarded; active callback/renderer stacks remain intact.",
+          "Local frame recursion checks precede automatic resume. Captured render/reset-flush generations prevent older bind/input/focus/selected/validation tails and post-getter cache publication from replacing newer unbind/bind/refresh/disposal outcomes.",
+          "Actual CVC restore action calls unbind then full refresh under the existing page signal. Installed fixtures/assertions cover signatures, detached captures, exact nodes/files, inactive/resume, Rows preservation and disposed errors; failure/reentry cases belong to source browser regressions.",
+          "Bare error-publication callers now receive an entry-generation/disposal predicate by default; supplied predicates remain. The native radio ARIA reaction witness verifies first-member unbind suppresses later member/error-region writes in both local and Rows Forms."
+        ],
+        "resolved_findings": [
+          "Reset-flush callbacks could previously unbind before older bind/input/focus/selected continuations resumed. The shared flush now returns its render generation and callers retain/check it.",
+          "Local validation now retains the flush-returned generation for its existing final publication guard, preserving its invalid result while suppressing stale visible issues after callback unbind.",
+          "Native getters can synchronously start newer work. Both local render and unbind cache publication recheck generation/disposal immediately after fieldValue reads.",
+          "showIssues now always checks an entry-generation/disposal or caller-supplied predicate before every owned ARIA/error-region write. New31st local/Rows radio regression covers the prior bare-call gap."
+        ],
+        "limitations": [
+          "This reviewer ran no project compiler/test/browser/performance command. Latest captured focused86 passes in Chromium/Firefox/WebKit independently match all31 new titles and the exact current186-input map.",
+          "Full canonical runtime, independent final archive/raw-evidence and generated semantic-document acceptance remain pending; no full-family/P0/M13 closure follows."
+        ],
+        "focused_evidence": [
+          {
+            "label": "focused-chromium",
+            "log": "docs/implementation/evidence/m57-focused-chromium-3.log",
+            "log_sha256": "2c53c9f8a7a1549df343acc52894c36287d751a7f2bbdd8893134693193ad8d7",
+            "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+            "input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "passed": 86,
+            "elapsed": "16.3s"
+          },
+          {
+            "label": "focused-firefox",
+            "log": "docs/implementation/evidence/m57-focused-firefox-2.log",
+            "log_sha256": "abb34273d7777d9297abe3188a3740e02aa3fb8d0ef36480ba57cf2f0725b085",
+            "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+            "input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "passed": 86,
+            "elapsed": "42.7s"
+          },
+          {
+            "label": "focused-webkit",
+            "log": "docs/implementation/evidence/m57-focused-webkit-2.log",
+            "log_sha256": "2bbd861beaafaa6cb186e17f9c9ebf7f42b39fd41597c5a86c0f88ba874a3de5",
+            "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+            "input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "passed": 86,
+            "elapsed": "28.5s"
+          }
+        ],
+        "frozen_input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+        "frozen_input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+        "frozen_input_entries": 186,
+        "audit": {
+          "path": "node_modules/.cache/m57-source-focused-audit-2.log",
+          "sha256": "49b1537990a4d115fff70c3d66c6ceb1e0fdef7e93ec04948b5bc2493c513665",
+          "scope": "Read-only current source and captured focused proof; no runtime rerun or final full-suite/raw-evidence certification."
+        },
+        "resolved_fixture_corrections": [
+          "The first development Chromium focus retained83passes/2fixturefailures. Grid fixture illegally configured a Select parser and hit unchanged GRID_PARSE_FIELD; corrected fixture first asserts rejection, then exercises eligible text parsers and native Select defaults.",
+          "The reset-flush fixture expected a custom validator on blank input without a required declaration; unchanged rules.ts skips that validator. Adding the explicit required tuple makes its intended validator eligible. Only this new test file differs between failed and corrected focused input maps; production source did not change."
+        ]
+      },
+      "source_guard_followup": {
+        "status": "resolved_independent_static_and_latest_focused86_three_engine_review",
+        "scope": "Bare showIssues() calls from validation/subscriptions/reconciliation omit the optional current predicate.",
+        "case": "An instrumented aria-invalid setAttribute reaction calls unbind(), which advances renderVersion and clears owned errors. The older bare showIssues loop then continues with captured fieldIssues/messages and can repaint stale ARIA/error text after the newer unbind.",
+        "minimal_fix": "Capture showIssues entry renderVersion and use it with disposal as the default per-write current predicate; preserve explicit supplied predicates and existing state owners.",
+        "prior_review_scope": "The recorded focused85 passes/current186 d7e1f3952c6f map remain real prior-scope evidence. They do not certify the corrected production source or this newly identified native attribute-reentry boundary. Source/full-runtime acceptance must use new captured gates after the fix.",
+        "fix": "showIssues captures entry renderVersion and uses disposal/generation as its default applies predicate while preserving caller-supplied predicates; each existing original/region write checks applies.",
+        "witness": {
+          "file": "tests/browser/form-defaults.spec.ts",
+          "title": "native validation publication stops after unbind during an ARIA write and leaves automatic work inactive",
+          "scope": "Local and Rows required radio groups; first-member ARIA reaction calls unbind once, later group/error writes stop, invalid return permitted, captured clear/inactive view and unchanged/detached Rows asserted."
+        },
+        "expected_focus_cases_per_engine": 86,
+        "latest_focus": [
+          {
+            "label": "focused-chromium",
+            "log": "docs/implementation/evidence/m57-focused-chromium-3.log",
+            "log_sha256": "2c53c9f8a7a1549df343acc52894c36287d751a7f2bbdd8893134693193ad8d7",
+            "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+            "input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "passed": 86,
+            "elapsed": "16.3s"
+          },
+          {
+            "label": "focused-firefox",
+            "log": "docs/implementation/evidence/m57-focused-firefox-2.log",
+            "log_sha256": "abb34273d7777d9297abe3188a3740e02aa3fb8d0ef36480ba57cf2f0725b085",
+            "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+            "input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "passed": 86,
+            "elapsed": "42.7s"
+          },
+          {
+            "label": "focused-webkit",
+            "log": "docs/implementation/evidence/m57-focused-webkit-2.log",
+            "log_sha256": "2bbd861beaafaa6cb186e17f9c9ebf7f42b39fd41597c5a86c0f88ba874a3de5",
+            "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+            "input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "passed": 86,
+            "elapsed": "28.5s"
+          }
+        ],
+        "current_input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+        "current_input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f"
+      },
+      "prior_focused_source_scopes": [
+        {
+          "status": "superseded_by_default_issue_publication_guard",
+          "input_manifest": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+          "input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+          "input_entries": 186,
+          "focused_evidence": [
+            {
+              "label": "focused-chromium",
+              "log": "docs/implementation/evidence/m57-focused-chromium-2.log",
+              "log_sha256": "8e842df51659f5a82f1fb1663471c994ff3532424b67fab7f3ecd165df08f3d3",
+              "input_manifest": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+              "input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+              "passed": 85,
+              "elapsed": "17.4s"
+            },
+            {
+              "label": "focused-firefox",
+              "log": "docs/implementation/evidence/m57-focused-firefox.log",
+              "log_sha256": "3eea900806ff300e08f885feba403240ffc02ec7e9c9d80ea96d3a5a3f5890e4",
+              "input_manifest": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+              "input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+              "passed": 85,
+              "elapsed": "43.4s"
+            },
+            {
+              "label": "focused-webkit",
+              "log": "docs/implementation/evidence/m57-focused-webkit.log",
+              "log_sha256": "55606da60386095d8fefa8fd351cb2dea5c14fbd5ada2456fdbcda8b74e6e187",
+              "input_manifest": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+              "input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+              "passed": 85,
+              "elapsed": "29.4s"
+            }
+          ],
+          "reviewed_normalized_sha256": {
+            "src/ui/form.ts": "e32ae65e13cb83d4d39d695c27ef29b752a4ed3db9887bf364cf80a31857ee10",
+            "src/ui/index.ts": "8f95f35aad9db8068e4e9d96a4e2b0a617e6fdeef705f8a7a85efe0bf3458ea6",
+            "src/ui/grid.ts": "30789cbc480fb64d7fb2263dece889b1e2a9f03291ee7f5f3edeff43e8506f41",
+            "src/ui/native-defaults.ts": "902042418d6be81564305493837934bba68d9d8af6b4cd74967a193f069981ed",
+            "src/ui/native-control.ts": "67d5b7a9078b9b2a3e297b20d6383971df4cc66a504e4230631f3168e817f837",
+            "src/ui/row-options.ts": "d7a3a2e84d249b885122d5683f39b0a064245d8ae178a0eeace14b3c31a98dd1",
+            "src/ui/field-render.ts": "4035a412a3ba9ff1cb9e23bae8cb42984b567e1605021fc1ec962e2092ce2b1d",
+            "examples/vite/m4/employees.ts": "222b0a2ea54f5e2fcfd2a59a45742f1b39c7386e7146d9ab88c481b10195a616",
+            "examples/vite/m4/side.html": "20a4055c238052d3f3054359f8fb24c4db7acfb781ee89cd759a40a0711a26c5",
+            "examples/vite/m4/stack.html": "0fca27ba5ff83dd464beb3d275c6ce1b86cece3852cf1a11ae05d1054eacbaf5",
+            "tests/consumers/browser/main.js": "feb0be8ec4d1919529e71566d3468487d237d1b28a9a7a8bbd5167497f606c4b",
+            "tests/consumers/ts/check.ts": "c6fb05bb5952bb05f00ec83590709fb50a28262305685413d074eeb40b17591a",
+            "tools/check-packed-browser.mjs": "54790805a26784d87c09ac5971be550015b16dfd85e00dadaf11eaf91bac320a",
+            "tests/browser/form-defaults.spec.ts": "7c2974ae20f9da532c82635a8c4a011d7862f399962ac07f5608942e3b92b5b8"
+          },
+          "audit": {
+            "path": "node_modules/.cache/m57-source-focused-audit.log",
+            "sha256": "e136fce7a6b1e3ddfcd5d9c2de78f7f9e6372f19a99938d3101a307aab916caf",
+            "scope": "Read-only recorded source/focused proof; no project runtime command was rerun."
+          },
+          "scope": "Real focused85 three-engine source scope retained. It does not certify the corrected showIssues default generation guard or31st witness/current714 suite."
+        }
+      ],
+      "semantic_precheck": {
+        "status": "draft_api_semantics_prechecked_final_receipt_generated_bodies_pending",
+        "reviewed_at": "2026-11-07T09:55:06.492Z",
+        "scope": [
+          "docs/implementation/current.md",
+          "docs/implementation/feature-parity.md",
+          "docs/implementation/m5-form-defaults-plan.md",
+          "docs/v2/form.md",
+          "docs/v2/ui.md",
+          "docs/v2/migration.md",
+          "docs/v2/employee-example.md",
+          "docs/v2/grid.md",
+          "docs/implementation/index.md",
+          "docs/index.md",
+          "docs/log.md"
+        ],
+        "confirmed": [
+          "Defaults parsers operate on detached captured native creation candidates, while local read remains unparsed; application factories own complete business records.",
+          "Captured File/Select/node/image ownership, unbound Rows marked undefined paths, retained drafts/data, inactive explicit calls and selected/full resume match current source.",
+          "Local FORM_RENDER call-stack bounds and generation/disposal error-publication cancellation are accurately bounded; native default action/application effects remain outside transaction claims.",
+          "Real CVC search restore calls unbind followed by full refresh under the page signal and claims no request or Rows mutation.",
+          "U02 and the new M5.7 parity paragraph preserve global/dynamic/full-owner/P0/M13 work and no omission/full-family closure."
+        ],
+        "remaining": "Provisional current/plan/log checkpoint and acceptance counts remain for root final-docs generation after the complete final receipt. This precheck does not approve final semantic bodies or verified stamps."
+      },
+      "unrelated_workspace_content": {
+        "path": "natural_js/",
+        "status": "latest_root_reported_absent_prior_presence_preservation_scope_retained",
+        "scope": "Earlier presence/preservation statements are dated observations. Root reports the path absent at19:10 local with no entry in git status for that path; do not claim it remains untracked in the final worktree.",
+        "prior_observation": {
+          "status": "root_reported_external_untracked_obsidian_vault_preserved",
+          "scope": "Appeared during execution outside the frozen186-input inventory. Leave untouched/untracked and exclude from the commit; do not claim an entirely clean final worktree while it remains."
+        },
+        "latest_observation": {
+          "observed_at_local": "2026-11-07 19:10 Asia/Seoul (root reported)",
+          "test_path_exists": false,
+          "git_status_for_path": "empty",
+          "root_action": "Root reports no modification, move or deletion and unchanged .gitignore.",
+          "actor_or_cause": "unknown"
+        }
+      },
+      "chromium_timing": {
+        "scope": "Recorded cross-process wall-clock observations only; no timestamps altered, tolerance widened or cause inferred. Strict sibling ordering, nonnegative child durations and every source/hash/identity/exit check remain required. Only the exact current+5ms anomaly keyed to original parent/manifest hashes is reviewed; a different anomaly requires fresh review.",
+        "receipt_field": "chromium_timing",
+        "observations": [
+          {
+            "parent_log": "m57-browser-chromium.log",
+            "parent_log_sha256": "3f283e079eac3b7594aa65ce44746718506349582139cd73ff43caf59d7fc78b",
+            "parent_input_manifest": "m57-inputs-d7e1f3952c6f.json",
+            "parent_input_manifest_sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+            "parent_exit_code": 0,
+            "parent_sources_unchanged": true,
+            "manifest": "m57-chromium-shards.json",
+            "manifest_sha256": "2820af08a31dad3d1535c63ef83ecc5cb4a69ebf470b887ad32b54c6b65ed272",
+            "runner": "m57-chromium-shards.mjs",
+            "runner_sha256": "ef1391e7e6dae3b63253e5690e32eb44b795791e6813ee5c72538bc13583c20a",
+            "parent_started": "2026-11-07T09:31:12.219Z",
+            "parent_finished": "2026-11-07T09:35:31.283Z",
+            "first_child_started": "2026-11-07T09:31:12.303Z",
+            "last_child_finished": "2026-11-07T09:35:31.279Z",
+            "first_child_started_minus_parent_started_ms": 84,
+            "last_child_finished_minus_parent_finished_ms": -4,
+            "wall_clock_enclosure_claimed": false,
+            "completion_supported_by_hashed_marker_and_exit": true
+          },
+          {
+            "parent_log": "m57-browser-chromium-2.log",
+            "parent_log_sha256": "273da0c70617351660a634bc1bb582d8101aec1af49975931ec816dcd06477e9",
+            "parent_input_manifest": "m57-inputs-f3893a8fcd25.json",
+            "parent_input_manifest_sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+            "parent_exit_code": 0,
+            "parent_sources_unchanged": true,
+            "manifest": "m57-chromium-shards-2.json",
+            "manifest_sha256": "ef5e8b3eec8e1aa534a323cbe030145045c5ad389d60c0cad5ae52daf1c380d0",
+            "runner": "m57-chromium-shards.mjs",
+            "runner_sha256": "ef1391e7e6dae3b63253e5690e32eb44b795791e6813ee5c72538bc13583c20a",
+            "parent_started": "2026-11-07T09:41:42.694Z",
+            "parent_finished": "2026-11-07T09:46:01.367Z",
+            "first_child_started": "2026-11-07T09:41:42.774Z",
+            "last_child_finished": "2026-11-07T09:46:01.372Z",
+            "first_child_started_minus_parent_started_ms": 80,
+            "last_child_finished_minus_parent_finished_ms": 5,
+            "wall_clock_enclosure_claimed": false,
+            "completion_supported_by_hashed_marker_and_exit": true
+          }
+        ],
+        "completion_basis": "The hashed tracked executor awaits child close, records child raw hashes, verifies the complete union and writes the manifest/hash marker before the parent captures its output and successful exit. Current ignored gate-wrapper source was inspected, without inventing an execution-time wrapper fingerprint.",
+        "independent_raw_review": "passed_exact_observations_and_causal_completion_without_tolerance_or_inferred_cause"
+      },
+      "final_raw_evidence": {
+        "status": "passed_independent_raw_review",
+        "reviewed_at": "2026-11-07T10:09:20.956Z",
+        "reviewer": "Independent legacy/raw-evidence agent",
+        "audit_log": {
+          "path": "node_modules/.cache/m57-independent-audit.log",
+          "sha256": "fa496615784d4de2ebab088c40f892a1c7edff797fc57c9ac8e84433e0113eaf"
+        },
+        "audit_helper": {
+          "path": "node_modules/.cache/m57-independent-audit.mjs",
+          "sha256": "ccfad7426aba5542728ef947e23bb7c323f16ed1b8488506d7e20f0891203b57"
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "docs/implementation/evidence/m57-verification.json",
+          "sha256": "e2186bfa703dba9dfa7e3f9c7af131347cbe36a01b4427a9e071d44a4f645a54",
+          "preserved_bytes_path": "node_modules/.cache/m57-reviewed-runtime-receipt.json",
+          "scope": "Exact R0 receipt bytes independently audited before this review-status ledger edit. This is a pre-review-status snapshot, not the final regenerated receipt hash."
+        },
+        "reviewed_ledger_snapshot": {
+          "path": "docs/implementation/evidence/m57-form-defaults.json",
+          "sha256": "ee8fe17d5d4b08cc7b21993bfe66f61332e0e252f3f24c8f4075324055475de1",
+          "scope": "Exact semantic ledger bytes associated with the independently reviewed R0 receipt before raw-review status was recorded. This is not a final/self hash."
+        },
+        "confirmed": {
+          "gate_records": 41,
+          "development": 10,
+          "superseded": 15,
+          "latest_final": 16,
+          "source_maps": 4,
+          "source_map_entries": [
+            186,
+            186,
+            186,
+            186
+          ],
+          "current_source_entries": 186,
+          "current_map": "m57-inputs-f3893a8fcd25.json",
+          "unit_passed": 138,
+          "new_browser_cases": 31,
+          "full_cases_each_engine": 714,
+          "chromium_child_raw_files": 100,
+          "expanded_execution_stage_commands": 27,
+          "collection_commands": 13,
+          "actual_package": {
+            "sha256": "6e52d258629167e9b94376bb80023b374170f89859b39ef035e31a6b409da16a",
+            "files": 188,
+            "packed_bytes": 325820,
+            "unpacked_bytes": 1629898,
+            "all_actual_member_payloads_sizes_and_packlist_match": true
+          },
+          "superseded_package": {
+            "sha256": "9bd9da0c986a73f9b42749679e079358c3c7a67cc65239cae8e47fea75324cfd",
+            "files": 188,
+            "scope": "Actual ignored backup payloads match the recorded old source map; no corrected-source credit."
+          },
+          "recomputed_medians": 60,
+          "raw_durations": 300,
+          "original_budgets": 30,
+          "immutable_parents": 6,
+          "original_raw_tar_fixtures": 3,
+          "v1_original_ignored_lock_master": "preserved"
+        },
+        "scope": [
+          "All retained41 gate/log/map hash/source flags and latest16 exact current-map passes; complete Chromium714 and superseded713 metadata/disjoint identity unions plus Firefox/WebKit714 coverage.",
+          "Actual current188-file tar payloads/header/packlist/sizes and preserved old9bd9 tar mapped to their respective recorded source scopes; same current tar JS/TS and five Windows browser consumers.",
+          "Sixty medians from300 raw durations, unchanged30 inherited budgets, viewport geometry/lifecycle/counters and protected benchmark fixtures.",
+          "Six immutable evidence parents, raw tar fixtures, v1/ignored original legacy lock/master preservation; unrelated untracked Obsidian content is outside frozen scope and remains untouched.",
+          "Exact current+5ms and prior-4ms parent/child observations match raw timestamps and receipt; strict child ordering/durations, causal awaited-close/hash-marker completion and all result/source/hash checks remain without tolerance or inferred clock cause."
+        ],
+        "limitations": [
+          "No runtime was rerun by the independent reviewer. Historical runtime and superseded/manual-stop/fixture scopes remain separate;152/713 stopped Firefox is started progress, not a pass count.",
+          "This approval covers raw evidence, not final semantic documents, mechanical verified stamps, manual assistive technology, actual Safari, personal acceptance, full-family/P0/M13 closure or an omission."
+        ]
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "reviewed_at": "2026-11-07T10:13:03.745Z",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_whole_file_sha256": "1d61add596e3a5e3f70b8a499aca615b1ea6ae22fad82b80cfab505b0cb7e032",
+            "normalized_body_sha256": "0c82489e2f95bb6ae5ab79df8c633e7c7eea967299d142757c8676ba97325179"
+          },
+          "docs/implementation/feature-parity.md": {
+            "normalized_whole_file_sha256": "8634ae597daa185144064366b62fe1e1ec6257fab4212e3ddf674d92e3450bc1",
+            "normalized_body_sha256": "b8e52a6da99d9081247ef66b0906b40064b2fd227c3e28f5e780339d5a92ede2"
+          },
+          "docs/implementation/m5-form-defaults-plan.md": {
+            "normalized_whole_file_sha256": "050d2b714288bb99d251b16bac5d82c17e3725a1b28a29e8aa85ac892594bb42",
+            "normalized_body_sha256": "888b1e377f36de59cf3a317fa3174ba40c27c8d5215dd15ce62aa240aeaab37f"
+          },
+          "docs/v2/form.md": {
+            "normalized_whole_file_sha256": "45a283858a35cffc8605a922612f5975659776977709c5d23c5d9a4252ed4529",
+            "normalized_body_sha256": "1dbbbd409fe8777e18b6fe9c06da524130f2f8cb5445a276b31e3fa5ceb52d7c"
+          },
+          "docs/v2/ui.md": {
+            "normalized_whole_file_sha256": "03d03760e3555791248a9ef2f31dcb6d4aec9a803a331942aa778423b288039d",
+            "normalized_body_sha256": "14c33da8c18eb5ff30477636843f9b245639205184698a0d06010c9763d16ed1"
+          },
+          "docs/v2/migration.md": {
+            "normalized_whole_file_sha256": "12c200355dcb0e26cdb6a5279729b13d024f8284e711296ca5df58b3029de5dd",
+            "normalized_body_sha256": "744dacf55edf85d44a491f346a7a9f55b573e2630abdd915cade17acbd118c42"
+          },
+          "docs/v2/employee-example.md": {
+            "normalized_whole_file_sha256": "73f23dfa44ea806fbd4a66040ba49e78406b7855fd24c032bd50f7d960ad19f9",
+            "normalized_body_sha256": "29a6624ad63a1cdae47f3e41ee81cb91827b7be2dfa4030f8f65da3ff70856c5"
+          },
+          "docs/v2/grid.md": {
+            "normalized_whole_file_sha256": "f024aa5d3bbadbabca3e207b9685863eea78d37998f902ec4d237256dcd36846",
+            "normalized_body_sha256": "039f7d153065ff5a18c7020f9edacbe6485f8ad8c214e6b021272a883f05b5b5"
+          }
+        },
+        "hash_scope": "PRE-final-verified-stamp semantic-review snapshots. Whole-file hashes normalize UTF-8 CRLF to LF; body hashes additionally exclude YAML frontmatter. These whole-file hashes are not post-stamp/final hashes. Fingerprint/generated/verified metadata may settle mechanically; reviewed semantic bodies must remain exact unless independently reviewed again.",
+        "reviewed_receipt_snapshot": {
+          "path": "docs/implementation/evidence/m57-verification.json",
+          "sha256": "073ac27147cf6d4f95ea67085420f88fbb51636426a3e6d9665d83ddb1df09d3",
+          "scope": "Exact R1 receipt bytes at independent semantic review. Later permitted review/semantic-ledger hash regeneration changes its whole-file hash; this is not a final/self hash."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m57-runtime-invariance-initial.json",
+          "sha256": "254e690f854bcded077989dcc1e8b3c60faec093a692c53dc74c9e062a6042b3",
+          "audited_receipt_sha256": "e2186bfa703dba9dfa7e3f9c7af131347cbe36a01b4427a9e071d44a4f645a54",
+          "unchanged": true,
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "additional_review_scope": [
+          "docs/implementation/index.md",
+          "docs/index.md",
+          "docs/log.md",
+          "docs/implementation/evidence/m57-verification.json",
+          "docs/implementation/evidence/m57-doc-history.json"
+        ],
+        "confirmed": [
+          "The final current/plan/parity bodies and Form/UI/migration/employee/Grid contracts match the settled source, independently audited R1 runtime facts and186/138/31/714/41/four-map/16/27+13 scope with the exact188-file6e52 artifact.",
+          "Defaults candidate parsers stay separate from unparsed localread; native creation data excludes static/images/business keys/File objects, while application factories own full business rows and uploads.",
+          "Exact native checkedness/Select identities/authored choices/children/src and private File restoration, Rows undefined marked unbound reads, current versus other drafts, inactive explicit calls and selected/full resume match actual owners/callers.",
+          "Restoring/getter/callback guards preserve the inherited local FORM_RENDER frame bound and native-reset default boundary. Captured render/reset generations and default guarded error publication stop older framework commits after newer unbind/bind/refresh/disposal.",
+          "The real CVC search restores captured fields then explicitly resumes under its page signal, without a request/shared Rows mutation. Grid keeps capture/text-parser eligibility and plain-call semantics, with explicit both-order path and recoverable getter recursion fixes.",
+          "U01/U02/U03, next M5.8 action and all remaining local/global/default-source/dynamic/UI/CVC/P0/M13 obligations stay required. No full-family closure, omission, publication/tag, actual Safari/manual/personal or model/token result is certified.",
+          "Prior fixture failure, complete713 Chrome, stopped Firefox152-started and old9bd package remain superseded only. Exact+5/-4 timing observations retain raw timestamps and causal hashed-marker/exit proof without tolerance or invented cause.",
+          "Both indexes route to M5.7. Existing M5.6 and older log text/date headings remain exact normalized text; actual history report preserves38 fingerprint-only historical bodies/generated/verified dates.",
+          "Generated zero-error/zero-warning completion wording is conditional on immediately authorized actual mechanical checks; no mechanical pass is recorded by this semantic approval."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "authorized_actions": [
+            "Apply verified metadata only to these eight independently reviewed semantic concepts.",
+            "Refresh source fingerprints and regenerate receipt/ledger review hashes while proving all independently audited runtime facts invariant, excluding only review and semantic_acceptance.sha256.",
+            "Run actual changed/full OKF checks and historical body/nonfingerprint-date preservation checks, retaining exact measured outputs.",
+            "After actual successful zero-error/zero-warning checks, record mechanical results and update documents, six selected-contract statuses and overall selected-verification status without another semantic roundtrip."
+          ],
+          "conditions": [
+            "Do not change reviewed semantic bodies, production/runtime inputs or audited runtime facts.",
+            "Do not mark mechanical checks or final completion passed before actual successful output.",
+            "Preserve the immutable initial invariance proof path/bytes and all pre-review receipt/ledger and pre-stamp document hashes as scoped snapshots; do not relabel them final/self hashes.",
+            "If semantic bodies or runtime facts change, obtain fresh scoped independent review.",
+            "Keep all full-owner/P0/M13 obligations and omission decisions open; unrelated external content is outside this acceptance."
+          ]
+        },
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m57-docs-changed.log",
+              "sha256": "fc9999c13e09e05854a23659695fb167370e550d1bb6ed8bb1d5e95b4ab19b98",
+              "concepts": 74,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m57-docs-full.log",
+              "sha256": "ef455a593521e629723a68e0964e69ff2a93b82bca85d4b5064a2ae2795e28b3",
+              "concepts": 74,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m57-doc-history.json",
+            "sha256": "0ec16b78ecefbdaf32f53cbffd3a7c25f1680aa178d80a455acdade35a8a6df3",
+            "historical_fingerprint_only": 38,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 8,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "expected_source_input_entries": 186,
+    "expected_package_file_count": 188,
+    "expected_inventory_scope": "Actual current source map186: prior184 plus one private TypeScript module and one browser test. Actual packed188: prior183 plus that module TypeScript source and four generated JS/declaration/map files. Final receipt remains authoritative for final inventories.",
+    "actual_package_file_count": 188,
+    "artifact_descriptor_observation": {
+      "sha256": "6e52d258629167e9b94376bb80023b374170f89859b39ef035e31a6b409da16a",
+      "files": 188,
+      "packed_bytes": 325820,
+      "unpacked_bytes": 1629898,
+      "input_manifest": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+      "scope": "Latest actual descriptor and tar-byte checksum. Earlier9bd9 artifact remains superseded under its explicit ignored backup path; neither artifact is published."
+    },
+    "execution_strategy": {
+      "runner": "docs/implementation/evidence/m57-chromium-shards.mjs",
+      "shard_count": 12,
+      "canonical_gate_groups": 16,
+      "expanded_execution_stage_commands": 27,
+      "collection_commands": 13,
+      "status": "passed_independent_latest12_shard_exact_union_metadata_and_all_retained_raw_children_review",
+      "scope": "Fresh sequential Playwright built-in shards with unchanged source/config/retry/skip acceptance; complete superseded12-shard output remains separately retained."
+    },
+    "actual_source_input_entries": 186,
+    "actual_runtime": {
+      "recorded_at": "2026-11-07T10:00:26.851Z",
+      "gate_records": 41,
+      "development_records": 10,
+      "superseded_records": 15,
+      "latest_final_gate_records": 16,
+      "retained_nonzero_records": 2,
+      "input_manifests": [
+        {
+          "path": "docs/implementation/evidence/m57-inputs-a88395150a4a.json",
+          "sha256": "a88395150a4ad58e69f6111ea8b3bda57c79e011a96a4c762490a2d1a2b895f7",
+          "entries": 186
+        },
+        {
+          "path": "docs/implementation/evidence/m57-inputs-c19bf7495eb2.json",
+          "sha256": "c19bf7495eb22ffb1655fa90ddf07936ea81fc96ca54a2ffd7d16b6b19c3b865",
+          "entries": 186
+        },
+        {
+          "path": "docs/implementation/evidence/m57-inputs-d7e1f3952c6f.json",
+          "sha256": "d7e1f3952c6f62331c3d44b18bee949d23846815f54e197dba54f74930d8f12e",
+          "entries": 186
+        },
+        {
+          "path": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+          "sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+          "entries": 186
+        }
+      ],
+      "current_input_manifest": {
+        "path": "docs/implementation/evidence/m57-inputs-f3893a8fcd25.json",
+        "sha256": "f3893a8fcd25dacf98b2b542bc3ee50ad38d0f6d0298e782666a115da2821a3f",
+        "entries": 186,
+        "current_normalized_sources_match": true
+      },
+      "unit": {
+        "passed": 138,
+        "new_cases": 0
+      },
+      "new_browser_cases": 31,
+      "full_suites": {
+        "chromium": {
+          "passed": 714,
+          "elapsed": "12 sequential Chromium shards, 258.6s",
+          "log": "docs/implementation/evidence/m57-browser-chromium-2.log",
+          "log_sha256": "273da0c70617351660a634bc1bb582d8101aec1af49975931ec816dcd06477e9"
+        },
+        "firefox": {
+          "passed": 714,
+          "elapsed": "7.5m",
+          "log": "docs/implementation/evidence/m57-browser-firefox-2.log",
+          "log_sha256": "f2888b7b22a596802f38074b221179f6ec7d57ccd11e8d3b99bf4183fa0925d1"
+        },
+        "webkit": {
+          "passed": 714,
+          "elapsed": "6.0m",
+          "log": "docs/implementation/evidence/m57-browser-webkit.log",
+          "log_sha256": "4e6da34ba0571006ede3d7be473cb45bc942fc22826fbf7413693a081218ab06"
+        }
+      },
+      "canonical_gate_groups": 16,
+      "expanded_execution_stage_commands": 27,
+      "collection_commands": 13,
+      "chromium": {
+        "manifest": "docs/implementation/evidence/m57-chromium-shards-2.json",
+        "manifest_sha256": "ef5e8b3eec8e1aa534a323cbe030145045c5ad389d60c0cad5ae52daf1c380d0",
+        "shard_count": 12,
+        "passed": 714,
+        "partitions": [
+          {
+            "shard": 1,
+            "passed": 70
+          },
+          {
+            "shard": 2,
+            "passed": 59
+          },
+          {
+            "shard": 3,
+            "passed": 63
+          },
+          {
+            "shard": 4,
+            "passed": 49
+          },
+          {
+            "shard": 5,
+            "passed": 74
+          },
+          {
+            "shard": 6,
+            "passed": 45
+          },
+          {
+            "shard": 7,
+            "passed": 73
+          },
+          {
+            "shard": 8,
+            "passed": 59
+          },
+          {
+            "shard": 9,
+            "passed": 66
+          },
+          {
+            "shard": 10,
+            "passed": 42
+          },
+          {
+            "shard": 11,
+            "passed": 58
+          },
+          {
+            "shard": 12,
+            "passed": 56
+          }
+        ],
+        "child_files_total_including_superseded": 100,
+        "scope": "Latest result and recorded partition counts/hash metadata read; independent exact identity/title/location union review remains pending."
+      },
+      "artifact": {
+        "sha256": "6e52d258629167e9b94376bb80023b374170f89859b39ef035e31a6b409da16a",
+        "files": 188,
+        "packed_bytes": 325820,
+        "unpacked_bytes": 1629898,
+        "scope": "Actual descriptor/tar-byte checksum recorded; complete independent archive payload/member review remains pending."
+      },
+      "checks_scope": "Latest sixteen captured gates all exit0, share current186 map and report sources_unchanged. All retained gate/log/map and100 Chromium child hashes were read; this ledger update does not replace independent raw archive/performance/identity review."
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Dynamic field rediscovery, local/shared/global hooks/defaults composition, per-unbound-key value observation and all remaining control/source/dynamic equivalence outside these selected captured creation/restoration/reusable-owner outcomes."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected outcomes can receive acceptance after implementation, fresh final gates and independent review. No full owner family, P0, M13 or parent milestone closure is claimed."
+  }
+}

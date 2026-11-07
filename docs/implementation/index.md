@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.7 Form captured defaults and unbind](m5-form-defaults-plan.md) - Return captured native creation values and restore the authored Form view without changing shared Rows data. (draft)
+
 * [Natural-JS 2.0 M5.6 Form binding lifecycle and selective refresh](m5-form-binding-plan.md) - Add synchronous whole-row Form hooks and refresh compiled fields without changing row identity or unselected input. (draft)
 
 * [Natural-JS 2.0 M5.5 local Form raw display and reset](m5-local-form-plan.md) - Apply local Form formatting without changing entered raw values and reconcile native reset through existing Form ownership. (draft)

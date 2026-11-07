@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-values-plan.md
     title: Completed Rows-backed value callback scope
-    git_blob: a06a9defa82c79a56489615d08c3d6cc787763d1
+    git_blob: be7098a106f34db78f7a40a67b124300a8e50ace
   - id: baseline
     resource: evidence/m54-verification.json
     title: Frozen 7a621e7 runtime and package receipt
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing local raw cache, candidates, rendering and ownership
-    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
+    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native values, display and raw constraints
@@ -28,7 +28,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Existing public Form and rule contracts
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Source-backed Form formatting, defaults and reset intent

@@ -48,6 +48,10 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
 
   const search = bindForm(searchRoot);
   own(() => search.dispose());
+  find<HTMLButtonElement>(searchRoot, '[data-action="restore-search"]').addEventListener("click", () => {
+    search.unbind();
+    search.refresh();
+  }, { signal });
   const detail = bindForm(detailRoot, {
     rows,
     rules,

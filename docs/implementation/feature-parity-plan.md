@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 8e0afafbc69ea094a6de0868d8ec87b3a2cffc21
+    git_blob: c33f9b637702cd7daa614752037f7623bfb6b6e5
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,11 +16,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 25b196d5d66582daf9f5d1600593d3e1034963fa
+    git_blob: 101dbce7db404005898a630f9b0364455b7441b8
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 48f8623ecd6549238bec4ba269235ca4c6ffef99
+    git_blob: 42ca9168e6de326c576344590d36cb7703659182
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -28,11 +28,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
+    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
 generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }

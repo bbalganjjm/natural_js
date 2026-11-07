@@ -44,15 +44,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 5d7f97a8797fd72cc24ac3af7265a39749962069
+    git_blob: 74ee1c8e1a2be0b757ecb055f44d4ddc270ff390
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: cfb46ce5b501918169cbc490e7cc85dfeab2f5ad
+    git_blob: e9bb8926aeb8d2af140a8693154fc005ae22996a
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 567439878a74284e7a1f60c6898d636322c190e5
+    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -100,7 +100,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: c15ab21168b93cb5675d2ddbf1c3fa18bfef557c
+    git_blob: 2355f21ec715d66f908ddfa392a65c85336b4bdd
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
@@ -108,7 +108,7 @@ sources:
   - id: employee-view
     resource: ../../examples/vite/m4/side.html
     title: Authored employee screen markers
-    git_blob: 16680df0e9ae8f0453915ead086d930daa5743f0
+    git_blob: 0e94c26ab286abeb646695cde8b1f15d4f5a93bb
   - id: containers
     resource: ../../examples/vite/m7/main.ts
     title: Runnable main, Popup, and keyed Tab page flow
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 8e0afafbc69ea094a6de0868d8ec87b3a2cffc21
+    git_blob: c33f9b637702cd7daa614752037f7623bfb6b6e5
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: ed3427c2322fb85ccdc370f0abfeb23901c74abe
-generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+    git_blob: 23bd853dba1680a4fae0e3cafb1837a0b6a49d8c
+generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -413,7 +413,7 @@ Use Form's existing render for structured/custom DOM and format for text display
 
 ## 11. Keep local input and source-backed Form ownership explicit
 
-Use a DOM-local Form for authored search inputs. Effective formatters now write display without replacing entered raw; local read stays unparsed and parse remains validation-only. Focus exposes editable raw, blur restores valid display and bind(null) refreshes after programmatic native changes. Native reset buttons restore current native defaults without making a request. Cleanup follows default action, respects cancellation and flushes completed work before a later local read/validate/input, including a binding inside an outer native form. beforeBindValue/onBindValue remain Rows-only.[^form]
+Use a DOM-local Form for authored search inputs. Effective formatters write display without replacing entered raw; local read stays unparsed, while validation and defaults parse separate candidates. Focus exposes editable raw, blur restores valid display and bind(null) refreshes after programmatic native changes. Native reset buttons restore current native defaults without making a request. Cleanup follows default action, respects cancellation and flushes completed work before a later local read/validate/input, including a binding inside an outer native form. beforeBindValue/onBindValue remain Rows-only.[^form]
 
 Legacy N([]).form(...).bind(0, data) still owned a dataset. Use createRows([normalizedRecord]) and bind its RowId for received/business records. Read rows.get(id).value when the complete record, including unbound keys, is needed; Form.read intentionally includes only marked fields. Use Rows.set for source changes and Rows.revert for an existing received checkpoint. Unbound-key normalization belongs in the application receive/factory step, not in a hidden display callback pass.[^rows][^form][^legacy-ui]
 
@@ -436,7 +436,11 @@ rows.revert(id); // Retains id and insert status; restores the received insert v
 
 Choose ordinary add when cancellation should remove the inserted row. A legacy live InitialData snapshot is not automatically a native default: before binding, set defaultValue/defaultChecked/defaultSelected when Reset fields must restore a preset. Otherwise capture an explicit application default record/checkpoint as above. Rows-backed native reset policy remains application-owned; use explicit data operations rather than implying a row-wide write from the browser reset event.[^rows][^form][^legacy-ui]
 
-The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Local display ownership introduces no second dataset or callback registry. Global composition, live-default unbind and dynamic discovery retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
+The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Restore captured fields calls unbind followed by full refresh: restoration and automatic resume are explicit, without a request or Rows write. Local display ownership introduces no second dataset or callback registry. Global composition and dynamic discovery retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
+
+Form.defaults returns captured native creation values with own parsers; it excludes static/images, option-source lists and business-only keys. Use an application factory to supply complete T before Rows.add or appendState. Unbind restores the live construction view and selected native files, clears the current draft/errors and detaches the current RowId without modifying committed Rows. Unlike legacy's retained row index, the restored view cannot write defaults into the old record. Keep the RowId and Rows when source access is needed; explicitly bind an ID to resume. Other-row drafts survive. Full local refresh resumes automatic handling, while selected refresh and explicit read/validate do not.[^form][^rows][^legacy-ui]
+
+Captured UI restoration preserves authored nodes, image attribute absence and selected option occurrences rather than flattening markup or coercing arrays. Native file references remain private restoration metadata; uploads use application File/FormData. No nonempty filename assignment, hidden dataset, autoUnbind option or implicit row-creation API is added. Native reset still uses current native defaults and Rows.revert still uses the received checkpoint. Dynamic field/configuration rediscovery remains separate required work.[^form][^legacy-ui][^parity]
 
 Legacy Form onBeforeBind/onBind becomes beforeBind/onBind with explicit FormBindContext<T>: root, immutable full raw row and original revert event or null. Ordinary returns do not cancel binding. Use beforeBindValue/onBindValue for field presentation; normalize source explicitly through Rows. Whole hooks surround full bind/refresh and current live-row revert, not construction, field edits or selected refresh. The CVC employee detail updates its current-row state through onBind.[^form][^legacy-ui]
 

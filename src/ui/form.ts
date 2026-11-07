@@ -10,6 +10,7 @@ import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } fr
 import type { RowOption } from "./row-options.js";
 import { control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
+import { createNativeDefaults } from "./native-defaults.js";
 import type {
   FormBindContext, FormHandle, FormValueContext, FormatRule, ParseInput, RuleContext, RuleSet,
   ValidateRule, ValidationIssue, ValidationResult
@@ -221,15 +222,30 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const renderers = fieldRenderers("bindForm", fields.map(field => ({
     name: field.name, element: field.element, formatted: field.format.length > 0
   })), options.render);
-  const renderedOriginals = fields.filter(field => renderers.has(field.name) ||
-    !rows && field.format.length && !control(field.element)).map(field => ({
-    field, element: field.element, children: [...field.element.childNodes],
-    src: field.element.localName === "img" ? field.element.getAttribute("src") : undefined
-  }));
+  const initial = fields.map(field => {
+    const element = field.element;
+    const files = element instanceof HTMLInputElement && element.type === "file" ? [...element.files ?? []] : undefined;
+    const selection = element instanceof HTMLSelectElement
+      ? [...element.options].map(option => ({ option, selected: option.selected })) : undefined;
+    const selected = field.choices ? selection!.filter(item => item.selected).map(item => field.choices!.raw.get(item.option)) : undefined;
+    let value = files ? files[0]?.name ?? "" : fieldValue(field);
+    if (selected) value = field.kind === "multiple" ? selected : selected[0] ?? null;
+    return {
+      field, element,
+      value,
+      children: control(element) ? [] : [...element.childNodes],
+      src: element.localName === "img" ? element.getAttribute("src") : undefined,
+      checked: field.kind === "radio" || field.kind === "checkbox"
+        ? field.elements.map(element => ({ input: element as HTMLInputElement, checked: (element as HTMLInputElement).checked })) : undefined,
+      selection, files
+    };
+  });
+  const renderedOriginals = initial.filter(({ field, element }) => renderers.has(field.name) ||
+    !rows && field.format.length && !control(element));
   const choiceFields = fields.filter(field => field.choices);
   const localRenderedValues = new Map<Field, { raw: unknown; shown: unknown; invalid: boolean }>(rows ? [] :
-    fields.filter(field => renderers.has(field.name) || field.format.length)
-    .map(field => { const raw = fieldValue(field); return [field, { raw, shown: raw, invalid: false }] as const; }));
+    initial.filter(({ field }) => renderers.has(field.name) || field.format.length)
+    .map(({ field, value }) => [field, { raw: value, shown: value, invalid: false }] as const));
   const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
   const releaseSelects: (() => void)[] = [];
   const resetOwners = new Set<HTMLFormElement>();
@@ -241,6 +257,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let resetTimer: ReturnType<typeof setTimeout> | undefined;
   let boundId: RowId | null = null;
   let disposed = false;
+  let automatic = true;
+  let restoring = false;
   let reconciling = false;
   let pointerField: Field | undefined;
   let renderVersion = 0;
@@ -249,6 +267,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const issues = new Map<Field, readonly ValidationIssue[]>();
   const activeValues = new Map<Field, Set<RowId>>();
   const activeBindings = new Set<RowId>();
+  const defaults = createNativeDefaults("bindForm", initial.filter(state => control(state.element)).map(state => ({
+    name: state.field.name, path: state.field.path, value: state.value, element: state.element,
+    ...(!state.field.choices && parsers.has(state.field.name) ? { parse: parsers.get(state.field.name)! } : {})
+  })), active);
   let localRenderStarted = false;
   try {
     for (const field of fields) {
@@ -341,7 +363,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     return element.multiple ? values : values[0] ?? null;
   }
 
-  function renderLocal(preserve?: Field, blurred?: Field, selected?: ReadonlySet<Field>): void {
+  function renderLocal(preserve?: Field, blurred?: Field, selected?: ReadonlySet<Field>): number {
     if (localRendering) throw formError("FORM_RENDER", "A local Form cannot recursively refresh its display.");
     const version = ++renderVersion;
     localRendering = true;
@@ -359,15 +381,18 @@ export function bindForm<T extends object = Record<string, unknown>>(
           renderVersion++;
           return false;
         };
-        if (!current()) return;
+        if (!current()) return version;
         const element = field.element;
         const focused = field !== blurred && control(element) && textLengthControl(element) &&
           !element.readOnly && element === root.ownerDocument.activeElement;
         if (field === preserve || control(element) && (focused || retained.invalid)) continue;
         writeValue(field, raw, values, null, false, current);
-        if (disposed || version !== renderVersion) return;
-        retained.shown = fieldValue(field);
+        if (disposed || version !== renderVersion) return version;
+        const shown = fieldValue(field);
+        if (disposed || version !== renderVersion) return version;
+        retained.shown = shown;
       }
+      return version;
     } finally { localRendering = false; }
   }
 
@@ -382,7 +407,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
   }
 
-  function flushLocalResets(preserve?: Field, repaint = true): void {
+  function flushLocalResets(preserve?: Field, repaint = true): number {
     const completed = new Set<HTMLFormElement>();
     for (const [owner, events] of pendingResets) {
       const dispatching = events.filter(event => event.eventPhase !== Event.NONE);
@@ -394,7 +419,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       clearTimeout(resetTimer);
       resetTimer = undefined;
     }
-    if (!completed.size) return;
+    if (!completed.size) return renderVersion;
     for (const field of fields) {
       if (!field.elements.some(element => {
         const owner = nativeOwner(element);
@@ -408,13 +433,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
       issues.delete(field);
     }
     if (repaint) {
-      renderLocal(preserve);
-      showIssues();
+      const rendered = renderLocal(preserve);
+      showIssues(() => !disposed && rendered === renderVersion);
+      return rendered;
     }
+    return renderVersion;
   }
 
   function onReset(event: Event): void {
-    if (disposed || !event.isTrusted || event.target !== event.currentTarget) return;
+    if (disposed || !automatic || !event.isTrusted || event.target !== event.currentTarget) return;
     const owner = event.currentTarget as HTMLFormElement;
     const pending = pendingResets.get(owner) ?? [];
     pending.push(event);
@@ -521,12 +548,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
     return { byField, parsed };
   }
 
-  function showIssues(): void {
+  function showIssues(current?: () => boolean): void {
     if (disposed) return;
+    const version = renderVersion;
+    const applies = current ?? (() => !disposed && version === renderVersion);
     const messages = new Map<HTMLElement, string[]>();
     for (const field of fields) {
       const fieldIssues = issues.get(field) ?? [];
       for (const original of field.originals) {
+        if (!applies()) return;
         if (fieldIssues.length) original.element.setAttribute("aria-invalid", "true");
         else if (original.invalid === null) original.element.removeAttribute("aria-invalid");
         else original.element.setAttribute("aria-invalid", original.invalid);
@@ -537,7 +567,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
         messages.set(field.error, list);
       }
     }
-    for (const region of regionState.keys()) region.textContent = (messages.get(region) ?? []).join(" ");
+    for (const region of regionState.keys()) {
+      if (!applies()) return;
+      region.textContent = (messages.get(region) ?? []).join(" ");
+    }
   }
 
   function valueError(context: FormValueContext, callback: ValueCallback, message: string, cause?: unknown): FrameworkError {
@@ -756,6 +789,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     try {
       invoke("beforeBind");
       if (!current(version)) return;
+      automatic = true;
       boundId = id;
       issues.clear();
       const rendered = render("bind", false, force, prepared);
@@ -766,7 +800,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (!current(rendered) || boundId !== id) return;
         for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
       }
-      showIssues();
+      showIssues(() => current(rendered) && boundId === id);
+      if (!current(rendered) || boundId !== id) return;
       invoke("onBind");
     } finally {
       if (bindCallbacks && id !== null) activeBindings.delete(id);
@@ -777,12 +812,104 @@ export function bindForm<T extends object = Record<string, unknown>>(
     active();
     if (rows) { bindRow(id, null, true); return; }
     if (id !== null) throw formError("ROW_MISSING", "This Form has no row store.", { id });
-    flushLocalResets();
+    const flushed = flushLocalResets();
     active();
-    renderLocal();
-    if (disposed) return;
+    if (flushed !== renderVersion) return;
+    if (localRendering) throw formError("FORM_RENDER", "A local Form cannot recursively refresh its display.");
+    automatic = true;
+    const rendered = renderLocal();
+    if (disposed || rendered !== renderVersion) return;
     issues.clear();
-    showIssues();
+    showIssues(() => !disposed && rendered === renderVersion);
+  }
+
+  function unbind(): void {
+    active();
+    if (restoring) throw formError("FORM_UNBIND", "A Form cannot recursively restore its captured view.");
+    const entry = renderVersion;
+    const entered = () => !disposed && entry === renderVersion;
+    const files = new Map<Field, FileList>();
+    restoring = true;
+    try {
+      for (const state of initial) if (state.files?.length) {
+        if (!entered()) return;
+        try {
+          const transfer = new (root.ownerDocument.defaultView?.DataTransfer ?? DataTransfer)();
+          if (!entered()) return;
+          for (const file of state.files) {
+            transfer.items.add(file);
+            if (!entered()) return;
+          }
+          const selected = transfer.files;
+          if (selected.length !== state.files.length) throw new TypeError("The native file list is incomplete.");
+          const probe = state.element.cloneNode() as HTMLInputElement;
+          if (!entered()) return;
+          probe.files = selected;
+          if (!entered()) return;
+          files.set(state.field, selected);
+        } catch (cause) {
+          if (!entered()) return;
+          throw new FrameworkError({ api: "bindForm", code: "FORM_UNBIND", message: "The captured files could not be restored.",
+            detail: { field: state.field.name }, cause });
+        }
+      }
+      if (!entered()) return;
+      const version = ++renderVersion;
+      const current = () => !disposed && version === renderVersion;
+      if (boundId !== null) drafts.delete(boundId);
+      boundId = null;
+      automatic = false;
+      pointerField = undefined;
+      issues.clear();
+      pendingResets.clear();
+      if (resetTimer !== undefined) { clearTimeout(resetTimer); resetTimer = undefined; }
+      for (const field of fields) field.projection = undefined;
+      for (const state of initial) {
+        if (!current()) return;
+        const { field, element } = state;
+        const retained = localRenderedValues.get(field);
+        if (retained) { retained.raw = state.value; retained.invalid = false; }
+        if (element instanceof HTMLSelectElement) {
+          const choices = field.choices;
+          if (choices) {
+            choices.raw = new Map(choices.authoredOptions.map((option, index) => [option, choices.authored[index]]));
+            choices.source = undefined;
+            choices.bound = false;
+            element.replaceChildren(...choices.authoredNodes);
+            if (!current()) return;
+          }
+          element.selectedIndex = -1;
+          for (const selected of state.selection!) if (selected.selected && selected.option.closest("select") === element) {
+            if (!current()) return;
+            selected.option.selected = true;
+          }
+        } else if (state.files) {
+          const captured = files.get(field);
+          if (captured) (element as HTMLInputElement).files = captured;
+          else (element as HTMLInputElement).value = "";
+        } else if (state.checked) {
+          for (const selected of state.checked) {
+            if (!current()) return;
+            selected.input.checked = selected.checked;
+          }
+        } else if (control(element)) display(element, state.value);
+        else if (state.src !== undefined) {
+          if (state.src === null) element.removeAttribute("src");
+          else element.setAttribute("src", state.src);
+        } else element.replaceChildren(...state.children);
+        if (!current()) return;
+        if (retained) {
+          const shown = fieldValue(field);
+          if (!current()) return;
+          retained.shown = shown;
+        }
+        if (rows) for (const member of field.elements) {
+          if (!current()) return;
+          member.setAttribute("data-field-changed", "false");
+        }
+      }
+      if (current()) showIssues(current);
+    } finally { restoring = false; }
   }
 
   function reconcile(id: RowId, validate = true): void {
@@ -839,11 +966,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (failed) throw failure;
   }
   function onInput(event: Event): void {
-    if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
+    if (disposed || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
     const field = byElement.get(event.target);
     if (!field || !control(field.element)) return;
-    if (!rows) flushLocalResets(field);
-    if (disposed) return;
+    const flushed = rows ? renderVersion : flushLocalResets(field);
+    if (disposed || !automatic || flushed !== renderVersion) return;
     if (disabled(event.target, root) ||
         (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
     if (rows) {
@@ -871,19 +998,21 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (value) value.invalid = found.length > 0;
       }
     }
-    showIssues();
+    showIssues(() => !disposed && version === renderVersion);
+    if (disposed || version !== renderVersion) return;
     if (localRenderedValues.size) renderLocal();
   }
 
   function onPointerDown(event: PointerEvent): void {
+    if (!automatic) return;
     pointerField = event.target instanceof HTMLElement ? byElement.get(event.target) : undefined;
   }
   function onPointerEnd(): void { pointerField = undefined; }
 
   function onFocusIn(event: FocusEvent): void {
-    if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
-    if (!rows) flushLocalResets();
-    if (disposed) return;
+    if (disposed || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+    const flushed = rows ? renderVersion : flushLocalResets();
+    if (disposed || !automatic || flushed !== renderVersion) return;
     const field = byElement.get(event.target);
     const pointed = field !== undefined && pointerField === field;
     pointerField = undefined;
@@ -914,9 +1043,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function onFocusOut(event: FocusEvent): void {
-    if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
-    if (!rows) flushLocalResets();
-    if (disposed) return;
+    if (disposed || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+    const flushed = rows ? renderVersion : flushLocalResets();
+    if (disposed || !automatic || flushed !== renderVersion) return;
     const field = byElement.get(event.target);
     if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
         field.kind !== "single" || !formatCapable(field.element) ||
@@ -969,6 +1098,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   return {
     bind,
+    defaults,
+    unbind,
     refresh(names) {
       active();
       if (names === undefined) { bind(boundId); return; }
@@ -981,7 +1112,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
         requested.add(name);
       }
       const selected = new Set(fields.filter(field => requested.has(field.name)));
-      if (!rows) { flushLocalResets(); active(); }
+      if (!rows) {
+        const flushed = flushLocalResets();
+        active();
+        if (flushed !== renderVersion) return;
+      }
       if (!selected.size) return;
       if (!rows) { renderLocal(undefined, undefined, selected); return; }
       const source = boundId === null ? null : rowValue(boundId);
@@ -1003,9 +1138,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     validate(id) {
       active();
       if (!rows) {
-        flushLocalResets();
+        const version = flushLocalResets();
         active();
-        const version = renderVersion;
         const entered = new Map(fields.map(field => [field, localFieldValue(field)] as const));
         const checked = evaluate(null, localValues(), entered);
         const found = [...checked.byField.values()].flat();
@@ -1085,6 +1219,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
         choices.authoredOptions.forEach((option, index) => { option.selected = choices.selection[index]; });
         choices.raw.clear();
       }
+      for (const state of initial) if (state.files) state.files.length = 0;
+      initial.length = 0;
+      renderedOriginals.length = 0;
       localRenderedValues.clear();
       drafts.clear();
       issues.clear();

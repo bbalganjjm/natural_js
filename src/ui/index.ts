@@ -99,6 +99,8 @@ export interface PaginationHandle {
 export interface FormHandle<T extends object> {
   bind(id: RowId | null): void;
   refresh(fields?: readonly string[]): void;
+  defaults(): Record<string, unknown>;
+  unbind(): void;
   read(): Record<string, unknown>;
   validate(id?: RowId): ValidationResult;
   dispose(): void;
