@@ -4,8 +4,12 @@ title: bindForm
 description: Bind authored Form fields to local raw input or Rows with formatting, typed choices, validation and accessible errors.
 tags: [ui, form, binding, accessibility]
 status: draft
-symbols: [bindForm]
+symbols: [bindForm, FormOptions]
 sources:
+  - id: presets-browser
+    resource: ../../tests/browser/form-presets.spec.ts
+    title: Explicit preset precedence and application callback composition regressions
+    git_blob: d667e0f2ac2493d12e16d9b776aa6cca5d999ac4
   - id: discovery-browser
     resource: ../../tests/browser/form-discovery.spec.ts
     title: Explicit field adoption, retirement, ownership and recovery regressions
@@ -41,11 +45,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
+    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
+    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -78,10 +82,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -113,9 +117,69 @@ rows.dispose();
 
 The built-in `required`, `email`, and `commas` rules need no import or registration. `parse` is application code when an entered string must become a number or another raw JSON value. A Form without `rows` reads local controls, such as a search form.[^rules][^form]
 
+# Shared options and callback composition
+
+Import FormOptions<T> from the UI entry to type an application-owned preset. Pass each screen's Rows in its instance call; object spread copies option properties, not the store, functions, DOM or referenced rule arguments. The employee controller reuses its company-email rule and salary parser this way.[^entry][^presets-browser]
+
+```ts
+import { bindForm, type FormOptions } from "@bbalganjjm/natural_js/ui";
+
+type Employee = { name: string; salary: number };
+const shared: FormOptions<Employee> = {
+  autoValidate: false,
+  parse: { salary: text => Number(text.replaceAll(",", "")) }
+};
+// root and rows belong to this screen.
+const detail = bindForm(root, { ...shared, rows, autoValidate: true });
+```
+
+Later own properties win, including undefined. Omit a property to inherit it; own undefined removes an inherited callback or selects the ordinary framework default. For example, autoValidate: undefined restores true, while false overrides true. Null is not a typed substitute: null callbacks retain FORM_BIND/FORM_VALUE_OPTIONS errors and null autoValidate retains FORM_VALIDATE. Callbacks and catalogs are captured when constructing the Form; changing the preset later does not reconfigure a live instance.[^form][^presets-browser]
+
+Object spread is shallow. Merge parse/render maps, RuleSet format/validate/messages/fields maps, and each affected FieldRules entry explicitly when both declarations must survive. Ordered format/validate tuple lists replace; [] clears that kind. Shared argument objects remain application-owned, so avoid mutating them during a callback. Given shared and local presets typed FormOptions<Employee>, this example combines their maps, merges salary's entry and clears its formatting. Merge other overlapping field entries explicitly too:[^rules][^presets-browser]
+
+```ts
+const options: FormOptions<Employee> = {
+  ...shared,
+  ...local,
+  parse: { ...shared.parse, ...local.parse },
+  render: { ...shared.render, ...local.render },
+  rules: {
+    ...shared.rules, ...local.rules,
+    format: { ...shared.rules?.format, ...local.rules?.format },
+    validate: { ...shared.rules?.validate, ...local.rules?.validate },
+    messages: { ...shared.rules?.messages, ...local.rules?.messages },
+    fields: {
+      ...shared.rules?.fields, ...local.rules?.fields,
+      salary: { ...shared.rules?.fields?.salary, ...local.rules?.fields?.salary, format: [] }
+    }
+  }
+};
+```
+
+When two callbacks must run, capture their function references and write their order in the application. This value pipeline preserves local output if shared returns undefined; all-undefined stays undefined, which matters for an unavailable choice. False, null, zero and empty text remain values. The small thenable check belongs to this example, not the framework API.[^form][^presets-browser]
+
+```js
+const thenable = value => value !== null &&
+  (typeof value === "object" || typeof value === "function") && typeof value.then === "function";
+const localValue = local.beforeBindValue;
+const sharedValue = shared.beforeBindValue;
+const beforeBindValue = (value, context) => {
+  const first = localValue(value, context);
+  if (thenable(first)) return first;
+  const last = sharedValue(first === undefined ? value : first, context);
+  return last === undefined ? first : last;
+};
+```
+
+This recipe assumes both captured callbacks exist. Call references as plain functions, with the same frozen context and bind/val phase; do not use an options object as their receiver. Forward intermediate thenables immediately to Form's existing synchronous-result handling. Current value thenables fail and drain rejection; stale/disposed value work may suppress that failure. Whole-callback thenables still fail. Do not swallow a Promise or continue the application tail after receiving it.[^form][^presets-browser]
+
+A whole observer can return immediately when its local result is exact false, otherwise call the shared observer. That false only skips the application's shared tail; it does not veto Form binding. The same immediate thenable forwarding applies. For a legacy after-value observer that needs original-input notification, call local(value, context), skip shared on exact false/thenable, then call shared(value, context); explicitly return the intended replacement. This is a separate recipe from the value pipeline.[^form][^presets-browser]
+
+The combined function is one Form callback. Form checks its final return, current source/generation and disposal after the function returns. It cannot cancel arbitrary application subcalls: a shared tail may run after local code rebinds or disposes the Form, and a temporary invalid intermediate can be converted to a valid final value. Existing guards prevent stale framework projection after that return. No callback-layer engine, implicit global registry or deep merge is added.[^form][^presets-browser]
+
 # Constructor and markers
 
-`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: FormValueContext) => unknown`, `onBindValue?: (value: unknown, context: FormValueContext) => unknown`, `beforeBind?: (context: FormBindContext<T>) => unknown` and `onBind?: (context: FormBindContext<T>) => unknown`. Both callback pairs require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
+`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?: FormOptions<T>): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: FormValueContext) => unknown`, `onBindValue?: (value: unknown, context: FormValueContext) => unknown`, `beforeBind?: (context: FormBindContext<T>) => unknown` and `onBind?: (context: FormBindContext<T>) => unknown`. Both callback pairs require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
 
 The [shared rule contract](rules.md) defines RuleSet.fields, per-kind TS/HTML precedence, empty-list overrides and shared/local composition. autoValidate defaults to true; false bypasses automatic native/business constraints while retaining parse/JSON/native-value integrity and disabled/readOnly edit guards. It clears stale row constraint results at automatic evaluation. Explicit validate() still performs full precommit checks. This is independent of native value conversion and the application-owned scalar choice parser.[^form][^rules]
 
@@ -152,7 +216,7 @@ A parser may convert a scalar radio or unmarked single Select string. Marked row
 
 ## Row-local typed choices
 
-A Rows-backed Form recognizes a native Select with data-field, data-options, data-option-label and data-option-value. The selected value and option source may use different nested paths. All three option paths compile through the existing safe path owner. Marked local Forms, unsupported elements, missing markers and string parsers on marked choices fail before ownership or ARIA changes. An effective formatter still requires a text-like field. No public option, type or method is added.[^form][^options]
+A Rows-backed Form recognizes a native Select with data-field, data-options, data-option-label and data-option-value. The selected value and option source may use different nested paths. All three option paths compile through the existing safe path owner. Marked local Forms, unsupported elements, missing markers and string parsers on marked choices fail before ownership or ARIA changes. An effective formatter still requires a text-like field. Marked choices use the existing constructor options.[^form][^options]
 
 ```html
 <label>Shift
@@ -327,7 +391,7 @@ A formatted local static target cannot be editable, an error region, or contain 
 
 Initial binding, input, blur and local bind(null) use the same format/native/render owners. Editable focused text shows raw and preserves its caret. Readonly text stays formatted. An entered value found invalid stays raw. A changed native raw value invalidates that retained result; later validation establishes its new status. This state is separate from visible error cleanup. Programmatic writes are collected by read/validate/refresh; dispatch input to refresh dependent display. A formatted text control's native constraints use a raw-filled probe, including custom validity and effective disabled state. File inputs keep native validation and are never assigned a filename by this mechanism.[^form][^native][^local-browser]
 
-Native form.reset() and reset buttons restore current native defaults. Local Form observes the effective form owners captured at binding for its valid controls and static fields, including an ancestor or form= owner outside the root. Dispose the handle and call bindForm again after changing native ownership. Existing radio owner/name restrictions still apply. A canceled reset changes no retained raw, generated display or owned errors. Untrusted synthetic reset notifications do not run framework reset cleanup; native default behavior may differ by browser. Call the native method or activate a reset button for the reset contract.[^form][^local-browser]
+Native form.reset() and reset buttons restore current native defaults. Local Form observes the effective form owners captured at binding for its valid controls and static fields, including an ancestor or form= owner outside the root. After moving compatible controls within the supported binding root, call rescan() to reconcile native reset ownership once observed reset cleanup has settled. Existing radio owner/name restrictions still apply. A canceled reset changes no retained raw, generated display or owned errors. Untrusted synthetic reset notifications do not run framework reset cleanup; native default behavior may differ by browser. Call the native method or activate a reset button for the reset contract.[^form][^local-browser]
 
 Framework cleanup runs in a queued task after the native default action. Public local read/validate, subsequent input/focus or bind(null) flush completed pending resets synchronously. An in-dispatch read still sees pre-reset raw. Immediate validation or later input therefore survives an older queued cleanup. Coalesced resets are applied once per affected owner; another owner's raw, focus and errors remain. Reset refreshes formatted controls from native DOM, retains static/renderer raw and refreshes dependent display. User-owned native custom validity follows browser behavior.[^form][^local-browser]
 
@@ -407,4 +471,5 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [^binding-browser]: Whole-row lifecycle and same-row selected refresh regressions
 [^defaults]: Private native creation record and synchronous parser builder
 [^defaults-browser]: Captured defaults, unbind, native files and inactive ownership regressions
+[^presets-browser]: Explicit preset precedence and application callback composition regressions
 [^discovery-browser]: Explicit field adoption, retirement, ownership and recovery regressions

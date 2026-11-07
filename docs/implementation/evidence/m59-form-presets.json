@@ -1,0 +1,1054 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.9 typed Form presets and callback composition",
+  "recorded_at": "2026-11-07",
+  "workspace_baseline_commit": "3f5e3adaa60554633d62c43d7df826efff239be5",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m58-verification.json",
+      "sha256": "8f42888a39a6dc4d1e036f1b18e325b8d15b99cf6ce73aebd5a5e74cda4ae583",
+      "preserved_in_commit": "3f5e3adaa60554633d62c43d7df826efff239be5"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m58-form-discovery.json",
+      "sha256": "0069c9a72d8ba48a3ea6e38fd49d6515b783d7acdc102ffe8ca8b7adda86dbcd"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    },
+    "resolver": "Inherit every original surface/dynamic/full-owner obligation through immutable M5.8 receipt/ledger and the original audit. Typed explicit preset/callback acceptance does not replace parent evidence, rerun historical runtime or recertify its scope. M5.9 starts clean; M5.8 failures/timing/attempt facts remain only in their dated parents unless new actual M5.9 work is recorded."
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "3f5e3adaa60554633d62c43d7df826efff239be5",
+    "scope": "Independent baseline audit observed a clean pushed M5.8 worktree before authorized M5.9 edits; no prior-stage dirty-state/failure provenance is attributed here."
+  },
+  "public_delta": {
+    "new_public_named_types": [
+      "FormOptions<T extends object = Record<string, unknown>>"
+    ],
+    "new_public_options": [],
+    "new_public_methods": 0,
+    "new_framework_runtime_functions": 0,
+    "new_public_entries": 0,
+    "new_private_framework_modules": 0,
+    "new_runtime_dependencies": 0,
+    "note": "One named options contract preserves the exact existing anonymous shape. Independent read-only comparison verified both fresh emitted JavaScript files against actual M5.8 tar members; no new framework runtime function/method/option/module/entry/dependency."
+  },
+  "selected_contracts": {
+    "typed_existing_options": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Export FormOptions<T extends object = Record<string, unknown>> as the exact existing anonymous constructor shape and use it in bindForm. Preserve runtime defaults/checks/callback signatures; remove only newly unused type imports.",
+      "source_refs": [
+        "src/ui/index.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "I02",
+        "P01",
+        "B01",
+        "B16"
+      ],
+      "remaining": "Actual M5.8 archive/fresh emitted JavaScript equality is independently verified. Final source/package gates, independent raw evidence and final documents remain required; no new runtime API or callback engine."
+    },
+    "explicit_option_precedence": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Use ordinary object spreads: later own values including undefined shadow prior values, omission inherits, explicit false overrides booleans, and own undefined can disable copied callbacks/use an ordinary default. Keep callback-null and autoValidate-null specific existing errors and typed exclusion; do not emulate jQuery undefined merging.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "examples/vite/m4/employees.ts"
+      ],
+      "witnesses": [
+        "B02",
+        "B03",
+        "I01",
+        "I03"
+      ],
+      "remaining": "No runtime global registry, implicit merge policy or new validation. Wider global/live configuration and wrapper parity remain required."
+    },
+    "explicit_nested_configuration": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Merge parse/render/format/validate/messages maps explicitly. Merge fields by map and individual FieldRules kind; tuple lists replace in order and [] clears a kind. Preserve shared settings/arguments and keep Rows/functions/DOM ownership explicit without cloning/global mutation.",
+      "source_refs": [
+        "src/ui/rules.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "B01",
+        "B04",
+        "B05"
+      ],
+      "remaining": "Mutable/hot catalogs, embedded Grid/List inheritance and all broader configuration/source equivalence remain required."
+    },
+    "application_callback_recipes": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Capture local/shared functions and plain-call the same context/phase. A value recipe forwards intermediate thenables to existing Form handling, sends effective local-or-input to shared, preserves local replacement on shared undefined and preserves all-undefined as undefined. False/null/zero/empty string remain values. Whole exact-false can skip shared without veto; legacy after-value original-input/false-tail is a separate explicit recipe.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/index.ts",
+        "v1/src/natural.ui.js"
+      ],
+      "witnesses": [
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11"
+      ],
+      "remaining": "Recipes are ordinary application functions, not framework-managed layers. Temporary intermediate values are not individually validated; global-wrapper/source equivalence stays open."
+    },
+    "callback_unit_lifetime_and_failure": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Treat each composed function as one existing callback unit. Native/current/source/disposal checks run after its outer return; app subcall tails are not automatically canceled. Preserve normal and stale/disposed value thenable handling/draining, whole thenable handling, thrown errors and final raw/display/source separation.",
+      "source_refs": [
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B16"
+      ],
+      "remaining": "No per-layer lifetime/validation promise or generic composition engine is inferred. Existing defaults/unbind/rescan, choice checks and Rows originals remain under their current owners."
+    },
+    "real_cvc_and_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Use one typed module-level employee preset for the existing company-email rule/salary parser across independent CVC instances, final instance Rows and meaningful local onBind selected-label behavior with explicit null cleanup. Add exact-package JS/TS/browser witnesses plus native-owner rescan documentation correction.",
+      "source_refs": [
+        "examples/vite/m4/employees.ts",
+        "tests/consumers/browser/main.js",
+        "tests/consumers/ts/check.ts",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "E01",
+        "I01",
+        "I02",
+        "I03",
+        "C01",
+        "B01",
+        "B16"
+      ],
+      "remaining": "No full-family/P0/M13 closure, approved omission, publication/tag, actual Safari/manual/personal or model/token result."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "The public UI entry names the existing Form options shape",
+      "marker": "export interface FormOptions"
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "bindForm uses the named options type while keeping existing runtime ownership",
+      "marker": "export function bindForm"
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "frozen typed presets can be reused without mutation or shared Rows and retain application argument references"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "plain spreads distinguish omitted inheritance own undefined reset and explicit false"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "null callback overrides retain specific constructor errors before root Select or ARIA ownership"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "explicit nested map composition preserves both catalogs parsers renderers messages and field kinds"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "tuple overrides replace ordered lists and empty lists clear authored kinds without an implicit deep merge"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "captured application callbacks run as plain functions with the same frozen context and bind or val phase"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "value pipelines preserve local output and all undefined keeps unavailable loaded choices unprojected"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "false null zero and empty string remain pipeline data and false does not automatically skip shared value work"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "a conditional whole observer tail can skip shared work on false without vetoing the binding"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "the explicit legacy after recipe passes original input and can skip only its shared tail on false"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "intermediate promises and thenables are forwarded immediately for current callback rejection draining and retry"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "local and shared application throws retain existing callback errors and release guards for a fresh bind"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "temporary application values can be converted before Form checks the single callback unit result"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "a nested newer bind does not cancel an application shared tail but suppresses the older framework write"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "disposal leaves application scalar tails running while stale promise forwarding is drained without replacing a new owner"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "typed configuration stays separate from native defaults captured adoption values and received Rows originals"
+    },
+    "E01": {
+      "kind": "example-source",
+      "file": "examples/vite/m4/employees.ts",
+      "title": "A typed module preset supplies existing email and salary behavior while instance options own Rows and selected-label callbacks",
+      "marker": "const sharedFormOptions: FormOptions<Employee>"
+    },
+    "I01": {
+      "kind": "installed-source",
+      "file": "tests/consumers/browser/main.js",
+      "title": "The installed browser fixture uses frozen explicit presets with independent Rows and local override semantics",
+      "marker": "state.formPresets ="
+    },
+    "I02": {
+      "kind": "installed-source",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "The exact installed public entry supports directly typed FormOptions<Employee> presets",
+      "marker": "export function connectPresetForm"
+    },
+    "I03": {
+      "kind": "installed-source",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Five installed browsers assert actual preset contexts, precedence, raw/source separation and independent data",
+      "marker": "Installed explicit Form presets must preserve spread precedence"
+    },
+    "P01": {
+      "kind": "artifact-proof",
+      "file": "docs/implementation/evidence/m59-runtime-js.json",
+      "title": "Fresh emitted Form and UI entry JavaScript exactly match actual M5.8 archive members",
+      "marker": "Raw bytes of the actual M5.8 archive members"
+    },
+    "C01": {
+      "kind": "inherited-browser-source",
+      "file": "tests/browser/m4-screen.spec.ts",
+      "title": "Existing two-layout employee witnesses retain selected-label, salary parsing and independent-page checks",
+      "marker": "keeps two pages ID-clean and independent"
+    }
+  },
+  "witness_counts": {
+    "status": "actual_current_canonical_counts_independent_raw_and_documents_pending",
+    "unit_delta": 0,
+    "browser_delta": 16,
+    "source_witnesses": 2,
+    "example_source_witnesses": 1,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 750,
+    "expected_full_cases_per_engine": 766,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 766,
+    "artifact_proof_witnesses": 1,
+    "inherited_browser_source_witnesses": 1
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m59-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m59-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact actual tar in isolated JS/TS and Chromium/Firefox/WebKit/actual Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Exact options-shape/type-only runtime preservation and actual M5.8 tar/new emitted JS comparison",
+      "Meaningful preset/precedence/nested-map/callback-unit failure/reentry regressions, strict source/build/example types and units",
+      "Full unfiltered three-engine suites and exact once-only Chromium identities with no retries/skips",
+      "Original nine binding/twenty-one viewport budgets and four protected fixtures",
+      "Independent source/caller/raw/final semantic reviews, changed/full OKF and historical body/date checks"
+    ],
+    "baseline_input_entries": 187,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 750,
+    "inventory_expectation": {
+      "status": "actual_final_frozen_counts",
+      "actual_source_inputs": 188,
+      "actual_package_files": 188,
+      "actual_unit_pass_count": 138,
+      "scope": "Current captured final canonical map and actual package descriptor/listing; one browser test input and no framework modules were added."
+    },
+    "framework_runtime_js_equality": {
+      "status": "passed_actual_M58_archive_to_fresh_M59_emitted_JS_independently_verified",
+      "proof": {
+        "path": "docs/implementation/evidence/m59-runtime-js.json",
+        "sha256": "c0a716c17f13a2eaa1f1365aa90e4c9b2afa431423cb4b221efa054bbf7030a5"
+      },
+      "baseline_tar_sha256": "26a12e65d281e84aeb8b119590b1e95a71c2c81714098ca1980262ee2829dead",
+      "files": [
+        {
+          "path": "build/ui/form.js",
+          "baseline_member": "package/build/ui/form.js",
+          "baseline_sha256": "c1df4520aa71f19492db24d3eadf5cfbefae6cd702993d351e684f0b0e503695",
+          "current_sha256": "c1df4520aa71f19492db24d3eadf5cfbefae6cd702993d351e684f0b0e503695",
+          "bytes": 80430,
+          "equal": true
+        },
+        {
+          "path": "build/ui/index.js",
+          "baseline_member": "package/build/ui/index.js",
+          "baseline_sha256": "4c60bdda2c8929ce7ba4eaef20553e4bb577cf83f057b20770238691c1982ffb",
+          "current_sha256": "4c60bdda2c8929ce7ba4eaef20553e4bb577cf83f057b20770238691c1982ffb",
+          "bytes": 495,
+          "equal": true
+        }
+      ],
+      "scope": "Actual baseline archive SHA and raw members checked against fresh emitted bytes, sizes and captured proof. Declaration changes are intentional; no project/compiler/browser command was rerun by the independent reviewer."
+    },
+    "semantic_document_scope": [
+      "docs/implementation/current.md",
+      "docs/implementation/feature-parity.md",
+      "docs/implementation/m5-form-presets-plan.md",
+      "docs/v2/form.md",
+      "docs/v2/ui.md",
+      "docs/v2/migration.md",
+      "docs/v2/employee-example.md"
+    ],
+    "semantic_document_scope_status": "planned7_pending_final_semantic_bodies",
+    "setup_observations": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on the six named owned ignored M59 helpers; one retained invocation per helper in this observation",
+        "checked_helpers": [
+          {
+            "path": "node_modules/.cache/m59-evidence.mjs",
+            "sha256": "b8921e07bd79beb201b09bf572c173a5699baa71cfbd5f279e734c7eae3bd31b"
+          },
+          {
+            "path": "node_modules/.cache/m59-git-audit.mjs",
+            "sha256": "4d075c5f5a9199bc723756b4caac6ad9734c5547d17b3372bf9cdeae0009271e"
+          },
+          {
+            "path": "node_modules/.cache/m59-doc-history.mjs",
+            "sha256": "f809b93431218aec295389876e95ef4482871cee4f0466d6057dfcf484fb8eaa"
+          },
+          {
+            "path": "node_modules/.cache/m59-runtime-invariance.mjs",
+            "sha256": "0d481f0a4f3da0ae6fb39195eae456a2d008297202237b866dc124f6e43ddba4"
+          },
+          {
+            "path": "node_modules/.cache/m59-complete.mjs",
+            "sha256": "757183c8145fd4b98488fbc4ec10a67cd84fc1a06701c103518e4f2df88051f6"
+          },
+          {
+            "path": "node_modules/.cache/m59-final-doc-check.mjs",
+            "sha256": "2b8e42d6b9b98853166c217ca930d26acce496a4fdc1d06ee0f2a471d64c8078"
+          }
+        ],
+        "log": {
+          "path": "node_modules/.cache/m59-helper-syntax.log",
+          "sha256": "39e9af798331c709cbccf5163de73332b894beb6552ba10d69902da5dd53d68b"
+        },
+        "limits": "Non-gate setup only. This observation does not count every tool/preparation command or infer runtime execution of these receipt/finalizer helpers."
+      }
+    ],
+    "operator_dispositions": [],
+    "diagnostic_dispositions": [],
+    "superseded_artifacts": [],
+    "independent_reviews": {
+      "baseline": "passed_read_only_3f5e3ad_M58_source_raw_archive_preservation_recovery",
+      "contract": "bounded_contract_independently_approved_before_source_GO",
+      "source": "passed_independent_connected_source_callers_16_fixed_witnesses_and_three_focused87_captures",
+      "evidence": "passed_independent_raw_receipt_records_maps_full_identity_unions_actual_archives_runtime_equality_installed_performance_and_protections",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_recovery",
+        "helper": {
+          "path": "node_modules/.cache/m59-baseline-audit.mjs",
+          "sha256": "a7b1240b5360c09211af7aae75b9b554f723a987cd9c7ced93d72e7a08b5e164"
+        },
+        "log": {
+          "path": "node_modules/.cache/m59-baseline-audit.log",
+          "sha256": "5e15435bf75e0307d8173847d886bb029fe49acf992d656de4f32f31a20f91f7"
+        },
+        "head": "3f5e3adaa60554633d62c43d7df826efff239be5",
+        "source_inputs": 187,
+        "raw_evidence_files": 103,
+        "records": 41,
+        "source_map_entry_counts": [
+          187,
+          187,
+          187,
+          187,
+          187,
+          187
+        ],
+        "immutable_parents": 6,
+        "canonical_groups": 16,
+        "execution_commands": 27,
+        "collection_commands": 13,
+        "chromium_raw_children": 50,
+        "units": 138,
+        "full_cases_each_engine": 750,
+        "actual_artifact": {
+          "path": "node_modules/.cache/m58-artifact/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "sha256": "26a12e65d281e84aeb8b119590b1e95a71c2c81714098ca1980262ee2829dead",
+          "files": 188,
+          "packed_bytes": 332616,
+          "unpacked_bytes": 1673919,
+          "all_current_payloads_match": true
+        },
+        "installed_js_ts": true,
+        "installed_windows_browsers": 5,
+        "v1_original_lock_master": "preserved",
+        "scope": "Read-only baseline/retained M5.8 scope only; no historical runtime rerun or new M5.9 acceptance."
+      },
+      "contract": {
+        "status": "bounded_approved_before_production_GO",
+        "review_log": {
+          "path": "node_modules/.cache/m59-contract-review.log",
+          "sha256": "5a705dcfe499413a37e1d5802f1ac6451bf511b50a1fe57e046f2e6aed64c21b"
+        },
+        "plan_snapshot": {
+          "path": "docs/implementation/m5-form-presets-plan.md",
+          "normalized_whole_file_sha256": "f165d2bb99341b337e8804964b9ee490e946bf0e448b6441ef7fd1a920aaa5b7",
+          "normalized_body_sha256": "0345fe91d0c286a439ed0b4653f0816f285461cc1245bac83d9cc7a3317b5ddb",
+          "scope": "Contract snapshot recorded immediately after independent pre-source approval. Later status/fingerprint/verified updates are not represented as this whole-file hash; this is not final source/runtime/document acceptance."
+        },
+        "resolved_precision": [
+          "Null wording names actual callback/autoValidate errors without introducing blanket validation.",
+          "Value thenable forwarding preserves existing stale/disposed suppression and draining; application functions remain one callback unit."
+        ],
+        "scope": "Contract approval only; actual source/callers/tests/runtime/raw and final document review remain pending."
+      },
+      "source": {
+        "status": "passed_selected_source_and_focused_scope_final_raw_and_documents_pending",
+        "helper": {
+          "path": "node_modules/.cache/m59-source-review.mjs",
+          "sha256": "290206106ceb57e8b8fa23088f3492393c3e16ffd5ac89965cb5a063447a1401"
+        },
+        "log": {
+          "path": "node_modules/.cache/m59-source-review.log",
+          "sha256": "0210b149be356c6f2ada94a47d869211c3ec03e05d8a547e71aa3a0026ff9379"
+        },
+        "review_time_scope": "Normalized source/test/caller hashes below describe this frozen reviewed188 map. They are not claims about later documentation stamps or a final receipt self-hash.",
+        "reviewed_files": [
+          {
+            "path": "src/ui/form.ts",
+            "normalized_sha256": "8b0427e78b33b8d3cbde9baabe15a34321ef2c5cd7ff605fd28449a208ec6a7e"
+          },
+          {
+            "path": "src/ui/index.ts",
+            "normalized_sha256": "84611fa1a03618c4f6796c7a99646db780a64618f0fb12162dcc1671b86fcc2d"
+          },
+          {
+            "path": "examples/vite/m4/employees.ts",
+            "normalized_sha256": "a7f29df55e88dd5a649438cffb6bef4210083bc68cb201802c3b4cb2af546982"
+          },
+          {
+            "path": "tests/browser/form-presets.spec.ts",
+            "normalized_sha256": "1b8cee670905985939e21b8d5e42bc156682572de7c7ca31a22d8b8398a646a2"
+          },
+          {
+            "path": "tests/consumers/browser/main.js",
+            "normalized_sha256": "78b730d82e40323e5ed7b86c72baac943aa206af2d3bc9b61f439acaafd827a1"
+          },
+          {
+            "path": "tests/consumers/ts/check.ts",
+            "normalized_sha256": "b2af744824a01d508aef1c9fcce5b70ee8147290a7174ac68b388b3956a7c23d"
+          },
+          {
+            "path": "tools/check-packed-browser.mjs",
+            "normalized_sha256": "c5c5406df097eed7de8cb49cb96904f33e63ea3fa39c4fd0f83d5923d71bed3c"
+          }
+        ],
+        "input_manifest": "m59-inputs-2e7617a4fc79.json",
+        "input_manifest_sha256": "2e7617a4fc7976a43909011cadb1c14aa022bec98adb7597003fe0c3c460d831",
+        "focused": [
+          {
+            "label": "focused-chromium",
+            "log": "m59-focused-chromium.log",
+            "log_sha256": "dff4e772710459e3ccf76d2cfe59dcb793e89daafcd30c05d8c10b46594d64dd",
+            "passed": 87,
+            "source_unchanged": true
+          },
+          {
+            "label": "focused-firefox",
+            "log": "m59-focused-firefox.log",
+            "log_sha256": "5977f95682f9269aa3330d55ed771deaea9dc197409aa6d01732d3c4fb3a1691",
+            "passed": 87,
+            "source_unchanged": true
+          },
+          {
+            "label": "focused-webkit",
+            "log": "m59-focused-webkit.log",
+            "log_sha256": "99c354e9e679b55905c9978b6d7d13b2038faffbfe24e88fb8b74632204729e9",
+            "passed": 87,
+            "source_unchanged": true
+          }
+        ],
+        "conclusions": [
+          "Exact existing nine-property options shape and generic default; type-only imports/signature preserve the complete Form executable body and both emitted JavaScript members.",
+          "The module preset retains existing email/salary behavior; per-instance Rows and selected-label onBind/null cleanup retain their existing owners.",
+          "Explicit maps/tuple replacement and plain-call recipes preserve undefined/false data semantics, same context/phase, current thenable errors/draining, original-input legacy-after recipe and outer callback-unit lifetime boundaries.",
+          "Sixteen fixed tests plus installed JS/TS/browser assertions cover selected scope without a framework merge/composition engine."
+        ],
+        "limits": "Source/caller and focused-witness acceptance only. Final sixteen canonical gates, independent raw evidence and final semantic/mechanical document approval remain pending; full-owner/P0/M13 obligations remain open."
+      },
+      "initial_documents_check": {
+        "status": "actual_initial_draft_check_final_checks_pending",
+        "log": {
+          "path": "node_modules/.cache/m59-docs-initial.log",
+          "sha256": "1cb573cf4b2074b10860991b26c225ce5b675951334d07e4935cc44c0f785f42"
+        },
+        "concepts": 76,
+        "reserved_files": 5,
+        "errors": 0,
+        "warnings": 60,
+        "drift": 50,
+        "unstamped": 10,
+        "scope": "Root captured this initial draft check before final receipt-generated bodies/verified stamps. The independent reviewer reads retained output only; zero-warning final completion is not claimed."
+      },
+      "preliminary_documents": {
+        "status": "preliminary_API_contract_read_no_blocker_final_generated_bodies_pending",
+        "reviewed_files": [
+          {
+            "path": "docs/implementation/current.md",
+            "normalized_whole_file_sha256": "6e7982e2baaacfc7622f0a984b6ef88d81aa99d275055b4b7e0ff90bab62d74d",
+            "normalized_body_sha256": "0eb4e8a8b31766b518204093b0070cf8cb0a91e581d3dd23019e4672ba146604"
+          },
+          {
+            "path": "docs/implementation/feature-parity.md",
+            "normalized_whole_file_sha256": "eb05b7c62dd0f748e8a6462c7b81b487b7e9fe501eda3b1f865b9478dac9e89f",
+            "normalized_body_sha256": "90dfe6c90949dde53fbcdfb1a084029844115475187cd408ed7eb77b48b6cbc5"
+          },
+          {
+            "path": "docs/implementation/m5-form-presets-plan.md",
+            "normalized_whole_file_sha256": "1b4e41b334887e35ae41fe2bed80dcb5ee78a0049097130d2cbe830a168e472a",
+            "normalized_body_sha256": "07a8d86fb1fd99ac0bf9588df725622db4a56255f5ff5734d332ea11f31ec957"
+          },
+          {
+            "path": "docs/v2/form.md",
+            "normalized_whole_file_sha256": "031215d8be1b865dd72a537973309773c6c2d50edbeebc1305dd78e1f79c239c",
+            "normalized_body_sha256": "0da9871a0f52bef7fe06c6b516a8f47cc5e7598b866ad18ce0fb505fc0aa5e37"
+          },
+          {
+            "path": "docs/v2/ui.md",
+            "normalized_whole_file_sha256": "368cc654e9b751b84c1de9c902338a8e0c453c061b9d851e242078a9354e34f2",
+            "normalized_body_sha256": "9bb00f52c4a8b8d5a9a47ba9582e53bc67cfe9d74ef58b79d90a733d907d4d21"
+          },
+          {
+            "path": "docs/v2/migration.md",
+            "normalized_whole_file_sha256": "cd4bdeac25cf4c3f509bb3a9de3758a9e3d0d6536dc458d012cd3769c2604ae4",
+            "normalized_body_sha256": "558ecb68a6b81b4f8a0bfebd5a48293d5f4163d096408e58162d5208ecc2f979"
+          },
+          {
+            "path": "docs/v2/employee-example.md",
+            "normalized_whole_file_sha256": "d36950f7a9448ea0e04d5b04aa87c4ec4ab23e3dddcb3a5ba703bdc18c97b3c5",
+            "normalized_body_sha256": "d9e5e2ffcf94d4de6e7aee21160a4ce4ccaf614d0a90944667d97900170c4c28"
+          }
+        ],
+        "scope": "Draft typed presets, explicit nested maps, callback-unit/thenable/failure boundaries, real CVC instance ownership, retained owner parity and native-owner rescan guidance were compared with frozen source and witnesses. Index/navigation/log additions reviewed. These are pre-final-draft snapshot hashes, not final verified-stamp hashes or final semantic acceptance.",
+        "final_rewrite_reminders": [
+          "Plan anonymous-constructor inconvenience sentence describes baseline3f5e and should use historical tense.",
+          "Checkpoint/Next/source-review pending lines must be rewritten from actual final receipt and independent approvals."
+        ],
+        "final_semantic_acceptance": "pending",
+        "followup": {
+          "status": "nested_map_example_correction_read_no_API_blocker",
+          "scope": "Root corrected the example to include top-level ...local plus explicit parse/render/format/validate/messages/fields composition. This follow-up reviews the draft correction only; final generated-body review remains pending."
+        }
+      },
+      "intermediate_documents_check": {
+        "status": "retained_intermediate_changed_check_expected_pending_independent_semantic_review",
+        "log": {
+          "path": "node_modules/.cache/m59-docs-intermediate.log",
+          "sha256": "87f597345f81a6f2f1eb3489c9908896cd203c43f0227e6339c463b668bada50"
+        },
+        "concepts": 76,
+        "reserved_files": 5,
+        "errors": 0,
+        "warnings": 6,
+        "verified_stale": 6,
+        "scope": "Root invoked the final-doc-check helper before final independent semantic approval. It stopped at the changed check with six verified-stale warnings; no new verified stamps or runtime/project failure is inferred. Initial0-error60-warning log remains separately preserved. Final semantic approval and actual changed/full zero-error zero-warning checks remain pending."
+      },
+      "runtime_reconciliation": {
+        "status": "captured_final_canonical_runtime_verified_independent_raw_and_documents_pending",
+        "input_manifest": "m59-inputs-2e7617a4fc79.json",
+        "input_manifest_sha256": "2e7617a4fc7976a43909011cadb1c14aa022bec98adb7597003fe0c3c460d831",
+        "source_inputs": 188,
+        "gate_records": 22,
+        "development_records": 6,
+        "superseded_records": 0,
+        "failed_records": 0,
+        "canonical_groups": 16,
+        "execution_commands": 27,
+        "collection_commands": 13,
+        "unit_passed": 138,
+        "unit_delta": 0,
+        "new_browser_cases": 16,
+        "full_suites": {
+          "chromium": {
+            "passed": 766,
+            "elapsed": "12 sequential Chromium shards, 292.4s",
+            "log": "m59-browser-chromium.log",
+            "log_sha256": "5f74ad3b0ffa863a9eaa13d8fb14c20723b4f51584c592805dbe78c7fd60d449"
+          },
+          "firefox": {
+            "passed": 766,
+            "elapsed": "8.3m",
+            "log": "m59-browser-firefox.log",
+            "log_sha256": "90e3a270adbbd227d7d739578e5687151ca64ff531a4a4e82065ddf673ccb505"
+          },
+          "webkit": {
+            "passed": 766,
+            "elapsed": "6.5m",
+            "log": "m59-browser-webkit.log",
+            "log_sha256": "032b98bd9035fe0330bfad360b29b91349e72a32870c7adc0e018831ee6ca2fc"
+          }
+        },
+        "chromium": {
+          "manifest": "m59-chromium-shards.json",
+          "manifest_sha256": "015ef35f1ea8c288e586f51bf63331dfbc7c3b09a6882763d843ac00175796c1",
+          "shard_count": 12,
+          "partitions": [
+            70,
+            65,
+            65,
+            73,
+            56,
+            73,
+            81,
+            44,
+            52,
+            71,
+            60,
+            56
+          ],
+          "raw_child_files": 50,
+          "elapsed_seconds": 292.438
+        },
+        "artifact": {
+          "sha256": "a6873b73f7a2aaafea9791f11d2c787aa6442fb52ac3748602e5a54fcd604c61",
+          "files": 188,
+          "packed_bytes": 332695,
+          "unpacked_bytes": 1674005,
+          "actual_tar_sha_and_listing_verified": true
+        },
+        "installed_js_ts": "captured pass",
+        "installed_windows_browsers": 5,
+        "performance": {
+          "binding_gate": "captured pass",
+          "viewport_gate": "captured pass",
+          "required_original_budgets": {
+            "binding": 9,
+            "viewport": 21
+          },
+          "independent_raw_medians_geometry_review": "pending"
+        },
+        "scope": "Read-only retained record/log/input-map/manifest/child-hash/archive-metadata reconciliation, followed by owned-ledger bookkeeping. No compiler/browser/project commands rerun; independent raw archive payload, test identity and performance review plus final semantic/mechanical documents remain pending.",
+        "helper": {
+          "path": "node_modules/.cache/m59-runtime-ledger.mjs",
+          "sha256": "020314ab029d07426a303bebfd2ea32880caed2e1cb23e3c91b880baac9a2c6b"
+        }
+      },
+      "evidence": {
+        "status": "passed_independent_final_raw_evidence_final_documents_pending",
+        "reviewer": "Independent legacy/raw-evidence agent; report read and hashes checked by connected-source/document reviewer",
+        "reported_audit_executions": 1,
+        "helper": {
+          "path": "node_modules/.cache/m59-independent-audit.mjs",
+          "sha256": "7a6dcc535d83d979f75f0f2251982abd99f7abe87e03b080a778866c16f62b56"
+        },
+        "log": {
+          "path": "node_modules/.cache/m59-independent-audit.log",
+          "sha256": "7ed37301b8d07e69a2a1f386f75b63587572ff081980cdcea671b413a119f8d4"
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m59-reviewed-runtime-receipt.json",
+          "sha256": "3780592d8a1b1dafde9ebf552aa4ae15ab307728acd878983f346310c632edd5",
+          "scope": "Byte-exact independently reviewed R0 snapshot, preserved before review-status changes. This is not a current/final receipt self-hash."
+        },
+        "reviewed_semantic_ledger_snapshot": {
+          "path": "docs/implementation/evidence/m59-form-presets.json",
+          "sha256": "42e372107bfaacf9adfa46f9994ea7492c750ee73bbb0d56f66abdca80a2736c",
+          "scope": "Exact pre-review-status ledger represented by the reviewed R0 receipt. Later review/final-stamp updates deliberately change this file; this is not its final self-hash."
+        },
+        "actual_scope": {
+          "records": 22,
+          "development": 6,
+          "final_groups": 16,
+          "superseded": 0,
+          "failed": 0,
+          "maps": 1,
+          "source_inputs": 188,
+          "focused_each": 87,
+          "full_each": 766,
+          "new_browser_cases": 16,
+          "chromium_raw_children": 50,
+          "chromium_once_only_disjoint_union": true,
+          "artifact": {
+            "sha256": "a6873b73f7a2aaafea9791f11d2c787aa6442fb52ac3748602e5a54fcd604c61",
+            "files": 188,
+            "packed_bytes": 332695,
+            "unpacked_bytes": 1674005,
+            "all_payloads_byte_identical_to_workspace_and_packlist": true
+          },
+          "framework_runtime_js_equality": {
+            "file": "m59-runtime-js.json",
+            "sha256": "c0a716c17f13a2eaa1f1365aa90e4c9b2afa431423cb4b221efa054bbf7030a5",
+            "actual_archive_and_current_bytes_independently_matched": true
+          },
+          "installed_js_ts": true,
+          "installed_windows_browsers": 5,
+          "recomputed_medians": 60,
+          "raw_durations": 300,
+          "original_budgets": 30,
+          "viewport_stage_samples": 120,
+          "viewport_cycle_windows": 300,
+          "immutable_parents": 6,
+          "protected_benchmark_fixtures": 4,
+          "protected_raw_tar_fixtures": 3,
+          "protections": {
+            "v1_unchanged": true,
+            "original_lock_ignored_untracked_byte_identical": true,
+            "master": "b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6",
+            "branch": "2.0.0-alpha.0",
+            "head": "3f5e3adaa60554633d62c43d7df826efff239be5"
+          }
+        },
+        "timing_observations": {
+          "first_child_started_minus_parent_started_ms": 88,
+          "last_child_finished_minus_parent_finished_ms": -11,
+          "completion": {
+            "parent_finished": "2026-11-07T12:37:08.724Z",
+            "last_child_finished": "2026-11-07T12:37:08.713Z",
+            "child_minus_parent_ms": -11,
+            "strict_wall_clock_parent_nesting": true,
+            "first_child_started": "2026-11-07T12:32:16.276Z",
+            "first_child_started_minus_parent_started_ms": 88,
+            "wall_clock_enclosure_claimed": false,
+            "awaited_child_close_then_hashed_manifest_marker_and_parent_exit_zero": true,
+            "sibling_order_and_nonnegative_durations_verified": true,
+            "timestamp_difference_cause": "not established",
+            "tolerance_applied": false
+          },
+          "scope": "Exact recorded cross-process wall-clock observations only. Completion is supported by awaited child close, hashed report/manifest marker and parent exit0; no wall-clock enclosure, timestamp cause or tolerance is inferred."
+        },
+        "limits": "Independent raw approval only. Final seven semantic bodies and actual changed/full zero-error zero-warning mechanical checks remain pending. Historical runtime is retained without rerun or broader recertification; no full-owner/P0/M13 closure or omission."
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "review_scope": "Final seven frozen semantic bodies, the two indexes and dated log compared with the frozen connected source/callers/sixteen tests, R1 receipt and accepted independent raw audit. No project/compiler/browser/runtime command rerun.",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_whole_file_sha256": "d3a3df3f1b9f7b292d54a9e78c38e04be8479d38ba88dc5abc7edb85b9735ee7",
+            "normalized_body_sha256": "532d6b7d332fecebf0b1e87670d855a3dca297b791ae2cf68d2719acf95b1e58"
+          },
+          "docs/implementation/feature-parity.md": {
+            "normalized_whole_file_sha256": "96801d8fc0d6d88afe00cbeed0d8c8fcb382754a6f035423500ce8863009cc24",
+            "normalized_body_sha256": "a5cecf00dddb95e3757795f650a50b8a33ee0fe1b7d4685d4f3b27cb218b3d31"
+          },
+          "docs/implementation/m5-form-presets-plan.md": {
+            "normalized_whole_file_sha256": "89d40a8c7b0ee9d4b9e8858bd3c0ef16d47e9125c413584292b6d567e01c20b4",
+            "normalized_body_sha256": "1c1f5c889a89053ea9b79d3a9eefc5df162b3684129119de683b4c3f04ee2a04"
+          },
+          "docs/v2/form.md": {
+            "normalized_whole_file_sha256": "872f7f8775b250e4e230f963b40afe671954e65881e10497b107ae72d7d80c17",
+            "normalized_body_sha256": "b980052547a23863256c014ebbe8358df1ad29319fd66d4339d29a2c2c467ca2"
+          },
+          "docs/v2/ui.md": {
+            "normalized_whole_file_sha256": "2e4a2d9f5363e519ac3b60da9a2a23466d349d88764efa60a5781ed4bf1ff81f",
+            "normalized_body_sha256": "9bb00f52c4a8b8d5a9a47ba9582e53bc67cfe9d74ef58b79d90a733d907d4d21"
+          },
+          "docs/v2/migration.md": {
+            "normalized_whole_file_sha256": "743c34ecee194193fc9c5af8640f694f56067c238b6ff410520152a39db664a4",
+            "normalized_body_sha256": "558ecb68a6b81b4f8a0bfebd5a48293d5f4163d096408e58162d5208ecc2f979"
+          },
+          "docs/v2/employee-example.md": {
+            "normalized_whole_file_sha256": "27b329b06b0769697b84497af42563fed83e21dbe86c7bfc78c1a3599a294fca",
+            "normalized_body_sha256": "d9e5e2ffcf94d4de6e7aee21160a4ce4ccaf614d0a90944667d97900170c4c28"
+          }
+        },
+        "review_time_hash_scope": "Whole-file and body hashes describe the settled fingerprint state before final verified stamps. Whole-file hashes are intentionally not post-stamp/final hashes. Semantic bodies must remain byte-identical after LF normalization.",
+        "navigation_and_log_reviewed_files": {
+          "docs/index.md": {
+            "normalized_whole_file_sha256": "46c1e6d6d082caf61aafc2434e8271242c503150fa902c0140d5515854820a95"
+          },
+          "docs/implementation/index.md": {
+            "normalized_whole_file_sha256": "c8d77a99418b30419b3d06de14b88424cbda648a84aa37f920a622280fdd3692"
+          },
+          "docs/log.md": {
+            "normalized_whole_file_sha256": "00a589538a6829336716c91978ed29a03baabbcd5aff2b74af854b3ab128be2d"
+          }
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m59-final-semantics-reviewed-receipt.json",
+          "sha256": "26a77cbabeb8912f09afb7a703052b51e54421066ab3d5f9cc456d7cc3354b88",
+          "scope": "Byte-exact R1 receipt at final semantic review; this is a pre-review-status snapshot, not a final/current receipt self-hash."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m59-runtime-invariance-initial.json",
+          "sha256": "8a03152ae3702e521e97949debd1ccfa5acbb77cd0007dbd90f0fc387fd281b1",
+          "audited_receipt_sha256": "3780592d8a1b1dafde9ebf552aa4ae15ab307728acd878983f346310c632edd5",
+          "unchanged": true,
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "historical_preservation": {
+          "baseline": "3f5e3adaa60554633d62c43d7df826efff239be5",
+          "historical_fingerprint_only": 39,
+          "preserved_bodies_and_generated_verified_dates": true,
+          "scope": "Independent read-only comparison of currently changed historical Markdown; final root history helper must reconfirm after verified stamps."
+        },
+        "semantic_findings": [
+          "The sole named public FormOptions type preserves the exact existing nine-property constructor shape; both emitted runtime members match actual M5.8 archive bytes.",
+          "Ordinary spread precedence, manual nested-map and per-field merges, tuple replacement/empty lists, same-context plain-call recipes and outer callback-unit boundaries agree with frozen source and sixteen witnesses.",
+          "Current/plan/parity and dated log match22 records,188 frozen inputs,138 units,766 cases per engine,one188-file tar,five installed Windows browsers,27 execution/13 collection scope and30 original budgets; earlier milestones retain their dated scope.",
+          "Marked choices use existing constructor options; native-owner moves name existing rescan. The two-layout preset owns existing rule/parser configuration while Rows and onBind/null-label cleanup remain instance-owned.",
+          "Wider live-global/embedded/source/hot/declaration/List/Grid/other-owner/P0/M13 obligations remain explicit, full-family closure and approved omissions remain zero, and all nine plan footnote definitions are restored."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "status": "authorized_after_this_independent_semantic_approval",
+          "permitted_actions": [
+            "Apply verified stamps to exactly these seven reviewed semantic concepts.",
+            "Settle fingerprint metadata, run actual changed/full document checks and historical body/date checks.",
+            "Record only actual mechanical results and finalize top-level plus six selected statuses through m59-complete after checks pass.",
+            "Regenerate receipt/review hashes and recheck runtime invariance with only review and semantic_acceptance.sha256 excluded."
+          ],
+          "conditions": "Seven semantic bodies, frozen source/runtime inputs, audited raw evidence and all runtime facts remain unchanged. A body/API/runtime change requires renewed independent review. Current draft zero-error/zero-warning sentences are conditional on actual successful mechanical checks; this review does not claim those checks have already passed."
+        },
+        "document_preparation_observations": {
+          "root_reported": "After footnote restoration, an intermediate changed check reported21 fingerprint drift errors and6 verified-stale warnings; seven sequential fingerprint-only passes settled metadata and the following changed check reported0 errors/6 verified-stale warnings pending this approval.",
+          "scope": "Documentation-only preparation reported by root. These observations do not modify the R0-frozen setup/development arrays, runtime facts or independent raw scope."
+        },
+        "limits": "Semantic approval only until actual final mechanical checks complete. No full-family/P0/M13 closure, omission, actual Safari/manual/personal/token/model result, publication or tag is approved.",
+        "helper": {
+          "path": "node_modules/.cache/m59-final-semantic-review.mjs",
+          "sha256": "2a499957b77ae0795812ca61491f460b5ed3e09af23d58dad964902a5903ba6c"
+        },
+        "review_log": {
+          "path": "node_modules/.cache/m59-final-semantic-review.log",
+          "sha256": "b0485aa763b6a22bd15b66438faea70fc5250b56fc0907e39aa13023faaa4e48"
+        },
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m59-docs-changed.log",
+              "sha256": "b60648ac9c8cb52b25771c3eb8b2057db228c08b93743af2f41aa262bb3cf60c",
+              "concepts": 76,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m59-docs-full.log",
+              "sha256": "c02d63dc24121536dd4afaf88882f6de606bc6da995da855c21e583683bc7f1e",
+              "concepts": 76,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m59-doc-history.json",
+            "sha256": "93c3f20721f54f795dd2a05f48295f4407e2d987a02997cb68ceeccd18a13301",
+            "historical_fingerprint_only": 39,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 7,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "limitations": [
+      "Historical runtime remains in its dated scope and is not rerun/recertified.",
+      "Actual macOS/iOS Safari, manual assistive technology, personal acceptance and final fixed-agent/token comparison remain unverified.",
+      "No model-response evaluation, token-saving measurement, npm publication or release tag is performed or inferred."
+    ],
+    "actual_runtime": {
+      "status": "captured_final_canonical_runtime_verified_independent_raw_and_documents_pending",
+      "input_manifest": "m59-inputs-2e7617a4fc79.json",
+      "input_manifest_sha256": "2e7617a4fc7976a43909011cadb1c14aa022bec98adb7597003fe0c3c460d831",
+      "source_inputs": 188,
+      "gate_records": 22,
+      "development_records": 6,
+      "superseded_records": 0,
+      "failed_records": 0,
+      "canonical_groups": 16,
+      "execution_commands": 27,
+      "collection_commands": 13,
+      "unit_passed": 138,
+      "unit_delta": 0,
+      "new_browser_cases": 16,
+      "full_suites": {
+        "chromium": {
+          "passed": 766,
+          "elapsed": "12 sequential Chromium shards, 292.4s",
+          "log": "m59-browser-chromium.log",
+          "log_sha256": "5f74ad3b0ffa863a9eaa13d8fb14c20723b4f51584c592805dbe78c7fd60d449"
+        },
+        "firefox": {
+          "passed": 766,
+          "elapsed": "8.3m",
+          "log": "m59-browser-firefox.log",
+          "log_sha256": "90e3a270adbbd227d7d739578e5687151ca64ff531a4a4e82065ddf673ccb505"
+        },
+        "webkit": {
+          "passed": 766,
+          "elapsed": "6.5m",
+          "log": "m59-browser-webkit.log",
+          "log_sha256": "032b98bd9035fe0330bfad360b29b91349e72a32870c7adc0e018831ee6ca2fc"
+        }
+      },
+      "chromium": {
+        "manifest": "m59-chromium-shards.json",
+        "manifest_sha256": "015ef35f1ea8c288e586f51bf63331dfbc7c3b09a6882763d843ac00175796c1",
+        "shard_count": 12,
+        "partitions": [
+          70,
+          65,
+          65,
+          73,
+          56,
+          73,
+          81,
+          44,
+          52,
+          71,
+          60,
+          56
+        ],
+        "raw_child_files": 50,
+        "elapsed_seconds": 292.438
+      },
+      "artifact": {
+        "sha256": "a6873b73f7a2aaafea9791f11d2c787aa6442fb52ac3748602e5a54fcd604c61",
+        "files": 188,
+        "packed_bytes": 332695,
+        "unpacked_bytes": 1674005,
+        "actual_tar_sha_and_listing_verified": true
+      },
+      "installed_js_ts": "captured pass",
+      "installed_windows_browsers": 5,
+      "performance": {
+        "binding_gate": "captured pass",
+        "viewport_gate": "captured pass",
+        "required_original_budgets": {
+          "binding": 9,
+          "viewport": 21
+        },
+        "independent_raw_medians_geometry_review": "pending"
+      },
+      "scope": "Read-only retained record/log/input-map/manifest/child-hash/archive-metadata reconciliation, followed by owned-ledger bookkeeping. No compiler/browser/project commands rerun; independent raw archive payload, test identity and performance review plus final semantic/mechanical documents remain pending."
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Wider global-wrapper/live configuration and default/callback equivalence, embedded Grid/List inheritance, local-source and per-unbound-key observation, direct hot declarations and all remaining control/source/dynamic outcomes outside typed explicit application presets."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected typed explicit preset/application-callback outcomes may receive acceptance after implementation, fresh gates and independent review. All full-owner/P0/M13 obligations and omission decisions remain open."
+  }
+}

@@ -376,6 +376,38 @@ try {
     onBind({ row, event }) { bindingCalls.push(["after", row.id, event?.type ?? null, bindingRoot.querySelector("input").value]); }
   });
   state.formBinding = { root: bindingRoot, rows: bindingRows, form: bindingForm, calls: bindingCalls };
+  const presetsRoot = document.createElement("section");
+  presetsRoot.innerHTML = `<h2>Explicit Form presets</h2><template><form>
+    <label>Name <input data-field="name" value="Captured" required></label><output data-error-for="name"></output>
+    <label>Active <input data-field="active" type="checkbox"></label></form></template>`;
+  document.querySelector("main").append(presetsRoot);
+  const presetCalls = [];
+  const localValue = function(value, context) {
+    presetCalls.push({ handler: "local", context, plain: this === undefined });
+    if (context.field === "name") return String(value ?? "").trim();
+  };
+  const sharedValue = function(value, context) {
+    presetCalls.push({ handler: "shared", context, plain: this === undefined });
+    if (context.field === "name") return String(value).toUpperCase();
+  };
+  const sharedFormOptions = Object.freeze({ autoValidate: false,
+    beforeBindValue(value, context) {
+      const local = localValue(value, context);
+      if (local !== null && (typeof local === "object" || typeof local === "function") && typeof local.then === "function") return local;
+      const shared = sharedValue(local === undefined ? value : local, context);
+      return shared === undefined ? local : shared;
+    }
+  });
+  const presetRows = [" ada ", " bea ", " cy "].map(name => createRows([{ name, active: true }]));
+  const presetForms = presetRows.map((rows, index) => {
+    const root = presetsRoot.querySelector("template").content.firstElementChild.cloneNode(true);
+    presetsRoot.append(root);
+    const options = index === 0 ? { ...sharedFormOptions, rows, autoValidate: true } :
+      index === 1 ? { ...sharedFormOptions, rows, autoValidate: undefined, beforeBindValue: undefined } : { ...sharedFormOptions, rows };
+    const form = bindForm(root, Object.freeze(options)); form.bind(rows.entries()[0].id);
+    return form;
+  });
+  state.formPresets = { root: presetsRoot, forms: presetForms, rows: presetRows, shared: sharedFormOptions, calls: presetCalls };
   const defaultsRoot = document.createElement("section");
   defaultsRoot.innerHTML = `<h2>Captured defaults</h2><form data-defaults-local>
     <label>Amount <input data-field="amount" value="1000" data-format='[["commas"]]' required></label>

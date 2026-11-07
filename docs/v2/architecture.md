@@ -16,11 +16,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
+    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
+    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding

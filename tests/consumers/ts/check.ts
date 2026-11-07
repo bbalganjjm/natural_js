@@ -7,11 +7,25 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
-import type { FieldRules, FormBindContext, FormValueContext, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
+import type { FieldRules, FormBindContext, FormValueContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
   options?: { value: string }[];
+}
+
+export function connectPresetForm(root: HTMLElement, rows: Rows<Employee>): FormHandle<Employee> {
+  const shared = Object.freeze<FormOptions<Employee>>({
+    autoValidate: false,
+    rules: { fields: { name: { validate: [["required"]] } } }
+  });
+  const local: FormOptions<Employee> = {
+    ...shared,
+    rows,
+    autoValidate: true,
+    onBind({ row }) { const name: string = row.value.name; void name; }
+  };
+  return bindForm(root, local);
 }
 
 export function receiveEmployees(rows: Rows<Employee>, states: readonly RowState<Employee>[]) {

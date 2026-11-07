@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
+    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
+    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -100,7 +100,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: af1ca1f7d75737eb2e45c2bf12748450031a550b
+    git_blob: 3dd3cd98c2dd4345c1525ef5469a2bb5f44ad006
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 5ba9f0b0b0d1bf36a27b199c5873d5f15338f74d
+    git_blob: a848dbf48171b5bb4eb6e1f2ac3cff3f4a3af3a5
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 8dd085ce6e878a969c1f3cf81876acb89d97497c
-generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+    git_blob: edc419fa578c97136880150ece13c2a65fd8283b
+generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -484,6 +484,14 @@ Legacy addTop/indexed add/move/copy workflows now use Rows `add(value, beforeId?
 After all required features, the [M13 review and remediation gate](../implementation/m13-review-plan.md) precedes personal testing and separately requested release work.
 
 Use [page](page.md), [Rows](data.md), [Form](form.md), [communication](comm.md), [Popup](popup.md), and [Tabs](tabs.md), [Documents](documents.md), and [Notify](notify.md) for exact signatures. For a narrower implementation start, inspect `examples/vite/m4/employees.ts` and `examples/vite/m7/main.ts`; their authored views and focused tests show the entire working routes.[^employee][^containers]
+
+# Form shared configuration
+
+Replace a 1.x ui.form configuration mutation with an application-owned FormOptions<T> object imported by its callers, then pass { ...shared, ...local, rows } to bindForm. Keep Rows and controller state instance-local. Standard object spread differs from jQuery.extend: omit a property to inherit, and use own undefined to remove a copied hook or restore an ordinary default. A former null-disabled callback becomes undefined; false remains an explicit boolean override.[^legacy-ui][^ui][^form]
+
+Merge nested maps and each field's format/validate kinds explicitly. Ordered tuples replace rather than concatenate; [] clears. [Form presets](form.md#shared-options-and-callback-composition) gives the executed local-then-shared value pipeline and separate original-input/false-tail notification recipe. Capture references, preserve context/phase, forward thenables, and treat the entire composition as one callback. The old option mutation, wrapper stacking and lost phase/output are not migration guarantees.[^legacy-ui][^form]
+
+This selected explicit-preset route does not close wider live-global configuration, embedded Grid/List Form inheritance, local-source or per-unbound-key callback equivalence. Those remain required parity work; no capability omission or new engine is approved.[^parity]
 
 [^legacy-screen]: Preserved 1.x search, grid, detail, and save example
 [^legacy-comm]: Preserved 1.x page loading and request serialization

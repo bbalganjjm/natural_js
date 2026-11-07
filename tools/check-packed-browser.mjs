@@ -314,6 +314,31 @@ try {
     disposed: ["FORM_DISPOSED", "FORM_DISPOSED"]
   }, "Installed Form rescan must reconcile late fields/files without projection, draft loss, source writes or implicit resume.");
 
+  const formPresets = await page.evaluate(() => {
+    const h = window.packedConsumer.formPresets, roots = [...h.root.querySelectorAll("form")];
+    const inputs = roots.map(root => root.querySelector('[data-field="name"]'));
+    const ids = h.rows.map(rows => rows.entries()[0].id);
+    const initial = { shown: inputs.map(input => input.value), raw: h.rows.map((rows, index) => rows.get(ids[index]).value.name),
+      checked: roots.map(root => root.querySelector('[type="checkbox"]').checked) };
+    const captured = h.calls.every(call => call.plain && Object.isFrozen(call.context)) &&
+      h.calls.every((call, index) => index % 2 === 0 ? call.handler === "local" && call.context === h.calls[index + 1].context : call.handler === "shared");
+    for (const input of inputs) { input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true })); }
+    const policy = { raw: h.rows.map((rows, index) => rows.get(ids[index]).value.name),
+      invalid: inputs.map(input => input.getAttribute("aria-invalid")), explicitThird: h.forms[2].validate().valid };
+    h.forms[0].unbind(); h.forms[0].bind(ids[0]); h.rows[0].set(ids[0], "name", " next ");
+    const updated = { shown: inputs[0].value, raw: h.rows[0].get(ids[0]).value.name, original: h.rows[0].original(ids[0]).name,
+      native: h.forms[0].defaults().name, other: h.rows[1].get(ids[1]).value.name,
+      phases: [...new Set(h.calls.map(call => call.context.phase))].sort(), frozen: Object.isFrozen(h.shared), sharedPolicy: h.shared.autoValidate };
+    for (const form of h.forms) form.dispose(); for (const rows of h.rows) rows.dispose();
+    h.root.remove(); delete window.packedConsumer.formPresets;
+    return { initial, captured, policy, updated };
+  });
+  assert.deepEqual(formPresets, {
+    initial: { shown: ["ADA", " bea ", "CY"], raw: [" ada ", " bea ", " cy "], checked: [true, true, true] }, captured: true,
+    policy: { raw: [" ada ", " bea ", ""], invalid: ["true", "true", null], explicitThird: false },
+    updated: { shown: "NEXT", raw: " next ", original: " ada ", native: "Captured", other: " bea ", phases: ["bind", "val"], frozen: true, sharedPolicy: false }
+  }, "Installed explicit Form presets must preserve spread precedence, callback contexts, raw ownership and separate instance data.");
+
   const formBinding = await page.evaluate(() => {
     const h = window.packedConsumer.formBinding, [first, second] = h.rows.entries();
     const input = h.root.querySelector("input"), summary = h.root.querySelector("span"), select = h.root.querySelector("select");

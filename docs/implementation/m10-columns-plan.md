@@ -8,7 +8,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required full framework and Grid scope
-    git_blob: 8dd085ce6e878a969c1f3cf81876acb89d97497c
+    git_blob: edc419fa578c97136880150ece13c2a65fd8283b
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field ownership and row lifetime
@@ -40,7 +40,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Grid handle and column state
-    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
+    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
   - id: tables
     resource: https://www.w3.org/WAI/tutorials/tables/irregular/
     title: WAI grouped header and native column associations

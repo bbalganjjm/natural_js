@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
-    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
+    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
@@ -44,7 +44,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Two-layout CVC integration
-    git_blob: af1ca1f7d75737eb2e45c2bf12748450031a550b
+    git_blob: 3dd3cd98c2dd4345c1525ef5469a2bb5f44ad006
   - id: rows
     resource: ../../src/data/index.ts
     title: Row identity, mutation, and change tracking

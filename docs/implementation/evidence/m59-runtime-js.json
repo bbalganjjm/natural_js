@@ -1,0 +1,23 @@
+{
+  "baseline_commit": "3f5e3adaa60554633d62c43d7df826efff239be5",
+  "baseline_tarball_sha256": "26a12e65d281e84aeb8b119590b1e95a71c2c81714098ca1980262ee2829dead",
+  "comparison": "Raw bytes of the actual M5.8 archive members against the fresh M5.9 emitted JavaScript; declaration files intentionally change.",
+  "files": [
+    {
+      "path": "build/ui/form.js",
+      "baseline_member": "package/build/ui/form.js",
+      "baseline_sha256": "c1df4520aa71f19492db24d3eadf5cfbefae6cd702993d351e684f0b0e503695",
+      "current_sha256": "c1df4520aa71f19492db24d3eadf5cfbefae6cd702993d351e684f0b0e503695",
+      "bytes": 80430,
+      "equal": true
+    },
+    {
+      "path": "build/ui/index.js",
+      "baseline_member": "package/build/ui/index.js",
+      "baseline_sha256": "4c60bdda2c8929ce7ba4eaef20553e4bb577cf83f057b20770238691c1982ffb",
+      "current_sha256": "4c60bdda2c8929ce7ba4eaef20553e4bb577cf83f057b20770238691c1982ffb",
+      "bytes": 495,
+      "equal": true
+    }
+  ]
+}

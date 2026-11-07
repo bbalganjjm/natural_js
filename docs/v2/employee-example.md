@@ -8,7 +8,7 @@ sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: af1ca1f7d75737eb2e45c2bf12748450031a550b
+    git_blob: 3dd3cd98c2dd4345c1525ef5469a2bb5f44ad006
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
@@ -53,10 +53,10 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -111,11 +111,11 @@ The table has native headers, including a name header with `aria-sort`; its repe
 
 # Controller
 
-`createEmployees` receives one `PageContext` per screen and registers every handle, subscription, and store with `own`. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
+`createEmployees` receives one `PageContext` per screen and registers every handle, subscription, and store with `own`. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. The module-scoped sharedFormOptions: FormOptions<Employee> contains that existing rule and parser; each controller spreads it into its own detail Form with its own Rows and onBind callback. No shared row store or global Form registry is created. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
 
 Both search views offer native Reset fields and explicit Restore captured fields. Native reset uses native default properties. Restore calls search.unbind() to restore the construction-time values, then search.refresh() to resume automatic formatting/validation. It sends no request, changes no shared employee row and does not recreate the CVC controller. The action listener uses the same page signal as other authored controls.[^controller][^side][^stack]
 
-Grid and List use one `Rows<Employee>` instance. A List selection calls `grid.select(id)`; Grid's selection callback selects the same ID in List, binds the detail Form, and updates the live selected-name output. The standalone Select offers typed sizes 2 and 5. Page requests go through the controller, which sets Grid and List to the same slice, reads Grid's normalized state, and calls `pagination.set(state)`. Filtering and sorting apply to both views before page slicing. The application resets to page 1 on a new search, filter, or sort; `Rows` subscriptions recalculate totals after edits.[^controller]
+Grid and List use one `Rows<Employee>` instance. A List selection calls `grid.select(id)`; Grid's selection callback selects the same ID in List and binds the detail Form. The detail's local onBind updates the live selected-name output after binding; null selection explicitly clears it. The standalone Select offers typed sizes 2 and 5. Page requests go through the controller, which sets Grid and List to the same slice, reads Grid's normalized state, and calls `pagination.set(state)`. Filtering and sorting apply to both views before page slicing. The application resets to page 1 on a new search, filter, or sort; `Rows` subscriptions recalculate totals after edits.[^controller]
 
 For an invalid changed row hidden by a filter or page, save validation clears the filter, computes that row's page under the current name sort, and selects it. It rechecks detail Form issues or an unavailable Grid Select choice, then focuses the connected field when one is available. The browser regression covers the off-page Grid choice. Editing controls become inert during save while Close stays available; settled saves restore focus when the prior target still exists.[^controller][^m4-test][^m6-test]
 

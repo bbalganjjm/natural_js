@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
-import type { RowId, Rows, RowsEvent } from "../data/index.js";
+import type { RowId, RowsEvent } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
@@ -12,7 +12,7 @@ import { control, disabled, display, displayField, fieldValue, formatCapable, in
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createNativeDefaults } from "./native-defaults.js";
 import type {
-  FormBindContext, FormHandle, FormValueContext, FormatRule, ParseInput, RuleContext, RuleSet,
+  FormBindContext, FormHandle, FormOptions, FormValueContext, FormatRule, RuleContext,
   ValidateRule, ValidationIssue, ValidationResult
 } from "./index.js";
 
@@ -82,12 +82,7 @@ function errorId(element: HTMLElement): string {
 
 export function bindForm<T extends object = Record<string, unknown>>(
   root: HTMLElement,
-  options: { rows?: Rows<T>; rules?: RuleSet; parse?: Record<string, ParseInput>; autoValidate?: boolean;
-    beforeBind?: (context: FormBindContext<T>) => unknown;
-    onBind?: (context: FormBindContext<T>) => unknown;
-    beforeBindValue?: (value: unknown, context: FormValueContext) => unknown;
-    onBindValue?: (value: unknown, context: FormValueContext) => unknown;
-    render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null> } = {}
+  options: FormOptions<T> = {}
 ): FormHandle<T> {
   if (!root || root.nodeType !== 1) {
     throw formError("FORM_ROOT", "Form root must be an HTML element.");

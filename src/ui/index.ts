@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { RowId, RowSnapshot, RowStatus, Snapshot, RowsEvent } from "../data/index.js";
+import type { RowId, RowSnapshot, RowStatus, Snapshot, Rows, RowsEvent } from "../data/index.js";
 
 export interface RuleContext {
   readonly field: string;
@@ -105,6 +105,18 @@ export interface FormHandle<T extends object> {
   read(): Record<string, unknown>;
   validate(id?: RowId): ValidationResult;
   dispose(): void;
+}
+
+export interface FormOptions<T extends object = Record<string, unknown>> {
+  rows?: Rows<T>;
+  rules?: RuleSet;
+  parse?: Record<string, ParseInput>;
+  autoValidate?: boolean;
+  beforeBind?: (context: FormBindContext<T>) => unknown;
+  onBind?: (context: FormBindContext<T>) => unknown;
+  beforeBindValue?: (value: unknown, context: FormValueContext) => unknown;
+  onBindValue?: (value: unknown, context: FormValueContext) => unknown;
+  render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>;
 }
 
 export interface SortIndicator {

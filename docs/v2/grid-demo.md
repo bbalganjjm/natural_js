@@ -116,7 +116,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
+    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
 generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }

@@ -4,12 +4,12 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [RuleContext, FormBindContext, FormValueContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
+symbols: [FormOptions, RuleContext, FormBindContext, FormValueContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 13306de750741fa1f3b5349c279d6b930f00b4da
+    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 3c8b5f7558382ade1c3971e68f87aa9059df6a63
+    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,19 +50,22 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
+  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
+
+FormOptions<T extends object = Record<string, unknown>> names the existing bindForm constructor shape. Compose application-wide, feature and instance settings with ordinary objects; pass per-screen Rows explicitly. [Form presets](form.md#shared-options-and-callback-composition) specifies shallow precedence, nested-map composition and the single-callback execution boundary. This type adds no runtime export or registry.[^ui][^form]
 
 # Summary
 
 | Symbol | Signature | Returns |
 |---|---|---|
 | `RuleContext` | Field, values snapshot, row identity, optional field element | Rule context |
+| `FormOptions<T>` | Optional Rows, rules, parse/render maps, autoValidate and existing whole/value callbacks | Typed application preset or instance options |
 | `FormBindContext<T>` | Readonly root HTMLElement, immutable row: RowSnapshot<T>, event: RowsEvent \| null | Rows-backed whole-Form callback context |
 | `FormValueContext` | RuleContext with bind/val phase, nonnull RowId and primary HTMLElement | Rows-backed Form value callback context |
 | `FormatRule` | Value, arguments, context | Display string |

@@ -3,7 +3,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
 import { bindForm, bindGrid, bindList, bindPagination, bindSelect } from "@bbalganjjm/natural_js/ui";
-import type { ListHandle, PageRequest, RuleSet, ValidationIssue } from "@bbalganjjm/natural_js/ui";
+import type { FormOptions, ListHandle, PageRequest, ValidationIssue } from "@bbalganjjm/natural_js/ui";
 
 type Employee = {
   id: string;
@@ -21,9 +21,18 @@ function find<ElementType extends Element>(root: ParentNode, selector: string): 
   return element;
 }
 
-const rules: RuleSet = {
-  validate: {
-    companyEmail: value => value.endsWith("@example.com") || "Use a company email."
+const sharedFormOptions: FormOptions<Employee> = {
+  rules: {
+    validate: {
+      companyEmail: value => value.endsWith("@example.com") || "Use a company email."
+    }
+  },
+  parse: {
+    salary: value => {
+      const parsed = Number(value.replaceAll(",", ""));
+      if (!value.trim() || !Number.isFinite(parsed)) throw new Error("Enter a number.");
+      return parsed;
+    }
   }
 };
 
@@ -53,14 +62,10 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     search.refresh();
   }, { signal });
   const detail = bindForm(detailRoot, {
+    ...sharedFormOptions,
     rows,
-    rules,
-    parse: {
-      salary: value => {
-        const parsed = Number(value.replaceAll(",", ""));
-        if (!value.trim() || !Number.isFinite(parsed)) throw new Error("Enter a number.");
-        return parsed;
-      }
+    onBind({ row }) {
+      selected.textContent = "Selected: " + row.value.name;
     }
   });
   own(() => detail.dispose());
@@ -80,10 +85,10 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   let list: ListHandle<Employee>;
   const grid = bindGrid(table, {
     rows,
-    onSelect({ id, row }) {
+    onSelect({ id }) {
       list?.select(id);
       detail.bind(id);
-      selected.textContent = row ? "Selected: " + row.value.name : "No employee selected";
+      if (id === null) selected.textContent = "No employee selected";
     }
   });
   own(() => grid.dispose());

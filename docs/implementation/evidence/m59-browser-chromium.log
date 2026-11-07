@@ -1,0 +1,14 @@
+{"shard":1,"passed":70,"identities_match":true,"retries":0,"skips":0}
+{"shard":2,"passed":65,"identities_match":true,"retries":0,"skips":0}
+{"shard":3,"passed":65,"identities_match":true,"retries":0,"skips":0}
+{"shard":4,"passed":73,"identities_match":true,"retries":0,"skips":0}
+{"shard":5,"passed":56,"identities_match":true,"retries":0,"skips":0}
+{"shard":6,"passed":73,"identities_match":true,"retries":0,"skips":0}
+{"shard":7,"passed":81,"identities_match":true,"retries":0,"skips":0}
+{"shard":8,"passed":44,"identities_match":true,"retries":0,"skips":0}
+{"shard":9,"passed":52,"identities_match":true,"retries":0,"skips":0}
+{"shard":10,"passed":71,"identities_match":true,"retries":0,"skips":0}
+{"shard":11,"passed":60,"identities_match":true,"retries":0,"skips":0}
+{"shard":12,"passed":56,"identities_match":true,"retries":0,"skips":0}
+766 passed (12 sequential Chromium shards, 292.4s)
+{"shard_manifest":"m59-chromium-shards.json","sha256":"015ef35f1ea8c288e586f51bf63331dfbc7c3b09a6882763d843ac00175796c1","complete":true}
