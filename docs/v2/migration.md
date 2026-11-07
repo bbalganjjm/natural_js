@@ -48,7 +48,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
+    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -108,7 +108,7 @@ sources:
   - id: employee-view
     resource: ../../examples/vite/m4/side.html
     title: Authored employee screen markers
-    git_blob: 701b6b74a863ed41bb92f80b423b1a7a94be6cd2
+    git_blob: 16680df0e9ae8f0453915ead086d930daa5743f0
   - id: containers
     resource: ../../examples/vite/m7/main.ts
     title: Runnable main, Popup, and keyed Tab page flow
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 21563bb16f801ddd28aac7ad87bed0e92aa690e4
+    git_blob: 52b39d14958425940697600e3252cd5787b8c5e4
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 6d58dbcb019a01df38547f94313713703aeed768
-generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+    git_blob: 4075c72f0255afe98a55e435a327eb30346c12fd
+generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -410,6 +410,33 @@ rows.set(id, "active", true);
 For legacy shared/local composition, call the local function, keep its result unless undefined, then call the shared function with that effective value. Keep the shared result unless undefined. Decide explicitly whether local false should skip the shared function; false remains a replacement, not an automatic veto. Do not copy the old wrapper's lost phase or undefined overwrite. A callback attached to a local DOM-only Form is not covered by this slice; retain its migration obligation until that source contract is implemented or explicitly retired.[^form][^legacy-ui]
 
 Use Form's existing render for structured/custom DOM and format for text display. Value callbacks accept only checked native-compatible projections; they do not define inverse parsing. Focused text shows source raw, and callbacks defer until blur. Validation/save still sees actual raw and invalid drafts. The reduced Grid detail template demonstrates a boolean employment label without modifying its stored boolean.[^form]
+
+## 11. Keep local input and source-backed Form ownership explicit
+
+Use a DOM-local Form for authored search inputs. Effective formatters now write display without replacing entered raw; local read stays unparsed and parse remains validation-only. Focus exposes editable raw, blur restores valid display and bind(null) refreshes after programmatic native changes. Native reset buttons restore current native defaults without making a request. Cleanup follows default action, respects cancellation and flushes completed work before a later local read/validate/input, including a binding inside an outer native form. beforeBindValue/onBindValue remain Rows-only.[^form]
+
+Legacy N([]).form(...).bind(0, data) still owned a dataset. Use createRows([normalizedRecord]) and bind its RowId for received/business records. Read rows.get(id).value when the complete record, including unbound keys, is needed; Form.read intentionally includes only marked fields. Use Rows.set for source changes and Rows.revert for an existing received checkpoint. Unbound-key normalization belongs in the application receive/factory step, not in a hidden display callback pass.[^rows][^form][^legacy-ui]
+
+Legacy add() captured live input values and kept an inserted row through revert. Ordinary Rows.add has no checkpoint; revert removes that insert. Preserve the add-time reset outcome with the existing received-state operation:[^rows][^legacy-ui]
+
+```ts
+// root authors data-field="name" and data-field="amount" with value="1200".
+const input = bindForm(root);
+const defaults = input.read(); // Raw native input, even while text is formatted.
+const rows = createRows<{ name: string; amount: number; source: string }>();
+const [id] = rows.appendState([{ status: "insert", value: {
+  name: String(defaults.name ?? ""), amount: Number(defaults.amount), source: "screen"
+} }]);
+input.dispose();
+const editor = bindForm(root, { rows });
+editor.bind(id);
+rows.set(id, "amount", 2400);
+rows.revert(id); // Retains id and insert status; restores the received insert value.
+```
+
+Choose ordinary add when cancellation should remove the inserted row. A legacy live InitialData snapshot is not automatically a native default: before binding, set defaultValue/defaultChecked/defaultSelected when Reset fields must restore a preset. Otherwise capture an explicit application default record/checkpoint as above. Rows-backed native reset policy remains application-owned; use explicit data operations rather than implying a row-wide write from the browser reset event.[^rows][^form][^legacy-ui]
+
+The two employee search layouts demonstrate uppercase display, entered raw request text, native field reset and independent CVC lifetimes. Local display ownership introduces no second dataset or callback registry. Whole-row/global hooks, unbound-key callback observation, partial binding and dynamic discovery retain their separate parity obligations.[^employee][^employee-view][^form][^parity]
 
 # Verify
 

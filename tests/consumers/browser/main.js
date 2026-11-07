@@ -357,6 +357,20 @@ try {
   });
   valueForm.bind(valueRows.entries()[0].id);
   state.formValues = { root: valueRoot, rows: valueRows, form: valueForm, calls: valueCalls };
+  const localContainer = document.createElement("section");
+  localContainer.innerHTML = `<h2>Local Form</h2><form><div data-local-root>
+    <label>Amount <input data-field="amount" value="1200" data-format='[["commas"]]' pattern="[0-9]+"></label>
+    <output data-error-for="amount"></output><label>Note <input data-field="note" value="Base"></label>
+    <p>Summary <span data-field="summary"><b>Original</b></span></p>
+    </div><button type="reset">Reset local fields</button></form>`;
+  document.querySelector("main").append(localContainer);
+  const localRoot = localContainer.querySelector("[data-local-root]");
+  const localSummary = localRoot.querySelector("span").firstChild;
+  const localForm = bindForm(localRoot, { parse: { amount: Number },
+    render: { summary(value, context) { return `${value}:${context.values.amount}:${context.values.note}`; } }
+  });
+  state.localForm = { container: localContainer, root: localRoot, owner: localContainer.querySelector("form"),
+    form: localForm, originalSummary: localSummary };
   state.incoming = createRows();
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = document.querySelector(`[data-host="${slot}"]`);

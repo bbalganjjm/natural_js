@@ -1,0 +1,21 @@
+{"shard_manifest":"m55-chromium-shards.json","sha256":"22a40d5741bad5b5227c404f68b389f132ed7c5a50da4ad3227d8624a39ba511","complete":false}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Failed Chromium run-1
+
+1 !== 0
+
+    at command (file:///D:/workspace/natural_js/docs/implementation/evidence/m55-chromium-shards.mjs:18:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///D:/workspace/natural_js/docs/implementation/evidence/m55-chromium-shards.mjs:31:16 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

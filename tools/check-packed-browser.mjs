@@ -127,6 +127,39 @@ try {
     { employeeNo: "C", name: "Pending", rowStatus: "insert" }
   ], restored: [["Pending", "insert"], ["Received removal", "delete"], ["Received revision", "update"]], insertedOriginal: null, ordinaryCopyRemoved: true });
 
+  const localForm = await page.evaluate(async () => {
+    const h = window.packedConsumer.localForm, input = h.root.querySelector("input");
+    const initial = { shown: input.value, raw: h.form.read().amount, valid: h.form.validate().valid };
+    input.value = "2100";
+    const direct = h.form.read().amount; h.form.bind(null);
+    const refreshed = input.value;
+    input.focus(); const focused = input.value;
+    input.value = "3100"; input.dispatchEvent(new Event("input", { bubbles: true })); input.blur();
+    const edited = { shown: input.value, raw: h.form.read().amount, valid: h.form.validate().valid };
+    h.owner.reset();
+    const reset = { shown: input.value, raw: h.form.read().amount, valid: h.form.validate().valid };
+    input.value = "bad"; input.dispatchEvent(new Event("input", { bubbles: true }));
+    const invalid = !h.form.validate().valid; await Promise.resolve();
+    const preserved = input.value === "bad" && input.getAttribute("aria-invalid") === "true" && h.form.read().amount === "bad";
+    h.owner.reset(); h.form.read();
+    const before = h.root.innerHTML;
+    h.owner.addEventListener("reset", event => event.preventDefault(), { once: true });
+    h.owner.reset(); await Promise.resolve();
+    const canceled = h.root.innerHTML === before && input.value === "1,200" && h.form.read().amount === "1200";
+    const summary = h.root.querySelector("span").textContent;
+    h.form.dispose();
+    const disposed = input.value === "1200" && h.root.querySelector("span").firstChild === h.originalSummary;
+    h.owner.reset(); await Promise.resolve();
+    const quiet = input.value === "1200" && h.root.querySelector("span").firstChild === h.originalSummary;
+    h.container.remove(); delete window.packedConsumer.localForm;
+    return { initial, direct, refreshed, focused, edited, reset, invalid, preserved, canceled, summary, disposed, quiet };
+  });
+  assert.deepEqual(localForm, { initial: { shown: "1,200", raw: "1200", valid: true }, direct: "2100",
+    refreshed: "2,100", focused: "2100", edited: { shown: "3,100", raw: "3100", valid: true },
+    reset: { shown: "1200", raw: "1200", valid: true }, invalid: true, preserved: true, canceled: true,
+    summary: "Original:1200:Base", disposed: true, quiet: true },
+  "Installed local Form must preserve raw input while formatting, validating and reconciling its ancestor native reset.");
+
   const formValues = await page.evaluate(() => {
     const h = window.packedConsumer.formValues, id = h.rows.entries()[0].id;
     const input = h.root.querySelector('[data-field="name"]');

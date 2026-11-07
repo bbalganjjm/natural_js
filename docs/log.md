@@ -1,3 +1,10 @@
+## 2026-11-07
+
+* **Verification** M5.5 passes sixteen latest groups on 183 frozen inputs, 138 units and 658 full cases per engine, with one 183-file tar in JS/TS and all five Windows browsers, unchanged 30 performance budgets and sixty recomputed medians. [Raw evidence](implementation/evidence/m55-verification.json) retains attempts, complete Chromium shard identities and selected scope. Independent source/document/raw-log/archive reviews pass; changed/full OKF checks have zero errors/warnings. Historical bodies/dates remain, and no full-family/P0/M13 closure, omission, publication or tag is claimed.
+
+* **Creation** [M5.5 local Form raw display and reset](implementation/m5-local-form-plan.md) applies compiled local formatting, preserves entered raw and reconciles effective native form owners through the existing Form owner. The [active plan](implementation/current.md) and [feature coverage](implementation/feature-parity.md) retain remaining owner/P0/M13 obligations.
+* **Update** [Form](v2/form.md), [UI contracts](v2/ui.md), [migration](v2/migration.md) and [employee screen](v2/employee-example.md) describe local raw/display ownership, native reset timing, rollback/disposal and explicit source/checkpoint recipes. Both search layouts use built-in uppercase display and native Reset fields without new controller code, a public API or a dependency.
+
 ## 2026-10-31
 
 * **Creation** [M5.4 Form value callbacks](implementation/m5-form-values-plan.md) adds before/after presentation callbacks with one refined context at the existing Form owner. Raw data, validation and tracking remain separate. The reduced CVC detail shows an employment label from its stored boolean. [Form](v2/form.md), [UI contracts](v2/ui.md), [migration](v2/migration.md) and [demo](v2/grid-demo.md) describe exact source/focus/cache/error behavior.

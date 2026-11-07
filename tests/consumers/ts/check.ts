@@ -314,3 +314,11 @@ export function connectFormValues(root: HTMLFormElement, rows: Rows<Employee>) {
     }
   });
 }
+
+export function connectLocalFormats(root: HTMLElement) {
+  const form = bindForm(root, { rules: { fields: { amount: { format: [["commas"]] } } }, parse: { amount: Number } });
+  form.bind(null);
+  const raw: Record<string, unknown> = form.read();
+  const validation: ValidationResult = form.validate();
+  return { form, raw, validation };
+}

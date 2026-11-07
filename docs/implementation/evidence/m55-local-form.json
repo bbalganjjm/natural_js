@@ -1,0 +1,658 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.5 local Form raw display and reset",
+  "recorded_at": "2026-11-07",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "workspace_baseline_commit": "7a621e7eeb92001ff7df7e277d06df0f79dcac44",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m54-verification.json",
+      "sha256": "73b1511370f7c72a3e715f77bf5a4200f624403b00d91ca6f5e363c86c428a99",
+      "preserved_in_commit": "7a621e7eeb92001ff7df7e277d06df0f79dcac44"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m54-form-values.json",
+      "sha256": "1c73e2571d00be2109b1476bf5344bb217e42d5f859af91b02b4f637944f4929"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "resolver": "Inherit every original symbol, option, dynamic path and unclosed owner obligation through immutable M5.4 evidence and the original audit. This selected local Form delta neither replaces parent ledgers nor reruns or recertifies historical runtime. The previous milestone alone owns its ten initial documentation snapshots; this stage started clean.",
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "7a621e7eeb92001ff7df7e277d06df0f79dcac44",
+    "scope": "No initial dirty documentation or new ten-file snapshot provenance is attributed to M5.5."
+  },
+  "public_delta": {
+    "new_public_named_types": [],
+    "new_public_options": [],
+    "new_public_methods": 0,
+    "new_public_entries": 0,
+    "new_shared_framework_modules": 0,
+    "new_runtime_dependencies": 0,
+    "note": "Reuse the existing Form local cache, compiled rule/native/render owners and native form ownership. No new setter, raw state manager, reset method, registry or callback option."
+  },
+  "selected_contracts": {
+    "raw_display": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Apply compiled local formats while retaining unparsed entered raw. Track only effective formatters and explicit renderers; read native property changes and explicit input events without adopting the last Form-written projection. RuleContext.rowId remains null.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/native-control.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B02",
+        "B03",
+        "B10",
+        "B25"
+      ],
+      "remaining": "Local before/after callbacks, unbound-key observation, partial binding and dynamic discovery remain required."
+    },
+    "focus_validation": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Preserve focused editable raw/caret, invalid entered text and readonly projection. Use detached raw-filled probes only where local text is projected; preserve native custom validity, effective disabled state, group/file semantics and business/cross-field raw checks. Parsers affect validation and do not rewrite local read().",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/native-control.ts",
+        "src/ui/rules.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B15",
+        "B20"
+      ],
+      "remaining": "No inverse format, implicit business normalization or complete shared rule/default equivalence is claimed."
+    },
+    "native_reset": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Observe distinct effective native owners: native control form ownership and ancestor forms of static fields, including currently supported ancestor and form= controls. Wait for native default action and final cancellation, reconcile affected controls, clear only affected field errors and refresh dependent displays. Retain static raw even for a static-only Form. Flush completed pending resets before public local operations; an in-dispatch read observes pre-reset values. Coalesce work in one owned task and preserve unrelated owners.",
+      "source_refs": [
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B16",
+        "B17",
+        "B18",
+        "B19",
+        "B20",
+        "B22",
+        "B27",
+        "B28"
+      ],
+      "remaining": "Native reset follows current DOM defaults. Ancestor-owned radio groups retain existing FORM_RADIO_OWNER restrictions. Rows-backed native reset does not implicitly write business data; complete legacy live InitialData/unbind semantics remain open."
+    },
+    "lifecycle": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Reject local formatted static targets that are editable/error regions or contain interactive, field or error content before ownership. Guard local formatter/renderer target raw, generation and disposal before writes, bound recursive refresh, restore local values, exact authored image src attributes and authored children on constructor failure, and release listeners/Select/root ownership. Dispose formatted controls and images to their latest entered raw value/src and restore other authored display children without changing Rows-backed disposal.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/field-render.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S03",
+        "B21",
+        "B22",
+        "B23",
+        "B24",
+        "B25"
+      ],
+      "remaining": "Application side effects are not transactional; wider shared/global row lifecycle equivalence remains required."
+    },
+    "migration": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use existing Rows for full received raw records and unbound keys. Explicit Rows operations own business changes and revert. Received status-insert appendState/replaceState checkpoints retain inserted defaults on revert; ordinary add-plus-revert removes that inserted row. Document native defaults separately from explicit live application checkpoints and exercise a real CVC search Form.",
+      "source_refs": [
+        "v1/src/natural.ui.js",
+        "v1/docs/examples/retrieve-data-list.md",
+        "src/data/index.ts",
+        "examples/vite/m10/main.ts"
+      ],
+      "witnesses": [
+        "D01",
+        "D02",
+        "D03",
+        "B26",
+        "B27",
+        "B28"
+      ],
+      "remaining": "All v1 Forms own datasets. This local display cache does not replace that legacy data owner or close all Form workflows."
+    },
+    "installed": {
+      "status": "selected_outcomes_verified_full_owner_obligations_retained",
+      "outcome": "Use one exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge, exercising existing public Form local raw/reset APIs, Rows migration recipes and cleanup. Retain complete fresh three-engine coverage and original performance budgets.",
+      "source_refs": [
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No npm publication or release tag. Actual macOS/iOS Safari remains excluded; available WebKit remains mandatory."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "The existing Form owns local raw projection and native reset lifecycle",
+      "marker": "function renderLocal("
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/native-control.ts",
+      "title": "Existing native probes validate entered raw and preserve file/group ownership",
+      "marker": "export function nativeMessage("
+    },
+    "S03": {
+      "kind": "source",
+      "file": "src/ui/field-render.ts",
+      "title": "Existing explicit renderer owner rejects recursive target writes",
+      "marker": "export function renderField("
+    },
+    "I01": {
+      "kind": "consumer",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript exercises existing local Form raw and validation contracts",
+      "marker": "export function connectLocalFormats("
+    },
+    "I02": {
+      "kind": "consumer",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Installed browser creates a local Form under an ancestor native reset owner",
+      "marker": "state.localForm ="
+    },
+    "I03": {
+      "kind": "consumer",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Installed browsers check local projection, unparsed raw, native reset, canceled reset, validation and disposal",
+      "marker": "const localForm = await page.evaluate("
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local compiled formats display authored raw values without becoming read or rule input"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "typed local declarations override their HTML kind and retain own named formatter functions"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local property writes remain observable without events and an explicit event can enter the previous projection"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local parsers affect validation candidates while reads and dependent rendering retain entered strings"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "formatted local native checks use raw text and preserve custom validity and effective disabled state"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local focus reveals raw and retains entered text and caret through dependent updates"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "pointer focus preserves the clicked selection while readonly local text remains formatted"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "invalid local edits remain visible through blur and valid replacements format without changing raw"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local autoValidate false formats entered raw but explicit validation still checks that raw"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local bind null refreshes static formats and dependent renderers from retained raw"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "native reset restores current native defaults and group choices before local refresh"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "a native reset button refreshes formatted defaults without a later Form call"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "synthetic reset follows native behavior while canceled native reset preserves raw and errors"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "a local div observes its ancestor native form reset and refreshes dependent display"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "external native form owners reset only their own raw and errors and preserve another owner focus"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "read inside reset dispatch sees old raw and immediate read after default action sees restored raw"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "explicit validation immediately after reset survives queued reset cleanup"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "coalesced resets never adopt a written projection or erase validation performed after the reset"
+    },
+    "B19": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "an edit after native reset takes precedence over pending reset rendering and cleanup"
+    },
+    "B20": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "formatted local siblings keep file validation on the real input and native reset clears the file"
+    },
+    "B21": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local constructor failures restore written values exact authored children and Select ownership"
+    },
+    "B22": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local disposal releases latest raw and exact display children and suppresses queued reset work"
+    },
+    "B23": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "recursive local formatter and renderer refresh fails without losing root ownership or retry"
+    },
+    "B24": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "a disposed local callback cannot overwrite its replacement Form or run stale later fields"
+    },
+    "B25": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "local image formats retain raw src and alt through direct writes disposal and failed initialization"
+    },
+    "B26": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "one-record Rows recipes retain unbound raw keys and distinguish received insert checkpoints from ordinary additions"
+    },
+    "B27": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "side CVC local search sends raw lowercase and resets native fields without a request or changes to another page",
+      "marker": "test(layout + \" CVC local search sends raw lowercase and resets native fields without a request or changes to another page\"",
+      "parameter": {
+        "layout": "side"
+      }
+    },
+    "B28": {
+      "kind": "browser",
+      "file": "tests/browser/form-local.spec.ts",
+      "title": "stack CVC local search sends raw lowercase and resets native fields without a request or changes to another page",
+      "marker": "test(layout + \" CVC local search sends raw lowercase and resets native fields without a request or changes to another page\"",
+      "parameter": {
+        "layout": "stack"
+      }
+    },
+    "D01": {
+      "kind": "example",
+      "file": "examples/vite/m4/employees.ts",
+      "title": "The existing CVC search reads local raw through its existing Form handle",
+      "marker": "const search = bindForm(searchRoot);"
+    },
+    "D02": {
+      "kind": "example",
+      "file": "examples/vite/m4/side.html",
+      "title": "The side CVC layout formats search display and uses a native reset button",
+      "marker": "<button type=\"reset\">Reset fields</button>"
+    },
+    "D03": {
+      "kind": "example",
+      "file": "examples/vite/m4/stack.html",
+      "title": "The stack CVC layout formats search display and uses a native reset button",
+      "marker": "<button type=\"reset\">Reset fields</button>"
+    }
+  },
+  "witness_counts": {
+    "status": "exact_source_witnesses_fresh_runtime_independently_confirmed",
+    "unit_delta": 0,
+    "browser_delta": 28,
+    "source_witnesses": 3,
+    "example_source_witnesses": 3,
+    "installed_source_witnesses": 3,
+    "inherited_full_cases_per_engine": 630,
+    "expected_full_cases_per_engine": 658,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 658
+  },
+  "verification": {
+    "status": "fresh_final_canonical_gates_independently_reviewed",
+    "gate_record": "docs/implementation/evidence/m55-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m55-verification.json",
+    "required_engines": [
+      "Chromium",
+      "Firefox",
+      "WebKit"
+    ],
+    "required_package_checks": "One exact tarball in isolated JavaScript/TypeScript and Chromium/Firefox/WebKit/actual Windows Chrome/Edge.",
+    "required_other_checks": [
+      "Strict source/build/example types",
+      "Meaningful DOM-only local raw/reset ownership regressions; a zero unit delta is legitimate",
+      "Unchanged binding and viewport performance budgets",
+      "Changed and full OKF document checks",
+      "Independent connected production-code, semantic document and raw-evidence reviews"
+    ],
+    "limitations": [
+      "Historical runtime is not rerun or recertified.",
+      "Manual assistive technology and final fixed-agent/token evaluation remain unverified.",
+      "Actual macOS/iOS Safari is excluded; available WebKit remains mandatory.",
+      "No model-response generation/evaluation or token-saving measurement is requested."
+    ],
+    "independent_reviews": {
+      "baseline": "passed_read_only_m54_source_raw_artifact_preservation_audit",
+      "source": "passed_final_connected_source_caller_review_and_recorded_fresh_runtime",
+      "evidence": "passed_final_independent_raw_archive_performance_three_engine_and_gate_inventory_review",
+      "documents": "passed_final_independent_seven_semantic_documents_receipt_index_log_review"
+    },
+    "baseline_input_entries": 182,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 630,
+    "independent_notes": {
+      "reviewer": "/root/m55_baseline",
+      "reviewed_at": "2026-11-07",
+      "source": {
+        "status": "passed_read_only_connected_review",
+        "normalized_sha256": {
+          "src/ui/form.ts": "5c657ad7a522c7ac454fa24939c22fd5ef7e9ddf4b22999fe27dd70ef1564c9b",
+          "tests/browser/form-local.spec.ts": "938d8f6e4724bf73c3eeca1b79183f0efba47f03086f849be50c4a8ab151ef65"
+        },
+        "exact_browser_witnesses": 28,
+        "confirmed": [
+          "Local-only static formatter preflight rejects editable/error targets and nested interactive/bound/error content before root or Select ownership; Rows preflight remains unchanged.",
+          "Existing nativeOwner serves reset listener discovery and affected-field cleanup, including static-only native Form fields; reset keeps their authored raw while clearing affected errors.",
+          "Formatted text/IMG raw adopts direct property changes without treating framework display as input; explicit input establishes raw even if equal to prior display. Invalid raw state remains separate from visible error cleanup.",
+          "Native reset uses one owned post-default task, final cancellation, in-dispatch/completed-event separation and synchronous public/input/focus flushing; later validation/input survives older cleanup.",
+          "Native probes are restricted to projected text, preserve custom validity and effective disabled state, and leave ordinary/file/group operations on native paths.",
+          "Constructor rollback restores written controls, exact authored child identities and absent/empty IMG src; dispose restores latest raw/src and clears timer/listeners/cache/root/Select ownership; stale disposed work cannot overwrite replacement Forms.",
+          "Rows-backed callback, source, draft, revert and disposal code paths retain their existing public contracts; no public type, option, method, module or dependency was added."
+        ],
+        "boundary": "Fresh runtime/final evidence is not certified by this read-only source review. Display callbacks do not make bare writes to unrelated unformatted DOM automatically reactive."
+      },
+      "preliminary_documents": {
+        "status": "final_semantic_review_passed",
+        "files": [
+          "docs/implementation/current.md",
+          "docs/implementation/feature-parity.md",
+          "docs/implementation/m5-local-form-plan.md",
+          "docs/v2/form.md",
+          "docs/v2/ui.md",
+          "docs/v2/migration.md",
+          "docs/v2/employee-example.md"
+        ],
+        "corrections": [],
+        "preserved_obligations": "No full Form/Core/UI/Grid family, P0, M13, omission, local/global callback, unbound-key, partial-binding or dynamic-discovery closure is claimed."
+      },
+      "chromium_executor": {
+        "status": "passed_independent_read_only_executor_review_fresh_runtime_approved_separately",
+        "runner": "docs/implementation/evidence/m55-chromium-six-shards.mjs",
+        "runner_sha256": "f1215f3460f1f06149674cedf01e9c23d68893b0f4ac6550e0a9543f4f03fe69",
+        "shard_count": 6,
+        "prior_runner": "docs/implementation/evidence/m55-chromium-shards.mjs",
+        "prior_runner_sha256": "4302078bb0266451d73e90ddeefd2994c100f1f606fd4fe39af07b4a36d4a6ae",
+        "prior_failed_attempt_preserved": true,
+        "proof": "One whole list plus six partition lists and six awaited fresh sequential executions use unchanged Playwright config/project with workers1/retries0. Per-partition listed/executed identities, successful single attempts, zero skip/flaky/global/unexpected errors and disjoint complete union are asserted. Its raw files and complete/failed manifest have independent names and hashes.",
+        "expected_canonical_gate_groups": 16,
+        "expected_execution_stage_commands": 21,
+        "expected_collection_commands": 7,
+        "limitation": "No six-shard runtime or root cause is certified by this source review. The earlier first223-case shard failed with222 passed/one beforeEach dynamic-import failure; the isolated case pass does not establish a cause or complete-suite success.",
+        "actual_recorded_result": {
+          "status": "completed_manifest_and_enclosing_gate_metadata_read_full_raw_coverage_audit_owned_separately",
+          "passed": 658,
+          "partitions": [
+            119,
+            104,
+            117,
+            118,
+            92,
+            108
+          ],
+          "records": 13,
+          "enclosing_gate_exit_code": 0,
+          "parent_sources_unchanged": true,
+          "manifest": "m55-chromium-six-shards.json",
+          "source_of_counts": "Retained completed manifest and enclosing frozen gate metadata; no browser rerun."
+        }
+      },
+      "history": {
+        "status": "passed_independent_read_only_body_and_nonfingerprint_metadata_comparison",
+        "baseline_commit": "7a621e7eeb92001ff7df7e277d06df0f79dcac44",
+        "historical_documents": 25,
+        "preserved_bodies_and_generated_verified_dates": true,
+        "initial_worktree": "clean",
+        "no_new_preexisting_snapshot_claim": true,
+        "public_types_and_package_exports_diff": "unchanged"
+      },
+      "runtime_summary": {
+        "status": "all16_latest_canonical_gates_and_final_independent_raw_reviews_passed",
+        "input_manifest": "m55-inputs-2c787d2277e7.json",
+        "input_manifest_sha256": "2c787d2277e7e55d79886273cb0e1a331a484331898f7193edf67d8f6d6070e5",
+        "full_suites": {
+          "chromium": 658,
+          "firefox": 658,
+          "webkit": 658
+        },
+        "unit_cases": 138,
+        "unit_delta": 0,
+        "artifact": {
+          "sha256": "94a942395623a3f4200874416113167a77d2f1269c24f5e65167b1348ab310ce",
+          "files": 183,
+          "packed_bytes": 318064,
+          "unpacked_bytes": 1587409
+        },
+        "gate_records": 31,
+        "development_records": 14,
+        "superseded_final_records": 1,
+        "input_manifests": 3,
+        "raw_child_files": 32,
+        "final_review_limit": "Independent final raw audit approves all31 records/three183-input maps, package/performance and complete Chromium/Firefox/WebKit coverage. Final semantic documents/receipt/index/log review also passes; only root final verified stamps, dependent-hash refresh and changed/full OKF checks remain before delivery."
+      },
+      "retained_chromium_attempt": {
+        "manifest": "m55-chromium-shards.json",
+        "manifest_sha256": "22a40d5741bad5b5227c404f68b389f132ed7c5a50da4ad3227d8624a39ba511",
+        "runner": "m55-chromium-shards.mjs",
+        "runner_sha256": "4302078bb0266451d73e90ddeefd2994c100f1f606fd4fe39af07b4a36d4a6ae",
+        "shard_count": 3,
+        "complete": false,
+        "certifies_full_suite": false,
+        "raw_child_files": 6,
+        "note": "First223-case partition retains222 passed and one beforeEach dynamic import failure. An isolated pass is diagnostic only; current cause remains unconfirmed. Completed six-shard coverage is independently separate."
+      },
+      "final_raw_evidence": {
+        "status": "approved_independently",
+        "audit": "node_modules/.cache/m55-independent-audit-final.log",
+        "sha256": "4b75413976f84e7149372ba735e22ce08f1683aebfcadbbc2b839756ada84922",
+        "records": 31,
+        "input_manifests": 3,
+        "entries_per_manifest": 183,
+        "latest_canonical_groups": 16,
+        "development_records": 14,
+        "superseded_final_records": 1,
+        "retained_failed_records": 3,
+        "failed_scope": "Focused Firefox fixture, focused WebKit fixture and original Chromium three-shard attempt remain failed evidence.",
+        "execution_commands": 21,
+        "collection_commands": 7,
+        "full_cases_per_engine": 658,
+        "review_method": "Final raw audit incorporates approved archive/performance/Chromium/Firefox audit logs by hash and directly verifies the final WebKit/full inventory proof; no runtime is rerun."
+      },
+      "final_documents": {
+        "status": "approved_independently",
+        "hash_scope": "Normalized whole-file bytes at independent semantic review, before final verification metadata and source-fingerprint stamps; these are review-time hashes, not post-stamp file hashes.",
+        "reviewed_at": "2026-11-07",
+        "semantic_files": [
+          "docs/implementation/current.md",
+          "docs/implementation/feature-parity.md",
+          "docs/implementation/m5-local-form-plan.md",
+          "docs/v2/form.md",
+          "docs/v2/ui.md",
+          "docs/v2/migration.md",
+          "docs/v2/employee-example.md"
+        ],
+        "normalized_reviewed_sha256": {
+          "docs/implementation/current.md": "42b28efdacc25f49bbd26ded5b7a68e4f7c45d49d34e9883812b921f21c5f290",
+          "docs/implementation/feature-parity.md": "5d3aaea7af833e91733fc3ad043b8b3936e935a30114eb5aed3998030b5134a4",
+          "docs/implementation/m5-local-form-plan.md": "f6864242c64cdf4947434c94ef3dad0e4d33fe1260b043da0c5e638d0f37b0ba",
+          "docs/v2/form.md": "a76c235ad85297fb8ff00c031f6f5cd21b37d21155e568645df057780c87ba48",
+          "docs/v2/ui.md": "a65f7113c8af9b4a84eaa02fe5998a284d794df5095d0533b4c215fcd3e80ac0",
+          "docs/v2/migration.md": "ae87c5269bbc88df54d738608665a736201eb56aa9b73aa7cad5b77162098096",
+          "docs/v2/employee-example.md": "36bba753afa88c19ecd392bb3d2cb265f7395c644e367ba7aeae3236d5d65755"
+        },
+        "additional_scope": [
+          "docs/implementation/index.md",
+          "docs/log.md",
+          "docs/implementation/evidence/m55-verification.json"
+        ],
+        "confirmed": [
+          "Final source/runtime/command/package counts agree with the generated receipt:183 inputs,138 units,658 cases per engine,16 groups,21 execution/seven collection commands,31 retained records and the exact183-member artifact.",
+          "Public API text accurately separates local unparsed raw/display, validation-only parsing, native owner capture, disposal/new bindForm after ownership changes, native/default/Rows ownership and Rows-only callbacks.",
+          "Static-target checks are explicitly preflight; formatter display does not imply lowercase normalization. The completed plan labels its old missing local behavior as the7a621e7 baseline in past tense.",
+          "Six-shard Chromium coverage and failed three-shard prefix remain separate. The unknown dynamic-import failure cause, Safari exclusion, manual/personal/fixed-agent limitations and all full owner/P0/M13 obligations remain explicit.",
+          "Existing historical log entries remain an exact normalized suffix; earlier25 historical body/generated/verified-date comparisons pass."
+        ],
+        "document_checks": "Approval covers semantic content and receipt consistency. Root will add verified metadata, regenerate dependent receipt hashes and run final changed/full OKF checks immediately; zero-warning claims remain conditional on those final checks passing."
+      }
+    },
+    "actual_frozen_input_entries": 183,
+    "actual_canonical_gate_groups": 16,
+    "actual_execution_stage_commands": 21,
+    "actual_collection_commands": 7,
+    "actual_gate_records": 31,
+    "actual_development_gate_records": 14,
+    "actual_superseded_final_records": 1,
+    "actual_input_manifests": 3,
+    "actual_child_raw_files": 32,
+    "actual_unit_cases": 138,
+    "actual_full_cases_per_engine": 658,
+    "artifact_sha256": "94a942395623a3f4200874416113167a77d2f1269c24f5e65167b1348ab310ce",
+    "chromium_method": "One canonical gate proves all658 identities exactly once across six fresh sequential built-in shards119+104+117+118+92+108, with seven collection and six execution commands. The original three-shard223-case failed prefix remains failed/superseded evidence; no retry, skip, monolithic pass or confirmed cause is claimed.",
+    "reviewed_conclusions": [
+      "Independent connected source/caller review confirms local raw/display separation, target freshness, invalid-state caching, file-safe raw probes, native reset cancellation/post-default/coalescing and cleanup, destructive-static-target preflight, exact IMG/child rollback and Rows compatibility without a new public API or module.",
+      "All31 captured runner records/log hashes and three183-entry input manifests pass the final independent raw audit. The latest sixteen canonical groups exit zero against one unchanged current183-input map. Fourteen development records and one superseded final record preserve all three failed commands.",
+      "Full Chromium covers658 identities exactly once across six built-in shards119+104+117+118+92+108 with zero retry/skip/flaky results. Firefox and WebKit each cover658 unsharded cases. Thirty-two raw child JSON/stderr files tie complete and incomplete attempts to their actual runners and parent gates; the failed old223-case prefix is not certified coverage.",
+      "The exact artifact SHA94a942395623a3f4200874416113167a77d2f1269c24f5e65167b1348ab310ce has183 actual members,318064 packed and1587409 unpacked bytes. The isolated JS/TS and all five available Windows browser consumers use that same artifact; all workspace payloads/sizes match.",
+      "Independent raw performance review approves60 recomputed medians from300 durations, all original nine binding and twenty-one viewport budgets, recorded viewport geometry/anchors/ownership and quiet cleanup. No universal speed, heap-retention or actual-token outcome is inferred.",
+      "All six immutable evidence parents, preserved v1 and ignored original legacy lock remain unchanged. M5.5 started clean; prior ten-document snapshot provenance belongs to M5.4 only. Independent comparison preserves25 historical bodies and generated/verified dates.",
+      "Selected local Form outcomes and the final seven semantic documents/receipt/index/log review are accepted. Full owner families, P0, M13, manual assistive technology and final agent-task/token evaluation remain open. No omission, npm publication or release tag is approved."
+    ],
+    "document_gate_note": "Independent semantic review approves the final seven semantic documents, receipt, index and log. Root must apply verified metadata, refresh dependent hashes and pass final changed/full OKF checks before completing stage delivery. No full-family closure or historical runtime recertification is claimed."
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Remaining control/option/callback/source/dynamic workflows, local/global bind-value lifecycle equivalence, unbound-key observation, partial binding and dynamic discovery beyond this selected raw display/native-reset scope."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected outcomes can receive acceptance after implementation, fresh final gates and independent review. No full owner family, P0, M13 or parent milestone closure is claimed."
+  }
+}

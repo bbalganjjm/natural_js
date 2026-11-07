@@ -4,69 +4,70 @@ title: Natural-JS 2.0 active plan
 description: Current checkpoint, remaining gates and next owner for the Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
-  - id: form-values
-    resource: m5-form-values-plan.md
-    title: Rows-backed Form presentation callbacks and raw ownership
-    git_blob: 2ea0ee4b30e4ce836dd6be0bea0bba4e72e4e8e1
+  - id: local-form
+    resource: m5-local-form-plan.md
+    title: Local Form raw display and native reset continuation
+    git_blob: d8ae494b5fd60178d119c28feacc965a3bf4721a
   - id: evidence
-    resource: evidence/m54-verification.json
-    title: Latest frozen runtime and artifact receipt
-    git_blob: 7419e17370dc53ddd72ad3a4a630e27f6e0a2bfe
+    resource: evidence/m55-verification.json
+    title: Latest frozen runtime and installed artifact receipt
+    git_blob: ca33e88a03dcf4a5794978b74c01e1d8248fc773
   - id: parity
     resource: feature-parity-plan.md
-    title: Required complete feature coverage and one omission review
-    git_blob: 6d58dbcb019a01df38547f94313713703aeed768
+    title: Complete required feature coverage and one omission review
+    git_blob: 4075c72f0255afe98a55e435a327eb30346c12fd
   - id: review
     resource: m13-review-plan.md
     title: Mandatory whole-code review and remediation
-    git_blob: bda236810e8ed4cf3bb9c3fa573bfdd088bcea37
+    git_blob: 6977094589c0f29b22e8ba16320fd7eb249a5eb9
   - id: conventions
     resource: ../governance/okf-conventions.md
     title: OKF document and verification rules
     git_blob: c39914313418de687419b88f43f8fce29333a053
-generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 ---
 
 Use this file to resume. The [milestone index](index.md), [roadmap](roadmap.md), [completed log](../log.md) and owning plans retain historical work; do not recertify it while refreshing fingerprints.
 
 # Goal
 
-Complete all 1.x framework capabilities in TypeScript/ESM without jQuery, preserving CVC, authored HTML/CSS, nested raw binding, unique IDs and accessible interaction. Keep contracts, code and agent context small. Only explicitly approved omissions reduce supported behavior.[^parity]
+Complete 1.x framework capabilities in TypeScript/ESM without jQuery, preserving CVC, authored HTML/CSS, nested raw binding, unique IDs and accessible interaction. Keep code, contracts and agent context small; remove supported outcomes only with explicit approval.[^parity]
 
 # Checkpoint
 
-- Work and authorized pushes stay on 2.0.0-alpha.0. M5.4 starts at pushed d923434ea9776e3978596e53a8da21c3daf6a642; ten preexisting document changes have separate snapshot provenance and are preserved.[^form-values][^evidence]
-- M5.4 adds two synchronous value callbacks and FormValueContext at the existing Rows-backed Form owner. Display replacements preserve source/originals/tracking/raw validation; field-local caching, focus deferral and reentry/source guards avoid repeated or stale work. No new module, dependency, registry or inverse mapper. [Form](../v2/form.md#value-callbacks) owns the API.[^form-values]
-- Sixteen canonical gates pass on 182 frozen inputs, 138 units, 630 full cases per engine. Chromium's three disjoint built-in shards prove complete once-only coverage; Firefox/WebKit are unsharded. Identical-package JS/TS plus five Windows browsers and unchanged nine binding/twenty-one viewport budgets pass. Tar SHA-256: 14fe023753933d17cb35c6de7b9b41ea80a5fc3674aeeec4f0809c7f5e56a9fd.[^evidence]
-- Independent connected source/caller/document and raw-log/archive/measurement reviews accept this selected slice. Changed/full OKF checks pass with zero errors/warnings; historical bodies/dates remain unchanged except the separately preserved initial edits. This does not close all legacy families.[^evidence][^conventions]
+- M5.5 starts at pushed 7a621e7eeb92001ff7df7e277d06df0f79dcac44 with a clean worktree. Work and authorized pushes stay on 2.0.0-alpha.0.[^evidence]
+- M5.5 extends the existing Form raw/display cache for local formatting and native-owner reset. It preserves unparsed raw, direct native writes, validation/focus, authored children and image src, and cancels stale or disposed work. Ownership preflight prevents formatting a container from deleting controls. No new public API, module or dependency. [Form](../v2/form.md#local-raw-input-and-native-reset) owns the contract.[^local-form]
+- Source-backed legacy records still use Rows. The plan verifies full unbound raw values, received insert checkpoints and explicit default/revert recipes; native defaults differ from live legacy InitialData. Whole-row/global callback and complete owner equivalence remain open.[^local-form]
+- Sixteen final gate groups pass on 183 frozen inputs, 138 units and 658 full cases per engine. Chromium's 6 disjoint shards cover every identity once; Firefox/WebKit are unsharded. Identical-package JS/TS plus all five Windows browsers and original nine binding/twenty-one viewport budgets pass. Tar SHA-256: 94a942395623a3f4200874416113167a77d2f1269c24f5e65167b1348ab310ce.[^evidence]
+- Independent connected source/caller/document and raw-log/archive/metric reviews accept the selected slice. Changed/full OKF checks pass with zero errors/warnings; historical bodies and dates are preserved. Earlier milestones remain accepted only within their dated scope.[^evidence][^conventions]
 
 # Next action
 
-Plan the remaining Form local-source/raw binding and lifecycle contract against legacy callers before implementing it. Keep shared/global callback/default lifecycles, List editing, Tree validation, unvalidated paste, general data-value/schema equivalence, other UI/CVC/P0 and mandatory M13 required. No new omission is approved.[^form-values][^review]
+Plan required Form whole-row callbacks, live default/unbind behavior and selective/dynamic field binding against legacy callers. Keep shared/global defaults/hooks, unbound-key observation, List editing, Tree validation, unvalidated paste, general data/schema equivalence, other UI/CVC/P0 and M13 required. No new omission or full-family closure is approved.[^local-form][^review]
 
 # Decisions
 
-- One CVC controller/cancellation lifetime per page; reuse its runtime in content, Popup, Tabs and Documents.
-- Safe data-field paths and store-local RowId identify data; document-unique IDs associate labels/ARIA. Bind existing HTML/CSS without imposing a design.
-- Share proven rule/control/cleanup behavior at existing owners. Use direct functions and ordinary objects; expose only application-use contracts.
+- One CVC controller/cancellation lifetime per page; reuse it in content, Popup, Tabs and Documents.
+- Safe data-field paths and RowId identify data; document-unique IDs associate labels/ARIA. Bind existing HTML/CSS.
+- Reuse actual rule/control/cleanup owners. Prefer direct functions and ordinary objects; expose only necessary application contracts.
 - Retain reachable formatter/validator/mask/date/byte behavior. Remove helpers only after direct, indirect, configuration and declaration reachability checks.[^parity]
-- Value callbacks project supported bound fields only. Local callbacks, unbound-key/global wrapper equivalence and wider Form raw rendering remain separate obligations; normalization uses explicit application data operations.[^form-values]
-- Root 2.0 remains Apache-2.0. Preserve master/LGPL v1 and the original ignored legacy lockfile.
-- Chromium/Firefox/WebKit are mandatory; installed Chrome/Edge use the same tar. Actual macOS/iOS Safari is excluded.
-- No npm publication or release tags until personal testing and a separate request.
+- DOM-local Form retains only display-related raw; received/business data stays in Rows. M5.4 callbacks and their nonnull context remain Rows-backed.[^local-form]
+- Root 2.0 stays Apache-2.0. Preserve master/LGPL v1, immutable evidence, original fixtures and the ignored legacy lockfile.
+- Chromium/Firefox/WebKit and installed Chrome/Edge remain required. Actual macOS/iOS Safari is excluded.
+- npm publication and release tags wait for personal testing and a separate request.
 
 # Verification log
 
-The [M5.4 plan](m5-form-values-plan.md) and [receipt](evidence/m54-verification.json) own command attempts, exact witnesses, shard identities and sixty recomputed raw performance medians. The active document keeps only resume context. Mapping counts remain 60 families/775 entries; selected acceptance does not close full families or recertify historical runtime.[^evidence][^parity]
+The [M5.5 plan](m5-local-form-plan.md) and [receipt](evidence/m55-verification.json) own command attempts, 28 new DOM witnesses, shard identities, installed payload proof and sixty recomputed performance medians. The active document keeps resume context only. All 60 mapped families/775 entries retain their complete obligations; selected acceptance does not recertify historical runtime.[^evidence][^parity]
 
 # Open questions
 
-Manual assistive technology, personal acceptance, actual token telemetry and equivalent final agent-task comparison remain unverified. Finish complete feature/dynamic coverage and one consolidated omission proposal, then [M13 whole-code review/remediation](m13-review-plan.md).[^parity][^review]
+Manual assistive technology, personal acceptance, actual token telemetry and final fixed-agent comparison remain unverified. Finish feature/dynamic coverage and the consolidated omission proposal, then [M13 whole-code review/remediation](m13-review-plan.md).[^parity][^review]
 
-[^form-values]: Rows-backed Form presentation callbacks and raw ownership
-[^evidence]: Latest frozen runtime and artifact receipt
-[^parity]: Required complete feature coverage and one omission review
+[^local-form]: Local Form raw display and native reset continuation
+[^evidence]: Latest frozen runtime and installed artifact receipt
+[^parity]: Complete required feature coverage and one omission review
 [^review]: Mandatory whole-code review and remediation
 [^conventions]: OKF document and verification rules

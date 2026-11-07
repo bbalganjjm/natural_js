@@ -60,7 +60,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
+    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -225,6 +225,8 @@ P0 must close behavior equivalence for mapped literal/merged options, dynamic di
 The [M5.3 continuation](m5-form-options-plan.md) adds selected Rows-backed nested Form choices and shared Form/Grid/List occurrence handling. It removes manual detail-screen option conversion while preserving unmarked/local Forms. Wider bind-value callbacks, Form raw rendering, List editing, Tree validation and remaining owner/P0/M13 obligations stay required; no full-family closure or omission is inferred.
 
 The [M5.4 continuation](m5-form-values-plan.md) adds selected Rows-backed Form value projection/observation contracts with raw validation and source ownership. It does not close local-source callbacks, unbound-key/global wrapper equivalence, wider Form raw rendering or any full family. Failed cycles, native shapes, focus and stale work have exact witnesses; all remaining owner/P0/M13 obligations stay required.
+
+The [M5.5 continuation](m5-local-form-plan.md) implements selected local raw formatting, native-owner reset and lifecycle protection through existing Form/native/render owners. Source-backed legacy workflows remain Rows-owned, including full unbound values and explicit received insert checkpoints. Fresh runtime/document checks accept these selected outcomes; this slice closes no full family, global/whole-row callback, unbound-key observation, partial binding, dynamic discovery or other owner/P0/M13 obligation.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
 

@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.5 local Form raw display and reset](m5-local-form-plan.md) - Apply local Form formatting without changing entered raw values and reconcile native reset through existing Form ownership. (draft)
+
 * [Natural-JS 2.0 M5.4 Form value callbacks](m5-form-values-plan.md) - Apply scoped Form value projections and observations without implicit Rows mutation or repeated validation callbacks. (draft)
 * [Natural-JS 2.0 M5.3 Form row-local choices](m5-form-options-plan.md) - Bind nested typed Form choices through existing option owners and remove manual detail-screen option conversion. (draft)
 

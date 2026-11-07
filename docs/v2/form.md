@@ -1,11 +1,15 @@
 ---
 type: UI Component
 title: bindForm
-description: Bind authored Form fields, groups and nested typed choices to Rows with drafts, retained rules and accessible errors.
+description: Bind authored Form fields to local raw input or Rows with formatting, typed choices, validation and accessible errors.
 tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm]
 sources:
+  - id: local-browser
+    resource: ../../tests/browser/form-local.spec.ts
+    title: Local raw formatting, native reset, lifecycle and CVC regressions
+    git_blob: 2c3d9d0ac8453a9e4e8039cddf2e9e9d4fa1ffa9
   - id: values-browser
     resource: ../../tests/browser/form-values.spec.ts
     title: Value projection, raw validation, focus and stale callback regressions
@@ -25,7 +29,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
+    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -58,10 +62,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -203,18 +207,50 @@ const form = bindForm(root, {
 
 Each configured field must have exactly one display target. The synchronous callback receives its raw value and `RuleContext`; return literal text, `null` to clear, or a fresh disconnected parentless Element, Text or DocumentFragment from the target's document. Configuration, callback failures, recursive updates, async results and invalid/owned returned nodes raise `UI_RENDER` with the binder API, field and callback cause when present. The application creates and sanitizes any trusted DOM; strings are never interpreted as HTML.[^render]
 
-Preflight rejects native value/image controls, editable regions, error regions, simultaneous nonempty effective formatters, and targets containing other bound fields/controls/error regions or framework interaction markers. [Grid's shared rendering contract](grid.md#display-rendering) details the same ownership rules. On Form disposal, only custom render targets recover their exact original child nodes; ordinary control values keep the existing Form disposal behavior. There is no new renderer registry or general utility API.[^render][^form][^controls-browser]
+Preflight rejects native value/image controls, editable regions, error regions, simultaneous nonempty effective formatters, and targets containing other bound fields/controls/error regions or framework interaction markers. [Grid's shared rendering contract](grid.md#display-rendering) details the same ownership rules. Rows-backed Form restores custom render targets' exact original child nodes on disposal. Local display cleanup also includes formatted static targets and raw control/image restoration described below. There is no new renderer registry or general utility API.[^render][^form][^controls-browser]
 
 A local Form retains each custom display field's original raw text separately from generated DOM. Native input updates reevaluate its display using the current field snapshot; `read()` and validation use the retained raw value, not the renderer's text output. This keeps a display prefix or rich child from becoming application input.[^form]
+
+## Local raw input and native reset
+
+A Form without Rows also applies effective formatters. It retains raw only for fields whose formatter/renderer writes display; other controls, groups, Select and files stay native. Formatted text controls and images remember the last Form-written value/src so a later direct property/attribute write is read as new raw. Static renderer/formatted text retains its authored raw separately. An input event explicitly establishes entered raw, even when it equals the previous projection. Local read() returns unparsed native values; parse functions affect validation only. RuleContext.rowId is null.[^form][^local-browser]
+
+```html
+<form>
+  <label>Amount <input data-field="amount" value="1200" data-format='[["commas"]]' pattern="[0-9]+"></label>
+  <output data-error-for="amount"></output>
+  <button type="reset">Reset fields</button>
+</form>
+```
+
+```ts
+const form = bindForm(root, { parse: { amount: Number } });
+form.read(); // { amount: "1200" }; an unfocused control displays "1,200".
+form.bind(null); // Refresh local display and clear visible errors, without replacing raw.
+```
+
+A formatted local static target cannot be editable, an error region, or contain interactive controls, bound fields or error regions (FORM_FORMAT_CONTROL). Ordinary decorative children and supported image src targets remain allowed. This preflight runs before ownership or DOM writes.[^form][^local-browser]
+
+Initial binding, input, blur and local bind(null) use the same format/native/render owners. Editable focused text shows raw and preserves its caret. Readonly text stays formatted. An entered value found invalid stays raw. A changed native raw value invalidates that retained result; later validation establishes its new status. This state is separate from visible error cleanup. Programmatic writes are collected by read/validate/refresh; dispatch input to refresh dependent display. A formatted text control's native constraints use a raw-filled probe, including custom validity and effective disabled state. File inputs keep native validation and are never assigned a filename by this mechanism.[^form][^native][^local-browser]
+
+Native form.reset() and reset buttons restore current native defaults. Local Form observes the effective form owners captured at binding for its valid controls and static fields, including an ancestor or form= owner outside the root. Dispose the handle and call bindForm again after changing native ownership. Existing radio owner/name restrictions still apply. A canceled reset changes no retained raw, generated display or owned errors. Untrusted synthetic reset notifications do not run framework reset cleanup; native default behavior may differ by browser. Call the native method or activate a reset button for the reset contract.[^form][^local-browser]
+
+Framework cleanup runs in a queued task after the native default action. Public local read/validate, subsequent input/focus or bind(null) flush completed pending resets synchronously. An in-dispatch read still sees pre-reset raw. Immediate validation or later input therefore survives an older queued cleanup. Coalesced resets are applied once per affected owner; another owner's raw, focus and errors remain. Reset refreshes formatted controls from native DOM, retains static/renderer raw and refreshes dependent display. User-owned native custom validity follows browser behavior.[^form][^local-browser]
+
+Initialization failure restores written control values, exact authored children and image src attributes and releases ownership. Disposal cancels pending reset work/listeners, restores latest raw values/src to local formatted controls/images and restores authored children for local static display. It leaves alt unchanged; empty image raw uses the native writer's removal rule. Disposal/rebinding cannot recapture separators or display prefixes as raw. Rows disposal retains its existing behavior.[^form][^native][^local-browser]
+
+Formatter/renderer results check current lifetime, generation and their target raw before DOM commit. An obsolete target write stops later field work. Recursive local display refresh raises FORM_RENDER (possibly wrapped by RULE_FAILED or UI_RENDER); earlier application/DOM side effects are not rolled back. Keep display callbacks focused on computing display and use input or an explicit refresh for application data changes.[^form][^render][^local-browser]
+
+Received/business records, full unbound keys and received insert checkpoints belong in Rows. Local formatting adds no separate dataset, setter, callback type or registration API. beforeBindValue/onBindValue remain Rows-only. Native defaults differ from legacy live InitialData; use the explicit [migration recipes](migration.md) for those workflows.[^form][^entry][^local-browser]
 
 # Methods
 
 | Method | Behavior |
 |---|---|
-| `bind(id)` | Shows an existing nondeleted row or clears with `null`. Switching rows retains each row's invalid drafts and restores them on return. A local Form accepts only `null`. |
+| `bind(id)` | Shows an existing nondeleted row or clears with `null`. Switching rows retains each row's invalid drafts and restores them on return. Local Form accepts only null to refresh current raw display and clear visible errors. |
 | `read()` | Returns a detached nested record of marked fields. A row-bound Form reads stored raw values, excluding invalid drafts; a local Form reads current control values without parsing. |
 | `validate(id?)` | Combines native HTML constraints and declarative rules. Without an ID, checks the bound row and every row with a retained draft. With an ID, checks that row without rebinding; hidden-row issues have no `element`. A draft made valid by another change enters `Rows` before the final result. |
-| `dispose()` | Removes delegated listeners and Rows subscription, releases the root, clears drafts, and restores original error text, field/error ARIA attributes and custom render target child nodes. Rows-backed fields also recover authored `data-field-changed` values or absence. It does not reset ordinary input values. Repeated disposal is safe. |
+| `dispose()` | Removes listeners, pending local reset work and Rows subscription, releases ownership and restores error/ARIA state. Rows-backed fields recover authored change markers and custom render children. Local formatted controls/images recover latest raw; local static display recovers authored children. Other ordinary input values remain. Repeated disposal is safe. |
 
 `ValidationIssue` contains `rowId`, `field`, `rule`, `message`, and an `element` only for visible or local fields. Later calls on a disposed handle raise `FORM_DISPOSED`. `Rows.replace`, removal, and `revert(id?)` discard the affected drafts, including a revert of a clean row. External `Rows.set` preserves drafts and clears stale errors for the visible row without calling application validators from the store subscription. An explicit `validate(id?)` rechecks drafts and commits those now valid before reporting the final state. If a `Rows.set` subscriber throws after an input edit was stored, Form clears that committed draft and propagates the original error; a rejected edit keeps its draft.[^form]
 
@@ -257,6 +293,7 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [Rows](data.md) owns row identity and events. [DatePicker](datepicker.md) provides explicit ISO calendar selection. [Select](select.md) describes standalone typed choices; Form owns marked Select fields. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
 
 [^entry]: Public UI entry and Form types
+[^local-browser]: Local raw formatting, native reset, lifecycle and CVC regressions
 [^values-browser]: Value projection, raw validation, focus and stale callback regressions
 [^form]: Form binding runtime
 [^options]: Shared row option extraction, DOM, selection and availability

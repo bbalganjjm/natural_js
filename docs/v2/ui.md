@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 7b5d6f99b96cf413f277169eafbba722f7e350d1
+    git_blob: 08fd35bb2992c2d701fe67a592d94ea984ceafb3
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
+  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -114,6 +114,10 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 `GridIdsChange` reports selected or checked membership, while `onSelect` continues to report active detail identity. Before hooks return a strict boolean or `undefined`; `false` vetoes the whole proposal. Reentrant state, Rows or sort/filter/page changes invalidate an outer proposal even if the projected IDs stay identical. Post callbacks see committed state and DOM; their exceptions propagate without rolling it back. Forced pruning bypasses veto and notifies after the view commits or a failed view/setter rolls back. A subsequent callback append keeps its new page totals; active/selected eligibility never implicitly clears independent eligible checks.[^selection][^grid][^lifecycle-browser]
 
 `checkMode?: "multiple" | "single"` is an inline Grid option, separate from `multiple` selection gestures. Multiple mode is the default. Single checking replaces the previous ID atomically through the same hooks; `setChecked` and `checkAll(true, scope)` never silently pick a first row. [Grid](grid.md) defines empty/one/many scope behavior and disabled header checks; no new public check-mode type or getter is added.[^grid][^selection]
+
+# Local Form input
+
+DOM-local Form applies effective formatters through the existing rules. Local read retains unparsed raw; parse is validation-only. Native reset uses effective form owners, post-default cleanup and synchronous flushing before later public/input work. It adds no public API or nullable FormValueContext. See [Form local input](form.md#local-raw-input-and-native-reset) for cache, focus, image/file, native-default and disposal rules.[^form][^native]
 
 # Form value callbacks
 

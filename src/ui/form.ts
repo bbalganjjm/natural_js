@@ -8,7 +8,7 @@ import type { RuleCall } from "./rules.js";
 import { claimSelect } from "./select-owner.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import type { RowOption } from "./row-options.js";
-import { control, disabled, display, displayField, fieldValue, formatCapable, nativeMessage, textLengthControl } from "./native-control.js";
+import { control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import type {
   FormHandle, FormValueContext, FormatRule, ParseInput, RuleContext, RuleSet,
@@ -201,6 +201,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (field.format.length && !formatCapable(field.element)) {
       throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
     }
+    if (!rows && field.format.length && !control(field.element) && (field.element.isContentEditable ||
+        field.element.matches("[data-error-for]") || field.element.querySelector(`${interactiveContent}, [data-field], [data-error-for]`))) {
+      throw formError("FORM_FORMAT_CONTROL", "Local formatting cannot replace editable or bound content.", { field: field.name });
+    }
     if (parsers.get(field.name) && (field.choices || field.kind === "checkbox" || field.kind === "multiple")) {
       throw formError("FORM_PARSE_CONTROL", "A string parser cannot convert typed choices, boolean or array controls.", { field: field.name });
     }
@@ -208,11 +212,33 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const renderers = fieldRenderers("bindForm", fields.map(field => ({
     name: field.name, element: field.element, formatted: field.format.length > 0
   })), options.render);
-  const renderedOriginals = fields.filter(field => renderers.has(field.name)).map(field => ({ element: field.element, children: [...field.element.childNodes] }));
+  const renderedOriginals = fields.filter(field => renderers.has(field.name) ||
+    !rows && field.format.length && !control(field.element)).map(field => ({
+    field, element: field.element, children: [...field.element.childNodes],
+    src: field.element.localName === "img" ? field.element.getAttribute("src") : undefined
+  }));
   const choiceFields = fields.filter(field => field.choices);
-  const localRenderedValues = new Map(rows ? [] : fields.filter(field => renderers.has(field.name)).map(field => [field, fieldValue(field)] as const));
+  const localRenderedValues = new Map<Field, { raw: unknown; shown: unknown; invalid: boolean }>(rows ? [] :
+    fields.filter(field => renderers.has(field.name) || field.format.length)
+    .map(field => { const raw = fieldValue(field); return [field, { raw, shown: raw, invalid: false }] as const; }));
   const byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
   const releaseSelects: (() => void)[] = [];
+  const resetOwners = new Set<HTMLFormElement>();
+  if (!rows) for (const field of fields) for (const element of field.elements) {
+    const owner = nativeOwner(element);
+    if (owner) resetOwners.add(owner);
+  }
+  const pendingResets = new Map<HTMLFormElement, Event[]>();
+  let resetTimer: ReturnType<typeof setTimeout> | undefined;
+  let boundId: RowId | null = null;
+  let disposed = false;
+  let reconciling = false;
+  let pointerField: Field | undefined;
+  let renderVersion = 0;
+  let localRendering = false;
+  const drafts = new Map<RowId, Map<Field, unknown>>();
+  const issues = new Map<Field, readonly ValidationIssue[]>();
+  const activeValues = new Map<Field, Set<RowId>>();
   let localRenderStarted = false;
   try {
     for (const field of fields) {
@@ -221,11 +247,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
       }
     }
     boundRoots.add(root);
-    if (!rows && renderers.size) { localRenderStarted = true; renderLocal(); }
+    if (localRenderedValues.size) { localRenderStarted = true; renderLocal(); }
   } catch (cause) {
     boundRoots.delete(root);
     for (const release of releaseSelects) release();
-    if (localRenderStarted) for (const original of renderedOriginals) original.element.replaceChildren(...original.children);
+    if (localRenderStarted) {
+      for (const [field, value] of localRenderedValues) if (control(field.element)) display(field.element, value.raw);
+      restoreRendered(true);
+    }
     throw cause;
   }
   for (const field of fields) {
@@ -244,15 +273,6 @@ export function bindForm<T extends object = Record<string, unknown>>(
       original.element.setAttribute("aria-describedby", [...tokens].join(" "));
     }
   }
-
-  let boundId: RowId | null = null;
-  let disposed = false;
-  let reconciling = false;
-  let pointerField: Field | undefined;
-  let renderVersion = 0;
-  const drafts = new Map<RowId, Map<Field, unknown>>();
-  const issues = new Map<Field, readonly ValidationIssue[]>();
-  const activeValues = new Map<Field, Set<RowId>>();
 
   function active(): void {
     if (disposed) throw formError("FORM_DISPOSED", "This Form has been disposed.");
@@ -273,7 +293,20 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function localFieldValue(field: Field): unknown {
-    return localRenderedValues.has(field) ? localRenderedValues.get(field) : fieldValue(field);
+    const retained = localRenderedValues.get(field);
+    if (!retained) return fieldValue(field);
+    if (control(field.element) || field.element.localName === "img") {
+      const entered = fieldValue(field);
+      if (!Object.is(entered, retained.shown)) {
+        retained.raw = retained.shown = entered;
+        retained.invalid = false;
+      }
+    }
+    return retained.raw;
+  }
+
+  function nativeOwner(element: HTMLElement): HTMLFormElement | null {
+    return control(element) ? element.form : element.closest<HTMLFormElement>("form");
   }
 
   function choiceOptions(field: Field, values: unknown, id: RowId | null): readonly RowOption[] {
@@ -298,12 +331,87 @@ export function bindForm<T extends object = Record<string, unknown>>(
     return element.multiple ? values : values[0] ?? null;
   }
 
-  function renderLocal(): void {
-    const values = localValues();
-    for (const field of fields) {
-      const renderer = renderers.get(field.name);
-      if (renderer) renderField("bindForm", field.element, readPath(values, field.path), context(field, null, values), renderer);
+  function renderLocal(preserve?: Field, blurred?: Field): void {
+    if (localRendering) throw formError("FORM_RENDER", "A local Form cannot recursively refresh its display.");
+    const version = ++renderVersion;
+    localRendering = true;
+    try {
+      const values = localValues();
+      for (const [field, retained] of localRenderedValues) {
+        const raw = readPath(values, field.path);
+        const current = () => {
+          if (disposed || version !== renderVersion) return false;
+          for (const events of pendingResets.values()) {
+            if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) return false;
+          }
+          if (Object.is(raw, localFieldValue(field))) return true;
+          renderVersion++;
+          return false;
+        };
+        if (!current()) return;
+        const element = field.element;
+        const focused = field !== blurred && control(element) && textLengthControl(element) &&
+          !element.readOnly && element === root.ownerDocument.activeElement;
+        if (field === preserve || control(element) && (focused || retained.invalid)) continue;
+        writeValue(field, raw, values, null, false, current);
+        if (disposed || version !== renderVersion) return;
+        retained.shown = fieldValue(field);
+      }
+    } finally { localRendering = false; }
+  }
+
+  function restoreRendered(rollback = false): void {
+    for (const original of renderedOriginals) {
+      original.element.replaceChildren(...original.children);
+      if (original.src !== undefined) {
+        if (!rollback) display(original.element, localFieldValue(original.field));
+        else if (original.src === null) original.element.removeAttribute("src");
+        else original.element.setAttribute("src", original.src);
+      }
     }
+  }
+
+  function flushLocalResets(preserve?: Field, repaint = true): void {
+    const completed = new Set<HTMLFormElement>();
+    for (const [owner, events] of pendingResets) {
+      const dispatching = events.filter(event => event.eventPhase !== Event.NONE);
+      if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) completed.add(owner);
+      if (dispatching.length) pendingResets.set(owner, dispatching);
+      else pendingResets.delete(owner);
+    }
+    if (!pendingResets.size && resetTimer !== undefined) {
+      clearTimeout(resetTimer);
+      resetTimer = undefined;
+    }
+    if (!completed.size) return;
+    for (const field of fields) {
+      if (!field.elements.some(element => {
+        const owner = nativeOwner(element);
+        return owner !== null && completed.has(owner);
+      })) continue;
+      const retained = localRenderedValues.get(field);
+      if (retained) {
+        if (control(field.element)) retained.raw = retained.shown = fieldValue(field);
+        retained.invalid = false;
+      }
+      issues.delete(field);
+    }
+    if (repaint) {
+      renderLocal(preserve);
+      showIssues();
+    }
+  }
+
+  function onReset(event: Event): void {
+    if (disposed || !event.isTrusted || event.target !== event.currentTarget) return;
+    const owner = event.currentTarget as HTMLFormElement;
+    const pending = pendingResets.get(owner) ?? [];
+    pending.push(event);
+    pendingResets.set(owner, pending);
+    resetTimer ??= setTimeout(() => {
+      resetTimer = undefined;
+      if (!disposed) flushLocalResets();
+    }, 0);
   }
 
   function context(field: Field, id: RowId | null, values: Record<string, unknown>): RuleContext {
@@ -377,7 +485,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (validate && required && !selected) found.push(issue(field, id, "html", "Select an option."));
     } else if (control(field.element)) {
       const visible = id === null || id === boundId;
-      const probe = visible && !valueCallbacks ? field.element : field.element.cloneNode(true) as Control;
+      const probe = visible && !valueCallbacks && !(id === null && field.format.length)
+        ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
       if (probe !== field.element) {
         probe.disabled = disabled(field.element, root);
@@ -461,7 +570,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (!current()) return;
     const renderer = renderers.get(field.name);
     if (renderer) renderField("bindForm", field.element, value, context(field, id, source ?? {}), renderer, false,
-      id !== null && activeValues.get(field)?.has(id) ? current : undefined);
+      !rows || id !== null && activeValues.get(field)?.has(id) ? current : undefined);
     else if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, value);
     else {
       const shown = source && !focused && field.format.length
@@ -648,6 +757,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
     const field = byElement.get(event.target);
     if (!field || !control(field.element)) return;
+    if (!rows) flushLocalResets(field);
+    if (disposed) return;
     if (disabled(event.target, root) ||
         (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
     if (rows) {
@@ -658,13 +769,25 @@ export function bindForm<T extends object = Record<string, unknown>>(
       reconcile(boundId, autoValidate);
       return;
     }
+    const retained = localRenderedValues.get(field);
+    if (retained) {
+      retained.raw = retained.shown = fieldValue(field);
+      retained.invalid = false;
+    }
+    const version = ++renderVersion;
     const entered = new Map(fields.map(item => [item, localFieldValue(item)] as const));
     const checked = evaluate(null, localValues(), entered, autoValidate);
+    if (disposed || version !== renderVersion) return;
     for (const item of fields) {
-      if (item === field || issues.has(item)) issues.set(item, checked.byField.get(item) ?? []);
+      if (item === field || issues.has(item)) {
+        const found = checked.byField.get(item) ?? [];
+        issues.set(item, found);
+        const value = localRenderedValues.get(item);
+        if (value) value.invalid = found.length > 0;
+      }
     }
     showIssues();
-    if (renderers.size) renderLocal();
+    if (localRenderedValues.size) renderLocal();
   }
 
   function onPointerDown(event: PointerEvent): void {
@@ -674,21 +797,27 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function onFocusIn(event: FocusEvent): void {
     if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
+    if (!rows) flushLocalResets();
+    if (disposed) return;
     const field = byElement.get(event.target);
     const pointed = field !== undefined && pointerField === field;
     pointerField = undefined;
     if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
         field.kind !== "single" || !formatCapable(field.element) ||
-        !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
-    if (valueCallbacks && textLengthControl(field.element) && field.element.readOnly) return;
+        rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
+    if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
     const element = field.element;
     const before = element.value;
-    const raw = readPath(rowValue(boundId), field.path);
+    const raw = rows ? readPath(rowValue(boundId!), field.path) : localFieldValue(field);
     if (before === (raw == null ? "" : String(raw))) return;
     const selection = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
       ? { start: element.selectionStart, end: element.selectionEnd, direction: element.selectionDirection }
       : null;
     display(element, raw);
+    if (!rows) {
+      localRenderedValues.get(field)!.shown = fieldValue(field);
+      renderVersion++;
+    }
     if (selection && selection.start !== null && selection.end !== null) {
       const selectAll = selection.start === 0 &&
         (selection.end === before.length || !pointed && selection.end === 0);
@@ -701,12 +830,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function onFocusOut(event: FocusEvent): void {
     if (disposed || !event.target || !(event.target instanceof HTMLElement)) return;
+    if (!rows) flushLocalResets();
+    if (disposed) return;
     const field = byElement.get(event.target);
     if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
         field.kind !== "single" || !formatCapable(field.element) ||
-        !rows || boundId === null || drafts.get(boundId)?.has(field)) return;
-    if (valueCallbacks && textLengthControl(field.element) && field.element.readOnly) return;
-    const id = boundId, snapshot = rows.get(id), version = renderVersion;
+        rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
+    if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
+    if (!rows) { renderLocal(undefined, field); return; }
+    const id = boundId!, snapshot = rows.get(id), version = renderVersion;
     const source = rowValue(id);
     const raw = readPath(source, field.path);
     const current = () => !disposed && boundId === id && version === renderVersion && rows.get(id) === snapshot;
@@ -724,6 +856,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   root.addEventListener("pointercancel", onPointerEnd);
   root.addEventListener("focusin", onFocusIn);
   root.addEventListener("focusout", onFocusOut);
+  for (const owner of resetOwners) owner.addEventListener("reset", onReset);
   const unsubscribe = rows?.subscribe(event => {
     if (disposed || event.type === "move" || event.type === "append" || (event.type === "set" || event.type === "setMany") && reconciling) return;
     if (event.type === "replace" || event.type === "revert" && event.id === undefined) drafts.clear();
@@ -752,6 +885,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (id !== null && !rows) {
         throw formError("ROW_MISSING", "This Form has no row store.", { id });
       }
+      if (!rows) {
+        flushLocalResets();
+        active();
+        renderLocal();
+        if (disposed) return;
+      }
       const source = id === null ? null : rowValue(id);
       const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
       boundId = id;
@@ -769,6 +908,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     },
     read() {
       active();
+      if (!rows) { flushLocalResets(); active(); }
       const source = rows ? (boundId === null ? {} : rowValue(boundId)) : localValues();
       let result: Record<string, unknown> = {};
       for (const field of fields) {
@@ -781,11 +921,21 @@ export function bindForm<T extends object = Record<string, unknown>>(
     validate(id) {
       active();
       if (!rows) {
+        flushLocalResets();
+        active();
+        const version = renderVersion;
         const entered = new Map(fields.map(field => [field, localFieldValue(field)] as const));
         const checked = evaluate(null, localValues(), entered);
         const found = [...checked.byField.values()].flat();
-        for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
-        showIssues();
+        if (!disposed && version === renderVersion) {
+          for (const field of fields) {
+            const fieldIssues = checked.byField.get(field) ?? [];
+            issues.set(field, fieldIssues);
+            const retained = localRenderedValues.get(field);
+            if (retained) retained.invalid = fieldIssues.length > 0;
+          }
+          showIssues();
+        }
         return { valid: found.length === 0, issues: found };
       }
       const targets = id === undefined
@@ -805,6 +955,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     },
     dispose() {
       if (disposed) return;
+      if (!rows) flushLocalResets(undefined, false);
       disposed = true;
       renderVersion++;
       activeValues.clear();
@@ -819,6 +970,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
       root.removeEventListener("pointercancel", onPointerEnd);
       root.removeEventListener("focusin", onFocusIn);
       root.removeEventListener("focusout", onFocusOut);
+      for (const owner of resetOwners) owner.removeEventListener("reset", onReset);
+      pendingResets.clear();
+      if (resetTimer !== undefined) clearTimeout(resetTimer);
+      if (!rows) for (const [field] of localRenderedValues) {
+        if (control(field.element)) display(field.element, localFieldValue(field));
+      }
       for (const field of fields) {
         for (const original of field.originals) {
           if (original.describedBy === null) original.element.removeAttribute("aria-describedby");
@@ -838,7 +995,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         else region.setAttribute("aria-live", original.live);
         region.textContent = original.text;
       }
-      for (const original of renderedOriginals) original.element.replaceChildren(...original.children);
+      restoreRendered();
       for (const field of choiceFields) {
         const choices = field.choices!;
         (field.element as HTMLSelectElement).replaceChildren(...choices.authoredNodes);

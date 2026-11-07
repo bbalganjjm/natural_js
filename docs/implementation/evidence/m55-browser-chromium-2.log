@@ -1,0 +1,8 @@
+{"shard":1,"passed":119,"identities_match":true,"retries":0,"skips":0}
+{"shard":2,"passed":104,"identities_match":true,"retries":0,"skips":0}
+{"shard":3,"passed":117,"identities_match":true,"retries":0,"skips":0}
+{"shard":4,"passed":118,"identities_match":true,"retries":0,"skips":0}
+{"shard":5,"passed":92,"identities_match":true,"retries":0,"skips":0}
+{"shard":6,"passed":108,"identities_match":true,"retries":0,"skips":0}
+658 passed (6 sequential Chromium shards, 248.0s)
+{"shard_manifest":"m55-chromium-six-shards.json","sha256":"f6288875962f1656c20738a2a471399562cffc8738ea52b6b85530be86c9fec8","complete":true}

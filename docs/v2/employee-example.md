@@ -20,11 +20,11 @@ sources:
   - id: side
     resource: ../../examples/vite/m4/side.html
     title: Side-by-side authored view
-    git_blob: 701b6b74a863ed41bb92f80b423b1a7a94be6cd2
+    git_blob: 16680df0e9ae8f0453915ead086d930daa5743f0
   - id: stack
     resource: ../../examples/vite/m4/stack.html
     title: Stacked authored view
-    git_blob: c07d7af888c3c4e715a915b6011e1ec96a942129
+    git_blob: 55eda774d31ba57eff84a4fd0da0c4cef3c555ab
   - id: side-css
     resource: ../../examples/vite/m4/side.css
     title: Side-by-side authored styling
@@ -53,9 +53,10 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T20:24:21Z }
+generated: { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6, at: 2026-11-07T04:45:12Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -78,6 +79,8 @@ Search employees, select a row in either a native table or compact list, edit it
 | `bindPagination` | Connects authored page buttons to the Grid/List page request. |
 
 The native action buttons and their event handlers belong to the page controller; there is no Button binder or theme.[^controller][^side][^stack]
+
+The search input declares the built-in upper formatter in both layouts. Its DOM-local Form shows uppercase while unfocused, exposes entered raw on focus and submits raw query text. Reset fields is a native reset button: it restores input defaults without requesting data or changing another CVC screen. Existing results remain until the next Search. Local display/raw state and reset cleanup share the [Form](form.md) owner; the controller adds no formatter or reset helper.[^controller][^side][^stack]
 
 # View
 
