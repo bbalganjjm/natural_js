@@ -6,10 +6,14 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm, FormOptions]
 sources:
+  - id: value-binding
+    resource: ../../src/ui/value-binding.ts
+    title: Private checked value callback execution shared with Grid and List
+    git_blob: cd12894b09ca3c9b1964f68a1b53cbc8ecc01fe4
   - id: presets-browser
     resource: ../../tests/browser/form-presets.spec.ts
     title: Explicit preset precedence and application callback composition regressions
-    git_blob: d667e0f2ac2493d12e16d9b776aa6cca5d999ac4
+    git_blob: 7d8a8307172217bc7bbf0d0c226d423510ed31af
   - id: discovery-browser
     resource: ../../tests/browser/form-discovery.spec.ts
     title: Explicit field adoption, retirement, ownership and recovery regressions
@@ -45,11 +49,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -82,10 +86,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -179,7 +183,7 @@ The combined function is one Form callback. Form checks its final return, curren
 
 # Constructor and markers
 
-`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?: FormOptions<T>): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: FormValueContext) => unknown`, `onBindValue?: (value: unknown, context: FormValueContext) => unknown`, `beforeBind?: (context: FormBindContext<T>) => unknown` and `onBind?: (context: FormBindContext<T>) => unknown`. Both callback pairs require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
+`bindForm<T extends object = Record<string, unknown>>(root: HTMLElement, options?: FormOptions<T>): FormHandle<T>` binds one root. Options are `rows?: Rows<T>`, `rules?: RuleSet`, `parse?: Record<string, ParseInput>`, `autoValidate?: boolean`, `render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>`, `beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown`, `onBindValue?: (value: unknown, context: ValueBindContext) => unknown`, `beforeBind?: (context: FormBindContext<T>) => unknown` and `onBind?: (context: FormBindContext<T>) => unknown`. Both callback pairs require Rows. A second live binding of that root raises `FORM_IN_USE`; disposal releases it. It leaves authored HTML and CSS in place.[^entry][^form]
 
 The [shared rule contract](rules.md) defines RuleSet.fields, per-kind TS/HTML precedence, empty-list overrides and shared/local composition. autoValidate defaults to true; false bypasses automatic native/business constraints while retaining parse/JSON/native-value integrity and disabled/readOnly edit guards. It clears stale row constraint results at automatic evaluation. Explicit validate() still performs full precommit checks. This is independent of native value conversion and the application-owned scalar choice parser.[^form][^rules]
 
@@ -238,7 +242,7 @@ bind(null) removes generated row choices without writing data. Initialization fa
 
 ## Value callbacks
 
-Rows-backed Form accepts synchronous beforeBindValue and onBindValue functions. One frozen FormValueContext extends RuleContext with phase "bind" or "val", a nonnull rowId and the primary bound HTMLElement. Its values snapshot contains source raw fields, not display projections. Grouped controls use their first member as element. Functions receive explicit arguments; Form supplies no special this or global wrapper.[^entry][^form][^values-browser]
+Rows-backed Form accepts synchronous beforeBindValue and onBindValue functions. The [shared value contract](value-callbacks.md) also applies to Grid/List; Form retains its own bound-row, draft, focus and refresh rules. One frozen ValueBindContext extends RuleContext with phase "bind" or "val", a nonnull rowId and the primary bound HTMLElement. Its values snapshot contains source raw fields, not display projections. Grouped controls use their first member as element. Functions receive explicit arguments; Form supplies no special this or global wrapper.[^entry][^form][^values-browser]
 
 ```ts
 const form = bindForm(root, {
@@ -473,3 +477,5 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [^defaults-browser]: Captured defaults, unbind, native files and inactive ownership regressions
 [^presets-browser]: Explicit preset precedence and application callback composition regressions
 [^discovery-browser]: Explicit field adoption, retirement, ownership and recovery regressions
+
+[^value-binding]: Private checked value callback execution shared with Grid and List

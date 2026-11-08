@@ -48,19 +48,19 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
+    git_blob: 35b8bfff7026d894082cd9471326728182066937
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -85,9 +85,9 @@ sources:
     resource: evidence/v1-core-parity.json
     title: Detailed core surface and dynamic reachability mapping
     git_blob: 8d7594b97048b06779166c451443bfafcee11c12
-generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 On 2026-10-05 the user required all 1.x framework capabilities in 2.0 and explicitly required column resize/reorder/hide, multiple selection, bulk paste and real scroll virtualization. Existing selected slices are verified implementations, not a certificate of full 1.x coverage; earlier exclusion/defer decisions must be reconciled with this instruction. This ledger records current gaps; it does not claim their implementation.
@@ -235,6 +235,8 @@ The [M5.7 continuation](m5-form-defaults-plan.md) adds captured native creation 
 The [M5.8 continuation](m5-form-discovery-plan.md) adds explicit ownership-only rescan through the same private constructor compiler. Compatible fields retain drafts/raw/captures; newly adopted bindings capture once and retirement releases error/reset/Select/File ownership without Rows writes. Recorded issues/drafts block unsafe retirement; queued reset and active work reject discovery. Thirty-six new browser witnesses include native error publication and listener-failure recovery plus two authored CVC toggles. Selected fresh runtime/document checks pass. Direct hot-declaration, shared/global and List/Grid dynamic parity, all full families/P0/M13 and the consolidated omission decision remain open.
 
 The [M5.9 continuation](m5-form-presets-plan.md) names the existing Form constructor options with FormOptions and demonstrates explicit application presets and callback composition. Form runtime JavaScript remains byte-identical to the actual M5.8 package; plain composed functions keep one callback-unit boundary. Selected fresh gates and independent source/raw/document checks pass. Wider live-global configuration, embedded Grid/List inheritance, local-source and per-unbound-key callbacks, all full families/P0/M13 and the consolidated omission decision remain open.
+
+The [M5.10 continuation](m5-collection-values-plan.md) implements selected mounted Grid/List value callbacks through the same private checked execution used by Form. ValueBindContext replaces the old Form-only name; List.refresh applies an explicit application policy without source mutation. Raw validation and each binder's cache/draft/focus/lifetime remain local. Selected fresh runtime and independent source/raw/document checks pass. Broader defaults/declaration/local-source/unbound-key/List-editing and all other owner/P0/M13 obligations remain open.
 
 [^surface]: Eight-file AST surface checklist and extraction limits
 

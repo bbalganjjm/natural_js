@@ -8,7 +8,7 @@ export interface RuleContext {
   readonly element?: HTMLElement;
 }
 
-export interface FormValueContext extends RuleContext {
+export interface ValueBindContext extends RuleContext {
   readonly rowId: RowId;
   readonly element: HTMLElement;
   readonly phase: "bind" | "val";
@@ -114,8 +114,8 @@ export interface FormOptions<T extends object = Record<string, unknown>> {
   autoValidate?: boolean;
   beforeBind?: (context: FormBindContext<T>) => unknown;
   onBind?: (context: FormBindContext<T>) => unknown;
-  beforeBindValue?: (value: unknown, context: FormValueContext) => unknown;
-  onBindValue?: (value: unknown, context: FormValueContext) => unknown;
+  beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
+  onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>;
 }
 
@@ -153,6 +153,7 @@ export interface GridFilterChoice {
 }
 
 export interface ListHandle<T extends object> {
+  refresh(): void;
   select(id: RowId | null): void;
   selected(): RowId | null;
   setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null): void;

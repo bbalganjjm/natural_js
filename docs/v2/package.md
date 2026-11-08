@@ -12,7 +12,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: UI runtime exports
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: compiler
     resource: ../../tsconfig.json
     title: 2.0 TypeScript build settings
@@ -21,10 +21,10 @@ sources:
     resource: ../../LICENSE
     title: Apache License 2.0 text for the new package
     git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
-generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 Build the root package to inspect real 2.0 exports. The unpublished `2.0.0-beta.0` candidate includes the CVC page runner, row store, communicator, shared error, Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents, plus retained UI-owned formatter/validator rules. A plain Dialog uses native HTML methods; it has no framework binder.
@@ -53,6 +53,8 @@ npm pack --dry-run --json
 # Verify
 
 `npm run test:consumers` builds and packs into an isolated temporary directory, then installs that tarball in separate JS and strict TS fixtures. For a frozen release artifact, run `npm run test:consumers -- --tarball <path.tgz> --sha256 <64-hex>`; this verifies the checksum before installing the exact same tarball in both fixtures and skips rebuilding. Run `npm run test:packed-browser -- --tarball <path.tgz> --sha256 <64-hex> --browser chromium` for a browser-served CVC/Form/Grid/Tree/DatePicker/Notify/Documents consumer installed from that artifact. The browser option also accepts `firefox`, `webkit`, `chrome`, or `edge` when available locally. The pack list must contain no 1.x bundle, jQuery, hand-maintained 1.x declarations, or general utility library. For browser import smoke, install Playwright binaries with `npx playwright install chromium firefox webkit` and run `npm run test:browser`. `npm run example` serves the authored-HTML Vite fixture.
+
+The current UI declarations expose ValueBindContext for Form/Grid/List field hooks and ListHandle.refresh(). The pre-release FormValueContext name is removed without an alias; update type imports when moving from the preceding candidate. Runtime package entries and dependencies are unchanged. [Shared value callbacks](value-callbacks.md) owns the behavior contract.[^ui]
 
 # Browser and publication scope
 

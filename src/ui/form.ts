@@ -11,24 +11,15 @@ import type { RowOption } from "./row-options.js";
 import { control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createNativeDefaults } from "./native-defaults.js";
+import { createValueBinding } from "./value-binding.js";
+import type { ValueProjection } from "./value-binding.js";
 import type {
-  FormBindContext, FormHandle, FormOptions, FormValueContext, FormatRule, RuleContext,
+  FormBindContext, FormHandle, FormOptions, ValueBindContext, FormatRule, RuleContext,
   ValidateRule, ValidationIssue, ValidationResult
 } from "./index.js";
 
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-type ValuePhase = FormValueContext["phase"];
-type ValueCallback = "beforeBindValue" | "onBindValue";
-
-interface Projection {
-  id: RowId;
-  raw: unknown;
-  value: unknown;
-  phase: ValuePhase;
-  state: "pending" | "applied" | "failed";
-  callback?: ValueCallback;
-}
-
+type ValuePhase = ValueBindContext["phase"];
 interface Choices {
   options: readonly string[];
   label: readonly string[];
@@ -51,7 +42,7 @@ interface Field {
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
   choices?: Choices;
-  projection?: Projection;
+  projection?: ValueProjection;
   renderingId?: RowId;
   error?: HTMLElement;
   originals: { element: HTMLElement; describedBy: string | null; invalid: string | null; changed: string | null }[];
@@ -107,6 +98,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       onBindValue !== undefined && typeof onBindValue !== "function")) {
     throw formError("FORM_VALUE_OPTIONS", "Value callbacks need Rows and synchronous functions.");
   }
+  const values = createValueBinding("bindForm", { beforeBindValue, onBindValue });
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
@@ -609,42 +601,6 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
-  function valueError(context: FormValueContext, callback: ValueCallback, message: string, cause?: unknown): FrameworkError {
-    return new FrameworkError({ api: "bindForm", code: "FORM_VALUE", message, cause,
-      detail: { field: context.field, rowId: context.rowId, phase: context.phase, callback } });
-  }
-
-  function replacement(field: Field, value: unknown, context: FormValueContext,
-    callback: ValueCallback, copy = true): unknown {
-    const scalar = (item: unknown) => item === null || typeof item === "string" || typeof item === "boolean" ||
-      typeof item === "number" && Number.isFinite(item);
-    const array = field.kind === "multiple" || field.kind === "checkbox" && field.elements.length > 1;
-    let selected: unknown[] | undefined;
-    if (array && Array.isArray(value)) {
-      try { selected = copy ? Array.from(value) : value; }
-      catch (cause) { throw valueError(context, callback, "The value replacement could not be read.", cause); }
-    }
-    if (array ? !selected || !selected.every(scalar) : !scalar(value) ||
-        field.kind === "checkbox" && typeof value !== "boolean") {
-      throw valueError(context, callback, "Return a native scalar value or a scalar array for a multiple-value control; use render for structured display.");
-    }
-    const projected = selected ?? value;
-    if (field.choices && !rowOptionAvailable([
-      ...field.choices.authored, ...choiceOptions(field, context.values, context.rowId).map(option => option.raw)
-    ], projected, array)) {
-      throw valueError(context, callback, "A projected choice needs available raw option occurrences.");
-    }
-    if (!array && field.kind === "single" && control(field.element)) {
-      const probe = field.element.cloneNode(true) as Control;
-      probe.disabled = false;
-      if (probe instanceof HTMLInputElement || probe instanceof HTMLTextAreaElement) probe.readOnly = false;
-      display(probe, projected);
-      const message = nativeMessage(probe, projected, false);
-      if (message) throw valueError(context, callback, message);
-    }
-    return selected && copy ? Object.freeze(selected) : projected;
-  }
-
   function writeValue(field: Field, value: unknown, source: Record<string, unknown> | null,
     id: RowId | null, focused: boolean, current: () => boolean): void {
     if (!current()) return;
@@ -672,7 +628,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     phase: ValuePhase, force: boolean, focused: boolean, current: () => boolean, preserveFocused = false): void {
     const active = activeValues.get(field);
     if (active?.has(id)) {
-      throw valueError(Object.freeze({ ...context(field, id, source), rowId: id, element: field.element, phase }),
+      throw values.error(Object.freeze({ ...context(field, id, source), rowId: id, element: field.element, phase }),
         beforeBindValue ? "beforeBindValue" : "onBindValue", "A value callback cannot recursively bind the same field and row.");
     }
     const previous = field.projection;
@@ -685,60 +641,18 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (force && !preserveFocused) writeValue(field, raw, source, id, true, current);
       return;
     }
-    focused = false;
-    const valueContext: FormValueContext = Object.freeze({ ...context(field, id, source),
+    const valueContext: ValueBindContext = Object.freeze({ ...context(field, id, source),
       rowId: id, element: field.element, phase: projection.phase });
-    if (projection.state === "applied") {
-      try {
-        const value = projection.callback ? replacement(field, projection.value, valueContext, projection.callback, false) : raw;
-        if (current()) writeValue(field, value, source, id, focused, current);
-      } catch (cause) {
-        if (cause instanceof FrameworkError && cause.code === "FORM_VALUE" && field.projection === projection) projection.state = "failed";
-        throw cause;
-      }
-      return;
-    }
+    const available = field.choices ? () => [
+      ...field.choices!.authored, ...choiceOptions(field, valueContext.values, id).map(option => option.raw)
+    ] : undefined;
+    const write = (value: unknown) => writeValue(field, value, source, id, false, current);
+    if (projection.state === "applied") { values.apply(field, field, raw, valueContext, write, current, available); return; }
     const running = active ?? new Set<RowId>();
     activeValues.set(field, running);
     running.add(id);
-    function invoke(callback: ValueCallback, value: unknown): unknown {
-      const run = callback === "beforeBindValue" ? beforeBindValue : onBindValue;
-      if (!run) return undefined;
-      try {
-        const result = run(value, valueContext);
-        if (result !== null && (typeof result === "object" || typeof result === "function") &&
-            typeof (result as { then?: unknown }).then === "function") {
-          void Promise.resolve(result).catch(() => {});
-          if (current()) throw valueError(valueContext, callback, "Value callbacks must finish synchronously.");
-          return undefined;
-        }
-        return result;
-      }
-      catch (cause) { throw valueError(valueContext, callback, "The value callback failed.", cause); }
-    }
-    try {
-      let value = raw, callback: ValueCallback | undefined;
-      const before = invoke("beforeBindValue", value);
-      if (!current()) return;
-      if (before !== undefined) { value = replacement(field, before, valueContext, "beforeBindValue"); callback = "beforeBindValue"; }
-      if (!current()) return;
-      writeValue(field, value, source, id, focused, current);
-      if (!current()) return;
-      const after = invoke("onBindValue", value);
-      if (!current()) return;
-      if (after !== undefined) {
-        const final = replacement(field, after, valueContext, "onBindValue");
-        if (!current()) return;
-        if (!sameJson(value, final)) writeValue(field, final, source, id, focused, current);
-        value = final;
-        callback = "onBindValue";
-      }
-      if (!current()) return;
-      field.projection = { id, raw, value, phase: projection.phase, state: "applied", callback };
-    } catch (cause) {
-      if (field.projection === projection) projection.state = "failed";
-      throw cause;
-    } finally {
+    try { values.apply(field, field, raw, valueContext, write, current, available); }
+    finally {
       running.delete(id);
       if (!running.size) activeValues.delete(field);
     }

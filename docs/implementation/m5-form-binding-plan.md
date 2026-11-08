@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-local-form-plan.md
     title: Completed local Form raw display and native reset scope
-    git_blob: 91d3af1baf90a4794e788b30611ae7cd1efec1a2
+    git_blob: ba1c9ab556dd34f7a51f74d35a85eebb769a65b5
   - id: baseline
     resource: evidence/m55-verification.json
     title: Frozen bbc767b runtime and package receipt
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing Form render, draft, subscription and ownership paths
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form and immutable row contracts
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable Rows snapshots, events and committed reversion
@@ -32,7 +32,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m10/detail.ts
     title: Existing CVC detail Form caller
-    git_blob: 9d474350f98980252acf1bf5174a9f42f5c419bd
+    git_blob: 913acc81719d1f39fbcdf128707dc59337c88cfa
 generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }

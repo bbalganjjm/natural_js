@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-state-plan.md
     title: Completed received-state continuation
-    git_blob: d86b16c965f70f4cdae178c681c2ad7d7ac15071
+    git_blob: 638a405523bc6fa653da34448d2866771ab4a78d
   - id: baseline
     resource: evidence/m52-verification.json
     title: Preserved 4660cd6 source and runtime evidence
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, candidates, drafts, validation and lifetime
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Existing row-local option extraction
@@ -24,11 +24,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid raw option maps and validation
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: list
     resource: ../../src/ui/list.ts
     title: List raw option maps and occurrence-based selection
-    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
+    git_blob: 35b8bfff7026d894082cd9471326728182066937
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select identity and authored-node restoration
@@ -36,7 +36,7 @@ sources:
   - id: detail
     resource: ../../examples/vite/m10/detail.ts
     title: Existing manual nested shift-option conversion
-    git_blob: 9d474350f98980252acf1bf5174a9f42f5c419bd
+    git_blob: 913acc81719d1f39fbcdf128707dc59337c88cfa
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Preserved Form and Select intent

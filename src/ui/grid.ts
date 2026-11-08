@@ -14,15 +14,17 @@ import { focusVisible, restoreAttributes } from "./dom-state.js";
 import { readClipboard } from "./grid-paste.js";
 import { createGridViewport, validateGridViewport } from "./grid-viewport.js";
 import { compileGridBody } from "./grid-row-blocks.js";
-import { display, displayField, fieldValue, nativeMessage, interactiveContent, disabled as controlDisabled } from "./native-control.js";
+import { display, displayField, fieldValue, nativeMessage, interactiveContent, disabled as controlDisabled, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createNativeDefaults } from "./native-defaults.js";
+import { createValueBinding } from "./value-binding.js";
+import type { ValueProjection } from "./value-binding.js";
 import { createGridHooks } from "./grid-hooks.js";
 import { bindGridHeight, validateGridHeight } from "./grid-height.js";
 import type { GridRowBinding } from "./grid-hooks.js";
 import type { GridHeightOptions } from "./grid-height.js";
 import type { RuleCall } from "./rules.js";
-import type { FormatRule, GridBindResult, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult } from "./index.js";
+import type { FormatRule, GridBindResult, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult, ValueBindContext } from "./index.js";
 
 interface TextField {
   index: number;
@@ -55,6 +57,7 @@ interface BoundText {
   invalids: (string | null)[];
   previous?: unknown;
   bound: boolean;
+  projection?: ValueProjection;
 }
 
 interface BoundSelect {
@@ -68,6 +71,7 @@ interface BoundSelect {
   optionsBound: boolean;
   previous?: unknown;
   selectedBound: boolean;
+  projection?: ValueProjection;
   release: () => void;
 }
 
@@ -136,6 +140,8 @@ function optionValues(value: unknown, descriptor: SelectField, rowId: RowId) {
 export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   rows: Rows<T>;
   statusFilter?: readonly RowStatus[];
+  beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
+  onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   beforeRowBind?: (context: GridRowBinding<T>) => void;
   onRowBind?: (context: GridRowBinding<T>) => void;
   onBind?: (result: GridBindResult) => void;
@@ -173,6 +179,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     throw gridError("GRID_ROOT", "The Grid root must be a table element.");
   }
   if (boundRoots.has(root)) throw gridError("GRID_IN_USE", "This table is already bound as a Grid.");
+  const values = createValueBinding("bindGrid", options);
   const body = compileGridBody(root);
   const { templates, authored } = body;
   const controlIndexes = authored.flatMap((element, index) =>
@@ -513,7 +520,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function bindable(): void {
     active();
-    if (hooks.running) throw gridError("GRID_BIND_REENTRANT", "A row callback cannot reenter binding.");
+    if (hooks.running || values.running) throw gridError("GRID_BIND_REENTRANT", "A row callback cannot reenter binding.");
   }
 
   function cleanupFailure(): void {
@@ -616,7 +623,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     for (const select of record.selects) select.release();
   }
 
-  function renderSelect(binding: BoundSelect, value: Snapshot<T>, id: RowId): void {
+  function projection(binding: { projection?: ValueProjection }, raw: unknown, id: RowId): void {
+    const previous = binding.projection;
+    if (!previous || previous.id !== id || !sameJson(previous.raw, raw)) {
+      binding.projection = { id, raw, value: raw, phase: previous?.id === id ? "val" : "bind", state: "pending" };
+    }
+  }
+
+  function renderSelect(binding: BoundSelect, value: Snapshot<T>, id: RowId, current?: () => boolean): void {
     const { descriptor, element } = binding;
     const source = descriptor.options ? readPath(value, descriptor.options) : null;
     if (!binding.optionsBound || !Object.is(binding.optionSource, source)) {
@@ -628,13 +642,65 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     if (descriptor.field) {
       const draft = descriptor.name ? drafts.get(id)?.get(descriptor.name) : undefined;
-      const current = draft ? draft.entered : readPath(value, descriptor.field);
-      if (!binding.selectedBound || !Object.is(binding.previous, current)) {
-        selectRowOptions(element, binding.rawByOption, current);
-        binding.previous = current;
+      const raw = draft ? draft.entered : readPath(value, descriptor.field);
+      if (values.enabled && current && !draft) {
+        projection(binding, raw, id);
+        const context: ValueBindContext = Object.freeze({ field: descriptor.name!,
+          values: value as Snapshot<Record<string, unknown>>, rowId: id, element, phase: binding.projection!.phase });
+        values.apply(binding, { element, elements: [element], kind: descriptor.multiple ? "multiple" : "single" }, raw, context,
+          shown => descriptor.options ? selectRowOptions(element, binding.rawByOption, shown) : display(element, shown),
+          current, descriptor.options ? () => [...binding.rawByOption.values()] : undefined);
+        if (!current()) return;
+        binding.previous = raw;
+        binding.selectedBound = true;
+      } else if (!binding.selectedBound || !Object.is(binding.previous, raw)) {
+        selectRowOptions(element, binding.rawByOption, raw);
+        binding.previous = raw;
         binding.selectedBound = true;
       }
     }
+  }
+
+  function writeText(binding: BoundText, snapshot: RowSnapshot<T>, value: unknown, draft: boolean, current?: () => boolean): void {
+    const field = binding.descriptor;
+    const renderer = renderers.get(field.name);
+    if ((renderer || field.format.length) && !draft) {
+      const context: RuleContext = { field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
+        rowId: snapshot.id, element: binding.element };
+      if (renderer) renderField("bindGrid", binding.element, value, context, renderer,
+        !!binding.element.closest("[data-merge]"), current);
+      else {
+        const shown = runner.format(field.format, value, context);
+        if (!current || current()) display(binding.element, shown);
+      }
+    } else if (!current || current()) {
+      if (field.kind === "single") display(binding.element, value);
+      else displayField({ element: binding.element, elements: binding.elements, kind: field.kind }, value);
+    }
+  }
+
+  function renderText(binding: BoundText, snapshot: RowSnapshot<T>, current?: () => boolean, repaint = false): void {
+    const field = binding.descriptor;
+    const draft = drafts.get(snapshot.id)?.get(field.name);
+    const raw = draft ? draft.entered : readPath(snapshot.value, field.path);
+    if (values.enabled && current && !draft) {
+      projection(binding, raw, snapshot.id);
+      const element = binding.element;
+      if (!repaint && field.editable && (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) &&
+          textLengthControl(element) && !element.readOnly && element === root.ownerDocument.activeElement) return;
+      if (!repaint && binding.bound && Object.is(binding.previous, raw) && binding.projection!.state !== "pending") return;
+      const context: ValueBindContext = Object.freeze({ field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
+        rowId: snapshot.id, element, phase: binding.projection!.phase });
+      values.apply(binding, { element, elements: binding.elements,
+        kind: field.checkbox ? "checkbox" : field.kind }, raw, context,
+        value => writeText(binding, snapshot, value, false, current), current);
+      if (!current()) return;
+    } else {
+      if (!repaint && binding.bound && Object.is(binding.previous, raw)) return;
+      writeText(binding, snapshot, raw, !!draft, current);
+    }
+    binding.previous = raw;
+    binding.bound = true;
   }
 
   function renderStatus(record: RenderedRow<T>, snapshot: RowSnapshot<T>): void {
@@ -648,40 +714,24 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
   }
 
-  function renderRecord(record: RenderedRow<T>, snapshot: RowSnapshot<T>): void {
+  function renderRecord(record: RenderedRow<T>, snapshot: RowSnapshot<T>, current?: () => boolean): void {
     if (record.snapshot === snapshot) return;
     const original = snapshot.status === "update" || snapshot.status === "delete"
       ? options.rows.original(snapshot.id) : undefined;
     for (const binding of record.texts) {
+      if (current && !current()) return;
       const changed = original !== undefined && !sameJson(
         readPath(original, binding.descriptor.path), readPath(snapshot.value, binding.descriptor.path));
       for (const element of binding.elements) element.setAttribute("data-field-changed", String(changed));
-      const draft = drafts.get(snapshot.id)?.get(binding.descriptor.name);
-      const value = draft ? draft.entered : readPath(snapshot.value, binding.descriptor.path);
-      if (!binding.bound || !Object.is(binding.previous, value)) {
-        const field = binding.descriptor;
-        const renderer = renderers.get(field.name);
-        if ((renderer || field.format.length) && !draft) {
-          const context: RuleContext = {
-            field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
-            rowId: snapshot.id, element: binding.element
-          };
-          if (renderer) renderField("bindGrid", binding.element, value, context, renderer, !!binding.element.closest("[data-merge]"));
-          else display(binding.element, runner.format(field.format, value, context));
-        } else {
-          if (field.kind === "single") display(binding.element, value);
-          else displayField({ element: binding.element, elements: binding.elements, kind: field.kind }, value);
-        }
-        binding.previous = value;
-        binding.bound = true;
-      }
+      renderText(binding, snapshot, current);
     }
     for (const binding of record.selects) {
+      if (current && !current()) return;
       if (binding.descriptor.field) binding.element.setAttribute("data-field-changed", String(original !== undefined &&
         !sameJson(readPath(original, binding.descriptor.field), readPath(snapshot.value, binding.descriptor.field))));
-      renderSelect(binding, snapshot.value, snapshot.id);
+      renderSelect(binding, snapshot.value, snapshot.id, current);
     }
-    record.snapshot = snapshot;
+    if (!current || current()) record.snapshot = snapshot;
   }
 
   function candidateValues(row: RowSnapshot<T>, pending = drafts.get(row.id)): Candidates {
@@ -1381,9 +1431,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     catch (cause) { failBinding(cause); }
   }
 
+  let valueRenderVersion = 0;
   function renderWindow(deferHooks = false, requested?: readonly RowId[], place = true, prepare = true): (() => void) | undefined {
     if (disposed) return;
     bindable();
+    const valueVersion = values.enabled ? ++valueRenderVersion : 0;
     if (place) body.resetMerges();
     const focused = root.ownerDocument.activeElement;
     const focusedRow = focused instanceof Element ? focused.closest("tr") : null;
@@ -1393,11 +1445,13 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const rebound: RenderedRow<T>[] = [];
     let pinLayoutChanged = false;
     const revision = viewRevision;
-    const source = hooks.enabled ? options.rows.entries({ includeDeleted: true }) : undefined;
-    const layout = hooks.enabled ? columns.columns() : undefined;
+    const source = hooks.enabled || values.enabled ? options.rows.entries({ includeDeleted: true }) : undefined;
+    const layout = hooks.enabled || values.enabled ? columns.columns() : undefined;
+    const current = values.enabled ? () => !disposed && valueVersion === valueRenderVersion &&
+      source === options.rows.entries({ includeDeleted: true }) && revision === viewRevision && layout === columns.columns() : undefined;
     const check = (id?: RowId) => {
       active();
-      if (source !== options.rows.entries({ includeDeleted: true }) || revision !== viewRevision || layout !== columns.columns()) {
+      if (current && !current() || source !== options.rows.entries({ includeDeleted: true }) || revision !== viewRevision || layout !== columns.columns()) {
         throw gridError("GRID_BIND_STALE", "The rows or view changed during a row callback.", { id });
       }
     };
@@ -1409,7 +1463,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (!record) {
           record = createRecord(id);
           records.set(id, record);
-          if (options.beforeRowBind || !place) for (const element of record.elements) anchor.parentNode!.insertBefore(element, anchor);
+          if (options.beforeRowBind || !place) for (const element of record.elements) {
+            if (current && !current()) return;
+            anchor.parentNode!.insertBefore(element, anchor);
+            if (current && !current()) return;
+          }
         }
         if (record.snapshot !== snapshot) {
           pinLayoutChanged = true;
@@ -1420,9 +1478,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           }
           if (snapshot.status === "delete") for (const control of record.controls) control.disabled = true;
         }
-        renderRecord(record, snapshot);
+        renderRecord(record, snapshot, current);
+        if (values.enabled) check(id);
         const issues = issueText.get(id);
         if (issues) showIssues(record, issues);
+        if (current && !current()) return;
         if (!place) {
           syncRecordSelection(id, record);
           if (progressive || viewport) for (const [physical, element] of record.elements.entries()) {
@@ -1456,18 +1516,25 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       })), columns.columns().filter(column => !column.hidden).length || body.columnCount);
       else {
         for (const id of mountedIds) if (!nextSet.has(id)) {
-          for (const element of records.get(id)?.elements ?? []) element.remove();
+          for (const element of records.get(id)?.elements ?? []) {
+            if (current && !current()) return;
+            element.remove();
+          }
         }
+        if (current && !current()) return;
         let cursor: Node = anchor;
         for (let index = nextIds.length - 1; index >= 0; index--) {
           const elements = records.get(nextIds[index])!.elements;
           for (let physical = elements.length - 1; physical >= 0; physical--) {
             const element = elements[physical];
+            if (current && !current()) return;
             if (element !== focusedRow && element.nextSibling !== cursor) anchor.parentNode!.insertBefore(element, cursor);
+            if (current && !current()) return;
             cursor = element;
           }
         }
       }
+      if (current && !current()) return;
       if (restoreFocus && root.ownerDocument.activeElement !== focused) {
         focused.focus({ preventScroll: true });
         if (selection && (focused instanceof HTMLInputElement || focused instanceof HTMLTextAreaElement)) {
@@ -1476,6 +1543,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       } else if (moveFocus) {
         focusContent();
       }
+      if (current && !current()) return;
       mountedIds = nextIds;
       for (const [id, record] of records) {
         if (nextSet.has(id)) continue;
@@ -1483,6 +1551,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         records.delete(id);
       }
     }
+    if (current && !current()) return;
     if (place) { mergeRows(); syncRowIndexes(); syncSelection(); if (!rebound.length) columns.measurePinned(); }
     focusAfterDisable(focused);
     if (!rebound.length && !cleanupErrors.length) return;
@@ -1670,6 +1739,28 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       element: fields(issue.rowId, issue.field).find(element => element.isConnected) })) };
   }
 
+  let pointedField: HTMLElement | undefined;
+  function onValuePointer(event: PointerEvent): void { pointedField = event.target instanceof HTMLElement ? event.target : undefined; }
+  function onValuePointerEnd(): void { pointedField = undefined; }
+  function onFocusIn(event: FocusEvent): void {
+    const target = event.target;
+    const pointed = target === pointedField;
+    pointedField = undefined;
+    if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) ||
+        !textLengthControl(target) || target.readOnly || disabled(target)) return;
+    const entry = edits.get(target);
+    const row = entry && options.rows.get(entry.id);
+    if (!entry || !row || drafts.get(entry.id)?.has(entry.binding.descriptor.name)) return;
+    const raw = readPath(row.value, entry.binding.descriptor.path), before = target.value;
+    if (before === (raw == null ? "" : String(raw))) return;
+    const { selectionStart: start, selectionEnd: end, selectionDirection: direction } = target;
+    display(target, raw);
+    if (start !== null && end !== null) {
+      const selectAll = start === 0 && (end === before.length || !pointed && end === 0), length = target.value.length;
+      target.setSelectionRange(selectAll ? 0 : Math.min(start, length), selectAll ? length : Math.min(end, length), direction ?? undefined);
+    }
+  }
+
   let focusCleanup = false;
   function onFocusOut(event: FocusEvent): void {
     if (validateOn === "blur" && event.target instanceof HTMLElement) {
@@ -1677,6 +1768,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       const next = event.relatedTarget;
       if (entry && !(next instanceof HTMLElement && entry.binding.elements.includes(next)) && drafts.get(entry.id)?.has(entry.binding.descriptor.name)) {
         reconcile(entry.id, autoValidate);
+      }
+    }
+    if (values.enabled && (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) &&
+        textLengthControl(event.target) && !event.target.readOnly) {
+      const entry = edits.get(event.target);
+      const row = entry && options.rows.get(entry.id), record = entry && records.get(entry.id);
+      if (entry && row && record && !drafts.get(entry.id)?.has(entry.binding.descriptor.name)) {
+        const current = () => !disposed && options.rows.get(entry.id) === row && records.get(entry.id) === record;
+        renderText(entry.binding, row, current, true);
       }
     }
     if (!viewport || focusCleanup) return;
@@ -2071,6 +2171,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   root.addEventListener("keydown", onKeyDown);
   root.addEventListener("paste", onPaste);
   root.addEventListener("focusout", onFocusOut);
+  if (values.enabled) {
+    root.addEventListener("focusin", onFocusIn);
+    root.addEventListener("pointerdown", onValuePointer);
+    root.addEventListener("pointerup", onValuePointerEnd);
+    root.addEventListener("pointercancel", onValuePointerEnd);
+  }
   let unsubscribe = () => {};
   boundRoots.add(root);
   try {
@@ -2106,6 +2212,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     root.removeEventListener("keydown", onKeyDown);
     root.removeEventListener("paste", onPaste);
     root.removeEventListener("focusout", onFocusOut);
+    if (values.enabled) {
+      root.removeEventListener("focusin", onFocusIn);
+      root.removeEventListener("pointerdown", onValuePointer);
+      root.removeEventListener("pointerup", onValuePointerEnd);
+      root.removeEventListener("pointercancel", onValuePointerEnd);
+    }
     height?.dispose();
     viewport?.dispose();
     if (options.viewport || progressive) {
@@ -2136,7 +2248,10 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     defaults,
     refresh() {
       bindable();
-      for (const record of records.values()) resetRecord(record);
+      for (const record of records.values()) {
+        resetRecord(record);
+        if (values.enabled) for (const binding of [...record.texts, ...record.selects]) binding.projection = undefined;
+      }
       let notify: (() => void) | undefined;
       try { notify = refreshView(); }
       catch (cause) { failBinding(cause); }
@@ -2251,6 +2366,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       root.removeEventListener("keydown", onKeyDown);
       root.removeEventListener("paste", onPaste);
       root.removeEventListener("focusout", onFocusOut);
+      if (values.enabled) {
+        root.removeEventListener("focusin", onFocusIn);
+        root.removeEventListener("pointerdown", onValuePointer);
+        root.removeEventListener("pointerup", onValuePointerEnd);
+        root.removeEventListener("pointercancel", onValuePointerEnd);
+      }
       height?.dispose();
       viewport?.dispose();
       if (options.viewport || progressive) {

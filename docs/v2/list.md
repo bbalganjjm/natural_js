@@ -6,14 +6,18 @@ tags: [ui, list, binding, accessibility]
 status: draft
 symbols: [bindList]
 sources:
+  - id: values-browser
+    resource: ../../tests/browser/collection-values.spec.ts
+    title: Shared mounted value projection, cache, refresh and lifetime regressions
+    git_blob: 5c2576a91c9b69b41f1e192db56ad3ec3635d678
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public List handle and export
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
+    git_blob: 35b8bfff7026d894082cd9471326728182066937
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
@@ -34,10 +38,10 @@ sources:
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native display and authored-template constraint regressions
     git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -83,13 +87,22 @@ rows.dispose();
 
 # Constructor
 
-`bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: { rows: Rows<T>; rules?: RuleSet; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): ListHandle<T>` requires exactly one direct `li[data-row-template]` and at most one direct `li[data-empty]`. The template and descendants cannot have fixed DOM IDs. The component replaces the template temporarily, creates row elements from it, and restores the original on disposal. A second live binding of the root raises `LIST_IN_USE`.[^entry][^list]
+`bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: { rows: Rows<T>; rules?: RuleSet; beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown; onBindValue?: (value: unknown, context: ValueBindContext) => unknown; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): ListHandle<T>` requires exactly one direct `li[data-row-template]` and at most one direct `li[data-empty]`. The template and descendants cannot have fixed DOM IDs. The component replaces the template temporarily, creates row elements from it, and restores the original on disposal. A second live binding of the root raises `LIST_IN_USE`.[^entry][^list]
 
 | Option | Behavior |
 |---|---|
 | `rows` | Required caller-owned Rows store; List never disposes it. |
 | `rules` | Optional RuleSet catalogs, messages, locale and field declarations; see [shared rules](rules.md). Retained UI built-ins also resolve. |
+| `beforeBindValue`, `onBindValue` | Captured synchronous value functions for named rendered fields; see [shared value callbacks](value-callbacks.md). |
 | `onSelect` | Receives changed row ID, row snapshot or `null`, and the source event; programmatic changes pass `event: null`. |
+
+# Value callbacks and refresh
+
+List shares beforeBindValue/onBindValue and ValueBindContext with Form/Grid. Projections pass through existing display and typed-choice writers; read-only controls remain read-only. Raw Rows, originals and validation stay separate. Options-only Selects have no named value callback; hidden retained records and detached validation probes do not run hooks. A clone being prepared for actual placement can receive callbacks before document connection.[^list][^values-browser]
+
+Initial/newly shown rows and explicit refresh use bind; a retained committed raw change uses val. Unchanged successful projections stay cached; raw change or refresh retries a failed projection. Choice-source-only updates recheck cached replacement availability. Reentrant binding raises LIST_BIND_REENTRANT; source mutations can already be committed, so correct the callback and refresh rather than assuming rollback.[^list][^values-browser]
+
+refresh(): void reprojects the visible records using the same compiled fields and existing row identities. It retains selection and the configured sort/filter/paging policies; ordinary rendering recomputes their visible result and applies the existing focus policy. Known issues and raw data remain. Use it after deliberately changing an application policy read by a forwarding callback. Hidden records receive no refresh hook; showing them later performs bind. No new dataset, whole-Form observer or edit mode is introduced.[^list][^values-browser]
 
 # Declarative options
 
@@ -153,3 +166,5 @@ Shared Rows insertion/movement/copy changes store order while preserving existin
 [^rules]: Private UI rule runner
 [^native]: Shared native field values, display and constraints
 [^controls-browser]: Shared native display and authored-template constraint regressions
+
+[^values-browser]: Shared mounted value projection, cache, refresh and lifetime regressions

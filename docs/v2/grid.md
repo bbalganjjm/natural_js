@@ -6,6 +6,10 @@ tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
 sources:
+  - id: values-browser
+    resource: ../../tests/browser/collection-values.spec.ts
+    title: Shared mounted value projection, raw editing and lifetime regressions
+    git_blob: 5c2576a91c9b69b41f1e192db56ad3ec3635d678
   - id: defaults
     resource: ../../src/ui/native-defaults.ts
     title: Private shared native creation record and parser builder
@@ -29,11 +33,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -122,10 +126,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-07T10:13:26Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -186,6 +190,7 @@ if (grid.validate().valid) console.log(rows.changes());
 | `revealInvalid` | Optional boolean, default `false`; explicit validation and rejected paste reveal the first current-page invalid row and try to focus its visible enabled field. |
 | `paste` | Optional boolean, default `false`; enables delegated native `text/plain` paste into bound row fields and safe focusability for plain display fields. The `paste` method is available independently. |
 | `onPaste` | `(result: ValidationResult) => void` after an API or native paste returns a validation result, including rejection. It is not called when preparation or a committed observer throws. |
+| `beforeBindValue`, `onBindValue` | Synchronous `(value: unknown, context: ValueBindContext) => unknown` for mounted named fields; see [shared value callbacks](value-callbacks.md). |
 | `beforeRowBind`, `onRowBind` | Synchronous callbacks receiving `{ row, elements, own }` for a changed or remounted record; see [row binding](#row-binding-and-owned-resources). |
 | `onBind` | Synchronous `(result: GridBindResult) => void` after completed binding, progressive chunks or explicit progressive reveal growth; see [completion](#bind-completion). |
 | `columns` | Optional full column state; each key appears exactly once in display order. Template `data-column` also enables management with authored defaults. |
@@ -207,6 +212,12 @@ if (grid.validate().valid) console.log(rows.changes());
 | `onRowAction` | `({ action, id, row, element, event }) => void` for named row buttons, including an authored Undo action on a shown deleted record; `row` is the current `RowSnapshot<T>`. |
 
 Eligibility callbacks must return strict booleans. Keep eligibility, comparator, predicate, filter-value and filter-label callbacks pure: they may run during rendering, validation of a proposal, or choice queries. A native authored `disabled` control prevents that UI gesture; it does not exclude an otherwise eligible row from programmatic full-set or scoped operations. Use `canSelect` or `canCheck` for data eligibility.[^grid][^selection][^filters]
+
+# Field value callbacks
+
+Grid uses the same captured, plain-function beforeBindValue/onBindValue contract as Rows-backed Form and List. Before projects raw input through the ordinary native/formatter/render writer; after observes that written projection and may replace it once. Raw Rows, originals, change markers, parsers, validation and save data stay unchanged. Callback context values remain the source snapshot; pure validation and detached/offscreen probes never execute the hooks. If revealInvalid mounts a real invalid row, that separate projection uses normal value callbacks.[^grid][^values-browser]
+
+Creation/remount/explicit refresh use bind; a retained field's committed raw change uses val. Successful unchanged projections stay cached, drafts suppress hooks, and option-source changes recheck cached choice availability. A failure retries after raw change or explicit refresh. Editable text reveals raw on focus and restores cached display on blur; invalid drafts retain entered raw. Row callbacks, completion and selection retain their existing ordering. Reentrant binding raises GRID_BIND_REENTRANT; a source mutation may already have committed before its subscription reports that error. Correct the application callback, then refresh; no source rollback is implied.[^grid][^values-browser]
 
 # Declarative options
 
@@ -651,3 +662,5 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 
 [^filter-browser]: Applied search, zero counts and callback ownership regressions
 [^progressive-browser]: Cooperative completion, cancellation, callback and bounded-work regressions
+
+[^values-browser]: Shared mounted value projection, raw editing and lifetime regressions

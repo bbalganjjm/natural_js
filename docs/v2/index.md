@@ -1,5 +1,7 @@
 # Concepts
 
+* [ValueBindContext](value-callbacks.md) - Project mounted Form, Grid and List values without changing raw Rows or validation. (draft)
+
 * [Shared field rules and automatic validation](rules.md) - Supply typed field declarations and shared rule catalogs without global registration or changing authored HTML. (draft)
 
 * [Grid compositions](grid-compositions.md) - Use current Rows values, native events and authored table structure without adding Grid utility APIs. (draft)

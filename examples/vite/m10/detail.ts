@@ -2,7 +2,11 @@
 import type { RowId, Rows } from "@bbalganjjm/natural_js/data";
 import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { bindForm } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, GridHandle, GridRowScope, ParseInput, RuleSet } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, GridHandle, GridRowScope, ParseInput, RuleSet, ValueBindContext } from "@bbalganjjm/natural_js/ui";
+
+export function employmentValue(value: unknown, context: ValueBindContext): string | undefined {
+  if (context.field === "active" && context.element.tagName === "SPAN") return value ? "Active" : "Inactive";
+}
 
 export type Employee = {
   readonly name: string;
@@ -85,9 +89,7 @@ export function employeeDetail(view: () => HTMLElement): PageDefinition<DetailIn
         error.textContent = "";
         refresh();
       },
-      beforeBindValue(value, context) {
-        if (context.field === "active" && context.element.tagName === "SPAN") return value ? "Active" : "Inactive";
-      }
+      beforeBindValue: employmentValue
     });
     unsubscribe = input.rows.subscribe(refresh);
 

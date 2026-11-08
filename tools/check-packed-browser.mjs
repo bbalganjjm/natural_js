@@ -339,6 +339,43 @@ try {
     updated: { shown: "NEXT", raw: " next ", original: " ada ", native: "Captured", other: " bea ", phases: ["bind", "val"], frozen: true, sharedPolicy: false }
   }, "Installed explicit Form presets must preserve spread precedence, callback contexts, raw ownership and separate instance data.");
 
+  const collectionValues = await page.evaluate(() => {
+    const h = window.packedConsumer.collectionValues, id = h.rows.entries()[0].id;
+    const shown = () => h.roots.map(root => ({ name: root.querySelector('[data-field="name"]').textContent,
+      active: root.querySelector('[data-field="active"]').textContent,
+      choice: root.querySelector("select").selectedOptions[0]?.textContent }));
+    const initial = shown(), source = h.rows.get(id), original = h.rows.original(id);
+    const paired = h.calls.every((call, index, calls) => call.plain && Object.isFrozen(call.context) &&
+      (index % 2 === 0 ? call.callback === "before" && calls[index + 1]?.context === call.context : call.callback === "after"));
+    h.policy.prefix = "Employee "; h.policy.choice = 2;
+    const beforeRefresh = shown(); h.calls.length = 0;
+    for (const handle of h.handles) handle.refresh();
+    const refreshed = shown(), refreshPhases = [...new Set(h.calls.map(call => call.context.phase))];
+    const quietSource = h.rows.get(id) === source && h.rows.original(id) === original && h.rows.changes().length === 0;
+    h.calls.length = 0; h.rows.set(id, "name", " Bea ");
+    const committed = shown(), updatePhases = [...new Set(h.calls.map(call => call.context.phase))];
+    h.rows.set(id, "chosen", 99);
+    const projectedChoice = shown().map(value => value.choice), count = h.calls.length;
+    const validations = h.handles.map(handle => handle.validate());
+    const validation = { valid: validations.map(result => result.valid),
+      choiceIssues: validations.every(result => result.issues.some(issue => issue.field === "chosen")),
+      quiet: h.calls.length === count, raw: h.rows.get(id).value.chosen };
+    const raw = { current: h.rows.get(id).value.name, original: h.rows.original(id).name,
+      active: h.rows.get(id).value.active, listDisabled: h.roots[2].querySelector("select").disabled };
+    for (const handle of h.handles) handle.dispose();
+    h.rows.dispose(); h.root.remove(); delete window.packedConsumer.collectionValues;
+    return { initial, paired, beforeRefresh, refreshed, refreshPhases, quietSource, committed, updatePhases, projectedChoice, validation, raw };
+  });
+  const initialValue = { name: "ADA", active: "Active", choice: "One" };
+  const refreshedValue = { name: "EMPLOYEE ADA", active: "Active", choice: "Two" };
+  assert.deepEqual(collectionValues, {
+    initial: [initialValue, initialValue, initialValue], paired: true,
+    beforeRefresh: [initialValue, initialValue, initialValue],
+    refreshed: [refreshedValue, refreshedValue, refreshedValue], refreshPhases: ["bind"], quietSource: true,
+    committed: [0, 1, 2].map(() => ({ ...refreshedValue, name: "EMPLOYEE BEA" })), updatePhases: ["val"],
+    projectedChoice: ["Two", "Two", "Two"], validation: { valid: [false, false, false], choiceIssues: true, quiet: true, raw: 99 },
+    raw: { current: " Bea ", original: " Ada ", active: true, listDisabled: true }
+  }, "Installed Form/Grid/List callbacks must share typed policy, preserve raw validation and refresh without source writes.");
   const formBinding = await page.evaluate(() => {
     const h = window.packedConsumer.formBinding, [first, second] = h.rows.entries();
     const input = h.root.querySelector("input"), summary = h.root.querySelector("span"), select = h.root.querySelector("select");

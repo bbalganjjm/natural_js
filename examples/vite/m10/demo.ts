@@ -3,9 +3,9 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowId, RowStatus } from "@bbalganjjm/natural_js/data";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import type { PageHandle } from "@bbalganjjm/natural_js/page";
-import { bindGrid, openPopup } from "@bbalganjjm/natural_js/ui";
-import type { GridBindResult, GridColumn, GridHandle, GridRowScope, PopupHandle, RuleSet, ValidationResult } from "@bbalganjjm/natural_js/ui";
-import { employeeDetail } from "./detail.js";
+import { bindForm, bindGrid, bindList, openPopup } from "@bbalganjjm/natural_js/ui";
+import type { GridBindResult, GridColumn, GridHandle, GridRowScope, PopupHandle, RuleSet, ValidationResult, ValueBindContext } from "@bbalganjjm/natural_js/ui";
+import { employeeDetail, employmentValue } from "./detail.js";
 import type { Employee } from "./detail.js";
 import { containWheel } from "./scroll-boundary.js";
 
@@ -1046,7 +1046,34 @@ blockRoot.addEventListener("click", event => {
 });
 refreshBlocks();
 
+const valueLabels = find<HTMLInputElement>("[data-value-labels]");
+const valueObserver = find<HTMLElement>("[data-value-observer]");
+const sharedValueOptions = {
+  beforeBindValue: (value: unknown, context: ValueBindContext) => valueLabels.checked ? employmentValue(value, context) : undefined,
+  onBindValue(value: unknown, context: ValueBindContext) {
+    valueObserver.textContent = JSON.stringify({ component: context.element.closest("form, table, ul")?.tagName,
+      field: context.field, rowId: context.rowId, phase: context.phase, value, raw: context.values[context.field] }, null, 2);
+  }
+};
+const valueForm = bindForm(find<HTMLFormElement>("[data-value-form]"), { rows, ...sharedValueOptions });
+const valueGrid = bindGrid(find<HTMLTableElement>("[data-value-grid]"), {
+  rows, ...sharedValueOptions, initialPage: { page: 1, size: 2 }
+});
+const valueList = bindList(find<HTMLUListElement>("[data-value-list]"), { rows, ...sharedValueOptions });
+valueList.setPage({ page: 1, size: 2 });
+let valueRow: RowId | null = null;
+function bindValueRow(): void {
+  const id = rows.entries().find(row => row.status !== "delete")?.id ?? null;
+  if (id !== valueRow) { valueRow = id; valueForm.bind(id); }
+}
+bindValueRow();
+const stopValueRows = rows.subscribe(bindValueRow);
+find<HTMLButtonElement>("[data-value-refresh]").addEventListener("click", () => {
+  valueForm.refresh(); valueGrid.refresh(); valueList.refresh();
+});
+
 window.addEventListener("pagehide", () => {
+  stopValueRows(); valueForm.dispose(); valueGrid.dispose(); valueList.dispose();
   disposeGrid(); stopRows(); rows.dispose();
   for (const handle of blockGrids) handle.dispose();
   stopBlocks(); blockRows.dispose();

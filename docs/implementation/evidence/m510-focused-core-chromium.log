@@ -1,0 +1,12 @@
+
+
+Running 1 test using 1 worker
+
+
+
+[1/1] [chromium] › tests\browser\row-state.spec.ts:307:1 › application GET decoding explicitly maps statuses and cancellation prevents late state publication
+  1 passed (2.2s)
+[WebServer] (node:4468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:18132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

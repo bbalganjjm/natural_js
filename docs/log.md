@@ -1,3 +1,9 @@
+## 2026-11-08
+
+* **Verification** M5.10 passes sixteen latest groups on 191 frozen inputs, 138 units and 793 full cases per engine, with the same actual 193-file tar in JS/TS and all five Windows browsers, original 30 performance budgets and sixty recomputed medians. [Raw evidence](implementation/evidence/m510-verification.json) retains every captured attempt and complete once-only Chromium identities, including two initial fixture corrections without framework source changes or weaker expectations. Independent source/caller/document/raw/archive reviews and changed/full OKF checks pass with zero errors/warnings. Historical bodies/dates remain; no full-family/P0/M13 closure, omission, publication or tag.
+
+* **Creation** [M5.10 shared field value callbacks](implementation/m5-collection-values-plan.md) implements one mounted-field contract for Form/Grid/List, a shared checked invocation owner, explicit application policy and List refresh. Independent M5.9 recovery, bounded pre-source review and selected fresh source/runtime/raw/document checks pass. Broader defaults/source/declaration/owner/P0/M13 obligations stay required.
+
 ## 2026-11-07
 
 * **Verification** M5.9 passes sixteen latest groups on 188 frozen inputs, 138 units and 766 full cases per engine, with the same actual 188-file tar in JS/TS and all five Windows browsers, original 30 performance budgets and sixty recomputed medians. [Raw evidence](implementation/evidence/m59-verification.json) retains all attempts and complete once-only Chromium identities; [emitted JS](implementation/evidence/m59-runtime-js.json) matches the actual M5.8 archive. Independent source/caller/document/raw/archive reviews and changed/full OKF checks pass with zero errors/warnings. Historical bodies/dates remain; no full-family/P0/M13 closure, omission, publication or tag.

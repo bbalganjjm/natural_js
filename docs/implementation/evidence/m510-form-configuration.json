@@ -1,0 +1,1409 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.10 shared field value callbacks",
+  "recorded_at": "2026-11-08",
+  "workspace_baseline_commit": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m59-verification.json",
+      "sha256": "aa1b993c75dcb71fdf418c9f4b6a603d6b6630b707d47d9cf00e01e04c7c21f3",
+      "preserved_in_commit": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m59-form-presets.json",
+      "sha256": "b7dd828e62f54cfa4b0d58b39001ade25fd43eba5eb705be2ee573cf40b18b70"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    },
+    "resolver": "Inherit every original surface/dynamic/full-owner obligation through immutable M5.9 receipt/ledger and the original audit. Shared mounted-field acceptance does not replace parent evidence, rerun historical runtime or recertify its scope. M5.10 starts clean; all earlier failure/timing/attempt facts remain only in their dated parents unless new actual M5.10 work is recorded."
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+    "scope": "Independent read-only baseline inventory observed a clean pushed M5.9 worktree before authorized M5.10 edits; new-stage planning edits are not pre-existing dirt."
+  },
+  "public_delta": {
+    "new_public_named_types": [
+      "ValueBindContext"
+    ],
+    "removed_public_named_types": [
+      "FormValueContext"
+    ],
+    "renamed_public_named_types": [
+      {
+        "from": "FormValueContext",
+        "to": "ValueBindContext",
+        "compatibility_alias": false,
+        "net_type_count_change": 0
+      }
+    ],
+    "new_public_options": [
+      "bindGrid.beforeBindValue",
+      "bindGrid.onBindValue",
+      "bindList.beforeBindValue",
+      "bindList.onBindValue"
+    ],
+    "new_public_methods": 1,
+    "new_public_entries": 0,
+    "new_private_framework_modules": 1,
+    "new_runtime_dependencies": 0,
+    "note": "ValueBindContext replaces the former name without an alias; four Grid/List constructor options and one List refresh method are added. One private createValueBinding owner serves three real binders. Other binder-local extracted functions remain internal. Runtime JavaScript intentionally changes; no M5.9 equality assumption is inherited.",
+    "new_public_runtime_functions": 0,
+    "new_private_shared_factories": 1
+  },
+  "selected_contracts": {
+    "shared_context_and_options": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Rename FormValueContext to ValueBindContext without an alias and preserve its fields. Expose beforeBindValue/onBindValue on Grid/List and ListHandle.refresh; capture references and reject malformed hook options before ownership.",
+      "source_refs": [
+        "src/ui/index.ts",
+        "src/ui/form.ts",
+        "src/ui/grid.ts",
+        "src/ui/list.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "I01",
+        "B06",
+        "B17"
+      ],
+      "remaining": "Broader declaration/default/whole-Form inheritance and all full owners remain required."
+    },
+    "shared_checked_value_owner": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Extract Form callback invocation, synchronous/thenable/error and native/choice replacement checks into one private owner, preserving Form details/causes and using binder-specific Grid/List errors. Before transforms raw for the writer and after observes/replaces once; undefined preserves and false/null/zero/empty text remain data.",
+      "source_refs": [
+        "src/ui/value-binding.ts",
+        "src/ui/form.ts",
+        "src/ui/grid.ts",
+        "src/ui/list.ts"
+      ],
+      "witnesses": [
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "B01",
+        "B04",
+        "B07",
+        "B08",
+        "B12",
+        "B15",
+        "B18",
+        "B19",
+        "B23"
+      ],
+      "remaining": "No public helper, callback-layer engine or generic utility. One composed application function remains one callback unit."
+    },
+    "raw_projection_cache_and_focus": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Keep raw source/validation/parser/draft/formatter/change ownership separate from callback projection. Cache successful unchanged fields only with hooks, recheck typed choices after source-option changes, bypass drafts and restore committed raw on editable Grid focus with cached display on blur.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/grid.ts",
+        "src/ui/list.ts"
+      ],
+      "witnesses": [
+        "S03",
+        "S04",
+        "S05",
+        "B02",
+        "B05",
+        "B13",
+        "B16",
+        "B24",
+        "P01"
+      ],
+      "remaining": "Pure row validation and detached/offscreen probes do not run hooks. Grid revealInvalid may mount a real invalid row, whose ordinary value projection then runs. Local-source/per-unbound-key outcomes remain required."
+    },
+    "mounted_phase_lifetime_and_failure": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Use bind for creation/remount/explicit refresh and val for retained committed raw changes. Hidden retained List records get no invented callback elements; later show binds. Opt-in source/generation/reentry checks stop stale framework writes and placement; failures drain rejection, keep causes, release failed construction and permit retry.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/grid.ts",
+        "src/ui/list.ts"
+      ],
+      "witnesses": [
+        "S04",
+        "S05",
+        "B09",
+        "B10",
+        "B11",
+        "B20",
+        "B21",
+        "B22",
+        "B25"
+      ],
+      "remaining": "No-hook fast paths retain existing context/checkpoint allocation behavior; row/completion/selection ordering remains owned by existing binders."
+    },
+    "explicit_live_policy_and_refresh": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Use an application-owned mutable policy read by stable plain forwarding callbacks across independent Form/Grid/List handles. Explicit refresh applies deliberate policy changes to unchanged visible data without Rows writes or selection/disposal changes.",
+      "source_refs": [
+        "examples/vite/m10/detail.ts",
+        "examples/vite/m10/demo.ts",
+        "src/ui/list.ts"
+      ],
+      "witnesses": [
+        "E01",
+        "E02",
+        "B03",
+        "B14",
+        "B26",
+        "C01"
+      ],
+      "remaining": "No global registry, implicit inherited settings, JSON cloning or hot constructor reconfiguration; wider global/default equivalence remains required."
+    },
+    "real_example_and_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Reuse the actual active-to-Active/Inactive example projection on authored static spans while retaining native checkbox behavior. Verify renamed public types/old-name rejection and callbacks/refresh in exact-package JS/TS and five Windows browser consumers.",
+      "source_refs": [
+        "examples/vite/m10/detail.ts",
+        "examples/vite/m10/demo.ts",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "E01",
+        "E02",
+        "I01",
+        "I02",
+        "I03",
+        "B26",
+        "C01"
+      ],
+      "remaining": "Example paths/semantic documents and exact witnesses are finalized only after implementation; no full-family closure or omitted capability is implied."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "Common ValueBindContext replaces the Form-only context and List exposes refresh",
+      "marker": "export interface ValueBindContext"
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/value-binding.ts",
+      "title": "One shared private checked value owner serves the three binders",
+      "marker": "export function createValueBinding"
+    },
+    "S03": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "Form retains field ownership while delegating checked invocation and replacement",
+      "marker": "values.apply(field, field, raw"
+    },
+    "S04": {
+      "kind": "source",
+      "file": "src/ui/grid.ts",
+      "title": "Grid owns projection cache native editing and final placement",
+      "marker": "function renderText("
+    },
+    "S05": {
+      "kind": "source",
+      "file": "src/ui/list.ts",
+      "title": "List owns read-only mounted projection cache and deliberate refresh",
+      "marker": "refresh() { active(); render(true); }"
+    },
+    "E01": {
+      "kind": "example_source",
+      "file": "examples/vite/m10/detail.ts",
+      "title": "Existing employment projection is shared without changing checkbox behavior",
+      "marker": "export function employmentValue"
+    },
+    "E02": {
+      "kind": "example_source",
+      "file": "examples/vite/m10/demo.ts",
+      "title": "The authored three-owner preview forwards a live app policy",
+      "marker": "const sharedValueOptions ="
+    },
+    "I01": {
+      "kind": "installed_source",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Installed TypeScript imports common context and rejects the removed name",
+      "marker": "@ts-expect-error Use the common ValueBindContext"
+    },
+    "I02": {
+      "kind": "installed_source",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Installed JS creates independent common-value owners and captured raw data",
+      "marker": "state.collectionValues ="
+    },
+    "I03": {
+      "kind": "installed_source",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Exact-package browser assertions cover common policy refresh and raw validation",
+      "marker": "const collectionValues = await page.evaluate"
+    },
+    "P01": {
+      "kind": "inherited_source",
+      "file": "tests/browser/form-presets.spec.ts",
+      "title": "Existing Form preset witnesses use the common context name",
+      "marker": "let context: ValueBindContext | undefined"
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid value hooks preserve scalar replacements raw context and ordinary formatting",
+      "marker": "value hooks preserve scalar replacements raw context and ordinary formatting"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid caches successful values and distinguishes committed updates from deliberate refresh",
+      "marker": "caches successful values and distinguishes committed updates from deliberate refresh"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid captured callbacks can read live application policy without sharing Rows",
+      "marker": "captured callbacks can read live application policy without sharing Rows"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid preserves typed occurrences and unmarked native choice coercion without rewriting raw selections",
+      "marker": "preserves typed occurrences and unmarked native choice coercion without rewriting raw selections"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid rechecks cached choice availability after option source changes and validates raw values",
+      "marker": "rechecks cached choice availability after option source changes and validates raw values"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid rejects invalid value callbacks before taking template Select or error ownership",
+      "marker": "rejects invalid value callbacks before taking template Select or error ownership"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid preserves thrown callback causes and retries failed projections only on explicit work",
+      "marker": "preserves thrown callback causes and retries failed projections only on explicit work"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid rejects and drains asynchronous value results and releases failed construction",
+      "marker": "rejects and drains asynchronous value results and releases failed construction"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid stops stale projection after nested source changes and disposal",
+      "marker": "stops stale projection after nested source changes and disposal"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid observes mounted fields only and treats retained row reappearance as binding",
+      "marker": "observes mounted fields only and treats retained row reappearance as binding"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "grid stops old placement after a focus handler replaces the shared source",
+      "marker": "stops old placement after a focus handler replaces the shared source"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list value hooks preserve scalar replacements raw context and ordinary formatting",
+      "marker": "value hooks preserve scalar replacements raw context and ordinary formatting"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list caches successful values and distinguishes committed updates from deliberate refresh",
+      "marker": "caches successful values and distinguishes committed updates from deliberate refresh"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list captured callbacks can read live application policy without sharing Rows",
+      "marker": "captured callbacks can read live application policy without sharing Rows"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list preserves typed occurrences and unmarked native choice coercion without rewriting raw selections",
+      "marker": "preserves typed occurrences and unmarked native choice coercion without rewriting raw selections"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list rechecks cached choice availability after option source changes and validates raw values",
+      "marker": "rechecks cached choice availability after option source changes and validates raw values"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list rejects invalid value callbacks before taking template Select or error ownership",
+      "marker": "rejects invalid value callbacks before taking template Select or error ownership"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list preserves thrown callback causes and retries failed projections only on explicit work",
+      "marker": "preserves thrown callback causes and retries failed projections only on explicit work"
+    },
+    "B19": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list rejects and drains asynchronous value results and releases failed construction",
+      "marker": "rejects and drains asynchronous value results and releases failed construction"
+    },
+    "B20": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list stops stale projection after nested source changes and disposal",
+      "marker": "stops stale projection after nested source changes and disposal"
+    },
+    "B21": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list observes mounted fields only and treats retained row reappearance as binding",
+      "marker": "observes mounted fields only and treats retained row reappearance as binding"
+    },
+    "B22": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "list stops old placement after a focus handler replaces the shared source",
+      "marker": "stops old placement after a focus handler replaces the shared source"
+    },
+    "B23": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "Grid value replacements preserve native grouped controls and reject invalid shapes"
+    },
+    "B24": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "Grid editing exposes raw focus preserves invalid drafts and projects parsed committed values on blur"
+    },
+    "B25": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "Grid viewport and progressive binding project mounted rows only and stop after disposal"
+    },
+    "B26": {
+      "kind": "browser",
+      "file": "tests/browser/collection-values.spec.ts",
+      "title": "one application policy serves Form Grid and List while lifecycle and source owners stay separate"
+    },
+    "C01": {
+      "kind": "browser",
+      "file": "tests/browser/m510-values-demo.spec.ts",
+      "title": "shared value policy refresh updates the authored Form Grid and List preview without writing Rows"
+    }
+  },
+  "witness_counts": {
+    "status": "actual_current_canonical_counts_independent_raw_and_documents_pending",
+    "unit_delta": 0,
+    "browser_delta": 27,
+    "collection_browser_cases": 26,
+    "demo_browser_cases": 1,
+    "source_witnesses": 5,
+    "example_source_witnesses": 2,
+    "installed_source_witnesses": 3,
+    "inherited_browser_source_witnesses": 1,
+    "inherited_full_cases_per_engine": 766,
+    "expected_full_cases_per_engine": 793,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 793
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m510-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m510-verification.json",
+    "required_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "required_package_checks": [
+      "isolated_js",
+      "isolated_ts",
+      "packed_chromium",
+      "packed_firefox",
+      "packed_webkit",
+      "installed_chrome",
+      "installed_edge"
+    ],
+    "required_other_checks": [
+      "strict_build",
+      "strict_source_types",
+      "strict_example_types",
+      "unit",
+      "binding_9_original_budgets",
+      "viewport_21_original_budgets",
+      "docs_changed_zero_errors_warnings",
+      "docs_full_zero_errors_warnings"
+    ],
+    "baseline_input_entries": 188,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 766,
+    "inventory_expectation": {
+      "status": "actual_final_frozen_counts",
+      "actual_source_inputs": 191,
+      "actual_package_files": 193,
+      "actual_unit_pass_count": 138,
+      "scope": "Current captured final canonical map and actual package descriptor/listing; actual private module and browser/example inputs are counted from the frozen map and pack output."
+    },
+    "semantic_document_scope": [
+      "docs/implementation/current.md",
+      "docs/implementation/feature-parity.md",
+      "docs/implementation/m5-collection-values-plan.md",
+      "docs/v2/value-callbacks.md",
+      "docs/v2/form.md",
+      "docs/v2/ui.md",
+      "docs/v2/grid.md",
+      "docs/v2/list.md",
+      "docs/v2/migration.md",
+      "docs/v2/grid-demo.md",
+      "docs/v2/architecture.md",
+      "docs/v2/package.md"
+    ],
+    "semantic_document_scope_status": "actual12_semantic_bodies_independently_approved_pending_mechanical_stamps",
+    "setup_observations": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M510 helpers; not a project verification command",
+        "log": {
+          "path": "node_modules/.cache/m510-helper-syntax.log",
+          "sha256": "6d7497ec323909353c7092ee19b5235e24a7ac241279fbdec42702bab79e028c"
+        }
+      },
+      {
+        "kind": "reported_root_non_project_preparation",
+        "status": "reported_failures_corrected_before_project_gates",
+        "source": "Root direct task message; no captured log/hash was supplied or invented.",
+        "observations": [
+          "Browser consumer main.js node --check initially failed on duplicate const valueRows; root put the new fixture in a block and reported subsequent main/tool syntax checks passing.",
+          "Ignored root preparation script initially hit CRLF text matching; root normalized its input and reported successful preparation."
+        ],
+        "runtime_gate_claim": false
+      }
+    ],
+    "operator_dispositions": [
+      {
+        "kind": "captured_initial_focused_fixture_corrections",
+        "log": "m510-focused-chromium.log",
+        "log_sha256": "4a2d7651782380559289caafc082f942f61afc6341d2f41a392355d06d1caaba",
+        "input_manifest": "m510-inputs-f80ad681eab4.json",
+        "input_manifest_sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a",
+        "passed": 122,
+        "failed": 2,
+        "sources_unchanged": true,
+        "changed_files_to_current": [
+          "tests/browser/collection-values.spec.ts"
+        ],
+        "framework_source_hashes_unchanged": true,
+        "disposition": "Root/test author corrected test input/change-event sequencing and authored List element metadata for a detached prepared clone. This is fixture correction evidence, not a framework source RED/GREEN bug fix. The earlier attempt is retained and grants no corrected-fixture pass."
+      }
+    ],
+    "diagnostic_dispositions": [
+      {
+        "status": "retained_failed_full_parent_and_later_passing_target_verified",
+        "failed_parent": {
+          "log": "m510-browser-chromium.log",
+          "log_sha256": "5c8c9fd80e2b25564ff09b50bca4eefab72e4e4228d573302b279939e4953c6e",
+          "input_manifest": "m510-inputs-2654b1433ba3.json",
+          "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+          "sources_unchanged": true,
+          "manifest": "m510-chromium-shards.json",
+          "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+          "complete": false,
+          "certifies_full_suite": false,
+          "completed_partitions": 11,
+          "completed_prefix_passed": 729,
+          "last_child": {
+            "report": "m510-chromium-run-12.json",
+            "report_sha256": "438e74bafcc10d6d8a875565b5d8425d38cbedaccfccfba13f642aa0888ba119",
+            "passed": 63,
+            "unexpected": 1,
+            "expected_id_count": 64,
+            "failed_test": {
+              "file": "row-state.spec.ts",
+              "line": 307,
+              "title": "application GET decoding explicitly maps statuses and cancellation prevents late state publication",
+              "observed_error": "Dynamic Grid module fetch failure reported at beforeEach page.evaluate line37 before the test body."
+            }
+          }
+        },
+        "later_diagnostic": {
+          "log": "m510-focused-core-chromium.log",
+          "log_sha256": "6612d796ee3d77dbf3b7dbc38dee94ee4a6c8f04744cc64fe532f1351872b0e4",
+          "input_manifest": "m510-inputs-2654b1433ba3.json",
+          "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+          "sources_unchanged": true,
+          "passed": 1,
+          "trace": {
+            "path": "docs/implementation/evidence/m510-module-import-diagnostic-trace.zip",
+            "sha256": "5d87bc27a57c07dfff48a2954531a3fef76e251e630ac792c54f4a19732badd4",
+            "bytes": 104085
+          },
+          "companion": {
+            "path": "docs/implementation/evidence/m510-module-import-diagnostic.json",
+            "sha256": "a756a94dbd2a41fed157120e538abcb273a32a410ea3913370daa9ba5f6152c5"
+          },
+          "actual_trace_grid_requests": [
+            {
+              "url": "http://127.0.0.1:4173/@fs/D:/workspace/natural_js/src/ui/grid.ts",
+              "status": 200,
+              "statusText": "OK"
+            }
+          ]
+        },
+        "scope": "The trace records the later passing targeted diagnostic only; no original failed-request trace, failure cause, tolerance, retry or full-suite coverage is inferred. Root changed only an ignored runner diagnostic phase outside the191 execution inputs; current wrapper inspection does not prove its execution-time hash."
+      }
+    ],
+    "superseded_artifacts": [],
+    "independent_reviews": {
+      "baseline": "passed_read_only_5ecda44_M59_source_raw_archive_preservation_recovery",
+      "contract": "bounded_contract_independently_approved_before_source_GO",
+      "source": "passed_independent_connected_source_callers_27_fixed_witnesses_and_three_focused124_captures",
+      "evidence": "passed_independent_raw_gate_source_map_archive_shard_performance_parent_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_M5.9_baseline_recovery_for_M5.10",
+        "helper": {
+          "path": "node_modules/.cache/m510-baseline-audit.mjs",
+          "sha256": "e50301edff7acab7c8818251b8d75d46082d41e97faf2932d019a920f127e5be"
+        },
+        "log": {
+          "path": "node_modules/.cache/m510-baseline-audit.log",
+          "sha256": "393766198b41573b03cec3cab95c95d38bb8bdff3d2f7b6bffce97da9cbb2aa5"
+        },
+        "head": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+        "source_inputs": 188,
+        "raw_evidence_files": 80,
+        "records": 22,
+        "source_map_entry_counts": [
+          188
+        ],
+        "immutable_parents": 6,
+        "canonical_groups": 16,
+        "execution_commands": 27,
+        "collection_commands": 13,
+        "chromium_raw_children": 50,
+        "units": 138,
+        "full_cases_each_engine": 766,
+        "actual_artifact": {
+          "path": "node_modules/.cache/m59-artifact/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "sha256": "a6873b73f7a2aaafea9791f11d2c787aa6442fb52ac3748602e5a54fcd604c61",
+          "files": 188,
+          "packed_bytes": 332695,
+          "unpacked_bytes": 1674005,
+          "all_current_payloads_match": true
+        },
+        "installed_js_ts": true,
+        "installed_windows_browsers": 5,
+        "v1_original_lock_master": "preserved",
+        "scope": "Read-only retained M5.9 scope only; no historical runtime rerun or M5.10 implementation acceptance."
+      },
+      "contract": {
+        "status": "bounded_approved_before_production_GO",
+        "recorded_at": "2026-11-08T07:39:04.405Z",
+        "baseline_commit": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+        "plan_snapshot": {
+          "path": "docs/implementation/m5-collection-values-plan.md",
+          "normalized_whole_file_sha256": "862890b352bb99ae2f1a2c5e97b4aa20bd2e3179f43381bfd231976d5fdd35a6",
+          "normalized_body_sha256": "baf242cc4472076cab82b747d24f896ccca8c1e8f7b19f22716a0c41a97dcefb",
+          "scope": "Independent pre-source approval of the plan body just read; root received approval before sending production GO. Later status, metadata and fingerprints are not this snapshot."
+        },
+        "decision": "No blocker. One shared field-value context/invocation/replacement owner serves three real binders; four Grid/List hook options and List refresh restore selected legacy outcomes without a registry or implicit whole-Form inheritance.",
+        "precision": [
+          "Validate hook types before DOM/Select/ARIA claims.",
+          "Only named bound fields invoke value callbacks; an option-source-only Select has no value field.",
+          "Real clones about to mount are valid callback elements; hidden retained List records are not imaginary mounted fields, and later show is bind.",
+          "Separate invalid drafts from successful committed projection caches; validation/offscreen probes never run hooks.",
+          "Preserve row-hook/value-hook/completion order and final placement/current-source guards; keep the no-hook fast path free of per-field callback contexts."
+        ],
+        "limits": [
+          "Contract approval only; actual implementation, witnesses, runtime/raw evidence and final document acceptance remain pending.",
+          "No compiler/browser/benchmark/model call or historical runtime rerun."
+        ],
+        "review_log": {
+          "path": "node_modules/.cache/m510-contract-review.log",
+          "sha256": "1e17ac904a6a6fb6c3f4505e04621d286dcdeea347c37ba6295e9ffc67c18107"
+        }
+      },
+      "initial_documents_check": {
+        "status": "actual_initial_draft_check_final_checks_pending",
+        "log": {
+          "path": "node_modules/.cache/m510-docs-initial.log",
+          "sha256": "e566972d9f56afaf8b70f295c287ddd0b99c528e20d61912f4e3ccd3509c36de"
+        },
+        "concepts": 78,
+        "reserved_files": 5,
+        "errors": 0,
+        "warnings": 121,
+        "warning_breakdown": {
+          "drift": 101,
+          "unstamped": 20
+        },
+        "scope": "Initial draft checker result only; root owns later correction/stamps/final independent semantic and mechanical gates."
+      },
+      "source": {
+        "status": "passed_independent_connected_source_callers_and_focused_witness_review",
+        "helper": {
+          "path": "node_modules/.cache/m510-source-review.mjs",
+          "sha256": "14553d60096e763de31bdd384c16ce0a01026117adcdc8b5c9a324dd6ffb56da"
+        },
+        "log": {
+          "path": "node_modules/.cache/m510-source-review.log",
+          "sha256": "1e23cccc90e1c7790370fe3f172e2507f947e38f477f7d1fc9fa0b4777c05cc4"
+        },
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_inputs": 191,
+        "reviewed_files": [
+          {
+            "path": "src/ui/index.ts",
+            "normalized_sha256": "53fc30f52b9c15e6bb95e90c55ae7b38d4af3f97add504c6213ef6660d8b7700"
+          },
+          {
+            "path": "src/ui/value-binding.ts",
+            "normalized_sha256": "ab0ad70fd87cabc5be3c2404878df4ad39791fa9b3a8532e53dfe95eea32873d"
+          },
+          {
+            "path": "src/ui/form.ts",
+            "normalized_sha256": "de6727f0c3059e7a59f18e451378f8e59d2484d7bb9f24f49f6b00b6184cb545"
+          },
+          {
+            "path": "src/ui/grid.ts",
+            "normalized_sha256": "d2107c8ce8aec5a71c99c7bc047f2f794a8206fd40bc6527102a5fe205899047"
+          },
+          {
+            "path": "src/ui/list.ts",
+            "normalized_sha256": "24d24f1f79b93b278d448ee8bb2998e830c47d222ef99e6502f129f0f1fe7adc"
+          },
+          {
+            "path": "examples/vite/m10/detail.ts",
+            "normalized_sha256": "9c4b3521012d5d53403878f4dcc565cd949fae758708a001318169f60cb6319a"
+          },
+          {
+            "path": "examples/vite/m10/demo.ts",
+            "normalized_sha256": "186dbd11c88b9991cb0d8039773cd383da4e4d136bd675d0545b0ea8696fe2ff"
+          },
+          {
+            "path": "examples/vite/m10/demo.html",
+            "normalized_sha256": "f9b5669a8a789ed80517d59464e44a7e83168f5607cea8dc0455b94114fe68ba"
+          },
+          {
+            "path": "tests/consumers/browser/main.js",
+            "normalized_sha256": "1d7f8364b7a726c2d5858a59f9294c9342511ec1747773886bdba09a9f760bea"
+          },
+          {
+            "path": "tests/consumers/ts/check.ts",
+            "normalized_sha256": "6e494a4b858fffc17bb4bb07c440cb35b041b3464b425d61846e5af04aae1605"
+          },
+          {
+            "path": "tools/check-packed-browser.mjs",
+            "normalized_sha256": "0a0509531ef971b3341d7edc952c8a387ed4a14011e560690c4800827f8ecbda"
+          },
+          {
+            "path": "tests/browser/form-presets.spec.ts",
+            "normalized_sha256": "be2f0116c8e93bce65b1a6e4d2ab2cd67b2044035b355472b0ac6a4110293445"
+          },
+          {
+            "path": "tests/browser/collection-values.spec.ts",
+            "normalized_sha256": "f8b2bc252257bbe6523bdef9ac1ca00d8c502110aa19ae21a8879019804bded9"
+          },
+          {
+            "path": "tests/browser/m510-values-demo.spec.ts",
+            "normalized_sha256": "c88fd203fc58b7c68d1205014a752c6a98a10e64c6cdeee47f64af98009bfade"
+          }
+        ],
+        "focused": [
+          {
+            "label": "focused-chromium",
+            "log": "m510-focused-chromium-2.log",
+            "log_sha256": "f8a0cddaedb569e654eb54fcd04e280ca21b58fd914dc5818b1abb8c989a74bc",
+            "passed": 124,
+            "source_unchanged": true
+          },
+          {
+            "label": "focused-firefox",
+            "log": "m510-focused-firefox.log",
+            "log_sha256": "f268461d2c7f93bd006b10f1cfda414dff0a6042c7334040da6a5358130826d1",
+            "passed": 124,
+            "source_unchanged": true
+          },
+          {
+            "label": "focused-webkit",
+            "log": "m510-focused-webkit.log",
+            "log_sha256": "7ecb85e011ad5a43b713ea2262e8271bb9cfbc6f12fccbf068107afee788962a",
+            "passed": 124,
+            "source_unchanged": true
+          }
+        ],
+        "scope": "Source/caller and latest three focused captures only. Canonical full suites, actual installed/performance final acceptance and independent raw/final semantic/mechanical reviews remain pending. No runtime JavaScript equality claim, historical recertification, full-family/P0/M13 closure or omitted capability."
+      },
+      "intermediate_documents_check": {
+        "status": "reported_root_draft_refresh_final_checks_pending",
+        "source": "Root reported actual changed checker after draft stamp/fingerprint settlement; no retained output path/hash was supplied and none is invented.",
+        "concepts": 78,
+        "reserved_files": 5,
+        "errors": 0,
+        "warnings": 10,
+        "warning_breakdown": {
+          "verified-stale": 10
+        },
+        "scope": "Reported intermediate preparation only; final independent semantic review and actual changed/full zero-warning checks remain pending."
+      },
+      "documents_precheck": {
+        "status": "preliminary_12_body_api_precheck_no_blocker_final_status_review_pending",
+        "files": [
+          "docs/implementation/current.md",
+          "docs/implementation/feature-parity.md",
+          "docs/implementation/m5-collection-values-plan.md",
+          "docs/v2/value-callbacks.md",
+          "docs/v2/form.md",
+          "docs/v2/ui.md",
+          "docs/v2/grid.md",
+          "docs/v2/list.md",
+          "docs/v2/migration.md",
+          "docs/v2/grid-demo.md",
+          "docs/v2/architecture.md",
+          "docs/v2/package.md"
+        ],
+        "checked": "Current source-linked API edits match common context rename, four value options, List refresh, native versus typed choices, raw/formatter/renderer and component-local cache/lifetime boundaries. List no-render limitation and capture wording are precise.",
+        "remaining": "Active/owning plan and change-log checkpoints retain temporary pending language and must be rewritten against the final runtime receipt; no final semantic approval or verified authorization is recorded."
+      },
+      "reveal_validation_precision": {
+        "status": "source_checked_existing_owner_precision",
+        "source": "src/ui/grid.ts validationResult → reveal → actual renderWindow",
+        "scope": "Row validation/probes remain callback-free. Existing revealInvalid may mount a real invalid row and then ordinary value callbacks run; this clarification adds no engine or capability and does not alter runtime inputs."
+      },
+      "runtime_reconciliation": {
+        "status": "captured_final_canonical_runtime_verified_independent_raw_and_documents_pending",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_inputs": 191,
+        "gate_records": 25,
+        "development_records": 8,
+        "superseded_records": 1,
+        "failed_records": 2,
+        "input_maps": [
+          {
+            "path": "m510-inputs-f80ad681eab4.json",
+            "entries": 191,
+            "sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a"
+          },
+          {
+            "path": "m510-inputs-2654b1433ba3.json",
+            "entries": 191,
+            "sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5"
+          }
+        ],
+        "canonical_groups": 16,
+        "execution_commands": 27,
+        "collection_commands": 13,
+        "unit_passed": 138,
+        "unit_delta": 0,
+        "new_browser_cases": 27,
+        "full_suites": {
+          "chromium": {
+            "passed": 793,
+            "elapsed": "12 sequential Chromium shards, 311.7s",
+            "log": "m510-browser-chromium-2.log",
+            "log_sha256": "c894606161be06795a998e8fdfc055e8e4db53255388afec3b3b333508023543"
+          },
+          "firefox": {
+            "passed": 793,
+            "elapsed": "10.0m",
+            "log": "m510-browser-firefox.log",
+            "log_sha256": "11b1b21899215132726ff814881c0d770f85e876060a4c67eb9b39e29334d77f"
+          },
+          "webkit": {
+            "passed": 793,
+            "elapsed": "7.7m",
+            "log": "m510-browser-webkit.log",
+            "log_sha256": "515ff1b015470bebec5c79a5ea42a23f7a957488f173e67604822688f9cc4a3a"
+          }
+        },
+        "chromium": {
+          "manifest": "m510-chromium-shards-2.json",
+          "manifest_sha256": "c855871b351e521188f47cf1b3d1459ca95e8809fc610c1f40f768f5c7425b64",
+          "shard_count": 12,
+          "partitions": [
+            71,
+            90,
+            49,
+            58,
+            76,
+            54,
+            74,
+            59,
+            69,
+            62,
+            67,
+            64
+          ],
+          "raw_child_files": 50,
+          "total_linked_raw_children": 100,
+          "elapsed_seconds": 311.713,
+          "retained_partial": {
+            "manifest": "m510-chromium-shards.json",
+            "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+            "complete": false,
+            "certifies_full_suite": false,
+            "completed_prefix_passed": 729,
+            "last_child_passed": 63,
+            "last_child_unexpected": 1
+          }
+        },
+        "artifact": {
+          "sha256": "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+          "files": 193,
+          "packed_bytes": 340502,
+          "unpacked_bytes": 1716337,
+          "actual_tar_sha_and_listing_verified": true
+        },
+        "installed_js_ts": "captured pass",
+        "installed_windows_browsers": 5,
+        "performance": {
+          "binding_gate": "captured pass",
+          "viewport_gate": "captured pass",
+          "required_original_budgets": {
+            "binding": 9,
+            "viewport": 21
+          },
+          "recomputed_medians": 60,
+          "raw_durations": 300,
+          "budgets_checked": 30,
+          "independent_raw_geometry_review": "pending"
+        },
+        "scope": "Read-only retained record/log/input-map/manifest/child-hash/archive-listing/metric reconciliation followed by owned-ledger bookkeeping. No compiler/browser/project command rerun; independent raw archive payload, metadata/test identity, geometry and final semantic/mechanical document reviews remain pending. Both failed attempts and the later passing diagnostic remain distinct; no original import-failure cause is inferred.",
+        "helper": {
+          "path": "node_modules/.cache/m510-runtime-ledger.mjs",
+          "sha256": "79d028e8679dd64a9bff73ea598180fd99bb5e31c593309d2132b68629c5ca9b"
+        }
+      },
+      "raw_evidence": {
+        "status": "passed_independent_final_raw_evidence_final_documents_pending",
+        "reviewer": "Independent legacy/raw-evidence agent; actual report/helper read and hashes checked by connected-source/document reviewer",
+        "reported_audit_executions": 1,
+        "helper": {
+          "path": "node_modules/.cache/m510-independent-audit.mjs",
+          "sha256": "6ddc6e83fbe594450872e796a25e726fc053c5a43eabf314a8f9b947c0e754cb"
+        },
+        "log": {
+          "path": "node_modules/.cache/m510-independent-audit.log",
+          "sha256": "c921c418b668e5bb52f1d1d88f548d90de5816f9bf1d3af180e87db6ed5eae14"
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m510-reviewed-runtime-receipt.json",
+          "sha256": "0964d6369978dd4f4aacbdd0550758c807a41aaf4d54b20dcb9a55ef6de368a6",
+          "scope": "Byte-exact independently reviewed R0 snapshot, preserved before review-status changes. This is not a current/final receipt self-hash."
+        },
+        "reviewed_semantic_ledger_snapshot": {
+          "path": "docs/implementation/evidence/m510-form-configuration.json",
+          "sha256": "6aadf2ec04e84f4d70d01e8a7adba2c38c475aac710bf2a2311f98067b0a2025",
+          "scope": "Exact pre-review-status ledger represented by reviewed R0. Later review/final-stamp updates deliberately change this file; this is not its final self-hash."
+        },
+        "actual_scope": {
+          "records": 25,
+          "development": 8,
+          "final_groups": 16,
+          "superseded": 1,
+          "failed": 2,
+          "maps": 2,
+          "source_inputs": 191,
+          "focused_each": 124,
+          "full_each": 793,
+          "new_browser_cases": 27,
+          "chromium_raw_children": 100,
+          "canonical_raw_children": 50,
+          "incomplete_raw_children": 50,
+          "chromium_once_only_disjoint_union": true,
+          "retained_incomplete": {
+            "manifest": "m510-chromium-shards.json",
+            "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+            "completed_prefix_passed": 729,
+            "failed_shard": {
+              "passed": 63,
+              "failed": 1
+            },
+            "full_suite_coverage_credit": 0
+          },
+          "later_diagnostic": {
+            "log": "m510-focused-core-chromium.log",
+            "input_manifest": "m510-inputs-2654b1433ba3.json",
+            "actual_cases": 1,
+            "passed": 1,
+            "full_suite_coverage_credit": 0,
+            "trace": {
+              "path": "docs/implementation/evidence/m510-module-import-diagnostic-trace.zip",
+              "sha256": "5d87bc27a57c07dfff48a2954531a3fef76e251e630ac792c54f4a19732badd4",
+              "bytes": 104085,
+              "archive_entries": 15,
+              "grid_requests": [
+                {
+                  "url": "http://127.0.0.1:4173/@fs/D:/workspace/natural_js/src/ui/grid.ts",
+                  "status": 200,
+                  "statusText": "OK"
+                }
+              ]
+            },
+            "companion": {
+              "path": "docs/implementation/evidence/m510-module-import-diagnostic.json",
+              "sha256": "a756a94dbd2a41fed157120e538abcb273a32a410ea3913370daa9ba5f6152c5"
+            },
+            "scope": "Later passing targeted diagnostic and its successful request only. It is not the original failed request and establishes no original root cause."
+          },
+          "artifact": {
+            "sha256": "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+            "files": 193,
+            "packed_bytes": 340502,
+            "unpacked_bytes": 1716337,
+            "all_payloads_byte_identical_to_workspace_and_packlist": true
+          },
+          "shared_value_runtime": {
+            "runtime_intentionally_changed": true,
+            "common_context": "ValueBindContext",
+            "old_context_removed_without_alias": true,
+            "four_existing_signature_collection_options_present": true,
+            "list_refresh_present": true,
+            "private_helper_members": [
+              "src/ui/value-binding.ts",
+              "build/ui/value-binding.js",
+              "build/ui/value-binding.d.ts",
+              "build/ui/value-binding.js.map",
+              "build/ui/value-binding.d.ts.map"
+            ],
+            "actual_three_binder_references": true,
+            "public_entries_unchanged": true,
+            "inherited_emitted_js_equality_claimed": false,
+            "historical_runtime_rerun": false
+          },
+          "installed_js_ts": true,
+          "installed_windows_browsers": 5,
+          "recomputed_medians": 60,
+          "raw_durations": 300,
+          "original_budgets": 30,
+          "viewport_stage_samples": 120,
+          "viewport_cycle_windows": 300,
+          "immutable_parents": 6,
+          "protected_benchmark_fixtures": 4,
+          "protected_raw_tar_fixtures": 3,
+          "protections": {
+            "v1_unchanged": true,
+            "original_lock_ignored_untracked_byte_identical": true,
+            "master": "b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6",
+            "branch": "2.0.0-alpha.0",
+            "head": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b"
+          }
+        },
+        "timing_observations": {
+          "records": [
+            {
+              "parent_log": "m510-browser-chromium.log",
+              "parent_log_sha256": "5c8c9fd80e2b25564ff09b50bca4eefab72e4e4228d573302b279939e4953c6e",
+              "parent_input_manifest": "m510-inputs-2654b1433ba3.json",
+              "parent_input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+              "parent_exit_code": 1,
+              "parent_sources_unchanged": true,
+              "manifest": "m510-chromium-shards.json",
+              "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+              "runner": "m510-chromium-shards.mjs",
+              "runner_sha256": "3e12de4c3ffc8ab25888d23ade44ebb9252f92e289ccafb93aa0eb1d8081b66a",
+              "parent_started": "2026-11-08T08:05:23.128Z",
+              "parent_finished": "2026-11-08T08:10:42.988Z",
+              "first_child_started": "2026-11-08T08:05:23.209Z",
+              "last_child_finished": "2026-11-08T08:10:42.964Z",
+              "first_child_started_minus_parent_started_ms": 81,
+              "last_child_finished_minus_parent_finished_ms": -24,
+              "wall_clock_enclosure_claimed": false,
+              "completion_supported_by_hashed_marker_and_exit": false
+            },
+            {
+              "parent_log": "m510-browser-chromium-2.log",
+              "parent_log_sha256": "c894606161be06795a998e8fdfc055e8e4db53255388afec3b3b333508023543",
+              "parent_input_manifest": "m510-inputs-2654b1433ba3.json",
+              "parent_input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+              "parent_exit_code": 0,
+              "parent_sources_unchanged": true,
+              "manifest": "m510-chromium-shards-2.json",
+              "manifest_sha256": "c855871b351e521188f47cf1b3d1459ca95e8809fc610c1f40f768f5c7425b64",
+              "runner": "m510-chromium-shards.mjs",
+              "runner_sha256": "3e12de4c3ffc8ab25888d23ade44ebb9252f92e289ccafb93aa0eb1d8081b66a",
+              "parent_started": "2026-11-08T08:13:23.466Z",
+              "parent_finished": "2026-11-08T08:18:35.288Z",
+              "first_child_started": "2026-11-08T08:13:23.545Z",
+              "last_child_finished": "2026-11-08T08:18:35.256Z",
+              "first_child_started_minus_parent_started_ms": 79,
+              "last_child_finished_minus_parent_finished_ms": -32,
+              "wall_clock_enclosure_claimed": false,
+              "completion_supported_by_hashed_marker_and_exit": true
+            }
+          ],
+          "completion": {
+            "parent_finished": "2026-11-08T08:18:35.288Z",
+            "last_child_finished": "2026-11-08T08:18:35.256Z",
+            "child_minus_parent_ms": -32,
+            "strict_wall_clock_parent_nesting": true,
+            "first_child_started": "2026-11-08T08:13:23.545Z",
+            "first_child_started_minus_parent_started_ms": 79,
+            "wall_clock_enclosure_claimed": false,
+            "awaited_child_close_then_hashed_manifest_marker_and_parent_exit_zero": true,
+            "sibling_order_and_nonnegative_durations_verified": true,
+            "timestamp_difference_cause": "not established",
+            "tolerance_applied": false
+          },
+          "current_wrapper_inspection": {
+            "path": "node_modules/.cache/m510-run.mjs",
+            "sha256": "325f1e836f756e88b0b9a000f314fe2532c98b4e4a8e36693cbeb6473e98a66d",
+            "scope": "Current read-only wrapper source inspection; its execution-time hash was not captured or invented.",
+            "execution_time_hash_claimed": false
+          },
+          "scope": "Exact recorded parent/child observations and current wrapper inspection only. Completion uses awaited child close, hashed report/manifest marker and successful parent exit; no execution-time wrapper hash, timestamp cause or tolerance is invented."
+        },
+        "limits": "Independent raw approval only. Final twelve semantic bodies and actual changed/full zero-error zero-warning mechanical checks remain pending. Historical runtime remains in its dated scope without rerun/recertification; no full-owner/P0/M13 closure or omission."
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "review_scope": "Twelve frozen current semantic concepts reviewed through their changed/new sections, connected frozen source/callers and27 new witnesses, baseline-preserved contracts, R1 receipt and accepted independent raw report. Three indexes and dated log were checked. No project/compiler/browser/benchmark/model command rerun.",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_whole_file_sha256": "d8b891aed8c586648b71611e04384cbb4c12e15c6c1cc24e587702488d0757a9",
+            "normalized_body_sha256": "97a2883f67f0b9fbd9c90496d20a0814add45494a4dc8370aca33e04c4696f78"
+          },
+          "docs/implementation/feature-parity.md": {
+            "normalized_whole_file_sha256": "baa6de26c359838291dd5cb0a5ba53a6737d7f4ad5fd77bbe0bce16eb842e737",
+            "normalized_body_sha256": "0b8788f68d8005e07807dd27255836677d5db777dd27af223cbb2ced77e5ecee"
+          },
+          "docs/implementation/m5-collection-values-plan.md": {
+            "normalized_whole_file_sha256": "7ce478bf1d39528085bc0f510eedb9eac8af5c858e685b941092bf0a1326fe4a",
+            "normalized_body_sha256": "ca69f41150f4b4447008ee467e49b055f20dbcd3ef47b1921e9d099764b80701"
+          },
+          "docs/v2/value-callbacks.md": {
+            "normalized_whole_file_sha256": "acf6ee879a346c7abbab0db2a828d76c540818b5b73072505653ec52831f3e5d",
+            "normalized_body_sha256": "12e6e06966cc629804af24f096fd36aec01f25983704a5bef035b08de5b7a8a4"
+          },
+          "docs/v2/form.md": {
+            "normalized_whole_file_sha256": "ee823cea7c10fa9f52bd09aef5d873c825e8cc966d2e696053c4fe49018daab2",
+            "normalized_body_sha256": "c203568eaa29d859ed3d8983302a9c70cceaeb4618c3759edc69281155a49b21"
+          },
+          "docs/v2/ui.md": {
+            "normalized_whole_file_sha256": "42f45e7d67b676150b81bb7df0b066804dcb10ed7af546d6de2e52ca85974225",
+            "normalized_body_sha256": "4cc593f456f0205c63724eaba0a59118b648dff7d50b71490f77fbeefb211b7d"
+          },
+          "docs/v2/grid.md": {
+            "normalized_whole_file_sha256": "f504733ef21f6ee6cbd95fbfc40fd7e650e6d5f8da125c595faa722a1b0089e3",
+            "normalized_body_sha256": "adb57243eb5490b550318d9f1dd5ec8c0512f71126d4466d86d85ccce0e934c3"
+          },
+          "docs/v2/list.md": {
+            "normalized_whole_file_sha256": "9885d0a2c465ff89a53e2014c86d16dbc63c1226e4443df0afad225e92c72fb7",
+            "normalized_body_sha256": "e05caf9b9f4f3d7ee620a06a0807fb75545ec9be7dd10e5b0023fbefeae2ba05"
+          },
+          "docs/v2/migration.md": {
+            "normalized_whole_file_sha256": "78c631ebd4cc80fae5e8d9f130fdff3303e9de006071ddb2d5e2f88720482700",
+            "normalized_body_sha256": "f90424e27a81d7a41527fefbfabf55c9f705dc0e12d8c04e3855986ba1f3863a"
+          },
+          "docs/v2/grid-demo.md": {
+            "normalized_whole_file_sha256": "82431e9e8c121261efce13d0151213486b9d7f70eeeca67ff874edfbb2f71ab4",
+            "normalized_body_sha256": "135462aa74d8ef9f99349440f721ac1da7c32f70224cbf2430cce300ea074f61"
+          },
+          "docs/v2/architecture.md": {
+            "normalized_whole_file_sha256": "99dfcc421eadaa28e7f214c8ec93b01ade1d9d62fb9a0e42b68c8b7ac2afec54",
+            "normalized_body_sha256": "88f89fc1c9042fd481c6908b4de40e704bb74a8cdcf1e430344a5e5cd621d4b1"
+          },
+          "docs/v2/package.md": {
+            "normalized_whole_file_sha256": "6a32664584b87b7a3d0b52bc5b284d554a039372758d7df64a5f26d495f1b8e0",
+            "normalized_body_sha256": "70028a3af795846ba02260acc5e06e23ef3993cd5bc191033be268f75a88c2d5"
+          }
+        },
+        "review_time_hash_scope": "Whole/body hashes describe the settled pre-verified fingerprint state. Whole hashes intentionally are not post-stamp/final hashes; semantic bodies must remain identical after LF normalization.",
+        "navigation_and_log_reviewed_files": {
+          "docs/index.md": {
+            "normalized_whole_file_sha256": "6ce2fd6294e15eb8bbee8ee2940603abde6caa16744071622653083d24f70d26"
+          },
+          "docs/implementation/index.md": {
+            "normalized_whole_file_sha256": "936a6650e1f0928bfeb695774e5bac98f7740925713e314cc6b1a54373130b6e"
+          },
+          "docs/v2/index.md": {
+            "normalized_whole_file_sha256": "47fb95145526efbae0f92de3b4de54e2d8302a9951ecab6eac6ee17a3a9ae56c"
+          },
+          "docs/log.md": {
+            "normalized_whole_file_sha256": "63db69c24fc869e631ab1bb1f1d481ead912e3255bc18be7e6300c45af024eff"
+          }
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m510-final-semantics-reviewed-receipt.json",
+          "sha256": "e5e2e297945979bfd19571c83c1e52af169a9b3a074f8f54fb73a60b84ec4cb2",
+          "scope": "Byte-exact R1 at final semantic review; pre-review-status snapshot, not a final/current receipt self-hash."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m510-runtime-invariance-initial.json",
+          "sha256": "e4f11cebf8f566c99bb334af6718564aafe090f1ed1138e42d2237e99f38b23f",
+          "audited_receipt_sha256": "0964d6369978dd4f4aacbdd0550758c807a41aaf4d54b20dcb9a55ef6de368a6",
+          "unchanged": true,
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "historical_preservation": {
+          "baseline": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+          "historical_fingerprint_only": 37,
+          "preserved_bodies_and_generated_verified_dates": true,
+          "scope": "Independent read-only comparison of currently changed historical Markdown. Final root history checks must reconfirm after verified stamps."
+        },
+        "semantic_findings": [
+          "Common ValueBindContext replaces the Form-only name without an alias, with four Grid/List options and List refresh; the5 public runtime entries and runtime dependencies stay unchanged. One private owner shares actual checked invocation and native/typed replacements across three binders; M5.9 emitted-JavaScript equality is not inherited.",
+          "Raw validation, drafts, native writers, typed occurrence choices, cache/focus and current/generation/disposal boundaries match frozen source and27 witnesses. Unmarked Selects retain native coercion; List has text/native output and no renderer option. A combined application function stays one callback unit.",
+          "Pure validation and detached/offscreen probes remain callback-free; existing revealInvalid can mount a real invalid row and then ordinary callbacks run. List refresh retains configured sort/filter/paging policies while ordinary rendering may recompute visible results and apply focus policy; no absolute page/order/focus guarantee remains.",
+          "Current/plan/parity and log counts match25 records, two191 maps,138 units,793 per engine, one193-file exact tar, five Windows browser installs,27 execution/13 collection commands and30 original budgets. Initial fixture corrections did not change framework source or weaken expected outcomes; the separate incomplete module-fetch failure grants no full-suite credit and its later diagnostic establishes no original cause.",
+          "Live policy forwarding, callback-reference capture only, the authored employment preview and explicit per-owner refresh agree with current code. Wider configuration/declaration/local-source/unbound-key and row/completion receiver/capture contracts remain review work rather than a promised new engine.",
+          "All9 plan footnotes remain, all three indexes route the current concepts, historical bodies/dates retain their prior scope, and full-family/P0/M13 closure and approved omissions remain zero."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "status": "authorized_after_this_independent_semantic_approval",
+          "permitted_actions": [
+            "Apply verified stamps to exactly these twelve reviewed semantic concepts.",
+            "Settle fingerprint metadata and run actual changed/full document checks plus historical body/date checks.",
+            "Record only actual mechanical results and finalize top-level plus six selected statuses through m510-complete after successful checks.",
+            "Regenerate receipt/review hashes and recheck runtime invariance excluding only review and semantic_acceptance.sha256."
+          ],
+          "conditions": "Twelve semantic bodies, frozen source/runtime inputs, accepted raw evidence and all runtime facts remain unchanged. Any body/API/runtime change requires renewed independent review. Draft zero-error/zero-warning sentences are conditional on actual successful mechanical checks; this review does not claim those checks already passed."
+        },
+        "document_preparation_observations": {
+          "precision_resolved": "List refresh changed from an absolute page/order/focus preservation statement to retention of configured policies with normal visible-result/focus recomputation. The plan narrows capture to value callback references, names the revealInvalid real-row projection boundary and preserves all9 footnotes.",
+          "scope": "Documentation-only precision; no R0-frozen runtime fact, setup/operator/diagnostic array or source input changed."
+        },
+        "limits": "Semantic approval only until actual final mechanical checks complete. No full-family/P0/M13 closure, omission, actual Safari/manual/personal/token/model result, publication or tag is approved.",
+        "helper": {
+          "path": "node_modules/.cache/m510-final-semantic-review.mjs",
+          "sha256": "ac3525c8fedafc76f779cf26eea266c75e4debea97272e7251b085c6bd0e37e3"
+        },
+        "review_log": {
+          "path": "node_modules/.cache/m510-final-semantic-review.log",
+          "sha256": "939343d6000386d4e4740646ea6ef85be820aff0bc3e0a860ff2cceadc667b01"
+        },
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m510-docs-changed.log",
+              "sha256": "53d401e2e73074a00823120a70ee770b646aee8b39929f701debe8db1931cf44",
+              "concepts": 78,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m510-docs-full.log",
+              "sha256": "125ea38e1ddb6d6e9bcd2bde7bf84ee4b05c3542e6e72fa0a29f92c4df66b53e",
+              "concepts": 78,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m510-doc-history.json",
+            "sha256": "af45b95c06c24c5eaf1796d68243af61569b128e95cff50260e3788c503f6f33",
+            "historical_fingerprint_only": 37,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 12,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "limitations": [
+      "Historical runtime remains in its dated scope and is not rerun/recertified.",
+      "Actual macOS/iOS Safari, manual assistive technology, personal acceptance and final fixed-agent/token comparison remain unverified.",
+      "No model-response evaluation, token-saving measurement, npm publication or release tag is performed or inferred."
+    ],
+    "actual_runtime": {
+      "status": "captured_final_canonical_runtime_verified_independent_raw_and_documents_pending",
+      "input_manifest": "m510-inputs-2654b1433ba3.json",
+      "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+      "source_inputs": 191,
+      "gate_records": 25,
+      "development_records": 8,
+      "superseded_records": 1,
+      "failed_records": 2,
+      "input_maps": [
+        {
+          "path": "m510-inputs-f80ad681eab4.json",
+          "entries": 191,
+          "sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a"
+        },
+        {
+          "path": "m510-inputs-2654b1433ba3.json",
+          "entries": 191,
+          "sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5"
+        }
+      ],
+      "canonical_groups": 16,
+      "execution_commands": 27,
+      "collection_commands": 13,
+      "unit_passed": 138,
+      "unit_delta": 0,
+      "new_browser_cases": 27,
+      "full_suites": {
+        "chromium": {
+          "passed": 793,
+          "elapsed": "12 sequential Chromium shards, 311.7s",
+          "log": "m510-browser-chromium-2.log",
+          "log_sha256": "c894606161be06795a998e8fdfc055e8e4db53255388afec3b3b333508023543"
+        },
+        "firefox": {
+          "passed": 793,
+          "elapsed": "10.0m",
+          "log": "m510-browser-firefox.log",
+          "log_sha256": "11b1b21899215132726ff814881c0d770f85e876060a4c67eb9b39e29334d77f"
+        },
+        "webkit": {
+          "passed": 793,
+          "elapsed": "7.7m",
+          "log": "m510-browser-webkit.log",
+          "log_sha256": "515ff1b015470bebec5c79a5ea42a23f7a957488f173e67604822688f9cc4a3a"
+        }
+      },
+      "chromium": {
+        "manifest": "m510-chromium-shards-2.json",
+        "manifest_sha256": "c855871b351e521188f47cf1b3d1459ca95e8809fc610c1f40f768f5c7425b64",
+        "shard_count": 12,
+        "partitions": [
+          71,
+          90,
+          49,
+          58,
+          76,
+          54,
+          74,
+          59,
+          69,
+          62,
+          67,
+          64
+        ],
+        "raw_child_files": 50,
+        "total_linked_raw_children": 100,
+        "elapsed_seconds": 311.713,
+        "retained_partial": {
+          "manifest": "m510-chromium-shards.json",
+          "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+          "complete": false,
+          "certifies_full_suite": false,
+          "completed_prefix_passed": 729,
+          "last_child_passed": 63,
+          "last_child_unexpected": 1
+        }
+      },
+      "artifact": {
+        "sha256": "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+        "files": 193,
+        "packed_bytes": 340502,
+        "unpacked_bytes": 1716337,
+        "actual_tar_sha_and_listing_verified": true
+      },
+      "installed_js_ts": "captured pass",
+      "installed_windows_browsers": 5,
+      "performance": {
+        "binding_gate": "captured pass",
+        "viewport_gate": "captured pass",
+        "required_original_budgets": {
+          "binding": 9,
+          "viewport": 21
+        },
+        "recomputed_medians": 60,
+        "raw_durations": 300,
+        "budgets_checked": 30,
+        "independent_raw_geometry_review": "pending"
+      },
+      "scope": "Read-only retained record/log/input-map/manifest/child-hash/archive-listing/metric reconciliation followed by owned-ledger bookkeeping. No compiler/browser/project command rerun; independent raw archive payload, metadata/test identity, geometry and final semantic/mechanical document reviews remain pending. Both failed attempts and the later passing diagnostic remain distinct; no original import-failure cause is inferred."
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Local-source and per-unbound-key value observation, broader default/global/declaration equivalence, direct hot declarations and all remaining control/source/dynamic outcomes outside selected mounted Form/Grid/List field-value callbacks."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected shared mounted field-value callback outcomes may receive acceptance after implementation, fresh gates and independent review. All full-owner/P0/M13 obligations and omission decisions remain open."
+  }
+}

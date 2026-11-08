@@ -7,11 +7,32 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
-import type { FieldRules, FormBindContext, FormValueContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
+import type { FieldRules, FormBindContext, ValueBindContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
+// @ts-expect-error Use the common ValueBindContext; the Form-only name was removed.
+import type { FormValueContext } from "@bbalganjjm/natural_js/ui";
 
 interface Employee {
   name: string;
   options?: { value: string }[];
+}
+
+export function connectValueBindings(formRoot: HTMLElement, gridRoot: HTMLTableElement,
+  listRoot: HTMLUListElement, rows: Rows<Employee>) {
+  const shared = {
+    beforeBindValue(value: unknown, context: ValueBindContext) {
+      const id: RowId = context.rowId;
+      const phase: "bind" | "val" = context.phase;
+      void [id, phase];
+      if (context.field === "name") return String(value).toUpperCase();
+    },
+    onBindValue(value: unknown, context: ValueBindContext) { void [value, context.element]; }
+  };
+  const form = bindForm(formRoot, { rows, ...shared });
+  const grid = bindGrid(gridRoot, { rows, ...shared });
+  const list = bindList(listRoot, { rows, ...shared });
+  const refreshed: void = list.refresh();
+  void refreshed;
+  return { form, grid, list };
 }
 
 export function connectPresetForm(root: HTMLElement, rows: Rows<Employee>): FormHandle<Employee> {
@@ -330,7 +351,7 @@ export function connectRowChoices(root: HTMLFormElement, rows: Rows<{
 
 export function connectFormValues(root: HTMLFormElement, rows: Rows<Employee>) {
   return bindForm(root, { rows,
-    beforeBindValue(value, context: FormValueContext) {
+    beforeBindValue(value, context: ValueBindContext) {
       const rule: RuleContext = context;
       const id: RowId = context.rowId;
       const phase: "bind" | "val" = context.phase;
@@ -339,7 +360,7 @@ export function connectFormValues(root: HTMLFormElement, rows: Rows<Employee>) {
       if (context.field === "name") return String(value).toUpperCase();
     },
     onBindValue(value, context) {
-      const sameContext: FormValueContext = context;
+      const sameContext: ValueBindContext = context;
       void [value, sameContext];
     }
   });

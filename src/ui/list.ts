@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 import type { RowId, RowSnapshot, Rows, Snapshot } from "../data/index.js";
 import { FrameworkError } from "../internal/framework-error.js";
+import { sameJson } from "../internal/same-json.js";
+import { createValueBinding } from "./value-binding.js";
+import type { ValueProjection } from "./value-binding.js";
 import { parsePath, readPath } from "./field-path.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
@@ -9,7 +12,7 @@ import { disabled, display, nativeMessage } from "./native-control.js";
 import type { RuleCall } from "./rules.js";
 import type {
   FormatRule, ListHandle, PageRequest, PageState, RuleContext, RuleSet,
-  ValidateRule, ValidationIssue, ValidationResult
+  ValidateRule, ValidationIssue, ValidationResult, ValueBindContext
 } from "./index.js";
 
 interface TextField {
@@ -37,6 +40,7 @@ interface BoundText {
   invalid: string | null;
   previous?: unknown;
   bound: boolean;
+  projection?: ValueProjection;
 }
 
 interface BoundSelect {
@@ -50,6 +54,7 @@ interface BoundSelect {
   optionsBound: boolean;
   previous?: unknown;
   selectedBound: boolean;
+  projection?: ValueProjection;
 }
 
 interface RenderedRow<T> {
@@ -73,12 +78,15 @@ function listError(code: string, message: string, detail?: Record<string, unknow
 export function bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: {
   rows: Rows<T>;
   rules?: RuleSet;
+  beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
+  onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
 }): ListHandle<T> {
   if (!root || (root.tagName !== "UL" && root.tagName !== "OL")) {
     throw listError("LIST_ROOT", "The List root must be a ul or ol element.");
   }
   if (boundRoots.has(root)) throw listError("LIST_IN_USE", "This List root is already bound.");
+  const values = createValueBinding("bindList", options);
   const templates = [...root.querySelectorAll<HTMLLIElement>("li[data-row-template]")];
   if (templates.length !== 1 || templates[0].parentElement !== root) {
     throw listError("LIST_TEMPLATE", "The List needs one direct li marked data-row-template.");
@@ -194,6 +202,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   let visibleIds: RowId[] = [];
   let rootFocusTabIndex = false;
   let disposed = false;
+  let renderVersion = 0;
 
   function active(): void {
     if (disposed) throw listError("LIST_DISPOSED", "This List has been disposed.");
@@ -257,44 +266,85 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       { rowId: id, field }); };
   }
 
-  function renderSelect(binding: BoundSelect, value: Snapshot<T>, id: RowId): void {
+  function projection(binding: { projection?: ValueProjection }, raw: unknown, id: RowId): void {
+    const previous = binding.projection;
+    if (!previous || previous.id !== id || !sameJson(previous.raw, raw)) {
+      binding.projection = { id, raw, value: raw, phase: previous?.id === id ? "val" : "bind", state: "pending" };
+    }
+  }
+
+  function resetProjection(record: RenderedRow<T>): void {
+    record.snapshot = undefined;
+    for (const binding of record.texts) { binding.projection = undefined; binding.bound = false; }
+    for (const binding of record.selects) { binding.projection = undefined; binding.selectedBound = false; }
+  }
+
+  function renderSelect(binding: BoundSelect, sourceValue: Snapshot<T>, id: RowId, current?: () => boolean): void {
     const { field, element } = binding;
-    const source = field.options ? readPath(value, field.options) : null;
+    const source = field.options ? readPath(sourceValue, field.options) : null;
     if (!binding.optionsBound || !Object.is(binding.source, source)) {
       binding.rawByOption = renderRowOptions(element, binding.authoredNodes, binding.authoredOptions, field.authored,
-        field.options ? rowOptions(value, field.options, field.label!, field.value!, invalidOptions(id)) : []);
+        field.options ? rowOptions(sourceValue, field.options, field.label!, field.value!, invalidOptions(id)) : []);
       binding.source = source;
       binding.optionsBound = true;
       binding.selectedBound = false;
     }
     if (field.field) {
-      const current = readPath(value, field.field);
-      if (!binding.selectedBound || !Object.is(binding.previous, current)) {
-        selectRowOptions(element, binding.rawByOption, current);
-        binding.previous = current;
+      const raw = readPath(sourceValue, field.field);
+      if (values.enabled && current) {
+        projection(binding, raw, id);
+        const context: ValueBindContext = Object.freeze({ field: field.name!,
+          values: sourceValue as Snapshot<Record<string, unknown>>, rowId: id, element, phase: binding.projection!.phase });
+        values.apply(binding, { element, elements: [element], kind: element.multiple ? "multiple" : "single" }, raw, context,
+          shown => field.options ? selectRowOptions(element, binding.rawByOption, shown) : display(element, shown),
+          current, field.options ? () => [...binding.rawByOption.values()] : undefined);
+        if (!current()) return;
+        binding.previous = raw;
+        binding.selectedBound = true;
+      } else if (!binding.selectedBound || !Object.is(binding.previous, raw)) {
+        selectRowOptions(element, binding.rawByOption, raw);
+        binding.previous = raw;
         binding.selectedBound = true;
       }
     }
   }
 
-  function renderRecord(record: RenderedRow<T>, row: RowSnapshot<T>): void {
+  function writeText(binding: BoundText, row: RowSnapshot<T>, value: unknown, current?: () => boolean): void {
+    if (binding.field.format.length) {
+      const context: RuleContext = { field: binding.field.name, values: row.value as Snapshot<Record<string, unknown>>,
+        rowId: row.id, element: binding.element };
+      const shown = runner.format(binding.field.format, value, context);
+      if (!current || current()) display(binding.element, shown);
+    } else if (!current || current()) display(binding.element, value);
+  }
+
+  function renderRecord(record: RenderedRow<T>, row: RowSnapshot<T>, current?: () => boolean): void {
     if (record.snapshot === row) return;
     for (const binding of record.texts) {
-      const value = readPath(row.value, binding.field.path);
-      if (!binding.bound || !Object.is(binding.previous, value)) {
-        if (binding.field.format.length) {
-          const context: RuleContext = {
-            field: binding.field.name, values: row.value as Snapshot<Record<string, unknown>>,
-            rowId: row.id, element: binding.element
-          };
-          display(binding.element, runner.format(binding.field.format, value, context));
-        } else display(binding.element, value);
-        binding.previous = value;
-        binding.bound = true;
+      if (current && !current()) return;
+      const raw = readPath(row.value, binding.field.path);
+      if (values.enabled && current) {
+        projection(binding, raw, row.id);
+        if (binding.bound && Object.is(binding.previous, raw) && binding.projection!.state !== "pending") continue;
+        const element = binding.element;
+        const context: ValueBindContext = Object.freeze({ field: binding.field.name,
+          values: row.value as Snapshot<Record<string, unknown>>, rowId: row.id, element, phase: binding.projection!.phase });
+        values.apply(binding, { element, elements: [element],
+          kind: element instanceof HTMLInputElement && element.type === "checkbox" ? "checkbox" : "single" }, raw, context,
+          value => writeText(binding, row, value, current), current);
+        if (!current()) return;
+      } else {
+        if (binding.bound && Object.is(binding.previous, raw)) continue;
+        writeText(binding, row, raw);
       }
+      binding.previous = raw;
+      binding.bound = true;
     }
-    for (const binding of record.selects) renderSelect(binding, row.value, row.id);
-    record.snapshot = row;
+    for (const binding of record.selects) {
+      if (current && !current()) return;
+      renderSelect(binding, row.value, row.id, current);
+    }
+    if (!current || current()) record.snapshot = row;
   }
 
   function validateRow(row: RowSnapshot<T>): ValidationIssue[] {
@@ -386,21 +436,27 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     options.onSelect?.({ id, row: id === null ? null : options.rows.get(id) ?? null, event });
   }
 
-  function render(): void {
+  function render(force = false): void {
     if (disposed) return;
+    if (values.running) throw listError("LIST_BIND_REENTRANT", "A value callback cannot reenter binding.");
+    const version = values.enabled ? ++renderVersion : 0;
     const entries = options.rows.entries();
+    const current = values.enabled ? () => !disposed && version === renderVersion && entries === options.rows.entries() : undefined;
     const live = new Set(entries.map(row => row.id));
     for (const [id, record] of records) {
       if (!live.has(id)) {
+        if (current && !current()) return;
         record.element.remove();
+        if (current && !current()) return;
         for (const release of record.releaseSelects) release();
         records.delete(id);
       }
     }
     if (selected !== null && !live.has(selected)) updateSelection(null, null);
-    if (disposed) return;
+    if (disposed || current && !current()) return;
     const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
     if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
+    if (current && !current()) return;
     let displayed = filtered;
     if (request) {
       const pages = Math.ceil(filtered.length / request.size);
@@ -410,13 +466,19 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       displayed = filtered.slice((page - 1) * request.size, page * request.size);
     } else pageState = null;
     const ids = displayed.map(row => row.id);
+    const mounted = values.enabled ? new Set(visibleIds) : undefined;
     for (const row of displayed) {
       let record = records.get(row.id);
       if (!record) {
         record = createRecord(row.id);
         records.set(row.id, record);
       }
-      renderRecord(record, row);
+      if (force || values.enabled && !mounted!.has(row.id)) resetProjection(record);
+      renderRecord(record, row, current);
+      if (current && !current()) {
+        if (disposed) return;
+        throw listError("LIST_BIND_STALE", "The rows or view changed during a value callback.", { rowId: row.id });
+      }
     }
     if (ids.length !== visibleIds.length || ids.some((id, index) => id !== visibleIds[index])) {
       const next = new Set(ids);
@@ -427,11 +489,17 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         focusedId !== null && next.has(focusedId);
       const moveFocus = focused instanceof HTMLElement && focusedId !== undefined &&
         focusedId !== null && !next.has(focusedId);
-      for (const id of visibleIds) if (!next.has(id)) records.get(id)?.element.remove();
+      for (const id of visibleIds) if (!next.has(id)) {
+        if (current && !current()) return;
+        records.get(id)?.element.remove();
+      }
+      if (current && !current()) return;
       let cursor: Node = anchor;
       for (let index = ids.length - 1; index >= 0; index--) {
         const element = records.get(ids[index])!.element;
+        if (current && !current()) return;
         if (element !== focusedRow && element.nextSibling !== cursor) root.insertBefore(element, cursor);
+        if (current && !current()) return;
         cursor = element;
       }
       if (restoreFocus && root.ownerDocument.activeElement !== focused) focused.focus({ preventScroll: true });
@@ -443,8 +511,10 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         }
         nextControl.focus({ preventScroll: true });
       }
+      if (current && !current()) return;
       visibleIds = ids;
     }
+    if (current && !current()) return;
     if (empty) empty.hidden = ids.length > 0;
   }
 
@@ -476,6 +546,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     });
     render();
   } catch (cause) {
+    boundRoots.delete(root);
     unsubscribe();
     root.removeEventListener("click", onClick);
     for (const record of records.values()) {
@@ -490,6 +561,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }
 
   return {
+    refresh() { active(); render(true); },
     select(id) {
       active();
       const row = id === null ? null : options.rows.get(id);
@@ -538,6 +610,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     dispose() {
       if (disposed) return;
       disposed = true;
+      if (values.enabled) renderVersion++;
       unsubscribe();
       root.removeEventListener("click", onClick);
       for (const record of records.values()) {

@@ -1,0 +1,4109 @@
+{
+  "date": "2026-11-08",
+  "milestone": "M5.10 shared field value callbacks",
+  "baseline_commit": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+  "input_manifest": "m510-inputs-2654b1433ba3.json",
+  "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+  "input_entries": 191,
+  "source_normalization": "UTF-8; CRLF normalized to LF",
+  "commands": {
+    "record_file": "m510-gates.jsonl",
+    "records": 25,
+    "final_gate_records": 16,
+    "canonical_gate_groups": 16,
+    "execution_stage_commands": 27,
+    "collection_commands": 13,
+    "command_count_scope": "Expand the Chromium aggregate into 12 Playwright execution commands and 13 collection commands; other gates retain one stage command each. This does not count every nested operating-system subprocess.",
+    "development_records": [
+      {
+        "label": "focused-build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-11-08T07:55:47.373Z",
+        "finished": "2026-11-08T07:55:48.711Z",
+        "exit_code": 0,
+        "log": "m510-focused-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m510-inputs-f80ad681eab4.json",
+        "input_manifest_sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-11-08T07:55:48.740Z",
+        "finished": "2026-11-08T07:55:49.142Z",
+        "exit_code": 0,
+        "log": "m510-focused-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m510-inputs-f80ad681eab4.json",
+        "input_manifest_sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m10/scroll-boundary.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-11-08T07:55:49.164Z",
+        "finished": "2026-11-08T07:55:49.576Z",
+        "exit_code": 0,
+        "log": "m510-focused-example-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m510-inputs-f80ad681eab4.json",
+        "input_manifest_sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/collection-values.spec.ts",
+          "tests/browser/form-values.spec.ts",
+          "tests/browser/form-presets.spec.ts",
+          "tests/browser/form-binding.spec.ts",
+          "tests/browser/grid-controls.spec.ts",
+          "tests/browser/list.spec.ts",
+          "tests/browser/m510-values-demo.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T07:55:58.161Z",
+        "finished": "2026-11-08T07:56:34.668Z",
+        "exit_code": 1,
+        "log": "m510-focused-chromium.log",
+        "log_sha256": "4a2d7651782380559289caafc082f942f61afc6341d2f41a392355d06d1caaba",
+        "input_manifest": "m510-inputs-f80ad681eab4.json",
+        "input_manifest_sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/collection-values.spec.ts",
+          "tests/browser/form-values.spec.ts",
+          "tests/browser/form-presets.spec.ts",
+          "tests/browser/form-binding.spec.ts",
+          "tests/browser/grid-controls.spec.ts",
+          "tests/browser/list.spec.ts",
+          "tests/browser/m510-values-demo.spec.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T07:59:53.964Z",
+        "finished": "2026-11-08T08:00:23.811Z",
+        "exit_code": 0,
+        "log": "m510-focused-chromium-2.log",
+        "log_sha256": "f8a0cddaedb569e654eb54fcd04e280ca21b58fd914dc5818b1abb8c989a74bc",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/collection-values.spec.ts",
+          "tests/browser/form-values.spec.ts",
+          "tests/browser/form-presets.spec.ts",
+          "tests/browser/form-binding.spec.ts",
+          "tests/browser/grid-controls.spec.ts",
+          "tests/browser/list.spec.ts",
+          "tests/browser/m510-values-demo.spec.ts",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T08:00:23.858Z",
+        "finished": "2026-11-08T08:01:50.499Z",
+        "exit_code": 0,
+        "log": "m510-focused-firefox.log",
+        "log_sha256": "f268461d2c7f93bd006b10f1cfda414dff0a6042c7334040da6a5358130826d1",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/collection-values.spec.ts",
+          "tests/browser/form-values.spec.ts",
+          "tests/browser/form-presets.spec.ts",
+          "tests/browser/form-binding.spec.ts",
+          "tests/browser/grid-controls.spec.ts",
+          "tests/browser/list.spec.ts",
+          "tests/browser/m510-values-demo.spec.ts",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T08:01:50.527Z",
+        "finished": "2026-11-08T08:02:39.072Z",
+        "exit_code": 0,
+        "log": "m510-focused-webkit.log",
+        "log_sha256": "7ecb85e011ad5a43b713ea2262e8271bb9cfbc6f12fccbf068107afee788962a",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "focused-core-chromium",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "tests/browser/row-state.spec.ts",
+          "--grep=application GET decoding explicitly maps statuses and cancellation prevents late state publication",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--trace=on",
+          "--output=node_modules/.cache/m510-import-trace",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T08:13:02.367Z",
+        "finished": "2026-11-08T08:13:05.142Z",
+        "exit_code": 0,
+        "log": "m510-focused-core-chromium.log",
+        "log_sha256": "6612d796ee3d77dbf3b7dbc38dee94ee4a6c8f04744cc64fe532f1351872b0e4",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      }
+    ],
+    "final_gates": [
+      {
+        "label": "build",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json"
+        ],
+        "started": "2026-11-08T08:03:50.187Z",
+        "finished": "2026-11-08T08:03:50.699Z",
+        "exit_code": 0,
+        "log": "m510-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "-p",
+          "tsconfig.json",
+          "--noEmit"
+        ],
+        "started": "2026-11-08T08:03:50.724Z",
+        "finished": "2026-11-08T08:03:51.098Z",
+        "exit_code": 0,
+        "log": "m510-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "example-types",
+        "args": [
+          "node_modules/typescript/bin/tsc",
+          "--ignoreConfig",
+          "--strict",
+          "--noEmit",
+          "--target",
+          "ES2022",
+          "--module",
+          "NodeNext",
+          "--moduleResolution",
+          "NodeNext",
+          "--lib",
+          "ES2022,DOM",
+          "examples/vite/benchmark.ts",
+          "examples/vite/m10/columns.ts",
+          "examples/vite/m10/demo.ts",
+          "examples/vite/m10/detail.ts",
+          "examples/vite/m10/main.ts",
+          "examples/vite/m10/progressive.ts",
+          "examples/vite/m10/scroll-boundary.ts",
+          "examples/vite/m11/main.ts",
+          "examples/vite/m12/main.ts",
+          "examples/vite/m3-fixture.ts",
+          "examples/vite/m4/employees.ts",
+          "examples/vite/m4/main.ts",
+          "examples/vite/m7-fixture.ts",
+          "examples/vite/m7/main.ts",
+          "examples/vite/main.ts"
+        ],
+        "started": "2026-11-08T08:03:51.121Z",
+        "finished": "2026-11-08T08:03:51.546Z",
+        "exit_code": 0,
+        "log": "m510-example-types.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "unit",
+        "args": [
+          "node_modules/vitest/vitest.mjs",
+          "run"
+        ],
+        "started": "2026-11-08T08:03:51.570Z",
+        "finished": "2026-11-08T08:03:54.543Z",
+        "exit_code": 0,
+        "log": "m510-unit.log",
+        "log_sha256": "58332587ba66153bbd15f017aeb188611b5b429c1ed5192746340d10233a51fd",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-chromium",
+        "args": [
+          "docs/implementation/evidence/m510-chromium-shards.mjs"
+        ],
+        "started": "2026-11-08T08:13:23.466Z",
+        "finished": "2026-11-08T08:18:35.288Z",
+        "exit_code": 0,
+        "log": "m510-browser-chromium-2.log",
+        "log_sha256": "c894606161be06795a998e8fdfc055e8e4db53255388afec3b3b333508023543",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-firefox",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=firefox",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T08:18:35.314Z",
+        "finished": "2026-11-08T08:28:36.910Z",
+        "exit_code": 0,
+        "log": "m510-browser-firefox.log",
+        "log_sha256": "11b1b21899215132726ff814881c0d770f85e876060a4c67eb9b39e29334d77f",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "browser-webkit",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=webkit",
+          "--workers=1",
+          "--reporter=line"
+        ],
+        "started": "2026-11-08T08:28:39.277Z",
+        "finished": "2026-11-08T08:36:23.137Z",
+        "exit_code": 0,
+        "log": "m510-browser-webkit.log",
+        "log_sha256": "515ff1b015470bebec5c79a5ea42a23f7a957488f173e67604822688f9cc4a3a",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "pack",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "pack",
+          "--json",
+          "--pack-destination",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact"
+        ],
+        "started": "2026-11-08T08:03:54.628Z",
+        "finished": "2026-11-08T08:03:58.968Z",
+        "exit_code": 0,
+        "log": "m510-pack.log",
+        "log_sha256": "13700b6f108359dd24ca7353db1b557e8f5604a032942d44be55b9b99c0625f0",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "consumers",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:consumers",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2"
+        ],
+        "started": "2026-11-08T08:03:59.063Z",
+        "finished": "2026-11-08T08:04:04.734Z",
+        "exit_code": 0,
+        "log": "m510-consumers.log",
+        "log_sha256": "7b53fa1d28684a41eba2b81e426687c3cbd5016c2d52032ee7b019e66d52a16b",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-chromium",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+          "--browser",
+          "chromium"
+        ],
+        "started": "2026-11-08T08:04:04.762Z",
+        "finished": "2026-11-08T08:04:10.056Z",
+        "exit_code": 0,
+        "log": "m510-packed-chromium.log",
+        "log_sha256": "42008d6a8497aa241ef95f5dd5dc6e51755e7c9bbe84326d7ce899b71d096321",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-firefox",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+          "--browser",
+          "firefox"
+        ],
+        "started": "2026-11-08T08:04:10.080Z",
+        "finished": "2026-11-08T08:04:17.657Z",
+        "exit_code": 0,
+        "log": "m510-packed-firefox.log",
+        "log_sha256": "37245b88927d76403b6600720fc315cc40b86358d97bf51370b9d3a22db964ef",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-webkit",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+          "--browser",
+          "webkit"
+        ],
+        "started": "2026-11-08T08:04:17.680Z",
+        "finished": "2026-11-08T08:04:24.502Z",
+        "exit_code": 0,
+        "log": "m510-packed-webkit.log",
+        "log_sha256": "7bf54355e1e48f5535e22ee585dd00fb4b4da619f8364b5eb5450fa92388ed11",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-chrome",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+          "--browser",
+          "chrome"
+        ],
+        "started": "2026-11-08T08:04:24.527Z",
+        "finished": "2026-11-08T08:04:30.576Z",
+        "exit_code": 0,
+        "log": "m510-packed-chrome.log",
+        "log_sha256": "aff03da984f310f399c462ac0d01ba1dc0bb2756da2a7423f6d784fbc3fe68f0",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "packed-edge",
+        "args": [
+          "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "test:packed-browser",
+          "--",
+          "--tarball",
+          "D:\\workspace\\natural_js\\node_modules\\.cache\\m510-artifact\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+          "--sha256",
+          "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+          "--browser",
+          "edge"
+        ],
+        "started": "2026-11-08T08:04:30.599Z",
+        "finished": "2026-11-08T08:04:37.202Z",
+        "exit_code": 0,
+        "log": "m510-packed-edge.log",
+        "log_sha256": "421cf243dd01b1ccc4200bad8e610289f0837e1879a7f8878fa826b097a89ff7",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "binding-performance",
+        "args": [
+          "tools/benchmark-m4.mjs",
+          "--browser=chromium",
+          "--runs=5",
+          "--warmup=2"
+        ],
+        "started": "2026-11-08T08:04:37.296Z",
+        "finished": "2026-11-08T08:04:47.424Z",
+        "exit_code": 0,
+        "log": "m510-binding-performance.log",
+        "log_sha256": "541bee79489c487b5a8cd1744ce2f10132a38aed904258c842683dbd97a27cdc",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      },
+      {
+        "label": "viewport-performance",
+        "args": [
+          "tools/benchmark-grid-viewport.mjs",
+          "--browser=chromium",
+          "--runs=5",
+          "--warmup=2"
+        ],
+        "started": "2026-11-08T08:04:47.513Z",
+        "finished": "2026-11-08T08:05:23.033Z",
+        "exit_code": 0,
+        "log": "m510-viewport-performance.log",
+        "log_sha256": "b7e037f6127f9c824570584094c6a8ed688a88c775a791132105c761b5afde3e",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {},
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      }
+    ],
+    "superseded": [
+      {
+        "label": "browser-chromium",
+        "args": [
+          "docs/implementation/evidence/m510-chromium-shards.mjs"
+        ],
+        "started": "2026-11-08T08:05:23.128Z",
+        "finished": "2026-11-08T08:10:42.988Z",
+        "exit_code": 1,
+        "log": "m510-browser-chromium.log",
+        "log_sha256": "5c8c9fd80e2b25564ff09b50bca4eefab72e4e4228d573302b279939e4953c6e",
+        "input_manifest": "m510-inputs-2654b1433ba3.json",
+        "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "source_normalization": "UTF-8; CRLF normalized to LF",
+        "sources_unchanged": true,
+        "environment": {
+          "PLAYWRIGHT_BROWSERS_PATH": null
+        },
+        "runtime": {
+          "node": "v24.18.0",
+          "platform": "win32",
+          "arch": "x64"
+        }
+      }
+    ],
+    "all_final_gates_exit_zero": true,
+    "all_final_sources_unchanged": true,
+    "note": "Only the latest sixteen gates certify the frozen map. Preserve development failures and source-change observations separately; historical runtime is not recertified."
+  },
+  "chromium_shards": {
+    "manifest": "m510-chromium-shards-2.json",
+    "manifest_sha256": "c855871b351e521188f47cf1b3d1459ca95e8809fc610c1f40f768f5c7425b64",
+    "runner": "m510-chromium-shards.mjs",
+    "runner_sha256": "3e12de4c3ffc8ab25888d23ade44ebb9252f92e289ccafb93aa0eb1d8081b66a",
+    "canonical_gate": "browser-chromium",
+    "parent_input_manifest": "m510-inputs-2654b1433ba3.json",
+    "parent_input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+    "input_proof": "The enclosing gate fingerprints the complete frozen input map before and after all 25 child commands; no child-specific source fingerprint is invented.",
+    "complete": true,
+    "passed": 793,
+    "disjoint_exact_union": true,
+    "identities_sha256": "5048f4652ce291e5cc174043738c2f23912ae3cd21eee88956172c06763c170c",
+    "shard_count": 12,
+    "execution_commands": 12,
+    "collection_commands": 13,
+    "partitions": [
+      {
+        "shard": 1,
+        "passed": 71,
+        "identities_sha256": "daccdd0d71122f5a6e8479620b3a884e5a87ecfa2abbcd4de4366eed9c0d9fc3"
+      },
+      {
+        "shard": 2,
+        "passed": 90,
+        "identities_sha256": "a4a7e99a6bca85fbaee66609a6637a0263ead8a0a93169097685099c591998a6"
+      },
+      {
+        "shard": 3,
+        "passed": 49,
+        "identities_sha256": "471d2fc7401a11b0cdc3432482cb4bf5c0c464c26a1840a5f9825d402368797b"
+      },
+      {
+        "shard": 4,
+        "passed": 58,
+        "identities_sha256": "626c6038c9f46bcc226f7dd164a58ea674049835cbedf1084e8feb26d128b337"
+      },
+      {
+        "shard": 5,
+        "passed": 76,
+        "identities_sha256": "69f0b164ee168406fc5e3a24f5b873d82818ae883bb62fa433b7a436c4ce49f1"
+      },
+      {
+        "shard": 6,
+        "passed": 54,
+        "identities_sha256": "4c6fd2d4c2a2dc45514352dfcdaf9e4d506ed851dfe55c0b2f60cec533a8ba9e"
+      },
+      {
+        "shard": 7,
+        "passed": 74,
+        "identities_sha256": "8d5352936232106cdce84484ab45b00c416089460996f08d85e91e3d267132e3"
+      },
+      {
+        "shard": 8,
+        "passed": 59,
+        "identities_sha256": "3280e9b2b8447a87dacb0f66ceab676d05e5cc72e70cbf38eae942d0316b3b0c"
+      },
+      {
+        "shard": 9,
+        "passed": 69,
+        "identities_sha256": "0980a5def20ccfc54cf703a83485966517ebbeef850d0f39c4617d4f3a0a8a68"
+      },
+      {
+        "shard": 10,
+        "passed": 62,
+        "identities_sha256": "7a0e5fbbf2e60749ad05319cc522279a5b61a3347211d87e16852cf9fd7040ef"
+      },
+      {
+        "shard": 11,
+        "passed": 67,
+        "identities_sha256": "3abc1a6c7e098b32351ace5fdb6131a88492a0f59b4d594590b146f4c48b77e4"
+      },
+      {
+        "shard": 12,
+        "passed": 64,
+        "identities_sha256": "41c8d7c334f90b88c2b3c3742c45c554c769b8a5176dde4e0696b7a0332f71c5"
+      }
+    ],
+    "records": [
+      {
+        "label": "list",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list"
+        ],
+        "started": "2026-11-08T08:13:23.545Z",
+        "finished": "2026-11-08T08:13:25.204Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-13.json",
+        "report_sha256": "d04175410ea3b67ab0bee85e1d9da764a4f093bd7e18f0b57875d4398165e942",
+        "stderr": "m510-chromium-list-13-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-1",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=1/12"
+        ],
+        "started": "2026-11-08T08:13:25.208Z",
+        "finished": "2026-11-08T08:13:26.829Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-1-2.json",
+        "report_sha256": "0c4dd79d83c4a3481e51c4a97e31e1063edad8a05511829d91fd739fab139c60",
+        "stderr": "m510-chromium-list-1-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-1",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=1/12"
+        ],
+        "started": "2026-11-08T08:13:26.831Z",
+        "finished": "2026-11-08T08:13:51.990Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-1-2.json",
+        "report_sha256": "3c54aaf844ef1bfe69bb99b10c289aacbd173eb9e84f816da33237178516b0dc",
+        "stderr": "m510-chromium-run-1-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-2",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=2/12"
+        ],
+        "started": "2026-11-08T08:13:51.992Z",
+        "finished": "2026-11-08T08:13:53.730Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-2-2.json",
+        "report_sha256": "6ae16c8456f00f51f1b9ee20311f7e09262770b5207e89f9a47b5b72d8f18412",
+        "stderr": "m510-chromium-list-2-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-2",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=2/12"
+        ],
+        "started": "2026-11-08T08:13:53.733Z",
+        "finished": "2026-11-08T08:14:14.613Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-2-2.json",
+        "report_sha256": "25c9c3534805e582d9fb316d24627241015077db63d4d126270d4e626488c2b3",
+        "stderr": "m510-chromium-run-2-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-3",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=3/12"
+        ],
+        "started": "2026-11-08T08:14:14.614Z",
+        "finished": "2026-11-08T08:14:16.267Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-3-2.json",
+        "report_sha256": "7b431a5aad331b52089daeb7073c9107ec277455b24c64fb7f01637857670bdb",
+        "stderr": "m510-chromium-list-3-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-3",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=3/12"
+        ],
+        "started": "2026-11-08T08:14:16.269Z",
+        "finished": "2026-11-08T08:14:30.023Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-3-2.json",
+        "report_sha256": "4f20c9d07031ecc39a74137876c742baa268109fdb43533fbdd99c9955fc6c77",
+        "stderr": "m510-chromium-run-3-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-4",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=4/12"
+        ],
+        "started": "2026-11-08T08:14:30.024Z",
+        "finished": "2026-11-08T08:14:31.696Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-4-2.json",
+        "report_sha256": "0b596cde4e1e94375d42af5ad802d232dea738b14cdd16cae34b1af894db2e59",
+        "stderr": "m510-chromium-list-4-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-4",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=4/12"
+        ],
+        "started": "2026-11-08T08:14:31.698Z",
+        "finished": "2026-11-08T08:14:45.574Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-4-2.json",
+        "report_sha256": "815e7b9aa8c14ee63478ec58abf604de92a528c26af5ccb24da3f0345043f8dc",
+        "stderr": "m510-chromium-run-4-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-5",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=5/12"
+        ],
+        "started": "2026-11-08T08:14:45.574Z",
+        "finished": "2026-11-08T08:14:47.205Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-5-2.json",
+        "report_sha256": "e08c752c2d68a4d297fce934301bb9817d0c26db48f02dbf2e14f7c3219cd1e8",
+        "stderr": "m510-chromium-list-5-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-5",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=5/12"
+        ],
+        "started": "2026-11-08T08:14:47.208Z",
+        "finished": "2026-11-08T08:15:11.033Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-5-2.json",
+        "report_sha256": "3385fadf6bfd57994bfbe96f4b5bfb41b52ad694e2f1569ad340094a0cb3bc3f",
+        "stderr": "m510-chromium-run-5-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-6",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=6/12"
+        ],
+        "started": "2026-11-08T08:15:11.034Z",
+        "finished": "2026-11-08T08:15:12.717Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-6-2.json",
+        "report_sha256": "8291f62e1bcf3ba9641118b860dd422a760fac97a0f4b7ba295831310176be23",
+        "stderr": "m510-chromium-list-6-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-6",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=6/12"
+        ],
+        "started": "2026-11-08T08:15:12.719Z",
+        "finished": "2026-11-08T08:15:32.071Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-6-2.json",
+        "report_sha256": "1a63f8e1ea2fe8eccd172b063c4c6cf21783fea00911ff4e57e7e3c020e70d97",
+        "stderr": "m510-chromium-run-6-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-7",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=7/12"
+        ],
+        "started": "2026-11-08T08:15:32.071Z",
+        "finished": "2026-11-08T08:15:33.761Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-7-2.json",
+        "report_sha256": "ff9ff966f5a0d3b67701beb2b0450e41684a9de8d6bc278534c95152b6399736",
+        "stderr": "m510-chromium-list-7-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-7",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=7/12"
+        ],
+        "started": "2026-11-08T08:15:33.763Z",
+        "finished": "2026-11-08T08:15:56.311Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-7-2.json",
+        "report_sha256": "0fed9814001d24e73b9545480ae656705f1ef5f5017c7bd8e869ab24de257401",
+        "stderr": "m510-chromium-run-7-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-8",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=8/12"
+        ],
+        "started": "2026-11-08T08:15:56.312Z",
+        "finished": "2026-11-08T08:15:57.982Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-8-2.json",
+        "report_sha256": "6423018815a4e5d6c66e6766ca7c9cd762a6127ced2b6e43aedd54a0aa980783",
+        "stderr": "m510-chromium-list-8-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-8",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=8/12"
+        ],
+        "started": "2026-11-08T08:15:57.984Z",
+        "finished": "2026-11-08T08:16:18.917Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-8-2.json",
+        "report_sha256": "5b19d702a9525c55898a2199b22a05586e324cd51f890d163aa9e7cf5112de18",
+        "stderr": "m510-chromium-run-8-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-9",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=9/12"
+        ],
+        "started": "2026-11-08T08:16:18.918Z",
+        "finished": "2026-11-08T08:16:20.626Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-9-2.json",
+        "report_sha256": "1ce22a172bfb644403831de234560d56dd1e43f16925a05e2c43e6644efd79de",
+        "stderr": "m510-chromium-list-9-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-9",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=9/12"
+        ],
+        "started": "2026-11-08T08:16:20.628Z",
+        "finished": "2026-11-08T08:16:43.485Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-9-2.json",
+        "report_sha256": "1c5134fe855bfa505431c11046bcb9ed8d75e93deee115cc75a474b0dbd8b17d",
+        "stderr": "m510-chromium-run-9-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-10",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=10/12"
+        ],
+        "started": "2026-11-08T08:16:43.486Z",
+        "finished": "2026-11-08T08:16:45.124Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-10-2.json",
+        "report_sha256": "555b9e662286742e532eb1c0deb4989ae62126bb75af355d77e657beb8747214",
+        "stderr": "m510-chromium-list-10-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-10",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=10/12"
+        ],
+        "started": "2026-11-08T08:16:45.127Z",
+        "finished": "2026-11-08T08:17:30.960Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-10-2.json",
+        "report_sha256": "19e0b0214a7bdeb8872c2baa23a338f336397ae0c8c2c1c28b19d23661d45d6e",
+        "stderr": "m510-chromium-run-10-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-11",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=11/12"
+        ],
+        "started": "2026-11-08T08:17:30.961Z",
+        "finished": "2026-11-08T08:17:32.611Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-11-2.json",
+        "report_sha256": "a07fa303df04d00939a77ab84709effc8961087a442b70400a6d4ac0971ada6b",
+        "stderr": "m510-chromium-list-11-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-11",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=11/12"
+        ],
+        "started": "2026-11-08T08:17:32.614Z",
+        "finished": "2026-11-08T08:18:12.109Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-11-2.json",
+        "report_sha256": "9aab86e31b8c563861d74d6bf1d864679e7189fa84528702a1d97b8be5498d5a",
+        "stderr": "m510-chromium-run-11-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "list-12",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--list",
+          "--shard=12/12"
+        ],
+        "started": "2026-11-08T08:18:12.111Z",
+        "finished": "2026-11-08T08:18:13.799Z",
+        "exit_code": 0,
+        "report": "m510-chromium-list-12-2.json",
+        "report_sha256": "d30e2d4a924e9912a8779e4d389114af798242ac5464f6c35838a5477d7fcda8",
+        "stderr": "m510-chromium-list-12-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "run-12",
+        "args": [
+          "node_modules/@playwright/test/cli.js",
+          "test",
+          "-c",
+          "tests/playwright.config.ts",
+          "--project=chromium",
+          "--workers=1",
+          "--retries=0",
+          "--reporter=json",
+          "--shard=12/12"
+        ],
+        "started": "2026-11-08T08:18:13.801Z",
+        "finished": "2026-11-08T08:18:35.256Z",
+        "exit_code": 0,
+        "report": "m510-chromium-run-12-2.json",
+        "report_sha256": "1c4d7386610629210e249a356470fc6a92ce790e41e519e22daf2d5cfaabe82b",
+        "stderr": "m510-chromium-run-12-2-stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "note": "Full Chromium coverage is the verified union of 12 built-in shards in fresh sequential Playwright processes. No monolithic pass, retry, skip or source/config change is claimed."
+  },
+  "chromium_timing": {
+    "scope": "Recorded ISO wall-clock boundaries from separate parent/child processes are preserved as observations. No timestamp tolerance, wall-clock enclosure or cause is inferred. Every child duration remains nonnegative and sibling start/finish ordering remains strict.",
+    "completion_basis": "The hashed tracked Chromium runner awaits each child close before recording its report/stderr hashes, verifies the complete union, then writes the manifest and emits its hashed completion marker. The parent gate captures that marker and records successful process exit after awaiting close; source-map/log/manifest/runner and result checks remain unchanged.",
+    "gate_wrapper_inspection": {
+      "path": "node_modules/.cache/m510-run.mjs",
+      "sha256": "325f1e836f756e88b0b9a000f314fe2532c98b4e4a8e36693cbeb6473e98a66d",
+      "scope": "Current read-only wrapper source inspection; its execution-time hash was not captured or invented."
+    },
+    "observations": [
+      {
+        "parent_log": "m510-browser-chromium.log",
+        "parent_log_sha256": "5c8c9fd80e2b25564ff09b50bca4eefab72e4e4228d573302b279939e4953c6e",
+        "parent_input_manifest": "m510-inputs-2654b1433ba3.json",
+        "parent_input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "parent_exit_code": 1,
+        "parent_sources_unchanged": true,
+        "manifest": "m510-chromium-shards.json",
+        "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+        "runner": "m510-chromium-shards.mjs",
+        "runner_sha256": "3e12de4c3ffc8ab25888d23ade44ebb9252f92e289ccafb93aa0eb1d8081b66a",
+        "parent_started": "2026-11-08T08:05:23.128Z",
+        "parent_finished": "2026-11-08T08:10:42.988Z",
+        "first_child_started": "2026-11-08T08:05:23.209Z",
+        "last_child_finished": "2026-11-08T08:10:42.964Z",
+        "first_child_started_minus_parent_started_ms": 81,
+        "last_child_finished_minus_parent_finished_ms": -24,
+        "wall_clock_enclosure_claimed": false,
+        "completion_supported_by_hashed_marker_and_exit": false
+      },
+      {
+        "parent_log": "m510-browser-chromium-2.log",
+        "parent_log_sha256": "c894606161be06795a998e8fdfc055e8e4db53255388afec3b3b333508023543",
+        "parent_input_manifest": "m510-inputs-2654b1433ba3.json",
+        "parent_input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+        "parent_exit_code": 0,
+        "parent_sources_unchanged": true,
+        "manifest": "m510-chromium-shards-2.json",
+        "manifest_sha256": "c855871b351e521188f47cf1b3d1459ca95e8809fc610c1f40f768f5c7425b64",
+        "runner": "m510-chromium-shards.mjs",
+        "runner_sha256": "3e12de4c3ffc8ab25888d23ade44ebb9252f92e289ccafb93aa0eb1d8081b66a",
+        "parent_started": "2026-11-08T08:13:23.466Z",
+        "parent_finished": "2026-11-08T08:18:35.288Z",
+        "first_child_started": "2026-11-08T08:13:23.545Z",
+        "last_child_finished": "2026-11-08T08:18:35.256Z",
+        "first_child_started_minus_parent_started_ms": 79,
+        "last_child_finished_minus_parent_finished_ms": -32,
+        "wall_clock_enclosure_claimed": false,
+        "completion_supported_by_hashed_marker_and_exit": true
+      }
+    ],
+    "clock_boundary_anomalies": []
+  },
+  "retained_partial_chromium_attempts": [
+    {
+      "manifest": "m510-chromium-shards.json",
+      "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+      "runner": "m510-chromium-shards.mjs",
+      "runner_sha256": "3e12de4c3ffc8ab25888d23ade44ebb9252f92e289ccafb93aa0eb1d8081b66a",
+      "parent_log": "m510-browser-chromium.log",
+      "parent_exit_code": 1,
+      "parent_input_manifest": "m510-inputs-2654b1433ba3.json",
+      "parent_input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+      "parent_sources_unchanged": true,
+      "complete": false,
+      "certifies_full_suite": false,
+      "shard_count": 12,
+      "expected_id_count": 793,
+      "completed_partitions": [
+        {
+          "shard": 1,
+          "passed": 71
+        },
+        {
+          "shard": 2,
+          "passed": 90
+        },
+        {
+          "shard": 3,
+          "passed": 49
+        },
+        {
+          "shard": 4,
+          "passed": 58
+        },
+        {
+          "shard": 5,
+          "passed": 76
+        },
+        {
+          "shard": 6,
+          "passed": 54
+        },
+        {
+          "shard": 7,
+          "passed": 74
+        },
+        {
+          "shard": 8,
+          "passed": 59
+        },
+        {
+          "shard": 9,
+          "passed": 69
+        },
+        {
+          "shard": 10,
+          "passed": 62
+        },
+        {
+          "shard": 11,
+          "passed": 67
+        }
+      ],
+      "records": [
+        {
+          "label": "list",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list"
+          ],
+          "started": "2026-11-08T08:05:23.209Z",
+          "finished": "2026-11-08T08:05:25.182Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list.json",
+          "report_sha256": "40d29a861a9613126a4706a2036542d840460e1f0b8361b28b52f7df5806c17f",
+          "stderr": "m510-chromium-list-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 793,
+          "stats": {
+            "startTime": "2026-11-08T08:05:23.789Z",
+            "duration": 1346.81,
+            "expected": 0,
+            "skipped": 793,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-1",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=1/12"
+          ],
+          "started": "2026-11-08T08:05:25.186Z",
+          "finished": "2026-11-08T08:05:26.921Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-1.json",
+          "report_sha256": "ca641bb00faace5fc489610171e3c79c847e6a108ddd64f936a1f77271519e11",
+          "stderr": "m510-chromium-list-1-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 71,
+          "stats": {
+            "startTime": "2026-11-08T08:05:25.767Z",
+            "duration": 1115.3649999999998,
+            "expected": 0,
+            "skipped": 71,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-1",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=1/12"
+          ],
+          "started": "2026-11-08T08:05:26.924Z",
+          "finished": "2026-11-08T08:05:54.929Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-1.json",
+          "report_sha256": "1e5d5645258c7dd54f69ad1774ddecdad0995f44a7ef80945a132ae7aeeca0d1",
+          "stderr": "m510-chromium-run-1-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 71,
+          "stats": {
+            "startTime": "2026-11-08T08:05:27.484Z",
+            "duration": 27418.708000000002,
+            "expected": 71,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-2",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=2/12"
+          ],
+          "started": "2026-11-08T08:05:54.931Z",
+          "finished": "2026-11-08T08:05:56.675Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-2.json",
+          "report_sha256": "31d36535ddcd6ef0cb6e75e01dbfa8ec9ee5bcb0d52119f51e9135b0ca7a0bcd",
+          "stderr": "m510-chromium-list-2-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 90,
+          "stats": {
+            "startTime": "2026-11-08T08:05:55.498Z",
+            "duration": 1112.4099999999999,
+            "expected": 0,
+            "skipped": 90,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-2",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=2/12"
+          ],
+          "started": "2026-11-08T08:05:56.677Z",
+          "finished": "2026-11-08T08:06:19.485Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-2.json",
+          "report_sha256": "d464c63fb8f39ab48d93de88097d17eaea99380e2d929f21adbb407362262988",
+          "stderr": "m510-chromium-run-2-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 90,
+          "stats": {
+            "startTime": "2026-11-08T08:05:57.292Z",
+            "duration": 22154.624,
+            "expected": 90,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-3",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=3/12"
+          ],
+          "started": "2026-11-08T08:06:19.486Z",
+          "finished": "2026-11-08T08:06:21.211Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-3.json",
+          "report_sha256": "d62f7d3fc2d98c36ae7bee7d570d1d06a1cb08d1595e7beea12dd8b290420994",
+          "stderr": "m510-chromium-list-3-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 49,
+          "stats": {
+            "startTime": "2026-11-08T08:06:20.064Z",
+            "duration": 1115.911,
+            "expected": 0,
+            "skipped": 49,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-3",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=3/12"
+          ],
+          "started": "2026-11-08T08:06:21.212Z",
+          "finished": "2026-11-08T08:06:36.174Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-3.json",
+          "report_sha256": "dc7063947d1b4a817677638aae41ee4b95c840adf326e06dbd3b499e98b83722",
+          "stderr": "m510-chromium-run-3-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 49,
+          "stats": {
+            "startTime": "2026-11-08T08:06:21.864Z",
+            "duration": 14277.918000000001,
+            "expected": 49,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-4",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=4/12"
+          ],
+          "started": "2026-11-08T08:06:36.175Z",
+          "finished": "2026-11-08T08:06:37.991Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-4.json",
+          "report_sha256": "69d0156a897c81102bd42a4fc73a2f90446fffcb0325c89564a1c2b0a647a03a",
+          "stderr": "m510-chromium-list-4-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 58,
+          "stats": {
+            "startTime": "2026-11-08T08:06:36.768Z",
+            "duration": 1189.194,
+            "expected": 0,
+            "skipped": 58,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-4",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=4/12"
+          ],
+          "started": "2026-11-08T08:06:37.995Z",
+          "finished": "2026-11-08T08:06:52.966Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-4.json",
+          "report_sha256": "06da8b58299396faaf97d10d3ef127e70e8351cf75afc83953525cfb6f6f9afa",
+          "stderr": "m510-chromium-run-4-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 58,
+          "stats": {
+            "startTime": "2026-11-08T08:06:38.601Z",
+            "duration": 14304.005,
+            "expected": 58,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-5",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=5/12"
+          ],
+          "started": "2026-11-08T08:06:52.967Z",
+          "finished": "2026-11-08T08:06:54.641Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-5.json",
+          "report_sha256": "0c610407f6aaa037bc75d9bbf294e0eb2662920d144128e6f664876b0289cfc5",
+          "stderr": "m510-chromium-list-5-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 76,
+          "stats": {
+            "startTime": "2026-11-08T08:06:53.511Z",
+            "duration": 1098.1779999999999,
+            "expected": 0,
+            "skipped": 76,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-5",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=5/12"
+          ],
+          "started": "2026-11-08T08:06:54.643Z",
+          "finished": "2026-11-08T08:07:18.306Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-5.json",
+          "report_sha256": "185fced2d0ff7d1ffd6ef586cd5960f88a17a3c13000670eb052cafc317c8a8a",
+          "stderr": "m510-chromium-run-5-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 76,
+          "stats": {
+            "startTime": "2026-11-08T08:06:55.191Z",
+            "duration": 23083.293,
+            "expected": 76,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-6",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=6/12"
+          ],
+          "started": "2026-11-08T08:07:18.307Z",
+          "finished": "2026-11-08T08:07:19.955Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-6.json",
+          "report_sha256": "c095f8bf416be07eb38bb7610be2fd18ed6fe256f73eaeb0f5c7795322de3c9b",
+          "stderr": "m510-chromium-list-6-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 54,
+          "stats": {
+            "startTime": "2026-11-08T08:07:18.852Z",
+            "duration": 1073.9,
+            "expected": 0,
+            "skipped": 54,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-6",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=6/12"
+          ],
+          "started": "2026-11-08T08:07:19.956Z",
+          "finished": "2026-11-08T08:07:39.327Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-6.json",
+          "report_sha256": "b3b0c879f6952fcb7630cf6d201d7c044c9eb4e2aa1249d6575de9fb08cd0930",
+          "stderr": "m510-chromium-run-6-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 54,
+          "stats": {
+            "startTime": "2026-11-08T08:07:20.539Z",
+            "duration": 18749.037,
+            "expected": 54,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-7",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=7/12"
+          ],
+          "started": "2026-11-08T08:07:39.327Z",
+          "finished": "2026-11-08T08:07:40.988Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-7.json",
+          "report_sha256": "c3c2579a6b1563288997fdb5b78330323c94e7fe6d811ee0250179243d02e0a9",
+          "stderr": "m510-chromium-list-7-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 74,
+          "stats": {
+            "startTime": "2026-11-08T08:07:39.859Z",
+            "duration": 1099.721,
+            "expected": 0,
+            "skipped": 74,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-7",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=7/12"
+          ],
+          "started": "2026-11-08T08:07:40.990Z",
+          "finished": "2026-11-08T08:08:03.279Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-7.json",
+          "report_sha256": "997d21e4a7bf3dd4c69bd4b3aab505f294e044ad8ee75ccca2d93d0e9ffdb90c",
+          "stderr": "m510-chromium-run-7-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 74,
+          "stats": {
+            "startTime": "2026-11-08T08:07:41.544Z",
+            "duration": 21712.077,
+            "expected": 74,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-8",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=8/12"
+          ],
+          "started": "2026-11-08T08:08:03.280Z",
+          "finished": "2026-11-08T08:08:04.902Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-8.json",
+          "report_sha256": "96e279e0fdd7eceec9e94db474a87aba0a9c0428af14ec07e4425a21ecfef8ca",
+          "stderr": "m510-chromium-list-8-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 59,
+          "stats": {
+            "startTime": "2026-11-08T08:08:03.812Z",
+            "duration": 1061.531,
+            "expected": 0,
+            "skipped": 59,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-8",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=8/12"
+          ],
+          "started": "2026-11-08T08:08:04.904Z",
+          "finished": "2026-11-08T08:08:25.920Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-8.json",
+          "report_sha256": "5ad157c9f22d80763a48ae2ddf8301e6bb2bed1341789fecdbb3b843123cca24",
+          "stderr": "m510-chromium-run-8-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 59,
+          "stats": {
+            "startTime": "2026-11-08T08:08:05.461Z",
+            "duration": 20414.617000000002,
+            "expected": 59,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-9",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=9/12"
+          ],
+          "started": "2026-11-08T08:08:25.921Z",
+          "finished": "2026-11-08T08:08:27.591Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-9.json",
+          "report_sha256": "8e8df57838799268e4f5ff4913f32560ea5abe068841a1a371a22e037980e0ba",
+          "stderr": "m510-chromium-list-9-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 69,
+          "stats": {
+            "startTime": "2026-11-08T08:08:26.462Z",
+            "duration": 1086.897,
+            "expected": 0,
+            "skipped": 69,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-9",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=9/12"
+          ],
+          "started": "2026-11-08T08:08:27.594Z",
+          "finished": "2026-11-08T08:08:50.522Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-9.json",
+          "report_sha256": "e5f2273a7ca37d634919fc10d4f7609190cad19da5778a021423a12772300fe4",
+          "stderr": "m510-chromium-run-9-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 69,
+          "stats": {
+            "startTime": "2026-11-08T08:08:28.158Z",
+            "duration": 22275.912,
+            "expected": 69,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-10",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=10/12"
+          ],
+          "started": "2026-11-08T08:08:50.523Z",
+          "finished": "2026-11-08T08:08:52.212Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-10.json",
+          "report_sha256": "c44a69cd1839506e311b8e41a052870fc184d34500b7d2ee867f203edb3cd925",
+          "stderr": "m510-chromium-list-10-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 62,
+          "stats": {
+            "startTime": "2026-11-08T08:08:51.067Z",
+            "duration": 1099.81,
+            "expected": 0,
+            "skipped": 62,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-10",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=10/12"
+          ],
+          "started": "2026-11-08T08:08:52.215Z",
+          "finished": "2026-11-08T08:09:37.728Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-10.json",
+          "report_sha256": "7718827eae65e4836dcdd7820f6c7f48164d4af2d00628e1b6a8971124ced09b",
+          "stderr": "m510-chromium-run-10-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 62,
+          "stats": {
+            "startTime": "2026-11-08T08:08:52.758Z",
+            "duration": 44921.077,
+            "expected": 62,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-11",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=11/12"
+          ],
+          "started": "2026-11-08T08:09:37.728Z",
+          "finished": "2026-11-08T08:09:39.411Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-11.json",
+          "report_sha256": "8f960ebbd94eb644180fc39598593196fdf786fc14d0bd85dd2a4d0cc6005949",
+          "stderr": "m510-chromium-list-11-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 67,
+          "stats": {
+            "startTime": "2026-11-08T08:09:38.279Z",
+            "duration": 1087.8000000000002,
+            "expected": 0,
+            "skipped": 67,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-11",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=11/12"
+          ],
+          "started": "2026-11-08T08:09:39.413Z",
+          "finished": "2026-11-08T08:10:19.081Z",
+          "exit_code": 0,
+          "report": "m510-chromium-run-11.json",
+          "report_sha256": "47c28a369876cde2db58ef92cca31706eaf7d467cab08a63f220abc9241e3685",
+          "stderr": "m510-chromium-run-11-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 67,
+          "stats": {
+            "startTime": "2026-11-08T08:09:40.041Z",
+            "duration": 39017.173,
+            "expected": 67,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "list-12",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--list",
+            "--shard=12/12"
+          ],
+          "started": "2026-11-08T08:10:19.082Z",
+          "finished": "2026-11-08T08:10:20.776Z",
+          "exit_code": 0,
+          "report": "m510-chromium-list-12.json",
+          "report_sha256": "6da104dfd887389669cb9916a2e099d5135d0ddcb233cf83522868f7538e735b",
+          "stderr": "m510-chromium-list-12-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 64,
+          "stats": {
+            "startTime": "2026-11-08T08:10:19.626Z",
+            "duration": 1075.469,
+            "expected": 0,
+            "skipped": 64,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        },
+        {
+          "label": "run-12",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--retries=0",
+            "--reporter=json",
+            "--shard=12/12"
+          ],
+          "started": "2026-11-08T08:10:20.778Z",
+          "finished": "2026-11-08T08:10:42.964Z",
+          "exit_code": 1,
+          "report": "m510-chromium-run-12.json",
+          "report_sha256": "438e74bafcc10d6d8a875565b5d8425d38cbedaccfccfba13f642aa0888ba119",
+          "stderr": "m510-chromium-run-12-stderr.log",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "listed_id_count": 64,
+          "stats": {
+            "startTime": "2026-11-08T08:10:21.340Z",
+            "duration": 21600.617,
+            "expected": 63,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "global_error_count": 0
+        }
+      ],
+      "note": "This incomplete attempt is retained as failed/superseded evidence. Its completed prefix does not certify any final full-suite result; actual failed child statistics remain visible."
+    }
+  ],
+  "retained_superseded_complete_chromium_attempts": [],
+  "diagnostic_artifacts": [
+    {
+      "file": "m510-module-import-diagnostic-trace.zip",
+      "sha256": "5d87bc27a57c07dfff48a2954531a3fef76e251e630ac792c54f4a19732badd4",
+      "bytes": 104085,
+      "purpose": "Retained diagnostic trace; no current network failure cause is inferred automatically."
+    }
+  ],
+  "artifact": {
+    "sha256": "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+    "files": 193,
+    "packed_bytes": 340502,
+    "unpacked_bytes": 1716337,
+    "all_actual_members_match_workspace": true,
+    "actual_listing_matches_manifest": true,
+    "individual_sizes_match": true,
+    "entries": [
+      ".",
+      "./page",
+      "./data",
+      "./ui",
+      "./comm"
+    ],
+    "runtime_dependencies": 0,
+    "publication": "not performed"
+  },
+  "checks": {
+    "build": "pass",
+    "types": "pass",
+    "example_types": "pass; existing Node Vite config/mock server excluded",
+    "unit": {
+      "passed": 138,
+      "new_cases": 0
+    },
+    "new_browser_cases": 27,
+    "full_suites": {
+      "chromium": {
+        "passed": 793,
+        "elapsed": "12 sequential Chromium shards, 311.7s",
+        "log": "m510-browser-chromium-2.log",
+        "method": "12 built-in shards in fresh sequential processes",
+        "shard_manifest": "m510-chromium-shards-2.json"
+      },
+      "firefox": {
+        "passed": 793,
+        "elapsed": "10.0m",
+        "log": "m510-browser-firefox.log"
+      },
+      "webkit": {
+        "passed": 793,
+        "elapsed": "7.7m",
+        "log": "m510-browser-webkit.log"
+      }
+    },
+    "installed_js_ts": "pass",
+    "installed_browsers": [
+      {
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "log": "m510-packed-chromium.log"
+      },
+      {
+        "browser": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "log": "m510-packed-firefox.log"
+      },
+      {
+        "browser": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "log": "m510-packed-webkit.log"
+      },
+      {
+        "browser": "chrome",
+        "version": "156.0.8078.80",
+        "passed": true,
+        "log": "m510-packed-chrome.log"
+      },
+      {
+        "browser": "edge",
+        "version": "157.0.4341.42",
+        "passed": true,
+        "log": "m510-packed-edge.log"
+      }
+    ],
+    "installed_value_callbacks": "The same exact artifact supplies ValueBindContext and rejects the removed FormValueContext name in isolated TypeScript consumers. Actual installed JavaScript/five-browser field callbacks and List refresh assertions plus exact acceptance witnesses own the tested scope."
+  },
+  "semantic_acceptance": {
+    "file": "m510-form-configuration.json",
+    "sha256": "6511bd480fcb7ebd3913c2ee98d60916287fa8893dd8060069cd9a35a2006d0e",
+    "selected_contracts": [
+      "shared_context_and_options",
+      "shared_checked_value_owner",
+      "raw_projection_cache_and_focus",
+      "mounted_phase_lifetime_and_failure",
+      "explicit_live_policy_and_refresh",
+      "real_example_and_installed"
+    ],
+    "new_cases": 27,
+    "full_families_closed": 0,
+    "omissions_approved": 0,
+    "inheritance": [
+      {
+        "path": "docs/implementation/evidence/m59-verification.json",
+        "sha256": "aa1b993c75dcb71fdf418c9f4b6a603d6b6630b707d47d9cf00e01e04c7c21f3"
+      },
+      {
+        "path": "docs/implementation/evidence/m59-form-presets.json",
+        "sha256": "b7dd828e62f54cfa4b0d58b39001ade25fd43eba5eb705be2ee573cf40b18b70"
+      },
+      {
+        "path": "docs/implementation/evidence/m1096-grid-audit.json",
+        "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "immutable_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "performance": {
+    "recomputed_raw_medians": 60,
+    "unchanged_fixtures": {
+      "tools/benchmark-m4.mjs": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+      "tools/benchmark-grid-viewport.mjs": "87570e023afb814627329fad003783fcefe2f8915ad086c0d209f977aa05de92",
+      "examples/vite/benchmark.ts": "0e4d4b89c4170ad720e979a468b8b1698db1307e0bba7e0a326fbcf69c127a1e",
+      "examples/vite/benchmark.html": "30b8eb3cb1bb0549d7765d91cd83f35dab6a445f797aef83e9caa9388505d55c"
+    },
+    "binding": {
+      "log": "m510-binding-performance.log",
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 26.5,
+            "rebind": 24.59999999962747,
+            "edit": 1.300000000745058,
+            "sort": 3.400000000372529,
+            "filter": 2.099999999627471
+          },
+          "budgets_ms": {
+            "initial": 30,
+            "rebind": 35,
+            "edit": 5,
+            "sort": 10,
+            "filter": 8
+          }
+        },
+        {
+          "kind": "nested-auto",
+          "rows": 1000,
+          "medians_ms": {
+            "initial": 52.59999999962747,
+            "rebind": 60.100000001490116,
+            "sort": 7.5,
+            "filter": 3.700000001117587
+          },
+          "budgets_ms": {
+            "initial": 90,
+            "rebind": 100,
+            "sort": 25,
+            "filter": 18
+          }
+        }
+      ]
+    },
+    "viewport": {
+      "log": "m510-viewport-performance.log",
+      "method": {
+        "count": 5000,
+        "kinds": [
+          "flat",
+          "nested",
+          "blocks"
+        ],
+        "runs": 5,
+        "warmup": 2,
+        "rootHeight": 400,
+        "estimate": 48,
+        "overscan": 3,
+        "mountedBound": 80,
+        "blocks": {
+          "physicalRowsPerRecord": 2,
+          "estimate": 80,
+          "mountedBound": 64,
+          "pasteRecords": 100,
+          "merge": "Adjacent scalar group keys span complete two-row records; each native merge stays inside a consecutive mounted segment."
+        },
+        "timing": "Rows and authored HTML prepared outside timing. Each operation includes two successive stable animation-frame geometry observations; fail after fifteen frames.",
+        "focus": "One invalid draft editor remains pinned with its exact node and caret while a distant variable-height window renders.",
+        "paste": "Flat/nested paste one thousand offscreen records; blocks paste one hundred. Each changes two fields in one atomic event; nested detail uses numeric Select values.",
+        "move": "Move the last of five thousand stored rows before a stable row near the current window; one event, unchanged snapshot and pinned draft/caret. Includes settled DOM with a 100ms same-host Chromium median budget.",
+        "append": {
+          "count": 250,
+          "medianBudgetMs": 100,
+          "anchorTolerancePx": 1,
+          "operation": "After original operations and twenty scroll-cycle assertions, append 250 clean records in one event. Preserve every old snapshot/order, save changes, checks, focused node/draft/caret and scroll anchor. Dispose all 5,250 records under the original cleanup budget."
+        },
+        "geometry": "Every live checkpoint requires intersecting mounted data rows and different measured row heights; reveal verifies the complete requested record rectangle and forward scroll advances logical intersection. Blocks record native physical-row heights, record bounds and merge spans; twenty cycle windows record actual intersections.",
+        "cleanup": "Exact authored markup/style after disposal, then observe zero mutations across late scroll and stable frames; this observes quiet work, not a direct cancelAnimationFrame call.",
+        "memory": "Chromium CDP forces GC before DOM counters; twenty-cycle growth remains bounded by two viewport element counts and twenty listeners. After detaching the fixture, record native focus/selection retention, release it by focusing the existing external main and clearing document ranges, wait two frames, then require the stated pre-fixture cleanup budget. No JavaScript heap-retention claim.",
+        "cleanupBudget": {
+          "nodes": 8,
+          "jsEventListeners": 0,
+          "documents": 0
+        },
+        "budgets": "Host-relative Chromium medians declared before measurement; other engines report samples without applying Chromium thresholds."
+      },
+      "scenarios": [
+        {
+          "kind": "flat",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 16.699999999254942,
+            "reveal": 65.59999999962747,
+            "scroll": 82.90000000037253,
+            "columns": 50.30000000074506,
+            "paste": 33.5,
+            "move": 62.70000000111759,
+            "append": 19.5,
+            "dispose": 24
+          },
+          "budgets_ms": {
+            "initial": 120,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100,
+            "append": 100
+          },
+          "maximum_physical_rows": 14,
+          "append_samples": [
+            {
+              "durationMs": 19,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 21.90000000037253,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 20.09999999962747,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 18.299999998882413,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            },
+            {
+              "durationMs": 19.5,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 171,
+              "nodeCount": 293,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 171
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "nested",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 12.099999999627471,
+            "reveal": 53.40000000037253,
+            "scroll": 83.80000000074506,
+            "columns": 49.20000000111759,
+            "paste": 33.19999999925494,
+            "move": 62.69999999925494,
+            "append": 16.600000001490116,
+            "dispose": 21.40000000037253
+          },
+          "budgets_ms": {
+            "initial": 180,
+            "reveal": 100,
+            "scroll": 100,
+            "columns": 150,
+            "paste": 2000,
+            "move": 100,
+            "append": 100
+          },
+          "maximum_physical_rows": 14,
+          "append_samples": [
+            {
+              "durationMs": 15.099999999627471,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 17.199999999254942,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 16.300000000745058,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 16.800000000745058,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            },
+            {
+              "durationMs": 16.600000001490116,
+              "mountedRowCount": 14,
+              "logicalRowCount": 5250,
+              "elementCount": 199,
+              "nodeCount": 349,
+              "spacerCount": 2,
+              "scrollTop": 28899,
+              "intersectingRowIndexes": [
+                601,
+                602,
+                603,
+                604,
+                605,
+                606,
+                607
+              ],
+              "measuredHeightRange": [
+                56,
+                116
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 601,
+                "beforeTop": 1,
+                "afterTop": 1,
+                "beforeScrollTop": 28899,
+                "afterScrollTop": 28899
+              },
+              "maximumMounted": 14,
+              "maximumElements": 199
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        },
+        {
+          "kind": "blocks",
+          "rows": 5000,
+          "medians_ms": {
+            "initial": 13.5,
+            "reveal": 67.09999999962747,
+            "scroll": 48.80000000074506,
+            "columns": 49.70000000111759,
+            "paste": 33.09999999962747,
+            "move": 61.899999998509884,
+            "append": 29.299999998882413,
+            "dispose": 20.59999999962747
+          },
+          "budgets_ms": {
+            "initial": 35,
+            "reveal": 100,
+            "scroll": 120,
+            "columns": 100,
+            "paste": 85,
+            "move": 100,
+            "append": 100
+          },
+          "maximum_physical_rows": 24,
+          "append_samples": [
+            {
+              "durationMs": 29.299999998882413,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 18.59999999962747,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 14.699999999254942,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 32.30000000074506,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            },
+            {
+              "durationMs": 31.59999999962747,
+              "mountedRowCount": 24,
+              "logicalRowCount": 5250,
+              "elementCount": 197,
+              "nodeCount": 305,
+              "spacerCount": 2,
+              "scrollTop": 48103,
+              "intersectingRowIndexes": [
+                1201,
+                1202,
+                1203,
+                1204,
+                1205,
+                1206,
+                1207,
+                1208,
+                1209
+              ],
+              "measuredHeightRange": [
+                42,
+                102
+              ],
+              "mountedLogicalRowCount": 12,
+              "recordGeometry": [
+                {
+                  "index": 0,
+                  "top": -48047,
+                  "bottom": -47903,
+                  "height": 144,
+                  "rowHeights": [
+                    102,
+                    42
+                  ]
+                },
+                {
+                  "index": 596,
+                  "top": -303,
+                  "bottom": -219,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 597,
+                  "top": -219,
+                  "bottom": -135,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 598,
+                  "top": -135,
+                  "bottom": -51,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 599,
+                  "top": -51,
+                  "bottom": 33,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 600,
+                  "top": 33,
+                  "bottom": 117,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 601,
+                  "top": 117,
+                  "bottom": 201,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 602,
+                  "top": 201,
+                  "bottom": 325,
+                  "height": 124,
+                  "rowHeights": [
+                    82,
+                    42
+                  ]
+                },
+                {
+                  "index": 603,
+                  "top": 325,
+                  "bottom": 409,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 604,
+                  "top": 409,
+                  "bottom": 493,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 605,
+                  "top": 493,
+                  "bottom": 577,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                },
+                {
+                  "index": 606,
+                  "top": 577,
+                  "bottom": 661,
+                  "height": 84,
+                  "rowHeights": [
+                    42,
+                    42
+                  ]
+                }
+              ],
+              "nativeMerges": [
+                {
+                  "rowIndex": 1194,
+                  "rowSpan": 8,
+                  "height": 336
+                },
+                {
+                  "rowIndex": 1202,
+                  "rowSpan": 14,
+                  "height": 628
+                }
+              ],
+              "appendedCount": 250,
+              "firstId": 5001,
+              "lastId": 5250,
+              "snapshotsPreserved": true,
+              "cleanRows": true,
+              "changesPreserved": true,
+              "focusedDraftPreserved": true,
+              "appendEvents": 1,
+              "anchor": {
+                "rowIndex": 1201,
+                "beforeTop": -9,
+                "afterTop": -9,
+                "beforeScrollTop": 48103,
+                "afterScrollTop": 48103
+              },
+              "maximumMounted": 24,
+              "maximumElements": 197
+            }
+          ],
+          "cleanup": [
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            },
+            {
+              "exactAuthoredMarkup": true,
+              "quietAfterLateEvents": true,
+              "observedLateMutations": 0
+            }
+          ]
+        }
+      ]
+    },
+    "limits": "Unchanged same-host Chromium fixtures, warmups, samples and nine binding/twenty-one viewport budgets. Shared Form/Grid/List callbacks retain raw/cache/native/lifetime owners and the no-hook fast path; no universal speed or actual-token claim."
+  },
+  "review": {
+    "baseline": "Independent read-only 5ecda44 M5.9 recovery matches its frozen188-input map,22 retained records/one188 map,80 exact committed evidence files, six immutable parents, all188 actual package payloads, retained766-case three-engine results, v1/master and ignored original legacy lock. Historical runtime was not rerun or recertified.",
+    "source": "passed_independent_connected_source_callers_27_fixed_witnesses_and_three_focused124_captures",
+    "evidence": "passed_independent_raw_gate_source_map_archive_shard_performance_parent_and_preservation_audit",
+    "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks",
+    "scope": "A common ValueBindContext replaces the former Form-only name without an alias. Grid/List gain the two existing-signature value hooks and List explicit refresh; one private owner shares checked invocation/replacement across three actual binders. Raw validation/cache/focus/mounted-row/lifetime owners remain component-local. No public helper, implicit global registry, dependency or callback-layer engine.",
+    "note": "Runtime receipt construction verifies recorded bytes and raw results. It does not itself certify an independent source, semantic document or evidence review."
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "5ecda443abbe2f9c41a7a23b672507e4a82ed59b",
+    "scope": "Independent read-only baseline inventory observed a clean pushed M5.9 worktree before authorized M5.10 edits; new-stage planning edits are not pre-existing dirt."
+  },
+  "superseded_artifacts": [],
+  "development_observations": {
+    "reported_setup_checks": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M510 helpers; not a project verification command",
+        "log": {
+          "path": "node_modules/.cache/m510-helper-syntax.log",
+          "sha256": "6d7497ec323909353c7092ee19b5235e24a7ac241279fbdec42702bab79e028c"
+        }
+      },
+      {
+        "kind": "reported_root_non_project_preparation",
+        "status": "reported_failures_corrected_before_project_gates",
+        "source": "Root direct task message; no captured log/hash was supplied or invented.",
+        "observations": [
+          "Browser consumer main.js node --check initially failed on duplicate const valueRows; root put the new fixture in a block and reported subsequent main/tool syntax checks passing.",
+          "Ignored root preparation script initially hit CRLF text matching; root normalized its input and reported successful preparation."
+        ],
+        "runtime_gate_claim": false
+      }
+    ],
+    "operator_dispositions": [
+      {
+        "kind": "captured_initial_focused_fixture_corrections",
+        "log": "m510-focused-chromium.log",
+        "log_sha256": "4a2d7651782380559289caafc082f942f61afc6341d2f41a392355d06d1caaba",
+        "input_manifest": "m510-inputs-f80ad681eab4.json",
+        "input_manifest_sha256": "f80ad681eab4d14398b3a578da8e2034889519e82f05252cb7e71f2b1ab5014a",
+        "passed": 122,
+        "failed": 2,
+        "sources_unchanged": true,
+        "changed_files_to_current": [
+          "tests/browser/collection-values.spec.ts"
+        ],
+        "framework_source_hashes_unchanged": true,
+        "disposition": "Root/test author corrected test input/change-event sequencing and authored List element metadata for a detached prepared clone. This is fixture correction evidence, not a framework source RED/GREEN bug fix. The earlier attempt is retained and grants no corrected-fixture pass."
+      }
+    ],
+    "diagnostic_dispositions": [
+      {
+        "status": "retained_failed_full_parent_and_later_passing_target_verified",
+        "failed_parent": {
+          "log": "m510-browser-chromium.log",
+          "log_sha256": "5c8c9fd80e2b25564ff09b50bca4eefab72e4e4228d573302b279939e4953c6e",
+          "input_manifest": "m510-inputs-2654b1433ba3.json",
+          "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+          "sources_unchanged": true,
+          "manifest": "m510-chromium-shards.json",
+          "manifest_sha256": "c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc",
+          "complete": false,
+          "certifies_full_suite": false,
+          "completed_partitions": 11,
+          "completed_prefix_passed": 729,
+          "last_child": {
+            "report": "m510-chromium-run-12.json",
+            "report_sha256": "438e74bafcc10d6d8a875565b5d8425d38cbedaccfccfba13f642aa0888ba119",
+            "passed": 63,
+            "unexpected": 1,
+            "expected_id_count": 64,
+            "failed_test": {
+              "file": "row-state.spec.ts",
+              "line": 307,
+              "title": "application GET decoding explicitly maps statuses and cancellation prevents late state publication",
+              "observed_error": "Dynamic Grid module fetch failure reported at beforeEach page.evaluate line37 before the test body."
+            }
+          }
+        },
+        "later_diagnostic": {
+          "log": "m510-focused-core-chromium.log",
+          "log_sha256": "6612d796ee3d77dbf3b7dbc38dee94ee4a6c8f04744cc64fe532f1351872b0e4",
+          "input_manifest": "m510-inputs-2654b1433ba3.json",
+          "input_manifest_sha256": "2654b1433ba3577c762a058769501f7ca6aa557fcd98a6bf6a511a26fa21bee5",
+          "sources_unchanged": true,
+          "passed": 1,
+          "trace": {
+            "path": "docs/implementation/evidence/m510-module-import-diagnostic-trace.zip",
+            "sha256": "5d87bc27a57c07dfff48a2954531a3fef76e251e630ac792c54f4a19732badd4",
+            "bytes": 104085
+          },
+          "companion": {
+            "path": "docs/implementation/evidence/m510-module-import-diagnostic.json",
+            "sha256": "a756a94dbd2a41fed157120e538abcb273a32a410ea3913370daa9ba5f6152c5"
+          },
+          "actual_trace_grid_requests": [
+            {
+              "url": "http://127.0.0.1:4173/@fs/D:/workspace/natural_js/src/ui/grid.ts",
+              "status": 200,
+              "statusText": "OK"
+            }
+          ]
+        },
+        "scope": "The trace records the later passing targeted diagnostic only; no original failed-request trace, failure cause, tolerance, retry or full-suite coverage is inferred. Root changed only an ignored runner diagnostic phase outside the191 execution inputs; current wrapper inspection does not prove its execution-time hash."
+      }
+    ],
+    "note": "Reported helper/setup observations are separate from captured runner gates. No inherited prior-stage syntax check or runtime count is attributed to M5.10. Gate record counts describe captured runner calls, not every preparatory or read-only tool command."
+  },
+  "logs_sha256": {
+    "m510-focused-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m510-focused-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m510-focused-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m510-focused-chromium.log": "4a2d7651782380559289caafc082f942f61afc6341d2f41a392355d06d1caaba",
+    "m510-focused-chromium-2.log": "f8a0cddaedb569e654eb54fcd04e280ca21b58fd914dc5818b1abb8c989a74bc",
+    "m510-focused-firefox.log": "f268461d2c7f93bd006b10f1cfda414dff0a6042c7334040da6a5358130826d1",
+    "m510-focused-webkit.log": "7ecb85e011ad5a43b713ea2262e8271bb9cfbc6f12fccbf068107afee788962a",
+    "m510-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m510-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m510-example-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "m510-unit.log": "58332587ba66153bbd15f017aeb188611b5b429c1ed5192746340d10233a51fd",
+    "m510-pack.log": "13700b6f108359dd24ca7353db1b557e8f5604a032942d44be55b9b99c0625f0",
+    "m510-consumers.log": "7b53fa1d28684a41eba2b81e426687c3cbd5016c2d52032ee7b019e66d52a16b",
+    "m510-packed-chromium.log": "42008d6a8497aa241ef95f5dd5dc6e51755e7c9bbe84326d7ce899b71d096321",
+    "m510-packed-firefox.log": "37245b88927d76403b6600720fc315cc40b86358d97bf51370b9d3a22db964ef",
+    "m510-packed-webkit.log": "7bf54355e1e48f5535e22ee585dd00fb4b4da619f8364b5eb5450fa92388ed11",
+    "m510-packed-chrome.log": "aff03da984f310f399c462ac0d01ba1dc0bb2756da2a7423f6d784fbc3fe68f0",
+    "m510-packed-edge.log": "421cf243dd01b1ccc4200bad8e610289f0837e1879a7f8878fa826b097a89ff7",
+    "m510-binding-performance.log": "541bee79489c487b5a8cd1744ce2f10132a38aed904258c842683dbd97a27cdc",
+    "m510-viewport-performance.log": "b7e037f6127f9c824570584094c6a8ed688a88c775a791132105c761b5afde3e",
+    "m510-browser-chromium.log": "5c8c9fd80e2b25564ff09b50bca4eefab72e4e4228d573302b279939e4953c6e",
+    "m510-focused-core-chromium.log": "6612d796ee3d77dbf3b7dbc38dee94ee4a6c8f04744cc64fe532f1351872b0e4",
+    "m510-browser-chromium-2.log": "c894606161be06795a998e8fdfc055e8e4db53255388afec3b3b333508023543",
+    "m510-browser-firefox.log": "11b1b21899215132726ff814881c0d770f85e876060a4c67eb9b39e29334d77f",
+    "m510-browser-webkit.log": "515ff1b015470bebec5c79a5ea42a23f7a957488f173e67604822688f9cc4a3a"
+  },
+  "limits": [
+    "Only selected shared mounted field-value callback outcomes are in scope. Local-source and per-unbound-key observation, broader default/global/declaration equivalence, direct hot declarations, remaining data/UI/CVC/P0 and mandatory M13 remain required; no omitted capability or required implementation engine is inferred.",
+    "Actual macOS/iOS Safari is excluded. Manual assistive technology and final fixed-agent/token evaluation remain unverified. No npm publication, release tag, master/v1 change or omission.",
+    "M5.10 started with a clean worktree. Earlier initial-state provenance remains owned by immutable parent receipts. No response-generation/model-evaluation tests, model-performance evaluations or token-saving measurement are performed or inferred."
+  ]
+}

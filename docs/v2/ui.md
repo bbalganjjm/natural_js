@@ -4,12 +4,12 @@ title: Natural-JS 2.0 UI contracts
 description: Shared rule, validation, selection, and page types for the implemented HTML-bound UI.
 tags: [ui, typescript, binding]
 status: draft
-symbols: [FormOptions, RuleContext, FormBindContext, FormValueContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
+symbols: [FormOptions, RuleContext, FormBindContext, ValueBindContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -21,7 +21,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,15 +50,17 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
 
 FormOptions<T extends object = Record<string, unknown>> names the existing bindForm constructor shape. Compose application-wide, feature and instance settings with ordinary objects; pass per-screen Rows explicitly. [Form presets](form.md#shared-options-and-callback-composition) specifies shallow precedence, nested-map composition and the single-callback execution boundary. This type adds no runtime export or registry.[^ui][^form]
+
+ValueBindContext replaces the pre-release FormValueContext name without an alias. Its fields are unchanged and now serve all three Rows-backed binders. ListHandle.refresh(): void explicitly reprojects visible records without changing their Rows, selection or IDs.[^ui][^form]
 
 # Summary
 
@@ -67,7 +69,7 @@ FormOptions<T extends object = Record<string, unknown>> names the existing bindF
 | `RuleContext` | Field, values snapshot, row identity, optional field element | Rule context |
 | `FormOptions<T>` | Optional Rows, rules, parse/render maps, autoValidate and existing whole/value callbacks | Typed application preset or instance options |
 | `FormBindContext<T>` | Readonly root HTMLElement, immutable row: RowSnapshot<T>, event: RowsEvent \| null | Rows-backed whole-Form callback context |
-| `FormValueContext` | RuleContext with bind/val phase, nonnull RowId and primary HTMLElement | Rows-backed Form value callback context |
+| `ValueBindContext` | RuleContext with bind/val phase, nonnull RowId and primary HTMLElement | Rows-backed Form/Grid/List value callback context |
 | `FormatRule` | Value, arguments, context | Display string |
 | `ValidateRule` | Value, arguments, context | Boolean or message |
 | `ParseInput` | Entered string and context | Raw candidate |
@@ -85,7 +87,7 @@ FormOptions<T extends object = Record<string, unknown>> names the existing bindF
 | `PaginationHandle` | `set`, `state`, `dispose` | Pagination handle |
 | `FormHandle<T>` | `bind`, `refresh`, `rescan`, `defaults`, `unbind`, `read`, `validate`, `dispose` | Form handle |
 | `SortIndicator` | Header `column`, ascending/descending `direction` | Grid ARIA sort state |
-| `ListHandle<T>` | Selection, sort, filter, page, validation, disposal | List handle |
+| `ListHandle<T>` | Selection, sort, filter, page, refresh, validation, disposal | List handle |
 | `GridColumn` | Readonly `key`, optional positive preferred `width`, optional boolean `hidden`/`pinned`; visible pins form a leading prefix | Column state |
 | `GridIdsChange` | Readonly `ids: readonly RowId[]`, `previous: readonly RowId[]`, `event: Event \| null` | Membership transition |
 | `GridRowScope` | `"visible" \| "filtered" \| "store"` | Explicit row-identity or check scope |
@@ -121,13 +123,13 @@ These methods extend the existing active-detail `select(id)` / `selected()` cont
 
 # Local Form input
 
-DOM-local Form applies effective formatters through the existing rules. Local read retains unparsed raw; validation and defaults parse separate candidates. Native reset uses effective form owners, post-default cleanup and synchronous flushing before later public/input work. FormValueContext remains Rows-backed and nonnull. See [Form local input](form.md#local-raw-input-and-native-reset) for cache, focus, image/file, native-default and disposal rules.[^form][^native]
+DOM-local Form applies effective formatters through the existing rules. Local read retains unparsed raw; validation and defaults parse separate candidates. Native reset uses effective form owners, post-default cleanup and synchronous flushing before later public/input work. ValueBindContext remains Rows-backed and nonnull. See [Form local input](form.md#local-raw-input-and-native-reset) for cache, focus, image/file, native-default and disposal rules.[^form][^native]
 
 FormHandle.defaults(): Record<string, unknown> returns detached native creation values for active adopted bindings with applicable own parsers. Initial fields capture at construction; explicit rescan captures new bindings and drops retired ones while preserving compatible captures. Static/image values and unbound business properties are excluded; it does not claim complete T. FormHandle.unbind(): void restores captured UI/files without Rows writes, drops the current association/draft and suspends automatic behavior while retaining ownership and unrelated drafts. Full bind/refresh resumes; explicit read/validate, rescan and selected refresh do not resume it. Capture, native reset and received Rows reversion remain separate. See [Form](form.md) for exact selection/node/file, failure and reentry boundaries.[^ui][^form]
 
 # Form value callbacks
 
-Rows-backed Form has separate beforeBindValue/onBindValue callbacks receiving unknown and FormValueContext. This context extends RuleContext with phase "bind" or "val", nonnull rowId and the primary bound HTMLElement. Undefined preserves the projected value; all other supported returns, including false, replace presentation without changing Rows. Local Forms reject these options. See [Form value callbacks](form.md#value-callbacks) for raw validation, caching, focus and error rules.[^ui][^form]
+Form, Grid and List have separate beforeBindValue/onBindValue callbacks receiving unknown and ValueBindContext. This context extends RuleContext with phase "bind" or "val", nonnull rowId and the primary bound HTMLElement. Undefined preserves the projected value; all other supported returns, including false, replace presentation without changing Rows. Local Forms reject these options. See [shared value callbacks](value-callbacks.md) and [Form value callbacks](form.md#value-callbacks) for raw validation, caching, focus and error rules.[^ui][^form]
 
 # Form whole-row callbacks and refresh
 

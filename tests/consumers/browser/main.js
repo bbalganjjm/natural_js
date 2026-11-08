@@ -462,6 +462,39 @@ try {
   });
   state.localForm = { container: localContainer, root: localRoot, owner: localContainer.querySelector("form"),
     form: localForm, originalSummary: localSummary };
+  {
+    const valuesRoot = document.createElement("section");
+    valuesRoot.innerHTML = `<h2>Shared collection value callbacks</h2>
+      <form><span data-field="name" data-format='[["upper"]]'></span><span data-field="active"></span>
+        <label>Form choice <select data-field="chosen" data-options="choices" data-option-label="label" data-option-value="value"></select></label></form>
+      <table><caption>Shared values</caption><thead><tr><th scope="col">Name</th><th scope="col">Active</th><th scope="col">Choice</th></tr></thead>
+        <tbody><tr data-row-template><td data-field="name" data-format='[["upper"]]'></td><td data-field="active"></td>
+          <td><label>Grid choice <select data-field="chosen" data-options="choices" data-option-label="label" data-option-value="value"></select></label></td></tr></tbody></table>
+      <ul><li data-row-template><span data-field="name" data-format='[["upper"]]'></span><span data-field="active"></span>
+        <label>List choice <select data-field="chosen" data-options="choices" data-option-label="label" data-option-value="value"></select></label></li></ul>`;
+    document.querySelector("main").append(valuesRoot);
+    const valueRows = createRows([{ name: " Ada ", active: true, chosen: 1,
+      choices: [{ label: "One", value: 1 }, { label: "Two", value: 2 }] }]);
+    const valuePolicy = { prefix: "", choice: undefined }, valueCalls = [];
+    const valueCallbacks = {
+      beforeBindValue(value, context) {
+        valueCalls.push({ callback: "before", value, context, plain: this === undefined });
+        if (context.field === "name") return valuePolicy.prefix + value.trim();
+        if (context.field === "active") return value ? "Active" : "Inactive";
+        if (context.field === "chosen") return valuePolicy.choice;
+      },
+      onBindValue(value, context) {
+        valueCalls.push({ callback: "after", value, context, plain: this === undefined });
+      }
+    };
+    const valueFormRoot = valuesRoot.querySelector("form"), valueGridRoot = valuesRoot.querySelector("table"), valueListRoot = valuesRoot.querySelector("ul");
+    const valueForm = bindForm(valueFormRoot, { rows: valueRows, ...valueCallbacks });
+    valueForm.bind(valueRows.entries()[0].id);
+    const valueGrid = bindGrid(valueGridRoot, { rows: valueRows, ...valueCallbacks });
+    const valueList = bindList(valueListRoot, { rows: valueRows, ...valueCallbacks });
+    state.collectionValues = { root: valuesRoot, roots: [valueFormRoot, valueGridRoot, valueListRoot],
+      handles: [valueForm, valueGrid, valueList], rows: valueRows, policy: valuePolicy, calls: valueCalls };
+  }
   state.incoming = createRows();
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {
     const host = document.querySelector(`[data-host="${slot}"]`);

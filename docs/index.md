@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 M5.10 shared field value callbacks](implementation/m5-collection-values-plan.md) - Project mounted Form, Grid and List values through one callback contract without changing raw data ownership. (draft)
+
 * [Natural-JS 2.0 M5.9 typed Form presets and callback composition](implementation/m5-form-presets-plan.md) - Reuse typed Form options and compose application callbacks without changing binding ownership. (draft)
 
 * [Natural-JS 2.0 M5.8 Form field rediscovery](implementation/m5-form-discovery-plan.md) - Explicitly reconcile authored Form fields while preserving retained input, data and resource ownership. (draft)

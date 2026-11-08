@@ -8,19 +8,19 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 20211f29b679ecfca737f4695d184553626066b1
+    git_blob: cb580673394aaca9d7b0b34b1794b3a1f8a08779
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics
-    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
+    git_blob: 35b8bfff7026d894082cd9471326728182066937
   - id: checks
     resource: ../../src/ui/grid-selection.ts
     title: Atomic checked-ID transitions and vetoes
@@ -48,7 +48,7 @@ sources:
   - id: demo
     resource: ../../examples/vite/m10/demo.ts
     title: Live all-options Grid and two authored record layouts
-    git_blob: c026da7f07812031e363e604265f74b7afbf6640
+    git_blob: d95fa80d55726d03ee0f90097591b35a3f3d24a5
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Unchanged flat, nested and multi-tr viewport budgets

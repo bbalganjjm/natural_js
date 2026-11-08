@@ -387,6 +387,28 @@ grace.paste@example.com	ignored phone	Support	4	false	Evening handoff	225</texta
       </section>
     </div>
 
+    <section class="future" data-value-demo aria-label="Shared field value callbacks">
+      <h2>Shared field value callbacks</h2>
+      <p>Form, Grid and List use the same value callbacks and employee Rows. This preview shows the first two records; Form shows the first. The main Grid still edits raw booleans.</p>
+      <label class="check-label"><input type="checkbox" data-value-labels checked> Show readable employment labels</label>
+      <button type="button" data-value-refresh>Refresh shared value policy</button>
+      <p>Change the policy, then refresh unchanged records. Display changes leave raw values, validation and tracked changes intact.</p>
+      <form data-value-form aria-label="Value callback Form">
+        <p><span data-field="name"></span>: <span data-field="active"></span></p>
+      </form>
+      <table data-value-grid>
+        <caption>Value callback Grid preview</caption>
+        <thead><tr><th scope="col">Employee</th><th scope="col">Employment</th></tr></thead>
+        <tbody><tr data-row-template><th scope="row" data-field="name"></th><td><span data-field="active"></span></td></tr></tbody>
+      </table>
+      <ul data-value-list aria-label="Value callback List preview">
+        <li data-row-template><span data-field="name"></span>: <span data-field="active"></span></li>
+        <li data-empty hidden>No employees</li>
+      </ul>
+      <p>Last onBindValue observation (projected value and source raw):</p>
+      <pre data-value-observer tabindex="0"></pre>
+    </section>
+
     <section class="future" data-block-demo aria-label="Authored row blocks and adjacent merges">
       <h2>Authored row blocks and adjacent merges</h2>
       <p>Each record occupies two rows in the first layout and three in the second. Edit any field in either table to update the other, including radio and checkbox groups, typed nested choices, dates and ranges. Avatars retain their authored alternative text; Team labels are rendered with an application-created strong element. Adjacent Department values merge first; Team values merge only within the same Department. Different row statuses keep separate merge cells. Store actions use the last record selected in either layout.</p>

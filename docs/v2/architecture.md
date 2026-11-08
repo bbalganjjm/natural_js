@@ -5,6 +5,10 @@ description: Small role modules, one-way imports, and evidence-based sharing kee
 tags: [architecture, modules, maintainability]
 status: draft
 sources:
+  - id: value-binding
+    resource: ../../src/ui/value-binding.ts
+    title: Private checked value invocation and native replacement shared by three binders
+    git_blob: cd12894b09ca3c9b1964f68a1b53cbc8ecc01fe4
   - id: package
     resource: ../../package.json
     title: Public package boundaries
@@ -16,15 +20,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: 2c8f6a4366287823c5dcc03aed8bb71d31ffe1fc
+    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -56,7 +60,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: be00786b8aa50a9ef64af11d5402298cdbc065b3
+    git_blob: 35b8bfff7026d894082cd9471326728182066937
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -149,10 +153,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-10-31T08:28:09Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -222,6 +226,10 @@ Controllers compose bottom-scroll, auto-loop and cancellation with native events
 
 Form/Grid/List share row-local extraction plus three small private functions in row-options.ts: option DOM/raw-map creation, Object.is occurrence selection and occurrence availability. Callers still own source caches, drafts, errors, events and cleanup. Form prepares all marked sources before direct bind and guards stale later-field work after callbacks. The detail controller delegates nested shift choices to Form instead of generating options, parsing codes or relying on subscriber order. No option-binding engine, registry, module or public API is added.[^row-options][^form][^grid][^list]
 
+## Shared field value ownership
+
+value-binding.ts captures and plain-calls the actual before/after value functions, drains asynchronous rejection, checks native scalar/array/choice replacements and runs one before-write-after sequence. Form, Grid and List retain their compiled field graph, projection slots, raw store, drafts/focus, option caches and current/generation checks. The helper owns no registry, dataset or component lifecycle. Common ValueBindContext names the existing row/field context; no-hook paths avoid field contexts and callback checkpoints.[^value-binding][^form][^grid][^list]
+
 # Related
 
 [The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [Tree](tree.md) and [DatePicker](datepicker.md) keep source and handle types together; [the authored M11 example](tree-date-example.md) connects them through the same CVC runtime. [Documents](documents.md), [Notify](notify.md) and [the application shell example](shell-example.md) complete the selected shell composition without a public shell engine. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
@@ -257,3 +265,5 @@ Form/Grid/List share row-local extraction plus three small private functions in 
 [^documents]: Dynamic authored document containers
 [^notify]: Persistent authored notifications
 [^tab-pages]: Private shared page-tab transitions and keyboard helpers
+
+[^value-binding]: Private checked value invocation and native replacement shared by three binders

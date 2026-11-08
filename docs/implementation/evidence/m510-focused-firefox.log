@@ -1,0 +1,135 @@
+
+
+Running 124 tests using 1 worker
+
+
+
+[1/124] [firefox] › tests\browser\collection-values.spec.ts:67:3 › grid value hooks preserve scalar replacements raw context and ordinary formatting
+[2/124] [firefox] › tests\browser\collection-values.spec.ts:95:3 › grid caches successful values and distinguishes committed updates from deliberate refresh
+[3/124] [firefox] › tests\browser\collection-values.spec.ts:109:3 › grid captured callbacks can read live application policy without sharing Rows
+[4/124] [firefox] › tests\browser\collection-values.spec.ts:126:3 › grid preserves typed occurrences and unmarked native choice coercion without rewriting raw selections
+[5/124] [firefox] › tests\browser\collection-values.spec.ts:144:3 › grid rechecks cached choice availability after option source changes and validates raw values
+[6/124] [firefox] › tests\browser\collection-values.spec.ts:157:3 › grid rejects invalid value callbacks before taking template Select or error ownership
+[7/124] [firefox] › tests\browser\collection-values.spec.ts:174:3 › grid preserves thrown callback causes and retries failed projections only on explicit work
+[8/124] [firefox] › tests\browser\collection-values.spec.ts:197:3 › grid rejects and drains asynchronous value results and releases failed construction
+[9/124] [firefox] › tests\browser\collection-values.spec.ts:215:3 › grid stops stale projection after nested source changes and disposal
+[10/124] [firefox] › tests\browser\collection-values.spec.ts:235:3 › grid observes mounted fields only and treats retained row reappearance as binding
+[11/124] [firefox] › tests\browser\collection-values.spec.ts:253:3 › grid stops old placement after a focus handler replaces the shared source
+[12/124] [firefox] › tests\browser\collection-values.spec.ts:67:3 › list value hooks preserve scalar replacements raw context and ordinary formatting
+[13/124] [firefox] › tests\browser\collection-values.spec.ts:95:3 › list caches successful values and distinguishes committed updates from deliberate refresh
+[14/124] [firefox] › tests\browser\collection-values.spec.ts:109:3 › list captured callbacks can read live application policy without sharing Rows
+[15/124] [firefox] › tests\browser\collection-values.spec.ts:126:3 › list preserves typed occurrences and unmarked native choice coercion without rewriting raw selections
+[16/124] [firefox] › tests\browser\collection-values.spec.ts:144:3 › list rechecks cached choice availability after option source changes and validates raw values
+[17/124] [firefox] › tests\browser\collection-values.spec.ts:157:3 › list rejects invalid value callbacks before taking template Select or error ownership
+[18/124] [firefox] › tests\browser\collection-values.spec.ts:174:3 › list preserves thrown callback causes and retries failed projections only on explicit work
+[19/124] [firefox] › tests\browser\collection-values.spec.ts:197:3 › list rejects and drains asynchronous value results and releases failed construction
+[20/124] [firefox] › tests\browser\collection-values.spec.ts:215:3 › list stops stale projection after nested source changes and disposal
+[21/124] [firefox] › tests\browser\collection-values.spec.ts:235:3 › list observes mounted fields only and treats retained row reappearance as binding
+[22/124] [firefox] › tests\browser\collection-values.spec.ts:253:3 › list stops old placement after a focus handler replaces the shared source
+[23/124] [firefox] › tests\browser\collection-values.spec.ts:277:1 › Grid value replacements preserve native grouped controls and reject invalid shapes
+[24/124] [firefox] › tests\browser\collection-values.spec.ts:293:1 › Grid editing exposes raw focus preserves invalid drafts and projects parsed committed values on blur
+[25/124] [firefox] › tests\browser\collection-values.spec.ts:310:1 › Grid viewport and progressive binding project mounted rows only and stop after disposal
+[26/124] [firefox] › tests\browser\collection-values.spec.ts:333:1 › one application policy serves Form Grid and List while lifecycle and source owners stay separate
+[27/124] [firefox] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+[28/124] [firefox] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+[29/124] [firefox] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+[30/124] [firefox] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+[31/124] [firefox] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+[32/124] [firefox] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+[33/124] [firefox] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+[34/124] [firefox] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+[35/124] [firefox] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+[36/124] [firefox] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+[37/124] [firefox] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+[38/124] [firefox] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+[39/124] [firefox] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+[40/124] [firefox] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+[41/124] [firefox] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+[42/124] [firefox] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+[43/124] [firefox] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry
+[44/124] [firefox] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+[45/124] [firefox] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+[46/124] [firefox] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+[47/124] [firefox] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+[48/124] [firefox] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+[49/124] [firefox] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+[50/124] [firefox] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation
+[51/124] [firefox] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+[52/124] [firefox] › tests\browser\form-presets.spec.ts:63:1 › frozen typed presets can be reused without mutation or shared Rows and retain application argument references
+[53/124] [firefox] › tests\browser\form-presets.spec.ts:80:1 › plain spreads distinguish omitted inheritance own undefined reset and explicit false
+[54/124] [firefox] › tests\browser\form-presets.spec.ts:96:1 › null callback overrides retain specific constructor errors before root Select or ARIA ownership
+[55/124] [firefox] › tests\browser\form-presets.spec.ts:111:1 › explicit nested map composition preserves both catalogs parsers renderers messages and field kinds
+[56/124] [firefox] › tests\browser\form-presets.spec.ts:131:1 › tuple overrides replace ordered lists and empty lists clear authored kinds without an implicit deep merge
+[57/124] [firefox] › tests\browser\form-presets.spec.ts:146:1 › captured application callbacks run as plain functions with the same frozen context and bind or val phase
+[58/124] [firefox] › tests\browser\form-presets.spec.ts:160:1 › value pipelines preserve local output and all undefined keeps unavailable loaded choices unprojected
+[59/124] [firefox] › tests\browser\form-presets.spec.ts:176:1 › false null zero and empty string remain pipeline data and false does not automatically skip shared value work
+[60/124] [firefox] › tests\browser\form-presets.spec.ts:191:1 › a conditional whole observer tail can skip shared work on false without vetoing the binding
+[61/124] [firefox] › tests\browser\form-presets.spec.ts:203:1 › the explicit legacy after recipe passes original input and can skip only its shared tail on false
+[62/124] [firefox] › tests\browser\form-presets.spec.ts:216:1 › intermediate promises and thenables are forwarded immediately for current callback rejection draining and retry
+[63/124] [firefox] › tests\browser\form-presets.spec.ts:236:1 › local and shared application throws retain existing callback errors and release guards for a fresh bind
+[64/124] [firefox] › tests\browser\form-presets.spec.ts:255:1 › temporary application values can be converted before Form checks the single callback unit result
+[65/124] [firefox] › tests\browser\form-presets.spec.ts:267:1 › a nested newer bind does not cancel an application shared tail but suppresses the older framework write
+[66/124] [firefox] › tests\browser\form-presets.spec.ts:282:1 › disposal leaves application scalar tails running while stale promise forwarding is drained without replacing a new owner
+[67/124] [firefox] › tests\browser\form-presets.spec.ts:300:1 › typed configuration stays separate from native defaults captured adoption values and received Rows originals
+[68/124] [firefox] › tests\browser\form-values.spec.ts:56:1 › Form value callbacks preserve real replacements and observe native DOM without changing Rows
+[69/124] [firefox] › tests\browser\form-values.spec.ts:93:1 › after projections run the existing formatter or renderer once more only when their raw input changes
+[70/124] [firefox] › tests\browser\form-values.spec.ts:117:1 › projection caching preserves whole-row formatter and renderer reactivity without replaying value callbacks
+[71/124] [firefox] › tests\browser\form-values.spec.ts:136:1 › callback phases follow actual field changes while unrelated rows movement nested siblings and unchanged resets stay quiet
+[72/124] [firefox] › tests\browser\form-values.spec.ts:153:1 › focused text defers explicit binding and preserves its pending reason through unchanged resets until blur
+[73/124] [firefox] › tests\browser\form-values.spec.ts:174:1 › invalid drafts never become binding events and a focused successful commit projects its new raw once on blur
+[74/124] [firefox] › tests\browser\form-values.spec.ts:191:1 › raw constraints and hidden validation ignore display projections and another row native custom validity
+[75/124] [firefox] › tests\browser\form-values.spec.ts:209:1 › parsers and business validation receive committed candidate raw while projections leave originals and save changes intact
+[76/124] [firefox] › tests\browser\form-values.spec.ts:229:1 › native groups typed duplicate choices and unmarked Selects preserve their distinct projection contracts
+[77/124] [firefox] › tests\browser\form-values.spec.ts:256:1 › undefined callbacks preserve structured display and unavailable loaded choices without normalizing their source
+[78/124] [firefox] › tests\browser\form-values.spec.ts:271:1 › callback option errors reject before Form ownership or accessibility changes and leave local Forms unchanged
+[79/124] [firefox] › tests\browser\form-values.spec.ts:292:1 › explicit invalid projections fail synchronously with automatic validation disabled and permit a fresh retry
+[80/124] [firefox] › tests\browser\form-values.spec.ts:332:1 › typed projection guards consume duplicate occurrences and reject an unavailable final replacement before its write
+[81/124] [firefox] › tests\browser\form-values.spec.ts:352:1 › cached explicit typed projections recheck changed options without replaying hooks or changing the received raw
+[82/124] [firefox] › tests\browser\form-values.spec.ts:368:1 › callback failures identify their field row phase and cause without pretending DOM binding is transactional
+[83/124] [firefox] › tests\browser\form-values.spec.ts:394:1 › different-row callback reentry completes the newer binding and rejects same-pair cycles with a recoverable error
+[84/124] [firefox] › tests\browser\form-values.spec.ts:422:1 › formatter and renderer row reentry cannot commit an older returned view over the completed new binding
+[85/124] [firefox] › tests\browser\form-values.spec.ts:443:1 › source removal null binding and replacement clear callback state without stale after work or resurrection
+[86/124] [firefox] › tests\browser\form-values.spec.ts:473:1 › disposal from either callback restores authored render nodes and suppresses every later value write
+[87/124] [firefox] › tests\browser\form-values.spec.ts:494:1 › a callback failure after a committed Rows update keeps the actual change and supports an explicit retry
+[88/124] [firefox] › tests\browser\form-values.spec.ts:509:1 › independent authored Forms share raw data with unique accessible errors and release callbacks without retained ownership
+[89/124] [firefox] › tests\browser\form-values.spec.ts:530:1 › array replacement accessors are materialized once before validation freezing and cached reuse
+[90/124] [firefox] › tests\browser\form-values.spec.ts:544:1 › same-target renderer recursion stays bounded without hooks during cached repaint and after null binding
+[91/124] [firefox] › tests\browser\form-values.spec.ts:565:1 › failed value cycles remain quiet on sibling updates until explicit binding or a real raw change retries them
+[92/124] [firefox] › tests\browser\form-values.spec.ts:583:1 › focused read-only text projects immediately while ordinary formatter-only focus behavior stays compatible
+[93/124] [firefox] › tests\browser\grid-controls.spec.ts:106:1 › radio groups with different native form owners fail before binding owns the authored table
+[94/124] [firefox] › tests\browser\grid-controls.spec.ts:128:1 › a partly hidden choice group consumes one protected paste position in mounted and offscreen rows
+[95/124] [firefox] › tests\browser\grid-controls.spec.ts:147:1 › a hidden viewport or ancestor protects mounted and offscreen paste targets equally
+[96/124] [firefox] › tests\browser\grid-controls.spec.ts:169:1 › required radio validation checks entered null before a parser can supply a raw default
+[97/124] [firefox] › tests\browser\grid-controls.spec.ts:181:1 › cross-tr native groups keep per-row values and stable identity without a native form
+[98/124] [firefox] › tests\browser\grid-controls.spec.ts:199:1 › multiple Select keeps empty and single arrays and distinguishes nested raw scalar types
+[99/124] [firefox] › tests\browser\grid-controls.spec.ts:214:1 › radio names isolate two MDI Grids and every record inside one outer form
+[100/124] [firefox] › tests\browser\grid-controls.spec.ts:239:1 › date time month week color and hidden stay strings while range uses its parser
+[101/124] [firefox] › tests\browser\grid-controls.spec.ts:253:1 › native value sanitization reports stored invalid values without silently rewriting them
+[102/124] [firefox] › tests\browser\grid-controls.spec.ts:274:1 › blur defers scalar commits and commits group and Select changes exactly once
+[103/124] [firefox] › tests\browser\grid-controls.spec.ts:292:1 › manual timing retains scalar radio checkbox and Select drafts until explicit validate
+[104/124] [firefox] › tests\browser\grid-controls.spec.ts:309:1 › Enter commits one scalar but composition modifiers and textarea Enter remain native
+[105/124] [firefox] › tests\browser\grid-controls.spec.ts:329:1 › quoted JSON array TSV applies two logical rows atomically and preserves unrelated drafts
+[106/124] [firefox] › tests\browser\grid-controls.spec.ts:344:1 › typed array paste preserves Object.is identity for negative and positive zero
+[107/124] [firefox] › tests\browser\grid-controls.spec.ts:360:1 › invalid JSON arrays unavailable choices and radio values reject the entire paste
+[108/124] [firefox] › tests\browser\grid-controls.spec.ts:378:1 › offscreen array paste keeps the two-tr viewport bounded and a focused draft attached
+[109/124] [firefox] › tests\browser\grid-controls.spec.ts:398:1 › partially disabled readonly or inert groups consume one protected logical position
+[110/124] [firefox] › tests\browser\grid-controls.spec.ts:413:1 › Grid Form and List apply programmatic text lengths and authored disabled constraints consistently
+[111/124] [firefox] › tests\browser\grid-controls.spec.ts:432:1 › only own parser and renderer keys are invoked including a field named toString
+[112/124] [firefox] › tests\browser\grid-controls.spec.ts:455:1 › images preserve alt and explicit Grid and Form renderers use fresh DOM or literal text
+[113/124] [firefox] › tests\browser\grid-controls.spec.ts:486:1 › merged render output stays display-only while ordinary display can render native interactive nodes
+[114/124] [firefox] › tests\browser\grid-controls.spec.ts:519:1 › invalid render targets fail before taking Grid Form or nested Select ownership
+[115/124] [firefox] › tests\browser\grid-controls.spec.ts:541:1 › connected foreign reused and asynchronous render nodes reject with exact binding recovery
+[116/124] [firefox] › tests\browser\grid-controls.spec.ts:574:1 › revealing the first error removes stale element references from other released invalid rows
+[117/124] [firefox] › tests\browser\grid-controls.spec.ts:592:1 › validation and rejected paste reveal the current-page invalid row and return connected focused fields
+[118/124] [firefox] › tests\browser\grid-controls.spec.ts:613:1 › off-page and filtered validation keeps the application page filter and focus unchanged
+[119/124] [firefox] › tests\browser\grid-controls.spec.ts:628:1 › single checks remain independent in two accessible MDI Grids and disposal restores authored DOM
+[120/124] [firefox] › tests\browser\list.spec.ts:13:1 › authored list keeps nested raw choices and RowId selection through sort, filter, and page
+[121/124] [firefox] › tests\browser\list.spec.ts:101:1 › List validates hidden rows and links errors without changing raw data
+[122/124] [firefox] › tests\browser\list.spec.ts:164:1 › List rejects duplicate template IDs before mutation
+[123/124] [firefox] › tests\browser\list.spec.ts:184:1 › List multiple Select validation requires a raw array
+[124/124] [firefox] › tests\browser\m510-values-demo.spec.ts:4:1 › shared value policy refresh updates the authored Form Grid and List preview without writing Rows
+  124 passed (1.4m)
+[WebServer] (node:3720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:3188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

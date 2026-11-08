@@ -1,0 +1,32 @@
+{"shard":1,"passed":71,"identities_match":true,"retries":0,"skips":0}
+{"shard":2,"passed":90,"identities_match":true,"retries":0,"skips":0}
+{"shard":3,"passed":49,"identities_match":true,"retries":0,"skips":0}
+{"shard":4,"passed":58,"identities_match":true,"retries":0,"skips":0}
+{"shard":5,"passed":76,"identities_match":true,"retries":0,"skips":0}
+{"shard":6,"passed":54,"identities_match":true,"retries":0,"skips":0}
+{"shard":7,"passed":74,"identities_match":true,"retries":0,"skips":0}
+{"shard":8,"passed":59,"identities_match":true,"retries":0,"skips":0}
+{"shard":9,"passed":69,"identities_match":true,"retries":0,"skips":0}
+{"shard":10,"passed":62,"identities_match":true,"retries":0,"skips":0}
+{"shard":11,"passed":67,"identities_match":true,"retries":0,"skips":0}
+{"shard_manifest":"m510-chromium-shards.json","sha256":"c5a530980318a165ee9f0fee65f5bd14de8897fdf86e4f2065dc0f168bac18cc","complete":false}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Failed Chromium run-12
+
+1 !== 0
+
+    at command (file:///D:/workspace/natural_js/docs/implementation/evidence/m510-chromium-shards.mjs:18:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///D:/workspace/natural_js/docs/implementation/evidence/m510-chromium-shards.mjs:31:16 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

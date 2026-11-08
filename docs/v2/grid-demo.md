@@ -5,6 +5,10 @@ description: Inspect committed field changes, loaded originals and edited deleti
 tags: [ui, grid, example, accessibility]
 status: draft
 sources:
+  - id: value-demo-browser
+    resource: ../../tests/browser/m510-values-demo.spec.ts
+    title: Shared policy preview, raw storage and keyboard refresh regression
+    git_blob: dac3dd537c659b498634261e7e0a7071c4358c8e
   - id: scroll
     resource: ../../examples/vite/m10/scroll-boundary.ts
     title: Page-owned native wheel boundary composition
@@ -32,15 +36,15 @@ sources:
   - id: view
     resource: ../../examples/vite/m10/demo.html
     title: Authored table, controls, and observation panels
-    git_blob: ada1c52168781751bf266a776ec5824d6ff3dfbe
+    git_blob: 2f82cf45b1ea723aecf564d396d1a959a688f737
   - id: controller
     resource: ../../examples/vite/m10/demo.ts
     title: Grid options, calls, and Rows state
-    git_blob: c026da7f07812031e363e604265f74b7afbf6640
+    git_blob: d95fa80d55726d03ee0f90097591b35a3f3d24a5
   - id: detail-controller
     resource: ../../examples/vite/m10/detail.ts
     title: One authored employee detail page in main content and Popup
-    git_blob: 9d474350f98980252acf1bf5174a9f42f5c419bd
+    git_blob: 913acc81719d1f39fbcdf128707dc59337c88cfa
   - id: style
     resource: ../../examples/vite/m10/demo.css
     title: Responsive demo styling
@@ -80,7 +84,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 5e10c04d83d3bfd8059013675d3037d91a0a3e02
+    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -116,11 +120,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 5f8b4b111ecafa7737c55f3bc3358f10e5de1cd3
-generated: { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+    git_blob: b03e5d6328d64698689621724492dc4e66292737
+generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-07T05:59:35Z }
+  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -312,6 +316,12 @@ Remaining Grid parity stays required follow-up work. Status/default/lifecycle, c
 
 Without `initialPage`, `viewport` or `progressive`, Grid creates all initial row clones. Local paging bounds the logical page; viewport bounds connected DOM and keeps page-wide check/range/paste semantics. The scroll root needs finite authored height and stable table/column widths; its estimate does not force fixed-height rows. Interactive use is not a controlled performance measurement. Rebinding for locale, initial page, mode or eligibility policy also discards active identity, selected/checked sets and uncommitted drafts. Use `setSelected([])` or `setChecked([])` to clear a complete set; `select(null)` clears only the active row. Keep the check checkbox separate from `data-field`, do not send `RowId` as a business key, and do not put a fixed `id` in a repeated row.[^grid][^controller][^selection][^viewport]
 
+# Shared value policy preview
+
+The authored Shared field value callbacks section binds the same employee Rows through a Form, a two-record Grid and a two-record List. It reuses employmentValue from the existing detail controller to show Active/Inactive only on static spans; the main Grid's native checkbox still edits a boolean. One explicit application callback pair reads the Show readable employment labels checkbox and reports the latest after-value context. Refresh shared value policy calls all three refresh owners without replacing their store or tracked values.[^controller][^detail-controller][^value-demo-browser]
+
+Changing policy alone does not invalidate cached unchanged projections. The next actual value change or explicit refresh reads the new policy. This example adds no global configuration API. The reduced CVC detail retains the same employment label rule.[^controller][^detail-controller][^value-demo-browser]
+
 # Related
 
 [^selection-evidence]: Final M10.6 source, package, browser and performance record
@@ -338,3 +348,5 @@ The Rows controls include Load received row states and Append received changes. 
 
 [^scroll]: Page-owned native wheel boundary composition
 [^pinned-browser]: Pin controls, reduced details and trusted native wheel regressions
+
+[^value-demo-browser]: Shared policy preview, raw storage and keyboard refresh regression

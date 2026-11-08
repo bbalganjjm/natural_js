@@ -2,7 +2,7 @@
 import { fileURLToPath } from "node:url";
 import { expect, test } from "@playwright/test";
 import type { RowId, Rows } from "../../src/data/index.js";
-import type { FormBindContext, FormHandle, FormOptions, FormValueContext } from "../../src/ui/index.js";
+import type { FormBindContext, FormHandle, FormOptions, ValueBindContext } from "../../src/ui/index.js";
 import type { bindForm } from "../../src/ui/form.js";
 import type { bindSelect } from "../../src/ui/select.js";
 
@@ -145,7 +145,7 @@ test("tuple overrides replace ordered lists and empty lists clear authored kinds
 
 test("captured application callbacks run as plain functions with the same frozen context and bind or val phase", async ({ page }) => {
   const result = await page.evaluate(() => {
-    const h = window.formPresets, root = h.root('<input data-field="name">'), records: unknown[] = []; let context: FormValueContext | undefined;
+    const h = window.formPresets, root = h.root('<input data-field="name">'), records: unknown[] = []; let context: ValueBindContext | undefined;
     const local: ValueCallback = function(this: unknown, value, current) { "use strict"; context = current; records.push(["local", this === undefined, current.phase, current.values.name, Object.isFrozen(current)]); return `${value}:local`; };
     let shared: ValueCallback = function(this: unknown, value, current) { "use strict"; records.push(["shared", this === undefined, current === context, current.phase, value]); return `${value}:shared`; };
     const callback = h.pipeline(local, shared); shared = () => "Mutated reference";
