@@ -8,11 +8,11 @@ sources:
   - id: continuation
     resource: m10-parity-plan.md
     title: Required Grid continuation and prior ordered Rows gates
-    git_blob: cb580673394aaca9d7b0b34b1794b3a1f8a08779
+    git_blob: 3109af1dc7ebd2dad24a6514f7b5fc5afd93d2df
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding, logical identities, drafts and paste
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Authored column topology and layout ownership

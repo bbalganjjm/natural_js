@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-state-plan.md
     title: Completed received-state continuation
-    git_blob: 638a405523bc6fa653da34448d2866771ab4a78d
+    git_blob: 2372a9239278c7eb180cecaec7fa7a8a4762d378
   - id: baseline
     resource: evidence/m52-verification.json
     title: Preserved 4660cd6 source and runtime evidence
@@ -24,7 +24,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid raw option maps and validation
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: list
     resource: ../../src/ui/list.ts
     title: List raw option maps and occurrence-based selection

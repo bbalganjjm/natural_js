@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid rendering, row identity, draft, and lifecycle behavior
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract

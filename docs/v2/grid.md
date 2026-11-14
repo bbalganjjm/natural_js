@@ -6,6 +6,10 @@ tags: [ui, grid, binding, accessibility]
 status: draft
 symbols: [bindGrid, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice]
 sources:
+  - id: callbacks-browser
+    resource: ../../tests/browser/grid-callbacks.spec.ts
+    title: Captured references, plain receivers, attachment and live policy regressions
+    git_blob: 543182bdd2d9fbb490b216e56e608e0fd3e2e31e
   - id: values-browser
     resource: ../../tests/browser/collection-values.spec.ts
     title: Shared mounted value projection, raw editing and lifetime regressions
@@ -37,7 +41,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -65,7 +69,7 @@ sources:
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private synchronous row binding and resource ownership
-    git_blob: 628b69014fd77f0f18e5e8c84d2953c1a9401bb9
+    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, callbacks, cleanup, empty state and failure regressions
@@ -126,10 +130,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -434,6 +438,10 @@ Releases row-owned resources, removes delegated listeners and mounted clones, un
 
 ## Row binding and owned resources
 
+Grid reads beforeRowBind, onRowBind and onBind once at construction, validates those references and calls them as plain functions without an implicit receiver. For an ordinary unbound ESM/strict function, this is undefined. Later replacement, deletion or addition on the original options object cannot reconfigure an existing Grid. Frozen options can be reused; each instance captures its own construction values. This rule covers these three binding callbacks and the separately documented value callbacks, not every Grid option.[^grid][^hooks][^callbacks-browser]
+
+For deliberately live behavior, pass a stable forwarding function such as onRowBind: context => policy.row?.(context), then change application-owned policy. Explicit refresh rebinds unchanged mounted rows. Existing source/disposal checks surround the complete forwarding function, not each application subcall. Use context.row/elements/own and explicit closures rather than a this receiver. This preserves data, cleanup and completion ownership without an implicit callback registry.[^grid][^hooks][^callbacks-browser]
+
 `beforeRowBind` and `onRowBind` receive a frozen context containing the immutable `row` snapshot, a readonly `elements` array for the complete physical tr block, and `own(dispose)`. Before runs on physical rows attached to their table before their field values; after runs after field binding and, in synchronous mode, final placement. During cooperative work the record is attached and fully bound, but shared placement/merge geometry commits at the chunk boundary before onBind. Read final chunk layout from completion rather than onRowBind. The rows are document-connected only when the table root is connected. Standalone detached tables are supported; connect the root before initializing or measuring layout-dependent widgets. Hooks run for changed mounted snapshots, remounted records and explicit refresh, not unchanged rows or movement alone. The table is already claimed before the first hook. Return values do not veto binding; asynchronous callbacks or cleanup are rejected and their promises consumed.[^hooks][^grid][^lifecycle-browser]
 
 Keep compiled field nodes, record structure and column topology intact. These callbacks connect application behavior; they do not recompile arbitrary per-row binding markup. Use the explicit display renderer for its owned target and register widget cleanup with `own`.
@@ -655,6 +663,7 @@ A CSS-only font/line-height reduction that leaves table and scroll-root dimensio
 [^owner]: Shared Select ownership
 [^scroll-example]: Page-owned wheel boundary composition
 [^hooks]: Private synchronous row binding and resource ownership
+[^callbacks-browser]: Captured references, plain receivers, attachment and live policy regressions
 [^lifecycle-browser]: Status, defaults, callbacks, cleanup, empty state and failure regressions
 [^defaults]: Private shared native creation record and parser builder
 

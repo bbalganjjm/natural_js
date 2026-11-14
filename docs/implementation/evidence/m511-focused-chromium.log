@@ -1,0 +1,2653 @@
+
+
+Running 126 tests using 1 worker
+
+
+
+[1/126] [chromium] › tests\browser\collection-values.spec.ts:67:3 › grid value hooks preserve scalar replacements raw context and ordinary formatting
+  1) [chromium] › tests\browser\collection-values.spec.ts:67:3 › grid value hooks preserve scalar replacements raw context and ordinary formatting 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-val-8045f-ext-and-ordinary-formatting-chromium\error-context.md
+
+
+
+
+[2/126] [chromium] › tests\browser\collection-values.spec.ts:95:3 › grid caches successful values and distinguishes committed updates from deliberate refresh
+  2) [chromium] › tests\browser\collection-values.spec.ts:95:3 › grid caches successful values and distinguishes committed updates from deliberate refresh 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-cac-fc964-tes-from-deliberate-refresh-chromium\error-context.md
+
+
+
+
+[3/126] [chromium] › tests\browser\collection-values.spec.ts:109:3 › grid captured callbacks can read live application policy without sharing Rows
+  3) [chromium] › tests\browser\collection-values.spec.ts:109:3 › grid captured callbacks can read live application policy without sharing Rows 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-cap-2baf5-policy-without-sharing-Rows-chromium\error-context.md
+
+
+
+
+[4/126] [chromium] › tests\browser\collection-values.spec.ts:126:3 › grid preserves typed occurrences and unmarked native choice coercion without rewriting raw selections
+  4) [chromium] › tests\browser\collection-values.spec.ts:126:3 › grid preserves typed occurrences and unmarked native choice coercion without rewriting raw selections 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-pre-bb811-ut-rewriting-raw-selections-chromium\error-context.md
+
+
+
+
+[5/126] [chromium] › tests\browser\collection-values.spec.ts:144:3 › grid rechecks cached choice availability after option source changes and validates raw values
+  5) [chromium] › tests\browser\collection-values.spec.ts:144:3 › grid rechecks cached choice availability after option source changes and validates raw values 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-rec-3ab7c-es-and-validates-raw-values-chromium\error-context.md
+
+
+
+
+[6/126] [chromium] › tests\browser\collection-values.spec.ts:157:3 › grid rejects invalid value callbacks before taking template Select or error ownership
+  6) [chromium] › tests\browser\collection-values.spec.ts:157:3 › grid rejects invalid value callbacks before taking template Select or error ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-rej-302d1-e-Select-or-error-ownership-chromium\error-context.md
+
+
+
+
+[7/126] [chromium] › tests\browser\collection-values.spec.ts:174:3 › grid preserves thrown callback causes and retries failed projections only on explicit work
+  7) [chromium] › tests\browser\collection-values.spec.ts:174:3 › grid preserves thrown callback causes and retries failed projections only on explicit work 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-pre-28464-tions-only-on-explicit-work-chromium\error-context.md
+
+
+
+
+[8/126] [chromium] › tests\browser\collection-values.spec.ts:197:3 › grid rejects and drains asynchronous value results and releases failed construction
+  8) [chromium] › tests\browser\collection-values.spec.ts:197:3 › grid rejects and drains asynchronous value results and releases failed construction 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-rej-5f0f3-eleases-failed-construction-chromium\error-context.md
+
+
+
+
+[9/126] [chromium] › tests\browser\collection-values.spec.ts:215:3 › grid stops stale projection after nested source changes and disposal
+  9) [chromium] › tests\browser\collection-values.spec.ts:215:3 › grid stops stale projection after nested source changes and disposal 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-sto-b9e02-source-changes-and-disposal-chromium\error-context.md
+
+
+
+
+[10/126] [chromium] › tests\browser\collection-values.spec.ts:235:3 › grid observes mounted fields only and treats retained row reappearance as binding
+  10) [chromium] › tests\browser\collection-values.spec.ts:235:3 › grid observes mounted fields only and treats retained row reappearance as binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-obs-cc0e0-row-reappearance-as-binding-chromium\error-context.md
+
+
+
+
+[11/126] [chromium] › tests\browser\collection-values.spec.ts:253:3 › grid stops old placement after a focus handler replaces the shared source
+  11) [chromium] › tests\browser\collection-values.spec.ts:253:3 › grid stops old placement after a focus handler replaces the shared source 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-grid-sto-cc038--replaces-the-shared-source-chromium\error-context.md
+
+
+
+
+[12/126] [chromium] › tests\browser\collection-values.spec.ts:67:3 › list value hooks preserve scalar replacements raw context and ordinary formatting
+  12) [chromium] › tests\browser\collection-values.spec.ts:67:3 › list value hooks preserve scalar replacements raw context and ordinary formatting 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-val-3e778-ext-and-ordinary-formatting-chromium\error-context.md
+
+
+
+
+[13/126] [chromium] › tests\browser\collection-values.spec.ts:95:3 › list caches successful values and distinguishes committed updates from deliberate refresh
+  13) [chromium] › tests\browser\collection-values.spec.ts:95:3 › list caches successful values and distinguishes committed updates from deliberate refresh 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-cac-cb2e6-tes-from-deliberate-refresh-chromium\error-context.md
+
+
+
+
+[14/126] [chromium] › tests\browser\collection-values.spec.ts:109:3 › list captured callbacks can read live application policy without sharing Rows
+  14) [chromium] › tests\browser\collection-values.spec.ts:109:3 › list captured callbacks can read live application policy without sharing Rows 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-cap-15fe3-policy-without-sharing-Rows-chromium\error-context.md
+
+
+
+
+[15/126] [chromium] › tests\browser\collection-values.spec.ts:126:3 › list preserves typed occurrences and unmarked native choice coercion without rewriting raw selections
+  15) [chromium] › tests\browser\collection-values.spec.ts:126:3 › list preserves typed occurrences and unmarked native choice coercion without rewriting raw selections 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-pre-83fe4-ut-rewriting-raw-selections-chromium\error-context.md
+
+
+
+
+[16/126] [chromium] › tests\browser\collection-values.spec.ts:144:3 › list rechecks cached choice availability after option source changes and validates raw values
+  16) [chromium] › tests\browser\collection-values.spec.ts:144:3 › list rechecks cached choice availability after option source changes and validates raw values 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-rec-c3bc0-es-and-validates-raw-values-chromium\error-context.md
+
+
+
+
+[17/126] [chromium] › tests\browser\collection-values.spec.ts:157:3 › list rejects invalid value callbacks before taking template Select or error ownership
+  17) [chromium] › tests\browser\collection-values.spec.ts:157:3 › list rejects invalid value callbacks before taking template Select or error ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-rej-47403-e-Select-or-error-ownership-chromium\error-context.md
+
+
+
+
+[18/126] [chromium] › tests\browser\collection-values.spec.ts:174:3 › list preserves thrown callback causes and retries failed projections only on explicit work
+  18) [chromium] › tests\browser\collection-values.spec.ts:174:3 › list preserves thrown callback causes and retries failed projections only on explicit work 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-pre-e974e-tions-only-on-explicit-work-chromium\error-context.md
+
+
+
+
+[19/126] [chromium] › tests\browser\collection-values.spec.ts:197:3 › list rejects and drains asynchronous value results and releases failed construction
+  19) [chromium] › tests\browser\collection-values.spec.ts:197:3 › list rejects and drains asynchronous value results and releases failed construction 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-rej-0494c-eleases-failed-construction-chromium\error-context.md
+
+
+
+
+[20/126] [chromium] › tests\browser\collection-values.spec.ts:215:3 › list stops stale projection after nested source changes and disposal
+  20) [chromium] › tests\browser\collection-values.spec.ts:215:3 › list stops stale projection after nested source changes and disposal 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-sto-6af5b-source-changes-and-disposal-chromium\error-context.md
+
+
+
+
+[21/126] [chromium] › tests\browser\collection-values.spec.ts:235:3 › list observes mounted fields only and treats retained row reappearance as binding
+  21) [chromium] › tests\browser\collection-values.spec.ts:235:3 › list observes mounted fields only and treats retained row reappearance as binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-obs-da8fe-row-reappearance-as-binding-chromium\error-context.md
+
+
+
+
+[22/126] [chromium] › tests\browser\collection-values.spec.ts:253:3 › list stops old placement after a focus handler replaces the shared source
+  22) [chromium] › tests\browser\collection-values.spec.ts:253:3 › list stops old placement after a focus handler replaces the shared source 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-list-sto-be0bb--replaces-the-shared-source-chromium\error-context.md
+
+
+
+
+[23/126] [chromium] › tests\browser\collection-values.spec.ts:277:1 › Grid value replacements preserve native grouped controls and reject invalid shapes
+  23) [chromium] › tests\browser\collection-values.spec.ts:277:1 › Grid value replacements preserve native grouped controls and reject invalid shapes 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-Grid-val-0b4fc-s-and-reject-invalid-shapes-chromium\error-context.md
+
+
+
+
+[24/126] [chromium] › tests\browser\collection-values.spec.ts:293:1 › Grid editing exposes raw focus preserves invalid drafts and projects parsed committed values on blur
+  24) [chromium] › tests\browser\collection-values.spec.ts:293:1 › Grid editing exposes raw focus preserves invalid drafts and projects parsed committed values on blur 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-Grid-edi-f9d23-ed-committed-values-on-blur-chromium\error-context.md
+
+
+
+
+[25/126] [chromium] › tests\browser\collection-values.spec.ts:310:1 › Grid viewport and progressive binding project mounted rows only and stop after disposal
+  25) [chromium] › tests\browser\collection-values.spec.ts:310:1 › Grid viewport and progressive binding project mounted rows only and stop after disposal 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-Grid-vie-09dea-nly-and-stop-after-disposal-chromium\error-context.md
+
+
+
+
+[26/126] [chromium] › tests\browser\collection-values.spec.ts:333:1 › one application policy serves Form Grid and List while lifecycle and source owners stay separate
+  26) [chromium] › tests\browser\collection-values.spec.ts:333:1 › one application policy serves Form Grid and List while lifecycle and source owners stay separate 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\collection-values-one-appl-39b53-source-owners-stay-separate-chromium\error-context.md
+
+
+
+
+[27/126] [chromium] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+  27) [chromium] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-whole-Form-ho-46913-ut-treating-false-as-a-veto-chromium\error-context.md
+
+
+
+
+[28/126] [chromium] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+  28) [chromium] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-full-Form-ref-9a585-ield-suppresses-whole-hooks-chromium\error-context.md
+
+
+
+
+[29/126] [chromium] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+  29) [chromium] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-whole-hook-op-44332--or-accessibility-ownership-chromium\error-context.md
+
+
+
+
+[30/126] [chromium] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+  30) [chromium] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-a-failing-bef-d04e7-errors-before-a-later-retry-chromium\error-context.md
+
+
+
+
+[31/126] [chromium] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+  31) [chromium] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-a-failing-aft-e9c21-eleases-its-guard-for-retry-chromium\error-context.md
+
+
+
+
+[32/126] [chromium] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+  32) [chromium] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-whole-hooks-r-908ba-rmit-a-synchronous-recovery-chromium\error-context.md
+
+
+
+
+[33/126] [chromium] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+  33) [chromium] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-a-superseded--ff093-rwriting-the-nested-binding-chromium\error-context.md
+
+
+
+
+[34/126] [chromium] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+  34) [chromium] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-unchanged-cur-68759-aying-unchanged-value-hooks-chromium\error-context.md
+
+
+
+
+[35/126] [chromium] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+  35) [chromium] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-revert-commit-6994a-ails-before-visible-changes-chromium\error-context.md
+
+
+
+
+[36/126] [chromium] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+  36) [chromium] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-keyed-edits-v-e69f1-ngs-do-not-emit-whole-hooks-chromium\error-context.md
+
+
+
+
+[37/126] [chromium] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+  37) [chromium] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-a-source-muta-7f986-resses-its-stale-after-hook-chromium\error-context.md
+
+
+
+
+[38/126] [chromium] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+  38) [chromium] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-a-completed-d-bbe80--without-a-stale-after-hook-chromium\error-context.md
+
+
+
+
+[39/126] [chromium] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+  39) [chromium] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-same-row-and--eeb02-g-the-next-explicit-binding-chromium\error-context.md
+
+
+
+
+[40/126] [chromium] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+  40) [chromium] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-disposal-duri-90703-ooks-and-releases-ownership-chromium\error-context.md
+
+
+
+
+[41/126] [chromium] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+  41) [chromium] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-formatter-and-91933-an-older-view-or-after-hook-chromium\error-context.md
+
+
+
+
+[42/126] [chromium] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+  42) [chromium] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-a-renderer-ca-f08ff-mplete-the-older-whole-pass-chromium\error-context.md
+
+
+
+
+[43/126] [chromium] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry
+  43) [chromium] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-whole-Form-re-8be59-sive-hook-refresh-and-retry-chromium\error-context.md
+
+
+
+
+[44/126] [chromium] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+  44) [chromium] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-whole-after-h-3cd90-fer-focused-text-projection-chromium\error-context.md
+
+
+
+
+[45/126] [chromium] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+  45) [chromium] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-selected-refr-aa033-compiled-paths-in-DOM-order-chromium\error-context.md
+
+
+
+
+[46/126] [chromium] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+  46) [chromium] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-selected-refr-4947b-adonly-projection-immediate-chromium\error-context.md
+
+
+
+
+[47/126] [chromium] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+  47) [chromium] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-selected-type-971bb-ed-source-before-any-writer-chromium\error-context.md
+
+
+
+
+[48/126] [chromium] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+  48) [chromium] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-selected-refr-bb1e9-dating-or-committing-inputs-chromium\error-context.md
+
+
+
+
+[49/126] [chromium] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+  49) [chromium] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-local-selecte-cdea6-and-validation-errors-alone-chromium\error-context.md
+
+
+
+
+[50/126] [chromium] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation
+  50) [chromium] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-an-empty-loca-91467-lected-writes-or-validation-chromium\error-context.md
+
+
+
+
+[51/126] [chromium] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+  51) [chromium] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\form-binding-unbound-selec-62bdd-and-never-emits-whole-hooks-chromium\error-context.md
+
+
+
+
+[52/126] [chromium] › tests\browser\grid-callbacks.spec.ts:40:1 › binding callbacks read their getters once and invoke captured functions without a receiver
+  52) [chromium] › tests\browser\grid-callbacks.spec.ts:40:1 › binding callbacks read their getters once and invoke captured functions without a receiver 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-binding-cal-75271-unctions-without-a-receiver-chromium\error-context.md
+
+
+
+
+[53/126] [chromium] › tests\browser\grid-callbacks.spec.ts:66:1 › replacing deleting or invalidating original callback properties preserves the captured handlers
+  53) [chromium] › tests\browser\grid-callbacks.spec.ts:66:1 › replacing deleting or invalidating original callback properties preserves the captured handlers 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-replacing-d-be187-erves-the-captured-handlers-chromium\error-context.md
+
+
+
+
+[54/126] [chromium] › tests\browser\grid-callbacks.spec.ts:79:1 › callbacks absent at construction cannot be installed through later option mutation
+  54) [chromium] › tests\browser\grid-callbacks.spec.ts:79:1 › callbacks absent at construction cannot be installed through later option mutation 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-callbacks-a-be0ca-rough-later-option-mutation-chromium\error-context.md
+
+
+
+
+[55/126] [chromium] › tests\browser\grid-callbacks.spec.ts:90:1 › deleting the original before hook during its first row preserves later attached pre-bind rows
+  55) [chromium] › tests\browser\grid-callbacks.spec.ts:90:1 › deleting the original before hook during its first row preserves later attached pre-bind rows 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-deleting-th-499b3-ater-attached-pre-bind-rows-chromium\error-context.md
+
+
+
+
+[56/126] [chromium] › tests\browser\grid-callbacks.spec.ts:104:1 › mutating after and completion options inside the first before hook cannot replace this binding
+  56) [chromium] › tests\browser\grid-callbacks.spec.ts:104:1 › mutating after and completion options inside the first before hook cannot replace this binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-mutating-af-56400-cannot-replace-this-binding-chromium\error-context.md
+
+
+
+
+[57/126] [chromium] › tests\browser\grid-callbacks.spec.ts:119:1 › frozen shared callbacks and frozen instance options keep two Rows and resource owners independent
+  57) [chromium] › tests\browser\grid-callbacks.spec.ts:119:1 › frozen shared callbacks and frozen instance options keep two Rows and resource owners independent 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-frozen-shar-ea4bc-resource-owners-independent-chromium\error-context.md
+
+
+
+
+[58/126] [chromium] › tests\browser\grid-callbacks.spec.ts:139:1 › stable application forwarding callbacks read current policy on explicit refresh
+  58) [chromium] › tests\browser\grid-callbacks.spec.ts:139:1 › stable application forwarding callbacks read current policy on explicit refresh 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-stable-appl-7d5d7--policy-on-explicit-refresh-chromium\error-context.md
+
+
+
+
+[59/126] [chromium] › tests\browser\grid-callbacks.spec.ts:157:1 › progressive chunks keep captured callbacks while explicit policy changes reach later chunks
+  59) [chromium] › tests\browser\grid-callbacks.spec.ts:157:1 › progressive chunks keep captured callbacks while explicit policy changes reach later chunks 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-callbacks-progressive-f04c1--changes-reach-later-chunks-chromium\error-context.md
+
+
+
+
+[60/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+  60) [chromium] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-every-physi-eeb39-ithout-owning-visual-design-chromium\error-context.md
+
+
+
+
+[61/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+  61) [chromium] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-status-filt-24d5f-s-preserve-the-current-view-chromium\error-context.md
+
+
+
+
+[62/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+  62) [chromium] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-retained-de-ad187-ndo-actions-retain-identity-chromium\error-context.md
+
+
+
+
+[63/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+  63) [chromium] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-deleted-row-ce8c0-unted-and-offscreen-records-chromium\error-context.md
+
+
+
+
+[64/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+  64) [chromium] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-native-merg-4e114--and-recompute-after-revert-chromium\error-context.md
+
+
+
+
+[65/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+  65) [chromium] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-committed-p-5fb97-en-a-deleted-row-hook-fails-chromium\error-context.md
+
+
+
+
+[66/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+  66) [chromium] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-failed-page-ae363-backs-append-new-clean-rows-chromium\error-context.md
+
+
+
+
+[67/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+  67) [chromium] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-failed-refr-875a5-er-binding-caches-are-reset-chromium\error-context.md
+
+
+
+
+[68/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+  68) [chromium] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-deleting-a--bac5f--an-enabled-visible-control-chromium\error-context.md
+
+
+
+
+[69/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+  69) [chromium] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-a-before-ro-be5e2--it-after-revert-or-refresh-chromium\error-context.md
+
+
+
+
+[70/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+  70) [chromium] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-status-proj-89334-pes-retain-live-eligibility-chromium\error-context.md
+
+
+
+
+[71/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+  71) [chromium] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-defaults-pr-e30ac-ut-claiming-business-fields-chromium\error-context.md
+
+
+
+
+[72/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+  72) [chromium] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-default-par-14259-write-Rows-or-source-markup-chromium\error-context.md
+
+
+
+
+[73/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+  73) [chromium] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-default-par-f098b--fail-without-changing-data-chromium\error-context.md
+
+
+
+
+[74/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+  74) [chromium] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-row-hooks-s-c1ee2--resources-in-reverse-order-chromium\error-context.md
+
+
+
+
+[75/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+  75) [chromium] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-the-table-i-c4885-first-application-hook-runs-chromium\error-context.md
+
+
+
+
+[76/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+  76) [chromium] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-owned-widge-91120-ved-on-release-and-disposal-chromium\error-context.md
+
+
+
+
+[77/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+  77) [chromium] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-failed-init-81515--Select-and-table-ownership-chromium\error-context.md
+
+
+
+
+[78/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+  78) [chromium] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-asynchronou-5677c-mises-or-stranded-ownership-chromium\error-context.md
+
+
+
+
+[79/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+  79) [chromium] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-row-hook-da-40244-ready-committed-inner-write-chromium\error-context.md
+
+
+
+
+[80/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+  80) [chromium] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-direct-recu-c7ce4-d-later-refresh-can-recover-chromium\error-context.md
+
+
+
+
+[81/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+  81) [chromium] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-disposal-in-7fc20--no-late-rollback-mutations-chromium\error-context.md
+
+
+
+
+[82/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+  82) [chromium] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-cleanup-fai-b0893-sposal-or-correct-rebinding-chromium\error-context.md
+
+
+
+
+[83/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+  83) [chromium] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-own-stays-v-f3857-es-registered-after-closure-chromium\error-context.md
+
+
+
+
+[84/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+  84) [chromium] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-onBind-dist-14c90-and-reports-retained-totals-chromium\error-context.md
+
+
+
+
+[85/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+  85) [chromium] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-post-bind-f-fab48--blocking-other-subscribers-chromium\error-context.md
+
+
+
+
+[86/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+  86) [chromium] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-viewport-re-980a3-valid-draft-and-bounded-DOM-chromium\error-context.md
+
+
+
+
+[87/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+  87) [chromium] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-authored-em-a4da8-ns-focus-and-exact-teardown-chromium\error-context.md
+
+
+
+
+[88/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+  88) [chromium] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-ambiguous-o-bf6e9-arkup-or-claiming-the-table-chromium\error-context.md
+
+
+
+
+[89/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+  89) [chromium] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-lifecycle-two-authore-1767f-state-and-remain-accessible-chromium\error-context.md
+
+
+
+
+[90/126] [chromium] › tests\browser\grid-progressive.spec.ts:130:1 › default binding has one frozen eight-field completion and exhausted calls do not repeat it
+  90) [chromium] › tests\browser\grid-progressive.spec.ts:130:1 › default binding has one frozen eight-field completion and exhausted calls do not repeat it 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-default-b-d2802-sted-calls-do-not-repeat-it-chromium\error-context.md
+
+
+
+
+[91/126] [chromium] › tests\browser\grid-progressive.spec.ts:144:1 › empty single exact and remainder boundaries count logical chunks and first last flags
+  91) [chromium] › tests\browser\grid-progressive.spec.ts:144:1 › empty single exact and remainder boundaries count logical chunks and first last flags 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-empty-sin-1bf74-chunks-and-first-last-flags-chromium\error-context.md
+
+
+
+
+[92/126] [chromium] › tests\browser\grid-progressive.spec.ts:164:1 › two physical rows stay one scheduled record with full logical page ARIA positions
+  92) [chromium] › tests\browser\grid-progressive.spec.ts:164:1 › two physical rows stay one scheduled record with full logical page ARIA positions 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-two-physi-08174-logical-page-ARIA-positions-chromium\error-context.md
+
+
+
+
+[93/126] [chromium] › tests\browser\grid-progressive.spec.ts:178:1 › positive delay yields to another Window task while prepared rows remain usable
+  93) [chromium] › tests\browser\grid-progressive.spec.ts:178:1 › positive delay yields to another Window task while prepared rows remain usable 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-positive--b742d-prepared-rows-remain-usable-chromium\error-context.md
+
+
+
+
+[94/126] [chromium] › tests\browser\grid-progressive.spec.ts:192:1 › renderMore shares its pending Promise and advances only one target
+  94) [chromium] › tests\browser\grid-progressive.spec.ts:192:1 › renderMore shares its pending Promise and advances only one target 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-renderMor-5847c-nd-advances-only-one-target-chromium\error-context.md
+
+
+
+
+[95/126] [chromium] › tests\browser\grid-progressive.spec.ts:205:1 › size one continuation still gives a queued Window task a turn
+  95) [chromium] › tests\browser\grid-progressive.spec.ts:205:1 › size one continuation still gives a queued Window task a turn 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-size-one--ba08f-a-queued-Window-task-a-turn-chromium\error-context.md
+
+
+
+
+[96/126] [chromium] › tests\browser\grid-progressive.spec.ts:216:1 › canceling the initial operation rejects it and resumes its unfinished target
+  96) [chromium] › tests\browser\grid-progressive.spec.ts:216:1 › canceling the initial operation rejects it and resumes its unfinished target 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-canceling-d7177-sumes-its-unfinished-target-chromium\error-context.md
+
+
+
+
+[97/126] [chromium] › tests\browser\grid-progressive.spec.ts:230:1 › canceling a continuation retains completed work and does not skip its remaining target
+  97) [chromium] › tests\browser\grid-progressive.spec.ts:230:1 › canceling a continuation retains completed work and does not skip its remaining target 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-canceling-e330d-t-skip-its-remaining-target-chromium\error-context.md
+
+
+
+
+[98/126] [chromium] › tests\browser\grid-progressive.spec.ts:243:1 › unobserved cancellation is handled internally and repeated cancel stays quiet
+  98) [chromium] › tests\browser\grid-progressive.spec.ts:243:1 › unobserved cancellation is handled internally and repeated cancel stays quiet 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-unobserve-ee4e0-repeated-cancel-stays-quiet-chromium\error-context.md
+
+
+
+
+[99/126] [chromium] › tests\browser\grid-progressive.spec.ts:253:1 › refresh supersedes pending work and starts a fresh first chunk
+  99) [chromium] › tests\browser\grid-progressive.spec.ts:253:1 › refresh supersedes pending work and starts a fresh first chunk 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-refresh-s-e3c9f--starts-a-fresh-first-chunk-chromium\error-context.md
+
+
+
+
+[100/126] [chromium] › tests\browser\grid-progressive.spec.ts:264:1 › Rows replacement cannot leave old IDs or late completion in the new prefix
+  100) [chromium] › tests\browser\grid-progressive.spec.ts:264:1 › Rows replacement cannot leave old IDs or late completion in the new prefix 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-Rows-repl-59fee-ompletion-in-the-new-prefix-chromium\error-context.md
+
+
+
+
+[101/126] [chromium] › tests\browser\grid-progressive.spec.ts:277:1 › explicit sort filter page and status requests reset first completion against the new scope
+  101) [chromium] › tests\browser\grid-progressive.spec.ts:277:1 › explicit sort filter page and status requests reset first completion against the new scope 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-explicit--b6b2d-etion-against-the-new-scope-chromium\error-context.md
+
+
+
+
+[102/126] [chromium] › tests\browser\grid-progressive.spec.ts:292:1 › ordinary data mutations cancel queued work without emitting full bind completion
+  102) [chromium] › tests\browser\grid-progressive.spec.ts:292:1 › ordinary data mutations cancel queued work without emitting full bind completion 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-ordinary--2dafa-itting-full-bind-completion-chromium\error-context.md
+
+
+
+
+[103/126] [chromium] › tests\browser\grid-progressive.spec.ts:315:1 › append during an unfinished prefix preserves old tail records without duplicate binding
+  103) [chromium] › tests\browser\grid-progressive.spec.ts:315:1 › append during an unfinished prefix preserves old tail records without duplicate binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-append-du-9d5d8-s-without-duplicate-binding-chromium\error-context.md
+
+
+
+
+[104/126] [chromium] › tests\browser\grid-progressive.spec.ts:330:1 › append advances one chunk from a complete target and preserves fully admitted rows
+  104) [chromium] › tests\browser\grid-progressive.spec.ts:330:1 › append advances one chunk from a complete target and preserves fully admitted rows 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-append-ad-86edd-eserves-fully-admitted-rows-chromium\error-context.md
+
+
+
+
+[105/126] [chromium] › tests\browser\grid-progressive.spec.ts:344:1 › empty append and exhausted requests retain cached completion without another callback
+  105) [chromium] › tests\browser\grid-progressive.spec.ts:344:1 › empty append and exhausted requests retain cached completion without another callback 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-empty-app-3579d-on-without-another-callback-chromium\error-context.md
+
+
+
+
+[106/126] [chromium] › tests\browser\grid-progressive.spec.ts:354:1 › explicit reveal synchronously admits its full-page target and supersedes delayed work
+  106) [chromium] › tests\browser\grid-progressive.spec.ts:354:1 › explicit reveal synchronously admits its full-page target and supersedes delayed work 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-explicit--4e936-and-supersedes-delayed-work-chromium\error-context.md
+
+
+
+
+[107/126] [chromium] › tests\browser\grid-progressive.spec.ts:371:1 › full logical-page selection checks paste and validation still include unadmitted IDs
+  107) [chromium] › tests\browser\grid-progressive.spec.ts:371:1 › full logical-page selection checks paste and validation still include unadmitted IDs 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-full-logi-9bb60-till-include-unadmitted-IDs-chromium\error-context.md
+
+
+
+
+[108/126] [chromium] › tests\browser\grid-progressive.spec.ts:386:1 › first-invalid reveal uses the same synchronous admission bridge
+  108) [chromium] › tests\browser\grid-progressive.spec.ts:386:1 › first-invalid reveal uses the same synchronous admission bridge 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-first-inv-35d20-ynchronous-admission-bridge-chromium\error-context.md
+
+
+
+
+[109/126] [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references
+  109) [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-validatio-8d9e4-released-element-references-chromium\error-context.md
+
+
+
+
+[110/126] [chromium] › tests\browser\grid-progressive.spec.ts:426:1 › a focused invalid draft and typed choices survive a sorted prefix reset
+  110) [chromium] › tests\browser\grid-progressive.spec.ts:426:1 › a focused invalid draft and typed choices survive a sorted prefix reset 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-a-focused-d47bd-rvive-a-sorted-prefix-reset-chromium\error-context.md
+
+
+
+
+[111/126] [chromium] › tests\browser\grid-progressive.spec.ts:450:1 › a committed column layout cancels pending work and continuation uses the retained state
+  111) [chromium] › tests\browser\grid-progressive.spec.ts:450:1 › a committed column layout cancels pending work and continuation uses the retained state 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-a-committ-3bfd0-ion-uses-the-retained-state-chromium\error-context.md
+
+
+
+
+[112/126] [chromium] › tests\browser\grid-progressive.spec.ts:466:1 › before-hook failure keeps earlier ready records and releases the failing row for retry
+  112) [chromium] › tests\browser\grid-progressive.spec.ts:466:1 › before-hook failure keeps earlier ready records and releases the failing row for retry 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-before-ho-ca0c9-s-the-failing-row-for-retry-chromium\error-context.md
+
+
+
+
+[113/126] [chromium] › tests\browser\grid-progressive.spec.ts:483:1 › field failure is observable without losing earlier bindings or leaking Select ownership
+  113) [chromium] › tests\browser\grid-progressive.spec.ts:483:1 › field failure is observable without losing earlier bindings or leaking Select ownership 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-field-fai-5b71b-or-leaking-Select-ownership-chromium\error-context.md
+
+
+
+
+[114/126] [chromium] › tests\browser\grid-progressive.spec.ts:499:1 › after-hook failure releases resources in reverse order and retries one uncommitted record
+  114) [chromium] › tests\browser\grid-progressive.spec.ts:499:1 › after-hook failure releases resources in reverse order and retries one uncommitted record 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-after-hoo-52572-ries-one-uncommitted-record-chromium\error-context.md
+
+
+
+
+[115/126] [chromium] › tests\browser\grid-progressive.spec.ts:513:1 › onBind failure keeps committed DOM and the next request does not redeliver that completion
+  115) [chromium] › tests\browser\grid-progressive.spec.ts:513:1 › onBind failure keeps committed DOM and the next request does not redeliver that completion 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-onBind-fa-eae7d-t-redeliver-that-completion-chromium\error-context.md
+
+
+
+
+[116/126] [chromium] › tests\browser\grid-progressive.spec.ts:526:1 › a completion callback starting another view aborts the old observer without stale completion
+  116) [chromium] › tests\browser\grid-progressive.spec.ts:526:1 › a completion callback starting another view aborts the old observer without stale completion 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-a-complet-b9ae8-er-without-stale-completion-chromium\error-context.md
+
+
+
+
+[117/126] [chromium] › tests\browser\grid-progressive.spec.ts:542:1 › disposal during completion settles the observer and restores authored ownership exactly
+  117) [chromium] › tests\browser\grid-progressive.spec.ts:542:1 › disposal during completion settles the observer and restores authored ownership exactly 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-disposal--c3135--authored-ownership-exactly-chromium\error-context.md
+
+
+
+
+[118/126] [chromium] › tests\browser\grid-progressive.spec.ts:560:1 › synchronous size-one completion cannot write after its callback disposes the Grid
+  118) [chromium] › tests\browser\grid-progressive.spec.ts:560:1 › synchronous size-one completion cannot write after its callback disposes the Grid 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-synchrono-783db--callback-disposes-the-Grid-chromium\error-context.md
+
+
+
+
+[119/126] [chromium] › tests\browser\grid-progressive.spec.ts:592:1 › synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid
+  119) [chromium] › tests\browser\grid-progressive.spec.ts:592:1 › synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-synchrono-c9b8a--callback-disposes-the-Grid-chromium\error-context.md
+
+
+
+
+[120/126] [chromium] › tests\browser\grid-progressive.spec.ts:619:1 › synchronous sort completion failure keeps its committed projection and advances the next chunk once
+  120) [chromium] › tests\browser\grid-progressive.spec.ts:619:1 › synchronous sort completion failure keeps its committed projection and advances the next chunk once 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-synchrono-cbbd3-dvances-the-next-chunk-once-chromium\error-context.md
+
+
+
+
+[121/126] [chromium] › tests\browser\grid-progressive.spec.ts:642:1 › invalid progressive options fail before DOM ownership and allow corrected binding
+  121) [chromium] › tests\browser\grid-progressive.spec.ts:642:1 › invalid progressive options fail before DOM ownership and allow corrected binding 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-invalid-p-60557-and-allow-corrected-binding-chromium\error-context.md
+
+
+
+
+[122/126] [chromium] › tests\browser\grid-progressive.spec.ts:663:1 › independent instances cancel separately and remain accessible without duplicate IDs
+  122) [chromium] › tests\browser\grid-progressive.spec.ts:663:1 › independent instances cancel separately and remain accessible without duplicate IDs 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-independe-4f81a-sible-without-duplicate-IDs-chromium\error-context.md
+
+
+
+
+[123/126] [chromium] › tests\browser\grid-progressive.spec.ts:685:1 › 5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix
+  123) [chromium] › tests\browser\grid-progressive.spec.ts:685:1 › 5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-5-000-row-b9358--rebinds-its-growing-prefix-chromium\error-context.md
+
+
+
+
+[124/126] [chromium] › tests\browser\grid-progressive.spec.ts:706:1 › positive viewport delay schedules materialized records rather than thousands of offscreen IDs
+  124) [chromium] › tests\browser\grid-progressive.spec.ts:706:1 › positive viewport delay schedules materialized records rather than thousands of offscreen IDs 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-positive--d7eed--thousands-of-offscreen-IDs-chromium\error-context.md
+
+
+
+
+[125/126] [chromium] › tests\browser\grid-progressive.spec.ts:724:1 › cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix
+  125) [chromium] › tests\browser\grid-progressive.spec.ts:724:1 › cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-cooperati-72d55-growing-thousand-row-prefix-chromium\error-context.md
+
+
+
+
+[126/126] [chromium] › tests\browser\grid-progressive.spec.ts:756:1 › a late viewport field failure publishes an owned error and retries its window without another completion
+  126) [chromium] › tests\browser\grid-progressive.spec.ts:756:1 › a late viewport field failure publishes an owned error and retries its window without another completion 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Goldman\AppData\Local\ms-playwright\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results\grid-progressive-a-late-vi-7eb52--without-another-completion-chromium\error-context.md
+
+
+  126 failed
+    [chromium] › tests\browser\collection-values.spec.ts:67:3 › grid value hooks preserve scalar replacements raw context and ordinary formatting 
+    [chromium] › tests\browser\collection-values.spec.ts:95:3 › grid caches successful values and distinguishes committed updates from deliberate refresh 
+    [chromium] › tests\browser\collection-values.spec.ts:109:3 › grid captured callbacks can read live application policy without sharing Rows 
+    [chromium] › tests\browser\collection-values.spec.ts:126:3 › grid preserves typed occurrences and unmarked native choice coercion without rewriting raw selections 
+    [chromium] › tests\browser\collection-values.spec.ts:144:3 › grid rechecks cached choice availability after option source changes and validates raw values 
+    [chromium] › tests\browser\collection-values.spec.ts:157:3 › grid rejects invalid value callbacks before taking template Select or error ownership 
+    [chromium] › tests\browser\collection-values.spec.ts:174:3 › grid preserves thrown callback causes and retries failed projections only on explicit work 
+    [chromium] › tests\browser\collection-values.spec.ts:197:3 › grid rejects and drains asynchronous value results and releases failed construction 
+    [chromium] › tests\browser\collection-values.spec.ts:215:3 › grid stops stale projection after nested source changes and disposal 
+    [chromium] › tests\browser\collection-values.spec.ts:235:3 › grid observes mounted fields only and treats retained row reappearance as binding 
+    [chromium] › tests\browser\collection-values.spec.ts:253:3 › grid stops old placement after a focus handler replaces the shared source 
+    [chromium] › tests\browser\collection-values.spec.ts:67:3 › list value hooks preserve scalar replacements raw context and ordinary formatting 
+    [chromium] › tests\browser\collection-values.spec.ts:95:3 › list caches successful values and distinguishes committed updates from deliberate refresh 
+    [chromium] › tests\browser\collection-values.spec.ts:109:3 › list captured callbacks can read live application policy without sharing Rows 
+    [chromium] › tests\browser\collection-values.spec.ts:126:3 › list preserves typed occurrences and unmarked native choice coercion without rewriting raw selections 
+    [chromium] › tests\browser\collection-values.spec.ts:144:3 › list rechecks cached choice availability after option source changes and validates raw values 
+    [chromium] › tests\browser\collection-values.spec.ts:157:3 › list rejects invalid value callbacks before taking template Select or error ownership 
+    [chromium] › tests\browser\collection-values.spec.ts:174:3 › list preserves thrown callback causes and retries failed projections only on explicit work 
+    [chromium] › tests\browser\collection-values.spec.ts:197:3 › list rejects and drains asynchronous value results and releases failed construction 
+    [chromium] › tests\browser\collection-values.spec.ts:215:3 › list stops stale projection after nested source changes and disposal 
+    [chromium] › tests\browser\collection-values.spec.ts:235:3 › list observes mounted fields only and treats retained row reappearance as binding 
+    [chromium] › tests\browser\collection-values.spec.ts:253:3 › list stops old placement after a focus handler replaces the shared source 
+    [chromium] › tests\browser\collection-values.spec.ts:277:1 › Grid value replacements preserve native grouped controls and reject invalid shapes 
+    [chromium] › tests\browser\collection-values.spec.ts:293:1 › Grid editing exposes raw focus preserves invalid drafts and projects parsed committed values on blur 
+    [chromium] › tests\browser\collection-values.spec.ts:310:1 › Grid viewport and progressive binding project mounted rows only and stop after disposal 
+    [chromium] › tests\browser\collection-values.spec.ts:333:1 › one application policy serves Form Grid and List while lifecycle and source owners stay separate 
+    [chromium] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto 
+    [chromium] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks 
+    [chromium] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership 
+    [chromium] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry 
+    [chromium] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry 
+    [chromium] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery 
+    [chromium] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding 
+    [chromium] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks 
+    [chromium] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes 
+    [chromium] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks 
+    [chromium] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook 
+    [chromium] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook 
+    [chromium] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding 
+    [chromium] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership 
+    [chromium] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook 
+    [chromium] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass 
+    [chromium] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry 
+    [chromium] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection 
+    [chromium] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order 
+    [chromium] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate 
+    [chromium] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer 
+    [chromium] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs 
+    [chromium] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone 
+    [chromium] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation 
+    [chromium] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:40:1 › binding callbacks read their getters once and invoke captured functions without a receiver 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:66:1 › replacing deleting or invalidating original callback properties preserves the captured handlers 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:79:1 › callbacks absent at construction cannot be installed through later option mutation 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:90:1 › deleting the original before hook during its first row preserves later attached pre-bind rows 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:104:1 › mutating after and completion options inside the first before hook cannot replace this binding 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:119:1 › frozen shared callbacks and frozen instance options keep two Rows and resource owners independent 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:139:1 › stable application forwarding callbacks read current policy on explicit refresh 
+    [chromium] › tests\browser\grid-callbacks.spec.ts:157:1 › progressive chunks keep captured callbacks while explicit policy changes reach later chunks 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table 
+    [chromium] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible 
+    [chromium] › tests\browser\grid-progressive.spec.ts:130:1 › default binding has one frozen eight-field completion and exhausted calls do not repeat it 
+    [chromium] › tests\browser\grid-progressive.spec.ts:144:1 › empty single exact and remainder boundaries count logical chunks and first last flags 
+    [chromium] › tests\browser\grid-progressive.spec.ts:164:1 › two physical rows stay one scheduled record with full logical page ARIA positions 
+    [chromium] › tests\browser\grid-progressive.spec.ts:178:1 › positive delay yields to another Window task while prepared rows remain usable 
+    [chromium] › tests\browser\grid-progressive.spec.ts:192:1 › renderMore shares its pending Promise and advances only one target 
+    [chromium] › tests\browser\grid-progressive.spec.ts:205:1 › size one continuation still gives a queued Window task a turn 
+    [chromium] › tests\browser\grid-progressive.spec.ts:216:1 › canceling the initial operation rejects it and resumes its unfinished target 
+    [chromium] › tests\browser\grid-progressive.spec.ts:230:1 › canceling a continuation retains completed work and does not skip its remaining target 
+    [chromium] › tests\browser\grid-progressive.spec.ts:243:1 › unobserved cancellation is handled internally and repeated cancel stays quiet 
+    [chromium] › tests\browser\grid-progressive.spec.ts:253:1 › refresh supersedes pending work and starts a fresh first chunk 
+    [chromium] › tests\browser\grid-progressive.spec.ts:264:1 › Rows replacement cannot leave old IDs or late completion in the new prefix 
+    [chromium] › tests\browser\grid-progressive.spec.ts:277:1 › explicit sort filter page and status requests reset first completion against the new scope 
+    [chromium] › tests\browser\grid-progressive.spec.ts:292:1 › ordinary data mutations cancel queued work without emitting full bind completion 
+    [chromium] › tests\browser\grid-progressive.spec.ts:315:1 › append during an unfinished prefix preserves old tail records without duplicate binding 
+    [chromium] › tests\browser\grid-progressive.spec.ts:330:1 › append advances one chunk from a complete target and preserves fully admitted rows 
+    [chromium] › tests\browser\grid-progressive.spec.ts:344:1 › empty append and exhausted requests retain cached completion without another callback 
+    [chromium] › tests\browser\grid-progressive.spec.ts:354:1 › explicit reveal synchronously admits its full-page target and supersedes delayed work 
+    [chromium] › tests\browser\grid-progressive.spec.ts:371:1 › full logical-page selection checks paste and validation still include unadmitted IDs 
+    [chromium] › tests\browser\grid-progressive.spec.ts:386:1 › first-invalid reveal uses the same synchronous admission bridge 
+    [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references 
+    [chromium] › tests\browser\grid-progressive.spec.ts:426:1 › a focused invalid draft and typed choices survive a sorted prefix reset 
+    [chromium] › tests\browser\grid-progressive.spec.ts:450:1 › a committed column layout cancels pending work and continuation uses the retained state 
+    [chromium] › tests\browser\grid-progressive.spec.ts:466:1 › before-hook failure keeps earlier ready records and releases the failing row for retry 
+    [chromium] › tests\browser\grid-progressive.spec.ts:483:1 › field failure is observable without losing earlier bindings or leaking Select ownership 
+    [chromium] › tests\browser\grid-progressive.spec.ts:499:1 › after-hook failure releases resources in reverse order and retries one uncommitted record 
+    [chromium] › tests\browser\grid-progressive.spec.ts:513:1 › onBind failure keeps committed DOM and the next request does not redeliver that completion 
+    [chromium] › tests\browser\grid-progressive.spec.ts:526:1 › a completion callback starting another view aborts the old observer without stale completion 
+    [chromium] › tests\browser\grid-progressive.spec.ts:542:1 › disposal during completion settles the observer and restores authored ownership exactly 
+    [chromium] › tests\browser\grid-progressive.spec.ts:560:1 › synchronous size-one completion cannot write after its callback disposes the Grid 
+    [chromium] › tests\browser\grid-progressive.spec.ts:592:1 › synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid 
+    [chromium] › tests\browser\grid-progressive.spec.ts:619:1 › synchronous sort completion failure keeps its committed projection and advances the next chunk once 
+    [chromium] › tests\browser\grid-progressive.spec.ts:642:1 › invalid progressive options fail before DOM ownership and allow corrected binding 
+    [chromium] › tests\browser\grid-progressive.spec.ts:663:1 › independent instances cancel separately and remain accessible without duplicate IDs 
+    [chromium] › tests\browser\grid-progressive.spec.ts:685:1 › 5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix 
+    [chromium] › tests\browser\grid-progressive.spec.ts:706:1 › positive viewport delay schedules materialized records rather than thousands of offscreen IDs 
+    [chromium] › tests\browser\grid-progressive.spec.ts:724:1 › cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix 
+    [chromium] › tests\browser\grid-progressive.spec.ts:756:1 › a late viewport field failure publishes an owned error and retries its window without another completion 
+[WebServer] (node:7132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:13620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4024) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10448) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11420) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20572) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9556) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21116) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4768) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14288) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

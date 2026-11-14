@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: a4472bd94c9cb4df63302e5d3ff41024ba7c37a1
+    git_blob: 142649bed5f0fdd46dd209efa25229ed54bdd03e
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -16,11 +16,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 718ab0f887ddc0ecd8d034846633f8e451c160ba
+    git_blob: 553d7b1db4b97136f07a7b70991540483af362f5
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: dfc46693c2c16a4c5c25721c8891cefaaac0203c
+    git_blob: 77e004c36dd48f7234cb4dbb179af9c1536e682c
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -28,19 +28,21 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
     git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
-generated: { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-24T13:51:10Z }
+  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
 
 # Goal
+
+[M5.11](m5-grid-callbacks-plan.md) addresses only construction-time capture and plain invocation of Grid row/completion callbacks, including physical attachment. Existing Form/value callback contracts provide the consistent model. Legacy source-backed local Form recipes do not establish a true DOM-only callback contract; per-unbound-key bind/val timing and legacy instance/initial-selection workflows remain explicit unresolved obligations. No family is closed or capability omitted by this slice.[^grid][^form]
 
 Complete framework behavior through consistent, readable TypeScript while preserving CVC, authored HTML/CSS, document-unique IDs, nested binding, accessible interaction and measured binding performance. Keep application business rules outside the framework. Minimize agent context, API surface, duplicated processing, hidden conventions and test/debug effort.
 

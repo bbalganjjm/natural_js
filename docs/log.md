@@ -1,3 +1,9 @@
+## 2026-11-14
+
+* **Verification** M5.11 passes sixteen latest groups on 192 frozen inputs, 138 units and 801 full cases per engine, with eight new DOM witnesses, the same actual 193-file tar in JS/TS and all five Windows browsers, original thirty performance budgets and sixty recomputed medians. [Raw evidence](implementation/evidence/m511-verification.json) retains all attempts, including the initial missing-browser launch failure, an incomplete Chromium module-import attempt and a later passing diagnostic without an inferred cause, complete Chromium identities and immutable parents. Independent source/raw/document reviews and changed/full OKF checks pass with zero errors/warnings; historical bodies/dates remain. No family/P0/M13 closure, omission, npm publication or tag.
+
+* **Creation** [M5.11 captured Grid callbacks](implementation/m5-grid-callbacks-plan.md) aligns the three existing row/completion callbacks with Form/value capture and plain invocation, including physical attachment. No public API, module or dependency is added. Legacy per-unbound-key timing and wider receiver/initial-selection outcomes remain required; no omission or family closure.
+
 ## 2026-11-08
 
 * **Verification** M5.10 passes sixteen latest groups on 191 frozen inputs, 138 units and 793 full cases per engine, with the same actual 193-file tar in JS/TS and all five Windows browsers, original 30 performance budgets and sixty recomputed medians. [Raw evidence](implementation/evidence/m510-verification.json) retains every captured attempt and complete once-only Chromium identities, including two initial fixture corrections without framework source changes or weaker expectations. Independent source/caller/document/raw/archive reviews and changed/full OKF checks pass with zero errors/warnings. Historical bodies/dates remain; no full-family/P0/M13 closure, omission, publication or tag.

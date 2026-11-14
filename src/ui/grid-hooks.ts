@@ -28,10 +28,12 @@ export function createGridHooks<T>(options: {
   beforeRowBind?: (context: GridRowBinding<T>) => void;
   onRowBind?: (context: GridRowBinding<T>) => void;
 }, onCleanupError: (cause: unknown) => void) {
+  const { beforeRowBind, onRowBind } = options;
   for (const phase of ["beforeRowBind", "onRowBind"] as const) {
-    if (options[phase] !== undefined && typeof options[phase] !== "function") throw failure(phase, `${phase} must be a function.`);
+    const run = phase === "beforeRowBind" ? beforeRowBind : onRowBind;
+    if (run !== undefined && typeof run !== "function") throw failure(phase, `${phase} must be a function.`);
   }
-  const enabled = options.beforeRowBind !== undefined || options.onRowBind !== undefined;
+  const enabled = beforeRowBind !== undefined || onRowBind !== undefined;
   type Binding = { context: GridRowBinding<T>; owned: (() => void)[]; closed: boolean };
   const bindings = new Map<RowId, Binding>();
   let depth = 0;
@@ -59,9 +61,10 @@ export function createGridHooks<T>(options: {
   }
 
   function invoke(binding: Binding, phase: "beforeRowBind" | "onRowBind", check: () => void): void {
+    const run = phase === "beforeRowBind" ? beforeRowBind : onRowBind;
     depth++;
     try {
-      try { synchronous(options[phase]?.(binding.context)); }
+      try { synchronous(run?.(binding.context)); }
       catch (cause) { throw failure(phase, `${phase} failed.`, binding.context.row.id, cause); }
       check();
     } catch (cause) {

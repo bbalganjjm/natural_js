@@ -604,8 +604,9 @@ try {
     const cleanup = { active: h.active, noLateClick: h.clicks === beforeDispose, restored: h.table.outerHTML === h.original };
     h.stop(); h.rows.dispose(); h.root.remove(); delete state.lifecycle;
     return { defaults, insertedView, refreshed, protectedDeletion, undo, empty, appended, shown, active, cleanup,
-      cleanFields, insertedFields, dirtyFields, deletedFields, undoFields, appendedOriginals };
+      cleanFields, insertedFields, dirtyFields, deletedFields, undoFields, appendedOriginals, plain: h.plain };
   });
+  assert(lifecycle.plain, "Installed Grid must invoke captured binding callbacks without an implicit receiver.");
   assert.deepEqual(lifecycle.cleanFields, { grid: ["false", "false"],
     original: { name: "Original", score: 10 }, frozen: true });
   assert.deepEqual(lifecycle.defaults, { name: "Default employee", score: 25 });

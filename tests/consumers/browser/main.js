@@ -215,15 +215,17 @@ try {
   const lifecycleTable = lifecycleRoot.querySelector("table");
   const lifecycleRows = createRows([{ name: "Original", score: 10 }]);
   const lifecycle = { root: lifecycleRoot, table: lifecycleTable, rows: lifecycleRows, original: lifecycleTable.outerHTML,
-    active: 0, clicks: 0, before: 0, bound: 0, binds: [], events: [] };
+    active: 0, clicks: 0, before: 0, bound: 0, binds: [], events: [], plain: true };
   state.lifecycle = lifecycle;
-  lifecycle.grid = bindGrid(lifecycleTable, { rows: lifecycleRows, parse: { score: Number },
+  const lifecycleOptions = { rows: lifecycleRows, parse: { score: Number },
     beforeRowBind(context) {
+      lifecycle.plain &&= this === undefined;
       lifecycle.before++;
       for (const element of context.elements) element.dataset.lifecycleBefore = String(context.row.id);
       context.own(() => { for (const element of context.elements) delete element.dataset.lifecycleBefore; });
     },
     onRowBind(context) {
+      lifecycle.plain &&= this === undefined;
       lifecycle.bound++; lifecycle.active++;
       const click = () => lifecycle.clicks++;
       for (const element of context.elements) element.addEventListener("click", click);
@@ -232,9 +234,17 @@ try {
         lifecycle.active--;
       });
     },
-    onBind(result) { lifecycle.binds.push({ total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted, event: result.event?.type ?? null }); },
+    onBind(result) {
+      lifecycle.plain &&= this === undefined;
+      lifecycle.binds.push({ total: result.total, filtered: result.filtered, visible: result.visible, mounted: result.mounted, event: result.event?.type ?? null });
+    },
     onRowAction({ action, id }) { if (action === "undo") lifecycleRows.revert(id); }
-  });
+  };
+  lifecycle.grid = bindGrid(lifecycleTable, lifecycleOptions);
+  const replacedBindingCallback = () => { throw new Error("Grid must retain its validated binding callbacks."); };
+  lifecycleOptions.beforeRowBind = replacedBindingCallback;
+  lifecycleOptions.onRowBind = replacedBindingCallback;
+  lifecycleOptions.onBind = replacedBindingCallback;
   lifecycle.stop = lifecycleRows.subscribe(event => lifecycle.events.push(event));
   const progressiveRoot = document.createElement("section");
   progressiveRoot.dataset.consumerProgressive = "";

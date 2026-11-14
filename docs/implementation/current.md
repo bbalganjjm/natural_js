@@ -4,29 +4,29 @@ title: Natural-JS 2.0 active plan
 description: Current checkpoint, remaining gates and next owner for the Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
-  - id: values
-    resource: m5-collection-values-plan.md
-    title: Shared mounted field value callbacks and local ownership
-    git_blob: 99e225a490c70fe9f94e26784b143751ed674d73
+  - id: callbacks
+    resource: m5-grid-callbacks-plan.md
+    title: Captured Grid binding callbacks and remaining source contracts
+    git_blob: 2e6446ca41a0b43426caa3ee773bfadd0282451c
   - id: evidence
-    resource: evidence/m510-verification.json
+    resource: evidence/m511-verification.json
     title: Latest frozen runtime and installed artifact receipt
-    git_blob: 772104504a5052c804e7f38ef8534f547c946ab0
+    git_blob: 3e48d10b551bde9c9ab99b673557a428302fa3d2
   - id: parity
     resource: feature-parity-plan.md
     title: Complete required feature coverage and one omission review
-    git_blob: b4e1f12791271f8a10702a533ab8c96871ea303a
+    git_blob: 58251b7b726ac4a654a592b07447f02b76f86fe9
   - id: review
     resource: m13-review-plan.md
     title: Mandatory whole-code review and remediation
-    git_blob: da7a62d35f16b038d6eeeea0090754041102e1a9
+    git_blob: bb2184e6d3bd15c2ce34af5796a5b502df649192
   - id: conventions
     resource: ../governance/okf-conventions.md
     title: OKF document and verification rules
     git_blob: c39914313418de687419b88f43f8fce29333a053
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 ---
 
 Use this file to resume. The [milestone index](index.md), [roadmap](roadmap.md), [completed log](../log.md) and owning plans retain historical work; do not recertify it while refreshing fingerprints.
@@ -37,15 +37,14 @@ Complete 1.x framework capabilities in TypeScript/ESM without jQuery, preserving
 
 # Checkpoint
 
-- M5.10 starts at pushed 5ecda443abbe2f9c41a7a23b672507e4a82ed59b with a clean worktree. Work and authorized pushes stay on 2.0.0-alpha.0.[^evidence]
-- Form, Grid and List share checked beforeBindValue/onBindValue execution through one private owner. ValueBindContext replaces the Form-only name without an alias; Grid/List gain the callback pair and List gains explicit visible refresh. [Shared value callbacks](../v2/value-callbacks.md) owns the contract.[^values]
-- Binders retain raw validation, input drafts, native/typed choices, projection caches, focus and source/lifetime checkpoints. The authored Grid demo shares employee Rows and an explicit live policy across all three owners; no global registry, dataset, dependency or callback-layer engine.[^values]
-- Sixteen final groups pass on 191 frozen inputs, 138 units and 793 full cases per engine. Chromium's 12 disjoint shards cover every identity once; Firefox/WebKit are unsharded. One actual 193-file tar passes JS/TS and all five Windows browsers plus original nine binding/twenty-one viewport budgets. Tar SHA-256: e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2.[^evidence]
-- Independent connected source/caller/document and raw-log/archive/metric reviews accept selected outcomes. Changed/full OKF checks have zero errors/warnings; historical bodies and dates remain. Earlier milestones retain their dated scope.[^evidence][^conventions]
+- M5.11 starts at pushed db760efc6367fc592b5a6d6e1e0cdc240eb1b68b with a clean worktree. Independent M5.10 recovery and bounded pre-source contract reviews pass. Work and authorized pushes stay on 2.0.0-alpha.0.[^callbacks]
+- Grid captures beforeRowBind/onRowBind/onBind once and invokes them plainly; before-hook attachment uses the same captured reference. No public API, module or dependency is added. Stable application forwarding functions retain deliberately live policy; other constructor options keep their own contracts.[^callbacks]
+- Sixteen latest groups pass on 192 frozen inputs, 138 units and 801 full cases per engine. Chromium's 12 disjoint shards cover every identity once; Firefox/WebKit are unsharded. One actual 193-file tar passes JS/TS and all five Windows browsers plus the original nine binding/twenty-one viewport budgets. Tar SHA-256: 3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2.[^evidence]
+- Independent connected source/caller, raw-log/archive/metric and final semantic reviews accept only selected outcomes. Changed/full OKF checks have zero errors/warnings; historical bodies and dates remain. Earlier milestones keep their dated scope.[^evidence][^conventions]
 
 # Next action
 
-Plan M5.11 against the remaining Form source/default/declaration outcomes, including local-source callbacks, per-unbound-key observation and existing row/completion callback capture and receiver contracts. Keep broader configuration equivalence, direct hot declarations and wider dynamic owners, List editing, Tree validation, unvalidated paste, general data/schema equivalence, other UI/CVC/P0 and M13 required. No omission or full-family closure is approved.[^values][^review]
+Plan M5.12 for the remaining source-only and per-unbound-key Form outcomes: establish the exact bind/val observation boundary before choosing a minimal owner or application recipe. Keep legacy instance/initial-selection, broader configuration/declaration equivalence, wider dynamic owners, List editing, Tree validation, unvalidated paste, data/schema equivalence, other UI/CVC/P0 and M13 required. No omission or full-family closure is approved.[^callbacks][^review]
 
 # Decisions
 
@@ -53,20 +52,20 @@ Plan M5.11 against the remaining Form source/default/declaration outcomes, inclu
 - Safe data-field paths and RowId identify data; document-unique IDs associate labels/ARIA. Bind existing HTML/CSS.
 - Reuse actual rule/control/cleanup owners. Prefer direct functions and ordinary objects; expose only necessary application contracts.
 - Retain reachable formatter/validator/mask/date/byte behavior. Remove helpers only after direct, indirect, configuration and declaration reachability checks.[^parity]
-- Creation defaults, captured UI restoration, native reset and received Rows reversion have separate owners. Applications supply complete business rows and uploads.[^values]
+- Creation defaults, captured UI restoration, native reset and received Rows reversion have separate owners. Applications supply complete business rows and uploads.[^callbacks]
 - Root 2.0 stays Apache-2.0. Preserve master/LGPL v1, immutable evidence, original fixtures and the ignored legacy lockfile.
 - Chromium/Firefox/WebKit and installed Chrome/Edge remain required. Actual macOS/iOS Safari is excluded.
 - npm publication and release tags wait for personal testing and a separate request.
 
 # Verification log
 
-The [M5.10 plan](m5-collection-values-plan.md) and [receipt](evidence/m510-verification.json) own all attempts, 27 new DOM witnesses, exact source/archive hashes, complete Chromium identities and sixty recomputed medians. This file keeps resume context only. All 60 mapped families/775 entries retain complete obligations; selected acceptance does not recertify historical runtime.[^evidence][^parity]
+The [M5.11 plan](m5-grid-callbacks-plan.md) and [receipt](evidence/m511-verification.json) own all attempts, eight new DOM witnesses, exact source/archive hashes, complete Chromium identities and sixty recomputed medians. The initial focused launch failures and an incomplete Chromium module-import attempt grant no full-suite credit. A later passing trace records HTTP 200 without establishing the original cause. All 60 mapped families/775 entries retain complete obligations; this file keeps resume context only.[^evidence][^parity]
 
 # Open questions
 
-Manual assistive technology, personal acceptance, actual token telemetry and final fixed-agent comparison remain unverified. Finish feature/dynamic coverage and the consolidated omission proposal, then [M13 whole-code review/remediation](m13-review-plan.md).[^parity][^review]
+The pre-body module-fetch failure's cause remains unverified and requires test-infrastructure follow-up. Manual assistive technology, personal acceptance, actual token telemetry and final fixed-agent comparison remain unverified. Finish feature/dynamic coverage and the consolidated omission proposal, then [M13 whole-code review/remediation](m13-review-plan.md).[^evidence][^parity][^review]
 
-[^values]: Shared mounted field value callbacks and local ownership
+[^callbacks]: Captured Grid binding callbacks and remaining source contracts
 [^evidence]: Latest frozen runtime and installed artifact receipt
 [^parity]: Complete required feature coverage and one omission review
 [^review]: Mandatory whole-code review and remediation

@@ -21,11 +21,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
-    git_blob: 628b69014fd77f0f18e5e8c84d2953c1a9401bb9
+    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, native defaults, callback and teardown regressions
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -140,6 +140,8 @@ FormHandle.refresh(fields?: readonly string[]): void refreshes the current ident
 FormHandle.rescan(): void explicitly reconciles authored field/error/reset ownership without projecting values or running callbacks/rules. Compatible bindings retain raw/drafts/captures; new bindings capture once and retired bindings release resources. Retained drafts/known-invalid local fields block affected retirement, replacement or reshaping with FORM_RESCAN; compatible bindings keep them. Active work, pending reset cleanup and direct owned-annotation changes also fail FORM_RESCAN. Call refresh separately for new values. The [Form rediscovery contract](form.md#field-rediscovery) owns preflight, fixed catalogs, release/re-adoption and native-failure retry/disposal.[^ui][^form]
 
 # Grid binding callbacks
+
+Grid captures beforeRowBind, onRowBind and onBind references once at construction and invokes them as plain functions without an implicit receiver. Mutating the original option properties cannot change an existing instance. Use a stable forwarding closure for deliberate live application policy and refresh for unchanged rows. Other constructor options retain their own contracts; see [Grid binding callbacks](grid.md#row-binding-and-owned-resources).[^grid][^hooks]
 
 Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/update. Shown deleted records retain their last committed values and remain noneditable/ineligible; authored row actions can offer Undo. Their delete save payload still uses the loaded original. Every physical record tr gets `data-row-status`, and table `data-changed` reports any pending Rows changes. Author labels and styles.[^grid][^lifecycle-browser]
 

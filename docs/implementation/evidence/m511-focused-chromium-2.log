@@ -1,0 +1,137 @@
+
+
+Running 126 tests using 1 worker
+
+
+
+[1/126] [chromium] › tests\browser\collection-values.spec.ts:67:3 › grid value hooks preserve scalar replacements raw context and ordinary formatting
+[2/126] [chromium] › tests\browser\collection-values.spec.ts:95:3 › grid caches successful values and distinguishes committed updates from deliberate refresh
+[3/126] [chromium] › tests\browser\collection-values.spec.ts:109:3 › grid captured callbacks can read live application policy without sharing Rows
+[4/126] [chromium] › tests\browser\collection-values.spec.ts:126:3 › grid preserves typed occurrences and unmarked native choice coercion without rewriting raw selections
+[5/126] [chromium] › tests\browser\collection-values.spec.ts:144:3 › grid rechecks cached choice availability after option source changes and validates raw values
+[6/126] [chromium] › tests\browser\collection-values.spec.ts:157:3 › grid rejects invalid value callbacks before taking template Select or error ownership
+[7/126] [chromium] › tests\browser\collection-values.spec.ts:174:3 › grid preserves thrown callback causes and retries failed projections only on explicit work
+[8/126] [chromium] › tests\browser\collection-values.spec.ts:197:3 › grid rejects and drains asynchronous value results and releases failed construction
+[9/126] [chromium] › tests\browser\collection-values.spec.ts:215:3 › grid stops stale projection after nested source changes and disposal
+[10/126] [chromium] › tests\browser\collection-values.spec.ts:235:3 › grid observes mounted fields only and treats retained row reappearance as binding
+[11/126] [chromium] › tests\browser\collection-values.spec.ts:253:3 › grid stops old placement after a focus handler replaces the shared source
+[12/126] [chromium] › tests\browser\collection-values.spec.ts:67:3 › list value hooks preserve scalar replacements raw context and ordinary formatting
+[13/126] [chromium] › tests\browser\collection-values.spec.ts:95:3 › list caches successful values and distinguishes committed updates from deliberate refresh
+[14/126] [chromium] › tests\browser\collection-values.spec.ts:109:3 › list captured callbacks can read live application policy without sharing Rows
+[15/126] [chromium] › tests\browser\collection-values.spec.ts:126:3 › list preserves typed occurrences and unmarked native choice coercion without rewriting raw selections
+[16/126] [chromium] › tests\browser\collection-values.spec.ts:144:3 › list rechecks cached choice availability after option source changes and validates raw values
+[17/126] [chromium] › tests\browser\collection-values.spec.ts:157:3 › list rejects invalid value callbacks before taking template Select or error ownership
+[18/126] [chromium] › tests\browser\collection-values.spec.ts:174:3 › list preserves thrown callback causes and retries failed projections only on explicit work
+[19/126] [chromium] › tests\browser\collection-values.spec.ts:197:3 › list rejects and drains asynchronous value results and releases failed construction
+[20/126] [chromium] › tests\browser\collection-values.spec.ts:215:3 › list stops stale projection after nested source changes and disposal
+[21/126] [chromium] › tests\browser\collection-values.spec.ts:235:3 › list observes mounted fields only and treats retained row reappearance as binding
+[22/126] [chromium] › tests\browser\collection-values.spec.ts:253:3 › list stops old placement after a focus handler replaces the shared source
+[23/126] [chromium] › tests\browser\collection-values.spec.ts:277:1 › Grid value replacements preserve native grouped controls and reject invalid shapes
+[24/126] [chromium] › tests\browser\collection-values.spec.ts:293:1 › Grid editing exposes raw focus preserves invalid drafts and projects parsed committed values on blur
+[25/126] [chromium] › tests\browser\collection-values.spec.ts:310:1 › Grid viewport and progressive binding project mounted rows only and stop after disposal
+[26/126] [chromium] › tests\browser\collection-values.spec.ts:333:1 › one application policy serves Form Grid and List while lifecycle and source owners stay separate
+[27/126] [chromium] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+[28/126] [chromium] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+[29/126] [chromium] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+[30/126] [chromium] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+[31/126] [chromium] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+[32/126] [chromium] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+[33/126] [chromium] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+[34/126] [chromium] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+[35/126] [chromium] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+[36/126] [chromium] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+[37/126] [chromium] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+[38/126] [chromium] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+[39/126] [chromium] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+[40/126] [chromium] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+[41/126] [chromium] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+[42/126] [chromium] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+[43/126] [chromium] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry
+[44/126] [chromium] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+[45/126] [chromium] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+[46/126] [chromium] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+[47/126] [chromium] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+[48/126] [chromium] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+[49/126] [chromium] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+[50/126] [chromium] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation
+[51/126] [chromium] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+[52/126] [chromium] › tests\browser\grid-callbacks.spec.ts:40:1 › binding callbacks read their getters once and invoke captured functions without a receiver
+[53/126] [chromium] › tests\browser\grid-callbacks.spec.ts:66:1 › replacing deleting or invalidating original callback properties preserves the captured handlers
+[54/126] [chromium] › tests\browser\grid-callbacks.spec.ts:79:1 › callbacks absent at construction cannot be installed through later option mutation
+[55/126] [chromium] › tests\browser\grid-callbacks.spec.ts:97:1 › deleting the original before hook during its first row preserves later attached pre-bind rows
+[56/126] [chromium] › tests\browser\grid-callbacks.spec.ts:111:1 › mutating after and completion options inside the first before hook cannot replace this binding
+[57/126] [chromium] › tests\browser\grid-callbacks.spec.ts:126:1 › frozen shared callbacks and frozen instance options keep two Rows and resource owners independent
+[58/126] [chromium] › tests\browser\grid-callbacks.spec.ts:146:1 › stable application forwarding callbacks read current policy on explicit refresh
+[59/126] [chromium] › tests\browser\grid-callbacks.spec.ts:164:1 › progressive chunks keep captured callbacks while explicit policy changes reach later chunks
+[60/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:104:1 › every physical row reflects status and table dirty state without owning visual design
+[61/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:128:1 › status filters are canonical detached state and invalid proposals preserve the current view
+[62/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:154:1 › retained deleted rows stay noneditable and ineligible while authored Undo actions retain identity
+[63/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:186:1 › deleted rows consume protected paste lines in mounted and offscreen records
+[64/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:208:1 › native merge runs split at status boundaries and recompute after revert
+[65/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:222:1 › committed pruning still notifies once when a deleted-row hook fails
+[66/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:244:1 › failed page binding finishes rollback before prune callbacks append new clean rows
+[67/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:273:1 › failed refresh cannot merge clean and deleted rows after binding caches are reset
+[68/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:292:1 › deleting a shown row moves focused native editors and selection buttons to an enabled visible control
+[69/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:311:1 › a before-row hook can apply deleted-state disabling without preserving it after revert or refresh
+[70/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:331:1 › status projection precedes text filters and paging while check scopes retain live eligibility
+[71/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:347:1 › defaults preserve captured native groups and own parsers without claiming business fields
+[72/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:375:1 › default parser failures and ambiguous native fields never write Rows or source markup
+[73/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:394:1 › default parser promises are consumed and fail without changing data
+[74/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:408:1 › row hooks see connected blocks before and after values and clean resources in reverse order
+[75/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:423:1 › the table is already claimed when the first application hook runs
+[76/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:435:1 › owned widget listeners do not duplicate on rebind and are removed on release and disposal
+[77/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:453:1 › failed initial before/after hooks restore authored nodes and release Select and table ownership
+[78/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:478:1 › asynchronous row and completion callbacks reject without unhandled promises or stranded ownership
+[79/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:497:1 › row-hook data mutations reject stale work while retaining the already committed inner write
+[80/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:513:1 › direct recursive refresh rejects before a second binding and later refresh can recover
+[81/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:526:1 › disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations
+[82/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:543:1 › cleanup failures do not prevent later resources, framework disposal or correct rebinding
+[83/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:565:1 › own stays valid for an active binding and immediately releases resources registered after closure
+[84/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:577:1 › onBind distinguishes whole binding from ordinary shared changes and reports retained totals
+[85/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:600:1 › post-bind failures propagate after clean append without undoing data or blocking other subscribers
+[86/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:614:1 › viewport release cleans row resources while clean append preserves a focused invalid draft and bounded DOM
+[87/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:632:1 › authored empty markup follows the logical view, column spans, focus and exact teardown
+[88/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:653:1 › ambiguous or invalid empty markers fail before modifying authored markup or claiming the table
+[89/126] [chromium] › tests\browser\grid-lifecycle.spec.ts:676:1 › two authored status views share Rows without sharing view state and remain accessible
+[90/126] [chromium] › tests\browser\grid-progressive.spec.ts:130:1 › default binding has one frozen eight-field completion and exhausted calls do not repeat it
+[91/126] [chromium] › tests\browser\grid-progressive.spec.ts:144:1 › empty single exact and remainder boundaries count logical chunks and first last flags
+[92/126] [chromium] › tests\browser\grid-progressive.spec.ts:164:1 › two physical rows stay one scheduled record with full logical page ARIA positions
+[93/126] [chromium] › tests\browser\grid-progressive.spec.ts:178:1 › positive delay yields to another Window task while prepared rows remain usable
+[94/126] [chromium] › tests\browser\grid-progressive.spec.ts:192:1 › renderMore shares its pending Promise and advances only one target
+[95/126] [chromium] › tests\browser\grid-progressive.spec.ts:205:1 › size one continuation still gives a queued Window task a turn
+[96/126] [chromium] › tests\browser\grid-progressive.spec.ts:216:1 › canceling the initial operation rejects it and resumes its unfinished target
+[97/126] [chromium] › tests\browser\grid-progressive.spec.ts:230:1 › canceling a continuation retains completed work and does not skip its remaining target
+[98/126] [chromium] › tests\browser\grid-progressive.spec.ts:243:1 › unobserved cancellation is handled internally and repeated cancel stays quiet
+[99/126] [chromium] › tests\browser\grid-progressive.spec.ts:253:1 › refresh supersedes pending work and starts a fresh first chunk
+[100/126] [chromium] › tests\browser\grid-progressive.spec.ts:264:1 › Rows replacement cannot leave old IDs or late completion in the new prefix
+[101/126] [chromium] › tests\browser\grid-progressive.spec.ts:277:1 › explicit sort filter page and status requests reset first completion against the new scope
+[102/126] [chromium] › tests\browser\grid-progressive.spec.ts:292:1 › ordinary data mutations cancel queued work without emitting full bind completion
+[103/126] [chromium] › tests\browser\grid-progressive.spec.ts:315:1 › append during an unfinished prefix preserves old tail records without duplicate binding
+[104/126] [chromium] › tests\browser\grid-progressive.spec.ts:330:1 › append advances one chunk from a complete target and preserves fully admitted rows
+[105/126] [chromium] › tests\browser\grid-progressive.spec.ts:344:1 › empty append and exhausted requests retain cached completion without another callback
+[106/126] [chromium] › tests\browser\grid-progressive.spec.ts:354:1 › explicit reveal synchronously admits its full-page target and supersedes delayed work
+[107/126] [chromium] › tests\browser\grid-progressive.spec.ts:371:1 › full logical-page selection checks paste and validation still include unadmitted IDs
+[108/126] [chromium] › tests\browser\grid-progressive.spec.ts:386:1 › first-invalid reveal uses the same synchronous admission bridge
+[109/126] [chromium] › tests\browser\grid-progressive.spec.ts:397:1 › validation reveal disposal retains issues without returning released element references
+[110/126] [chromium] › tests\browser\grid-progressive.spec.ts:426:1 › a focused invalid draft and typed choices survive a sorted prefix reset
+[111/126] [chromium] › tests\browser\grid-progressive.spec.ts:450:1 › a committed column layout cancels pending work and continuation uses the retained state
+[112/126] [chromium] › tests\browser\grid-progressive.spec.ts:466:1 › before-hook failure keeps earlier ready records and releases the failing row for retry
+[113/126] [chromium] › tests\browser\grid-progressive.spec.ts:483:1 › field failure is observable without losing earlier bindings or leaking Select ownership
+[114/126] [chromium] › tests\browser\grid-progressive.spec.ts:499:1 › after-hook failure releases resources in reverse order and retries one uncommitted record
+[115/126] [chromium] › tests\browser\grid-progressive.spec.ts:513:1 › onBind failure keeps committed DOM and the next request does not redeliver that completion
+[116/126] [chromium] › tests\browser\grid-progressive.spec.ts:526:1 › a completion callback starting another view aborts the old observer without stale completion
+[117/126] [chromium] › tests\browser\grid-progressive.spec.ts:542:1 › disposal during completion settles the observer and restores authored ownership exactly
+[118/126] [chromium] › tests\browser\grid-progressive.spec.ts:560:1 › synchronous size-one completion cannot write after its callback disposes the Grid
+[119/126] [chromium] › tests\browser\grid-progressive.spec.ts:592:1 › synchronous sort completion cannot restore a sort attribute after its callback disposes the Grid
+[120/126] [chromium] › tests\browser\grid-progressive.spec.ts:619:1 › synchronous sort completion failure keeps its committed projection and advances the next chunk once
+[121/126] [chromium] › tests\browser\grid-progressive.spec.ts:642:1 › invalid progressive options fail before DOM ownership and allow corrected binding
+[122/126] [chromium] › tests\browser\grid-progressive.spec.ts:663:1 › independent instances cancel separately and remain accessible without duplicate IDs
+[123/126] [chromium] › tests\browser\grid-progressive.spec.ts:685:1 › 5,000-row viewport admission never constructs offscreen records or rebinds its growing prefix
+[124/126] [chromium] › tests\browser\grid-progressive.spec.ts:706:1 › positive viewport delay schedules materialized records rather than thousands of offscreen IDs
+[125/126] [chromium] › tests\browser\grid-progressive.spec.ts:724:1 › cooperative nonviewport admission avoids per-record rescans of a growing thousand-row prefix
+[126/126] [chromium] › tests\browser\grid-progressive.spec.ts:756:1 › a late viewport field failure publishes an owned error and retries its window without another completion
+  126 passed (30.3s)
+[WebServer] (node:17028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:7340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

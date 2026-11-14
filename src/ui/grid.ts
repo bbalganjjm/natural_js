@@ -185,7 +185,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const controlIndexes = authored.flatMap((element, index) =>
     element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement ? [index] : []);
   let statuses = checkedStatuses(options.statusFilter === undefined ? ["clean", "insert", "update"] : options.statusFilter);
-  if (options.onBind !== undefined && typeof options.onBind !== "function") {
+  const { beforeRowBind, onRowBind, onBind } = options;
+  if (onBind !== undefined && typeof onBind !== "function") {
     throw gridError("GRID_BIND", "onBind must be a synchronous function.");
   }
   const progressive = options.progressive;
@@ -199,7 +200,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const restoreBusyAttribute = restoreAttributes(root, ["aria-busy"]);
   const cleanupErrors: unknown[] = [];
   const failedPrunes: (() => void)[] = [];
-  const hooks = createGridHooks(options, cause => cleanupErrors.push(cause));
+  const hooks = createGridHooks({ beforeRowBind, onRowBind }, cause => cleanupErrors.push(cause));
   const emptyMarkers = [...root.querySelectorAll<HTMLElement>("[data-empty]")]
     .filter(element => element.closest("table") === root);
   if (emptyMarkers.length > 1 || emptyMarkers.some(element =>
@@ -1190,9 +1191,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     notifyPrunes(current);
     if (operation !== current || disposed) return;
     const result = bindingResult(current.event, current.start === 0, !unfinished);
-    if (emit && options.onBind) {
+    if (emit && onBind) {
       try {
-        const returned: unknown = options.onBind(result);
+        const returned: unknown = onBind(result);
         if (returned !== null && (typeof returned === "object" || typeof returned === "function") &&
             typeof (returned as { then?: unknown }).then === "function") {
           void Promise.resolve(returned).catch(() => {});
@@ -1463,7 +1464,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (!record) {
           record = createRecord(id);
           records.set(id, record);
-          if (options.beforeRowBind || !place) for (const element of record.elements) {
+          if (beforeRowBind || !place) for (const element of record.elements) {
             if (current && !current()) return;
             anchor.parentNode!.insertBefore(element, anchor);
             if (current && !current()) return;

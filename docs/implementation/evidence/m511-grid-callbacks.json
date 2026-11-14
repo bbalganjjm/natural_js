@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.11 captured Grid binding callbacks",
+  "recorded_at": "2026-11-14",
+  "workspace_baseline_commit": "db760efc6367fc592b5a6d6e1e0cdc240eb1b68b",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m510-verification.json",
+      "sha256": "5502cec87f405e63675815c33e30a47ca9ba7d8554e4bf289d847b005cc1a866",
+      "preserved_in_commit": "db760efc6367fc592b5a6d6e1e0cdc240eb1b68b"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m510-form-configuration.json",
+      "sha256": "6511bd480fcb7ebd3913c2ee98d60916287fa8893dd8060069cd9a35a2006d0e"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    },
+    "resolver": "Inherit every original surface/dynamic/full-owner obligation through immutable M5.10 receipt/ledger and original audit. Captured Grid callback outcomes do not replace parent evidence or rerun/recertify historical runtime. Historical M5.10 failed focused fixtures, incomplete full Chromium attempt and later passing diagnostic remain dated parent facts; no M5.11 failure is inferred."
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "db760efc6367fc592b5a6d6e1e0cdc240eb1b68b",
+    "scope": "Independent read-only baseline recovery observed the clean pushed M5.10 tree before authorized M5.11 plan/source edits; new-stage planning is not pre-existing dirt."
+  },
+  "public_delta": {
+    "new_public_named_types": [],
+    "removed_public_named_types": [],
+    "new_public_options": [],
+    "new_public_methods": 0,
+    "new_public_entries": 0,
+    "new_private_framework_modules": 0,
+    "new_runtime_dependencies": 0,
+    "new_public_runtime_functions": 0,
+    "new_private_shared_factories": 0,
+    "note": "Existing Grid callback options and contexts remain. Capture and plain invocation change existing behavior; no blanket capture/reconfiguration promise applies to other options. No runtime-JavaScript equality with M5.10 is claimed."
+  },
+  "selected_contracts": {
+    "captured_references": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Read beforeRowBind,onRowBind and onBind once at construction; validate and invoke those same references. Later property mutation/deletion/addition cannot replace,disable or enable them. Frozen options and one-read getters work.",
+      "source_refs": [
+        "src/ui/grid.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B02",
+        "B03",
+        "B05",
+        "B06",
+        "B08",
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "Other constructor options and wider configuration/declaration/default behavior remain outside this bounded outcome."
+    },
+    "plain_invocation_and_attachment": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Invoke the selected row and completion functions plainly, without an options-object or implicit Grid receiver. Use captured beforeRowBind when deciding physical attachment before that hook. Preserve contexts and signatures.",
+      "source_refs": [
+        "src/ui/grid.ts",
+        "src/ui/grid-hooks.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B04",
+        "B05",
+        "B08",
+        "I01",
+        "I02",
+        "I03",
+        "R01"
+      ],
+      "remaining": "Legacy instance receivers require explicit application forwarding. This does not close whole legacy receiver/initial-selection families."
+    },
+    "owner_invariants": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Preserve row/completion order, synchronous/thenable checks,error codes and causes,resource cleanup,rollback,source/reentry/disposal checkpoints,progressive completion and viewport owners.",
+      "source_refs": [
+        "src/ui/grid.ts",
+        "src/ui/grid-hooks.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B06",
+        "B08",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10"
+      ],
+      "remaining": "No lifecycle engine or second renderer. Inherited full-owner acceptance remains required."
+    },
+    "explicit_live_forwarding_and_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Independent Grid instances capture their own references. Stable application forwarding callbacks may read live policy,with explicit refresh applying it to unchanged rows. Existing examples keep using explicit contexts; verify the bounded contract in the actual installed browser caller,isolated TypeScript signatures and five exact-package Windows browsers.",
+      "source_refs": [
+        "examples/vite/m10/demo.ts",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "B06",
+        "B07",
+        "B08",
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No global registry,implicit callback replacement or public preset engine. All remaining parity owners remain required."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/grid.ts",
+      "title": "Constructor captures all three references and physical attachment uses the captured before hook",
+      "marker": "const { beforeRowBind, onRowBind, onBind } = options;"
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/grid-hooks.ts",
+      "title": "The private row owner validates and plainly invokes captured functions",
+      "marker": "synchronous(run?.(binding.context))"
+    },
+    "I01": {
+      "kind": "installed_source",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Actual isolated TypeScript consumer keeps the existing signatures with explicit void receivers",
+      "marker": "beforeRowBind(this: void, context)"
+    },
+    "I02": {
+      "kind": "installed_source",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Actual installed browser caller replaces constructor properties with throwers and observes plain invocation",
+      "marker": "Grid must retain its validated binding callbacks."
+    },
+    "I03": {
+      "kind": "installed_source",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "The five-browser installed runner asserts the retained caller plain-invocation result",
+      "marker": "Installed Grid must invoke captured binding callbacks without an implicit receiver."
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "binding callbacks read their getters once and invoke captured functions without a receiver"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "replacing deleting or invalidating original callback properties preserves the captured handlers"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "callbacks absent at construction cannot be installed through later option mutation"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "deleting the original before hook during its first row preserves later attached pre-bind rows"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "mutating after and completion options inside the first before hook cannot replace this binding"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "frozen shared callbacks and frozen instance options keep two Rows and resource owners independent"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "stable application forwarding callbacks read current policy on explicit refresh"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/grid-callbacks.spec.ts",
+      "title": "progressive chunks keep captured callbacks while explicit policy changes reach later chunks"
+    },
+    "R01": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-lifecycle.spec.ts",
+      "title": "row hooks see connected blocks before and after values and clean resources in reverse order"
+    },
+    "R02": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-lifecycle.spec.ts",
+      "title": "failed initial before/after hooks restore authored nodes and release Select and table ownership"
+    },
+    "R03": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-lifecycle.spec.ts",
+      "title": "asynchronous row and completion callbacks reject without unhandled promises or stranded ownership"
+    },
+    "R04": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-lifecycle.spec.ts",
+      "title": "row-hook data mutations reject stale work while retaining the already committed inner write"
+    },
+    "R05": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-lifecycle.spec.ts",
+      "title": "direct recursive refresh rejects before a second binding and later refresh can recover"
+    },
+    "R06": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-lifecycle.spec.ts",
+      "title": "disposal inside a viewport row hook leaves exact authored markup and no late rollback mutations"
+    },
+    "R07": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-progressive.spec.ts",
+      "title": "before-hook failure keeps earlier ready records and releases the failing row for retry"
+    },
+    "R08": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-progressive.spec.ts",
+      "title": "after-hook failure releases resources in reverse order and retries one uncommitted record"
+    },
+    "R09": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-progressive.spec.ts",
+      "title": "onBind failure keeps committed DOM and the next request does not redeliver that completion"
+    },
+    "R10": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/grid-progressive.spec.ts",
+      "title": "disposal during completion settles the observer and restores authored ownership exactly"
+    }
+  },
+  "witness_counts": {
+    "status": "actual_current_canonical_counts_independent_raw_and_documents_pending",
+    "unit_delta": 0,
+    "browser_delta": 8,
+    "grid_callback_browser_cases": 8,
+    "source_witnesses": 2,
+    "installed_source_witnesses": 3,
+    "inherited_browser_source_witnesses": 10,
+    "inherited_full_cases_per_engine": 793,
+    "expected_full_cases_per_engine": 801,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 801
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m511-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m511-verification.json",
+    "required_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "required_package_checks": [
+      "isolated_js",
+      "isolated_ts",
+      "packed_chromium",
+      "packed_firefox",
+      "packed_webkit",
+      "installed_chrome",
+      "installed_edge"
+    ],
+    "required_other_checks": [
+      "strict_build",
+      "strict_source_types",
+      "strict_example_types",
+      "unit",
+      "binding_9_original_budgets",
+      "viewport_21_original_budgets",
+      "docs_changed_zero_errors_warnings",
+      "docs_full_zero_errors_warnings"
+    ],
+    "baseline_input_entries": 191,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 793,
+    "inventory_expectation": {
+      "status": "actual_final_frozen_counts",
+      "actual_source_inputs": 192,
+      "actual_package_files": 193,
+      "actual_unit_pass_count": 138,
+      "scope": "Current captured final canonical map and actual package descriptor/listing; actual private module and browser/example inputs are counted from the frozen map and pack output."
+    },
+    "semantic_document_scope": [
+      "docs/implementation/current.md",
+      "docs/implementation/feature-parity-plan.md",
+      "docs/implementation/m5-grid-callbacks-plan.md",
+      "docs/v2/grid.md",
+      "docs/v2/ui.md",
+      "docs/v2/migration.md",
+      "docs/v2/grid-demo.md"
+    ],
+    "semantic_document_scope_status": "actual7_semantic_bodies_independently_approved_pending_mechanical_stamps",
+    "setup_observations": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M511 helpers; not a project verification command",
+        "log": {
+          "path": "node_modules/.cache/m511-helper-syntax.log",
+          "sha256": "4d916d1a488a2311a93ef96586ea9b4572be00d656d3cfe17fb58199536a4780"
+        }
+      },
+      {
+        "kind": "own_read_only_baseline_helper_assertion",
+        "status": "corrected_before_source_GO",
+        "source": "Baseline reviewer actual tool observations; no retained failure log/hash was captured or invented.",
+        "observation": "The initial new audit expected the literal word beforeEach inside saved error JSON. Actual historical JSON records row-state.spec.ts:37:14; the reviewer corrected the assertion to that saved location plus its source beforeEach context. Later read-only recovery passed, including actual ZIP member requests. This is an audit assertion defect, not a new runtime or framework failure.",
+        "runtime_gate_claim": false
+      },
+      {
+        "kind": "reported_root_playwright_browser_restore",
+        "status": "reported_cli_install_exit_zero_directories_independently_present",
+        "source": "Root direct task message reports Playwright CLI install exit0; no retained installer log/hash was supplied or invented.",
+        "installed_root": "C:/Users/Goldman/AppData/Local/ms-playwright",
+        "observed_directories": [
+          "chromium-1243",
+          "chromium_headless_shell-1243",
+          "webkit-2359",
+          "ffmpeg-1011",
+          "winldd-1007"
+        ],
+        "firefox": "Existing workspace-local Playwright Firefox1543 cache remains the scoped Firefox path.",
+        "runtime_gate_claim": false,
+        "scope": "Browser setup observation only. Corrected captured focused/canonical gates separately own all actual test credit. No inherited browser availability or prior-stage runtime is recertified."
+      }
+    ],
+    "operator_dispositions": [
+      {
+        "kind": "captured_initial_focused_browser_launch_unavailable",
+        "log": "m511-focused-chromium.log",
+        "log_sha256": "bd4b0726922153314fc2ae497f8846277b9272e611aa82312cae5198cb05c26c",
+        "input_manifest": "m511-inputs-f9ba8d799f02.json",
+        "input_manifest_sha256": "f9ba8d799f023be510b18bc2db8efe3b0518e3ac214c3fca32755685d5d5377a",
+        "failed": 126,
+        "matching_missing_executable_errors": 126,
+        "sources_unchanged": true,
+        "observed_missing_path": "C:\\Users\\Goldman\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1243\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+        "changed_files_after_capture": [
+          "tests/browser/grid-callbacks.spec.ts"
+        ],
+        "framework_source_hashes_unchanged": true,
+        "disposition": "Every reported failure is browserType.launch with the missing default Chromium headless executable before test bodies. Separately, static review corrected expected ordinary per-row hook order and expanded initial-absence variants in the new test. Those fixture edits do not diagnose the captured launch failures, and no framework-source RED/GREEN fix is claimed. Preserve this attempt/map; later captured passes alone own their actual tested scope."
+      }
+    ],
+    "superseded_artifacts": [],
+    "independent_reviews": {
+      "baseline": "passed_read_only_db760ef_M510_source_raw_archive_preservation_recovery",
+      "contract": "bounded_contract_independently_approved_before_source_GO",
+      "source": "passed_independent_connected_source_callers_and_fixed_witness_static_review",
+      "evidence": "passed_independent_raw_gate_source_map_archive_shard_performance_parent_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_M5.10_baseline_recovery_for_M5.11",
+        "helper": {
+          "path": "node_modules/.cache/m511-baseline-audit.mjs",
+          "sha256": "d1f757fe6bcf01426b06f43843947ea142af0a4a40dd759ba290c2d3365d13cb"
+        },
+        "log": {
+          "path": "node_modules/.cache/m511-baseline-audit.log",
+          "sha256": "cb7e644b8a8a17c55b98cda23d4faa067a7fb507ec35ec459314363ba783240b"
+        },
+        "inputs": 191,
+        "committed_evidence_files": 136,
+        "records": 25,
+        "development": 8,
+        "latest": 16,
+        "superseded": 1,
+        "input_maps": 2,
+        "unit": 138,
+        "full_cases_per_engine": 793,
+        "actual_tar_sha256": "e6a84cd2db67da09cbc42ac789e239e175364c23be3b1c58197af7dcb4ffa6d2",
+        "actual_tar_files": 193,
+        "linked_raw_children": 100,
+        "semantic_bodies": 12,
+        "historical_fingerprint_only": 37,
+        "scope": "Read-only recorded-byte recovery; no compiler/runtime/browser/performance/model command executed. Historical failure and diagnostic facts remain dated M5.10 evidence."
+      },
+      "source": {
+        "status": "passed_independent_connected_source_callers_and_fixed_witness_static_review",
+        "reviewer": "m511_baseline, independent of source authorship",
+        "reviewed_at": "2026-11-14",
+        "reviewed_source_sha256": {
+          "src/ui/grid.ts": "1744ed203115198666d1f4078d67cb20d8c651ee7894d7b86016f5e0859e3739",
+          "src/ui/grid-hooks.ts": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+          "src/ui/form.ts": "de6727f0c3059e7a59f18e451378f8e59d2484d7bb9f24f49f6b00b6184cb545",
+          "tests/browser/grid-callbacks.spec.ts": "32f5f54176d0184de649de712c08732947d5af5eb6ae6c3fed80b23abf3fb3e9",
+          "tests/browser/grid-lifecycle.spec.ts": "0747e2056149d70e5591de618f3f5c87a689da0bf49d59c6dc2fb5d305d72fff",
+          "tests/browser/grid-progressive.spec.ts": "7506afc7fed7f8b6f77d6455b4468296d76fa62b7eeb4e3d85db4f48cd85d974",
+          "tests/browser/grid-viewport.spec.ts": "61efa7d7c9449f523cce5dab8a5b4d5654ea5d36e9e8c7a6e7e78da6a6cc101b",
+          "tests/consumers/browser/main.js": "69d2022c3ba958e1cd0360398662f8cfc525743e9678f743a0253cdda12e3f54",
+          "tests/consumers/ts/check.ts": "09f36ac5ff3ebdf6c5745ae27f3e3154956e19c0a6e4e4a6954c9fbaba8dde86",
+          "tools/check-packed-browser.mjs": "a6f383443964062ffd19bc18163fb489746c93e9d06c05dc79fac206ff4ac5fb",
+          "examples/vite/m10/demo.ts": "186dbd11c88b9991cb0d8039773cd383da4e4d136bd675d0545b0ea8696fe2ff"
+        },
+        "new_browser_witnesses": 8,
+        "source_witnesses": 2,
+        "installed_source_witnesses": 3,
+        "inherited_browser_source_witnesses": 10,
+        "observations": [
+          "Constructor reads all three external callback properties once and sends ordinary captured references to the existing private row owner.",
+          "Validation, invocation and before-hook physical attachment use the same captured references; options-object receiver invocation is removed.",
+          "No-hook behavior, existing row context/freezing, check/cleanup/error/rollback, progressive and viewport lifetime owners remain connected.",
+          "Corrected static fixture expectations preserve actual before-all/after-all ordinary row ordering; initial none/before-only/after-only branches cover disabled and enabled private owners.",
+          "Installed mutable constructor properties are replaced by throwers while actual caller observes plain strict-ESM invocation; isolated TypeScript uses explicit void receivers with existing signatures."
+        ],
+        "scope": "Read-only connected-code and fixed-witness review only. No compiler/browser/runtime/performance command executed; first focused launch failures and later actual gates retain their own captured scope.",
+        "findings": [],
+        "helper": {
+          "path": "node_modules/.cache/m511-source-review.mjs",
+          "sha256": "73788247f6afef45fa7d618a72058ce5d4a94efebbb12362d25c8ca7d62a75da"
+        },
+        "log": {
+          "path": "node_modules/.cache/m511-source-review.log",
+          "sha256": "f35b38e99da908a63c06d07e60285219a73b0aed4dbf38cab248142dcdc075ad"
+        },
+        "review_scope": "Targeted Ponytail connected-change review only; mandatory final whole-code M13 review/remediation remains required."
+      },
+      "runtime_reconciliation": {
+        "status": "captured_final_canonical_runtime_verified_independent_raw_and_documents_pending",
+        "input_manifest": "m511-inputs-abdebb72f467.json",
+        "input_manifest_sha256": "abdebb72f4675f2ea85e0c1c13de4373e3947e60d929f51953f5f3fb4609b9f5",
+        "source_inputs": 192,
+        "gate_records": 28,
+        "development_records": 11,
+        "superseded_records": 1,
+        "failed_records": 2,
+        "input_maps": [
+          {
+            "path": "m511-inputs-f9ba8d799f02.json",
+            "entries": 192,
+            "sha256": "f9ba8d799f023be510b18bc2db8efe3b0518e3ac214c3fca32755685d5d5377a"
+          },
+          {
+            "path": "m511-inputs-abdebb72f467.json",
+            "entries": 192,
+            "sha256": "abdebb72f4675f2ea85e0c1c13de4373e3947e60d929f51953f5f3fb4609b9f5"
+          }
+        ],
+        "canonical_groups": 16,
+        "execution_commands": 27,
+        "collection_commands": 13,
+        "unit_passed": 138,
+        "unit_delta": 0,
+        "new_browser_cases": 8,
+        "full_suites": {
+          "chromium": {
+            "passed": 801,
+            "elapsed": "12 sequential Chromium shards, 288.5s",
+            "log": "m511-browser-chromium-2.log",
+            "log_sha256": "4affff3067b5863cffb2a67df91997ab281e51209b6adae029e6c4038f1c7c19"
+          },
+          "firefox": {
+            "passed": 801,
+            "elapsed": "8.4m",
+            "log": "m511-browser-firefox.log",
+            "log_sha256": "0d5ecbb3cb8da646eb0f3925897aaf2ef4dea9b43f551f7d54f0d371268d05cb"
+          },
+          "webkit": {
+            "passed": 801,
+            "elapsed": "6.2m",
+            "log": "m511-browser-webkit.log",
+            "log_sha256": "8593aaa32fca3942c7a963fec0a119a2cbec9a1d2e95bd81b9b91811f595893f"
+          }
+        },
+        "chromium": {
+          "manifest": "m511-chromium-shards-2.json",
+          "manifest_sha256": "16df21b8ace201165f2f1c9bb3fe4950b9c875196fec44860eb83b17e5e1a6f1",
+          "shard_count": 12,
+          "partitions": [
+            71,
+            90,
+            49,
+            58,
+            84,
+            54,
+            74,
+            59,
+            69,
+            62,
+            67,
+            64
+          ],
+          "raw_child_files": 50,
+          "total_linked_raw_children": 72,
+          "elapsed_seconds": 288.495,
+          "retained_partial": {
+            "manifest": "m511-chromium-shards.json",
+            "manifest_sha256": "d70166708b639770aded62cf4a013c8bccec6177caa9ea4f1084a3455ee93a78",
+            "complete": false,
+            "certifies_full_suite": false,
+            "completed_prefix_passed": 268,
+            "last_child_passed": 83,
+            "last_child_unexpected": 1
+          }
+        },
+        "artifact": {
+          "sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+          "files": 193,
+          "packed_bytes": 340609,
+          "unpacked_bytes": 1716884,
+          "actual_tar_sha_and_listing_verified": true
+        },
+        "installed_js_ts": "captured pass",
+        "installed_windows_browsers": 5,
+        "performance": {
+          "binding_gate": "captured pass",
+          "viewport_gate": "captured pass",
+          "required_original_budgets": {
+            "binding": 9,
+            "viewport": 21
+          },
+          "recomputed_medians": 60,
+          "raw_durations": 300,
+          "budgets_checked": 30,
+          "independent_raw_geometry_review": "pending"
+        },
+        "scope": "Read-only retained record/log/input-map/manifest/child-hash/archive-listing/metric reconciliation followed by owned-ledger bookkeeping. No compiler/browser/project command rerun; independent raw archive payload, metadata/test identity, geometry and final semantic/mechanical document reviews remain pending. Both failed attempts and the later passing diagnostic remain distinct; no original import-failure cause is inferred.",
+        "helper": {
+          "path": "node_modules/.cache/m511-runtime-ledger.mjs",
+          "sha256": "a85c575b238bc824abf03eb3eefc27d6c23584041fb8bf0c1907997da06a3fb8"
+        }
+      },
+      "raw_evidence": {
+        "status": "approved_independent_final_raw_evidence",
+        "helper": {
+          "path": "node_modules/.cache/m511-independent-audit.mjs",
+          "sha256": "b7835ffe90f5e3245ac8996a3849578ce521d950f88dcf7fbe07559b9f254829"
+        },
+        "log": {
+          "path": "node_modules/.cache/m511-independent-audit.log",
+          "sha256": "27cc9a0af19d2817b65a9e651894bd869a8c5969a5f42db6c733983f24edd79c"
+        },
+        "audited_receipt": {
+          "path": "node_modules/.cache/m511-reviewed-runtime-receipt.json",
+          "sha256": "d2808da7b917c1bdf62beca5de31d1fbf972b081457821369f2815d71ff45924",
+          "byte_exact_R0": true
+        },
+        "records": 28,
+        "source_inputs": 192,
+        "unit_cases": 138,
+        "full_cases_per_engine": 801,
+        "actual_archive": {
+          "sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+          "files": 193,
+          "packed_bytes": 340609,
+          "unpacked_bytes": 1716884,
+          "header_checksums": 193,
+          "all_payloads_byte_identical": true
+        },
+        "linked_raw_children": 72,
+        "later_diagnostic": {
+          "passed": 1,
+          "trace_entries": 13,
+          "actual_grid_GET_status": 200,
+          "original_failure_cause_inferred": false,
+          "full_suite_coverage_credit": 0
+        },
+        "recomputed_medians": 60,
+        "raw_durations": 300,
+        "budgets_checked": 30,
+        "raw_geometry_checked": true,
+        "immutable_parents": 6,
+        "protected_performance_fixtures": 4,
+        "protected_raw_tar_fixtures": 3,
+        "preservation": "v1,ignored original lock,master and alpha baseline verified",
+        "scope": "Accepted independent read-only audit of captured bytes/results. No project/compiler/browser/benchmark/model command rerun; historical runtime is not recertified and final semantic/mechanical document review remains separate."
+      },
+      "documents_precheck": {
+        "status": "document_scope_corrected_original_review_snapshot_preserved",
+        "source": "Root actual history precheck found that the changed parity concept is feature-parity-plan.md; the original ledger named unchanged feature-parity.md. This is semantic-scope bookkeeping,not a runtime source change.",
+        "corrected_semantic_concept": "docs/implementation/feature-parity-plan.md",
+        "historical_fingerprint_only_concept": "docs/implementation/feature-parity.md",
+        "proof_policy": "Keep immutable R0, current R1 c2bacde63b55944eeea87f3cf070d2936df78adec0591d91a160345fd6bb4859 and original initial R0-to-R1 proof through semantic review. The ordinary post-semantic receipt will project corrected semantic-ledger SHA and review metadata; runtime facts remain unchanged.",
+        "historical_metadata_restoration": "Root restored feature-parity.md baseline metadata only after asserting its body unchanged; later global stamp may refresh its fingerprints only."
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "review_scope": "Seven complete frozen semantic bodies independently read across agent reviewers, with connected frozen source/callers and8 new witnesses,baseline-preserved contracts,R1 receipt and accepted independent raw report. Lead reviewer read full current/plan and all three indexes; other reviewers read five full canonical bodies,then rechecked the two surgical Grid demo corrections. Dated log additions and unchanged historical remainder were checked. No project/compiler/browser/benchmark/model command rerun.",
+        "independent_complete_body_reviews": {
+          "docs/v2/grid.md": {
+            "reviewer": "m511_design",
+            "sha256": "2e8bf94153930006a203fcfde25fa09c2964e34de948fa3f203805bbe666d1b8"
+          },
+          "docs/v2/ui.md": {
+            "reviewer": "m511_design",
+            "sha256": "036efd0ebfdf8e8d2acad43e3ca53a9d86da5aa4021f3789119954ab9a79f415"
+          },
+          "docs/implementation/feature-parity-plan.md": {
+            "reviewer": "m511_legacy",
+            "sha256": "3648831cbc1549b6e9d6e25fd6e02f3704771a954ec467eca93026662967ae1a"
+          },
+          "docs/v2/migration.md": {
+            "reviewer": "m511_legacy",
+            "sha256": "223e92995bfd0d82d0c46216ca5dbebe0e54f4c124d594a7dec58da38c60cc04"
+          },
+          "docs/v2/grid-demo.md": {
+            "reviewer": "m511_legacy",
+            "sha256": "8584bf2be6df3f19b792688788f90dd4706a0e8617a57afa5665c3d250888bbc"
+          }
+        },
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_whole_file_sha256": "d15d29ac50580335d9ee9365a390328a20855c99351397a0c43387d494fc2cb4",
+            "normalized_body_sha256": "b11ab7460752608e2039ae6df019dcb04e8aee0f9419793c74ff93907642eb48"
+          },
+          "docs/implementation/feature-parity-plan.md": {
+            "normalized_whole_file_sha256": "052b316e7bb7ef36accea8824bd9459a84ffbc61169977f10f80eb4dc8261ff6",
+            "normalized_body_sha256": "3648831cbc1549b6e9d6e25fd6e02f3704771a954ec467eca93026662967ae1a"
+          },
+          "docs/implementation/m5-grid-callbacks-plan.md": {
+            "normalized_whole_file_sha256": "2159666d819250c47b72ee73135a87e4219c1bcf10b0841567d6f1dcef02c722",
+            "normalized_body_sha256": "04d1197f63ed92674249aa46048dea38ffef78f4a7db8a70064a8e80fbf9a969"
+          },
+          "docs/v2/grid.md": {
+            "normalized_whole_file_sha256": "366894362ee440698f86b6bab101dbc19771c35313332d6b9251c34779f82d12",
+            "normalized_body_sha256": "2e8bf94153930006a203fcfde25fa09c2964e34de948fa3f203805bbe666d1b8"
+          },
+          "docs/v2/ui.md": {
+            "normalized_whole_file_sha256": "7668cc712517e7784c69977385a53d9fa0908bd2d1469304438b71196ed524e7",
+            "normalized_body_sha256": "036efd0ebfdf8e8d2acad43e3ca53a9d86da5aa4021f3789119954ab9a79f415"
+          },
+          "docs/v2/migration.md": {
+            "normalized_whole_file_sha256": "46e2f09346c0b8ea18e358bcc1f7820516363c6c8dece049e6e01f07814da68e",
+            "normalized_body_sha256": "223e92995bfd0d82d0c46216ca5dbebe0e54f4c124d594a7dec58da38c60cc04"
+          },
+          "docs/v2/grid-demo.md": {
+            "normalized_whole_file_sha256": "7dfdcf62a2de6f28fa2300a94cb2d955d75090c3a67ad0337823ca3b4e93e1ac",
+            "normalized_body_sha256": "8584bf2be6df3f19b792688788f90dd4706a0e8617a57afa5665c3d250888bbc"
+          }
+        },
+        "review_time_hash_scope": "Whole/body hashes describe the settled pre-verified fingerprint state. Whole hashes intentionally are not post-stamp/final hashes; semantic bodies must remain identical after LF normalization.",
+        "navigation_and_log_reviewed_files": {
+          "docs/index.md": {
+            "normalized_whole_file_sha256": "523c22f10113e6d0fb7538ac460b6cd5d86691e3849bf03c3456bf55d8c45241"
+          },
+          "docs/implementation/index.md": {
+            "normalized_whole_file_sha256": "0cbbd0f90d9a624d261a772528076dc10227243fa4658ef0b1095bdc9204b22f"
+          },
+          "docs/v2/index.md": {
+            "normalized_whole_file_sha256": "47fb95145526efbae0f92de3b4de54e2d8302a9951ecab6eac6ee17a3a9ae56c"
+          },
+          "docs/log.md": {
+            "normalized_whole_file_sha256": "b7562465e95ac3183f930e904308eec17a1c199add0ce5e39b8dc8c117bf72be"
+          }
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m511-final-semantics-reviewed-receipt.json",
+          "sha256": "c2bacde63b55944eeea87f3cf070d2936df78adec0591d91a160345fd6bb4859",
+          "scope": "Byte-exact R1 at final semantic review; pre-review-status snapshot, not a final/current receipt self-hash."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m511-runtime-invariance-initial.json",
+          "sha256": "bd7db12eaaf7468b4b3ae5f7b15f8a4ce3b7636c6cc3d22044bcf16b947901b7",
+          "audited_receipt_sha256": "d2808da7b917c1bdf62beca5de31d1fbf972b081457821369f2815d71ff45924",
+          "unchanged": true,
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "historical_preservation": {
+          "baseline": "db760efc6367fc592b5a6d6e1e0cdc240eb1b68b",
+          "historical_fingerprint_only": 34,
+          "preserved_bodies_and_generated_verified_dates": true,
+          "scope": "Independent read-only comparison of currently changed historical Markdown. Final root history checks must reconfirm after verified stamps."
+        },
+        "semantic_findings": [
+          "Exactly three existing Grid callbacks are captured once at construction, validated and invoked plainly. Captured beforeRowBind also controls initial physical attachment. No public type,option,method,entry,module,registry or dependency is added; other options keep their existing contracts.",
+          "Absent/present getter and mutation cases,frozen independent instances,physical attachment,explicit live forwarding and progressive callbacks match the8 new witnesses. Existing cleanup,error/thenable,reentry,disposal,progressive and viewport owners remain connected.",
+          "Strict/ESM callbacks observe undefined this; legacy instance receiver use migrates through explicit application forwarding. Stable closures can read current policy and deliberate refresh applies it to unchanged rows. No blanket hot option reconfiguration promise is made.",
+          "Actual recorded setup/launch failure facts remain separate from static fixture corrections; the first focused126-launch-failure attempt ran no test bodies. Only later captured passing maps/gates own their tested scope. Historical M5.10 incomplete requests and diagnostics retain only their dated parent scope.",
+          "The actual M5.11 incomplete Chromium parent retains four completed partitions and the failed fifth child. Its Grid module-fetch error occurred at beforeEach61 before the named test body. A later passing targeted trace,if present,owns only its later request; no original cause,transient classification,tolerance,retry or full-suite credit is inferred.",
+          "Current plan/parity/navigation/log describe28 retained records,two192-input maps,138 units,801 cases per engine,one193-file exact tar,five Windows browser runs,27 execution/13 collection commands and30 unchanged original budgets.",
+          "True DOM-only legacy Form callbacks have no demonstrated source-row contract; per-unbound-key timing remains unresolved. Wider default/declaration/receiver/initial-selection and data/UI/CVC/P0/M13 obligations remain required; no omission or full-family closure is approved."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "status": "authorized_after_this_independent_semantic_approval",
+          "permitted_actions": [
+            "Apply verified stamps to exactly these seven reviewed semantic concepts.",
+            "Settle fingerprint metadata and run actual changed/full document checks plus historical body/date checks.",
+            "Record only actual mechanical results and finalize top-level plus four selected statuses through m511-complete after successful checks.",
+            "Regenerate receipt/review hashes and recheck runtime invariance excluding only review and semantic_acceptance.sha256."
+          ],
+          "conditions": "Seven semantic bodies, frozen source/runtime inputs, accepted raw evidence and all runtime facts remain unchanged. Any body/API/runtime change requires renewed independent review. Draft zero-error/zero-warning sentences are conditional on actual successful mechanical checks; this review does not claim those checks already passed."
+        },
+        "document_preparation_observations": {
+          "precision_resolved": "Initial-absence coverage includes disabled,before-only and after-only owners. Ordinary multirow order remains before-all then after-all; strict/ESM receiver wording names its actual language scope. Existing source-only/unbound-key outcomes remain unresolved. Complete-body review corrected two stale Grid demo clauses: Form owns declared row-local choices without an application adapter,and filter choices retain the status/manual value universe while other filters affect counts including zero.",
+          "bookkeeping": "Corrected the seven-concept parity path to feature-parity-plan.md; restored unchanged feature-parity.md historical metadata before fingerprint-only refresh. Removed a reverse source edge that caused a fingerprint cycle. Original R0,R1 and initial invariance proof remain byte-identical.",
+          "scope": "Documentation precision and bookkeeping only; no R0-frozen runtime fact,setup/operator array or source input changed."
+        },
+        "limits": "Semantic approval only until actual final mechanical checks complete. No full-family/P0/M13 closure, omission, actual Safari/manual/personal/token/model result, publication or tag is approved.",
+        "helper": {
+          "path": "node_modules/.cache/m511-final-semantic-review.mjs",
+          "sha256": "7ed13ace5d9b43baa6e30fa16b6a9f3a17fd4d8321ba4a450679b784552bb83c"
+        },
+        "review_log": {
+          "path": "node_modules/.cache/m511-final-semantic-review.log",
+          "sha256": "4a73e94faec5c49cb3a7a31ed987f04f8fdc53e8141a10edbfbf45c7cb7c7432"
+        },
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m511-docs-changed.log",
+              "sha256": "4704190f30a93357dbd82e6d23299dee058bf6e2a2c4e03c2af2b687386a6894",
+              "concepts": 79,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m511-docs-full.log",
+              "sha256": "cbe37a3fdc056e38afab945d4ba676e0f209535331852036c36a424826736b64",
+              "concepts": 79,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m511-doc-history.json",
+            "sha256": "1a079398c56b576fb46e840856e7c7dddfc6d0e257dc5da59b9828597124bc2d",
+            "historical_fingerprint_only": 34,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 7,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "limitations": [
+      "Historical runtime remains in its dated scope and is not rerun/recertified.",
+      "Actual macOS/iOS Safari, manual assistive technology, personal acceptance and final fixed-agent/token comparison remain unverified.",
+      "No model-response evaluation, token-saving measurement, npm publication or release tag is performed or inferred."
+    ],
+    "diagnostic_dispositions": [
+      {
+        "status": "retained_failed_full_parent_and_later_passing_target_verified",
+        "failed_parent": {
+          "log": "m511-browser-chromium.log",
+          "log_sha256": "a8ebbbb57cece2360513da87605fefee7c2a3756113924343298e3637ed4191c",
+          "input_manifest": "m511-inputs-abdebb72f467.json",
+          "input_manifest_sha256": "abdebb72f4675f2ea85e0c1c13de4373e3947e60d929f51953f5f3fb4609b9f5",
+          "sources_unchanged": true,
+          "manifest": "m511-chromium-shards.json",
+          "manifest_sha256": "d70166708b639770aded62cf4a013c8bccec6177caa9ea4f1084a3455ee93a78",
+          "complete": false,
+          "certifies_full_suite": false,
+          "completed_partitions": 4,
+          "completed_prefix_passed": 268,
+          "last_child": {
+            "report": "m511-chromium-run-5.json",
+            "report_sha256": "b2f0ef5780f4de6b4044bd4a1ea1f301352a6a42f0d87ece211bda125e59a7ad",
+            "passed": 83,
+            "unexpected": 1,
+            "expected_id_count": 84,
+            "failed_test": {
+              "file": "grid-change-state.spec.ts",
+              "line": 139,
+              "title": "raw array order matters while equivalent JSON and object key order do not",
+              "observed_error": "Dynamic Grid module fetch failure reported at beforeEach page.evaluate line61 before the test body."
+            }
+          }
+        },
+        "later_diagnostic": {
+          "log": "m511-focused-core-chromium.log",
+          "log_sha256": "e9921e3f181d7dda5d55cd6007c316c288ee1b02f59f648e5b8fa09120d5df6b",
+          "input_manifest": "m511-inputs-abdebb72f467.json",
+          "input_manifest_sha256": "abdebb72f4675f2ea85e0c1c13de4373e3947e60d929f51953f5f3fb4609b9f5",
+          "sources_unchanged": true,
+          "passed": 1,
+          "trace": {
+            "path": "docs/implementation/evidence/m511-module-import-diagnostic-trace.zip",
+            "sha256": "7562762b0600f95aa99883fa87c5d1d049263e59ce42d54897d54069cf22bad8",
+            "bytes": 105426
+          },
+          "companion": {
+            "path": "docs/implementation/evidence/m511-module-import-diagnostic.json",
+            "sha256": "f036c75e7c3a6ca71a97c830712a4f4c9f6c9dd6d143958bebb15d69a67f66e9"
+          },
+          "actual_trace_grid_requests": [
+            {
+              "url": "http://127.0.0.1:4173/@fs/D:/workspace/natural_js/src/ui/grid.ts",
+              "status": 200,
+              "statusText": "OK"
+            }
+          ]
+        },
+        "scope": "The trace records the later passing targeted diagnostic only; no original failed-request trace, failure cause, tolerance, retry or full-suite coverage is inferred. All192 captured execution inputs remain unchanged between the failed parent and later passing diagnostic. Current ignored wrapper inspection does not prove its execution-time hash."
+      }
+    ],
+    "actual_runtime": {
+      "status": "captured_final_canonical_runtime_verified_independent_raw_and_documents_pending",
+      "input_manifest": "m511-inputs-abdebb72f467.json",
+      "input_manifest_sha256": "abdebb72f4675f2ea85e0c1c13de4373e3947e60d929f51953f5f3fb4609b9f5",
+      "source_inputs": 192,
+      "gate_records": 28,
+      "development_records": 11,
+      "superseded_records": 1,
+      "failed_records": 2,
+      "input_maps": [
+        {
+          "path": "m511-inputs-f9ba8d799f02.json",
+          "entries": 192,
+          "sha256": "f9ba8d799f023be510b18bc2db8efe3b0518e3ac214c3fca32755685d5d5377a"
+        },
+        {
+          "path": "m511-inputs-abdebb72f467.json",
+          "entries": 192,
+          "sha256": "abdebb72f4675f2ea85e0c1c13de4373e3947e60d929f51953f5f3fb4609b9f5"
+        }
+      ],
+      "canonical_groups": 16,
+      "execution_commands": 27,
+      "collection_commands": 13,
+      "unit_passed": 138,
+      "unit_delta": 0,
+      "new_browser_cases": 8,
+      "full_suites": {
+        "chromium": {
+          "passed": 801,
+          "elapsed": "12 sequential Chromium shards, 288.5s",
+          "log": "m511-browser-chromium-2.log",
+          "log_sha256": "4affff3067b5863cffb2a67df91997ab281e51209b6adae029e6c4038f1c7c19"
+        },
+        "firefox": {
+          "passed": 801,
+          "elapsed": "8.4m",
+          "log": "m511-browser-firefox.log",
+          "log_sha256": "0d5ecbb3cb8da646eb0f3925897aaf2ef4dea9b43f551f7d54f0d371268d05cb"
+        },
+        "webkit": {
+          "passed": 801,
+          "elapsed": "6.2m",
+          "log": "m511-browser-webkit.log",
+          "log_sha256": "8593aaa32fca3942c7a963fec0a119a2cbec9a1d2e95bd81b9b91811f595893f"
+        }
+      },
+      "chromium": {
+        "manifest": "m511-chromium-shards-2.json",
+        "manifest_sha256": "16df21b8ace201165f2f1c9bb3fe4950b9c875196fec44860eb83b17e5e1a6f1",
+        "shard_count": 12,
+        "partitions": [
+          71,
+          90,
+          49,
+          58,
+          84,
+          54,
+          74,
+          59,
+          69,
+          62,
+          67,
+          64
+        ],
+        "raw_child_files": 50,
+        "total_linked_raw_children": 72,
+        "elapsed_seconds": 288.495,
+        "retained_partial": {
+          "manifest": "m511-chromium-shards.json",
+          "manifest_sha256": "d70166708b639770aded62cf4a013c8bccec6177caa9ea4f1084a3455ee93a78",
+          "complete": false,
+          "certifies_full_suite": false,
+          "completed_prefix_passed": 268,
+          "last_child_passed": 83,
+          "last_child_unexpected": 1
+        }
+      },
+      "artifact": {
+        "sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+        "files": 193,
+        "packed_bytes": 340609,
+        "unpacked_bytes": 1716884,
+        "actual_tar_sha_and_listing_verified": true
+      },
+      "installed_js_ts": "captured pass",
+      "installed_windows_browsers": 5,
+      "performance": {
+        "binding_gate": "captured pass",
+        "viewport_gate": "captured pass",
+        "required_original_budgets": {
+          "binding": 9,
+          "viewport": 21
+        },
+        "recomputed_medians": 60,
+        "raw_durations": 300,
+        "budgets_checked": 30,
+        "independent_raw_geometry_review": "pending"
+      },
+      "scope": "Read-only retained record/log/input-map/manifest/child-hash/archive-listing/metric reconciliation followed by owned-ledger bookkeeping. No compiler/browser/project command rerun; independent raw archive payload, metadata/test identity, geometry and final semantic/mechanical document reviews remain pending. Both failed attempts and the later passing diagnostic remain distinct; no original import-failure cause is inferred."
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Local-source and per-unbound-key value observation,broader default/global/declaration equivalence,direct hot declarations and all remaining control/source/dynamic outcomes outside selected mounted value or captured Grid row/completion callbacks."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected captured Grid row/completion outcomes may receive acceptance after implementation,fresh gates and independent review. All full-owner/P0/M13 obligations and consolidated omission decisions remain open."
+  }
+}

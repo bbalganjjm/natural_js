@@ -1,0 +1,15 @@
+{
+  "trace": "docs/implementation/evidence/m511-module-import-diagnostic-trace.zip",
+  "sha256": "7562762b0600f95aa99883fa87c5d1d049263e59ce42d54897d54069cf22bad8",
+  "bytes": 105426,
+  "kind": "passing_targeted_diagnostic_after_prior_beforeEach_module_fetch_failure",
+  "gate_log": "m511-focused-core-chromium.log",
+  "grid_requests": [
+    {
+      "url": "http://127.0.0.1:4173/@fs/D:/workspace/natural_js/src/ui/grid.ts",
+      "status": 200,
+      "statusText": "OK"
+    }
+  ],
+  "limits": "The trace records the later passing diagnostic, not the original failed request. No root cause, retry, tolerance or full-suite coverage is inferred."
+}

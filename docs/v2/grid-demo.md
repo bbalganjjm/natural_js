@@ -84,7 +84,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -121,10 +121,10 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: b03e5d6328d64698689621724492dc4e66292737
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -150,7 +150,7 @@ Row status selects live, modified, deleted, all retained or no statuses through 
 
 # View
 
-The row's Inline detail and Popup detail actions share one authored template and employeeDetail PageDefinition. Their editors include fields hidden from the current Grid column state. The nested Shift Select is native application markup populated before Form's subscriber, with an application parser retaining numeric codes. No competing Select binder or new Form option-map contract is used.[^view][^controller][^detail-controller]
+The row's Inline detail and Popup detail actions share one authored template and employeeDetail PageDefinition. Their editors include fields hidden from the current Grid column state. The native Shift Select declares data-options="assignment.shifts", data-option-label="meta.label" and data-option-value="code". Form owns these row-local choices, raw code values and cleanup; the controller adds no option-generation, code-parser or subscriber-order adapter.[^view][^controller][^detail-controller]
 
 The labelled height button connects heightResize to the existing scroll region. ArrowUp/Down, Shift, Home/End and pointer dragging adjust the area; the reveal control accepts nearest/start/center/end. Authored CSS and the existing page-owned wheel guard provide scroll containment. These controls work with or without the optional measured viewport.[^view][^controller][^style]
 
@@ -242,7 +242,7 @@ In **Validation**, select On blur to defer scalar commits until leaving the fiel
 | `filtered` | All rows matching the manual and column filters, before paging. |
 | `store` | All live Rows entries, regardless of filtering or paging. |
 
-Header sort buttons cycle ascending, descending, then cleared and update `aria-sort`. The Team column filter combines with the manual Team predicate and other column filters using AND. `setColumnFilter("team", null)` means all values; `setColumnFilter("team", [])` means none. The empty-value button demonstrates the latter; All teams in the header clears only the column filter. `filterChoices("team", search)` returns frozen raw `{ value, label, count }` choices after the manual/other column filters, excluding the Team column's own filter and before paging. Search matches choice labels without changing row filtering or clearing selected values hidden by the search.[^controller][^grid][^filters]
+Header sort buttons cycle ascending, descending, then cleared and update `aria-sort`. The Team column filter combines with the manual Team predicate and other column filters using AND. `setColumnFilter("team", null)` means all values; `setColumnFilter("team", [])` means none. The empty-value button demonstrates the latter; All teams in the header clears only the column filter. `filterChoices("team", search)` returns frozen raw `{ value, label, count }` choices within the status/manual domain. Counts apply other column filters, exclude the Team column's own filter and ignore paging, retaining zero-count values. Search matches choice labels without changing row filtering or clearing selected values hidden by the search.[^controller][^grid][^filters]
 
 Activate Inspect after sorting, filtering or paging to see `onRowAction` receive `{ action, id, row, element, event }` for the current row snapshot and stable ID. It does not change the active row or either ID set. The **Selected or inspected raw snapshot** and **Rows.original(id)** panels follow the inspected ID on later refreshes, including edits and view changes. A row-selection callback or explicit row-selection click clears inspection; a missing inspected ID falls back to the active row, and Dataset reset clears it. An inserted or copied row shows `null` in the original panel because `Rows.original(id)` returns `undefined`.[^controller][^grid]
 
@@ -317,6 +317,8 @@ Remaining Grid parity stays required follow-up work. Status/default/lifecycle, c
 Without `initialPage`, `viewport` or `progressive`, Grid creates all initial row clones. Local paging bounds the logical page; viewport bounds connected DOM and keeps page-wide check/range/paste semantics. The scroll root needs finite authored height and stable table/column widths; its estimate does not force fixed-height rows. Interactive use is not a controlled performance measurement. Rebinding for locale, initial page, mode or eligibility policy also discards active identity, selected/checked sets and uncommitted drafts. Use `setSelected([])` or `setChecked([])` to clear a complete set; `select(null)` clears only the active row. Keep the check checkbox separate from `data-field`, do not send `RowId` as a business key, and do not put a fixed `id` in a repeated row.[^grid][^controller][^selection][^viewport]
 
 # Shared value policy preview
+
+The main Grid's row-resource and completion callbacks use explicit closures over its controls and counters. Grid captures these three binding callback references at construction; it does not bind this or reread callback properties. Change live application policy inside a stable forwarding function, and use refresh for unchanged rows. [Grid row binding](grid.md#row-binding-and-owned-resources) defines the boundary; other Grid options retain their own contracts.[^controller]
 
 The authored Shared field value callbacks section binds the same employee Rows through a Form, a two-record Grid and a two-record List. It reuses employmentValue from the existing detail controller to show Active/Inactive only on static spans; the main Grid's native checkbox still edits a boolean. One explicit application callback pair reads the Show readable employment labels checkbox and reports the latest after-value context. Refresh shared value policy calls all three refresh owners without replacing their store or tracked values.[^controller][^detail-controller][^value-demo-browser]
 

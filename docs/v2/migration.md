@@ -52,7 +52,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: a4472bd94c9cb4df63302e5d3ff41024ba7c37a1
+    git_blob: 142649bed5f0fdd46dd209efa25229ed54bdd03e
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: b4e1f12791271f8a10702a533ab8c96871ea303a
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+    git_blob: 58251b7b726ac4a654a592b07447f02b76f86fe9
+generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -395,6 +395,8 @@ Do not copy the old zero-delay recursion, nonpaged first=false anomaly, empty-ap
 
 ## 10. Separate Form display callbacks from source normalization
 
+Grid beforeRowBind, onRowBind and onBind now capture the validated function once and call it without an implicit receiver. Remove reliance on the legacy component receiver or the pre-release options-object receiver; use the explicit context and application closures. Later original-options replacement/deletion/addition has no effect. A stable function such as onBind: result => policy.complete?.(result) reads a deliberately mutable application policy; refresh rebinds unchanged rows. A constructor completion can run before the bindGrid return is assigned, so do not read that uninitialized handle in it. Legacy this.select(0) initial-selection workflows retain a separate explicit post-construction migration obligation; capture consistency does not close that wider outcome.[^grid][^legacy-ui][^parity]
+
 Replace onBeforeBindValue/onBindValue with beforeBindValue/onBindValue on a Rows-backed Form, Grid or List. Both receive value and ValueBindContext: phase is bind/val, rowId is explicit and element is the primary native field member. Before runs before display; after observes it and may replace projected raw once. Undefined keeps the current value; false, zero, null and empty string are actual replacements. No this/jQuery collection or global registry is supplied.[^form][^legacy-ui]
 
 Returns now affect display only. The old bind loop also visited unbound keys and wrote callback returns into its mutable dataset. Its val-before received old data; val-after could change data after notification without another DOM write. Preserve intentional business normalization in application receive/decode/parse code or an explicit Rows write instead of relying on those inconsistent side effects. Native boolean checkboxes and numeric choice maps need no old number/boolean-to-string workaround.[^form][^rows][^legacy-ui]
@@ -493,7 +495,7 @@ Replace a 1.x ui.form configuration mutation with an application-owned FormOptio
 
 Merge nested maps and each field's format/validate kinds explicitly. Ordered tuples replace rather than concatenate; [] clears. [Form presets](form.md#shared-options-and-callback-composition) gives the executed local-then-shared value pipeline and separate original-input/false-tail notification recipe. Capture references, preserve context/phase, forward thenables, and treat the entire composition as one callback. The old option mutation, wrapper stacking and lost phase/output are not migration guarantees.[^legacy-ui][^form]
 
-Mounted Grid/List fields now support the same explicit value callbacks as Form. Pass a shared callback pair explicitly and use stable forwarding functions when the application must read a deliberately mutable policy at call time. Form/Grid refresh and List.refresh reproject unchanged visible values without Rows mutation. ValueBindContext replaces the pre-release FormValueContext name without an alias. Broader default/declaration equivalence, local-source and per-unbound-key callbacks remain required; no full-family closure, capability omission or global engine is approved.[^parity]
+Mounted Grid/List fields now support the same explicit value callbacks as Form. Pass a shared callback pair explicitly and use stable forwarding functions when the application must read a deliberately mutable policy at call time. Form/Grid refresh and List.refresh reproject unchanged visible values without Rows mutation. ValueBindContext replaces the pre-release FormValueContext name without an alias. Legacy Form binding requires a dataset row and add creates one; no examined legacy source/example establishes callbacks for a true DOM-only Form. Unbound-key before/after timing is real and remains required: enumerating full Rows in whole hooks or subscribing to source changes does not reproduce that per-key bind/val timing. Broader default/declaration equivalence also stays open; no full-family closure, capability omission or global engine is approved.[^legacy-ui][^parity]
 
 [^legacy-screen]: Preserved 1.x search, grid, detail, and save example
 [^legacy-comm]: Preserved 1.x page loading and request serialization

@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: 68e4229f98812886e99d0037b187ce1e17dd9465
+    git_blob: d2ac58bd92537eb0cca2e2ce7ebf972cdd6360d7
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable legacy behavior and unresolved cross-owner obligations
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Existing row binding, projection, callbacks and resource lifetime
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Bounded mounted windows and scroll geometry
@@ -28,7 +28,7 @@ sources:
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Synchronous row hooks and reverse resource release
-    git_blob: 628b69014fd77f0f18e5e8c84d2953c1a9401bb9
+    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
   - id: page
     resource: ../../src/page/index.ts
     title: Per-instance abort and asynchronous controller cleanup

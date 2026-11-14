@@ -8,7 +8,7 @@ sources:
   - id: closure
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: 68e4229f98812886e99d0037b187ce1e17dd9465
+    git_blob: d2ac58bd92537eb0cca2e2ce7ebf972cdd6360d7
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable 7a36a39 Grid audit
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and delegated native events
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Existing active, selected and checked transitions

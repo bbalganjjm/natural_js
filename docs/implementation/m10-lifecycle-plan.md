@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: cb580673394aaca9d7b0b34b1794b3a1f8a08779
+    git_blob: 3109af1dc7ebd2dad24a6514f7b5fc5afd93d2df
   - id: data
     resource: ../../src/data/index.ts
     title: Shared snapshots, tombstones and atomic notification
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled record binding and view ownership
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: body
     resource: ../../src/ui/grid-row-blocks.ts
     title: Authored record blocks and native merging
@@ -28,7 +28,7 @@ sources:
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private synchronous row resources and cleanup
-    git_blob: 628b69014fd77f0f18e5e8c84d2953c1a9401bb9
+    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
   - id: browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, binding failure, append, focus and empty-state acceptance

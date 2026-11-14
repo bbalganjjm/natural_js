@@ -203,19 +203,22 @@ export function connectRowLifecycle(table: HTMLTableElement, rows: Rows<Employee
   const bindings: { event: RowsEvent | null; counts: readonly number[] }[] = [];
   const grid = bindGrid(table, {
     rows, statusFilter: ["clean", "insert", "update", "delete"],
-    beforeRowBind(context) {
+    beforeRowBind(this: void, context) {
+      const receiver: void = this; void receiver;
       const row: RowSnapshot<Employee> = context.row;
       const elements: readonly HTMLTableRowElement[] = context.elements;
       for (const element of elements) element.dataset.consumerRow = String(row.id);
       context.own(() => { for (const element of elements) delete element.dataset.consumerRow; });
     },
-    onRowBind(context) {
+    onRowBind(this: void, context) {
+      const receiver: void = this; void receiver;
       const element = context.elements[0];
       const onClick = () => { element.dataset.consumerStatus = context.row.status; };
       element.addEventListener("click", onClick);
       context.own(() => element.removeEventListener("click", onClick));
     },
-    onBind(result) {
+    onBind(this: void, result) {
+      const receiver: void = this; void receiver;
       bindings.push({ event: result.event, counts: [result.total, result.filtered, result.visible, result.mounted] });
     }
   });

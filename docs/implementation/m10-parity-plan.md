@@ -8,11 +8,11 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature scope and dependency order
-    git_blob: b4e1f12791271f8a10702a533ab8c96871ea303a
+    git_blob: 58251b7b726ac4a654a592b07447f02b76f86fe9
   - id: coverage
     resource: feature-parity.md
     title: Remaining Grid behavior families
-    git_blob: a4472bd94c9cb4df63302e5d3ff41024ba7c37a1
+    git_blob: 142649bed5f0fdd46dd209efa25229ed54bdd03e
   - id: data
     resource: ../../src/data/index.ts
     title: Shared row identity, order and immutable changes
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid projection, drafts and mounted lifetime
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: ordering-browser
     resource: ../../tests/browser/rows-ordering.spec.ts
     title: Shared order, draft, focus and viewport regressions

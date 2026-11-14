@@ -28,7 +28,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: da177986f02bbfc5df160a10fda6ad88c9e253c1
+    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -56,7 +56,7 @@ sources:
   - id: grid-hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private Grid row callbacks and reverse resource cleanup
-    git_blob: 628b69014fd77f0f18e5e8c84d2953c1a9401bb9
+    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
