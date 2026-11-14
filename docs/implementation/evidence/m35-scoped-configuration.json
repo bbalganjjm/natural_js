@@ -1,0 +1,86 @@
+{
+  "milestone": "M3.5",
+  "status": "accepted_source_and_focused_witness_snapshot",
+  "baseline": {
+    "commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
+    "receipt": {
+      "path": "docs/implementation/evidence/m34-verification.json",
+      "sha256": "91264b814b7981ef8c506db80e0e246d3d333188c626f537445618add48720b2",
+      "bytes": 6906
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/7",
+  "selected_contracts": {
+    "creation": "One captured Rows owner through Grid/List/Tree and Grid selection/checks; one read and cloned communicator base URL.",
+    "live": "Two existing RuleSet value unions accept captured plain synchronous locale/message providers per generated failed-rule message; literal snapshots and existing fallback/cost fast path remain.",
+    "application": "Two actual CVC pages own independent Forms/Rows/services and identity-checked native Map handles, with deliberate scope forwarding.",
+    "public_delta": "Only locale/messages values expand; no new named public type, field, entry, runtime filename, dependency or registry."
+  },
+  "independent_source_review": {
+    "reviewer": "m511_design",
+    "status": "passed_connected_applied_source_callers_and_eight_draft_contracts",
+    "report": {
+      "path": "docs/implementation/evidence/m35-independent-source-review.json",
+      "sha256": "79dba3b79f8725413cb43e9db85071d2ea305aefbe9b8950c3c6bce487e431f0",
+      "bytes": 6612
+    },
+    "preflight": {
+      "path": "docs/implementation/evidence/m35-independent-preflight.json",
+      "sha256": "8d1d11226272cb9ac8eed12f949c93010f4e39df63ebcdeec9b5ca111267e543",
+      "bytes": 2666
+    },
+    "source_sha256": {
+      "src/ui/grid.ts": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "src/ui/list.ts": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "src/ui/tree.ts": "18219e9f309ff188a8234e6dc0b1c21d21b088daf28994f91031b08ce3b508c9",
+      "src/comm/index.ts": "00d14005d526d9cf31fd863e600894efe5e997f9de40d9a4f19e91320dfab4de",
+      "src/ui/index.ts": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+      "src/ui/rules.ts": "6608c910782124ab1ceee0ff1014abed96199598d8989c2b8c2a3572aac70772",
+      "src/ui/grid-selection.ts": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+      "tests/consumers/browser/main.js": "006e7f38f68c963c861f579e9f0a84b703ba1c7a553778099d5eb7e01a302484",
+      "tests/consumers/ts/check.ts": "34660017e286e373e1e1d704634ebce6014a8136cd70ab187eb2a7e4b4f2490e",
+      "tools/check-packed-browser.mjs": "696951ac664ccd377d4353212dcd1520bfa1c0693ef1cd0b83d0a6b4e532614c",
+      "tests/configuration.test.ts": "28975220d42710dedf045f66348e9c5efffbff006d32ec38e94822b05cabb9d0",
+      "tests/browser/configuration.spec.ts": "9136ce80876944c01c1115d3bc6455bad042a0ddfb4b74f9f6eaa661d377463c"
+    }
+  },
+  "witnesses": {
+    "new_unit_cases": 8,
+    "new_browser_cases": 5,
+    "files": [
+      "tests/configuration.test.ts",
+      "tests/browser/configuration.spec.ts"
+    ],
+    "installed": [
+      "tests/consumers/browser/main.js",
+      "tests/consumers/ts/check.ts",
+      "tools/check-packed-browser.mjs"
+    ]
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 163,
+    "focus_each_engine": 32,
+    "scope": "All three focused engines pass on one source; no failed current-stage development attempt at capture."
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m35-declaration-contract.json",
+    "sha256": "9775168b228d3d629d91c49d2fd01aa9270ebde0c07e93ecff5f51b054900c13",
+    "bytes": 1208
+  },
+  "remaining": [
+    "M3.6 automatic advice and M3.7 declarations/actions retain their required owners.",
+    "M5.18 global fallback, catalogs, standalone rules/masks and private rule-call receiver remain open.",
+    "Component-specific configuration/text/selection, all M5 ancestors and whole-framework/M13/release gates remain required."
+  ],
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable pre-canonical source/focus snapshot; m35-verification.json owns later runtime/raw/document completion."
+}

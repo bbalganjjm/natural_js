@@ -28,11 +28,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: M6 List implementation
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: select
     resource: ../../src/ui/select.ts
     title: M6 standalone Select implementation

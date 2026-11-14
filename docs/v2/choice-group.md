@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public choice-group function, handle and shared choice type
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: group
     resource: ../../src/ui/choice-group.ts
     title: Authored generation, native selection, defaults and focus

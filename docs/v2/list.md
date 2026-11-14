@@ -13,11 +13,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public List handle and export
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
@@ -29,7 +29,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private UI rule runner
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -38,10 +38,10 @@ sources:
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native display and authored-template constraint regressions
     git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -95,6 +95,8 @@ rows.dispose();
 | `rules` | Optional RuleSet catalogs, messages, locale and field declarations; see [shared rules](rules.md). Retained UI built-ins also resolve. |
 | `beforeBindValue`, `onBindValue` | Captured synchronous value functions for named rendered fields; see [shared value callbacks](value-callbacks.md). |
 | `onSelect` | Receives changed row ID, row snapshot or `null`, and the source event; programmatic changes pass `event: null`. |
+
+bindList captures its Rows once. Rendering, subscription, selection and validate() use that same store; replacing options.rows cannot redirect an existing binding. Update the captured Rows normally, or dispose and bind a new owner for another store. No store is cloned or frozen.[^list]
 
 # Value callbacks and refresh
 

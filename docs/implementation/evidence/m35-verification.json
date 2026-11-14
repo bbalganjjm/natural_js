@@ -1,0 +1,213 @@
+{
+  "milestone": "M3.5",
+  "status": "selected_outcomes_verified_remaining_owners_open",
+  "baseline_commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
+  "runtime": {
+    "path": "docs/implementation/evidence/m35-runtime-receipt.json",
+    "sha256": "8fcd4267841d2ee55fe84343a642383fe8e071ee61864b4bcb784b14a1d53d57",
+    "bytes": 249235
+  },
+  "source_review": {
+    "path": "docs/implementation/evidence/m35-scoped-configuration.json",
+    "sha256": "62de95e583a271b4554361fea73139b71bdf2cf234120b3ecb4796d69c9317fc",
+    "bytes": 4311,
+    "reviewer": "m511_design",
+    "connected_report": {
+      "path": "docs/implementation/evidence/m35-independent-source-review.json",
+      "sha256": "79dba3b79f8725413cb43e9db85071d2ea305aefbe9b8950c3c6bce487e431f0",
+      "bytes": 6612
+    }
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m35-independent-audit.json",
+    "sha256": "42b2441e6e0fb33234f337e25c32ee10b6c4f96749ca046a27ffe5ba6a64e7f0",
+    "bytes": 71535,
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "docs/implementation/evidence/m35-independent-audit.mjs",
+      "sha256": "72b98cdbe12057f940b0a603e35424ee4ba024edb53c18ee89714934ca6678d0",
+      "bytes": 28549
+    },
+    "original_execution_path": "node_modules/.cache/m35-independent-audit.mjs"
+  },
+  "counts": {
+    "inputs": 209,
+    "attempts": 27,
+    "canonical_gates": 16,
+    "development_attempts": 10,
+    "superseded_canonical_attempts": 1,
+    "unit_cases": 163,
+    "new_unit_cases": 8,
+    "full_cases_each": 911,
+    "new_browser_cases": 5,
+    "focused_each": 32,
+    "diagnostic_focus_each": 37,
+    "package_files": 203,
+    "declarations": 40,
+    "unchanged_declarations": 38,
+    "changed_declarations": 2,
+    "performance_budgets": 30,
+    "raw_medians": 60,
+    "raw_durations": 300
+  },
+  "artifact": {
+    "sha256": "375b752ef05f77781bb671ce2001de5bc4bb5b1df4405f439d9114a34a03e7de",
+    "files": 203,
+    "packed_bytes": 361201,
+    "unpacked_bytes": 1828622
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m35-declaration-contract.json",
+    "sha256": "9775168b228d3d629d91c49d2fd01aa9270ebde0c07e93ecff5f51b054900c13",
+    "bytes": 1208
+  },
+  "documents": {
+    "status": "passed_independent_semantics_and_actual_changed_full_checks",
+    "semantic_files": [
+      "docs/implementation/current.md",
+      "docs/implementation/m3-scoped-configuration-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "docs/v2/rules.md",
+      "docs/v2/comm.md",
+      "docs/v2/grid.md",
+      "docs/v2/list.md",
+      "docs/v2/tree.md",
+      "docs/v2/form.md",
+      "docs/v2/architecture.md",
+      "docs/v2/migration.md"
+    ],
+    "expected_scope": {
+      "concepts": 93,
+      "reserved_files": 5
+    },
+    "independent_review": {
+      "reviewer": "m511_design",
+      "path": "node_modules/.cache/m35-final-document-approval.json",
+      "sha256": "c0d30194c84fb70f0262ddab7254aebd2f6ed7472aeb9a4d8db923a77efa7b0d",
+      "bytes": 13153,
+      "reviewed_files": {
+        "docs/implementation/current.md": {
+          "normalized_body_sha256": "17efa128f98a299206c796074bd074bce9331e4c73f812d934594ddc3679853e",
+          "normalized_body_bytes": 5458,
+          "review": "Fresh independent final full-body semantic review against accepted immutable runtime, source/draft snapshot, raw audit, declaration delta and remaining-owner contract."
+        },
+        "docs/implementation/m3-scoped-configuration-plan.md": {
+          "normalized_body_sha256": "252823f78778f90f9cddad83b99f40703f9ba3c1459ba927c9593850ab2cb85d",
+          "normalized_body_bytes": 12603,
+          "review": "Fresh independent final full-body semantic review against accepted immutable runtime, source/draft snapshot, raw audit, declaration delta and remaining-owner contract."
+        },
+        "docs/implementation/m5-completion-run.md": {
+          "normalized_body_sha256": "8f90e7f618c8042e60cf8436d6b72926d3f3b9bee3ffd102c2840da62b8f7695",
+          "normalized_body_bytes": 8946,
+          "review": "Fresh independent final full-body semantic review against accepted immutable runtime, source/draft snapshot, raw audit, declaration delta and remaining-owner contract."
+        },
+        "docs/v2/rules.md": {
+          "normalized_body_sha256": "b8b2e023125ae1ff3b4c3db31f7a3177f206694fb2c84d1d5a4d3bb98722bd4e",
+          "normalized_body_bytes": 9186,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/comm.md": {
+          "normalized_body_sha256": "e096084f715598235c46a7538b407edd70d1651c43fa3ad35e2748da032cf048",
+          "normalized_body_bytes": 7841,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/grid.md": {
+          "normalized_body_sha256": "33379310c2865f33d5d62b142903bb25dca3aafe5abcd9bd283a961b7c4786d0",
+          "normalized_body_bytes": 84081,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/list.md": {
+          "normalized_body_sha256": "c89afd857e66d049ec0d6d4981c8bc8590d35d39e4ec79847be044775c7eaacb",
+          "normalized_body_bytes": 10308,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/tree.md": {
+          "normalized_body_sha256": "f79f9d7beb5b445068921ed3dc72fc1d38ddfdda073905baa20e5b8a62e02d21",
+          "normalized_body_bytes": 8729,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/form.md": {
+          "normalized_body_sha256": "f691bc8147969378f02303a80c9f087333dd1582c1df74ec56debd8f8c50d302",
+          "normalized_body_bytes": 55214,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/architecture.md": {
+          "normalized_body_sha256": "56fe6aa8b792cc1bac7a6ad0dc6bd4a7c6c9f3784d8e723ab97ef714ad24b70a",
+          "normalized_body_bytes": 19590,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        },
+        "docs/v2/migration.md": {
+          "normalized_body_sha256": "519e40ecfd79eaed0cb670cceab53aac9a0f3838f2ee78b6477a2c0d673d8bb0",
+          "normalized_body_bytes": 62381,
+          "review": "Prior independent connected full-body API acceptance rechecked by exact unchanged body hash."
+        }
+      }
+    },
+    "mechanical": {
+      "checks": {
+        "changed": {
+          "path": "docs/implementation/evidence/m35-docs-changed.log",
+          "sha256": "f9cdb5584308a90c815bd030402648327240b4aadf482299393c99ca6eb14701",
+          "bytes": 183,
+          "concepts": 93,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        },
+        "full": {
+          "path": "docs/implementation/evidence/m35-docs-full.log",
+          "sha256": "66d217842081338c4c10b8a70a9a2949013a28afbc4bb01ac0e2e7f72769cd4c",
+          "bytes": 173,
+          "concepts": 93,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "history": {
+        "path": "docs/implementation/evidence/m35-document-history.json",
+        "sha256": "846eda0a1af0078aa680bbbe052415ed5090aa7819d42df07788554850142ccc",
+        "bytes": 2685
+      },
+      "fingerprint_log": {
+        "path": "docs/implementation/evidence/m35-docs-fingerprints.log",
+        "sha256": "96311a69ca3b73a49603d93e2759bc57779399bdd4e4b820527ad6c05c7eeae9",
+        "bytes": 448
+      },
+      "reviewed_bodies_unchanged": true
+    }
+  },
+  "inherited_limits": {
+    "parent": {
+      "path": "docs/implementation/evidence/m34-verification.json",
+      "sha256": "91264b814b7981ef8c506db80e0e246d3d333188c626f537445618add48720b2",
+      "bytes": 6906
+    },
+    "scope": "Windows WebKit native cookie/header limits, original unexplained Tree/date timeout and earlier Edge/module-fetch observations retain parent scope. No Safari/manual-AT/token result is inferred."
+  },
+  "retained_current_failure": {
+    "report": {
+      "path": "docs/implementation/evidence/m35-browser-webkit-suite-run-1.json.gz",
+      "sha256": "5965b48be7aa87cf830bbba4f5b96965296e4ac00244e137c627376cdbac8872",
+      "bytes": 72025
+    },
+    "passed": 910,
+    "failed": 1,
+    "source": "tests/browser/grid-progressive.spec.ts",
+    "case": "refresh supersedes pending work and starts a fresh first chunk",
+    "location": "beforeEach line55 page.goto before framework import",
+    "error": "Could not connect to server",
+    "cause": "unknown",
+    "production_fix": false,
+    "source_test_config_changes": false,
+    "unchanged_diagnostic_each_engine": 37,
+    "scope": "Diagnostic and later complete-suite passes do not explain the original connection failure."
+  },
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "remaining": "Twenty-six authorized unconditional stages remain after selected M3.5 acceptance; required M3.6 automatic advice, all M5 ancestors and whole-framework/M13/release owners remain independently required."
+}

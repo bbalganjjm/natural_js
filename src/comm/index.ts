@@ -20,7 +20,7 @@ export function createCommunicator(options: {
   after?: (response: Response) => Response | Promise<Response>;
   send?: (request: Request) => Promise<Response>;
 } = {}): Communicator {
-  const { prepare, after, send } = options;
+  const { baseURL: suppliedBaseURL, prepare, after, send } = options;
   if (prepare !== undefined && typeof prepare !== "function" ||
       after !== undefined && typeof after !== "function" ||
       send !== undefined && typeof send !== "function") {
@@ -28,6 +28,11 @@ export function createCommunicator(options: {
       code: "REQUEST_OPTIONS", api: "createCommunicator",
       message: "prepare, after and send must be functions when supplied."
     });
+  }
+  let baseURL: URL | undefined;
+  try { if (suppliedBaseURL !== undefined) baseURL = new URL(suppliedBaseURL.href); }
+  catch (cause) {
+    throw new FrameworkError({ code: "REQUEST_OPTIONS", api: "createCommunicator", message: "baseURL must provide a valid URL.", cause });
   }
   return {
     async request<Result>(requestOptions: RequestOptions<Result>): Promise<Result> {
@@ -60,7 +65,7 @@ export function createCommunicator(options: {
 
       let request = await perform("REQUEST_INIT",
         "The request could not be created. Check its URL, method, and body.", signal,
-        () => new Request(options.baseURL ? new URL(url, options.baseURL) : url,
+        () => new Request(baseURL ? new URL(url, baseURL) : url,
           { method, body: requestBody, headers, signal }));
 
       if (prepare) {

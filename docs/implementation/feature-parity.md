@@ -48,15 +48,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: Current List implementation
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
@@ -72,7 +72,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
   - id: grid-mapping
     resource: evidence/v1-grid-parity.json
     title: Detailed Grid surface, configuration and dynamic mapping

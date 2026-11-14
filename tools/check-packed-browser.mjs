@@ -121,6 +121,16 @@ try {
     disposal: { same: true, code: "PAGE_DISPOSE", ownCause: true, undefinedCause: true, empty: true, order: ["deactivate", "dispose", "owned"] }
   }, "Installed pages must preserve captured factories/loaders, live per-generation views, method receivers, input/output identity and shared cleanup failures.");
 
+  const configuration = await page.evaluate(() => window.packedConsumer.checkConfiguration());
+  assert.deepEqual(configuration, {
+    initial: Array(4).fill("This field is required."),
+    changed: ["필수 입력 항목이야.", "This field is required.", "This field is required.", "This field is required."],
+    override: "<b>Scoped</b>", inert: true, urlsBefore: ["https://one.test/api/row", "https://two.test/api/row"],
+    urlsAfter: ["https://updated.test/api/row", "https://two.test/api/row"], baseReads: 1, ownership: true, plain: true,
+    rows: { colliding: true, selected: "A changed", own: "A edited", other: "B" },
+    pageCleanup: { firstClosed: true, siblingAlive: true, finalClosed: true }
+  }, "Installed scoped policies must distinguish static/live messages, preserve store identity and use explicit forwarding without a registry.");
+
   const choiceGroups = await page.evaluate(() => {
     const h = window.packedConsumer.choiceGroups, id = h.rows.entries()[0].id;
     const initial = { gender: h.gender.value(), fruit: h.fruit.value(), empty: h.empty.value(), defaults: h.defaults,

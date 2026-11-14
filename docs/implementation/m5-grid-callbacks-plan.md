@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-collection-values-plan.md
     title: Shared field value callbacks and remaining configuration outcomes
-    git_blob: 22947e36a1c7de5ec3607afa0b1ab37aaedae35f
+    git_blob: b4c27710e35e7fb2481b89b96e1820404d3508af
   - id: baseline
     resource: evidence/m510-verification.json
     title: Frozen M5.10 source, runtime and installed artifact baseline
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid construction, physical row attachment and completion
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Synchronous row callback and cleanup ownership
@@ -28,7 +28,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete feature obligations and consolidated omission decisions
-    git_blob: c1c0893f28a8fc390eefe963ceaced1aee38732a
+    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
 generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }

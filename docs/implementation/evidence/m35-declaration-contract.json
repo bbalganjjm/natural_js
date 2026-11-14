@@ -1,0 +1,28 @@
+{
+  "kind": "actual_pack_declaration_delta",
+  "parent_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m34-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "bc89851fb0ab02b069188f3df678f6e9ee76ab724e4f89898d0a58be0facfeff",
+    "bytes": 359787
+  },
+  "current_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m35-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "375b752ef05f77781bb671ce2001de5bc4bb5b1df4405f439d9114a34a03e7de",
+    "bytes": 361201
+  },
+  "entries": 40,
+  "unchanged": 38,
+  "changed": [
+    {
+      "path": "build/ui/grid-selection.d.ts",
+      "before": "af2a7c4e2e4e4946b00782b183576065ca071ae6bafcb6d994a193f72aa38104",
+      "after": "b2717690bcb2a3b61987bc07b03b897675a813ca5a08c049881d7d08234b997b"
+    },
+    {
+      "path": "build/ui/index.d.ts",
+      "before": "c8e6f8b4330eeef5f4115d62a3bbf82c54f2515d4410ea9b0c562de827430533",
+      "after": "840fd974af00adc3e4ee21ec08e435865f2a193713ec338ce6829226a27d2379"
+    }
+  ],
+  "scope": "Actual tar declaration payloads; only RuleSet value unions are new public configuration. Existing private selection signature receives captured Rows explicitly."
+}

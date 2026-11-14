@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.5",
+  "status": "passed_independent_connected_applied_source_and_API_draft_review",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T19:43:27.193Z",
+  "baseline_commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
+  "applied_manifest": {
+    "path": "node_modules/.cache/m35-applied-source.json",
+    "sha256": "4bbc52d131d8bf5d5a4ebe1c573e08e82254706b6a727b649e49ff363a4028de"
+  },
+  "independent_preflight": {
+    "path": "node_modules/.cache/m35-independent-preflight.json",
+    "sha256": "8d1d11226272cb9ac8eed12f949c93010f4e39df63ebcdeec9b5ca111267e543"
+  },
+  "source_sha256": {
+    "src/ui/grid.ts": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+    "src/ui/list.ts": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+    "src/ui/tree.ts": "18219e9f309ff188a8234e6dc0b1c21d21b088daf28994f91031b08ce3b508c9",
+    "src/comm/index.ts": "00d14005d526d9cf31fd863e600894efe5e997f9de40d9a4f19e91320dfab4de",
+    "src/ui/index.ts": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+    "src/ui/rules.ts": "6608c910782124ab1ceee0ff1014abed96199598d8989c2b8c2a3572aac70772",
+    "src/ui/grid-selection.ts": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+    "tests/consumers/browser/main.js": "006e7f38f68c963c861f579e9f0a84b703ba1c7a553778099d5eb7e01a302484",
+    "tests/consumers/ts/check.ts": "34660017e286e373e1e1d704634ebce6014a8136cd70ab187eb2a7e4b4f2490e",
+    "tools/check-packed-browser.mjs": "696951ac664ccd377d4353212dcd1520bfa1c0693ef1cd0b83d0a6b4e532614c",
+    "tests/configuration.test.ts": "28975220d42710dedf045f66348e9c5efffbff006d32ec38e94822b05cabb9d0",
+    "tests/browser/configuration.spec.ts": "9136ce80876944c01c1115d3bc6455bad042a0ddfb4b74f9f6eaa661d377463c"
+  },
+  "normalized_API_draft_bodies": {
+    "docs/v2/rules.md": {
+      "normalized_body_sha256": "b8b2e023125ae1ff3b4c3db31f7a3177f206694fb2c84d1d5a4d3bb98722bd4e",
+      "normalized_body_bytes": 9186
+    },
+    "docs/v2/comm.md": {
+      "normalized_body_sha256": "e096084f715598235c46a7538b407edd70d1651c43fa3ad35e2748da032cf048",
+      "normalized_body_bytes": 7841
+    },
+    "docs/v2/grid.md": {
+      "normalized_body_sha256": "33379310c2865f33d5d62b142903bb25dca3aafe5abcd9bd283a961b7c4786d0",
+      "normalized_body_bytes": 84081
+    },
+    "docs/v2/list.md": {
+      "normalized_body_sha256": "c89afd857e66d049ec0d6d4981c8bc8590d35d39e4ec79847be044775c7eaacb",
+      "normalized_body_bytes": 10308
+    },
+    "docs/v2/tree.md": {
+      "normalized_body_sha256": "f79f9d7beb5b445068921ed3dc72fc1d38ddfdda073905baa20e5b8a62e02d21",
+      "normalized_body_bytes": 8729
+    },
+    "docs/v2/form.md": {
+      "normalized_body_sha256": "f691bc8147969378f02303a80c9f087333dd1582c1df74ec56debd8f8c50d302",
+      "normalized_body_bytes": 55214
+    },
+    "docs/v2/architecture.md": {
+      "normalized_body_sha256": "56fe6aa8b792cc1bac7a6ad0dc6bd4a7c6c9f3784d8e723ab97ef714ad24b70a",
+      "normalized_body_bytes": 19590
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "519e40ecfd79eaed0cb670cceab53aac9a0f3838f2ee78b6477a2c0d673d8bb0",
+      "normalized_body_bytes": 62381
+    }
+  },
+  "normalization": "UTF-8; CRLF normalized to LF. Markdown bodies are the untrimmed substring after the second frontmatter delimiter.",
+  "accepted_contract": [
+    "All twelve applied source/test/installed paths match the independently reviewed exact candidates. Seven existing runtime modules change; no runtime module, field, named type, entry, dependency or registry is added. Public expansion is limited to the values of two existing RuleSet properties.",
+    "Grid/List/Tree and the connected private Grid selection owner capture one Rows identity. Native update/selection/edit/validation/subscription paths use that store. A different store requires a new owner; declaration mutation does not retarget old subscriptions.",
+    "Communicator captures and copies a supplied base URL at creation. Original URL or option mutation and later absent-option addition cannot retarget it. Native URL behavior for an omitted base, dynamic Fetch, captured hooks and request-local cancellation remain.",
+    "Literal locale/messages retain creation snapshots. Captured synchronous providers run plainly, locale before messages, per generated failed-rule message. Passing or skipped validation and direct custom messages bypass them. Invalid/throwing policy uses contextual RULE_FAILED; invalid asynchronous output is rejected and drained locally.",
+    "Whole message maps are checked per generated issue without identity caching, repaint, subscription or whole-validation snapshots. Existing key normalization, fallback and placeholders remain. Global fallback, catalogs, masks and private call.run semantics keep their later owners.",
+    "Two actual Page owners demonstrate live versus fixed Forms, formatter/service forwarding, native Map ownership, early close, replacement and sibling survival. Installed witnesses extend existing application fixtures and retain preceding Page/loading/lifetime/request checks.",
+    "Eight API/architecture/migration bodies match source and callers. Form composition captures two message-policy references and intentionally resolves them per issue; it explains the static literal alternative. List and Tree descriptions name only their actual operations."
+  ],
+  "review_findings_resolved": [
+    "Form preset composition no longer spreads function-valued message policy as an empty object; ordinary provider composition preserves the intended behavior without a framework merge helper.",
+    "Copied List/Tree Rows prose now describes rendering/subscription/selection/validation or graph/query operations accurately without implying editable List or general Tree validation."
+  ],
+  "runtime_verification": {
+    "status": "pending_independent_raw_and_final_document_acceptance",
+    "reviewer_executed_project_commands": false,
+    "observations": "Root reports actual development checks and focused engines passed and canonical gates are running. This source review claims no independently audited runtime, archive or timing result."
+  },
+  "limits": [
+    "This reviewer writes only this ignored report and runs no compiler, browser, benchmark or project checker.",
+    "No broad configuration, advice, declaration, mask, standalone-rule, full-family, M5.20, final P0, M13 or release closure is granted.",
+    "Only the already approved exact O01-O05 omissions apply. All unlisted behavior and inherited native/failure limitations remain required."
+  ]
+}

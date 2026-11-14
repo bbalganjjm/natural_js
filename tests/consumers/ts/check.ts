@@ -190,7 +190,15 @@ createCommunicator({ send: () => new Response("[]") });
 
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {
   const nameRules: FieldRules = { validate: [["minlength", 2]] };
-  const rules = { fields: { name: nameRules } } satisfies RuleSet;
+  const policy = { locale: "en_US", messages: { minlength: "At least {0}." } };
+  const rules = { fields: { name: nameRules }, locale: () => policy.locale, messages: () => policy.messages } satisfies RuleSet;
+  const fixedRules: RuleSet = { locale: policy.locale, messages: policy.messages }; void fixedRules;
+  const invalidPolicy = {
+    // @ts-expect-error Locale providers are synchronous primitive-string functions.
+    locale: async () => "en_US",
+    // @ts-expect-error Message providers are synchronous whole-map functions.
+    messages: async () => ({ required: "Async" })
+  } satisfies RuleSet; void invalidPolicy;
   const bindings: FormBindContext<Employee>[] = [];
   const form = bindForm(root, { rows, rules, autoValidate: false,
     beforeBind(context) {

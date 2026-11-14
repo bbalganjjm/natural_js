@@ -1,0 +1,75 @@
+{
+  "label": "browser-firefox-run-1",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "tests/playwright.config.ts",
+    "--project=firefox",
+    "--workers=2",
+    "--retries=0",
+    "--reporter=json",
+    "--output=docs/implementation/evidence/m35-browser-firefox-suite-failures"
+  ],
+  "started": "2026-11-14T19:43:07.143Z",
+  "finished": "2026-11-14T19:49:30.978Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+    "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+    "bytes": 21349,
+    "entries": 209
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+    "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+    "bytes": 21349,
+    "entries": 209
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m35-browser-firefox-suite-run-1.json.gz",
+    "sha256": "ed5aa1c1b76243b8ae3cd256926b9a44f07b209a17aaf15efa80bcf84d3b0504",
+    "bytes": 71448,
+    "encoding": "gzip",
+    "uncompressed_sha256": "4795b6b9c77f6a198fb48feea934d4d756dded7f3a46cefb383e64d9c607fe01",
+    "uncompressed_bytes": 1006600
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m35-browser-firefox-suite-run-1-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

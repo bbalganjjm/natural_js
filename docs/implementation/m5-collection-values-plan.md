@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-presets-plan.md
     title: Explicit typed presets and application callback composition
-    git_blob: 88f405d86d14491b987f0c0b4bb26b5be4c752a1
+    git_blob: da470e6522796db15cbb6f7de380a251f11c318b
   - id: baseline
     resource: evidence/m59-verification.json
     title: Frozen 5ecda44 source, runtime and installed artifact baseline
@@ -20,15 +20,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field caches, native editing and mounted row lifecycle
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: Read-only List caches, choices and validation
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public value context and component handles
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Embedded row Forms, global lookup and mounted value updates
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained behavior and consolidated omission obligations
-    git_blob: c1c0893f28a8fc390eefe963ceaced1aee38732a
+    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
 generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }

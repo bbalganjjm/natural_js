@@ -1,0 +1,893 @@
+{
+  "prefix": "m35",
+  "stage": "M3.5",
+  "baseline_commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
+  "created": "2026-11-14T19:37:07.772Z",
+  "head": "fd5c66a507b140b8648907759395204ac4fe69d6",
+  "initial_worktree": " M docs/implementation/current.md\n M docs/implementation/evidence/m5-completion-run.json\n M docs/implementation/index.md\n M docs/implementation/m5-completion-run.md\n M docs/index.md\n M docs/log.md\n M src/comm/index.ts\n M src/ui/grid-selection.ts\n M src/ui/grid.ts\n M src/ui/index.ts\n M src/ui/list.ts\n M src/ui/rules.ts\n M src/ui/tree.ts\n M tests/consumers/browser/main.js\n M tests/consumers/ts/check.ts\n M tools/check-packed-browser.mjs\n?? docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs\n?? docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs\n?? docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs\n?? docs/implementation/m3-scoped-configuration-plan.md\n?? tests/browser/configuration.spec.ts\n?? tests/configuration.test.ts\n",
+  "source_normalization": "UTF-8; CRLF normalized to LF; tar fixtures additionally protected as raw bytes",
+  "protected_files": [
+    {
+      "path": "tools/benchmark-m4.mjs",
+      "sha256": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+      "bytes": 11967
+    },
+    {
+      "path": "tools/benchmark-grid-viewport.mjs",
+      "sha256": "87570e023afb814627329fad003783fcefe2f8915ad086c0d209f977aa05de92",
+      "bytes": 31662
+    },
+    {
+      "path": "examples/vite/benchmark.ts",
+      "sha256": "ef6ed79908de768dcda7bfe07a88adeb4b421df9c30fff7125dae18d602f203d",
+      "bytes": 8475
+    },
+    {
+      "path": "examples/vite/benchmark.html",
+      "sha256": "3d65a0dda4a30f637f7335172eb54545869fbee3527267d954cd7b20a0b3eb4d",
+      "bytes": 2794
+    },
+    {
+      "path": "tests/evaluation/m8/task1-seed.tar",
+      "sha256": "8ae5f81f2f58eff35b9788c3a61b42e8c8b6176b46781f13a00ccca63bc4052e",
+      "bytes": 13824
+    },
+    {
+      "path": "tests/evaluation/m8/task2-seed.tar",
+      "sha256": "ba39cc15dd2eaa6294d19a25537c987c113df3b5f0ac222a7e15dc233a484990",
+      "bytes": 40960
+    },
+    {
+      "path": "tests/evaluation/m8/task3-seed.tar",
+      "sha256": "c1c035df3cf1e2aa320c8365e56a1d87e5f351ac48e2b88aa2376ad19fbfb38d",
+      "bytes": 12800
+    },
+    {
+      "path": "docs/implementation/evidence/m34-runtime-receipt.json",
+      "sha256": "81f5a4c517d539fa165b412c5b33ab0ba812cb7110bbb44e13de491316332a7e",
+      "bytes": 203223
+    },
+    {
+      "path": "docs/implementation/evidence/m34-binding-performance-result.json",
+      "sha256": "1d1d1b860ba76e8f2714597b23ff7eb6abbd1cf88e50e39d84c97d71cf496f78",
+      "bytes": 2359
+    },
+    {
+      "path": "docs/implementation/evidence/m34-binding-performance-start.json",
+      "sha256": "f8958801e50043f05dee06ce756735b341480291a35b32105c7f54521296335f",
+      "bytes": 1498
+    },
+    {
+      "path": "docs/implementation/evidence/m34-binding-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-binding-performance.json.gz",
+      "sha256": "648234f40f0f69b8ce4739c10e41b9198d872068b15e7dc2b9a75f9c3811a662",
+      "bytes": 4621
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/attachments/tree-binding-measurements-1018b22ab9a89d296cc0418fe02df0a5ab7513c3.json",
+      "sha256": "70b86372795d37321a5a9388620905b30577bce1b480db7ed66d7cb51f6c66d4",
+      "bytes": 1593
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/tree-binding.json",
+      "sha256": "70b86372795d37321a5a9388620905b30577bce1b480db7ed66d7cb51f6c66d4",
+      "bytes": 1593
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-list-result.json",
+      "sha256": "c0b7915ccff7fec37b8eabc990486b29028617bdde9be5f8a87ebe094af3c955",
+      "bytes": 2571
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-list-start.json",
+      "sha256": "81fa797d2dee4a7d20ca30854f38b89cb5b722d9b2ca5da75bd2b447e4ff979d",
+      "bytes": 1708
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-list.json.gz",
+      "sha256": "7bbce3e55e0b1909f96ac11d8b83039d53b83a2771c23efde6eb7633ddd8e384",
+      "bytes": 57073
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-result.json",
+      "sha256": "6eb3a2f7cdbaacc6cc8d4c9564baaaf086f366bef492541b4ec58c6aa147acde",
+      "bytes": 8539
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-run-1-result.json",
+      "sha256": "b7dc8ca2f5bd4d373b9bae71a46bdec673903e2d135c01450432a73d09900136",
+      "bytes": 2561
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-run-1-start.json",
+      "sha256": "57976fa12d4e36821cb75587bb28cde73f77ecaad01644e55882d8e071788069",
+      "bytes": 1697
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-run-1.json.gz",
+      "sha256": "f41754bc3dc2c50f17cb4acf45a6ac70c94b54ab42712ed86ae871cb15302d48",
+      "bytes": 70380
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-chromium-suite-start.json",
+      "sha256": "2ab141cfe96390f517b07f94ebc09e2c2540f0427f35456c8271575a667ec51b",
+      "bytes": 1248
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/attachments/tree-binding-measurements-3c9184dda385f9276d5f84686ebbc9fc85741d2f.json",
+      "sha256": "d00aca9d551070acc0542e8931325e94bcae4cabdb6e72d3f0d5b2c3f91821d9",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/tree-binding.json",
+      "sha256": "d00aca9d551070acc0542e8931325e94bcae4cabdb6e72d3f0d5b2c3f91821d9",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-list-result.json",
+      "sha256": "b204268abcb64b8bc1c2f4d681f6e8ee116ac6061475f4e7e244a887cdf82175",
+      "bytes": 2626
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-list-start.json",
+      "sha256": "66a7dd69adc7728805fd57802ea532960a9e912167dd8af3077a5b913a550185",
+      "bytes": 1763
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-list.json.gz",
+      "sha256": "74e0e7c788d942daf35baf2614badcd0b8810a19854d8be2ba596c1bbb96e0bd",
+      "bytes": 57099
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-result.json",
+      "sha256": "fdf88cdf34ff5dbb85ba5619dfc6c327e69ef5d1ba2fab2d22412cc56cf129af",
+      "bytes": 8643
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-run-1-result.json",
+      "sha256": "857f62a0321ee7efbee12f35d7f49817bcfffb9fafb046543ca5b3ac207e584a",
+      "bytes": 2616
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-run-1-start.json",
+      "sha256": "4900e5a6a5e97bd2554b82735662a860cb098085da54bd759dd48deb458ec19c",
+      "bytes": 1752
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-run-1.json.gz",
+      "sha256": "a72489776607378a11766b81a95cf9112147ac895ffab4f21c54ddfd7244b928",
+      "bytes": 70964
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-firefox-suite-start.json",
+      "sha256": "063886ad5ef060d22f2ba64d4af781d921067e2554ce452edf7f6b050e769776",
+      "bytes": 1246
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/attachments/tree-binding-measurements-fd2e74e8687132c5675f8952ef1d08f53ad75779.json",
+      "sha256": "91f09587e2a1f76ecd5275dfc0fca600ad8065ecc4b8b03c5469adc7f160d087",
+      "bytes": 1349
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/tree-binding.json",
+      "sha256": "91f09587e2a1f76ecd5275dfc0fca600ad8065ecc4b8b03c5469adc7f160d087",
+      "bytes": 1349
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-list-result.json",
+      "sha256": "4cef1dd76b898b0aa8bddd1b3d3de8d1e1aa35bca92dbcb60be07be846914b6e",
+      "bytes": 2561
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-list-start.json",
+      "sha256": "efec3e0b8751229eecc38b759d90059fdfd20e79e1f6434bae6a3bdc5a1db8e9",
+      "bytes": 1698
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-list.json.gz",
+      "sha256": "e6567a08e28490a7a05f1c13db814171287080f6a99fbdc2fd911e43ea8c4c9c",
+      "bytes": 57070
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-result.json",
+      "sha256": "d9a9a8bc6e8030fc1ab7db3b272b6f42ad290161d75a84f88b873bf039e1fbd3",
+      "bytes": 8507
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-run-1-result.json",
+      "sha256": "c7f65817b1195031b535fc0d6f696f057a3ea9d7467f57e5926bdfc8c5142616",
+      "bytes": 2551
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-run-1-start.json",
+      "sha256": "6dc1e36e2c55979567bb0c12a4bdfcd1a65bed2a977b202e016f24f4087c6b59",
+      "bytes": 1687
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-run-1.json.gz",
+      "sha256": "0354c8a4c89998adb24bbfe65d03abb0e89b00106a707eb3b49cb7813cd12067",
+      "bytes": 70860
+    },
+    {
+      "path": "docs/implementation/evidence/m34-browser-webkit-suite-start.json",
+      "sha256": "76c04b8c084223429c2b429b793c594bebb71648ffbc979b37a25733af90968b",
+      "bytes": 1244
+    },
+    {
+      "path": "docs/implementation/evidence/m34-build-result.json",
+      "sha256": "08ee52a31eced188b113ddbef3191ee8f3058b3707b1409e7e63c484d9019390",
+      "bytes": 2109
+    },
+    {
+      "path": "docs/implementation/evidence/m34-build-start.json",
+      "sha256": "907660b2dc433b2a865bf59918fd4688e1ab75d4014613ea777140ecfd2701ea",
+      "bytes": 1396
+    },
+    {
+      "path": "docs/implementation/evidence/m34-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-consumers-result.json",
+      "sha256": "4ee27e96a6d084ef9a56da35b3fc06ba80e0d8b1ace1e2ffc22c81cf20eb0834",
+      "bytes": 2384
+    },
+    {
+      "path": "docs/implementation/evidence/m34-consumers-start.json",
+      "sha256": "ec91323b68bdabca0589210e1f254a7dda6d6f9b58dd5646bf72cc71ce2eb3aa",
+      "bytes": 1669
+    },
+    {
+      "path": "docs/implementation/evidence/m34-consumers-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-consumers-stdout.partial",
+      "sha256": "cc201e16b313583606c221a5f967073366ae3465354687d6630431c3ceb25ea5",
+      "bytes": 379
+    },
+    {
+      "path": "docs/implementation/evidence/m34-declaration-invariance.json",
+      "sha256": "db2be3ac08979e41b7d6b6cdda7d704099d0494de6a699028bc9121ffcd04992",
+      "bytes": 719
+    },
+    {
+      "path": "docs/implementation/evidence/m34-docs-changed-2.log",
+      "sha256": "d3a7e3750a3892869ddd19a4c5d481c3e49cb84c0a36f3cf056f143db6f0a473",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m34-docs-changed.log",
+      "sha256": "d3a7e3750a3892869ddd19a4c5d481c3e49cb84c0a36f3cf056f143db6f0a473",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m34-docs-fingerprints-2.log",
+      "sha256": "0ecd134e0a09343850d54edbfb3d626e0a4525ecadf697aa1a6d64c02cc4731c",
+      "bytes": 102
+    },
+    {
+      "path": "docs/implementation/evidence/m34-docs-fingerprints.log",
+      "sha256": "a0aa939f4310b9e5126d92a54cafb4ffc019eee23b71e56a187c18f2739c717a",
+      "bytes": 448
+    },
+    {
+      "path": "docs/implementation/evidence/m34-docs-full-2.log",
+      "sha256": "e6e1665097fd3358582c433a3a5f49c0b6d6b9294bcfd7993c96a8362c6b78cc",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m34-docs-full.log",
+      "sha256": "e6e1665097fd3358582c433a3a5f49c0b6d6b9294bcfd7993c96a8362c6b78cc",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m34-document-checks-2.json",
+      "sha256": "e0b7de295648ffdccd65876d7ad6657644601f482e0c894e794a5fef29496bdd",
+      "bytes": 1013
+    },
+    {
+      "path": "docs/implementation/evidence/m34-document-checks.json",
+      "sha256": "484d9b0d3932b98963c3389952c121bc39a18af0a4ed2dfe1d2028f2f6481b39",
+      "bytes": 1005
+    },
+    {
+      "path": "docs/implementation/evidence/m34-document-history-2.json",
+      "sha256": "9c39e92d319c2bb39fa4a0d1c1ebfa266841973fad7e6cbcc025afae2b86c4b5",
+      "bytes": 2385
+    },
+    {
+      "path": "docs/implementation/evidence/m34-document-history.json",
+      "sha256": "9c39e92d319c2bb39fa4a0d1c1ebfa266841973fad7e6cbcc025afae2b86c4b5",
+      "bytes": 2385
+    },
+    {
+      "path": "docs/implementation/evidence/m34-example-types-result.json",
+      "sha256": "b10d3047aac256e4277879977bf6c23e95943e0801b0a394ca374538f929b5b3",
+      "bytes": 2887
+    },
+    {
+      "path": "docs/implementation/evidence/m34-example-types-start.json",
+      "sha256": "94b4ab2862a4b6f741328ac16aa3fa167d8603810c387cfae7606feb1b29b547",
+      "bytes": 2174
+    },
+    {
+      "path": "docs/implementation/evidence/m34-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-build-result.json",
+      "sha256": "e8e0e502981c8f50f986d48c51f42c4e1ec78c624b8f87a25dbf9329a6b24085",
+      "bytes": 2133
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-build-start.json",
+      "sha256": "726b7e5665f6f3f55509845b24c73f6f61384afdce1edfff2a3a6cbcd79142da",
+      "bytes": 1420
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-list-result.json",
+      "sha256": "2e25880e4be699a44903732755f027e27d978291f6ae7e9b759008a33b071fd2",
+      "bytes": 2797
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-list-start.json",
+      "sha256": "f71bcca7b12dd4264574da50894df39822a0477a0955a52953bdc1a7ba7b1511",
+      "bytes": 1936
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-list.json.gz",
+      "sha256": "a9d3d9704120c09b862cf1f87511033b466f06005bcd173ac53406859cf8d858",
+      "bytes": 4963
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-result.json",
+      "sha256": "ddf5a583b95e5a47d1fcac44ee1146d019cde135e4667e8f452c72723a28e915",
+      "bytes": 8627
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-run-1-result.json",
+      "sha256": "9c19ff8760bb77ae2d13c05c6f2a6dc923f7dc019aae7cd49efe004e9a925f4a",
+      "bytes": 2786
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-run-1-start.json",
+      "sha256": "81d999b7fa584a7b94aef7c700678394f7dd00246e6540523f9d9c46266f93cd",
+      "bytes": 1925
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-run-1.json.gz",
+      "sha256": "679a36475943203fedb945bc1ccc64963d1d92922b18c0aad271a7b6f249baf8",
+      "bytes": 5852
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-chromium-suite-start.json",
+      "sha256": "71ecf4ca98cc8cc1417d08c2c516f6f788c2481902c6b5257420881433eeaedd",
+      "bytes": 1248
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-example-types-result.json",
+      "sha256": "3a35f648d3ad9c51eb10ab586faf607df5501c60aaf4718a78741e11a7c56d60",
+      "bytes": 2911
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-example-types-start.json",
+      "sha256": "e97324f642373fa6dcb0886a5e49e96443e5c55fcd917a095c3a7960cf38d833",
+      "bytes": 2198
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-list-result.json",
+      "sha256": "3189a6b79ead1adfc102dfccd53084439aa022c08876cd88e2068bb462a774d5",
+      "bytes": 2852
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-list-start.json",
+      "sha256": "31bdc99d75e00ec9f75998f58cfaf8dd7e60f637576cc4c018086c031c62280d",
+      "bytes": 1991
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-list.json.gz",
+      "sha256": "93f60d4dc9273664357484e635dad3d2d04f09891ee7e6090f5f70f594e7eb64",
+      "bytes": 4972
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-result.json",
+      "sha256": "1e10402ee93571bdf6b364504a9f039a309107dda38b8af2879f10e28b1d0285",
+      "bytes": 8735
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-run-1-result.json",
+      "sha256": "f04959da7e4105dde65a443b09e27b55148a6d0c09b3468c5a0619115cd78e96",
+      "bytes": 2841
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-run-1-start.json",
+      "sha256": "bf9dc7cf4ceefc6133dccd2b7f060e5c927666e6a91b211a1acfb383d64bb429",
+      "bytes": 1980
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-run-1.json.gz",
+      "sha256": "1defe7182c47ff95f11427860286ece5cc3eb02c38393303a158e057727519f1",
+      "bytes": 5898
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-firefox-suite-start.json",
+      "sha256": "2d9ed173802b783328dd0d130fe71e3f5d284261ae321cbbd2c06449de6d3469",
+      "bytes": 1246
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-types-result.json",
+      "sha256": "991a5a1600a2da832e3456296ba5a1eda7ea8fd8398626a988dba0991e04c1bf",
+      "bytes": 2149
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-types-start.json",
+      "sha256": "5a7073f11f7bfb4f7332c1edbcfeae1938894cc33e05c2fe705979424fe3a775",
+      "bytes": 1436
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-unit-result.json",
+      "sha256": "bc56571f6335d93510f327d46c00587a11e489e1df482a1b9842908790a34bec",
+      "bytes": 2111
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-unit-start.json",
+      "sha256": "030ba818e0170260533a6b27008c55a1135b0048658f1aad95c8013e067451e4",
+      "bytes": 1396
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-unit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-unit-stdout.partial",
+      "sha256": "d305f585d81da540ae267c809befd410c04f1c62217b0d4cce779701580c00db",
+      "bytes": 190
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-list-result.json",
+      "sha256": "3108d7c26b989fb337921f7fc20549f51854ab0afb44576dddd93cf9f29cb66b",
+      "bytes": 2787
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-list-start.json",
+      "sha256": "62aa262e197fd908210e3ba99f77b6758c67785bf2049dbe205345a7c7ad7e68",
+      "bytes": 1926
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-list.json.gz",
+      "sha256": "04b848661865caad18ac932db8f6bea3c7aef1bfb13bcd849feedc596e5652db",
+      "bytes": 4985
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-result.json",
+      "sha256": "7eec3e0e0a632524ec19a9533d50008880409b42b5765a3cfa336828c319a083",
+      "bytes": 8603
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-run-1-result.json",
+      "sha256": "d61982628737518ee70fffcb68e6234d5299ca527ff20c7f712e20ac51fa4253",
+      "bytes": 2776
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-run-1-start.json",
+      "sha256": "36659d0b0035d235004a2fea303d000f0c5fedeed5a0f4b7346e202715e8d700",
+      "bytes": 1915
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-run-1.json.gz",
+      "sha256": "7ca8ef6854342e879e8ade3bd405332c8eff18b44f0b25503dd3aadcb17603cc",
+      "bytes": 5873
+    },
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-start.json",
+      "sha256": "1b037c42959150479e22ed870132339518a491c67e86d4d7c42ed168f5f15fb1",
+      "bytes": 1244
+    },
+    {
+      "path": "docs/implementation/evidence/m34-gates.jsonl",
+      "sha256": "87964a84d6a4b6aae622b6351cf581d423e91f79b02332009f89338af84f72a9",
+      "bytes": 95147
+    },
+    {
+      "path": "docs/implementation/evidence/m34-independent-audit.json",
+      "sha256": "655001aa93d6ee76f44d2a020305c4131ac8a6c05cf2f64273d637a6c03ab495",
+      "bytes": 57100
+    },
+    {
+      "path": "docs/implementation/evidence/m34-independent-audit.mjs",
+      "sha256": "e69a970a6e33db3b46bd07c6c00c7079b5949c0be206242a1d059b871b895487",
+      "bytes": 21366
+    },
+    {
+      "path": "docs/implementation/evidence/m34-independent-source-review.json",
+      "sha256": "e243b5ab25568523a553f0194afe3420e48a91fbc9cbcdf91aff1e733d36d31e",
+      "bytes": 5146
+    },
+    {
+      "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+      "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+      "bytes": 21139
+    },
+    {
+      "path": "docs/implementation/evidence/m34-pack-result.json",
+      "sha256": "c1355af0cdaa9f4b61481fac54707dab162b3f3a4cd5fc0e7a9ce2155baea60d",
+      "bytes": 2379
+    },
+    {
+      "path": "docs/implementation/evidence/m34-pack-start.json",
+      "sha256": "48fecb90c990dcc6ab029ca309f8e900187abf2f631b4e86669a94fcc67062e5",
+      "bytes": 1518
+    },
+    {
+      "path": "docs/implementation/evidence/m34-pack-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-pack.json.gz",
+      "sha256": "80c84f969cf8c492f7518ccc67799ba97af8e8626a3035c8960af52a6faa24b5",
+      "bytes": 2164
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chrome-result.json",
+      "sha256": "40c23a0f4a2a8d291c2d93fd079e966f1162a14b75e8b073494d0c5b14d606e3",
+      "bytes": 2472
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chrome-start.json",
+      "sha256": "c4631dca851466c0f2bb3176554bc9e378889ac11cccd6610be20ebd26d345eb",
+      "bytes": 1757
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chrome-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chrome-stdout.partial",
+      "sha256": "75e8c6118e0687d42b563e8b36691203405c951bc1c0b359b8baa485df429bfd",
+      "bytes": 459
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chromium-result.json",
+      "sha256": "34b21f3059f72d0a083e66cd9780fe4c0c25f9987316d26737610be3353c9993",
+      "bytes": 2480
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chromium-start.json",
+      "sha256": "542dae48db30bf11b81606e8776907a8526486f6ea7f44c35a39d46aa2f6cec5",
+      "bytes": 1765
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chromium-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-chromium-stdout.partial",
+      "sha256": "17bb87cb74cfeebed9f47104793bf434454810579e119956183745808a0341e7",
+      "bytes": 463
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-edge-result.json",
+      "sha256": "dbcfb83ad68aeabc0a691f7a3431fcf2fc3d08721c3791510b684da0b4c498d1",
+      "bytes": 2464
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-edge-start.json",
+      "sha256": "bffc4c42b3e8211609f54dcdbf4a1455933480185f6365f7566a16569ab76827",
+      "bytes": 1749
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-edge-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-edge-stdout.partial",
+      "sha256": "39dbcd3359b9bcde2433ecf0e84e9c14ab36744ad016467bd55ec258773cba45",
+      "bytes": 455
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-firefox-result.json",
+      "sha256": "b16ff047c0d9c9e84ec2ce21d6d5e718d62198ae05bbb23f6a3abbb841d68f44",
+      "bytes": 2536
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-firefox-start.json",
+      "sha256": "c3d0599b293e24acf4d435f0a6a56158792689887a3e4f5782ed7ebdf81470d4",
+      "bytes": 1821
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-firefox-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-firefox-stdout.partial",
+      "sha256": "ccddf5f9adf313186c1a7124b25fdd3e5da91dd5468bddf30d2e7bfb43cbf094",
+      "bytes": 453
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-webkit-result.json",
+      "sha256": "7733104568e0e0741bd37d6202f7f09ff33da94c311d7d04f8915ad5d6a8b561",
+      "bytes": 2472
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-webkit-start.json",
+      "sha256": "1abff349950606db6558b456421c173d105acfd67e1f14e99647ca1aec27cc12",
+      "bytes": 1757
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-webkit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-packed-webkit-stdout.partial",
+      "sha256": "c32d2f9c41fcf8540191e04c16ed2197db6b184c5d5c0125d22068bffbfeefc4",
+      "bytes": 450
+    },
+    {
+      "path": "docs/implementation/evidence/m34-page-lifetime.json",
+      "sha256": "769715866013ff1201bab28a7782d288188ed62213b0e9df8530625b6772e925",
+      "bytes": 3429
+    },
+    {
+      "path": "docs/implementation/evidence/m34-setup.json",
+      "sha256": "cedcc9c6a04930f373121eeab39bd6b95de8c1115f1b059b2301e875efa116ed",
+      "bytes": 39178
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865
+    },
+    {
+      "path": "docs/implementation/evidence/m34-types-result.json",
+      "sha256": "72d8bf5c890ca89a36d70e8b21fbdc9e40b0d6d7d5d75d59431b490ee1cfd02a",
+      "bytes": 2125
+    },
+    {
+      "path": "docs/implementation/evidence/m34-types-start.json",
+      "sha256": "f7c2f380a888d5ad6a0b8c8c4c457c4014e3790f05175872c0ed09e86a7f79e7",
+      "bytes": 1412
+    },
+    {
+      "path": "docs/implementation/evidence/m34-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-unit-result.json",
+      "sha256": "de0297fd9e693aa4e5078c7229479fd4703f18824fce93521b1732eb9eef1978",
+      "bytes": 2087
+    },
+    {
+      "path": "docs/implementation/evidence/m34-unit-start.json",
+      "sha256": "b7db28571a2bfa218325f5ce242b5c2ec694a8a1e26f82e9bf73079a30f110fd",
+      "bytes": 1372
+    },
+    {
+      "path": "docs/implementation/evidence/m34-unit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-unit-stdout.partial",
+      "sha256": "db6233e93a88e1974997ca10cf798b80e8a3c5deaa59d8bbd5ac1bb8541948ff",
+      "bytes": 190
+    },
+    {
+      "path": "docs/implementation/evidence/m34-verification.json",
+      "sha256": "91264b814b7981ef8c506db80e0e246d3d333188c626f537445618add48720b2",
+      "bytes": 6906
+    },
+    {
+      "path": "docs/implementation/evidence/m34-viewport-performance-result.json",
+      "sha256": "5fb7bd54d159ea0d0cfd13c7d1c18e905d120f35fc2a6e8ba3b3f90071e0de7a",
+      "bytes": 2374
+    },
+    {
+      "path": "docs/implementation/evidence/m34-viewport-performance-start.json",
+      "sha256": "b2b650bddf96ac00a083ded2a0ee232b6581de0ef0b93199c99343a2901f0061",
+      "bytes": 1512
+    },
+    {
+      "path": "docs/implementation/evidence/m34-viewport-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m34-viewport-performance.json.gz",
+      "sha256": "456758849e2612e60ae4ccdd7a09ca3be157f43c670efb0111b2a35d01f91122",
+      "bytes": 8541
+    }
+  ],
+  "original_lock": {
+    "path": "js/natural_js/@types/package-lock.json",
+    "sha256": "ed9165da5fa2bb5cb7c4e858370e5703941e92a2559751ccf19ee41311313afe",
+    "bytes": 1285
+  },
+  "v1_tree": "4c6dc6d646af8e6646029a95c2cc4ba070cf0a1c",
+  "parent_receipt": {
+    "path": "docs/implementation/evidence/m34-runtime-receipt.json",
+    "sha256": "81f5a4c517d539fa165b412c5b33ab0ba812cb7110bbb44e13de491316332a7e",
+    "bytes": 203223
+  },
+  "working_parent": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ]
+}

@@ -48,11 +48,11 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request payload, decoder, and cancellation
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
@@ -60,7 +60,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -92,11 +92,11 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private declarative rule dispatch
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Retained formatter and internal mask/date operations
@@ -148,15 +148,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 963be2786fdcf1f979d17523c65fc6d6aca4b698
+    git_blob: 9cd81c778f355813b4a73e7f3d3fa9eeb26751f0
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: c1c0893f28a8fc390eefe963ceaced1aee38732a
-generated: { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
+    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:49Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:49Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -304,7 +304,7 @@ There is no implicit first-row truncation, default POST or custom URI escaping. 
 
 ## 4. Move rules without dropping Form behavior
 
-Keep the 1.x JSON tuple syntax on fields: `data-format='[["commas"]]'` and `data-validate='[["required"],["email"]]'`. `bindForm` compiles these names through the private UI rule runner; Grid and List use that runner for row fields. The retained formatter family reaches internal mask, date, and time operations, and the validator family reaches date/time, byte count, and combined names. These operations are still available through declarations even though standalone `N.formatter`, `N.validator`, `N.mask`, and generic `N.date` exports are absent. `RuleSet` adds application rules, messages, or a locale per binding; a field parser converts entered strings to raw JSON values when needed.[^form][^rules][^formats][^validators][^ui]
+Keep the 1.x JSON tuple syntax on fields: `data-format='[["commas"]]'` and `data-validate='[["required"],["email"]]'`. `bindForm` compiles these names through the private UI rule runner; Grid and List use that runner for row fields. The retained formatter family reaches internal mask, date, and time operations, and the validator family reaches date/time, byte count, and combined names. These operations are still available through declarations even though standalone `N.formatter`, `N.validator`, `N.mask`, and generic `N.date` exports are absent. `RuleSet` adds application rules, messages, or a locale per binding; a field parser converts entered strings to raw JSON values when needed. Literal locale/message values are creation snapshots; captured synchronous functions can read current scope state for each generated failed-rule message. See [live message policy](rules.md#literal-and-live-message-policy). Use explicit typed scope objects, forwarding functions and identity-checked native Maps for legacy context/service lookup; no global discovery is implied. Grid/List/Tree retain one captured Rows and communicator retains one copied base URL, so create another owner to change those fixed identities. Other component text/default, advice, declaration and remaining rule obligations retain their numbered owners.[^form][^rules][^formats][^validators][^ui]
 
 | Change | 2.0 behavior |
 |---|---|

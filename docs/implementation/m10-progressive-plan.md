@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: 518f062e1a984a25e9ba86aa72c4dc491ad08dce
+    git_blob: 67c01b1a405d80d9a1819b4b33ee49bb23ecb4d6
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable legacy behavior and unresolved cross-owner obligations
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Existing row binding, projection, callbacks and resource lifetime
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Bounded mounted windows and scroll geometry

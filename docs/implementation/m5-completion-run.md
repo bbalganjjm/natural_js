@@ -8,7 +8,7 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: 45fbc076c01f63b40d22c323e3c85ff900f7bb55
+    git_blob: d9b990e7a6b49ec4e40ba9e7c7cedbb0c98a7287
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
@@ -16,7 +16,7 @@ sources:
   - id: live
     resource: m5-live-choice-groups-plan.md
     title: Accepted M5.14 private handoff and failure contract
-    git_blob: 2b8a3c5c9d15e91a21d65c5993fac8f27db66823
+    git_blob: 2b80305eef5af5e134ed302dd75afeb685ec2d3d
   - id: protocol
     resource: evidence/m32final-verification.json
     title: Tool-inclusive M3.2 runtime and independent acceptance
@@ -33,9 +33,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 # Goal
@@ -66,7 +66,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Finish M3.4 separate commit/push, then implement M3.5 and continue every required ancestor through M5.20. Preserve each exact receipt and inherited native/Tree/date/Edge limitations.[^run]
+Finish M3.5 separate commit/push, then implement required M3.6 automatic advice and every subsequent ancestor through M5.20. Keep each exact receipt and inherited native/Tree/date/Edge limitation.[^run]
 
 # Decisions
 
@@ -85,6 +85,8 @@ The original M3.2 R0, 34 attempts, 291 retained paths, pending projection and in
 M3.3 adds one optional HTML loader to the existing page owner. It records 24 attempts; the latest sixteen canonical groups pass on 206 inputs, 155 units and 891 full cases per engine, with 47 focused cases per engine, with 15 new browser cases, one exact 203-file package, all five installed browsers and original performance budgets. A single non-strict serialized-callback fixture failure remains preserved without a framework fix claim. After selected M3.3 acceptance, twenty-eight unconditional stages remain.[^run]
 
 M3.4 passes sixteen canonical groups on 207 inputs, 155 units and 906 full cases per engine, retaining all 891 parent cases. Seven development records and the canonical groups total twenty-three passing attempts; focus passes 62 per engine. Fifteen new cases cover page capture/lifetime and typed independent parent scopes. The 203-file archive passes JS/TS, all five installed browser paths and the original thirty budgets; all forty declarations are identical. No new public API, type, entry, dependency or runtime filename is added. After selected M3.4, twenty-seven unconditional stages remain.[^run]
+
+M3.5 retains 27 records: ten development attempts, sixteen latest passing canonical groups and one earlier full WebKit navigation failure. The 209 inputs pass 163 units and 911 full cases per engine; primary focus passes 32 and separate unchanged Grid diagnostics pass 37 per engine. The first WebKit run retains 910 passes/one setup connection failure before framework import, with no proven cause or production fix; the later unchanged full suite passes. Eight units/five browser cases are new and all 906 parent cases remain. One 203-file archive passes JS/TS, five installed browser paths and the original thirty budgets. Thirty-eight of forty declarations are unchanged; only two existing RuleSet value unions and a private selection signature differ. Two actual CVC scopes preserve independent live policy and owned replacement cleanup. After selected M3.5, twenty-six unconditional stages remain; automatic R02 interception is still required.[^run]
 
 # Open questions
 

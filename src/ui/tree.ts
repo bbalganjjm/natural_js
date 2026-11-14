@@ -68,7 +68,8 @@ export function bindTree<T extends object>(root: HTMLUListElement | HTMLOListEle
     throw treeError("TREE_ROOT", "The Tree needs a connected ul or ol element.");
   }
   if (boundRoots.has(root)) throw treeError("TREE_IN_USE", "This Tree root is already bound.");
-  if (!options || typeof options.rows?.entries !== "function" || typeof options.rows?.subscribe !== "function" ||
+  const sourceRows = options?.rows;
+  if (!options || typeof sourceRows?.entries !== "function" || typeof sourceRows?.subscribe !== "function" ||
       typeof options.key !== "function" || typeof options.parent !== "function" ||
       (options.onSelect !== undefined && typeof options.onSelect !== "function")) {
     throw treeError("TREE_OPTIONS", "The Tree needs Rows and key and parent functions.");
@@ -185,7 +186,7 @@ export function bindTree<T extends object>(root: HTMLUListElement | HTMLOListEle
     const next = new Map<RowId, Node<T>>();
     const keys = new Map<string | number, RowId>();
     const parents = new Map<RowId, string | number | null>();
-    for (const row of options.rows.entries()) {
+    for (const row of sourceRows.entries()) {
       const key = options.key(row.value);
       const parent = options.parent(row.value);
       if (!isKey(key) || (parent !== null && !isKey(parent))) {
@@ -489,7 +490,7 @@ export function bindTree<T extends object>(root: HTMLUListElement | HTMLOListEle
     boundRoots.delete(root);
   }
   try {
-    unsubscribe = options.rows.subscribe(render);
+    unsubscribe = sourceRows.subscribe(render);
     render();
   } catch (cause) {
     dispose();

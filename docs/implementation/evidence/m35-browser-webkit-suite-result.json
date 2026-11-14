@@ -1,0 +1,227 @@
+{
+  "label": "browser-webkit",
+  "started": "2026-11-14T19:49:31.061Z",
+  "finished": "2026-11-14T19:53:59.856Z",
+  "exit_code": 1,
+  "error": "AssertionError [ERR_ASSERTION]: browser-webkit-run-1\n\n1 !== 0\n",
+  "before": {
+    "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+    "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+    "bytes": 21349,
+    "entries": 209
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+    "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+    "bytes": 21349,
+    "entries": 209
+  },
+  "sources_unchanged": true,
+  "workers": 2,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [],
+  "children": [
+    {
+      "label": "browser-webkit-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=webkit",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m35-browser-webkit-suite-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T19:49:31.088Z",
+      "finished": "2026-11-14T19:49:32.893Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+        "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+        "bytes": 21349,
+        "entries": 209
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+        "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+        "bytes": 21349,
+        "entries": 209
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m35-browser-webkit-suite-list.json.gz",
+        "sha256": "26a711e9d36d88dc00d06806dcb0d540466ca7496f3c3c1672b6ede4984f5928",
+        "bytes": 57359,
+        "encoding": "gzip",
+        "uncompressed_sha256": "b73e2e4ba45b9c7c32d187102b1b5537468aec68223ecebb7efcff87e8c7803d",
+        "uncompressed_bytes": 587645
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m35-browser-webkit-suite-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "browser-webkit-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=webkit",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m35-browser-webkit-suite-failures"
+      ],
+      "started": "2026-11-14T19:49:32.926Z",
+      "finished": "2026-11-14T19:53:59.824Z",
+      "exit_code": 1,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+        "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+        "bytes": 21349,
+        "entries": 209
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+        "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+        "bytes": 21349,
+        "entries": 209
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m35-browser-webkit-suite-run-1.json.gz",
+        "sha256": "5965b48be7aa87cf830bbba4f5b96965296e4ac00244e137c627376cdbac8872",
+        "bytes": 72025,
+        "encoding": "gzip",
+        "uncompressed_sha256": "15b8444ae4f6ed47658a37e94e0104531acc73658eb3bad0013f930dbc9ecc49",
+        "uncompressed_bytes": 1008995
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m35-browser-webkit-suite-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m35-browser-webkit-suite-failures/.last-run.json",
+      "sha256": "52192a43b5556a8bdb743d138062b4cc9a92960f344d5dc8a1e0a45fe8e95541",
+      "bytes": 96
+    },
+    {
+      "path": "docs/implementation/evidence/m35-browser-webkit-suite-failures/grid-progressive-refresh-s-e3c9f--starts-a-fresh-first-chunk-webkit/error-context.md",
+      "sha256": "fbb07ae29ed9ff62e847ee3c2f8b9e349ba0fc669a65cfff9a806d0eda5199d1",
+      "bytes": 13612
+    },
+    {
+      "path": "docs/implementation/evidence/m35-browser-webkit-suite-failures/grid-progressive-refresh-s-e3c9f--starts-a-fresh-first-chunk-webkit/trace.zip",
+      "sha256": "eae659a88f8e639ed39248a73792564c75ebbc0c883d67619675df077b280d6a",
+      "bytes": 9830
+    },
+    {
+      "path": "docs/implementation/evidence/m35-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/attachments/tree-binding-measurements-6fac635307a18cff10e52e00a7d3f6377140422c.json",
+      "sha256": "9f51035ed44dd2c454a6a34f803a811d1025d40f06da69b33ff6ba7ebed09b7e",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m35-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/tree-binding.json",
+      "sha256": "9f51035ed44dd2c454a6a34f803a811d1025d40f06da69b33ff6ba7ebed09b7e",
+      "bytes": 1348
+    }
+  ],
+  "coverage": null,
+  "complete": false
+}

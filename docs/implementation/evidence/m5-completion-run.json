@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M3.4",
+  "current_stage": "M3.5",
   "queue": [
     {
       "id": "P0.1",
@@ -49,16 +49,16 @@
     {
       "id": "M3.4",
       "scope_ref": "remaining-work-plan.json#/stages/6",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
       "receipt": "m34-verification.json"
     },
     {
       "id": "M3.5",
       "scope_ref": "remaining-work-plan.json#/stages/7",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m35-verification.json"
     },
     {
       "id": "M3.6",
@@ -249,25 +249,25 @@
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
-    "stage": "M3.4",
-    "baseline_commit": "b1d16082af4b938b1a885c8508f6243c886c3435",
-    "parent_receipt": "m33-runtime-receipt.json",
-    "contract": "implemented and independently reviewed source/callers/draft",
+    "stage": "M3.5",
+    "baseline_commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
+    "parent_receipt": "m34-runtime-receipt.json",
+    "contract": "implemented and independently reviewed source/callers/eight drafts",
     "runtime_checks": "sixteen canonical groups passed",
-    "runtime_receipt": "m34-runtime-receipt.json",
-    "inputs": 207,
-    "units": 155,
-    "full_each": 906,
-    "focus_each": 62,
+    "runtime_receipt": "m35-runtime-receipt.json",
+    "inputs": 209,
+    "units": 163,
+    "full_each": 911,
+    "focus_each": 32,
     "documents": "passed_independent_and_actual_zero_errors_warnings"
   },
   "latest_completed_checks": {
-    "stage": "M3.3",
-    "commit": "b1d16082af4b938b1a885c8508f6243c886c3435",
-    "receipt": "m33-verification.json",
-    "inputs": 206,
+    "stage": "M3.4",
+    "commit": "fd5c66a507b140b8648907759395204ac4fe69d6",
+    "receipt": "m34-verification.json",
+    "inputs": 207,
     "units": 155,
-    "full_each": 891,
+    "full_each": 906,
     "docs_errors": 0,
     "docs_warnings": 0
   },

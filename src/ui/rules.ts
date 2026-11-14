@@ -95,8 +95,12 @@ function compile<Run>(declarations: unknown, field: string, attribute: "data-for
 export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
   const formats = supplied(api, rules?.format);
   const validators = supplied(api, rules?.validate);
-  const messages = suppliedMessages(api, rules?.messages);
-  const locale: "ko_KR" | "en_US" = rules?.locale?.toLowerCase().startsWith("ko") ? "ko_KR" : "en_US";
+  const { messages: messagePolicy, locale: localePolicy } = rules ?? {};
+  if (localePolicy !== undefined && typeof localePolicy !== "string" && typeof localePolicy !== "function") {
+    throw ruleError(api, "RULE_DECLARATION", "locale must be text or a function.");
+  }
+  const messages = typeof messagePolicy === "function" ? new Map<string, string>() : suppliedMessages(api, messagePolicy);
+  const locale: "ko_KR" | "en_US" = typeof localePolicy !== "function" && localePolicy?.toLowerCase().startsWith("ko") ? "ko_KR" : "en_US";
   const fields = new Map<string, { format?: readonly RuleCall<FormatRule>[]; validate?: readonly RuleCall<ValidateRule>[] }>();
   if (rules?.fields !== undefined) {
     if (!rules.fields || typeof rules.fields !== "object" || Array.isArray(rules.fields)) {
@@ -119,8 +123,27 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
   }
 
   function message(call: RuleCall<ValidateRule>, field: string): string {
-    const template = messages.get(call.key) ??
-      (Object.hasOwn(builtinMessages[locale], call.key) ? builtinMessages[locale][call.key] : undefined) ??
+    let currentLocale = locale, currentMessages = messages;
+    try {
+      if (typeof localePolicy === "function") {
+        const value = localePolicy();
+        if (typeof value !== "string") {
+          if (value !== null && (typeof value === "object" || typeof value === "function") &&
+              typeof (value as { then?: unknown }).then === "function") void Promise.resolve(value).catch(() => {});
+          throw new TypeError("A locale provider must return text.");
+        }
+        currentLocale = value.toLowerCase().startsWith("ko") ? "ko_KR" : "en_US";
+      }
+      if (typeof messagePolicy === "function") {
+        const value = messagePolicy();
+        if (value === undefined) throw new TypeError("A message provider must return a message object.");
+        currentMessages = suppliedMessages(api, value);
+      }
+    } catch (cause) {
+      throw ruleError(api, "RULE_FAILED", "Rule message policy failed for " + field + ".", field, call.name, cause);
+    }
+    const template = currentMessages.get(call.key) ??
+      (Object.hasOwn(builtinMessages[currentLocale], call.key) ? builtinMessages[currentLocale][call.key] : undefined) ??
       `${field} failed ${call.name}.`;
     return template.replace(/\{(\d+)\}/g, (_, index: string) => String(call.args[Number(index)] ?? ""));
   }
@@ -171,8 +194,14 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
   };
 }
 
-function suppliedMessages(api: string, entries: Record<string, string> | undefined): Map<string, string> {
+function suppliedMessages(api: string, entries: unknown): Map<string, string> {
   const result = new Map<string, string>();
+  if (entries !== undefined && (entries === null || typeof entries !== "object" || Array.isArray(entries) ||
+      typeof (entries as { then?: unknown }).then === "function")) {
+    if (entries !== null && (typeof entries === "object" || typeof entries === "function") &&
+      typeof (entries as { then?: unknown }).then === "function") void Promise.resolve(entries).catch(() => {});
+    throw ruleError(api, "RULE_DECLARATION", "messages must be a synchronous message object.");
+  }
   for (const [name, message] of Object.entries(entries ?? {})) {
     if (typeof message !== "string" || !message.trim() || result.has(ruleKey(name))) {
       throw ruleError(api, "RULE_DECLARATION", "A rule message must have one nonempty text.");

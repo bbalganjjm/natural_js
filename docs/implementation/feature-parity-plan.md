@@ -12,7 +12,7 @@ sources:
   - id: omission
     resource: omission-decision.md
     title: Exact five approved omissions and retained obligations
-    git_blob: 5305f70fbe67d4f65d29ea081806c80d396f0a6b
+    git_blob: 3480707796d751619a98ae094b61a294d63e74af
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -20,7 +20,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 963be2786fdcf1f979d17523c65fc6d6aca4b698
+    git_blob: 9cd81c778f355813b4a73e7f3d3fa9eeb26751f0
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -28,11 +28,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: d3f39c719d1f597941d9b3be551804298659edd1
+    git_blob: 37301b3aa0d7962fee1e0a4042ab72ee9d2eb4f0
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: c8d7f9c53102d1d6783d8e816c4be47452409cc3
+    git_blob: fe4c5390a9868290635d1edd28286acf1be52c79
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -40,7 +40,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership

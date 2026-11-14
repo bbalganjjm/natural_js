@@ -57,7 +57,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
@@ -81,7 +81,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private Form and Grid rule runner
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Retained Form formatter behavior
@@ -94,10 +94,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -145,11 +145,13 @@ const shared: FormOptions<Employee> = {
 const detail = bindForm(root, { ...shared, rows, autoValidate: true });
 ```
 
-Later own properties win, including undefined. Omit a property to inherit it; own undefined removes an inherited callback or selects the ordinary framework default. For example, autoValidate: undefined restores true, while false overrides true. Null is not a typed substitute: null callbacks retain FORM_BIND/FORM_VALUE_OPTIONS errors and null autoValidate retains FORM_VALIDATE. Callbacks and catalogs are captured when constructing the Form; changing the preset later does not reconfigure a live instance.[^form][^presets-browser]
+Later own properties win, including undefined. Omit a property to inherit it; own undefined removes an inherited callback or selects the ordinary framework default. For example, autoValidate: undefined restores true, while false overrides true. Null is not a typed substitute: null callbacks retain FORM_BIND/FORM_VALUE_OPTIONS errors and null autoValidate retains FORM_VALIDATE. Callbacks and catalogs are captured when constructing the Form; replacing preset properties later does not reconfigure it. Explicit locale/message providers can read live state; see [shared rules](rules.md#literal-and-live-message-policy).[^form][^presets-browser]
 
-Object spread is shallow. Merge parse/render maps, RuleSet format/validate/messages/fields maps, and each affected FieldRules entry explicitly when both declarations must survive. Ordered format/validate tuple lists replace; [] clears that kind. Shared argument objects remain application-owned, so avoid mutating them during a callback. Given shared and local presets typed FormOptions<Employee>, this example combines their maps, merges salary's entry and clears its formatting. Merge other overlapping field entries explicitly too:[^rules][^presets-browser]
+Object spread is shallow. Merge parse/render maps, RuleSet format/validate/fields maps and literal message maps, and each affected FieldRules entry explicitly when both declarations must survive. Ordered format/validate tuple lists replace; [] clears that kind. Shared argument objects remain application-owned, so avoid mutating them during a callback. Given shared and local presets typed FormOptions<Employee>, this example combines their maps, merges salary's entry and clears its formatting. Merge other overlapping field entries explicitly too:[^rules][^presets-browser]
 
 ```ts
+const sharedMessages = shared.rules?.messages;
+const localMessages = local.rules?.messages;
 const options: FormOptions<Employee> = {
   ...shared,
   ...local,
@@ -159,7 +161,10 @@ const options: FormOptions<Employee> = {
     ...shared.rules, ...local.rules,
     format: { ...shared.rules?.format, ...local.rules?.format },
     validate: { ...shared.rules?.validate, ...local.rules?.validate },
-    messages: { ...shared.rules?.messages, ...local.rules?.messages },
+    messages: () => ({
+      ...(typeof sharedMessages === "function" ? sharedMessages() : sharedMessages),
+      ...(typeof localMessages === "function" ? localMessages() : localMessages)
+    }),
     fields: {
       ...shared.rules?.fields, ...local.rules?.fields,
       salary: { ...shared.rules?.fields?.salary, ...local.rules?.fields?.salary, format: [] }
@@ -167,6 +172,8 @@ const options: FormOptions<Employee> = {
   }
 };
 ```
+
+The message function above intentionally resolves the two captured policies on every generated issue; local entries win. Referenced literal map changes are live in this explicit composition. Use a literal merged map instead when both policies must stay fixed. No framework merge helper is required.[^rules]
 
 When two callbacks must run, capture their function references and write their order in the application. This value pipeline preserves local output if shared returns undefined; all-undefined stays undefined, which matters for an unavailable choice. False, null, zero and empty text remain values. The small thenable check belongs to this example, not the framework API.[^form][^presets-browser]
 
@@ -205,7 +212,7 @@ The [shared rule contract](rules.md) defines RuleSet.fields, per-kind TS/HTML pr
 
 An image field writes the raw value to native `src`; `null` or empty text removes the attribute and leaves authored `alt` unchanged. Ordinary display fields remain text. Explicit rich display uses the `render` option described below.[^native][^render]
 
-Rule names are case-insensitive. Combined validators accept the retained `+` and underscore spellings. For effective declarations, malformed JSON/name tuples raise `RULE_DECLARATION`, unknown names raise `RULE_UNKNOWN`, and invalid built-in arguments raise `RULE_ARGUMENT` at binding. `RuleSet.format` and `RuleSet.validate` can override built-ins per Form; `RuleSet.messages` replaces built-in messages. Built-in messages default to English; a locale beginning with `ko` selects Korean. Domain rules belong in `RuleSet`, not a framework utility package.[^rules]
+Rule names are case-insensitive. Combined validators accept the retained `+` and underscore spellings. For effective declarations, malformed JSON/name tuples raise `RULE_DECLARATION`, unknown names raise `RULE_UNKNOWN`, and invalid built-in arguments raise `RULE_ARGUMENT` at binding. `RuleSet.format` and `RuleSet.validate` can override built-ins per Form; `RuleSet.messages` replaces built-in messages. Built-in messages default to English; a locale beginning with `ko` selects Korean. The [shared message policy](rules.md#literal-and-live-message-policy) also accepts captured synchronous locale/message functions for existing instances. Domain rules belong in `RuleSet`, not a framework utility package.[^rules]
 
 A path is parsed once. It rejects prototype keys, numeric array indexes, and expressions; a nested write copies that object path and replaces its top-level `Rows` field. Array values can still be stored or replaced as whole fields.[^path][^form]
 

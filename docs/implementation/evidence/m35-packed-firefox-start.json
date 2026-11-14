@@ -1,0 +1,47 @@
+{
+  "label": "packed-firefox",
+  "args": [
+    "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "run",
+    "test:packed-browser",
+    "--",
+    "--tarball",
+    "D:\\workspace\\natural_js\\node_modules\\.cache\\m35-artifact-pack\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "--sha256",
+    "375b752ef05f77781bb671ce2001de5bc4bb5b1df4405f439d9114a34a03e7de",
+    "--browser",
+    "firefox"
+  ],
+  "started": "2026-11-14T19:39:11.563Z",
+  "before": {
+    "path": "docs/implementation/evidence/m35-inputs-60e3731f1687.json",
+    "sha256": "60e3731f1687eca9f0e0a5d47a5b0369c4805594b68117d46e3b517636066bf5",
+    "bytes": 21349,
+    "entries": 209
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+  },
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m35-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m35-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "stdout_partial": "docs/implementation/evidence/m35-packed-firefox-stdout.partial",
+  "stderr": "docs/implementation/evidence/m35-packed-firefox-stderr.log"
+}

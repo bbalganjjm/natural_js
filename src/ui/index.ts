@@ -42,8 +42,8 @@ export interface FieldRules {
 export interface RuleSet {
   format?: Record<string, FormatRule>;
   validate?: Record<string, ValidateRule>;
-  messages?: Record<string, string>;
-  locale?: string;
+  messages?: Record<string, string> | (() => Record<string, string>);
+  locale?: string | (() => string);
   fields?: Record<string, FieldRules>;
 }
 

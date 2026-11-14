@@ -17,10 +17,10 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator runtime and types
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
-generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 The `./comm` entry exports `createCommunicator` and request types. It uses native Request/Response with Fetch as the default sender; application code chooses API URLs, wire conversion and any explicit custom sender.[^comm]
@@ -39,12 +39,14 @@ The `./comm` entry exports `createCommunicator` and request types. It uses nativ
 
 | Option | Type | Behavior |
 |---|---|---|
-| `baseURL` | `URL` | Resolves relative request URLs. |
+| `baseURL` | `URL` | Read and cloned once at creation; resolves relative request URLs. |
 | `prepare` | `(request: Request) => Request \| Promise<Request>` | Runs before sending; may return a new Request, including app headers. |
 | `after` | `(response: Response) => Response \| Promise<Response>` | Runs after sending, before HTTP status and decoding checks. |
 | `send` | `(request: Request) => Promise<Response>` | Optional native/custom sender; omission uses the current global fetch when each request executes. |
 
 Callbacks must satisfy their declared result types. If prepare returns a replacement Request, the caller's abort signal remains attached to the final sent Request.[^comm]
+
+baseURL is read once and copied with native new URL at creation. Mutating the supplied URL, replacing/deleting the option or adding a previously absent base cannot retarget this communicator. Invalid supplied URL data raises REQUEST_OPTIONS at createCommunicator with cause. Create another communicator for another fixed base, or use an explicit application forwarding function to choose the current service.[^comm]
 
 prepare, after and a supplied send are read once at communicator creation and called plainly, without an implicit receiver. Replacing or adding a callback later does not change that communicator. Use a closure for deliberate live policy. Nonfunctions raise REQUEST_OPTIONS at createCommunicator; wrong prepare/after results retain REQUEST_PREPARE/REQUEST_AFTER failures. Default fetch is looked up per request, so it is not captured as an artificial sender.[^comm]
 

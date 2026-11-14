@@ -8,15 +8,15 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required Grid continuation and full feature obligations
-    git_blob: c1c0893f28a8fc390eefe963ceaced1aee38732a
+    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row ownership and existing active-detail contract
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: legacy
     resource: evidence/v1-grid-parity.json
     title: Legacy Grid behavior and remaining semantic obligations
@@ -24,7 +24,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private identity sets, transitions and ranges
-    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
+    git_blob: 219727ea3f2526fc4722eaaa2725ebfc3c361f13
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private scalar filter state and counts

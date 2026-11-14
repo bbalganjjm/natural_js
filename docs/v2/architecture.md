@@ -5,6 +5,10 @@ description: Small role modules, one-way imports, and evidence-based sharing kee
 tags: [architecture, modules, maintainability]
 status: draft
 sources:
+  - id: configuration-browser
+    resource: ../../tests/browser/configuration.spec.ts
+    title: Two CVC scopes, captured data and owned live policy
+    git_blob: b44d45dfa8f827bef1467c4cc04a9e44e7449da0
   - id: value-binding
     resource: ../../src/ui/value-binding.ts
     title: Private checked value invocation and native replacement shared by three binders
@@ -20,7 +24,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
@@ -28,7 +32,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -40,7 +44,7 @@ sources:
   - id: grid-selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid active identity, sets, eligibility, and transitions
-    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
+    git_blob: 219727ea3f2526fc4722eaaa2725ebfc3c361f13
   - id: grid-filters
     resource: ../../src/ui/grid-filters.ts
     title: Private Grid scalar filter state and choice counts
@@ -60,7 +64,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -80,7 +84,7 @@ sources:
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree hierarchy and authored-list binding
-    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
+    git_blob: f9984fcd70da26da37d5dbdc0f2960fcc5efa36d
   - id: datepicker
     resource: ../../src/ui/datepicker.ts
     title: Controlled authored-calendar binding
@@ -112,7 +116,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private Form/Grid rule runner
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: formats
     resource: ../../src/ui/format-rules.ts
     title: Private retained formatter rules
@@ -132,7 +136,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
   - id: error
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error
@@ -153,10 +157,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -230,6 +234,14 @@ Form/Grid/List share row-local extraction plus three small private functions in 
 
 value-binding.ts captures and plain-calls the actual before/after value functions, drains asynchronous rejection, checks native scalar/array/choice replacements and runs one before-write-after sequence. Form, Grid and List retain their compiled field graph, projection slots, raw store, drafts/focus, option caches and current/generation checks. The helper owns no registry, dataset or component lifecycle. Common ValueBindContext names the existing row/field context; no-hook paths avoid field contexts and callback checkpoints.[^value-binding][^form][^grid][^list]
 
+## Application scopes and captured owners
+
+Use one ordinary typed application object per scope. Explicit object composition supplies creation defaults; locale/message functions and formatter/service forwarding provide deliberate live policy. Resolve services through their owning object, or capture the chosen service before await when an operation needs one snapshot. Framework Rules/Rows are not an application-wide configuration registry.[^configuration-browser]
+
+Grid/List/Tree capture the subscribed Rows once, including Grid's private selection/check owner. Communicator captures a copied base URL; changing a caller's options cannot switch these owners accidentally. Rules capture literal policy or provider references; providers affect the next generated validation message. No generic context, translation, deep-merge or service engine is added.[^configuration-browser]
+
+Use native Map for known-key handle lookup/enumeration. Map.has distinguishes missing from stored undefined. Register each application's disposer through PageContext.own and delete an entry only when it still equals that disposer’s handle. The executed two-page recipe closes an old Form after replacement, removes the current owned Form on page close and leaves the sibling scope active.[^configuration-browser]
+
 # Related
 
 [The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [Tree](tree.md) and [DatePicker](datepicker.md) keep source and handle types together; [the authored M11 example](tree-date-example.md) connects them through the same CVC runtime. [Documents](documents.md), [Notify](notify.md) and [the application shell example](shell-example.md) complete the selected shell composition without a public shell engine. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
@@ -267,3 +279,5 @@ value-binding.ts captures and plain-calls the actual before/after value function
 [^tab-pages]: Private shared page-tab transitions and keyboard helpers
 
 [^value-binding]: Private checked value invocation and native replacement shared by three binders
+
+[^configuration-browser]: Two CVC scopes, captured data and owned live policy

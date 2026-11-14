@@ -8,11 +8,11 @@ sources:
   - id: types
     resource: ../../src/ui/index.ts
     title: RuleSet, FieldRules and rule callback types
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Shared per-binder declaration compiler and execution
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Native value integrity and optional constraints
@@ -24,15 +24,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid timing, typed options and atomic paste
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: Display List rules and explicit validation
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree formatter caller and effective validation restriction
-    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
+    git_blob: f9984fcd70da26da37d5dbdc0f2960fcc5efa36d
   - id: browser
     resource: ../../tests/browser/shared-rules.spec.ts
     title: Shared declarations, overrides and ownership regressions
@@ -41,9 +41,9 @@ sources:
     resource: ../../tests/browser/auto-validation.spec.ts
     title: Automatic policy, integrity and explicit-check regressions
     git_blob: 09f4fa7c192a1181a662ecb9f4f1cec082eeb78e
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 # Contract
@@ -93,9 +93,30 @@ Compilation copies list and argument-array containers once per binder. Reference
 
 # Shared and local configuration
 
-Use ordinary object spreads. Merge format, validate and messages catalogs explicitly when both shared and local entries must survive. Merge fields at the map level and then merge an individual field entry when retaining one kind while replacing the other, as salary above does. A replaced tuple list is a complete ordered replacement; there is no implicit deep merge or callback composition. Use consistent catalog spelling when overriding a name: duplicate aliases after case/combined-name normalization are rejected.[^rules]
+Use ordinary object spreads. Merge format/validate catalogs and literal message maps explicitly when both shared and local entries must survive. Compose message providers with ordinary functions; spreading a function does not resolve its returned map. Merge fields at the map level and then merge an individual field entry when retaining one kind while replacing the other, as salary above does. A replaced tuple list is a complete ordered replacement; there is no implicit deep merge or callback composition. Use consistent catalog spelling when overriding a name: duplicate aliases after case/combined-name normalization are rejected.[^rules]
 
 Form, Grid and List use the same field declaration contract. Effective nonempty formatters retain each component's control restrictions and cannot coexist with a Form/Grid renderer. An explicit empty formatter list can clear an authored format before those checks. Tree supports the same formatter declarations and rejects nonempty effective validation on its bound fields; empty overrides can clear an authored validator declaration. This does not add editable List or general Tree validation.[^form][^grid][^list][^tree][^browser]
+
+# Literal and live message policy
+
+RuleSet.locale accepts a string or () => string. RuleSet.messages accepts a Record<string, string> or () => Record<string, string>. The runner reads each option once at construction. Literal locale and copied own enumerable message entries stay fixed; replacing an option does not reconfigure that runner. Captured functions may deliberately read current application state.[^types][^rules]
+
+~~~ts
+const scope = { locale: "en_US", messages: {} as Record<string, string> };
+const rules: RuleSet = {
+  locale: () => scope.locale,
+  messages: () => scope.messages
+};
+// Existing Forms using these functions observe the next generated message.
+scope.locale = "ko_KR";
+scope.messages.required = "Enter an employee name.";
+~~~
+
+For each generated failed-rule message, call locale first and then messages, once each, plainly with no arguments. Passing validation, skipped optional blank values and a validator's own nonempty message do not call them. Bound functions retain their explicit receiver. A case-insensitive ko prefix selects Korean; every other primitive string selects English. Resolution remains normalized rule-key override, current built-in message, then field/rule text. Placeholder substitution and inert text rendering remain unchanged.[^rules]
+
+Providers must synchronously return the declared value. Invalid literals fail creation with RULE_DECLARATION; provider throws or invalid outputs fail with RULE_FAILED and the current API, field, rule and cause. Promise/thenable outputs are rejected and their rejection is drained. Message results must be non-null, non-array objects with own enumerable nonempty string values and no duplicate normalized keys. Empty maps use the existing fallback. The whole map is checked per generated issue; keep component message maps small. There is no automatic repaint, subscription or whole-validation snapshot.[^rules]
+
+The [configuration test](../../tests/configuration.test.ts) verifies 1000 passing validations without provider/map reads and two generated issues with two scans of a 102-entry map. These operation counts describe this path; they are not timing results. Global custom-rule fallback, standalone rules and remaining catalog/mask parity retain M5.18 ownership.[^rules]
 
 # Automatic versus explicit validation
 

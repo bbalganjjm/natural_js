@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-state-plan.md
     title: Completed received-state continuation
-    git_blob: 59b5cd6f74e0b4d542d31bbc3388387de53d54df
+    git_blob: b118583c9838365a7b219ad4d6cc54e09b7a1795
   - id: baseline
     resource: evidence/m52-verification.json
     title: Preserved 4660cd6 source and runtime evidence
@@ -24,11 +24,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid raw option maps and validation
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: List raw option maps and occurrence-based selection
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select identity and authored-node restoration

@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-shared-rules-plan.md
     title: Completed shared-rule continuation
-    git_blob: e40661c1910f8287a5af26f7990b0053ae30c717
+    git_blob: b67b32d295c1e7b39efc9915809f5cb6fb56c451
   - id: baseline
     resource: evidence/m51-verification.json
     title: Preserved 73f5a88 source and runtime evidence
@@ -20,7 +20,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request method, JSON body, decoding and cancellation
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Incoming rowStatus, received-value reversion and raw ordering

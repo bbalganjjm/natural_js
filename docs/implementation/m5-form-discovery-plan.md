@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-defaults-plan.md
     title: Completed captured defaults and reusable unbinding scope
-    git_blob: 5fcd871b700e8ae6d9e143a1d89e48439a1669d2
+    git_blob: dc49dbc142fcb703aa0ebf1334d5f02946b1a7b9
   - id: baseline
     resource: evidence/m57-verification.json
     title: Frozen ebf700c source, runtime and installed package baseline
@@ -20,7 +20,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form handle and rule contracts
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Native values, groups and constraints
@@ -32,7 +32,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Captured rule catalogs and compiled field declarations
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy cache-controlled lookup, creation capture and current-node unbinding
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: c1c0893f28a8fc390eefe963ceaced1aee38732a
+    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
 generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }

@@ -8,7 +8,7 @@ sources:
   - id: runtime
     resource: ../../src/comm/index.ts
     title: Existing native Request, Response and cancellation owner
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
   - id: legacy
     resource: ../../v1/src/natural.architecture.js
     title: Request filters, transformations, stopping and completion
@@ -28,7 +28,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Existing pending five-item decision
-    git_blob: 5305f70fbe67d4f65d29ea081806c80d396f0a6b
+    git_blob: 3480707796d751619a98ae094b61a294d63e74af
 generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }

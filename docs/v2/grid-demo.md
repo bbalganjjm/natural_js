@@ -84,7 +84,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid contract and rendering lifetime
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured viewport, spacer and scroll ownership
@@ -104,7 +104,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Independent active row, selection and check state
-    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
+    git_blob: 219727ea3f2526fc4722eaaa2725ebfc3c361f13
   - id: controls-browser
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Native groups, typed values, validation and display regressions
@@ -120,7 +120,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
 generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }

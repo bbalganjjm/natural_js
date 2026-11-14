@@ -52,7 +52,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current asynchronous communication owner
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
   - id: page
     resource: ../../src/page/index.ts
     title: Explicit inert view and controller factory
@@ -60,7 +60,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Existing typed Grid and List predicate contracts
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
 generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }

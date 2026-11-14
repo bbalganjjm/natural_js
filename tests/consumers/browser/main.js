@@ -145,6 +145,60 @@ state.checkPageLoading = async () => {
   return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, lifetime, canceled: canceledResult, rejected, disposal };
 };
 
+state.checkConfiguration = async () => {
+  const roots = [], handles = [], receivers = [];
+  const send = async request => new Response(JSON.stringify(request.url));
+  const original = new URL("https://one.test/api/"); let baseReads = 0;
+  const options = { get baseURL() { baseReads++; return original; }, send };
+  const scopes = ["one", "two"].map((key, index) => ({ locale: "en_US", messages: {}, handles: new Map(),
+    rows: createRows([{ name: "" }]), service: createCommunicator(index ? { baseURL: new URL("https://two.test/api/"), send } : options) }));
+  const form = (scope, live, root, page) => {
+    const rules = { locale: live ? function() { receivers.push(this); return scope.locale; } : scope.locale,
+      messages: live ? function() { receivers.push(this); return scope.messages; } : scope.messages };
+    const handle = bindForm(root, { rows: scope.rows, rules }); handle.bind(scope.rows.entries()[0].id);
+    const close = () => { if (scope.handles.get("detail") === handle) scope.handles.delete("detail"); handle.dispose(); };
+    page.own(close); return { root, handle, close };
+  };
+  const hosts = scopes.map(() => document.createElement("div")); document.querySelector("main").append(...hosts);
+  const forms = [];
+  const pages = scopes.map((scope, index) => mountPage(hosts[index], {
+    view() { const root = document.createElement("section"), fields = '<input aria-label="Name" data-field="name" data-validate=\'[["required"]]\'><output data-error-for="name"></output>';
+      root.innerHTML = '<form data-live>' + fields + '</form><form data-fixed>' + fields + '</form>'; return root; },
+    controller(page) { return { init() {
+      page.own(() => scope.rows.dispose());
+      const pair = { live: form(scope, true, page.root.querySelector("[data-live]"), page), fixed: form(scope, false, page.root.querySelector("[data-fixed]"), page) };
+      forms[index] = pair; scope.handles.set("detail", pair.live.handle); scope.handles.set("optional", undefined);
+    } }; }
+  }));
+  await Promise.all(pages.map(page => page.ready));
+  const read = () => forms.flatMap(pair => [pair.live.handle.validate().issues[0].message, pair.fixed.handle.validate().issues[0].message]);
+  const initial = read(); scopes[0].locale = "ko_KR"; const changed = read();
+  scopes[0].messages.required = "<b>Scoped</b>"; const override = forms[0].live.handle.validate().issues[0].message;
+  const inert = forms[0].live.root.querySelector("b") === null && forms[0].live.root.querySelector("output").textContent === override;
+  original.pathname = "/mutated/"; Object.defineProperty(options, "baseURL", { value: new URL("https://updated.test/api/") });
+  const forwards = scopes.map(scope => () => scope.service.request({ url: "row" }));
+  const urlsBefore = await Promise.all(forwards.map(run => run())); scopes[0].service = createCommunicator(options);
+  const urlsAfter = await Promise.all(forwards.map(run => run()));
+  scopes[0].handles.set("detail", forms[0].fixed.handle); forms[0].live.close();
+  const ownership = scopes[0].handles.get("detail") === forms[0].fixed.handle && scopes[1].handles.get("detail") === forms[1].live.handle &&
+    scopes[0].handles.has("optional") && !scopes[0].handles.has("missing");
+
+  const table = document.createElement("table"); table.innerHTML = '<caption>Owned Rows</caption><thead><tr><th scope="col">Name</th></tr></thead><tbody><tr data-row-template><td><input data-field="name"><button type="button" data-select-row>Select</button></td></tr></tbody>';
+  document.querySelector("main").append(table); roots.push(table);
+  const one = createRows([{ name: "A" }]), two = createRows([{ name: "B" }]), id = one.entries()[0].id; let selected;
+  const gridOptions = { rows: one, onSelect({ row }) { selected = row.value.name; } }, grid = bindGrid(table, gridOptions); handles.push(grid);
+  gridOptions.rows = two; one.set(id, "name", "A changed"); grid.select(id);
+  const field = table.querySelector("input"); field.value = "A edited"; field.dispatchEvent(new Event("change", { bubbles: true }));
+  const rows = { colliding: id === two.entries()[0].id, selected, own: one.get(id).value.name, other: two.get(id).value.name };
+  handles.forEach(handle => handle.dispose()); roots.forEach(root => root.remove());
+  await pages[0].dispose(); const firstClosed = pages[0].root === null && !scopes[0].handles.has("detail");
+  const siblingAlive = pages[1].root?.isConnected === true && scopes[1].handles.get("detail") === forms[1].live.handle;
+  await pages[1].dispose(); const finalClosed = pages[1].root === null && scopes.every(scope => !scope.handles.has("detail"));
+  hosts.forEach(host => host.remove());
+  return { initial, changed, override, inert, urlsBefore, urlsAfter, baseReads, ownership, plain: receivers.every(value => value === undefined), rows,
+    pageCleanup: { firstClosed, siblingAlive, finalClosed } };
+};
+
 function view() {
   const root = document.createElement("article");
   root.innerHTML = `

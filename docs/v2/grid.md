@@ -37,11 +37,11 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -85,7 +85,7 @@ sources:
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private active identity, membership, eligibility, and transition ordering
-    git_blob: 1b74c39d3161345aec1c9d0c3dd9de49c947f23d
+    git_blob: 219727ea3f2526fc4722eaaa2725ebfc3c361f13
   - id: filters
     resource: ../../src/ui/grid-filters.ts
     title: Private scalar column filters and choice counts
@@ -97,7 +97,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Shared Form/Grid rule runner
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -130,10 +130,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 `bindGrid` adds behavior to a native table and a caller-owned `Rows` store. It repeats an authored single-row or multi-row record, keeps active detail identity, selected membership, checked membership and invalid cell drafts under store-local `RowId` values, and never uses DOM IDs as row or field keys. The three selection states are independent.[^grid][^blocks][^selection]
@@ -216,6 +216,8 @@ if (grid.validate().valid) console.log(rows.changes());
 | `onRowAction` | `({ action, id, row, element, event }) => void` for named row buttons, including an authored Undo action on a shown deleted record; `row` is the current `RowSnapshot<T>`. |
 
 Eligibility callbacks must return strict booleans. Keep eligibility, comparator, predicate, filter-value and filter-label callbacks pure: they may run during rendering, validation of a proposal, or choice queries. A native authored `disabled` control prevents that UI gesture; it does not exclude an otherwise eligible row from programmatic full-set or scoped operations. Use `canSelect` or `canCheck` for data eligibility.[^grid][^selection][^filters]
+
+bindGrid captures its Rows once. Rendering, subscription, selection and applicable edit/validation operations use that same store; replacing options.rows cannot redirect an existing binding. Update the captured Rows normally, or dispose and bind a new owner for another store. No store is cloned or frozen.[^grid]
 
 # Field value callbacks
 

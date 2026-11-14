@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m10-pinned-plan.md
     title: Completed pinned-column continuation
-    git_blob: ce217498685d432035da00ca037d527ebff0f15a
+    git_blob: 7b6b1e2c71350b563979c08e61ff191c089f5098
   - id: baseline
     resource: evidence/m10964p-verification.json
     title: Preserved a0f837a runtime baseline
@@ -16,11 +16,11 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Existing per-binder rule compilation and execution
-    git_blob: a143951476286c0b66584ae57ea47932280d2ba2
+    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
   - id: types
     resource: ../../src/ui/index.ts
     title: Shared rule and UI contracts
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: form
     resource: ../../src/ui/form.ts
     title: Form candidates, drafts and validation ownership
@@ -28,15 +28,15 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid candidates, commit timing and validated paste
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: Display List fields and explicit validation
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree formatter caller and validation boundary
-    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
+    git_blob: f9984fcd70da26da37d5dbdc0f2960fcc5efa36d
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Existing display renderer preflight

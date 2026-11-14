@@ -22,7 +22,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communication type contract
-    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+    git_blob: 9fa5534fcaa71e390603e0523e3a415bd564d98c
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:01:11Z }
 ---
 

@@ -32,7 +32,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01–O05 are approved exclusions
-    git_blob: 5305f70fbe67d4f65d29ea081806c80d396f0a6b
+    git_blob: 3480707796d751619a98ae094b61a294d63e74af
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Direct PageDefinition forwarding and modal ownership

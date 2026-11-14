@@ -9,7 +9,7 @@ sources:
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree hierarchy, field binding, keyboard, and disposal implementation
-    git_blob: 4a5cd095c2e4d2aa106f9c944365e50964b7e243
+    git_blob: f9984fcd70da26da37d5dbdc0f2960fcc5efa36d
   - id: rows
     resource: ../../src/data/index.ts
     title: Caller-owned Rows and stable row identity
@@ -21,9 +21,9 @@ sources:
   - id: apg
     resource: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
     title: WAI-ARIA treeview pattern
-generated: { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T04:19:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 ---
 
 `bindTree` turns an authored list template into a single-selection hierarchy over caller-owned `Rows`. Tree displays text and controls focus, expansion, and selection; edit the selected record through a Form.[^tree]
@@ -77,6 +77,8 @@ Selection of a collapsed descendant expands its ancestors. `key` and `parent` de
 | `onSelect` | `({ id, row, event }) => void` | None | Changed selection with `RowId \| null`, `RowSnapshot<T> \| null`, and `Event \| null`. |
 
 Rows insertion order determines sibling order. String and numeric keys remain distinct. Missing parents, duplicate keys, and cycles raise `TREE_PARENT`, `TREE_KEY`, or `TREE_CYCLE`; Tree does not infer roots from missing parents.[^tree]
+
+bindTree captures its Rows once. Graph construction, rendering, subscription, selection and node queries use that same store; replacing options.rows cannot redirect an existing binding. Update the captured Rows normally, or dispose and bind a new owner for another store. No store is cloned or frozen.[^tree]
 
 # Declarative options
 

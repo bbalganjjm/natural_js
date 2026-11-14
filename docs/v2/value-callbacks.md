@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Common public field value context
-    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
+    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
   - id: binding
     resource: ../../src/ui/value-binding.ts
     title: Shared checked invocation, native replacements and write order
@@ -21,11 +21,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid mounted-field, draft, focus and projection owner
-    git_blob: 09ffaa47fbc1245bf8dec049a251a84ea41cfa21
+    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
   - id: list
     resource: ../../src/ui/list.ts
     title: Read-only List projection and refresh owner
-    git_blob: 35b8bfff7026d894082cd9471326728182066937
+    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
   - id: browser
     resource: ../../tests/browser/collection-values.spec.ts
     title: Shared callback, raw-value and lifecycle witnesses

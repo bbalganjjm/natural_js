@@ -86,6 +86,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     throw listError("LIST_ROOT", "The List root must be a ul or ol element.");
   }
   if (boundRoots.has(root)) throw listError("LIST_IN_USE", "This List root is already bound.");
+  const sourceRows = options.rows;
   const values = createValueBinding("bindList", options);
   const templates = [...root.querySelectorAll<HTMLLIElement>("li[data-row-template]")];
   if (templates.length !== 1 || templates[0].parentElement !== root) {
@@ -433,15 +434,15 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         button.setAttribute("aria-pressed", String(rowId === id));
       }
     }
-    options.onSelect?.({ id, row: id === null ? null : options.rows.get(id) ?? null, event });
+    options.onSelect?.({ id, row: id === null ? null : sourceRows.get(id) ?? null, event });
   }
 
   function render(force = false): void {
     if (disposed) return;
     if (values.running) throw listError("LIST_BIND_REENTRANT", "A value callback cannot reenter binding.");
     const version = values.enabled ? ++renderVersion : 0;
-    const entries = options.rows.entries();
-    const current = values.enabled ? () => !disposed && version === renderVersion && entries === options.rows.entries() : undefined;
+    const entries = sourceRows.entries();
+    const current = values.enabled ? () => !disposed && version === renderVersion && entries === sourceRows.entries() : undefined;
     const live = new Set(entries.map(row => row.id));
     for (const [id, record] of records) {
       if (!live.has(id)) {
@@ -530,7 +531,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   root.addEventListener("click", onClick);
   let unsubscribe = () => {};
   try {
-    unsubscribe = options.rows.subscribe(event => {
+    unsubscribe = sourceRows.subscribe(event => {
       if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
         for (const record of records.values()) clearIssues(record);
       } else if (event.type === "setMany") {
@@ -564,7 +565,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     refresh() { active(); render(true); },
     select(id) {
       active();
-      const row = id === null ? null : options.rows.get(id);
+      const row = id === null ? null : sourceRows.get(id);
       if (id !== null && (!row || row.status === "delete")) {
         throw listError("LIST_ROW", "The selected row is not available in this List.", { id });
       }
@@ -599,11 +600,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     },
     validate(id): ValidationResult {
       active();
-      const target = id === undefined ? undefined : options.rows.get(id);
+      const target = id === undefined ? undefined : sourceRows.get(id);
       if (id !== undefined && (!target || target.status === "delete")) {
         throw listError("LIST_ROW", "The row ID is not available in this List.", { id });
       }
-      const rows = target ? [target] : options.rows.entries();
+      const rows = target ? [target] : sourceRows.entries();
       const issues = rows.flatMap(row => validateRow(row));
       return { valid: issues.length === 0, issues };
     },

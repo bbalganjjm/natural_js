@@ -9,8 +9,7 @@ interface ActiveChange<T> {
   event: Event | null;
 }
 
-export function createGridSelection<T extends object>(options: {
-  rows: Rows<T>;
+export function createGridSelection<T extends object>(rows: Rows<T>, options: {
   multiple?: boolean;
   toggleSelection?: boolean;
   checkMode?: "multiple" | "single";
@@ -67,7 +66,7 @@ export function createGridSelection<T extends object>(options: {
   function code(kind: Kind): string { return kind === "selection" ? "GRID_SELECTION" : "GRID_CHECK"; }
 
   function eligible(id: RowId, kind: Kind): boolean {
-    const row = options.rows.get(id);
+    const row = rows.get(id);
     if (!row || row.status === "delete") return false;
     const predicate = kind === "selection" ? options.canSelect : options.canCheck;
     if (!predicate) return true;
@@ -81,11 +80,11 @@ export function createGridSelection<T extends object>(options: {
   function checkpoint(kind: Kind): () => void {
     const expected = revision;
     const expectedView = view.revision();
-    const entries = options.rows.entries();
+    const entries = rows.entries();
     const visible = [...view.visible()];
     const filtered = [...view.filtered()];
     return () => {
-      if (revision !== expected || view.revision() !== expectedView || options.rows.entries() !== entries ||
+      if (revision !== expected || view.revision() !== expectedView || rows.entries() !== entries ||
           !same(view.visible(), visible) || !same(view.filtered(), filtered)) {
         fail(code(kind), "Grid state changed while a row transition was being prepared.");
       }
@@ -94,7 +93,7 @@ export function createGridSelection<T extends object>(options: {
 
   function ordered(ids: ReadonlySet<RowId>): readonly RowId[] {
     if (!ids.size) return empty;
-    return Object.freeze(options.rows.entries().filter(row => ids.has(row.id)).map(row => row.id));
+    return Object.freeze(rows.entries().filter(row => ids.has(row.id)).map(row => row.id));
   }
 
   function checkedIds(ids: readonly RowId[], kind: Kind): readonly RowId[] {
@@ -102,7 +101,7 @@ export function createGridSelection<T extends object>(options: {
     const next = new Set<RowId>();
     for (const id of ids) {
       if (next.has(id)) fail(code(kind), "Grid row IDs must not repeat.", { id });
-      const row = options.rows.get(id);
+      const row = rows.get(id);
       if (!row || row.status === "delete") fail("GRID_ROW", "The row ID is not available in this Grid.", { id });
       if (!eligible(id, kind)) fail(code(kind), "The row is not eligible for this Grid operation.", { id });
       next.add(id);
@@ -111,7 +110,7 @@ export function createGridSelection<T extends object>(options: {
   }
 
   function activeChange(id: RowId | null, event: Event | null): ActiveChange<T> {
-    return Object.freeze({ id, row: id === null ? null : options.rows.get(id) ?? null, event });
+    return Object.freeze({ id, row: id === null ? null : rows.get(id) ?? null, event });
   }
 
   function idsChange(ids: readonly RowId[], previous: readonly RowId[], event: Event | null): GridIdsChange {
@@ -173,7 +172,7 @@ export function createGridSelection<T extends object>(options: {
   function scopeIds(scope: GridRowScope): readonly RowId[] {
     if (scope === "visible") return view.visible();
     if (scope === "filtered") return view.filtered();
-    if (scope === "store") return options.rows.entries().map(row => row.id);
+    if (scope === "store") return rows.entries().map(row => row.id);
     return fail("GRID_CHECK", "A Grid check scope must be visible, filtered, or store.");
   }
 

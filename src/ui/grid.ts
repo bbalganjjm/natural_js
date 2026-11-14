@@ -179,6 +179,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     throw gridError("GRID_ROOT", "The Grid root must be a table element.");
   }
   if (boundRoots.has(root)) throw gridError("GRID_IN_USE", "This table is already bound as a Grid.");
+  const sourceRows = options.rows;
   const values = createValueBinding("bindGrid", options);
   const body = compileGridBody(root);
   const { templates, authored } = body;
@@ -375,7 +376,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     ...textFields.map(field => ({ name: field.name, element: authored[field.index], formatted: field.format.length > 0 })),
     ...selectFields.flatMap(field => field.name ? [{ name: field.name, element: authored[field.index] }] : [])
   ], options.render);
-  const selection = createGridSelection(options, {
+  const selection = createGridSelection(sourceRows, options, {
     visible: () => { active(); return visibleIds; },
     filtered: () => { active(); return filteredIds; },
     revision: () => { active(); return viewRevision; },
@@ -509,7 +510,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   let cachedStatusEntries: readonly RowSnapshot<T>[] = [];
 
   function statusEntries(): readonly RowSnapshot<T>[] {
-    const source = options.rows.entries({ includeDeleted: statuses.includes("delete") });
+    const source = sourceRows.entries({ includeDeleted: statuses.includes("delete") });
     if (statuses.length === 3 && !statuses.includes("delete")) return source;
     if (source !== cachedStatusSource || statuses !== cachedStatusFilter) {
       cachedStatusEntries = Object.freeze(source.filter(row => statuses.includes(row.status)));
@@ -718,7 +719,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   function renderRecord(record: RenderedRow<T>, snapshot: RowSnapshot<T>, current?: () => boolean): void {
     if (record.snapshot === snapshot) return;
     const original = snapshot.status === "update" || snapshot.status === "delete"
-      ? options.rows.original(snapshot.id) : undefined;
+      ? sourceRows.original(snapshot.id) : undefined;
     for (const binding of record.texts) {
       if (current && !current()) return;
       const changed = original !== undefined && !sameJson(
@@ -891,7 +892,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   function reconcile(id: RowId, full = true): ValidationIssue[] {
-    const row = options.rows.get(id);
+    const row = sourceRows.get(id);
     if (!row || row.status === "delete") {
       throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
     }
@@ -909,18 +910,18 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       for (const field of ready) {
         const draft = pending.get(field);
         if (!draft) continue;
-        const current = options.rows.get(id);
+        const current = sourceRows.get(id);
         if (!current || current.status === "delete") {
           throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
         }
         const next = writePath(current.value as Readonly<Record<string, unknown>>, draft.path, candidate.parsed.get(field));
         const key = draft.path[0] as keyof T;
         try {
-          options.rows.set(id, key, next[draft.path[0]] as T[keyof T]);
+          sourceRows.set(id, key, next[draft.path[0]] as T[keyof T]);
           pending.delete(field);
         } catch (cause) {
           try {
-            const stored = options.rows.get(id);
+            const stored = sourceRows.get(id);
             if (stored && Object.is(readPath(stored.value, draft.path), candidate.parsed.get(field))) {
               pending.delete(field);
             }
@@ -935,7 +936,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const record = records.get(id);
     if (record) resetRecord(record);
     bindRows();
-    const updated = options.rows.get(id);
+    const updated = sourceRows.get(id);
     if (!updated || updated.status === "delete") {
       throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
     }
@@ -965,7 +966,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     } else if (event.type === "set" || event.type === "setMany") {
       for (const id of event.type === "setMany" ? event.ids : [event.id]) {
         const pending = drafts.get(id);
-        const row = pending ? options.rows.get(id) : undefined;
+        const row = pending ? sourceRows.get(id) : undefined;
         if (pending && row && !reconciling) {
           for (const [field, draft] of pending) {
             if (!Object.is(readPath(row.value, draft.path), draft.baseline)) pending.delete(field);
@@ -1128,7 +1129,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function bindingResult(event: RowsEvent | null = lastBinding?.event ?? null,
     first = lastBinding?.first ?? true, complete = !unfinished && !operation): GridBindResult {
-    return Object.freeze({ total: options.rows.entries({ includeDeleted: true }).length,
+    return Object.freeze({ total: sourceRows.entries({ includeDeleted: true }).length,
       filtered: filteredIds.length, visible: visibleIds.length, mounted: records.size, event,
       available: progressive ? available : visibleIds.length, first: progressive ? first : true,
       last: !progressive || complete && available === visibleIds.length });
@@ -1160,7 +1161,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     void promise.catch(() => {});
     const current: BindingOperation = { ...goal, promise, resolve, reject, completed: false, cancelled: false, started: false,
       notify, ids: [], cursor: 0, revision: viewRevision,
-      rows: options.rows.entries({ includeDeleted: true }), layout: columns.columns() };
+      rows: sourceRows.entries({ includeDeleted: true }), layout: columns.columns() };
     operation = current;
     bindingPromise = promise;
     return current;
@@ -1168,7 +1169,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function checkOperation(current: BindingOperation): void {
     if (operation !== current || disposed) throw new DOMException("Grid binding aborted", "AbortError");
-    if (current.revision !== viewRevision || current.rows !== options.rows.entries({ includeDeleted: true }) ||
+    if (current.revision !== viewRevision || current.rows !== sourceRows.entries({ includeDeleted: true }) ||
         current.layout !== columns.columns()) {
       throw gridError("GRID_BIND_STALE", "The rows or view changed during progressive binding.");
     }
@@ -1246,7 +1247,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
       while (current.cursor < current.ids.length) {
         const id = current.ids[current.cursor++];
-        const snapshot = options.rows.get(id);
+        const snapshot = sourceRows.get(id);
         const changed = snapshot !== records.get(id)?.snapshot;
         if (changed && snapshot) {
           const existed = records.has(id);
@@ -1273,7 +1274,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       checkOperation(current);
       if (viewport) {
         const needed = windowIds();
-        if (needed.some(id => records.get(id)?.snapshot !== options.rows.get(id))) {
+        if (needed.some(id => records.get(id)?.snapshot !== sourceRows.get(id))) {
           current.ids = needed;
           current.cursor = 0;
           scheduleOperation(current, progressive?.delay ?? 0);
@@ -1367,7 +1368,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (viewport || progressive || body.merged || options.revealInvalid) visibleIndexes = new Map(visibleIds.map((id, index) => [id, index]));
       mergeKeys = nextMergeKeys;
       filteredIds = Object.freeze(filtered.map(row => row.id));
-      root.setAttribute("data-changed", String(options.rows.changes().length > 0));
+      root.setAttribute("data-changed", String(sourceRows.changes().length > 0));
       const emptyFocus = empty?.contains(root.ownerDocument.activeElement) && visibleIds.length > 0;
       if (empty) empty.hidden = visibleIds.length > 0;
       const focusedRow = priorFocus instanceof Element ? rowIds.get(priorFocus.closest("tr")!) : undefined;
@@ -1446,19 +1447,19 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const rebound: RenderedRow<T>[] = [];
     let pinLayoutChanged = false;
     const revision = viewRevision;
-    const source = hooks.enabled || values.enabled ? options.rows.entries({ includeDeleted: true }) : undefined;
+    const source = hooks.enabled || values.enabled ? sourceRows.entries({ includeDeleted: true }) : undefined;
     const layout = hooks.enabled || values.enabled ? columns.columns() : undefined;
     const current = values.enabled ? () => !disposed && valueVersion === valueRenderVersion &&
-      source === options.rows.entries({ includeDeleted: true }) && revision === viewRevision && layout === columns.columns() : undefined;
+      source === sourceRows.entries({ includeDeleted: true }) && revision === viewRevision && layout === columns.columns() : undefined;
     const check = (id?: RowId) => {
       active();
-      if (current && !current() || source !== options.rows.entries({ includeDeleted: true }) || revision !== viewRevision || layout !== columns.columns()) {
+      if (current && !current() || source !== sourceRows.entries({ includeDeleted: true }) || revision !== viewRevision || layout !== columns.columns()) {
         throw gridError("GRID_BIND_STALE", "The rows or view changed during a row callback.", { id });
       }
     };
     try {
       for (const id of prepare ? nextIds : []) {
-        const snapshot = options.rows.get(id);
+        const snapshot = sourceRows.get(id);
         if (!snapshot) continue;
         let record = records.get(id);
         if (!record) {
@@ -1561,7 +1562,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       try {
         for (const record of rebound) {
           hooks.after(record.id, () => check(record.id));
-          if (options.rows.get(record.id)?.status === "delete") for (const control of record.controls) control.disabled = true;
+          if (sourceRows.get(record.id)?.status === "delete") for (const control of record.controls) control.disabled = true;
           if (!place) syncRecordSelection(record.id, record);
         }
         if (hooks.enabled) check();
@@ -1600,7 +1601,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     body.merge(mountedIds.flatMap(id => {
       const record = records.get(id);
       return record ? [{ elements: record.elements, mergeCells: record.mergeCells,
-        keys: mergeKeys.get(id)!, index: visibleIndexes.get(id)!, status: options.rows.get(id)?.status }] : [];
+        keys: mergeKeys.get(id)!, index: visibleIndexes.get(id)!, status: sourceRows.get(id)?.status }] : [];
     }), root.ownerDocument.activeElement);
   }
 
@@ -1647,7 +1648,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const action = target.closest<HTMLButtonElement>("button[data-row-action]");
     if (action && !action.matches(":disabled")) {
       const id = rowIds.get(action.closest("tr")!);
-      const row = id === undefined ? undefined : options.rows.get(id);
+      const row = id === undefined ? undefined : sourceRows.get(id);
       if (row) options.onRowAction?.({ action: action.getAttribute("data-row-action")!, id: row.id, row, element: action, event });
       return;
     }
@@ -1679,7 +1680,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (!["nearest", "start", "center", "end"].includes(block)) {
       throw gridError("GRID_VIEWPORT_ALIGN", "Reveal options need a block of nearest, start, center or end.");
     }
-    const row = options.rows.get(id);
+    const row = sourceRows.get(id);
     if (!row || !visibleIds.includes(id)) {
       throw gridError("GRID_VIEWPORT_ROW", "Reveal needs a row in the current logical page.", { id });
     }
@@ -1750,7 +1751,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) ||
         !textLengthControl(target) || target.readOnly || disabled(target)) return;
     const entry = edits.get(target);
-    const row = entry && options.rows.get(entry.id);
+    const row = entry && sourceRows.get(entry.id);
     if (!entry || !row || drafts.get(entry.id)?.has(entry.binding.descriptor.name)) return;
     const raw = readPath(row.value, entry.binding.descriptor.path), before = target.value;
     if (before === (raw == null ? "" : String(raw))) return;
@@ -1774,9 +1775,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (values.enabled && (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) &&
         textLengthControl(event.target) && !event.target.readOnly) {
       const entry = edits.get(event.target);
-      const row = entry && options.rows.get(entry.id), record = entry && records.get(entry.id);
+      const row = entry && sourceRows.get(entry.id), record = entry && records.get(entry.id);
       if (entry && row && record && !drafts.get(entry.id)?.has(entry.binding.descriptor.name)) {
-        const current = () => !disposed && options.rows.get(entry.id) === row && records.get(entry.id) === record;
+        const current = () => !disposed && sourceRows.get(entry.id) === row && records.get(entry.id) === record;
         renderText(entry.binding, row, current, true);
       }
     }
@@ -1880,7 +1881,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   function draft(id: RowId, field: string, path: readonly string[], entered: unknown, commit: boolean): void {
-    const row = options.rows.get(id);
+    const row = sourceRows.get(id);
     if (!row || row.status === "delete") return;
     const pending = drafts.get(id) ?? new Map<string, FieldDraft>();
     const baseline = pending.get(field)?.baseline ?? readPath(row.value, path);
@@ -1952,7 +1953,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const rowIndex = visibleIds.indexOf(start?.id);
     const first = records.get(start?.id);
     const offscreen = Boolean(viewport || progressive);
-    if (rowIndex < 0 || options.rows.get(start?.id)?.status === "delete" || !first && !offscreen) throw gridError("GRID_PASTE_TARGET", "Paste needs a visible editable row.", { id: start?.id });
+    if (rowIndex < 0 || sourceRows.get(start?.id)?.status === "delete" || !first && !offscreen) throw gridError("GRID_PASTE_TARGET", "Paste needs a visible editable row.", { id: start?.id });
     const binding = (record: RenderedRow<T>, field: typeof pasteFields[number]) =>
       field.text >= 0 ? record.texts[field.text] : record.selects[field.select];
     const layout = columns.columns();
@@ -1990,7 +1991,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (fieldIndex < 0 || new Set(fields.map(field => field.name)).size !== fields.length) {
       throw gridError("GRID_PASTE_TARGET", "Paste needs unique visible field names.", { field: start.field });
     }
-    const entries = options.rows.entries();
+    const entries = sourceRows.entries();
     const revision = viewRevision;
     const pendingBefore = new Map([...drafts].map(([id, pending]) => [id, new Map(pending)]));
     const issuesBefore = new Map(issueText);
@@ -2000,7 +2001,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         const actual = drafts.get(id);
         return actual?.size === pending.size && [...pending].every(([field, draft]) => actual.get(field) === draft);
       });
-      if (options.rows.entries() !== entries || viewRevision !== revision || columns.columns() !== layout || !sameDrafts) {
+      if (sourceRows.entries() !== entries || viewRevision !== revision || columns.columns() !== layout || !sameDrafts) {
         throw gridError("GRID_PASTE_STALE", "The Grid changed while paste was being prepared. Retry with its current view.");
       }
     }
@@ -2026,7 +2027,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
       if (!issues.length) for (const [offset, cells] of matrix.entries()) {
         const id = visibleIds[rowIndex + offset];
-        const row = options.rows.get(id)!;
+        const row = sourceRows.get(id)!;
         if (row.status === "delete") continue;
         const record = records.get(id);
         const pending = new Map(drafts.get(id));
@@ -2133,12 +2134,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         pasteCommit = true;
         pasteNotified = false;
         try {
-          options.rows.setMany(updates);
+          sourceRows.setMany(updates);
           clearPasted();
         } catch (cause) {
           pasteCommit = false;
           let committed = pasteNotified;
-          try { committed ||= options.rows.entries() !== entries; }
+          try { committed ||= sourceRows.entries() !== entries; }
           catch { committed = true; }
           if (committed) {
             clearPasted();
@@ -2199,7 +2200,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       binding = { element: select, key, handle, shown: [] };
       filterBindings.push(binding);
     }
-    unsubscribe = options.rows.subscribe(onRows);
+    unsubscribe = sourceRows.subscribe(onRows);
     render(null)?.();
   } catch (cause) {
     boundRoots.delete(root);
@@ -2243,7 +2244,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       active();
       if (scope === "visible") return visibleIds;
       if (scope === "filtered") return filteredIds;
-      if (scope === "store") return Object.freeze(options.rows.entries().map(row => row.id));
+      if (scope === "store") return Object.freeze(sourceRows.entries().map(row => row.id));
       throw gridError("GRID_SCOPE", "A Grid row scope must be visible, filtered or store.");
     },
     defaults,
@@ -2346,11 +2347,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     },
     validate(id): ValidationResult {
       active();
-      const target = id === undefined ? undefined : options.rows.get(id);
+      const target = id === undefined ? undefined : sourceRows.get(id);
       if (id !== undefined && (!target || target.status === "delete")) {
         throw gridError("GRID_ROW", "The row ID is not available in this Grid.", { id });
       }
-      const ids = target ? [target.id] : options.rows.entries().map(row => row.id);
+      const ids = target ? [target.id] : sourceRows.entries().map(row => row.id);
       const issues = ids.flatMap(rowId => reconcile(rowId));
       return validationResult(issues);
     },
