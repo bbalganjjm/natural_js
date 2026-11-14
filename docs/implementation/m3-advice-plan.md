@@ -32,11 +32,11 @@ sources:
   - id: shell
     resource: ../../examples/vite/m4/main.ts
     title: Actual employee page startup and close owner
-    git_blob: 2a52459904aa6454f3fca97592537fc9b6faf473
+    git_blob: dc298f87b8a9f890d0ea818f7fc455abe149f628
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Existing employee bindings, search and save-refresh behavior
-    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
+    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
   - id: omissions
     resource: omission-decision.md
     title: Only O01-O05 are approved exclusions

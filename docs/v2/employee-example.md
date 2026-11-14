@@ -5,6 +5,18 @@ description: One CVC controller shares Rows across Form, Grid, and List, coordin
 tags: [example, cvc, form, grid, list, select, pagination, accessibility]
 status: draft
 sources:
+  - id: declarations-test
+    resource: ../../tests/browser/m37-declarations.spec.ts
+    title: Actual asynchronous declaration order, defaults, row actions and cancellation
+    git_blob: b9ec2a66775698aa5f1e34e3835008d37115a9f8
+  - id: codes
+    resource: ../../examples/vite/m4/employee-codes.json
+    title: Application common-code batch asset
+    git_blob: b5f54333a06ce1e14e737f0a4f4b3dcf634447eb
+  - id: start
+    resource: ../../examples/vite/m4/employee-start.json
+    title: Separate application initial-data asset
+    git_blob: 24518c957603b95d474e024d858d1a766d884949
   - id: xhr
     resource: ../../examples/vite/m4/employee-xhr.ts
     title: Application-only finite-body XHR sender
@@ -12,11 +24,11 @@ sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
+    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
-    git_blob: 2a52459904aa6454f3fca97592537fc9b6faf473
+    git_blob: dc298f87b8a9f890d0ea818f7fc455abe149f628
   - id: vite
     resource: ../../examples/vite/vite.config.ts
     title: Development-only HTML fragment route
@@ -57,10 +69,10 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -154,6 +166,16 @@ Add ?policy=trim-search to either layout for the real PageDefinition.advice exam
 
 The [automatic advice tests](../../tests/browser/m36-advice.spec.ts) cover awaited setup, early native submit, a premature actual action, canceled preparation, a surviving sibling, invalid setup/retry and matching/nonmatching raw POST behavior. The [common page contract](page.md#automatic-controller-advice) defines sync/async wrapper and cleanup rules. No application advice engine or controller registry is added.
 
+# Asynchronous typed declarations
+
+Open either layout with ?declarations=async. The ordinary mode keeps its existing setup, initial selection and status. Declaration mode awaits setup, one common-code batch requested with groups=page-size and a separate initial-data record through the same Page signal. Application decoders check unknown replies, filter unrelated/over-limit codes and require the selected positive page size to remain available. The supplied records retain empty query, select size 5 and resolve business ID E-102 to Grace through current RowId. 0/false/empty/null are valid raw Select defaults where the domain permits them; they are not positive page sizes.[^runner][^codes][^start][^declarations-test]
+
+Typed request/component/event/action declarations remain ordinary objects and functions; returned handles are stored separately. Preparation sets received native query/default before Form capture, constructs components and awaits the first public search. It then connects declared events, selects the requested employee and publishes ready status in order before Page activation. null deliberately selects nothing. An unknown employee or failed request stops later actions. The early submit guard prevents navigation before event connection, and Close aborts preparation and owned resources.[^runner][^controller][^declarations-test]
+
+Search and save read current input/changes for each call and retain the existing busy/request owner and public advice path. Grid/List row callbacks register physical elements in a per-page WeakMap keyed to RowId; cleanup removes only that registration. Delegated native button/change and employee-inspect events read a fresh nondeleted Rows snapshot. Repeated selected-row actions still run. Grid change observes its accepted Select commit; disabled List Selects remain read-only, with button/custom actions and later programmatic source values demonstrated. Sort retains unchanged registrations; filtering, paging, replacement and closure silence old detached nodes. Two screens keep independent maps, counters, raw rows and cancellation.[^controller][^declarations-test]
+
+The declaration tests cover both layouts, request batching/filtering, normal setup overrides, pending native submit/Close, malformed data, retry, null/unknown initial IDs, current search/save payloads and row action isolation. No framework scanner, string dispatcher, code-cache library or new controls/theme are introduced.[^declarations-test]
+
 # Pitfalls
 
 `data-role` and `data-action` are application selectors, not framework markers. The Vite mock and HTML-fragment middleware are development examples, not transport or rendering services supplied by the package. The pagination here is client-side over the filtered rows; it does not fetch a server page. List displays disabled row-local Selects, so edits belong in Form or Grid. The native name header is the only sortable column in this example.[^controller][^server][^vite][^side]
@@ -175,3 +197,7 @@ The [automatic advice tests](../../tests/browser/m36-advice.spec.ts) cover await
 [^server]: Development-only mock API
 [^m4-test]: Original screen and server-HTML browser regression
 [^m6-test]: List and paging browser regression
+
+[^declarations-test]: Actual asynchronous declaration order, defaults, row actions and cancellation
+[^codes]: Application common-code batch asset
+[^start]: Separate application initial-data asset

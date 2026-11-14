@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-choice-groups-plan.md
     title: Accepted generation-before-Form contract
-    git_blob: c143953d49899c1693bcfce69a57a189f38ed2e4
+    git_blob: 11f49367ceef1fcf852894ce261ed812e9fa8e5d
   - id: baseline
     resource: evidence/m513-verification.json
     title: Frozen M5.13 source and package evidence

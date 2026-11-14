@@ -1,0 +1,23 @@
+{
+  "stage": "M3.7",
+  "parent": {
+    "path": "docs/implementation/evidence/m36-runtime-receipt.json",
+    "sha256": "932790a7a467c0c5a62f48e229324a1e25569d4eb6e558a6b8f66b5ab9017cd4",
+    "bytes": 232973
+  },
+  "artifact": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m37-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "4194aba11bdb1c2d583c3440685efa42b7e87068cc0dacb00a506eae74cea61c",
+    "bytes": 372081
+  },
+  "entries": 41,
+  "unchanged": 38,
+  "changed": [
+    "build/ui/grid-hooks.d.ts",
+    "build/ui/grid.d.ts",
+    "build/ui/list.d.ts"
+  ],
+  "added": [],
+  "removed": [],
+  "scope": "Only the inferred List.onRowBind option is added publicly. Grid/private declarations use the renamed shared RowBinding with precise element type. Public UI entry bytes and all other declarations remain identical."
+}

@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-presets-plan.md
     title: Explicit typed presets and application callback composition
-    git_blob: 113441e2f33c8413254db06214bc59c6ae63d599
+    git_blob: 12ed9fbdf4e7cb2ad30d26c7d9f62c572e7402ea
   - id: baseline
     resource: evidence/m59-verification.json
     title: Frozen 5ecda44 source, runtime and installed artifact baseline
@@ -20,11 +20,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field caches, native editing and mounted row lifecycle
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: list
     resource: ../../src/ui/list.ts
     title: Read-only List caches, choices and validation
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public value context and component handles
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained behavior and consolidated omission obligations
-    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
+    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
 generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }

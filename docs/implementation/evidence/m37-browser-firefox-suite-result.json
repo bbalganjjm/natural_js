@@ -1,0 +1,224 @@
+{
+  "label": "browser-firefox",
+  "started": "2026-11-14T22:23:59.422Z",
+  "finished": "2026-11-14T22:30:52.152Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+    "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+    "bytes": 22425,
+    "entries": 219
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+    "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+    "bytes": 22425,
+    "entries": 219
+  },
+  "sources_unchanged": true,
+  "workers": 2,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m37-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m37-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m37-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [],
+  "children": [
+    {
+      "label": "browser-firefox-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=firefox",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m37-browser-firefox-suite-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T22:23:59.452Z",
+      "finished": "2026-11-14T22:24:01.327Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m37-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m37-browser-firefox-suite-list.json.gz",
+        "sha256": "574d36289fdfc8a825333955292afb097e51f7d910f7d92d5d9576d66c982079",
+        "bytes": 60118,
+        "encoding": "gzip",
+        "uncompressed_sha256": "cdbe484ce6e80c2b0940721613d5eecd718c18c47c1b876a6badbc9460ed5c85",
+        "uncompressed_bytes": 618316
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m37-browser-firefox-suite-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "browser-firefox-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=firefox",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m37-browser-firefox-suite-failures"
+      ],
+      "started": "2026-11-14T22:24:01.361Z",
+      "finished": "2026-11-14T22:30:52.096Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m37-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m37-browser-firefox-suite-run-1.json.gz",
+        "sha256": "2146fa812ab27c630179d1cf6ce377f08f646d8d9defcf787be472fe05fb86ae",
+        "bytes": 74835,
+        "encoding": "gzip",
+        "uncompressed_sha256": "ddb8ad0e5837f3706d2a8e7c3460474951069cdb7dbc98ad54054483dac159b7",
+        "uncompressed_bytes": 1055552
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m37-browser-firefox-suite-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m37-browser-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m37-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/attachments/tree-binding-measurements-019c4dd4109ca58f4531d0460cc70f8df11fec54.json",
+      "sha256": "555d09f47d9fa31857374ea2f354ef2b142ec4c5c9f89b190b4cc9f068b558cc",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m37-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/tree-binding.json",
+      "sha256": "555d09f47d9fa31857374ea2f354ef2b142ec4c5c9f89b190b4cc9f068b558cc",
+      "bytes": 1348
+    }
+  ],
+  "coverage": {
+    "passed": 955,
+    "identities_sha256": "0c0ef6c1c1636c408aed4206e84b0b4b2853dc851e6092d74452cb67312aa548",
+    "semantic_identities_sha256": "a43b7ee9e757fbbff3ed0d23d8ea4dd9caccff9d66ccc1fc4e91b59243f304af",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

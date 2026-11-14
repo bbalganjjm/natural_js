@@ -8,11 +8,11 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 6821865c44cfd7e544aacc73e335a4d425dd41d8
+    git_blob: 394c14772b320b23952d5100e68542fabba415d1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
@@ -20,7 +20,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: checks
     resource: ../../src/ui/grid-selection.ts
     title: Atomic checked-ID transitions and vetoes

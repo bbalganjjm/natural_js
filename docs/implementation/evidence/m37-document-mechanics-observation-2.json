@@ -1,0 +1,13 @@
+{
+  "stage": "M3.7",
+  "kind": "document_index_description_correction",
+  "report": {
+    "path": "docs/implementation/evidence/m37-docs-changed-2.log",
+    "sha256": "83596ffbbb6d4b4b9db3de81da0291905a112e146338b9e655080de0d10e9582"
+  },
+  "errors": 0,
+  "warnings": 2,
+  "cause": "New index descriptions differed from exact concept frontmatter.",
+  "correction": "Derive both index entries title and description from stage frontmatter, including draft status; keep all eight independently accepted semantic bodies unchanged.",
+  "scope": "No runtime attempt or credit; actual changed/full document checks still required."
+}

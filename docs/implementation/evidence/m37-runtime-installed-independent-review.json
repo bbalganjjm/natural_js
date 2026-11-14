@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "stage": "M3.7",
+  "status": "GO_independent_runtime_installed_source_cache_only",
+  "written_at": "2026-11-14T22:04:55.064Z",
+  "manifests": {
+    "node_modules/.cache/m37-preparation-baseline/runtime-manifest-r2.json": "89c88d14445519c10cfcb15f5631d6af2ae7a00487db24240a4728ded6b4bcad",
+    "node_modules/.cache/m37-preparation-baseline/installed-candidate-manifest-r3.json": "8efd7c299426be9583f58b66157c89e9a292f8e72854ce45b81b9660e0e36b2f",
+    "node_modules/.cache/m37-preparation-baseline/joint-candidate-proposal-r2.json": "ad1fa4e9557f57a88dd251c3538bcd6c7129b1f37f4c7402a382aa7c4db127ec",
+    "node_modules/.cache/m37-runtime-installed-independent-review-r1-findings.json": "5acce0c863ee3b7951bffafaf1ba8fa8bac6e712f384e0253824a794636b552e"
+  },
+  "reviewed": [
+    {
+      "target": "src/ui/grid-hooks.ts",
+      "base_raw_sha256": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+      "base_normalized_sha256": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/src__ui__grid-hooks.ts",
+      "candidate_raw_sha256": "ed36d86ef2770804e7fb651cb7b76266d1426a9cacb115f0fbd179b782fd2d29",
+      "candidate_normalized_sha256": "ed36d86ef2770804e7fb651cb7b76266d1426a9cacb115f0fbd179b782fd2d29"
+    },
+    {
+      "target": "src/ui/grid.ts",
+      "base_raw_sha256": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "base_normalized_sha256": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/src__ui__grid.ts",
+      "candidate_raw_sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+      "candidate_normalized_sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573"
+    },
+    {
+      "target": "src/ui/list.ts",
+      "base_raw_sha256": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "base_normalized_sha256": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/src__ui__list-r2.ts",
+      "candidate_raw_sha256": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19",
+      "candidate_normalized_sha256": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19"
+    },
+    {
+      "target": "tests/grid-hooks.test.ts",
+      "base_raw_sha256": "ae059cc3aee8d2441154381d8fe03690d280164c40fba66dce04dd01d48f9963",
+      "base_normalized_sha256": "ae059cc3aee8d2441154381d8fe03690d280164c40fba66dce04dd01d48f9963",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tests__grid-hooks.test.ts",
+      "candidate_raw_sha256": "e5ca71e6329de8f29cc278c001e0cee66b90637a83eb2d1b8dd1df893b600abc",
+      "candidate_normalized_sha256": "e5ca71e6329de8f29cc278c001e0cee66b90637a83eb2d1b8dd1df893b600abc"
+    },
+    {
+      "target": "tests/browser/grid-callbacks.spec.ts",
+      "base_raw_sha256": "32f5f54176d0184de649de712c08732947d5af5eb6ae6c3fed80b23abf3fb3e9",
+      "base_normalized_sha256": "32f5f54176d0184de649de712c08732947d5af5eb6ae6c3fed80b23abf3fb3e9",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tests__browser__grid-callbacks.spec.ts",
+      "candidate_raw_sha256": "e435e29aa1dacfc8e22a63f38f9c2bc90f63b75579c1933ae82beac21e5fd274",
+      "candidate_normalized_sha256": "e435e29aa1dacfc8e22a63f38f9c2bc90f63b75579c1933ae82beac21e5fd274"
+    },
+    {
+      "target": "tests/browser/grid-progressive.spec.ts",
+      "base_raw_sha256": "7506afc7fed7f8b6f77d6455b4468296d76fa62b7eeb4e3d85db4f48cd85d974",
+      "base_normalized_sha256": "7506afc7fed7f8b6f77d6455b4468296d76fa62b7eeb4e3d85db4f48cd85d974",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tests__browser__grid-progressive.spec.ts",
+      "candidate_raw_sha256": "d5dba82ed8ce1d40f2eda59a00109b11d8533935587f9a573b6319316e4aceda",
+      "candidate_normalized_sha256": "d5dba82ed8ce1d40f2eda59a00109b11d8533935587f9a573b6319316e4aceda"
+    },
+    {
+      "target": "tests/browser/grid-recipes.spec.ts",
+      "base_raw_sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "base_normalized_sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tests__browser__grid-recipes.spec.ts",
+      "candidate_raw_sha256": "2f704ef0c4d2c979ede4b354afa47b0354168916bfb775d2c88d0b46dd28e27a",
+      "candidate_normalized_sha256": "2f704ef0c4d2c979ede4b354afa47b0354168916bfb775d2c88d0b46dd28e27a"
+    },
+    {
+      "target": "tests/consumers/ts/check.ts",
+      "base_raw_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+      "base_normalized_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tests__consumers__ts__check-r3.ts",
+      "candidate_raw_sha256": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86",
+      "candidate_normalized_sha256": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86"
+    },
+    {
+      "target": "tests/consumers/browser/main.js",
+      "base_raw_sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+      "base_normalized_sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tests__consumers__browser__main-r2.js",
+      "candidate_raw_sha256": "5f0f99462b85c88ae994482369f54c58fc5822017dbe8ebd801f0241426ed9fb",
+      "candidate_normalized_sha256": "5f0f99462b85c88ae994482369f54c58fc5822017dbe8ebd801f0241426ed9fb"
+    },
+    {
+      "target": "tools/check-packed-browser.mjs",
+      "base_raw_sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+      "base_normalized_sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+      "candidate": "node_modules/.cache/m37-preparation-baseline/tools__check-packed-browser-r2.mjs",
+      "candidate_raw_sha256": "8e7cca63de9556d1553ae1e1a9ac8420e56c2e3830665c0f1c85471450b82a60",
+      "candidate_normalized_sha256": "8e7cca63de9556d1553ae1e1a9ac8420e56c2e3830665c0f1c85471450b82a60"
+    }
+  ],
+  "connected_owners": {
+    "src/ui/index.ts": {
+      "raw_sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+      "normalized_sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5"
+    },
+    "src/ui/select.ts": {
+      "raw_sha256": "b3564b47653787f27347a465dca1c28c8f6246419289c74b7735fc4acc60bd39",
+      "normalized_sha256": "b584b7e4adfa98345ffa717adc60b85d80e1b8db1ca3ebe1b9e7ce2f06215f0c"
+    },
+    "src/ui/select-owner.ts": {
+      "raw_sha256": "0e111dd61ef5801b129d5f325f4d05d71b74ce4496a9452fba6a460c4ec09f28",
+      "normalized_sha256": "0e111dd61ef5801b129d5f325f4d05d71b74ce4496a9452fba6a460c4ec09f28"
+    },
+    "src/ui/value-binding.ts": {
+      "raw_sha256": "3aa6496e714dc5321545507ca5d471cf389cb40ec45c013fdceb4ddcad11174c",
+      "normalized_sha256": "3aa6496e714dc5321545507ca5d471cf389cb40ec45c013fdceb4ddcad11174c"
+    },
+    "src/data/index.ts": {
+      "raw_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+      "normalized_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827"
+    },
+    "src/internal/framework-error.ts": {
+      "raw_sha256": "272a5f1c6ff684eeae2272586ed1e12cd9be0a12a5890eff1872b0281dbf619e",
+      "normalized_sha256": "272a5f1c6ff684eeae2272586ed1e12cd9be0a12a5890eff1872b0281dbf619e"
+    },
+    "tests/browser/collection-values.spec.ts": {
+      "raw_sha256": "f8b2bc252257bbe6523bdef9ac1ca00d8c502110aa19ae21a8879019804bded9",
+      "normalized_sha256": "f8b2bc252257bbe6523bdef9ac1ca00d8c502110aa19ae21a8879019804bded9"
+    }
+  },
+  "finding_resolved": {
+    "id": "M37-LR-01",
+    "required_generic": "SelectChoice<SelectValue>",
+    "exact_one_substitution_asserted": true,
+    "additional_public_type_change": false
+  },
+  "acceptance_by_connected_static_review": [
+    "Public change is only bindList.onRowBind with inferred readonly RowSnapshot/current RowId, frozen readonly precise HTMLLIElement list and synchronous own. No named /ui type, module, registry, dependency, event engine or async callback added.",
+    "Existing grid-hooks owner is shared through private createRowHooks/RowBinding; bindGrid API/runtime behavior is preserved. Grid candidate is independently reconstructed exactly from private name/generic/API argument changes.",
+    "List captures its callback once and invokes it plainly/synchronously after current values and final physical placement, in display order. Invalid async callbacks/cleanup are consumed and rejected through bindList errors.",
+    "Changed/forced/re-entered bindings release prior resources before value writes; filter/page exit, prune and disposal release; retained sort moves do not replay. Existing cached LI reentry gets a new binding even with unchanged snapshot.",
+    "Hook-only version/store checks, reentrant binding guards, callback/cleanup failure rollback, initial authored template/select-claim restoration, retry invalidation and all-cleanup-before-report disposal are coherent.",
+    "No-hook path avoids hook calls and the additional next-ID Set for unchanged views. Original performance gates remain required; no performance result is claimed.",
+    "Four existing private unit/browser type callers preserve case definitions/assertions and only adapt private symbols, precise types and the explicit bindGrid argument.",
+    "List stays read-only and existing selection/onSelect semantics remain unchanged. Native editable List/generated group integration is not credited.",
+    "Installed JS exercises actual packed List/native/custom resources, current raw snapshots/RowIds, retained sorting and reentered views; seven bind/cleanup cycles and quiet released nodes match the real source order.",
+    "Installed native Select declarations stay frozen and separate from returned handles; actual value mapping distinguishes explicit0/false/empty/null without invalid pagination defaults. Corrected installed TS uses the required imported generic.",
+    "Every preexisting M3.6 installed consumer/assertion byte is independently reconstructed exactly after removing only the added recipes/import/assertion, preserving actual common advice and other previous owners."
+  ],
+  "metadata_assertions": {
+    "independent_target_hashes_and_exact_actual_bases": 10,
+    "all_raw_and_LF_hashes_recorded": true,
+    "grid_mechanical_reconstruction": true,
+    "existing_private_case_declarations_retained": true,
+    "old_installed_consumers_and_assertions_reconstructed_exactly": true,
+    "installed_R3_changes_one_type_argument_only": true
+  },
+  "excluded_self_review": "All5 self-authored actual-M4 application candidate paths and their own11 browser proposals are explicitly excluded. Separate Baseline independent app record431d23e1 supplies that review; this record does not self-certify the app.",
+  "actual_source_or_docs_mutated": false,
+  "project_compiler_browser_benchmark_commands": 0,
+  "scope_limit": "Static cache preflight GO only. Applied M3.6 source guards are exact, but its saved prerequisite commit and the actual written M3.7 plan still must be bound by root before applying. No runtime/family/P0/M13/omission/release credit.",
+  "pending": [
+    "Root saved M3.6 checkpoint and written actual M3.7 plan/final joint binding",
+    "Bounded actual source apply and full unchanged verification",
+    "Independent applied source/raw/final semantic acceptance",
+    "Separate stage commit/push"
+  ]
+}

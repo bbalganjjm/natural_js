@@ -1,0 +1,22 @@
+[
+  {
+    "group": "page-size",
+    "label": "2",
+    "value": 2
+  },
+  {
+    "group": "page-size",
+    "label": "5",
+    "value": 5
+  },
+  {
+    "group": "page-size",
+    "label": "10",
+    "value": 10
+  },
+  {
+    "group": "unrelated",
+    "label": "Unrelated",
+    "value": 1
+  }
+]

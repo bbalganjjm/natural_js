@@ -2,17 +2,10 @@
 import { FrameworkError } from "../internal/framework-error.js";
 import type { RowId, RowSnapshot } from "../data/index.js";
 
-export interface GridRowBinding<T> {
+export interface RowBinding<T, E extends HTMLElement> {
   readonly row: RowSnapshot<T>;
-  readonly elements: readonly HTMLTableRowElement[];
+  readonly elements: readonly E[];
   own(dispose: () => void): void;
-}
-
-function failure(phase: string, message: string, id?: RowId, cause?: unknown): FrameworkError {
-  if (cause instanceof FrameworkError && cause.api === "bindGrid") return cause;
-  return new FrameworkError({ api: "bindGrid", code: "GRID_BIND",
-    message,
-    detail: { phase, ...(id === undefined ? {} : { id }) }, cause });
 }
 
 function synchronous(result: unknown): void {
@@ -24,17 +17,24 @@ function synchronous(result: unknown): void {
 }
 
 /** Own only the resources registered by the current binding of each mounted row. */
-export function createGridHooks<T>(options: {
-  beforeRowBind?: (context: GridRowBinding<T>) => void;
-  onRowBind?: (context: GridRowBinding<T>) => void;
+export function createRowHooks<T, E extends HTMLElement>(api: "bindGrid" | "bindList", options: {
+  beforeRowBind?: (context: RowBinding<T, E>) => void;
+  onRowBind?: (context: RowBinding<T, E>) => void;
 }, onCleanupError: (cause: unknown) => void) {
+  function failure(phase: string, message: string, id?: RowId, cause?: unknown): FrameworkError {
+    if (cause instanceof FrameworkError && cause.api === api) return cause;
+    return new FrameworkError({ api, code: api === "bindGrid" ? "GRID_BIND" : "LIST_BIND",
+      message,
+      detail: { phase, ...(id === undefined ? {} : { id }) }, cause });
+  }
+
   const { beforeRowBind, onRowBind } = options;
   for (const phase of ["beforeRowBind", "onRowBind"] as const) {
     const run = phase === "beforeRowBind" ? beforeRowBind : onRowBind;
     if (run !== undefined && typeof run !== "function") throw failure(phase, `${phase} must be a function.`);
   }
   const enabled = beforeRowBind !== undefined || onRowBind !== undefined;
-  type Binding = { context: GridRowBinding<T>; owned: (() => void)[]; closed: boolean };
+  type Binding = { context: RowBinding<T, E>; owned: (() => void)[]; closed: boolean };
   const bindings = new Map<RowId, Binding>();
   let depth = 0;
   let disposed = false;
@@ -81,7 +81,7 @@ export function createGridHooks<T>(options: {
   return {
     enabled,
     get running(): boolean { return depth > 0; },
-    before(row: RowSnapshot<T>, elements: readonly HTMLTableRowElement[], check: () => void): void {
+    before(row: RowSnapshot<T>, elements: readonly E[], check: () => void): void {
       if (!enabled) return;
       if (disposed) throw failure("beforeRowBind", "This row binding owner has been disposed.", row.id);
       if (bindings.has(row.id)) { release(row.id); check(); }

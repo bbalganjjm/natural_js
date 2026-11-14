@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m10-pinned-plan.md
     title: Completed pinned-column continuation
-    git_blob: 323c99720927cf0e6647fbe9ff798d151bc4b217
+    git_blob: d59c436bf12b684906c28f0ca845fd503ed36f92
   - id: baseline
     resource: evidence/m10964p-verification.json
     title: Preserved a0f837a runtime baseline
@@ -28,11 +28,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid candidates, commit timing and validated paste
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: list
     resource: ../../src/ui/list.ts
     title: Display List fields and explicit validation
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree formatter caller and validation boundary

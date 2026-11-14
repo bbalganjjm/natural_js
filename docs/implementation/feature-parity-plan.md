@@ -20,7 +20,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 0892663b9b5f91da0a11a23ae4da5a8fccf30ed7
+    git_blob: fa0f6d8d5a1fdc251e8f8709b2d8b37793ff22a5
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -28,11 +28,11 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 37301b3aa0d7962fee1e0a4042ab72ee9d2eb4f0
+    git_blob: 0bf915d4c73cad7bb073aa719f011087faf18ae1
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 288685677d5190826893743d3a094d12711965af
+    git_blob: 3812ecbfaa4ef1428838dfa8d9f2cab16a9f1aba
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -40,7 +40,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership

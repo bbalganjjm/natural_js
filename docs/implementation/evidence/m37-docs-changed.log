@@ -1,0 +1,8 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 docs:check
+> node tools/knowledge-docs/knowledge-docs.mjs check --changed
+
+docs/implementation/index.md: warn index-gap: m3-declarations-plan.md is not listed
+docs/implementation/index.md:3: warn index-entry-format: entry should be '* [Title](url) - description'
+docs/index.md:7: warn index-entry-format: entry should be '* [Title](url) - description'
+knowledge-docs: 95 concepts, 5 reserved files | 0 errors, 3 warnings (index-gap 1, index-entry-format 2)

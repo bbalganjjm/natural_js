@@ -1,0 +1,39 @@
+{
+  "status": "passed_full_fixture_body_static_review_no_collection_or_execution",
+  "reviewer": "m511_baseline",
+  "fixture_author": "m511_design",
+  "reviewer_authored_runtime_not_fixture": true,
+  "fixture": {
+    "path": "node_modules/.cache/m37-preparation-baseline/list-row-bindings.spec.ts",
+    "sha256": "bc88caf94da04e0117315bd8736d3030336f3d80f828597ca0481ba6814b262a",
+    "bytes": 20907
+  },
+  "witness_manifest": {
+    "path": "node_modules/.cache/m37-preparation-baseline/fixture-manifest-design.json",
+    "sha256": "8d33ddb36fc68c46a4ff29d03a22fd108a0000d085ee4aea060a54c07b62e6f9",
+    "bytes": 5650
+  },
+  "runtime_manifest": {
+    "path": "node_modules/.cache/m37-preparation-baseline/runtime-manifest-r2.json",
+    "sha256": "89c88d14445519c10cfcb15f5631d6af2ae7a00487db24240a4728ded6b4bcad",
+    "bytes": 5296
+  },
+  "static_inventory": {
+    "registration_sites": 9,
+    "expected_expanded_browser_cases": 11
+  },
+  "accepted": [
+    "Captured/plain/bound/absent callbacks and values/final physical LI placement",
+    "Current RowId native/custom actions, sort retention and equal-snapshot filter/page reentry",
+    "Prior cleanup before replacement writes and pre-mutation view guards",
+    "Uncaught source REENTRANT versus caught source STALE, complete prepared cleanup and explicit retry",
+    "Failed initial callback restores authored DOM/template and native Select claims",
+    "Asynchronous callback/cleanup rejection draining, reverse cleanup, primitive cause and late ownership",
+    "Disposal during callback restores the first owner and preserves its same-store sibling"
+  ],
+  "limits": [
+    "Full fixture bodies were read; no project/compiler/browser/unit/benchmark command was run.",
+    "This record reviews independently authored fixture logic, not the reviewer-authored runtime.",
+    "No runtime, full family, P0, M13 or release acceptance is granted."
+  ]
+}

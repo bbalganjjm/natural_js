@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-grid-callbacks-plan.md
     title: Captured Grid callbacks and unresolved source observation
-    git_blob: e3baf98454fa406efa6885469418348ba034cf48
+    git_blob: d8f4e83cc690a390abf91b6fb0ca0a61ef34e8b7
   - id: baseline
     resource: evidence/m511-verification.json
     title: Frozen M5.11 source, runtime and installed artifact baseline
@@ -32,7 +32,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained outcomes and consolidated omission obligations
-    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
+    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
 generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }

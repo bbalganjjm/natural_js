@@ -28,7 +28,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Existing two-layout CVC request caller
-    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
+    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
   - id: baseline
     resource: evidence/m31-verification.json
     title: Accepted M3.1 source, runtime, raw and document checkpoint

@@ -3,12 +3,12 @@ import { fileURLToPath } from "node:url";
 import { expect, test } from "@playwright/test";
 import type { Rows } from "../../src/data/index.js";
 import type { GridBindResult } from "../../src/ui/index.js";
-import type { GridRowBinding } from "../../src/ui/grid-hooks.js";
+import type { RowBinding } from "../../src/ui/grid-hooks.js";
 import type { bindGrid } from "../../src/ui/grid.js";
 
 type Item = { name: string };
 type Options = Parameters<typeof bindGrid<Item>>[1];
-type RowBinding = GridRowBinding<Item>;
+type GridBinding = RowBinding<Item, HTMLTableRowElement>;
 declare global {
   interface Window {
     gridCallbacks: {
@@ -41,10 +41,10 @@ test("binding callbacks read their getters once and invoke captured functions wi
   const result = await page.evaluate(() => {
     const h = window.gridCallbacks, rows = h.rows(), table = h.table();
     const reads = { before: 0, after: 0, complete: 0 }, calls: string[] = [], receivers: boolean[] = [], frozen: boolean[] = [];
-    const before = function (this: unknown, context: RowBinding) { "use strict";
+    const before = function (this: unknown, context: GridBinding) { "use strict";
       receivers.push(this === undefined); frozen.push(Object.isFrozen(context)); calls.push(`before:${context.row.value.name}`);
     };
-    const after = function (this: unknown, context: RowBinding) { "use strict";
+    const after = function (this: unknown, context: GridBinding) { "use strict";
       receivers.push(this === undefined); frozen.push(Object.isFrozen(context)); calls.push(`after:${context.row.value.name}`);
     };
     const complete = function (this: unknown, context: GridBindResult) { "use strict";
@@ -128,8 +128,8 @@ test("frozen shared callbacks and frozen instance options keep two Rows and reso
     const h = window.gridCallbacks, firstRows = h.rows([{ name: "First" }]), secondRows = h.rows([{ name: "Second" }]);
     const firstTable = h.table(), secondTable = h.table(), original = firstTable.outerHTML, calls: string[] = [], cleaned: string[] = [];
     const shared = Object.freeze({
-      beforeRowBind(context: RowBinding) { const name = context.row.value.name; calls.push(`before:${name}`); context.own(() => cleaned.push(name)); },
-      onRowBind(context: RowBinding) { calls.push(`after:${context.row.value.name}`); },
+      beforeRowBind(context: GridBinding) { const name = context.row.value.name; calls.push(`before:${name}`); context.own(() => cleaned.push(name)); },
+      onRowBind(context: GridBinding) { calls.push(`after:${context.row.value.name}`); },
       onBind(context: GridBindResult) { calls.push(`complete:${context.mounted}`); }
     });
     const firstOptions = Object.freeze({ ...shared, rows: firstRows }), secondOptions = Object.freeze({ ...shared, rows: secondRows });
@@ -147,8 +147,8 @@ test("stable application forwarding callbacks read current policy on explicit re
   const result = await page.evaluate(() => {
     const h = window.gridCallbacks, rows = h.rows(), table = h.table(), calls: string[] = [];
     const policy = (label: string) => ({
-      before(context: RowBinding) { calls.push(`before:${label}`); context.elements[0].dataset.policy = label; },
-      after(context: RowBinding) { calls.push(`after:${label}`); context.elements[0].querySelector("output")!.textContent = `${label}:${context.row.value.name}`; },
+      before(context: GridBinding) { calls.push(`before:${label}`); context.elements[0].dataset.policy = label; },
+      after(context: GridBinding) { calls.push(`after:${label}`); context.elements[0].querySelector("output")!.textContent = `${label}:${context.row.value.name}`; },
       complete() { calls.push(`complete:${label}`); }
     });
     let current = policy("Initial");

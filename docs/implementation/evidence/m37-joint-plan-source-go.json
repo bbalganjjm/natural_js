@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "stage": "M3.7",
+  "status": "GO",
+  "reviewer": "m511_design",
+  "written_at": "2026-11-14T22:15:01.207Z",
+  "baseline_commit": "96d5e66ccfa2a90eec53e3307302ae3d140e1644",
+  "written_plan": {
+    "path": "docs/implementation/m3-declarations-plan.md",
+    "sha256": "d39fe702a08400fdf293aa5935a6ab0ad9cacb392b5ae994e32804e65760a3eb",
+    "bytes": 9839
+  },
+  "written_plan_record": {
+    "path": "node_modules/.cache/m37-written-plan.json",
+    "sha256": "8fb4e30cb747c343821a9dcc0d5dbdeaa8625a80402f542f565c3895fd9d727e",
+    "bytes": 558
+  },
+  "saved_parent_verification": {
+    "path": "docs/implementation/evidence/m36-verification.json",
+    "sha256": "a2ff6623063430830fb150941fd0fb3dbb65c48dde9ede1020595888aaa6ad4d",
+    "bytes": 8851
+  },
+  "joint_candidate_proposal": {
+    "path": "node_modules/.cache/m37-preparation-baseline/joint-candidate-proposal-r2.json",
+    "sha256": "ad1fa4e9557f57a88dd251c3538bcd6c7129b1f37f4c7402a382aa7c4db127ec",
+    "bytes": 11395
+  },
+  "independent_reviews": [
+    {
+      "path": "node_modules/.cache/m37-runtime-installed-independent-review.json",
+      "sha256": "a81fbc9fb1dc8edbc6783bb22b9d2d97159d6b0f4afbafa7d2a39f4b9152dbbe",
+      "bytes": 11760
+    },
+    {
+      "path": "node_modules/.cache/m37-preparation-baseline/fixture-independent-review.json",
+      "sha256": "21369690cb1edcb66f643feea5de9dbf83de078a520a810873e01a5744f7bf6c",
+      "bytes": 1902
+    },
+    {
+      "path": "node_modules/.cache/m37-app-independent-source-review.json",
+      "sha256": "431d23e11c2178bac5363d9a0e9eda5f3f63ab7c0f86e109c624aadd4e9b6245",
+      "bytes": 4257
+    }
+  ],
+  "contract_refs": [
+    {
+      "path": "node_modules/.cache/m37-preparation-baseline/contract.md",
+      "sha256": "beceb3018372bbb0dfce826a8f23fa5bbd85e84a6fd4c1ed572dc58b029e268f",
+      "bytes": 4716
+    },
+    {
+      "path": "node_modules/.cache/m37-actual-app-legacy/contract-r2.md",
+      "sha256": "97f9a4b258f04add4d24fa895d346315e8624fdafbdb32c5f44ebe17729b0085",
+      "bytes": 12149
+    }
+  ],
+  "review_scope": "Full actual written-plan review and bounded plan/source binding; reuse independent connected source reviews rather than repeat or self-certify authored fixtures.",
+  "source_candidates": [
+    {
+      "target": "src/ui/grid-hooks.ts",
+      "base_raw_sha256": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+      "base_normalized_sha256": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/src__ui__grid-hooks.ts",
+        "sha256": "ed36d86ef2770804e7fb651cb7b76266d1426a9cacb115f0fbd179b782fd2d29",
+        "bytes": 5058,
+        "normalized_sha256": "ed36d86ef2770804e7fb651cb7b76266d1426a9cacb115f0fbd179b782fd2d29"
+      }
+    },
+    {
+      "target": "src/ui/grid.ts",
+      "base_raw_sha256": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "base_normalized_sha256": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/src__ui__grid.ts",
+        "sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+        "bytes": 118014,
+        "normalized_sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573"
+      }
+    },
+    {
+      "target": "src/ui/list.ts",
+      "base_raw_sha256": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "base_normalized_sha256": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/src__ui__list-r2.ts",
+        "sha256": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19",
+        "bytes": 29282,
+        "normalized_sha256": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19"
+      }
+    },
+    {
+      "target": "tests/grid-hooks.test.ts",
+      "base_raw_sha256": "ae059cc3aee8d2441154381d8fe03690d280164c40fba66dce04dd01d48f9963",
+      "base_normalized_sha256": "ae059cc3aee8d2441154381d8fe03690d280164c40fba66dce04dd01d48f9963",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tests__grid-hooks.test.ts",
+        "sha256": "e5ca71e6329de8f29cc278c001e0cee66b90637a83eb2d1b8dd1df893b600abc",
+        "bytes": 9173,
+        "normalized_sha256": "e5ca71e6329de8f29cc278c001e0cee66b90637a83eb2d1b8dd1df893b600abc"
+      }
+    },
+    {
+      "target": "tests/browser/grid-callbacks.spec.ts",
+      "base_raw_sha256": "32f5f54176d0184de649de712c08732947d5af5eb6ae6c3fed80b23abf3fb3e9",
+      "base_normalized_sha256": "32f5f54176d0184de649de712c08732947d5af5eb6ae6c3fed80b23abf3fb3e9",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tests__browser__grid-callbacks.spec.ts",
+        "sha256": "e435e29aa1dacfc8e22a63f38f9c2bc90f63b75579c1933ae82beac21e5fd274",
+        "bytes": 12631,
+        "normalized_sha256": "e435e29aa1dacfc8e22a63f38f9c2bc90f63b75579c1933ae82beac21e5fd274"
+      }
+    },
+    {
+      "target": "tests/browser/grid-progressive.spec.ts",
+      "base_raw_sha256": "7506afc7fed7f8b6f77d6455b4468296d76fa62b7eeb4e3d85db4f48cd85d974",
+      "base_normalized_sha256": "7506afc7fed7f8b6f77d6455b4468296d76fa62b7eeb4e3d85db4f48cd85d974",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tests__browser__grid-progressive.spec.ts",
+        "sha256": "d5dba82ed8ce1d40f2eda59a00109b11d8533935587f9a573b6319316e4aceda",
+        "bytes": 58844,
+        "normalized_sha256": "d5dba82ed8ce1d40f2eda59a00109b11d8533935587f9a573b6319316e4aceda"
+      }
+    },
+    {
+      "target": "tests/browser/grid-recipes.spec.ts",
+      "base_raw_sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "base_normalized_sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tests__browser__grid-recipes.spec.ts",
+        "sha256": "2f704ef0c4d2c979ede4b354afa47b0354168916bfb775d2c88d0b46dd28e27a",
+        "bytes": 19412,
+        "normalized_sha256": "2f704ef0c4d2c979ede4b354afa47b0354168916bfb775d2c88d0b46dd28e27a"
+      }
+    },
+    {
+      "target": "tests/browser/list-row-bindings.spec.ts",
+      "base_raw_sha256": null,
+      "base_normalized_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/list-row-bindings.spec.ts",
+        "sha256": "bc88caf94da04e0117315bd8736d3030336f3d80f828597ca0481ba6814b262a",
+        "bytes": 20907,
+        "normalized_sha256": "bc88caf94da04e0117315bd8736d3030336f3d80f828597ca0481ba6814b262a"
+      }
+    },
+    {
+      "target": "examples/vite/m4/employees.ts",
+      "base_raw_sha256": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+      "base_normalized_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/employees.ts",
+        "sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "bytes": 18120,
+        "normalized_sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114"
+      }
+    },
+    {
+      "target": "examples/vite/m4/main.ts",
+      "base_raw_sha256": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+      "base_normalized_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/main.ts",
+        "sha256": "4ed89f19aae992edb8f0b43006cb8fa65bb3303dc77d89c9ea22ca8b745392bd",
+        "bytes": 7055,
+        "normalized_sha256": "4ed89f19aae992edb8f0b43006cb8fa65bb3303dc77d89c9ea22ca8b745392bd"
+      }
+    },
+    {
+      "target": "examples/vite/m4/employee-codes.json",
+      "base_raw_sha256": null,
+      "base_normalized_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/employee-codes.json",
+        "sha256": "056c6e53aeefa6580cff43f9924b5c96c2b60b940e20b906d9ccf326d8a9516e",
+        "bytes": 285,
+        "normalized_sha256": "056c6e53aeefa6580cff43f9924b5c96c2b60b940e20b906d9ccf326d8a9516e"
+      }
+    },
+    {
+      "target": "examples/vite/m4/employee-start.json",
+      "base_raw_sha256": null,
+      "base_normalized_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/employee-start.json",
+        "sha256": "4a50977290eb05d8e8fb71a6db4acecefa4841e6b3c85f8b064d211dd03543e1",
+        "bytes": 69,
+        "normalized_sha256": "4a50977290eb05d8e8fb71a6db4acecefa4841e6b3c85f8b064d211dd03543e1"
+      }
+    },
+    {
+      "target": "tests/browser/m37-declarations.spec.ts",
+      "base_raw_sha256": null,
+      "base_normalized_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/m37-declarations.spec.ts",
+        "sha256": "045638b32d9a4454737c51b8ae36881b517e9a75e22fc4c24578c959a3b17bea",
+        "bytes": 13396,
+        "normalized_sha256": "045638b32d9a4454737c51b8ae36881b517e9a75e22fc4c24578c959a3b17bea"
+      }
+    },
+    {
+      "target": "tests/consumers/ts/check.ts",
+      "base_raw_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+      "base_normalized_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tests__consumers__ts__check-r3.ts",
+        "sha256": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86",
+        "bytes": 25789,
+        "normalized_sha256": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86"
+      }
+    },
+    {
+      "target": "tests/consumers/browser/main.js",
+      "base_raw_sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+      "base_normalized_sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tests__consumers__browser__main-r2.js",
+        "sha256": "5f0f99462b85c88ae994482369f54c58fc5822017dbe8ebd801f0241426ed9fb",
+        "bytes": 57601,
+        "normalized_sha256": "5f0f99462b85c88ae994482369f54c58fc5822017dbe8ebd801f0241426ed9fb"
+      }
+    },
+    {
+      "target": "tools/check-packed-browser.mjs",
+      "base_raw_sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+      "base_normalized_sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+      "candidate": {
+        "path": "node_modules/.cache/m37-preparation-baseline/tools__check-packed-browser-r2.mjs",
+        "sha256": "8e7cca63de9556d1553ae1e1a9ac8420e56c2e3830665c0f1c85471450b82a60",
+        "bytes": 97672,
+        "normalized_sha256": "8e7cca63de9556d1553ae1e1a9ac8420e56c2e3830665c0f1c85471450b82a60"
+      }
+    }
+  ],
+  "metadata_guards": {
+    "candidate_files_exact": 16,
+    "existing_sources_match_raw_bases": 12,
+    "new_targets_absent": 4,
+    "actual_HEAD_matches_saved_M36": true,
+    "actual_parent_and_plan_hashes_exact": true,
+    "expected_new_browser_cases": 22,
+    "new_unit_registrations": 0
+  },
+  "contract_acceptance": [
+    "Only public runtime delta is inferred List.onRowBind; shared existing private row ownership and direct private Grid callers are updated without new module/registry/type export.",
+    "Row callback capture/plain synchronous invocation, actual LI placement, stable RowId, cleanup before changed writes and view exit, retained-sort behavior, reentry/version guards and restoration follow the independently accepted contracts.",
+    "Actual async Employee declarations use explicit app-owned requests/decoders/defaults/events/actions, keep options separate from handles, preserve normal M4/M3.6 flows and List read-only boundary.",
+    "Current saved M36 commit and actual written M37 plan satisfy historical pending cache prerequisites; no cache snapshots are rewritten."
+  ],
+  "independent_review_ownership": {
+    "runtime_private_installed": "m511_legacy, record a81fbc9fb1dc8edbc6783bb22b9d2d97159d6b0f4afbafa7d2a39f4b9152dbbe",
+    "application_and_11_app_cases": "m511_baseline, record 431d23e11c2178bac5363d9a0e9eda5f3f63ab7c0f86e109c624aadd4e9b6245",
+    "design_authored_11_List_cases": "m511_baseline independent full-body acceptance 21369690cb1edcb66f643feea5de9dbf83de078a520a810873e01a5744f7bf6c; no self-review claim"
+  },
+  "findings": [],
+  "limits": [
+    "Unapplied source preflight only; no compiler, collector, unit, browser, performance or project checker ran in this binding.",
+    "Actual applied source/gates/raw evidence/final document acceptance and separate commit/push remain required.",
+    "Only O01-O05 are approved exclusions; no List/Grid/declaration/P0/M13/release family closure."
+  ]
+}

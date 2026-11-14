@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 6821865c44cfd7e544aacc73e335a4d425dd41d8
+    git_blob: 394c14772b320b23952d5100e68542fabba415d1
   - id: data
     resource: ../../src/data/index.ts
     title: Shared snapshots, tombstones and atomic notification
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled record binding and view ownership
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: body
     resource: ../../src/ui/grid-row-blocks.ts
     title: Authored record blocks and native merging
@@ -28,7 +28,7 @@ sources:
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private synchronous row resources and cleanup
-    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
+    git_blob: b3817f2602ecdbc7e4356069ef9266757768dee9
   - id: browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, binding failure, append, focus and empty-state acceptance
@@ -36,7 +36,7 @@ sources:
   - id: units
     resource: ../../tests/grid-hooks.test.ts
     title: Owned resource ordering, sync-only boundaries and failure release
-    git_blob: e0ded96c9b2e34e4d841d607ca52c9a8fc287a0e
+    git_blob: 6901d1ea74c9f1142902e9677a535e46673a4e79
   - id: benchmark
     resource: ../../tools/benchmark-grid-viewport.mjs
     title: Original viewport fixtures with final clean-append measurements

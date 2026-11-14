@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { describe, expect, it } from "vitest";
-import { createGridHooks } from "../src/ui/grid-hooks.js";
-import type { GridRowBinding } from "../src/ui/grid-hooks.js";
+import { createRowHooks } from "../src/ui/grid-hooks.js";
+import type { RowBinding } from "../src/ui/grid-hooks.js";
 import type { RowSnapshot } from "../src/data/index.js";
 import { FrameworkError } from "../src/internal/framework-error.js";
 
@@ -12,13 +12,13 @@ const elements = [{} as HTMLTableRowElement];
 
 describe("Grid row hook ownership", () => {
   it("keeps disabled hooks empty and rejects invalid callback declarations before binding", () => {
-    const hooks = createGridHooks({}, () => { throw new Error("Unexpected cleanup"); });
+    const hooks = createRowHooks("bindGrid", {}, () => { throw new Error("Unexpected cleanup"); });
     expect(hooks.enabled).toBe(false);
     hooks.before(row(), elements, () => { throw new Error("Unexpected checkpoint"); });
     hooks.after(1, check); hooks.release(1); hooks.dispose();
     expect(hooks.running).toBe(false);
     for (const phase of ["beforeRowBind", "onRowBind"]) {
-      expect(() => createGridHooks({ [phase]: null } as never, check)).toThrow(expect.objectContaining({
+      expect(() => createRowHooks("bindGrid", { [phase]: null } as never, check)).toThrow(expect.objectContaining({
         api: "bindGrid", code: "GRID_BIND", detail: { phase }
       }));
     }
@@ -26,9 +26,9 @@ describe("Grid row hook ownership", () => {
 
   it("shares one context, freezes the row-element list, checkpoints and cleans each binding in reverse order", () => {
     const events: string[] = [];
-    const contexts: GridRowBinding<{ name: string }>[] = [];
+    const contexts: RowBinding<{ name: string }, HTMLTableRowElement>[] = [];
     const source = [...elements];
-    const hooks = createGridHooks<{ name: string }>({
+    const hooks = createRowHooks<{ name: string }, HTMLTableRowElement>("bindGrid", {
       beforeRowBind(context) {
         expect(hooks.running).toBe(true); contexts.push(context); events.push("before");
         context.own(() => { expect(hooks.running).toBe(true); events.push("first cleanup"); });
@@ -56,7 +56,7 @@ describe("Grid row hook ownership", () => {
     const original = new Error("Failed widget");
     const events: string[] = [];
     let fail = true;
-    const hooks = createGridHooks({ beforeRowBind(context) {
+    const hooks = createRowHooks("bindGrid", { beforeRowBind(context) {
       context.own(() => events.push("cleanup"));
       if (fail) throw original;
     } }, check);
@@ -71,7 +71,7 @@ describe("Grid row hook ownership", () => {
   it("preserves checkpoint failures and closes resources registered before and after placement", () => {
     const stale = new FrameworkError({ api: "bindGrid", code: "GRID_BIND_STALE", message: "Changed during callback." });
     const cleaned: string[] = [];
-    const hooks = createGridHooks({
+    const hooks = createRowHooks("bindGrid", {
       beforeRowBind(context) { context.own(() => cleaned.push("before")); },
       onRowBind(context) { context.own(() => cleaned.push("after")); }
     }, check);
@@ -86,13 +86,13 @@ describe("Grid row hook ownership", () => {
   it("preserves Grid guard errors and checks cleanup effects before delivering the next row snapshot", () => {
     for (const code of ["GRID_BIND_REENTRANT", "GRID_BIND_STALE", "GRID_DISPOSED"]) {
       const guard = new FrameworkError({ api: "bindGrid", code, message: "Stopped by the Grid guard." });
-      const hooks = createGridHooks({ beforeRowBind() { throw guard; } }, check);
+      const hooks = createRowHooks("bindGrid", { beforeRowBind() { throw guard; } }, check);
       expect(() => hooks.before(row(), elements, check)).toThrow(guard);
     }
     const stale = new FrameworkError({ api: "bindGrid", code: "GRID_BIND_STALE", message: "Changed during cleanup." });
     let changed = false;
     let calls = 0;
-    const hooks = createGridHooks({ beforeRowBind(context) {
+    const hooks = createRowHooks("bindGrid", { beforeRowBind(context) {
       calls++; context.own(() => { changed = true; });
     } }, check);
     hooks.before(row(), elements, check);
@@ -104,12 +104,12 @@ describe("Grid row hook ownership", () => {
   it("rejects and consumes asynchronous before/after results and closes late resources", async () => {
     for (const phase of ["beforeRowBind", "onRowBind"] as const) {
       let cleaned = 0;
-      const callback = async (context: GridRowBinding<unknown>) => {
+      const callback = async (context: RowBinding<unknown, HTMLTableRowElement>) => {
         context.own(() => { cleaned++; });
         await Promise.resolve();
         context.own(() => { cleaned++; });
       };
-      const hooks = createGridHooks({ [phase]: callback }, check);
+      const hooks = createRowHooks("bindGrid", { [phase]: callback }, check);
       if (phase === "onRowBind") hooks.before(row(), elements, check);
       expect(() => phase === "beforeRowBind" ? hooks.before(row(), elements, check) : hooks.after(1, check))
         .toThrow(expect.objectContaining({ code: "GRID_BIND", detail: { phase, id: 1 } }));
@@ -119,8 +119,8 @@ describe("Grid row hook ownership", () => {
   });
 
   it("cleans late own immediately without closing a newer binding with the same row ID", () => {
-    const contexts: GridRowBinding<unknown>[] = [];
-    const hooks = createGridHooks({ beforeRowBind(context) { contexts.push(context); } }, check);
+    const contexts: RowBinding<unknown, HTMLTableRowElement>[] = [];
+    const hooks = createRowHooks<unknown, HTMLTableRowElement>("bindGrid", { beforeRowBind(context) { contexts.push(context); } }, check);
     hooks.before(row(), elements, check); hooks.before(row(), elements, check);
     let cleaned = 0;
     expect(() => contexts[0].own(() => { cleaned++; expect(hooks.running).toBe(true); }))
@@ -134,7 +134,7 @@ describe("Grid row hook ownership", () => {
     const cleanupError = new Error("Widget cleanup");
     const events: number[] = [];
     const reported: unknown[] = [];
-    const hooks = createGridHooks({ beforeRowBind(context) {
+    const hooks = createRowHooks("bindGrid", { beforeRowBind(context) {
       const id = context.row.id;
       context.own(() => events.push(id));
       context.own(() => { if (id === 2) throw cleanupError; });
@@ -150,7 +150,7 @@ describe("Grid row hook ownership", () => {
   it("finishes cleanup when the reporter throws and reports unsupported asynchronous cleanup", async () => {
     const reporterError = new Error("Reporter failed");
     const events: number[] = [];
-    const hooks = createGridHooks({ beforeRowBind(context) {
+    const hooks = createRowHooks("bindGrid", { beforeRowBind(context) {
       const id = context.row.id;
       context.own(() => events.push(id));
       context.own(() => { throw new Error("Cleanup failed"); });
@@ -160,7 +160,7 @@ describe("Grid row hook ownership", () => {
     expect(events).toEqual([2, 1]); expect(hooks.running).toBe(false);
 
     const reported: unknown[] = [];
-    const asyncHooks = createGridHooks({ beforeRowBind(context) {
+    const asyncHooks = createRowHooks("bindGrid", { beforeRowBind(context) {
       context.own(async () => { throw new Error("Async cleanup"); });
     } }, cause => reported.push(cause));
     asyncHooks.before(row(), elements, check); asyncHooks.release(1);

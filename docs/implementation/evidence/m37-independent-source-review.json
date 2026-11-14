@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.7",
+  "status": "passed_composite_applied_source_and_independent_five_API_draft_review_raw_pending",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T22:23:14.363Z",
+  "baseline_commit": "96d5e66ccfa2a90eec53e3307302ae3d140e1644",
+  "applied_source": {
+    "path": "node_modules/.cache/m37-applied-source.json",
+    "sha256": "6e922d738d8171679dc2753ad58b406ff54a068a55514b0277daf9d49a36af7b",
+    "bytes": 2615
+  },
+  "written_plan": {
+    "path": "docs/implementation/m3-declarations-plan.md",
+    "sha256": "d39fe702a08400fdf293aa5935a6ab0ad9cacb392b5ae994e32804e65760a3eb",
+    "bytes": 9839
+  },
+  "independent_joint_go": {
+    "path": "node_modules/.cache/m37-joint-plan-source-go.json",
+    "sha256": "3d4ff6eb45fff9ebe61492db63983e73df793d7608b4ae6db29b2678b67008b4",
+    "bytes": 12861
+  },
+  "source_sha256": {
+    "src/ui/grid-hooks.ts": "ed36d86ef2770804e7fb651cb7b76266d1426a9cacb115f0fbd179b782fd2d29",
+    "src/ui/grid.ts": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+    "src/ui/list.ts": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19",
+    "tests/grid-hooks.test.ts": "e5ca71e6329de8f29cc278c001e0cee66b90637a83eb2d1b8dd1df893b600abc",
+    "tests/browser/grid-callbacks.spec.ts": "e435e29aa1dacfc8e22a63f38f9c2bc90f63b75579c1933ae82beac21e5fd274",
+    "tests/browser/grid-progressive.spec.ts": "d5dba82ed8ce1d40f2eda59a00109b11d8533935587f9a573b6319316e4aceda",
+    "tests/browser/grid-recipes.spec.ts": "2f704ef0c4d2c979ede4b354afa47b0354168916bfb775d2c88d0b46dd28e27a",
+    "tests/browser/list-row-bindings.spec.ts": "bc88caf94da04e0117315bd8736d3030336f3d80f828597ca0481ba6814b262a",
+    "examples/vite/m4/employees.ts": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+    "examples/vite/m4/main.ts": "4ed89f19aae992edb8f0b43006cb8fa65bb3303dc77d89c9ea22ca8b745392bd",
+    "examples/vite/m4/employee-codes.json": "056c6e53aeefa6580cff43f9924b5c96c2b60b940e20b906d9ccf326d8a9516e",
+    "examples/vite/m4/employee-start.json": "4a50977290eb05d8e8fb71a6db4acecefa4841e6b3c85f8b064d211dd03543e1",
+    "tests/browser/m37-declarations.spec.ts": "045638b32d9a4454737c51b8ae36881b517e9a75e22fc4c24578c959a3b17bea",
+    "tests/consumers/ts/check.ts": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86",
+    "tests/consumers/browser/main.js": "5f0f99462b85c88ae994482369f54c58fc5822017dbe8ebd801f0241426ed9fb",
+    "tools/check-packed-browser.mjs": "8e7cca63de9556d1553ae1e1a9ac8420e56c2e3830665c0f1c85471450b82a60"
+  },
+  "composite_independent_reviews": {
+    "runtime_private_installed": {
+      "owner": "m511_legacy",
+      "path": "node_modules/.cache/m37-runtime-installed-independent-review.json",
+      "sha256": "a81fbc9fb1dc8edbc6783bb22b9d2d97159d6b0f4afbafa7d2a39f4b9152dbbe",
+      "bytes": 11760,
+      "scope": "Independent complete shared row owner/List/private Grid caller and installed targets; excludes its own Employee application."
+    },
+    "application": {
+      "owner": "m511_baseline",
+      "path": "node_modules/.cache/m37-app-independent-source-review.json",
+      "sha256": "431d23e11c2178bac5363d9a0e9eda5f3f63ab7c0f86e109c624aadd4e9b6245",
+      "bytes": 4257,
+      "scope": "Independent actual Employee app and all11 new application browser proposal bodies."
+    },
+    "original_List_fixtures": {
+      "owner": "m511_baseline",
+      "path": "node_modules/.cache/m37-preparation-baseline/fixture-independent-review.json",
+      "sha256": "21369690cb1edcb66f643feea5de9dbf83de078a520a810873e01a5744f7bf6c",
+      "bytes": 1902,
+      "scope": "Independent full11 List fixture bodies authored by Design; no Design self-approval."
+    }
+  },
+  "normalized_API_draft_bodies": {
+    "docs/v2/list.md": {
+      "normalized_body_sha256": "a533bc2b3ef32cbaf8e81c49f15b676741afb95e9522bfa393ea49f056500d73",
+      "normalized_body_bytes": 13205
+    },
+    "docs/v2/ui.md": {
+      "normalized_body_sha256": "650b94e9402571f26037b6f2a431d607a66f7b7a3e113b28f53149874880bee2",
+      "normalized_body_bytes": 26349
+    },
+    "docs/v2/architecture.md": {
+      "normalized_body_sha256": "c0bd4eac70ab67d592a47a521cd768d85a7813cb2a585e512211ff95060090d7",
+      "normalized_body_bytes": 21316
+    },
+    "docs/v2/employee-example.md": {
+      "normalized_body_sha256": "6f33210c07eb331b89ac19d882885a5db628f50cd0c52d60f3c0043c09f583a4",
+      "normalized_body_bytes": 17134
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "7b6f1803841636955d6809694f099b3c138c71b4b2b6c8a3db5ffbf0f6bbf7e8",
+      "normalized_body_bytes": 64789
+    }
+  },
+  "normalization": "UTF-8 with CRLF->LF; untrimmed body after second frontmatter delimiter, retaining blank lines and final newline.",
+  "accepted_contract": [
+    "All16 actual source hashes exactly match the independently approved joint proposal and apply map. Twelve prior bases/four new absent targets were guarded before apply; no extra source change is credited.",
+    "Only new public runtime seam is List.onRowBind inferred from bindList. Existing private grid-hooks shares precise TR/LI RowBinding and direct Grid callers; no new module, entry, named public row type, utility, registry or dependency.",
+    "List captures/plain-calls synchronous after-values/final-placement callbacks; RowId, owned reverse cleanup, old-before-write, hidden/reentry/sort resource behavior and before-mutation view guards follow the independently accepted actual owners.",
+    "Declared Employee app preparation/request/component/event/action phases remain ordinary typed objects/functions, current source reads, signal-owned CVC setup/cleanup, separate returned handles and explicit domain decoders. Normal mode and prior M3.6 public actions/advice remain intact.",
+    "Native/custom row actions use current physical ownership and fresh Rows snapshots; List remains read-only, Grid proves accepted native commit ordering and two pages keep independent registrations/signals.",
+    "Installed Select declarations distinguish raw0/false/empty/null without using those values as positive page sizes, preserve declaration objects and retain older installed behavior.",
+    "All five updated API bodies were independently read against the applied source and composite review. Source post-callback checkpoint versus uncaught subscriber reentry and Employee-versus-installed default witness attribution are now precise."
+  ],
+  "findings_resolved": [
+    "List now states post-callback invalidation produces LIST_BIND_STALE, while an uncaught reentrant subscriber may propagate LIST_BIND_REENTRANT first; committed source is not rolled back.",
+    "Migration attributes empty-query/null-selection defaults to Employee mode and raw0/false/empty/null Select defaults to the actual installed browser recipe with a separate TS witness."
+  ],
+  "required_remaining_owners": {
+    "M5.15": "Data value/schema/projection contract and complete-source versus marked-field recipes.",
+    "M5.16": "Remaining Form creation/default/update/removal/reset, including resolved loaded-deletion detail and entered candidate.",
+    "M5.17": "Exact Form/source callback and receiver outcomes, including unresolved literal unbound-key timing; no broad callback family closure.",
+    "M5.18": "Retained rule/manual mask/standalone outcomes and remaining live configuration.",
+    "M5.19": "Shared native/generated row-control ownership and contracts.",
+    "M6.1": "Complete Select/generated-choice mutation matrix.",
+    "M6.2": "Editable List; current M3.7 List display controls remain disabled.",
+    "M6.3": "List active/multiple selection and checks.",
+    "M6.4": "List creation/order and remaining row-resource workflows; this selected hook does not close the family.",
+    "M6.5": "List progressive work and geometry.",
+    "M6.6": "Pagination windows/set navigation.",
+    "M6.7": "Native/anchor action outcomes.",
+    "M5.20": "Final Data/Form/shared-control cross-owner acceptance after prerequisites."
+  },
+  "runtime_verification": "Root owns all execution. This is applied source/API draft acceptance only; recorded-byte raw audit and final coordination/document semantics/mechanics remain pending.",
+  "limits": [
+    "This reviewer authored the original11 List browser fixtures; their full independent acceptance is supplied by Baseline213696, not self-certified here.",
+    "No compiler, collector, unit, browser, performance or project checker commands ran from this reviewer.",
+    "Only O01-O05 omissions are approved. No whole R03/List/Grid/Form/P0/M13/release closure or Safari/manual-AT/token result."
+  ]
+}

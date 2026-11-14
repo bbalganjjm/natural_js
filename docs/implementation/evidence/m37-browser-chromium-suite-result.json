@@ -1,0 +1,224 @@
+{
+  "label": "browser-chromium",
+  "started": "2026-11-14T22:21:03.945Z",
+  "finished": "2026-11-14T22:23:59.391Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+    "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+    "bytes": 22425,
+    "entries": 219
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+    "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+    "bytes": 22425,
+    "entries": 219
+  },
+  "sources_unchanged": true,
+  "workers": 2,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m37-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m37-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m37-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [],
+  "children": [
+    {
+      "label": "browser-chromium-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=chromium",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m37-browser-chromium-suite-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T22:21:03.974Z",
+      "finished": "2026-11-14T22:21:06.020Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m37-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m37-browser-chromium-suite-list.json.gz",
+        "sha256": "0b1e0dc75a837269106a47ed34821d4b461a683529ea32714aad6e36f44d8cea",
+        "bytes": 60119,
+        "encoding": "gzip",
+        "uncompressed_sha256": "2a137f3787ec7efe14421d6003fd528f3dbeb8a99080d3c3ec043f62e602b0a2",
+        "uncompressed_bytes": 620221
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m37-browser-chromium-suite-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "browser-chromium-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=chromium",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m37-browser-chromium-suite-failures"
+      ],
+      "started": "2026-11-14T22:21:06.055Z",
+      "finished": "2026-11-14T22:23:59.330Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m37-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m37-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m37-inputs-2abad77d9985.json",
+        "sha256": "2abad77d9985dadb6a7620d20970adfc40ce258b81c3a38ca62d0bf1b5810903",
+        "bytes": 22425,
+        "entries": 219
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m37-browser-chromium-suite-run-1.json.gz",
+        "sha256": "d6bdbcd3d5871d03ae829e09f8543bd6a5d65fc9e9092f8494d43acb996aa375",
+        "bytes": 74162,
+        "encoding": "gzip",
+        "uncompressed_sha256": "ce6dbf5ffd9af9f497373a8f53b060af3fd483d6600776c607377a315a0b8c63",
+        "uncompressed_bytes": 1057288
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m37-browser-chromium-suite-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m37-browser-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m37-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/attachments/tree-binding-measurements-bac187d5c61d0333d3aa6dcc624c0fc4f1de06fe.json",
+      "sha256": "ad0e7ab5e55848f5eff7adaadb3da0882a4bada7f34b4c5d82fd4a6f30d38f67",
+      "bytes": 1622
+    },
+    {
+      "path": "docs/implementation/evidence/m37-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/tree-binding.json",
+      "sha256": "ad0e7ab5e55848f5eff7adaadb3da0882a4bada7f34b4c5d82fd4a6f30d38f67",
+      "bytes": 1622
+    }
+  ],
+  "coverage": {
+    "passed": 955,
+    "identities_sha256": "337a79ea4450e3f565c9b14d383cea02156b7b0b49927563664ad91348ffa4af",
+    "semantic_identities_sha256": "a43b7ee9e757fbbff3ed0d23d8ea4dd9caccff9d66ccc1fc4e91b59243f304af",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

@@ -1,0 +1,113 @@
+{
+  "milestone": "M3.7",
+  "status": "accepted_source_and_focused_witness_snapshot",
+  "baseline": {
+    "commit": "96d5e66ccfa2a90eec53e3307302ae3d140e1644",
+    "receipt": {
+      "path": "docs/implementation/evidence/m36-verification.json",
+      "sha256": "a2ff6623063430830fb150941fd0fb3dbb65c48dde9ede1020595888aaa6ad4d",
+      "bytes": 8851
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/9",
+  "selected_contracts": {
+    "row_lifetime": "One List.onRowBind option reuses the existing private Grid row-resource owner with precise LI/TR inference, capture/plain synchronous invocation, final placement, pure-sort retention, view-exit/reentry and complete cleanup.",
+    "declarations": "Actual opt-in Employee asynchronous requested-code/data preparation, distinct typed declarations/handles, current-payload requests, owned native/custom row actions and ordered RowId selection/ready actions through the existing Page signal.",
+    "defaults": "Separate installed native Select recipe executes reusable declarations with raw0/false/empty/null; TypeScript consumer checks their types. Normal employee mode remains unchanged."
+  },
+  "independent_source_review": {
+    "status": "passed_composite_applied_source_and_independent_five_API_draft_review_raw_pending",
+    "reviewer": "composite",
+    "report": {
+      "path": "docs/implementation/evidence/m37-independent-source-review.json",
+      "sha256": "edfb44b193ccbd26a76bfff403e65550cf36dfe7e971ca8928c2a44fc9715422",
+      "bytes": 8622
+    },
+    "source_sha256": {
+      "src/ui/grid-hooks.ts": "ed36d86ef2770804e7fb651cb7b76266d1426a9cacb115f0fbd179b782fd2d29",
+      "src/ui/grid.ts": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+      "src/ui/list.ts": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19",
+      "tests/grid-hooks.test.ts": "e5ca71e6329de8f29cc278c001e0cee66b90637a83eb2d1b8dd1df893b600abc",
+      "tests/browser/grid-callbacks.spec.ts": "e435e29aa1dacfc8e22a63f38f9c2bc90f63b75579c1933ae82beac21e5fd274",
+      "tests/browser/grid-progressive.spec.ts": "d5dba82ed8ce1d40f2eda59a00109b11d8533935587f9a573b6319316e4aceda",
+      "tests/browser/grid-recipes.spec.ts": "2f704ef0c4d2c979ede4b354afa47b0354168916bfb775d2c88d0b46dd28e27a",
+      "tests/browser/list-row-bindings.spec.ts": "bc88caf94da04e0117315bd8736d3030336f3d80f828597ca0481ba6814b262a",
+      "examples/vite/m4/employees.ts": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+      "examples/vite/m4/main.ts": "4ed89f19aae992edb8f0b43006cb8fa65bb3303dc77d89c9ea22ca8b745392bd",
+      "examples/vite/m4/employee-codes.json": "056c6e53aeefa6580cff43f9924b5c96c2b60b940e20b906d9ccf326d8a9516e",
+      "examples/vite/m4/employee-start.json": "4a50977290eb05d8e8fb71a6db4acecefa4841e6b3c85f8b064d211dd03543e1",
+      "tests/browser/m37-declarations.spec.ts": "045638b32d9a4454737c51b8ae36881b517e9a75e22fc4c24578c959a3b17bea",
+      "tests/consumers/ts/check.ts": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86",
+      "tests/consumers/browser/main.js": "5f0f99462b85c88ae994482369f54c58fc5822017dbe8ebd801f0241426ed9fb",
+      "tools/check-packed-browser.mjs": "8e7cca63de9556d1553ae1e1a9ac8420e56c2e3830665c0f1c85471450b82a60"
+    },
+    "coverage": {
+      "runtime_private_installed": {
+        "path": "docs/implementation/evidence/m37-runtime-installed-independent-review.json",
+        "sha256": "a81fbc9fb1dc8edbc6783bb22b9d2d97159d6b0f4afbafa7d2a39f4b9152dbbe",
+        "bytes": 11760
+      },
+      "application": {
+        "path": "docs/implementation/evidence/m37-app-independent-review.json",
+        "sha256": "431d23e11c2178bac5363d9a0e9eda5f3f63ab7c0f86e109c624aadd4e9b6245",
+        "bytes": 4257
+      },
+      "original_List_fixtures": {
+        "path": "docs/implementation/evidence/m37-fixture-independent-review.json",
+        "sha256": "21369690cb1edcb66f643feea5de9dbf83de078a520a810873e01a5744f7bf6c",
+        "bytes": 1902
+      },
+      "joint_written_plan": {
+        "path": "docs/implementation/evidence/m37-joint-plan-source-go.json",
+        "sha256": "3d4ff6eb45fff9ebe61492db63983e73df793d7608b4ae6db29b2678b67008b4",
+        "bytes": 12861
+      }
+    }
+  },
+  "witnesses": {
+    "new_unit_cases": 0,
+    "new_browser_cases": 22,
+    "list_browser": 11,
+    "employee_browser": 11,
+    "files": [
+      "tests/browser/list-row-bindings.spec.ts",
+      "tests/browser/m37-declarations.spec.ts"
+    ]
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 217,
+    "focus_each_engine": 101,
+    "current_failed_project_attempts": 0,
+    "cache_static_finding": {
+      "path": "docs/implementation/evidence/m37-cache-type-finding.json",
+      "sha256": "cf9b9158def42ee5b50e1f28babde6153b6132ff07140f5232fa48cf12472a18",
+      "bytes": 1795
+    },
+    "scope": "A required generic argument was corrected in cache before any project execution; zero test/compiler failure credit. Two API prose attributions were corrected during independent review without source changes."
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m37-declaration-contract.json",
+    "sha256": "06fc4733c5039a749d83b425f9da34d1f66e19459d0cf8d1507e6c8a5c9a73d9",
+    "bytes": 849
+  },
+  "written_plan": {
+    "path": "docs/implementation/evidence/m37-written-plan.md",
+    "sha256": "d39fe702a08400fdf293aa5935a6ab0ad9cacb392b5ae994e32804e65760a3eb",
+    "bytes": 9839
+  },
+  "remaining": [
+    "M5.15-M5.20 and all remaining ancestor UI/shell outcomes retain their exact owners.",
+    "List editing/generated row controls remain M6.2/M5.19; no whole-family/M13/release closure."
+  ],
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable applied-source/focus/composite-review snapshot; m37-verification.json owns later raw and final-document completion."
+}

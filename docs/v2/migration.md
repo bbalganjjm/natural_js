@@ -60,7 +60,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Measured Grid viewport, anchoring and cleanup
@@ -92,7 +92,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List row field dispatch and validation
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Private declarative rule dispatch
@@ -108,11 +108,11 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
+    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
-    git_blob: 2a52459904aa6454f3fca97592537fc9b6faf473
+    git_blob: dc298f87b8a9f890d0ea818f7fc455abe149f628
   - id: employee-view
     resource: ../../examples/vite/m4/side.html
     title: Authored employee screen markers
@@ -148,15 +148,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 0892663b9b5f91da0a11a23ae4da5a8fccf30ed7
+    git_blob: fa0f6d8d5a1fdc251e8f8709b2d8b37793ff22a5
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
-generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -218,6 +218,10 @@ Replace cont.caller, opener/request/context lookups with a concrete typed input 
 
 Move configured controller advice to PageDefinition.advice: match selects native method paths/view/custom predicates, and wrap returns an ordinary sync or async wrapper around lexical proceed. Discovery runs automatically before init through own methods and nested plain objects, with root class lifecycle support; no per-method assignment or string advice-type engine is needed. Preserve synchronous results by choosing a synchronous wrapper, and await async after/recovery explicitly. Public actions must exist before init even when their private bindings await setup. Root init/activate proceeds stop after abort; arbitrary actions check their own page signal and cleanup remains callable. See [automatic advice](page.md#automatic-controller-advice) and the executed employee policy.[^page][^employee]
 
+
+Use ordinary typed request/component/event/action objects for former Natural-TEMPLATE declarations, with returned handles stored separately. Await dependent code/data requests, construct components, bind source, connect owned native/custom events and await explicit actions before init completes. The [employee declaration mode](employee-example.md#asynchronous-typed-declarations) demonstrates requested-group batching/filtering, current-payload requests, empty-query/null-selection defaults and ordered business-ID selection through the common Page lifetime. The [installed browser recipe](../../tests/consumers/browser/main.js) separately executes reusable Select declarations with raw 0/false/empty/null; the [installed TypeScript witness](../../tests/consumers/ts/check.ts) checks their types. Framework-specific editing/generated-control outcomes retain their separate owners.[^employee][^page]
+
+List.onRowBind supplies the same inferred row/elements/own vocabulary as Grid, with one LI and no before phase. Register arbitrary repeated row actions/resources there and release them through own. Use RowId and fresh Rows.get(id), not DOM IDs or visible positions. List.onSelect still fires only for a changed selection. Pure sorting retains unchanged resources; view exit and re-entry release/reacquire them. The [List contract](list.md#row-binding-and-owned-resources) defines synchronous errors and cleanup.[^list]
 
 ## 2. Bind fields and select a row by identity
 

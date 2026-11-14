@@ -1,0 +1,37 @@
+{
+  "status": "independent_static_type_finding_corrected_in_cache_not_compiled",
+  "finder": "m511_legacy",
+  "producer": "m511_baseline",
+  "previous_manifest": {
+    "path": "node_modules/.cache/m37-preparation-baseline/installed-candidate-manifest-r2.json",
+    "sha256": "bcc36b2f680e6656cf509db4b49d15bff5087cb4a820065b6ed7d2a02d39381d",
+    "bytes": 2120
+  },
+  "previous_candidate": {
+    "path": "node_modules/.cache/m37-preparation-baseline/tests__consumers__ts__check-r2.ts",
+    "sha256": "211e063affff91ee7050ec184230abea53c3d21147ca2dbbd672df8c5e965b14",
+    "bytes": 25776
+  },
+  "corrected_manifest": {
+    "path": "node_modules/.cache/m37-preparation-baseline/installed-candidate-manifest-r3.json",
+    "sha256": "8efd7c299426be9583f58b66157c89e9a292f8e72854ce45b81b9660e0e36b2f",
+    "bytes": 2233
+  },
+  "corrected_candidate": {
+    "path": "node_modules/.cache/m37-preparation-baseline/tests__consumers__ts__check-r3.ts",
+    "sha256": "d4c824f2b221a05a946cdc306a5c3ec46659ab5abab7e8f836f0b3e3b13e9f86",
+    "bytes": 25789
+  },
+  "declaration_source": {
+    "path": "src/ui/index.ts",
+    "sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+    "bytes": 7114
+  },
+  "issue": "SelectChoice requires its V type argument; readonly SelectChoice[] in the uncompiled TS consumer candidate omitted it.",
+  "correction": "Use the already imported SelectValue in readonly SelectChoice<SelectValue>[]; one source substitution only.",
+  "retained": "R2 candidate/manifest and the first joint proposal remain unchanged.",
+  "actual_compiler_or_project_commands": 0,
+  "actual_test_failures": 0,
+  "runtime_or_canonical_credit": 0,
+  "independent_recheck": "Pending exact corrected candidate review; actual compile remains root-owned after source application."
+}

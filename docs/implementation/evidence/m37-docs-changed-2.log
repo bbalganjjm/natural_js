@@ -1,0 +1,7 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 docs:check
+> node tools/knowledge-docs/knowledge-docs.mjs check --changed
+
+docs/implementation/index.md:3: warn index-desc: description differs from docs/implementation/m3-declarations-plan.md frontmatter
+docs/index.md:7: warn index-desc: description differs from docs/implementation/m3-declarations-plan.md frontmatter
+knowledge-docs: 95 concepts, 5 reserved files | 0 errors, 2 warnings (index-desc 2)

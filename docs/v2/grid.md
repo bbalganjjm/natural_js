@@ -9,7 +9,7 @@ sources:
   - id: callbacks-browser
     resource: ../../tests/browser/grid-callbacks.spec.ts
     title: Captured references, plain receivers, attachment and live policy regressions
-    git_blob: 543182bdd2d9fbb490b216e56e608e0fd3e2e31e
+    git_blob: b82180645fa4674c042fde8a772db98818d11c3e
   - id: values-browser
     resource: ../../tests/browser/collection-values.spec.ts
     title: Shared mounted value projection, raw editing and lifetime regressions
@@ -25,7 +25,7 @@ sources:
   - id: progressive-browser
     resource: ../../tests/browser/grid-progressive.spec.ts
     title: Cooperative completion, cancellation, callback and bounded-work regressions
-    git_blob: 46ea6fc25e2abbccdddb7fbb0e8ad6f96748929f
+    git_blob: 0d385d4dd09f1bf6ff2e81f75b28b22762387c69
   - id: filter-browser
     resource: ../../tests/browser/grid-filter-apply.spec.ts
     title: Applied search, zero counts and callback ownership regressions
@@ -41,7 +41,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Private native column topology and resize ownership
@@ -69,7 +69,7 @@ sources:
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private synchronous row binding and resource ownership
-    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
+    git_blob: b3817f2602ecdbc7e4356069ef9266757768dee9
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, defaults, callbacks, cleanup, empty state and failure regressions

@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M3.6",
+  "current_stage": "M3.7",
   "queue": [
     {
       "id": "P0.1",
@@ -63,16 +63,16 @@
     {
       "id": "M3.6",
       "scope_ref": "remaining-work-plan.json#/stages/8",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "96d5e66ccfa2a90eec53e3307302ae3d140e1644",
       "receipt": "m36-verification.json"
     },
     {
       "id": "M3.7",
       "scope_ref": "remaining-work-plan.json#/stages/9",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m37-verification.json"
     },
     {
       "id": "M5.15",
@@ -249,16 +249,13 @@
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
-    "stage": "M3.6",
-    "baseline_commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
-    "parent_receipt": "m35-runtime-receipt.json",
-    "contract": "implemented and independently reviewed composite source/callers/four drafts",
+    "contract": "implemented and independently reviewed composite source/callers/five drafts",
     "runtime_checks": "sixteen canonical groups passed",
-    "runtime_receipt": "m36-runtime-receipt.json",
-    "inputs": 215,
+    "runtime_receipt": "m37-runtime-receipt.json",
+    "inputs": 219,
     "units": 217,
-    "full_each": 933,
-    "focus_each": 80,
+    "full_each": 955,
+    "focus_each": 101,
     "documents": "passed_independent_and_actual_zero_errors_warnings"
   },
   "latest_completed_checks": {

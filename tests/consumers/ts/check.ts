@@ -356,6 +356,27 @@ export function configureGridState(grid: GridHandle<Employee>, ids: readonly Row
   return { selected, checked, checkState, visible, filtered, store, values, choices, matching };
 }
 
+export function connectDeclaredSelectDefaults(roots: readonly HTMLSelectElement[]) {
+  const choices: readonly SelectChoice<SelectValue>[] = Object.freeze([
+    Object.freeze({ label: "Zero", value: 0 }), Object.freeze({ label: "False", value: false }),
+    Object.freeze({ label: "Empty string", value: "" })
+  ]);
+  const declarations = Object.freeze([0, false, "", null].map(value => Object.freeze({ choices, value })));
+  const handles = declarations.map((declaration, index) => bindSelect(roots[index], declaration));
+  return { declarations, handles, values: handles.map(handle => handle.value()) };
+}
+
+export function connectListRowActions(root: HTMLUListElement, rows: Rows<Employee>,
+  act: (id: RowId, name: string, event: Event) => void) {
+  return bindList(root, { rows, onRowBind: function(this: void, context) {
+    const id: RowId = context.row.id, name: string = context.row.value.name;
+    const elements: readonly HTMLLIElement[] = context.elements;
+    const click = (event: Event) => act(id, name, event);
+    for (const element of elements) element.addEventListener("click", click);
+    context.own(() => { for (const element of elements) element.removeEventListener("click", click); });
+  } });
+}
+
 export function connectDataUI(listRoot: HTMLUListElement, sizeRoot: HTMLSelectElement,
   pageRoot: HTMLElement, rows: Rows<Employee>) {
   const list = bindList(listRoot, { rows });

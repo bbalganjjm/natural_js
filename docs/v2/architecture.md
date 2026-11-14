@@ -36,7 +36,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: grid-height
     resource: ../../src/ui/grid-height.ts
     title: Private authored Grid height ownership
@@ -64,11 +64,11 @@ sources:
   - id: grid-hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private Grid row callbacks and reverse resource cleanup
-    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
+    git_blob: b3817f2602ecdbc7e4356069ef9266757768dee9
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: select
     resource: ../../src/ui/select.ts
     title: Standalone Select binding
@@ -161,10 +161,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -208,7 +208,7 @@ Build `src/` once with `tsc` to `build/`. The package export map resolves public
 
 `native-control.ts` has concrete Form/Grid/List callers for scalar/group values, image/text display, text-length checks and native value sanitization. Its interactive-content selector is shared by Grid merge and explicit-render preflight. Each binder still owns compilation, probes, drafts, rules and error presentation; List validates against authored-template probes, not its disabled display clones. Grid compiles one logical group across physical rows, allocates isolated native radio names, and retains its scalar fast path without creating a Form controller per record. `field-render.ts` is shared only by Form/Grid: it validates explicit display targets and fresh same-document results before replacement. No renderer, native-field or check-mode type is added to the public entry. Form alone snapshots original custom-render children for disposal; Grid already owns unchanged template restoration.[^native][^render][^form][^grid][^list]
 
-`grid-hooks.ts` owns synchronous before/after callbacks and reverse resource cleanup for each mounted record binding. Grid keeps status projection, captured native defaults, empty-page visibility, placement, reentrancy checkpoints and completion notification with its existing view owner. It restores failed view/setter state before delivering forced pruning callbacks, so a callback's later append is not overwritten. Status presentation does not create a parallel row store; snapshots and clean append remain data-owned, while business factories/loaders/counters remain application-owned. No generic lifecycle, result-template or network-loader registry is added.[^grid-hooks][^grid][^data]
+`grid-hooks.ts` owns synchronous row callbacks and reverse resource cleanup for Grid and List. Grid uses before/after phases; List exposes only onRowBind after bound values and final placement. The private RowBinding element parameter preserves TR versus LI inference. List tracks visible membership separately from its value cache so detached/re-entered rows release/reacquire resources without a second cleanup engine. Grid keeps status projection, captured native defaults, empty-page visibility, placement, reentrancy checkpoints and completion notification with its existing view owner. It restores failed view/setter state before delivering forced pruning callbacks, so a callback's later append is not overwritten. Status presentation does not create a parallel row store; snapshots and clean append remain data-owned, while business factories/loaders/counters remain application-owned. No generic lifecycle, result-template or network-loader registry is added.[^grid-hooks][^grid][^data]
 
 Clean append and explicit state append share the existing Rows notification path. Form ignores append for its already-bound row, preserving drafts, rules and focus; default List/Tree enumeration still hides tombstones. RowState separates received metadata from business JSON; replaceState/appendState keep received value/status checkpoints inside the existing store. Revert restores that checkpoint, while ordinary add/copy inserts are discarded. Retained deletions can anchor order but cannot become move/copy/edit sources. A Grid opts into retained last-committed deleted values through its status projection, protects deleted editors and splits merges at differing statuses. Rows.changes() uses the received original for delete payloads. Application code owns legacy metadata mapping, selected business payload keys, scalar/array choice and request method; no serializer or transport policy enters Data. Native defaults are an untyped record for an application factory, not a cast to the complete domain T.[^data][^form][^grid][^grid-blocks]
 

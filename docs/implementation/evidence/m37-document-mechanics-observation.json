@@ -1,0 +1,18 @@
+{
+  "stage": "M3.7",
+  "kind": "document_mechanics_observation",
+  "first_changed_check": {
+    "path": "docs/implementation/evidence/m37-docs-changed.log",
+    "sha256": "e6880dc5fff65502eb5342f20cdac374613c4496ff33c18010a7f9956f7f1dc3",
+    "errors": 0,
+    "warnings": 3,
+    "cause": "Two new index entries used unsupported list/separator syntax; the index parser also reported the unrecognized stage entry as missing."
+  },
+  "premature_finish": {
+    "error": "ENOENT: node_modules/.cache/m37-last-document-check.json",
+    "cause": "Root invoked the dependent finish step after the failed check.",
+    "verification_metadata_written": false
+  },
+  "correction": "Change only the two index entries to the repository format; retain approved eight semantic bodies and immutable runtime receipt.",
+  "scope": "No compiler, unit, browser, package or performance attempt; no extra runtime credit. Actual changed/full document checks must still pass."
+}

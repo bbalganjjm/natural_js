@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: aabf8dc81304246573aed96387076d6c2d149e05
+    git_blob: ae0aa6948d1dcb36dcdc9d01afbff06b84b31cd7
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable legacy behavior and unresolved cross-owner obligations
@@ -20,7 +20,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Existing row binding, projection, callbacks and resource lifetime
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Bounded mounted windows and scroll geometry
@@ -28,7 +28,7 @@ sources:
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Synchronous row hooks and reverse resource release
-    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
+    git_blob: b3817f2602ecdbc7e4356069ef9266757768dee9
   - id: page
     resource: ../../src/page/index.ts
     title: Per-instance abort and asynchronous controller cleanup
@@ -36,7 +36,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/grid-progressive.spec.ts
     title: Logical chunks, owned failures, cancellation and bounded work regressions
-    git_blob: 46ea6fc25e2abbccdddb7fbb0e8ad6f96748929f
+    git_blob: 0d385d4dd09f1bf6ff2e81f75b28b22762387c69
   - id: demo-browser
     resource: ../../tests/browser/m10-progressive.spec.ts
     title: Authored controls and independent CVC lifetime regressions

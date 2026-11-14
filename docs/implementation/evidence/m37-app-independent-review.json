@@ -1,0 +1,90 @@
+{
+  "status": "passed_connected_application_source_and_all_browser_proposals_static_review_no_execution",
+  "reviewer": "m511_baseline",
+  "producer": "m511_legacy",
+  "manifest": {
+    "path": "node_modules/.cache/m37-actual-app-legacy/candidate-manifest.json",
+    "sha256": "83d7cc8d5f1fd4bed125e4d9668960db54e0e5039c9d49c47551db5d3d668c25",
+    "bytes": 6318
+  },
+  "contract": {
+    "path": "node_modules/.cache/m37-actual-app-legacy/contract-r2.md",
+    "sha256": "97f9a4b258f04add4d24fa895d346315e8624fdafbdb32c5f44ebe17729b0085"
+  },
+  "exact_owned_targets": [
+    {
+      "target": "examples/vite/m4/employees.ts",
+      "base_raw_sha256": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/employees.ts",
+        "sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "bytes": 18120
+      }
+    },
+    {
+      "target": "examples/vite/m4/main.ts",
+      "base_raw_sha256": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/main.ts",
+        "sha256": "4ed89f19aae992edb8f0b43006cb8fa65bb3303dc77d89c9ea22ca8b745392bd",
+        "bytes": 7055
+      }
+    },
+    {
+      "target": "examples/vite/m4/employee-codes.json",
+      "base_raw_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/employee-codes.json",
+        "sha256": "056c6e53aeefa6580cff43f9924b5c96c2b60b940e20b906d9ccf326d8a9516e",
+        "bytes": 285
+      }
+    },
+    {
+      "target": "examples/vite/m4/employee-start.json",
+      "base_raw_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/employee-start.json",
+        "sha256": "4a50977290eb05d8e8fb71a6db4acecefa4841e6b3c85f8b064d211dd03543e1",
+        "bytes": 69
+      }
+    },
+    {
+      "target": "tests/browser/m37-declarations.spec.ts",
+      "base_raw_sha256": null,
+      "candidate": {
+        "path": "node_modules/.cache/m37-actual-app-legacy/m37-declarations.spec.ts",
+        "sha256": "045638b32d9a4454737c51b8ae36881b517e9a75e22fc4c24578c959a3b17bea",
+        "bytes": 13396
+      }
+    }
+  ],
+  "read_scope": "Read both existing-application source deltas in full, complete main/decoder code, connected Employee startup/request/page/selection/native-event owners, both new assets and every new browser witness body. Reused prior full M3.6 review for byte-unchanged Employee code outside the exact delta.",
+  "accepted": [
+    "Normal setup3/7 and ordinary UI behavior retained; mode is explicit and adds no HTML/control/theme.",
+    "Code batch and separate data request decode unknown values and finish before native defaults/component acquisition.",
+    "Declared requests use current query/Rows changes through the existing busy/abort owner; declaration objects and handles remain separate.",
+    "Mode awaits initial source binding before declared native/custom events, then ordered business-ID selection/ready actions with signal checks.",
+    "Shared private WeakMap uses physical nodes/stable RowId and identity-checked row-owned cleanup; delegated action reads a fresh Rows snapshot.",
+    "Native accepted-change proof is Grid-only; List stays read-only and proves repeated/custom/programmatic-source outcomes.",
+    "Public M3.6 actions.search remains the route for initial/native/save-refresh searches; no redundant advice/declaration engine is added.",
+    "All11 proposed browser cases are coherent with real authored side/stack pages and their source owners."
+  ],
+  "metadata_checks": {
+    "source_preconditions_exact": 15,
+    "candidate_hashes_exact": 5,
+    "actual_new_targets_absent": 3
+  },
+  "static_browser_inventory": {
+    "definitions": 8,
+    "expanded_cases": 11,
+    "collected": false,
+    "executed": 0
+  },
+  "limits": [
+    "Actual compiler/collector/browser/benchmark gates remain required; no such command was run.",
+    "No whole R03/List/Grid/M5.19/M6.2/P0/M13/release closure or new omission.",
+    "Common runtime and installed candidates have separate author/reviewer ownership."
+  ],
+  "actual_source_edited": false,
+  "project_checks_executed": false
+}

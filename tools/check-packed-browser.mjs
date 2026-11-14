@@ -449,6 +449,17 @@ try {
     projectedChoice: ["Two", "Two", "Two"], validation: { valid: [false, false, false], choiceIssues: true, quiet: true, raw: 99 },
     raw: { current: " Bea ", original: " Ada ", active: true, listDisabled: true }
   }, "Installed Form/Grid/List callbacks must share typed policy, preserve raw validation and refresh without source writes.");
+  const listRows = await page.evaluate(() => window.packedConsumer.checkListRows());
+  assert.deepEqual(listRows, {
+    reads: 1, plain: true, placed: true, afterSort: 2,
+    filtered: { active: 1, calls: 2 }, restored: { active: 2, calls: 3 }, paged: 1,
+    events: [
+      { id: 1, name: "Ada", type: "click" }, { id: 1, name: "Ada", type: "click" },
+      { id: 2, name: "Grace", type: "click" }, { id: 1, name: "Ada2", type: "click" },
+      { id: 1, name: "Ada2", type: "row-action" }, { id: 2, name: "Grace", type: "click" }
+    ], calls: 7, cleaned: 7, active: 0, silent: true, template: 1,
+    defaults: { values: [0, false, "", null], intact: true, separate: true }
+  }, "Installed List callbacks must use current RowId and placed values, retain sorted resources, recreate view entries and release native/custom actions exactly once.");
   const formBinding = await page.evaluate(() => {
     const h = window.packedConsumer.formBinding, [first, second] = h.rows.entries();
     const input = h.root.querySelector("input"), summary = h.root.querySelector("span"), select = h.root.querySelector("select");

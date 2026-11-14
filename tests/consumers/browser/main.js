@@ -1,7 +1,7 @@
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindChoiceGroup, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
 const state = { ready: false, screens: {}, handles: {}, outputs: [], allowClose: false, documentControllers: 0 };
 window.packedConsumer = state;
@@ -143,6 +143,53 @@ state.checkPageLoading = async () => {
     empty: host.childElementCount === 0 && primitive.root === null, order };
   host.remove();
   return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, lifetime, canceled: canceledResult, rejected, disposal };
+};
+
+state.checkListRows = () => {
+  const host = document.createElement("section");
+  host.innerHTML = '<ul><li data-row-template><button type="button" data-row-action><span data-field="name"></span></button></li><li data-empty hidden>Empty</li></ul>';
+  document.querySelector("main").append(host);
+  const root = host.querySelector("ul"), rows = createRows([{ name: "Ada" }, { name: "Grace" }]);
+  const events = [], calls = []; let active = 0, cleaned = 0, reads = 0, plain = true, placed = true;
+  const onRowBind = function(context) { "use strict";
+    plain = plain && this === undefined;
+    const { row, elements, own } = context, element = elements[0], button = element.querySelector("button");
+    placed = placed && element.parentElement === root && button.textContent === row.value.name &&
+      Object.isFrozen(context) && Object.isFrozen(elements) && elements.length === 1;
+    calls.push(row.value.name); active++;
+    const action = event => events.push({ id: row.id, name: row.value.name, type: event.type });
+    button.addEventListener("click", action); element.addEventListener("row-action", action);
+    own(() => { button.removeEventListener("click", action); element.removeEventListener("row-action", action); active--; cleaned++; });
+  };
+  const options = { rows, get onRowBind() { reads++; return onRowBind; } }, handle = bindList(root, options);
+  Object.defineProperty(options, "onRowBind", { value: () => { throw new Error("Late installed List callback replacement"); } });
+  const first = root.querySelector("button"); first.click(); first.click();
+  handle.setSort((left, right) => right.name.localeCompare(left.name));
+  const afterSort = calls.length; root.querySelector("button").click();
+  handle.setFilter(row => row.name === "Ada"); const filtered = { active, calls: calls.length };
+  handle.setFilter(null); const restored = { active, calls: calls.length };
+  rows.set(rows.entries()[0].id, "name", "Ada2"); first.click();
+  first.closest("li").dispatchEvent(new CustomEvent("row-action", { bubbles: true }));
+  handle.setPage({ page: 1, size: 1 }); const paged = active;
+  handle.setPage(null); handle.refresh(); root.querySelector("button").click();
+  handle.dispose(); const before = events.length; first.click();
+  const result = { reads, plain, placed, afterSort, filtered, restored, paged, events,
+    calls: calls.length, cleaned, active, silent: events.length === before,
+    template: root.querySelectorAll("li[data-row-template]").length };
+  const choices = Object.freeze([
+    Object.freeze({ label: "Zero", value: 0 }), Object.freeze({ label: "False", value: false }),
+    Object.freeze({ label: "Empty string", value: "" })
+  ]);
+  const declarations = Object.freeze([0, false, "", null].map(value => Object.freeze({ choices, value })));
+  const initial = JSON.stringify(declarations), controls = declarations.map((_declaration, index) => {
+    const select = document.createElement("select"); select.setAttribute("aria-label", "Code default " + index); host.append(select); return select;
+  });
+  const handles = declarations.map((declaration, index) => bindSelect(controls[index], declaration));
+  result.defaults = { values: handles.map(handle => handle.value()),
+    intact: initial === JSON.stringify(declarations) && declarations.every(Object.isFrozen) && Object.isFrozen(choices),
+    separate: handles.every((handle, index) => handle !== declarations[index]) };
+  for (const handle of handles) handle.dispose();
+  rows.dispose(); host.remove(); return result;
 };
 
 state.checkConfiguration = async () => {

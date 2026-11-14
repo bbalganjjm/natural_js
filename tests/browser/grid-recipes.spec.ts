@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 import type { Rows } from "../../src/data/index.js";
 import type { GridHandle } from "../../src/ui/index.js";
 import type { bindGrid } from "../../src/ui/grid.js";
-import type { GridRowBinding } from "../../src/ui/grid-hooks.js";
+import type { RowBinding } from "../../src/ui/grid-hooks.js";
 
 type Item = { name: string; count: number; active: boolean; choice: string | null; profile: { note: string }; team: string };
 type Options = Parameters<typeof bindGrid<Item>>[1];
@@ -67,7 +67,7 @@ test.beforeEach(async ({ page }) => {
         lifetime.abort(); h.grid?.dispose(); root.scrollTop = 0; lifetime = new AbortController();
         h.grid = bindGrid(table, { rows, multiple: true, parse: { count(input: string) {
           const value = Number(input); if (!Number.isFinite(value)) throw new Error("Enter a finite count."); return value;
-        } }, ...extra, onRowBind(context: GridRowBinding<Item>) {
+        } }, ...extra, onRowBind(context: RowBinding<Item, HTMLTableRowElement>) {
           for (const element of context.elements) h.identities.set(element, context.row.id);
           context.own(() => { for (const element of context.elements) h.identities.delete(element); });
         } });

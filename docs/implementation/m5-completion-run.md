@@ -8,7 +8,7 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: caa426cb81b9a819729f841dded9c5bbcc7ed921
+    git_blob: 2a07ede5fed3f95583a57f0f99471084930fbc5c
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
@@ -16,7 +16,7 @@ sources:
   - id: live
     resource: m5-live-choice-groups-plan.md
     title: Accepted M5.14 private handoff and failure contract
-    git_blob: a47e72ae51bbfe087c7b9e0448097e1b63db49b6
+    git_blob: c98be3a79082c2b913327f54e52d1356a9263b87
   - id: protocol
     resource: evidence/m32final-verification.json
     title: Tool-inclusive M3.2 runtime and independent acceptance
@@ -33,9 +33,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 ---
 
 # Goal
@@ -66,7 +66,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Save/push the separate M3.6 checkpoint, then implement required M3.7 declaration assembly and every subsequent ancestor through M5.20. Keep each exact receipt and inherited native/Tree/date/Edge/navigation limitation.[^run]
+Save/push the separate M3.7 checkpoint, then implement M5.15 data/value/projection outcomes and every subsequent ancestor through M5.20. Keep each exact receipt and inherited native/Tree/date/Edge/navigation/test-transport limitation.[^run]
 
 # Decisions
 
@@ -89,6 +89,8 @@ M3.4 passes sixteen canonical groups on 207 inputs, 155 units and 906 full cases
 M3.5 retains 27 records: ten development attempts, sixteen latest passing canonical groups and one earlier full WebKit navigation failure. The 209 inputs pass 163 units and 911 full cases per engine; primary focus passes 32 and separate unchanged Grid diagnostics pass 37 per engine. The first WebKit run retains 910 passes/one setup connection failure before framework import, with no proven cause or production fix; the later unchanged full suite passes. Eight units/five browser cases are new and all 906 parent cases remain. One 203-file archive passes JS/TS, five installed browser paths and the original thirty budgets. Thirty-eight of forty declarations are unchanged; only two existing RuleSet value unions and a private selection signature differ. Two actual CVC scopes preserve independent live policy and owned replacement cleanup. After selected M3.5, twenty-six unconditional stages remain; automatic R02 interception is still required.[^run]
 
 M3.6 retains 28 records: twelve development attempts and sixteen latest passing canonical groups. The final 215 inputs pass 217 units, 80 focused cases and 933 full cases per engine, retaining all 911 parent cases and adding 54 units/22 browser cases. The first Chromium focus retains 79 passes/one serialized-private-field fixture failure; an exact-expression diagnostic confirms the missing helper without suite credit. Moving native classes into a served fixture preserves all assertions and changes no production source. The 208-file archive passes JS/TS, five installed browsers and the original thirty budgets. Forty-one declarations retain thirty-nine identical files, one changed page entry and one added private-module declaration. Independent composite source/raw/final semantic reviews and actual document checks accompany selected acceptance. After selected M3.6, twenty-five unconditional stages remain; M3.7 full declaration assembly and all later owners remain required.[^run]
+
+M3.7 passes all 23 records: seven development attempts and sixteen canonical groups on 219 inputs, 217 units, 101 focused cases and 955 full cases per engine. Twenty-two browser cases are new and all 933 parent cases remain; no new unit registrations. List.onRowBind alone extends the public options and reuses the existing Grid resource owner. The actual employee mode preserves awaited typed declarations, current payloads, ordered initial selection and stable row events. Separate installed Select declarations retain raw0/false/empty/null defaults. One static generic correction precedes all project execution. The 208-file archive passes JS/TS, five installed browsers and the original thirty budgets. Thirty-eight of forty-one declarations remain identical. Independent source/raw/document acceptance accompanies selected completion. After M3.7, twenty-four unconditional stages remain. M3.8 is outside the fixed batch and is not a prerequisite added to M5.15.[^run]
 
 # Open questions
 

@@ -8,7 +8,7 @@ sources:
   - id: acceptance
     resource: m10-acceptance-plan.md
     title: Current semantic acceptance and retained obligations
-    git_blob: e1d17e17c7164d49bb40eabcd05a2dc3e0ee607a
+    git_blob: 4c873e17205c08fb04c24fcccb9bfd28f32d4dcf
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Existing native topology, resizing and restoration owner
@@ -16,7 +16,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid column and row-hook integration
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: types
     resource: ../../src/ui/index.ts
     title: Existing GridColumn and GridHandle contracts

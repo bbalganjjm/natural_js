@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import type { Rows } from "../../src/data/index.js";
 import type { GridBindResult, GridHandle } from "../../src/ui/index.js";
-import type { GridRowBinding } from "../../src/ui/grid-hooks.js";
+import type { RowBinding } from "../../src/ui/grid-hooks.js";
 import type { bindGrid } from "../../src/ui/grid.js";
 
 type Item = { key: number; group: string; profile: { name: string; note: string }; mode: string;
@@ -19,8 +19,8 @@ declare global {
       markup: string; original: string; options: Options; before: number[]; after: number[];
       connected: boolean[]; cleaned: { id: number; phase: string }[]; binds: Observed[]; frozen: boolean[];
       unhandled: string[]; clones: number; clicks: number; fault?: Fault;
-      actions: { before?: (context: GridRowBinding<Item>) => unknown;
-        after?: (context: GridRowBinding<Item>) => unknown; bind?: (result: GridBindResult) => unknown };
+      actions: { before?: (context: RowBinding<Item, HTMLTableRowElement>) => unknown;
+        after?: (context: RowBinding<Item, HTMLTableRowElement>) => unknown; bind?: (result: GridBindResult) => unknown };
       reset(count?: number, extra?: Partial<Options>): void;
       item(index: number): Item; ids(): number[]; block(id: number): HTMLTableRowElement[];
       field<E extends HTMLElement = HTMLElement>(id: number, name: string): E | null;

@@ -19,9 +19,9 @@ import { fieldRenderers, renderField } from "./field-render.js";
 import { createNativeDefaults } from "./native-defaults.js";
 import { createValueBinding } from "./value-binding.js";
 import type { ValueProjection } from "./value-binding.js";
-import { createGridHooks } from "./grid-hooks.js";
+import { createRowHooks } from "./grid-hooks.js";
 import { bindGridHeight, validateGridHeight } from "./grid-height.js";
-import type { GridRowBinding } from "./grid-hooks.js";
+import type { RowBinding } from "./grid-hooks.js";
 import type { GridHeightOptions } from "./grid-height.js";
 import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridBindResult, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, ValidateRule, ValidationIssue, ValidationResult, ValueBindContext } from "./index.js";
@@ -142,8 +142,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   statusFilter?: readonly RowStatus[];
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
-  beforeRowBind?: (context: GridRowBinding<T>) => void;
-  onRowBind?: (context: GridRowBinding<T>) => void;
+  beforeRowBind?: (context: RowBinding<T, HTMLTableRowElement>) => void;
+  onRowBind?: (context: RowBinding<T, HTMLTableRowElement>) => void;
   onBind?: (result: GridBindResult) => void;
   progressive?: { size: number; delay?: number };
   initialPage?: PageRequest;
@@ -201,7 +201,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const restoreBusyAttribute = restoreAttributes(root, ["aria-busy"]);
   const cleanupErrors: unknown[] = [];
   const failedPrunes: (() => void)[] = [];
-  const hooks = createGridHooks({ beforeRowBind, onRowBind }, cause => cleanupErrors.push(cause));
+  const hooks = createRowHooks("bindGrid", { beforeRowBind, onRowBind }, cause => cleanupErrors.push(cause));
   const emptyMarkers = [...root.querySelectorAll<HTMLElement>("[data-empty]")]
     .filter(element => element.closest("table") === root);
   if (emptyMarkers.length > 1 || emptyMarkers.some(element =>

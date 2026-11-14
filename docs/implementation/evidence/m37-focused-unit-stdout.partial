@@ -1,0 +1,9 @@
+
+ RUN  v5.0.1 D:/workspace/natural_js
+
+
+ Test Files  14 passed (14)
+      Tests  217 passed (217)
+   Start at  07:16:10
+   Duration  643ms (transform 50%, tests 27%, import 19%, worker 4%)
+

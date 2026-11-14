@@ -3,6 +3,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import { sendEmployee } from "./employee-xhr.js";
 import type { RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
+import type { RowId } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
 import { bindForm, bindGrid, bindList, bindPagination, bindSelect } from "@bbalganjjm/natural_js/ui";
 import type { FormOptions, ListHandle, PageRequest, SelectChoice, ValidationIssue } from "@bbalganjjm/natural_js/ui";
@@ -10,6 +11,7 @@ import type { FormOptions, ListHandle, PageRequest, SelectChoice, ValidationIssu
 export interface EmployeeSetup {
   readonly pageSizes: readonly SelectChoice<number>[];
   readonly pageSize: number;
+  readonly declarations?: { readonly query: string; readonly selectedEmployee: string | null };
 }
 
 type Employee = {
@@ -54,7 +56,8 @@ export function createEmployees(context: PageContext<{ close(): void }>,
   const status = find<HTMLOutputElement>(root, '[data-role="status"]');
   close.addEventListener("click", () => input.close(), { signal });
   let bindings: ReturnType<typeof createEmployeeBindings> | undefined;
-  root.addEventListener("submit", event => { if (!bindings) event.preventDefault(); }, { capture: true, signal });
+  let ready = false;
+  root.addEventListener("submit", event => { if (!ready) event.preventDefault(); }, { capture: true, signal });
   const actions: EmployeeActions = {
     async search(query) {
       signal.throwIfAborted();
@@ -71,6 +74,8 @@ export function createEmployees(context: PageContext<{ close(): void }>,
       signal.throwIfAborted();
       bindings = createEmployeeBindings(context, setup, actions);
       await bindings.init();
+      signal.throwIfAborted();
+      ready = true;
     }
   };
 }
@@ -127,6 +132,12 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
   const selected = find<HTMLOutputElement>(root, '[data-role="selected"]');
   const sortHeader = find<HTMLTableCellElement>(root, 'th[aria-sort]');
 
+  const startup = setup.declarations;
+  if (startup) {
+    const query = find<HTMLInputElement>(searchRoot, '[data-field="query"]');
+    query.defaultValue = startup.query;
+    query.value = startup.query;
+  }
   const search = bindForm(searchRoot);
   own(() => search.dispose());
   find<HTMLButtonElement>(searchRoot, '[data-action="restore-search"]').addEventListener("click", () => {
@@ -154,9 +165,18 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     departmentToggle.setAttribute("aria-expanded", String(!visible));
     departmentToggle.textContent = visible ? "Show department" : "Hide department";
   }, { signal });
+  const eventRows = startup ? new WeakMap<HTMLElement, { id: RowId; root: HTMLElement }>() : undefined;
+  function registerRow(id: RowId, elements: readonly HTMLElement[], rowRoot: HTMLElement, own: (release: () => void) => void): void {
+    const current = eventRows;
+    if (!current) return;
+    const entry = { id, root: rowRoot };
+    for (const element of elements) current.set(element, entry);
+    own(() => { for (const element of elements) if (current.get(element) === entry) current.delete(element); });
+  }
   let list: ListHandle<Employee>;
   const grid = bindGrid(table, {
     rows,
+    onRowBind: startup ? ({ row, elements, own }) => registerRow(row.id, elements, table, own) : undefined,
     onSelect({ id }) {
       list?.select(id);
       detail.bind(id);
@@ -166,18 +186,22 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
   own(() => grid.dispose());
   list = bindList(listRoot, {
     rows,
+    onRowBind: startup ? ({ row, elements, own }) => registerRow(row.id, elements, listRoot, own) : undefined,
     onSelect({ id }) { grid.select(id); }
   });
   own(() => list.dispose());
 
   let pageRequest: PageRequest = { page: 1, size: setup.pageSize };
-  const pageSize = bindSelect(pageSizeRoot, {
-    choices: setup.pageSizes,
-    value: setup.pageSize,
-    onChange(value) {
-      if (typeof value === "number") applyPage({ page: 1, size: value });
+  const declarations = {
+    pageSize: {
+      choices: setup.pageSizes,
+      value: setup.pageSize,
+      onChange(value: unknown) {
+        if (typeof value === "number") applyPage({ page: 1, size: value });
+      }
     }
-  });
+  };
+  const pageSize = bindSelect(pageSizeRoot, declarations.pageSize);
   own(() => pageSize.dispose());
   const pagination = bindPagination(pagerRoot, {
     state: { page: 1, size: 5, total: 0 },
@@ -237,6 +261,16 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     error.textContent = cause instanceof Error ? cause.message : String(cause);
   }
 
+  const requests = {
+    search(query: Record<string, unknown>, callerSignal: AbortSignal) {
+      return request<Employee[]>({ url: endpoint("search"), method: "POST", json: query, signal: callerSignal });
+    },
+    save() {
+      return request<void>({ url: endpoint("save"), method: "POST",
+        json: rows.changes().map(({ status, value }) => ({ status, value })), decode: () => undefined });
+    }
+  };
+
   async function executeSearch(query: Record<string, unknown>): Promise<boolean> {
     signal.throwIfAborted();
     searchController?.abort();
@@ -245,12 +279,7 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     status.textContent = "Loading…";
     error.textContent = "";
     try {
-      const values = await request<Employee[]>({
-        url: endpoint("search"),
-        method: "POST",
-        json: query,
-        signal: current.signal
-      });
+      const values = await requests.search(query, current.signal);
       if (signal.aborted || current.signal.aborted) return false;
       pageRequest = { page: 1, size: pageRequest.size };
       rows.replace(values);
@@ -314,12 +343,7 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     error.textContent = "";
     status.textContent = "Saving…";
     try {
-      await request<void>({
-        url: endpoint("save"),
-        method: "POST",
-        json: changes.map(({ status, value }) => ({ status, value })),
-        decode: () => undefined
-      });
+      await requests.save();
       if (signal.aborted) return;
       if (await load()) status.textContent = "Saved";
       else if (!signal.aborted) {
@@ -339,10 +363,33 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     }
   }
 
-  searchRoot.addEventListener("submit", event => {
-    event.preventDefault();
-    if (!saving) void load();
-  }, { signal });
+  let inspections = 0;
+  const events = {
+    search(event: SubmitEvent) {
+      event.preventDefault();
+      if (!saving) void load();
+    },
+    inspect(event: Event) {
+      const target = event.target, owner = event.currentTarget;
+      if (!eventRows || !(target instanceof Element) || !(owner instanceof HTMLElement) || !owner.contains(target)) return;
+      if (event.type === "click" && !target.closest("button[data-select-row]")) return;
+      if (event.type === "change" && (owner !== table || !(target instanceof HTMLSelectElement))) return;
+      const element = target.closest<HTMLElement>("tr,li"), entry = element && eventRows.get(element);
+      if (!entry || entry.root !== owner) return;
+      const row = rows.get(entry.id);
+      if (!row || row.status === "delete") return;
+      const reason = event instanceof CustomEvent && typeof event.detail === "string" ? " [" + event.detail + "]" : "";
+      status.textContent = "Inspection " + ++inspections + ": " + row.value.name + " (choice " + row.value.chosen + ")" + reason;
+    }
+  };
+  function connectEvents(): void {
+    searchRoot.addEventListener("submit", events.search, { signal });
+    if (startup) for (const owner of [table, listRoot]) {
+      owner.addEventListener("click", events.inspect, { signal });
+      owner.addEventListener("change", events.inspect, { signal });
+      owner.addEventListener("employee-inspect", events.inspect, { signal });
+    }
+  }
   filterInput.addEventListener("input", () => {
     const query = filterInput.value.trim().toLowerCase();
     grid.setFilter(query ? row => row.name.toLowerCase().includes(query) : null);
@@ -382,5 +429,23 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     void save();
   }, { signal });
 
-  return { init: async () => { await load(); }, search: executeSearch };
+  return {
+    async init() {
+      if (!startup) { connectEvents(); await load(); return; }
+      if (!await load()) throw new Error("Employee declarations need a successful initial search.");
+      signal.throwIfAborted();
+      connectEvents();
+      const initialActions = [
+        () => {
+          if (startup.selectedEmployee === null) { grid.select(null); return; }
+          const row = rows.entries().find(row => row.value.id === startup.selectedEmployee);
+          if (!row) throw new Error("The initial employee is not in the search result.");
+          showRow(row.id);
+        },
+        () => { status.textContent = "Employee declarations ready"; }
+      ];
+      for (const action of initialActions) { signal.throwIfAborted(); await action(); signal.throwIfAborted(); }
+    },
+    search: executeSearch
+  };
 }

@@ -32,7 +32,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid render, edit and subscription owner
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Connected Grid selection and check data owner
@@ -40,7 +40,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List render, selection and subscription owner
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: tree
     resource: ../../src/ui/tree.ts
     title: Tree graph and subscription owner

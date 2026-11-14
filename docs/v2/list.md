@@ -6,6 +6,14 @@ tags: [ui, list, binding, accessibility]
 status: draft
 symbols: [bindList]
 sources:
+  - id: row-hooks
+    resource: ../../src/ui/grid-hooks.ts
+    title: Shared Grid and List row resource lifetime
+    git_blob: b3817f2602ecdbc7e4356069ef9266757768dee9
+  - id: row-browser
+    resource: ../../tests/browser/list-row-bindings.spec.ts
+    title: List row resource capture, placement, reentry and cleanup regressions
+    git_blob: 1bb534f10b2abd961fd271b4f8eabd3593418d79
   - id: values-browser
     resource: ../../tests/browser/collection-values.spec.ts
     title: Shared mounted value projection, cache, refresh and lifetime regressions
@@ -17,7 +25,7 @@ sources:
   - id: list
     resource: ../../src/ui/list.ts
     title: List binding runtime
-    git_blob: 6e21dcc210683adc4e790f3ba4fd0bf720da6347
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Shared private row-local options
@@ -38,10 +46,10 @@ sources:
     resource: ../../tests/browser/grid-controls.spec.ts
     title: Shared native display and authored-template constraint regressions
     git_blob: 6df9b6e36371f8547a3366ea60e1afc9f70e5d56
-generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 ---
 
 `bindList` renders a caller-owned `Rows` store inside an authored `<ul>` or `<ol>`. The List displays data and lets users select a row; edit a selected record through a separate Form or Grid.[^list]
@@ -87,13 +95,14 @@ rows.dispose();
 
 # Constructor
 
-`bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: { rows: Rows<T>; rules?: RuleSet; beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown; onBindValue?: (value: unknown, context: ValueBindContext) => unknown; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): ListHandle<T>` requires exactly one direct `li[data-row-template]` and at most one direct `li[data-empty]`. The template and descendants cannot have fixed DOM IDs. The component replaces the template temporarily, creates row elements from it, and restores the original on disposal. A second live binding of the root raises `LIST_IN_USE`.[^entry][^list]
+`bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: { rows: Rows<T>; rules?: RuleSet; onRowBind?: (context: { readonly row: RowSnapshot<T>; readonly elements: readonly HTMLLIElement[]; own(dispose: () => void): void }) => void; beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown; onBindValue?: (value: unknown, context: ValueBindContext) => unknown; onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void }): ListHandle<T>` requires exactly one direct `li[data-row-template]` and at most one direct `li[data-empty]`. The template and descendants cannot have fixed DOM IDs. The component replaces the template temporarily, creates row elements from it, and restores the original on disposal. A second live binding of the root raises `LIST_IN_USE`.[^entry][^list]
 
 | Option | Behavior |
 |---|---|
 | `rows` | Required caller-owned Rows store; List never disposes it. |
 | `rules` | Optional RuleSet catalogs, messages, locale and field declarations; see [shared rules](rules.md). Retained UI built-ins also resolve. |
 | `beforeBindValue`, `onBindValue` | Captured synchronous value functions for named rendered fields; see [shared value callbacks](value-callbacks.md). |
+| `onRowBind` | Captured synchronous function over the current immutable row, one readonly LI element and owned cleanup; see [row resources](#row-binding-and-owned-resources). |
 | `onSelect` | Receives changed row ID, row snapshot or `null`, and the source event; programmatic changes pass `event: null`. |
 
 bindList captures its Rows once. Rendering, subscription, selection and validate() use that same store; replacing options.rows cannot redirect an existing binding. Update the captured Rows normally, or dispose and bind a new owner for another store. No store is cloned or frozen.[^list]
@@ -105,6 +114,28 @@ List shares beforeBindValue/onBindValue and ValueBindContext with Form/Grid. Pro
 Initial/newly shown rows and explicit refresh use bind; a retained committed raw change uses val. Unchanged successful projections stay cached; raw change or refresh retries a failed projection. Choice-source-only updates recheck cached replacement availability. Reentrant binding raises LIST_BIND_REENTRANT; source mutations can already be committed, so correct the callback and refresh rather than assuming rollback.[^list][^values-browser]
 
 refresh(): void reprojects the visible records using the same compiled fields and existing row identities. It retains selection and the configured sort/filter/paging policies; ordinary rendering recomputes their visible result and applies the existing focus policy. Known issues and raw data remain. Use it after deliberately changing an application policy read by a forwarding callback. Hidden records receive no refresh hook; showing them later performs bind. No new dataset, whole-Form observer or edit mode is introduced.[^list][^values-browser]
+
+# Row binding and owned resources
+
+onRowBind receives the inferred { row, elements, own } context after values and final LI placement, in displayed order. Capture occurs once at creation; calls are plain and synchronous. The row retains its store-local RowId and the one-element array is frozen. Connect the List root before measuring document layout. No named row-context type is exported from the UI entry.[^list][^row-hooks][^row-browser]
+
+Use own(() => void) for each resource created for this binding. Cleanup runs in reverse registration order before changed/forced value writes, view exit, source pruning or disposal. Pure sorting of retained unchanged rows preserves their resources. A filtered or paged row gets a fresh binding when it re-enters, even if its cached LI and snapshot are unchanged. Hidden rows get no callback. A late own call immediately disposes its new resource and rejects the released binding.[^row-hooks][^list][^row-browser]
+
+```ts
+const list = bindList(root, {
+  rows,
+  onRowBind({ row, elements, own }) {
+    const element = elements[0];
+    const inspect = () => showEmployee(rows.get(row.id));
+    element.addEventListener("employee-inspect", inspect);
+    own(() => element.removeEventListener("employee-inspect", inspect));
+  }
+});
+```
+
+root, rows and showEmployee are application values. Read Rows.get(row.id) in a later action to observe current source data. onSelect remains a changed-selection notification; repeated actions on the same selected row belong to authored native/custom event handlers. The employee example demonstrates delegated row handlers with one WeakMap of physical elements and owned registrations.[^list][^row-browser]
+
+Asynchronous callback/cleanup results are drained and rejected. Reentrant refresh/sort/filter/page binding raises LIST_BIND_REENTRANT before changing those view options. A post-callback source/view checkpoint raises LIST_BIND_STALE when it detects changed work. An uncaught subscriber reentry can instead propagate LIST_BIND_REENTRANT first; the source mutation may already have committed. Correct the callback and refresh. A callback/checkpoint failure closes all prepared bindings, while initial setup failure restores template/Select ownership. Cleanup continues across all resources and reports the first LIST_BIND error after restoration; an earlier setup failure stays primary. List controls remain read-only.[^list][^row-hooks][^row-browser]
 
 # Declarative options
 
@@ -170,3 +201,6 @@ Shared Rows insertion/movement/copy changes store order while preserving existin
 [^controls-browser]: Shared native display and authored-template constraint regressions
 
 [^values-browser]: Shared mounted value projection, cache, refresh and lifetime regressions
+
+[^row-hooks]: Shared Grid and List row resource lifetime
+[^row-browser]: List row resource capture, placement, reentry and cleanup regressions

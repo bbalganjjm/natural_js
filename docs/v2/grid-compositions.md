@@ -8,7 +8,7 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid delegation and current row identity
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: rows
     resource: ../../src/data/index.ts
     title: Immutable snapshots and independent store identity
@@ -16,7 +16,7 @@ sources:
   - id: recipes
     resource: ../../tests/browser/grid-recipes.spec.ts
     title: Projections, native event order and authored topology regressions
-    git_blob: 09e49a7e553fa468c8035c1f46dcb6624500ea7d
+    git_blob: 90d2cf337afaadb49b704f1c843f7e96bc1e9c35
   - id: activation
     resource: ../../tests/browser/grid-acceptance.spec.ts
     title: Accessible record-area activation regressions

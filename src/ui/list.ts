@@ -3,6 +3,8 @@ import type { RowId, RowSnapshot, Rows, Snapshot } from "../data/index.js";
 import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
 import { createValueBinding } from "./value-binding.js";
+import { createRowHooks } from "./grid-hooks.js";
+import type { RowBinding } from "./grid-hooks.js";
 import type { ValueProjection } from "./value-binding.js";
 import { parsePath, readPath } from "./field-path.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
@@ -58,6 +60,7 @@ interface BoundSelect {
 }
 
 interface RenderedRow<T> {
+  id: RowId;
   element: HTMLLIElement;
   snapshot?: RowSnapshot<T>;
   texts: BoundText[];
@@ -78,6 +81,7 @@ function listError(code: string, message: string, detail?: Record<string, unknow
 export function bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: {
   rows: Rows<T>;
   rules?: RuleSet;
+  onRowBind?: (context: RowBinding<T, HTMLLIElement>) => void;
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
@@ -88,6 +92,9 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   if (boundRoots.has(root)) throw listError("LIST_IN_USE", "This List root is already bound.");
   const sourceRows = options.rows;
   const values = createValueBinding("bindList", options);
+  const cleanupErrors: unknown[] = [];
+  const { onRowBind } = options;
+  const hooks = createRowHooks("bindList", { onRowBind }, cause => cleanupErrors.push(cause));
   const templates = [...root.querySelectorAll<HTMLLIElement>("li[data-row-template]")];
   if (templates.length !== 1 || templates[0].parentElement !== root) {
     throw listError("LIST_TEMPLATE", "The List needs one direct li marked data-row-template.");
@@ -209,6 +216,18 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (disposed) throw listError("LIST_DISPOSED", "This List has been disposed.");
   }
 
+  function bindable(): void {
+    active();
+    if (hooks.running || values.running) throw listError("LIST_BIND_REENTRANT", "A row callback cannot reenter binding.");
+  }
+
+  function cleanupFailure(): void {
+    if (!cleanupErrors.length) return;
+    const cause = cleanupErrors[0];
+    cleanupErrors.length = 0;
+    throw cause;
+  }
+
   function createRecord(id: RowId): RenderedRow<T> {
     const element = template.cloneNode(true) as HTMLLIElement;
     element.removeAttribute("data-row-template");
@@ -259,7 +278,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     }
     for (const button of buttons) button.setAttribute("aria-pressed", String(selected === id));
     rowIds.set(element, id);
-    return { element, texts, selects, buttons, errors, hasIssues: false, releaseSelects };
+    return { id, element, texts, selects, buttons, errors, hasIssues: false, releaseSelects };
   }
 
   function invalidOptions(id: RowId): (field: string) => never {
@@ -439,84 +458,112 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
 
   function render(force = false): void {
     if (disposed) return;
-    if (values.running) throw listError("LIST_BIND_REENTRANT", "A value callback cannot reenter binding.");
-    const version = values.enabled ? ++renderVersion : 0;
+    bindable();
+    const tracked = hooks.enabled || values.enabled;
+    const version = tracked ? ++renderVersion : 0;
     const entries = sourceRows.entries();
-    const current = values.enabled ? () => !disposed && version === renderVersion && entries === sourceRows.entries() : undefined;
-    const live = new Set(entries.map(row => row.id));
-    for (const [id, record] of records) {
-      if (!live.has(id)) {
-        if (current && !current()) return;
-        record.element.remove();
-        if (current && !current()) return;
-        for (const release of record.releaseSelects) release();
-        records.delete(id);
-      }
-    }
-    if (selected !== null && !live.has(selected)) updateSelection(null, null);
-    if (disposed || current && !current()) return;
-    const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
-    if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
-    if (current && !current()) return;
-    let displayed = filtered;
-    if (request) {
-      const pages = Math.ceil(filtered.length / request.size);
-      const page = Math.min(request.page, Math.max(1, pages));
-      request = { page, size: request.size };
-      pageState = Object.freeze({ ...request, total: filtered.length, pages });
-      displayed = filtered.slice((page - 1) * request.size, page * request.size);
-    } else pageState = null;
-    const ids = displayed.map(row => row.id);
-    const mounted = values.enabled ? new Set(visibleIds) : undefined;
-    for (const row of displayed) {
-      let record = records.get(row.id);
-      if (!record) {
-        record = createRecord(row.id);
-        records.set(row.id, record);
-      }
-      if (force || values.enabled && !mounted!.has(row.id)) resetProjection(record);
-      renderRecord(record, row, current);
-      if (current && !current()) {
-        if (disposed) return;
-        throw listError("LIST_BIND_STALE", "The rows or view changed during a value callback.", { rowId: row.id });
-      }
-    }
-    if (ids.length !== visibleIds.length || ids.some((id, index) => id !== visibleIds[index])) {
-      const next = new Set(ids);
-      const focused = root.ownerDocument.activeElement;
-      const focusedRow = focused instanceof Element ? focused.closest("li") : null;
-      const focusedId = focusedRow && rowIds.get(focusedRow);
-      const restoreFocus = focused instanceof HTMLElement && focusedId !== undefined &&
-        focusedId !== null && next.has(focusedId);
-      const moveFocus = focused instanceof HTMLElement && focusedId !== undefined &&
-        focusedId !== null && !next.has(focusedId);
-      for (const id of visibleIds) if (!next.has(id)) {
-        if (current && !current()) return;
-        records.get(id)?.element.remove();
-      }
-      if (current && !current()) return;
-      let cursor: Node = anchor;
-      for (let index = ids.length - 1; index >= 0; index--) {
-        const element = records.get(ids[index])!.element;
-        if (current && !current()) return;
-        if (element !== focusedRow && element.nextSibling !== cursor) root.insertBefore(element, cursor);
-        if (current && !current()) return;
-        cursor = element;
-      }
-      if (restoreFocus && root.ownerDocument.activeElement !== focused) focused.focus({ preventScroll: true });
-      else if (moveFocus) {
-        const nextControl = root.querySelector<HTMLElement>('button[data-select-row]:not(:disabled)') ?? root;
-        if (nextControl === root && !root.hasAttribute("tabindex")) {
-          root.tabIndex = -1;
-          rootFocusTabIndex = true;
+    const current = tracked ? () => !disposed && version === renderVersion && entries === sourceRows.entries() : undefined;
+    const check = (id?: RowId) => {
+      active();
+      if (current && !current()) throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback.", { rowId: id });
+    };
+    const created: RenderedRow<T>[] = [];
+    const rebound: RenderedRow<T>[] = [];
+    try {
+      const live = new Set(entries.map(row => row.id));
+      for (const [id, record] of records) {
+        if (!live.has(id)) {
+          hooks.release(id);
+          if (current) check(id);
+          record.element.remove();
+          if (current) check(id);
+          for (const release of record.releaseSelects) release();
+          records.delete(id);
         }
-        nextControl.focus({ preventScroll: true });
       }
-      if (current && !current()) return;
-      visibleIds = ids;
+      if (selected !== null && !live.has(selected)) updateSelection(null, null);
+      if (disposed || current && !current()) return;
+      const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
+      if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
+      if (current) check();
+      let displayed = filtered;
+      if (request) {
+        const pages = Math.ceil(filtered.length / request.size);
+        const page = Math.min(request.page, Math.max(1, pages));
+        request = { page, size: request.size };
+        pageState = Object.freeze({ ...request, total: filtered.length, pages });
+        displayed = filtered.slice((page - 1) * request.size, page * request.size);
+      } else pageState = null;
+      const ids = displayed.map(row => row.id);
+      const changed = ids.length !== visibleIds.length || ids.some((id, index) => id !== visibleIds[index]);
+      const next = hooks.enabled || changed ? new Set(ids) : undefined;
+      const mounted = tracked ? new Set(visibleIds) : undefined;
+      if (hooks.enabled) for (const id of visibleIds) if (!next!.has(id)) {
+        hooks.release(id); check(id);
+      }
+      for (const row of displayed) {
+        let record = records.get(row.id);
+        if (!record) {
+          record = createRecord(row.id);
+          records.set(row.id, record);
+          if (hooks.enabled) created.push(record);
+        }
+        if (hooks.enabled && (force || !mounted!.has(row.id) || record.snapshot !== row)) {
+          hooks.before(row, [record.element], () => check(row.id));
+          rebound.push(record);
+        }
+        if (force || tracked && !mounted!.has(row.id)) resetProjection(record);
+        renderRecord(record, row, current);
+        if (current) check(row.id);
+      }
+      if (changed) {
+        const focused = root.ownerDocument.activeElement;
+        const focusedRow = focused instanceof Element ? focused.closest("li") : null;
+        const focusedId = focusedRow && rowIds.get(focusedRow);
+        const restoreFocus = focused instanceof HTMLElement && focusedId !== undefined &&
+          focusedId !== null && next!.has(focusedId);
+        const moveFocus = focused instanceof HTMLElement && focusedId !== undefined &&
+          focusedId !== null && !next!.has(focusedId);
+        for (const id of visibleIds) if (!next!.has(id)) {
+          if (current) check(id);
+          records.get(id)?.element.remove();
+        }
+        if (current) check();
+        let cursor: Node = anchor;
+        for (let index = ids.length - 1; index >= 0; index--) {
+          const element = records.get(ids[index])!.element;
+          if (current) check(ids[index]);
+          if (element !== focusedRow && element.nextSibling !== cursor) root.insertBefore(element, cursor);
+          if (current) check(ids[index]);
+          cursor = element;
+        }
+        if (restoreFocus && root.ownerDocument.activeElement !== focused) focused.focus({ preventScroll: true });
+        else if (moveFocus) {
+          const nextControl = root.querySelector<HTMLElement>('button[data-select-row]:not(:disabled)') ?? root;
+          if (nextControl === root && !root.hasAttribute("tabindex")) {
+            root.tabIndex = -1;
+            rootFocusTabIndex = true;
+          }
+          nextControl.focus({ preventScroll: true });
+        }
+        if (current) check();
+        visibleIds = ids;
+      }
+      if (current) check();
+      if (empty) empty.hidden = ids.length > 0;
+      for (const record of rebound) hooks.after(record.id, () => check(record.id));
+      cleanupFailure();
+    } catch (cause) {
+      for (const record of rebound) { hooks.release(record.id); resetProjection(record); }
+      for (const record of created) if (records.get(record.id) === record) {
+        record.element.remove();
+        for (const release of record.releaseSelects) release();
+        records.delete(record.id);
+      }
+      if (hooks.enabled) visibleIds = visibleIds.filter(id => records.get(id)?.element.parentElement === root);
+      cleanupErrors.length = 0;
+      throw cause;
     }
-    if (current && !current()) return;
-    if (empty) empty.hidden = ids.length > 0;
   }
 
   function onClick(event: Event): void {
@@ -530,6 +577,26 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
 
   root.addEventListener("click", onClick);
   let unsubscribe = () => {};
+  function dispose(): void {
+    if (disposed) return;
+    disposed = true;
+    if (hooks.enabled || values.enabled) renderVersion++;
+    unsubscribe();
+    root.removeEventListener("click", onClick);
+    hooks.dispose();
+    for (const record of records.values()) {
+      record.element.remove();
+      for (const release of record.releaseSelects) release();
+    }
+    records.clear();
+    visibleIds = [];
+    anchor.replaceWith(template);
+    if (empty) empty.hidden = emptyWasHidden!;
+    if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
+    for (const release of releaseTemplateSelects) release();
+    boundRoots.delete(root);
+    cleanupFailure();
+  }
   try {
     unsubscribe = sourceRows.subscribe(event => {
       if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
@@ -547,22 +614,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     });
     render();
   } catch (cause) {
-    boundRoots.delete(root);
-    unsubscribe();
-    root.removeEventListener("click", onClick);
-    for (const record of records.values()) {
-      record.element.remove();
-      for (const release of record.releaseSelects) release();
-    }
-    anchor.replaceWith(template);
-    if (empty) empty.hidden = emptyWasHidden!;
-    if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
-    for (const release of releaseTemplateSelects) release();
+    try { dispose(); } catch { /* The setup failure remains primary. */ }
     throw cause;
   }
 
   return {
-    refresh() { active(); render(true); },
+    refresh() { bindable(); render(true); },
     select(id) {
       active();
       const row = id === null ? null : sourceRows.get(id);
@@ -576,17 +633,17 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       return selected;
     },
     setSort(compare) {
-      active();
+      bindable();
       sort = compare;
       render();
     },
     setFilter(predicate) {
-      active();
+      bindable();
       filter = predicate;
       render();
     },
     setPage(next) {
-      active();
+      bindable();
       if (next !== null && (!Number.isSafeInteger(next.page) || next.page < 1 ||
           !Number.isSafeInteger(next.size) || next.size < 1)) {
         throw listError("LIST_PAGE", "A page request needs positive integer page and size values.");
@@ -608,23 +665,6 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const issues = rows.flatMap(row => validateRow(row));
       return { valid: issues.length === 0, issues };
     },
-    dispose() {
-      if (disposed) return;
-      disposed = true;
-      if (values.enabled) renderVersion++;
-      unsubscribe();
-      root.removeEventListener("click", onClick);
-      for (const record of records.values()) {
-        record.element.remove();
-        for (const release of record.releaseSelects) release();
-      }
-      records.clear();
-      visibleIds = [];
-      anchor.replaceWith(template);
-      if (empty) empty.hidden = emptyWasHidden!;
-      if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
-      for (const release of releaseTemplateSelects) release();
-      boundRoots.delete(root);
-    }
+    dispose
   };
 }

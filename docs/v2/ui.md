@@ -6,6 +6,10 @@ tags: [ui, typescript, binding]
 status: draft
 symbols: [FormOptions, RuleContext, FormBindContext, ValueBindContext, FormatRule, ValidateRule, ParseInput, FieldRules, RuleSet, ValidationIssue, ValidationResult, PageRequest, PageInput, PageState, SelectValue, SelectChoice, SelectSelection, SelectHandle, PaginationHandle, FormHandle, SortIndicator, GridColumn, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, GridHandle, GridBindResult]
 sources:
+  - id: list
+    resource: ../../src/ui/list.ts
+    title: List row callback and resource lifetime
+    git_blob: e97c85d1a9618672a5e84c23b1a38633b5e3d79c
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
@@ -21,11 +25,11 @@ sources:
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Logical-page and mounted-row Grid contracts
-    git_blob: 09718101d01218f9b891e37efce4ab5dd5dfada3
+    git_blob: 49ad06146be28548099caf2e276adfc7698265b1
   - id: hooks
     resource: ../../src/ui/grid-hooks.ts
     title: Private row callback and resource ownership contract
-    git_blob: ef9ddf47da4ab02a035f20794286685dbf52f3b1
+    git_blob: b3817f2602ecdbc7e4356069ef9266757768dee9
   - id: lifecycle-browser
     resource: ../../tests/browser/grid-lifecycle.spec.ts
     title: Status, native defaults, callback and teardown regressions
@@ -50,10 +54,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -149,6 +153,10 @@ Grid accepts `statusFilter?: readonly RowStatus[]`, defaulting to clean/insert/u
 
 `onBind` receives the frozen eight-field `GridBindResult` defined below. It runs after initial, replace/append, explicit view and refresh binding, including empty results; progressive mode also reports completed chunks and explicit reveal growth. Ordinary mutations, viewport movement and exhausted continuations do not emit it. Use application code for counters and loading; `Rows.append` loads clean data while `Rows.add` creates an inserted business row.[^grid][^lifecycle-browser]
 
+# List row resources
+
+List captures one optional onRowBind function and infers { row, elements, own } with one HTMLLIElement. It invokes that synchronous plain function after values and final placement; the existing Grid owner supplies reverse cleanup, failure and late-registration rules. Re-entered filtered/paged rows get fresh resources, while pure sorting retains unchanged bindings. List selection and disabled display controls keep their existing contracts. See [List row resources](list.md#row-binding-and-owned-resources).[^list][^hooks]
+
 # Field options
 
 Grid and Rows-backed Form write `data-field-changed="true"` or `"false"` on every bound field member by comparing its committed raw path with `Rows.original(id)`. Nested paths and grouped values remain independent of formatted display and invalid or deferred drafts. Inserted rows have no baseline and receive `"false"`; deleted Grid rows retain their last committed field flags. A focused field's flag updates even when its entered text is preserved. Local Form leaves this attribute application-owned; Rows-backed Form restores authored values or absence on disposal, while Grid restores untouched template nodes. [Form](form.md#loaded-value-changes) and [Grid](grid.md#field-change-markers) define the complete ownership and comparison rules.[^form][^grid]
@@ -218,3 +226,5 @@ Optional progressive: { size, delay? } enables cooperative prefix binding. whenB
 [^render]: Private explicit render preflight and DOM ownership
 [^hooks]: Private row callback and resource ownership contract
 [^lifecycle-browser]: Status, native defaults, callback and teardown regressions
+
+[^list]: List row callback and resource lifetime
