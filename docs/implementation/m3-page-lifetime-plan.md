@@ -48,7 +48,7 @@ sources:
   - id: installed
     resource: ../../tests/consumers/browser/main.js
     title: Existing installed page loading and communicator witness
-    git_blob: 7a6e7d143c0aa5a25cec8f0fcafadd3ab2638e06
+    git_blob: fb49e1dcc3c4303b6ba78794ebb01eb685d35079
 generated: { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }

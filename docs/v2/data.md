@@ -6,13 +6,21 @@ tags: [data, rows, typescript]
 status: draft
 symbols: [RowId, Snapshot, RowStatus, RowState, RowSnapshot, RowChange, RowsEvent, Rows, createRows]
 sources:
+  - id: values-test
+    resource: ../../tests/rows-values.test.ts
+    title: Exact object and array traversal and explicit application normalization
+    git_blob: 38d433e2738a5dc2157e0cbd9dd1218cfc0a95f9
+  - id: projection-browser
+    resource: ../../tests/browser/data-projections.spec.ts
+    title: Connected shared binding and configured wire projection workflows
+    git_blob: 40c77d54ede4430e8b8f9a460a34758cc8ca1ba8
   - id: data
     resource: ../../src/data/index.ts
     title: Row store runtime and types
     git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
-generated: { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-31T05:07:04Z }
+  - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 ---
 
 The `./data` entry exports `createRows` and row types. It stores JSON-compatible rows without adding framework fields to business values, and uses store-local numeric IDs for identity.[^data]
@@ -35,7 +43,23 @@ The `./data` entry exports `createRows` and row types. It stores JSON-compatible
 
 ## `createRows(initial?)`
 
-Accepts an optional array of plain, acyclic JSON-compatible row objects. It clones and deeply freezes rows and nested arrays/objects. Values such as `Date`, `undefined`, `NaN`, functions, symbol keys, and cycles fail with `ROW_VALUE`. An invalid outer replacement does not commit; application side effects during value evaluation are not rolled back.[^data]
+Accepts an optional array of plain, acyclic JSON-compatible row objects. It clones and deeply freezes rows and nested arrays/objects. Stored values such as `Date`, `undefined`, `NaN`, functions and cycles fail with `ROW_VALUE`. Object symbol keys also fail; named and symbol metadata on nested arrays is ignored as described below. An invalid outer replacement does not commit; application side effects during value evaluation are not rolled back.[^data]
+
+# Source values and application conversion
+
+An accepted object contributes its own enumerable string keys. Inherited and nonenumerable object fields are not copied; read any required business fields explicitly before construction. Own object symbols are rejected even when nonenumerable. Null-prototype sources produce ordinary frozen object copies. Nested arrays read indexed positions, including inherited indexed values, and ignore named/symbol metadata. An empty position without a value is undefined and fails the JSON boundary. Repeated acyclic aliases are cloned independently; changing an external alias does not update Rows.[^data][^values-test]
+
+Convert application classes, Date/BigInt values, methods and cyclic references before supplying Rows. Choose domain representations explicitly, such as ISO dates, decimal strings and manager business IDs. Preserve null deliberately and omit an absent optional property; storing undefined is invalid. Rows does not add a converter or alter the rich source graph. Use set/setMany for later source updates and dispose each consumer before disposing its caller-owned store.[^data][^values-test][^projection-browser]
+
+The connected projection fixture shares one Rows among Form, Grid and List and keeps an equal-valued second store independent. It demonstrates native committed edits, explicit external writes, original/revert, consumer disposal and observer unsubscription. Full business source is rows.get(id).value; a Rows-backed Form.read returns committed marked paths and is not an entered-draft extractor. The broader entered-creation/selection-checkpoint workflow retains its own Form milestone.[^projection-browser]
+
+Literal business keys are distinct from UI paths. Rows and explicit wire projections can retain id/status/value/rowStatus, dotted literal keys and own prototype-sensitive keys without treating them as framework metadata. Form/Grid/List data-field paths still enforce their separate safe nested-path grammar. RowSnapshot.id always remains a local identity.[^data][^values-test][^projection-browser]
+
+# Application wire projection
+
+Resolve active, selected, checked, visible, filtered or full-store membership when creating the payload; choose the intended intersection explicitly through existing component APIs and RowId. Project requested keys plus configured extra keys with ordinary application operations. Read literal keys directly, omit only missing/undefined values and retain 0/false/empty text/null/nested values. Capture an extra-key list with a copy at declaration time or read current application policy in the request function; neither requires a framework projection service.[^values-test][^projection-browser]
+
+Keep business metadata separate from the wire operation. If the domain uses rowStatus or status, choose a distinct reserved wire key or envelope instead of overwriting it. A deletion from rows.changes() carries the received original; rows.get(id).value retains its last committed display. Pick the one the server expects. Send the projected business value through the existing communicator and omit local RowId and UI drafts. The actual Request JSON and installed consumers verify these boundaries.[^data][^projection-browser]
 
 # Methods
 
@@ -172,3 +196,6 @@ rows.dispose();
 [The M1 contract](../implementation/m1-contract.md) defines row identity and nested data goals. [Form](form.md) and [Grid](grid.md) describe their binding contracts.
 
 [^data]: Row store runtime and types
+
+[^values-test]: Exact object and array traversal and explicit application normalization
+[^projection-browser]: Connected shared binding and configured wire projection workflows

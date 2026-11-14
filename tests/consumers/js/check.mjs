@@ -113,6 +113,21 @@ assert(Object.isFrozen(controls.original(existingControl.id).assignment.selected
 assert.equal(controls.original(999999), undefined);
 controls.dispose();
 
+{
+  const source = { id: "business-a", name: "Ada", note: null, profile: { team: "Core" }, choices: [{ code: 0 }], active: false, count: 0, tenant: "T" };
+  const projected = createRows([source]); const id = projected.entries()[0].id;
+  source.profile.team = "External";
+  assert.equal(projected.get(id).value.profile.team, "Core");
+  projected.set(id, "profile", { team: "Support" });
+  const columns = ["id", "name", "note", "profile", "choices", "active", "count", "tenant"];
+  const payload = projected.changes().map(({ status, value }) => ({
+    ...Object.fromEntries(columns.flatMap(key => value[key] === undefined ? [] : [[key, value[key]]])), operation: status
+  }));
+  assert.deepEqual(payload, [{ id: "business-a", name: "Ada", note: null, profile: { team: "Support" }, choices: [{ code: 0 }], active: false, count: 0, tenant: "T", operation: "update" }]);
+  assert.equal(payload[0].id, source.id); assert.notEqual(payload[0].id, id);
+  assert(Object.isFrozen(projected.original(id).profile)); projected.dispose();
+}
+
 const originalFetch = globalThis.fetch;
 const received = createRows();
 received.replaceState([

@@ -8,7 +8,7 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: 2a07ede5fed3f95583a57f0f99471084930fbc5c
+    git_blob: e7fb8ab46a43afabeab2ab6a2c02db99e64f9f5a
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
@@ -33,9 +33,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
+  - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 ---
 
 # Goal
@@ -66,7 +66,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Save/push the separate M3.7 checkpoint, then implement M5.15 data/value/projection outcomes and every subsequent ancestor through M5.20. Keep each exact receipt and inherited native/Tree/date/Edge/navigation/test-transport limitation.[^run]
+Save/push the separate M5.15 checkpoint, then implement M5.16 entered-value/full restoration/deleted-detail outcomes and every subsequent ancestor through M5.20. Preserve each exact receipt and inherited/current native/network/test-transport limits.[^run]
 
 # Decisions
 
@@ -91,6 +91,8 @@ M3.5 retains 27 records: ten development attempts, sixteen latest passing canoni
 M3.6 retains 28 records: twelve development attempts and sixteen latest passing canonical groups. The final 215 inputs pass 217 units, 80 focused cases and 933 full cases per engine, retaining all 911 parent cases and adding 54 units/22 browser cases. The first Chromium focus retains 79 passes/one serialized-private-field fixture failure; an exact-expression diagnostic confirms the missing helper without suite credit. Moving native classes into a served fixture preserves all assertions and changes no production source. The 208-file archive passes JS/TS, five installed browsers and the original thirty budgets. Forty-one declarations retain thirty-nine identical files, one changed page entry and one added private-module declaration. Independent composite source/raw/final semantic reviews and actual document checks accompany selected acceptance. After selected M3.6, twenty-five unconditional stages remain; M3.7 full declaration assembly and all later owners remain required.[^run]
 
 M3.7 passes all 23 records: seven development attempts and sixteen canonical groups on 219 inputs, 217 units, 101 focused cases and 955 full cases per engine. Twenty-two browser cases are new and all 933 parent cases remain; no new unit registrations. List.onRowBind alone extends the public options and reuses the existing Grid resource owner. The actual employee mode preserves awaited typed declarations, current payloads, ordered initial selection and stable row events. Separate installed Select declarations retain raw0/false/empty/null defaults. One static generic correction precedes all project execution. The 208-file archive passes JS/TS, five installed browsers and the original thirty budgets. Thirty-eight of forty-one declarations remain identical. Independent source/raw/document acceptance accompanies selected completion. After M3.7, twenty-four unconditional stages remain. M3.8 is outside the fixed batch and is not a prerequisite added to M5.15.[^run]
+
+M5.15 retains 27 records: ten development attempts, sixteen latest canonical passes and one earlier Chromium full import failure with 956 passes/one failure. Its exact dependency trace records ERR_NO_BUFFER_SPACE; the deeper cause is unknown and no production fix is attributed. Unchanged Grid-column diagnostics pass 18 per engine. The 221 inputs pass 225 units, 48 primary focused cases and 957 latest full cases per engine; eight units/two browser cases are new and all 955 parent cases remain. All framework source/API/dependency bytes are unchanged, and the exact 208-file archive and all 41 declarations equal M3.7. JS/TS, five installed browsers and original thirty budgets pass. Independent source/raw/document acceptance accompanies selected completion. After M5.15, twenty-three unconditional stages remain, including the genuine M5.16 entered/full restore/deleted-detail gaps.[^run]
 
 # Open questions
 

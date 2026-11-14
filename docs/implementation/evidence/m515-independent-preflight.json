@@ -1,0 +1,377 @@
+{
+  "status": "GO_bounded_preparation_contract_no_framework_runtime_API_change_justified",
+  "reviewer": "m511_baseline",
+  "producer": "m511_legacy",
+  "proposal_manifest": {
+    "path": "node_modules/.cache/m515-preparation-legacy/candidate-manifest.json",
+    "sha256": "2e6b19dad341e6283f86fe201f4b2445e1eeaada6144ebe9e19f69c944c9e6cd",
+    "bytes": 17246
+  },
+  "exact_proposal_files": [
+    {
+      "path": "node_modules/.cache/m515-preparation-legacy/m515-contract.md",
+      "sha256": "c672c21d17e417a906949ea23cd3f574283f1fd82820dbe86a939d0430bc2153",
+      "bytes": 12820
+    },
+    {
+      "path": "node_modules/.cache/m515-preparation-legacy/employee-source.candidate.ts",
+      "sha256": "ed480b8034ad806f985a60ddf225a4ab336da80b1512a368da29d92c0142ea2a",
+      "bytes": 2910
+    },
+    {
+      "path": "node_modules/.cache/m515-preparation-legacy/rows-values.test.candidate.ts",
+      "sha256": "61b7d67c02c894b0b7b909af8622bc98b8683fe8d7dcf2615f8077b5490a4e81",
+      "bytes": 8059
+    },
+    {
+      "path": "node_modules/.cache/m515-preparation-legacy/installed-source.candidate.ts",
+      "sha256": "65a8746ede3cbd3707c5ef424c9ff0c86002100642c572751794323496c42cd4",
+      "bytes": 1487
+    },
+    {
+      "path": "node_modules/.cache/m515-preparation-legacy/data-operations.candidate.ts",
+      "sha256": "53cec21bb6abe10cb11eef385243e3a6e544773e35e07f7d5e04cb14c344fbfa",
+      "bytes": 1470
+    }
+  ],
+  "registry": {
+    "path": "docs/implementation/evidence/remaining-work-plan.json",
+    "sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632",
+    "bytes": 571328,
+    "pointer": "/stages/11",
+    "stage": {
+      "order": 12,
+      "id": "M5.15",
+      "title": "Data values, schemas and projections",
+      "scope": "Finish JSON/nested/own/inherited/mutable/non-JSON boundaries, configured extra keys, selected/checked/changed projections and shared consumer semantics using Rows. Retain incoming checkpoints, ordered operations and wire recipes.",
+      "acceptance": "Actual legacy cases resolve to preserved behavior, explicit application conversion or a genuine approved loss; business keys survive and RowId stays local. No second synchronization store or generic data library.",
+      "depends_on": [
+        "M3.2",
+        "M3.5"
+      ],
+      "condition": "none",
+      "state": "planned"
+    }
+  },
+  "actual_read_source": [
+    {
+      "path": "src/data/index.ts",
+      "sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+      "bytes": 15686
+    },
+    {
+      "path": "src/internal/same-json.ts",
+      "sha256": "a454ae3c392509ad4f222dafda69b2aea4fd54bd08d622a5d7845d3c725084d6",
+      "bytes": 717
+    },
+    {
+      "path": "src/ui/field-path.ts",
+      "sha256": "2a31e756daccb79deb5d2f3d4cf43292c0790eb35bacfd88b910010859fbb97a",
+      "bytes": 1980
+    },
+    {
+      "path": "src/ui/index.ts",
+      "sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+      "bytes": 7114
+    },
+    {
+      "path": "src/ui/form.ts",
+      "sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+      "bytes": 80848
+    },
+    {
+      "path": "src/ui/grid.ts",
+      "sha256": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "bytes": 117974
+    },
+    {
+      "path": "src/ui/grid-selection.ts",
+      "sha256": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+      "bytes": 11903
+    },
+    {
+      "path": "src/ui/list.ts",
+      "sha256": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "bytes": 27752
+    },
+    {
+      "path": "tests/rows.test.ts",
+      "sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+      "bytes": 50214
+    },
+    {
+      "path": "tests/browser/form-source.spec.ts",
+      "sha256": "d731bab9c46046e8718e9f8c905b3a7cdfad4e68ea78e264bf290b09d32c6899",
+      "bytes": 15455
+    },
+    {
+      "path": "tests/browser/grid-recipes.spec.ts",
+      "sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "bytes": 19399
+    },
+    {
+      "path": "tests/consumers/js/check.mjs",
+      "sha256": "abfc278db130408051c41efe39fbfe6449e26cb271c4ff35c6d891fbfcf8a445",
+      "bytes": 11890
+    },
+    {
+      "path": "v1/src/natural.core.js",
+      "sha256": "65604d3581b4509412a87fab0ee0af1d0e40ae85baaf8e96391a23505e6d1db1",
+      "bytes": 75380
+    },
+    {
+      "path": "v1/src/natural.data.js",
+      "sha256": "65ecebe84468c27ff149bf4010b2143ee98040351b0c604c75f1dc11abad55c8",
+      "bytes": 38708
+    },
+    {
+      "path": "v1/src/natural.ui.js",
+      "sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+      "bytes": 354376
+    },
+    {
+      "path": "v1/docs/core/json.md",
+      "sha256": "1fab6e40114dba99de4bbc495646e212b373fa2c7c0acb24b41c47fedb656c57",
+      "bytes": 4822
+    },
+    {
+      "path": "v1/docs/examples/template/search-grid-detail-horizontal.md",
+      "sha256": "325c4a900ad11d92b66f5522217e7a631f26cd1350145ffcf1b4d79935643603",
+      "bytes": 18894
+    },
+    {
+      "path": "docs/v2/data.md",
+      "sha256": "0a5dc59af1ea6974ec7396e1cf4ca8cb56dfc4e29f5bf8b49434c52fbaf47f21",
+      "bytes": 16631
+    }
+  ],
+  "read_scope": "Read the full proposed contract and all five fragments/eight cases, complete current Rows and sameJson/fieldPath owners, current relevant Form/Grid/List selection/write boundaries, exact legacy configured projection/Form/Grid shared-data/filter/sort/save callers and existing acceptance source. Hash checks below are metadata only, not test execution.",
+  "accepted_contract": [
+    "Rows owns detached immutable visited JSON, local RowId, explicit received checkpoints, ordered operations and synchronous committed delivery.",
+    "Application conversion preserves needed inherited/hidden/class/Date/BigInt/cyclic-domain meaning with explicit string/null/business-ID fields; mutable rich domain objects remain application-owned.",
+    "Own null/false/zero/nested values, literal/prototype-sensitive business keys and optional missing fields keep precise boundaries; UI safe nested paths remain a separate contract.",
+    "Nested arrays currently use indexed reads including inherited present slots and ignore named/symbol extras; characterize this instead of inventing stricter behavior.",
+    "Requested columns plus explicit captured/live extras use native application projection; business identifiers survive and RowSnapshot.id is not payload data.",
+    "Selected/checked/view/change scopes use existing current RowId APIs; delete checkpoint versus last committed display is a deliberate application wire choice.",
+    "Existing shared Rows subscriptions and component disposers replace wrapper identity/global singleton ownership without a second synchronization store."
+  ],
+  "implementation_constraints": [
+    "No new Rows method, recursive JSON/schema type, DTO/projection utility package, deep merge, synchronization registry or generic data library.",
+    "Do not ship the legacy app fragments as unused example helpers: execute the concrete recipe in the later connected acceptance fixture or actual application caller.",
+    "A wire status column may be named rowStatus only when that business domain reserves it; use a separate operation key when business status/rowStatus fields already carry content.",
+    "Preserve nullable versus omitted data deliberately; undefined is not a stored JSON clearing value. No demonstrated top-level partial-property-removal caller was found in inspected examples.",
+    "Reuse existing unsupported-value/atomic-batch/checkpoint/ordered/subscriber tests instead of restating them."
+  ],
+  "static_inventory": {
+    "proposed_new_unit_cases": 8,
+    "inherited_structural_pairs_resolved": 17,
+    "inherited_dynamic_records_resolved": 3,
+    "inherited_record_scope": "Pointer existence and original obligations retained; no runtime or whole-family closure."
+  },
+  "proposal_precondition_observations": [
+    {
+      "path": "src/data/index.ts",
+      "proposal_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+      "current_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+      "unchanged": true
+    },
+    {
+      "path": "src/internal/same-json.ts",
+      "proposal_sha256": "a454ae3c392509ad4f222dafda69b2aea4fd54bd08d622a5d7845d3c725084d6",
+      "current_sha256": "a454ae3c392509ad4f222dafda69b2aea4fd54bd08d622a5d7845d3c725084d6",
+      "unchanged": true
+    },
+    {
+      "path": "src/ui/index.ts",
+      "proposal_sha256": "9ba3b503fac6475ecb3c8b001aa61fd564da79ad33a920635b2cc45a27a3d800",
+      "current_sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+      "unchanged": false
+    },
+    {
+      "path": "src/ui/field-path.ts",
+      "proposal_sha256": "2a31e756daccb79deb5d2f3d4cf43292c0790eb35bacfd88b910010859fbb97a",
+      "current_sha256": "2a31e756daccb79deb5d2f3d4cf43292c0790eb35bacfd88b910010859fbb97a",
+      "unchanged": true
+    },
+    {
+      "path": "src/ui/form.ts",
+      "proposal_sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+      "current_sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+      "unchanged": true
+    },
+    {
+      "path": "src/ui/grid.ts",
+      "proposal_sha256": "1744ed203115198666d1f4078d67cb20d8c651ee7894d7b86016f5e0859e3739",
+      "current_sha256": "ac2bfee89f0c897897531a4882f95d8bcf10736156eabd86fcfbe87d81b73737",
+      "unchanged": false
+    },
+    {
+      "path": "src/ui/list.ts",
+      "proposal_sha256": "24d24f1f79b93b278d448ee8bb2998e830c47d222ef99e6502f129f0f1fe7adc",
+      "current_sha256": "3ccf85fd9badbed72c6c9a32e251439f00f450660396285faf3923493e1274cb",
+      "unchanged": false
+    },
+    {
+      "path": "src/ui/tree.ts",
+      "proposal_sha256": "f496bcdb685e3684ce597115de05ffec7fc2a16c2bc9776ea2884dba868566bc",
+      "current_sha256": "18219e9f309ff188a8234e6dc0b1c21d21b088daf28994f91031b08ce3b508c9",
+      "unchanged": false
+    },
+    {
+      "path": "src/ui/grid-hooks.ts",
+      "proposal_sha256": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+      "current_sha256": "b64792c2969321bf8033515f32282cb68e46e9f3bede6959d96f8e3f7d76af32",
+      "unchanged": true
+    },
+    {
+      "path": "examples/vite/m4/employees.ts",
+      "proposal_sha256": "e9208b3a8a322ab2c6b184043247397a07ffb1ec643b1587ee5a4bfb9e7a043b",
+      "current_sha256": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+      "unchanged": false
+    },
+    {
+      "path": "examples/vite/m10/demo.ts",
+      "proposal_sha256": "186dbd11c88b9991cb0d8039773cd383da4e4d136bd675d0545b0ea8696fe2ff",
+      "current_sha256": "186dbd11c88b9991cb0d8039773cd383da4e4d136bd675d0545b0ea8696fe2ff",
+      "unchanged": true
+    },
+    {
+      "path": "examples/vite/m10/detail.ts",
+      "proposal_sha256": "9c4b3521012d5d53403878f4dcc565cd949fae758708a001318169f60cb6319a",
+      "current_sha256": "9c4b3521012d5d53403878f4dcc565cd949fae758708a001318169f60cb6319a",
+      "unchanged": true
+    },
+    {
+      "path": "tests/rows.test.ts",
+      "proposal_sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+      "current_sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+      "unchanged": true
+    },
+    {
+      "path": "tests/browser/form-source.spec.ts",
+      "proposal_sha256": "d731bab9c46046e8718e9f8c905b3a7cdfad4e68ea78e264bf290b09d32c6899",
+      "current_sha256": "d731bab9c46046e8718e9f8c905b3a7cdfad4e68ea78e264bf290b09d32c6899",
+      "unchanged": true
+    },
+    {
+      "path": "tests/browser/grid-recipes.spec.ts",
+      "proposal_sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "current_sha256": "289d66c1815a9565085004a620d6732c251cbd257032a1619988b037ff91693a",
+      "unchanged": true
+    },
+    {
+      "path": "tests/consumers/js/check.mjs",
+      "proposal_sha256": "abfc278db130408051c41efe39fbfe6449e26cb271c4ff35c6d891fbfcf8a445",
+      "current_sha256": "abfc278db130408051c41efe39fbfe6449e26cb271c4ff35c6d891fbfcf8a445",
+      "unchanged": true
+    },
+    {
+      "path": "tests/consumers/ts/check.ts",
+      "proposal_sha256": "ca888cfe9ec86d9e05e3d41cb24b7f8047ca1a15416d96da09ad6c01970fcc0d",
+      "current_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+      "unchanged": false
+    },
+    {
+      "path": "docs/v2/data.md",
+      "proposal_sha256": "0a5dc59af1ea6974ec7396e1cf4ca8cb56dfc4e29f5bf8b49434c52fbaf47f21",
+      "current_sha256": "0a5dc59af1ea6974ec7396e1cf4ca8cb56dfc4e29f5bf8b49434c52fbaf47f21",
+      "unchanged": true
+    },
+    {
+      "path": "docs/v2/grid-compositions.md",
+      "proposal_sha256": "40e5bbfb12cf4f05585c18c27333917ff1f901316c7637e8b740ad42f5ffaf7f",
+      "current_sha256": "e798e06034cc4ab71dc65c0e01cec8e755ec529cc7f6fefe38917453ba6992e5",
+      "unchanged": false
+    },
+    {
+      "path": "docs/v2/migration.md",
+      "proposal_sha256": "ffcbccba0a829d0c2d95f155240ad8bd94609ba57aa1aa107c4f05462457725f",
+      "current_sha256": "11762a43d8286ea9967055c7d492c5f89c4b8a22e8da7e3eac5c295263455583",
+      "unchanged": false
+    },
+    {
+      "path": "docs/implementation/remaining-work-plan.md",
+      "proposal_sha256": "4db22e59d7205a13d37b458d86654e9b1a39f383fb6e7aeb73b9cfa019db2a3c",
+      "current_sha256": "8c4ae4a5c0e23b5fc0596936cf9f917ec1f61abc5aae52122a64412fb64218a2",
+      "unchanged": false
+    },
+    {
+      "path": "docs/implementation/evidence/remaining-work-plan.json",
+      "proposal_sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632",
+      "current_sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632",
+      "unchanged": true
+    },
+    {
+      "path": "docs/implementation/evidence/p01-core-preflight.json",
+      "proposal_sha256": "504695af0af16fca3a496484cc1ed456fcb786951d1e59a6456ceb7cf6caa5cd",
+      "current_sha256": "504695af0af16fca3a496484cc1ed456fcb786951d1e59a6456ceb7cf6caa5cd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/implementation/evidence/v1-core-parity.json",
+      "proposal_sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029",
+      "current_sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029",
+      "unchanged": true
+    },
+    {
+      "path": "docs/implementation/evidence/v1-surface-inventory.json",
+      "proposal_sha256": "da8b2fb4013f4b18432f581fa0cfd1c91d3d67f95f3be5d36ed6478cac35a8c5",
+      "current_sha256": "da8b2fb4013f4b18432f581fa0cfd1c91d3d67f95f3be5d36ed6478cac35a8c5",
+      "unchanged": true
+    },
+    {
+      "path": "v1/src/natural.core.js",
+      "proposal_sha256": "65604d3581b4509412a87fab0ee0af1d0e40ae85baaf8e96391a23505e6d1db1",
+      "current_sha256": "65604d3581b4509412a87fab0ee0af1d0e40ae85baaf8e96391a23505e6d1db1",
+      "unchanged": true
+    },
+    {
+      "path": "v1/src/natural.data.js",
+      "proposal_sha256": "65ecebe84468c27ff149bf4010b2143ee98040351b0c604c75f1dc11abad55c8",
+      "current_sha256": "65ecebe84468c27ff149bf4010b2143ee98040351b0c604c75f1dc11abad55c8",
+      "unchanged": true
+    },
+    {
+      "path": "v1/src/natural.ui.js",
+      "proposal_sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+      "current_sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+      "unchanged": true
+    },
+    {
+      "path": "v1/docs/core/json.md",
+      "proposal_sha256": "1fab6e40114dba99de4bbc495646e212b373fa2c7c0acb24b41c47fedb656c57",
+      "current_sha256": "1fab6e40114dba99de4bbc495646e212b373fa2c7c0acb24b41c47fedb656c57",
+      "unchanged": true
+    },
+    {
+      "path": "v1/docs/data/data-utilities.md",
+      "proposal_sha256": "a158fa8be59ae9747f627ef8e13f5fac441c3865ea4f21ab85f7ae84b255c30e",
+      "current_sha256": "a158fa8be59ae9747f627ef8e13f5fac441c3865ea4f21ab85f7ae84b255c30e",
+      "unchanged": true
+    },
+    {
+      "path": "v1/docs/ui/form.md",
+      "proposal_sha256": "ebf1203071270e44ce442fdc593e05003e50e676e2dc3c76cee0542b3bff6263",
+      "current_sha256": "ebf1203071270e44ce442fdc593e05003e50e676e2dc3c76cee0542b3bff6263",
+      "unchanged": true
+    },
+    {
+      "path": "v1/docs/examples/template/search-grid-detail-horizontal.md",
+      "proposal_sha256": "325c4a900ad11d92b66f5522217e7a631f26cd1350145ffcf1b4d79935643603",
+      "current_sha256": "325c4a900ad11d92b66f5522217e7a631f26cd1350145ffcf1b4d79935643603",
+      "unchanged": true
+    }
+  ],
+  "precondition_scope": "Original cache predates later approved stages. Changed source/document hashes require the later saved-baseline rebase; they are not current test failures and do not invalidate the unchanged Rows traversal reviewed here.",
+  "retained_limits": [
+    "M5.17 exact per-key/unbound/inherited callback timing/receivers",
+    "M5.18 rules/configuration/catalog/manual masks",
+    "M5.19 generated/shared row controls",
+    "M6.2 editable List and remaining Tree changed presentation owners",
+    "M5.20 final mixed-family closure; original profiles/local overrides remain mandatory",
+    "Only O01-O05 are approved losses; an actual missing removal workflow would need its own bounded resolution, not silent identity reset"
+  ],
+  "project_or_compiler_or_browser_or_unit_or_benchmark_commands": 0,
+  "runtime_or_canonical_credit": 0,
+  "actual_source_or_docs_edits": false
+}

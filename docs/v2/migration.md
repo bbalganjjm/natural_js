@@ -5,6 +5,10 @@ description: Move a 1.x search/list/detail screen, changed-row save, and Popup o
 tags: [project, migration, cvc, form]
 status: draft
 sources:
+  - id: data-projections
+    resource: ../../tests/browser/data-projections.spec.ts
+    title: Executed source sharing, normalization and configured wire projection
+    git_blob: 40c77d54ede4430e8b8f9a460a34758cc8ca1ba8
   - id: omissions
     resource: ../implementation/evidence/m32-approved-omissions.json
     title: Explicit approval of exactly five workflow omissions
@@ -153,10 +157,10 @@ sources:
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
     git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
-generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
+  - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -239,6 +243,14 @@ Replace repeated `id="name"` and index-based `form.bind(index, data)` with autho
 ```
 
 These are shortened M4 markup extracts. Copy the complete [side](../../examples/vite/m4/side.html) or [stack](../../examples/vite/m4/stack.html) screen to retain the required table, list, form, labels, and actions. `data-role` and `data-action` are application selectors; `data-field`, `data-row-template`, `data-validate`, and `data-error-for` are binding markers. Repeated templates must not contain fixed DOM IDs. `RowId` is local to one store and is not a business key to send to the server.[^employee-view][^page][^rows]
+
+## Data values and configured projections
+
+Normalize rich source values explicitly before Rows: read required inherited/hidden business properties, convert dates/numeric domains deliberately and replace cyclic references with business keys. The store copies own enumerable object keys and indexed arrays into detached frozen values; nullable and omitted properties remain distinct from invalid stored undefined. Array metadata is not copied, while object symbol keys reject the supplied value. [Rows source values](data.md#source-values-and-application-conversion) defines the exact boundary.[^rows][^data-projections]
+
+Replace mapFromKeys with request-local application projection over requested plus configured extra keys. Keep literal-key access separate from safe data-field paths. Explicitly copy a fixed policy or read a live policy at payload time, retaining 0/false/empty/null/nested/business metadata. Resolve active/batch/check/view/change membership by existing IDs and choose hidden-row inclusion deliberately. Reserve a distinct wire operation key when business status/rowStatus exists; use original delete payload or last display only as the server contract requires. The [executed projection fixture](../../tests/browser/data-projections.spec.ts) and installed consumers demonstrate actual Request JSON and same-store versus separate-store ownership.[^rows][^data-projections]
+
+Share the same Rows instance across Form/Grid/List; wrapping equal data again creates independent identity and subscriptions. External object mutation does not write immutable Rows, and Form.read returns committed marked fields rather than all business source or entered drafts. Keep application factories, selection checkpoints and schema choices local. No new Rows API, generic schema/conversion package or compatibility utility is added by these recipes; later entered-value, complete restoration and rule/control outcomes retain their numbered owners.[^rows][^data-projections]
 
 ## 3. Validate before sending changed rows
 
@@ -578,3 +590,5 @@ Catalog replacement preserves raw source/originals, current/hidden drafts, captu
 [^parity-plan]: Full framework feature coverage execution plan
 
 [^scroll-example]: Page-owned native wheel boundary composition
+
+[^data-projections]: Executed source sharing, normalization and configured wire projection

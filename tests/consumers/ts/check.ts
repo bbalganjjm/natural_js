@@ -356,6 +356,27 @@ export function configureGridState(grid: GridHandle<Employee>, ids: readonly Row
   return { selected, checked, checkState, visible, filtered, store, values, choices, matching };
 }
 
+type ProjectedEmployee = { id: string; name: string; note: null; profile: { team: string }; choices: { code: number }[] };
+export function projectRawEmployeeChanges(rows: Rows<ProjectedEmployee>) {
+  const first = rows.entries()[0]; if (!first) return [];
+  const original: Snapshot<ProjectedEmployee> | undefined = rows.original(first.id);
+  if (false) {
+    // @ts-expect-error Nested snapshot fields are readonly.
+    first.value.profile.team = "Bypass";
+    // @ts-expect-error Snapshot arrays are readonly.
+    first.value.choices.push({ code: 2 });
+    // @ts-expect-error Original nested items are readonly.
+    original!.choices[0].code = 2;
+  }
+  const requested = ["id", "name", "note", "profile", "choices"], extras = ["operation"];
+  return rows.changes().map(({ status, value }) => {
+    const record = { ...value, operation: status };
+    return Object.fromEntries([...requested, ...extras].flatMap(key => {
+      const item: unknown = Reflect.get(record, key); return item === undefined ? [] : [[key, item]];
+    }));
+  });
+}
+
 export function connectDeclaredSelectDefaults(roots: readonly HTMLSelectElement[]) {
   const choices: readonly SelectChoice<SelectValue>[] = Object.freeze([
     Object.freeze({ label: "Zero", value: 0 }), Object.freeze({ label: "False", value: false }),

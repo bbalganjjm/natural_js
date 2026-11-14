@@ -4,14 +4,14 @@ title: Natural-JS 2.0 active plan
 description: Current checkpoint, remaining gates and next owner for the Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
-  - id: declarations
-    resource: m3-declarations-plan.md
-    title: Current M3.7 typed declarations and row resources
-    git_blob: 8ce833f6584d8414d8664d3b85e54a5a3b09dec8
+  - id: projection
+    resource: m5-data-projections-plan.md
+    title: Current M5.15 data values and application projections
+    git_blob: 58adbc84f3e2d0ea47a7788f932772dac99e3830
   - id: batch
     resource: m5-completion-run.md
     title: Authorized separate-stage M5 completion and prerequisite run
-    git_blob: 2e3b5acecff3ba8ad81553478a2eb931eae2f7ec
+    git_blob: 02ed7c8d5e0c4735d0d6a5482daf2ca4603ea652
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -21,9 +21,9 @@ sources:
     title: Safe live Form-owned choice replacement
     git_blob: c98be3a79082c2b913327f54e52d1356a9263b87
   - id: evidence
-    resource: evidence/m37-verification.json
-    title: Selected M3.7 runtime and independent acceptance
-    git_blob: 2a011adb7644d0b748a12267ebcd10b6e4dc4f37
+    resource: evidence/m515-verification.json
+    title: Selected M5.15 runtime and independent acceptance
+    git_blob: 43e58d011aab626e95108581cd4f0ef226c7c771
   - id: parity
     resource: feature-parity-plan.md
     title: Complete required feature coverage and one omission review
@@ -36,9 +36,9 @@ sources:
     resource: ../governance/okf-conventions.md
     title: OKF document and verification rules
     git_blob: 81500f1f325ac03d4a2772fca8f5f2a87e715191
-generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
+  - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 ---
 
 Use this file to resume. The [milestone index](index.md), [roadmap](roadmap.md) and [completed log](../log.md) retain historical work; refresh fingerprints without recertifying old bodies.
@@ -49,9 +49,9 @@ Complete 1.x framework capabilities in TypeScript/ESM without jQuery, preserving
 
 # Checkpoint
 
-- M3.7 adds only List.onRowBind and reuses the existing private Grid row-resource owner. Captured synchronous callbacks receive precise LI/TR elements, stable RowId and reverse owned cleanup. List releases resources on view exit and reacquires them on re-entry while pure sorting retains unchanged bindings. The actual employee declaration mode awaits code/data dependencies and explicit initial actions through the existing CVC lifetime.[^declarations]
-- Sixteen canonical groups pass on 219 frozen inputs, 217 units and 955 full cases per engine, retaining all 933 parent cases. Focus passes 101 per engine. Twenty-two browser cases are new; existing unit registrations are unchanged. The exact 208-file archive passes JS/TS, five installed browsers and the original thirty budgets/sixty medians. Forty-one declarations retain thirty-eight identical files; only Grid, List and their private row-hook declaration change.[^evidence]
-- M3.6 is saved and pushed as 96d5e66; all earlier separate commits and immutable evidence remain. The user authorized every necessary predecessor through joined M5.20 with separate plans, checks, documents and commits.[^batch]
+- M5.15 retains source/value and configured projection outcomes through existing Rows and explicit application code. Eight unit cases and two connected browser cases cover exact clone boundaries, rich-source normalization, shared Form/Grid/List ownership and raw wire scopes without a new framework API, module, type, dependency or convenience library.[^projection]
+- Sixteen latest canonical groups pass on 221 frozen inputs, 225 units and 957 full cases per engine, retaining all 955 parent cases. Primary focus passes 48 and separate unchanged Grid-column diagnostics pass 18 per engine. The 208-file archive and all package payloads are byte-identical to M3.7; all forty-one declarations remain identical. JS/TS, five installed browsers and the original thirty budgets/sixty medians pass.[^evidence]
+- M3.7 is saved and pushed as 1f2eeaf; every earlier separate commit and immutable receipt remains. The user authorized every necessary predecessor through joined M5.20 with separate plans, checks, documents and commits.[^batch]
 
 # Steps
 
@@ -59,7 +59,7 @@ Follow the durable ordered queue and separate-stage procedure in the [completion
 
 # Next action
 
-Save/push the separate M3.7 checkpoint, then implement M5.15 from its bounded data/value/projection plan. Existing Rows/communication owners can retain those outcomes without a new schema or transformation API; verify normalized application values, shared binding and explicit wire projection. Continue the separate queue through joined M5.20; twenty-four unconditional stages remain after selected M3.7.[^batch][^review]
+Save/push the separate M5.15 checkpoint, then implement M5.16 from its reviewed entered-value and full restoration/deleted-detail contract. Keep current native/creation/committed/received/selection values distinct and reuse existing Form/Rows ownership. Continue the separate queue through joined M5.20; twenty-three unconditional stages remain after selected M5.15.[^batch][^review]
 
 # Decisions
 
@@ -73,18 +73,18 @@ Save/push the separate M3.7 checkpoint, then implement M5.15 from its bounded da
 
 # Verification log
 
-The [M3.7 acceptance](evidence/m37-verification.json) links immutable runtime/source records, composite independent source review, independent raw audit and final document checks. All twenty-three records pass: seven development attempts and sixteen latest canonical groups. No current project failure is retained. Independent cache review corrected one required SelectChoice type argument before execution; it receives no compiler/test credit. Two prose corrections distinguish callback error order and employee versus installed default witnesses. The archive SHA-256 is 4194aba11bdb1c2d583c3440685efa42b7e87068cc0dacb00a506eae74cea61c. Original benchmarks and inherited failures/limits remain unchanged; no whole-family, M5.20, M13 or release closure is inferred.[^evidence][^batch]
+The [M5.15 acceptance](evidence/m515-verification.json) links immutable runtime/source records, independent source/two-draft review, recorded-byte audit and final document checks. Twenty-seven records retain ten development attempts, sixteen latest canonical passes and one earlier Chromium full run with 956 passes/one import failure. Its trace records grid.ts HTTP 200 and dependency grid-selection.ts ERR_NO_BUFFER_SPACE. The deeper cause is unknown; no source/test/configuration fix is claimed. Unchanged diagnostics pass 18 per engine and later complete suites pass 957 per engine. The metadata-only trace reader receives no suite credit. The exact archive 4194aba11bdb1c2d583c3440685efa42b7e87068cc0dacb00a506eae74cea61c and all forty-one declarations remain identical to M3.7. Original benchmarks and inherited limits remain; no whole-family, M5.20, M13 or release closure is inferred.[^evidence][^batch]
 
 # Open questions
 
 Only O01-O05 are explicitly excluded. Other source-value/callback, configuration/advice/declaration and component obligations remain required. The first Tree/date timeout has no proven cause; direct Windows WebKit cookie/header wire differences remain measured platform limits. Manual assistive-technology, actual token measurements and the earlier module-fetch cause retain their existing limits. M13 whole-code review, publication/tags/master/v1 cleanup remain outside this ancestor run.[^evidence][^batch][^review]
 
 [^choices]: Safe live Form-owned choice replacement
-[^evidence]: Selected M3.7 runtime and independent acceptance
+[^evidence]: Selected M5.15 runtime and independent acceptance
 [^parity]: Complete required feature coverage and one omission review
 [^review]: Mandatory whole-code review and remediation
 [^conventions]: OKF document and verification rules
 [^remaining]: Fixed 56-stage continuation and exact known-record ownership
 [^batch]: Authorized separate-stage M5 completion and prerequisite run
 
-[^declarations]: Current M3.7 typed declarations and row resources
+[^projection]: Current M5.15 data values and application projections

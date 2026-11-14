@@ -4,6 +4,7 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 M5.15 data values and application projections](implementation/m5-data-projections-plan.md) - Verify exact JSON source boundaries and executable application normalization, configured wire projections and shared-consumer ownership without another Rows API. (draft)
 * [Natural-JS 2.0 M3.7 typed declarations and row actions](implementation/m3-declarations-plan.md) - Assemble asynchronous page requests, components, events and actions through existing CVC ownership and add one List row-resource callback. (draft)
 * [Natural-JS 2.0 M3.6 automatic controller advice](implementation/m3-advice-plan.md) - Discover controller methods once before init and compose ordinary wrappers through one optional page contract while preserving cancellation and cleanup. (draft)
 * [Natural-JS 2.0 M3.5 scoped configuration and captured ownership](implementation/m3-scoped-configuration-plan.md) - Keep one Rows and base URL owner while supporting explicit live locale and message providers on existing UI instances. (draft)

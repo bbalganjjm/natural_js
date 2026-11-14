@@ -449,6 +449,12 @@ try {
     projectedChoice: ["Two", "Two", "Two"], validation: { valid: [false, false, false], choiceIssues: true, quiet: true, raw: 99 },
     raw: { current: " Bea ", original: " Ada ", active: true, listDisabled: true }
   }, "Installed Form/Grid/List callbacks must share typed policy, preserve raw validation and refresh without source writes.");
+  const sourceProjection = await page.evaluate(() => window.packedConsumer.checkSourceProjection());
+  const sourceBusiness = { id: "business-a", note: null, active: false, count: 0, choices: [{ code: 0 }], status: "approved", rowStatus: "domain", value: { amount: 0 }, tenant: "T" };
+  assert.deepEqual(sourceProjection, { detached: "Core", shared: ["Edith", "Edith", "Edith"], read: { name: "Edith" },
+    wire: [{ ...sourceBusiness, name: "Edith", profile: { team: "Support" }, operation: "update" }],
+    deleted: [{ ...sourceBusiness, name: "Ada", profile: { team: "Core" }, operation: "delete" }], currentDeleted: "Edith", frozen: true, businessId: true
+  }, "Installed source projections must preserve business/null/nested/falsy fields and checkpoint deletion without confusing local RowId or business status.");
   const listRows = await page.evaluate(() => window.packedConsumer.checkListRows());
   assert.deepEqual(listRows, {
     reads: 1, plain: true, placed: true, afterSort: 2,

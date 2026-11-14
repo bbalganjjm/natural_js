@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M3.7",
+  "current_stage": "M5.15",
   "queue": [
     {
       "id": "P0.1",
@@ -70,16 +70,16 @@
     {
       "id": "M3.7",
       "scope_ref": "remaining-work-plan.json#/stages/9",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "1f2eeaf16edac57770488347c375230184662f3a",
       "receipt": "m37-verification.json"
     },
     {
       "id": "M5.15",
       "scope_ref": "remaining-work-plan.json#/stages/11",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m515-verification.json"
     },
     {
       "id": "M5.16",
@@ -249,13 +249,14 @@
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
-    "contract": "implemented and independently reviewed composite source/callers/five drafts",
-    "runtime_checks": "sixteen canonical groups passed",
-    "runtime_receipt": "m37-runtime-receipt.json",
-    "inputs": 219,
-    "units": 217,
-    "full_each": 955,
-    "focus_each": 101,
+    "contract": "implemented existing owners; independently reviewed six witness/consumer paths and two drafts",
+    "runtime_checks": "sixteen latest canonical groups passed",
+    "runtime_receipt": "m515-runtime-receipt.json",
+    "inputs": 221,
+    "units": 225,
+    "full_each": 957,
+    "focus_each": 48,
+    "diagnostic_focus_each": 18,
     "documents": "passed_independent_and_actual_zero_errors_warnings"
   },
   "latest_completed_checks": {

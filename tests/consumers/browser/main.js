@@ -145,6 +145,29 @@ state.checkPageLoading = async () => {
   return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, lifetime, canceled: canceledResult, rejected, disposal };
 };
 
+state.checkSourceProjection = async () => {
+  const host = document.createElement("section"); host.innerHTML = '<form><label>Name <input data-field="name"></label></form>' +
+    '<table><caption>Installed shared data</caption><thead><tr><th scope="col">Name</th></tr></thead><tbody><tr data-row-template><td><span data-field="name"></span></td></tr></tbody></table>' +
+    '<ul><li data-row-template><span data-field="name"></span></li></ul>';
+  document.querySelector("main").append(host);
+  const source = { id: "business-a", name: "Ada", note: null, active: false, count: 0, profile: { team: "Core" }, choices: [{ code: 0 }], tenant: "T", status: "approved", rowStatus: "domain", value: { amount: 0 } };
+  const rows = createRows([source]), id = rows.entries()[0].id, form = bindForm(host.querySelector("form"), { rows }),
+    grid = bindGrid(host.querySelector("table"), { rows }), list = bindList(host.querySelector("ul"), { rows }); form.bind(id);
+  source.profile.team = "External"; const detached = rows.get(id).value.profile.team;
+  rows.set(id, "profile", { team: "Support" }); rows.set(id, "name", "Edith");
+  const columns = Object.freeze(["id", "name", "note", "active", "count", "profile", "choices", "status", "rowStatus", "value", "tenant", "missing"]);
+  const project = () => rows.changes().map(({ status, value }) => ({ ...Object.fromEntries(columns.flatMap(key => {
+    const item = value[key]; return item === undefined ? [] : [[key, item]];
+  })), operation: status }));
+  let wire; const comm = createCommunicator({ send: async request => { wire = await request.json(); return new Response(null, { status: 204 }); } });
+  await comm.request({ url: new URL("https://example.test/projected"), method: "POST", json: project(), decode: () => undefined });
+  const shared = [host.querySelector("input").value, host.querySelector("table span").textContent, host.querySelector("ul span").textContent], read = form.read();
+  rows.remove(id); const deleted = project(), currentDeleted = rows.get(id).value.name;
+  const result = { detached, shared, read, wire, deleted, currentDeleted,
+    frozen: Object.isFrozen(rows.original(id).choices[0]), businessId: wire[0].id !== id };
+  form.dispose(); grid.dispose(); list.dispose(); rows.dispose(); host.remove(); return result;
+};
+
 state.checkListRows = () => {
   const host = document.createElement("section");
   host.innerHTML = '<ul><li data-row-template><button type="button" data-row-action><span data-field="name"></span></button></li><li data-empty hidden>Empty</li></ul>';
