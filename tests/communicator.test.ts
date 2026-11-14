@@ -191,3 +191,117 @@ describe("createCommunicator", () => {
     expect(sent?.signal.aborted).toBe(true);
   });
 });
+
+describe("captured communicator hook contracts", () => {
+  it("captures hook getters once and calls prepare after and decode without a receiver", async () => {
+    const receivers: unknown[] = [], order: string[] = [];
+    let prepareReads = 0, afterReads = 0, decodeReads = 0;
+    const options = {
+      get prepare() {
+        prepareReads++;
+        return function(this: unknown, request: Request) { receivers.push(this); order.push("prepare"); return request; };
+      },
+      get after() {
+        afterReads++;
+        return function(this: unknown, response: Response) { receivers.push(this); order.push("after"); return response; };
+      }
+    };
+    const comm = createCommunicator(options);
+    Object.defineProperty(options, "prepare", { value: () => { throw new Error("Late replacement"); } });
+    Object.defineProperty(options, "after", { value: null });
+    vi.stubGlobal("fetch", vi.fn(async () => { order.push("fetch"); return new Response('{"count":1}'); }));
+    for (let index = 0; index < 2; index++) {
+      const result = await comm.request<number>({
+        url: "https://example.test/employees",
+        get decode() {
+          decodeReads++;
+          return async function(this: unknown, response: Response) {
+            receivers.push(this); order.push("decode");
+            return (await response.json() as { count: number }).count;
+          };
+        }
+      });
+      expect(result).toBe(1);
+    }
+    expect({ prepareReads, afterReads, decodeReads }).toEqual({ prepareReads: 1, afterReads: 1, decodeReads: 2 });
+    expect(receivers).toEqual(Array(6).fill(undefined));
+    expect(order).toEqual(["prepare", "fetch", "after", "decode", "prepare", "fetch", "after", "decode"]);
+  });
+
+  it("keeps absent hooks absent and shared captures independent with explicit live application policy", async () => {
+    const added = vi.fn((request: Request) => request);
+    const absent: { prepare?: (request: Request) => Request } = {};
+    const first = createCommunicator(absent);
+    absent.prepare = added;
+    let reads = 0, calls = 0, token = "first";
+    const shared = Object.freeze({
+      get prepare() { reads++; return (request: Request) => { calls++; request.headers.set("X-Policy", token); return request; }; }
+    });
+    const second = createCommunicator(shared), third = createCommunicator(shared);
+    const sent: (string | null)[] = [];
+    vi.stubGlobal("fetch", vi.fn(async (request: Request) => { sent.push(request.headers.get("X-Policy")); return new Response("{}"); }));
+    await Promise.all([first.request({ url: "https://example.test/same" }),
+      second.request({ url: "https://example.test/same" }), third.request({ url: "https://example.test/same" })]);
+    expect(added).not.toHaveBeenCalled();
+    expect(sent.filter(value => value === "first")).toHaveLength(2);
+    token = "second";
+    await second.request({ url: "https://example.test/same" });
+    expect(sent.at(-1)).toBe("second");
+    expect({ reads, calls }).toEqual({ reads: 2, calls: 3 });
+  });
+
+  it("rejects nonfunction supplied hooks and decoders before transport work", async () => {
+    const fetch = vi.fn();
+    vi.stubGlobal("fetch", fetch);
+    for (const name of ["prepare", "after"]) for (const value of [null, false, 0, "bad", {}]) {
+      expect(() => createCommunicator({ [name]: value } as never)).toThrowError(
+        expect.objectContaining({ code: "REQUEST_OPTIONS", api: "createCommunicator" }));
+    }
+    const prepare = vi.fn((request: Request) => request);
+    for (const decode of [null, false, 0, "bad", {}]) {
+      await expect(createCommunicator({ prepare }).request({
+        url: "https://example.test/employees", decode
+      } as never)).rejects.toMatchObject({ code: "REQUEST_OPTIONS", api: "Communicator.request" });
+    }
+    const cancelled = new AbortController();
+    cancelled.abort();
+    await expect(createCommunicator({ prepare }).request({
+      url: "https://example.test/employees", signal: cancelled.signal, decode: 0
+    } as never)).rejects.toMatchObject({ name: "AbortError" });
+    expect(prepare).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it.each(["prepare", "after"] as const)("keeps %s return validation in its existing phase", async phase => {
+    const fetch = vi.fn(async () => new Response("{}")), decode = vi.fn(() => 1);
+    vi.stubGlobal("fetch", fetch);
+    const comm = createCommunicator(phase === "prepare"
+      ? { prepare: (() => ({})) as never } : { after: (() => ({})) as never });
+    await expect(comm.request({ url: "https://example.test/employees", decode }))
+      .rejects.toMatchObject({ code: phase === "prepare" ? "REQUEST_PREPARE" : "REQUEST_AFTER", cause: expect.any(TypeError) });
+    expect(fetch).toHaveBeenCalledTimes(phase === "prepare" ? 0 : 1);
+    expect(decode).not.toHaveBeenCalled();
+  });
+
+  it.each(["after", "decode"] as const)("aborts a pending %s and ignores its later result", async phase => {
+    const controller = new AbortController();
+    let enter!: () => void, release!: () => void;
+    const entered = new Promise<void>(resolve => { enter = resolve; });
+    const after = (response: Response) => phase === "after"
+      ? new Promise<Response>(resolve => { enter(); release = () => resolve(response); }) : response;
+    const decode = vi.fn(() => phase === "decode"
+      ? new Promise<unknown>(resolve => { enter(); release = () => resolve({ late: true }); }) : { decoded: true });
+    const fetch = vi.fn(async () => new Response("{}"));
+    vi.stubGlobal("fetch", fetch);
+    const pending = createCommunicator({ after }).request<unknown>({
+      url: "https://example.test/employees", signal: controller.signal, decode
+    });
+    await entered;
+    controller.abort();
+    await expect(pending).rejects.toMatchObject({ name: "AbortError" });
+    release();
+    await Promise.resolve(); await Promise.resolve();
+    expect(fetch).toHaveBeenCalledOnce();
+    expect(decode).toHaveBeenCalledTimes(phase === "decode" ? 1 : 0);
+  });
+});

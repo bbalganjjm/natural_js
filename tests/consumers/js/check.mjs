@@ -151,6 +151,43 @@ try {
     url: "employees", method: "POST", json: [{ name: "A" }]
   });
   assert.deepEqual(result, [{ name: "A" }]);
+  {
+    const order = [], receivers = [];
+    let reads = 0, completed = 0;
+    const hooks = {
+      get prepare() {
+        reads++;
+        return function(request) { receivers.push(this); order.push("prepare"); return request; };
+      },
+      after(response) { receivers.push(this); order.push("after"); return response; }
+    };
+    const comm = createCommunicator(hooks);
+    hooks.after = () => { throw new Error("Late hook replacement must not run"); };
+    globalThis.fetch = async request => {
+      order.push("fetch");
+      assert.equal(request.url, "https://example.test/employees");
+      assert.deepEqual(await request.json(), { query: "Ada" });
+      return new Response('[{"name":" Ada "}]');
+    };
+    async function search(query) {
+      try {
+        order.push("beforeInit");
+        if (!query.trim()) throw new Error("Query required");
+        const result = await comm.request({ url: "https://example.test/employees", method: "POST",
+          json: { query: query.trim() }, decode: async function(response) {
+            receivers.push(this); order.push("decode"); return await response.json();
+          } });
+        order.push("success");
+        return result.map(row => ({ ...row, name: row.name.trim() }));
+      } finally { completed++; order.push("complete"); }
+    }
+    assert.deepEqual(await search(" Ada "), [{ name: "Ada" }]);
+    assert.equal(reads, 1);
+    assert.deepEqual(receivers, [undefined, undefined, undefined]);
+    assert.deepEqual(order, ["beforeInit", "prepare", "fetch", "after", "decode", "success", "complete"]);
+    await assert.rejects(search(" "), /Query required/);
+    assert.equal(completed, 2);
+  }
 } finally {
   globalThis.fetch = originalFetch;
 }

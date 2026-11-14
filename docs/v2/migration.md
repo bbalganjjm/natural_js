@@ -40,7 +40,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request payload, decoder, and cancellation
-    git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
+    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
@@ -100,7 +100,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: 3dd3cd98c2dd4345c1525ef5469a2bb5f44ad006
+    git_blob: 9a243e065f0db6469d7c819f46df6f7fb061520e
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
@@ -120,7 +120,7 @@ sources:
   - id: employee-test
     resource: ../../tests/browser/m4-screen.spec.ts
     title: Search, validation, payload, and cancellation browser checks
-    git_blob: 0e11a8c4117126675f6b5e65ad68d3f397f54a2d
+    git_blob: 666a61d7da40766f23c17621e3d88a0ba875a5b6
   - id: containers-test
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Popup and Tab browser checks
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 52bc4dc663cd9d2321193f31d73257781b614610
+    git_blob: d73d12387064d650ced045e6567cfe1458d76fd0
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 8346dee24d7196d12898fd1d149c0132a58a2980
-generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+    git_blob: 42d57606e683a6bb854e54480259b51530923ea6
+generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -463,6 +463,12 @@ detail.refresh(["profile.department"]);
 Resolve/discard any affected row draft or known local issue before removing/replacing its binding. Rescan retains compatible fields and inactive state, with current RowId unchanged unless application Rows removal/replacement detaches it. It does not invoke Form hooks/rules/parsers/renderers or write Rows. Error associations may publish existing issues. A pending native reset must finish/flush before the graph changes. To change owned annotations, detach, rescan to release, edit while detached, reattach and rescan to adopt. Leaving data-options without data-field is still invalid. Fixed catalogs, preflight errors and native-failure retry/disposal are defined in [Form rediscovery](form.md#field-rediscovery); direct hot declarations and List/Grid rediscovery remain required parity work.[^form][^parity]
 
 # Verify
+
+## Keep communication policy explicit
+
+Compose legacy request phases with ordinary typed application functions: normalize/stop before comm.request, prepare a native Request, process a native Response, transform the awaited decoded result, handle a chosen error in catch and release invocation-local state in finally. The existing prepare/after callbacks are captured at communicator creation; decode is captured per request. All three are plain calls, so replace legacy receiver-dependent logic with explicit closures/arguments. Replacing callback properties later does not update an existing communicator.[^comm][^legacy-comm]
+
+The two-layout employee controller wraps its existing search/save calls with one page-local pending counter and owned aria-busy restoration. It joins page/caller signals once and uses no URL-keyed registry or common filter engine. A supplied application completion function must state its own primary-error policy; the [communication contract](comm.md) and installed consumers demonstrate direct try/catch/finally composition.[^employee][^comm]
 
 Run the installed JS/TS consumer check and the focused existing browser regressions after changing an application screen:[^package][^employee-test][^containers-test]
 

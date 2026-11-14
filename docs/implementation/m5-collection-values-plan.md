@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-presets-plan.md
     title: Explicit typed presets and application callback composition
-    git_blob: 8a7be953bdae1297674fd5460e75049f86f74e93
+    git_blob: ee32ea8a6c1cde5cb373de682c3a1f5572e075c6
   - id: baseline
     resource: evidence/m59-verification.json
     title: Frozen 5ecda44 source, runtime and installed artifact baseline
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained behavior and consolidated omission obligations
-    git_blob: 8346dee24d7196d12898fd1d149c0132a58a2980
+    git_blob: 42d57606e683a6bb854e54480259b51530923ea6
 generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }

@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-state-plan.md
     title: Completed received-state continuation
-    git_blob: f0a3a7953aef562c9b14293ca43a81794b372f84
+    git_blob: 9c6647138562b4252bbada72889dab98d5a7a0fe
   - id: baseline
     resource: evidence/m52-verification.json
     title: Preserved 4660cd6 source and runtime evidence

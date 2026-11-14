@@ -1,0 +1,12 @@
+
+ RUN  v5.0.1 D:/workspace/natural_js
+
+ ❯ tests/communicator-recipes.test.ts (5 tests | 1 failed) 5084ms
+   ❯ ordinary application request recipes (5)
+     × counts identical-URL concurrent requests independently within and across scopes 5017ms
+
+ Test Files  1 failed | 11 passed (12)
+      Tests  1 failed | 149 passed (150)
+   Start at  23:26:35
+   Duration  5.38s (tests 82%, transform 13%, import 4%, worker 1%)
+

@@ -1,0 +1,63 @@
+{
+  "label": "focused-unit",
+  "args": [
+    "node_modules/vitest/vitest.mjs",
+    "run"
+  ],
+  "started": "2026-11-14T14:29:33.614Z",
+  "finished": "2026-11-14T14:29:34.538Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m31-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-metadata-2cf6b90520bc.mjs",
+      "sha256": "2cf6b90520bcc962ec1c41eae9c3e2c9daab776d0eab39862f09d861d7779122",
+      "bytes": 19222,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m31-inputs-b64cc5640357.json",
+    "sha256": "b64cc5640357e7df5ec26b5aae199afdfbc2e38f6a192dd3be20015d38b7494e",
+    "bytes": 20698,
+    "entries": 203
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m31-inputs-b64cc5640357.json",
+    "sha256": "b64cc5640357e7df5ec26b5aae199afdfbc2e38f6a192dd3be20015d38b7494e",
+    "bytes": 20698,
+    "entries": 203
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m31-focused-unit-2-stdout.partial",
+    "sha256": "14f60bc1ff58b485cf71f2234d7424a34d483a3d84cd808be7f0762c894cfdaf",
+    "bytes": 190
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m31-focused-unit-2-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {},
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

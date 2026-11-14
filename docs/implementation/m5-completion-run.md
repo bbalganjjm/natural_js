@@ -8,15 +8,15 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: a567d64d11db085e31240fa84c9c4ce202ec5796
+    git_blob: 06d0143ed4f8b851c6a8c41aae01b65bc2cd0600
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
     git_blob: a18ff58091c2eb8d8050ba8222d6b3285a078a11
   - id: live
     resource: m5-live-choice-groups-plan.md
-    title: Current M5.14 private handoff and failure contract
-    git_blob: 272a92e5f834ac487c02f65ed9920bc9480c6550
+    title: Accepted M5.14 private handoff and failure contract
+    git_blob: 4cdf48e3ecbdf722206e187256801251894226dd
   - id: baseline
     resource: evidence/m513-verification.json
     title: Preserved accepted runtime baseline
@@ -29,9 +29,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 ---
 
 # Goal
@@ -62,7 +62,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Execute M3.1 next: preserve the existing communicator, capture and plainly invoke its hooks, and verify one typed application request wrapper for ordered preparation, transformation, recovery and exactly-once terminal cleanup. Continue the remaining necessary queue and each M5 stage independently through the joined M5.20 acceptance. The consolidated five-item omission decision remains pending; no silence authorizes removal.[^live][^run]
+Execute M3.2 next after P0.1, M5.14 and M3.1. Review its native protocol/custom-sender contract before code; retain separate commits and actual evidence for every later common/M5 stage through M5.20. Keep the tracker accurate during checks and context recovery.[^run]
 
 # Decisions
 
@@ -74,7 +74,7 @@ Execute M3.1 next: preserve the existing communicator, capture and plainly invok
 
 # Verification log
 
-P0.1 known source-case assignment is independently accepted and pushed as cf2210f. M5.14 selected live-catalog replacement passes fresh full gates and independent source/raw/document acceptance on 202 frozen inputs, 138 units and 853 complete cases per engine. The durable queue records each separate commit/receipt; the other 31 unconditional stages remain pending. No partial Form result closes M5.20 or any whole family. Existing historical results retain their original scope.[^run][^baseline]
+P0.1 is pushed as cf2210f and M5.14 as 6bc3c04. M3.1 passes independent source/raw/document acceptance on 203 inputs, 150 units and 857 cases per engine, including installed consumers and original performance budgets. The durable queue retains separate receipts/commits; thirty unconditional stages remain pending. No partial Form result closes M5.20 or a whole family. Historical results retain their original scope.[^run][^baseline]
 
 # Open questions
 
@@ -82,7 +82,7 @@ The source-backed five-item O01-O05 proposal has been presented once and awaits 
 
 [^run]: Durable current stage, exact ancestor queue and completion references
 [^scope]: Fixed 56-stage scope, predecessors and terminal conditions
-[^live]: Current M5.14 private handoff and failure contract
+[^live]: Accepted M5.14 private handoff and failure contract
 [^baseline]: Preserved accepted runtime baseline
 [^core]: Core source cases, inherited boundaries and open decisions
 [^ui]: UI and Grid source-case inventory and shared-owner boundaries

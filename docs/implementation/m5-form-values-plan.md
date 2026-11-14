@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-options-plan.md
     title: Completed typed-choice continuation
-    git_blob: bc90cb8821f87456326cf2d893d84e0b4a6a72eb
+    git_blob: 30cf84768b376319eaf1d7354ab1cff2f349081b
   - id: baseline
     resource: evidence/m53-verification.json
     title: Preserved d923434 runtime and code baseline

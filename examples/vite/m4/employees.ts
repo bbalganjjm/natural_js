@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
+import type { RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
 import { bindForm, bindGrid, bindList, bindPagination, bindSelect } from "@bbalganjjm/natural_js/ui";
@@ -40,6 +41,35 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   const session = crypto.randomUUID();
   const endpoint = (name: string) => "employees/" + name + "?session=" + encodeURIComponent(session);
   const comm = createCommunicator({ baseURL: new URL("/api/", document.baseURI) });
+  let pendingRequests = 0;
+  let busyBefore: string | null | undefined;
+  function restoreRequestBusy(): void {
+    const before = busyBefore;
+    busyBefore = undefined;
+    if (before === undefined) return;
+    if (before === null) root.removeAttribute("aria-busy");
+    else root.setAttribute("aria-busy", before);
+  }
+  own(restoreRequestBusy);
+
+  async function request<Result>(options: RequestOptions<Result>): Promise<Result> {
+    const first = pendingRequests++ === 0;
+    try {
+      signal.throwIfAborted();
+      if (first) {
+        busyBefore = root.getAttribute("aria-busy");
+        root.setAttribute("aria-busy", "true");
+      }
+      const { signal: callerSignal, ...prepared } = options;
+      return await comm.request<Result>({
+        ...prepared,
+        signal: callerSignal ? AbortSignal.any([signal, callerSignal]) : signal
+      });
+    } finally {
+      pendingRequests--;
+      if (pendingRequests === 0 && !signal.aborted) restoreRequestBusy();
+    }
+  }
   const rows = createRows<Employee>();
   own(() => rows.dispose());
 
@@ -172,11 +202,11 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     status.textContent = "Loading…";
     error.textContent = "";
     try {
-      const values = await comm.request<Employee[]>({
+      const values = await request<Employee[]>({
         url: endpoint("search"),
         method: "POST",
         json: search.read(),
-        signal: AbortSignal.any([signal, current.signal])
+        signal: current.signal
       });
       if (signal.aborted || current.signal.aborted) return false;
       pageRequest = { page: 1, size: pageRequest.size };
@@ -231,11 +261,10 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     error.textContent = "";
     status.textContent = "Saving…";
     try {
-      await comm.request<void>({
+      await request<void>({
         url: endpoint("save"),
         method: "POST",
         json: changes.map(({ status, value }) => ({ status, value })),
-        signal,
         decode: () => undefined
       });
       if (signal.aborted) return;

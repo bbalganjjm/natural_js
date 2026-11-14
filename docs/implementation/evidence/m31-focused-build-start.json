@@ -1,0 +1,38 @@
+{
+  "label": "focused-build",
+  "args": [
+    "node_modules/typescript/bin/tsc",
+    "-p",
+    "tsconfig.json"
+  ],
+  "started": "2026-11-14T14:26:34.206Z",
+  "before": {
+    "path": "docs/implementation/evidence/m31-inputs-353fd91cffa2.json",
+    "sha256": "353fd91cffa2e87543df38fe967dce1728131e22c09b5869d1aa668d725df861",
+    "bytes": 20698,
+    "entries": 203
+  },
+  "environment": {},
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m31-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-metadata-2cf6b90520bc.mjs",
+      "sha256": "2cf6b90520bcc962ec1c41eae9c3e2c9daab776d0eab39862f09d861d7779122",
+      "bytes": 19222,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "stdout_partial": "docs/implementation/evidence/m31-focused-build-stdout.partial",
+  "stderr": "docs/implementation/evidence/m31-focused-build-stderr.log"
+}

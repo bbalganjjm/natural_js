@@ -19,10 +19,24 @@ export function createCommunicator(options: {
   prepare?: (request: Request) => Request | Promise<Request>;
   after?: (response: Response) => Response | Promise<Response>;
 } = {}): Communicator {
+  const { prepare, after } = options;
+  if (prepare !== undefined && typeof prepare !== "function" ||
+      after !== undefined && typeof after !== "function") {
+    throw new FrameworkError({
+      code: "REQUEST_OPTIONS", api: "createCommunicator",
+      message: "prepare and after must be functions when supplied."
+    });
+  }
   return {
     async request<Result>(requestOptions: RequestOptions<Result>): Promise<Result> {
       const { url, method = "GET", json, body, signal, decode } = requestOptions;
       if (signal?.aborted) throw abortError();
+      if (decode !== undefined && typeof decode !== "function") {
+        throw new FrameworkError({
+          code: "REQUEST_OPTIONS", api: "Communicator.request",
+          message: "decode must be a function."
+        });
+      }
       if (json !== undefined && body !== undefined) {
         throw new FrameworkError({
           code: "REQUEST_OPTIONS",
@@ -47,10 +61,10 @@ export function createCommunicator(options: {
         () => new Request(options.baseURL ? new URL(url, options.baseURL) : url,
           { method, body: requestBody, headers, signal }));
 
-      if (options.prepare) {
+      if (prepare) {
         request = await perform("REQUEST_PREPARE", "The request preparation hook failed.", signal,
           async () => {
-            const prepared = await options.prepare!(request);
+            const prepared = await prepare(request);
             if (!(prepared instanceof Request)) throw new TypeError("prepare must return a Request");
             return prepared;
           });
@@ -65,10 +79,10 @@ export function createCommunicator(options: {
 
       let response = await perform("REQUEST_NETWORK", "The request could not be sent.", activeSignal,
         () => fetch(request));
-      if (options.after) {
+      if (after) {
         response = await perform("REQUEST_AFTER", "The response hook failed.", activeSignal,
           async () => {
-            const processed = await options.after!(response);
+            const processed = await after(response);
             if (!(processed instanceof Response)) throw new TypeError("after must return a Response");
             return processed;
           });

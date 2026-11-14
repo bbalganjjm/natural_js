@@ -1,0 +1,167 @@
+{
+  "scope": "Public and internal emitted declarations are byte-identical to the actual independently verified M5.14 artifact; no new signature or type is introduced.",
+  "baseline_artifact_sha256": "61b24907bf094ee9cfd1b08d577cdd43fad6ebdae9e54580a62dc20672fdaf43",
+  "files": [
+    {
+      "path": "build/comm/index.d.ts",
+      "sha256": "1043efda4bf112804df1159c75917647d41cb7c2fdfc0542acffc9fa304786af"
+    },
+    {
+      "path": "build/data/index.d.ts",
+      "sha256": "9a02a2482c5e081a784a237fe01f730c5acfe2c92e96150f98c5c18c3ac15cc6"
+    },
+    {
+      "path": "build/index.d.ts",
+      "sha256": "8a3b51cdd070bcc8b981e1b3ef961833db8fc784a525da95c86e77b0f01fad12"
+    },
+    {
+      "path": "build/internal/framework-error.d.ts",
+      "sha256": "208a7ebe31e97a9cd23509ea44394afd9194e4b7974d61044439c8fa8c8a5093"
+    },
+    {
+      "path": "build/internal/same-json.d.ts",
+      "sha256": "e9ce1023bfaa4bd44860bcdc05083dbbdf91b6fcd84140a70f798e6893741439"
+    },
+    {
+      "path": "build/page/index.d.ts",
+      "sha256": "8a1ccfafe7b8c9273ebaafbe207ea9a6cc759731fda6bf51427ca0e6d9a7e61f"
+    },
+    {
+      "path": "build/ui/choice-group-owner.d.ts",
+      "sha256": "218fa1a402937286889ec8b56145f980bcfceb47eeac8838178d16f400c8badf"
+    },
+    {
+      "path": "build/ui/choice-group.d.ts",
+      "sha256": "061db2a10769dba43264f619bf2cc9a5e820276be0d1ad58aceaf829ef87f857"
+    },
+    {
+      "path": "build/ui/datepicker.d.ts",
+      "sha256": "d1946f54fa6f202113e928dfe09668ab184a69d04d322401ca16d6620be87be6"
+    },
+    {
+      "path": "build/ui/documents.d.ts",
+      "sha256": "e1d59c4cae604664cc9a52950720df185116a68c75fd8e1f817376e471b8117f"
+    },
+    {
+      "path": "build/ui/dom-state.d.ts",
+      "sha256": "217810dd66a082df6bb625988b0ee213ae80e751e1a6b9627996dd4ba206dbb9"
+    },
+    {
+      "path": "build/ui/field-path.d.ts",
+      "sha256": "ad8f4539ed9e22a9f25384863384d0ad836095d0b707fdc54397cf6a1f609575"
+    },
+    {
+      "path": "build/ui/field-render.d.ts",
+      "sha256": "a2d1b866f4f315a99b179f7f9af3b85a0edf027b80c44a9d27648740273be4cb"
+    },
+    {
+      "path": "build/ui/form.d.ts",
+      "sha256": "929af520853b5099bbaa6fa5adfe9885a54ba994745da098326cad1a475c7e99"
+    },
+    {
+      "path": "build/ui/format-rules.d.ts",
+      "sha256": "def6b2997f41349b9245cf5115f1d2d265c1d64fdf0ecbb709423a301ef906d7"
+    },
+    {
+      "path": "build/ui/grid-columns.d.ts",
+      "sha256": "e4bca208bac74f0c99dbe4fa6e005d3fa8ddd246d2010377eefc9a06f2e8c973"
+    },
+    {
+      "path": "build/ui/grid-filters.d.ts",
+      "sha256": "839db0fb9491ba1df4505d0f3f7fde2c758747e11d17fa24825c2ec264989ddc"
+    },
+    {
+      "path": "build/ui/grid-height.d.ts",
+      "sha256": "dcf711b9e5d05217a34b959dc31a51f857943934b562e3c2c6efac3adba24e03"
+    },
+    {
+      "path": "build/ui/grid-hooks.d.ts",
+      "sha256": "92c6cffc5a63cce149655e9cf787ef2ba0bb557f5894c641b0bbbea3c658daa8"
+    },
+    {
+      "path": "build/ui/grid-paste.d.ts",
+      "sha256": "424f66a2af35d5326c0e1ce89354eb97ad159538315634a06def2895dadd1911"
+    },
+    {
+      "path": "build/ui/grid-row-blocks.d.ts",
+      "sha256": "cd4f6270d5f4cae79322b0c994ec057f9a18bea539f24d27ee019984702dbcb7"
+    },
+    {
+      "path": "build/ui/grid-selection.d.ts",
+      "sha256": "af2a7c4e2e4e4946b00782b183576065ca071ae6bafcb6d994a193f72aa38104"
+    },
+    {
+      "path": "build/ui/grid-viewport.d.ts",
+      "sha256": "8e00a340e3ca46c953f5a2ffa18f92cfe64c1ac0658ed79458d7767b56842ff5"
+    },
+    {
+      "path": "build/ui/grid.d.ts",
+      "sha256": "fbf126cdc25c0eed3a582a548c1874830d1e65fae54f3c343bb8c04e94db1099"
+    },
+    {
+      "path": "build/ui/index.d.ts",
+      "sha256": "c8e6f8b4330eeef5f4115d62a3bbf82c54f2515d4410ea9b0c562de827430533"
+    },
+    {
+      "path": "build/ui/list.d.ts",
+      "sha256": "2e77b5a442c77a0f47483acf534ab41236229053b65021dd751b4853f242d604"
+    },
+    {
+      "path": "build/ui/native-control.d.ts",
+      "sha256": "cb6e1c9fd6dad6e9e6d565a28b91fff719c2a5cb95badb94c4890d397e091cef"
+    },
+    {
+      "path": "build/ui/native-defaults.d.ts",
+      "sha256": "7f96237552a9266088daf83a27bdb340d174c63bbc8974864ebf64ceb891c9fa"
+    },
+    {
+      "path": "build/ui/notify.d.ts",
+      "sha256": "92ac2b92804537011b5e354f54db6e421b06c0f6216e210eefa9edaf398f55b0"
+    },
+    {
+      "path": "build/ui/pagination.d.ts",
+      "sha256": "6f759a4f038e85a2302d67eef6b7ccc56768d8f02ab8ea28a1a5b920657501f1"
+    },
+    {
+      "path": "build/ui/popup.d.ts",
+      "sha256": "e12bab54cd748b95cc681f4a8356e810549563bcc1475913ec09d2cb213f0816"
+    },
+    {
+      "path": "build/ui/row-options.d.ts",
+      "sha256": "8a77b5f9b917e3358bcaee1956ad7108e48c3a0877eb784aa5476aa3d8892dd1"
+    },
+    {
+      "path": "build/ui/rules.d.ts",
+      "sha256": "357b8d81fcf42b6fbd0be1dec33a2dcb1dc5164d04fba607226f065ec2feb58c"
+    },
+    {
+      "path": "build/ui/select-owner.d.ts",
+      "sha256": "de44a7224f46ab8d18a20dd202550bc293c8b60e528f48bd4602e4af2450e090"
+    },
+    {
+      "path": "build/ui/select.d.ts",
+      "sha256": "61a0bf55f2360c8b6a694a08fabf2d32b4f12df921114085e28e305c33de422f"
+    },
+    {
+      "path": "build/ui/tab-pages.d.ts",
+      "sha256": "3d7c88fcf04bb6aa3b676819caeab5a8e5bc3e999b70255e9060e34c33606eaa"
+    },
+    {
+      "path": "build/ui/tabs.d.ts",
+      "sha256": "ef0e9dac2444f71c604ab05d8aa9769c6a54ca0227ee0ca11fcba4c6170b2af6"
+    },
+    {
+      "path": "build/ui/tree.d.ts",
+      "sha256": "86f1faaa7d620342fa9afbaea801c82b13a68346dcdce5d784d288087753c6d8"
+    },
+    {
+      "path": "build/ui/validate-rules.d.ts",
+      "sha256": "efc8cfb802b3fcf305688548d198e6161a2b857be6cae9b9c577cda754537f11"
+    },
+    {
+      "path": "build/ui/value-binding.d.ts",
+      "sha256": "4ce9e7e12a3d601dcc470dedccd1ade4f8e7632dc1c9bbedfc0df50e54257c5c"
+    }
+  ],
+  "unchanged": true
+}

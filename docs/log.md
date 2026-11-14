@@ -1,4 +1,11 @@
+## 2026-11-15
+
+* **Verification** M3.1 passes sixteen canonical groups on 203 inputs, 150 units and 857 full cases per engine, with twelve added units and four real CVC cases. [Acceptance](implementation/evidence/m31-verification.json) retains one immutable runtime receipt, independent raw audit, all 853 parent identities, actual 203-file package in JS/TS and five Windows browsers, and the original thirty performance budgets/sixty medians. The initial 149-pass/one-timeout fixture attempt remains separate from the corrected 150; no framework red/green claim. Independent source/raw/final semantic reviews and changed/full docs pass with zero errors/warnings. Historical bodies/dates and all old evidence remain; no whole-family closure, omission, publication or tag.
+
 ## 2026-11-14
+
+* **Creation** [M3.1 communication phases](implementation/m3-communication-plan.md) captures and plainly invokes existing hooks and executes explicit application phases through native promises. Both CVC layouts own busy state and cancellation cleanup; installed consumers exercise the same native request contract. All forty emitted declarations remain byte-identical. No new public API, middleware registry or dependency.
+
 
 * **Verification** M5.14 passes sixteen latest groups on 202 frozen inputs, 138 units and 853 complete cases per engine, 17 added browser witnesses, one exact 203-file tar in JS/TS and all five Windows browsers, and the original thirty performance budgets/sixty recomputed medians. [Evidence](implementation/evidence/m514-verification.json) preserves the initial focused test-contract failures and all 23gate records. Independent source/raw/final-document reviews and changed/full OKF checks pass with zero errors/warnings; immutable evidence and historical bodies/dates remain. The other M5/prerequisite stages and the pending five-item omission decision remain open. No publication or tag.
 

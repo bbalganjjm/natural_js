@@ -8,7 +8,7 @@ sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: 3dd3cd98c2dd4345c1525ef5469a2bb5f44ad006
+    git_blob: 9a243e065f0db6469d7c819f46df6f7fb061520e
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
@@ -48,15 +48,15 @@ sources:
   - id: m4-test
     resource: ../../tests/browser/m4-screen.spec.ts
     title: Original screen and server-HTML browser regression
-    git_blob: 0e11a8c4117126675f6b5e65ad68d3f397f54a2d
+    git_blob: 666a61d7da40766f23c17621e3d88a0ba875a5b6
   - id: m6-test
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
+  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -112,6 +112,8 @@ The table has native headers, including a name header with `aria-sort`; its repe
 # Controller
 
 `createEmployees` receives one `PageContext` per screen and registers every handle, subscription, and store with `own`. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. The module-scoped sharedFormOptions: FormOptions<Employee> contains that existing rule and parser; each controller spreads it into its own detail Form with its own Rows and onBind callback. No shared row store or global Form registry is created. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
+
+One local typed request function wraps search/save. Its pending counter sets the screen's aria-busy on the first request and restores the captured authored value after the last. It joins caller/page cancellation once; the URL is not a resource key. Page-owned cleanup restores the captured attribute after abort even if request finally blocks have already drained the counter. Aborted requests do not write to a closed page or another instance. The communication API supplies transport and captured hooks; the application owns this request presentation.[^controller][^m4-test]
 
 Both search views offer native Reset fields and explicit Restore captured fields. Native reset uses native default properties. Restore calls search.unbind() to restore the construction-time values, then search.refresh() to resume automatic formatting/validation. It sends no request, changes no shared employee row and does not recreate the CVC controller. The action listener uses the same page signal as other authored controls.[^controller][^side][^stack]
 

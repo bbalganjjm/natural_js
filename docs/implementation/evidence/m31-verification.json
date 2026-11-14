@@ -1,0 +1,139 @@
+{
+  "milestone": "M3.1",
+  "status": "selected_outcomes_verified_remaining_owners_open",
+  "baseline_commit": "6bc3c04f13607d346ef7f434b24aa53c8ca0de15",
+  "runtime": {
+    "path": "docs/implementation/evidence/m31-runtime-receipt.json",
+    "sha256": "cf1de2981ec603b84047b12ea8506795bac65bd7a7e126dd04524db684383cf2"
+  },
+  "source_review": {
+    "path": "docs/implementation/evidence/m31-communication.json",
+    "sha256": "331672bcdd29f5df7e5ebd24e4c03d5e7527a2eae36761675dc1c69d8013422c",
+    "reviewer": "m511_design"
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m31-independent-audit.json",
+    "sha256": "93cf5941e14c93bf3b23a50ee098c9ef3df89ebea608c89820c34ddec3bfb2ab",
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "node_modules/.cache/m31-independent-audit.mjs",
+      "sha256": "cebec9c7ace1ec800be35d9927e4104e7e1f6e85f513e164e68e3bbfdc9a78c5"
+    }
+  },
+  "counts": {
+    "inputs": 203,
+    "attempts": 24,
+    "canonical_gates": 16,
+    "development_attempts": 8,
+    "unit_cases": 150,
+    "new_unit_cases": 12,
+    "full_cases_each": 857,
+    "new_browser_cases": 4,
+    "focused_each": 25,
+    "package_files": 203,
+    "unchanged_declarations": 40,
+    "performance_budgets": 30,
+    "raw_medians": 60,
+    "raw_durations": 300
+  },
+  "artifact": {
+    "sha256": "6594fa46ebb2eb33dbe5316dedcc58ab0163e3dbe7d7ac9d35169c547ac323eb",
+    "files": 203,
+    "packed_bytes": 358711,
+    "unpacked_bytes": 1817177
+  },
+  "documents": {
+    "status": "passed_independent_semantics_and_actual_changed_full_checks",
+    "semantic_files": [
+      "docs/implementation/current.md",
+      "docs/implementation/m3-communication-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "docs/v2/comm.md",
+      "docs/v2/employee-example.md",
+      "docs/v2/migration.md"
+    ],
+    "expected_scope": {
+      "concepts": 89,
+      "reserved_files": 5
+    },
+    "independent_review": {
+      "reviewer": "m511_design",
+      "path": "node_modules/.cache/m31-final-document-approval.json",
+      "sha256": "62efcdf18fa4ea6110b3d971c41b7021e1c92834f8e9982afd6cc3631c556931",
+      "bytes": 7777,
+      "reviewed_files": {
+        "docs/implementation/current.md": {
+          "normalized_body_sha256": "d5713ac97002f57d5c3d99fd2c5868845d685246b33e0523bb5048e31f4e2b52",
+          "normalized_body_bytes": 4750,
+          "review": "Fresh full-body independent final semantic review against immutable runtime and raw audit."
+        },
+        "docs/implementation/m3-communication-plan.md": {
+          "normalized_body_sha256": "e72adf2bf2e48c105c2387d4666e612b38002b9269c930b4caf4beae72c4b8bd",
+          "normalized_body_bytes": 6547,
+          "review": "Fresh full-body independent final semantic review against immutable runtime and raw audit."
+        },
+        "docs/implementation/m5-completion-run.md": {
+          "normalized_body_sha256": "35375ed259cc7c0e32049b728d703c67afbbae687334d8be2f5ab5a7d2f4b3ee",
+          "normalized_body_bytes": 5946,
+          "review": "Fresh full-body independent final semantic review against immutable runtime and raw audit."
+        },
+        "docs/v2/comm.md": {
+          "normalized_body_sha256": "45ac19b344211d4fc2274d4d4802d9cd5af85845a97bda51ba127f2672bbd9df",
+          "normalized_body_bytes": 5429,
+          "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/v2/employee-example.md": {
+          "normalized_body_sha256": "ba50c4313560f6894506bdec7b1288fae1871055fc4b902459c0a16aed425810",
+          "normalized_body_bytes": 11994,
+          "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/v2/migration.md": {
+          "normalized_body_sha256": "902cc4a5da7b3861d5556ff7824da0ecebf81712be9b558010e96dbece0d7c2d",
+          "normalized_body_bytes": 58535,
+          "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+        }
+      }
+    },
+    "mechanical": {
+      "checks": {
+        "changed": {
+          "path": "docs/implementation/evidence/m31-docs-changed.log",
+          "sha256": "9000172ae3669254334c44741a89de2587a3318e5874445dc58b3ef01c0c7280",
+          "bytes": 183,
+          "concepts": 89,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        },
+        "full": {
+          "path": "docs/implementation/evidence/m31-docs-full.log",
+          "sha256": "4119efcda50ab9297b87ed0dfdc672e4f31e3d6e8cd5b4519a059e47d30a0019",
+          "bytes": 173,
+          "concepts": 89,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "history": {
+        "path": "docs/implementation/evidence/m31-document-history.json",
+        "sha256": "a0d932834fd6eaf7a4af4ae282b45223c709a214b590cf403d36920162d1cd46",
+        "bytes": 2081
+      },
+      "fingerprint_log": {
+        "path": "docs/implementation/evidence/m31-docs-fingerprints.log",
+        "sha256": "656bbfdc13b756ae7735df75eda0c61d6ecd2fe40c317da2e16b1f55ab393c5f",
+        "bytes": 448
+      },
+      "reviewed_bodies_unchanged": true
+    }
+  },
+  "closure": {
+    "selected_only": true,
+    "full_families": 0,
+    "omissions_approved": 0,
+    "publication": false,
+    "tag": false
+  },
+  "remaining": "Thirty authorized unconditional stages remain; pending O01-O05 and all fixed whole-framework/M13/release conditions retain their separate owners."
+}

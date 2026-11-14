@@ -1,0 +1,70 @@
+{
+  "label": "binding-performance",
+  "args": [
+    "tools/benchmark-m4.mjs",
+    "--browser=chromium",
+    "--runs=5",
+    "--warmup=2"
+  ],
+  "started": "2026-11-14T14:32:36.702Z",
+  "finished": "2026-11-14T14:32:45.620Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m31-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-metadata-2cf6b90520bc.mjs",
+      "sha256": "2cf6b90520bcc962ec1c41eae9c3e2c9daab776d0eab39862f09d861d7779122",
+      "bytes": 19222,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m31-inputs-b64cc5640357.json",
+    "sha256": "b64cc5640357e7df5ec26b5aae199afdfbc2e38f6a192dd3be20015d38b7494e",
+    "bytes": 20698,
+    "entries": 203
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m31-inputs-b64cc5640357.json",
+    "sha256": "b64cc5640357e7df5ec26b5aae199afdfbc2e38f6a192dd3be20015d38b7494e",
+    "bytes": 20698,
+    "entries": 203
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m31-binding-performance.json.gz",
+    "sha256": "d62acec1390449feadb85d4af6eaa3b878d9738f6b8b5f9d8c10a8c907db1d9d",
+    "bytes": 4645,
+    "encoding": "gzip",
+    "uncompressed_sha256": "e9a2e8690484d802b150633dfc01ff734799899091035ff228aa5b204212925e",
+    "uncompressed_bytes": 30518
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m31-binding-performance-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": null
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

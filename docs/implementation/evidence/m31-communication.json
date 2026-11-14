@@ -1,0 +1,99 @@
+{
+  "milestone": "M3.1",
+  "status": "accepted_source_and_focused_witness_snapshot",
+  "baseline": {
+    "commit": "6bc3c04f13607d346ef7f434b24aa53c8ca0de15",
+    "receipt": {
+      "path": "docs/implementation/evidence/m514-verification.json",
+      "sha256": "a91f593ededa423367713a75089ba78f79adef69a3d471d16c20b7d33c399037"
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/3",
+  "selected_contracts": {
+    "captured_hooks": "Existing prepare/after creation capture, plain invocation, early supplied-function checks and unchanged phase-specific native-object validation.",
+    "ordered_application_phases": "Executed typed input preparation, stop, Request/Response transformations, decoded result/recovery and explicit finally through existing Communicator.",
+    "owned_terminal": "Per-call terminal cleanup, same-URL two-scope isolation, actual CVC busy capture/restoration and page/caller cancellation without late writes.",
+    "installed_contract": "Existing public entries and forty byte-identical emitted declarations; actual JS/TS and five-browser captured-hook/application/abort consumers."
+  },
+  "independent_source_review": {
+    "reviewer": "m511_design",
+    "status": "passed_connected_source_callers_and_draft_API_contracts",
+    "source_sha256": {
+      "src/comm/index.ts": "a157788b7d1ee6e22cba2b6192f2ba6c3a6e9b5671ca7de4d41c55d92de815b3",
+      "examples/vite/m4/employees.ts": "2a0811dbe122ca4e00e8db10bc69b009ec7db51d6680fd2a3c8df315465aa5d1",
+      "tests/communicator.test.ts": "e390f272796c483827faaf9903664310de9e1092724ecdeb5de3860ab8245426",
+      "tests/communicator-recipes.test.ts": "ce818ce52f146043c03783898a14e7bb4e2d62db5ca341e740fe60d0087545c1",
+      "tests/browser/m4-screen.spec.ts": "197e16ddc701d27d8c0153ebb4c431575a8e6580364f2ac35c29ac52cf4f205e",
+      "tests/consumers/js/check.mjs": "3ab6f7e73514c89091cce7057f4555ae9cbf838960df909a501d20e2f2c7ec4a",
+      "tests/consumers/ts/check.ts": "04fc0d5e48343850465268593ce14597251c538aa241f0deed93a1f6012bf14d",
+      "tests/consumers/browser/main.js": "470b586c8deccf0340b4d108cd5e618d45a34d1ef5bdd4fe9bd6db9af2fe3448",
+      "tools/check-packed-browser.mjs": "ea66fef095505de5e2921b54d2f896c27e52dfed9c0ce46ce833501ed5563be8"
+    },
+    "findings_resolved": [
+      "Creation/request error API names qualified.",
+      "Timeout witness asserts decoder entered.",
+      "Both CVC screens settle initial requests before authored busy-state capture.",
+      "Already-aborted invalid decoder retains AbortError priority.",
+      "Same-URL fake transport correlates actual query input rather than assumed dispatch order."
+    ]
+  },
+  "witnesses": {
+    "units": [
+      {
+        "file": "tests/communicator.test.ts",
+        "new_cases": 7
+      },
+      {
+        "file": "tests/communicator-recipes.test.ts",
+        "new_cases": 5
+      }
+    ],
+    "browser": [
+      {
+        "file": "tests/browser/m4-screen.spec.ts",
+        "new_cases": 4,
+        "layouts": [
+          "side",
+          "stack"
+        ]
+      }
+    ],
+    "installed": [
+      "tests/consumers/js/check.mjs",
+      "tests/consumers/ts/check.ts",
+      "tests/consumers/browser/main.js",
+      "tools/check-packed-browser.mjs"
+    ]
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 150,
+    "focus_each_engine": 25,
+    "retained_first_unit": {
+      "passed": 149,
+      "failed": 1,
+      "result": "timeout",
+      "disposition": "New fixture assumed transport admission order. Only its query correlation changed; no framework red/green claim."
+    }
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m31-declaration-invariance.json",
+    "sha256": "96f61297b2cbc60184a7e36ac9cf3a03b018f0b0382ecc117ea88db5a128da8e"
+  },
+  "remaining": [
+    "M3.2 protocol/custom-native transport and pending O01-O05.",
+    "M3.3-M3.7 loader/metadata/configuration/advice/declarations.",
+    "M12.4 scoped shell aggregation.",
+    "All fixed remaining M5/ancestors and whole-framework/M13/release gates."
+  ],
+  "closure": {
+    "full_families": 0,
+    "omissions_approved": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable source/focus snapshot before canonical receipt creation. Final runtime, raw/document acceptance and stage completion belong to m31-verification.json; pending fields here describe this capture only."
+}

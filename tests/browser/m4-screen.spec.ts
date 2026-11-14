@@ -315,3 +315,54 @@ test("server HTML runs the same employee controller in two ID-clean pages", asyn
   await expect(first.locator('[data-role="status"]')).toHaveText("Saved");
   await expect(screens.nth(1).locator("tbody tr")).toHaveCount(3);
 });
+
+for (const layout of ["side", "stack"] as const) {
+  test(layout + " owns request busy state across success failure and replacement", async ({ page }) => {
+    const errors: Error[] = [];
+    page.on("pageerror", error => errors.push(error));
+    await page.goto("/m4/" + layout + ".html");
+    const screen = page.locator('[data-page="employees"]');
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+    await screen.evaluate(root => root.setAttribute("aria-busy", "false"));
+    const query = screen.locator('[data-role="search"] [data-field="query"]');
+    await query.fill("slow");
+    await screen.locator('[data-role="search"] button[type="submit"]').click();
+    await expect(screen).toHaveAttribute("aria-busy", "true");
+    await query.fill("Grace");
+    await screen.locator('[data-role="search"] button[type="submit"]').click();
+    await expect(screen.locator('[data-role="status"]')).toHaveText("1 employees");
+    await expect(screen).toHaveAttribute("aria-busy", "false");
+    await query.fill("error");
+    await screen.locator('[data-role="search"] button[type="submit"]').click();
+    await expect(screen.locator('[data-role="status"]')).toHaveText("Search failed");
+    await expect(screen).toHaveAttribute("aria-busy", "false");
+    expect(errors).toEqual([]);
+  });
+
+  test(layout + " restores detached page request state without writing into a sibling", async ({ page }) => {
+    const errors: Error[] = [];
+    page.on("pageerror", error => errors.push(error));
+    await page.goto("/m4/" + layout + ".html");
+    await page.locator('[data-action="open"]').click();
+    const screens = page.locator('[data-page="employees"]');
+    await expect(screens).toHaveCount(2);
+    const first = screens.nth(0), second = screens.nth(1);
+    await expect(first.locator("tbody tr")).toHaveCount(3);
+    await expect(second.locator("tbody tr")).toHaveCount(3);
+    await first.evaluate(root => root.setAttribute("aria-busy", "false"));
+    const retained = await first.elementHandle();
+    if (!retained) throw new Error("Employee root was not mounted.");
+    const query = first.locator('[data-role="search"] [data-field="query"]');
+    await query.fill("slow");
+    await first.locator('[data-role="search"] button[type="submit"]').click();
+    await expect(first).toHaveAttribute("aria-busy", "true");
+    expect(await second.getAttribute("aria-busy")).toBeNull();
+    await first.locator('[data-action="close"]').click();
+    await expect(screens).toHaveCount(1);
+    expect(await retained.getAttribute("aria-busy")).toBe("false");
+    expect(await screens.first().getAttribute("aria-busy")).toBeNull();
+    await expect(screens.first().locator("tbody tr")).toHaveCount(3);
+    await retained.dispose();
+    expect(errors).toEqual([]);
+  });
+}

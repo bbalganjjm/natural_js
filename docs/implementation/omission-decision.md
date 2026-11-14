@@ -48,7 +48,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current asynchronous communication owner
-    git_blob: f3650ddbfeb5d87c3e58dc84904df9704e994368
+    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
   - id: page
     resource: ../../src/page/index.ts
     title: Explicit inert view and controller factory

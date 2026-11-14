@@ -101,6 +101,13 @@ try {
   const setupError = await page.evaluate(() => window.packedConsumer.error);
   assert(!setupError, `Packed consumer setup failed: ${setupError}`);
 
+  const requests = await page.evaluate(() => window.packedConsumer.checkRequests());
+  assert.deepEqual(requests, {
+    result: [{ name: "Ada" }],
+    order: ["beforeInit", "prepare", "after", "decode", "success", "complete", "beforeInit", "complete"],
+    reads: 1, completed: 2, plain: true, stopped: true, abortName: "AbortError", abortComplete: 1
+  }, "Installed requests must preserve captured plain hooks, explicit application stages and aborted completion.");
+
   const choiceGroups = await page.evaluate(() => {
     const h = window.packedConsumer.choiceGroups, id = h.rows.entries()[0].id;
     const initial = { gender: h.gender.value(), fruit: h.fruit.value(), empty: h.empty.value(), defaults: h.defaults,

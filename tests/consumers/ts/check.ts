@@ -4,7 +4,7 @@ import type { PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowId, RowSnapshot, RowState, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
-import type { Communicator } from "@bbalganjjm/natural_js/comm";
+import type { Communicator, RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { ChoiceGroupHandle } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
@@ -139,6 +139,21 @@ export function loadEmployees(comm: Communicator = createCommunicator({
   after: response => response
 })): Promise<Employee[]> {
   return comm.request<Employee[]>({ url: "employees", method: "GET" });
+}
+
+export async function searchEmployees(comm: Communicator, query: string,
+  lifecycle: { pending: number; completed: number }): Promise<Employee[]> {
+  lifecycle.pending++;
+  try {
+    const options: RequestOptions<Employee[]> = {
+      url: "employees", method: "POST", json: { query: query.trim() },
+      decode: async response => await response.json() as Employee[]
+    };
+    return await comm.request(options);
+  } catch (cause) {
+    if (cause instanceof FrameworkError && cause.code === "REQUEST_HTTP" && cause.detail?.status === 503) return [];
+    throw cause;
+  } finally { lifecycle.pending--; lifecycle.completed++; }
 }
 
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {

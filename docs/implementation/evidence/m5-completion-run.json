@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M5.14",
+  "current_stage": "M3.1",
   "queue": [
     {
       "id": "P0.1",
@@ -21,16 +21,16 @@
     {
       "id": "M5.14",
       "scope_ref": "remaining-work-plan.json#/stages/2",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "6bc3c04f13607d346ef7f434b24aa53c8ca0de15",
       "receipt": "m514-verification.json"
     },
     {
       "id": "M3.1",
       "scope_ref": "remaining-work-plan.json#/stages/3",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m31-verification.json"
     },
     {
       "id": "M3.2",
@@ -249,6 +249,14 @@
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
+    "stage": "M3.1",
+    "runtime": "docs/implementation/evidence/m31-runtime-receipt.json",
+    "source_review": "passed_independent",
+    "raw_review": "passed_independent",
+    "documents": "passed_independent_and_actual_zero_errors_warnings"
+  },
+  "latest_completed_checks": {
+    "stage": "M5.14",
     "strict_build": "passed",
     "strict_source_types": "passed",
     "strict_example_types": "passed",

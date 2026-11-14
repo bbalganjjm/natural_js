@@ -1,0 +1,16 @@
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/communicator-recipes.test.ts > ordinary application request recipes > counts identical-URL concurrent requests independently within and across scopes
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/communicator-recipes.test.ts:74:3
+     72|   });
+     73|
+     74|   it("counts identical-URL concurrent requests independently within an…
+       |   ^
+     75|     const sent: { resolve(response: Response): void }[] = [];
+     76|     vi.stubGlobal("fetch", vi.fn(() => new Promise<Response>(resolve =…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

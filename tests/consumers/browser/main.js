@@ -1,9 +1,59 @@
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
+import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindChoiceGroup, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
 const state = { ready: false, screens: {}, handles: {}, outputs: [], allowClose: false, documentControllers: 0 };
 window.packedConsumer = state;
+
+state.checkRequests = async () => {
+  const order = [], receivers = [];
+  let reads = 0, completed = 0;
+  const options = {
+    get prepare() {
+      reads++;
+      return function(request) { receivers.push(this); order.push("prepare"); return request; };
+    },
+    async after(response) {
+      receivers.push(this); order.push("after");
+      const { employees } = await response.json();
+      return new Response(JSON.stringify(employees));
+    }
+  };
+  const comm = createCommunicator(options);
+  options.after = () => { throw new Error("Late replacement must not run"); };
+  async function load(query) {
+    try {
+      order.push("beforeInit");
+      if (!query.trim()) throw new Error("Query required");
+      const decoded = await comm.request({
+        url: "data:application/json," + encodeURIComponent(JSON.stringify({ employees: [{ name: query }] })),
+        decode: async function(response) {
+          receivers.push(this); order.push("decode"); return await response.json();
+        }
+      });
+      order.push("success");
+      return decoded.map(row => ({ ...row, name: row.name.trim() }));
+    } finally { completed++; order.push("complete"); }
+  }
+  const result = await load(" Ada ");
+  let stopped = false;
+  try { await load(" "); } catch (cause) { stopped = cause.message === "Query required"; }
+  const controller = new AbortController();
+  let enter;
+  const entered = new Promise(resolve => { enter = resolve; });
+  const hanging = createCommunicator({ after: () => { enter(); return new Promise(() => undefined); } });
+  let abortComplete = 0, abortName;
+  const pending = (async () => {
+    try { return await hanging.request({ url: "data:application/json,[]", signal: controller.signal }); }
+    finally { abortComplete++; }
+  })();
+  await entered;
+  controller.abort();
+  try { await pending; } catch (cause) { abortName = cause.name; }
+  return { result, order, reads, completed, plain: receivers.every(value => value === undefined),
+    stopped, abortName, abortComplete };
+};
 
 function view() {
   const root = document.createElement("article");
