@@ -1,0 +1,1061 @@
+{
+  "schema_version": 1,
+  "kind": "P0.1 core source preflight",
+  "recorded_at": "2026-11-14",
+  "baseline_commit": "867a5bb0f70a3572a6ea38bec21d6fb8a5bb0710",
+  "status": "source_preflight_cases_assigned_runtime_and_families_open",
+  "scope": {
+    "families": 15,
+    "classes": 27,
+    "members": 207,
+    "literal_options": 26,
+    "structural": 260,
+    "dynamic_groups": 15,
+    "case_groups": 29,
+    "decision_inputs": 12,
+    "whole_p01_semantic_closure_claimed": false,
+    "runtime_commands_executed": false,
+    "omissions_approved": 0
+  },
+  "sources": {
+    "docs/implementation/evidence/v1-core-parity.json": {
+      "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+    },
+    "docs/implementation/evidence/v1-surface-inventory.json": {
+      "sha256": "da8b2fb4013f4b18432f581fa0cfd1c91d3d67f95f3be5d36ed6478cac35a8c5"
+    },
+    "docs/implementation/evidence/remaining-work-plan.json": {
+      "sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632"
+    },
+    "v1/src/natural.js.js": {
+      "sha256": "db451e89314f57a5f13340712b681ca218d4e9b37093f3e08445948fa7ad7fd3"
+    },
+    "v1/src/natural.core.js": {
+      "sha256": "65604d3581b4509412a87fab0ee0af1d0e40ae85baaf8e96391a23505e6d1db1"
+    },
+    "v1/src/natural.architecture.js": {
+      "sha256": "545a0f80760d888a6465942d258b520c36dba0c5bc48bb95cf27cb02a21a9c26"
+    },
+    "v1/src/natural.data.js": {
+      "sha256": "65ecebe84468c27ff149bf4010b2143ee98040351b0c604c75f1dc11abad55c8"
+    },
+    "v1/src/natural.template.js": {
+      "sha256": "61c4b67e2a018e9fa18f8d8f5960400a66a1dbea58deb3ccedbe1d3702d65642"
+    },
+    "v1/src/natural.code.js": {
+      "sha256": "20da68c7c6e893708e5fdaeef3e3a4484bdc755d50f6535a30443d17c3c58a46"
+    },
+    "v1/lib/jquery-3.7.1.min.js": {
+      "sha256": "7aa6b0e08f48a0f95d8df7ea89e4cbfe1ef3d1e8c0f7373f7f25edfb4e4a325e"
+    },
+    "v1/dist/natural.config.js": {
+      "sha256": "7777a896a606553a80b02925fc496056fde07ba9dbf335b9579ded917d37201c"
+    },
+    "v1/@types/natural.architecture.misc.d.ts": {
+      "sha256": "0dbbc33dd62f25525ba0a5ba284e0db513da7667da22c33195bf0d0ed1ff87fa"
+    }
+  },
+  "inheritance": {
+    "original_ledger": "docs/implementation/evidence/v1-core-parity.json",
+    "original_entry": "Expand original entry_defaults recursively, enclosing source path, ALL feature profiles and local planned_acceptance overrides. New groups add concrete branches without replacing original cases/intent/secondary owners.",
+    "stage_registry": "docs/implementation/evidence/remaining-work-plan.json",
+    "required_steps": "Retain the union of every original feature profile family required_steps. primary_owner routes work only; discoveries reopen existing owners.",
+    "case_refs": "case_ids select groups; specific_case_refs add exact member/rule/option cases to every common/group case. Class/namespace records inherit all child members/options, not presence-only behavior.",
+    "selected_evidence": "Reuse selected implementations. Old planned gaps are not proof of current missing code; source cases are not runtime tests or approved public contracts.",
+    "unresolved": "Absent static references do not prove unused; declarations/TODOs do not prove shipped support. External/config/alias branches require actual owning acceptance.",
+    "modern_source_refs": "Modern source references locate observed owners, not a newly frozen runtime. Accepted historical identities remain while implementation proceeds."
+  },
+  "selected_evidence": [
+    {
+      "path": "docs/implementation/evidence/m51-shared-rules.json",
+      "sha256": "6b5108667a3a48983b09b2f572bffc4b238918eba7e75471aca6ebdecf4efde2",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m52-row-state.json",
+      "sha256": "39c01607fbbe8ccaba925b8c5d7defd9942edc83f2cf3c0e92176ba707c6cc48",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m53-form-options.json",
+      "sha256": "fb1ab16511bae1fc737bb51516a0cb00cf04574c22dbf1a94fae98857047fc3b",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m54-form-values.json",
+      "sha256": "1c73e2571d00be2109b1476bf5344bb217e42d5f859af91b02b4f637944f4929",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m55-local-form.json",
+      "sha256": "55f6b1a75fdee0493e189f217da9d1ff1a633afd4c027c0de191a718c96cd507",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m56-form-binding.json",
+      "sha256": "d217f47befe30fcd05a8aa69762774680743b8c092f8a51cb39941e6498c42cc",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m57-form-defaults.json",
+      "sha256": "b2ce382d21940d155becf7997da2101aeb354e22c855b7800b2987b7ec439500",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m58-form-discovery.json",
+      "sha256": "0069c9a72d8ba48a3ea6e38fd49d6515b783d7acdc102ffe8ca8b7adda86dbcd",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m59-form-presets.json",
+      "sha256": "b7dd828e62f54cfa4b0d58b39001ade25fd43eba5eb705be2ee573cf40b18b70",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m510-form-configuration.json",
+      "sha256": "6511bd480fcb7ebd3913c2ee98d60916287fa8893dd8060069cd9a35a2006d0e",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m511-grid-callbacks.json",
+      "sha256": "c678d105531815322f61aa8200d00098eb3e45572e79e08c52d354c499978f79",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m512-form-source.json",
+      "sha256": "48539caeb8025c4e021c49bfb1969292c464d020ac345dd0f4b573b7394409fa",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    },
+    {
+      "path": "docs/implementation/evidence/m513-choice-groups.json",
+      "sha256": "5e766bf6cb6e96cbdbad2157102999705c2613d3129a4fcd125950e91efffd9e",
+      "selector": "/selected_contracts",
+      "use": "Retain accepted selected outcome at its historical scope; no fresh runtime credit."
+    }
+  ],
+  "case_groups": {
+    "assembly": {
+      "sources": [
+        "v1/src/natural.js.js:16",
+        "v1/src/natural.architecture.js:15",
+        "v1/docs/architecture/communicator.md:85"
+      ],
+      "cases": [
+        "Create two independently scoped controllers over authored roots; data/element factory forms resolve to the intended receiver without global selector or jQuery dependence.",
+        "Resolve N/NC/NA/ND/NT/NCD/jQuery.fn aliases to actual definitions; distinguish copied statics, factory-lost statics and unavailable paths.",
+        "Class/namespace records inherit every concrete child member/option case; namespace presence alone never proves behavior completion."
+      ]
+    },
+    "cleanup": {
+      "sources": [
+        "v1/src/natural.core.js:434",
+        "v1/src/natural.data.js:36",
+        "src/page/index.ts:160"
+      ],
+      "cases": [
+        "Dispose one of two simultaneous pages with open calendars/overlays and active drag/resize subscriptions; only that owner loses listeners/timers/UI claims.",
+        "Detach/dispose a subscribed consumer then mutate the shared source; no stale registration/DOM write remains and another store/page keeps working.",
+        "Partial initialization failure/abort releases acquired resources once, including late cleanup; no global garbage collection is required."
+      ]
+    },
+    "strings": {
+      "sources": [
+        "v1/src/natural.core.js:475",
+        "v1/src/natural.data.js:1067",
+        "src/ui/format-rules.ts:57",
+        "src/ui/validate-rules.ts:70"
+      ],
+      "common": [
+        "Exercise null/undefined, blank/whitespace, zero/false and ordinary text at actual rule/native callers; raw source and display remain distinct.",
+        "Use standard operations privately where needed; replacing machinery does not remove its used rule outcome."
+      ],
+      "member_cases": {
+        "contains": "U01: prove no direct/transitive/config/declaration/alias/external framework owner needs public substring convenience; native includes can serve a used private caller.",
+        "endsWith": "Component/template suffix matches only the intended terminal position; interior-only text does not select the branch.",
+        "startsWith": "Only p./e./c.-prefixed declarations enter their branch; interior text is not a prefix.",
+        "insertAt": "U01: classify indexed insertion callers before removing the convenience; native slicing can serve a used owner.",
+        "removeWhitespace": "U01: classify callers before removing the convenience without altering validator whitespace behavior.",
+        "lpad": "7,3,0 -> 007; already-long text, blank and multichar fill follow the documented target-length contract.",
+        "rpad": "7,3,0 -> 700; already-long text, blank and multichar fill follow the documented target-length contract.",
+        "isEmpty": "Blank optional rules skip and required whitespace fails; zero/false follow explicit native/rule requirements rather than accidental truthiness.",
+        "byteLength": "ASCII A/U+0080/Hangul count 1/2/configuredWidth; surrogate pairs count two UTF-16 units. Test width 2/3/4 and NUL; TextEncoder UTF-8 is not equivalent.",
+        "trimToEmpty": "Nullish/blank -> empty display and nonblank text trimmed without implicitly rewriting Rows.",
+        "nullToEmpty": "U01: distinguish nullish-only conversion from trimming before proving no owning convenience use.",
+        "trimToNull": "Whitespace -> null at its actual owner; nonblank text trimmed and zero retained.",
+        "trimToUndefined": "Whitespace -> undefined only at optional-argument boundaries; never insert undefined into JSON Rows.",
+        "trimToZero": "Blank numeric fallback -> zero; signs/zero/nonblank number text retain intended formatting/validation.",
+        "trimToVal": "Blank -> supplied fallback and nonblank -> trimmed text; explicitly crosswalk primitive/null legacy arguments."
+      }
+    },
+    "dates": {
+      "sources": [
+        "v1/src/natural.core.js:583",
+        "v1/src/natural.core.js:718",
+        "v1/src/natural.core.js:1636",
+        "src/ui/format-rules.ts:265"
+      ],
+      "cases": [
+        "Parse 4/6/8/10/12/14-digit and separated values; compare blank/zero/impossible/leap/early-year dates.",
+        "Compare PHP token/escape/ISO-week/timezone/epoch/configured-separator outcomes at actual rule/calendar owners.",
+        "February includes correct adjacent-month cells and leap boundaries; calculations stay private.",
+        "Prototype/timestamp/day-difference exports need their own boundary; a used dateList calculation cannot disappear with its export."
+      ],
+      "member_cases": {
+        "diff": "U01: classify actual day-distance/timezone/DST use before removal.",
+        "strToDateStrArr": "Supported date/time shapes split to correct components; malformed input cannot normalize to an unrelated valid date.",
+        "strToDate": "Partial/full values preserve year/raw/pattern; invalid/leap/early-year results are explicit.",
+        "format": "Y-m-d, m/d/Y, escaped literals and timezone/ISO-week tokens render without Date.prototype mutation.",
+        "dateToTs": "U01: seconds/rounding differ from milliseconds; classify consumers.",
+        "tsToDate": "U01: milliseconds/current-time defaults differ from dateToTs seconds; classify consumers without inventing an API.",
+        "dateList": "Required calendar computation remains privately owned even if public export is removed after proof."
+      }
+    },
+    "elements": {
+      "sources": [
+        "v1/src/natural.core.js:775",
+        "v1/src/natural.core.js:801",
+        "v1/src/natural.ui.js:3352",
+        "src/ui/native-control.ts",
+        "src/ui/form.ts:827"
+      ],
+      "member_cases": {
+        "toOpts": "Resolve data-opts/shared defaults/local options/typed declarations; malformed declarations fail before ownership mutation. R04/R03 remain explicit.",
+        "toRules": "HTML and typed field/group tuples yield the same rule order/args/messages; empty clears and malformed declarations have explicit results.",
+        "toData": "Read/create text, textarea, select, radio, 0/1/N checkboxes, image src and text. Disabled/default/current values and full business-row factories remain distinct.",
+        "dataChanged": "Real committed changes produce documented visible changed feedback; no-op/shared update/disposal leaves no stale animation/class.",
+        "maxZindex": "Nested overlays retain intended order and restore author state; two pages cannot corrupt each other through global z-index mutation."
+      }
+    },
+    "browsers": {
+      "sources": [
+        "v1/src/natural.core.js:950",
+        "v1/src/natural.core.js:1002",
+        "src/ui/grid-columns.ts"
+      ],
+      "cases": [
+        "Crosswalk sniff/prefix branches to actual standard event/layout behavior in required modern browsers.",
+        "Scrollbar/overflow/zoom/resize measurement preserves layout and removes temporary nodes.",
+        "Old IE-only machinery is not a new support promise; used visible outcomes remain feature-owned."
+      ]
+    },
+    "messages": {
+      "sources": [
+        "v1/src/natural.core.js:1024",
+        "v1/src/natural.data.js:731",
+        "v1/dist/natural.config.js:174",
+        "src/ui/rules.ts:121"
+      ],
+      "cases": [
+        "Rule-specific message wins; missing custom-rule message uses configured locale global fallback; missing locale/key never produces an empty issue.",
+        "Substitute {0}/{1}/{2}, zero/false and effective byte-width defaults; define missing placeholders and retain inert text.",
+        "Two scopes retain independent locales/messages; explicit live updates reach intended existing consumers without altering captured policy.",
+        "Additional app locales work without assuming a global registry; R04 discovery/switch losses remain unresolved."
+      ]
+    },
+    "projection": {
+      "sources": [
+        "v1/src/natural.core.js:1076",
+        "v1/docs/core/json.md:35",
+        "v1/src/natural.ui.js:3432",
+        "v1/src/natural.ui.js:6384",
+        "docs/v2/grid-compositions.md"
+      ],
+      "cases": [
+        "Project {id:1,name:A,age:30,rowStatus:update} with requested [id,name] plus configured extras [rowStatus] into id/name/rowStatus. excludeMapFromKeys adds keys.",
+        "Retain null/business id/nested arrays; omit missing/undefined requested values; dotted keys are not silently deep paths.",
+        "No-key projection preserves full business content; classify immutable snapshots versus legacy same mutable reference.",
+        "Selected/checked/modified/deleted payloads use intended raw/checkpoint values and live RowId; do not transmit internal identity or delete a business id.",
+        "Configured extra/inherited source keys need explicit crosswalk; no generic JSON utility or automatic serializer."
+      ]
+    },
+    "values": {
+      "sources": [
+        "v1/src/natural.ui.js:3426",
+        "v1/src/natural.ui.js:3667",
+        "src/data/index.ts:73",
+        "src/data/index.ts:205",
+        "docs/implementation/evidence/m52-row-state.json",
+        "docs/implementation/evidence/m512-form-source.json"
+      ],
+      "cases": [
+        "Load/append/replace nested JSON, own zero/false/null, ordered arrays and null-prototype objects; preserve inputs and atomic malformed-late-record failure.",
+        "Classify Date/functions/undefined/NaN/Infinity/BigInt/cycles/sparse arrays/symbols/nonenumerable/inherited properties against actual callers; modern JSON acceptance is not parity proof.",
+        "Classify external mutable writes/repeated aliases separately from Rows.set/setMany notifications and deeply immutable snapshots.",
+        "Retain received checkpoints, add/copy/move anchors and no-op caches through accepted owners, without a schema/status engine.",
+        "Normalize source at receive/factory/explicit-write boundaries; full source access is independent of Form.read marked fields."
+      ],
+      "pending_boundary": "core-boundary:values"
+    },
+    "filter_sort": {
+      "sources": [
+        "v1/src/natural.data.js:1126",
+        "v1/src/natural.data.js:1142",
+        "v1/src/natural.ui.js:6384",
+        "docs/v2/grid-compositions.md"
+      ],
+      "cases": [
+        "Predicates receive intended raw row/index and preserve IDs; all selected/checked/changed/deleted projections survive view operations.",
+        "Compare numbers/numeric strings/zero/negative/blank/null/equal keys ascending/descending; correct Number(a)&&Number(b) zero defects explicitly.",
+        "Separate view order, Rows.move order and legacy mutable in-place sort; shared Forms still address the same row.",
+        "Executable strings remain R06; legacy AND-to-OR replacement is a defect, not desired predicate semantics."
+      ]
+    },
+    "events": {
+      "sources": [
+        "v1/src/natural.core.js:1148",
+        "v1/src/natural.core.js:1210",
+        "v1/src/natural.core.js:1233",
+        "v1/src/natural.core.js:1584"
+      ],
+      "cases": [
+        "Disabled/canceled actions cannot navigate or run later actions; enabled pointer/keyboard remains accessible.",
+        "Input handling retains editing/navigation shortcuts, clipboard and IME; parsing is not blanket key suppression.",
+        "Nested scrolling contains wheel only at declared boundaries and releases listeners.",
+        "Zero/multiple durations, seconds/milliseconds, animation/transition end and cancellation settle work once and restore author state.",
+        "Binding precedes action; R06 handler enumeration/namespaces/priority require disposition, not mere cleanup equivalence."
+      ]
+    },
+    "masks": {
+      "sources": [
+        "v1/src/natural.core.js:1310",
+        "v1/docs/core/mask.md:45",
+        "v1/src/natural.data.js:626",
+        "tests/format-rules.test.ts"
+      ],
+      "cases": [
+        "Generic digit/letter/Hangul/space/literal/mismatch/extra/blank cases preserve raw source.",
+        "Numeric sign/currency/grouping/padding/precision/round/ceil/floor include 1.999 carry and negative rounding with corrected results.",
+        "Standalone format/error/errorCodes/strippedValue/allowPartial/nextValidChar/deleting/throwing workflows are separate from one-shot rules.",
+        "Classify external partial-input diagnostics before adding/removing their API."
+      ],
+      "pending_boundary": "core-boundary:mask-diagnostics"
+    },
+    "guards": {
+      "sources": [
+        "v1/src/natural.core.js:22",
+        "v1/src/natural.core.js:290",
+        "v1/src/natural.core.js:306",
+        "src/internal/framework-error.ts"
+      ],
+      "cases": [
+        "Actual callers distinguish string/finite numeric/plain/null-prototype/empty object/array/array-like/wrapped data/HTMLElement without jQuery.",
+        "Invalid input fails with code/API/cause before partial ownership; error construction versus throwing stays deterministic.",
+        "Rule tuple slicing never mutates caller declarations; native arrays replace wrapped helper machinery privately.",
+        "Binding paths reject unsafe traversal while legitimate raw business keys and broader value boundaries receive explicit classification."
+      ]
+    },
+    "config": {
+      "sources": [
+        "v1/src/natural.core.js:259",
+        "v1/src/natural.architecture.js:371",
+        "v1/src/natural.architecture.js:592",
+        "v1/dist/natural.config.js:12",
+        "docs/implementation/evidence/m59-form-presets.json"
+      ],
+      "cases": [
+        "Crosswalk constructor -> shared -> local precedence with explicit false/zero/null/empty lists, not truthy merges.",
+        "Define creation snapshot versus explicit live defaults/locale/rules/services for two independent scopes and existing consumers.",
+        "Read/write/remove request metadata and parent/opener/caller services through typed ownership; define missing/stored-undefined behavior.",
+        "DOM instance/context enumeration and N.locale discovery/update remain R04; handles/presets alone do not prove equivalence.",
+        "Retain accepted field maps/presets/pipelines/forwarding; add only remaining propagation and declarations."
+      ]
+    },
+    "request_options": {
+      "sources": [
+        "v1/src/natural.architecture.js:302",
+        "v1/src/natural.architecture.js:400",
+        "v1/dist/natural.config.js:78",
+        "docs/implementation/evidence/m52-row-state.json"
+      ],
+      "options": {
+        "url": "Relative/base URL and data/view overload target the intended endpoint; fragments/query/base are explicit.",
+        "referrer": "Capture app location metadata, distinct from HTTP Referer/referrerPolicy.",
+        "contentType": "JSON/raw/URL-encoded/FormData/no-header requests transmit intended bytes without forcing JSON.",
+        "cache": "Constructor false is overridden by shipped true; configured false controls intended GET/HEAD cache/busting, not every POST.",
+        "async": "True uses ordinary async HTTP; actual async:false remains R07, not automatic Promise equivalence.",
+        "type": "Constructor/shipped POST versus modern GET requires explicit method+payload migration.",
+        "data": "Object/array/raw/form/query/empty inputs use explicit wire recipes; encoding failure cannot corrupt a partial request.",
+        "dataIsArray": "Legacy wrapped false truncates first row and true sends whole array; accepted scalar/array recipes retain deliberate payloads.",
+        "dataType": "JSON/text/HTML/XML/empty/custom decoding/converter chains have owners; script/JSONP remain R07.",
+        "urlSync": "Configured location-change guard suppresses stale delivery; page cancellation alone does not prove equivalence. Legacy ignores exclamation marks.",
+        "crossDomain": "Same/cross origin, credentials/auth/preflight and cancel have explicit HTTP outcomes; JSONP is separate.",
+        "browserHistory": "Legacy TODO has no observed behavior branch; confirm declaration/config-only status instead of inventing History support.",
+        "append": "Typed additive/replacement/default host loading preserves ownership/init order/failure restoration.",
+        "target": "Explicit destination/reload targets the intended instance and preserves other pages; stale/removed host behavior is explicit."
+      },
+      "member_cases": {
+        "constructor": "Apply constructor, shipped config and caller overrides before body/query encoding; malformed serialization is explicit and no wrapper/raw overload truncates an intended whole-array payload.",
+        "attr": "Read absent/all/named request metadata, write zero/false/null/object values and preserve intended chain receiver; stored undefined/getter ambiguity has an explicit typed migration.",
+        "removeAttr": "Delete one existing/missing metadata key without deleting another request or page input; return/chain behavior is documented.",
+        "param": "For ?flag&empty=&x=1&x=2 classify bare-key, empty-value and repeated-key intent; legacy bare key becomes string undefined, empty becomes true and repeats overwrite. Preserve meaningful query access without copying those accidental conversions; test percent encoding and malformed input.",
+        "get": "Inspect current request settings versus captured metadata without mutating a different request; expose only the required typed request information.",
+        "reload": "Reload captured URL/destination/input through the same CVC lifetime; removed target, rapid replacement, stale response and failure keep independent instances correct."
+      }
+    },
+    "transport": {
+      "sources": [
+        "v1/src/natural.architecture.js:28",
+        "v1/src/natural.architecture.js:146",
+        "v1/@types/natural.architecture.misc.d.ts:6",
+        "v1/docs/architecture/communicator.md:85",
+        "v1/lib/jquery-3.7.1.min.js",
+        "src/comm/index.ts"
+      ],
+      "cases": [
+        "Normalize string/options/data/element overloads and invalid input without copying receiver methods.",
+        "Inherited ordinary settings include headers/accepts/contentType/mimeType, username/password, xhrFields.withCredentials, timeout, processData/traditional, cache/ifModified/statusCode, beforeSend/context/global, dataFilter/converters and custom xhr; distinguish pass-through from callbacks submit replaces.",
+        "Network/HTTP/decode/timeout/abort and replacement Request cancellation yield deterministic error/finalization once and no late writes.",
+        "jqXHR abort/headers/status/progress/Deferred/receiver workflows need native equivalents or R07; Promise shape alone is insufficient.",
+        "Bundled jQuery implements script/JSONP/converter/synchronous-XHR branches reachable via inherited settings even without a repository example; exact losses belong in R07.",
+        "browserHistory is TODO/config, not implemented History; remote executable HTML/controller discovery remains R01."
+      ],
+      "inherited_settings_status": "Local declaration, actual pass-through and bundled transport branches identified; external consumers and final equivalents remain open.",
+      "settings_partition": {
+        "ordinary_pass_through": {
+          "fields": [
+            "accepts",
+            "headers",
+            "contentType",
+            "mimeType",
+            "username",
+            "password",
+            "xhrFields",
+            "timeout",
+            "processData",
+            "traditional",
+            "cache",
+            "ifModified",
+            "statusCode",
+            "method",
+            "type",
+            "url",
+            "data",
+            "dataType",
+            "crossDomain",
+            "isLocal",
+            "context",
+            "global"
+          ],
+          "acceptance": "For each concrete caller, preserve intended request bytes/headers/credentials/cache/status/timeout/receiver/global-observer outcome with typed native policy or explicitly classify the actual lost workflow. token presence alone is not runtime closure."
+        },
+        "response_conversion": {
+          "fields": [
+            "contents",
+            "converters",
+            "dataFilter",
+            "responseFields",
+            "throws"
+          ],
+          "acceptance": "Separate documented converter/filter workflows from internal jQuery extension settings; cover content sniff, text/XML/JSON conversion, custom transform/error and response inspection. A declaration/internal token alone does not prove a public required workflow."
+        },
+        "unsupported_transport_candidates": {
+          "fields": [
+            "async:false",
+            "dataType:script",
+            "dataType:jsonp",
+            "jsonp",
+            "jsonpCallback",
+            "scriptAttrs",
+            "scriptCharset"
+          ],
+          "decision": "core:R07",
+          "acceptance": "Inspect actual sync/script/JSONP caller outcomes and effects before proposing one exact loss; do not mark them equivalent to ordinary Promise/JSON decode or silently omit them."
+        },
+        "submit_overwrites": {
+          "fields": [
+            "beforeSend",
+            "success",
+            "error",
+            "complete"
+          ],
+          "acceptance": "NA.comm.submit replaces these raw Ajax callbacks. Preserve the actual filter/error-handler contract rather than claiming arbitrary option callbacks were honored. The Request type excludes success/error/complete but still inherits beforeSend."
+        },
+        "external_nonliteral": {
+          "replace": "Source branches at v1/src/natural.architecture.js:207/220 accept externally merged replacement even though no literal constructor key exists. Shared loader must preserve safe ownership/outcome.",
+          "enctype": "Locally declared at v1/@types/natural.architecture.misc.d.ts:16; do not infer automatic multipart form submission from this declaration. Prove actual FormData/body/processData/contentType callers.",
+          "browserHistory": "Explicit TODO and configuration values do not establish History behavior; maintain its non-shipped-status investigation."
+        }
+      }
+    },
+    "hooks": {
+      "sources": [
+        "v1/src/natural.architecture.js:52",
+        "v1/src/natural.architecture.js:87",
+        "v1/src/natural.architecture.js:159",
+        "v1/docs/architecture/communication-filter.md:58"
+      ],
+      "cases": [
+        "beforeInit/afterInit/beforeSend/success/error/complete have deterministic ordered/unordered/tied execution.",
+        "Transformations, undefined passthrough, Error/false stop/recovery and terminal completion have explicit args/receiver rules.",
+        "Thrown/rejected hooks, decoder/callback failure, timeout and abort clean up/finalize; do not copy broken beforeInit bare-wrapper chaining.",
+        "Reset/rebuild updates intended later requests; captured in-flight versus deliberate live policy is explicit.",
+        "Location guards/cancel/no-late-write survive replaced Request/Response and both HTML/data callers."
+      ]
+    },
+    "lifecycle": {
+      "sources": [
+        "v1/src/natural.architecture.js:444",
+        "v1/src/natural.architecture.js:466",
+        "v1/docs/architecture/controller.md",
+        "src/page/index.ts"
+      ],
+      "cases": [
+        "Explicit view/controller factories produce two independent instances with input/output/caller/opener/request metadata.",
+        "ready/init/activate/deactivate/open/reload/dispose order works in content/Popup/Tabs/Documents and delayed code loading.",
+        "Rapid reload/parent closure/abort/init or activation failure release partial resources once and stop late output/DOM writes.",
+        "Destination/additive/replacement modes retain intended old/new instance on success/failure; inert HTML and unique IDs remain."
+      ]
+    },
+    "advice": {
+      "sources": [
+        "v1/src/natural.architecture.js:482",
+        "v1/docs/architecture/aop.md",
+        "v1/docs/template/conventions.md:51"
+      ],
+      "cases": [
+        "Before/after/around/error preserve args/result/order/nested ownership and actual required proceed invocation outcomes.",
+        "Sync throws versus rejected promises/startup cancellation are explicit; legacy sync-only catch is not async support.",
+        "View/path/custom-pointcut interception is R02; wrappers must preserve useful guard/log/error/startup outcomes or record exact loss.",
+        "Controller/advisor receiver needs migrate to typed context/closures, not private implementation objects."
+      ]
+    },
+    "declarations": {
+      "sources": [
+        "v1/src/natural.template.js:21",
+        "v1/src/natural.template.js:159",
+        "v1/src/natural.template.js:216",
+        "v1/docs/template/conventions.md:51",
+        "v1/docs/template/component-declaration.md"
+      ],
+      "cases": [
+        "Await common/data-code, filter by code key and apply selected/default choices before dependent components/events/actions/init/open.",
+        "Defaults/options/action order are explicit; declarations remain separate from handles.",
+        "Enter search respects excluded controls/default button, avoids duplicate submit and cleans up listeners.",
+        "Code failure/abort stops later construction/actions/open; container readiness cannot race initialization.",
+        "R03 governs automatic p./e. interpretation/string action dispatch; c.* are application communicator factories.",
+        "Correct per-action onInitComponents and stalled onOpenDefer defects without claiming them intended ordering."
+      ]
+    },
+    "row_events": {
+      "sources": [
+        "v1/src/natural.template.js:313",
+        "v1/src/natural.template.js:376",
+        "src/ui/grid.ts:1651",
+        "docs/v2/grid-compositions.md"
+      ],
+      "cases": [
+        "Native/custom/grouped row actions retain RowId/raw/event/element after sort/filter/page/rebind and observe committed binding first.",
+        "Grouped names/custom selector targets stay row/page scoped without duplicate IDs.",
+        "Removed/recycled/disposed rows cannot execute old actions; handlers clean up once.",
+        "Keep existing Grid action/post-edit recipes; add missing List/declaration/resource behavior through current owners."
+      ]
+    },
+    "sync": {
+      "sources": [
+        "v1/src/natural.data.js:36",
+        "v1/src/natural.data.js:81",
+        "src/data/index.ts:131",
+        "docs/implementation/evidence/m52-row-state.json"
+      ],
+      "cases": [
+        "Shared Form/Grid/List/Tree observe intended field/row/structural changes; equal values in a second Rows remain isolated.",
+        "View ordering preserves selected identity; no loops or cross-row refresh.",
+        "Detach/dispose during notification and unsubscribe/rebind/replace leave no stale work/registrations.",
+        "Reuse received-state/append/replace/checkpoint evidence; do not reproduce DOM singleton/wrapper-identity defects."
+      ]
+    },
+    "runner_options": {
+      "sources": [
+        "v1/src/natural.data.js:105",
+        "v1/src/natural.data.js:646",
+        "v1/docs/data/formatter.md:223",
+        "v1/docs/data/validator.md:91"
+      ],
+      "options": {
+        "data": "Dataset/rules-object versus element-mode, full/indexed rows and immutable raw ownership; do not copy format(row) shrinking its dataset.",
+        "rules": "Field-to-tuple maps, ordered names/args/overrides/empty clears; M5.1 fields already exist.",
+        "isElement": "Internal mode determines discovery/DOM/events; retain useful dataset-versus-DOM outcomes without unnecessary public mode flags.",
+        "createEvent": "Manual format/unformat/validate events outside normal binding are R08; suppression is not validation disabling.",
+        "context": "Root/input/group lookup is scoped; independent instances and absent/empty rows never fall into invalid selector iteration.",
+        "targetEle": "Native groups/formatted elements retain exact targets/raw/display/errors/cleanup without duplicate-ID lookup."
+      }
+    },
+    "standalone_rules": {
+      "sources": [
+        "v1/src/natural.data.js:134",
+        "v1/src/natural.data.js:225",
+        "v1/src/natural.data.js:679",
+        "v1/docs/data/formatter.md:188",
+        "v1/docs/data/validator.md:164"
+      ],
+      "cases": [
+        "Rules-object formatter/validator processes full/chosen dataset rows without shrinking source, and returns intended per-row/field results.",
+        "Manual events/hot cached element rules have equivalents or R08 disposition; unformat reads raw, not inverse parsing.",
+        "Config-extension custom rules, args, element/context and receiver migrate explicitly; bound rules stay required.",
+        "Standalone partial-mask diagnostics need an explicit boundary, not silent absorption into R08.",
+        "Correct empty/plain-object/mixed-group target defects rather than preserving corrupt/no-op behavior."
+      ]
+    },
+    "form_callbacks": {
+      "sources": [
+        "v1/src/natural.ui.js:417",
+        "v1/src/natural.ui.js:3667",
+        "v1/src/natural.ui.js:4030",
+        "v1/src/natural.ui.js:4240",
+        "v1/docs/ui/form.md:202",
+        "v1/docs/examples/edit-form-data.md:311",
+        "docs/implementation/evidence/m512-form-source.json"
+      ],
+      "cases": [
+        "Whole/selected bind visits bound/unbound/inherited keys: compare per-key before-render-after versus current before-all/after-all.",
+        "Getters have no hooks; setter-before old value/equal-write callbacks/bound-unbound notify:false differences require explicit outcomes.",
+        "Classify nonundefined before/after source returns and post-notify/stale-DOM mutation without hidden writes in display callbacks.",
+        "Local capture/conditional live global read/undefined/false/dropped action/global-only capture and throwing/reentrant/disposed behavior remain explicit.",
+        "Concrete number/boolean normalization caller is covered by M5.12 receive/typed-control recipes; exact per-key timing is not.",
+        "First selection must safely use a live handle/initial policy even during construction, never an unassigned handle variable."
+      ],
+      "pending_boundary": "core-boundary:per-key-callbacks"
+    },
+    "inspection": {
+      "sources": [
+        "v1/src/natural.code.js:18",
+        "v1/src/natural.code.js:27",
+        "v1/src/natural.code.js:157",
+        "v1/src/natural.code.js:180",
+        "v1/docs/code/inspection.md:47",
+        "v1/docs/code/inspection.md:113",
+        "v1/docs/code/inspection.md:154"
+      ],
+      "cases": [
+        "Application success filters invoke optional inspection even with no framework auto caller; external invocation is not unused.",
+        "Selected/all/custom rules yield stable level/message/line/code, exclusions and unknown-rule outcomes.",
+        "Scope-selector/component-value checks cover intended scripts; do not copy first-script-only false negatives.",
+        "Severity/report/critical abort/locale/custom findings need equivalent or R05; lint/sourcemaps alone are not equivalent.",
+        "No-script/compact closing-script sourceURL behavior is explicit; malformed insertion and silent Error-return logging are defects."
+      ]
+    },
+    "utility_boundary": {
+      "sources": [
+        "docs/implementation/evidence/v1-core-parity.json#/retirement_groups/8",
+        "v1/src/natural.js.js:16",
+        "v1/dist/natural.config.js",
+        "v1/docs/core/json.md"
+      ],
+      "cases": [
+        "Record direct/transitive/config/declaration/alias/receiver/external callers before classifying unrelated convenience.",
+        "Used behavior stays privately owned; no replacement convenience package or generic library.",
+        "dateList/byte validation/messages/masks/control/scroll/animation behavior remains required despite namespace appearance.",
+        "Existing removal authorization applies only after proof; no helper is certified unused by this preflight."
+      ]
+    },
+    "format_catalog": {
+      "sources": [
+        "v1/src/natural.data.js:229",
+        "v1/docs/data/formatter.md:150",
+        "src/ui/format-rules.ts",
+        "tests/format-rules.test.ts"
+      ],
+      "common": [
+        "Resolve each exact retained name from HTML and typed fields in actual Form/Grid/List callers; override/unknown-name/invalid-arg outcomes are explicit.",
+        "Exercise blank/valid/invalid and each documented arg branch without source mutation; reuse selected evidence without recertification.",
+        "Crosswalk legacy fallback syntax to explicit modern declarations; corruption/rounding/empty-source defects are not compatibility requirements.",
+        "Custom functions need documented capture/plain receiver/context and consistent thrown/nontext failure, without private RuleCall this."
+      ],
+      "rule_cases": {
+        "commas": "-1234567.125 -> -1,234,567.125; signs/fractions and malformed/blank behavior.",
+        "rrn": "9001011234567 -> 900101-1234567; zero/full optional mask count/character and malformed args.",
+        "ssn": "123456789 -> 123-45-6789; invalid length/already-separated/blank.",
+        "kbrn": "1234567890 -> 123-45-67890; invalid length/already-separated/blank.",
+        "kcn": "1234567890123 -> 123456-7890123; invalid length/already-separated/blank.",
+        "upper": "abc -> ABC; nonletters/blank valid text.",
+        "lower": "ABC -> abc; nonletters/blank valid text.",
+        "capitalize": "ada lovelace -> Ada lovelace; whitespace/empty/nonletter through actual preprocessing.",
+        "zipcode": "123456 -> 123-456; short/invalid/current postal shape is an explicit migration, not rule deletion.",
+        "phone": "0212345678 -> 02-1234-5678; 01012345678 -> 010-1234-5678; short/invalid/blank/separators.",
+        "realnum": "0100.10 -> 100.1; zero/negative/exponent/invalid/nonfinite outcomes.",
+        "trimtoempty": "Whitespace/nullish -> empty text and nonblank trimmed; source not normalized.",
+        "trimtozero": "Whitespace -> 0 display; zero/nonblank retained.",
+        "trimtoval": "Blank -> supplied fallback/nonblank -> trimmed; primitive versus null/object legacy args crosswalked.",
+        "date": "20240315 with 8 -> 2024-03-15; m/d/Y -> 03/15/2024. Cover 4/6/8/10/12/14/default/invalid/leap/early-year/token/escape/timezone. Date/month picker args remain C12.",
+        "time": "1234 -> 12:34; 2/4/6/separators and corrected 0005 -> 00:05:00 length padding.",
+        "limit": "abcdef,3 -> abc; multibyte budget/suffix/empty suffix/oversized suffix; omitted suffix no accidental throw.",
+        "replace": "a-b-a,a,x -> x-b-x; literal/regex-like/empty/multiple cases. Broken third-arg this.vo write is a defect, not a source-write API.",
+        "lpad": "7,3,0 -> 007; target bounds/multichar fill/already-long text.",
+        "rpad": "7,3,0 -> 700; target bounds/multichar fill/already-long text.",
+        "mask": "phone/email/address/name/rrn plus optional character; short/blank/Unicode and privacy outcome.",
+        "generic": "01012345678,###-####-#### -> 010-1234-5678; digit/letter/Hangul/space/literal/mismatch/extra/blank and corrected s acceptance.",
+        "numeric": "1234.5,#,##0.00 -> 1,234.50; sign/currency/parentheses/grouping/precision/padding/round/ceil/floor, 1.999 carry and negatives."
+      }
+    },
+    "validate_catalog": {
+      "sources": [
+        "v1/src/natural.data.js:778",
+        "v1/src/natural.data.js:1067",
+        "v1/docs/data/validator.md:91",
+        "src/ui/validate-rules.ts",
+        "tests/validate-rules.test.ts",
+        "tests/rules.test.ts"
+      ],
+      "common": [
+        "Resolve each exact name/combined alias from HTML/typed declarations; valid/invalid/optional-blank/required-blank and custom overrides.",
+        "Exercise documented/malformed args and configured message fallback; accessible group/native errors attach correctly and clear after correction.",
+        "Use raw/draft values, not display text; defaults/parse/native integrity/autoValidate remain distinct.",
+        "Retain checksum/case/regex/leap/date corrections; no catalog deletion is authorized.",
+        "Default byte width/effective message args are explicit without mutating caller declarations; live/captured policy is deliberate."
+      ],
+      "rule_cases": {
+        "required": "Whitespace fails/nonblank passes; zero/false obey explicit native boolean/choice requirements.",
+        "alphabet": "abc/letter whitespace passes/digits fail; optional blanks separate.",
+        "integer": "+123 passes/1.2 fails; zero/sign/blank.",
+        "korean": "Hangul/whitespace passes/Latin and digits fail; Unicode coverage deliberate.",
+        "alphabet_integer": "A1 passes/disallowed punctuation fails; alphabet+integer ordering aliases.",
+        "integer_korean": "가1 passes/Latin fails; integer+korean aliases.",
+        "alphabet_korean": "A가 passes/digits fail; alphabet+korean aliases.",
+        "alphabet_integer_korean": "A가1 passes/disallowed punctuation fails; all component order aliases.",
+        "dash_integer": "12-3 passes/letters fail; integer+dash alias.",
+        "commas_integer": "1,234 passes/letters fail; integer+commas alias.",
+        "number": "-1,234.5 passes/1.2.3 fails; zero/sign/coercion boundaries.",
+        "email": "a@b.co passes/a@@b fails; optional blank/anchoring.",
+        "url": "https://example.com/a passes/javascript action text fails; supported scheme crosswalk.",
+        "zipcode": "123-456 passes under retained shape; invalid/current postal shape explicit.",
+        "decimal": "Precision 0/1/2; .5/integer/overprecision; malformed/negative precision.",
+        "phone": "Complete landline/mobile and partial true/false/string true/false; incomplete input distinguishes policy.",
+        "rrn": "Generated synthetic valid/invalid checksum pair; preserve fix for legacy always-false number/string comparison.",
+        "ssn": "123-45-6789 passes/malformed or prefixed value fails.",
+        "frn": "Generated synthetic valid/invalid checksum/category pair.",
+        "frn_rrn": "Resident/foreign dispatch with valid/invalid checksums; rrn+frn alias.",
+        "kbrn": "Synthetic valid/invalid checksum pair, including trailing-digit correction.",
+        "kcn": "Synthetic valid/invalid corporate checksum pair.",
+        "date": "2024-02-29 valid/2023-02-29/zero-day/nondate invalid; separators/partial/early years crosswalked.",
+        "time": "23:59:59 valid/24:00 invalid; HH/HHmm/HHmmss/separators.",
+        "accept": "Y with Y|N passes/X fails; full matching/malformed regex.",
+        "match": "abc123 with digit pattern passes/abc fails; substring differs from accept.",
+        "acceptfileext": "file.PNG with jpg|png passes/fileXpng fails; case/escaped dot.",
+        "notaccept": "X with Y|N passes/Y fails; full-match inversion.",
+        "notmatch": "abc with digit pattern passes/abc123 fails; inversion.",
+        "notacceptfileext": "file.txt with jpg|png passes/file.PNG fails; case/escaped dot.",
+        "equalTo": "Same-row safe nested peer equality/inequality/draft values; selector peers migrate and lowercase dispatch is fixed without global selectors.",
+        "maxlength": "Trimmed at/below/above max; malformed numeric arg/zero.",
+        "minlength": "Trimmed at/below/above min; malformed numeric arg/zero.",
+        "rangelength": "Inclusive boundaries/reversed bounds/blank policy.",
+        "maxbyte": "ASCII/U+0080/Hangul/surrogate/NUL at max with configured/explicit width; message shows effective width.",
+        "minbyte": "Same unit/width cases at inclusive minimum.",
+        "rangebyte": "Inclusive min/max/configured or explicit third width; reversed/invalid bounds and effective message args.",
+        "maxvalue": "Inclusive max/zero/negative/coercible text/invalid args.",
+        "minvalue": "Inclusive min/zero/negative/coercible text/invalid args.",
+        "rangevalue": "Inclusive bounds/negative/zero/reversed or invalid bounds.",
+        "regexp": "Pattern/flags/optional message; absent message nonempty fallback, invalid args early failure, global/sticky state isolation."
+      }
+    }
+  },
+  "entries": [
+    {"inventory_pointer":"/files/0/classes/0","ledger_pointer":"/files/0/classes/0","kind":"class","symbol":"NJS","primary_owner":"M3.4","case_ids":["assembly"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/0/classes/0/members/0","ledger_pointer":"/files/0/classes/0/members/0","kind":"member","symbol":"NJS.prototype.constructor","primary_owner":"M3.4","case_ids":["assembly"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/0/classes/0/members/1","ledger_pointer":"/files/0/classes/0/members/1","kind":"member","symbol":"NJS.version","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/0","ledger_pointer":"/files/1/classes/0","kind":"class","symbol":"NC.gc","primary_owner":"M3.4","case_ids":["cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/0/members/0","ledger_pointer":"/files/1/classes/0/members/0","kind":"member","symbol":"NC.gc.minimum","primary_owner":"M3.4","case_ids":["cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/0/members/1","ledger_pointer":"/files/1/classes/0/members/1","kind":"member","symbol":"NC.gc.full","primary_owner":"M3.4","case_ids":["cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/0/members/2","ledger_pointer":"/files/1/classes/0/members/2","kind":"member","symbol":"NC.gc.ds","primary_owner":"M5.15","case_ids":["cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1","ledger_pointer":"/files/1/classes/1","kind":"class","symbol":"NC.string","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/1/members/0","ledger_pointer":"/files/1/classes/1/members/0","kind":"member","symbol":"NC.string.contains","primary_owner":"M3.8","case_ids":["strings","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/contains"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/1/members/1","ledger_pointer":"/files/1/classes/1/members/1","kind":"member","symbol":"NC.string.endsWith","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/endsWith"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/2","ledger_pointer":"/files/1/classes/1/members/2","kind":"member","symbol":"NC.string.startsWith","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/startsWith"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/3","ledger_pointer":"/files/1/classes/1/members/3","kind":"member","symbol":"NC.string.insertAt","primary_owner":"M3.8","case_ids":["strings","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/insertAt"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/1/members/4","ledger_pointer":"/files/1/classes/1/members/4","kind":"member","symbol":"NC.string.removeWhitespace","primary_owner":"M3.8","case_ids":["strings","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/removeWhitespace"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/1/members/5","ledger_pointer":"/files/1/classes/1/members/5","kind":"member","symbol":"NC.string.lpad","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/lpad"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/6","ledger_pointer":"/files/1/classes/1/members/6","kind":"member","symbol":"NC.string.rpad","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/rpad"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/7","ledger_pointer":"/files/1/classes/1/members/7","kind":"member","symbol":"NC.string.isEmpty","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/isEmpty"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/8","ledger_pointer":"/files/1/classes/1/members/8","kind":"member","symbol":"NC.string.byteLength","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/byteLength"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/9","ledger_pointer":"/files/1/classes/1/members/9","kind":"member","symbol":"NC.string.trimToEmpty","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/trimToEmpty"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/10","ledger_pointer":"/files/1/classes/1/members/10","kind":"member","symbol":"NC.string.nullToEmpty","primary_owner":"M3.8","case_ids":["strings","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/nullToEmpty"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/1/members/11","ledger_pointer":"/files/1/classes/1/members/11","kind":"member","symbol":"NC.string.trimToNull","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/trimToNull"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/12","ledger_pointer":"/files/1/classes/1/members/12","kind":"member","symbol":"NC.string.trimToUndefined","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/trimToUndefined"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/13","ledger_pointer":"/files/1/classes/1/members/13","kind":"member","symbol":"NC.string.trimToZero","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/trimToZero"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/1/members/14","ledger_pointer":"/files/1/classes/1/members/14","kind":"member","symbol":"NC.string.trimToVal","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/strings/member_cases/trimToVal"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/2","ledger_pointer":"/files/1/classes/2","kind":"class","symbol":"NC.date","primary_owner":"M5.18","case_ids":["dates"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/2/members/0","ledger_pointer":"/files/1/classes/2/members/0","kind":"member","symbol":"NC.date.diff","primary_owner":"M3.8","case_ids":["dates","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/diff"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/2/members/1","ledger_pointer":"/files/1/classes/2/members/1","kind":"member","symbol":"NC.date.strToDateStrArr","primary_owner":"M5.18","case_ids":["dates"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/strToDateStrArr"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/2/members/2","ledger_pointer":"/files/1/classes/2/members/2","kind":"member","symbol":"NC.date.strToDate","primary_owner":"M5.18","case_ids":["dates"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/strToDate"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/2/members/3","ledger_pointer":"/files/1/classes/2/members/3","kind":"member","symbol":"NC.date.format","primary_owner":"M5.18","case_ids":["dates"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/format"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/2/members/4","ledger_pointer":"/files/1/classes/2/members/4","kind":"member","symbol":"NC.date.dateToTs","primary_owner":"M3.8","case_ids":["dates","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/dateToTs"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/2/members/5","ledger_pointer":"/files/1/classes/2/members/5","kind":"member","symbol":"NC.date.tsToDate","primary_owner":"M3.8","case_ids":["dates","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/tsToDate"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/2/members/6","ledger_pointer":"/files/1/classes/2/members/6","kind":"member","symbol":"NC.date.dateList","primary_owner":"M3.8","case_ids":["dates","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/dates/member_cases/dateList"],"candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/3","ledger_pointer":"/files/1/classes/3","kind":"class","symbol":"NC.element","primary_owner":"M5.18","case_ids":["elements"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/3/members/0","ledger_pointer":"/files/1/classes/3/members/0","kind":"member","symbol":"NC.element.toOpts","primary_owner":"M3.5","case_ids":["elements","config","declarations"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/elements/member_cases/toOpts"],"candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/1/classes/3/members/1","ledger_pointer":"/files/1/classes/3/members/1","kind":"member","symbol":"NC.element.toRules","primary_owner":"M5.18","case_ids":["elements"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/elements/member_cases/toRules"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/3/members/2","ledger_pointer":"/files/1/classes/3/members/2","kind":"member","symbol":"NC.element.toData","primary_owner":"M5.18","case_ids":["elements"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/elements/member_cases/toData"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/3/members/3","ledger_pointer":"/files/1/classes/3/members/3","kind":"member","symbol":"NC.element.dataChanged","primary_owner":"M5.15","case_ids":["elements"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/elements/member_cases/dataChanged"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/3/members/4","ledger_pointer":"/files/1/classes/3/members/4","kind":"member","symbol":"NC.element.maxZindex","primary_owner":"M5.18","case_ids":["elements"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/elements/member_cases/maxZindex"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/4","ledger_pointer":"/files/1/classes/4","kind":"class","symbol":"NC.browser","primary_owner":"M3.8","case_ids":["browsers"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/4/members/0","ledger_pointer":"/files/1/classes/4/members/0","kind":"member","symbol":"NC.browser.cookie","primary_owner":"M3.8","case_ids":["browsers","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/4/members/1","ledger_pointer":"/files/1/classes/4/members/1","kind":"member","symbol":"NC.browser.removeCookie","primary_owner":"M3.8","case_ids":["browsers","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/4/members/2","ledger_pointer":"/files/1/classes/4/members/2","kind":"member","symbol":"NC.browser.msieVersion","primary_owner":"M3.8","case_ids":["browsers"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/4/members/3","ledger_pointer":"/files/1/classes/4/members/3","kind":"member","symbol":"NC.browser.is","primary_owner":"M3.8","case_ids":["browsers"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/4/members/4","ledger_pointer":"/files/1/classes/4/members/4","kind":"member","symbol":"NC.browser.contextPath","primary_owner":"M3.8","case_ids":["browsers","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/4/members/5","ledger_pointer":"/files/1/classes/4/members/5","kind":"member","symbol":"NC.browser.scrollbarWidth","primary_owner":"M3.8","case_ids":["browsers"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/5","ledger_pointer":"/files/1/classes/5","kind":"class","symbol":"NC.message","primary_owner":"M5.18","case_ids":["messages","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/5/members/0","ledger_pointer":"/files/1/classes/5/members/0","kind":"member","symbol":"NC.message.replaceMsgVars","primary_owner":"M5.18","case_ids":["messages","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/5/members/1","ledger_pointer":"/files/1/classes/5/members/1","kind":"member","symbol":"NC.message.get","primary_owner":"M5.18","case_ids":["messages","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/1/classes/6","ledger_pointer":"/files/1/classes/6","kind":"class","symbol":"NC.array","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/6/members/0","ledger_pointer":"/files/1/classes/6/members/0","kind":"member","symbol":"NC.array.deduplicate","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/7","ledger_pointer":"/files/1/classes/7","kind":"class","symbol":"NC.json","primary_owner":"M5.15","case_ids":["projection","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/7/members/0","ledger_pointer":"/files/1/classes/7/members/0","kind":"member","symbol":"NC.json.mapFromKeys","primary_owner":"M5.15","case_ids":["projection","values"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/7/members/1","ledger_pointer":"/files/1/classes/7/members/1","kind":"member","symbol":"NC.json.mergeJsonArray","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/7/members/2","ledger_pointer":"/files/1/classes/7/members/2","kind":"member","symbol":"NC.json.format","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/8","ledger_pointer":"/files/1/classes/8","kind":"class","symbol":"NC.event","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/8/members/0","ledger_pointer":"/files/1/classes/8/members/0","kind":"member","symbol":"NC.event.isNumberRelatedKeys","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/8/members/1","ledger_pointer":"/files/1/classes/8/members/1","kind":"member","symbol":"NC.event.disable","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/8/members/2","ledger_pointer":"/files/1/classes/8/members/2","kind":"member","symbol":"NC.event.windowScrollLock","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/8/members/3","ledger_pointer":"/files/1/classes/8/members/3","kind":"member","symbol":"NC.event.getMaxDuration","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/8/members/4","ledger_pointer":"/files/1/classes/8/members/4","kind":"member","symbol":"NC.event.whichAnimationEvent","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/8/members/5","ledger_pointer":"/files/1/classes/8/members/5","kind":"member","symbol":"NC.event.whichTransitionEvent","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/9","ledger_pointer":"/files/1/classes/9","kind":"class","symbol":"NC.mask","primary_owner":"M5.18","case_ids":["masks"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/9/members/0","ledger_pointer":"/files/1/classes/9/members/0","kind":"member","symbol":"NC.mask.prototype.constructor","primary_owner":"M5.18","case_ids":["masks"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/9/members/1","ledger_pointer":"/files/1/classes/9/members/1","kind":"member","symbol":"NC.mask.prototype.setGeneric","primary_owner":"M5.18","case_ids":["masks"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/9/members/2","ledger_pointer":"/files/1/classes/9/members/2","kind":"member","symbol":"NC.mask.prototype.setNumeric","primary_owner":"M5.18","case_ids":["masks"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10","ledger_pointer":"/files/1/classes/10","kind":"class","symbol":"NC","primary_owner":"M3.4","case_ids":["guards","assembly","strings","dates","elements","browsers","messages","projection","events","masks","cleanup","config","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/1/classes/10/members/0","ledger_pointer":"/files/1/classes/10/members/0","kind":"member","symbol":"NC.prototype.remove_","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/1","ledger_pointer":"/files/1/classes/10/members/1","kind":"member","symbol":"NC.prototype.tpBind","primary_owner":"M3.8","case_ids":["events","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R06","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/1/classes/10/members/2","ledger_pointer":"/files/1/classes/10/members/2","kind":"member","symbol":"NC.prototype.instance","primary_owner":"M3.5","case_ids":["config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/1/classes/10/members/3","ledger_pointer":"/files/1/classes/10/members/3","kind":"member","symbol":"NC.prototype.vals","primary_owner":"M5.18","case_ids":["elements","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/4","ledger_pointer":"/files/1/classes/10/members/4","kind":"member","symbol":"NC.prototype.events","primary_owner":"M3.8","case_ids":["events","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R06","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/1/classes/10/members/5","ledger_pointer":"/files/1/classes/10/members/5","kind":"member","symbol":"NC.locale","primary_owner":"M5.18","case_ids":["config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/1/classes/10/members/6","ledger_pointer":"/files/1/classes/10/members/6","kind":"member","symbol":"NC.debug","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/10/members/7","ledger_pointer":"/files/1/classes/10/members/7","kind":"member","symbol":"NC.log","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/10/members/8","ledger_pointer":"/files/1/classes/10/members/8","kind":"member","symbol":"NC.info","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/10/members/9","ledger_pointer":"/files/1/classes/10/members/9","kind":"member","symbol":"NC.warn","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/10/members/10","ledger_pointer":"/files/1/classes/10/members/10","kind":"member","symbol":"NC.error","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/11","ledger_pointer":"/files/1/classes/10/members/11","kind":"member","symbol":"NC.type","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/12","ledger_pointer":"/files/1/classes/10/members/12","kind":"member","symbol":"NC.isString","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/13","ledger_pointer":"/files/1/classes/10/members/13","kind":"member","symbol":"NC.isNumeric","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/14","ledger_pointer":"/files/1/classes/10/members/14","kind":"member","symbol":"NC.isPlainObject","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/15","ledger_pointer":"/files/1/classes/10/members/15","kind":"member","symbol":"NC.isEmptyObject","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/16","ledger_pointer":"/files/1/classes/10/members/16","kind":"member","symbol":"NC.isArray","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/17","ledger_pointer":"/files/1/classes/10/members/17","kind":"member","symbol":"NC.isArraylike","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/18","ledger_pointer":"/files/1/classes/10/members/18","kind":"member","symbol":"NC.isWrappedSet","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/19","ledger_pointer":"/files/1/classes/10/members/19","kind":"member","symbol":"NC.isElement","primary_owner":"M3.8","case_ids":["guards"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/20","ledger_pointer":"/files/1/classes/10/members/20","kind":"member","symbol":"NC.toSelector","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/10/members/21","ledger_pointer":"/files/1/classes/10/members/21","kind":"member","symbol":"NC.serialExecute","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:U01","classification":"unrelated_candidate_proof_required"},
+    {"inventory_pointer":"/files/1/classes/10/members/22","ledger_pointer":"/files/1/classes/10/members/22","kind":"member","symbol":"NC.gc","primary_owner":"M3.4","case_ids":["cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/23","ledger_pointer":"/files/1/classes/10/members/23","kind":"member","symbol":"NC.string","primary_owner":"M5.18","case_ids":["strings"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/24","ledger_pointer":"/files/1/classes/10/members/24","kind":"member","symbol":"NC.date","primary_owner":"M5.18","case_ids":["dates"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/25","ledger_pointer":"/files/1/classes/10/members/25","kind":"member","symbol":"NC.element","primary_owner":"M5.18","case_ids":["elements"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/26","ledger_pointer":"/files/1/classes/10/members/26","kind":"member","symbol":"NC.browser","primary_owner":"M3.8","case_ids":["browsers"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/27","ledger_pointer":"/files/1/classes/10/members/27","kind":"member","symbol":"NC.message","primary_owner":"M5.18","case_ids":["messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/28","ledger_pointer":"/files/1/classes/10/members/28","kind":"member","symbol":"NC.array","primary_owner":"M3.8","case_ids":["utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/29","ledger_pointer":"/files/1/classes/10/members/29","kind":"member","symbol":"NC.json","primary_owner":"M5.15","case_ids":["projection","utility_boundary"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/30","ledger_pointer":"/files/1/classes/10/members/30","kind":"member","symbol":"NC.event","primary_owner":"M3.8","case_ids":["events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/1/classes/10/members/31","ledger_pointer":"/files/1/classes/10/members/31","kind":"member","symbol":"NC.mask","primary_owner":"M5.18","case_ids":["masks"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/0","ledger_pointer":"/files/2/classes/0","kind":"class","symbol":"NA.comm.request","primary_owner":"M3.4","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/2/classes/0/members/0","ledger_pointer":"/files/2/classes/0/members/0","kind":"member","symbol":"NA.comm.request.prototype.constructor","primary_owner":"M3.2","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence","specific_case_refs":["/case_groups/request_options/member_cases/constructor"]},
+    {"inventory_pointer":"/files/2/classes/0/members/1","ledger_pointer":"/files/2/classes/0/members/1","kind":"member","symbol":"NA.comm.request.prototype.attr","primary_owner":"M3.4","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition","specific_case_refs":["/case_groups/request_options/member_cases/attr"]},
+    {"inventory_pointer":"/files/2/classes/0/members/2","ledger_pointer":"/files/2/classes/0/members/2","kind":"member","symbol":"NA.comm.request.prototype.removeAttr","primary_owner":"M3.4","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition","specific_case_refs":["/case_groups/request_options/member_cases/removeAttr"]},
+    {"inventory_pointer":"/files/2/classes/0/members/3","ledger_pointer":"/files/2/classes/0/members/3","kind":"member","symbol":"NA.comm.request.prototype.param","primary_owner":"M3.2","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence","specific_case_refs":["/case_groups/request_options/member_cases/param"]},
+    {"inventory_pointer":"/files/2/classes/0/members/4","ledger_pointer":"/files/2/classes/0/members/4","kind":"member","symbol":"NA.comm.request.prototype.get","primary_owner":"M3.2","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence","specific_case_refs":["/case_groups/request_options/member_cases/get"]},
+    {"inventory_pointer":"/files/2/classes/0/members/5","ledger_pointer":"/files/2/classes/0/members/5","kind":"member","symbol":"NA.comm.request.prototype.reload","primary_owner":"M3.4","case_ids":["request_options","config","transport"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence","specific_case_refs":["/case_groups/request_options/member_cases/reload"]},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/0","ledger_pointer":"/files/2/classes/0/literal_options/0","kind":"option","symbol":"NA.comm.request.options.url","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/url"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/1","ledger_pointer":"/files/2/classes/0/literal_options/1","kind":"option","symbol":"NA.comm.request.options.referrer","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/referrer"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/2","ledger_pointer":"/files/2/classes/0/literal_options/2","kind":"option","symbol":"NA.comm.request.options.contentType","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/contentType"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/3","ledger_pointer":"/files/2/classes/0/literal_options/3","kind":"option","symbol":"NA.comm.request.options.cache","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/cache"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/4","ledger_pointer":"/files/2/classes/0/literal_options/4","kind":"option","symbol":"NA.comm.request.options.async","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/async"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/5","ledger_pointer":"/files/2/classes/0/literal_options/5","kind":"option","symbol":"NA.comm.request.options.type","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/type"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/6","ledger_pointer":"/files/2/classes/0/literal_options/6","kind":"option","symbol":"NA.comm.request.options.data","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/data"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/7","ledger_pointer":"/files/2/classes/0/literal_options/7","kind":"option","symbol":"NA.comm.request.options.dataIsArray","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/dataIsArray"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/8","ledger_pointer":"/files/2/classes/0/literal_options/8","kind":"option","symbol":"NA.comm.request.options.dataType","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/dataType"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/9","ledger_pointer":"/files/2/classes/0/literal_options/9","kind":"option","symbol":"NA.comm.request.options.urlSync","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/urlSync"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/10","ledger_pointer":"/files/2/classes/0/literal_options/10","kind":"option","symbol":"NA.comm.request.options.crossDomain","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/crossDomain"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/11","ledger_pointer":"/files/2/classes/0/literal_options/11","kind":"option","symbol":"NA.comm.request.options.browserHistory","primary_owner":"M3.2","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/browserHistory"],"classification":"todo_nonshipped_status_must_be_confirmed"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/12","ledger_pointer":"/files/2/classes/0/literal_options/12","kind":"option","symbol":"NA.comm.request.options.append","primary_owner":"M3.3","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/append"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/0/literal_constructor_option_keys/13","ledger_pointer":"/files/2/classes/0/literal_options/13","kind":"option","symbol":"NA.comm.request.options.target","primary_owner":"M3.3","case_ids":["request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/request_options/options/target"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/2/classes/1","ledger_pointer":"/files/2/classes/1","kind":"class","symbol":"NA.comm","primary_owner":"M3.3","case_ids":["transport","hooks","request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/2/classes/1/members/0","ledger_pointer":"/files/2/classes/1/members/0","kind":"member","symbol":"NA.comm.prototype.constructor","primary_owner":"M3.1","case_ids":["transport","hooks","request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/1/members/1","ledger_pointer":"/files/2/classes/1/members/1","kind":"member","symbol":"NA.comm.xhr","primary_owner":"M3.1","case_ids":["transport","hooks","request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/1/members/2","ledger_pointer":"/files/2/classes/1/members/2","kind":"member","symbol":"NA.comm.initFilterConfig","primary_owner":"M3.1","case_ids":["hooks","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/1/members/3","ledger_pointer":"/files/2/classes/1/members/3","kind":"member","symbol":"NA.comm.resetFilterConfig","primary_owner":"M3.1","case_ids":["hooks","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/1/members/4","ledger_pointer":"/files/2/classes/1/members/4","kind":"member","symbol":"NA.comm.submit","primary_owner":"M3.1","case_ids":["transport","hooks","request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/1/members/5","ledger_pointer":"/files/2/classes/1/members/5","kind":"member","symbol":"NA.comm.error","primary_owner":"M3.1","case_ids":["transport","hooks","request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/1/members/6","ledger_pointer":"/files/2/classes/1/members/6","kind":"member","symbol":"NA.comm.request","primary_owner":"M3.1","case_ids":["transport","hooks","request_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/2","ledger_pointer":"/files/2/classes/2","kind":"class","symbol":"NA.cont","primary_owner":"M3.4","case_ids":["lifecycle","advice"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/2/classes/2/members/0","ledger_pointer":"/files/2/classes/2/members/0","kind":"member","symbol":"NA.cont.prototype.constructor","primary_owner":"M3.4","case_ids":["lifecycle","advice"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/2/members/1","ledger_pointer":"/files/2/classes/2/members/1","kind":"member","symbol":"NA.cont.trInit","primary_owner":"M3.4","case_ids":["lifecycle","advice"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/2/members/2","ledger_pointer":"/files/2/classes/2/members/2","kind":"member","symbol":"NA.cont.aop","primary_owner":"M3.6","case_ids":["lifecycle","advice"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R02","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/2/classes/3","ledger_pointer":"/files/2/classes/3","kind":"class","symbol":"NA.context","primary_owner":"M3.5","case_ids":["config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/2/classes/3/members/0","ledger_pointer":"/files/2/classes/3/members/0","kind":"member","symbol":"NA.context.attrObj","primary_owner":"M3.5","case_ids":["config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/2/classes/3/members/1","ledger_pointer":"/files/2/classes/3/members/1","kind":"member","symbol":"NA.context.attr","primary_owner":"M3.5","case_ids":["config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/2/classes/4","ledger_pointer":"/files/2/classes/4","kind":"class","symbol":"NA.config","primary_owner":"M3.1","case_ids":["hooks","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/2/classes/4/members/0","ledger_pointer":"/files/2/classes/4/members/0","kind":"member","symbol":"NA.config.filterConfig","primary_owner":"M3.1","case_ids":["hooks","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/5","ledger_pointer":"/files/2/classes/5","kind":"class","symbol":"NA","primary_owner":"M3.4","case_ids":["assembly","transport","lifecycle"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/2/classes/5/members/0","ledger_pointer":"/files/2/classes/5/members/0","kind":"member","symbol":"NA.prototype.comm","primary_owner":"M3.1","case_ids":["assembly","transport","lifecycle"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/5/members/1","ledger_pointer":"/files/2/classes/5/members/1","kind":"member","symbol":"NA.prototype.request","primary_owner":"M3.2","case_ids":["request_options","config","assembly"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/5/members/2","ledger_pointer":"/files/2/classes/5/members/2","kind":"member","symbol":"NA.prototype.cont","primary_owner":"M3.4","case_ids":["lifecycle","assembly"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/5/members/3","ledger_pointer":"/files/2/classes/5/members/3","kind":"member","symbol":"NA.ajax","primary_owner":"M3.1","case_ids":["assembly","transport","lifecycle"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R07","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/2/classes/5/members/4","ledger_pointer":"/files/2/classes/5/members/4","kind":"member","symbol":"NA.comm","primary_owner":"M3.1","case_ids":["assembly","transport","lifecycle"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/5/members/5","ledger_pointer":"/files/2/classes/5/members/5","kind":"member","symbol":"NA.cont","primary_owner":"M3.4","case_ids":["lifecycle","assembly"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/2/classes/5/members/6","ledger_pointer":"/files/2/classes/5/members/6","kind":"member","symbol":"NA.context","primary_owner":"M3.5","case_ids":["config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R04","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/2/classes/5/members/7","ledger_pointer":"/files/2/classes/5/members/7","kind":"member","symbol":"NA.config","primary_owner":"M3.1","case_ids":["hooks","config"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/0","ledger_pointer":"/files/3/classes/0","kind":"class","symbol":"ND.ds","primary_owner":"M5.15","case_ids":["sync","cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/3/classes/0/members/0","ledger_pointer":"/files/3/classes/0/members/0","kind":"member","symbol":"ND.ds.prototype.constructor","primary_owner":"M5.15","case_ids":["sync","cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/0/members/1","ledger_pointer":"/files/3/classes/0/members/1","kind":"member","symbol":"ND.ds.instance","primary_owner":"M5.15","case_ids":["sync","cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/0/members/2","ledger_pointer":"/files/3/classes/0/members/2","kind":"member","symbol":"ND.ds.prototype.remove","primary_owner":"M5.15","case_ids":["sync","cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/0/members/3","ledger_pointer":"/files/3/classes/0/members/3","kind":"member","symbol":"ND.ds.prototype.notify","primary_owner":"M5.15","case_ids":["sync","cleanup"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1","ledger_pointer":"/files/3/classes/1","kind":"class","symbol":"ND.formatter","primary_owner":"M5.18","case_ids":["format_catalog","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/3/classes/1/members/0","ledger_pointer":"/files/3/classes/1/members/0","kind":"member","symbol":"ND.formatter.prototype.constructor","primary_owner":"M5.18","case_ids":["format_catalog","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/1/members/1","ledger_pointer":"/files/3/classes/1/members/1","kind":"member","symbol":"ND.formatter.prototype.format","primary_owner":"M5.18","case_ids":["format_catalog","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/1/members/2","ledger_pointer":"/files/3/classes/1/members/2","kind":"member","symbol":"ND.formatter.prototype.unformat","primary_owner":"M5.18","case_ids":["format_catalog","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/1/members/3","ledger_pointer":"/files/3/classes/1/members/3","kind":"member","symbol":"ND.formatter.commas","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/commas"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/4","ledger_pointer":"/files/3/classes/1/members/4","kind":"member","symbol":"ND.formatter.rrn","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/rrn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/5","ledger_pointer":"/files/3/classes/1/members/5","kind":"member","symbol":"ND.formatter.ssn","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/ssn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/6","ledger_pointer":"/files/3/classes/1/members/6","kind":"member","symbol":"ND.formatter.kbrn","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/kbrn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/7","ledger_pointer":"/files/3/classes/1/members/7","kind":"member","symbol":"ND.formatter.kcn","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/kcn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/8","ledger_pointer":"/files/3/classes/1/members/8","kind":"member","symbol":"ND.formatter.upper","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/upper"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/9","ledger_pointer":"/files/3/classes/1/members/9","kind":"member","symbol":"ND.formatter.lower","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/lower"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/10","ledger_pointer":"/files/3/classes/1/members/10","kind":"member","symbol":"ND.formatter.capitalize","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/capitalize"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/11","ledger_pointer":"/files/3/classes/1/members/11","kind":"member","symbol":"ND.formatter.zipcode","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/zipcode"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/12","ledger_pointer":"/files/3/classes/1/members/12","kind":"member","symbol":"ND.formatter.phone","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/phone"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/13","ledger_pointer":"/files/3/classes/1/members/13","kind":"member","symbol":"ND.formatter.realnum","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/realnum"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/14","ledger_pointer":"/files/3/classes/1/members/14","kind":"member","symbol":"ND.formatter.trimtoempty","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/trimtoempty"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/15","ledger_pointer":"/files/3/classes/1/members/15","kind":"member","symbol":"ND.formatter.trimtozero","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/trimtozero"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/16","ledger_pointer":"/files/3/classes/1/members/16","kind":"member","symbol":"ND.formatter.trimtoval","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/trimtoval"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/17","ledger_pointer":"/files/3/classes/1/members/17","kind":"member","symbol":"ND.formatter.date","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/date"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/18","ledger_pointer":"/files/3/classes/1/members/18","kind":"member","symbol":"ND.formatter.time","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/time"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/19","ledger_pointer":"/files/3/classes/1/members/19","kind":"member","symbol":"ND.formatter.limit","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/limit"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/20","ledger_pointer":"/files/3/classes/1/members/20","kind":"member","symbol":"ND.formatter.replace","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/replace"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/21","ledger_pointer":"/files/3/classes/1/members/21","kind":"member","symbol":"ND.formatter.lpad","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/lpad"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/22","ledger_pointer":"/files/3/classes/1/members/22","kind":"member","symbol":"ND.formatter.rpad","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/rpad"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/23","ledger_pointer":"/files/3/classes/1/members/23","kind":"member","symbol":"ND.formatter.mask","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/mask"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/24","ledger_pointer":"/files/3/classes/1/members/24","kind":"member","symbol":"ND.formatter.generic","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/generic"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/members/25","ledger_pointer":"/files/3/classes/1/members/25","kind":"member","symbol":"ND.formatter.numeric","primary_owner":"M5.18","case_ids":["format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/format_catalog/rule_cases/numeric"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/1/literal_constructor_option_keys/0","ledger_pointer":"/files/3/classes/1/literal_options/0","kind":"option","symbol":"ND.formatter.options.data","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/data"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/1/literal_constructor_option_keys/1","ledger_pointer":"/files/3/classes/1/literal_options/1","kind":"option","symbol":"ND.formatter.options.rules","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/rules"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/1/literal_constructor_option_keys/2","ledger_pointer":"/files/3/classes/1/literal_options/2","kind":"option","symbol":"ND.formatter.options.isElement","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/isElement"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/1/literal_constructor_option_keys/3","ledger_pointer":"/files/3/classes/1/literal_options/3","kind":"option","symbol":"ND.formatter.options.createEvent","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/createEvent"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/1/literal_constructor_option_keys/4","ledger_pointer":"/files/3/classes/1/literal_options/4","kind":"option","symbol":"ND.formatter.options.context","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/context"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/1/literal_constructor_option_keys/5","ledger_pointer":"/files/3/classes/1/literal_options/5","kind":"option","symbol":"ND.formatter.options.targetEle","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/targetEle"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/2","ledger_pointer":"/files/3/classes/2","kind":"class","symbol":"ND.validator","primary_owner":"M5.18","case_ids":["validate_catalog","messages","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/3/classes/2/members/0","ledger_pointer":"/files/3/classes/2/members/0","kind":"member","symbol":"ND.validator.prototype.constructor","primary_owner":"M5.18","case_ids":["validate_catalog","messages","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/2/members/1","ledger_pointer":"/files/3/classes/2/members/1","kind":"member","symbol":"ND.validator.prototype.validate","primary_owner":"M5.18","case_ids":["validate_catalog","messages","standalone_rules","runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/2/members/2","ledger_pointer":"/files/3/classes/2/members/2","kind":"member","symbol":"ND.validator.required","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/required"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/3","ledger_pointer":"/files/3/classes/2/members/3","kind":"member","symbol":"ND.validator.alphabet","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/alphabet"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/4","ledger_pointer":"/files/3/classes/2/members/4","kind":"member","symbol":"ND.validator.integer","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/integer"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/5","ledger_pointer":"/files/3/classes/2/members/5","kind":"member","symbol":"ND.validator.korean","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/korean"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/6","ledger_pointer":"/files/3/classes/2/members/6","kind":"member","symbol":"ND.validator.alphabet_integer","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/alphabet_integer"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/7","ledger_pointer":"/files/3/classes/2/members/7","kind":"member","symbol":"ND.validator.integer_korean","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/integer_korean"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/8","ledger_pointer":"/files/3/classes/2/members/8","kind":"member","symbol":"ND.validator.alphabet_korean","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/alphabet_korean"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/9","ledger_pointer":"/files/3/classes/2/members/9","kind":"member","symbol":"ND.validator.alphabet_integer_korean","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/alphabet_integer_korean"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/10","ledger_pointer":"/files/3/classes/2/members/10","kind":"member","symbol":"ND.validator.dash_integer","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/dash_integer"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/11","ledger_pointer":"/files/3/classes/2/members/11","kind":"member","symbol":"ND.validator.commas_integer","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/commas_integer"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/12","ledger_pointer":"/files/3/classes/2/members/12","kind":"member","symbol":"ND.validator.number","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/number"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/13","ledger_pointer":"/files/3/classes/2/members/13","kind":"member","symbol":"ND.validator.email","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/email"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/14","ledger_pointer":"/files/3/classes/2/members/14","kind":"member","symbol":"ND.validator.url","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/url"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/15","ledger_pointer":"/files/3/classes/2/members/15","kind":"member","symbol":"ND.validator.zipcode","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/zipcode"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/16","ledger_pointer":"/files/3/classes/2/members/16","kind":"member","symbol":"ND.validator.decimal","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/decimal"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/17","ledger_pointer":"/files/3/classes/2/members/17","kind":"member","symbol":"ND.validator.phone","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/phone"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/18","ledger_pointer":"/files/3/classes/2/members/18","kind":"member","symbol":"ND.validator.rrn","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/rrn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/19","ledger_pointer":"/files/3/classes/2/members/19","kind":"member","symbol":"ND.validator.ssn","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/ssn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/20","ledger_pointer":"/files/3/classes/2/members/20","kind":"member","symbol":"ND.validator.frn","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/frn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/21","ledger_pointer":"/files/3/classes/2/members/21","kind":"member","symbol":"ND.validator.frn_rrn","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/frn_rrn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/22","ledger_pointer":"/files/3/classes/2/members/22","kind":"member","symbol":"ND.validator.kbrn","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/kbrn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/23","ledger_pointer":"/files/3/classes/2/members/23","kind":"member","symbol":"ND.validator.kcn","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/kcn"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/24","ledger_pointer":"/files/3/classes/2/members/24","kind":"member","symbol":"ND.validator.date","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/date"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/25","ledger_pointer":"/files/3/classes/2/members/25","kind":"member","symbol":"ND.validator.time","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/time"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/26","ledger_pointer":"/files/3/classes/2/members/26","kind":"member","symbol":"ND.validator.accept","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/accept"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/27","ledger_pointer":"/files/3/classes/2/members/27","kind":"member","symbol":"ND.validator.match","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/match"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/28","ledger_pointer":"/files/3/classes/2/members/28","kind":"member","symbol":"ND.validator.acceptfileext","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/acceptfileext"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/29","ledger_pointer":"/files/3/classes/2/members/29","kind":"member","symbol":"ND.validator.notaccept","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/notaccept"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/30","ledger_pointer":"/files/3/classes/2/members/30","kind":"member","symbol":"ND.validator.notmatch","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/notmatch"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/31","ledger_pointer":"/files/3/classes/2/members/31","kind":"member","symbol":"ND.validator.notacceptfileext","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/notacceptfileext"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/32","ledger_pointer":"/files/3/classes/2/members/32","kind":"member","symbol":"ND.validator.equalTo","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/equalTo"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/33","ledger_pointer":"/files/3/classes/2/members/33","kind":"member","symbol":"ND.validator.maxlength","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/maxlength"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/34","ledger_pointer":"/files/3/classes/2/members/34","kind":"member","symbol":"ND.validator.minlength","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/minlength"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/35","ledger_pointer":"/files/3/classes/2/members/35","kind":"member","symbol":"ND.validator.rangelength","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/rangelength"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/36","ledger_pointer":"/files/3/classes/2/members/36","kind":"member","symbol":"ND.validator.maxbyte","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/maxbyte"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/37","ledger_pointer":"/files/3/classes/2/members/37","kind":"member","symbol":"ND.validator.minbyte","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/minbyte"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/38","ledger_pointer":"/files/3/classes/2/members/38","kind":"member","symbol":"ND.validator.rangebyte","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/rangebyte"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/39","ledger_pointer":"/files/3/classes/2/members/39","kind":"member","symbol":"ND.validator.maxvalue","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/maxvalue"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/40","ledger_pointer":"/files/3/classes/2/members/40","kind":"member","symbol":"ND.validator.minvalue","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/minvalue"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/41","ledger_pointer":"/files/3/classes/2/members/41","kind":"member","symbol":"ND.validator.rangevalue","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/rangevalue"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/members/42","ledger_pointer":"/files/3/classes/2/members/42","kind":"member","symbol":"ND.validator.regexp","primary_owner":"M5.18","case_ids":["validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/validate_catalog/rule_cases/regexp"],"classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/2/literal_constructor_option_keys/0","ledger_pointer":"/files/3/classes/2/literal_options/0","kind":"option","symbol":"ND.validator.options.data","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/data"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/2/literal_constructor_option_keys/1","ledger_pointer":"/files/3/classes/2/literal_options/1","kind":"option","symbol":"ND.validator.options.rules","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/rules"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/2/literal_constructor_option_keys/2","ledger_pointer":"/files/3/classes/2/literal_options/2","kind":"option","symbol":"ND.validator.options.isElement","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/isElement"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/2/literal_constructor_option_keys/3","ledger_pointer":"/files/3/classes/2/literal_options/3","kind":"option","symbol":"ND.validator.options.createEvent","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/createEvent"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/2/literal_constructor_option_keys/4","ledger_pointer":"/files/3/classes/2/literal_options/4","kind":"option","symbol":"ND.validator.options.context","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/context"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/2/literal_constructor_option_keys/5","ledger_pointer":"/files/3/classes/2/literal_options/5","kind":"option","symbol":"ND.validator.options.targetEle","primary_owner":"M5.18","case_ids":["runner_options"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","specific_case_refs":["/case_groups/runner_options/options/targetEle"],"classification":"effective_default_and_branch_crosswalk_required"},
+    {"inventory_pointer":"/files/3/classes/3","ledger_pointer":"/files/3/classes/3","kind":"class","symbol":"ND.data","primary_owner":"M5.15","case_ids":["filter_sort","projection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/3/classes/3/members/0","ledger_pointer":"/files/3/classes/3/members/0","kind":"member","symbol":"ND.data.filter","primary_owner":"M3.8","case_ids":["filter_sort","projection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R06","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/3/members/1","ledger_pointer":"/files/3/classes/3/members/1","kind":"member","symbol":"ND.data.sortBy","primary_owner":"M5.15","case_ids":["filter_sort","projection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/3/members/2","ledger_pointer":"/files/3/classes/3/members/2","kind":"member","symbol":"ND.data.sort","primary_owner":"M5.15","case_ids":["filter_sort","projection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/4","ledger_pointer":"/files/3/classes/4","kind":"class","symbol":"ND","primary_owner":"M5.15","case_ids":["filter_sort","projection","standalone_rules"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/3/classes/4/members/0","ledger_pointer":"/files/3/classes/4/members/0","kind":"member","symbol":"ND.prototype.datafilter","primary_owner":"M3.8","case_ids":["filter_sort","projection","standalone_rules"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R06","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/4/members/1","ledger_pointer":"/files/3/classes/4/members/1","kind":"member","symbol":"ND.prototype.datasort","primary_owner":"M5.15","case_ids":["filter_sort","projection","standalone_rules"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/4/members/2","ledger_pointer":"/files/3/classes/4/members/2","kind":"member","symbol":"ND.prototype.formatter","primary_owner":"M5.18","case_ids":["standalone_rules","runner_options","format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/4/members/3","ledger_pointer":"/files/3/classes/4/members/3","kind":"member","symbol":"ND.prototype.validator","primary_owner":"M5.18","case_ids":["standalone_rules","runner_options","validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/4/members/4","ledger_pointer":"/files/3/classes/4/members/4","kind":"member","symbol":"ND.ds","primary_owner":"M5.15","case_ids":["sync"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/3/classes/4/members/5","ledger_pointer":"/files/3/classes/4/members/5","kind":"member","symbol":"ND.formatter","primary_owner":"M5.18","case_ids":["standalone_rules","runner_options","format_catalog"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/4/members/6","ledger_pointer":"/files/3/classes/4/members/6","kind":"member","symbol":"ND.validator","primary_owner":"M5.18","case_ids":["standalone_rules","runner_options","validate_catalog","messages"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R08","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/3/classes/4/members/7","ledger_pointer":"/files/3/classes/4/members/7","kind":"member","symbol":"ND.data","primary_owner":"M5.15","case_ids":["filter_sort","projection","standalone_rules"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"required_owning_outcome_rewrite_or_selected_evidence"},
+    {"inventory_pointer":"/files/6/classes/0","ledger_pointer":"/files/4/classes/0","kind":"class","symbol":"NT.aop","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/6/classes/0/members/0","ledger_pointer":"/files/4/classes/0/members/0","kind":"member","symbol":"NT.aop.codes","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R03","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/6/classes/0/members/1","ledger_pointer":"/files/4/classes/0/members/1","kind":"member","symbol":"NT.aop.template","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R03","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/6/classes/0/members/2","ledger_pointer":"/files/4/classes/0/members/2","kind":"member","symbol":"NT.aop.components","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R03","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/6/classes/0/members/3","ledger_pointer":"/files/4/classes/0/members/3","kind":"member","symbol":"NT.aop.events","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R03","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/6/classes/1","ledger_pointer":"/files/4/classes/1","kind":"class","symbol":"NT","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/6/classes/1/members/0","ledger_pointer":"/files/4/classes/1/members/0","kind":"member","symbol":"NT.aop","primary_owner":"M3.7","case_ids":["declarations","row_events"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R03","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/7/classes/0","ledger_pointer":"/files/5/classes/0","kind":"class","symbol":"NCD.inspection","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/7/classes/0/members/0","ledger_pointer":"/files/5/classes/0/members/0","kind":"member","symbol":"NCD.inspection.test","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R05","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/7/classes/0/members/1","ledger_pointer":"/files/5/classes/0/members/1","kind":"member","symbol":"NCD.inspection.rules","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R05","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/7/classes/0/members/2","ledger_pointer":"/files/5/classes/0/members/2","kind":"member","symbol":"NCD.inspection.report","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R05","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/7/classes/1","ledger_pointer":"/files/5/classes/1","kind":"class","symbol":"NCD","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","classification":"structural_aggregate_inherit_all_children"},
+    {"inventory_pointer":"/files/7/classes/1/members/0","ledger_pointer":"/files/5/classes/1/members/0","kind":"member","symbol":"NCD.severityLevels","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R05","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/7/classes/1/members/1","ledger_pointer":"/files/5/classes/1/members/1","kind":"member","symbol":"NCD.inspection","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R05","classification":"pending_exact_workflow_disposition"},
+    {"inventory_pointer":"/files/7/classes/1/members/2","ledger_pointer":"/files/5/classes/1/members/2","kind":"member","symbol":"NCD.addSourceURL","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_entry_defaults_profiles_and_local_overrides","candidate_id":"core:R05","classification":"pending_exact_workflow_disposition"}
+  ],
+  "dynamic": [
+    {"id":"core:D01","ledger_pointer":"/additional_dynamic_paths/0","primary_owner":"M3.4","case_ids":["assembly","guards","utility_boundary"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D02","ledger_pointer":"/additional_dynamic_paths/1","primary_owner":"M5.18","case_ids":["config","messages","strings","request_options"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D03","ledger_pointer":"/additional_dynamic_paths/2","primary_owner":"M5.18","case_ids":["format_catalog","runner_options","standalone_rules","dates"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D04","ledger_pointer":"/additional_dynamic_paths/3","primary_owner":"M5.18","case_ids":["validate_catalog","runner_options","messages"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D05","ledger_pointer":"/additional_dynamic_paths/4","primary_owner":"M3.1","case_ids":["transport","request_options","hooks"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D06","ledger_pointer":"/additional_dynamic_paths/5","primary_owner":"M3.1","case_ids":["advice","hooks","declarations"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D07","ledger_pointer":"/additional_dynamic_paths/6","primary_owner":"M5.15","case_ids":["sync","cleanup"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D08","ledger_pointer":"/additional_dynamic_paths/7","primary_owner":"M5.15","case_ids":["filter_sort","projection","values"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D09","ledger_pointer":"/additional_dynamic_paths/8","primary_owner":"M3.7","case_ids":["declarations","row_events","form_callbacks"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D10","ledger_pointer":"/additional_dynamic_paths/9","primary_owner":"M3.8","case_ids":["inspection"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D11","ledger_pointer":"/additional_dynamic_paths/10","primary_owner":"M3.8","case_ids":["events","elements","row_events"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D12","ledger_pointer":"/additional_dynamic_paths/11","primary_owner":"M5.18","case_ids":["dates","format_catalog","utility_boundary"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D13","ledger_pointer":"/additional_dynamic_paths/12","primary_owner":"M5.18","case_ids":["masks","standalone_rules"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D14","ledger_pointer":"/additional_dynamic_paths/13","primary_owner":"M3.3","case_ids":["lifecycle","transport","request_options"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"},
+    {"id":"core:D15","ledger_pointer":"/additional_dynamic_paths/14","primary_owner":"M5.15","case_ids":["projection","values","request_options"],"original_acceptance":"inherit_remaining_acceptance_and_all_feature_profiles","external_reachability_status":"source_path_identified_acceptance_and_disposition_open"}
+  ],
+  "decision_candidates": [
+    {"id":"core:R01","ledger_pointer":"/retirement_groups/0","owner":"P0.2","kind":"actual_capability_retirement_draft","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Executing embedded scripts while loading remote block HTML and automatically discovering its controller.","preserve":["CVC loading/lifecycle","page transport policy","caller input/output"],"case_ids":["lifecycle"]},
+    {"id":"core:R02","ledger_pointer":"/retirement_groups/1","owner":"P0.2","kind":"actual_capability_retirement_draft","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Automatic controller method interception selected by dotted path, view selector or custom pointcut, including around proceed and synchronous error advice.","preserve":["async startup","guards/logging/error processing","argument/result ordering"],"case_ids":["advice"]},
+    {"id":"core:R03","ledger_pointer":"/retirement_groups/2","owner":"P0.2","kind":"mechanism_retirement_with_behavior_obligations","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Interpreting p.* and e.* controller property names, replacing declarations with handles, and invoking string action names automatically.","preserve":["common/data-code loading","initialization hooks/order","row event identity","search submission","component actions"],"case_ids":["declarations"]},
+    {"id":"core:R04","ledger_pointer":"/retirement_groups/3","owner":"P0.2","kind":"mechanism_retirement_with_behavior_obligations","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Global context/instance registry discovery, app-wide mutable defaults and global locale switches through N APIs.","preserve":["consistent defaults/localization","shared editing","cross-page services","localized rule messages"],"case_ids":["config"]},
+    {"id":"core:R05","ledger_pointer":"/retirement_groups/4","owner":"P0.2","kind":"actual_capability_retirement_draft","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Application-wired runtime HTML inspection, custom findings, exclusions, severity/abort reporting and sourceURL injection.","preserve":["reviewable check results","scope/value-binding safeguards"],"case_ids":["inspection"]},
+    {"id":"core:R06","ledger_pointer":"/retirement_groups/5","owner":"P0.2","kind":"actual_capability_retirement_draft","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Public bound-handler enumeration, priority reordering through jQuery internals and executable string conditions for data filtering.","preserve":["binding-before-action order","canceled/disabled interaction","sort/filter/changed-row projection"],"case_ids":["events"]},
+    {"id":"core:R07","ledger_pointer":"/retirement_groups/6","owner":"P0.2","kind":"inherited_transport_capability_review","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Potential unsupported synchronous XHR, script/JSONP decoding and other inherited jQuery AjaxSettings workflows.","preserve":["ordinary HTTP/wire protocol","headers/cache/CORS","error/finalization","HTML loading"],"case_ids":["transport"]},
+    {"id":"core:R08","ledger_pointer":"/retirement_groups/7","owner":"P0.2","kind":"standalone_convenience_boundary_review","original_approval":"not_requested_not_approved","status":"not_approved","lost_workflow":"Potential standalone data formatter/validator objects and manual format/unformat/validate events outside bound UI.","preserve":["all shipped rules","raw/display lifecycle","custom rules/messages","row Form integration"],"case_ids":["standalone_rules"]},
+    {"id":"core:U01","ledger_pointer":"/retirement_groups/8","owner":"P0.2","kind":"unrelated_convenience_candidate","original_approval":"existing_authorization_only_after_reachability_proof","status":"existing_authorization_only_after_reachability_proof","lost_workflow":"Generic string/array/JSON/cookie/date/logging convenience entry points that have no remaining owning framework responsibility.","preserve":["all transitive Form/UI helpers","observable framework behavior"],"case_ids":["utility_boundary"]},
+    {"id":"core-boundary:values","owner":"M5.15/P0.2","status":"classify_actual_intended_workflow_before_deciding","case_ids":["values","projection","filter_sort"],"question":"Which non-JSON/inherited/direct-mutable outcomes were useful supported workflows rather than incidental acceptance? Preserve required outcomes and obtain the single decision for genuine loss. No omission approved."},
+    {"id":"core-boundary:per-key-callbacks","owner":"M5.17/P0.2","status":"classify_useful_phases_separately_from_corruption","case_ids":["form_callbacks","values"],"question":"Whole hooks/subscriptions do not prove per-key/no-op/old-value/local-global/receiver parity. Preserve intent or record exact loss; stale-DOM/post-notify corruption is not a desired result."},
+    {"id":"core-boundary:mask-diagnostics","owner":"M5.18/P0.2","status":"external_mutable_partial_input_workflow_open","case_ids":["masks","standalone_rules"],"question":"One-shot rules do not supply partial-input/deleting/error diagnostics. Classify D13 explicitly; do not silently fold it into convenience removal."}
+  ],
+  "completion_boundary": {
+    "what_this_proves": "Known core structural/dynamic inputs have exact origin pointers and inherited/local concrete acceptance or specific unresolved boundaries.",
+    "what_it_does_not_prove": "No runtime execution, complete external-app certification, family/P0/milestone closure, API/omission approval or historical evidence recertification.",
+    "next": "Use in bounded owner plans and one P0.2 proposal. Independently review source cases and all other owners before P0.1 closure."
+  }
+}

@@ -1,0 +1,1134 @@
+{
+  "schema_version": 1,
+  "milestone": "P0.1",
+  "kind": "ui_grid_source_case_inventory_preflight",
+  "recorded_at": "2026-11-14",
+  "baseline_commit": "daab0f2b04cb3b8ecac871a3a147f4b0fa8dbcfe",
+  "status": "source_case_inventory_runtime_and_full_families_open",
+  "scope": "Known noncore UI/Grid source-case inventory for the authorized M5.14-M5.20 ancestor batch. Exact original records remain referenced, not copied or certified by this preflight.",
+  "baseline_recovery": {
+    "helper": "node_modules/.cache/m514-baseline-audit.mjs",
+    "helper_sha256": "30253d10499d418e1d7f20f6d0ee7a79ec73a938c2f56165c48b9e67c511112b",
+    "log": "node_modules/.cache/m514-baseline-audit.log",
+    "log_sha256": "4b84ef861552bb43b86152b837d778c83ea72e05769e899db893d9807062e3dd",
+    "scope": "Read-only recovery of201inputs/95evidence/27records/3maps/138units/836each/203actualarchive and original budgets; no historical runtime rerun or recertification."
+  },
+  "registry": {
+    "path": "docs/implementation/evidence/remaining-work-plan.json",
+    "sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632",
+    "resolution_rule": "Every entry requires the union of required_steps for ALL its profiles. primary_owner routes bookkeeping only, never drops secondary owners. Ledger entry defaults/local overrides and original acceptance remain in force."
+  },
+  "exact_inputs": {
+    "ui_surface": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/structural",
+      "where": {
+        "ledger": "ui"
+      },
+      "expected_records": 426,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "grid_surface": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/structural",
+      "where": {
+        "ledger": "grid"
+      },
+      "expected_records": 89,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "ui_dynamic": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/dynamic",
+      "where": {
+        "ledger": "ui"
+      },
+      "expected_records": 21,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "grid_dynamic": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/dynamic",
+      "where": {
+        "ledger": "grid"
+      },
+      "expected_records": 17,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "supplemental": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/supplemental",
+      "where": {
+        "ledger": "ui"
+      },
+      "expected_records": 750,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "supplemental_kinds": {
+      "nested-helper": 16,
+      "declaration-surface": 96,
+      "declaration-field": 484,
+      "declaration-call": 53,
+      "configuration-path": 101
+    },
+    "ui_findings": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/audit_findings",
+      "where": {
+        "ledger": "ui"
+      },
+      "expected_records": 5,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "grid_contracts": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/grid_contracts",
+      "where": {},
+      "expected_records": 30,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    },
+    "grid_acceptance": {
+      "registry": "docs/implementation/evidence/remaining-work-plan.json",
+      "collection_pointer": "/grid_acceptance",
+      "where": {},
+      "expected_records": 41,
+      "exact_record_identity": "Use each original ledger_pointer/inventory_pointer or id in the referenced registry; preserve duplicate symbols and ALL profile required_steps."
+    }
+  },
+  "original_sources": [
+    {
+      "path": "docs/implementation/evidence/v1-ui-parity.json",
+      "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6",
+      "status": "immutable_inherited_audit_or_selected_acceptance_not_rerun"
+    },
+    {
+      "path": "docs/implementation/evidence/v1-grid-parity.json",
+      "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c",
+      "status": "immutable_inherited_audit_or_selected_acceptance_not_rerun"
+    },
+    {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8",
+      "status": "immutable_inherited_audit_or_selected_acceptance_not_rerun"
+    },
+    {
+      "path": "docs/implementation/evidence/m10964-grid-acceptance.json",
+      "sha256": "087ad46a109202ba1ed54a717d7ae570918312158835091f70609b3929f21c30",
+      "status": "immutable_inherited_audit_or_selected_acceptance_not_rerun"
+    },
+    {
+      "path": "docs/implementation/evidence/m10964p-grid-acceptance.json",
+      "sha256": "a1b7aeebfe27b2be82f013053125861019cf3b6323d290344dbca9ddd35dbf68",
+      "status": "immutable_inherited_audit_or_selected_acceptance_not_rerun"
+    }
+  ],
+  "selected_overlays": [
+    {
+      "path": "docs/implementation/evidence/m51-shared-rules.json",
+      "sha256": "6b5108667a3a48983b09b2f572bffc4b238918eba7e75471aca6ebdecf4efde2",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m52-row-state.json",
+      "sha256": "39c01607fbbe8ccaba925b8c5d7defd9942edc83f2cf3c0e92176ba707c6cc48",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m53-form-options.json",
+      "sha256": "fb1ab16511bae1fc737bb51516a0cb00cf04574c22dbf1a94fae98857047fc3b",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m54-form-values.json",
+      "sha256": "1c73e2571d00be2109b1476bf5344bb217e42d5f859af91b02b4f637944f4929",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m55-local-form.json",
+      "sha256": "55f6b1a75fdee0493e189f217da9d1ff1a633afd4c027c0de191a718c96cd507",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m56-form-binding.json",
+      "sha256": "d217f47befe30fcd05a8aa69762774680743b8c092f8a51cb39941e6498c42cc",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m57-form-defaults.json",
+      "sha256": "b2ce382d21940d155becf7997da2101aeb354e22c855b7800b2987b7ec439500",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m58-form-discovery.json",
+      "sha256": "0069c9a72d8ba48a3ea6e38fd49d6515b783d7acdc102ffe8ca8b7adda86dbcd",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m59-form-presets.json",
+      "sha256": "b7dd828e62f54cfa4b0d58b39001ade25fd43eba5eb705be2ee573cf40b18b70",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m510-form-configuration.json",
+      "sha256": "6511bd480fcb7ebd3913c2ee98d60916287fa8893dd8060069cd9a35a2006d0e",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m511-grid-callbacks.json",
+      "sha256": "c678d105531815322f61aa8200d00098eb3e45572e79e08c52d354c499978f79",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m512-form-source.json",
+      "sha256": "48539caeb8025c4e021c49bfb1969292c464d020ac345dd0f4b573b7394409fa",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    },
+    {
+      "path": "docs/implementation/evidence/m513-choice-groups.json",
+      "sha256": "5e766bf6cb6e96cbdbad2157102999705c2613d3129a4fcd125950e91efffd9e",
+      "status": "retain_selected_outcomes_and_all_remaining_owner_obligations"
+    }
+  ],
+  "inspection": {
+    "method": "Fresh bounded reads and targeted searches listed below; inherited audit definitions/acceptance and exact mappings reused explicitly. Hashing a file is not full semantic reading.",
+    "files": [
+      {
+        "path": "v1/src/natural.ui.js",
+        "sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+        "read_scope": "Bounded Form constructor/bind/unbind/add/remove/revert/val/update and wrapper reads; targeted Tree/TODO/native-control searches."
+      },
+      {
+        "path": "v1/src/natural.ui.shell.js",
+        "sha256": "0a670f80e1f0c217f80f2d8a80754e56fcdf699a74ddf65aa544e6cac814bf7b",
+        "read_scope": "Targeted saveHistory source search; other shell branches inherited from immutable UI audit."
+      },
+      {
+        "path": "v1/src/natural.template.js",
+        "sha256": "61c4b67e2a018e9fa18f8d8f5960400a66a1dbea58deb3ccedbe1d3702d65642",
+        "read_scope": "Targeted p.select/code/default/selected source searches; full loader behavior inherited from core/UI audits."
+      },
+      {
+        "path": "v1/dist/natural.config.js",
+        "sha256": "7777a896a606553a80b02925fc496056fde07ba9dbf335b9579ded917d37201c",
+        "read_scope": "Targeted global message/datepicker/month/popup/tab/List/Documents default searches; exact101paths inherited from registry."
+      },
+      {
+        "path": "v1/docs/ui/select.md",
+        "sha256": "c160ef559b5942314e8b87f6c42e0465570ade712df729431ea0929e4cf6139f",
+        "read_scope": "Bounded generated radio/multiple Select caller and default/mutation documentation."
+      },
+      {
+        "path": "v1/docs/template/conventions.md",
+        "sha256": "5db964f0905479f7c05982ac891f2fa5fffbf014b7807d2f88a7dbf427e35de5",
+        "read_scope": "Bounded p.select/p.form/p.grid/search declaration example."
+      },
+      {
+        "path": "v1/docs/template/component-declaration.md",
+        "sha256": "cf54b154c8f5f2b72fd4ff2d9b88d5539075bd464704214ad16490225ed8f6d5",
+        "read_scope": "Bounded code/comm/data readiness, repeated declaration and callback initial-selection examples."
+      },
+      {
+        "path": "v1/docs/examples/enter-form-data.md",
+        "sha256": "f05087f4603aa253691a9ce35ee9bf03c5d17e6e4cd64d25de1928ce9c2edc0d",
+        "read_scope": "Bounded code-before-Form, add/current native values, reset/revert and formatter-triggered date attachment caller."
+      },
+      {
+        "path": "v1/docs/examples/template/search-grid-detail-horizontal.md",
+        "sha256": "325c4a900ad11d92b66f5522217e7a631f26cd1350145ffcf1b4d79935643603",
+        "read_scope": "Bounded shared Grid/detail Form, autoUnbind and generated code-choice caller."
+      },
+      {
+        "path": "src/ui/form.ts",
+        "sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+        "read_scope": "Fresh bounded reread of current nativeOwner/replaceGroup, onReset and onRows subscription/lifetime functions (lines383-520,618-639,1409-1469). These are the frozen M5.14 working-tree functions, not daab0f2 implementations; legacy source cases and inherited audit outcomes retain their original scope.",
+        "normalized_sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+        "input_snapshot": {
+          "kind": "M5.14 frozen working-tree execution input, not baseline Git source",
+          "manifest": {
+            "path": "docs/implementation/evidence/m514-inputs-11672a852e98.json",
+            "sha256": "11672a852e98af55f324f885a90aa9ce7559018eae75d7d9533c13ccd1911cc5"
+          },
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "captured_gate": {
+            "label": "focused-webkit",
+            "sources_unchanged": true
+          },
+          "scope": "Recorded map provenance only; this preflight grants no runtime credit."
+        }
+      },
+      {
+        "path": "src/ui/choice-group-owner.ts",
+        "sha256": "6792da12c2522cb6d0a654c7a239b60367b8c3a7b4693ca81e771a85a7120f14",
+        "read_scope": "Fresh complete reread of current descriptor/replacement interface, registration, readiness, exact claim/version, mediated replacement/focus and source-value checks. This is the frozen M5.14 working-tree owner, not daab0f2; inherited baseline owner facts remain historical.",
+        "normalized_sha256": "6792da12c2522cb6d0a654c7a239b60367b8c3a7b4693ca81e771a85a7120f14",
+        "input_snapshot": {
+          "kind": "M5.14 frozen working-tree execution input, not baseline Git source",
+          "manifest": {
+            "path": "docs/implementation/evidence/m514-inputs-11672a852e98.json",
+            "sha256": "11672a852e98af55f324f885a90aa9ce7559018eae75d7d9533c13ccd1911cc5"
+          },
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "captured_gate": {
+            "label": "focused-webkit",
+            "sources_unchanged": true
+          },
+          "scope": "Recorded map provenance only; this preflight grants no runtime credit."
+        }
+      },
+      {
+        "path": "src/ui/index.ts",
+        "sha256": "9ba3b503fac6475ecb3c8b001aa61fd564da79ad33a920635b2cc45a27a3d800",
+        "read_scope": "Bounded Form/List/Grid public interfaces."
+      },
+      {
+        "path": "src/ui/grid.ts",
+        "sha256": "1744ed203115198666d1f4078d67cb20d8c651ee7894d7b86016f5e0859e3739",
+        "read_scope": "Bounded paste validation and targeted native-group/cardinality/callback source reads."
+      },
+      {
+        "path": "src/ui/list.ts",
+        "sha256": "24d24f1f79b93b278d448ee8bb2998e830c47d222ef99e6502f129f0f1fe7adc",
+        "read_scope": "Bounded compile/createRecord reads proving radio rejection and disabled native controls."
+      },
+      {
+        "path": "src/data/index.ts",
+        "sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+        "read_scope": "Targeted JSON/plain-object/clone/own-key/set/replace/status source searches."
+      },
+      {
+        "path": "src/ui/tree.ts",
+        "sha256": "f496bcdb685e3684ce597115de05ffec7fc2a16c2bc9776ea2884dba868566bc",
+        "read_scope": "Bounded current public handle/options/root/identity contract; other flows inherited."
+      },
+      {
+        "path": "src/ui/datepicker.ts",
+        "sha256": "ddb34471a9e40e28b044874d9535946715492121140ce5bbde67283918b971c4",
+        "read_scope": "Bounded current public handle/options/day-value contract; other calendar flows inherited."
+      },
+      {
+        "path": "src/ui/popup.ts",
+        "sha256": "0e3575893c293e2a3b152c802fe46a0d77c101c417a4aea019ad3bbc7336d26f",
+        "read_scope": "Bounded public API/host and targeted lifetime/opener source reads."
+      },
+      {
+        "path": "src/ui/tabs.ts",
+        "sha256": "657888840ddb869cadf5ac7e5d19492233cf3d3e90c3d84886ed16c6ce8ed07a",
+        "read_scope": "Bounded public API/entry and targeted host source reads."
+      },
+      {
+        "path": "src/ui/documents.ts",
+        "sha256": "878be46a60d7673675bf99c0747ea60edadeb129d8dd16d659d319c8fba0679c",
+        "read_scope": "Bounded public API/guard/root entry and targeted source reads."
+      }
+    ],
+    "not_claimed": [
+      "Fresh line-by-line review of every legacy UI/Grid function or750supplemental records.",
+      "Runtime acceptance of any P0/M5.14-M5.20 outcome.",
+      "Exhaustive discovery of private external applications or undocumented consumers.",
+      "Whole-family closure or approval of a lost supported capability."
+    ],
+    "snapshot_refresh_note": "The initial Form and choice-group-owner inspection hashes captured intermediate M5.14 editing states. After fresh bounded/complete rereads, these two entries now identify the actual frozen M5.14 working-tree input map explicitly. Baseline start metadata, original source cases, inherited audits and all open P0/runtime/family/omission states remain unchanged."
+  },
+  "case_groups": [
+    {
+      "id": "UI-P01",
+      "profiles": [
+        "U01",
+        "U02",
+        "U03"
+      ],
+      "dynamic": [
+        "UI-D01",
+        "UI-D02",
+        "UI-D03",
+        "UI-D04",
+        "UI-D05",
+        "UI-D13",
+        "UI-D15"
+      ],
+      "owners": [
+        "M5.14",
+        "M5.15",
+        "M5.16",
+        "M5.17",
+        "M5.18",
+        "M5.19",
+        "M5.20"
+      ],
+      "inspection": "fresh_bounded_source_reads_plus_inherited_selected_acceptance",
+      "source_refs": [
+        "v1/src/natural.ui.js:3354-3428",
+        "v1/src/natural.ui.js:3591-3901",
+        "v1/src/natural.ui.js:3901-4289",
+        "src/ui/form.ts:77-116",
+        "src/ui/form.ts:287-340",
+        "src/ui/form.ts:761-827",
+        "src/ui/form.ts:1028-1103",
+        "src/ui/form.ts:1319-1374"
+      ],
+      "cases": [
+        "Separate committed Rows values, retained invalid drafts, current native entry, captured creation values, native reset and received revert checkpoints.",
+        "Legacy add extracts current native inputs after optional autoUnbind, merges caller data, chooses an insertion position and emits source/status updates. Rows-backed Form.read returns committed source and is not an entered-draft extraction contract.",
+        "Preserve independent unbind/resume, missing/deleted current-row handling, compatible rescan, cache/discovery and selected update outcomes without duplicating the completed default/restore owners.",
+        "Trace whole and per-key callbacks through inherited/unbound keys, equal writes, old-value before timing, return transforms, post-notification mutation, reentry, thrown/async callbacks and explicit receiver migration."
+      ]
+    },
+    {
+      "id": "UI-P02",
+      "profiles": [
+        "U09",
+        "U10",
+        "G04"
+      ],
+      "dynamic": [
+        "UI-D13",
+        "UI-D14"
+      ],
+      "owners": [
+        "M5.14",
+        "M5.19",
+        "M6.1",
+        "M3.7"
+      ],
+      "inspection": "fresh_authored_caller_and_owner_reads_with_inherited_select_audit",
+      "source_refs": [
+        "src/ui/choice-group-owner.ts:1-82",
+        "src/ui/form.ts:136-174",
+        "v1/docs/ui/select.md:186-209",
+        "v1/docs/examples/enter-form-data.md:146-172",
+        "v1/docs/template/component-declaration.md:109-127",
+        "v1/docs/template/conventions.md:149-177"
+      ],
+      "cases": [
+        "Code/comm/data choices finish before dependent Forms/components initialize; repeated matching controls have independent instances and stable declared ordering.",
+        "Generation-before-Form and standalone replacement are accepted M5.13 outcomes. Safe live adopted replacement still needs preflight, source/draft/default retention, rollback, rescan/dispose and exact ownership checks.",
+        "Retain radio string/null and generated checkbox string-array shapes for zero/one/many choices, raw option identity, native names/labels, required/disabled/unavailable values, reset and mutation/index/append/remove semantics."
+      ]
+    },
+    {
+      "id": "UI-P03",
+      "profiles": [
+        "U04",
+        "U05",
+        "U06",
+        "U07",
+        "U08",
+        "G02",
+        "G04",
+        "G09",
+        "G10",
+        "G15",
+        "G19",
+        "G20"
+      ],
+      "dynamic": [
+        "UI-D05",
+        "UI-D06",
+        "UI-D16"
+      ],
+      "owners": [
+        "M6.2",
+        "M6.3",
+        "M6.4",
+        "M6.5",
+        "M3.7",
+        "M5.19"
+      ],
+      "inspection": "fresh_current_List_entry_and_creation_reads_plus_inherited_iteration_audit",
+      "source_refs": [
+        "src/ui/list.ts:126-176",
+        "src/ui/list.ts:205-244",
+        "v1-ui-parity.json#/nested_helpers/entries"
+      ],
+      "cases": [
+        "List currently rejects radio and disables bound Select/text inputs; editable row Forms/native groups/drafts/commits are genuine M6.2 work.",
+        "Preserve separate active/batch/check state, vetoes/ranges/eligible scopes, stable RowIds, ordered creation/copy/move/remove/revert and row-resource cleanup.",
+        "Delayed/progressive admission, append/add/select/check/validate reveal, cancel/retry and height/scroll outcomes require their own cases; paging is not virtualization."
+      ]
+    },
+    {
+      "id": "UI-P04",
+      "profiles": [
+        "U11",
+        "U12"
+      ],
+      "dynamic": [
+        "UI-D01",
+        "UI-D02",
+        "UI-D03",
+        "UI-D04",
+        "UI-D13"
+      ],
+      "owners": [
+        "M6.6",
+        "M6.7",
+        "M3.5",
+        "M3.7"
+      ],
+      "inspection": "inherited_original_UI_cases_and_fixed_stage_contracts_not_fresh_full_runtime_review",
+      "source_refs": [
+        "v1-ui-parity.json#/profiles/U11",
+        "v1-ui-parity.json#/profiles/U12"
+      ],
+      "cases": [
+        "Pagination numeric windows, set jumps, shrinking/empty totals, accessible state, callback suppression and Grid/List synchronization remain required.",
+        "Native and anchor actions need disabled pointer/Enter/Space behavior, creation hooks, authored-content preservation and teardown."
+      ]
+    },
+    {
+      "id": "UI-P05",
+      "profiles": [
+        "U13",
+        "U14",
+        "U15",
+        "U16"
+      ],
+      "dynamic": [
+        "UI-D01",
+        "UI-D02",
+        "UI-D03",
+        "UI-D04",
+        "UI-D06",
+        "UI-D08",
+        "UI-D13",
+        "UI-D18"
+      ],
+      "owners": [
+        "M7.1",
+        "M7.2",
+        "M7.3",
+        "M7.4",
+        "M3.3",
+        "M3.4",
+        "M3.5",
+        "M3.7"
+      ],
+      "inspection": "fresh_current_Popup_API_and_lifetime_entry_reads_plus_inherited_dialog_audit",
+      "source_refs": [
+        "src/ui/popup.ts:6-49",
+        "v1-ui-parity.json#/external_configuration/groups",
+        "v1-ui-parity.json#/profiles/U13",
+        "v1-ui-parity.json#/profiles/U14",
+        "v1-ui-parity.json#/profiles/U15",
+        "v1-ui-parity.json#/profiles/U16"
+      ],
+      "cases": [
+        "Authored Alert/confirm, contextual input/array messages, optional expiry, result/veto/order and local/shared labels are distinct workflows.",
+        "Nonmodal/hide-retain/reopen/drag and preloaded/retained/recreated Popup pages must use common loading/CVC owners with opener/input/output/context, guards, cancellation, focus and cleanup.",
+        "Existing Popup execution is not full retain/preload/drag parity; complete the M7 ancestors before final joined acceptance."
+      ]
+    },
+    {
+      "id": "UI-P06",
+      "profiles": [
+        "U17"
+      ],
+      "dynamic": [
+        "UI-D02",
+        "UI-D03",
+        "UI-D04",
+        "UI-D06",
+        "UI-D07",
+        "UI-D08",
+        "UI-D13"
+      ],
+      "owners": [
+        "M7.5",
+        "M3.3",
+        "M3.4",
+        "M3.7"
+      ],
+      "inspection": "fresh_current_Tabs_API_entry_read_plus_inherited_entry_option_audit",
+      "source_refs": [
+        "src/ui/tabs.ts:8-41",
+        "v1-ui-parity.json#/additional_dynamic_paths/6",
+        "v1-ui-parity.json#/additional_dynamic_paths/7"
+      ],
+      "cases": [
+        "EachTab preload/stateless/active/disabled and activation-input branches extend constructor literals.",
+        "Resolve lazy/preloaded/recreated pages, initial callback suppression, rapid activation, abort/retry, disabled focus and overflow/reveal with two authored layouts."
+      ]
+    },
+    {
+      "id": "UI-P07",
+      "profiles": [
+        "U18",
+        "U19"
+      ],
+      "dynamic": [
+        "UI-D01",
+        "UI-D03",
+        "UI-D04",
+        "UI-D13",
+        "UI-D17"
+      ],
+      "owners": [
+        "M11.1",
+        "M11.2",
+        "M5.15",
+        "M3.7"
+      ],
+      "inspection": "fresh_Tree_API_and_preserved_checkbox_TODO_search_plus_inherited_identity_audit",
+      "source_refs": [
+        "src/ui/tree.ts:10-27",
+        "src/ui/tree.ts:60-81",
+        "v1/src/natural.ui.js:7344-7500",
+        "v1/src/natural.ui.js:7550-7612"
+      ],
+      "cases": [
+        "Keep old display key separate from identity val, parent/level/root mapping and folder/leaf selection.",
+        "Shipped generated checkbox cascade/mixed ancestor behavior is required. Commented val/check/update TODO methods do not establish shipped public implementations.",
+        "Check insert/move/remove/reload, disabled branches, accessible keyboard/typeahead/labels and source synchronization."
+      ]
+    },
+    {
+      "id": "UI-P08",
+      "profiles": [
+        "U01",
+        "U05",
+        "U20",
+        "U21",
+        "G04"
+      ],
+      "dynamic": [
+        "UI-D02",
+        "UI-D03",
+        "UI-D04",
+        "UI-D12",
+        "UI-D13",
+        "UI-D19"
+      ],
+      "owners": [
+        "M5.18",
+        "M11.3",
+        "M11.4",
+        "M3.7"
+      ],
+      "inspection": "fresh_DatePicker_API_configuration_and_real_Form_recipe_reads_plus_inherited_calendar_audit",
+      "source_refs": [
+        "src/ui/datepicker.ts:5-23",
+        "src/ui/datepicker.ts:50-74",
+        "v1/dist/natural.config.js:355-400",
+        "v1/docs/examples/enter-form-data.md:226-239"
+      ],
+      "cases": [
+        "The shipped Form example uses the date formatter to attach a picker and write raw Ymd; display-only formatting is not attachment equivalence.",
+        "Preserve Form/Grid/editable List initial/dynamic/offscreen attachment, date/month raw/display/rules/bounds/locale/veto/focus and lifetime.",
+        "Month/year input/panels, period selection, holidays and touch/wheel alternatives remain M11.4 outcomes, not general date-utility APIs."
+      ]
+    },
+    {
+      "id": "UI-P09",
+      "profiles": [
+        "U22"
+      ],
+      "dynamic": [
+        "UI-D01",
+        "UI-D02",
+        "UI-D04",
+        "UI-D20"
+      ],
+      "owners": [
+        "M12.1"
+      ],
+      "inspection": "inherited_shipped_notification_and_configuration_cases_not_fresh_full_runtime_review",
+      "source_refs": [
+        "v1-ui-parity.json#/profiles/U22",
+        "v1-ui-parity.json#/audit_findings/4"
+      ],
+      "cases": [
+        "Rich inert content/actions, URL/hash/function workflows, placement/stacking, accessible expiry/pause/dismissal and cleanup remain required.",
+        "M12.1 is outside this unconditional M5-target ancestor queue; no omission or full UI closure follows from completing that queue."
+      ]
+    },
+    {
+      "id": "UI-P10",
+      "profiles": [
+        "U23",
+        "U24",
+        "U25"
+      ],
+      "dynamic": [
+        "UI-D01",
+        "UI-D02",
+        "UI-D04",
+        "UI-D06",
+        "UI-D09",
+        "UI-D10",
+        "UI-D11",
+        "UI-D13",
+        "UI-D21"
+      ],
+      "owners": [
+        "M12.2",
+        "M12.3",
+        "M12.4",
+        "M3.1",
+        "M3.2",
+        "M3.3",
+        "M3.4",
+        "M3.7"
+      ],
+      "inspection": "fresh_current_Documents_API_and_saveHistory_search_plus_inherited_shell_audit",
+      "source_refs": [
+        "src/ui/documents.ts:7-59",
+        "v1/src/natural.ui.shell.js:193",
+        "v1-ui-parity.json#/audit_findings/1",
+        "v1-ui-parity.json#/external_declarations"
+      ],
+      "cases": [
+        "Documents SDI/duplicate-key/metadata, common page lifecycle, retained/stateless policies and scoped request aggregation remain owned by M12.2/M12.4.",
+        "Capacity/state eviction/menus/bulk close are M12.3 and remain outside this unconditional ancestor queue. Eviction is not closing.",
+        "saveHistory has a preserved constructor literal and declaration/document intent but no consuming source branch found in the inherited audit. External consumers remain unknown; static absence is not approval to remove it."
+      ]
+    },
+    {
+      "id": "GRID-P01",
+      "profiles": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G19",
+        "G20"
+      ],
+      "dynamic": [
+        "grid:D02",
+        "grid:D05",
+        "grid:D09",
+        "grid:D10",
+        "grid:D11",
+        "grid:D17"
+      ],
+      "owners": [
+        "M5.15",
+        "M5.16",
+        "M5.18",
+        "M5.19",
+        "M5.20",
+        "M3.5",
+        "M3.7"
+      ],
+      "inspection": "fresh_current_Grid_native_group_and_Form_owner_reads_plus_selected_M5_overlays",
+      "source_refs": [
+        "src/ui/grid.ts:306-342",
+        "src/ui/grid.ts:793-801",
+        "src/ui/grid.ts:2043-2078",
+        "src/ui/choice-group-owner.ts:1-82",
+        "src/ui/form.ts:136-174"
+      ],
+      "cases": [
+        "Current Grid uses authored group member count for checkbox arrays and has no generated ChoiceGroupBinding adoption. Form-only zero/one/many acceptance cannot close generated row controls.",
+        "Retain shared Rows/status/checkpoint/retained-anchor/wire outcomes already accepted in M5.2; add actual generated nested row-control/typed rule/source integration rather than another data store.",
+        "Check sort/filter/page/recycling, inaccessible offscreen controls, raw versus display projection, invalid drafts, required/disabled/readonly rules, source replacement, unique IDs/names and exact release."
+      ]
+    },
+    {
+      "id": "GRID-P02",
+      "profiles": [
+        "G01",
+        "G03",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G19",
+        "G20"
+      ],
+      "dynamic": [
+        "grid:D01",
+        "grid:D02",
+        "grid:D03",
+        "grid:D06",
+        "grid:D07",
+        "grid:D08",
+        "grid:D10"
+      ],
+      "owners": [
+        "M3.5",
+        "M3.7",
+        "M5.17",
+        "M5.18",
+        "M10.9.8",
+        "M10.9.9"
+      ],
+      "inspection": "inherited_connected_Grid_callback_review_and_fresh_preserved_wrapper_receiver_source_reads",
+      "source_refs": [
+        "v1/src/natural.ui.js:417-434",
+        "v1/docs/template/component-declaration.md:184-194",
+        "m511-grid-callbacks.json#/selected_contracts",
+        "m510-form-configuration.json#/selected_contracts"
+      ],
+      "cases": [
+        "Preserve M5.10 field and M5.11 captured plain row/completion contracts, explicit live forwarding and resource/checkpoint behavior.",
+        "Legacy initial-select through callback this, local/shared return ordering, typed declarations and source actions need concrete owner integration; a matching modern callback name is insufficient.",
+        "Native post-edit event registration, controlled template rescan/rebind and owned cleanup are selected recipes, not missing Grid event/cache engines."
+      ]
+    },
+    {
+      "id": "GRID-P03",
+      "profiles": [
+        "G04",
+        "G06",
+        "G15",
+        "G18",
+        "G19"
+      ],
+      "dynamic": [
+        "grid:D12",
+        "grid:D15"
+      ],
+      "owners": [
+        "M5.18",
+        "M10.9.7",
+        "M10.9.9"
+      ],
+      "inspection": "fresh_current_paste_precommit_validation_read_plus_inherited_validation_policy",
+      "source_refs": [
+        "src/ui/grid.ts:1949-2121",
+        "m51-shared-rules.json#/selected_contracts/validation-policy"
+      ],
+      "cases": [
+        "autoValidate:false already bypasses automatic native/business constraints at edit commit points while retaining parse/value integrity. Manual timing remains separate.",
+        "Atomic paste still explicitly validates with true; unvalidated paste and remaining legacy validation-scope crosswalk stay required at M10.9.7 outside this batch. Existing validate(id) scope recipes are not a missing engine."
+      ]
+    },
+    {
+      "id": "GRID-P04",
+      "profiles": [
+        "G14",
+        "G16",
+        "G20"
+      ],
+      "dynamic": [
+        "grid:D03",
+        "grid:D13"
+      ],
+      "owners": [
+        "M7.4",
+        "M5.20",
+        "M10.9.8",
+        "M10.9.9"
+      ],
+      "inspection": "inherited_later_selected_detail_and_Popup_acceptance_with_fresh_Popup_entry_read",
+      "source_refs": [
+        "m10964-grid-acceptance.json#/contracts/row-details",
+        "m10964p-grid-acceptance.json#/selected_contracts/row-details",
+        "src/ui/popup.ts:6-49"
+      ],
+      "cases": [
+        "Full and reduced authored detail Forms, shared Rows, navigation/validation and cleanup already have selected acceptance.",
+        "General retained/preloaded/drag/guard Popup outcomes still require M7 integration; do not rebuild a Grid detail engine."
+      ]
+    },
+    {
+      "id": "GRID-P05",
+      "profiles": [
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G20"
+      ],
+      "dynamic": [
+        "grid:D01",
+        "grid:D02",
+        "grid:D03",
+        "grid:D04",
+        "grid:D05",
+        "grid:D06",
+        "grid:D07",
+        "grid:D08",
+        "grid:D09",
+        "grid:D10",
+        "grid:D11",
+        "grid:D12",
+        "grid:D13",
+        "grid:D14",
+        "grid:D15",
+        "grid:D16",
+        "grid:D17"
+      ],
+      "owners": [
+        "M10.9.7",
+        "M10.9.8",
+        "M10.9.9"
+      ],
+      "inspection": "inherited_complete_immutable_Grid_mapping_and_later_selected_contract_reconciliation_not_fresh_full_runtime_review",
+      "source_refs": [
+        "m1096-grid-audit.json#/surface",
+        "m1096-grid-audit.json#/dynamic_groups",
+        "m10964-grid-acceptance.json#/contracts",
+        "m10964-grid-acceptance.json#/families",
+        "m10964p-grid-acceptance.json#/selected_contracts",
+        "v1-grid-parity.json#/profiles"
+      ],
+      "cases": [
+        "Preserve implemented columns/resize/reorder/hide, multi-selection/checking, raw sort/filter, quoted atomic paste, multi-tr/merge, actual bounded viewport/progressive, measured leading pinning and wheel containment.",
+        "Retain all 89 exact surface records,17 dynamics,30 contracts and41 acceptance IDs with secondary owners and original cases. None closes merely because its selected local implementation exists.",
+        "Native topology/root inspection and old geometry knobs need outcome/customization resolution; retain documented native-table pinning limits and the one consolidated decision for any genuine lost capability."
+      ]
+    }
+  ],
+  "finding_dispositions": [
+    {
+      "id": "UI-F01",
+      "source": {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "pointer": "/audit_findings/0"
+      },
+      "dynamic_ref": "UI-D17",
+      "owner": "P0.1",
+      "closure_stage": "M8.2",
+      "state": "required_source_case_inherited_no_new_runtime_closure",
+      "note": "Tree key/val meaning differs from current key(row): label and identity mappings must remain distinct."
+    },
+    {
+      "id": "UI-F02",
+      "source": {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "pointer": "/audit_findings/1"
+      },
+      "dynamic_ref": "UI-D21",
+      "owner": "P0.1",
+      "closure_stage": "M8.2",
+      "state": "required_source_case_inherited_no_new_runtime_closure",
+      "note": "Documents saveHistory is declared/literal-only in the inspected preserved source; external history intent remains unresolved and required for closure."
+    },
+    {
+      "id": "UI-F03",
+      "source": {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "pointer": "/audit_findings/2"
+      },
+      "dynamic_ref": "UI-D03",
+      "owner": "P0.1",
+      "closure_stage": "M8.2",
+      "state": "required_source_case_inherited_no_new_runtime_closure",
+      "note": "Global/local before hooks do not uniformly veto; actual local/global/value transforms and consumer return effects require acceptance."
+    },
+    {
+      "id": "UI-F04",
+      "source": {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "pointer": "/audit_findings/3"
+      },
+      "dynamic_ref": "UI-D05",
+      "owner": "P0.1",
+      "closure_stage": "M8.2",
+      "state": "required_source_case_inherited_no_new_runtime_closure",
+      "note": "Form.bindEvents adds four reachable nested functions beyond twelve NU.ui helpers and the inventory member count."
+    },
+    {
+      "id": "UI-F05",
+      "source": {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "pointer": "/audit_findings/4"
+      },
+      "dynamic_ref": "UI-D20",
+      "owner": "P0.1",
+      "closure_stage": "M8.2",
+      "state": "required_source_case_inherited_no_new_runtime_closure",
+      "note": "Rich/action notifications and optional expiry can preserve useful behavior with authored inert content and accessible controls; none is an approved omission."
+    }
+  ],
+  "grid_resolution": {
+    "surface_source": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "pointer": "/surface",
+      "entries": 89
+    },
+    "dynamic_source": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "pointer": "/dynamic_groups",
+      "entries": 17
+    },
+    "contracts": {
+      "ids": [
+        "advanced-capabilities",
+        "defaults-composition",
+        "root-inspection",
+        "native-topology",
+        "sticky-layout",
+        "height-controls",
+        "column-chooser",
+        "header-sort",
+        "column-filter",
+        "row-merge",
+        "paste",
+        "data-projections",
+        "template-cache",
+        "row-selection",
+        "row-checks",
+        "row-lifecycle",
+        "row-defaults",
+        "change-status",
+        "validation-policy",
+        "native-controls",
+        "row-order",
+        "shared-updates",
+        "display",
+        "action-reveal",
+        "hover",
+        "progressive-render",
+        "field-rules",
+        "messages",
+        "row-events",
+        "row-details"
+      ],
+      "exact_profiles_and_owners_in": "docs/implementation/evidence/remaining-work-plan.json#/grid_contracts",
+      "closure_stage": "M10.9.9"
+    },
+    "acceptance_source": {
+      "path": "docs/implementation/evidence/v1-grid-parity.json",
+      "pointer": "/profiles",
+      "ids": [
+        "G01-A01",
+        "G01-A02",
+        "G02-A01",
+        "G02-A02",
+        "G03-A01",
+        "G03-A02",
+        "G04-A01",
+        "G04-A02",
+        "G05-A01",
+        "G05-A02",
+        "G06-A01",
+        "G06-A02",
+        "G07-A01",
+        "G07-A02",
+        "G08-A01",
+        "G08-A02",
+        "G09-A01",
+        "G09-A02",
+        "G10-A01",
+        "G10-A02",
+        "G11-A01",
+        "G11-A02",
+        "G12-A01",
+        "G12-A02",
+        "G13-A01",
+        "G13-A02",
+        "G14-A01",
+        "G14-A02",
+        "G14-A03",
+        "G15-A01",
+        "G15-A02",
+        "G16-A01",
+        "G16-A02",
+        "G17-A01",
+        "G17-A02",
+        "G18-A01",
+        "G18-A02",
+        "G19-A01",
+        "G19-A02",
+        "G20-A01",
+        "G20-A02"
+      ],
+      "exact_pointers_in": "docs/implementation/evidence/remaining-work-plan.json#/grid_acceptance"
+    },
+    "selected_scope": "Original current descriptions can predate selected M5/M10 implementations. Apply later ledgers before declaring a missing capability; no G01-G20 closure follows."
+  },
+  "ancestor_batch": {
+    "targets": [
+      "M5.14",
+      "M5.15",
+      "M5.16",
+      "M5.17",
+      "M5.18",
+      "M5.19",
+      "M5.20"
+    ],
+    "target_count": 7,
+    "unconditional_stages": [
+      "P0.1",
+      "M5.14",
+      "M3.1",
+      "M3.2",
+      "M3.3",
+      "M3.4",
+      "M3.5",
+      "M3.6",
+      "M3.7",
+      "M5.15",
+      "M5.16",
+      "M5.17",
+      "M5.18",
+      "M5.19",
+      "M6.1",
+      "M6.2",
+      "M6.3",
+      "M6.4",
+      "M6.5",
+      "M6.6",
+      "M6.7",
+      "M7.1",
+      "M7.2",
+      "M7.3",
+      "M7.4",
+      "M7.5",
+      "M11.1",
+      "M11.2",
+      "M11.3",
+      "M11.4",
+      "M12.2",
+      "M12.4",
+      "M5.20"
+    ],
+    "unconditional_count": 33,
+    "required_ancestors": 26,
+    "conditional_decision": {
+      "id": "P0.2",
+      "rule": "Not a static ancestor, but any actual lost R01/R02/R04/transport or other supported workflow requires the one consolidated decision before dependent completion. No omission is inferred."
+    },
+    "outside_unconditional_batch": [
+      "M3.8",
+      "M12.1",
+      "M12.3",
+      "M10.9.7",
+      "M10.9.8",
+      "M10.9.9",
+      "M8.1-M8.6",
+      "M13.1-M13.4",
+      "M9.1-M9.6"
+    ],
+    "rule": "All listed ancestors, including five M7 stages, keep separate detailed plans, implementation/test/evidence/doc acceptance and commits. The user authorized necessary ancestors; this preflight does not approve future signatures."
+  },
+  "unresolved": [
+    "External application/declaration/configuration/receiver callers remain subject to P0.1 investigation and concrete owner cases; no static reference is not unused proof.",
+    "saveHistory external intent remains unknown. Preserve the difference between a literal/declaration and an executing shipped branch.",
+    "Exact inherited/unbound-key/equal-write/old-value/post-notification callback use cases need M5.17 contract review; whole Rows observers are not equivalent timing proof.",
+    "Non-JSON/inherited/custom value and configured checked/unchecked codes need M5.15/M5.19 boundaries or concrete application conversion; do not silently discard business values.",
+    "M5.20 must join actual completed editable List, Tree/date and shell ancestors. Standalone Form/Grid tests cannot stand in for those outcomes.",
+    "Unvalidated paste, general Grid semantic closure, rich notifications, Documents capacity and whole-code/personal/release gates remain at their outside-batch owners.",
+    "Newly discovered existing-scope branches reopen the fixed owner checklist. Script/discovery/AOP/registry/transport/geometry mechanism changes do not automatically authorize lost capabilities.",
+    "Manual assistive technology, real OS IME/clipboard and future runtime/agent-task evidence are unexecuted here; actual Safari alone is excluded."
+  ],
+  "closure": {
+    "runtime_checks_run": false,
+    "full_UI_families_closed": 0,
+    "full_Grid_families_closed": 0,
+    "omissions_approved": 0,
+    "exhaustive_external_discovery_closed": false,
+    "P0_aggregate_semantic_closure_claimed": false
+  }
+}

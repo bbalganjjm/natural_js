@@ -1,0 +1,37 @@
+{
+  "milestone": "P0.1",
+  "status": "accepted_known_source_case_inventory",
+  "scope": "Known source-case assignment and exact inherited ownership only. This is not runtime, external-app, full-family, P0.2 or whole-framework acceptance.",
+  "inputs": {
+    "docs/implementation/evidence/remaining-work-plan.json": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632",
+    "docs/implementation/evidence/p01-core-preflight.json": "504695af0af16fca3a496484cc1ed456fcb786951d1e59a6456ceb7cf6caa5cd",
+    "docs/implementation/evidence/p01-ui-grid-preflight.json": "c2bf4af02d5e55fd1266a7cae134bf80f570085c688ac7f6fae48c503577524f"
+  },
+  "counts": {
+    "structural": 775,
+    "dynamic": 53,
+    "ui_supplemental": 750,
+    "ui_findings": 5,
+    "grid_contracts": 30,
+    "grid_acceptance": 41,
+    "core_case_groups": 29,
+    "ui_grid_case_groups": 15
+  },
+  "independent_reviews": [
+    {
+      "reviewer": "m511_design",
+      "scope": "Core exact260/15 records,29casegroups, all original overrides/source references and selected evidence; source/hash review passed."
+    },
+    {
+      "reviewer": "m511_legacy",
+      "scope": "Exact426+89/750/21+17/5/30/41 pointers, all secondary owners, original source fragments, corrected snapshot hashes and33-stage ancestor union; no remaining known-source assignment gap."
+    }
+  ],
+  "checks": {
+    "source_and_pointer_assertions": "passed",
+    "runtime_commands_executed": false,
+    "full_families_closed": 0,
+    "omissions_approved": 0
+  },
+  "next": "Implement every owning acceptance case separately; retain original rules and the one consolidated genuine-loss decision."
+}
