@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-binding-plan.md
     title: Completed whole-row observers and same-ID refresh scope
-    git_blob: 56630d68c03362df8ca36a53c2380201cde75cfd
+    git_blob: 14f118cf2567a0c365f136eb8341cbf59798a60f
   - id: baseline
     resource: evidence/m56-verification.json
     title: Frozen c4aacd0 runtime and installed package receipt

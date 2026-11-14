@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 726f8d786e3dee0985d4f65447f0e6a75c36a0ab
+    git_blob: a88025fbea7822f059ba3a7338ee6297a54a0014
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy more, vertical resize and action-driven scrolling

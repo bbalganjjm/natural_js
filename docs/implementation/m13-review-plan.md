@@ -5,14 +5,18 @@ description: Required whole-code review and verified remediation after feature p
 tags: [meta, plan, review, quality]
 status: draft
 sources:
+  - id: remaining
+    resource: evidence/remaining-work-plan.json
+    title: Fixed 56-stage continuation and exact known-record ownership
+    git_blob: a18ff58091c2eb8d8050ba8222d6b3285a078a11
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and final review gate
-    git_blob: 4cbd20e61c7ea08e4b412a0c92dd88461ed52cf9
+    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and dependency order
-    git_blob: 0f89068eaf0b87158d2b8305ec473bd5d19b4c53
+    git_blob: 3f26da6201495be6823374d69ad89a929110b512
   - id: coverage
     resource: feature-parity.md
     title: Framework behavior coverage and approved omission boundary
@@ -33,9 +37,9 @@ sources:
     resource: ../../package.json
     title: Package entries, build and verification commands
     git_blob: 393602a69677d5fdaf7968fd49b19efd1b7d5cae
-generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+  - { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 ---
 
 # Goal
@@ -57,6 +61,19 @@ The named skill produces a read-only report: it lists findings and changes no co
 
 # Steps
 
+## Fixed continuation IDs
+
+The [numbered continuation](remaining-work-plan.md) gives this final review four bounded stages. The procedures below retain their complete scope and correction loop; this numbering does not reduce the required review.[^remaining]
+
+| Stage | Required result |
+|---|---|
+| M13.1 | Freeze the complete baseline and run the whole-code read-only Ponytail report (procedures 1-2). |
+| M13.2 | Resolve every confirmed Must fix/Should fix and decide every suggestion with regressions and affected gates (procedures 3-4). |
+| M13.3 | Independently re-review all corrections and connected flows; failures return to M13.2 without new stage numbers. |
+| M13.4 | Run frozen full source/artifact/browser/performance/docs gates and all three fixed coding-agent tasks, independently review final evidence and hand off the unpublished result (procedures 5-7). |
+
+## Required procedures
+
 1. **Freeze the review baseline.** Record the branch, commit, source fingerprints, declared browser/load assumptions and exact package artifact. Confirm required parity and its gates are complete. Map the whole scope to owning modules so the review covers existing code as well as the final diff; record anything unavailable instead of claiming it was checked.[^parity][^coverage]
 2. **Run the read-only skill review.** Inspect correctness, security, data loss, failure/cancellation/disposal, expected-load behavior, meaningful test gaps, speed and unnecessary code. Trace every affected caller and indirect declaration/configuration/rule path. Keep the skill's numbered Must fix, Should fix and Nice to have report, including each concrete trigger, wrong result, smallest fix and consequence of skipping it. No concrete case means no finding.
 3. **Record and resolve each finding.** Give each finding a stable ID, owner, affected symbols/callers, reproduction, expected/actual result and disposition. Must fix and Should fix findings must be fixed and verified before M13 closes. A claim disproved by evidence is recorded as such rather than silently dropped. Every Nice to have receives either a fix or a concrete decision explaining why the current behavior/code is retained. Do not defer a confirmed Must fix or Should fix beyond this gate.
@@ -69,7 +86,7 @@ The completion record must connect each finding to its reproduction, minimal cor
 
 # Next action
 
-Continue the active required parity work. Prepare M13's frozen scope and invoke `ponytail:ponytail-review` only after that work and P0 closure are complete. This plan adds the final gate; it does not start a whole-code review or certify unfinished features.
+Finish orders 01-46 of [the fixed continuation](remaining-work-plan.md), including all required families, P0 decisions and M8 acceptance. Then execute M13.1-M13.4 over the complete codebase. Only the final verified unpublished result goes to personal testing in M9.1-M9.2; M9.3-M9.6 release/repository work stays separately conditional.[^remaining]
 
 # Decisions
 
@@ -99,3 +116,5 @@ Continue the active required parity work. Prepare M13's frozen scope and invoke 
 [^architecture]: Public ownership, one-way dependencies and private sharing
 [^evaluation]: Fixed agent tasks and honest read-cost accounting
 [^package]: Package entries, build and verification commands
+
+[^remaining]: Fixed 56-stage continuation and exact known-record ownership

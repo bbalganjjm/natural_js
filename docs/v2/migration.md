@@ -144,7 +144,7 @@ sources:
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 0f89068eaf0b87158d2b8305ec473bd5d19b4c53
+    git_blob: 3f26da6201495be6823374d69ad89a929110b512
 generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }

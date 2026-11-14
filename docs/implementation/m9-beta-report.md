@@ -8,7 +8,7 @@ sources:
   - id: plan
     resource: m9-plan.md
     title: Approved M9 release gates
-    git_blob: 3123d8f041582a8a6c70da949dd454aeb76e5e49
+    git_blob: fefcf3e8701122ddfcade459f7f5494879364a1e
   - id: package
     resource: ../../package.json
     title: Beta package metadata and scripts

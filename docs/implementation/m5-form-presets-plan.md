@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-discovery-plan.md
     title: Completed explicit field discovery and lifetime scope
-    git_blob: b3612640596569e56dbc7eb654b9794d5b3e3264
+    git_blob: b82c08a96689064eca3d6d62e1b8aab3ce7032cc
   - id: baseline
     resource: evidence/m58-verification.json
     title: Frozen 3f5e3ad source, runtime and installed package baseline
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: 0f89068eaf0b87158d2b8305ec473bd5d19b4c53
+    git_blob: 3f26da6201495be6823374d69ad89a929110b512
 generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }

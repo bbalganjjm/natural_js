@@ -5,6 +5,10 @@ description: Staged completion of required legacy behavior and advanced Grid fea
 tags: [meta, plan, migration, parity]
 status: draft
 sources:
+  - id: remaining
+    resource: evidence/remaining-work-plan.json
+    title: Fixed 56-stage continuation and exact known-record ownership
+    git_blob: a18ff58091c2eb8d8050ba8222d6b3285a078a11
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
@@ -12,11 +16,11 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
-    git_blob: 4cbd20e61c7ea08e4b412a0c92dd88461ed52cf9
+    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 553d7b1db4b97136f07a7b70991540483af362f5
+    git_blob: 23b50b8a5e8500e19bab4742c4780aad1ab15da4
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
@@ -33,14 +37,17 @@ sources:
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
     git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
 
 # Goal
+
+The [fixed continuation](remaining-work-plan.md) assigns every remaining outcome to 56 numbered steps and terminal IDs. It is the single detailed execution sequence; the family tables here retain scope and historical selected contracts. All structural/dynamic/supplemental records resolve through the registry without treating old snapshot gaps as current missing code.[^remaining]
+
 
 [M5.12](m5-form-source-plan.md) executes application receive normalization, full own-source observation and committed Rows notifications with existing Form/data owners and the actual CVC demo. No new observer, nullable field context or dataset is justified by the examined caller. Exact legacy per-key timing, no-op callbacks and silent post-notification mutation remain defect-sensitive unresolved obligations; selected recipe acceptance does not close a family or approve an omission.[^form][^data]
 
@@ -50,7 +57,7 @@ Complete framework behavior through consistent, readable TypeScript while preser
 
 # Checkpoint
 
-- The implementation baseline is 80e1fb3 on 2.0.0-alpha.0. M0-M12 selected work is recorded in the existing plans; the M12 artifact remains unpublished. Runtime source and past evidence are unchanged by this scope correction.
+- The original 2026-10-05 scope-correction baseline is 80e1fb3 on 2.0.0-alpha.0; current.md identifies the current accepted implementation. M0-M12 selected work is recorded in the existing plans; the M12 artifact remains unpublished. Runtime source and past evidence are unchanged by this scope correction.
 - The initial coverage ledger has 60 behavior families. Its eight-file AST checklist records 43 classes, 394 members and 338 literal constructor option keys. Neither count proves exhaustive behavior coverage; merged defaults, dynamic declarations, aliases and callback ordering need P0 closure.[^coverage]
 - No proposed feature omission is approved. Previously deferred/excluded behavior must be reconciled with the latest instruction. Already approved TS/ESM, new API naming, jQuery removal, unique IDs, root Apache-2.0 and preserved LGPL v1 do not need approval again.
 - Release-candidate preparation is blocked by required feature gaps. npm publication and release tags additionally require personal testing and a later explicit request. Only real macOS/iOS Safari is outside browser scope; available Windows engines remain required.
@@ -58,6 +65,25 @@ Complete framework behavior through consistent, readable TypeScript while preser
 M10.5 implements authored column state and controls; [its detailed plan](m10-columns-plan.md) preserves its gates. M10.6 implements independent selection/check sets, scoped checks, native header sort/filters and stable actions; [its plan](m10-selection-plan.md) records the contract and current gates. The detailed evidence maps all 775 checklist entries across core/Grid/other UI and shell, with 53 identified dynamic path groups; structural coverage is checked, while semantic/dynamic closure remains open. Continue that closure alongside the remaining Grid/component slices and prepare the single omission proposal; no candidate omission has been applied. Historical measurements retain their original source/artifact identities.[^coverage]
 
 # Steps
+
+## Fixed remaining ownership
+
+| Owner | Fixed remaining IDs | Count |
+|---|---|---|
+| P0 inventory/decision | P0.1-P0.2 | 2 |
+| Common CVC/communication | M3.1-M3.8 | 8 |
+| Data/Form | M5.14-M5.20 | 7 |
+| Data UI | M6.1-M6.7 | 7 |
+| Dialog/Popup/Tabs | M7.1-M7.5 | 5 |
+| Grid completion | M10.9.7-M10.9.9 | 3 |
+| Tree/date | M11.1-M11.4 | 4 |
+| Notify/Documents/shell | M12.1-M12.4 | 4 |
+| Whole-framework acceptance | M8.1-M8.6 | 6 |
+| Whole-code review/remediation | M13.1-M13.4 | 4 |
+| Personal acceptance/release/repository | M9.1-M9.6 | 6 |
+| Total | 50 development/quality +6 conditional personal/delivery steps | 56 |
+
+Read the numbered plan for each stage's exact scope, predecessors and exit tests. Existing declarations/rules/defaults and advanced Grid capabilities are reused; remaining implementation and semantic acceptance are separate tasks. P0.1 enumerates actual inherited/callback/configuration branches; P0.2 requests one whole-framework omission decision. Rejecting a candidate keeps its outcome in the same owning stage.[^remaining]
 
 ## P0. Close the inventory and prepare the single omission review
 
@@ -119,7 +145,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Continue P0 dynamic semantic closure and prepare the single omission proposal after that review. M10.6 and [M10.7](m10-paste-plan.md) gates are complete within their contracts. [M10.8](m10-viewport-plan.md) implements measured viewport rendering while preserving logical-page checks/paste, one attached focused editor and native table indices. M10.9.1 ordered shared Rows, [M10.9.2 authored row blocks/merging](m10-row-blocks-plan.md), [M10.9.3 native controls/display/validation](m10-controls-plan.md) and [M10.9.4 status/row lifecycle](m10-lifecycle-plan.md) retain separate contracts and frozen evidence under [the detailed M10.9 plan](m10-parity-plan.md). M10.9.5 implements [authored detail navigation and geometry](m10-detail-plan.md) through existing owners. [M10.9.6](m10-closure-plan.md) separates change presentation (.1), interaction/view controls (.2), progressive rendering/completion (.3) and semantic acceptance (.4). The .1 contract implements immutable original access, exact committed-field state and edited deletion display. The reviewed [.2 interaction contract](m10-interactions-plan.md) adds explicit native toggles, applied search/zero-count choices and authored column-recovery/action-scroll compositions. The implemented [.3 progressive contract](m10-progressive-plan.md) provides logical prefix admission, cooperative row work, uniform completion and owned cancellation through current Grid/viewport/CVC; the remaining option/default/callback obligations stay required. Its 89-entry/17-group planning snapshot records the baseline rather than certifying full semantic parity. Continue the remaining required component/CVC slices afterward. Preserve other stages, the final M13 review/remediation gate and publication deferral.
+Follow orders 01-56 in [the numbered remaining plan](remaining-work-plan.md), beginning with P0.1 inventory closure and the complete P0.2 decision, then the M5.14 runtime contract. M5.20 closes the Data/Form shared-owner matrix; M10.9.7-M10.9.9 close concrete Grid validation/integration and all 89 surface entries, 17 dynamic groups, 30 contracts and 41 acceptance IDs; M8.1-M8.6 close core/UI/P0/docs/quality/agent acceptance before M13.1-M13.4. Personal acceptance and separately requested release/repository actions remain M9.1-M9.6. Existing-scope discoveries reopen their owner and do not create another unbounded continuation.[^remaining]
 
 # Decisions
 
@@ -153,3 +179,5 @@ P0's exhaustive behavior mapping, final omission candidates and their one user d
 [^data]: Current RowId and shared Rows implementation
 [^grid]: Current authored table implementation
 [^form]: Current input, draft and validation ownership
+
+[^remaining]: Fixed 56-stage continuation and exact known-record ownership

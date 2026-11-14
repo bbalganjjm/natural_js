@@ -1,0 +1,148 @@
+{
+  "kind": "planning_coverage_and_preservation",
+  "status": "verified_planning_accuracy_and_document_preservation_future_implementation_pending",
+  "baseline_commit": "867a5bb0f70a3572a6ea38bec21d6fb8a5bb0710",
+  "registry_sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632",
+  "counts": {
+    "families": 60,
+    "structural": 775,
+    "classes": 43,
+    "members": 394,
+    "literal_paths": 338,
+    "dynamic_groups": 53,
+    "supplemental": 750,
+    "grid_contracts": 30,
+    "grid_acceptance": 41,
+    "ui_findings": 5,
+    "decision_inputs": 12,
+    "planned_stages": 56,
+    "full_families_closed_by_this_plan": 0,
+    "omissions_approved_by_this_plan": 0
+  },
+  "stage_count": 56,
+  "implementation_and_quality_steps": 50,
+  "conditional_personal_delivery_steps": 6,
+  "dependency_cycles": 0,
+  "all_required_family_owners_precede_closure": true,
+  "all_prior_stages_precede_terminal_gates": true,
+  "markdown_registry_rows_match": 56,
+  "supplemental_kinds": {
+    "nested-helper": 16,
+    "declaration-surface": 96,
+    "declaration-field": 484,
+    "declaration-call": 53,
+    "configuration-path": 101
+  },
+  "runtime_inputs_unchanged": 201,
+  "raw_fixtures_unchanged": 3,
+  "historical_evidence_unchanged": 95,
+  "source_hashes_match": 9,
+  "full_families_closed": 0,
+  "omissions_approved": 0,
+  "runtime_checks_run": false,
+  "scope": "Known-input ownership and document consistency only. P0.1 semantic/external discovery and all 56 future work steps retain planned status.",
+  "independent_review": {
+    "status": "passed",
+    "scope": "Fixed plan and known-input ownership accuracy only; no implementation, omission approval or fresh runtime credit.",
+    "reviewers": {
+      "core": {
+        "agent": "m511_legacy",
+        "structural_pairs": 260,
+        "dynamic": 15,
+        "decision_records": 9,
+        "documents": [
+          "remaining-work-plan.md",
+          "current.md",
+          "roadmap.md",
+          "feature-parity-plan.md"
+        ]
+      },
+      "ui": {
+        "agent": "m511_design",
+        "structural_pairs": 426,
+        "dynamic": 21,
+        "supplemental": 750,
+        "families": 25,
+        "findings": 5,
+        "documents": [
+          "remaining-work-plan.md"
+        ]
+      },
+      "grid_global": {
+        "agent": "m511_baseline",
+        "structural_pairs": 89,
+        "dynamic": 17,
+        "contracts": 30,
+        "acceptance_ids": 41,
+        "documents": [
+          "remaining-work-plan.md",
+          "m13-review-plan.md",
+          "m9-plan.md"
+        ],
+        "helper": {
+          "path": "node_modules/.cache/remaining-grid-global-review.mjs",
+          "sha256": "2fcad17554bef4f87348a9010c2e0b3d0389429c2bb20734ce705645543cf8a0"
+        },
+        "log": {
+          "path": "node_modules/.cache/remaining-grid-global-review.log",
+          "sha256": "bf36813670b7f9c0cbefebc0506ed9cccebfd54b016cb4e2e3bc7bf6140a6f37"
+        }
+      }
+    },
+    "resolved_findings": [
+      "All required implementation ancestors and P0.2 now precede owning closure/terminal gates.",
+      "Grid contract profiles include direct, dynamic/cross-ledger, later-family and selected row-details edges.",
+      "Month attachment completes at M11.4 after day attachment, with final shared acceptance at M5.20.",
+      "All three final coding-agent tasks match M13.4 and its owner plan.",
+      "80e1fb3 is explicitly the historical scope-correction baseline."
+    ],
+    "reviewed_bodies": {
+      "docs/implementation/remaining-work-plan.md": {
+        "normalized_body_sha256": "8fd97288653b512020b1d503b9e95488438c16a8b6c4bef8702f4648e32cb921"
+      },
+      "docs/implementation/current.md": {
+        "normalized_body_sha256": "94eab8fcbf53e173bb54db3908ff5337d77471509cb39aeefdce39b440e82f3b"
+      },
+      "docs/implementation/roadmap.md": {
+        "normalized_body_sha256": "d70d5cf4f49656a35e96624912fb6284cf6aa50a870aca11e4543b76bfc77191"
+      },
+      "docs/implementation/feature-parity-plan.md": {
+        "normalized_body_sha256": "f7d3299503441c2398e30279581bc7be040344bc7b396e7d265059e8b7b9a6aa"
+      },
+      "docs/implementation/m13-review-plan.md": {
+        "normalized_body_sha256": "67d88d68be5ab6c9fecf20fee9b55d62b91a56d0ac05af0c8f87fb71558057ea"
+      },
+      "docs/implementation/m9-plan.md": {
+        "normalized_body_sha256": "cbbec0661775b258e07102bb071402b54761558d29381b280026373f63865a4f"
+      }
+    }
+  },
+  "documentation": {
+    "checks": {
+      "changed": {
+        "path": "docs/implementation/evidence/remaining-work-docs-changed.log",
+        "sha256": "6492578ebb3e235ec2253091f24513ee16349ff1caa45d90ec9dc5f988f5a80a",
+        "concepts": 85,
+        "reserved_files": 5,
+        "errors": 0,
+        "warnings": 0
+      },
+      "full": {
+        "path": "docs/implementation/evidence/remaining-work-docs-full.log",
+        "sha256": "bbcf224cf49e145dceb44317d7fa5027bf425d453399243cfd91334e05241102",
+        "concepts": 85,
+        "reserved_files": 5,
+        "errors": 0,
+        "warnings": 0
+      }
+    },
+    "history": {
+      "path": "docs/implementation/evidence/remaining-work-document-history.json",
+      "sha256": "6f90b2cfcc22902613fc21b344543a86ee3c6de3d2da33f7a5c9ed653be09948",
+      "historical_fingerprint_only": 33,
+      "preserved_historical_bodies_and_dates": true
+    },
+    "reviewed_bodies_unchanged": true,
+    "verified_semantic_concepts": 6
+  }
+}

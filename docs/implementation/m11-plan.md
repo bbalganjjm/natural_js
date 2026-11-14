@@ -8,7 +8,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Migration roadmap
-    git_blob: 4cbd20e61c7ea08e4b412a0c92dd88461ed52cf9
+    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI entry

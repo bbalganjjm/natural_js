@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 numbered remaining work](remaining-work-plan.md) - Fixed execution order and terminal stage numbers for every remaining framework capability and delivery gate. (draft)
+
 * [Natural-JS 2.0 M5.13 authored choice groups](m5-choice-groups-plan.md) - Generate native radio and checkbox choices from authored templates and adopt them safely in Form. (draft)
 
 * [Natural-JS 2.0 M5.12 Form source ownership](m5-form-source-plan.md) - Execute application normalization and full-source observation through existing Form and Rows owners. (draft)

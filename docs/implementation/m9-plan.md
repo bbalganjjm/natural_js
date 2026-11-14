@@ -5,10 +5,14 @@ description: Approved beta, release-candidate, and 2.0.0 gates for installed con
 tags: [meta, plan, release]
 status: draft
 sources:
+  - id: remaining
+    resource: evidence/remaining-work-plan.json
+    title: Fixed 56-stage continuation and exact known-record ownership
+    git_blob: a18ff58091c2eb8d8050ba8222d6b3285a078a11
   - id: roadmap
     resource: roadmap.md
     title: First-release scope and M9 gate
-    git_blob: 4cbd20e61c7ea08e4b412a0c92dd88461ed52cf9
+    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
   - id: m8
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-beta-report.md
     title: Unpublished M8 beta-candidate evidence and limits
@@ -29,9 +33,10 @@ sources:
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 ---
 
 M9 implementation is approved after [the unpublished M8 candidate](m8-beta-report.md). The user authorized deletion of the unused public `Rule` type while retaining Form formatter and validator behavior. The exact beta artifact was reviewed, but the user has since deferred npm publication and release tags until remaining features and personal testing are complete.[^roadmap][^m8]
@@ -49,6 +54,21 @@ Release Natural-JS 2.0.0 from a small Apache-2.0 ESM package whose installed Jav
 
 # Steps
 
+## Fixed future continuation
+
+The earlier beta checks below remain historical. After M13.4, [the numbered remaining plan](remaining-work-plan.md) defines six future stages; none grants registry/tag/master/removal approval.[^remaining]
+
+| Stage | Activation and result |
+|---|---|
+| M9.1 | User tests the exact complete unpublished feature package and records results. |
+| M9.2 | Fix personal findings, independently re-review and obtain user re-acceptance. |
+| M9.3 | A later release request activates support/manifest/license/registry-readiness and exact beta-artifact preparation. |
+| M9.4 | Validate beta then RC artifacts; registry/tag writes require the concrete artifact/action approval. |
+| M9.5 | Rebuild/check the stable 2.0.0 artifact and publish/tag only after separate explicit approval; verify registry/install/source identity. |
+| M9.6 | Separately requested master/archive and optional active-v1/worktree cleanup, after exact remote preservation and an approved transition proposal. |
+
+## Historical release procedure and retained gates
+
 | Stage | Work | Exit evidence |
 |---|---|---|
 | 0. Freeze M8 handoff | Confirm M8's final report, commit, source and documentation checks, failing/known cases, API audit, test fixture versions, and release branch. Record the exact Git SHA used for the first beta build. Resolve or explicitly carry the `Rule` type decision before the public contract freezes. | A release checklist links the final M8 evidence, the proposed public export inventory, and each accepted limit. No unstated M8 warning is treated as a pass. |
@@ -63,7 +83,7 @@ Release Natural-JS 2.0.0 from a small Apache-2.0 ESM package whose installed Jav
 
 # Next action
 
-The M8 recheck, public `Rule` type deletion, exact beta tarball consumer checks, and automated accessibility gates are complete and recorded below. Keep that beta artifact unpublished while M10 and later separately approved work proceeds. Before any registry publication or tag, prepare a final candidate with its exact SHA, tarball, package contents, release notes, completed gates, and remaining limitations for the user's personal tests and explicit publication decision. Safari is outside the initial 2.0 browser support scope; Playwright WebKit remains distinct engine evidence.
+Continue the required framework work in [the fixed 56-stage plan](remaining-work-plan.md). Complete parity/P0 and M13.1-M13.4 before personal testing; execute M9.1-M9.2 on the exact unpublished result. npm publication and release tags remain deferred until personal acceptance and a new request, with exact-artifact approval at M9.4/M9.5. Master/archive/v1 removal is a separate conditional M9.6 proposal, not implied by release approval. Safari remains outside scope; available WebKit stays mandatory.[^remaining]
 
 # Decisions
 
@@ -99,3 +119,5 @@ The M8 recheck, public `Rule` type deletion, exact beta tarball consumer checks,
 [^performance]: Fixed binding fixture and M6 performance budgets
 [^workflow]: Source, documentation, and verification workflow
 [^wcag]: W3C Web Content Accessibility Guidelines 2.2
+
+[^remaining]: Fixed 56-stage continuation and exact known-record ownership

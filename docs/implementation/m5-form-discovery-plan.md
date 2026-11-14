@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-defaults-plan.md
     title: Completed captured defaults and reusable unbinding scope
-    git_blob: a59fb5afc15a89205623ffd54290a6239c5cf065
+    git_blob: 94ac2b3730f9de0ae5fca99f7dda07450e6a01a9
   - id: baseline
     resource: evidence/m57-verification.json
     title: Frozen ebf700c source, runtime and installed package baseline
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: 0f89068eaf0b87158d2b8305ec473bd5d19b4c53
+    git_blob: 3f26da6201495be6823374d69ad89a929110b512
 generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }

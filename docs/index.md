@@ -4,6 +4,8 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 numbered remaining work](implementation/remaining-work-plan.md) - Fixed execution order and terminal stage numbers for every remaining framework capability and delivery gate. (draft)
+
 * [bindChoiceGroup](v2/choice-group.md) - Generate native radio or checkbox choices from an authored fieldset template and adopt them in Form. (draft)
 * [Authored choice groups in two CVC layouts](v2/choice-groups-example.md) - Generate native radio and checkbox choices before Form in independent authored CVC screens. (draft)
 

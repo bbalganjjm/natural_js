@@ -4,12 +4,16 @@ title: Natural-JS 2.0 master roadmap
 description: Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: remaining
+    resource: evidence/remaining-work-plan.json
+    title: Fixed 56-stage continuation and exact known-record ownership
+    git_blob: a18ff58091c2eb8d8050ba8222d6b3285a078a11
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-10-20T15:04:19Z }
+  - { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -27,6 +31,27 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 - [M13 whole-code review and remediation](m13-review-plan.md) is a required final gate after all required parity work and before personal testing or separately requested release preparation. It reviews the complete 2.0 code and its consumers, then closes findings through authorized fixes, regression checks and independent re-review.
 
 # Steps
+
+## Fixed continuation after M5.13
+
+The [numbered remaining plan](remaining-work-plan.md) owns execution orders 01-56, dependencies, concrete change boundaries and acceptance. Original M0-M13 labels retain ownership/history; they are not the execution sequence. M5 ends at M5.20, the final development gate is M13.4, and the last separately conditional repository step is M9.6. Existing-scope defects reopen their owners; only an explicitly reviewed scope change renumbers stages.[^remaining]
+
+| Owner | Fixed remaining IDs | Count |
+|---|---|---|
+| P0 inventory/decision | P0.1-P0.2 | 2 |
+| Common CVC/communication | M3.1-M3.8 | 8 |
+| Data/Form | M5.14-M5.20 | 7 |
+| Data UI | M6.1-M6.7 | 7 |
+| Dialog/Popup/Tabs | M7.1-M7.5 | 5 |
+| Grid completion | M10.9.7-M10.9.9 | 3 |
+| Tree/date | M11.1-M11.4 | 4 |
+| Notify/Documents/shell | M12.1-M12.4 | 4 |
+| Whole-framework acceptance | M8.1-M8.6 | 6 |
+| Whole-code review/remediation | M13.1-M13.4 | 4 |
+| Personal acceptance/release/repository | M9.1-M9.6 | 6 |
+| Total | 50 development/quality +6 conditional personal/delivery steps | 56 |
+
+## Original milestone ownership
 
 | Milestone | Work and exit gate |
 |---|---|
@@ -49,7 +74,7 @@ Each milestone starts with a detailed plan, user review, and approval of its con
 
 # Next action
 
-Complete P0's option/member/dynamic mapping and one consolidated omission proposal, then the required Grid and other framework stages in [the execution plan](feature-parity-plan.md). After required coverage and its owning milestone gates close, complete [M13](m13-review-plan.md) before personal testing and a separately planned M9 release candidate. Registry publication and release tags remain deferred until explicitly requested. Real Safari on macOS or iOS is excluded; available Playwright WebKit remains required. The previously approved unused public Rule alias stays removed; retained Form rules remain supported.
+Use [current.md](current.md) and [the fixed continuation](remaining-work-plan.md). Start P0.1 semantic/external inventory closure, prepare the single complete omission decision in P0.2 and implement the bounded M5.14 contract in its dependency order. Finish all owning stages and P0 before M13.1-M13.4 whole-code review/remediation/final gates. Personal tests follow in M9.1-M9.2; release, registry/tag and optional master/archive actions retain M9.3-M9.6's separate conditions. Real Safari remains excluded and available WebKit remains required.[^remaining]
 
 # Decisions
 
@@ -74,3 +99,5 @@ Complete P0's option/member/dynamic mapping and one consolidated omission propos
 
 - M6 met the [reference-host binding budgets](m4-plan.md); List's first bind still builds all row records, so larger data sets need a later memory review. A fresh Playwright Firefox build passed the M6 browser suite on this host. M8 compared its three 2.0 tasks with one byte-count method; actual token use and an equivalent 1.x baseline remain unavailable.
 - P0's complete mapping, consolidated omission proposal and detailed new public contracts remain open. Required parity gaps and unfinished M13 review/remediation block personal acceptance and release preparation.
+
+[^remaining]: Fixed 56-stage continuation and exact known-record ownership
