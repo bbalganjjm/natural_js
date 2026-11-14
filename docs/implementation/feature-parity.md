@@ -48,7 +48,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
@@ -60,7 +60,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport

@@ -37,7 +37,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Grid handle types
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding and validation runtime
@@ -101,7 +101,7 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit field rendering and DOM ownership

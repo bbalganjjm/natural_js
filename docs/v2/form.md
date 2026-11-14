@@ -13,7 +13,7 @@ sources:
   - id: value-binding
     resource: ../../src/ui/value-binding.ts
     title: Private checked value callback execution shared with Grid and List
-    git_blob: cd12894b09ca3c9b1964f68a1b53cbc8ecc01fe4
+    git_blob: 9f59b5313d2eb0988f7f4dbdbaa37611ccc73184
   - id: presets-browser
     resource: ../../tests/browser/form-presets.spec.ts
     title: Explicit preset precedence and application callback composition regressions
@@ -53,15 +53,15 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public UI entry and Form types
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit field rendering and DOM ownership
@@ -90,10 +90,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -207,7 +207,7 @@ A path is parsed once. It rejects prototype keys, numeric array indexes, and exp
 
 A nonempty effective formatter list on a Select or non-text input (including radio, checkbox, file, and number) raises `FORM_FORMAT_CONTROL` at binding; changing those controls to display strings would corrupt their value semantics. A file input may bind only to a local Form (`FORM_FILE_ROWS` for Rows); `multiple` file selection is outside this field contract (`FORM_FILE_MULTIPLE`).[^form]
 
-Repeated `data-field` paths are allowed only for radio or checkbox controls. A radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. An unmarked native `<select multiple>` produces a string array. Group choices must have distinct values. For each kind falling back to HTML, all declarations of that attribute in one group must match; a typed override ignores that kind's HTML. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
+Repeated `data-field` paths are allowed only for radio or checkbox controls. A static radio group needs the same native `name` and form owner inside the binding root; its raw value is the checked option string or `null`. One static checkbox has a boolean raw value; two or more checkboxes with one `data-field` produce a string array. An unmarked native `<select multiple>` produces a string array. Group choices must have distinct values. For each kind falling back to HTML, all declarations of that attribute in one group must match; a typed override ignores that kind's HTML. The same authored `data-error-for` region describes every group member. Invalid combinations raise `FORM_FIELD_REPEAT`, `FORM_RADIO_OWNER`, `FORM_GROUP_VALUE`, or `FORM_GROUP_RULES`.[^form]
 
 ```html
 <form data-role="preferences">
@@ -220,7 +220,7 @@ Repeated `data-field` paths are allowed only for radio or checkbox controls. A r
 </form>
 ```
 
-A parser may convert a scalar radio or unmarked single Select string. Marked row-local choices already supply raw values and reject string parsers. It cannot attach to a boolean checkbox or array-valued checkbox group or multiple Select (`FORM_PARSE_CONTROL`). Multiple Select and checkbox groups retain arrays for empty and single selections. Only own parser/render configuration entries are callable, including a field named `toString`. These authored Selects are owned by Form until disposal, so a second `bindSelect` on the same element raises `SELECT_OWNED`.[^form][^controls-browser]
+A parser may convert a static scalar radio or unmarked single Select string. Marked row-local choices already supply raw values and reject string parsers. On static fields, attaching a parser to a checkbox or multiple Select raises `FORM_PARSE_CONTROL`. Initialized generated groups reject parsers with `FORM_CHOICE_GROUP`. Multiple Select and checkbox groups retain arrays for empty and single selections. Only own parser/render configuration entries are callable, including a field named `toString`. These authored Selects are owned by Form until disposal, so a second `bindSelect` on the same element raises `SELECT_OWNED`.[^form][^controls-browser]
 
 ## Row-local typed choices
 
@@ -246,7 +246,7 @@ bind(null) removes generated row choices without writing data. Initialization fa
 
 ## Value callbacks
 
-Rows-backed Form accepts synchronous beforeBindValue and onBindValue functions. The [shared value contract](value-callbacks.md) also applies to Grid/List; Form retains its own bound-row, draft, focus and refresh rules. One frozen ValueBindContext extends RuleContext with phase "bind" or "val", a nonnull rowId and the primary bound HTMLElement. Its values snapshot contains source raw fields, not display projections. Grouped controls use their first member as element. Functions receive explicit arguments; Form supplies no special this or global wrapper.[^entry][^form][^values-browser]
+Rows-backed Form accepts synchronous beforeBindValue and onBindValue functions. The [shared value contract](value-callbacks.md) also applies to Grid/List; Form retains its own bound-row, draft, focus and refresh rules. One frozen ValueBindContext extends RuleContext with phase "bind" or "val", a nonnull rowId and the primary bound HTMLElement. Its values snapshot contains source raw fields, not display projections. Populated grouped controls use their first member as element; empty generated groups use their actual fieldset. Functions receive explicit arguments; Form supplies no special this or global wrapper.[^entry][^form][^values-browser]
 
 ```ts
 const form = bindForm(root, {
@@ -264,7 +264,7 @@ const form = bindForm(root, {
 
 beforeBindValue receives source raw. Its effective result goes through the existing native, formatter or display writer. onBindValue then receives that projected raw and observes the written view. Undefined preserves the current value; false, null, zero and empty string replace it. A changed after result is checked and written once without replaying either callback. Formatter/render callbacks may run twice when an after result changes their input. An unchanged cached projection still uses the existing whole-row formatter/render behavior.[^form][^values-browser]
 
-Explicit replacements accept finite JSON scalars or scalar arrays for array controls. A single checkbox requires a boolean. Marked Select replacements require matching raw option occurrences; unmarked native controls retain string coercion. Rejected shapes, async/thenable, structured object or DOM returns raise FORM_VALUE. Use render for structured/DOM display. Scalar-array replacements are copied and frozen. Undefined leaves existing source-display behavior intact, including an unavailable loaded choice. Every explicit replacement is checked even with autoValidate:false. A cached explicit choice is checked again against current options without replaying the callbacks; an unavailable projection raises FORM_VALUE until an explicit bind refreshes it.[^form][^native][^values-browser]
+Explicit replacements accept finite JSON scalars or scalar arrays for array controls. A static single checkbox requires a boolean. Marked Select replacements require matching raw option occurrences; unmarked native controls retain string coercion. Rejected shapes, async/thenable, structured object or DOM returns raise FORM_VALUE. Use render for structured/DOM display. Scalar-array replacements are copied and frozen. Undefined leaves existing source-display behavior intact, including an unavailable loaded choice. Every explicit replacement is checked even with autoValidate:false. A cached explicit choice is checked again against current options without replaying the callbacks; an unavailable projection raises FORM_VALUE until an explicit bind refreshes it.[^form][^native][^values-browser]
 
 These callbacks change presentation only. Form.read(), Rows source/originals/status/changes, save payloads and data-field-changed retain actual raw data. Native and business validation use raw/candidate values; raw false projected true still fails required, and display padding cannot satisfy raw minlength. Callback options on local Forms or nonfunctions fail preflight with FORM_VALUE_OPTIONS before ownership/ARIA changes. Local Forms retain their existing DOM-owned contract.[^form][^values-browser]
 
@@ -432,7 +432,7 @@ With default automatic validation, Form passes one snapshot of all unparsed ente
 
 Visible, local and hidden-row native checks share the same candidate rules. Programmatically bound text obeys `minlength`/`maxlength`, as do entered drafts; hidden-row probes need no rebinding. Effective native disabled state and `willValidate` apply, including disabled fieldsets and their first-legend exception. Invalid stored date/time, number/range or color candidates that the native input sanitizes report an issue rather than rewriting stored data. An unsupported authored input type follows its effective browser-native fallback; no date polyfill is added.[^native][^form][^controls-browser]
 
-Native `required` on a radio or repeated checkbox field requires at least one matching choice; its shared error marks every group member. Built-in `required` fails for an unchecked single checkbox; a caller-supplied `required` rule still controls its own result. A local file field validates and reads the first selected filename, while application code takes the `File` or `FormData` for upload.[^form][^rules]
+Native `required` on a static radio or static repeated-checkbox field requires at least one matching choice; its shared error marks every group member. Built-in `required` fails for an unchecked single checkbox; a caller-supplied `required` rule still controls its own result. A local file field validates and reads the first selected filename, while application code takes the `File` or `FormData` for upload.[^form][^rules]
 
 Formatting changes only the displayed text. Focus restores the stored raw value, and blur formats again when no invalid draft remains. When keyboard or programmatic focus starts at the beginning of a formatted control, Form selects its raw text for replacement; pointer focus keeps the clicked caret. Formatter fallback rules can display text for a stored `null` without changing that raw value. Call `validate()` before saving and use `Rows.changes()` for the raw save payload.[^form][^formats]
 
@@ -456,13 +456,21 @@ These are the changes needed when moving a Form declaration. The full applicatio
 - `read()` is not a save gate. A local Form can return invalid entered text; a row-bound Form excludes invalid drafts. Check `validate()` before sending `Rows.changes()`.[^form]
 - A parser must return a JSON-compatible raw value. Throwing or returning `undefined` keeps the entered draft and produces a `parse` issue; arbitrary invalid objects are rejected by `Rows`.[^form]
 - `data-field` is not a DOM `id`. Repeated and simultaneous authored views must avoid duplicate fixed IDs.[^path]
-- Form radio groups keep their authored native name/form-owner contract; [Grid](grid.md) allocates isolated clone names for repeated logical records. Explicit render factories must not mutate Rows or take another field's DOM.[^form][^render]
+- Static Form radio groups keep their authored native name/form-owner contract; [Grid](grid.md) allocates isolated clone names for repeated logical records. Explicit render factories must not mutate Rows or take another field's DOM.[^form][^render]
 
 A shared Rows `move` changes order only, and `append` adds separate clean records. Form retains its bound RowId, draft, validation message and current control focus for both notifications without rerendering or rerunning formatters. Independent copied or appended rows are separate snapshots; Form switches to one only through an explicit `bind(id)`. Form still rejects binding a deleted row even when another Grid shows retained deletion snapshots. See [Rows](data.md) for loaded-row, order and copy semantics.[^form]
 
 # Related
 
 [Rows](data.md) owns row identity and events. [DatePicker](datepicker.md) provides explicit ISO calendar selection. [Select](select.md) describes standalone typed choices; Form owns marked Select fields. [UI contracts](ui.md) defines `RuleSet`, `FormHandle`, and validation results. [The M1 contract](../implementation/m1-contract.md) records the first-release rule boundary.
+
+# Authored choice groups
+
+Initialize [bindChoiceGroup](choice-group.md) on each named `fieldset[data-field]` before creating Form. Form adopts its private native descriptor: radio is string/null; generated checkbox groups are string arrays even with zero or one choice. The first input is the primary callback element, or the actual fieldset when empty. Static single checkboxes keep boolean values. Root declarations, errors and change markers include the real group root and members; no hidden control is created.[^form][^native]
+
+Rows retain received raw values. The view checks only exact string codes, while validation reports wrong shapes, duplicate entries and unavailable choices; disabled catalog choices remain available. Value-callback replacements require valid available string/null or string-array values. Group formatting, display renderers and string parsers are rejected. Native required checkboxes require each enabled input; use a root `data-validate` rule for logical selection. The existing text-based required rule still rejects `[""]`. A template-required empty group produces a Form issue unless effectively disabled; the fieldset alone does not participate in browser native constraint validation.[^form]
+
+Creation selection sets native defaults before Form captures. `defaults()`, local native reset, captured restoration through `unbind()` and Rows reversion keep their existing distinct owners. Rows-backed native reset does not write Rows. Public group writes/disposal raise `CHOICE_OWNED` before changing adopted DOM, including while Form is unbound. Dispose Form first, or successfully retire the field through `rescan()`, to release the claim. Failed construction/acquisition releases provisional claims; a rejected rescan retains existing claims. Live adopted choice replacement remains required follow-up. See the [executed two-layout CVC example](choice-groups-example.md).[^form]
 
 [^entry]: Public UI entry and Form types
 [^local-browser]: Local raw formatting, native reset, lifecycle and CVC regressions

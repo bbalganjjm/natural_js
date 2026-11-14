@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
-import { control, display, nativeMessage } from "./native-control.js";
+import { arrayField, control, display, nativeMessage } from "./native-control.js";
+import { checkGroupValue } from "./choice-group-owner.js";
+import type { ChoiceGroupBinding } from "./choice-group-owner.js";
 import { rowOptionAvailable } from "./row-options.js";
 import type { RowId } from "../data/index.js";
 import type { ValueBindContext } from "./index.js";
@@ -19,6 +21,7 @@ interface Field {
   element: HTMLElement;
   elements: readonly HTMLElement[];
   kind: "single" | "radio" | "checkbox" | "multiple";
+  group?: ChoiceGroupBinding;
 }
 
 /** Binders retain their field graph, projection slots and lifetime checkpoints. */
@@ -41,7 +44,7 @@ export function createValueBinding(api: "bindForm" | "bindGrid" | "bindList", op
     available?: () => readonly unknown[], copy = true): unknown {
     const scalar = (item: unknown) => item === null || typeof item === "string" || typeof item === "boolean" ||
       typeof item === "number" && Number.isFinite(item);
-    const array = field.kind === "multiple" || field.kind === "checkbox" && field.elements.length > 1;
+    const array = arrayField(field);
     let selected: unknown[] | undefined;
     if (array && Array.isArray(value)) {
       try { selected = copy ? Array.from(value) : value; }
@@ -54,6 +57,10 @@ export function createValueBinding(api: "bindForm" | "bindGrid" | "bindList", op
         : "Return a native scalar value or a scalar array for a multiple-value control; use render for structured display.");
     }
     const projected = selected ?? value;
+    if (field.group) {
+      const message = checkGroupValue(field.group, projected);
+      if (message) throw error(context, callback, message);
+    }
     if (available && !rowOptionAvailable(available(), projected, array)) {
       throw error(context, callback, "A projected choice needs available raw option occurrences.");
     }

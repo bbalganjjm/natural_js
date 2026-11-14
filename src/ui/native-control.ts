@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
+import type { ChoiceGroupBinding } from "./choice-group-owner.js";
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-type Field = { element: HTMLElement; elements: readonly HTMLElement[]; kind: "single" | "radio" | "checkbox" | "multiple" };
+type Field = { element: HTMLElement; elements: readonly HTMLElement[]; kind: "single" | "radio" | "checkbox" | "multiple"; group?: ChoiceGroupBinding };
+
+export function arrayField(field: Field): boolean {
+  return field.kind === "multiple" || field.kind === "checkbox" && (field.group !== undefined || field.elements.length > 1);
+}
 
 export const interactiveContent = "button, input, textarea, select, a[href], area[href], details, dialog, audio[controls], video[controls], iframe, object, embed, img[usemap], [tabindex], [contenteditable]";
 
@@ -40,6 +45,7 @@ export function inputValue(element: HTMLElement): unknown {
 }
 
 export function fieldValue(field: Field): unknown {
+  if (field.group) return field.group.read();
   if (field.kind === "radio") {
     const selected = field.elements.find(element => (element as HTMLInputElement).checked);
     return selected ? (selected as HTMLInputElement).value : null;
@@ -69,6 +75,7 @@ export function display(element: HTMLElement, value: unknown): void {
 }
 
 export function displayField(field: Field, value: unknown): void {
+  if (field.group) { field.group.write(value); return; }
   if (field.kind === "radio") {
     const selected = value == null ? null : String(value);
     for (const element of field.elements) {

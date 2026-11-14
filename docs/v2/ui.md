@@ -9,7 +9,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI types and runtime exports
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: selection
     resource: ../../src/ui/grid-selection.ts
     title: Private Grid identity, membership, and check contracts
@@ -41,19 +41,19 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -202,6 +202,10 @@ Optional progressive: { size, delay? } enables cooperative prefix binding. whenB
 # Related
 
 [Form](form.md), [Grid](grid.md), [List](list.md), [Select](select.md), [Pagination](pagination.md), [Popup](popup.md), and [Tabs](tabs.md), [Tree](tree.md), and [DatePicker](datepicker.md), [Notify](notify.md), and [Documents](documents.md) document runtime behavior. [The M1 contract](../implementation/m1-contract.md) records the first-release boundary.
+
+# Authored radio and checkbox choices
+
+`bindChoiceGroup(root: HTMLFieldSetElement, options)` returns `ChoiceGroupHandle` with `setChoices`, `setValue`, `value` and `dispose`. Choices reuse `SelectChoice<string>`; radio selection is string/null and checkbox selection is always a string array. The [component contract](choice-group.md) defines authored templates, native defaults, literal labels, unique group names and strict Form adoption. No public value alias, registry, dependency or package entry is added. Existing Select and static checkbox contracts are unchanged.[^ui]
 
 [^ui]: Public UI types and runtime exports
 [^selection]: Private Grid identity, membership, and check contracts

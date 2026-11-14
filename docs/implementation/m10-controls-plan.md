@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: 0028ec9dfe0435f5685ad6c1753f41dc5848fdbf
+    git_blob: 726f8d786e3dee0985d4f65447f0e6a75c36a0ab
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics
@@ -32,7 +32,7 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native values, display and constraints
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: rendering
     resource: ../../src/ui/field-render.ts
     title: Private explicit display and DOM ownership checks

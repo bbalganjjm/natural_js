@@ -1,0 +1,1603 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\workspace\\natural_js\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "tests/playwright.config.ts",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--reporter=json",
+      "--list",
+      "--shard=2/12"
+    ],
+    "configFile": "D:\\workspace\\natural_js\\tests\\playwright.config.ts",
+    "rootDir": "D:/workspace/natural_js/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/workspace/natural_js/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": {
+      "current": 2,
+      "total": 12
+    },
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run example",
+      "cwd": "D:\\workspace\\natural_js\\",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "field-render.spec.ts",
+      "file": "field-render.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "renderer declarations use only own functions, including a field named toString",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-5ef4608d8a2a3e838f71",
+          "file": "field-render.spec.ts",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "configuration rejects ambiguous fields and owned native content before mutation or execution",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-a8417d518db805cd27b3",
+          "file": "field-render.spec.ts",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "rendered strings remain text while fresh native nodes, fragments and null replace content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-0087b4819cfd2632c575",
+          "file": "field-render.spec.ts",
+          "line": 71,
+          "column": 1
+        },
+        {
+          "title": "invalid ownership and async returns preserve field content without unhandled rejections",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-21754fc7e4827ab65303",
+          "file": "field-render.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "factory exceptions and same-target reentry stay structured, release their guard and allow independent targets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-4f20db3cf5d99130253f",
+          "file": "field-render.spec.ts",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "title": "local Form renders from raw values, refreshes dependent display and restores authored nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "caf421fc3eeef5d13652-8c93a22b6f60ee794462",
+          "file": "field-render.spec.ts",
+          "line": 145,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "form-binding.spec.ts",
+      "file": "form-binding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-5e9f91bf4955b6903049",
+          "file": "form-binding.spec.ts",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-5287d1b8448c8e4df8c5",
+          "file": "form-binding.spec.ts",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "whole hook option errors reject before root Select or accessibility ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-785d4bf625f69a2a0542",
+          "file": "form-binding.spec.ts",
+          "line": 94,
+          "column": 1
+        },
+        {
+          "title": "a failing before hook preserves the previous row view draft and visible errors before a later retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-5483dd0aa5b73779fbe8",
+          "file": "form-binding.spec.ts",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "a failing after hook retains completed association and display and releases its guard for retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-e68160f2a7c2517e499f",
+          "file": "form-binding.spec.ts",
+          "line": 144,
+          "column": 1
+        },
+        {
+          "title": "whole hooks reject and drain asynchronous results and permit a synchronous recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-adaf5d1447b4f2ae05e7",
+          "file": "form-binding.spec.ts",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "a superseded hook still drains its rejected asynchronous result without overwriting the nested binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-444ff99e8616a534e3ad",
+          "file": "form-binding.spec.ts",
+          "line": 176,
+          "column": 1
+        },
+        {
+          "title": "unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-ac645bebbd2d2bbfab60",
+          "file": "form-binding.spec.ts",
+          "line": 193,
+          "column": 1
+        },
+        {
+          "title": "revert commits source and drops its draft even when the before hook fails before visible changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-9e117a5392801ccb2321",
+          "file": "form-binding.spec.ts",
+          "line": 208,
+          "column": 1
+        },
+        {
+          "title": "keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-9a505ef7abebf8d0254e",
+          "file": "form-binding.spec.ts",
+          "line": 227,
+          "column": 1
+        },
+        {
+          "title": "a source mutation during before binding supersedes that pass and suppresses its stale after hook",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-41a25212873430f38ba3",
+          "file": "form-binding.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "a completed different-row nested bind replaces its outer pass without a stale after hook",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-42aa6a21c6a048860251",
+          "file": "form-binding.spec.ts",
+          "line": 260,
+          "column": 1
+        },
+        {
+          "title": "same-row and cyclic whole-hook entry fail without poisoning the next explicit binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-64a887d6bdc5277a1ef4",
+          "file": "form-binding.spec.ts",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "disposal during a before hook suppresses field work and after hooks and releases ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-70797f41798c42a31c47",
+          "file": "form-binding.spec.ts",
+          "line": 290,
+          "column": 1
+        },
+        {
+          "title": "formatter and renderer row replacement during full binding cannot publish an older view or after hook",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-28009634cee875800f5b",
+          "file": "form-binding.spec.ts",
+          "line": 305,
+          "column": 1
+        },
+        {
+          "title": "a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-7eb50fffa35394516714",
+          "file": "form-binding.spec.ts",
+          "line": 321,
+          "column": 1
+        },
+        {
+          "title": "whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-25c34be3b252001ae941",
+          "file": "form-binding.spec.ts",
+          "line": 346,
+          "column": 1
+        },
+        {
+          "title": "whole after hooks finish synchronously while full and selected refresh defer focused text projection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-4481531ffd62bc6c23d7",
+          "file": "form-binding.spec.ts",
+          "line": 389,
+          "column": 1
+        },
+        {
+          "title": "selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-c6015f213fcac3407624",
+          "file": "form-binding.spec.ts",
+          "line": 403,
+          "column": 1
+        },
+        {
+          "title": "selected refresh treats native groups atomically and keeps focused readonly projection immediate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-a9cefdddd7fd801227f6",
+          "file": "form-binding.spec.ts",
+          "line": 421,
+          "column": 1
+        },
+        {
+          "title": "selected typed choices prepare only selected sources and reject a later malformed selected source before any writer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-4a94e736bd3f34ce1681",
+          "file": "form-binding.spec.ts",
+          "line": 443,
+          "column": 1
+        },
+        {
+          "title": "selected refresh preserves invalid drafts and issues without parsing validating or committing inputs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-825d4e81af62ce290e63",
+          "file": "form-binding.spec.ts",
+          "line": 460,
+          "column": 1
+        },
+        {
+          "title": "local selected refresh uses raw context while leaving unselected native display and validation errors alone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-438d4eea1223e3e3aacb",
+          "file": "form-binding.spec.ts",
+          "line": 478,
+          "column": 1
+        },
+        {
+          "title": "an empty local selection can finish native reset without adding selected writes or validation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-d34fd4d002ef06dafb98",
+          "file": "form-binding.spec.ts",
+          "line": 494,
+          "column": 1
+        },
+        {
+          "title": "unbound selected refresh only clears selected compiled fields and never emits whole hooks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b0980eb58997005b314b-d72a3baee06244aeefb8",
+          "file": "form-binding.spec.ts",
+          "line": 508,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "form-choice-groups.spec.ts",
+      "file": "form-choice-groups.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "generated groups retain zero one many values and adoption captures without changing static checkbox shape",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-8120751ea19bdc0d68e7",
+          "file": "form-choice-groups.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "native required checks each enabled checkbox while root rules and empty logical groups stay distinct",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-052f84d522c416a6514a",
+          "file": "form-choice-groups.spec.ts",
+          "line": 60,
+          "column": 1
+        },
+        {
+          "title": "raw group validation rejects coercion duplicates and unavailable codes without rewriting Rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-7df80c6b1e2043df4f77",
+          "file": "form-choice-groups.spec.ts",
+          "line": 86,
+          "column": 1
+        },
+        {
+          "title": "value projections accept radio null and stable arrays and reject invalid generated codes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-6b90db05fbffc511c586",
+          "file": "form-choice-groups.spec.ts",
+          "line": 107,
+          "column": 1
+        },
+        {
+          "title": "Form ownership blocks public group writes and disposal through unbind then releases on disposal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-e3f4cb23eef1d029c53b",
+          "file": "form-choice-groups.spec.ts",
+          "line": 138,
+          "column": 1
+        },
+        {
+          "title": "two generated-group Forms share native commits and release their ownership independently",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-ad32f0b28165e5b7047d",
+          "file": "form-choice-groups.spec.ts",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "rescan keeps rejected draft ownership and releases a successfully retired group",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-eb89aec9c0c8ea0e259b",
+          "file": "form-choice-groups.spec.ts",
+          "line": 183,
+          "column": 1
+        },
+        {
+          "title": "failed construction and rescan release provisional claims without unlocking another Form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-f40f742082981fcb4e02",
+          "file": "form-choice-groups.spec.ts",
+          "line": 198,
+          "column": 1
+        },
+        {
+          "title": "late ARIA and subscription setup failures release group and root ownership for retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-35a6c79a29da2f35b0c1",
+          "file": "form-choice-groups.spec.ts",
+          "line": 219,
+          "column": 1
+        },
+        {
+          "title": "local native reset and captured defaults remain separate through unbind",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-5d06ad3081ab8f6bae9f",
+          "file": "form-choice-groups.spec.ts",
+          "line": 241,
+          "column": 1
+        },
+        {
+          "title": "uninitialized disposed and configured display groups fail before adoption",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46877dfb13b1fb9325a4-c70daaa55717f2020b98",
+          "file": "form-choice-groups.spec.ts",
+          "line": 255,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "form-defaults.spec.ts",
+      "file": "form-defaults.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Form defaults capture live native values including root readonly disabled and hidden fields but exclude display and business data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-dc8454c312e199035de6",
+          "file": "form-defaults.spec.ts",
+          "line": 52,
+          "column": 1
+        },
+        {
+          "title": "captured defaults native reset and received Rows originals remain three independent checkpoints",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-c574e8512c11c640d2b4",
+          "file": "form-defaults.spec.ts",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "title": "defaults return detached nested records and arrays without recapturing edits binding refresh or reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-626e8e9853e0e1d6377e",
+          "file": "form-defaults.spec.ts",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "title": "Form default parsers use own native fields in compiled order and one unparsed captured context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-9b466260b90a5f7eea82",
+          "file": "form-defaults.spec.ts",
+          "line": 94,
+          "column": 1
+        },
+        {
+          "title": "default parser errors undefined async and uncloneable results fail without changing DOM and release guards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-d92ab643092f58098586",
+          "file": "form-defaults.spec.ts",
+          "line": 111,
+          "column": 1
+        },
+        {
+          "title": "Form and Grid default getter recursion is bounded per owner recoverable and permits another owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-0fbe2e3ad202437e5611",
+          "file": "form-defaults.spec.ts",
+          "line": 133,
+          "column": 1
+        },
+        {
+          "title": "native default paths reject parent-child conflicts in both DOM orders for Form and Grid",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-b174ae8ba26c1b76c9ed",
+          "file": "form-defaults.spec.ts",
+          "line": 152,
+          "column": 1
+        },
+        {
+          "title": "shared default assembly preserves Grid readonly disabled groups parser order and Select parser exclusion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-6bee6a00c2d99a23105c",
+          "file": "form-defaults.spec.ts",
+          "line": 167,
+          "column": 1
+        },
+        {
+          "title": "disposing from a default parser prevents a late result without affecting another live owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-ba9004f21142de34a99c",
+          "file": "form-defaults.spec.ts",
+          "line": 180,
+          "column": 1
+        },
+        {
+          "title": "Rows unbind restores captured UI without callbacks notifications or business changes and retains ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-87b94345f1e2990af13a",
+          "file": "form-defaults.spec.ts",
+          "line": 196,
+          "column": 1
+        },
+        {
+          "title": "unbind discards only the current row draft detaches updates and retains other row drafts for reuse",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-b4bfd449c765d8c32bca",
+          "file": "form-defaults.spec.ts",
+          "line": 213,
+          "column": 1
+        },
+        {
+          "title": "unbind restores exact static nodes and image src attributes while preserving current native configuration and alt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-a6266ec8f0c0becf52fe",
+          "file": "form-defaults.spec.ts",
+          "line": 227,
+          "column": 1
+        },
+        {
+          "title": "captured group checkedness restores stable shapes without mutating checkbox values or native defaults",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-46f8ee77ae1851ad8b35",
+          "file": "form-defaults.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "unmarked Select restore follows captured option identities while preserving reordered added and removed application options",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-d7dcbfef323163b5b099",
+          "file": "form-defaults.spec.ts",
+          "line": 259,
+          "column": 1
+        },
+        {
+          "title": "marked Select unbind restores owned authored nodes selection and raw mapping before another row binds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-18cb47be72b137e9442f",
+          "file": "form-defaults.spec.ts",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "local unbind suspends automatic work while read validate and selected refresh remain usable without resuming it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-4ff070bd1d5d2f44d78d",
+          "file": "form-defaults.spec.ts",
+          "line": 287,
+          "column": 1
+        },
+        {
+          "title": "defaults neither flush pending native reset display nor resume an inactive local Form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-995810d525cdea6e3875",
+          "file": "form-defaults.spec.ts",
+          "line": 307,
+          "column": 1
+        },
+        {
+          "title": "unbind cancels older completed native reset cleanup before it can repaint the restored view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-8beb92c52305c4896655",
+          "file": "form-defaults.spec.ts",
+          "line": 320,
+          "column": 1
+        },
+        {
+          "title": "native reset default action after in-dispatch unbind wins unless the reset is canceled",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-960b97bb7b6bf3b807f6",
+          "file": "form-defaults.spec.ts",
+          "line": 357,
+          "column": 1
+        },
+        {
+          "title": "unbind from whole value formatter renderer and parser callbacks suppresses older writes and sibling commits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-7346e7e1b364ee75dc00",
+          "file": "form-defaults.spec.ts",
+          "line": 372,
+          "column": 1
+        },
+        {
+          "title": "native setter reentry rejects same-owner unbind once and releases the restoration guard for retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-09f6b40ecd7731be42bb",
+          "file": "form-defaults.spec.ts",
+          "line": 394,
+          "column": 1
+        },
+        {
+          "title": "newer binding local full refresh and disposal during a native setter stop stale sibling restoration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-217ef3b8a2990b6eec89",
+          "file": "form-defaults.spec.ts",
+          "line": 410,
+          "column": 1
+        },
+        {
+          "title": "file restoration privately preserves every captured File while defaults expose only the first filename",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-72fc5465d5a18c3ff68a",
+          "file": "form-defaults.spec.ts",
+          "line": 452,
+          "column": 1
+        },
+        {
+          "title": "empty file capture clears later selection while disposal keeps current files and existing restrictions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-438f49c4d78c30aa561f",
+          "file": "form-defaults.spec.ts",
+          "line": 471,
+          "column": 1
+        },
+        {
+          "title": "file reconstruction failure precedes DOM error or inactive changes and preflight recursion stays bounded",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-70d3119c42c6c1e345b7",
+          "file": "form-defaults.spec.ts",
+          "line": 484,
+          "column": 1
+        },
+        {
+          "title": "newer full refresh or disposal during file preflight prevents all older restoration writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-64bb1c6045915bdc1e22",
+          "file": "form-defaults.spec.ts",
+          "line": 509,
+          "column": 1
+        },
+        {
+          "title": "Form creation defaults feed an explicit complete Rows factory and a received insert checkpoint",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-873386c6d231e4c2c383",
+          "file": "form-defaults.spec.ts",
+          "line": 529,
+          "column": 1
+        },
+        {
+          "title": "native validation publication stops after unbind during an ARIA write and leaves automatic work inactive",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-037a2b8d685b5ad0b012",
+          "file": "form-defaults.spec.ts",
+          "line": 542,
+          "column": 1
+        },
+        {
+          "title": "a canceled local render cannot erase newer validation or resume handlers through a rejected nested bind",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-40e3574d0d1981e96e66",
+          "file": "form-defaults.spec.ts",
+          "line": 579,
+          "column": 1
+        },
+        {
+          "title": "side CVC restores captured search fields without a request or changes to another page then resumes formatting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-9fd74cbabd6280c7f502",
+          "file": "form-defaults.spec.ts",
+          "line": 601,
+          "column": 3
+        },
+        {
+          "title": "stack CVC restores captured search fields without a request or changes to another page then resumes formatting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0adf95f4e40a91628e67-901aab42cb0fdf1d22a0",
+          "file": "form-defaults.spec.ts",
+          "line": 601,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-14T07:05:21.204Z",
+    "duration": 1122.942,
+    "expected": 0,
+    "skipped": 73,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

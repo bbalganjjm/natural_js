@@ -1,5 +1,8 @@
 # Concepts
 
+* [bindChoiceGroup](choice-group.md) - Generate native radio or checkbox choices from an authored fieldset template and adopt them in Form. (draft)
+* [Authored choice groups in two CVC layouts](choice-groups-example.md) - Generate native radio and checkbox choices before Form in independent authored CVC screens. (draft)
+
 * [Form source ownership and observation](form-source.md) - Normalize application records and observe complete raw Rows without adding field callbacks for absent HTML. (draft)
 
 * [ValueBindContext](value-callbacks.md) - Project mounted Form, Grid and List values without changing raw Rows or validation. (draft)

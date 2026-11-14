@@ -1,6 +1,6 @@
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import { bindForm, bindGrid, bindList, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindChoiceGroup, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
 const state = { ready: false, screens: {}, handles: {}, outputs: [], allowClose: false, documentControllers: 0 };
 window.packedConsumer = state;
@@ -342,6 +342,26 @@ try {
   const ruleGrid = bindGrid(ruleRoot.querySelector("table"), { rows: ruleRows, rules, parse, autoValidate: false, paste: true });
   const ruleList = bindList(ruleRoot.querySelector("ul"), { rows: ruleRows, rules });
   state.sharedRules = { root: ruleRoot, rows: ruleRows, form: ruleForm, grid: ruleGrid, list: ruleList, original: originalRules };
+  const choiceRoot = document.createElement("section");
+  choiceRoot.innerHTML = `<h2>Authored choice groups</h2><form>
+    <fieldset data-field="gender"><legend>Gender</legend><template data-choice-template><label><input type="radio" required><span data-choice-label></span></label></template></fieldset><output data-error-for="gender"></output>
+    <fieldset data-field="fruits" data-validate='[["required"]]'><legend>Fruit</legend><template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset><output data-error-for="fruits"></output>
+    <fieldset data-field="empty"><legend>Empty choices</legend><template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset>
+    </form>`;
+  document.querySelector("main").append(choiceRoot);
+  const choiceOriginal = choiceRoot.outerHTML;
+  const genderGroup = bindChoiceGroup(choiceRoot.querySelector('[data-field="gender"]'), {
+    choices: [{ value: "male", label: "Male" }, { value: "female", label: "Female" }], value: "male"
+  });
+  const fruitGroup = bindChoiceGroup(choiceRoot.querySelector('[data-field="fruits"]'), {
+    choices: [{ value: "apple", label: "Apple" }, { value: "banana", label: "Banana" }], value: ["apple"]
+  });
+  const emptyGroup = bindChoiceGroup(choiceRoot.querySelector('[data-field="empty"]'), { choices: [] });
+  const choiceRows = createRows([{ gender: "female", fruits: ["banana"], empty: [] }]);
+  const choiceForm = bindForm(choiceRoot.querySelector("form"), { rows: choiceRows });
+  const choiceDefaults = choiceForm.defaults(); choiceForm.bind(choiceRows.entries()[0].id);
+  state.choiceGroups = { root: choiceRoot, original: choiceOriginal, rows: choiceRows, form: choiceForm,
+    gender: genderGroup, fruit: fruitGroup, empty: emptyGroup, defaults: choiceDefaults };
   const valueRoot = document.createElement("section");
   valueRoot.innerHTML = `<h2>Form value callbacks</h2><form><p>Summary <span data-field="summary"></span></p>
     <label>Name <input data-field="name" minlength="3"></label><output data-error-for="name"></output>

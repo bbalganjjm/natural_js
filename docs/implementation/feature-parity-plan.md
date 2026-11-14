@@ -8,7 +8,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 142649bed5f0fdd46dd209efa25229ed54bdd03e
+    git_blob: 116edaa8ec090d99478799e1cde18c5b0834565c
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -20,7 +20,7 @@ sources:
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 77e004c36dd48f7234cb4dbb179af9c1536e682c
+    git_blob: 55622f3aa61ec2ec3ab2f7a28c6aec8ade6811cb
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -32,10 +32,10 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
-generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -141,6 +141,10 @@ Continue P0 dynamic semantic closure and prepare the single omission proposal af
 # Open questions
 
 P0's exhaustive behavior mapping, final omission candidates and their one user decision are pending. Remaining parity public contracts require their detailed slice review; implemented column, batch-edit, viewport and multi-row/merge contracts retain their owning evidence and P0 option/dynamic closure. Manual assistive-technology testing and actual token telemetry remain open; available automated/browser checks must still run during implementation.
+
+# M5.13 bounded U10 continuation
+
+[M5.13](m5-choice-groups-plan.md) implements authored native radio/checkbox generation before Form adoption and standalone choice replacement through one specific private descriptor owner. Stable zero/one/many checkbox arrays, native labels/names/defaults, exact string-code rendering, raw validation and reverse CVC cleanup preserve the actual legacy caller without copying generated forms or cardinality defects. Public writes/disposal reject while adopted. Live Form-owned replacement and broader Select/declaration/receiver/default equivalence stay required; no U10/full-family closure or omission is approved. The actual [two-layout example](../v2/choice-groups-example.md) and [API](../v2/choice-group.md) retain the bounded contract.[^form][^coverage]
 
 [^coverage]: Initial source-backed coverage ledger
 [^roadmap]: Milestone governance and current scope

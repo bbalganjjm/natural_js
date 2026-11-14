@@ -212,6 +212,8 @@ export { bindForm } from "./form.js";
 export { bindGrid } from "./grid.js";
 export { bindList } from "./list.js";
 export { bindSelect } from "./select.js";
+export { bindChoiceGroup } from "./choice-group.js";
+export type { ChoiceGroupHandle } from "./choice-group.js";
 export { bindPagination } from "./pagination.js";
 export { openPopup } from "./popup.js";
 export type { PopupHandle } from "./popup.js";

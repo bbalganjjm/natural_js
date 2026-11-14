@@ -9,15 +9,15 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Common public field value context
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: binding
     resource: ../../src/ui/value-binding.ts
     title: Shared checked invocation, native replacements and write order
-    git_blob: cd12894b09ca3c9b1964f68a1b53cbc8ecc01fe4
+    git_blob: 9f59b5313d2eb0988f7f4dbdbaa37611ccc73184
   - id: form
     resource: ../../src/ui/form.ts
     title: Form cache, input and lifetime owner
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid mounted-field, draft, focus and projection owner
@@ -30,18 +30,18 @@ sources:
     resource: ../../tests/browser/collection-values.spec.ts
     title: Shared callback, raw-value and lifecycle witnesses
     git_blob: 5c2576a91c9b69b41f1e192db56ad3ec3635d678
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 ---
 
 beforeBindValue(value, context) and onBindValue(value, context) are synchronous optional callbacks on Rows-backed Form, Grid and List. ValueBindContext replaces the pre-release FormValueContext name without an alias. Pass the same application-owned functions explicitly to each binder; no global registry or implicit FormOptions inheritance is involved.[^ui][^binding]
 
 # Context and order
 
-The frozen context extends RuleContext with nonnull rowId, primary bound HTMLElement and phase: "bind" | "val". values is the immutable source-raw snapshot, including fields not displayed in this element. Grouped controls use their first element. A prepared clone may be detached while it is being bound for placement; pure offscreen validation/probing never invents an element or runs value hooks. Grid revealInvalid may subsequently mount a real invalid row; that projection uses the normal binding callbacks.[^ui][^form][^grid][^list]
+The frozen context extends RuleContext with nonnull rowId, primary bound HTMLElement and phase: "bind" | "val". values is the immutable source-raw snapshot, including fields not displayed in this element. Populated grouped controls use their first element; an empty generated group uses its actual fieldset. A prepared clone may be detached while it is being bound for placement; pure offscreen validation/probing never invents an element or runs value hooks. Grid revealInvalid may subsequently mount a real invalid row; that projection uses the normal binding callbacks.[^ui][^form][^grid][^list]
 
-Before receives source raw. Its effective result passes through the existing native, formatter or explicit-render writer, then after observes the written view and receives that projected raw. A different after result is checked and written once. Undefined preserves the current value; false, null, zero and empty string are values. A replacement is a finite native scalar or scalar array for a multiple-value field; one checkbox requires boolean. Typed choices require available raw option occurrences. Unmarked native Selects keep native string conversion rather than typed occurrence matching. Structured display uses Form/Grid render; List has no render option and keeps text/native read-only output.[^binding]
+Before receives source raw. Its effective result passes through the existing native, formatter or explicit-render writer, then after observes the written view and receives that projected raw. A different after result is checked and written once. Undefined preserves the current value; false, null, zero and empty string are values. A replacement is a finite native scalar or scalar array for a multiple-value field; one static checkbox requires boolean. Typed choices require available raw option occurrences. Unmarked native Selects keep native string conversion rather than typed occurrence matching. Structured display uses Form/Grid render; List has no render option and keeps text/native read-only output.[^binding]
 
 Callbacks are captured once and called as plain functions, with the same context for the before/after pair. Errors retain API-specific VALUE_OPTIONS/VALUE codes, callback, field, row and phase where available, and the cause. Thenables fail the synchronous contract and their rejection is drained; stale/disposed value work may suppress that failure. One application-composed function remains one callback unit: framework checks follow its return, not each application subcall.[^binding][^form]
 
@@ -82,6 +82,10 @@ The stable callback deliberately reads the current application policy. Value cal
 Generation, source and disposal checks prevent stale framework writes and placement after callback work. Grid/List reject recursive binding with their BIND_REENTRANT codes; source changes may already have committed before a subscription reports that failure. Correct the callback and refresh. Earlier application/DOM side effects are not rolled back. Callback failures during construction release owned resources so the same authored root can retry.[^form][^grid][^list][^browser]
 
 Whole Form observers, Grid row/completion hooks and selection retain their own lifecycle and ordering. No-hook operation uses the existing binding paths without value contexts or extra callback checkpoints. Local-source hooks, per-unbound-key observations, broader implicit defaults and full legacy parity remain outside this selected contract.[^form][^grid][^list]
+
+# Generated group replacements
+
+For an initialized choice group adopted by Form, radio replacements accept a string or null; checkbox replacements require a string array at zero, one or many choices. Duplicate, unavailable or nonstring entries fail before writing the view. Null is a valid unselected radio value even without a null catalog entry. A zero-choice group uses its actual fieldset as `context.element`; populated groups use their first input. Projection never normalizes Rows or originals. Static single checkboxes keep boolean replacement semantics. [Choice groups](choice-group.md) defines the generation/adoption boundary.[^binding][^form]
 
 [^ui]: Common public field value context
 [^binding]: Shared checked invocation, native replacements and write order

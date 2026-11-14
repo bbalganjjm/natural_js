@@ -8,7 +8,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Whole Form binding, marked reads and native commit boundaries
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: data
     resource: ../../src/data/index.ts
     title: Complete immutable source records and committed notifications
@@ -20,7 +20,7 @@ sources:
   - id: installed
     resource: ../../tests/consumers/browser/main.js
     title: Installed source normalization and observation fixture
-    git_blob: e714fb2f4b0c77b5195fdbfb8344e015f15d55d6
+    git_blob: 94bce2522dbbbaa86e9e3395cb8d955d73da38f8
   - id: demo-browser
     resource: ../../tests/browser/m512-source-demo.spec.ts
     title: Actual reduced CVC detail and full source panel regression
@@ -28,7 +28,7 @@ sources:
   - id: installed-check
     resource: ../../tools/check-packed-browser.mjs
     title: Exact-package source, original, notification and cleanup assertions
-    git_blob: 33d48c085aa8e46338039cb93460565d40e8df53
+    git_blob: 046fe3008932aea0232ae89079328cce2cea9d3e
   - id: example
     resource: ../../examples/vite/m10/demo.ts
     title: Actual selected or inspected full raw snapshot panel

@@ -1,0 +1,966 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.13 authored choice groups",
+  "recorded_at": "2026-11-14",
+  "workspace_baseline_commit": "08c5aec77fd70e2cddd625734d94fc237a601582",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m512-verification.json",
+      "sha256": "6040b6dd66d5a4ae10f50c55e958b6c8e3ff791f799d315fba1ae08f49ac2866",
+      "preserved_in_commit": "08c5aec77fd70e2cddd625734d94fc237a601582"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m512-form-source.json",
+      "sha256": "48539caeb8025c4e021c49bfb1969292c464d020ac345dd0f4b573b7394409fa"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    },
+    "resolver": "Inherit complete original/full-owner obligations through immutable M5.12 receipt/ledger and original audit. Historical M5.12 unchanged-runtime and controlled-probe acceptance does not certify M5.13. Current framework/runtime/package changes require fresh verification; no current artifact equality or inherited diagnostic credit is assumed."
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "08c5aec77fd70e2cddd625734d94fc237a601582",
+    "scope": "Independent first-run recorded-byte recovery observed clean pushed M5.12 before authorized M5.13 planning/source edits."
+  },
+  "public_delta": {
+    "status": "actual_frozen_public_surface_and_source_layout",
+    "new_public_named_types": [
+      "ChoiceGroupHandle"
+    ],
+    "removed_public_named_types": [],
+    "new_public_runtime_functions": 1,
+    "new_public_functions": [
+      "bindChoiceGroup"
+    ],
+    "reused_public_types": [
+      "SelectChoice<string>"
+    ],
+    "new_public_handle_methods": [
+      "setChoices",
+      "setValue",
+      "value",
+      "dispose"
+    ],
+    "new_public_methods": 4,
+    "new_public_entries": 0,
+    "new_runtime_dependencies": 0,
+    "new_runtime_files": [
+      "src/ui/choice-group.ts",
+      "src/ui/choice-group-owner.ts"
+    ],
+    "private_shared_owner_modules": 1,
+    "note": "Two actual runtime files serve standalone generation and Form adoption. No value alias,generic extension engine,public registry or unused utility. Current runtime/archive changes are intentional; M5.12 package equality is not inherited."
+  },
+  "selected_contracts": {
+    "authored_generation_and_standalone_values": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Generate native choices in an accessible authored fieldset/item-label template. Validate before mutation; isolate native names/IDs and write literal labels. Radio returns string/null; checkbox returns string arrays at0/1/N. Standalone writes reject invalid shapes,drop unknown codes and preserve live/default selection and appropriate focus separately.",
+      "source_refs": [
+        "src/ui/choice-group.ts",
+        "src/ui/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "I01",
+        "I02",
+        "I03",
+        "I04"
+      ],
+      "remaining": "No visual theme,custom keyboard engine,form wrapper,hidden proxy or code registry. Broader legacy Select operations remain required."
+    },
+    "stable_native_source_and_projection": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Use an explicit checkbox-array predicate across actual native readers/writers and value projection,including empty groups. Form renders exact matching string codes without rewriting raw source/originals; existing validation reports shape,duplicate and unavailable values. Callback replacements require available native-compatible values; static controls keep existing behavior.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/native-control.ts",
+        "src/ui/value-binding.ts"
+      ],
+      "witnesses": [
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "B14",
+        "B16",
+        "B17",
+        "B19",
+        "I02",
+        "I03",
+        "I04"
+      ],
+      "remaining": "No global source coercion or nullable/dummy element context; full data/schema and other value/default owners remain open."
+    },
+    "form_adoption_claims_and_cleanup": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "A specific private descriptor/claim owner serves binder and Form. Adopted groups lock public writes/dispose before mutation. Dispose or successful rescan retirement releases claims; rejected rescans retain old claims and failed acquisition releases provisional new claims. CVC reverse cleanup disposes Form before group.",
+      "source_refs": [
+        "src/ui/choice-group.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "S03",
+        "B08",
+        "B11",
+        "B12",
+        "B18",
+        "B19",
+        "B20",
+        "B21",
+        "B22",
+        "B24",
+        "B25",
+        "E02",
+        "I03",
+        "I04"
+      ],
+      "remaining": "Form-owned live replacement is a required follow-up; selected generation-before-Form does not close U10 or approve an omission."
+    },
+    "defaults_reset_required_and_accessibility": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Preserve checked versus defaultChecked,Form defaults/current reads/local native reset/change-state/unbind captures and exact authored cleanup. Empty groups retain real fieldset/error context. Required radio,per-enabled-checkbox native constraints and empty-required issues follow explicit policy; logical nonempty uses the unchanged root required text semantics. A single selected empty-string code fails; applications provide a cardinality-only validator when empty codes are valid. Effective disabled and real focus fallback remain native.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/native-control.ts",
+        "src/ui/choice-group.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S03",
+        "S04",
+        "B01",
+        "B04",
+        "B05",
+        "B12",
+        "B13",
+        "B14",
+        "B15",
+        "B23",
+        "B25",
+        "B26",
+        "E01",
+        "E02",
+        "I03",
+        "I04"
+      ],
+      "remaining": "Rows-backed reset gains no new subscription or store write. No claim that a fieldset alone joins browser constraint validation; broader defaults/reset equivalence remains required."
+    },
+    "actual_cvc_and_exact_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Rebuild actual generation-before-Form radio/single and checkbox/array workflow in two authored CVC instances,with shared Rows/validation/revert and cleanup. Verify precise public handle and standalone/Form behavior in exact-package JS/TS and five Windows browsers.",
+      "source_refs": [
+        "v1/docs/examples/template/search-grid-detail-horizontal.md",
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "B25",
+        "B26",
+        "E01",
+        "E02",
+        "I01",
+        "I02",
+        "I03",
+        "I04"
+      ],
+      "remaining": "Actual example/test paths and counts are finalized from implementation. Full owners/P0/M13 and personal/manual/token checks remain required."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/choice-group.ts",
+      "title": "Authored binder and precise plain public handle",
+      "marker": "export function bindChoiceGroup"
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/choice-group-owner.ts",
+      "title": "Private ready/claim/value owner shared with Form",
+      "marker": "export function claimChoiceGroup"
+    },
+    "S03": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "Persistent native group field and transactional Form adoption",
+      "marker": "const pendingGroups = new Map<ChoiceGroupBinding, () => void>();"
+    },
+    "S04": {
+      "kind": "source",
+      "file": "src/ui/native-control.ts",
+      "title": "One shared explicit native array predicate",
+      "marker": "export function arrayField"
+    },
+    "S05": {
+      "kind": "source",
+      "file": "src/ui/value-binding.ts",
+      "title": "Existing value owner checks available group replacements",
+      "marker": "const message = checkGroupValue(field.group, projected);"
+    },
+    "S06": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "One binding function and one public handle added to the existing UI entry",
+      "marker": "export type { ChoiceGroupHandle } from \"./choice-group.js\";"
+    },
+    "E01": {
+      "kind": "example_source",
+      "file": "examples/vite/m5/choices.html",
+      "title": "Two authored layouts and standalone native replacement controls",
+      "marker": "<template data-workspace>"
+    },
+    "E02": {
+      "kind": "example_source",
+      "file": "examples/vite/m5/choices.ts",
+      "title": "Generation-before-Form and ordered CVC cleanup",
+      "marker": "own(() => form.dispose());"
+    },
+    "I01": {
+      "kind": "installed_source",
+      "file": "tests/consumers/js/check.mjs",
+      "title": "Isolated JavaScript public binding import",
+      "marker": "assert.equal(typeof bindChoiceGroup, \"function\");"
+    },
+    "I02": {
+      "kind": "installed_source",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Precise handle/string arrays and invalid-value type rejections",
+      "marker": "export function connectChoiceGroups"
+    },
+    "I03": {
+      "kind": "installed_source",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Actual installed radio/checkbox/empty Form groups",
+      "marker": "state.choiceGroups ="
+    },
+    "I04": {
+      "kind": "installed_source",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Exact installed package adoption,raw defaults,cardinality and cleanup assertions",
+      "marker": "Installed authored groups must keep array shape, raw ownership, captured defaults, adoption locks and exact teardown."
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "authored native groups use literal labels and document-isolated names without generated IDs or forms"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "checkbox groups retain arrays at zero one and many choices and public setters normalize only valid strings"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "radio setters preserve null empty codes and disabled values while rejecting array and coerced values"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "replacement preserves surviving current and native default selections as separate checkpoints"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "standalone replacement restores a surviving focused choice then an enabled neighbor or real empty fieldset"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "invalid templates choices and initial values fail without changing authored DOM or retaining ownership"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "setter getters cannot mutate a disposed adopted or successfully replaced choice group"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "constructor preparation stays unadoptable until native nodes defaults and listener setup finish"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "sparse catalogs and failed insertion preserve a usable current group and its focused native input"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "native callbacks are captured once and called plainly while disabled controls and instances remain independent"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "adoption guards public writes and disposal until the exact claim is released"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "disposal restores exact authored nodes attributes and quiet late events including a disabled empty root"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "native keyboard interaction skips disabled radio choices and toggles checkbox arrays"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "generated groups retain zero one many values and adoption captures without changing static checkbox shape"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "native required checks each enabled checkbox while root rules and empty logical groups stay distinct"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "raw group validation rejects coercion duplicates and unavailable codes without rewriting Rows"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "value projections accept radio null and stable arrays and reject invalid generated codes"
+    },
+    "B18": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "Form ownership blocks public group writes and disposal through unbind then releases on disposal"
+    },
+    "B19": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "two generated-group Forms share native commits and release their ownership independently"
+    },
+    "B20": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "rescan keeps rejected draft ownership and releases a successfully retired group"
+    },
+    "B21": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "failed construction and rescan release provisional claims without unlocking another Form"
+    },
+    "B22": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "late ARIA and subscription setup failures release group and root ownership for retry"
+    },
+    "B23": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "local native reset and captured defaults remain separate through unbind"
+    },
+    "B24": {
+      "kind": "browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "uninitialized disposed and configured display groups fail before adoption"
+    },
+    "B25": {
+      "kind": "browser",
+      "file": "tests/browser/m513-choice-demo.spec.ts",
+      "title": "authored choice groups bind two independent CVC records and restore captured values without source writes"
+    },
+    "B26": {
+      "kind": "browser",
+      "file": "tests/browser/m513-choice-demo.spec.ts",
+      "title": "standalone authored choices retain array shape and surviving native defaults across replacement"
+    }
+  },
+  "witness_counts": {
+    "status": "actual_frozen_source_inventory_fresh_canonical_counts_pending",
+    "unit_delta": 0,
+    "browser_delta": 26,
+    "standalone_browser_cases": 13,
+    "form_browser_cases": 11,
+    "actual_demo_browser_cases": 2,
+    "source_witnesses": 6,
+    "example_source_witnesses": 2,
+    "installed_source_witnesses": 4,
+    "inherited_full_cases_per_engine": 810,
+    "expected_full_cases_per_engine": 836,
+    "expected_unit_pass_count": 138
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m513-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m513-verification.json",
+    "required_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "required_package_checks": [
+      "isolated_js",
+      "isolated_ts",
+      "packed_chromium",
+      "packed_firefox",
+      "packed_webkit",
+      "installed_chrome",
+      "installed_edge"
+    ],
+    "required_other_checks": [
+      "strict_build",
+      "strict_source_types",
+      "strict_example_types",
+      "unit",
+      "binding_9_original_budgets",
+      "viewport_21_original_budgets",
+      "docs_changed_zero_errors_warnings",
+      "docs_full_zero_errors_warnings"
+    ],
+    "baseline_input_entries": 194,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 810,
+    "inventory_expectation": {
+      "status": "frozen_source_counts_actual_canonical_receipt_pending",
+      "expected_source_inputs": 201,
+      "expected_package_files": 203,
+      "expected_unit_pass_count": 138,
+      "scope": "Actual two runtime files,three browser files and two authored example files expand the baseline input inventory by7; current archive descriptor supplies203files. Fresh complete gates still own acceptance."
+    },
+    "semantic_document_scope": [
+      "docs/implementation/current.md",
+      "docs/implementation/m5-choice-groups-plan.md",
+      "docs/implementation/feature-parity-plan.md",
+      "docs/v2/choice-group.md",
+      "docs/v2/form.md",
+      "docs/v2/ui.md",
+      "docs/v2/value-callbacks.md",
+      "docs/v2/migration.md",
+      "docs/v2/choice-groups-example.md",
+      "docs/v2/select.md"
+    ],
+    "semantic_document_scope_status": "exact_ten_concepts_confirmed_by_root_actual_bodies_pending",
+    "setup_observations": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M513 helpers; not project verification",
+        "log": {
+          "path": "node_modules/.cache/m513-helper-syntax.log",
+          "sha256": "b9437d368f0de1448af9327cd0369f0162f0a27e3f526d17b2758a823c7e56e7"
+        }
+      }
+    ],
+    "operator_dispositions": [
+      {
+        "kind": "captured_initial_type_and_demo_locator_failures",
+        "initial_build": {
+          "label": "focused-build",
+          "args": [
+            "node_modules/typescript/bin/tsc",
+            "-p",
+            "tsconfig.json"
+          ],
+          "started": "2026-11-14T06:48:49.237Z",
+          "finished": "2026-11-14T06:48:54.292Z",
+          "exit_code": 1,
+          "log": "m513-focused-build.log",
+          "log_sha256": "1eef4054b149826cd9518ae843fc1ac963580264e1acf3cac01d6014436bfc90",
+          "input_manifest": "m513-inputs-1cb13f960cc6.json",
+          "input_manifest_sha256": "1cb13f960cc6db8bfef02e4d9f9dfaa4aa22aaa29b3e48a3e4112d523a778bf5",
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "sources_unchanged": true,
+          "environment": {},
+          "runtime": {
+            "node": "v24.18.0",
+            "platform": "win32",
+            "arch": "x64"
+          }
+        },
+        "initial_focused": {
+          "label": "focused-chromium",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "tests/browser/choice-group.spec.ts",
+            "tests/browser/form-choice-groups.spec.ts",
+            "tests/browser/m513-choice-demo.spec.ts",
+            "tests/browser/form-m6.spec.ts",
+            "tests/browser/form-values.spec.ts",
+            "tests/browser/form-defaults.spec.ts",
+            "tests/browser/form-discovery.spec.ts",
+            "tests/browser/select-pagination.spec.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--reporter=line"
+          ],
+          "started": "2026-11-14T06:50:03.457Z",
+          "finished": "2026-11-14T06:51:13.520Z",
+          "exit_code": 1,
+          "log": "m513-focused-chromium.log",
+          "log_sha256": "5df5b5625c7f5defe753612bbef61dfa2a0d457a986019a25607986d965004e0",
+          "input_manifest": "m513-inputs-b16c86601670.json",
+          "input_manifest_sha256": "b16c866016709b4c3b4a7a89711847005600dee754b9b436adf30c8c29b7a729",
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "sources_unchanged": true,
+          "environment": {
+            "PLAYWRIGHT_BROWSERS_PATH": null
+          },
+          "runtime": {
+            "node": "v24.18.0",
+            "platform": "win32",
+            "arch": "x64"
+          }
+        },
+        "focused_passed": 118,
+        "focused_failed": 1,
+        "disposition": "Initial build rejected a possibly null/undefined captured template item in a closure. A later type assertion follows the existing validated template guard. The captured119-case browser attempt failed waiting for an exact-label locator at demo line49; the retained context renders the Choice list combobox. The test author changed to the semantic combobox role. Later independent source fixes/regressions are separate; this locator failure is not their framework RED/GREEN proof,and only fresh maps/gates certify corrected implementation."
+      }
+    ],
+    "diagnostic_dispositions": [
+      {
+        "kind": "original_failed_demo_locator_trace_and_context",
+        "parent_gate": {
+          "label": "focused-chromium",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "tests/browser/choice-group.spec.ts",
+            "tests/browser/form-choice-groups.spec.ts",
+            "tests/browser/m513-choice-demo.spec.ts",
+            "tests/browser/form-m6.spec.ts",
+            "tests/browser/form-values.spec.ts",
+            "tests/browser/form-defaults.spec.ts",
+            "tests/browser/form-discovery.spec.ts",
+            "tests/browser/select-pagination.spec.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--reporter=line"
+          ],
+          "started": "2026-11-14T06:50:03.457Z",
+          "finished": "2026-11-14T06:51:13.520Z",
+          "exit_code": 1,
+          "log": "m513-focused-chromium.log",
+          "log_sha256": "5df5b5625c7f5defe753612bbef61dfa2a0d457a986019a25607986d965004e0",
+          "input_manifest": "m513-inputs-b16c86601670.json",
+          "input_manifest_sha256": "b16c866016709b4c3b4a7a89711847005600dee754b9b436adf30c8c29b7a729",
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "sources_unchanged": true,
+          "environment": {
+            "PLAYWRIGHT_BROWSERS_PATH": null
+          },
+          "runtime": {
+            "node": "v24.18.0",
+            "platform": "win32",
+            "arch": "x64"
+          }
+        },
+        "trace": {
+          "path": "docs/implementation/evidence/m513-demo-locator-trace.zip",
+          "sha256": "2d78502756009b43531e29aeb9bc1b30244309a523fd48ff37882346b46dafd9",
+          "bytes": 16847,
+          "members": 9,
+          "trace_events": 63
+        },
+        "context": {
+          "path": "docs/implementation/evidence/m513-demo-locator-context.txt",
+          "sha256": "8077799c50b4b96cf71ae50ea376cba81401a9428902e5218eb1d9d38470f652",
+          "bytes": 11337
+        },
+        "observed_error": "locator.selectOption timed out waiting for exact Choice list label; context shows the rendered combobox",
+        "original_attempt_passed": 118,
+        "original_attempt_failed": 1,
+        "full_suite_credit": 0,
+        "scope": "Actual original failed-test trace/context,not a later diagnostic or M5.12 probe. Current test uses getByRole; recorded bytes establish the failed call and rendered context,not acceptance of later source changes."
+      }
+    ],
+    "superseded_artifacts": [],
+    "independent_reviews": {
+      "baseline": "passed_read_only_08c5aec_M512_source_raw_archive_review_document_and_preservation_recovery",
+      "contract": "passed_amended_authored_group_shape_source_validation_accessibility_and_transactional_claim_contract_before_source_GO",
+      "source": "passed_independent_third_connected_runtime_callers_26_fixed_witnesses_and_frozen_focus_review",
+      "evidence": "passed_independent_raw_source_map_archive_shard_performance_failure_artifact_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_M5.12_baseline_recovery_for_M5.13",
+        "helper": {
+          "path": "node_modules/.cache/m513-baseline-audit.mjs",
+          "sha256": "d64226dfa597e4cd021339da9c94955e8828168545dff238547652411567ee45"
+        },
+        "log": {
+          "path": "node_modules/.cache/m513-baseline-audit.log",
+          "sha256": "43be1de2b5eb8427965790e8cc2b5a12ffc392bd74d85a8fd43f915b5185ac37"
+        },
+        "inputs": 194,
+        "committed_evidence_files": 87,
+        "records": 24,
+        "development": 8,
+        "latest": 16,
+        "superseded": 0,
+        "input_maps": 1,
+        "unit": 138,
+        "full_cases_per_engine": 810,
+        "actual_tar_sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+        "actual_tar_files": 193,
+        "linked_raw_children": 50,
+        "semantic_bodies": 7,
+        "historical_fingerprint_only": 27,
+        "document_concepts": 81,
+        "scope": "First-run read-only historical recorded-byte recovery only. Current-stage runtime/package may change; historical probe/tests/equality are not recertified or credited."
+      },
+      "contract": {
+        "status": "approved_after_explicit_precision_updates",
+        "scope": "ChoiceGroupHandle,string-only native/source selection policy,accessible names,empty/disabled focus and native-required semantics,local-only reset ownership,locked adopted public writes and provisional claim rollback. Standalone replacement only; live adopted replacement remains required.",
+        "required_precision": {
+          "status": "accepted_pre_verification_evidence_backed_wording",
+          "source": "src/ui/validate-rules.ts:169,176 and the existing rule-input conversion",
+          "observation": "Existing required validation tests nonempty trimmed text,not array cardinality; a selected empty-string code remains invalid. The plan and selected outcome now state that boundary. No global validator or source policy changes are approved."
+        }
+      },
+      "document_preparation": {
+        "status": "draft_fingerprint_chain_settled_independent_verified_stamps_pending",
+        "log": {
+          "path": "node_modules/.cache/m513-pre-docs.log",
+          "sha256": "f6a9b0638953c83b52351e6517ca48f8c965e081a760b7131295e2becdd38a68",
+          "bytes": 742
+        },
+        "observation": "Root reported an initial single-pass30-fingerprint drift and7 stale-verified warnings; a historical dependency chain exceeded the old10-pass helper bound. One further stamp settled0. Actual precheck has84concepts/5reserved,0errors/7expected stale warnings before final independent verification.",
+        "helper_settle_bound": 64,
+        "scope": "Document preparation only; no canonical/runtime gate or completed final document acceptance is inferred."
+      },
+      "source": {
+        "status": "passed_independent_third_connected_runtime_callers_26_fixed_witnesses_and_frozen_focus_review",
+        "reviewer": "m511_baseline; no runtime/test/example authorship",
+        "reviewed_at": "2026-11-14",
+        "reviewed_source_sha256": {
+          "src/ui/choice-group.ts": "5f4618992f364a6cb9b07f13ed7e5aaae1bcdd718d042159c7e57f02da390310",
+          "src/ui/choice-group-owner.ts": "b99ddb27e38df873a698e7578961308a1212e4ea31a668838a7dd510d2a12eb3",
+          "src/ui/form.ts": "42a758e629f8c8e3202dc16cb46dd6f0750714d8534c8abfb1c0db5efc2b8d76",
+          "src/ui/native-control.ts": "1a41cc7bf79c0f00eef7d7163bcc99aeab190f7e5134d7bb2d38fdfcb0f33197",
+          "src/ui/value-binding.ts": "3aa6496e714dc5321545507ca5d471cf389cb40ec45c013fdceb4ddcad11174c",
+          "src/ui/index.ts": "9ba3b503fac6475ecb3c8b001aa61fd564da79ad33a920635b2cc45a27a3d800",
+          "examples/vite/m5/choices.html": "d58cee916706ff2aa1dc2a7cfcd8bdf4a1d5c42a7288bd48cfcb351e044ba2da",
+          "examples/vite/m5/choices.ts": "095ab7f616ec8a54cd3636faefd0a519ec0c437b2a83d6cc56e789991d968f81",
+          "tests/browser/choice-group.spec.ts": "ba22b7f5af55abb0e39dd29464bdffd4fb50f2f31b95801bd744f1521271435b",
+          "tests/browser/form-choice-groups.spec.ts": "d40af3a90a505f34a46f0f6cfa263b12a1a439d12077f7f6b9c63af817ca660f",
+          "tests/browser/m513-choice-demo.spec.ts": "c5c4e6256f130257448092e4b5004d1f3450b5c7f6888f0489acd131c5ddcb35",
+          "tests/consumers/js/check.mjs": "2592ddba0ba2e9d6e92f755de5a214e61349130898852a79094fcf7334e11166",
+          "tests/consumers/ts/check.ts": "e4930d8acac6629cd4718f40b5b1aa9bae534c3e9900028bf2b94b4f23ae9a84",
+          "tests/consumers/browser/main.js": "b423fa53aa4b14eb8cc7f989f83946752f28214966c77eaaef6d178578533581",
+          "tools/check-packed-browser.mjs": "3c1659a4b674c2c26afb39f260d88ca7cd9e449168105b15fb7ba8c068558cfc",
+          "src/ui/native-defaults.ts": "902042418d6be81564305493837934bba68d9d8af6b4cd74967a193f069981ed",
+          "src/ui/dom-state.ts": "2f7326f36ae4efd8a2022a38228c1baae4834436b592aa8a4dc2e7544fa6796d",
+          "src/ui/select.ts": "b584b7e4adfa98345ffa717adc60b85d80e1b8db1ca3ebe1b9e7ce2f06215f0c",
+          "src/ui/validate-rules.ts": "2e6210c8578acebe495de64e8b638016877b81d3a1fcad568c7554dc223d722e"
+        },
+        "actual_runtime_files": [
+          "src/ui/choice-group.ts",
+          "src/ui/choice-group-owner.ts",
+          "src/ui/form.ts",
+          "src/ui/native-control.ts",
+          "src/ui/value-binding.ts",
+          "src/ui/index.ts"
+        ],
+        "new_runtime_files": [
+          "src/ui/choice-group.ts",
+          "src/ui/choice-group-owner.ts"
+        ],
+        "source_witnesses": 6,
+        "new_browser_witnesses": 26,
+        "total_exact_witnesses": 38,
+        "focused_records": {
+          "chromium": {
+            "log": "m513-focused-chromium-2.log",
+            "sha256": "e105f872ab1b4fa541e2ed5ef0a1fb5572d78b0b68b9487101a31b1dc193ad09",
+            "input_manifest": "m513-inputs-e5c095d8017b.json",
+            "passed": 123
+          },
+          "firefox": {
+            "log": "m513-focused-firefox.log",
+            "sha256": "f4bbf49f5c9d7e07016852335f030f38d2b3363beb5e600dd6d46ee6355d9f2f",
+            "input_manifest": "m513-inputs-e5c095d8017b.json",
+            "passed": 123
+          },
+          "webkit": {
+            "log": "m513-focused-webkit.log",
+            "sha256": "bd9b777f756a98a67b271e1d9b55607954df6f54f721a5e292c9251c00464f2d",
+            "input_manifest": "m513-inputs-e5c095d8017b.json",
+            "passed": 123
+          }
+        },
+        "findings": [],
+        "observations": [
+          "Reviewed all six new/modified runtime files through new code plus connected Form compile/capture/validation/render/reset/rescan/disposal owners,all three new test files,actual CVC HTML/controller and four installed-consumer paths.",
+          "ChoiceGroupHandle/string-code shapes and one public function are precise. Two actual runtime files share one private ready/claim owner; no public registry,utility,dependency or package entry was added.",
+          "Dense catalog preparation,selection snapshots,operation generation and provisional initialization prevent stale publication. Sparse values,failed insertion/retry/focus and duplicate ready/claimed ownership are covered by final standalone regressions.",
+          "Form compiles stable0/1/N native fields with real fieldset fallback,strict callback replacements and raw-source validation. Global validator/static checkbox/Select semantics remain unchanged; required keeps existing text semantics.",
+          "Constructor/ARIA/subscription and rescan claim acquisition release provisional claims; draft rejection retains ownership. Local native reset,captured defaults,Rows reversion and paused unbind retain distinct owners.",
+          "Native names/IDs,literal labels,keyboard/disabled/focus/error captures and CVC reverse cleanup agree with the authored example and fixed witnesses. Live adopted replacement remains an explicit required follow-up.",
+          "Earlier compiler/locator captures and subsequent independently identified source fixes retain separate scopes. Three final123-case focus captures match the exact current201-input map; complete canonical/raw/document acceptance remains separate."
+        ],
+        "scope": "Targeted third Ponytail connected-change review and recorded-byte focused-result reconciliation only. No compiler/browser/runtime/performance command executed; no whole-family,P0/M13 or manual accessibility claim.",
+        "helper": {
+          "path": "node_modules/.cache/m513-source-review.mjs",
+          "sha256": "97947cdfda5685f8dd6589694741c1ec8c4b0957553530d118a0e316f5a9d990"
+        },
+        "log": {
+          "path": "node_modules/.cache/m513-source-review.log",
+          "sha256": "3941b94cbe9d9b3af5ecdc07ebddc557be6e31bbfb349b89a65cc57b37dc3a4d"
+        }
+      },
+      "implemented_draft_documents": {
+        "status": "passed_independent_complete_body_static_review_not_final_semantic_or_mechanical_acceptance",
+        "reviewer": "m511_design",
+        "source": "Independent final task message after actual frozen source/caller review; these two bodies were authored by m511_baseline and not self-certified.",
+        "reviewed_body_sha256": {
+          "docs/v2/choice-group.md": "3ef3d7e84ba492baeae2dabbb5da11bc267fd85e7bc9ae14abb95b3a4ef93d68",
+          "docs/v2/choice-groups-example.md": "7043e679de55e2d39b85fc923af0be8a6ac42ec4338127dd33bf5602c59b3d7c"
+        },
+        "scope": "Read-only full-body source-backed review only; no stamps,runtime/raw or final ten-concept acceptance is inferred."
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "reviewer": "m511_design",
+        "reviewed_at": "2026-11-14",
+        "scope": "Independent complete-body review of the final ten concepts against connected source, fixed witnesses, actual installed callers, accepted independent raw audit and the unchanged R0-to-R1 runtime facts. Ancillary index/log additions preserve the same bounded outcome. Final completion prose is accepted for the state reached only after root completes the authorized mechanical checks; no checker execution or verified stamp is claimed by this review.",
+        "body_normalization": "UTF-8 text with CRLF normalized to LF; substring after the terminating frontmatter delimiter newline---newline, untrimmed and retaining final newline.",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_body_sha256": "3e138114bf4a1400f0072bb06825b54eb49551f4a3efbbb5c1c99b3567b97d74"
+          },
+          "docs/implementation/m5-choice-groups-plan.md": {
+            "normalized_body_sha256": "ea25dbe4463387c08bc796f8fa00781276c98d75d0a3c6830a1b6960a6c70740"
+          },
+          "docs/implementation/feature-parity-plan.md": {
+            "normalized_body_sha256": "0eda7144cfa2d907b359cb39fe87cb20e64097b214500cf018fe0a56963902c0"
+          },
+          "docs/v2/form.md": {
+            "normalized_body_sha256": "f52ffe2343f2f0497ba28ddb54aff58836c981fa086b545cef7073277ef15cad"
+          },
+          "docs/v2/ui.md": {
+            "normalized_body_sha256": "965487010eae080a248c431f10ffad52bd19d92836a8326caa1c7e2ba682f979"
+          },
+          "docs/v2/value-callbacks.md": {
+            "normalized_body_sha256": "45196c08db7e56a669581acd85ef09310d82a81ef3cd30e2eca054177d54b2a2"
+          },
+          "docs/v2/migration.md": {
+            "normalized_body_sha256": "3a1d767e27b460351909c8e7424e0ced6df4a130d685654774cae7d8c2ebaa32"
+          },
+          "docs/v2/select.md": {
+            "normalized_body_sha256": "3b747873e1675a516d18da2b22605d76cf735458263c989884250d2f0dc96dac"
+          },
+          "docs/v2/choice-group.md": {
+            "normalized_body_sha256": "3ef3d7e84ba492baeae2dabbb5da11bc267fd85e7bc9ae14abb95b3a4ef93d68"
+          },
+          "docs/v2/choice-groups-example.md": {
+            "normalized_body_sha256": "7043e679de55e2d39b85fc923af0be8a6ac42ec4338127dd33bf5602c59b3d7c"
+          }
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m513-final-document-receipt.json",
+          "sha256": "278fe33f947c066dfd0d8dba59ba740c267bd1d10e6153fa545ca4aed501e240",
+          "scope": "Byte-exact R1 at final semantic review, preserved with create-new semantics before later review metadata updates."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m513-runtime-invariance-initial.json",
+          "sha256": "8e6201aeba8f0abab84b3598cbb1e584ad425baeb89889e04f3794c46d1580c2",
+          "audited_receipt_sha256": "f298a0b893b88484992f92132dd644fd6ac45ac6c0321af2528566f9f8710484",
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "unchanged": true,
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "expected_document_checker_scope": {
+          "concepts": 84,
+          "reserved_files": 5
+        },
+        "review_inputs": {
+          "completion_schema": {
+            "path": "node_modules/.cache/m513-complete.mjs",
+            "sha256": "8583fbb8b2c84bfd0732e5029abac9978c090ceb3603805de4f0f52e16deacdf",
+            "execution": "read_only_not_executed"
+          },
+          "runtime_invariance_helper": {
+            "path": "node_modules/.cache/m513-runtime-invariance.mjs",
+            "sha256": "ae1a991b400ae6e241e4bf2f02cd2f2a9306b1876308119d4c32507f260e086c",
+            "execution": "read_only_not_executed"
+          },
+          "accepted_independent_raw_audit": {
+            "path": "node_modules/.cache/m513-independent-audit.log",
+            "sha256": "6383ed7d6b22b6fbc6cb065c6a4a2a610f60835e1479189110723d67d1638f88",
+            "scope": "Existing independent raw acceptance; no runtime rerun or new raw-review credit."
+          }
+        },
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "allowed": [
+            "Apply verified metadata to exactly the ten reviewed semantic concepts while preserving their normalized bodies.",
+            "Refresh necessary source fingerprints while preserving historical bodies and generated/verified dates outside the reviewed concepts.",
+            "Run actual changed/full document checks and record zero errors/warnings with the expected 84-concept/5-reserved scope.",
+            "Record actual historical-preservation/body-hash assertions and mechanical check logs, then advance selected completion statuses only after all checks pass."
+          ],
+          "conditions": "No semantic body edits, runtime/source/caller/test changes, raw fact rewrites, expanded parity claims or new verification credit. Preserve the reviewed R1 snapshot and immutable R0-to-R1 proof; verify any later receipt updates change only review and semantic_acceptance.sha256."
+        },
+        "limitations": [
+          "No compiler, test, browser, benchmark, project checker or model evaluation was executed by this reviewer.",
+          "Live Form-owned replacement, broader owners/P0/M13, manual assistive technology, personal acceptance and actual token comparison remain unverified or required as documented.",
+          "Actual macOS/iOS Safari is excluded; no omitted capability, full-family closure, publication or release tag is approved."
+        ],
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m513-docs-changed.log",
+              "sha256": "1d7e13603e3603ad770f50b383e39940630816cb8dfce6f3eae2558c3a9a2a75",
+              "concepts": 84,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m513-docs-full.log",
+              "sha256": "6fd50dda92bda0cd5be2211e7809c8fa0ae99ba52b120de3ff375c34bdb1e7ea",
+              "concepts": 84,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m513-doc-history.json",
+            "sha256": "0e2c24c4d9cf919e0e1a3c88fdcacb775600d8a014ec12455089c45d259918a7",
+            "historical_fingerprint_only": 43,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 10,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      },
+      "evidence": {
+        "status": "approved_independent_final_raw_evidence",
+        "helper": {
+          "path": "node_modules/.cache/m513-independent-audit.mjs",
+          "sha256": "346457c346144279eed69205c0b6466073b426c83348c9fac239a51e9b9a1df4"
+        },
+        "log": {
+          "path": "node_modules/.cache/m513-independent-audit.log",
+          "sha256": "6383ed7d6b22b6fbc6cb065c6a4a2a610f60835e1479189110723d67d1638f88"
+        },
+        "audited_receipt": {
+          "path": "node_modules/.cache/m513-reviewed-runtime-receipt.json",
+          "sha256": "f298a0b893b88484992f92132dd644fd6ac45ac6c0321af2528566f9f8710484",
+          "byte_exact_R0": true
+        },
+        "scope": "Accepted independent recorded-byte audit of the complete immutable R0 scope. No runtime rerun,expanded observation,historical credit or full-family acceptance; final document verification remains pending."
+      }
+    },
+    "limitations": [
+      "Historical runtime remains in its dated scope and is not rerun/recertified.",
+      "Actual macOS/iOS Safari, manual assistive technology, personal acceptance and final fixed-agent/token comparison remain unverified.",
+      "No model-response evaluation, token-saving measurement, npm publication or release tag is performed or inferred."
+    ],
+    "runtime": {
+      "status": "fresh_canonical_and_independent_raw_complete_final_documents_pending",
+      "facts_owner": {
+        "path": "node_modules/.cache/m513-reviewed-runtime-receipt.json",
+        "sha256": "f298a0b893b88484992f92132dd644fd6ac45ac6c0321af2528566f9f8710484"
+      },
+      "scope": "Actual201inputs/27records/3maps,138units,26new/836cases per engine,203-file artifact and complete diagnostics/performance/protection facts remain in immutable R0; no facts are rewritten here."
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Literal per-unbound-key interleaving,equal-write callbacks,inherited enumerable keys,before-set old-value timing,silent post-notification mutation,broader default/global/declaration equivalence,direct hot declarations and all remaining Form/control/source/dynamic outcomes. Existing whole hooks/Rows recipes do not imply equivalence."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    },
+    {
+      "owner": "Choice groups / U10",
+      "required": "Safe live Form-owned choice replacement and broader Select removal/index/append/reset and dynamic declaration semantics beyond selected generation-before-Form and standalone replacement."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected authored group generation-before-Form/standalone replacement may be accepted after implementation,fresh gates and independent review. Live adopted replacement and all full-owner/P0/M13/consolidated omission obligations remain open."
+  }
+}

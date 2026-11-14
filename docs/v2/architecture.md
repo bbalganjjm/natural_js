@@ -8,7 +8,7 @@ sources:
   - id: value-binding
     resource: ../../src/ui/value-binding.ts
     title: Private checked value invocation and native replacement shared by three binders
-    git_blob: cd12894b09ca3c9b1964f68a1b53cbc8ecc01fe4
+    git_blob: 9f59b5313d2eb0988f7f4dbdbaa37611ccc73184
   - id: package
     resource: ../../package.json
     title: Public package boundaries
@@ -20,11 +20,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI contracts and component exports
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid binding
@@ -104,7 +104,7 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native values, display and constraints
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Private explicit render configuration and DOM ownership

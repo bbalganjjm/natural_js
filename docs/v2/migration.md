@@ -44,11 +44,11 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -72,7 +72,7 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native value, display and constraint contracts
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: render
     resource: ../../src/ui/field-render.ts
     title: Explicit field rendering without HTML string evaluation
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 142649bed5f0fdd46dd209efa25229ed54bdd03e
+    git_blob: 116edaa8ec090d99478799e1cde18c5b0834565c
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 98f8a183026bb6b37f92ea4cf9b4572dee14bc98
-generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
+    git_blob: 0f89068eaf0b87158d2b8305ec473bd5d19b4c53
+generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -339,7 +339,7 @@ Standalone utility entry points are absent, but Form-reachable formatter, valida
 
 Cascading Tree checks, month-only/holiday DatePicker behavior, editable and multiple-selection Lists, complete contextual Alert behavior, retained/preloaded Popup and Tab policies and the shell gaps above remain required additions. Grid column resize/reorder/show/hide uses authored keys and full GridColumn state. M10.6 adds independent selectedIds/setSelected and checkedIds/setChecked, explicit scoped check-all, authored sort/filter controls and stable row actions; select/selected/onSelect still control the active detail row only. M10.7 replaces legacy pastiable with opt-in native plaintext paste and grid.paste(text, { id, field }): quoted TSV is validated before one Rows.setMany change, protected fields consume positions, and overflow or ambiguous raw choices rejects the complete proposal. Display fields participate without injecting contenteditable; authored HTML remains the template. M10.8 adds measured variable-height viewport rendering, M10.9.2 adds authored multi-tr records and adjacent native merges, M10.9.3 adds native groups/inputs, explicit display, validation timing/reveal and exclusive checks, and M10.9.4 adds status projection, native defaults, owned row binding, clean append and authored empty markup. M10.9.5 adds authored CVC details, logical identity scopes, height controls and explicit reveal alignment. Remaining option/dynamic closure stays required. The [coverage ledger](../implementation/feature-parity.md) records exact gaps and the [execution plan](../implementation/feature-parity-plan.md) orders their completion.[^parity][^parity-plan][^grid][^viewport][^blocks]
 
-Replace row-local radio names/duplicate field IDs with `data-field` groups: Grid compiles members across the record and allocates a unique native radio name per clone, while Form keeps its explicit authored form/name contract. One checkbox is boolean, repeated checkboxes and multiple Selects always use arrays, and radio is string/null. This removes 1.x's selection-count-dependent scalar/array shape. Nested Grid Select options preserve raw scalar types. Native date/time/month/week/color/hidden values are strings; Grid number/range inputs require application parsers, and unsupported types follow the engine's native text fallback. File upload stays outside JSON Rows. Array clipboard values use a JSON array inside one normally quoted TSV cell; protected groups still consume one field position. See [Grid](grid.md) for the complete value/paste contract.[^grid][^form][^native][^controls-browser]
+Replace row-local radio names/duplicate field IDs with `data-field` groups: Grid compiles members across the record and allocates a unique native radio name per clone, while static Form groups keep their explicit authored form/name contract. One static checkbox is boolean, repeated checkboxes and multiple Selects always use arrays, and radio is string/null. This removes 1.x's selection-count-dependent scalar/array shape. Nested Grid Select options preserve raw scalar types. Native date/time/month/week/color/hidden values are strings; Grid number/range inputs require application parsers, and unsupported types follow the engine's native text fallback. File upload stays outside JSON Rows. Array clipboard values use a JSON array inside one normally quoted TSV cell; protected groups still consume one field position. See [Grid](grid.md) for the complete value/paste contract.[^grid][^form][^native][^controls-browser]
 
 Move 1.x `checkSingleTarget` behavior to `checkMode: "single"`, which atomically replaces one checked ID through existing hooks; proposals containing multiple eligible IDs fail unchanged. Use Grid `validateOn: "blur"` for focus-out scalar commits or `"manual"` for explicit validation; the default `"change"` preserves input drafts and change commits. `revealInvalid: true` reveals the first current-page error without changing page/filter. Native programmatic text limits, effective disabled state and value sanitization are shared with Form/List.[^grid][^native][^controls-browser]
 
@@ -397,7 +397,7 @@ Do not copy the old zero-delay recursion, nonpaged first=false anomaly, empty-ap
 
 Grid beforeRowBind, onRowBind and onBind now capture the validated function once and call it without an implicit receiver. Remove reliance on the legacy component receiver or the pre-release options-object receiver; use the explicit context and application closures. Later original-options replacement/deletion/addition has no effect. A stable function such as onBind: result => policy.complete?.(result) reads a deliberately mutable application policy; refresh rebinds unchanged rows. A constructor completion can run before the bindGrid return is assigned, so do not read that uninitialized handle in it. Legacy this.select(0) initial-selection workflows retain a separate explicit post-construction migration obligation; capture consistency does not close that wider outcome.[^grid][^legacy-ui][^parity]
 
-Replace onBeforeBindValue/onBindValue with beforeBindValue/onBindValue on a Rows-backed Form, Grid or List. Both receive value and ValueBindContext: phase is bind/val, rowId is explicit and element is the primary native field member. Before runs before display; after observes it and may replace projected raw once. Undefined keeps the current value; false, zero, null and empty string are actual replacements. No this/jQuery collection or global registry is supplied.[^form][^legacy-ui]
+Replace onBeforeBindValue/onBindValue with beforeBindValue/onBindValue on a Rows-backed Form, Grid or List. Both receive value and ValueBindContext: phase is bind/val, rowId is explicit and element is the primary actual bound element (the fieldset for an empty generated group). Before runs before display; after observes it and may replace projected raw once. Undefined keeps the current value; false, zero, null and empty string are actual replacements. No this/jQuery collection or global registry is supplied.[^form][^legacy-ui]
 
 Returns now affect display only. The old bind loop also visited unbound keys and wrote callback returns into its mutable dataset. Its val-before received old data; val-after could change data after notification without another DOM write. Preserve intentional business normalization in application receive/decode/parse code or an explicit Rows write instead of relying on those inconsistent side effects. Native boolean checkboxes and numeric choice maps need no old number/boolean-to-string workaround.[^form][^rows][^legacy-ui]
 
@@ -498,6 +498,12 @@ Replace a 1.x ui.form configuration mutation with an application-owned FormOptio
 Merge nested maps and each field's format/validate kinds explicitly. Ordered tuples replace rather than concatenate; [] clears. [Form presets](form.md#shared-options-and-callback-composition) gives the executed local-then-shared value pipeline and separate original-input/false-tail notification recipe. Capture references, preserve context/phase, forward thenables, and treat the entire composition as one callback. The old option mutation, wrapper stacking and lost phase/output are not migration guarantees.[^legacy-ui][^form]
 
 Mounted Grid/List fields now support the same explicit value callbacks as Form. Pass a shared callback pair explicitly and use stable forwarding functions when the application must read a deliberately mutable policy at call time. Form/Grid refresh and List.refresh reproject unchanged visible values without Rows mutation. ValueBindContext replaces the pre-release FormValueContext name without an alias. Legacy Form binding requires a dataset row and add creates one; no examined legacy source/example establishes callbacks for a true DOM-only Form. Unbound-key before/after timing is real and remains required: enumerating full Rows in whole hooks or subscribing to source changes does not reproduce that per-key bind/val timing. Broader default/declaration equivalence also stays open; no full-family closure, capability omission or global engine is approved.[^legacy-ui][^parity]
+
+# Generated radio and checkbox choices
+
+Replace the old codes → Select.bind → Form sequence with [bindChoiceGroup](choice-group.md) on an authored named fieldset/template, then create Form. Use string choice codes and explicit initial `value`; normalize business codes before loading Rows. Wrapping labels retain native interaction without per-item fixed IDs, generated forms or HTML-label evaluation. A generated checkbox group always reads an array, including zero or one choice. This corrects the old count-dependent scalar collapse rather than copying it.[^legacy-ui][^form]
+
+The [two-instance example](choice-groups-example.md) shows radio/default capture, checkbox validation, Rows reversion and CVC cleanup. Register group disposal before Form disposal so reverse cleanup releases Form first. While adopted, update values through Rows; group `setChoices`, `setValue` and `dispose` reject. Dispose Form before standalone replacement. Live owned replacement and broader Select/declaration/default equivalence remain required; this bounded workflow does not close the whole family.[^form][^parity-plan]
 
 [^legacy-screen]: Preserved 1.x search, grid, detail, and save example
 [^legacy-comm]: Preserved 1.x page loading and request serialization

@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-presets-plan.md
     title: Explicit typed presets and application callback composition
-    git_blob: bf4fe11d1f45ed7316dbd8c35cb9506bbfd87e13
+    git_blob: 931c2f939ac73437c3943e227a37bb9ff86d9749
   - id: baseline
     resource: evidence/m59-verification.json
     title: Frozen 5ecda44 source, runtime and installed artifact baseline
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing guarded Form projection and raw input ownership
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field caches, native editing and mounted row lifecycle
@@ -28,7 +28,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public value context and component handles
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Embedded row Forms, global lookup and mounted value updates
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained behavior and consolidated omission obligations
-    git_blob: 98f8a183026bb6b37f92ea4cf9b4572dee14bc98
+    git_blob: 0f89068eaf0b87158d2b8305ec473bd5d19b4c53
 generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }

@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.13 authored choice groups](m5-choice-groups-plan.md) - Generate native radio and checkbox choices from authored templates and adopt them safely in Form. (draft)
+
 * [Natural-JS 2.0 M5.12 Form source ownership](m5-form-source-plan.md) - Execute application normalization and full-source observation through existing Form and Rows owners. (draft)
 
 * [Natural-JS 2.0 M5.11 captured Grid binding callbacks](m5-grid-callbacks-plan.md) - Capture validated row and completion callbacks once and invoke them without an implicit receiver. (draft)

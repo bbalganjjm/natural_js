@@ -9,7 +9,7 @@ sources:
   - id: entry
     resource: ../../src/ui/index.ts
     title: Public Select types and export
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: select
     resource: ../../src/ui/select.ts
     title: Select binding runtime
@@ -18,9 +18,10 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
+  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 ---
 
 `bindSelect` adds typed choices to an authored `<select>` and reports the raw selected value. Form owns marked `data-field` Selects, while Grid and List own marked Selects in their repeated templates. An unmarked Select can be bound standalone; bind each Select only once.[^select][^owner]
@@ -81,6 +82,10 @@ The DOM string `value` is not enough to distinguish a generated numeric choice f
 # Related
 
 [Form](form.md) owns field Selects. [Grid](grid.md) and [List](list.md) bind nested row-local choices. [UI contracts](ui.md) defines `SelectChoice` and `SelectHandle`.
+
+# Radio and checkbox templates
+
+`bindSelect` remains a native Select binder with typed scalar choices. Use [bindChoiceGroup](choice-group.md) for authored native radio/checkbox item templates. It reuses `SelectChoice<string>` but returns a precise `ChoiceGroupHandle`: radio string/null, checkbox string arrays at every cardinality. Generate choices before Form adoption; public writes and disposal are locked until Form releases the group. This does not change Select ownership or raw option matching.[^entry][^select]
 
 [^entry]: Public Select types and export
 [^select]: Select binding runtime

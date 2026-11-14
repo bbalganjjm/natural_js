@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-local-form-plan.md
     title: Completed local Form raw display and native reset scope
-    git_blob: baa0d32ad8b38bb68757f98611c5de4e9a9d55f0
+    git_blob: 05bb58c9a4d4503931f03a8f645b43f11a736213
   - id: baseline
     resource: evidence/m55-verification.json
     title: Frozen bbc767b runtime and package receipt
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing Form render, draft, subscription and ownership paths
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form and immutable row contracts
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable Rows snapshots, events and committed reversion

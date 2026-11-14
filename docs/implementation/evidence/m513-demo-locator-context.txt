@@ -1,0 +1,217 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: m513-choice-demo.spec.ts >> standalone authored choices retain array shape and surviving native defaults across replacement
+- Location: tests\browser\m513-choice-demo.spec.ts:44:1
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: locator.selectOption: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('[data-playground]').getByLabel('Choice list', { exact: true })
+
+```
+
+# Page snapshot
+
+```yaml
+- main [ref=e2]:
+  - heading "Authored radio and checkbox choices" [level=1] [ref=e3]
+  - paragraph [ref=e4]: Both screens use the same controller and different authored layouts. Native labels, keys and disabled choices keep their browser behavior.
+  - region "Standalone choice replacement" [ref=e5]:
+    - heading "Replace a choice list" [level=2] [ref=e6]
+    - generic [ref=e7]:
+      - group "Favorite fruit" [ref=e8]:
+        - generic [ref=e10]:
+          - checkbox "Apple" [checked] [ref=e11]
+          - text: Apple
+        - generic [ref=e12]:
+          - checkbox "Banana" [ref=e13]
+          - text: Banana
+        - generic [ref=e14]:
+          - checkbox "Pear" [disabled] [ref=e15]
+          - text: Pear
+      - generic [ref=e16]:
+        - text: Choice list
+        - combobox "Choice list" [ref=e17]:
+          - option "All fruits" [selected]
+          - option "One fruit"
+          - option "No choices"
+          - option "Disabled fruits"
+      - generic [ref=e18]:
+        - button "Choose Apple" [ref=e19]
+        - button "Clear selection" [ref=e20]
+        - button "Restore native defaults" [ref=e21]
+        - button "Read selection" [ref=e22]
+      - status
+      - generic [ref=e23]: "[\"apple\"]"
+  - region "Independent CVC choice screens" [ref=e24]:
+    - heading "Bind records in two layouts" [level=2] [ref=e25]
+    - paragraph [ref=e26]: Received records and captured creation values have separate owners. Restore captured fields pauses editing until Bind record resumes it.
+    - status [ref=e27]: Choice screens are ready.
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - button "Open stacked screen" [ref=e30]
+        - region "Stacked choice screen" [ref=e32]:
+          - heading "Stacked editor" [level=3] [ref=e33]
+          - button "Close screen" [ref=e34]
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - text: Name
+              - textbox "Name" [ref=e37]: Ada
+            - status
+            - group "Gender" [ref=e38]:
+              - generic [ref=e40]:
+                - radio "Male" [ref=e41]
+                - text: Male
+              - generic [ref=e42]:
+                - radio "Female" [checked] [ref=e43]
+                - text: Female
+              - generic [ref=e44]:
+                - radio "Prefer not to say" [ref=e45]
+                - text: Prefer not to say
+            - status
+            - group "Favorite fruit" [ref=e46]:
+              - generic [ref=e48]:
+                - checkbox "Apple" [ref=e49]
+                - text: Apple
+              - generic [ref=e50]:
+                - checkbox "Banana" [checked] [ref=e51]
+                - text: Banana
+              - generic [ref=e52]:
+                - checkbox "Pear" [disabled] [ref=e53]
+                - text: Pear
+            - status
+            - generic [ref=e54]:
+              - button "Validate record" [ref=e55]
+              - button "Revert received values" [ref=e56]
+              - button "Restore captured fields" [ref=e57]
+              - button "Bind record" [ref=e58]
+          - status
+          - heading "Committed source" [level=4] [ref=e59]
+          - generic [ref=e60]: "{ \"id\": 1, \"value\": { \"name\": \"Ada\", \"gender\": \"female\", \"favoriteFruit\": [ \"banana\" ] }, \"status\": \"clean\" }"
+          - heading "Captured defaults" [level=4] [ref=e61]
+          - generic [ref=e62]: "{ \"name\": \"\", \"gender\": \"male\", \"favoriteFruit\": [ \"apple\" ] }"
+      - generic [ref=e63]:
+        - button "Open chip screen" [ref=e64]
+        - region "Chip choice screen" [ref=e66]:
+          - heading "Chip editor" [level=3] [ref=e67]
+          - button "Close screen" [ref=e68]
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - text: Name
+              - textbox "Name" [ref=e71]: Bea
+            - status
+            - group "Gender" [ref=e72]:
+              - generic [ref=e74]:
+                - radio "Male" [ref=e75]
+                - generic [ref=e76]: Male
+              - generic [ref=e77]:
+                - radio "Female" [checked] [ref=e78]
+                - generic [ref=e79]: Female
+              - generic [ref=e80]:
+                - radio "Prefer not to say" [ref=e81]
+                - generic [ref=e82]: Prefer not to say
+            - status
+            - group "Favorite fruit" [ref=e83]:
+              - generic [ref=e85]:
+                - checkbox "Apple" [ref=e86]
+                - generic [ref=e87]: Apple
+              - generic [ref=e88]:
+                - checkbox "Banana" [checked] [ref=e89]
+                - generic [ref=e90]: Banana
+              - generic [ref=e91]:
+                - checkbox "Pear" [disabled] [ref=e92]
+                - generic [ref=e93]: Pear
+            - status
+            - generic [ref=e94]:
+              - button "Validate record" [ref=e95]
+              - button "Revert received values" [ref=e96]
+              - button "Restore captured fields" [ref=e97]
+              - button "Bind record" [ref=e98]
+          - status
+          - heading "Committed source" [level=4] [ref=e99]
+          - generic [ref=e100]: "{ \"id\": 1, \"value\": { \"name\": \"Bea\", \"gender\": \"female\", \"favoriteFruit\": [ \"banana\" ] }, \"status\": \"clean\" }"
+          - heading "Captured defaults" [level=4] [ref=e101]
+          - generic [ref=e102]: "{ \"name\": \"\", \"gender\": \"male\", \"favoriteFruit\": [ \"apple\" ] }"
+```
+
+# Test source
+
+```ts
+  1  | // SPDX-License-Identifier: Apache-2.0
+  2  | import { expect, test } from "@playwright/test";
+  3  | 
+  4  | test("authored choice groups bind two independent CVC records and restore captured values without source writes", async ({ page }) => {
+  5  |   await page.routeWebSocket(/127\.0\.0\.1:4173/, socket => socket.close());
+  6  |   await page.goto("/m5/choices.html");
+  7  |   const stack = page.getByRole("region", { name: "Stacked choice screen" });
+  8  |   const chips = page.getByRole("region", { name: "Chip choice screen" });
+  9  |   await expect(stack.getByRole("radio", { name: "Female", exact: true })).toBeChecked();
+  10 |   await expect(chips.getByRole("radio", { name: "Female", exact: true })).toBeChecked();
+  11 |   await expect(stack.locator("[data-defaults]")).toContainText('"gender": "male"');
+  12 |   const initial = JSON.parse(await stack.locator("[data-source]").innerText());
+  13 |   await stack.getByRole("radio", { name: "Male", exact: true }).check();
+  14 |   await expect(stack.locator("[data-source]")).toContainText('"gender": "male"');
+  15 |   await expect(chips.getByRole("radio", { name: "Female", exact: true })).toBeChecked();
+  16 |   await stack.getByRole("button", { name: "Revert received values" }).click();
+  17 |   await expect(stack.getByRole("radio", { name: "Female", exact: true })).toBeChecked();
+  18 |   await stack.getByRole("button", { name: "Restore captured fields" }).click();
+  19 |   await expect(stack.getByRole("radio", { name: "Male", exact: true })).toBeChecked();
+  20 |   await expect(stack.getByRole("checkbox", { name: "Apple", exact: true })).toBeChecked();
+  21 |   expect(JSON.parse(await stack.locator("[data-source]").innerText()).value).toEqual(initial.value);
+  22 |   await stack.getByRole("button", { name: "Bind record", exact: true }).click();
+  23 |   await stack.getByRole("checkbox", { name: "Banana", exact: true }).uncheck();
+  24 |   await stack.getByRole("button", { name: "Validate record" }).click();
+  25 |   await expect(stack.locator('[data-error-for="favoriteFruit"]')).not.toBeEmpty();
+  26 |   await expect(stack.getByRole("checkbox", { name: "Pear", exact: true })).toBeDisabled();
+  27 |   await stack.getByRole("checkbox", { name: "Apple", exact: true }).check();
+  28 |   await stack.getByRole("button", { name: "Validate record" }).click();
+  29 |   await expect(stack.locator("[data-status]")).toHaveText("Record is valid.");
+  30 |   const names = await page.locator("[data-screen] input[type=radio]").evaluateAll(inputs =>
+  31 |     inputs.map(input => (input as HTMLInputElement).name));
+  32 |   expect(new Set(names).size).toBe(2);
+  33 |   const ids = await page.locator("[id]").evaluateAll(elements => elements.map(element => element.id));
+  34 |   expect(new Set(ids).size).toBe(ids.length);
+  35 |   const detached = await stack.getByRole("radio", { name: "Male", exact: true }).elementHandle();
+  36 |   await stack.getByRole("button", { name: "Close screen" }).click();
+  37 |   await expect(stack).toHaveCount(0);
+  38 |   await detached!.evaluate(input => { input.checked = true; input.dispatchEvent(new Event("change", { bubbles: true })); });
+  39 |   await page.getByRole("button", { name: "Open stacked screen" }).click();
+  40 |   await expect(stack.getByRole("radio", { name: "Female", exact: true })).toBeChecked();
+  41 |   await expect(chips.locator("[data-source]")).toContainText('"name": "Bea"');
+  42 | });
+  43 | 
+  44 | test("standalone authored choices retain array shape and surviving native defaults across replacement", async ({ page }) => {
+  45 |   await page.routeWebSocket(/127\.0\.0\.1:4173/, socket => socket.close());
+  46 |   await page.goto("/m5/choices.html");
+  47 |   const playground = page.locator("[data-playground]");
+  48 |   await expect(playground.getByRole("checkbox", { name: "Apple", exact: true })).toBeChecked();
+> 49 |   await playground.getByLabel("Choice list", { exact: true }).selectOption("one");
+     |                                                               ^ Error: locator.selectOption: Test timeout of 30000ms exceeded.
+  50 |   await expect(playground.getByRole("checkbox")).toHaveCount(1);
+  51 |   await playground.getByRole("button", { name: "Clear selection" }).click();
+  52 |   await expect(playground.locator("[data-playground-value]")).toHaveText("[]");
+  53 |   await playground.getByRole("button", { name: "Restore native defaults" }).click();
+  54 |   await expect(playground.getByRole("checkbox", { name: "Apple", exact: true })).toBeChecked();
+  55 |   await playground.getByRole("button", { name: "Read selection" }).click();
+  56 |   await expect(playground.locator("[data-playground-value]")).toHaveText('["apple"]');
+  57 |   await playground.getByLabel("Choice list", { exact: true }).selectOption("empty");
+  58 |   await expect(playground.getByRole("checkbox")).toHaveCount(0);
+  59 |   await expect(playground.locator("[data-playground-value]")).toHaveText("[]");
+  60 |   await playground.getByLabel("Choice list", { exact: true }).selectOption("all");
+  61 |   await playground.getByRole("button", { name: "Choose Apple" }).click();
+  62 |   await expect(playground.locator("[data-playground-value]")).toHaveText('["apple"]');
+  63 | });
+  64 | 
+```

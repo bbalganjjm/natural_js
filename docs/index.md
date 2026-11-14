@@ -4,6 +4,11 @@ okf_version: "0.2"
 
 # Start here
 
+* [bindChoiceGroup](v2/choice-group.md) - Generate native radio or checkbox choices from an authored fieldset template and adopt them in Form. (draft)
+* [Authored choice groups in two CVC layouts](v2/choice-groups-example.md) - Generate native radio and checkbox choices before Form in independent authored CVC screens. (draft)
+
+* [Natural-JS 2.0 M5.13 authored choice groups](implementation/m5-choice-groups-plan.md) - Generate native radio and checkbox choices from authored templates and adopt them safely in Form. (draft)
+
 * [Natural-JS 2.0 M5.12 Form source ownership](implementation/m5-form-source-plan.md) - Execute application normalization and full-source observation through existing Form and Rows owners. (draft)
 
 * [Natural-JS 2.0 M5.11 captured Grid binding callbacks](implementation/m5-grid-callbacks-plan.md) - Capture validated row and completion callbacks once and invoke them without an implicit receiver. (draft)

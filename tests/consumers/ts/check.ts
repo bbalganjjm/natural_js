@@ -5,7 +5,8 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowId, RowSnapshot, RowState, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import type { ChoiceGroupHandle } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 import type { FieldRules, FormBindContext, ValueBindContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
 // @ts-expect-error Use the common ValueBindContext; the Form-only name was removed.
@@ -397,4 +398,23 @@ export function connectLocalFormats(root: HTMLElement) {
   const raw: Record<string, unknown> = form.read();
   const validation: ValidationResult = form.validate();
   return { form, raw, validation };
+}
+
+export function connectChoiceGroups(root: HTMLFormElement, genderRoot: HTMLFieldSetElement, fruitRoot: HTMLFieldSetElement) {
+  const rows = createRows<{ gender: string | null; fruits: readonly string[] }>([{ gender: "female", fruits: ["apple"] }]);
+  const gender: ChoiceGroupHandle = bindChoiceGroup(genderRoot, { choices: [{ value: "female", label: "Female" }], value: null });
+  const fruit = bindChoiceGroup(fruitRoot, { choices: [{ value: "apple", label: "Apple" }], value: [] });
+  const current = fruit.value();
+  if (current !== null && typeof current !== "string") {
+    const values: readonly string[] = current;
+    rows.set(rows.entries()[0].id, "fruits", values);
+  }
+  if (false) {
+    // @ts-expect-error Generated choices require string codes.
+    fruit.setChoices([{ value: 1, label: "One" }]);
+    // @ts-expect-error Checkbox selections cannot contain null entries.
+    fruit.setValue([null]);
+  }
+  const form = bindForm(root, { rows }); form.bind(rows.entries()[0].id);
+  return { rows, form, gender, fruit, dispose() { form.dispose(); fruit.dispose(); gender.dispose(); rows.dispose(); } };
 }

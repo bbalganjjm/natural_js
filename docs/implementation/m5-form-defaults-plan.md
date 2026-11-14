@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-binding-plan.md
     title: Completed whole-row observers and same-ID refresh scope
-    git_blob: 9e92e3a8fd852c4e6166bb271ad1e3da5c8087ea
+    git_blob: 56630d68c03362df8ca36a53c2380201cde75cfd
   - id: baseline
     resource: evidence/m56-verification.json
     title: Frozen c4aacd0 runtime and installed package receipt
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing compiled fields, local raw cache, drafts and lifecycle
-    git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
+    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form and native creation contracts
-    git_blob: b03e5d6328d64698689621724492dc4e66292737
+    git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Existing native creation snapshot and default parser owner
@@ -28,7 +28,7 @@ sources:
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values and groups
-    git_blob: 0a94918ba94c3f153c8de51e1b7036c2ab868363
+    git_blob: ba5da2de312e41492ce6ead4df8300d13004dd76
   - id: choices
     resource: ../../src/ui/row-options.ts
     title: Existing authored and generated Select ownership

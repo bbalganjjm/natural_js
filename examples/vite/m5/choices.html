@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Authored choice groups</title>
+    <style>
+      body { margin: 2rem auto; padding: 0 1rem; max-width: 72rem; font: 1rem/1.5 system-ui, sans-serif; }
+      button, input, select { font: inherit; }
+      button { margin: .25rem; }
+      fieldset { margin: 1rem 0; }
+      fieldset > label { display: block; margin: .5rem 0; }
+      pre { padding: .75rem; background: #f3f5f7; overflow: auto; }
+      output { display: block; }
+      [data-error-for] { color: #9c1635; }
+      [data-screens] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr)); gap: 1.5rem; }
+      [data-screen] { border: 1px solid #bcc6d2; padding: 1rem; }
+      [data-layout="chips"] fieldset > label { display: inline-flex; gap: .4rem; padding: .5rem; border: 1px solid #bdc9d5; border-radius: 1rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Authored radio and checkbox choices</h1>
+      <p>Both screens use the same controller and different authored layouts. Native labels, keys and disabled choices keep their browser behavior.</p>
+      <section aria-label="Standalone choice replacement" data-playground>
+        <h2>Replace a choice list</h2>
+        <form>
+          <fieldset data-standalone>
+            <legend>Favorite fruit</legend>
+            <template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template>
+          </fieldset>
+          <label>Choice list <select data-catalog><option value="all">All fruits</option><option value="one">One fruit</option><option value="empty">No choices</option><option value="disabled">Disabled fruits</option></select></label>
+          <div>
+            <button type="button" data-choose>Choose Apple</button>
+            <button type="button" data-clear>Clear selection</button>
+            <button type="reset">Restore native defaults</button>
+            <button type="button" data-read>Read selection</button>
+          </div>
+          <output data-playground-state aria-live="polite"></output>
+          <pre data-playground-value tabindex="0"></pre>
+        </form>
+      </section>
+      <section aria-label="Independent CVC choice screens">
+        <h2>Bind records in two layouts</h2>
+        <p>Received records and captured creation values have separate owners. Restore captured fields pauses editing until Bind record resumes it.</p>
+        <output data-page-status aria-live="polite"></output>
+        <div data-screens>
+          <div><button type="button" data-open="stack">Open stacked screen</button><div data-host="stack"></div></div>
+          <div><button type="button" data-open="chips">Open chip screen</button><div data-host="chips"></div></div>
+        </div>
+      </section>
+    </main>
+    <template data-workspace>
+      <section data-screen>
+        <h3 data-title></h3>
+        <button type="button" data-close>Close screen</button>
+        <form>
+          <label>Name <input data-field="name" required></label><output data-error-for="name"></output>
+          <fieldset data-field="gender">
+            <legend>Gender</legend>
+            <template data-choice-template><label><input type="radio" required><span data-choice-label></span></label></template>
+          </fieldset><output data-error-for="gender"></output>
+          <fieldset data-field="favoriteFruit" data-validate='[["required"]]'>
+            <legend>Favorite fruit</legend>
+            <template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template>
+          </fieldset><output data-error-for="favoriteFruit"></output>
+          <div>
+            <button type="button" data-validate>Validate record</button>
+            <button type="button" data-revert>Revert received values</button>
+            <button type="button" data-restore>Restore captured fields</button>
+            <button type="button" data-bind>Bind record</button>
+          </div>
+        </form>
+        <output data-status aria-live="polite"></output>
+        <h4>Committed source</h4><pre data-source tabindex="0"></pre>
+        <h4>Captured defaults</h4><pre data-defaults tabindex="0"></pre>
+      </section>
+    </template>
+    <script type="module" src="./choices.ts"></script>
+  </body>
+</html>
