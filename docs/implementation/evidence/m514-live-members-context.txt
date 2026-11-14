@@ -1,0 +1,270 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: form-live-choice-groups.spec.ts >> new members retain errors and change markers and retired controls cannot commit
+- Location: tests\browser\form-live-choice-groups.spec.ts:160:1
+
+# Error details
+
+```
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 2
++ Received  + 2
+
+@@ -1,8 +1,8 @@
+  Object {
+-   "cleared": true,
+-   "committed": "c",
++   "cleared": false,
++   "committed": "b",
+    "described": true,
+    "marked": true,
+    "quiet": true,
+    "restoredOld": true,
+    "retainedMessage": true,
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - heading "Natural-JS 2.0 import smoke" [level=1] [ref=e3]
+    - paragraph [ref=e4]:
+      - link "Grid contract demo" [ref=e5] [cursor=pointer]:
+        - /url: /m10/demo.html
+      - text: ·
+      - link "Choice-group CVC demo" [ref=e6] [cursor=pointer]:
+        - /url: /m5/choices.html
+      - text: ·
+      - link "Tree and DatePicker CVC demo" [ref=e7] [cursor=pointer]:
+        - /url: /m11/side.html
+      - text: ·
+      - link "Application shell demo" [ref=e8] [cursor=pointer]:
+        - /url: /m12/side.html
+    - generic [ref=e9]:
+      - heading "First authored view" [level=2] [ref=e10]
+      - button "Check import" [ref=e11]
+      - status [ref=e12]: ESM ready
+    - generic [ref=e13]:
+      - heading "Second authored view" [level=2] [ref=e14]
+      - button "Check import" [ref=e15]
+      - status [ref=e16]: ESM ready
+  - generic [ref=e17]:
+    - group "Choices" [ref=e18]
+    - status
+    - text: Hint
+```
+
+# Test source
+
+```ts
+  82  |     group.setChoices(choices); const current = group.value(), quiet = hooks === before;
+  83  |     form.bind(ids[0]); const hidden = group.value(), read = form.read();
+  84  |     const raw = rows.entries().map(row => row.value.choice), sameMessage = root.querySelector("output")!.textContent === messages;
+  85  |     form.dispose(); group.dispose(); rows.dispose();
+  86  |     return { removed, current, hidden, read, raw, quiet, events, sameMessage };
+  87  |   });
+  88  |   expect(result).toEqual({ removed: ["a"], current: ["a", "b"], hidden: ["a", "b"], read: { choice: ["a"] },
+  89  |     raw: [["a"], ["a"]], quiet: true, events: 0, sameMessage: true });
+  90  | });
+  91  | 
+  92  | test("applied explicit projections preflight new codes while raw and failed projections keep their owners", async ({ page }) => {
+  93  |   const result = await page.evaluate(() => {
+  94  |     const h = window.liveFormChoices;
+  95  |     return ["explicit", "raw", "failed"].map(mode => {
+  96  |       const root = h.root("radio"), fieldset = root.querySelector("fieldset")!;
+  97  |       const group = h.group(fieldset, { choices: ["a", "b"].map(value => ({ value, label: value })), value: "a" });
+  98  |       const raw = mode === "raw" ? "missing" : "a", rows = h.rows([{ choice: raw }]), id = rows.entries()[0].id;
+  99  |       let hooks = 0, projected = mode === "failed" ? "missing" : "b", primary = true;
+  100 |       const form = h.form(root, { rows, beforeBindValue(_value, context) {
+  101 |         hooks++; primary &&= context.element === fieldset.querySelector("input");
+  102 |         return mode === "raw" ? undefined : projected;
+  103 |       } });
+  104 |       const bind = h.code(() => form.bind(id)), before = hooks;
+  105 |       const beforeHTML = fieldset.innerHTML, rejected = mode === "explicit" ? h.code(() => group.setChoices([{ value: "c", label: "C" }])) : "none";
+  106 |       const untouched = mode !== "explicit" || fieldset.innerHTML === beforeHTML;
+  107 |       group.setChoices((mode === "explicit" ? ["b", "c"] : ["c"]).map(value => ({ value, label: value })));
+  108 |       const shown = group.value(), quiet = hooks === before;
+  109 |       projected = "c"; form.refresh(["choice"]); const refreshed = group.value(), source = rows.get(id)!.value.choice;
+  110 |       form.dispose(); group.dispose(); rows.dispose();
+  111 |       return { mode, bind, rejected, untouched, shown, quiet, hooks, refreshed, source, primary };
+  112 |     });
+  113 |   });
+  114 |   expect(result).toEqual([
+  115 |     { mode: "explicit", bind: "none", rejected: "FORM_VALUE", untouched: true, shown: "b", quiet: true, hooks: 2, refreshed: "c", source: "a", primary: true },
+  116 |     { mode: "raw", bind: "none", rejected: "none", untouched: true, shown: null, quiet: true, hooks: 2, refreshed: null, source: "missing", primary: true },
+  117 |     { mode: "failed", bind: "FORM_VALUE", rejected: "none", untouched: true, shown: null, quiet: true, hooks: 2, refreshed: "c", source: "a", primary: true }
+  118 |   ]);
+  119 | });
+  120 | 
+  121 | test("a retained draft overrides an older explicit projection during adopted replacement", async ({ page }) => {
+  122 |   const result = await page.evaluate(() => {
+  123 |     const h = window.liveFormChoices, root = h.root("radio"), fieldset = root.querySelector("fieldset")!;
+  124 |     fieldset.dataset.validate = '[["reject"]]';
+  125 |     const group = h.group(fieldset, { choices: ["a", "b", "c"].map(value => ({ value, label: value })) });
+  126 |     const rows = h.rows([{ choice: "a" }]), id = rows.entries()[0].id; let hooks = 0;
+  127 |     const form = h.form(root, { rows, rules: { validate: { reject: () => "Keep this draft" } }, beforeBindValue() { hooks++; return "b"; } });
+  128 |     form.bind(id); fieldset.querySelectorAll("input")[2].click(); const before = hooks;
+  129 |     group.setChoices([{ value: "c", label: "C" }]);
+  130 |     const shown = group.value(), raw = form.read(), quiet = hooks === before, error = root.querySelector("output")!.textContent;
+  131 |     form.dispose(); group.dispose(); rows.dispose(); return { shown, raw, quiet, error };
+  132 |   });
+  133 |   expect(result).toEqual({ shown: "c", raw: { choice: "a" }, quiet: true, error: "Keep this draft" });
+  134 | });
+  135 | 
+  136 | test("local native selection reset and captured unbind remain separate after live replacement", async ({ page }) => {
+  137 |   const result = await page.evaluate(() => {
+  138 |     const h = window.liveFormChoices;
+  139 |     return (["radio", "checkbox"] as const).map(kind => {
+  140 |       const root = h.root(kind), fieldset = root.querySelector("fieldset")!, value = (code: string) => kind === "radio" ? code : [code];
+  141 |       const choices = ["a", "b"].map(value => ({ value, label: value }));
+  142 |       const group = h.group(fieldset, { choices, value: value("b") }), form = h.form(root);
+  143 |       fieldset.querySelectorAll("input")[1].checked = false; fieldset.querySelector("input")!.click();
+  144 |       group.setChoices([...choices].reverse()); const current = form.read();
+  145 |       root.reset(); const reset = form.read();
+  146 |       group.setChoices([choices[0]]); group.setChoices(choices); form.unbind();
+  147 |       const captured = group.value(), defaults = form.defaults();
+  148 |       root.reset(); const paused = group.value(); group.setChoices([...choices].reverse()); const kept = group.value();
+  149 |       form.unbind(); const again = group.value(); form.dispose(); group.dispose();
+  150 |       return { kind, current, reset, captured, defaults, paused, kept, again };
+  151 |     });
+  152 |   });
+  153 |   expect(result).toEqual((["radio", "checkbox"] as const).map(kind => {
+  154 |     const value = (code: string) => kind === "radio" ? code : [code], empty = kind === "radio" ? null : [];
+  155 |     return { kind, current: { choice: value("a") }, reset: { choice: value("b") }, captured: value("b"),
+  156 |       defaults: { choice: value("b") }, paused: empty, kept: empty, again: value("b") };
+  157 |   }));
+  158 | });
+  159 | 
+  160 | test("new members retain errors and change markers and retired controls cannot commit", async ({ page }) => {
+  161 |   const result = await page.evaluate(() => {
+  162 |     const h = window.liveFormChoices, root = h.root("radio", 'aria-describedby="hint"'), fieldset = root.querySelector("fieldset")!;
+  163 |     const hint = document.createElement("span"); hint.id = "hint"; hint.textContent = "Hint"; root.append(hint);
+  164 |     fieldset.dataset.validate = '[["policy"]]';
+  165 |     const group = h.group(fieldset, { choices: ["a", "b"].map(value => ({ value, label: value })) });
+  166 |     const rows = h.rows([{ choice: "a" }]), id = rows.entries()[0].id; let reject = true;
+  167 |     const form = h.form(root, { rows, rules: { validate: { policy: () => reject ? "Rejected" : null } } });
+  168 |     form.bind(id); rows.set(id, "choice", "b"); form.validate();
+  169 |     const old = [...fieldset.querySelectorAll("input")], error = root.querySelector("output")!, message = error.textContent;
+  170 |     group.setChoices(["b", "c"].map(value => ({ value, label: value })));
+  171 |     const members = [...fieldset.querySelectorAll("input")], marked = [fieldset, ...members].every(input => input.dataset.fieldChanged === "true");
+  172 |     const described = members.every(input => input.getAttribute("aria-describedby") === `hint ${error.id}` && input.getAttribute("aria-invalid") === "true");
+  173 |     const restoredOld = old.every(input => input.getAttribute("aria-describedby") === "hint" && !input.hasAttribute("aria-invalid") && !input.hasAttribute("data-field-changed"));
+  174 |     const retainedMessage = error.textContent === message; reject = false;
+  175 |     members[1].checked = true; old[0].name = "retired"; root.append(old[0]); old[0].dispatchEvent(new Event("change", { bubbles: true }));
+  176 |     const quiet = rows.get(id)!.value.choice === "b";
+  177 |     members[1].dispatchEvent(new Event("change", { bubbles: true }));
+  178 |     const committed = rows.get(id)!.value.choice, cleared = error.textContent === "";
+  179 |     old[0].remove(); form.dispose(); group.dispose(); rows.dispose();
+  180 |     return { marked, described, restoredOld, retainedMessage, quiet, committed, cleared };
+  181 |   });
+> 182 |   expect(result).toEqual({ marked: true, described: true, restoredOld: true, retainedMessage: true, quiet: true, committed: "c", cleared: true });
+      |                  ^ Error: expect(received).toEqual(expected) // deep equality
+  183 | });
+  184 | 
+  185 | test("catalog getters cannot publish over newer source binding restoration or Form ownership", async ({ page }) => {
+  186 |   const result = await page.evaluate(() => {
+  187 |     const h = window.liveFormChoices;
+  188 |     return ["set", "bind", "unbind", "dispose", "reclaim", "nested"].map(effect => {
+  189 |       const root = h.root("radio"), fieldset = root.querySelector("fieldset")!;
+  190 |       const group = h.group(fieldset, { choices: ["a", "b"].map(value => ({ value, label: value })), value: "a" });
+  191 |       const rows = h.rows([{ choice: "a" }, { choice: "b" }]), ids = rows.entries().map(row => row.id);
+  192 |       let form = h.form(root, { rows }); form.bind(ids[0]); let after = "", reads = 0;
+  193 |       const code = h.code(() => group.setChoices([{ value: "c", get label() {
+  194 |         reads++;
+  195 |         if (effect === "set") rows.set(ids[0], "choice", "b");
+  196 |         else if (effect === "bind") form.bind(ids[1]);
+  197 |         else if (effect === "unbind") form.unbind();
+  198 |         else if (effect === "dispose") form.dispose();
+  199 |         else if (effect === "reclaim") { form.dispose(); form = h.form(root, { rows }); form.bind(ids[1]); }
+  200 |         else group.setChoices([]);
+  201 |         after = fieldset.innerHTML; return "C";
+  202 |       } }]));
+  203 |       const preserved = after === "" || fieldset.innerHTML === after, value = group.value();
+  204 |       form.dispose(); group.setChoices([{ value: "a", label: "A" }]); const usable = group.value() === "a" || group.value() === null;
+  205 |       group.dispose(); rows.dispose(); return { effect, code, preserved, value, reads, usable };
+  206 |     });
+  207 |   });
+  208 |   expect(result).toEqual(["set", "bind", "unbind", "dispose", "reclaim", "nested"].map(effect => ({ effect,
+  209 |     code: effect === "dispose" || effect === "reclaim" ? "CHOICE_STALE" : "FORM_CHOICE_GROUP", preserved: true,
+  210 |     value: effect === "set" || effect === "bind" || effect === "reclaim" ? "b" : "a", reads: 1, usable: true })));
+  211 | });
+  212 | 
+  213 | test("active value work and incomplete construction reject live replacement without reading its catalog", async ({ page }) => {
+  214 |   const result = await page.evaluate(() => {
+  215 |     const h = window.liveFormChoices, root = h.root("radio"), fieldset = root.querySelector("fieldset")!;
+  216 |     const group = h.group(fieldset, { choices: [{ value: "a", label: "A" }] });
+  217 |     const rows = h.rows([{ choice: "a" }]), id = rows.entries()[0].id;
+  218 |     let reads = 0, duringConstruction = "", duringValue = "";
+  219 |     const choices = [{ value: "a", get label() { reads++; return "A"; } }];
+  220 |     const region = root.querySelector("output")!, setAttribute = region.setAttribute;
+  221 |     region.setAttribute = function(name, value) {
+  222 |       if (name === "aria-live") duringConstruction = h.code(() => group.setChoices(choices));
+  223 |       setAttribute.call(this, name, value);
+  224 |     };
+  225 |     const form = h.form(root, { rows, beforeBindValue() { duringValue = h.code(() => group.setChoices(choices)); } });
+  226 |     region.setAttribute = setAttribute; form.bind(id);
+  227 |     const value = group.value(); form.dispose(); group.dispose(); rows.dispose();
+  228 |     return { duringConstruction, duringValue, reads, value };
+  229 |   });
+  230 |   expect(result).toEqual({ duringConstruction: "FORM_CHOICE_GROUP", duringValue: "FORM_CHOICE_GROUP", reads: 0, value: "a" });
+  231 | });
+  232 | 
+  233 | test("pending local reset blocks replacement and insertion reset is canceled before catalog publication", async ({ page }) => {
+  234 |   const result = await page.evaluate(() => {
+  235 |     const h = window.liveFormChoices, root = h.root("radio"), fieldset = root.querySelector("fieldset")!;
+  236 |     const choices = ["a", "b"].map(value => ({ value, label: value }));
+  237 |     const group = h.group(fieldset, { choices, value: "a" }), form = h.form(root);
+  238 |     fieldset.querySelectorAll("input")[1].click(); root.reset();
+  239 |     const pending = h.code(() => group.setChoices([])), reset = form.read();
+  240 |     const old = [...fieldset.querySelectorAll("input")], before = fieldset.innerHTML, insert = fieldset.insertBefore;
+  241 |     let resetEvent: Event | undefined; root.addEventListener("reset", event => { resetEvent = event; });
+  242 |     fieldset.insertBefore = function<T extends Node>(node: T, child: Node | null): T { root.reset(); return insert.call(this, node, child) as T; };
+  243 |     const during = h.code(() => group.setChoices([])); fieldset.insertBefore = insert;
+  244 |     const canceled = resetEvent?.isTrusted === true && resetEvent.defaultPrevented, restored = fieldset.innerHTML === before && old.every(input => input.isConnected);
+  245 |     const synthetic = new Event("reset", { cancelable: true }); root.dispatchEvent(synthetic);
+  246 |     group.setChoices(choices); const retry = form.read();
+  247 |     form.dispose(); group.dispose(); return { pending, reset, during, canceled, restored, syntheticCanceled: synthetic.defaultPrevented, retry };
+  248 |   });
+  249 |   expect(result).toEqual({ pending: "FORM_CHOICE_GROUP", reset: { choice: "a" }, during: "FORM_CHOICE_GROUP", canceled: true,
+  250 |     restored: true, syntheticCanceled: false, retry: { choice: "a" } });
+  251 | });
+  252 | 
+  253 | test("empty groups preflight explicit native reset owners and roll back listener setup failure", async ({ page }) => {
+  254 |   const result = await page.evaluate(() => {
+  255 |     const h = window.liveFormChoices, source = h.root("checkbox", 'form="outside-choice-form"'), wrapper = document.createElement("div");
+  256 |     const fieldset = source.querySelector("fieldset")!, output = source.querySelector("output")!;
+  257 |     const outside = document.createElement("form"); outside.id = "outside-choice-form"; document.body.append(outside, wrapper);
+  258 |     wrapper.append(fieldset, output); source.remove();
+  259 |     const group = h.group(fieldset, { choices: [] }), form = h.form(wrapper), before = fieldset.innerHTML;
+  260 |     const add = outside.addEventListener, failure = new Error("Reset listener failed"); let same = false;
+  261 |     outside.addEventListener = function(type, listener, options) { if (type === "reset") throw failure; return add.call(this, type, listener, options); };
+  262 |     try { group.setChoices([{ value: "a", label: "A" }]); } catch (cause) { same = cause === failure; }
+  263 |     outside.addEventListener = add; const restored = fieldset.innerHTML === before && group.value() instanceof Array && !fieldset.querySelector("input");
+  264 |     const insert = fieldset.insertBefore; let resetEvent: Event | undefined; outside.addEventListener("reset", event => { resetEvent = event; });
+  265 |     fieldset.insertBefore = function<T extends Node>(node: T, child: Node | null): T { outside.reset(); return insert.call(this, node, child) as T; };
+  266 |     const during = h.code(() => group.setChoices([{ value: "a", label: "A" }])); fieldset.insertBefore = insert;
+  267 |     const canceled = resetEvent?.defaultPrevented === true && resetEvent.isTrusted;
+  268 |     group.setChoices([{ value: "a", label: "A" }]); fieldset.querySelector("input")!.click(); outside.reset();
+  269 |     const reset = form.read(), owner = fieldset.querySelector("input")!.form === outside;
+  270 |     form.dispose(); group.dispose();
+  271 |     fieldset.setAttribute("form", outside.id);
+  272 |     fieldset.querySelector<HTMLTemplateElement>("template")!.content.querySelector("input")!.required = true;
+  273 |     const emptyGroup = h.group(fieldset, { choices: [] }), emptyForm = h.form(wrapper);
+  274 |     const missing = !emptyForm.validate().valid; outside.reset(); emptyForm.read();
+  275 |     const emptyOwner = fieldset.form === outside && output.textContent === "";
+  276 |     emptyForm.dispose(); emptyGroup.dispose();
+  277 |     return { same, restored: !!restored, during, canceled, reset, owner, missing, emptyOwner };
+  278 |   });
+  279 |   expect(result).toEqual({ same: true, restored: true, during: "FORM_CHOICE_GROUP", canceled: true, reset: { choice: [] }, owner: true, missing: true, emptyOwner: true });
+  280 | });
+  281 | 
+  282 | test("native insertion and late ARIA failures restore old members maps issues and focus for retry", async ({ page }) => {
+```

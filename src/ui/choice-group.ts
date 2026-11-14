@@ -3,7 +3,7 @@ import { FrameworkError } from "../internal/framework-error.js";
 import type { SelectChoice } from "./index.js";
 import { focusVisible, restoreAttributes, uniqueId } from "./dom-state.js";
 import { interactiveContent } from "./native-control.js";
-import { assertChoiceGroupWritable, publishChoiceGroup, registerChoiceGroup, type ChoiceGroupBinding } from "./choice-group-owner.js";
+import { assertChoiceGroupWritable, publishChoiceGroup, registerChoiceGroup, replaceChoiceGroup, type ChoiceGroupBinding, type ChoiceGroupReplacement } from "./choice-group-owner.js";
 
 export interface ChoiceGroupHandle {
   setChoices(choices: readonly SelectChoice<string>[]): void;
@@ -102,38 +102,63 @@ export function bindChoiceGroup(root: HTMLFieldSetElement, options: {
     });
     return { labels: nextLabels, inputs: nextLabels.map(label => label.querySelector("input")!), values: prepared.map(choice => choice.value) };
   }
-  function publish(next: ReturnType<typeof prepare>, expected: number): void {
-    current(expected);
-    const version = ++generation, focused = document.activeElement as HTMLInputElement | null, focusedIndex = inputs.indexOf(focused!);
-    const previous = [...root.childNodes], previousChecked = inputs.map(input => input.checked);
-    const old = { inputs, labels, values };
-    inputs = next.inputs; labels = next.labels; values = next.values;
-    try {
-      for (const label of old.labels) label.remove();
-      const fragment = document.createDocumentFragment(); fragment.append(...labels);
-      root.insertBefore(fragment, template!.nextSibling);
-    } catch (cause) {
-      if (!disposed && generation === version) {
-        inputs = old.inputs; labels = old.labels; values = old.values;
-        root.replaceChildren(...previous);
-        for (const [index, input] of inputs.entries()) input.checked = previousChecked[index];
-        if (focusedIndex >= 0) focusVisible(focused!);
+  function replacement(next: ReturnType<typeof prepare>, expected: number, ownerCurrent: () => void): ChoiceGroupReplacement {
+    active(); ownerCurrent();
+    if (generation !== expected) throw error("CHOICE_STALE", "A newer choice-group operation superseded this change.");
+    let applied = false, version = expected, focused: HTMLInputElement | null = null, focusedIndex = -1;
+    function latest(): boolean {
+      if (disposed || generation !== version) return false;
+      try { ownerCurrent(); return true; } catch { return false; }
+    }
+    return {
+      inputs: next.inputs, values: next.values,
+      apply() {
+        active(); ownerCurrent();
+        if (generation !== expected) throw error("CHOICE_STALE", "A newer choice-group operation superseded this change.");
+        applied = true; version = ++generation;
+        focused = document.activeElement as HTMLInputElement | null; focusedIndex = inputs.indexOf(focused!);
+        const previous = [...root.childNodes], previousChecked = inputs.map(input => input.checked), tabindex = root.getAttribute("tabindex");
+        const old = { inputs, labels, values };
+        let undone = false, changedTabindex = false;
+        const undo = () => {
+          if (undone || !latest()) return;
+          undone = true;
+          inputs = old.inputs; labels = old.labels; values = old.values;
+          root.replaceChildren(...previous);
+          if (!latest()) return;
+          for (const [index, input] of inputs.entries()) input.checked = previousChecked[index];
+          if (changedTabindex) {
+            if (tabindex === null) root.removeAttribute("tabindex"); else root.setAttribute("tabindex", tabindex);
+          }
+          version = ++generation;
+        };
+        inputs = next.inputs; labels = next.labels; values = next.values;
+        try {
+          for (const label of old.labels) label.remove();
+          const fragment = document.createDocumentFragment(); fragment.append(...labels);
+          root.insertBefore(fragment, template!.nextSibling);
+          if (latest() && !inputs.length && !root.matches(":disabled") && !root.hasAttribute("tabindex")) {
+            changedTabindex = true; root.tabIndex = -1;
+          }
+        } catch (cause) {
+          try { undo(); } catch { /* Preserve the insertion failure. */ }
+          throw cause;
+        }
+        return undo;
+      },
+      finish() {
+        if (!applied || !latest() || focusedIndex < 0 || root.matches(":disabled")) return;
+        const target = inputs.find(input => input.value === focused!.value && !input.matches(":disabled")) ??
+          inputs.slice(focusedIndex).find(input => !input.matches(":disabled")) ?? inputs.slice(0, focusedIndex).reverse().find(input => !input.matches(":disabled"));
+        if ((!target || !focusVisible(target)) && latest()) rootFocus();
       }
-      throw cause;
-    }
-    if (disposed || generation !== version) return;
-    if (!inputs.length && !root.matches(":disabled") && !root.hasAttribute("tabindex")) root.tabIndex = -1;
-    if (focusedIndex >= 0 && !root.matches(":disabled")) {
-      const target = inputs.find(input => input.value === focused!.value && !input.matches(":disabled")) ??
-        inputs.slice(focusedIndex).find(input => !input.matches(":disabled")) ?? inputs.slice(0, focusedIndex).reverse().find(input => !input.matches(":disabled"));
-      if (!target || !focusVisible(target)) { current(version); rootFocus(); }
-    }
+    };
   }
   function setChoices(choices: readonly SelectChoice<string>[]): void {
-    active(); assertChoiceGroupWritable(group);
+    active();
     const version = generation;
-    const next = prepare(choices, group.read(), inputs.filter(input => input.defaultChecked).map(input => input.value));
-    publish(next, version);
+    replaceChoiceGroup(group, current => replacement(
+      prepare(choices, group.read(), inputs.filter(input => input.defaultChecked).map(input => input.value)), version, current));
   }
   function setValue(value: string | null | readonly string[]): void {
     active(); assertChoiceGroupWritable(group);
@@ -145,9 +170,10 @@ export function bindChoiceGroup(root: HTMLFieldSetElement, options: {
   }
   const unregister = registerChoiceGroup(group);
   try {
-    const initial = selection(Object.hasOwn(options, "value") ? options.value : kind === "radio" ? null : []);
-    const first = prepare(options.choices, initial, typeof initial === "string" ? [initial] : initial ?? []);
-    publish(first, generation);
+    replaceChoiceGroup(group, current => {
+      const initial = selection(Object.hasOwn(options, "value") ? options.value : kind === "radio" ? null : []);
+      return replacement(prepare(options.choices, initial, typeof initial === "string" ? [initial] : initial ?? []), generation, current);
+    });
     root.addEventListener("change", change);
     publishChoiceGroup(group);
   } catch (cause) {

@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-grid-callbacks-plan.md
     title: Captured Grid callbacks and unresolved source observation
-    git_blob: e55da8ef3bce5941f254454244477a78e4304dd0
+    git_blob: 5803af51570a2680fab36169786dc209d421ad4a
   - id: baseline
     resource: evidence/m511-verification.json
     title: Frozen M5.11 source, runtime and installed artifact baseline
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Whole-row Form callbacks, compiled field reads and native commits
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable full records, committed notifications and no-op writes
@@ -32,7 +32,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained outcomes and consolidated omission obligations
-    git_blob: 3f26da6201495be6823374d69ad89a929110b512
+    git_blob: 8346dee24d7196d12898fd1d149c0132a58a2980
 generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }

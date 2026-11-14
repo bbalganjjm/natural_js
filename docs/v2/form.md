@@ -6,6 +6,10 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm, FormOptions]
 sources:
+  - id: live-choice-browser
+    resource: ../../tests/browser/form-live-choice-groups.spec.ts
+    title: Live group catalog, draft, capture, reset, failure and focus witnesses
+    git_blob: 590f938e05ebfb2e2bb0fcab877c4501f16b9c50
   - id: source-browser
     resource: ../../tests/browser/form-source.spec.ts
     title: Application normalization and complete raw source observation regressions
@@ -57,7 +61,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form binding runtime
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native field values, display and constraints
@@ -90,10 +94,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -316,7 +320,7 @@ detail.rescan();
 
 Compatible bindings retain the exact Field, raw/projection, issues, current/other-row drafts and creation capture: the path, native shape, ordered members and binding annotations stay the same. Reordering independent fields or moving unchanged controls between valid native form owners preserves those values. Error-region replacement preserves the control/draft and publishes already-known issues to the new region. Generated error IDs remain document-unique; original ARIA and old-region state are restored.[^form][^discovery-browser]
 
-New bindings capture their complete live native/UI state once at adoption. A clean reshaped group is one new binding with the complete current native group capture. Retired bindings disappear from read/defaults and release Select, display, error/reset, raw/projection and private File resources. Retained captures do not change. Any retained row draft, including a valid uncommitted candidate, blocks retirement/replacement/reshaping with FORM_RESCAN and field/row identity. Known local issues or invalid raw caches also block retirement, including static displays; resolve or explicitly discard them first. Rescan does not validate to decide whether a draft is safe.[^form][^discovery-browser]
+New bindings capture their complete live native/UI state once at adoption. A clean reshaped group is one new binding with the complete current native group capture. Retired bindings disappear from read/defaults and release Select, display, error/reset, raw/projection and private File resources. Retained captures do not change. Any retained row draft, including a valid uncommitted candidate, blocks retirement/replacement/reshaping with FORM_RESCAN and field/row identity. Known local issues or invalid raw caches also block retirement, including static displays; resolve or explicitly discard them first. Rescan does not validate to decide whether a draft is safe. A generated group's setChoices uses the specific catalog handoff below and retains its compiled field and drafts; it is not binding retirement or direct declaration editing.[^form][^discovery-browser][^live-choice-browser]
 
 Binding annotations on owned nodes are fixed: data-field, format/validate/choice declarations, native type/multiple and grouped name/value metadata. Direct changes fail FORM_RESCAN. Detach the element/subtree, rescan to release, edit while detached, then reattach and rescan to adopt. Marker-only release must remove all binding/choice annotations; orphan data-options retains FORM_OPTIONS. New HTML rules use the existing captured catalogs/parsers. Function catalogs stay fixed; known render targets may temporarily disappear, while constructor rejection of unknown renderer targets remains.[^form][^discovery-browser]
 
@@ -470,7 +474,13 @@ Initialize [bindChoiceGroup](choice-group.md) on each named `fieldset[data-field
 
 Rows retain received raw values. The view checks only exact string codes, while validation reports wrong shapes, duplicate entries and unavailable choices; disabled catalog choices remain available. Value-callback replacements require valid available string/null or string-array values. Group formatting, display renderers and string parsers are rejected. Native required checkboxes require each enabled input; use a root `data-validate` rule for logical selection. The existing text-based required rule still rejects `[""]`. A template-required empty group produces a Form issue unless effectively disabled; the fieldset alone does not participate in browser native constraint validation.[^form]
 
-Creation selection sets native defaults before Form captures. `defaults()`, local native reset, captured restoration through `unbind()` and Rows reversion keep their existing distinct owners. Rows-backed native reset does not write Rows. Public group writes/disposal raise `CHOICE_OWNED` before changing adopted DOM, including while Form is unbound. Dispose Form first, or successfully retire the field through `rescan()`, to release the claim. Failed construction/acquisition releases provisional claims; a rejected rescan retains existing claims. Live adopted choice replacement remains required follow-up. See the [executed two-layout CVC example](choice-groups-example.md).[^form]
+Creation selection sets native defaults before Form captures. `defaults()`, local native reset, captured restoration through `unbind()` and Rows reversion keep their existing distinct owners. Rows-backed native reset does not write Rows. Direct group setValue/dispose raise CHOICE_OWNED while adopted, including while Form is unbound. Dispose Form first, or successfully retire the field through rescan, to release that claim. Failed acquisition releases provisional claims; rejected rescan retains old claims.[^form]
+
+The existing group setChoices call can replace a Form-owned catalog through its specific owner. Form keeps the same field, raw Rows/originals, every row draft and captured creation values; it retargets native members, errors/ARIA/change markers and local reset owners. Current drafts override old display caches. Without a draft, an applicable cached explicit callback replacement must fit the proposed codes or FORM_VALUE rejects before mutation. Raw unavailable source is retained; pending/failed projections do not replay. Local/unbound/paused views keep surviving native checkedness, and paused editing stays paused.[^form][^live-choice-browser]
+
+Catalog replacement itself writes no Rows and runs no reconciliation, validator, whole/value hook, native change or onChange. It retains known issues until ordinary editing/validation changes them. Form's existing FORM_RESCAN guard rejects entry while it is reconciling or publishing field membership. Other active Form work, pending local reset, changed declarations and stale binding/source work raise FORM_CHOICE_GROUP. Release through detach/rescan before editing declarations; direct in-place changes remain rejected. An active automatic local Form cancels a trusted native reset during publication; Rows-backed, paused or synthetic notifications retain their existing policy.[^form][^live-choice-browser]
+
+Ordinary publication failure rolls back old native nodes/maps/attributes/issues/listeners and restores focus under unchanged ownership. External Rows writes remain committed and their queued events follow the ordinary Form update path after rollback; those events may run normal hooks. Disposal/newer ownership cannot restore retired DOM. Native defaultChecked keeps only surviving codes, while defaults retains the original capture and unbind can restore captured codes reintroduced later. See [choice groups](choice-group.md) and the [two-layout CVC example](choice-groups-example.md) for the complete replacement boundary.[^form][^live-choice-browser]
 
 [^entry]: Public UI entry and Form types
 [^local-browser]: Local raw formatting, native reset, lifecycle and CVC regressions
@@ -492,5 +502,6 @@ Creation selection sets native defaults before Form captures. `defaults()`, loca
 [^defaults-browser]: Captured defaults, unbind, native files and inactive ownership regressions
 [^presets-browser]: Explicit preset precedence and application callback composition regressions
 [^discovery-browser]: Explicit field adoption, retirement, ownership and recovery regressions
+[^live-choice-browser]: Live group catalog, draft, capture, reset, failure and focus witnesses
 
 [^value-binding]: Private checked value callback execution shared with Grid and List

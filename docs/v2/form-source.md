@@ -8,7 +8,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Whole Form binding, marked reads and native commit boundaries
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: data
     resource: ../../src/data/index.ts
     title: Complete immutable source records and committed notifications
@@ -28,7 +28,7 @@ sources:
   - id: installed-check
     resource: ../../tools/check-packed-browser.mjs
     title: Exact-package source, original, notification and cleanup assertions
-    git_blob: 046fe3008932aea0232ae89079328cce2cea9d3e
+    git_blob: 7e08a783489cb1932541cfa628fed065e92e24a4
   - id: example
     resource: ../../examples/vite/m10/demo.ts
     title: Actual selected or inspected full raw snapshot panel

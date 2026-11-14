@@ -1,0 +1,7 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test:packed-browser
+> node tools/check-packed-browser.mjs --tarball D:\workspace\natural_js\node_modules\.cache\m514-artifact\bbalganjjm-natural_js-2.0.0-beta.0.tgz --sha256 61b24907bf094ee9cfd1b08d577cdd43fad6ebdae9e54580a62dc20672fdaf43 --browser edge
+
+
+added 1 package in 2s
+Packed browser consumer passed (edge 157.0.4341.46, win32, SHA-256 61b24907bf094ee9cfd1b08d577cdd43fad6ebdae9e54580a62dc20672fdaf43).

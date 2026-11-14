@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-discovery-plan.md
     title: Completed explicit field discovery and lifetime scope
-    git_blob: b82c08a96689064eca3d6d62e1b8aab3ce7032cc
+    git_blob: 5cec9099fe3a6c512ba33bf6b19d4210cd225389
   - id: baseline
     resource: evidence/m58-verification.json
     title: Frozen 3f5e3ad source, runtime and installed package baseline
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Constructor option capture and guarded callback execution
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form callback, rule and handle contracts
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: 3f26da6201495be6823374d69ad89a929110b512
+    git_blob: 8346dee24d7196d12898fd1d149c0132a58a2980
 generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }

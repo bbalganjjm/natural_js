@@ -416,5 +416,6 @@ export function connectChoiceGroups(root: HTMLFormElement, genderRoot: HTMLField
     fruit.setValue([null]);
   }
   const form = bindForm(root, { rows }); form.bind(rows.entries()[0].id);
+  fruit.setChoices([{ value: "apple", label: "Apple again" }]);
   return { rows, form, gender, fruit, dispose() { form.dispose(); fruit.dispose(); gender.dispose(); rows.dispose(); } };
 }

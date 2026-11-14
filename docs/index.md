@@ -4,10 +4,16 @@ okf_version: "0.2"
 
 # Start here
 
+* [Natural-JS 2.0 consolidated omission decision](implementation/omission-decision.md) - Five narrow legacy workflow losses proposed for one explicit decision, with alternatives, migration costs and retained obligations. (draft)
+
+* [Natural-JS 2.0 sequential M5 completion run](implementation/m5-completion-run.md) - Complete M5.14 through M5.20 and their necessary predecessors as separately reviewed, verified and committed stages. (draft)
+
+* [Natural-JS 2.0 M5.14 live Form choice catalogs](implementation/m5-live-choice-groups-plan.md) - Replace adopted native choice catalogs while retaining Form field identity, data, drafts, defaults and owned cleanup. (draft)
+
 * [Natural-JS 2.0 numbered remaining work](implementation/remaining-work-plan.md) - Fixed execution order and terminal stage numbers for every remaining framework capability and delivery gate. (draft)
 
-* [bindChoiceGroup](v2/choice-group.md) - Generate native radio or checkbox choices from an authored fieldset template and adopt them in Form. (draft)
-* [Authored choice groups in two CVC layouts](v2/choice-groups-example.md) - Generate native radio and checkbox choices before Form in independent authored CVC screens. (draft)
+* [bindChoiceGroup](v2/choice-group.md) - Generate native radio or checkbox choices from an authored fieldset and replace catalogs through its Form owner. (draft)
+* [Authored choice groups in two CVC layouts](v2/choice-groups-example.md) - Generate native choices before Form and replace adopted catalogs in independent authored CVC screens. (draft)
 
 * [Natural-JS 2.0 M5.13 authored choice groups](implementation/m5-choice-groups-plan.md) - Generate native radio and checkbox choices from authored templates and adopt them safely in Form. (draft)
 

@@ -1,0 +1,285 @@
+{
+  "kind": "sequential_M5_completion_run",
+  "baseline_commit": "daab0f2b04cb3b8ecac871a3a147f4b0fa8dbcfe",
+  "authorization": {
+    "targets": "M5.14-M5.20",
+    "include_necessary_prerequisites": true,
+    "separate_stage_plans_tests_docs_commits": true,
+    "publication": false,
+    "master_v1_change": false
+  },
+  "status": "in_progress",
+  "current_stage": "M5.14",
+  "queue": [
+    {
+      "id": "P0.1",
+      "scope_ref": "remaining-work-plan.json#/stages/0",
+      "status": "known_source_cases_independently_accepted_runtime_and_families_open",
+      "commit": "cf2210fc7d9eeef7b7ef1d126ec2dd79040821e7",
+      "receipt": "p01-inventory-verification.json"
+    },
+    {
+      "id": "M5.14",
+      "scope_ref": "remaining-work-plan.json#/stages/2",
+      "status": "verified_separate_commit_pending",
+      "commit": null,
+      "receipt": "m514-verification.json"
+    },
+    {
+      "id": "M3.1",
+      "scope_ref": "remaining-work-plan.json#/stages/3",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M3.2",
+      "scope_ref": "remaining-work-plan.json#/stages/4",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M3.3",
+      "scope_ref": "remaining-work-plan.json#/stages/5",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M3.4",
+      "scope_ref": "remaining-work-plan.json#/stages/6",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M3.5",
+      "scope_ref": "remaining-work-plan.json#/stages/7",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M3.6",
+      "scope_ref": "remaining-work-plan.json#/stages/8",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M3.7",
+      "scope_ref": "remaining-work-plan.json#/stages/9",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M5.15",
+      "scope_ref": "remaining-work-plan.json#/stages/11",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M5.16",
+      "scope_ref": "remaining-work-plan.json#/stages/12",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M5.17",
+      "scope_ref": "remaining-work-plan.json#/stages/13",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M5.18",
+      "scope_ref": "remaining-work-plan.json#/stages/14",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M5.19",
+      "scope_ref": "remaining-work-plan.json#/stages/15",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.1",
+      "scope_ref": "remaining-work-plan.json#/stages/16",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.2",
+      "scope_ref": "remaining-work-plan.json#/stages/17",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.3",
+      "scope_ref": "remaining-work-plan.json#/stages/18",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.4",
+      "scope_ref": "remaining-work-plan.json#/stages/19",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.5",
+      "scope_ref": "remaining-work-plan.json#/stages/20",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.6",
+      "scope_ref": "remaining-work-plan.json#/stages/21",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M6.7",
+      "scope_ref": "remaining-work-plan.json#/stages/22",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M7.1",
+      "scope_ref": "remaining-work-plan.json#/stages/23",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M7.2",
+      "scope_ref": "remaining-work-plan.json#/stages/24",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M7.3",
+      "scope_ref": "remaining-work-plan.json#/stages/25",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M7.4",
+      "scope_ref": "remaining-work-plan.json#/stages/26",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M7.5",
+      "scope_ref": "remaining-work-plan.json#/stages/27",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M11.1",
+      "scope_ref": "remaining-work-plan.json#/stages/28",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M11.2",
+      "scope_ref": "remaining-work-plan.json#/stages/29",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M11.3",
+      "scope_ref": "remaining-work-plan.json#/stages/30",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M11.4",
+      "scope_ref": "remaining-work-plan.json#/stages/31",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M12.2",
+      "scope_ref": "remaining-work-plan.json#/stages/33",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M12.4",
+      "scope_ref": "remaining-work-plan.json#/stages/35",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    },
+    {
+      "id": "M5.20",
+      "scope_ref": "remaining-work-plan.json#/stages/36",
+      "status": "planned",
+      "commit": null,
+      "receipt": null
+    }
+  ],
+  "limits": [
+    "P0.2 remains conditional for genuine loss decisions even though it is not an unconditional ancestor.",
+    "P0.1 acceptance covers known source-case assignment only; runtime, full-family closure and P0.2 loss decisions remain open.",
+    "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
+  ],
+  "current_checks": {
+    "strict_build": "passed",
+    "strict_source_types": "passed",
+    "strict_example_types": "passed",
+    "retained_first_focus": {
+      "cases": 136,
+      "passed": 134,
+      "failed": 2,
+      "log": "m514-focused-chromium.log",
+      "scope": "test-contract corrections only: exact true for successful validators and structural attribute equality plus exact old node identity; original logs, input map and traces retained"
+    },
+    "current_focus": {
+      "chromium": 140,
+      "firefox": 140,
+      "webkit": 140,
+      "failed": 0
+    },
+    "units": 138,
+    "installed_js_ts": "passed",
+    "installed_browsers": [
+      "chromium",
+      "firefox",
+      "webkit",
+      "chrome",
+      "edge"
+    ],
+    "performance_original_budgets": 30,
+    "full_source_suites": {
+      "chromium": 853,
+      "firefox": 853,
+      "webkit": 853
+    },
+    "final_receipt": "m514-verification.json"
+  }
+}

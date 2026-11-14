@@ -159,7 +159,7 @@ test("setter getters cannot mutate a disposed adopted or successfully replaced c
     }));
   });
   expect(result).toEqual(["choices", "value"].flatMap(operation => ["dispose", "claim", "nested"].map(effect => ({ operation, effect,
-    code: effect === "dispose" ? "CHOICE_DISPOSED" : effect === "claim" ? "CHOICE_OWNED" : "CHOICE_STALE",
+    code: effect === "dispose" ? "CHOICE_DISPOSED" : effect === "claim" && operation === "value" ? "CHOICE_OWNED" : "CHOICE_STALE",
     preserved: true, value: effect === "dispose" ? null : effect === "nested" ? ["b"] : ["a"], reads: 1 }))));
 });
 
@@ -192,6 +192,20 @@ test("constructor preparation stays unadoptable until native nodes defaults and 
   }, source("../../src/ui/form.ts"));
   expect(result).toEqual({ preparation: [false, false], provisional: false, blocked: "FORM_CHOICE_GROUP", duplicate: "CHOICE_OWNED", duplicateGetter: "CHOICE_OWNED", duplicateReads: 0,
     defaults: { choice: ["a"] }, sameFailure: true, released: true, restored: true });
+});
+
+test("catalog preparation detects a temporary claim that returns to an unclaimed group", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.choiceGroup, root = h.root("checkbox"), handle = h.bind(root, { choices: [{ label: "A", value: "a" }], value: ["a"] });
+    const original = root.innerHTML;
+    const code = h.code(() => handle.setChoices([{ get label() {
+      const release = h.claim(h.get(root)!); release(); return "B";
+    }, value: "b" }]));
+    const unchanged = root.innerHTML === original, selected = handle.value();
+    handle.setChoices([{ label: "A again", value: "a" }]); const retry = handle.value(); handle.dispose();
+    return { code, unchanged, selected, retry };
+  });
+  expect(result).toEqual({ code: "CHOICE_STALE", unchanged: true, selected: ["a"], retry: ["a"] });
 });
 
 test("sparse catalogs and failed insertion preserve a usable current group and its focused native input", async ({ page }) => {

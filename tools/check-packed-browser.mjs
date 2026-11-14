@@ -106,10 +106,14 @@ try {
     const initial = { gender: h.gender.value(), fruit: h.fruit.value(), empty: h.empty.value(), defaults: h.defaults,
       read: h.form.read(), valid: h.form.validate().valid };
     const before = h.root.outerHTML, errors = [];
-    for (const action of [() => h.fruit.setChoices([]), () => h.gender.setValue("male"), () => h.empty.dispose()]) {
+    for (const action of [() => h.gender.setValue("male"), () => h.empty.dispose()]) {
       try { action(); } catch (cause) { errors.push(cause.code); }
     }
-    const locked = errors.length === 3 && errors.every(code => code === "CHOICE_OWNED") && h.root.outerHTML === before;
+    const locked = errors.length === 2 && errors.every(code => code === "CHOICE_OWNED") && h.root.outerHTML === before;
+    h.fruit.setChoices([]);
+    const removed = { value: h.fruit.value(), read: h.form.read(), valid: h.form.validate().valid };
+    h.fruit.setChoices([{ value: "apple", label: "Apple again" }, { value: "banana", label: "Banana again" }]);
+    const returned = { value: h.fruit.value(), defaults: h.form.defaults(), valid: h.form.validate().valid };
     const male = h.root.querySelector('input[type="radio"][value="male"]');
     male.checked = true; male.dispatchEvent(new Event("change", { bubbles: true }));
     const edited = h.rows.get(id).value.gender;
@@ -121,15 +125,18 @@ try {
     h.empty.dispose(); h.fruit.dispose(); h.gender.dispose();
     const exact = h.root.outerHTML === h.original;
     h.rows.dispose(); h.root.remove(); delete window.packedConsumer.choiceGroups;
-    return { initial, locked, edited, reverted, restored, one, zero, exact };
+    return { initial, locked, removed, returned, edited, reverted, restored, one, zero, exact };
   });
   assert.deepEqual(choiceGroups, {
     initial: { gender: "female", fruit: ["banana"], empty: [], defaults: { gender: "male", fruits: ["apple"], empty: [] },
       read: { gender: "female", fruits: ["banana"], empty: [] }, valid: true },
-    locked: true, edited: "male", reverted: "female",
+    locked: true,
+    removed: { value: [], read: { gender: "female", fruits: ["banana"], empty: [] }, valid: false },
+    returned: { value: ["banana"], defaults: { gender: "male", fruits: ["apple"], empty: [] }, valid: true },
+    edited: "male", reverted: "female",
     restored: { gender: "male", fruit: ["apple"], source: { gender: "female", fruits: ["banana"], empty: [] } },
     one: ["apple"], zero: [], exact: true
-  }, "Installed authored groups must keep array shape, raw ownership, captured defaults, adoption locks and exact teardown.");
+  }, "Installed authored groups must mediate live catalogs while keeping raw data, captured defaults, direct-write locks and exact teardown.");
 
   const incoming = await page.evaluate(() => {
     const rows = window.packedConsumer.incoming;

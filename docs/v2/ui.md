@@ -41,7 +41,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form field options and explicit display
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Private shared native field values and constraints
@@ -50,10 +50,10 @@ sources:
     resource: ../../src/ui/field-render.ts
     title: Private explicit render preflight and DOM ownership
     git_blob: 676d0e69a7cfc6eafab93b3abf5cd32c1a5a4a6c
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 The `./ui` entry exports the HTML-bound Form, Grid, List, Select, Pagination, Popup, Tabs, Tree, DatePicker, Notify, and Documents functions and their types. The types below keep callbacks, values, and component handles explicit; no generic component registry is exported.[^ui]
@@ -205,7 +205,7 @@ Optional progressive: { size, delay? } enables cooperative prefix binding. whenB
 
 # Authored radio and checkbox choices
 
-`bindChoiceGroup(root: HTMLFieldSetElement, options)` returns `ChoiceGroupHandle` with `setChoices`, `setValue`, `value` and `dispose`. Choices reuse `SelectChoice<string>`; radio selection is string/null and checkbox selection is always a string array. The [component contract](choice-group.md) defines authored templates, native defaults, literal labels, unique group names and strict Form adoption. No public value alias, registry, dependency or package entry is added. Existing Select and static checkbox contracts are unchanged.[^ui]
+`bindChoiceGroup(root: HTMLFieldSetElement, options)` returns `ChoiceGroupHandle` with `setChoices`, `setValue`, `value` and `dispose`. Choices reuse `SelectChoice<string>`; radio selection is string/null and checkbox selection is always a string array. After Form adoption, value reads remain available and setChoices uses a specific Form catalog handoff; direct setValue/dispose stay locked. Replacement preserves the compiled field, raw Rows/drafts, captured defaults and native accessibility without replaying validation or value hooks itself. The [component contract](choice-group.md) defines cached explicit-projection checks, native reset, stale/busy failure, rollback and focus. No public signature, value alias, registry, dependency or package entry is added by live replacement. Existing Select and static checkbox contracts are unchanged.[^ui][^form]
 
 [^ui]: Public UI types and runtime exports
 [^selection]: Private Grid identity, membership, and check contracts

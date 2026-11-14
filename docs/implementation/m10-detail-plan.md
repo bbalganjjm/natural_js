@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: a88025fbea7822f059ba3a7338ee6297a54a0014
+    git_blob: e648ca9fb694d9ea8feb7a1d6c8297447aa8e239
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy more, vertical resize and action-driven scrolling
@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Shared row drafts, native constraints and validation
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Existing CVC Popup lifecycle and focus restoration

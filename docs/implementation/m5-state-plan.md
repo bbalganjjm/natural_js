@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-shared-rules-plan.md
     title: Completed shared-rule continuation
-    git_blob: c4a876dee6be8178cd635f376e02c43aa34f1c0a
+    git_blob: 8bfa42621c431f4a21e517ee6f6523ca8b7da906
   - id: baseline
     resource: evidence/m51-verification.json
     title: Preserved 73f5a88 source and runtime evidence

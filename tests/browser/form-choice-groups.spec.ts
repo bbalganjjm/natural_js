@@ -135,19 +135,22 @@ test("value projections accept radio null and stable arrays and reject invalid g
   }
 });
 
-test("Form ownership blocks public group writes and disposal through unbind then releases on disposal", async ({ page }) => {
+test("Form ownership mediates catalogs while blocking direct values and disposal through unbind", async ({ page }) => {
   const result = await page.evaluate(() => {
     const h = window.formChoices, root = h.root(), fieldset = root.querySelector("fieldset")!;
     const group = h.group(fieldset, { choices: [{ value: "a", label: "A" }], value: ["a"] });
     const rows = h.rows([{ choice: ["a"] }]), form = h.form(root, { rows }); form.bind(rows.entries()[0].id);
     const before = fieldset.outerHTML;
-    const locked = [() => group.setChoices([]), () => group.setValue([]), () => group.dispose()].map(h.code);
+    const locked = [() => group.setValue([]), () => group.dispose()].map(h.code);
     const unchanged = before === fieldset.outerHTML && JSON.stringify(group.value()) === '["a"]';
+    group.setChoices([{ value: "a", label: "A again" }, { value: "b", label: "B" }]);
+    const mediated = { value: group.value(), count: fieldset.querySelectorAll("input").length, raw: form.read() };
     form.unbind(); const retained = h.code(() => group.setChoices([]));
     form.dispose(); group.setChoices([]); const empty = group.value(); group.dispose(); rows.dispose();
-    return { locked, unchanged, retained, empty };
+    return { locked, unchanged, mediated, retained, empty };
   });
-  expect(result).toEqual({ locked: ["CHOICE_OWNED", "CHOICE_OWNED", "CHOICE_OWNED"], unchanged: true, retained: "CHOICE_OWNED", empty: [] });
+  expect(result).toEqual({ locked: ["CHOICE_OWNED", "CHOICE_OWNED"], unchanged: true,
+    mediated: { value: ["a"], count: 2, raw: { choice: ["a"] } }, retained: "none", empty: [] });
 });
 
 test("two generated-group Forms share native commits and release their ownership independently", async ({ page }) => {
@@ -187,7 +190,7 @@ test("rescan keeps rejected draft ownership and releases a successfully retired 
     const group = h.group(fieldset, { choices: [{ value: "a", label: "A" }], value: ["a"] });
     const rows = h.rows([{ choice: ["a"] }]), form = h.form(root, { rows }); form.bind(rows.entries()[0].id);
     const input = fieldset.querySelector("input")!; input.checked = false; input.dispatchEvent(new Event("change", { bubbles: true }));
-    fieldset.remove(); const rejected = h.code(() => form.rescan()), stillLocked = h.code(() => group.setChoices([]));
+    fieldset.remove(); const rejected = h.code(() => form.rescan()), stillLocked = h.code(() => group.setValue([]));
     root.append(fieldset); form.unbind(); fieldset.remove(); form.rescan();
     group.setChoices([]); const released = group.value(), read = form.read(), stored = rows.get(rows.entries()[0].id)!.value.choice;
     form.dispose(); group.dispose(); rows.dispose(); return { rejected, stillLocked, released, read, stored };

@@ -1,0 +1,1186 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.14 live Form-owned choice catalogs",
+  "recorded_at": "2026-11-14",
+  "workspace_baseline_commit": "daab0f2b04cb3b8ecac871a3a147f4b0fa8dbcfe",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m513-verification.json",
+      "sha256": "b540d04a998360876b11569575b728393dc96fd5de69f5033b5e189745efb785",
+      "preserved_in_commit": "daab0f2b04cb3b8ecac871a3a147f4b0fa8dbcfe"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m513-choice-groups.json",
+      "sha256": "5e766bf6cb6e96cbdbad2157102999705c2613d3129a4fcd125950e91efffd9e"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    }
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "daab0f2b04cb3b8ecac871a3a147f4b0fa8dbcfe",
+    "scope": "Independent initial recorded-byte recovery observed clean pushed alpha before authorized batch/preflight/source edits. Later batch documents are authorized work,not inherited runtime evidence."
+  },
+  "public_delta": {
+    "status": "actual_frozen_public_surface_and_source_layout_runtime_acceptance_pending",
+    "new_public_named_types": [],
+    "removed_public_named_types": [],
+    "new_public_runtime_functions": 0,
+    "new_public_functions": [],
+    "new_public_handle_methods": [],
+    "new_public_methods": 0,
+    "new_public_entries": 0,
+    "new_runtime_dependencies": 0,
+    "new_runtime_files": [],
+    "note": "Permit existing ChoiceGroupHandle.setChoices during Form adoption through one specific private prepared handoff. Public setValue/dispose remain locked. No new public API/type/entry/dependency or generic transaction engine; runtime/archive changes are intentional and no payload-equality assumption is inherited.",
+    "modified_runtime_files": [
+      "src/ui/choice-group.ts",
+      "src/ui/choice-group-owner.ts",
+      "src/ui/form.ts"
+    ],
+    "existing_private_owner": "src/ui/choice-group-owner.ts",
+    "private_contract": "ChoiceGroupReplacement with registration/claim identity and prepared apply/undo/focus mediation; no public export change"
+  },
+  "selected_contracts": {
+    "prepared_claim_and_stale_guards": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Capture exact registration and Form claim identity before getters; retain generation,RowId and source snapshot. Reject active Form work/pending reset and stale/released/reclaimed preparation before publication.",
+      "source_refs": [
+        "src/ui/choice-group.ts",
+        "src/ui/choice-group-owner.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "S03",
+        "B01",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B14"
+      ],
+      "remaining": "Private handoff serves existing group/Form owners only. Broader declarations,global defaults and all full owner contracts remain required."
+    },
+    "transactional_compiled_membership": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Prepare disconnected catalog controls, then update the same compiled Form Field and native/member/original/capture/default/error/reset references. Roll back ordinary publication failure without retiring Field identity or losing retained drafts.",
+      "source_refs": [
+        "src/ui/choice-group.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "S03",
+        "B07",
+        "B08",
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "B15"
+      ],
+      "remaining": "No generalized transaction/binding graph or whole-application side-effect rollback. Disposal or newer ownership must never resurrect retired nodes."
+    },
+    "raw_drafts_and_explicit_projection": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Replace catalog without Rows writes,reconciliation,validators,whole/value hooks,native change or onChange. Preserve raw source/originals and RowId-keyed drafts; preflight only applicable applied explicit cached projection against proposed choices,without replaying callbacks.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/value-binding.ts",
+        "src/ui/choice-group.ts"
+      ],
+      "witnesses": [
+        "S03",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B13",
+        "B16",
+        "B17",
+        "I04"
+      ],
+      "remaining": "Unavailable source values and pending/failed projections retain their documented owners. Full data/value/source/default semantics remain open."
+    },
+    "captured_native_reset_and_focus": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Keep radio string/null and checkbox arrays at0/1/N. Preserve live checkedness and surviving native defaults separately from captured creation values; unbind uses group.write(capture.value),including empty groups. Retarget existing issues/attributes,reset owners and focus after maps and guards settle.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/ui/choice-group.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S03",
+        "B02",
+        "B06",
+        "B07",
+        "B10",
+        "B11",
+        "B12",
+        "B15",
+        "E01",
+        "E02"
+      ],
+      "remaining": "Public setValue/dispose stay locked while adopted. No hidden proxy/local raw store,native wrapper or new reset-data policy."
+    },
+    "real_cvc_and_exact_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Exercise live adopted replacement through actual authored CVC and existing isolated JS/TS/five-browser consumers,including independent instances,source/drafts/defaults/failure and quiet teardown.",
+      "source_refs": [
+        "examples/vite/m5/choices.html",
+        "examples/vite/m5/choices.ts",
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "S04",
+        "E01",
+        "E02",
+        "B16",
+        "B17",
+        "I01",
+        "I02",
+        "I03",
+        "I04"
+      ],
+      "remaining": "Broader Select mutation/index/append/reset remains M6.1; generated row-control integration remains M5.19 and editable List remains M6.2. No full-family,P0,M13,personal or release closure."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/choice-group.ts",
+      "title": "Prepared native catalog publication and deferred focus under exact generation ownership",
+      "marker": "function replacement("
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/ui/choice-group-owner.ts",
+      "title": "Exact registration claim/version and optional Form replacement mediation",
+      "marker": "export function replaceChoiceGroup("
+    },
+    "S03": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "Same compiled Field membership replacement,source/draft/cache guards and transactional native maps",
+      "marker": "function replaceGroup("
+    },
+    "S04": {
+      "kind": "source",
+      "file": "src/ui/index.ts",
+      "title": "Existing public choice-group entry remains unchanged",
+      "marker": "ChoiceGroupHandle"
+    },
+    "E01": {
+      "kind": "example_source",
+      "file": "examples/vite/m5/choices.html",
+      "title": "Native live catalog control in each authored CVC screen",
+      "marker": "data-live-catalog"
+    },
+    "E02": {
+      "kind": "example_source",
+      "file": "examples/vite/m5/choices.ts",
+      "title": "Existing adopted Fruit handle mediates setChoices without writing source",
+      "marker": "fruit.setChoices("
+    },
+    "I01": {
+      "kind": "installed_source",
+      "file": "tests/consumers/js/check.mjs",
+      "title": "Isolated JavaScript retains the existing public choice-group import",
+      "marker": "assert.equal(typeof bindChoiceGroup, \"function\");"
+    },
+    "I02": {
+      "kind": "installed_source",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Strict TypeScript uses existing setChoices after Form adoption",
+      "marker": "fruit.setChoices([{ value: \"apple\", label: \"Apple again\" }]);"
+    },
+    "I03": {
+      "kind": "installed_source",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Existing package-served group and Form handles supply real native consumer state",
+      "marker": "choiceGroups"
+    },
+    "I04": {
+      "kind": "installed_source",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Actual installed catalog removal and return retain raw values/defaults/direct-write locks",
+      "marker": "Installed authored groups must mediate live catalogs while keeping raw data, captured defaults, direct-write locks and exact teardown."
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "catalog preparation detects a temporary claim that returns to an unclaimed group"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "adopted catalogs preserve Rows values and captures across zero one many choices"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "current and hidden row drafts survive catalog removal without committing or replaying hooks"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "applied explicit projections preflight new codes while raw and failed projections keep their owners"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "a retained draft overrides an older explicit projection during adopted replacement"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "local native selection reset and captured unbind remain separate after live replacement"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "new members retain errors and change markers and retired controls cannot commit"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "catalog getters cannot publish over newer source binding restoration or Form ownership"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "active value work and incomplete construction reject live replacement without reading its catalog"
+    },
+    "B10": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "pending local reset blocks replacement and insertion reset is canceled before catalog publication"
+    },
+    "B11": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "empty groups preflight explicit native reset owners and roll back listener setup failure"
+    },
+    "B12": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "native insertion and late ARIA failures restore old members maps issues and focus for retry"
+    },
+    "B13": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "insertion-time Rows events roll back the catalog and replay external writes and draft clearing"
+    },
+    "B14": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "insertion-time disposal and replacement ownership cannot resurrect the retired catalog"
+    },
+    "B15": {
+      "kind": "browser",
+      "file": "tests/browser/form-live-choice-groups.spec.ts",
+      "title": "live focus and membership stay independent in simultaneous Forms sharing Rows"
+    },
+    "B16": {
+      "kind": "browser",
+      "file": "tests/browser/m513-choice-demo.spec.ts",
+      "title": "Stacked choice screen replaces adopted choices without replacing its record or defaults",
+      "marker": "test(`${name} replaces adopted choices without replacing its record or defaults`"
+    },
+    "B17": {
+      "kind": "browser",
+      "file": "tests/browser/m513-choice-demo.spec.ts",
+      "title": "Chip choice screen replaces adopted choices without replacing its record or defaults",
+      "marker": "test(`${name} replaces adopted choices without replacing its record or defaults`"
+    },
+    "W01": {
+      "kind": "modified_existing_browser",
+      "file": "tests/browser/form-choice-groups.spec.ts",
+      "title": "Form ownership mediates catalogs while blocking direct values and disposal through unbind",
+      "previous_title": "Form ownership blocks public group writes and disposal through unbind then releases on disposal",
+      "new_case_count": 0
+    },
+    "W02": {
+      "kind": "modified_existing_browser",
+      "file": "tests/browser/choice-group.spec.ts",
+      "title": "setter getters cannot mutate a disposed adopted or successfully replaced choice group",
+      "new_case_count": 0,
+      "note": "Updated expected stale-claim result; the existing test identity is not a new case."
+    }
+  },
+  "witness_plan": {
+    "status": "actual_frozen_source_witness_inventory_recorded_runtime_acceptance_pending",
+    "required": [
+      "Rows/local/paused Forms and independent MDI",
+      "zero/one/many groups and hidden/current drafts",
+      "explicit/raw/pending/failed value projections",
+      "captured creation versus live/native defaults,reset and unbind",
+      "issue/change/ARIA/focus preservation and quiet retired controls",
+      "stale getters,ABA/reclaim,Rows mutation,disposal and reentry",
+      "insertion/annotation/reset-listener failures with rollback",
+      "actual CVC and exact installed JS/TS/five-browser consumers"
+    ]
+  },
+  "witness_counts": {
+    "status": "actual_frozen_source_inventory_fresh_runtime_counts_pending",
+    "unit_delta": 0,
+    "browser_delta": 17,
+    "standalone_browser_cases": 1,
+    "form_browser_cases": 14,
+    "actual_demo_browser_cases": 2,
+    "modified_existing_browser_cases": 2,
+    "modified_existing_cases_add_to_delta": false,
+    "source_witnesses": 4,
+    "example_source_witnesses": 2,
+    "installed_source_witnesses": 4,
+    "inherited_full_cases_per_engine": 836,
+    "expected_full_cases_per_engine": 853,
+    "expected_unit_pass_count": 138
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m514-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m514-verification.json",
+    "required_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "required_package_checks": [
+      "isolated_js",
+      "isolated_ts",
+      "packed_chromium",
+      "packed_firefox",
+      "packed_webkit",
+      "installed_chrome",
+      "installed_edge"
+    ],
+    "required_other_checks": [
+      "strict_build",
+      "strict_source_types",
+      "strict_example_types",
+      "unit",
+      "binding_9_original_budgets",
+      "viewport_21_original_budgets",
+      "docs_changed_zero_errors_warnings",
+      "docs_full_zero_errors_warnings"
+    ],
+    "baseline_input_entries": 201,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 836,
+    "inventory_expectation": {
+      "status": "actual_frozen_source_counts_canonical_receipt_pending",
+      "expected_source_inputs": 202,
+      "expected_package_files": 203,
+      "expected_unit_pass_count": 138,
+      "scope": "One new browser file adds14cases; one standalone case and two expanded real-demo cases add17total. Two modified existing cases add no new count. Three existing runtime modules change; no new public API/type/entry/dependency or archive-equality assumption."
+    },
+    "semantic_document_scope": [
+      "docs/implementation/current.md",
+      "docs/implementation/m5-live-choice-groups-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "docs/implementation/feature-parity-plan.md",
+      "docs/v2/choice-group.md",
+      "docs/v2/choice-groups-example.md",
+      "docs/v2/form.md",
+      "docs/v2/ui.md",
+      "docs/v2/value-callbacks.md",
+      "docs/v2/migration.md",
+      "docs/v2/select.md",
+      "docs/implementation/omission-decision.md"
+    ],
+    "semantic_document_scope_status": "exact_twelve_current_plan_and_API_bodies_pending_final_review",
+    "setup_observations": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M514 helpers; not project verification",
+        "log": {
+          "path": "node_modules/.cache/m514-helper-syntax.log",
+          "sha256": "58d3ab3f91c80ca12f1cd69482eaeec96101b3564346af8280bc1fc65c060808"
+        }
+      },
+      {
+        "kind": "own_ignored_helper_syntax_after_frozen_inventory_and_doc_scope_guards",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M514 helpers; not project verification",
+        "log": {
+          "path": "node_modules/.cache/m514-helper-syntax-2.log",
+          "sha256": "125a8364b8a6aa53da4cd969cd6da39b05d6fa181973c1bfae53a614f3a8d37c"
+        }
+      }
+    ],
+    "operator_dispositions": [
+      {
+        "kind": "captured_initial_focused_fixture_failures",
+        "initial_gate": {
+          "label": "focused-chromium",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "tests/browser/form-live-choice-groups.spec.ts",
+            "tests/browser/choice-group.spec.ts",
+            "tests/browser/form-choice-groups.spec.ts",
+            "tests/browser/m514-choice-demo.spec.ts",
+            "tests/browser/form-m6.spec.ts",
+            "tests/browser/form-values.spec.ts",
+            "tests/browser/form-defaults.spec.ts",
+            "tests/browser/form-discovery.spec.ts",
+            "tests/browser/select-pagination.spec.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--reporter=line"
+          ],
+          "started": "2026-11-14T12:53:40.860Z",
+          "finished": "2026-11-14T12:54:09.185Z",
+          "exit_code": 1,
+          "log": "m514-focused-chromium.log",
+          "log_sha256": "814bc093475a4d343d1f2e7ed3b9a79fd66cb31b993990aaff2dab871eeb962a",
+          "input_manifest": "m514-inputs-8e65fc9eec66.json",
+          "input_manifest_sha256": "8e65fc9eec66ff405948984db554203025fac1ea3f5ae05be5f7d0b2f33235c5",
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "sources_unchanged": true,
+          "environment": {
+            "PLAYWRIGHT_BROWSERS_PATH": null
+          },
+          "runtime": {
+            "node": "v24.18.0",
+            "platform": "win32",
+            "arch": "x64"
+          }
+        },
+        "initial_scope": {
+          "total": 136,
+          "passed": 134,
+          "failed": 2,
+          "full_suite_credit": 0
+        },
+        "changed_inputs": [
+          "tests/browser/form-live-choice-groups.spec.ts"
+        ],
+        "framework_sources_changed_between_maps": false,
+        "corrections": [
+          {
+            "case": "new members retain errors and change markers and retired controls cannot commit",
+            "change": "Use exact true for the successful custom validation branch; null remains a validation failure."
+          },
+          {
+            "case": "native insertion and late ARIA failures restore old members maps issues and focus for retry",
+            "change": "Assert equivalent DOM and exact native child identity/checkedness/focus,not serialized attribute-byte order."
+          }
+        ],
+        "focused_selection_difference": {
+          "initial_demo_filter": "tests/browser/m514-choice-demo.spec.ts",
+          "corrected_demo_filter": "tests/browser/m513-choice-demo.spec.ts",
+          "scope": "The initial filter omitted the actual four-case demo file. Corrected focused selection contains140cases. This is separate from the two fixture failures and does not add whole-suite credit."
+        },
+        "corrected_development_focus": {
+          "chromium": {
+            "gate": {
+              "label": "focused-chromium",
+              "args": [
+                "node_modules/@playwright/test/cli.js",
+                "test",
+                "-c",
+                "tests/playwright.config.ts",
+                "tests/browser/form-live-choice-groups.spec.ts",
+                "tests/browser/choice-group.spec.ts",
+                "tests/browser/form-choice-groups.spec.ts",
+                "tests/browser/m513-choice-demo.spec.ts",
+                "tests/browser/form-m6.spec.ts",
+                "tests/browser/form-values.spec.ts",
+                "tests/browser/form-defaults.spec.ts",
+                "tests/browser/form-discovery.spec.ts",
+                "tests/browser/select-pagination.spec.ts",
+                "--project=chromium",
+                "--workers=1",
+                "--reporter=line"
+              ],
+              "started": "2026-11-14T13:02:02.964Z",
+              "finished": "2026-11-14T13:02:32.100Z",
+              "exit_code": 0,
+              "log": "m514-focused-chromium-2.log",
+              "log_sha256": "263848b19be9464f818d04ac26b5ccf5c563447675f5b66ad759bdef662bee4f",
+              "input_manifest": "m514-inputs-11672a852e98.json",
+              "input_manifest_sha256": "11672a852e98af55f324f885a90aa9ce7559018eae75d7d9533c13ccd1911cc5",
+              "source_normalization": "UTF-8; CRLF normalized to LF",
+              "sources_unchanged": true,
+              "environment": {
+                "PLAYWRIGHT_BROWSERS_PATH": null
+              },
+              "runtime": {
+                "node": "v24.18.0",
+                "platform": "win32",
+                "arch": "x64"
+              }
+            },
+            "passed": 140,
+            "full_suite_credit": 0
+          },
+          "firefox": {
+            "gate": {
+              "label": "focused-firefox",
+              "args": [
+                "node_modules/@playwright/test/cli.js",
+                "test",
+                "-c",
+                "tests/playwright.config.ts",
+                "tests/browser/form-live-choice-groups.spec.ts",
+                "tests/browser/choice-group.spec.ts",
+                "tests/browser/form-choice-groups.spec.ts",
+                "tests/browser/m513-choice-demo.spec.ts",
+                "tests/browser/form-m6.spec.ts",
+                "tests/browser/form-values.spec.ts",
+                "tests/browser/form-defaults.spec.ts",
+                "tests/browser/form-discovery.spec.ts",
+                "tests/browser/select-pagination.spec.ts",
+                "--project=firefox",
+                "--workers=1",
+                "--reporter=line"
+              ],
+              "started": "2026-11-14T13:02:32.125Z",
+              "finished": "2026-11-14T13:03:51.638Z",
+              "exit_code": 0,
+              "log": "m514-focused-firefox.log",
+              "log_sha256": "98c811144e157376051af04b527c54ed1096e7ebd805434079af4f179e6b11a0",
+              "input_manifest": "m514-inputs-11672a852e98.json",
+              "input_manifest_sha256": "11672a852e98af55f324f885a90aa9ce7559018eae75d7d9533c13ccd1911cc5",
+              "source_normalization": "UTF-8; CRLF normalized to LF",
+              "sources_unchanged": true,
+              "environment": {
+                "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+              },
+              "runtime": {
+                "node": "v24.18.0",
+                "platform": "win32",
+                "arch": "x64"
+              }
+            },
+            "passed": 140,
+            "full_suite_credit": 0
+          },
+          "webkit": {
+            "gate": {
+              "label": "focused-webkit",
+              "args": [
+                "node_modules/@playwright/test/cli.js",
+                "test",
+                "-c",
+                "tests/playwright.config.ts",
+                "tests/browser/form-live-choice-groups.spec.ts",
+                "tests/browser/choice-group.spec.ts",
+                "tests/browser/form-choice-groups.spec.ts",
+                "tests/browser/m513-choice-demo.spec.ts",
+                "tests/browser/form-m6.spec.ts",
+                "tests/browser/form-values.spec.ts",
+                "tests/browser/form-defaults.spec.ts",
+                "tests/browser/form-discovery.spec.ts",
+                "tests/browser/select-pagination.spec.ts",
+                "--project=webkit",
+                "--workers=1",
+                "--reporter=line"
+              ],
+              "started": "2026-11-14T13:03:51.661Z",
+              "finished": "2026-11-14T13:04:39.409Z",
+              "exit_code": 0,
+              "log": "m514-focused-webkit.log",
+              "log_sha256": "51ac2dba0b25daae097897028e5481a1ca52557d7e9880731f81fcd9454623ca",
+              "input_manifest": "m514-inputs-11672a852e98.json",
+              "input_manifest_sha256": "11672a852e98af55f324f885a90aa9ce7559018eae75d7d9533c13ccd1911cc5",
+              "source_normalization": "UTF-8; CRLF normalized to LF",
+              "sources_unchanged": true,
+              "environment": {
+                "PLAYWRIGHT_BROWSERS_PATH": null
+              },
+              "runtime": {
+                "node": "v24.18.0",
+                "platform": "win32",
+                "arch": "x64"
+              }
+            },
+            "passed": 140,
+            "full_suite_credit": 0
+          }
+        },
+        "disposition": "Two fixture-only corrections and the actual demo filter are followed by three complete corrected140-case focused passes. Fresh canonical whole-suite acceptance remains pending the current pipeline; no failed or focused attempt stands in for it."
+      }
+    ],
+    "diagnostic_dispositions": [
+      {
+        "kind": "original_failed_M514_focused_members",
+        "parent_gate": {
+          "label": "focused-chromium",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "tests/browser/form-live-choice-groups.spec.ts",
+            "tests/browser/choice-group.spec.ts",
+            "tests/browser/form-choice-groups.spec.ts",
+            "tests/browser/m514-choice-demo.spec.ts",
+            "tests/browser/form-m6.spec.ts",
+            "tests/browser/form-values.spec.ts",
+            "tests/browser/form-defaults.spec.ts",
+            "tests/browser/form-discovery.spec.ts",
+            "tests/browser/select-pagination.spec.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--reporter=line"
+          ],
+          "started": "2026-11-14T12:53:40.860Z",
+          "finished": "2026-11-14T12:54:09.185Z",
+          "exit_code": 1,
+          "log": "m514-focused-chromium.log",
+          "log_sha256": "814bc093475a4d343d1f2e7ed3b9a79fd66cb31b993990aaff2dab871eeb962a",
+          "input_manifest": "m514-inputs-8e65fc9eec66.json",
+          "input_manifest_sha256": "8e65fc9eec66ff405948984db554203025fac1ea3f5ae05be5f7d0b2f33235c5",
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "sources_unchanged": true,
+          "environment": {
+            "PLAYWRIGHT_BROWSERS_PATH": null
+          },
+          "runtime": {
+            "node": "v24.18.0",
+            "platform": "win32",
+            "arch": "x64"
+          }
+        },
+        "trace": {
+          "path": "docs/implementation/evidence/m514-live-members-trace.zip",
+          "sha256": "105efe3ad977d61d047706e5538a74e28dd2694231de652d36eea7b3f8c6149d",
+          "bytes": 15949,
+          "members": 9,
+          "trace_events": 65
+        },
+        "context": {
+          "path": "docs/implementation/evidence/m514-live-members-context.txt",
+          "sha256": "c752709d2f463de16c19ac156c47d57af6949660e827b57e8aec3e5f185b12c7",
+          "bytes": 18882
+        },
+        "observed_error": "The permissive fixture branch returned null instead of the documented exact true success,so the expected c commit/error clear did not occur.",
+        "disposition": "Corrected only the custom validator fixture to return true on success.",
+        "source_or_screencast_capture": false,
+        "full_suite_credit": 0,
+        "scope": "Actual first-failure trace/context,not a later diagnostic or historical M5.13 evidence. Source-map comparison proves only this test file changed before the corrected focused runs."
+      },
+      {
+        "kind": "original_failed_M514_focused_rollback",
+        "parent_gate": {
+          "label": "focused-chromium",
+          "args": [
+            "node_modules/@playwright/test/cli.js",
+            "test",
+            "-c",
+            "tests/playwright.config.ts",
+            "tests/browser/form-live-choice-groups.spec.ts",
+            "tests/browser/choice-group.spec.ts",
+            "tests/browser/form-choice-groups.spec.ts",
+            "tests/browser/m514-choice-demo.spec.ts",
+            "tests/browser/form-m6.spec.ts",
+            "tests/browser/form-values.spec.ts",
+            "tests/browser/form-defaults.spec.ts",
+            "tests/browser/form-discovery.spec.ts",
+            "tests/browser/select-pagination.spec.ts",
+            "--project=chromium",
+            "--workers=1",
+            "--reporter=line"
+          ],
+          "started": "2026-11-14T12:53:40.860Z",
+          "finished": "2026-11-14T12:54:09.185Z",
+          "exit_code": 1,
+          "log": "m514-focused-chromium.log",
+          "log_sha256": "814bc093475a4d343d1f2e7ed3b9a79fd66cb31b993990aaff2dab871eeb962a",
+          "input_manifest": "m514-inputs-8e65fc9eec66.json",
+          "input_manifest_sha256": "8e65fc9eec66ff405948984db554203025fac1ea3f5ae05be5f7d0b2f33235c5",
+          "source_normalization": "UTF-8; CRLF normalized to LF",
+          "sources_unchanged": true,
+          "environment": {
+            "PLAYWRIGHT_BROWSERS_PATH": null
+          },
+          "runtime": {
+            "node": "v24.18.0",
+            "platform": "win32",
+            "arch": "x64"
+          }
+        },
+        "trace": {
+          "path": "docs/implementation/evidence/m514-live-rollback-trace.zip",
+          "sha256": "7c80bef97a4c9f83b62e63fdec509905b01f56f921de6db08d15c511bbdd8908",
+          "bytes": 15509,
+          "members": 9,
+          "trace_events": 65
+        },
+        "context": {
+          "path": "docs/implementation/evidence/m514-live-rollback-context.txt",
+          "sha256": "a81799dfee53fbf2f64891b139af0db2b3eb4529ad4c63b5968248c5c077a36e",
+          "bytes": 17509
+        },
+        "observed_error": "The fixture compared serialized innerHTML bytes after rollback; equivalent owned attributes had different serialization order.",
+        "disposition": "Corrected only the fixture to compare DOM isEqualNode plus exact retained child-node identity,checked value and focus. No attribute-byte or style-text identity promise is introduced.",
+        "source_or_screencast_capture": false,
+        "full_suite_credit": 0,
+        "scope": "Actual first-failure trace/context,not a later diagnostic or historical M5.13 evidence. Source-map comparison proves only this test file changed before the corrected focused runs."
+      }
+    ],
+    "superseded_artifacts": [],
+    "independent_reviews": {
+      "baseline": "passed_read_only_daab0f2_M513_source_raw_archive_review_and_preservation_recovery",
+      "contract": "passed_pre_source_specific_private_handoff_and_failure_contract",
+      "source": "passed_independent_connected_source_and_caller_review",
+      "evidence": "passed_independent_raw_source_map_archive_shard_performance_failure_artifact_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_M513_baseline_recovery_for_authorized_M514_to_M520",
+        "helper": {
+          "path": "node_modules/.cache/m514-baseline-audit.mjs",
+          "sha256": "30253d10499d418e1d7f20f6d0ee7a79ec73a938c2f56165c48b9e67c511112b"
+        },
+        "log": {
+          "path": "node_modules/.cache/m514-baseline-audit.log",
+          "sha256": "4b84ef861552bb43b86152b837d778c83ea72e05769e899db893d9807062e3dd"
+        },
+        "scope": "Recorded-byte recovery only;201inputs/95protected evidence/27records/3maps/138units/836each/203actualtar/30budgets/6parents/3rawfixtures and original review snapshots remain dated M5.13 evidence."
+      },
+      "contract": {
+        "plan": "docs/implementation/m5-live-choice-groups-plan.md",
+        "status": "source_GO_from_root_no_runtime_acceptance",
+        "scope": "Specific existing setChoices/Form claim handoff; exact independent contract review notes are recorded by root before final acceptance."
+      },
+      "witness_inventory": {
+        "status": "actual_frozen_source_only_no_runtime_credit",
+        "browser_files": [
+          "tests/browser/choice-group.spec.ts",
+          "tests/browser/form-live-choice-groups.spec.ts",
+          "tests/browser/m513-choice-demo.spec.ts"
+        ],
+        "new_browser_cases": 17,
+        "modified_existing_cases": [
+          {
+            "file": "tests/browser/form-choice-groups.spec.ts",
+            "previous_title": "Form ownership blocks public group writes and disposal through unbind then releases on disposal",
+            "current_title": "Form ownership mediates catalogs while blocking direct values and disposal through unbind",
+            "delta": 0
+          },
+          {
+            "file": "tests/browser/choice-group.spec.ts",
+            "title": "setter getters cannot mutate a disposed adopted or successfully replaced choice group",
+            "delta": 0
+          }
+        ],
+        "source_sha256": {
+          "src/ui/choice-group.ts": "f1a6f019405752cf0434ea0868bb62c9fc7904b84c967580677c19e35dd9a5eb",
+          "src/ui/choice-group-owner.ts": "6792da12c2522cb6d0a654c7a239b60367b8c3a7b4693ca81e771a85a7120f14",
+          "src/ui/form.ts": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+          "src/ui/index.ts": "9ba3b503fac6475ecb3c8b001aa61fd564da79ad33a920635b2cc45a27a3d800",
+          "examples/vite/m5/choices.html": "159341946f126e66744364ac5d0aa48b6eb76c1e9878f773e16edd69b46a98bd",
+          "examples/vite/m5/choices.ts": "b2e6021053b13fb4bb9e70224349d08350a7e972fd8977fafb8bcfe39fea06e3",
+          "tests/consumers/js/check.mjs": "2592ddba0ba2e9d6e92f755de5a214e61349130898852a79094fcf7334e11166",
+          "tests/consumers/ts/check.ts": "f9694b047211a728a7dd874b1d6e9c8921ff77f7d5d0dbd707c4e06637a5d948",
+          "tests/consumers/browser/main.js": "b423fa53aa4b14eb8cc7f989f83946752f28214966c77eaaef6d178578533581",
+          "tools/check-packed-browser.mjs": "6ec249e45a80d2712a929dbcc65515658224736f4a2313362ad86ffa5179287d",
+          "tests/browser/choice-group.spec.ts": "049ec20f9b7ada66c07103b972964bb905681f2f72da876dff932fe607b96d1e",
+          "tests/browser/form-live-choice-groups.spec.ts": "ff6e0097b1e3a5092b028cae0a6611e61e82137043d381d524eda68535e685a9",
+          "tests/browser/m513-choice-demo.spec.ts": "a68c216193d516dba89f9d74d7f61dc64ec6ad6ca63cdc20e0afc06f87ddd685",
+          "tests/browser/form-choice-groups.spec.ts": "e8e146682f6a79269872d5d50cd0b1a231e0ad18343eff4937f0cef7f75cd47c"
+        },
+        "scope": "Read-only literal/new-file and two-layout expansion inventory against daab0f2; no test collection/execution,compiler or browser command."
+      },
+      "source": {
+        "status": "passed_independent_connected_source_and_caller_review",
+        "reviewers": [
+          {
+            "name": "m511_design",
+            "scope": "Independent specific group/claim owner review; Form implementation author."
+          },
+          {
+            "name": "m511_legacy",
+            "scope": "Independent connected group/Form/bridge/tests/demo/TS/packed-consumer review; no M5.14 runtime or caller authorship."
+          }
+        ],
+        "findings": [],
+        "reviewed_source_sha256": {
+          "src/ui/choice-group.ts": "f1a6f019405752cf0434ea0868bb62c9fc7904b84c967580677c19e35dd9a5eb",
+          "src/ui/choice-group-owner.ts": "6792da12c2522cb6d0a654c7a239b60367b8c3a7b4693ca81e771a85a7120f14",
+          "src/ui/form.ts": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+          "src/ui/native-control.ts": "1a41cc7bf79c0f00eef7d7163bcc99aeab190f7e5134d7bb2d38fdfcb0f33197",
+          "src/ui/native-defaults.ts": "902042418d6be81564305493837934bba68d9d8af6b4cd74967a193f069981ed",
+          "src/ui/value-binding.ts": "3aa6496e714dc5321545507ca5d471cf389cb40ec45c013fdceb4ddcad11174c",
+          "src/ui/rules.ts": "a8fe90c206cfa1b0800b0c0f6a48b9e9a5b350b8974986bcf081a1054a81f0c8",
+          "tests/browser/choice-group.spec.ts": "049ec20f9b7ada66c07103b972964bb905681f2f72da876dff932fe607b96d1e",
+          "tests/browser/form-choice-groups.spec.ts": "e8e146682f6a79269872d5d50cd0b1a231e0ad18343eff4937f0cef7f75cd47c",
+          "tests/browser/form-live-choice-groups.spec.ts": "ff6e0097b1e3a5092b028cae0a6611e61e82137043d381d524eda68535e685a9",
+          "tests/browser/m513-choice-demo.spec.ts": "a68c216193d516dba89f9d74d7f61dc64ec6ad6ca63cdc20e0afc06f87ddd685",
+          "examples/vite/m5/choices.html": "159341946f126e66744364ac5d0aa48b6eb76c1e9878f773e16edd69b46a98bd",
+          "examples/vite/m5/choices.ts": "b2e6021053b13fb4bb9e70224349d08350a7e972fd8977fafb8bcfe39fea06e3",
+          "tests/consumers/ts/check.ts": "f9694b047211a728a7dd874b1d6e9c8921ff77f7d5d0dbd707c4e06637a5d948",
+          "tools/check-packed-browser.mjs": "6ec249e45a80d2712a929dbcc65515658224736f4a2313362ad86ffa5179287d"
+        },
+        "focused_records": {
+          "chromium": {
+            "log": "m514-focused-chromium-2.log",
+            "sha256": "263848b19be9464f818d04ac26b5ccf5c563447675f5b66ad759bdef662bee4f",
+            "input_manifest": "m514-inputs-11672a852e98.json",
+            "passed": 140
+          },
+          "firefox": {
+            "log": "m514-focused-firefox.log",
+            "sha256": "98c811144e157376051af04b527c54ed1096e7ebd805434079af4f179e6b11a0",
+            "input_manifest": "m514-inputs-11672a852e98.json",
+            "passed": 140
+          },
+          "webkit": {
+            "log": "m514-focused-webkit.log",
+            "sha256": "51ac2dba0b25daae097897028e5481a1ca52557d7e9880731f81fcd9454623ca",
+            "input_manifest": "m514-inputs-11672a852e98.json",
+            "passed": 140
+          }
+        },
+        "observations": [
+          "Specific prepared handoff and claim-version checks retain Field/draft/capture identity and prevent stale getter ABA publication.",
+          "Raw Rows/originals, explicit applied projection preflight and failed/pending cache ownership remain separate from current native selection.",
+          "Membership, annotations, issues, native reset subscriptions, ordinary rollback and settled focus follow the actual controls.",
+          "Queued real source events retain ordinary draft pruning and repaint after guarded publication; external writes are not rolled back.",
+          "Disposal, release/reclaim and newer source work cannot resurrect retired controls; direct public setValue/dispose remain locked.",
+          "Fourteen Form-live tests, one added standalone test, two expanded demo tests and two modified existing tests cover the selected contract.",
+          "No new public API/type/entry, dependency, generic transaction engine or second data store is introduced."
+        ],
+        "scope": "Targeted change review and frozen focused-log reconciliation only; no full-family, whole P0/M13, final raw/document or manual accessibility acceptance.",
+        "log": {
+          "path": "node_modules/.cache/m514-source-review.log",
+          "sha256": "12e7e94c59072f7c3c3677af4fc64d486938dd606f489e870f5e570762848d9e"
+        }
+      },
+      "evidence": {
+        "status": "approved_independent_final_raw_evidence",
+        "helper": {
+          "path": "node_modules/.cache/m514-independent-audit.mjs",
+          "sha256": "b11a8fe7fb4e28c054d01e18dfdb824ce1b4ca20b178fc668014e546c728d431"
+        },
+        "log": {
+          "path": "node_modules/.cache/m514-independent-audit.log",
+          "sha256": "df7f49a2601538188b2a06f230f978224122e692bec3d29afb7f11a9e675e02e"
+        },
+        "audited_receipt": {
+          "path": "node_modules/.cache/m514-reviewed-runtime-receipt.json",
+          "sha256": "7c0e64667439dcef808979157733aaea3b4c83b21713b8edb0094a8b1e54c856",
+          "byte_exact_R0": true
+        },
+        "scope": "Accepted independent recorded-byte audit of the complete immutable R0 scope. No runtime rerun,expanded observation,historical credit or full-family acceptance; final document verification remains pending."
+      },
+      "final_documents": {
+        "schema_version": 1,
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "reviewed_at": "2026-11-14T13:53:00.712Z",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_body_sha256": "a4834a9f05efa657b153f6117cd64a7095e674d653fa88eac29510caeeab346f",
+            "normalized_body_bytes": 4524,
+            "review": "Fresh full-body semantic review, including final corrected P0 resume wording."
+          },
+          "docs/implementation/m5-live-choice-groups-plan.md": {
+            "normalized_body_sha256": "677fab9a6b77c6f4feb55fba9068bcab2d87f82d87d944d2572cf140802ab6dd",
+            "normalized_body_bytes": 8551,
+            "review": "Fresh full-body semantic review, including final corrected P0 resume wording."
+          },
+          "docs/implementation/m5-completion-run.md": {
+            "normalized_body_sha256": "e45dc1b20b4c0afd297fa3d9d2305c5ab5aef3ebb08b64b03899131d5f469be5",
+            "normalized_body_bytes": 6181,
+            "review": "Fresh full-body semantic review, including final corrected P0 resume wording."
+          },
+          "docs/implementation/feature-parity-plan.md": {
+            "normalized_body_sha256": "c06ee1e08eff905a0ed609f7ca985ac8ebcd7611424f703351a4047d90c13ac9",
+            "normalized_body_bytes": 22824,
+            "review": "Prior full-body independent acceptance renewed after exact reconstruction proves only redundant live-choices footnote reference/definition removal. The inline M5.14 link and actual Form source retain provenance."
+          },
+          "docs/v2/choice-group.md": {
+            "normalized_body_sha256": "e28e65c4bdb3aca8e4a40de78af21257e9327c1246a4faf32275d79050f4b5b9",
+            "normalized_body_bytes": 13066,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/v2/choice-groups-example.md": {
+            "normalized_body_sha256": "f1aca179d8e56372fdeac7495d83f1bd777edb777fa1febbde1474db4de93e51",
+            "normalized_body_bytes": 7472,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/v2/form.md": {
+            "normalized_body_sha256": "e2bedf464cad4b82b29c06ec797d3645f6119fd59f048d5c87a9e4fd0d3554bb",
+            "normalized_body_bytes": 54407,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/v2/ui.md": {
+            "normalized_body_sha256": "791635767e4783c070471d1c7d4f6b52aa1730060fa4176db82c2a381656e811",
+            "normalized_body_bytes": 25751,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/v2/value-callbacks.md": {
+            "normalized_body_sha256": "f4b7cef55c8e37eee923c3b5e5aed092ac028c3f427709736ddae74e5545a5fa",
+            "normalized_body_bytes": 7178,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/v2/migration.md": {
+            "normalized_body_sha256": "750a0aa60ce678a76283fc200f47fd875cf94c084149ab47497d9e2573438c12",
+            "normalized_body_bytes": 57460,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/v2/select.md": {
+            "normalized_body_sha256": "067af160f9c4b1563e7851e703ceb6c316e1e4437bf4c7bbb3bf60f775c0cda5",
+            "normalized_body_bytes": 4217,
+            "review": "Prior independent full-body semantic acceptance rechecked by exact unchanged hash."
+          },
+          "docs/implementation/omission-decision.md": {
+            "normalized_body_sha256": "cfb4fff32f48cdcd44fb0ca6f6d520a42b00b66f7e5e0b0fa70dd52726ebcd32",
+            "normalized_body_bytes": 11971,
+            "review": "Fresh full-body semantic review, including final corrected P0 resume wording."
+          }
+        },
+        "normalization": "UTF-8; CRLF normalized to LF; body after the second frontmatter delimiter, untrimmed including blank lines and final newline.",
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m514-final-document-receipt.json",
+          "sha256": "42055802d10414267689c9c50bb6b9cde066ed4c33da9b6289cf8b3bd1ba4ffd"
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m514-runtime-invariance-initial.json",
+          "sha256": "9c7fed4632a8bf907e8c5526fe90d2cc38dc571c1c839fcb40e95adaa2d8317d",
+          "audited_receipt_sha256": "7c0e64667439dcef808979157733aaea3b4c83b21713b8edb0094a8b1e54c856",
+          "unchanged": true,
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "independent_raw_evidence": {
+          "helper": {
+            "path": "node_modules/.cache/m514-independent-audit.mjs",
+            "sha256": "b11a8fe7fb4e28c054d01e18dfdb824ce1b4ca20b178fc668014e546c728d431"
+          },
+          "log": {
+            "path": "node_modules/.cache/m514-independent-audit.log",
+            "sha256": "df7f49a2601538188b2a06f230f978224122e692bec3d29afb7f11a9e675e02e"
+          }
+        },
+        "expected_document_checker_scope": {
+          "concepts": 88,
+          "reserved_files": 5
+        },
+        "findings_resolved": [
+          "Omission Next action awaits the already-presented O01-O05 decision; it does not ask again.",
+          "Completion-run Open questions retains that same pending decision and required non-omitted owner outcomes.",
+          "Parity current checkpoint separates accepted P0.1 known-source inventory from pending O01-O05, runtime/full-family acceptance and final P0 semantic checks."
+        ],
+        "accepted_scope": [
+          "Only selected M5.14 live Form-owned catalog replacement outcomes; public setValue/dispose stay locked.",
+          "Raw Rows, RowId drafts, captured versus native defaults, cached explicit projection preflight, issue retargeting, reset ownership, rollback, stale/disposal guards and post-guard focus match frozen source and recorded witnesses.",
+          "23 gates, seven development records, sixteen final groups, 202 inputs, 138 units, 17 added cases and 853 cases per engine match independently accepted raw evidence.",
+          "P0.1 known-source inventory is accepted at cf2210f; all five proposed omissions remain pending and no full family, M5.20, final P0, M13 or release is closed.",
+          "Seven unchanged API/example bodies retain their prior independent full-body semantic acceptance; four root plans/current and the omission proposal were freshly read. Index/history changes retain accurate links and selected scope."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "allowed_actions": [
+            "Apply verified/generated metadata only to these twelve reviewed semantic concepts.",
+            "Refresh source fingerprints in dependent historical documents while preserving their semantic bodies and generated/verified dates.",
+            "Run actual changed/full documentation checks and record their output plus the exact document-history preservation report.",
+            "Update only selected M5.14 completion/review statuses after all stated checks pass, retaining every remaining owner, pending omission and immutable runtime fact."
+          ],
+          "required_before_completion": [
+            "Every reviewed normalized body hash remains unchanged.",
+            "Actual changed and full checks each report 88 concepts, five reserved files, zero errors and zero warnings.",
+            "History assertions prove all other changed concept bodies and generated/verified dates unchanged, allowing only dependency fingerprints.",
+            "Runtime facts remain deeply identical to independently audited R0 after excluding only review and semantic_acceptance.sha256; preserve immutable reviewed R1/proof snapshots.",
+            "If a gate fails, do not mark the selected stage complete or publish its final-pass prose. Resolve the actual failure without altering accepted bodies, or request a new semantic review for a body change."
+          ],
+          "final_pass_prose_delivery_condition": "The reviewed current/plan/log final-pass wording is approved for the completed checkpoint only after the root executes and passes the actual mechanical checks above. This semantic approval does not itself claim those checks ran.",
+          "excluded": [
+            "Source/test/example changes",
+            "Changes to audited runtime observations",
+            "Historical runtime recertification",
+            "Omission approval or full-family/M13 closure",
+            "npm publication, release tags, master/v1 changes"
+          ]
+        },
+        "limits": [
+          "Independent read-only semantic and recorded-byte review; no compiler, browser, benchmark, model evaluation or project checker executed by this reviewer.",
+          "Actual macOS/iOS Safari, manual assistive technology and actual token telemetry retain their prior limitations.",
+          "Only this ignored approval JSON is written; no source, ledger or documentation edits."
+        ],
+        "semantic_renewal": {
+          "prior_approval_sha256": "988130fd4e1da6af509b5d2542a7f3f7374abc9ef3bd5a450f392b49762a7249",
+          "changed_file": "docs/implementation/feature-parity-plan.md",
+          "prior_normalized_body_sha256": "18ad249a891d74d0e97a0ad3fc1dbf71ac9dc51dec165e6a8706f5c6954b768f",
+          "renewed_normalized_body_sha256": "c06ee1e08eff905a0ed609f7ca985ac8ebcd7611424f703351a4047d90c13ac9",
+          "change": "Remove redundant live-choices frontmatter source and its body footnote reference/definition to break a fingerprint dependency cycle. Retain the inline owning-plan link and actual Form source; no contract, acceptance claim or pending obligation changes.",
+          "exact_reconstruction_of_previous_body_verified": true,
+          "other_eleven_bodies_unchanged": true,
+          "immutable_R1_and_initial_runtime_proof_unchanged": true,
+          "prechecker_attempt": {
+            "disposition": "Parent reported fingerprint settling exhausted64passes before the checker ran; this earns no checker pass. Parent removed the redundant provenance cycle and reported an acyclic graph. This approval independently verifies the exact prose removal; it does not execute or certify a graph/checker command.",
+            "mechanical_checks_required_again": true
+          }
+        },
+        "reviewer": "m511_design",
+        "approval_record": {
+          "path": "node_modules/.cache/m514-final-document-approval.json",
+          "sha256": "041ed9185b3d1faaebe09d4828939a2464ec8ea4c6cbe9ae7228cc3586dbb982"
+        },
+        "mechanical_attempts": [
+          {
+            "phase": "fingerprint_settling",
+            "result": "failed_before_checker_execution",
+            "passes": 64,
+            "disposition": "Removed one newly introduced cyclic plan provenance reference; renewed independent one-body semantic acceptance, other eleven bodies and runtime facts unchanged.",
+            "evidence": "Actual root tool output; no raw checker execution or pass claimed."
+          },
+          {
+            "phase": "changed_docs_check",
+            "errors": 0,
+            "warnings": 10,
+            "category": "index-desc",
+            "disposition": "Synchronized ten reserved index descriptions to their actual concept frontmatter; no concept body changed.",
+            "evidence": "Actual root tool output; the first cache checker log was overwritten by the final successful check, so no retained raw first-log hash is claimed."
+          }
+        ],
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m514-docs-changed.log",
+              "sha256": "00cb574274c8d6a15521680c00f3d55b635de767371ec0dfa1c4c4bb19ee71c0",
+              "concepts": 88,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m514-docs-full.log",
+              "sha256": "ddf721ff14bc5167e5f9f34b65a360caef43850d19de71e578761f2fba08e687",
+              "concepts": 88,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m514-doc-history.json",
+            "sha256": "10c8aa3bdf395f04df99ca4652c1f10afc6479e1d10d478a6f133e4a80f1f2c2",
+            "historical_fingerprint_only": 36,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 12,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "limitations": [
+      "Only selected live Form-owned catalog replacement is in this stage. Full owners/P0/M13 and the remaining33-stage batch remain required.",
+      "No M5.13 development failure,trace or helper syntax check is attributed to this stage. New attempts and diagnostics must use m514 names and actual captured files.",
+      "Actual Safari is excluded; available WebKit and installed Chrome/Edge remain required. Manual/personal/fixed-agent/token and registry/tag/master/v1 actions are not accepted here."
+    ],
+    "runtime": {
+      "status": "fresh_canonical_and_independent_raw_complete_final_documents_pending",
+      "facts_owner": {
+        "path": "node_modules/.cache/m514-reviewed-runtime-receipt.json",
+        "sha256": "7c0e64667439dcef808979157733aaea3b4c83b21713b8edb0094a8b1e54c856"
+      },
+      "scope": "Actual202inputs/23records/2maps,138units,17new/853cases per engine,203-file artifact and complete diagnostics/performance/protection facts remain in immutable R0; no facts are rewritten here."
+    },
+    "semantic_document_scope_pending_additions": [
+      {
+        "path": "docs/implementation/omission-decision.md",
+        "condition": "Add only after the separate author provides its frozen actual file/hash; no omission approval. Then expect12semantic and88checker concepts."
+      }
+    ],
+    "expected_document_checker_scope": {
+      "concepts": 88,
+      "reserved_files": 5
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Literal per-unbound-key interleaving,equal-write callbacks,inherited enumerable keys,before-set old-value timing,silent post-notification mutation,broader default/global/declaration equivalence,direct hot declarations and all remaining Form/control/source/dynamic outcomes. Existing whole hooks/Rows recipes do not imply equivalence."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    },
+    {
+      "owner": "Choice groups / U10",
+      "required": "Broader Select removal/index/append/reset,value/default/event and dynamic declaration semantics remain M6.1; generated row-control integration remains M5.19. Selected live adopted replacement does not close U10."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only bounded live adopted catalog replacement may be accepted after implementation,fresh stage gates and independent source/raw/doc review. Every inherited full owner/P0/M13/consolidated omission and remaining authorized ancestor-batch obligation stays required."
+  }
+}

@@ -49,6 +49,12 @@ const definition: PageDefinition<{ layout: Layout; close(): void }> = {
       if (!result.valid) result.issues.find(issue => issue.element)?.element?.focus();
     }
     formRoot.addEventListener("submit", event => { event.preventDefault(); validate(); }, { signal });
+    find<HTMLSelectElement>(root, "[data-live-catalog]").addEventListener("change", event => {
+      const catalog = event.currentTarget as HTMLSelectElement;
+      fruit.setChoices(catalog.value === "empty" ? [] : catalog.value === "one" ? fruits.slice(0, 1)
+        : catalog.value === "disabled" ? fruits.map(choice => ({ ...choice, disabled: true })) : fruits);
+      status.textContent = "Choice catalog replaced. Stored values and captured defaults are unchanged.";
+    }, { signal });
     root.addEventListener("click", event => {
       const button = (event.target as Element).closest<HTMLButtonElement>("button");
       if (!button) return;

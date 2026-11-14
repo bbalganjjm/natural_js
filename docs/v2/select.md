@@ -18,10 +18,14 @@ sources:
     resource: ../../src/ui/select-owner.ts
     title: Shared Select ownership
     git_blob: 6902e2789df6e44123b2ea599e4d05fa1c098fa4
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - id: group
+    resource: ../../src/ui/choice-group.ts
+    title: Separate generated-group catalog and direct-write ownership
+    git_blob: 55f64a676def493b2b82221138fade4dc0755d2e
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 `bindSelect` adds typed choices to an authored `<select>` and reports the raw selected value. Form owns marked `data-field` Selects, while Grid and List own marked Selects in their repeated templates. An unmarked Select can be bound standalone; bind each Select only once.[^select][^owner]
@@ -85,8 +89,9 @@ The DOM string `value` is not enough to distinguish a generated numeric choice f
 
 # Radio and checkbox templates
 
-`bindSelect` remains a native Select binder with typed scalar choices. Use [bindChoiceGroup](choice-group.md) for authored native radio/checkbox item templates. It reuses `SelectChoice<string>` but returns a precise `ChoiceGroupHandle`: radio string/null, checkbox string arrays at every cardinality. Generate choices before Form adoption; public writes and disposal are locked until Form releases the group. This does not change Select ownership or raw option matching.[^entry][^select]
+`bindSelect` remains a native Select binder with typed scalar choices. Use [bindChoiceGroup](choice-group.md) for authored native radio/checkbox item templates. It reuses `SelectChoice<string>` but returns a precise `ChoiceGroupHandle`: radio string/null, checkbox string arrays at every cardinality. Generate choices before Form adoption. After adoption, the existing setChoices call can use Form's catalog handoff; direct setValue/dispose stay locked until Form releases the group. This group-specific behavior does not change native Select ownership or raw option matching.[^entry][^select][^group]
 
 [^entry]: Public Select types and export
 [^select]: Select binding runtime
 [^owner]: Shared Select ownership
+[^group]: Separate generated-group catalog and direct-write ownership

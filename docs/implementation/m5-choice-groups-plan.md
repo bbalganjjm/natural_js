@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-source-plan.md
     title: Existing source ownership and next U10 requirement
-    git_blob: 63df393eb305f77b6f7f58542b03acbe56845b64
+    git_blob: 67977f5d4fb1c9c9cde9ca6a23d94016ed89c127
   - id: baseline
     resource: evidence/m512-verification.json
     title: Frozen M5.12 source, runtime and installed artifact baseline
@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Compiled native groups, drafts, captures, rescan and cleanup
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native read, write and checkbox shape
@@ -36,7 +36,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete required outcomes and consolidated omission obligations
-    git_blob: 3f26da6201495be6823374d69ad89a929110b512
+    git_blob: 8346dee24d7196d12898fd1d149c0132a58a2980
 generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }

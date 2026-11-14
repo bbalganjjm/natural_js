@@ -7,7 +7,7 @@ import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
 import { claimSelect } from "./select-owner.js";
 import { checkGroupValue, claimChoiceGroup, getChoiceGroup } from "./choice-group-owner.js";
-import type { ChoiceGroupBinding } from "./choice-group-owner.js";
+import type { ChoiceGroupBinding, ChoiceGroupReplacement } from "./choice-group-owner.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import type { RowOption } from "./row-options.js";
 import { arrayField, control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
@@ -277,7 +277,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let boundId: RowId | null = null;
   let unsubscribe: (() => void) | undefined;
   let disposed = false;
+  let initialized = false;
   let scanning = false;
+  let replacingGroup: { events: RowsEvent[]; reset: boolean } | undefined;
   let rescanIncomplete = false;
   let workDepth = 0;
   let automatic = true;
@@ -300,7 +302,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let localRenderStarted = false;
   try {
     for (const field of fields) {
-      if (field.group) releaseGroups.set(field.group, claimChoiceGroup(field.group));
+      if (field.group) releaseGroups.set(field.group, claimChoiceGroup(field.group, prepare => replaceGroup(field, prepare)));
       if (field.element instanceof HTMLSelectElement) {
         releaseSelects.set(field.element, claimSelect(field.element, "bindForm"));
       }
@@ -380,7 +382,138 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function nativeOwner(element: HTMLElement): HTMLFormElement | null {
-    return control(element) ? element.form : element.closest<HTMLFormElement>("form");
+    return control(element) || element instanceof HTMLFieldSetElement ? element.form : element.closest<HTMLFormElement>("form");
+  }
+
+  function replaceGroup(field: Field, prepare: () => ChoiceGroupReplacement): void {
+    active();
+    if (!initialized || workDepth || restoring || reconciling || localRendering || rescanIncomplete || pendingResets.size) {
+      throw formError("FORM_CHOICE_GROUP", "Finish current Form work before replacing its choices.", { field: field.name });
+    }
+    working(() => {
+      const group = field.group!, id = boundId, snapshot = id === null ? undefined : rows!.get(id);
+      let version = renderVersion;
+      const current = () => !disposed && version === renderVersion && boundId === id &&
+        (id === null || rows!.get(id) === snapshot) && !replacingGroup?.reset;
+      const checkpoint = () => {
+        if (!current()) throw formError("FORM_CHOICE_GROUP", "Newer Form work superseded this choice replacement.", { field: field.name });
+      };
+      const state = initial.find(state => state.field === field)!;
+      const shown = group.read(), next = prepare();
+      checkpoint();
+      if (byName.get(field.name) !== field || group.root !== root && !root.contains(group.root) ||
+          field.originals.some(({ element }) => annotations.get(element) !== annotation(element))) {
+        throw formError("FORM_CHOICE_GROUP", "Reconcile changed Form fields before replacing choices.", { field: field.name });
+      }
+      const draft = id === null ? undefined : drafts.get(id);
+      const raw = snapshot ? readPath(snapshot.value, field.path) : undefined, projection = field.projection;
+      const applied = projection?.state === "applied" && projection.id === id && sameJson(projection.raw, raw);
+      if (id !== null && !draft?.has(field) && applied && projection.callback) {
+        const message = checkGroupValue({ ...group, inputs: next.inputs, values: next.values }, projection.value);
+        if (message) throw values.error(Object.freeze({ ...context(field, id, snapshot!.value as Record<string, unknown>),
+          rowId: id, element: field.element, phase: projection.phase }), projection.callback, message);
+      }
+      const selected = id !== null ? draft?.has(field) ? draft.get(field) :
+        applied ? projection.value : projection?.state === "failed" || projection?.state === "pending" ? shown : raw :
+        shown;
+      const rootOriginal = field.originals.find(original => original.element === group.root)!;
+      const originals = [rootOriginal, ...next.inputs.map(element => ({ element,
+        describedBy: element.getAttribute("aria-describedby"), invalid: element.getAttribute("aria-invalid"),
+        changed: element.getAttribute("data-field-changed") }))];
+      const primary = next.inputs[0] ?? group.root;
+      const nextElements = new Map(byElement), nextAnnotations = new Map(annotations);
+      for (const element of field.elements) { nextElements.delete(element); nextAnnotations.delete(element); }
+      for (const element of next.inputs) nextElements.set(element, field);
+      for (const { element } of originals) nextAnnotations.set(element, annotation(element));
+      const nextOwners = new Set<HTMLFormElement>();
+      if (!rows) for (const item of fields) for (const { element } of item === field ? originals : item.originals) {
+        let owner: HTMLFormElement | null;
+        if (item === field && element instanceof HTMLInputElement) {
+          const form = element.getAttribute("form"), target = form === null ? group.root.closest("form") :
+            root.ownerDocument.getElementById(form);
+          owner = target instanceof HTMLFormElement ? target : null;
+        } else owner = nativeOwner(element);
+        if (owner) nextOwners.add(owner);
+      }
+      const defaultEntry = defaultEntries.find(entry => entry.name === field.name);
+      const previous = { element: field.element, elements: field.elements, originals: field.originals,
+        byElement, annotations, initialElement: state.element, checked: state.checked,
+        defaultElement: defaultEntry?.element, issues: issues.get(field), owners: new Set(resetOwners) };
+      const attributes = field.originals.map(({ element }) => ({ element,
+        describedBy: element.getAttribute("aria-describedby"), invalid: element.getAttribute("aria-invalid"),
+        changed: element.getAttribute("data-field-changed") }));
+      const writeAttributes = (original: Field["originals"][number]) => {
+        if (original.describedBy === null) original.element.removeAttribute("aria-describedby");
+        else original.element.setAttribute("aria-describedby", original.describedBy);
+        if (original.invalid === null) original.element.removeAttribute("aria-invalid");
+        else original.element.setAttribute("aria-invalid", original.invalid);
+        if (rows) {
+          if (original.changed === null) original.element.removeAttribute("data-field-changed");
+          else original.element.setAttribute("data-field-changed", original.changed);
+        }
+      };
+      const transaction = { events: [] as RowsEvent[], reset: false }, added: HTMLFormElement[] = [], removed: HTMLFormElement[] = [];
+      let undo: (() => void) | undefined, committed = false, failed = false, failure: unknown;
+      checkpoint();
+      replacingGroup = transaction;
+      scanning = true;
+      version = ++renderVersion;
+      try {
+        for (const owner of nextOwners) if (!resetOwners.has(owner)) {
+          added.push(owner); owner.addEventListener("reset", onReset); checkpoint();
+        }
+        for (const original of field.originals) if (original.element !== group.root) {
+          writeAttributes(original); checkpoint();
+        }
+        undo = next.apply();
+        checkpoint();
+        field.element = primary; field.elements = [...next.inputs]; field.originals = originals;
+        byElement = nextElements; annotations = nextAnnotations;
+        state.element = primary;
+        const captured = new Set(typeof state.value === "string" ? [state.value] : Array.isArray(state.value) ? state.value : []);
+        state.checked = next.inputs.map(input => ({ input, checked: captured.has(input.value) }));
+        if (defaultEntry) defaultEntry.element = primary;
+        if (previous.issues) issues.set(field, previous.issues.map(issue => issue.element ? { ...issue, element: primary } : issue));
+        group.write(selected);
+        const original = id === null ? undefined : rows!.original(id);
+        const changed = original !== undefined && !sameJson(readPath(original, field.path), raw);
+        for (const original of originals) {
+          const tokens = new Set((original.describedBy ?? "").split(/\s+/).filter(Boolean)), error = errorIds.get(field);
+          if (error) tokens.add(error);
+          const describedBy = tokens.size ? [...tokens].join(" ") : original.describedBy;
+          writeAttributes({ ...original, describedBy,
+            invalid: previous.issues?.length ? "true" : original.invalid,
+            changed: rows ? String(changed) : original.changed });
+          checkpoint();
+        }
+        for (const owner of resetOwners) if (!nextOwners.has(owner)) {
+          removed.push(owner); owner.removeEventListener("reset", onReset); checkpoint();
+        }
+        resetOwners.clear(); for (const owner of nextOwners) resetOwners.add(owner);
+        committed = true;
+      } catch (cause) {
+        failed = true; failure = cause;
+        if (!disposed) {
+          field.element = previous.element; field.elements = previous.elements; field.originals = previous.originals;
+          byElement = previous.byElement; annotations = previous.annotations;
+          state.element = previous.initialElement; state.checked = previous.checked;
+          if (defaultEntry) defaultEntry.element = previous.defaultElement!;
+          if (previous.issues) issues.set(field, previous.issues); else issues.delete(field);
+          resetOwners.clear(); for (const owner of previous.owners) resetOwners.add(owner);
+          try { undo?.(); } catch { /* Preserve the original publication failure. */ }
+          for (const original of attributes) try { writeAttributes(original); } catch { /* Preserve the original failure. */ }
+          for (const owner of removed) try { owner.addEventListener("reset", onReset); } catch { /* Preserve the original failure. */ }
+        }
+      } finally {
+        if (!committed) for (const owner of added) try { owner.removeEventListener("reset", onReset); } catch { /* Preserve the original failure. */ }
+        scanning = false;
+        replacingGroup = undefined;
+        for (const event of transaction.events) try { onRows(event); } catch (cause) {
+          if (!failed) { failed = true; failure = cause; }
+        }
+      }
+      if (failed) throw failure;
+    });
   }
 
   function choiceOptions(field: Field, values: unknown, id: RowId | null): readonly RowOption[] {
@@ -488,6 +621,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function onReset(event: Event): void {
     if (disposed || !automatic || !event.isTrusted || event.target !== event.currentTarget) return;
+    if (replacingGroup) {
+      event.preventDefault();
+      replacingGroup.reset = true;
+      return;
+    }
     const owner = event.currentTarget as HTMLFormElement;
     const pending = pendingResets.get(owner) ?? [];
     pending.push(event);
@@ -895,7 +1033,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         pendingSelects.set(field.element, claimSelect(field.element, "bindForm"));
       }
       for (const field of nextFields) if (field.group && !releaseGroups.has(field.group)) {
-        pendingGroups.set(field.group, claimChoiceGroup(field.group));
+        pendingGroups.set(field.group, claimChoiceGroup(field.group, prepare => replaceGroup(field, prepare)));
       }
       if (!current()) return;
       committing = true;
@@ -1071,7 +1209,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
         const { field, element } = state;
         const retained = localRenderedValues.get(field);
         if (retained) { retained.raw = state.value; retained.invalid = false; }
-        if (element instanceof HTMLSelectElement) {
+        if (field.group) field.group.write(state.value);
+        else if (element instanceof HTMLSelectElement) {
           const choices = field.choices;
           if (choices) {
             choices.raw = new Map(choices.authoredOptions.map((option, index) => [option, choices.authored[index]]));
@@ -1271,6 +1410,38 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
+  function onRows(event: RowsEvent): void {
+    if (replacingGroup) { replacingGroup.events.push(event); return; }
+    if (!rows || disposed || event.type === "move" || event.type === "append" || (event.type === "set" || event.type === "setMany") && reconciling) return;
+    if (event.type === "replace" || event.type === "revert" && event.id === undefined) drafts.clear();
+    else if (event.type === "remove") drafts.delete(event.id);
+    else if (event.type === "revert" && event.id !== undefined) drafts.delete(event.id);
+    if (boundId === null || event.type === "set" && event.id !== boundId ||
+        event.type === "setMany" && !event.ids.includes(boundId)) return;
+    const row = rows.get(boundId);
+    if (!row || row.status === "delete") {
+      boundId = null;
+      issues.clear();
+      if (scanning) return;
+      render("bind");
+      showIssues();
+      return;
+    }
+    if (scanning) {
+      if (event.type === "set" || event.type === "setMany" || event.type === "replace" ||
+          event.type === "revert" && (event.id === undefined || event.id === boundId)) issues.clear();
+      return;
+    }
+    if (event.type === "revert" && (event.id === undefined || event.id === boundId)) {
+      bindRow(boundId, event, false);
+      return;
+    }
+    const reset = event.type === "replace";
+    if (reset || event.type === "set" || event.type === "setMany") issues.clear();
+    render(reset ? "bind" : "val", !reset);
+    showIssues();
+  }
+
   try {
     root.addEventListener("input", onInput);
     root.addEventListener("change", onInput);
@@ -1280,40 +1451,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
     root.addEventListener("focusin", onFocusIn);
     root.addEventListener("focusout", onFocusOut);
     for (const owner of resetOwners) owner.addEventListener("reset", onReset);
-    unsubscribe = rows?.subscribe(event => {
-      if (disposed || event.type === "move" || event.type === "append" || (event.type === "set" || event.type === "setMany") && reconciling) return;
-      if (event.type === "replace" || event.type === "revert" && event.id === undefined) drafts.clear();
-      else if (event.type === "remove") drafts.delete(event.id);
-      else if (event.type === "revert" && event.id !== undefined) drafts.delete(event.id);
-      if (boundId === null || event.type === "set" && event.id !== boundId ||
-          event.type === "setMany" && !event.ids.includes(boundId)) return;
-      const row = rows.get(boundId);
-      if (!row || row.status === "delete") {
-        boundId = null;
-        issues.clear();
-        if (scanning) return;
-        render("bind");
-        showIssues();
-        return;
-      }
-      if (scanning) {
-        if (event.type === "set" || event.type === "setMany" || event.type === "replace" ||
-            event.type === "revert" && (event.id === undefined || event.id === boundId)) issues.clear();
-        return;
-      }
-      if (event.type === "revert" && (event.id === undefined || event.id === boundId)) {
-        bindRow(boundId, event, false);
-        return;
-      }
-      const reset = event.type === "replace";
-      if (reset || event.type === "set" || event.type === "setMany") issues.clear();
-      render(reset ? "bind" : "val", !reset);
-      showIssues();
-    });
+    unsubscribe = rows?.subscribe(onRows);
   } catch (cause) {
     try { dispose(); } catch { /* Preserve the setup failure after releasing ownership. */ }
     throw cause;
   }
+  initialized = true;
 
   return {
     bind,

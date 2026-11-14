@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior

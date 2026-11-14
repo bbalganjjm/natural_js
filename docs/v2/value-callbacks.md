@@ -17,7 +17,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form cache, input and lifetime owner
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid mounted-field, draft, focus and projection owner
@@ -30,9 +30,9 @@ sources:
     resource: ../../tests/browser/collection-values.spec.ts
     title: Shared callback, raw-value and lifecycle witnesses
     git_blob: 5c2576a91c9b69b41f1e192db56ad3ec3635d678
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 beforeBindValue(value, context) and onBindValue(value, context) are synchronous optional callbacks on Rows-backed Form, Grid and List. ValueBindContext replaces the pre-release FormValueContext name without an alias. Pass the same application-owned functions explicitly to each binder; no global registry or implicit FormOptions inheritance is involved.[^ui][^binding]
@@ -86,6 +86,8 @@ Whole Form observers, Grid row/completion hooks and selection retain their own l
 # Generated group replacements
 
 For an initialized choice group adopted by Form, radio replacements accept a string or null; checkbox replacements require a string array at zero, one or many choices. Duplicate, unavailable or nonstring entries fail before writing the view. Null is a valid unselected radio value even without a null catalog entry. A zero-choice group uses its actual fieldset as `context.element`; populated groups use their first input. Projection never normalizes Rows or originals. Static single checkboxes keep boolean replacement semantics. [Choice groups](choice-group.md) defines the generation/adoption boundary.[^binding][^form]
+
+Calling the adopted group's setChoices does not rerun before/after hooks. Without a current draft, an applicable applied explicit projection must be valid in the proposed catalog; otherwise FORM_VALUE rejects before native mutation. A current draft takes precedence over that cache, while raw unavailable source and all hidden drafts stay unchanged. Catalog replacement keeps pending/failed projections' surviving native display without retrying them; ordinary refresh/raw-change retry rules remain in force. Later callbacks use the new first input or real empty fieldset as their context element. External Rows events raised during native publication remain ordinary source updates and may run their normal projections after catalog rollback; the no-replay rule does not suppress them.[^form]
 
 [^ui]: Common public field value context
 [^binding]: Shared checked invocation, native replacements and write order

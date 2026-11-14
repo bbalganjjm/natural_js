@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: a88025fbea7822f059ba3a7338ee6297a54a0014
+    git_blob: e648ca9fb694d9ea8feb7a1d6c8297447aa8e239
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form group values, native constraints and display
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: list
     resource: ../../src/ui/list.ts
     title: Existing nested Select and display semantics

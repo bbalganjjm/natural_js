@@ -5,6 +5,14 @@ description: Staged completion of required legacy behavior and advanced Grid fea
 tags: [meta, plan, migration, parity]
 status: draft
 sources:
+  - id: inventory
+    resource: evidence/p01-inventory-verification.json
+    title: Accepted known source-case assignment and retained runtime boundaries
+    git_blob: 752884fca41d6e4e911fd2194dac7e104fdcbad7
+  - id: omission
+    resource: omission-decision.md
+    title: Five presented pending workflow decisions and retained obligations
+    git_blob: 04b78d559eb93143e7e71a3e23b4caecf18c47e0
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -12,7 +20,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 116edaa8ec090d99478799e1cde18c5b0834565c
+    git_blob: 52bc4dc663cd9d2321193f31d73257781b614610
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -24,7 +32,7 @@ sources:
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 55622f3aa61ec2ec3ab2f7a28c6aec8ade6811cb
+    git_blob: 85da1c18d5432a41ef547779afa61960f6e16b44
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
@@ -36,10 +44,10 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
-generated: { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
@@ -62,7 +70,7 @@ Complete framework behavior through consistent, readable TypeScript while preser
 - No proposed feature omission is approved. Previously deferred/excluded behavior must be reconciled with the latest instruction. Already approved TS/ESM, new API naming, jQuery removal, unique IDs, root Apache-2.0 and preserved LGPL v1 do not need approval again.
 - Release-candidate preparation is blocked by required feature gaps. npm publication and release tags additionally require personal testing and a later explicit request. Only real macOS/iOS Safari is outside browser scope; available Windows engines remain required.
 
-M10.5 implements authored column state and controls; [its detailed plan](m10-columns-plan.md) preserves its gates. M10.6 implements independent selection/check sets, scoped checks, native header sort/filters and stable actions; [its plan](m10-selection-plan.md) records the contract and current gates. The detailed evidence maps all 775 checklist entries across core/Grid/other UI and shell, with 53 identified dynamic path groups; structural coverage is checked, while semantic/dynamic closure remains open. Continue that closure alongside the remaining Grid/component slices and prepare the single omission proposal; no candidate omission has been applied. Historical measurements retain their original source/artifact identities.[^coverage]
+M10.5 implements authored column state and controls; [its detailed plan](m10-columns-plan.md) preserves its gates. M10.6 implements independent selection/check sets, scoped checks, native header sort/filters and stable actions; [its plan](m10-selection-plan.md) records the contract and current gates. P0.1 known source-case assignment is independently accepted and pushed as cf2210f, including all 775 structural records, 53 dynamic groups, 750 supplemental UI records and original findings/contracts/acceptance. Runtime/full-family and final P0 semantic closure remain open. The five-item O01-O05 proposal has been presented once and awaits the existing user decision; do not restart the inventory or request another proposal. Historical measurements retain their original source/artifact identities.[^coverage][^inventory][^omission]
 
 # Steps
 
@@ -83,17 +91,17 @@ M10.5 implements authored column state and controls; [its detailed plan](m10-col
 | Personal acceptance/release/repository | M9.1-M9.6 | 6 |
 | Total | 50 development/quality +6 conditional personal/delivery steps | 56 |
 
-Read the numbered plan for each stage's exact scope, predecessors and exit tests. Existing declarations/rules/defaults and advanced Grid capabilities are reused; remaining implementation and semantic acceptance are separate tasks. P0.1 enumerates actual inherited/callback/configuration branches; P0.2 requests one whole-framework omission decision. Rejecting a candidate keeps its outcome in the same owning stage.[^remaining]
+Read the numbered plan for each stage's exact scope, predecessors and exit tests. Existing declarations/rules/defaults and advanced Grid capabilities are reused; remaining implementation and semantic acceptance are separate tasks. P0.1 has assigned the known inherited/callback/configuration cases; P0.2 awaits the existing five-item decision. Rejecting or leaving a candidate unanswered keeps its outcome in the same owning stage.[^remaining][^inventory][^omission]
 
-## P0. Close the inventory and prepare the single omission review
+## P0. Inventory and one omission decision
 
 Map each preserved member, option, event, declaration and reachable rule to a behavior-family ID, current equivalent, gap, owning module and acceptance check. Inspect defaults merged outside constructors and dynamic HTML/configuration dispatch. Separate legacy implementation defects from intended behavior. Use old types, examples and docs to resolve ambiguous public usage, then confirm it against source. Do not count a matching binder name or an absent static call as proof.
 
 For each removal candidate record its direct/transitive/configuration/declaration/rule references, framework owner and replacement. Unused or unrelated convenience code can be removed within the user's existing authorization. Used helpers may be replaced by standards or private local code when behavior remains. Preserve Form-used formatter, validator, mask, date/time and byte processing. Do not create a separate convenience package.
 
-Prepare one consolidated proposal for genuinely lost capabilities: legacy evidence, exact lost workflow, modern alternative, reason for retirement, affected callers and migration cost. Candidate mechanisms currently requiring investigation include executable HTML/controller discovery, arbitrary controller AOP, runtime TEMPLATE interpretation, global instance discovery, optional runtime code inspection and handler/expression introspection. Useful typed declaration, remote-code loading, configuration, row-event and lifecycle behavior must be preserved even if its old mechanism changes. Rich notifications, expiry, tree checks and month/holiday selection are implementation gaps, not automatic retirement candidates.
+The accepted source inventory and subsequent review narrowed genuine proposed losses to five: UI-blocking synchronous requests, JSONP, automatic response-script execution/controller discovery, executable string filter conditions and arbitrary external jQuery handler introspection/reordering. The [presented proposal](omission-decision.md) records exact boundaries, alternatives and migration costs. Every other R/GR behavior, including advice, typed declarations, configuration, custom inspection, standalone rules and useful callback outcomes, remains required. Rich notifications, expiry, Tree checks and month/holiday selection are implementation work.[^inventory][^omission]
 
-Ask once after the inventory is complete. Until an explicit decision, every proposed omission remains required. A native/ESM rewrite that preserves an already approved behavior does not require another approval. P0 completes only when all surface entries and dynamic use paths have owners, gaps have tests planned, and the omission proposal is ready for that consolidated decision.
+The maintainer has asked once. Await that existing O01-O05 decision while continuing independent implementation; silence approves nothing. A native/ESM rewrite that preserves an already approved behavior does not require another approval. P0.1 inventory acceptance does not close runtime/full-family or final P0 semantic checks; each remains assigned to its fixed owner.[^inventory][^omission]
 
 ## Shared foundations and dependency order
 
@@ -145,7 +153,7 @@ Performance fixtures start with the existing 100/1,000-row binding budgets and 5
 
 # Next action
 
-Follow orders 01-56 in [the numbered remaining plan](remaining-work-plan.md), beginning with P0.1 inventory closure and the complete P0.2 decision, then the M5.14 runtime contract. M5.20 closes the Data/Form shared-owner matrix; M10.9.7-M10.9.9 close concrete Grid validation/integration and all 89 surface entries, 17 dynamic groups, 30 contracts and 41 acceptance IDs; M8.1-M8.6 close core/UI/P0/docs/quality/agent acceptance before M13.1-M13.4. Personal acceptance and separately requested release/repository actions remain M9.1-M9.6. Existing-scope discoveries reopen their owner and do not create another unbounded continuation.[^remaining]
+Follow orders 01-56 in [the numbered remaining plan](remaining-work-plan.md). The user authorized the separate M5.14-M5.20 stages and all necessary predecessors in one continuous run. P0.2 gates genuine losses only; independent implementation continues while its consolidated decision is pending. M5.20 closes the Data/Form shared-owner matrix; M10.9.7-M10.9.9 close concrete Grid validation/integration and all 89 surface entries, 17 dynamic groups, 30 contracts and 41 acceptance IDs; M8.1-M8.6 close core/UI/P0/docs/quality/agent acceptance before M13.1-M13.4. Personal acceptance and separately requested release/repository actions remain M9.1-M9.6. Existing-scope discoveries reopen their owner and do not create another unbounded continuation.[^remaining]
 
 # Decisions
 
@@ -166,11 +174,15 @@ Follow orders 01-56 in [the numbered remaining plan](remaining-work-plan.md), be
 
 # Open questions
 
-P0's exhaustive behavior mapping, final omission candidates and their one user decision are pending. Remaining parity public contracts require their detailed slice review; implemented column, batch-edit, viewport and multi-row/merge contracts retain their owning evidence and P0 option/dynamic closure. Manual assistive-technology testing and actual token telemetry remain open; available automated/browser checks must still run during implementation.
+P0.1 known source-case assignment is accepted. The already-presented O01-O05 decision, owning runtime/full-family acceptance and final P0 semantic checks remain pending. Remaining public contracts require their detailed slice review; implemented Grid contracts retain their original evidence. Manual assistive-technology testing and actual token telemetry remain open; available automated/browser checks must still run during implementation.[^inventory][^omission]
 
 # M5.13 bounded U10 continuation
 
-[M5.13](m5-choice-groups-plan.md) implements authored native radio/checkbox generation before Form adoption and standalone choice replacement through one specific private descriptor owner. Stable zero/one/many checkbox arrays, native labels/names/defaults, exact string-code rendering, raw validation and reverse CVC cleanup preserve the actual legacy caller without copying generated forms or cardinality defects. Public writes/disposal reject while adopted. Live Form-owned replacement and broader Select/declaration/receiver/default equivalence stay required; no U10/full-family closure or omission is approved. The actual [two-layout example](../v2/choice-groups-example.md) and [API](../v2/choice-group.md) retain the bounded contract.[^form][^coverage]
+[M5.13](m5-choice-groups-plan.md) implemented authored native radio/checkbox generation before Form adoption and standalone choice replacement through one specific private descriptor owner. Stable zero/one/many checkbox arrays, native labels/names/defaults, exact string-code rendering, raw validation and reverse CVC cleanup preserve the actual legacy caller without copying generated forms or cardinality defects. Its adopted catalog lock is extended by M5.14 below; direct setValue/dispose remain locked. Broader Select/declaration/receiver/default equivalence stays required; no U10/full-family closure or omission is approved.[^form][^coverage]
+
+# M5.14 live Form-owned catalogs
+
+[M5.14](m5-live-choice-groups-plan.md) uses the existing setChoices method and a specific private group/Form handoff. The existing compiled field retains raw Rows, all row drafts, captured creation values, rules and display-cache ownership while controls, native lookup, error targets, reset subscriptions and focus follow the new catalog. Removed codes stay in committed data and drafts; zero/one/many choices remain valid catalogs. Ordinary failures restore old node identity and metadata; stale work cannot overwrite later source or ownership. The [two-layout example](../v2/choice-groups-example.md) and [API](../v2/choice-group.md) describe the implemented contract. Fresh full runtime and final independent evidence/document acceptance are recorded by the owning stage; this continuation does not close the whole U10 family.[^form]
 
 [^coverage]: Initial source-backed coverage ledger
 [^roadmap]: Milestone governance and current scope
@@ -181,3 +193,6 @@ P0's exhaustive behavior mapping, final omission candidates and their one user d
 [^form]: Current input, draft and validation ownership
 
 [^remaining]: Fixed 56-stage continuation and exact known-record ownership
+
+[^inventory]: Accepted known source-case assignment and retained runtime boundaries
+[^omission]: Five presented pending workflow decisions and retained obligations

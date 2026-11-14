@@ -1,30 +1,30 @@
 ---
 type: Example
 title: Authored choice groups in two CVC layouts
-description: Generate native radio and checkbox choices before Form in independent authored CVC screens.
+description: Generate native choices before Form and replace adopted catalogs in independent authored CVC screens.
 tags: [ui, form, cvc, example, accessibility]
 status: draft
 sources:
   - id: view
     resource: ../../examples/vite/m5/choices.html
-    title: Authored fieldsets, templates, two CSS layouts and standalone controls
-    git_blob: 3aad48066172837ce2aafcd8e62cd78278d41069
+    title: Authored fieldsets, two CSS layouts and live/standalone catalog controls
+    git_blob: c554545c79bcadfde456a2fd12c3d55fd407f4cd
   - id: controller
     resource: ../../examples/vite/m5/choices.ts
-    title: Choices before Form, independent CVC records and reverse cleanup
-    git_blob: 22af9b2f50b9ec5bf4df0fa258be54157497d239
+    title: Choices before Form, live adopted replacement and reverse CVC cleanup
+    git_blob: f96d11b580743c6a8ccad5582f110bbc7551c159
   - id: group
     resource: ../../src/ui/choice-group.ts
     title: Standalone native generation, selection and replacement
-    git_blob: 3b33c92ad50575807dd17e115d130730d0952619
+    git_blob: 55f64a676def493b2b82221138fade4dc0755d2e
   - id: owner
     resource: ../../src/ui/choice-group-owner.ts
-    title: Form claim and public-write exclusion
-    git_blob: 5fc27f10b4bc6ee0560d3e7ea59b6dd3b649f990
+    title: Form claim, catalog handoff and direct value/dispose exclusion
+    git_blob: c2fd4d145d27b23dacd67c980f719926083b5b2b
   - id: form
     resource: ../../src/ui/form.ts
     title: Captured defaults, Rows binding, validation and unbind
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: page
     resource: ../../src/page/index.ts
     title: CVC page creation and cleanup
@@ -32,17 +32,17 @@ sources:
   - id: browser
     resource: ../../tests/browser/m513-choice-demo.spec.ts
     title: Authored-screen browser contract witnesses
-    git_blob: d9b85843296297676c1ba219dc7e7b932c6c4a1a
+    git_blob: 242fc8dff970819a134ef35adc5bb4fb44e486ba
   - id: legacy
     resource: ../../v1/docs/examples/template/search-grid-detail-horizontal.md
     title: Actual historical gender and favorite-fruit generation-before-Form caller
     git_blob: add6d13e3001ac86ea246e330a0287a3fc057d1f
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
-This example loads gender and fruit choices before constructing Form, matching the actual legacy caller's useful workflow. One CVC definition creates two independent screens; authored CSS changes their layouts. A separate standalone group demonstrates replacement without modifying an adopted Form field.[^controller][^view][^legacy]
+This example loads gender and fruit choices before constructing Form, matching the actual legacy caller's useful workflow. One CVC definition creates two independent screens; authored CSS changes their layouts. Each screen replaces its adopted Fruit catalog through the same group handle. A separate standalone group demonstrates native replacement and reset.[^controller][^view][^legacy]
 
 # Scenario
 
@@ -57,7 +57,7 @@ The committed record starts with gender female and favoriteFruit ["banana"]. Bef
 | mountPage | Runs one controller and cleanup lifetime per screen. |
 | createRows | Keeps that screen's complete person, original values and committed changes. |
 | bindChoiceGroup | Generates native radio/checkbox members from the authored templates. |
-| bindForm | Adopts those fixed members, binds the person and owns field validation/captures. |
+| bindForm | Adopts each group field, mediates catalog membership and owns binding, validation and captures. |
 | Application HTML/CSS | Supplies legends, wrapping labels, controls, stacked layout and chip layout. |
 
 Both fieldsets put data-field on the root. Their item templates contain an input and a data-choice-label span inside a label. The gender template uses native required; the fruit root uses data-validate='[["required"]]' for the existing logical rule. Pear is a disabled choice. No per-item IDs, generated form wrapper or theme is needed.[^view][^controller]
@@ -82,12 +82,15 @@ In the actual controller, init calls form.bind only after cleanup is registered.
 # Try the Form screen
 
 1. Choose a radio, check fruit and edit Name. Native input reaches the current Rows record; the committed source panel follows that store.
-2. Use Validate record to display Form issues and focus a returned real field element.
-3. Use Revert received values to restore the original person. Received reversion does not replace the captured creation defaults.
-4. Use Restore captured fields to call form.unbind. The view returns to the captured fields and automatic editing pauses; Rows remains unchanged. Bind record resumes display and editing of the current source.
-5. Close either screen, then reopen its layout. The other screen retains its own record and controller.[^controller][^view][^form]
+2. Change Fruit choices to No choices, Only Apple, All fruits or Disabled fruits. The controller calls fruit.setChoices through Form ownership. The source and captured-default panels stay unchanged; restored catalog codes display the corresponding source again.
+3. Use Validate record to evaluate the current catalog, display issues and focus a returned real field element. Catalog replacement does not itself rerun validation or clear old issues.
+4. Use Revert received values to restore the original person. Received reversion does not replace the captured creation defaults.
+5. Use Restore captured fields to call form.unbind. Available captured fields return and automatic editing pauses; Rows remains unchanged. Catalog replacement still works while paused. Bind record resumes display and editing of the current source.
+6. Close either screen, then reopen its layout. The other screen retains its own record, catalog and controller.[^controller][^view][^form]
 
-The adopted handles remain readable, but their public setters and dispose are locked. The screen updates source through Form/Rows. Its close action disposes the owning Form before group cleanup; it does not attempt live adopted choice replacement.[^controller][^owner]
+Fruit choices uses the native select marked data-live-catalog in each authored screen. Its change listener supplies a complete new catalog; it does not write Rows, dispatch a synthetic choice change or recapture creation defaults. A zero-choice checkbox field remains an array-valued Form field with its real fieldset/error context. The other screen's catalog stays independent.[^controller][^view][^form]
+
+Adopted value reads and setChoices remain available; direct setValue and dispose stay locked. Source changes go through native Form edits or Rows. Closing disposes the owning Form before group cleanup. Captured Apple creation values and surviving defaultChecked values remain separate: removing and reintroducing Apple does not recreate a lost native default, while a later unbind can restore its captured value.[^controller][^owner][^form]
 
 # Try standalone replacement
 
@@ -101,16 +104,16 @@ Restore native defaults is an authored browser reset button. It resets checkedne
 
 The fieldsets have visible legends and native wrapping labels. The binder isolates generated native names, while Form owns group error associations and change markers. Tab, radio arrows and Space remain native; disabled choices retain their browser interaction. Layout CSS belongs to the example.[^view][^group][^form]
 
-This stage demonstrates generation before Form and standalone replacement. Live Form-owned replacement, broader legacy Select operations and full U10-family acceptance remain required follow-up work. The example adds no code-loading registry, application utility package or new rendering owner. Browser witnesses and final acceptance are recorded separately; this draft is not a claim of completed browser or manual assistive-technology verification.[^owner][^browser][^legacy]
+This example demonstrates generation before Form, live Form-owned catalogs and standalone replacement. Broader Select/index/append/reset, generated row declarations and full U10-family acceptance remain required owner work. The example adds no code-loading registry, application utility package or new rendering owner. Browser witnesses and final acceptance are recorded separately; this draft is not a claim of completed browser or manual assistive-technology verification.[^owner][^browser][^legacy]
 
 # Related
 
 [bindChoiceGroup](choice-group.md), [Form](form.md), [CVC pages](page.md), [source ownership](form-source.md) and [migration](migration.md).
 
-[^view]: Authored fieldsets, templates, two CSS layouts and standalone controls
-[^controller]: Choices before Form, independent CVC records and reverse cleanup
+[^view]: Authored fieldsets, two CSS layouts and live/standalone catalog controls
+[^controller]: Choices before Form, live adopted replacement and reverse CVC cleanup
 [^group]: Standalone native generation, selection and replacement
-[^owner]: Form claim and public-write exclusion
+[^owner]: Form claim, catalog handoff and direct value/dispose exclusion
 [^form]: Captured defaults, Rows binding, validation and unbind
 [^page]: CVC page creation and cleanup
 [^browser]: Authored-screen browser contract witnesses

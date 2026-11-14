@@ -1,7 +1,7 @@
 ---
 type: UI Component
 title: bindChoiceGroup
-description: Generate native radio or checkbox choices from an authored fieldset template and adopt them in Form.
+description: Generate native radio or checkbox choices from an authored fieldset and replace catalogs through its Form owner.
 tags: [ui, select, form, binding, accessibility]
 status: draft
 symbols: [bindChoiceGroup, ChoiceGroupHandle]
@@ -13,15 +13,15 @@ sources:
   - id: group
     resource: ../../src/ui/choice-group.ts
     title: Authored generation, native selection, defaults and focus
-    git_blob: 3b33c92ad50575807dd17e115d130730d0952619
+    git_blob: 55f64a676def493b2b82221138fade4dc0755d2e
   - id: owner
     resource: ../../src/ui/choice-group-owner.ts
     title: Private registration, Form claim and source-value checks
-    git_blob: 5fc27f10b4bc6ee0560d3e7ea59b6dd3b649f990
+    git_blob: c2fd4d145d27b23dacd67c980f719926083b5b2b
   - id: form
     resource: ../../src/ui/form.ts
     title: Form adoption, validation, captures, reset and retirement
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Shared native group readers and writers
@@ -37,14 +37,18 @@ sources:
   - id: browser
     resource: ../../tests/browser/choice-group.spec.ts
     title: Standalone authored-group contract witnesses
-    git_blob: a45bbbee27c6194d8fa85b10fb5e34e5a37179f7
+    git_blob: 9bacad0415336b4b0f47e745d73e6a3400785ccd
   - id: form-browser
     resource: ../../tests/browser/form-choice-groups.spec.ts
     title: Form adoption and native-value contract witnesses
-    git_blob: 409d559516a9f206d9872b7d70049c4170d9bb34
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+    git_blob: c703cf541e845fbc0081c521c31d8d24901bb977
+  - id: live-browser
+    resource: ../../tests/browser/form-live-choice-groups.spec.ts
+    title: Live Form catalog ownership, drafts, defaults, rollback and focus witnesses
+    git_blob: 590f938e05ebfb2e2bb0fcab877c4501f16b9c50
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 bindChoiceGroup fills an authored fieldset with native radio or checkbox inputs. The authored input type determines the mode once. Radio values are string or null; checkbox values are string arrays even with zero or one choice. The binder supplies behavior and native names; HTML and CSS supply the layout.[^group][^native]
@@ -96,14 +100,14 @@ The fieldset needs a nonempty legend, aria-label or resolvable aria-labelledby. 
 |---|---|
 | value() | Returns string/null for radio or a fresh string array in catalog order for checkbox. Available while Form owns the group. |
 | setValue(value) | Standalone only. Rejects wrong shapes before changing checkedness; unknown string codes clear/drop from selection and duplicate array entries collapse to native choices. Existing disabled choices can be selected programmatically. |
-| setChoices(choices) | Standalone only. Validates and prepares new controls first. Retains surviving current checked values and defaultChecked values separately; new choices start unchecked. It never writes Rows. |
+| setChoices(choices) | Validates and prepares new controls first. Standalone replacement retains surviving current checked values and defaultChecked separately. An adopting Form mediates membership and displayed selection as described below. The call itself never writes Rows. |
 | dispose() | Standalone only. Removes the listener/generated controls, restores exact authored child nodes and owned tabindex, then releases registration. Repeated completed disposal is safe. |
 
 The initial selection sets both checked and defaultChecked. Later setValue changes current checkedness only. Native form reset restores defaultChecked, including defaults retained through setChoices. These native defaults and Form's captured creation values have separate owners.[^group][^form]
 
 Replacement preserves focus outside the group. If an item owned focus, it focuses a surviving enabled item or an enabled neighbor; otherwise the real fieldset is the fallback, with an owned tabindex when needed. A disabled fieldset does not force focus. Native labels, radio arrows, Space, Tab and disabled input behavior remain browser-owned.[^group]
 
-Setter preparation rechecks lifetime and ownership before publication. A newer standalone write during preparation supersedes the outer setter with CHOICE_STALE; disposal or Form adoption also prevents stale publication. Form can adopt a group only after its constructor has published successful initialization, not a provisional descriptor.[^group][^owner]
+Setter preparation rechecks lifetime and exact ownership before publication. A newer write or a changed registration/Form claim supersedes the outer setter with CHOICE_STALE, including a temporary claim released during preparation. Form can adopt a group only after its constructor has published successful initialization, not a provisional descriptor.[^group][^owner]
 
 # Form adoption
 
@@ -117,16 +121,36 @@ const rows = createRows([{ favoriteFruit: ["banana"] }]);
 const form = bindForm(document.querySelector<HTMLFormElement>("[data-person]")!, { rows });
 form.bind(rows.entries()[0].id);
 
-// Change adopted source through Rows; public fruit setters/dispose are locked.
+// Replace the catalog without changing the stored ["banana"] value.
+fruit.setChoices([{ value: "apple", label: "Apple" }]);
+// Change the adopted source through Rows; direct setValue/dispose stay locked.
 rows.set(rows.entries()[0].id, "favoriteFruit", ["apple"]);
 form.dispose();
 fruit.dispose();
 rows.dispose();
 ```
 
-Public setValue, setChoices and dispose raise CHOICE_OWNED while adopted. Form.dispose or successful field retirement through rescan releases the claim; unbind does not. Rejected rescan retains old claims, while failed constructor/rescan acquisition releases provisional new claims. Register group cleanup before Form cleanup in CVC so reverse disposal releases Form first. Live choice replacement while adopted remains a required follow-up.[^owner][^form]
+Public setValue and dispose raise CHOICE_OWNED while adopted. setChoices uses the Form's specific replacement owner. Form.dispose or successful field retirement through rescan releases the claim; unbind does not. Rejected rescan retains old claims, while failed constructor/rescan acquisition releases provisional new claims. Register group cleanup before Form cleanup in CVC so reverse disposal releases Form first.[^owner][^form]
 
 Rows values stay raw. Form displays exact matching string codes and reports invalid shapes, duplicate or unavailable codes through its existing validation path without rewriting source or originals. Disabled existing choices remain available. Value-callback replacements are stricter: their shape and every code must be valid for the group, otherwise the checked callback path raises an error. Normalize business values before loading Rows. Group parsers, formatting and display renderers are rejected.[^form][^owner][^values]
+
+# Live catalogs in Form
+
+Form keeps the same compiled field, path, rules, captured creation value and RowId-keyed drafts when setChoices replaces its members. It retargets native input lookup, error/ARIA/change attributes and local reset ownership to the new controls. An empty group uses its real fieldset as the field/error context. Retired controls no longer commit through Form.[^form][^live-browser]
+
+| View before replacement | Selection after replacement |
+|---|---|
+| Committed Rows source without a draft | Displays matching raw codes; removing a code leaves source, originals and changes untouched. Reintroducing it displays that stored value again. |
+| Current or hidden row draft | Retains the draft under the same field and RowId. The current view shows available draft codes; switching back to a hidden row still finds its draft. |
+| Applied explicit value-callback projection without a current draft | Checks its cached replacement against the proposed codes before mutation. An unavailable replacement raises FORM_VALUE and leaves the catalog unchanged. |
+| Pending or failed projection | Keeps the current surviving native selection without replaying hooks. The existing explicit refresh path retries the projection. |
+| Local, unbound or paused Form | Retains surviving native checkedness. Removed selections drop from local reads; no hidden local raw store is added and paused editing stays paused. |
+
+A current draft takes precedence over an older applied projection. Replacement itself runs no validator, whole/value hook, reconciliation, native change or onChange and does not update Rows. Existing issues retain their messages and point to a current real element; native editing or explicit validate evaluates availability against the new catalog.[^form][^values][^live-browser]
+
+Call setChoices outside active Form bind/render/value/rule work, restoration, reconciliation, rescan or pending local native reset. Release a binding through the normal detach/rescan workflow before changing its declarations, then reattach/rescan to adopt it; changed in-place annotations are rejected. Stale Form generation, binding or source snapshots reject publication. During publication, an active automatic local Form cancels a trusted native reset and invalidates the replacement. Rows-backed, paused or synthetic reset notifications do not use that interception.[^form][^live-browser]
+
+Under unchanged ownership, an ordinary publication failure restores old node identity, checkedness, field maps, issues, attributes, reset listeners and focus. Native publication failures keep their original error; cleanup failures do not replace it. Disposal or newer ownership prevents old DOM from being restored. If application code writes Rows during native insertion, that write remains committed: Form rolls back the catalog and processes the queued external event through its ordinary update path, which may run the normal projections/hooks.[^group][^owner][^form][^live-browser]
 
 # Validation and reset
 
@@ -134,7 +158,9 @@ A template-required radio needs a selection. For required checkboxes, each enabl
 
 Use the root's ordinary required rule for nonempty text semantics. It is not an array-cardinality validator: [""] still fails. Supply an application validator when an empty string is a valid selected code and only cardinality matters. Source shape/availability and native-required constraints remain separate checks.[^form][^required]
 
-Form.defaults and unbind include captured group values; root/member ARIA and change markers follow Form capture/restore. Local Form uses its existing native-reset owner. Rows-backed reset adds no store write or reset subscription: browser checkedness, current Rows data and received reversion remain separate. Use Form.refresh to display the current source again or Rows.revert to restore received values.[^form]
+Form.defaults retains captured group values even when their codes are absent from the current catalog. unbind restores the captured codes available now, including an empty group; reintroduced codes can be restored by a later unbind. Catalog changes retain only surviving defaultChecked values, so native reset and captured creation values remain separate. Root/member ARIA and change markers follow Form capture/restore.[^form][^live-browser]
+
+Local Form follows the real native form owners, including an explicit fieldset form attribute when the group is empty. Rows-backed reset adds no store write or reset subscription: browser checkedness, current Rows data and received reversion remain separate. Use Form.refresh to display the current source again or Rows.revert to restore received values.[^form][^live-browser]
 
 # Events and errors
 
@@ -144,12 +170,15 @@ onChange is captured once and called plainly for native changes from generated m
 |---|---|
 | CHOICE_ROOT / CHOICE_TEMPLATE | Invalid or unnamed fieldset, or invalid authored item structure. |
 | CHOICE_OPTIONS / CHOICE_VALUE | Invalid choices/callback or wrong standalone selection shape. |
-| CHOICE_OWNED | Duplicate binding or an attempted public write/disposal while Form owns the group. |
+| CHOICE_OWNED | Duplicate binding, direct setValue/dispose while adopted, or an owner that cannot mediate catalog replacement. |
 | CHOICE_DISPOSED | A non-dispose method is used after disposal. |
-| CHOICE_STALE | A newer operation supersedes a setter while it prepares its change. |
-| FORM_CHOICE_GROUP / FORM_FORMAT_CONTROL | Form sees an uninitialized group or an unsupported parser/renderer/formatter. |
+| CHOICE_STALE | A newer operation, registration or claim supersedes catalog preparation. |
+| FORM_CHOICE_GROUP | Invalid adoption, a group parser/renderer, active/pending Form work, changed annotations or stale Form/source work during replacement. |
+| FORM_RESCAN | Form is already reconciling or publishing field membership. This existing guard runs before replacement preflight. |
+| FORM_VALUE | The proposed catalog cannot represent an applicable cached explicit callback replacement. |
+| FORM_FORMAT_CONTROL | A formatter is assigned to a generated group. |
 
-Keep the template and generated control structure stable during ownership. Use standalone setChoices for catalog changes; release/recreate for a different authored mode. Existing static checkbox groups and native bindSelect keep their own contracts.[^group][^form][^native]
+Keep the template and generated control structure stable during ownership. Use setChoices for standalone or Form-mediated catalog changes; release/recreate for a different authored mode. Existing static checkbox groups and native bindSelect keep their own contracts.[^group][^form][^native]
 
 # Related
 
@@ -164,3 +193,4 @@ Keep the template and generated control structure stable during ownership. Use s
 [^required]: Existing required text semantics
 [^browser]: Standalone authored-group contract witnesses
 [^form-browser]: Form adoption and native-value contract witnesses
+[^live-browser]: Live Form catalog ownership, drafts, defaults, rollback and focus witnesses

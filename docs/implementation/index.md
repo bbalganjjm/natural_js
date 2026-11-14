@@ -1,5 +1,11 @@
 # Concepts
 
+* [Natural-JS 2.0 consolidated omission decision](omission-decision.md) - Five narrow legacy workflow losses proposed for one explicit decision, with alternatives, migration costs and retained obligations. (draft)
+
+* [Natural-JS 2.0 sequential M5 completion run](m5-completion-run.md) - Complete M5.14 through M5.20 and their necessary predecessors as separately reviewed, verified and committed stages. (draft)
+
+* [Natural-JS 2.0 M5.14 live Form choice catalogs](m5-live-choice-groups-plan.md) - Replace adopted native choice catalogs while retaining Form field identity, data, drafts, defaults and owned cleanup. (draft)
+
 * [Natural-JS 2.0 numbered remaining work](remaining-work-plan.md) - Fixed execution order and terminal stage numbers for every remaining framework capability and delivery gate. (draft)
 
 * [Natural-JS 2.0 M5.13 authored choice groups](m5-choice-groups-plan.md) - Generate native radio and checkbox choices from authored templates and adopt them safely in Form. (draft)

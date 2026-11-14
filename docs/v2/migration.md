@@ -48,7 +48,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, drafts, and validation
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid row field dispatch and validation
@@ -140,15 +140,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 116edaa8ec090d99478799e1cde18c5b0834565c
+    git_blob: 52bc4dc663cd9d2321193f31d73257781b614610
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 3f26da6201495be6823374d69ad89a929110b512
-generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+    git_blob: 8346dee24d7196d12898fd1d149c0132a58a2980
+generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
+  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -503,7 +503,9 @@ Mounted Grid/List fields now support the same explicit value callbacks as Form. 
 
 Replace the old codes → Select.bind → Form sequence with [bindChoiceGroup](choice-group.md) on an authored named fieldset/template, then create Form. Use string choice codes and explicit initial `value`; normalize business codes before loading Rows. Wrapping labels retain native interaction without per-item fixed IDs, generated forms or HTML-label evaluation. A generated checkbox group always reads an array, including zero or one choice. This corrects the old count-dependent scalar collapse rather than copying it.[^legacy-ui][^form]
 
-The [two-instance example](choice-groups-example.md) shows radio/default capture, checkbox validation, Rows reversion and CVC cleanup. Register group disposal before Form disposal so reverse cleanup releases Form first. While adopted, update values through Rows; group `setChoices`, `setValue` and `dispose` reject. Dispose Form before standalone replacement. Live owned replacement and broader Select/declaration/default equivalence remain required; this bounded workflow does not close the whole family.[^form][^parity-plan]
+The [two-instance example](choice-groups-example.md) shows radio/default capture, checkbox validation, Rows reversion, live Fruit catalogs and CVC cleanup. Register group disposal before Form disposal so reverse cleanup releases Form first. While adopted, change values through native Form edits or Rows. Existing group setChoices now uses Form's catalog owner; direct setValue/dispose remain locked. There is no new public setter or implicit code registry.[^form]
+
+Catalog replacement preserves raw source/originals, current/hidden drafts, captured creation values and known issues. It does not itself write Rows or replay rules/hooks. A current draft overrides an older display cache; an applicable explicit cached replacement without a draft must remain available or FORM_VALUE rejects the proposed catalog. Local/unbound/paused views preserve surviving native selection without resuming paused editing. Native defaults retain only surviving codes; captured defaults can restore a reintroduced code through unbind. Finish pending Form/reset work before replacing choices and use the normal release/rescan workflow before changing declarations. See [choice groups](choice-group.md) for publication rollback, external-source events and focus. Broader Select/index/append/reset, generated row declarations and full-family acceptance remain at their owning stages.[^form][^parity-plan]
 
 [^legacy-screen]: Preserved 1.x search, grid, detail, and save example
 [^legacy-comm]: Preserved 1.x page loading and request serialization

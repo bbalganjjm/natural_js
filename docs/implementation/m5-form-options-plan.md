@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-state-plan.md
     title: Completed received-state continuation
-    git_blob: a899789c0a2f55837ff074020389281437974f52
+    git_blob: f0a3a7953aef562c9b14293ca43a81794b372f84
   - id: baseline
     resource: evidence/m52-verification.json
     title: Preserved 4660cd6 source and runtime evidence
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Form fields, candidates, drafts, validation and lifetime
-    git_blob: 47b163dad56b382ea494ac6ddbb258a587423dd1
+    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
   - id: options
     resource: ../../src/ui/row-options.ts
     title: Existing row-local option extraction

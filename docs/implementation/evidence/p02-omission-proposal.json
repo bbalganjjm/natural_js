@@ -1,0 +1,508 @@
+{
+  "schema_version": 1,
+  "kind": "consolidated_actual_workflow_omission_proposal",
+  "recorded_at": "2026-11-14",
+  "status": "draft_awaiting_single_user_decision",
+  "proposal_count": 5,
+  "approvals_obtained": 0,
+  "scope": "Five narrow actual supported workflows only; this is not blanket approval for original R/GR groups, API renames or private machinery removal.",
+  "sources": {
+    "core": {
+      "path": "docs/implementation/evidence/v1-core-parity.json",
+      "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+    },
+    "grid": {
+      "path": "docs/implementation/evidence/v1-grid-parity.json",
+      "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+    },
+    "core_preflight": {
+      "path": "docs/implementation/evidence/p01-core-preflight.json",
+      "sha256": "504695af0af16fca3a496484cc1ed456fcb786951d1e59a6456ceb7cf6caa5cd"
+    },
+    "ui_grid_preflight": {
+      "path": "docs/implementation/evidence/p01-ui-grid-preflight.json",
+      "sha256": "c2bf4af02d5e55fd1266a7cae134bf80f570085c688ac7f6fae48c503577524f"
+    },
+    "registry": {
+      "path": "docs/implementation/evidence/remaining-work-plan.json",
+      "sha256": "68b844b99c05afacb6ae44ab836b9541750a1a95d0b4cedee5f482e26043b632"
+    },
+    "architecture": {
+      "path": "v1/src/natural.architecture.js",
+      "sha256": "545a0f80760d888a6465942d258b520c36dba0c5bc48bb95cf27cb02a21a9c26"
+    },
+    "core_source": {
+      "path": "v1/src/natural.core.js",
+      "sha256": "65604d3581b4509412a87fab0ee0af1d0e40ae85baaf8e96391a23505e6d1db1"
+    },
+    "data_source": {
+      "path": "v1/src/natural.data.js",
+      "sha256": "65ecebe84468c27ff149bf4010b2143ee98040351b0c604c75f1dc11abad55c8"
+    },
+    "ajax_types": {
+      "path": "v1/@types/natural.architecture.misc.d.ts",
+      "sha256": "0dbbc33dd62f25525ba0a5ba284e0db513da7667da22c33195bf0d0ed1ff87fa"
+    },
+    "jquery": {
+      "path": "v1/lib/jquery-3.7.1.min.js",
+      "sha256": "7aa6b0e08f48a0f95d8df7ea89e4cbfe1ef3d1e8c0f7373f7f25edfb4e4a325e"
+    },
+    "cvc_guide": {
+      "path": "v1/docs/architecture/cvc-pattern.md",
+      "sha256": "a22ea2de374708068f52d9ead4c211d92288e926745fd3773eb375bb63e38f19"
+    },
+    "comm_guide": {
+      "path": "v1/docs/architecture/communicator.md",
+      "sha256": "4812ba51745d9b4d2e66c1140778dc2d1cdcac34472e8baa388bff6ef402bb26"
+    },
+    "request_guide": {
+      "path": "v1/docs/architecture/request.md",
+      "sha256": "b038833c13b3e8d460b8715581d128cd505db6f6b7b1bb5fbfb4869abe4a38e1"
+    },
+    "filter_guide": {
+      "path": "v1/docs/data/data-utilities.md",
+      "sha256": "a158fa8be59ae9747f627ef8e13f5fac441c3865ea4f21ab85f7ae84b255c30e"
+    },
+    "event_guide": {
+      "path": "v1/docs/core/n-function.md",
+      "sha256": "a732ea182736b48a718f7e854e0a5c11dcd2b35663a26dd24cc1fe7725d08e02"
+    },
+    "event_helpers": {
+      "path": "v1/docs/core/event.md",
+      "sha256": "c016e29c5c21446290dd10d30cb2112b9cd1a87ed58ec119f0be8cb37c974000"
+    },
+    "modern_comm": {
+      "path": "src/comm/index.ts",
+      "sha256": "74a7ed8be5b6cdea6e4a9c40ab11c9f73320444e3ba5e05054a0bdd7dc0dd956"
+    },
+    "modern_page": {
+      "path": "src/page/index.ts",
+      "sha256": "befcbcca6e87b71d5482ab1efa6ce0aa4a2676e3cbc75c81866d6fd7186565bf"
+    },
+    "modern_ui": {
+      "path": "src/ui/index.ts",
+      "sha256": "9ba3b503fac6475ecb3c8b001aa61fd564da79ad33a920635b2cc45a27a3d800"
+    }
+  },
+  "items": [
+    {
+      "id": "O01",
+      "title": "Synchronous network requests that block the UI thread",
+      "original_groups": [
+        "core:R07"
+      ],
+      "owners": [
+        "M3.1",
+        "M3.2"
+      ],
+      "recommendation": "omit_only_this_workflow",
+      "decision": "pending_user_decision",
+      "actual_loss": "The framework would no longer issue async:false requests or return after a synchronous network round trip while blocking browser interaction.",
+      "evidence": [
+        {
+          "source": "architecture",
+          "line": 308,
+          "note": "Literal async:true is caller-overridable and request options reach NA.ajax at submit."
+        },
+        {
+          "source": "ajax_types",
+          "line": 30,
+          "note": "Request inherits AjaxSettingsBase and explicitly declares deprecated async:false."
+        },
+        {
+          "source": "request_guide",
+          "line": 95,
+          "note": "Documented per-call async flag."
+        },
+        {
+          "source": "jquery",
+          "line": 2,
+          "note": "Bundled transport passes i.async to XMLHttpRequest.open."
+        }
+      ],
+      "caller_status": "Shipped public option and executing transport branch; no concrete synchronous application request was identified in this bounded source review. External callers remain unknown.",
+      "modern_route": {
+        "available": "createCommunicator already returns a Promise and accepts cancellation; complete required ordered policy/timeout behavior in M3.1/M3.2.",
+        "migration": "Await the request and express dependent work after it. Own a pending/disabled state for the relevant action instead of blocking the whole browser.",
+        "not_equivalent": "Asynchronous sequencing does not reproduce a blocked main thread."
+      },
+      "user_cost": "Convert synchronous call chains to async/await and handle pending/error/cancel explicitly. A caller relying on blocked browser interaction must change its flow.",
+      "preserve": [
+        "Ordinary asynchronous HTTP",
+        "Ordered request/error/completion hooks",
+        "Timeout/cancellation",
+        "Response transformation and wire recipes"
+      ],
+      "if_declined": "Keep this outcome required in M3.2 and design a reviewed native transport route; no jQuery dependency is restored."
+    },
+    {
+      "id": "O02",
+      "title": "Framework-provided JSONP transport for JSONP-only endpoints",
+      "original_groups": [
+        "core:R07"
+      ],
+      "owners": [
+        "M3.2"
+      ],
+      "recommendation": "omit_only_this_workflow",
+      "decision": "pending_user_decision",
+      "actual_loss": "The communicator would no longer call a JSONP endpoint by injecting a callback script, including callback-name/script transport configuration.",
+      "evidence": [
+        {
+          "source": "ajax_types",
+          "line": 54,
+          "note": "JSONP response transport and callback query behavior are documented inherited settings."
+        },
+        {
+          "source": "comm_guide",
+          "line": 85,
+          "note": "Other Ajax settings pass through except overwritten lifecycle callbacks."
+        },
+        {
+          "source": "architecture",
+          "line": 287,
+          "note": "NA.ajax receives the assembled request options."
+        },
+        {
+          "source": "jquery",
+          "line": 2,
+          "note": "Bundled json/jsonp prefilter and script transport implement the workflow."
+        }
+      ],
+      "caller_status": "The inherited option reaches a bundled implementation. No concrete JSONP-only application endpoint was identified; external consumers are unknown.",
+      "modern_route": {
+        "available": "Ordinary JSON over native HTTP is the retained communication owner; remaining CORS/credentials/header policies belong to M3.2.",
+        "migration": "Use an endpoint that returns JSON with the required CORS policy, or an application backend proxy.",
+        "not_equivalent": "A browser fetch to a server that provides only JSONP is not an equivalent replacement. The endpoint or application integration may need a change."
+      },
+      "user_cost": "Potential server CORS/response change or backend proxy. This can require work outside frontend code.",
+      "preserve": [
+        "Ordinary cross-origin HTTP/CORS",
+        "Credentials/auth headers",
+        "JSON/custom decoding",
+        "Application-owned API and protocol adapters"
+      ],
+      "if_declined": "Keep JSONP as required M3.2 transport capability and review its specific implementation/cancellation ownership."
+    },
+    {
+      "id": "O03",
+      "title": "Automatic execution of scripts received as HTML or script responses",
+      "original_groups": [
+        "core:R01",
+        "core:R07"
+      ],
+      "owners": [
+        "M3.2",
+        "M3.3",
+        "M3.4"
+      ],
+      "recommendation": "omit_only_this_workflow",
+      "decision": "pending_user_decision",
+      "actual_loss": "Remote HTML would no longer execute embedded scripts to declare/discover its controller; a dataType:script response would no longer execute as request success. This includes the old one-HTML-file executable block distribution workflow.",
+      "evidence": [
+        {
+          "source": "architecture",
+          "line": 205,
+          "note": "jQuery HTML/append/replacement insertion precedes controller lookup/init."
+        },
+        {
+          "source": "architecture",
+          "line": 225,
+          "note": "The controller is discovered from the inserted view and initialized."
+        },
+        {
+          "source": "cvc_guide",
+          "line": 74,
+          "note": "Documented load sequence explicitly executes inline script, declares the controller, then discovers and initializes it."
+        },
+        {
+          "source": "cvc_guide",
+          "line": 96,
+          "note": "The authored block layout includes View plus inline Controller script."
+        },
+        {
+          "source": "ajax_types",
+          "line": 50,
+          "note": "The script response type executes JavaScript."
+        },
+        {
+          "source": "jquery",
+          "line": 2,
+          "note": "Bundled HTML insertion/script conversion provides execution."
+        }
+      ],
+      "caller_status": "Concrete shipped CVC block-page convention and examples; the script data transport is also available through inherited settings.",
+      "modern_route": {
+        "available": "PageDefinition already explicitly connects an inert view with a controller factory and independent lifetime. ESM application modules remain executable application code.",
+        "migration": "Move controller code into a TS/ESM module, explicitly connect it to the authored HTML, and use the common M3.3 loader in all containers. Deliberate module import stays application-owned.",
+        "not_equivalent": "The new architecture does not automatically run arbitrary response text or discover a controller created by that text."
+      },
+      "user_cost": "Split executable block HTML into authored view plus controller module and update page registration/loading. Keep HTML/CSS and CVC behavior.",
+      "preserve": [
+        "CVC and authored HTML/CSS",
+        "Remote inert views",
+        "Explicit controller modules and dynamic application imports",
+        "Code/data loading before init",
+        "Main/Popup/Tabs/Documents reuse",
+        "Input/output/caller metadata and lifecycle"
+      ],
+      "if_declined": "Keep the exact executable-block/script workflow required for M3.2/M3.3 review; do not silently claim explicit ESM alone is identical."
+    },
+    {
+      "id": "O04",
+      "title": "Compiling JavaScript string filter conditions at runtime",
+      "original_groups": [
+        "core:R06"
+      ],
+      "owners": [
+        "M3.8",
+        "M5.15"
+      ],
+      "recommendation": "omit_only_this_workflow",
+      "decision": "pending_user_decision",
+      "actual_loss": "The framework would no longer accept a string such as age > 20 and compile it as JavaScript with new Function. Runtime condition text would need an explicit application interpretation step.",
+      "evidence": [
+        {
+          "source": "data_source",
+          "line": 1126,
+          "note": "String conditions are rewritten and compiled with new Function; predicate functions use a separate branch."
+        },
+        {
+          "source": "filter_guide",
+          "line": 65,
+          "note": "Both function and string condition contracts are documented, including examples and known rewrite defects."
+        }
+      ],
+      "caller_status": "Documented callable framework capability. Repository examples also demonstrate predicate alternatives; external text-configured callers remain unknown.",
+      "modern_route": {
+        "available": "GridHandle.setFilter and ListHandle.setFilter already accept typed predicates; native Array.filter serves application data.",
+        "migration": "Convert authored conditions to predicates, for example row => row.age > 20. If conditions are external data, the application owns an explicit allowed condition schema/parser.",
+        "not_equivalent": "A predicate API does not by itself execute a received JavaScript expression string."
+      },
+      "user_cost": "Rewrite string conditions as functions. Applications that load condition text need their own explicit interpretation policy.",
+      "preserve": [
+        "Filtering/sorting and stable RowId",
+        "Header value filters/search",
+        "Selected/checked/changed/deleted projections",
+        "Correct logical AND and spaces inside values"
+      ],
+      "if_declined": "Keep runtime string-condition capability required in M3.8 without copying the legacy AND-to-OR or whitespace corruption defects."
+    },
+    {
+      "id": "O05",
+      "title": "Inspecting or reprioritizing already installed arbitrary jQuery handlers",
+      "original_groups": [
+        "core:R06"
+      ],
+      "owners": [
+        "M3.7",
+        "M3.8",
+        "M6.7"
+      ],
+      "recommendation": "omit_only_this_workflow",
+      "decision": "pending_user_decision",
+      "actual_loss": "The framework would no longer return another library existing jQuery handler/type/namespace records or insert a newly registered handler ahead of unknown existing handlers by changing their internal order.",
+      "evidence": [
+        {
+          "source": "core_source",
+          "line": 38,
+          "note": "tpBind registers a handler and moves a jQuery handler entry to the front."
+        },
+        {
+          "source": "core_source",
+          "line": 240,
+          "note": "events exposes jQuery internal handler collections."
+        },
+        {
+          "source": "event_guide",
+          "line": 130,
+          "note": "Priority insertion is documented."
+        },
+        {
+          "source": "event_guide",
+          "line": 167,
+          "note": "Public event/type/namespace enumeration is documented."
+        },
+        {
+          "source": "event_helpers",
+          "line": 110,
+          "note": "The documented blocking example uses priority insertion."
+        }
+      ],
+      "caller_status": "Actual public introspection and priority APIs, also used internally for duplicate-binding and disabling. The internal UI outcomes remain required; arbitrary external introspection is the proposed loss.",
+      "modern_route": {
+        "available": "Native listeners, owned teardown and explicit controller/row hooks are existing owners; finish deterministic binding-before-action and disabled/canceled interaction in M3.7/M6.7.",
+        "migration": "Keep application-owned listener references/metadata and register actions through the declared order. Use available browser development tools for external handler debugging.",
+        "not_equivalent": "This does not offer a programmatic inventory or reordering of arbitrary already-installed third-party handlers."
+      },
+      "user_cost": "Replace integrations that inspect jQuery internal event records. Explicitly own listener registration/order; a generic external-handler manipulation tool is no longer supplied.",
+      "preserve": [
+        "Binding-before-action",
+        "Native pointer/keyboard activation",
+        "Disabled/canceled action blocking",
+        "Row action identity",
+        "No duplicate framework registration",
+        "Owned cleanup and debugging evidence"
+      ],
+      "if_declined": "Keep the precise introspection/priority workflow required in M3.8; do not classify every native event or cancellation feature as omitted."
+    }
+  ],
+  "required_without_omission": [
+    {
+      "group": "core:R01",
+      "disposition": "Only O03 automatic response-code execution is proposed; CVC/remote inert views/controller lifecycle stay required.",
+      "owners": [
+        "M3.3",
+        "M3.4"
+      ]
+    },
+    {
+      "group": "core:R02",
+      "disposition": "No omission proposed. Preserve before/after/around/error, useful path/view/custom-pointcut workflows and explicit receiver/async behavior through reviewed modern composition.",
+      "owners": [
+        "M3.6"
+      ]
+    },
+    {
+      "group": "core:R03",
+      "disposition": "No UI behavior omission proposed. Typed declarations/code loading/defaults/actions/search/row events must preserve outcomes; old property spellings and declaration-to-handle mutation are API migration, not separate feature deletion.",
+      "owners": [
+        "M3.7",
+        "M5.19"
+      ]
+    },
+    {
+      "group": "core:R04",
+      "disposition": "No omission proposed. Scoped services/handles and deliberate live defaults/locale/messages/rules must preserve useful shared configuration and lookup workflows.",
+      "owners": [
+        "M3.5",
+        "M5.17",
+        "M5.18"
+      ]
+    },
+    {
+      "group": "core:R05",
+      "disposition": "No omission proposed. Preserve useful custom inspection/findings/exclusions/severity/abort/debugging outcomes through a reviewed scoped workflow; lint/sourcemaps alone are not proof.",
+      "owners": [
+        "M3.8"
+      ]
+    },
+    {
+      "group": "core:R06",
+      "disposition": "Only O04 and O05 narrow capabilities are proposed. Predicate filtering, projection, ordering, cancel/disabled/binding-before-action stay required.",
+      "owners": [
+        "M3.7",
+        "M3.8",
+        "M5.15",
+        "M6.7"
+      ]
+    },
+    {
+      "group": "core:R07",
+      "disposition": "Only O01/O02/O03 are proposed. Ordinary HTTP/settings, custom transform/transport outcomes, headers/status/progress, wire recipes/error/completion/cancel remain required. Old jqXHR method spelling alone is API migration.",
+      "owners": [
+        "M3.1",
+        "M3.2",
+        "M3.3"
+      ]
+    },
+    {
+      "group": "core:R08",
+      "disposition": "No blanket omission proposed. Retain bound rules and resolve supported standalone dataset/manual-format/unformat/validate workflows through the existing rule owner; no convenience catalog is recreated.",
+      "owners": [
+        "M5.18"
+      ]
+    },
+    {
+      "group": "core:U01",
+      "disposition": "Separate existing authorization: remove only proven unused/unrelated convenience code after direct/transitive/config/declaration/alias/external reachability proof. Used private outcomes remain. No new removal approval is inferred.",
+      "owners": [
+        "P0.2",
+        "M3.8",
+        "M5.18"
+      ]
+    },
+    {
+      "group": "core-boundary:values",
+      "disposition": "No omission proposed. Classify actual non-JSON/inherited/mutable callers and preserve useful outcomes or explicitly return a genuine loss to this decision; canonical JSON alone does not prove parity.",
+      "owners": [
+        "M5.15"
+      ]
+    },
+    {
+      "group": "core-boundary:per-key-callbacks",
+      "disposition": "No omission proposed. Resolve useful per-key/unbound/no-op/old-value/local-global/receiver timing; normalization recipes are not exact timing proof. Do not reproduce silent corruption as a feature.",
+      "owners": [
+        "M5.17"
+      ]
+    },
+    {
+      "group": "core-boundary:mask-diagnostics",
+      "disposition": "No omission proposed. Explicitly resolve standalone partial-input/deleting/error diagnostics and preserve required UI mask behavior.",
+      "owners": [
+        "M5.18"
+      ]
+    },
+    {
+      "group": "grid:GR01",
+      "disposition": "No omission proposed. Retain useful topology/inspection/customization outcomes through authored native tables/column plans and concrete migration, rather than old mutable field names.",
+      "owners": [
+        "M10.9.8",
+        "M10.9.9"
+      ]
+    },
+    {
+      "group": "grid:GR02",
+      "disposition": "No omission proposed. Preserve pinning/footer/resize/reflow/customization through measured layout/CSS/column state; old pixel knob spelling alone is not a feature loss.",
+      "owners": [
+        "M10.9.8",
+        "M10.9.9"
+      ]
+    },
+    {
+      "group": "grid:GR03",
+      "disposition": "No separate decision. Preserve Grid declarations/code choices/row actions and binding-before-action under core:R03.",
+      "owners": [
+        "M3.7",
+        "M5.19",
+        "M10.9.8"
+      ]
+    }
+  ],
+  "decision_rule": "Ask once with all five concrete items and costs. Record explicit item decisions. Rejected, unanswered and unlisted outcomes remain required; approval never follows from silence or this document.",
+  "p01_inventory_conclusion": {
+    "status": "accepted_known_source_case_inventory",
+    "known_record_assignment_blockers": [],
+    "counts": {
+      "structural": 775,
+      "dynamic": 53,
+      "supplemental_ui": 750,
+      "ui_findings": 5,
+      "grid_contracts": 30,
+      "grid_acceptance_ids": 41,
+      "core_surface": 260,
+      "core_dynamic": 15
+    },
+    "basis": "Exact origin pointers, all secondary profiles/local/default acceptance, concrete source cases and decision candidates resolve through the frozen registry and two preflight inputs. Independent source-case reviews found no remaining known-origin/case assignment gap after corrected UI/Grid snapshot provenance.",
+    "what_remains": "P0.1 known-source inventory acceptance is complete and does not depend on P0.2 approval. Future detailed contracts, implementation/tests and newly discovered actual-scope branches remain assigned to their fixed owners.",
+    "not_claimed": [
+      "Runtime or full-family acceptance",
+      "Omission approval",
+      "Discovery of every private external application",
+      "Final P0/M8 semantic closure"
+    ],
+    "acceptance_commit": "cf2210fc7d9eeef7b7ef1d126ec2dd79040821e7",
+    "receipt": {
+      "path": "docs/implementation/evidence/p01-inventory-verification.json",
+      "sha256": "ba04dbde3b7d38fa556de984b9f15daad158003f93cbcb1407df348e61b9148c"
+    }
+  },
+  "scope_boundary": {
+    "source_edits": false,
+    "runtime_checks_run": false,
+    "framework_behavior_removed": false,
+    "new_public_api_approved": false,
+    "unrelated_helpers": "Existing authorization remains conditional on separate reachability proof; no extension/convenience package.",
+    "publication_or_branch_actions": false
+  }
+}

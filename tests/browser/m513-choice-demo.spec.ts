@@ -61,3 +61,29 @@ test("standalone authored choices retain array shape and surviving native defaul
   await playground.getByRole("button", { name: "Choose Apple" }).click();
   await expect(playground.locator("[data-playground-value]")).toHaveText('["apple"]');
 });
+
+for (const name of ["Stacked choice screen", "Chip choice screen"]) test(`${name} replaces adopted choices without replacing its record or defaults`, async ({ page }) => {
+  await page.routeWebSocket(/127\.0\.0\.1:4173/, socket => socket.close());
+  await page.goto("/m5/choices.html");
+  const screen = page.getByRole("region", { name, exact: true });
+  await expect(screen.getByRole("checkbox", { name: "Banana", exact: true })).toBeChecked();
+  const source = await screen.locator("[data-source]").innerText(), defaults = await screen.locator("[data-defaults]").innerText();
+  const catalog = screen.getByRole("combobox", { name: "Fruit choices", exact: true });
+  await catalog.selectOption("empty");
+  await expect(screen.getByRole("checkbox")).toHaveCount(0);
+  await screen.getByRole("button", { name: "Validate record", exact: true }).click();
+  await expect(screen.locator('[data-field="favoriteFruit"]')).toHaveAttribute("aria-invalid", "true");
+  await catalog.selectOption("one");
+  await expect(screen.getByRole("checkbox")).toHaveCount(1);
+  await expect(screen.getByRole("checkbox", { name: "Apple", exact: true })).not.toBeChecked();
+  await catalog.selectOption("all");
+  await expect(screen.getByRole("checkbox", { name: "Banana", exact: true })).toBeChecked();
+  await screen.getByRole("button", { name: "Validate record", exact: true }).click();
+  await expect(screen.locator("[data-status]")).toHaveText("Record is valid.");
+  await expect(screen.locator("[data-source]")).toHaveText(source);
+  await expect(screen.locator("[data-defaults]")).toHaveText(defaults);
+  await screen.getByRole("checkbox", { name: "Apple", exact: true }).check();
+  await expect(screen.locator("[data-source]")).toContainText('"apple"');
+  const other = page.getByRole("region", { name: name === "Stacked choice screen" ? "Chip choice screen" : "Stacked choice screen" });
+  await expect(other.getByRole("checkbox", { name: "Apple", exact: true })).not.toBeChecked();
+});
