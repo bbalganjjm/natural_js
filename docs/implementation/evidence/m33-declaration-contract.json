@@ -1,0 +1,23 @@
+{
+  "kind": "actual_pack_declaration_delta",
+  "parent_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m32final-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "2ac25f2126c58351deb3c7cc9589eae4d71758e24b0e583927ce45f8282fe684",
+    "bytes": 358915
+  },
+  "current_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m33-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "2d443c48d62ae2a06bfe534b6c0bf3704f1974445a83483b872c78a1c8a0812e",
+    "bytes": 359573
+  },
+  "entries": 40,
+  "unchanged": 39,
+  "changed": [
+    {
+      "path": "build/page/index.d.ts",
+      "sha256": "3bd64e98588ba3a4e4e83416e46cf270f2726dab75e0201d09fc31dc22d01f81",
+      "bytes": 1213
+    }
+  ],
+  "public_delta": "One optional PageDefinition.loadHtml field; no new export/type/entry/dependency or output filename."
+}

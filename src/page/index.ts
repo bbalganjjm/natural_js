@@ -18,6 +18,7 @@ export interface PageController {
 
 export interface PageDefinition<Input = unknown, Output = unknown> {
   view: URL | HTMLElement | (() => HTMLElement);
+  loadHtml?: (url: URL, signal: AbortSignal) => Promise<string>;
   controller(context: PageContext<Input, Output>): PageController;
 }
 
@@ -79,7 +80,9 @@ function isHtmlElement(value: unknown): value is HTMLElement {
 }
 
 function checkExecutableHtml(root: HTMLElement, url: URL): void {
-  for (const element of [root, ...root.querySelectorAll<HTMLElement>("*")]) {
+  const pending: Element[] = [root];
+  while (pending.length) {
+    const element = pending.pop()!;
     if (/^(script|iframe|frame|frameset|object|embed|meta|base|portal)$/.test(element.localName)) {
       throw pageError("PAGE_HTML", "Page HTML contains an executable element", undefined,
         { element: element.localName, url: url.href });
@@ -91,6 +94,10 @@ function checkExecutableHtml(root: HTMLElement, url: URL): void {
         throw pageError("PAGE_HTML", "Page HTML contains an executable attribute", undefined,
           { element: element.localName, attribute: name, url: url.href });
       }
+    }
+    for (const child of element.children) pending.push(child);
+    if (element.localName === "template" && element.namespaceURI === "http://www.w3.org/1999/xhtml") {
+      for (const child of (element as HTMLTemplateElement).content.children) pending.push(child);
     }
   }
 }
@@ -112,18 +119,28 @@ function checkIds(root: HTMLElement, target: Document): void {
   }
 }
 
-async function loadRoot(view: PageDefinition["view"], signal: AbortSignal, target: Document): Promise<HTMLElement> {
+async function loadRoot(view: PageDefinition["view"], signal: AbortSignal, target: Document,
+  loadHtml: PageDefinition["loadHtml"]): Promise<HTMLElement> {
   if (view instanceof URL) {
-    let response: Response;
-    try {
-      response = await fetch(view, { signal });
-    } catch (cause) {
-      throw normalize(cause, "PAGE_FETCH");
+    let html: string;
+    if (loadHtml) {
+      let loaded: unknown;
+      try { loaded = await loadHtml(view, signal); }
+      catch (cause) { throw normalize(cause, "PAGE_FETCH"); }
+      if (typeof loaded !== "string") {
+        throw pageError("PAGE_LOAD", "The HTML loader must return text", undefined, { url: view.href });
+      }
+      html = loaded;
+    } else {
+      let response: Response;
+      try { response = await fetch(view, { signal }); }
+      catch (cause) { throw normalize(cause, "PAGE_FETCH"); }
+      if (!response.ok) {
+        throw pageError("PAGE_HTTP", "Page HTML request failed", undefined, { status: response.status, url: view.href });
+      }
+      html = await response.text();
     }
-    if (!response.ok) {
-      throw pageError("PAGE_HTTP", "Page HTML request failed", undefined, { status: response.status, url: view.href });
-    }
-    const html = await response.text();
+    if (signal.aborted) throw aborted();
     const template = target.createElement("template");
     template.innerHTML = html;
     if (template.content.children.length !== 1 ||
@@ -146,6 +163,10 @@ export function mountPage<Input = unknown, Output = unknown>(
   definition: PageDefinition<Input, Output>,
   input?: Input
 ): PageHandle<Output> {
+  const { loadHtml } = definition;
+  if (loadHtml !== undefined && typeof loadHtml !== "function") {
+    throw pageError("PAGE_OPTIONS", "loadHtml must be a function when supplied");
+  }
   let instance: Instance | null = null;
   let disposed = false;
   let generation = 0;
@@ -189,7 +210,7 @@ export function mountPage<Input = unknown, Output = unknown>(
     instance = current;
     try {
       if (!isHtmlElement(host)) throw pageError("ROOT_MISSING", "Page host must be an HTML element");
-      const root = await untilAbort(current.abort.signal, () => loadRoot(definition.view, current.abort.signal, host.ownerDocument));
+      const root = await untilAbort(current.abort.signal, () => loadRoot(definition.view, current.abort.signal, host.ownerDocument, loadHtml));
       live(current, expected);
       current.root = root;
       if (current.generated) {

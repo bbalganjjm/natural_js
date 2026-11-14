@@ -110,6 +110,14 @@ try {
     customStages: [["send", true, "https://example.test/employees"], ["after"], ["decode"]]
   }, "Installed requests must preserve captured plain hooks, explicit application stages and aborted completion.");
 
+  const pageLoading = await page.evaluate(() => window.packedConsumer.checkPageLoading());
+  assert.deepEqual(pageLoading, {
+    reads: 1, loads: 2, plain: true, initial: { text: "Processed", inertIds: 2, liveIds: 0 }, reloaded: "Processed",
+    controllers: 2, cleaned: 2, prepared: 3, processed: 3, decoded: 3,
+    canceled: { outcome: "AbortError", signalAborted: true, controllers: 0, empty: true, after: 0, decode: 0 },
+    rejected: { code: "PAGE_HTML", controllers: 0, empty: true, executed: false }
+  }, "Installed pages must capture a plain communicator HTML loader, preserve inert IDs, cancel late work and reject nested executable templates.");
+
   const choiceGroups = await page.evaluate(() => {
     const h = window.packedConsumer.choiceGroups, id = h.rows.entries()[0].id;
     const initial = { gender: h.gender.value(), fruit: h.fruit.value(), empty: h.empty.value(), defaults: h.defaults,

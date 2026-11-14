@@ -12,7 +12,7 @@ sources:
   - id: omission
     resource: omission-decision.md
     title: Exact five approved omissions and retained obligations
-    git_blob: 3db0f03a3fb969272a6cbef550ecfa631384406a
+    git_blob: 3586346b948dbbd2cf38292a89bb71d09aa7f582
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -20,7 +20,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: 42ccd34a08b6345884ad73664165a18d89ba411e
+    git_blob: 5d3fe66ff956023f3fa0cd11f8e654cf1703c07f
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -32,7 +32,7 @@ sources:
   - id: architecture
     resource: ../v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 951e59371d537ef735a86632787b4b21ff9df444
+    git_blob: 736114a318f73864199595f63eca998bdb5b157f
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation

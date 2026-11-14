@@ -1,0 +1,37 @@
+{
+  "label": "unit",
+  "args": [
+    "node_modules/vitest/vitest.mjs",
+    "run"
+  ],
+  "started": "2026-11-14T18:14:56.239Z",
+  "before": {
+    "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+    "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+    "bytes": 21029,
+    "entries": 206
+  },
+  "environment": {},
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m33-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m33-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m33-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "stdout_partial": "docs/implementation/evidence/m33-unit-stdout.partial",
+  "stderr": "docs/implementation/evidence/m33-unit-stderr.log"
+}

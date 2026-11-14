@@ -1,0 +1,64 @@
+{
+  "milestone": "M3.3",
+  "status": "accepted_source_and_focused_witness_snapshot",
+  "baseline": {
+    "commit": "86be062fcbc30015a3671d629ef45df6779aeae8",
+    "receipt": {
+      "path": "docs/implementation/evidence/m32final-verification.json",
+      "sha256": "eb755c565fb08b9c03ee2bd2034d884343c6d30f76959f650167094a90ed4adb",
+      "bytes": 10903
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/5",
+  "selected_contracts": {
+    "loader": "One optional captured/plain PageDefinition.loadHtml for URL views; existing direct Fetch fallback; same parser, IDs, controller and resource/cancellation lifetime.",
+    "html": "Iterative nested-template executable validation; inert template IDs excluded from live document uniqueness, trusted borrowed/factory source policy unchanged.",
+    "containers": "Actual communicator preparation/response/decode through content, Popup, Tabs and Documents, plus caller-owned destination/add/retain-old-host policies.",
+    "public_delta": "One optional field, zero new public type/entry/dependency/runtime filename. View/controller capture and primitive cleanup/disposal policies remain M3.4."
+  },
+  "independent_source_review": {
+    "reviewer": "m511_design",
+    "status": "passed_connected_applied_source_callers_and_draft_contracts",
+    "source_sha256": {
+      "src/page/index.ts": "b8b00a8ac5ff4f2c383c0e11fa6b09256488b7b0544fc1b0cebb81df1a7150bf",
+      "tests/browser/page-loading.spec.ts": "b6a280bafb74f842a5d825f490c900012f7e13d768b969f6f11e3b90fd9f227c",
+      "tests/consumers/browser/main.js": "206d0e6ac9f6fd4ba0513c47b116d671ee46b0fce3c471ed8e731207c5038ee2",
+      "tests/consumers/ts/check.ts": "d3f77eab9247a3012523ef9a1799a3f32878b23c6b4e784e4615ba864156dc44",
+      "tools/check-packed-browser.mjs": "83009118fed084a6d18eb63e6b7dbc04ccca423da43588263a8e23a76cbfec2e"
+    }
+  },
+  "witnesses": {
+    "new_browser_cases": 15,
+    "file": "tests/browser/page-loading.spec.ts",
+    "installed": [
+      "tests/consumers/ts/check.ts",
+      "tests/consumers/browser/main.js",
+      "tools/check-packed-browser.mjs"
+    ]
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 155,
+    "focus_each_engine": 47,
+    "retained_first_chromium_focus": {
+      "passed": 46,
+      "failed": 1,
+      "disposition": "The supplied callback was serialized into a non-strict browser evaluation realm. Only its test definition gained use strict; the framework already called it plainly. No framework RED/GREEN fix claim."
+    }
+  },
+  "remaining": [
+    "M3.4 lifecycle/factory/view/metadata and M3.5-M3.7 configuration/advice/declarations.",
+    "All fixed M5 ancestors, whole-framework/M13/release gates.",
+    "Existing Windows WebKit native limits and old unexplained Tree/date/Edge observations retain their scope."
+  ],
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable pre-canonical source/focus snapshot; m33-verification.json owns later raw/document completion."
+}

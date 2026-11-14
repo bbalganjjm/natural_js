@@ -5,6 +5,14 @@ description: One picker PageDefinition shares Rows across main content, Popup, a
 tags: [ui-shell, cvc, example, accessibility]
 status: draft
 sources:
+  - id: loading
+    resource: ../../tests/browser/page-loading.spec.ts
+    title: Communicator HTML loading across all four containers and owned hosts
+    git_blob: 012acb1c6b531e8cb644da7c5cd95f27c57bc804
+  - id: page
+    resource: ../../src/page/index.ts
+    title: Shared PageDefinition loading and lifetime owner
+    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
   - id: controller
     resource: ../../examples/vite/m7/main.ts
     title: Shared page definition and container ownership
@@ -25,9 +33,10 @@ sources:
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Cross-container and MDI browser checks
     git_blob: 67c6bdd310b8083059548eccbfec369678dd5167
-generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 ---
 
 The M7 Vite example mounts one picker `PageDefinition` independently in main content, a native dialog Popup, and the People and Preview Tab panels. A caller-owned `Rows` store shares the selected person across two authored MDI layouts without repeated DOM IDs.[^controller][^side][^stack]
@@ -60,7 +69,11 @@ The People and Preview Tab picker buttons open the same workspace's Popup while 
 
 # Variations
 
-For a server-authored view, replace the picker factory with a `URL`; keep the same controller and use a separate mount for each container. A borrowed `HTMLElement` view can be mounted in one live container at a time. A plain Dialog needs only authored `<dialog>` markup and native `showModal()`/`close()`.[^controller]
+For a server-authored view, replace the picker factory with a `URL`; keep the same controller and use a separate mount for each container. An optional captured loadHtml(url, signal) can call the application communicator with a text decoder. The same complete definition works in main content, Popup, Tabs and Documents; containers add no second loader. Actual loader witnesses observe prepared headers and transformed text in all four containers.[^loading][^page]
+
+For destination/add operations, create one application-owned child host per page. To retain the old page until a candidate is ready, stage the candidate in a separate connected hidden/inert host, then retire the old handle. Candidate IDs must be absent or document-unique. Candidate ready already includes activation before reveal; old cleanup is a commit boundary, not rollback. The application disposes failed or superseded candidate handles and removes their child hosts; a PageHandle does not remove its caller-owned host. Existing in-place reload removes its previous instance before loading, so it has a different retention policy.[^loading][^page]
+
+A borrowed `HTMLElement` view can be mounted in one live container at a time. A plain Dialog needs only authored `<dialog>` markup and native `showModal()`/`close()`.[^controller]
 
 # Pitfalls
 
@@ -70,6 +83,8 @@ The example's `find` helper is local application code, not a Natural-JS selector
 
 [Popup](popup.md), [Tabs](tabs.md), and [the page runtime](page.md) define the public contracts. [The employee example](employee-example.md) exercises Rows/Form/Grid data binding; this example focuses on page containers.
 
+[^loading]: Communicator HTML loading across all four containers and owned hosts
+[^page]: Shared PageDefinition loading and lifetime owner
 [^controller]: Shared page definition and container ownership
 [^side]: Authored side-by-side layout
 [^stack]: Authored stacked layout

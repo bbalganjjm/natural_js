@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.3",
+  "status": "passed_independent_connected_source_and_API_draft_review",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T18:18:22.677Z",
+  "baseline_commit": "86be062fcbc30015a3671d629ef45df6779aeae8",
+  "source_sha256": {
+    "src/page/index.ts": "b8b00a8ac5ff4f2c383c0e11fa6b09256488b7b0544fc1b0cebb81df1a7150bf",
+    "tests/browser/page-loading.spec.ts": "b6a280bafb74f842a5d825f490c900012f7e13d768b969f6f11e3b90fd9f227c",
+    "tests/consumers/browser/main.js": "206d0e6ac9f6fd4ba0513c47b116d671ee46b0fce3c471ed8e731207c5038ee2",
+    "tests/consumers/ts/check.ts": "d3f77eab9247a3012523ef9a1799a3f32878b23c6b4e784e4615ba864156dc44",
+    "tools/check-packed-browser.mjs": "83009118fed084a6d18eb63e6b7dbc04ccca423da43588263a8e23a76cbfec2e"
+  },
+  "normalized_API_draft_bodies": {
+    "docs/v2/page.md": {
+      "normalized_body_sha256": "18a772a14d41974884cc935c39916c935f5a9b3f9cabe9227171f99ebd034ad6",
+      "normalized_body_bytes": 6309
+    },
+    "docs/v2/page-containers-example.md": {
+      "normalized_body_sha256": "f8fce1d763c974923575633fbdcde1a0bdc82e21effaba979af38ce0f845f456",
+      "normalized_body_bytes": 6329
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "94a5b053b3c1f3e855c24d950f2fcfae4143fa978b3c95defd9851f7c871b05c",
+      "normalized_body_bytes": 61086
+    }
+  },
+  "normalization": "UTF-8; CRLF normalized to LF. Markdown body is the untrimmed substring after the second frontmatter delimiter.",
+  "accepted_contract": [
+    "Exactly one optional PageDefinition.loadHtml(url, signal):Promise<string> field is added. The function is read and validated once per mount, invoked plainly, and reused for reload. No other declaration snapshot guarantee is introduced.",
+    "Native Fetch remains the omitted-loader path. URL HTML from both paths uses the same one-element parser, recursive executable checks including nested HTML template contents, live ID checks, generation checks, controller lifetime, and cleanup. Inert template IDs keep their existing semantics.",
+    "Borrowed and factory roots do not invoke loadHtml. Custom FrameworkError and AbortError values retain their origin. Nonfunction options and nontext results have explicit Page errors; ordinary default body-read errors retain PAGE_INIT.",
+    "The same complete definition composes with main content, Popup, Tabs, and Documents through the existing runner. Real HTTP/communicator witnesses assert prepared headers and transformed text across all four containers.",
+    "Caller-owned staging hosts implement destination/add or retain-old replacement. Candidate ready already includes activation, old retirement is a commit boundary, and the application disposes failed/superseded handles and removes their hosts. No generic replacement or loader registry is added.",
+    "Installed browser JavaScript executes captured loader, communicator, reload, abort, inert-ID, nested-executable, and disposal outcomes; the installed TypeScript fixture accepts text loaders and rejects Response-returning loaders. Existing M3.2 request witnesses remain present."
+  ],
+  "review_findings_resolved": [
+    "The first plain-receiver fixture ran a sloppy callback through page.evaluate. An explicit strict directive now tests undefined receiver on an actual plain call. Source invocation remains unchanged; preserve the original 46-pass/one-failure attempt without a framework bug-fix claim.",
+    "Page API now distinguishes runner-created errors from propagated FrameworkError values, states default body-read PAGE_INIT, and limits capture/mutation guarantees to loadHtml.",
+    "The container recipe explicitly assigns child-host removal to the application."
+  ],
+  "runtime_verification": {
+    "status": "pending_independent_raw_audit_and_final_document_acceptance",
+    "reviewer_executed_project_commands": false,
+    "observations": "Root reports strict build/source/example types,155 Vitest units and corrected47-case focus in all three engines. These reports are not independently audited runtime credit in this source review."
+  },
+  "scope_limits": [
+    "Fifteen new browser definitions are reviewed statically. Canonical collection/count and exact artifact/performance facts require the later immutable raw audit.",
+    "Controller/view/lifecycle receiver and reentry refinements remain M3.4. No full-family, final P0, M5.20, M13 or release closure.",
+    "Only the previously approved exact O01-O05 omissions apply. All unlisted legacy workflows remain required.",
+    "This reviewer edits only this ignored report and invokes no compiler, browser, benchmark or project checker."
+  ]
+}

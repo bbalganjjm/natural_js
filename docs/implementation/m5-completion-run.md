@@ -8,7 +8,7 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: 985d9373362c9c9477b2eef6419479c45a94f46b
+    git_blob: a294c21cbd14ca424d7e05b58d89d866ecaa93e6
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
@@ -16,7 +16,7 @@ sources:
   - id: live
     resource: m5-live-choice-groups-plan.md
     title: Accepted M5.14 private handoff and failure contract
-    git_blob: 96d22f6f9b1947cc63359665e698f23f5c97e916
+    git_blob: 19d12621f52035dc25259ed2d34f17ae16f570ff
   - id: protocol
     resource: evidence/m32final-verification.json
     title: Tool-inclusive M3.2 runtime and independent acceptance
@@ -33,9 +33,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 ---
 
 # Goal
@@ -66,7 +66,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Finish M3.2 independent final-document acceptance and its separate commit/push from the tool-inclusive checkpoint. Then write and implement M3.3; retain separate commits and actual evidence through M5.20. Keep the explicit Windows WebKit native limits, unexplained original Tree/date timeout and fresh installed Edge failure with their recorded attempts. Keep the tracker accurate during checks and context recovery.[^run][^protocol]
+Finish M3.3 independent raw/final-document acceptance and its separate commit/push. Then write and implement M3.4; continue every required ancestor through M5.20. Preserve all inherited native/Tree/date/Edge limitations and each exact receipt rather than reclassifying history.[^run]
 
 # Decisions
 
@@ -80,7 +80,9 @@ Finish M3.2 independent final-document acceptance and its separate commit/push f
 
 P0.1 is pushed as cf2210f and M5.14 as 6bc3c04. M3.1 retains its accepted 203-input, 150-unit, 857-case-per-engine evidence. The tool-inclusive M3.2 receipt has 22 fresh attempts and sixteen latest canonical groups on 205 inputs, 155 Vitest units and 876 full cases per engine. Its exact 203-file archive equals the original M3.2 tar and passes JS/TS, five installed browsers and the original thirty budgets. Thirteen source-owned paths include the two documentation-tool corrections and raw-byte Git attributes; three separate Node diagnostics include RED/GREEN with no extra unit/browser credit.[^run][^protocol]
 
-The original M3.2 R0, 34 attempts, 291 retained paths, pending projection and initial document approval remain immutable. The 298-path parent snapshot protects later bookkeeping separately. Original primary 44-case and diagnostic 4-case focus retain their original scope; both current and parent full-case identities are preserved. Windows WebKit cookie/header withholding is not certified. The original Tree/date timeout and fresh Edge ERR_NO_BUFFER_SPACE have no proven cause or production fix; later complete suites and all five installed checks pass. After selected M3.2 acceptance, twenty-nine unconditional stages remain. No partial Form result closes M5.20 or a whole family.[^run][^protocol][^baseline]
+The original M3.2 R0, 34 attempts, 291 retained paths, pending projection and initial document approval remain immutable. The 298-path parent snapshot protects later bookkeeping separately. Original primary 44-case and diagnostic 4-case focus retain their original scope; both current and parent full-case identities are preserved. Windows WebKit cookie/header withholding is not certified. The original Tree/date timeout and fresh Edge ERR_NO_BUFFER_SPACE have no proven cause or production fix; later complete suites and all five installed checks pass. At the M3.2 checkpoint, twenty-nine unconditional stages remained. No partial Form result closes M5.20 or a whole family.[^run][^protocol][^baseline]
+
+M3.3 adds one optional HTML loader to the existing page owner. It records 24 attempts; the latest sixteen canonical groups pass on 206 inputs, 155 units and 891 full cases per engine, with 47 focused cases per engine, with 15 new browser cases, one exact 203-file package, all five installed browsers and original performance budgets. A single non-strict serialized-callback fixture failure remains preserved without a framework fix claim. After selected M3.3 acceptance, twenty-eight unconditional stages remain.[^run]
 
 # Open questions
 

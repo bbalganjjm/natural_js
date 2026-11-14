@@ -65,6 +65,53 @@ state.checkRequests = async () => {
     stopped, abortName, abortComplete, customValue, customStages };
 };
 
+state.checkPageLoading = async () => {
+  const host = document.createElement("div"); document.querySelector("main").append(host);
+  let reads = 0, loads = 0, controllers = 0, cleaned = 0, plain = true, prepared = 0, processed = 0, decoded = 0;
+  const comm = createCommunicator({
+    prepare(request) { prepared++; request.headers.set("X-Page-Policy", "packed"); return request; },
+    async after(response) { processed++; return new Response((await response.text()).replace("Original", "Processed"), { status: response.status, headers: response.headers }); }
+  });
+  const readHtml = (url, signal) => comm.request({ url, signal, decode(response) { decoded++; return response.text(); } });
+  const loader = async function(url, signal) { loads++; plain &&= this === undefined; return readHtml(url, signal); };
+  const html = '<section><span>Original</span><template><input id="packed-page-inert"><input id="packed-page-inert"></template></section>';
+  const definition = {
+    view: new URL("data:text/html;charset=utf-8," + encodeURIComponent(html)),
+    get loadHtml() { reads++; return loader; },
+    controller({ own }) { controllers++; own(() => { cleaned++; }); return {}; }
+  };
+  const handle = mountPage(host, definition);
+  Object.defineProperty(definition, "loadHtml", { value: () => { throw new Error("Late page loader replacement"); } });
+  await handle.ready;
+  if (reads !== 1 || loads !== 1) throw new Error("Installed PageDefinition.loadHtml was not captured and used.");
+  const initial = { text: handle.root.querySelector("span").textContent,
+    inertIds: handle.root.querySelector("template").content.querySelectorAll('[id="packed-page-inert"]').length,
+    liveIds: document.querySelectorAll('[id="packed-page-inert"]').length };
+  await handle.reload(); const reloaded = handle.root.querySelector("span").textContent; await handle.dispose();
+
+  let enter, release, activeSignal, afterAbort = 0, decodeAbort = 0, canceledControllers = 0;
+  const entered = new Promise(resolve => { enter = resolve; });
+  const waiting = createCommunicator({ send(request) { activeSignal = request.signal; enter(); return new Promise(resolve => { release = resolve; }); },
+    after(response) { afterAbort++; return response; } });
+  const canceled = mountPage(host, { view: new URL("https://example.test/pending-page"),
+    loadHtml: (url, signal) => waiting.request({ url, signal, decode(response) { decodeAbort++; return response.text(); } }),
+    controller() { canceledControllers++; return {}; } });
+  const canceledReady = canceled.ready.then(() => "ready", cause => cause.name); await entered; await canceled.dispose();
+  release(new Response("<section>Late</section>")); await new Promise(resolve => setTimeout(resolve, 0));
+  const canceledResult = { outcome: await canceledReady, signalAborted: activeSignal.aborted, controllers: canceledControllers,
+    empty: host.childElementCount === 0 && canceled.root === null, after: afterAbort, decode: decodeAbort };
+
+  let badControllers = 0;
+  const unsafe = '<section><template><template><script>globalThis.__packedTemplateExecuted = true</script></template></template></section>';
+  const failed = mountPage(host, { view: new URL("data:text/html;charset=utf-8," + encodeURIComponent(unsafe)), loadHtml: readHtml,
+    controller() { badControllers++; return {}; } });
+  const failedCode = await failed.ready.then(() => "none", cause => cause.code); await failed.dispose();
+  const rejected = { code: failedCode, controllers: badControllers, empty: host.childElementCount === 0,
+    executed: globalThis.__packedTemplateExecuted === true };
+  host.remove();
+  return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, canceled: canceledResult, rejected };
+};
+
 function view() {
   const root = document.createElement("article");
   root.innerHTML = `

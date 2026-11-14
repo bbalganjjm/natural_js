@@ -9,11 +9,11 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Page runtime and types
-    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
-generated: { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
+generated: { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T09:10:24Z }
-  - { by: codex/gpt-6, at: 2026-10-05T08:49:05Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 ---
 
 The `./page` entry exports `mountPage` and its CVC types. Each mount creates a controller instance for one authored HTML root.[^page]
@@ -23,7 +23,7 @@ The `./page` entry exports `mountPage` and its CVC types. Each mount creates a c
 | Symbol | Signature | Returns |
 |---|---|---|
 | `mountPage` | `mountPage(host, definition, input?)` | `PageHandle<Output>` |
-| `PageDefinition<Input, Output>` | `view` plus `controller(context)` | Page declaration |
+| `PageDefinition<Input, Output>` | `view`, optional `loadHtml`, `controller(context)` | Page declaration |
 | `PageContext<Input, Output>` | `root`, `input`, `signal`, `own()`, `output()` | Controller context |
 | `PageController` | Optional `init()`, `activate()`, `deactivate()`, `dispose()` | Lifecycle hooks |
 | `PageHandle<Output>` | `ready`, `root`, `onOutput()`, lifecycle methods | Mounted page |
@@ -32,9 +32,13 @@ The `./page` entry exports `mountPage` and its CVC types. Each mount creates a c
 
 ## `mountPage(host, definition, input?)`
 
-`host` is an `HTMLElement`. `definition.view` is a `URL` for fetched HTML, an existing `HTMLElement`, or a synchronous factory returning a detached `HTMLElement`. Fetched HTML must have exactly one element root. Before insertion, the runner rejects executable elements (including `script` and `iframe`) and attributes such as inline event handlers, `srcdoc`, and `javascript:` URLs with `PAGE_HTML`. A generated root requires an empty host; an existing root must be the host or one of its descendants and remains in the DOM after disposal. Only one mount may claim the same existing root at a time.[^page]
+`host` is an `HTMLElement`. `definition.view` is a `URL` for fetched HTML, an existing `HTMLElement`, or a synchronous factory returning a detached `HTMLElement`. URL HTML must have exactly one element root. Both native Fetch and a custom loader use this same parser. Before insertion, the runner checks all descendants, including nested HTML template contents, and rejects executable elements (including `script` and `iframe`) and attributes such as inline event handlers, `srcdoc`, and `javascript:` URLs with `PAGE_HTML`. A generated root requires an empty host; an existing root must be the host or one of its descendants and remains in the DOM after disposal. Only one mount may claim the same existing root at a time.[^page]
 
-The runner checks `id` uniqueness within the root and against `host.ownerDocument`. Repeated pages should use root-scoped selectors such as `data-field`; if an `id` is needed for a label or ARIA relation, make it unique across all live page instances. The runner does not rewrite IDs.[^page]
+For URL views, optional loadHtml(url: URL, signal: AbortSignal): Promise<string> connects the application communicator or another explicit text loader. It is read once per mount, called plainly, and reused for reload. Later replacement or addition of loadHtml does not change that handle; borrowed/factory views do not call it. Omission retains native Fetch. The page owner still parses, checks IDs and manages controller/cancellation/cleanup; a late loader result cannot insert HTML or revive a disposed generation.[^page]
+
+A supplied nonfunction raises PAGE_OPTIONS synchronously; a nonstring result raises PAGE_LOAD. Capturing a getter can throw synchronously. Other custom loader failures use PAGE_FETCH while existing FrameworkError/AbortError values keep their owner. Native Fetch retains PAGE_FETCH/PAGE_HTTP. Ordinary native response-body read failures use PAGE_INIT; AbortError and existing FrameworkError values keep their propagation.[^page]
+
+The runner checks `id` uniqueness within the root and against `host.ownerDocument`. Repeated pages should use root-scoped selectors such as `data-field`; if an `id` is needed for a label or ARIA relation, make it unique across all live page instances. The runner does not rewrite IDs. IDs inside inert template contents are not live document IDs and do not participate in this check.[^page]
 
 # Methods
 
@@ -53,16 +57,21 @@ The runner checks `id` uniqueness within the root and against `host.ownerDocumen
 
 `output()` during initialization or inactivity is ignored. A new controller is created on reload, so keep durable application data outside the controller. A factory must return a fresh detached root for each concurrent mount.
 
-Cancellation rejects with a DOM `AbortError`. Other failures use `FrameworkError` with `api: "mountPage"`: `ROOT_MISSING`, `ROOT_IN_USE`, `HOST_NOT_EMPTY`, `DUPLICATE_ID`, `PAGE_HTML`, `PAGE_FETCH`, `PAGE_HTTP`, `CONTROLLER_INVALID`, `PAGE_INIT`, `PAGE_ACTIVATE`, `PAGE_DEACTIVATE`, or `PAGE_DISPOSE`, according to the failed step.[^page]
+Cancellation rejects with a DOM `AbortError`. Declaration-getter errors retain their JavaScript propagation. Runner-created page-operation errors use `FrameworkError` with `api: "mountPage"`; existing FrameworkError values from a custom loader retain their original code/API, including communicator REQUEST_HTTP/REQUEST_DECODE. Runner error codes include: `ROOT_MISSING`, `ROOT_IN_USE`, `HOST_NOT_EMPTY`, `DUPLICATE_ID`, `PAGE_HTML`, `PAGE_OPTIONS`, `PAGE_LOAD`, `PAGE_FETCH`, `PAGE_HTTP`, `CONTROLLER_INVALID`, `PAGE_INIT`, `PAGE_ACTIVATE`, `PAGE_DEACTIVATE`, or `PAGE_DISPOSE`, according to the failed step.[^page]
 
 # Examples
 
 ```ts
 import { mountPage } from "@bbalganjjm/natural_js/page";
+import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 
+const comm = createCommunicator();
 const host = document.querySelector<HTMLElement>("[data-page-host]")!;
 const page = mountPage(host, {
   view: new URL("./editor.html", import.meta.url),
+  loadHtml: (url, signal) => comm.request<string>({
+    url, signal, decode: response => response.text()
+  }),
   controller({ root, signal, output }) {
     return {
       init() {

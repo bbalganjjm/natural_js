@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation and stage boundaries
-    git_blob: e6903fb7efd352ee2b8b1f5a5a1694b1a89608d2
+    git_blob: 49a46ba41ebe5a8310b076da08397bd5c7490783
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid fields, drafts, paste and row lifetime

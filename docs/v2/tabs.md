@@ -17,7 +17,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Shared CVC page runtime
-    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
+    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
   - id: coordinator
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers

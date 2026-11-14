@@ -4,18 +4,22 @@ title: Natural-JS 2.0 active plan
 description: Current checkpoint, remaining gates and next owner for the Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: html
+    resource: m3-html-loading-plan.md
+    title: Current M3.3 common HTML loader contract
+    git_blob: 036b82d04688584a9c72573234dde9f0527f9918
   - id: protocol
     resource: m3-protocol-plan.md
     title: Current M3.2 native protocol and custom-sender contract
-    git_blob: 7c73168c0dff036c3d9a30541dbd1b399dc2c01d
+    git_blob: b94f7386725699eda8bd9f781ea5ef0b1ab86a5b
   - id: communication
     resource: m3-communication-plan.md
     title: Current M3.1 ordered application request and captured hook contract
-    git_blob: 87d7aed53a589d9b6ad037f2996622936dcd44fb
+    git_blob: d37725e500bafe3455d7f9d79a472b2f3447b24f
   - id: batch
     resource: m5-completion-run.md
     title: Authorized separate-stage M5 completion and prerequisite run
-    git_blob: deaa4c5c92bfad5febaeb0eab4fb920b42b61cf4
+    git_blob: d1f88ae14d2b7b1a3ef402a00cfbc87e57ffac32
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -23,26 +27,26 @@ sources:
   - id: choices
     resource: m5-live-choice-groups-plan.md
     title: Safe live Form-owned choice replacement
-    git_blob: 96d22f6f9b1947cc63359665e698f23f5c97e916
+    git_blob: 19d12621f52035dc25259ed2d34f17ae16f570ff
   - id: evidence
-    resource: evidence/m32final-verification.json
-    title: Tool-inclusive M3.2 runtime and independent acceptance
-    git_blob: c44fa622097d0c1b7073701598a2fe394014db57
+    resource: evidence/m33-verification.json
+    title: Selected M3.3 runtime and independent acceptance
+    git_blob: a6e18716de4a267e5ae3568fd6766ee8efcd3b4b
   - id: parity
     resource: feature-parity-plan.md
     title: Complete required feature coverage and one omission review
-    git_blob: 58f7ec09c3afdcdbbeadb43917f28061b9034c3c
+    git_blob: 4dc432ebdc8eea1846745520efede712523494cf
   - id: review
     resource: m13-review-plan.md
     title: Mandatory whole-code review and remediation
-    git_blob: 562c5b6b0ddd7ce9cc89c6613c8b2eea611c9e0c
+    git_blob: 1ea0adf1e024bbc544e27cbda7c6ed0a2af91e52
   - id: conventions
     resource: ../governance/okf-conventions.md
     title: OKF document and verification rules
     git_blob: 81500f1f325ac03d4a2772fca8f5f2a87e715191
-generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 ---
 
 Use this file to resume. The [milestone index](index.md), [roadmap](roadmap.md) and [completed log](../log.md) retain historical work; refresh fingerprints without recertifying old bodies.
@@ -53,10 +57,10 @@ Complete 1.x framework capabilities in TypeScript/ESM without jQuery, preserving
 
 # Checkpoint
 
-- M3.2 adds one captured/plain sender to existing communication options. Fetch stays the default. The application-only employee XHR sender preserves prepared bytes, native authentication/progress and owned cancellation in both CVC layouts. No type/export/entry/dependency or utility library is added.[^protocol]
-- All sixteen fresh tool-inclusive canonical groups pass on 205 frozen inputs, 155 Vitest units and 876 full cases per engine. Immediate-parent case identities and forty declaration files are unchanged; all 857 M3.1 browser identities remain. The exact 203-file archive is byte-identical to the original M3.2 archive and passes JS/TS, five installed Windows browsers and the original thirty budgets/sixty medians. Archive SHA-256: 2ac25f2126c58351deb3c7cc9589eae4d71758e24b0e583927ce45f8282fe684.[^evidence]
-- Windows WebKit native controls reproduce cookie/header withholding differences; selected delegation passes without certifying those standards outcomes. The original Tree/date timeout and the fresh installed Edge ERR_NO_BUFFER_SPACE failure have no proven cause or production fix. Later complete source suites and all five installed browsers pass. Preserve every attempt and carry the native limitations to browser/release ownership.[^evidence]
-- P0.1 is saved in cf2210f, M5.14 in 6bc3c04 and M3.1 in 3a9a2c8. Each keeps its own acceptance. The user authorized M5.14-M5.20 and every necessary predecessor as separate implementations, checks, documents and commits in one continuous run.[^batch][^communication][^choices]
+- M3.3 adds one optional captured/plain PageDefinition.loadHtml for URL views. The same parser checks nested template contents and live IDs; one page owner handles controllers, cancellation and cleanup across content, Popup, Tabs and Documents. No runtime module, named type, entry or dependency is added.[^html]
+- Sixteen canonical groups pass on 206 frozen inputs, 155 units and 891 full cases per engine, retaining all 876 parent identities. Primary focus passes 47 per engine; fifteen new cases exercise loader/error/template/container/host behavior. The exact 203-file archive passes JS/TS, five installed browsers and the original thirty budgets/sixty medians. Only the page declaration changes among forty files.[^evidence]
+- One initial focused fixture produced 46 passes and one failure because its serialized callback was not strict. Only that test function gained use strict; the framework already invoked it plainly. Preserve the first report/trace without a framework bug-fix claim.[^evidence]
+- P0.1, M5.14, M3.1 and M3.2 are saved separately; M3.2 is pushed as 86be062. The user authorized every necessary predecessor through joined M5.20, with a separate plan, checks, documents and commit per stage.[^batch]
 
 # Steps
 
@@ -64,7 +68,7 @@ Follow the durable ordered queue and separate-stage procedure in the [completion
 
 # Next action
 
-Finish independent final-document acceptance and the separate M3.2 commit/push using the tool-inclusive checkpoint. Then write M3.3 common HTML loading from that saved baseline. Continue every required stage through joined M5.20 acceptance; twenty-nine unconditional stages remain after selected M3.2. Use the existing runner/owners and keep declaration objects separate from runtime handles.[^protocol][^batch][^review]
+Finish independent M3.3 raw/final-document acceptance and its separate commit/push, then write and implement M3.4 page metadata/lifetime from that saved baseline. Continue every required stage through joined M5.20 acceptance; twenty-eight unconditional stages remain after selected M3.3. Use the existing runner/owners and keep declaration objects separate from runtime handles.[^protocol][^batch][^review]
 
 # Decisions
 
@@ -78,16 +82,14 @@ Finish independent final-document acceptance and the separate M3.2 commit/push u
 
 # Verification log
 
-The [tool-inclusive M3.2 acceptance](evidence/m32final-verification.json) links its immutable runtime receipt, connected source review, independent raw audit and final document checks. Its 22 fresh attempts include sixteen latest canonical groups; superseded installed checks retain zero current canonical credit. The final source review covers thirteen paths: ten original runtime/caller paths, two documentation-tool corrections and evidence-local raw-byte Git attributes. Three separate Node checker diagnostics include the Windows case-variant RED and final GREEN; they do not add Vitest units or browser cases.[^evidence]
-
-The original M3.2 R0, all thirty-four original attempts, 291 retained R0 paths, pending document projection and initial document approval remain immutable. The 298-path post-R0 parent snapshot protects later bookkeeping separately; it grants no retrospective acceptance. Original development focus passes 44 per engine and unchanged Tree/date diagnostics pass 4 per engine. Only the communicator declaration differs from M3.1; the checker correction changes no runtime API, case or declaration. No whole-family, M5.20, M13 or release closure is inferred.[^evidence][^batch]
+The [M3.3 acceptance](evidence/m33-verification.json) references one immutable runtime receipt, connected source review, independent raw audit and final document checks. Twenty-four attempts retain eight development records and sixteen canonical groups. The first strictness fixture failure remains separate from corrected focus. The final archive SHA-256 is 2d443c48d62ae2a06bfe534b6c0bf3704f1974445a83483b872c78a1c8a0812e. Historical evidence and original budgets remain; no full-family, M5.20, M13 or release closure is inferred.[^evidence][^batch]
 
 # Open questions
 
 Only O01-O05 are explicitly excluded. Other source-value/callback, configuration/advice/declaration and component obligations remain required. The first Tree/date timeout has no proven cause; direct Windows WebKit cookie/header wire differences remain measured platform limits. Manual assistive-technology, actual token measurements and the earlier module-fetch cause retain their existing limits. M13 whole-code review, publication/tags/master/v1 cleanup remain outside this ancestor run.[^protocol][^batch][^review]
 
 [^choices]: Safe live Form-owned choice replacement
-[^evidence]: Tool-inclusive M3.2 runtime and independent acceptance
+[^evidence]: Selected M3.3 runtime and independent acceptance
 [^parity]: Complete required feature coverage and one omission review
 [^review]: Mandatory whole-code review and remediation
 [^conventions]: OKF document and verification rules
@@ -95,3 +97,5 @@ Only O01-O05 are explicitly excluded. Other source-value/callback, configuration
 [^batch]: Authorized separate-stage M5 completion and prerequisite run
 [^communication]: Current M3.1 ordered application request and captured hook contract
 [^protocol]: Current M3.2 native protocol and custom-sender contract
+
+[^html]: Current M3.3 common HTML loader contract

@@ -1,0 +1,230 @@
+{
+  "label": "focused-firefox",
+  "started": "2026-11-14T18:11:54.529Z",
+  "finished": "2026-11-14T18:12:22.328Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+    "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+    "bytes": 21029,
+    "entries": 206
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+    "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+    "bytes": 21029,
+    "entries": 206
+  },
+  "sources_unchanged": true,
+  "workers": 1,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m33-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m33-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m33-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [
+    "tests/browser/page-loading.spec.ts",
+    "tests/browser/page.spec.ts",
+    "tests/browser/popup.spec.ts",
+    "tests/browser/tabs.spec.ts",
+    "tests/browser/documents.spec.ts"
+  ],
+  "children": [
+    {
+      "label": "focused-firefox-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/page-loading.spec.ts",
+        "tests/browser/page.spec.ts",
+        "tests/browser/popup.spec.ts",
+        "tests/browser/tabs.spec.ts",
+        "tests/browser/documents.spec.ts",
+        "--project=firefox",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m33-focused-firefox-suite-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T18:11:54.557Z",
+      "finished": "2026-11-14T18:11:55.247Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m33-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m33-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m33-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+        "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+        "bytes": 21029,
+        "entries": 206
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+        "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+        "bytes": 21029,
+        "entries": 206
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m33-focused-firefox-suite-list.json.gz",
+        "sha256": "392097455f68f9fe6c7b4dc8450608a984d1b895277eba2cf817e9b96be39e63",
+        "bytes": 4068,
+        "encoding": "gzip",
+        "uncompressed_sha256": "c2b5d4ec277a98239d484a3b4f71c6215f5685d45fe4101698c9a21cb48f98ad",
+        "uncompressed_bytes": 32983
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m33-focused-firefox-suite-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "focused-firefox-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/page-loading.spec.ts",
+        "tests/browser/page.spec.ts",
+        "tests/browser/popup.spec.ts",
+        "tests/browser/tabs.spec.ts",
+        "tests/browser/documents.spec.ts",
+        "--project=firefox",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m33-focused-firefox-suite-failures"
+      ],
+      "started": "2026-11-14T18:11:55.276Z",
+      "finished": "2026-11-14T18:12:22.298Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m33-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m33-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m33-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+        "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+        "bytes": 21029,
+        "entries": 206
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m33-inputs-6582652a7bcf.json",
+        "sha256": "6582652a7bcf7d74dfd72fcd602d7b898f93cd9e0442b0772fa534ab60613b0b",
+        "bytes": 21029,
+        "entries": 206
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m33-focused-firefox-suite-run-1.json.gz",
+        "sha256": "a3168b808b6988101b2f43ade7164e30c87a3c4bfb339c3f463eee9eba1c3bbc",
+        "bytes": 4805,
+        "encoding": "gzip",
+        "uncompressed_sha256": "d2b60a44ed787f25bd8dfbd5cd290a17005bcdee6e7eb86e3f58775ef829b0c3",
+        "uncompressed_bytes": 54586
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m33-focused-firefox-suite-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m33-focused-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    }
+  ],
+  "coverage": {
+    "passed": 47,
+    "identities_sha256": "78f311d8ab8f6654be55229ba786a4b1b41ef118925cf23e72aee6b78010a208",
+    "semantic_identities_sha256": "3a8ce68ce32a03708ea5a3df635fa33588763127d7de80b2b186b3b3c33d086e",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

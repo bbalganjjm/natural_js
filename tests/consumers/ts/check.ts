@@ -82,8 +82,11 @@ export function receiveEmployees(rows: Rows<Employee>, states: readonly RowState
   return { appended, payload };
 }
 
+const htmlCommunicator = createCommunicator();
 export const definition = {
   view: new URL("./employee.html", import.meta.url),
+  loadHtml: (url: URL, signal: AbortSignal): Promise<string> =>
+    htmlCommunicator.request<string>({ url, signal, decode: response => response.text() }),
   controller({ input, output }) {
     return {
       init() {
@@ -91,6 +94,12 @@ export const definition = {
       }
     };
   }
+} satisfies PageDefinition<Employee, string>;
+
+export const invalidHtmlDefinition = {
+  ...definition,
+  // @ts-expect-error An HTML loader must return text, not a native Response.
+  loadHtml: async () => new Response("")
 } satisfies PageDefinition<Employee, string>;
 
 export function mountEmployees(host: HTMLElement) {

@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M3.2",
+  "current_stage": "M3.3",
   "queue": [
     {
       "id": "P0.1",
@@ -35,16 +35,16 @@
     {
       "id": "M3.2",
       "scope_ref": "remaining-work-plan.json#/stages/4",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "86be062fcbc30015a3671d629ef45df6779aeae8",
       "receipt": "m32final-verification.json"
     },
     {
       "id": "M3.3",
       "scope_ref": "remaining-work-plan.json#/stages/5",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m33-verification.json"
     },
     {
       "id": "M3.4",
@@ -249,70 +249,59 @@
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
-    "stage": "M3.2",
-    "original_runtime_receipt": "m32-runtime-receipt.json",
-    "original_runtime_sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
-    "original_project_attempts": 34,
-    "original_latest_unit_cases": 155,
-    "original_latest_full_each": 876,
-    "correction": "Exclude the designated raw evidence tree from OKF concept traversal; active malformed concepts and explicit file validation remain checked.",
-    "changed_source_paths": [
-      "tools/knowledge-docs/knowledge-docs.mjs",
-      "tools/knowledge-docs/knowledge-docs.test.mjs"
+    "stage": "M3.3",
+    "baseline_commit": "86be062fcbc30015a3671d629ef45df6779aeae8",
+    "parent_receipt": "m32final-runtime-receipt.json",
+    "contract": "passed independent applied-source and draft API review",
+    "source_snapshot": "m33-html-loading.json",
+    "source_snapshot_sha256": "c71f07290f1fa64d948b474b9aa7a90333c482577f6865c97f384df344f489b0",
+    "inputs": 206,
+    "units": 155,
+    "focus_each": 47,
+    "session_id": 12328,
+    "journal": "m33-gates.jsonl",
+    "recorded_attempts": 24,
+    "passed_canonical": [
+      "build",
+      "types",
+      "example-types",
+      "unit",
+      "pack",
+      "consumers",
+      "packed-chromium",
+      "packed-firefox",
+      "packed-webkit",
+      "packed-chrome",
+      "packed-edge",
+      "binding-performance",
+      "viewport-performance",
+      "browser-chromium",
+      "browser-firefox",
+      "browser-webkit"
     ],
-    "separate_checker_regression": "passed 1 Node test; not a Vitest/browser/canonical result",
-    "next_runtime_prefix": "m32final",
-    "next_canonical_groups": "all 16 pending on new frozen tool-inclusive inputs",
+    "pending_canonical": [],
+    "package_sha256": "2d443c48d62ae2a06bfe534b6c0bf3704f1974445a83483b872c78a1c8a0812e",
+    "declarations": {
+      "entries": 40,
+      "unchanged": 39,
+      "changed": [
+        "build/page/index.d.ts"
+      ]
+    },
+    "first_focus": "46 passed,1 failed from the non-strict test callback; strict function correction only, no framework fix.",
     "documents": "passed_independent_and_actual_zero_errors_warnings",
-    "limits": [
-      "Original Windows WebKit native cookie/header limits remain open.",
-      "Original Tree/date timeout cause remains unproven."
-    ],
-    "fresh_verification": {
-      "prefix": "m32final",
-      "session_id": 90784,
-      "baseline_commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
-      "parent_runtime": "m32-runtime-receipt.json",
-      "parent_sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
-      "source_snapshot": "m32final-source.json",
-      "source_snapshot_sha256": "1182ba20fb1fe67a532d4e76cb847ed6679078be7d0e1950e621a1147d554c55",
-      "runtime_inputs": 205,
-      "reviewed_owned_paths": 13,
-      "recorded_attempts": 22,
-      "passed_groups": [
-        "build",
-        "types",
-        "example-types",
-        "unit",
-        "pack",
-        "consumers",
-        "packed-chromium",
-        "packed-firefox",
-        "packed-webkit",
-        "packed-chrome",
-        "packed-edge",
-        "binding-performance",
-        "viewport-performance",
-        "browser-chromium",
-        "browser-firefox",
-        "browser-webkit"
-      ],
-      "pending_groups": [],
-      "journal": "m32final-gates.jsonl",
-      "installed_error": "Initial Edge initialization resource load ERR_NO_BUFFER_SPACE; source/artifact unchanged, complete installed rerun passed; cause unproven.",
-      "next": "Wait for Firefox/WebKit full groups, build immutable new R0, independent raw and ten-body final semantics, actual document checks, commit/push, then M3.3.",
-      "runtime_receipt": "m32final-runtime-receipt.json",
-      "runtime_sha256": "03bc37761bd88d2a93852f6e570238a1195455c108935d02f61be11c8c09da30",
-      "independent_raw": "passed recorded-byte audit",
-      "documents": "ten-body final semantic review and mechanical checks pending"
-    }
+    "next": "Finish all full engines, immutable R0/raw review/final six semantic concepts and checks; separate commit/push, then M3.4.",
+    "runtime_receipt": "m33-runtime-receipt.json",
+    "runtime_sha256": "70d16be00cf5848b46f9707ca1a67dfb985a4b4866d87721ef5cc6d85f740479",
+    "independent_raw": "passed recorded-byte audit"
   },
   "latest_completed_checks": {
-    "stage": "M3.1",
-    "receipt": "m31-verification.json",
-    "inputs": 203,
-    "units": 150,
-    "full_each": 857,
+    "stage": "M3.2",
+    "commit": "86be062fcbc30015a3671d629ef45df6779aeae8",
+    "receipt": "m32final-verification.json",
+    "inputs": 205,
+    "units": 155,
+    "full_each": 876,
     "docs_errors": 0,
     "docs_warnings": 0
   },

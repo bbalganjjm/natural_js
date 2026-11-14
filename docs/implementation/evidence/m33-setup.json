@@ -1,0 +1,878 @@
+{
+  "prefix": "m33",
+  "stage": "M3.3",
+  "baseline_commit": "86be062fcbc30015a3671d629ef45df6779aeae8",
+  "created": "2026-11-14T18:07:27.908Z",
+  "head": "86be062fcbc30015a3671d629ef45df6779aeae8",
+  "initial_worktree": " M docs/implementation/current.md\n M docs/implementation/evidence/m5-completion-run.json\n M docs/implementation/index.md\n M docs/index.md\n M docs/log.md\n M src/page/index.ts\n M tests/consumers/browser/main.js\n M tests/consumers/ts/check.ts\n M tools/check-packed-browser.mjs\n?? docs/implementation/evidence/m33-stage-evidence-67303c6384dc.mjs\n?? docs/implementation/evidence/m33-stage-metadata-c788135184d3.mjs\n?? docs/implementation/evidence/m33-stage-run-98c755b1b338.mjs\n?? docs/implementation/m3-html-loading-plan.md\n?? tests/browser/page-loading.spec.ts\n",
+  "source_normalization": "UTF-8; CRLF normalized to LF; tar fixtures additionally protected as raw bytes",
+  "protected_files": [
+    {
+      "path": "tools/benchmark-m4.mjs",
+      "sha256": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+      "bytes": 11967
+    },
+    {
+      "path": "tools/benchmark-grid-viewport.mjs",
+      "sha256": "87570e023afb814627329fad003783fcefe2f8915ad086c0d209f977aa05de92",
+      "bytes": 31662
+    },
+    {
+      "path": "examples/vite/benchmark.ts",
+      "sha256": "ef6ed79908de768dcda7bfe07a88adeb4b421df9c30fff7125dae18d602f203d",
+      "bytes": 8475
+    },
+    {
+      "path": "examples/vite/benchmark.html",
+      "sha256": "3d65a0dda4a30f637f7335172eb54545869fbee3527267d954cd7b20a0b3eb4d",
+      "bytes": 2794
+    },
+    {
+      "path": "tests/evaluation/m8/task1-seed.tar",
+      "sha256": "8ae5f81f2f58eff35b9788c3a61b42e8c8b6176b46781f13a00ccca63bc4052e",
+      "bytes": 13824
+    },
+    {
+      "path": "tests/evaluation/m8/task2-seed.tar",
+      "sha256": "ba39cc15dd2eaa6294d19a25537c987c113df3b5f0ac222a7e15dc233a484990",
+      "bytes": 40960
+    },
+    {
+      "path": "tests/evaluation/m8/task3-seed.tar",
+      "sha256": "c1c035df3cf1e2aa320c8365e56a1d87e5f351ac48e2b88aa2376ad19fbfb38d",
+      "bytes": 12800
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-runtime-receipt.json",
+      "sha256": "03bc37761bd88d2a93852f6e570238a1195455c108935d02f61be11c8c09da30",
+      "bytes": 181533
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-binding-performance-result.json",
+      "sha256": "ab3ec3315173a8c24db324338ed2998038e4aeafd94a5cf7237740601cdb7a3d",
+      "bytes": 2394
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-binding-performance-start.json",
+      "sha256": "7c53bc7e1e3c2e633da99a1690b212a54515631f474e49b22593c7321ae3efdb",
+      "bytes": 1528
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-binding-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-binding-performance.json.gz",
+      "sha256": "a97294710c9214e16a901a3347e2e5830e030f76c0ee5d704bb19f3d1c0b3e28",
+      "bytes": 4641
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/attachments/tree-binding-measurements-82180fdebbc4a40a7cb347d9dc824c46f2badaf6.json",
+      "sha256": "86d1b2db6ccb1c83949be10cceaab7b897e6cabe40ed8cf3c41d749b08ee3762",
+      "bytes": 1554
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/tree-binding.json",
+      "sha256": "86d1b2db6ccb1c83949be10cceaab7b897e6cabe40ed8cf3c41d749b08ee3762",
+      "bytes": 1554
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-list-result.json",
+      "sha256": "7c48b12b830dac34c06c850c0a41f1d7339a60d12f9102be551c7e52342ebac1",
+      "bytes": 2611
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-list-start.json",
+      "sha256": "300752e6ffcb75c3efcf0ec037ccf4d2e9453608657e8197de7ae7b269bcedca",
+      "bytes": 1743
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-list.json.gz",
+      "sha256": "e085fb4185ed9f26cf9423e41162db3e04f1121469b1d0f0b0bd3a43f23c60ee",
+      "bytes": 55353
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-result.json",
+      "sha256": "95f5308779f705b0b55edccf3ec6a136dcfc089d82043b3550ed2d58161ae40c",
+      "bytes": 8658
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-run-1-result.json",
+      "sha256": "12661080c9eee500bee2daab083347173354f37a3ed3e426704eccbc22b2e6e9",
+      "bytes": 2600
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-run-1-start.json",
+      "sha256": "08102ed1ef3b9148edba5ac53fa47b8badfd243338a97fe7cdc6a9e81e0abfac",
+      "bytes": 1732
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-run-1.json.gz",
+      "sha256": "d89a4f45a777d76085824be2ee075d841e6bc9f863750553e89d02034335594a",
+      "bytes": 68173
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-chromium-suite-start.json",
+      "sha256": "680cb7759548c35a4642a31bc2bf5ae7dc915488d2e14231f23bea1d4c5e6199",
+      "bytes": 1273
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/attachments/tree-binding-measurements-ec6c13cbd763256d94415f2e30a7025de416bcec.json",
+      "sha256": "be4a3e278aa424cfaee86cbddbae7cda8feac29625bfb5ba0a19017141024167",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/tree-binding.json",
+      "sha256": "be4a3e278aa424cfaee86cbddbae7cda8feac29625bfb5ba0a19017141024167",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-list-result.json",
+      "sha256": "8a647dd15fd66f5a1ab3a566d420069c1dc81eb23997deaa0a14329f22ba2e43",
+      "bytes": 2666
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-list-start.json",
+      "sha256": "4101b43b77947c43e9c8b210612987bd1dae808ed589d9f1e847bca6975dae56",
+      "bytes": 1798
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-list.json.gz",
+      "sha256": "48617ed213aeae88e9efcb43b051ff0880c0243ee7206ad55bea932e2d5c5456",
+      "bytes": 55366
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-result.json",
+      "sha256": "007f84cc87d29972ffa034eec4bbffe7e9989985fa990f3aef49d982e510c4dc",
+      "bytes": 8762
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-run-1-result.json",
+      "sha256": "9ecbbcd9d39b09a346580ef6e1c195509d5fbfae06700db09f755653c8dc5b8a",
+      "bytes": 2655
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-run-1-start.json",
+      "sha256": "3265d50ebf18c2abf4d8093cea0c6749d5f3f43c72488ddf3b900295edf490fd",
+      "bytes": 1787
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-run-1.json.gz",
+      "sha256": "5a7749115463ca7fa50a8584997842069460a150b1501b83dece0df5c66dcdcc",
+      "bytes": 68967
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-firefox-suite-start.json",
+      "sha256": "85aa667827dd7787d89b196ea0fac1d665363e820a56068b5dd16fd3b11eb7a2",
+      "bytes": 1271
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/attachments/tree-binding-measurements-598e038571cdd29f25c2be119372fc4628d41c98.json",
+      "sha256": "534baa68e41ef81e5327fc9fd8dd5fdd1c9ca741299cde6601c4e91e366c730e",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/tree-binding.json",
+      "sha256": "534baa68e41ef81e5327fc9fd8dd5fdd1c9ca741299cde6601c4e91e366c730e",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-list-result.json",
+      "sha256": "07aee65e079228e567ff872e42df68031e76053c4a6e34966d4c3b0326c45f4d",
+      "bytes": 2601
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-list-start.json",
+      "sha256": "4746e63ac46c63c83b6cc166199e763643775605b84c5070f44f7348901206a9",
+      "bytes": 1733
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-list.json.gz",
+      "sha256": "656fdadc6e4e8230a1b19549548fa28f5babf1438b1a2492551b9daf9b1ad346",
+      "bytes": 55336
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-result.json",
+      "sha256": "affc934cb2febb795d6bf2c2bc88b05fc549a99c06199b5609e9bfaeef2bd0f4",
+      "bytes": 8626
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-run-1-result.json",
+      "sha256": "c12c4171a8e76f7e93761fd1e220a3e9a7bd8a1718edbcc9725be57bc046a8bf",
+      "bytes": 2590
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-run-1-start.json",
+      "sha256": "77f26c1f28e37cf2c0a10f764074bb234ce556ca14ad9bba675414a9b634924f",
+      "bytes": 1722
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-run-1.json.gz",
+      "sha256": "5ad95cfe6ae4dee94862665fb77f9c1f5cbe32a547802cee09e5eb7eb6db4bb5",
+      "bytes": 68737
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-start.json",
+      "sha256": "ee3d0399424c7d326f03bd82f46163bd9e53c2838791bac9ea0232c28079aad2",
+      "bytes": 1269
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-build-result.json",
+      "sha256": "95a43a7ce9c17159cd2c0640ad4b981a4fd4132f16ce7ea53ca67b873cb2fc8b",
+      "bytes": 2144
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-build-start.json",
+      "sha256": "f62eed13da31a22efea13e4bcc38daf192ca2899c66ca28fc381442eced5a0ca",
+      "bytes": 1426
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-2-result.json",
+      "sha256": "6d43f2e25d79d103f480afb46eda696c1fcefcf6e6bd96f5cbca3f0b112ac72d",
+      "bytes": 2428
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-2-start.json",
+      "sha256": "285dd3f514e1d93750311ced21ac9449727fc70ea84eac203a9872acf2fce561",
+      "bytes": 1708
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-2-stdout.partial",
+      "sha256": "3ce391b712f1129e9b912907e4339e411dd4b6b2a2d0b1a91e65f23339b015c2",
+      "bytes": 384
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-result.json",
+      "sha256": "0628654638a2b31d637679ff893302e5e30bf674cc0b10cb35c36ea562a4c0bf",
+      "bytes": 2424
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-start.json",
+      "sha256": "ce710eb0a88399a2b3d9a02b754ca0ecc8da69133b3321d7091383d666cba1d8",
+      "bytes": 1704
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-consumers-stdout.partial",
+      "sha256": "9a93e1e35ae7419aa398319f57f4897c13d7f142dbe69129000d81b4c2f343bb",
+      "bytes": 384
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-changed-2.log",
+      "sha256": "7cdd74fa32fdf4af263eb028edefee62a929c518ce8c685aa1953a04232c3cce",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-changed.log",
+      "sha256": "7cdd74fa32fdf4af263eb028edefee62a929c518ce8c685aa1953a04232c3cce",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-fingerprints-2.log",
+      "sha256": "2c4973239c29809a683d52428c53bc1c7ff83f60f3b5b4ca036cdcb7d7f6e827",
+      "bytes": 481
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-fingerprints.log",
+      "sha256": "f093ad3d93c6da94fd105db87f75da11ce81efe36cf3903a4804ee6fe96f53b4",
+      "bytes": 448
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-full-2.log",
+      "sha256": "b980f75959af547e0e154c1420abd725dec0562c2cd37f4c2eb3660aeaef489e",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-full.log",
+      "sha256": "b980f75959af547e0e154c1420abd725dec0562c2cd37f4c2eb3660aeaef489e",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-preflight-changed.log",
+      "sha256": "7cdd74fa32fdf4af263eb028edefee62a929c518ce8c685aa1953a04232c3cce",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-preflight-fingerprints.log",
+      "sha256": "81026250a0ac140f7bc29a3d2e1ff6b19466799acc87f6c55ba68250276cf3f1",
+      "bytes": 379
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-preflight-full.log",
+      "sha256": "b980f75959af547e0e154c1420abd725dec0562c2cd37f4c2eb3660aeaef489e",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-preflight-result.json",
+      "sha256": "b9d87b3b30ed6bf77edd91f1ba9b2d2136257fc4915d414523aaedfd6fa2f256",
+      "bytes": 1436
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-2-result.json",
+      "sha256": "0625b6504e92f08d7b6dbb68fa31ae208e25c5f2f987b447bdd666df656f143c",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-2-stdout.log",
+      "sha256": "d7d3795f402fb88e20af3ab7d3fd98b762822993355534515721427a7bd2c532",
+      "bytes": 1055
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-3-result.json",
+      "sha256": "3c42cddfb16033efb49c3ea34f826e72823223573b606e009fef2de297152937",
+      "bytes": 1391
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-3-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-3-stdout.log",
+      "sha256": "a452f2c80a58c5ac58924dc05d080c138051047c5dec838cba5162112b21133a",
+      "bytes": 193
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-result.json",
+      "sha256": "6402cca1019e852d66aad2c4522d7acddf487d47937c67cb0ac00a8e6ccd2bf8",
+      "bytes": 1374
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-stdout.log",
+      "sha256": "2c999f88e98ddc1c7df32afca551917382542b203b5b0d6f89bf1a15cf9c44d1",
+      "bytes": 192
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-document-checks-2.json",
+      "sha256": "13fc7fb67098ab18a1468c571b7f54259a8d12c2e6f26b7cc2516a11788704fa",
+      "bytes": 1033
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-document-checks.json",
+      "sha256": "84d19d488adddeb55011f6f3662867bcf6331f55fbdf2351acae238d984cd2c7",
+      "bytes": 1025
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-document-history-2.json",
+      "sha256": "265fe3f04c9eb09366d6ad60614ea2e52d1e333ee2fe1795bf380c4123c73778",
+      "bytes": 2358
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-document-history.json",
+      "sha256": "265fe3f04c9eb09366d6ad60614ea2e52d1e333ee2fe1795bf380c4123c73778",
+      "bytes": 2358
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-example-types-result.json",
+      "sha256": "550afb4a9d6e233023083070725b3151fff2512f11c65e41caec1142558f22b4",
+      "bytes": 2922
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-example-types-start.json",
+      "sha256": "b2f465ac9a3be21b2b44123138bad7df18448421c5691ccc7a8d214926afa928",
+      "bytes": 2204
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-fingerprint-preflight-result.json",
+      "sha256": "71d83611357b93563984f4ae25caba79165e9a9a4d8cfd068e0e12f6071e82c7",
+      "bytes": 697
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-fingerprint-preflight.log",
+      "sha256": "61eb25b20d0d8484c3e16a1e36d1aba603eeff24041eff3ce080f1265ee40f7e",
+      "bytes": 35
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-gates.jsonl",
+      "sha256": "ad8f674d1c5050096bf77622ed6a7296f11743258e52fe613389796c44361699",
+      "bytes": 80624
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-helper-review.json",
+      "sha256": "0b1b9a943bab6d229eba76d93a2e6f335e145ea3690916c4aec3049f05c5e125",
+      "bytes": 2716
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-independent-audit.json",
+      "sha256": "f961c7f3036011f54e2132a79319a0a8554aa33733e481026b4c6567d39cb216",
+      "bytes": 68210
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-independent-audit.mjs",
+      "sha256": "4f5b26b5d90b5dba7ef4d36f2a2035daa292fe618dcc23817934cfb13a04e427",
+      "bytes": 28023
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-inputs-2923a8600769.json",
+      "sha256": "2923a86007692105aee05d2761ad61afcfbbb615712ea5d55568f944776e8160",
+      "bytes": 20921
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+      "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+      "bytes": 20921
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-inputs-f3f8aeb8735b.json",
+      "sha256": "f3f8aeb8735bb6dcca5cb47d72dd96cf6783f3b6cef5617a9e425e9289dae94f",
+      "bytes": 20921
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-metadata-candidates.json",
+      "sha256": "495b0a91e889f1105e009fbaf437bee66ce3b8205a0121a08009158188a54400",
+      "bytes": 2132
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck-first-attempt.json",
+      "sha256": "50f1a8eed8c39001963521d404f8568d6b0a93fa68f657c1b139559491306ef8",
+      "bytes": 643
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck-first-attempt.mjs",
+      "sha256": "c2aec47beb206cf39beadc055c1b5324af71b389cb62e3dfd4ae98e669ef36cd",
+      "bytes": 11724
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck.json",
+      "sha256": "ec735b0f83b595cf14bf3e3aca1ff27484316a5fde0335fdcc00af81e9d99abd",
+      "bytes": 4698
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck.mjs",
+      "sha256": "68254d740d3f9c5bfab55a3b5597d54abd4a95de9a738880ffd893c8e4a43f77",
+      "bytes": 12690
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-pack-result.json",
+      "sha256": "21476d7c0b62adb2e8969073b7f4ed5a741f2079f4cae29b5d418718ebcd133a",
+      "bytes": 2419
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-pack-start.json",
+      "sha256": "b355985900b2ee3514b6a6abf15062ce97ca60e6aa448a9496cfe9399d3159e8",
+      "bytes": 1553
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-pack-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-pack.json.gz",
+      "sha256": "ac87719c784b159119852c98fffd23b56311ad1a9fdc4ba9ad81e1ef171dfd13",
+      "bytes": 2161
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-2-result.json",
+      "sha256": "75fe9055ba3221847263129bd82a135d634b5b1b98e4b123d0062f99942d6060",
+      "bytes": 2516
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-2-start.json",
+      "sha256": "1f3626ca49e4af5e78d00701dcfa6162f8996d39fb38b97b52b853ab28a8a171",
+      "bytes": 1796
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-2-stdout.partial",
+      "sha256": "bb663cd1dbe8761b5cc9b350d39bfcfd2549bbd54c81fbb57a442dac772c57b1",
+      "bytes": 464
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-result.json",
+      "sha256": "85b79de28f82ac3149df82a48fe25f41750dcacccf31b234393d51fd2ddaa1cf",
+      "bytes": 2512
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-start.json",
+      "sha256": "f3f4d8d2a2ec3ddbf7c9222f08e8370b2ff55812fa57e2df97e2017c83ae6e13",
+      "bytes": 1792
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chrome-stdout.partial",
+      "sha256": "bb663cd1dbe8761b5cc9b350d39bfcfd2549bbd54c81fbb57a442dac772c57b1",
+      "bytes": 464
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-2-result.json",
+      "sha256": "043f9a020f435274a13e8689c2f4270808adc314f7600e9f4681ecdf6040785b",
+      "bytes": 2524
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-2-start.json",
+      "sha256": "a99b928a73b78647e253a53f9e323ab8e74c5fc8aaca647cbe8d78150e6c6db6",
+      "bytes": 1804
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-2-stdout.partial",
+      "sha256": "1b630c9b7b22fc6212a964e7d9415a65a0e4d6c85641e1da21984c71cb9d3971",
+      "bytes": 468
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-result.json",
+      "sha256": "e65d92d80c6766a2a92a58449895c1e98fa9c07c505f917129a8f48b43304ab1",
+      "bytes": 2520
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-start.json",
+      "sha256": "75db9f4ed147660118429e6ce711b5b20f161e9d621eb55dd10966e7ebc5fe7b",
+      "bytes": 1800
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-chromium-stdout.partial",
+      "sha256": "1b630c9b7b22fc6212a964e7d9415a65a0e4d6c85641e1da21984c71cb9d3971",
+      "bytes": 468
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-2-result.json",
+      "sha256": "a1b1e02b16ed27748e5c64b48a0087f9652e5e6ae36180cb787bf096cf5bdd25",
+      "bytes": 2508
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-2-start.json",
+      "sha256": "841acd97b3ccb393f11486121ab72c15c12fe41716c27f5ef565524d09aba802",
+      "bytes": 1788
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-2-stdout.partial",
+      "sha256": "734f97e4b7d40b2189a20160fb397fa29cbb381304cebfa517a88c34d57b64b5",
+      "bytes": 460
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-result.json",
+      "sha256": "fd1e661b9fb1e82bbc805808b0a3b135088d814264c341a302a102b9255e005f",
+      "bytes": 2506
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-start.json",
+      "sha256": "f5fae8a1a4254e1904bfcf9a7739511354f80b14deffe80b1bc7672e14e8bd42",
+      "bytes": 1784
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-stderr.log",
+      "sha256": "ffce80916b3a9e2f9690fede65a3fdf0c6ea9de65409135ae4a148ff4f78e559",
+      "bytes": 557
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-edge-stdout.partial",
+      "sha256": "848ae41b6b7177bde3c0edc6072f297095ae74326b5065de32186d4ca698244c",
+      "bytes": 326
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-2-result.json",
+      "sha256": "c983b932b6e68eda9c7ece73b353990aff8303c440e4fae346d1a217b347a915",
+      "bytes": 2580
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-2-start.json",
+      "sha256": "d1c11da6f98be16a3347444deae044613a9912be7196f9ffb071877b7f411637",
+      "bytes": 1860
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-2-stdout.partial",
+      "sha256": "f8b31fc9415ecca88d6b368a5443f000a0aee64f3cdde2902d9ee3426bef784d",
+      "bytes": 458
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-result.json",
+      "sha256": "99522feca023895edee9cef7b550ac35f4cc8faabbffacd9ce028de07f3b0223",
+      "bytes": 2576
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-start.json",
+      "sha256": "5fc42f7833ba909e99aa00f731a1e5a0841e80cad7d0f346b05f44dd87ae1bb4",
+      "bytes": 1856
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-firefox-stdout.partial",
+      "sha256": "1f71ac058a9fd16c5b0dcbe296b2ff720738917fc7d4c3e4f2012801afc676e9",
+      "bytes": 458
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-2-result.json",
+      "sha256": "fdab3c99f7e89540022f188598c098e2a7f1ef247d67ce95569979b359ee721c",
+      "bytes": 2516
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-2-start.json",
+      "sha256": "c5ab0919c1a436727caf69a90a7c804272b6c70c480cc97cddbce92d57d014df",
+      "bytes": 1796
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-2-stdout.partial",
+      "sha256": "21cebe590fd608165d018290c2f9d5b8f7d5c628a2249d6a42ab52297ed0613b",
+      "bytes": 455
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-result.json",
+      "sha256": "3552fe12174fbfc105e710b31ae12789900c5d7eaab1fa04fd40d498ec4286f7",
+      "bytes": 2512
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-start.json",
+      "sha256": "882fd020e1b2aa840a0b9c7eaa672d04790ffec64d894744b0540a7089c57852",
+      "bytes": 1792
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-packed-webkit-stdout.partial",
+      "sha256": "5bdbf0f8dc486ec2dcd315f1eb7f4ce97acd9d872ac96b09f721f11f1e4f6822",
+      "bytes": 455
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-setup.json",
+      "sha256": "8486c380efc9cf23495a6b841d1a7612d7389c462e02a858724036cd4ebe32f1",
+      "bytes": 154404
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-source.json",
+      "sha256": "1182ba20fb1fe67a532d4e76cb847ed6679078be7d0e1950e621a1147d554c55",
+      "bytes": 4652
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-stage-git-helper.mjs",
+      "sha256": "6f9a61f916a56c2bcb04630d498dbaed826a57e859bfde243d29dc9a4b1bd1b4",
+      "bytes": 4511
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-types-result.json",
+      "sha256": "a514b6e2d6d8eded2aa40cf95ef426e1481e25ec0d3447cbb18e3dd97e9edd0c",
+      "bytes": 2160
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-types-start.json",
+      "sha256": "9389d45568aab8c23335bebb5e6499b1f628709e0bc1da5821d38a5ca6178e8b",
+      "bytes": 1442
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-unit-result.json",
+      "sha256": "18685fa7b66e999b2deb6e12e938762fa4885e4417ef385255c007580664c864",
+      "bytes": 2122
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-unit-start.json",
+      "sha256": "25adc6723ccebead31b1d485c3111cdd2bb207204b8da70b610a8b3017533015",
+      "bytes": 1402
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-unit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-unit-stdout.partial",
+      "sha256": "9ed826b4de1480cede21e6cd5493de5c7667908d81cbbcf25954e8782aa4a631",
+      "bytes": 191
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-verification.json",
+      "sha256": "eb755c565fb08b9c03ee2bd2034d884343c6d30f76959f650167094a90ed4adb",
+      "bytes": 10903
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-viewport-performance-result.json",
+      "sha256": "711588480631232d10aac9fbde6df4b4f7e71561332fb52aac877219bd9cc364",
+      "bytes": 2409
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-viewport-performance-start.json",
+      "sha256": "b35500b490d729a89c47fc28ce660739705287cae585af119cc0f7fd0ddd9c96",
+      "bytes": 1542
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-viewport-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-viewport-performance.json.gz",
+      "sha256": "84c363d5e9f55dbdb5f1a7a2bcc925607c3a1d2bb6896299add42f5038b41f70",
+      "bytes": 8556
+    }
+  ],
+  "original_lock": {
+    "path": "js/natural_js/@types/package-lock.json",
+    "sha256": "ed9165da5fa2bb5cb7c4e858370e5703941e92a2559751ccf19ee41311313afe",
+    "bytes": 1285
+  },
+  "v1_tree": "4c6dc6d646af8e6646029a95c2cc4ba070cf0a1c",
+  "parent_receipt": {
+    "path": "docs/implementation/evidence/m32final-runtime-receipt.json",
+    "sha256": "03bc37761bd88d2a93852f6e570238a1195455c108935d02f61be11c8c09da30",
+    "bytes": 181533
+  },
+  "working_parent": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m33-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m33-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m33-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ]
+}

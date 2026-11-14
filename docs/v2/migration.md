@@ -40,7 +40,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Page definition, scoped root, output, and lifecycle
-    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
+    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
   - id: rows
     resource: ../../src/data/index.ts
     title: RowId, changes, and immutable row values
@@ -148,15 +148,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 42ccd34a08b6345884ad73664165a18d89ba411e
+    git_blob: 5d3fe66ff956023f3fa0cd11f8e654cf1703c07f
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 58f7ec09c3afdcdbbeadb43917f28061b9034c3c
-generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+    git_blob: 4dc432ebdc8eea1846745520efede712523494cf
+generated: { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -209,6 +209,8 @@ await page.ready;
 ```
 
 This compact extract assumes an `HTMLElement` host and an `HTMLTemplateElement` template as in [m4/main.ts](../../examples/vite/m4/main.ts); use that complete file to run it. The controller receives `root`, `input`, `signal`, and `own` per page instance. Dispose the page before removing its host so an aborted request cannot write into a closed view. After an explicit close, return focus to a connected external control; the M4 caller uses its Open button.[^page][^employee-runner][^employee-test]
+
+For remote CVC views, supply optional PageDefinition.loadHtml(url, signal) when HTML must share application communication policy. Close over createCommunicator and request text with decode: response => response.text(); keep the explicit controller module and pass the complete definition to each container. Native and custom loading share root/template/ID validation, cancellation and cleanup, including rejection of nested executable templates. Use owned child hosts for add/retain-old replacement and keep its activation/retirement policy distinct from in-place reload. See [the page contract](page.md) and [container recipes](page-containers-example.md).[^page][^comm]
 
 ## 2. Bind fields and select a row by identity
 

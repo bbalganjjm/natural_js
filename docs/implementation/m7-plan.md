@@ -18,7 +18,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: One CVC runtime and lifecycle
-    git_blob: f753a91b97c8137bcb4cdc5a476f13a4cf098588
+    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
   - id: legacy-popup
     resource: ../../v1/docs/ui/popup.md
     title: Preserved 1.x Popup intent and behavior

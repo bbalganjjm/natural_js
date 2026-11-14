@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "changed": {
+      "path": "docs/implementation/evidence/m33-docs-changed.log",
+      "sha256": "dbb3e0ac99e50a5a24a8936775f3c922411a78771fb270c8843ac1edf4bfbcba",
+      "bytes": 183,
+      "concepts": 91,
+      "reserved_files": 5,
+      "errors": 0,
+      "warnings": 0
+    },
+    "full": {
+      "path": "docs/implementation/evidence/m33-docs-full.log",
+      "sha256": "469f466ec8d15762ade4f8f441086362e27410d0abaf792cbddcb9f79d779be4",
+      "bytes": 173,
+      "concepts": 91,
+      "reserved_files": 5,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "history": {
+    "path": "docs/implementation/evidence/m33-document-history.json",
+    "sha256": "7dc7786664ad4b46f1de7f0477d0fcb005c17d163be147a2098f4f35b47c1cba",
+    "bytes": 2334
+  },
+  "fingerprint_log": {
+    "path": "docs/implementation/evidence/m33-docs-fingerprints.log",
+    "sha256": "47d166adbbd18afa7c62c6526a7132b7132f2cbeacb3f2c71974a2519e105fec",
+    "bytes": 448
+  },
+  "reviewed_bodies_unchanged": true
+}
