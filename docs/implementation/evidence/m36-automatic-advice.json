@@ -1,0 +1,120 @@
+{
+  "milestone": "M3.6",
+  "status": "accepted_source_and_focused_witness_snapshot",
+  "baseline": {
+    "commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
+    "receipt": {
+      "path": "docs/implementation/evidence/m35-verification.json",
+      "sha256": "a6fec96aab63e43339188ba83c646354181b8cf3fc148e373536c936d0f803c8",
+      "bytes": 9373
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/8",
+  "selected_contracts": {
+    "automatic": "One optional PageDefinition.advice array and one PageAdvice type; captured native match/wrap functions automatically select own/nested methods and root class lifecycle methods before init.",
+    "lifetime": "Original-owner sync/falsy proceeds, ordered wrappers, lifecycle-only abort guards, controller adoption/weak method claims, complete partial cleanup and all-owned-wrapper restoration; current PageContext is excluded.",
+    "application": "Stable public employee actions exist before async setup, private bindings follow validated asset data, and every load uses the public property. Native early submit and pending Close keep their real owners.",
+    "bounded_existing_correction": "Only validated root/host candidates are adopted; rejected connected factory roots cannot remove another active page or occupied destination content."
+  },
+  "independent_source_review": {
+    "status": "passed_composite_independent_source_and_four_draft_contracts",
+    "reviewer": "composite",
+    "report": {
+      "path": "docs/implementation/evidence/m36-independent-source-review.json",
+      "sha256": "a6a7ea736e9c1463e9047863b687c25163db347a84d1db04aa85458ca0fe5c41",
+      "bytes": 7063
+    },
+    "source_sha256": {
+      "src/page/index.ts": "2cd309503654fdc5d89ff6fcbc95a3d5fc08a67b67ed99866fc4866138e196f5",
+      "src/page/advice.ts": "9a041ac1b34688e5f7c5bacf63d92e0f500ed49c706f9cc4093fce9d20e79f58",
+      "tests/page-advice.test.ts": "344b7201b4db4e1c1ae8987d0faf8def486a67067639755af74113d9200db0a4",
+      "tests/browser/page-advice.spec.ts": "77e9c975da4be7cba1b719a4b95e55820ba0968246984d53716fa8d787b2279a",
+      "examples/vite/m4/employees.ts": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+      "examples/vite/m4/main.ts": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+      "examples/vite/m4/employee-setup.json": "8a061586d4f3f1ea27ceedf2f2f2c1fb228bb5e9e79d60a0b13f4ba103f01b2e",
+      "tests/browser/m36-advice.spec.ts": "913566de07ee880b56ace3b1f22a5ced08fd72a35b715bca62114f0c664c435a",
+      "tests/consumers/ts/check.ts": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+      "tests/consumers/browser/main.js": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+      "tools/check-packed-browser.mjs": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+      "tests/browser/fixtures/advice-controller.ts": "3e3bdf1414c1cd259a19dd0f53a11dc7be0e04f874818b9c6e8cdeeacd7d1622"
+    },
+    "coverage": {
+      "core": {
+        "path": "docs/implementation/evidence/m36-core-independent-review.json",
+        "sha256": "11568220a9f46f681291a0f7263362f64f2d5d4464738afb5eca1f3b518f25f6",
+        "bytes": 5248
+      },
+      "app_installed": {
+        "path": "docs/implementation/evidence/m36-app-independent-review.json",
+        "sha256": "21edc12c3944cec62a2339ef13edfce4acd8d14a5a0415448a7ea3f5ef6fbd34",
+        "bytes": 7500
+      },
+      "root_authored_transport_correction": {
+        "path": "docs/implementation/evidence/m36-harness-independent-review.json",
+        "sha256": "46133e603fbb130e6088ff756eca321c8a02fb606c53964c89409df18d176b2a",
+        "bytes": 4170
+      },
+      "original_fixtures": "Baseline independent fixture review bound to joint6db990 and fixture64eaf; no author self-review claim."
+    }
+  },
+  "witnesses": {
+    "new_unit_cases": 54,
+    "new_browser_cases": 22,
+    "common_browser": 16,
+    "employee_browser": 6,
+    "files": [
+      "tests/page-advice.test.ts",
+      "tests/browser/page-advice.spec.ts",
+      "tests/browser/m36-advice.spec.ts"
+    ],
+    "native_class_module": "tests/browser/fixtures/advice-controller.ts"
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 217,
+    "focus_each_engine": 80,
+    "initial_focus": {
+      "passed": 79,
+      "failed": 1,
+      "engine": "chromium",
+      "source_input_entries": 214,
+      "scope": "Original serialized class fixture failed before advice installation because Playwright private-field helpers were outside the browser callback."
+    },
+    "corrected_input_entries": 215,
+    "diagnosis": {
+      "path": "docs/implementation/evidence/m36-serialized-class-diagnostic.json",
+      "sha256": "9de24ca3606e97ffb516052849ef4de138e579a90cb1431921560c99aeb4cbc6",
+      "bytes": 1529
+    },
+    "scope": "Test-only transport correction preserves native private fields and receiver/cleanup assertions. No production source changed after the initial applied candidate."
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m36-declaration-contract.json",
+    "sha256": "3f4532235081a57b0337f691026159b2799c80d0b97dd239940506f5eed304ab",
+    "bytes": 1186
+  },
+  "written_plan": {
+    "path": "docs/implementation/evidence/m36-written-plan.md",
+    "sha256": "514496c4b18849b2a5a13e96d667582fcc75a3f4a89dfb0dd469ed8d0de6426b",
+    "bytes": 12932
+  },
+  "contract": {
+    "path": "docs/implementation/evidence/m36-advice-contract.md",
+    "sha256": "1441bc3772066e21555cc663cc51ff3a80732426a3f3c7aba49a870362049de8",
+    "bytes": 13288
+  },
+  "remaining": [
+    "M3.7 full asynchronous declarations/actions and all subsequent M5 ancestors remain required.",
+    "Whole core/family closure and M13/release owners remain separate."
+  ],
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable source/focus/composite-review snapshot; m36-verification.json owns later raw/final-document completion."
+}

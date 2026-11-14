@@ -5,6 +5,10 @@ description: Small role modules, one-way imports, and evidence-based sharing kee
 tags: [architecture, modules, maintainability]
 status: draft
 sources:
+  - id: page-advice
+    resource: ../../src/page/advice.ts
+    title: Page-local automatic method discovery and lifetime
+    git_blob: bca295c532e60202899145fbafc5ad133906480a
   - id: configuration-browser
     resource: ../../tests/browser/configuration.spec.ts
     title: Two CVC scopes, captured data and owned live policy
@@ -128,7 +132,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: CVC page runner
-    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
+    git_blob: 4aedbe450f442b7d8c96955c837c5c88f379276a
   - id: data
     resource: ../../src/data/index.ts
     title: Row store
@@ -157,10 +161,10 @@ sources:
     resource: ../../src/ui/tab-pages.ts
     title: Private shared page-tab transitions and keyboard helpers
     git_blob: 4e0f2ee8ee62e95f0b3e47d7a305ecffbe53bd31
-generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
 ---
 
 The root 2.0 package uses one directory per public role and a narrow private internal area. An agent can start at the package export map, then read one entry and its direct dependencies.
@@ -242,6 +246,14 @@ Grid/List/Tree capture the subscribed Rows once, including Grid's private select
 
 Use native Map for known-key handle lookup/enumeration. Map.has distinguishes missing from stored undefined. Register each application's disposer through PageContext.own and delete an entry only when it still equals that disposer’s handle. The executed two-page recipe closes an old Form after replacement, removes the current owned Form on page close and leaves the sibling scope active.[^configuration-browser]
 
+## Automatic CVC method ownership
+
+page/advice.ts owns the optional captured match/wrap contract, finite own-method discovery, original-owner proceeds and method claims/restoration. mountPage adopts controllers only after the advice claim succeeds, then runs the same init/activate/cleanup owner in every container. No-advice pages skip discovery. The current PageContext is a runtime owner, not a traversed controller fragment.[^page-advice]
+
+Discovery groups aliases by physical slot; ordered wrappers preserve sync return shape and explicitly composed async behavior. Metadata changes during callbacks are rejected before replacement. Partial installs stay through controller and owned cleanup; release recognizes every owned wrapper, including an earlier layer after a failed later replacement. Blocked weak claims prevent reuse of unrestored context. Framework errors describe phase/path rather than exposing business arguments.[^page-advice]
+
+The employee factory exposes stable public actions before asynchronous preparation. Its private binding implementation appears only after validated setup, and every load reads the public action property. Main supplies optional query policy through PageDefinition.advice; application functions own query policy and preparation, while the common page owner installs and releases interception.[^page-advice]
+
 # Related
 
 [The M1 contract](../implementation/m1-contract.md) gives behavioral invariants. [Package](package.md) lists what is actually installable. [The employee example](employee-example.md) exercises data UI across two authored layouts. [Popup](popup.md) and [Tabs](tabs.md) document the M7 container contracts; [the page-container example](page-containers-example.md) traces one definition across main content, Popup, and Tabs. [Tree](tree.md) and [DatePicker](datepicker.md) keep source and handle types together; [the authored M11 example](tree-date-example.md) connects them through the same CVC runtime. [Documents](documents.md), [Notify](notify.md) and [the application shell example](shell-example.md) complete the selected shell composition without a public shell engine. [The roadmap](../implementation/roadmap.md) sets later implementation gates.
@@ -281,3 +293,5 @@ Use native Map for known-key handle lookup/enumeration. Map.has distinguishes mi
 [^value-binding]: Private checked value invocation and native replacement shared by three binders
 
 [^configuration-browser]: Two CVC scopes, captured data and owned live policy
+
+[^page-advice]: Page-local automatic method discovery and lifetime

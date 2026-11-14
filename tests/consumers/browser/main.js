@@ -267,6 +267,53 @@ function view() {
     <button type="button" data-action="save">Save</button>`;
   return root;
 }
+state.checkEmployeeAdvice = async () => {
+  const host = document.createElement("div"); document.body.append(host);
+  const order = [], comm = createCommunicator({ send: async () => new Response(JSON.stringify([{ name: "Ada" }])) });
+  let constructed = 0;
+  const page = mountPage(host, {
+    view() { const root = document.createElement("form"); root.innerHTML = '<label>Name <input data-field="name"></label>'; return root; },
+    advice: [{
+      match: (path, _owner, context) => /^actions\.(?:search)$/.test(path) && context.root.matches("form"),
+      wrap: proceed => async (...args) => {
+        order.push("before");
+        const query = args[0];
+        const result = await proceed(typeof query === "string" ? query.trim() : query);
+        order.push("after");
+        return result;
+      }
+    }],
+    controller({ root, signal, own }) {
+      let rows;
+      const actions = { async search(name) {
+        signal.throwIfAborted();
+        if (!rows) throw new Error("Employee bindings are not ready.");
+        rows.set(rows.entries()[0].id, "name", name); order.push("core"); return true;
+      } };
+      return {
+        actions,
+        async init() {
+          order.push("prepare");
+          const initial = await comm.request({ url: "https://example.test/employees", signal });
+          signal.throwIfAborted();
+          constructed++; order.push("construct");
+          rows = createRows(initial); const current = rows; own(() => current.dispose());
+          const form = bindForm(root, { rows }); own(() => form.dispose()); form.bind(rows.entries()[0].id);
+          await actions.search(" Grace ");
+        },
+        activate() { order.push("activate"); }
+      };
+    }
+  });
+  await page.ready;
+  const first = host.querySelector("input").value;
+  await page.reload();
+  const value = host.querySelector("input").value;
+  await page.dispose();
+  const released = host.childElementCount === 0; host.remove();
+  return { order, constructed, first, value, released };
+};
+
 
 const definition = {
   view,

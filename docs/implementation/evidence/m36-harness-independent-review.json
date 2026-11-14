@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.6",
+  "status": "passed_independent_transport_correction_review_no_runtime_credit",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T21:31:18.704Z",
+  "corrected_source": {
+    "path": "node_modules/.cache/m36-corrected-source.json",
+    "sha256": "3e1ac656e0cd0af61d9a8a8f79324c35b9dd1842aa19fbb01664ba064a95469e",
+    "bytes": 2212
+  },
+  "reviewed_files": {
+    "tests/browser/page-advice.spec.ts": {
+      "path": "tests/browser/page-advice.spec.ts",
+      "sha256": "77e9c975da4be7cba1b719a4b95e55820ba0968246984d53716fa8d787b2279a",
+      "bytes": 33859
+    },
+    "tests/browser/fixtures/advice-controller.ts": {
+      "path": "tests/browser/fixtures/advice-controller.ts",
+      "sha256": "3e3bdf1414c1cd259a19dd0f53a11dc7be0e04f874818b9c6e8cdeeacd7d1622",
+      "bytes": 784
+    }
+  },
+  "normalized_source_sha256": {
+    "tests/browser/fixtures/advice-controller.ts": "3e3bdf1414c1cd259a19dd0f53a11dc7be0e04f874818b9c6e8cdeeacd7d1622",
+    "tests/browser/page-advice.spec.ts": "77e9c975da4be7cba1b719a4b95e55820ba0968246984d53716fa8d787b2279a"
+  },
+  "unchanged_project_source_paths": [
+    "src/page/index.ts",
+    "src/page/advice.ts",
+    "tests/page-advice.test.ts",
+    "examples/vite/m4/employees.ts",
+    "examples/vite/m4/main.ts",
+    "examples/vite/m4/employee-setup.json",
+    "tests/browser/m36-advice.spec.ts",
+    "tests/consumers/ts/check.ts",
+    "tests/consumers/browser/main.js",
+    "tools/check-packed-browser.mjs"
+  ],
+  "preserved_initial_fixture": {
+    "path": "docs/implementation/evidence/m36-initial-page-advice.spec.ts",
+    "sha256": "8bb4bf4c07ce05d6b8d61f4bf8a7af71e43d00ba6f4995078c5e94b5ceb2be6e",
+    "bytes": 34084
+  },
+  "diagnosis": {
+    "path": "docs/implementation/evidence/m36-serialized-class-diagnostic.json",
+    "sha256": "9de24ca3606e97ffb516052849ef4de138e579a90cb1431921560c99aeb4cbc6",
+    "bytes": 1529
+  },
+  "serialized_expression": {
+    "path": "docs/implementation/evidence/m36-serialized-class-expression.js",
+    "sha256": "bf1b1993a6a0f54169ab860e0f12f3116277fc6f554c25a170cc56a88126dc72",
+    "bytes": 4337
+  },
+  "accepted_contract": [
+    "The private-field Controller and class-valued ConstructorValue move together to a Vite-served module, so their real module scope includes any transformed helpers. No private-field helper is injected into the page, and no plain fake receiver replaces the class.",
+    "Native/private-field init and dispose still increment one instance count; count2 per controller, independent borrowed nested method results and sibling use remain exact assertions. Constructor identity and normal new construction remain checked against the imported class.",
+    "Factory records native context own/output identities after construction but before Page advice installation, preserving the previous pre-install baseline. Broad policies still invoke those native methods; identity checks occur before disposal and context paths remain excluded.",
+    "The constructor still registers the same owned finish callback. Cleanup/advice event order and every existing assertion remain. Every later test body after the first-case boundary is byte-identical after newline normalization.",
+    "Exactly the test callback transport and one served test module change. All framework/application/installed source hashes remain at their accepted joint candidates. Original fixture, actual failed expression and diagnostic bytes remain preserved.",
+    "The diagnostic identifies ReferenceError for a missing serialized Playwright transform helper in the authored fixture. This is a test transport correction, not a framework bug-fix claim."
+  ],
+  "findings": [],
+  "limits": [
+    "No compiler/browser/test/benchmark/project checker ran from this reviewer. Root current focus/gates remain independently owned.",
+    "The reviewer authored the original core fixtures; this review independently examines only the root-authored transport correction and served module, not a renewed independent approval of the whole original fixture family.",
+    "No runtime success, catalog/family/release closure or additional omission is granted."
+  ]
+}

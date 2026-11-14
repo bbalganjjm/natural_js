@@ -1,0 +1,199 @@
+{
+  "milestone": "M3.6",
+  "status": "selected_outcomes_verified_remaining_owners_open",
+  "baseline_commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
+  "runtime": {
+    "path": "docs/implementation/evidence/m36-runtime-receipt.json",
+    "sha256": "932790a7a467c0c5a62f48e229324a1e25569d4eb6e558a6b8f66b5ab9017cd4",
+    "bytes": 232973
+  },
+  "source_review": {
+    "path": "docs/implementation/evidence/m36-automatic-advice.json",
+    "sha256": "6623bf2056e259f5a2eba13be9b435b3db7f6b8c1a606c5c4f1473d6ce37cf84",
+    "bytes": 6097,
+    "reviewer": "composite",
+    "connected_report": {
+      "path": "docs/implementation/evidence/m36-independent-source-review.json",
+      "sha256": "a6a7ea736e9c1463e9047863b687c25163db347a84d1db04aa85458ca0fe5c41",
+      "bytes": 7063
+    }
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m36-independent-audit.json",
+    "sha256": "f2fbf3832f80dbd679f7bed3545cb66005626e8075d7a5909834e8c996d0d48d",
+    "bytes": 69113,
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "docs/implementation/evidence/m36-independent-audit.mjs",
+      "sha256": "c7efab40333f2c79fcff4f0b20f2941078d37245222b036ac8ed736cde590914",
+      "bytes": 28848
+    },
+    "original_execution_path": "node_modules/.cache/m36-independent-audit.mjs"
+  },
+  "counts": {
+    "inputs": 215,
+    "attempts": 28,
+    "canonical_gates": 16,
+    "development_attempts": 12,
+    "superseded_canonical_attempts": 0,
+    "unit_cases": 217,
+    "new_unit_cases": 54,
+    "full_cases_each": 933,
+    "new_browser_cases": 22,
+    "focused_each": 80,
+    "package_files": 208,
+    "declarations": 41,
+    "unchanged_declarations": 39,
+    "changed_declarations": 1,
+    "added_declarations": 1,
+    "performance_budgets": 30,
+    "raw_medians": 60,
+    "raw_durations": 300
+  },
+  "artifact": {
+    "sha256": "e81cbaa02b5e8b9d9fd8aee8acb5504b902fa44c8a9ed4625783ef977ecf040e",
+    "files": 208,
+    "packed_bytes": 370661,
+    "unpacked_bytes": 1872927
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m36-declaration-contract.json",
+    "sha256": "3f4532235081a57b0337f691026159b2799c80d0b97dd239940506f5eed304ab",
+    "bytes": 1186
+  },
+  "documents": {
+    "status": "passed_independent_semantics_and_actual_changed_full_checks",
+    "semantic_files": [
+      "docs/implementation/current.md",
+      "docs/implementation/m3-advice-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "docs/v2/page.md",
+      "docs/v2/employee-example.md",
+      "docs/v2/architecture.md",
+      "docs/v2/migration.md"
+    ],
+    "expected_scope": {
+      "concepts": 94,
+      "reserved_files": 5
+    },
+    "independent_review": {
+      "reviewer": "m511_design",
+      "path": "node_modules/.cache/m36-final-document-approval.json",
+      "sha256": "54d70fbac4d8893b5fb62486665feb0abcd5fbe8bea657dd59e694944e5d85f2",
+      "bytes": 11920,
+      "reviewed_files": {
+        "docs/implementation/current.md": {
+          "normalized_body_sha256": "6f817d3ccffe4b5ba07064026c069d0caaee11d51ba5c5b06d3a8b9a20afa6c0",
+          "normalized_body_bytes": 5662,
+          "review": "Fresh independent final full-body semantic review against immutable source/composite/runtime/raw evidence, original written checkpoint and remaining-stage ownership."
+        },
+        "docs/implementation/m3-advice-plan.md": {
+          "normalized_body_sha256": "82995eeda477ea1cbcb4f2e3bb379d9f6da7eed24324035cba13d66d9ab343c9",
+          "normalized_body_bytes": 12428,
+          "review": "Fresh independent final full-body semantic review against immutable source/composite/runtime/raw evidence, original written checkpoint and remaining-stage ownership."
+        },
+        "docs/implementation/m5-completion-run.md": {
+          "normalized_body_sha256": "4cdc52ff1b065fc589f4142fdc8bbbe07a9fc09e0cbc53870b21f5561efe935b",
+          "normalized_body_bytes": 9960,
+          "review": "Fresh independent final full-body semantic review against immutable source/composite/runtime/raw evidence, original written checkpoint and remaining-stage ownership."
+        },
+        "docs/v2/page.md": {
+          "normalized_body_sha256": "1122802cf83d7c2fb7c91387739d44b4440ced9d20ddde528f876f823ed200eb",
+          "normalized_body_bytes": 12661,
+          "review": "Accepted independent full-body API semantics rechecked by exact unchanged a6a7 body hash."
+        },
+        "docs/v2/employee-example.md": {
+          "normalized_body_sha256": "b26564b7601d0040d7ed08ecdcf4efdb6fc8c40977a9a3f38865f398d6b296ea",
+          "normalized_body_bytes": 14458,
+          "review": "Accepted independent full-body API semantics rechecked by exact unchanged a6a7 body hash."
+        },
+        "docs/v2/architecture.md": {
+          "normalized_body_sha256": "9070dd4528ba6289800c6eff44cc5f606a3f80cb5a63c1c0d73e85dfcfb48318",
+          "normalized_body_bytes": 21013,
+          "review": "Accepted independent full-body API semantics rechecked by exact unchanged a6a7 body hash."
+        },
+        "docs/v2/migration.md": {
+          "normalized_body_sha256": "ad4296c56f01acff047414b180e08b9f58b8d58f0088f39d0f3f827413560a7c",
+          "normalized_body_bytes": 63367,
+          "review": "Accepted independent full-body API semantics rechecked by exact unchanged a6a7 body hash."
+        }
+      }
+    },
+    "mechanical": {
+      "checks": {
+        "changed": {
+          "path": "docs/implementation/evidence/m36-docs-changed.log",
+          "sha256": "d67c017a76b3149ff70aec8777ec0f9bd6842f0f475bca5c32494046b9c5bf0f",
+          "bytes": 183,
+          "concepts": 94,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        },
+        "full": {
+          "path": "docs/implementation/evidence/m36-docs-full.log",
+          "sha256": "7f2068a1adc44658a091efedc565403e89e93f7782e2d682cf71be88c4bed0a9",
+          "bytes": 173,
+          "concepts": 94,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "history": {
+        "path": "docs/implementation/evidence/m36-document-history.json",
+        "sha256": "50fdbbc1a1e37d6fd34c22387280165ed3e6c1f1fb9d4fc77479825d630ec47c",
+        "bytes": 2545
+      },
+      "fingerprint_log": {
+        "path": "docs/implementation/evidence/m36-docs-fingerprints.log",
+        "sha256": "dace8db8f5a1ab6299891e8ceaaf6bfda2b245fbe9537c70a681bcd3685e8322",
+        "bytes": 448
+      },
+      "reviewed_bodies_unchanged": true
+    }
+  },
+  "inherited_limits": {
+    "parent": {
+      "path": "docs/implementation/evidence/m35-verification.json",
+      "sha256": "a6fec96aab63e43339188ba83c646354181b8cf3fc148e373536c936d0f803c8",
+      "bytes": 9373
+    },
+    "scope": "Windows WebKit native cookie/header limits, original unexplained Tree/date timeout, earlier Edge/module-fetch observations and M3.5 pre-import navigation failure retain their parent scope. No Safari/manual-AT/token result is inferred."
+  },
+  "retained_current_failure": {
+    "report": {
+      "path": "docs/implementation/evidence/m36-focused-chromium-suite-run-1.json.gz",
+      "sha256": "aa17878e97f9efba69efd0e8de18c8f5f6d4c4f649183296985faf9bacc87073",
+      "bytes": 7233
+    },
+    "passed": 79,
+    "failed": 1,
+    "source": "tests/browser/page-advice.spec.ts",
+    "case": "two real pages discover nested methods and class lifecycle methods through native predicates with independent receivers",
+    "input_entries": 214,
+    "diagnosis": {
+      "path": "docs/implementation/evidence/m36-serialized-class-diagnostic.json",
+      "sha256": "9de24ca3606e97ffb516052849ef4de138e579a90cb1431921560c99aeb4cbc6",
+      "bytes": 1529
+    },
+    "diagnostic_helper": {
+      "path": "docs/implementation/evidence/m36-class-diagnostic.mjs",
+      "sha256": "649f82a29289e4b22a858fa9f064bb447107b01740ca697ac23f12296d7b38cd",
+      "bytes": 2259
+    },
+    "error": "ReferenceError: _classPrivateFieldInitSpec is not defined",
+    "cause": "Playwright serialized a class callback without the transform helpers defined outside it.",
+    "production_fix": false,
+    "correction": "Move native-private-field classes into a Vite-served fixture module, preserving class identity, receiver and cleanup assertions.",
+    "corrected_input_entries": 215,
+    "scope": "The separately recorded exact-expression diagnostic receives zero unit, suite or canonical credit. All production, application and installed sources remain unchanged after the test transport correction."
+  },
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "remaining": "Twenty-five authorized unconditional stages remain after selected M3.6 acceptance; required M3.7 declaration assembly, all subsequent M5 ancestors and whole-framework/M13/release owners remain independently required."
+}

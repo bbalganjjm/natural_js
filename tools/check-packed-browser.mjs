@@ -121,6 +121,12 @@ try {
     disposal: { same: true, code: "PAGE_DISPOSE", ownCause: true, undefinedCause: true, empty: true, order: ["deactivate", "dispose", "owned"] }
   }, "Installed pages must preserve captured factories/loaders, live per-generation views, method receivers, input/output identity and shared cleanup failures.");
 
+  const employeeAdvice = await page.evaluate(() => window.packedConsumer.checkEmployeeAdvice());
+  assert.deepEqual(employeeAdvice, {
+    order: ["prepare", "construct", "before", "core", "after", "activate", "prepare", "construct", "before", "core", "after", "activate"],
+    constructed: 2, first: "Grace", value: "Grace", released: true
+  }, "Installed advice must discover public actions, await preparation and preserve order across independent reload instances.");
+
   const configuration = await page.evaluate(() => window.packedConsumer.checkConfiguration());
   assert.deepEqual(configuration, {
     initial: Array(4).fill("This field is required."),

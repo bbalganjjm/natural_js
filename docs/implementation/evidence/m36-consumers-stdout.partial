@@ -1,0 +1,10 @@
+
+> @bbalganjjm/natural_js@2.0.0-beta.0 test:consumers
+> node tools/check-consumers.mjs --tarball D:\workspace\natural_js\node_modules\.cache\m36-artifact-pack\bbalganjjm-natural_js-2.0.0-beta.0.tgz --sha256 e81cbaa02b5e8b9d9fd8aee8acb5504b902fa44c8a9ed4625783ef977ecf040e
+
+
+added 1 package in 2s
+JS installed consumer passed.
+
+added 1 package in 2s
+TS installed consumer passed.

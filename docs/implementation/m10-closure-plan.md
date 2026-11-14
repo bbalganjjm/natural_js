@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-parity-plan.md
     title: Required Grid continuation
-    git_blob: 921be2c06b4239cf735428599fa415dff760a979
+    git_blob: 6821865c44cfd7e544aacc73e335a4d425dd41d8
   - id: mapping
     resource: evidence/v1-grid-parity.json
     title: Preserved 89-entry and 17-group structural audit

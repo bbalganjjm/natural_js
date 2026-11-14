@@ -1,0 +1,32 @@
+{
+  "kind": "actual_pack_declaration_delta",
+  "parent_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m35-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "375b752ef05f77781bb671ce2001de5bc4bb5b1df4405f439d9114a34a03e7de",
+    "bytes": 361201
+  },
+  "current_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m36-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "e81cbaa02b5e8b9d9fd8aee8acb5504b902fa44c8a9ed4625783ef977ecf040e",
+    "bytes": 370661
+  },
+  "entries": 41,
+  "parent_entries": 40,
+  "unchanged": 39,
+  "changed": [
+    {
+      "path": "build/page/index.d.ts",
+      "before": "3bd64e98588ba3a4e4e83416e46cf270f2726dab75e0201d09fc31dc22d01f81",
+      "after": "1599cefff57a75ccb152b29dd3b08b1859937da02e11a2c6a2ea18b17f46abc5"
+    }
+  ],
+  "added": [
+    {
+      "path": "build/page/advice.d.ts",
+      "sha256": "6175e23f880343eb6d1782cb3598aa4693607b86611705ba02cf99a1e3d8aab7",
+      "bytes": 779
+    }
+  ],
+  "removed": [],
+  "scope": "One optional PageDefinition field and one PageAdvice type from the existing page entry; one private CVC module, no new runtime entry or dependency."
+}

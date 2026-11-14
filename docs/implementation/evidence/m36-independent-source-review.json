@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.6",
+  "status": "passed_composite_applied_source_and_independent_four_API_draft_review_raw_pending",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T21:51:55.213Z",
+  "baseline_commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
+  "corrected_application": {
+    "path": "node_modules/.cache/m36-corrected-source.json",
+    "sha256": "3e1ac656e0cd0af61d9a8a8f79324c35b9dd1842aa19fbb01664ba064a95469e",
+    "bytes": 2212
+  },
+  "source_sha256": {
+    "src/page/index.ts": "2cd309503654fdc5d89ff6fcbc95a3d5fc08a67b67ed99866fc4866138e196f5",
+    "src/page/advice.ts": "9a041ac1b34688e5f7c5bacf63d92e0f500ed49c706f9cc4093fce9d20e79f58",
+    "tests/page-advice.test.ts": "344b7201b4db4e1c1ae8987d0faf8def486a67067639755af74113d9200db0a4",
+    "tests/browser/page-advice.spec.ts": "77e9c975da4be7cba1b719a4b95e55820ba0968246984d53716fa8d787b2279a",
+    "examples/vite/m4/employees.ts": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+    "examples/vite/m4/main.ts": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+    "examples/vite/m4/employee-setup.json": "8a061586d4f3f1ea27ceedf2f2f2c1fb228bb5e9e79d60a0b13f4ba103f01b2e",
+    "tests/browser/m36-advice.spec.ts": "913566de07ee880b56ace3b1f22a5ced08fd72a35b715bca62114f0c664c435a",
+    "tests/consumers/ts/check.ts": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+    "tests/consumers/browser/main.js": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+    "tools/check-packed-browser.mjs": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+    "tests/browser/fixtures/advice-controller.ts": "3e3bdf1414c1cd259a19dd0f53a11dc7be0e04f874818b9c6e8cdeeacd7d1622"
+  },
+  "composite_independent_reviews": {
+    "core": {
+      "owner": "m511_legacy",
+      "path": "node_modules/.cache/m36-core-legacy-final-review.json",
+      "sha256": "11568220a9f46f681291a0f7263362f64f2d5d4464738afb5eca1f3b518f25f6",
+      "bytes": 5248,
+      "scope": "Independent exact common helper/Page source review, not its authored app files."
+    },
+    "app_installed": {
+      "owner": "m511_design",
+      "path": "node_modules/.cache/m36-app-installed-independent-review.json",
+      "sha256": "21edc12c3944cec62a2339ef13edfce4acd8d14a5a0415448a7ea3f5ef6fbd34",
+      "bytes": 7500,
+      "scope": "Independent four app/three installed targets; original authored core fixtures excluded."
+    },
+    "original_fixtures": {
+      "owner": "m511_baseline",
+      "path": "node_modules/.cache/m36-framework-baseline/joint-candidate-manifest.json",
+      "sha256": "6db990029ba8961adef65936ac3e07f11f68754755855e481b63ad66bddc19c4",
+      "bytes": 10154,
+      "scope": "Independent full54-unit/16-common-browser static fixture review recorded in independent_review_status.fixtures."
+    },
+    "transport": {
+      "owner": "m511_design",
+      "path": "node_modules/.cache/m36-independent-harness-review.json",
+      "sha256": "46133e603fbb130e6088ff756eca321c8a02fb606c53964c89409df18d176b2a",
+      "bytes": 4170,
+      "scope": "Independent root-authored private-class transport correction and real module only; original full fixture approval remains Baseline."
+    }
+  },
+  "normalized_API_draft_bodies": {
+    "docs/v2/page.md": {
+      "normalized_body_sha256": "1122802cf83d7c2fb7c91387739d44b4440ced9d20ddde528f876f823ed200eb",
+      "normalized_body_bytes": 12661
+    },
+    "docs/v2/employee-example.md": {
+      "normalized_body_sha256": "b26564b7601d0040d7ed08ecdcf4efdb6fc8c40977a9a3f38865f398d6b296ea",
+      "normalized_body_bytes": 14458
+    },
+    "docs/v2/architecture.md": {
+      "normalized_body_sha256": "9070dd4528ba6289800c6eff44cc5f606a3f80cb5a63c1c0d73e85dfcfb48318",
+      "normalized_body_bytes": 21013
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "ad4296c56f01acff047414b180e08b9f58b8d58f0088f39d0f3f827413560a7c",
+      "normalized_body_bytes": 63367
+    }
+  },
+  "normalization": "UTF-8 with CRLF->LF; untrimmed body after second frontmatter delimiter, retaining blank lines and final newline.",
+  "accepted_contract": [
+    "Exactly twelve current source hashes match the corrected applied-source map. Non-test framework/app/installed hashes remain identical to their separately approved joint candidates.",
+    "One PageDefinition.advice field and PageAdvice type support captured plain match/wrap, finite automatic own/nested-plain discovery, original owner/alias/descriptor/claim rules and typed application policy; no entry/dependency/registry/secondary advice engine is added.",
+    "Exact PageContext identity is excluded, ordinary input aliases remain discoverable, claimed discovered slots reject before matching, startup-only abort checks preserve arbitrary action ownership, and every attempted wrapper identity remains recognizable through complete cleanup/restoration.",
+    "The preexisting generated-root adoption fix preserves a foreign connected root and occupied destination. Advice partial cleanup preserves first failure and blocked weak claims instead of early restoration or stale-owner reuse.",
+    "Actual Employee actions exist before asynchronous setup, all search paths forward through the public property, and preparation/early-submit/Close/signals/save behavior remain application-owned. Installed TS/JS witnesses use only the public API and retain all older assertions.",
+    "Four current API bodies were independently reviewed with prior accepted unchanged portions. Corrected explicit pre-match slot conflicts, cross-page controller lookup wording, current architecture ownership and CVC migration placement remove the identified ambiguities.",
+    "The served private-field class module preserves real private receivers/constructor identity and every original assertion. Its preserved failed serialized expression has a missing transform-helper ReferenceError; this is test transport correction, not framework bug-fix credit."
+  ],
+  "findings_resolved": [
+    "Page API now documents claimed discovered-slot rejection before matching, even for a false matcher.",
+    "Cross-page metadata lookup is distinguished from within-controller automatic method discovery.",
+    "Architecture describes current common-owner/application responsibilities without abandoned cache-proposal history.",
+    "Migration advice belongs to CVC step1, before field binding."
+  ],
+  "runtime_verification": "Root owns all execution. This record is source/API draft acceptance; immutable recorded-byte audit and final document semantics/mechanics remain pending.",
+  "limits": [
+    "This reviewer authored the original core fixtures and does not independently certify their full bodies here; Baseline provides that independent part, with separate Legacy core and Design app/transport reviews.",
+    "No compiler/browser/unit/benchmark/project checker ran from this reviewer.",
+    "No full-family/P0/M13/release closure, extra omission, Safari/manual-AT/token result or final documentation verification is granted."
+  ]
+}

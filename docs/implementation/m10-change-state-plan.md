@@ -20,7 +20,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Grid semantic closure and required continuation
-    git_blob: 67c01b1a405d80d9a1819b4b33ee49bb23ecb4d6
+    git_blob: aabf8dc81304246573aed96387076d6c2d149e05
   - id: data
     resource: ../../src/data/index.ts
     title: Current values, immutable originals, deletion payloads and restoration

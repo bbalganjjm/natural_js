@@ -12,11 +12,11 @@ sources:
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
+    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
-    git_blob: 1d670bd4d61cb8600e28f2ac66cd85ab63b240d0
+    git_blob: 2a52459904aa6454f3fca97592537fc9b6faf473
   - id: vite
     resource: ../../examples/vite/vite.config.ts
     title: Development-only HTML fragment route
@@ -57,10 +57,10 @@ sources:
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -115,7 +115,7 @@ The table has native headers, including a name header with `aria-sort`; its repe
 
 # Controller
 
-`createEmployees` receives one `PageContext` per screen and registers every handle, subscription, and store with `own`. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. The module-scoped sharedFormOptions: FormOptions<Employee> contains that existing rule and parser; each controller spreads it into its own detail Form with its own Rows and onBind callback. No shared row store or global Form registry is created. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
+`createEmployees` receives one PageContext and an application preparation function per screen. Its synchronous factory exposes stable public actions before init; those actions reject before private bindings exist and check the page signal. Async init awaits validated page-size setup before constructing the existing bindings. The private binding owner registers every handle, subscription and store with own. The controller owns the business-specific `companyEmail` validator, salary parser, name comparator/filter, API endpoints, and save conversion. The module-scoped sharedFormOptions: FormOptions<Employee> contains that existing rule and parser; each controller spreads it into its own detail Form with its own Rows and onBind callback. No shared row store or global Form registry is created. UI rules `email`, `integer`, `minvalue`, and `commas` remain framework-reachable through Form.[^controller]
 
 One local typed request function wraps search/save. Its pending counter sets the screen's aria-busy on the first request and restores the captured authored value after the last. It joins caller/page cancellation once; the URL is not a resource key. Page-owned cleanup restores the captured attribute after abort even if request finally blocks have already drained the counter. Aborted requests do not write to a closed page or another instance. The communication API supplies transport and captured hooks; the application owns this request presentation.[^controller][^m4-test]
 
@@ -145,6 +145,14 @@ The fixture includes `a: [{ aa: 11, bb: 22 }, {}]`: the incomplete option is ski
 Open `/m4/side.html` and `/m4/stack.html` to compare independent authored layout and CSS. Use `/m4/side.html?view=server` for fetched HTML, or Open another screen to inspect simultaneous state and unique IDs. The two-screen browser case closes with Enter, checks that focus returns to Open, and reopens with Enter. The M6 browser spec checks both layouts for keyboard page/row activation, synchronized List/Grid slices, typed page size, empty state, and independent two-screen paging.[^runner][^m6-test]
 
 For an optional nested employee field, edit the two detail HTML inputs, the Employee shapes and new-row default in `employees.ts` and `mock-server.ts`, the fixture and expected-save JSON, and the matching browser case. Form follows `data-field` paths automatically; a data-only field needs no runtime or controller event-handler change. Start with those files rather than reading `main.ts` and CSS. The first save case in `tests/browser/m4-screen.spec.ts` is the narrowest payload regression; page-control changes start with the first case in `tests/browser/m6-screen.spec.ts`. After editing source-linked examples, check whether `m6-plan.md` needs a source-fingerprint refresh. Read only the recent entries of `docs/log.md` for a same-task update.[^controller][^side][^stack][^fixture][^expected][^server]
+
+# Preparation and automatic advice
+
+The shell loads employee-setup.json through createCommunicator using an import.meta.url asset reference. Its application decoder checks positive unique choices and an included default before binding; ordinary defaults remain 2/5 with size 5. The status announces Preparing while Close is already available. A signal-owned capture submit handler prevents default navigation while bindings do not exist; normal submitted search resumes through the existing handler after construction.[^runner][^controller]
+
+Add ?policy=trim-search to either layout for the real PageDefinition.advice example. Native path/root/owner predicates select actions.search, and its ordinary wrapper checks unknown arguments before trimming only a string query. Default mode supplies no advice and preserves raw request behavior. Initial load, native Search and save-refresh all read the same public action property, so they cannot bypass interception. The framework handles discovery and release; application code owns query policy, setup and the existing request/error UI.[^runner][^controller]
+
+The [automatic advice tests](../../tests/browser/m36-advice.spec.ts) cover awaited setup, early native submit, a premature actual action, canceled preparation, a surviving sibling, invalid setup/retry and matching/nonmatching raw POST behavior. The [common page contract](page.md#automatic-controller-advice) defines sync/async wrapper and cleanup rules. No application advice engine or controller registry is added.
 
 # Pitfalls
 

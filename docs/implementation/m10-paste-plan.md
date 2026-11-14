@@ -16,7 +16,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion
-    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
+    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
   - id: evidence
     resource: evidence/m107-verification.json
     title: Frozen M10.7 source, commands, artifact and results

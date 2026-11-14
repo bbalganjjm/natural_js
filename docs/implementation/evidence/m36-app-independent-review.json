@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.6",
+  "status": "passed_independent_cache_application_and_full_installed_candidates_review_not_applied",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T20:51:49.389Z",
+  "baseline_commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
+  "reviewed_manifests": [
+    {
+      "path": "node_modules/.cache/m36-automatic-app-revision/candidate-manifest.json",
+      "sha256": "b5296a96da53ee3c85f50d7a37fb9719cab60ce6c16c1d38ab09227c708db432",
+      "bytes": 6969
+    },
+    {
+      "path": "node_modules/.cache/m36-installed-root-r2/candidate-manifest.json",
+      "sha256": "c8b14dc16f09f70b8866d5226ea3f86247026f673fcb5cea29c7cb0a3bc5229c",
+      "bytes": 2689
+    }
+  ],
+  "contract": {
+    "path": "node_modules/.cache/m36-advice-contract-baseline/contract-r4.md",
+    "sha256": "1441bc3772066e21555cc663cc51ff3a80732426a3f3c7aba49a870362049de8",
+    "bytes": 13288
+  },
+  "selected_targets": {
+    "examples/vite/m4/employees.ts": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-automatic-app-revision/employees.ts",
+        "sha256": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+        "bytes": 14649
+      },
+      "normalized_sha256": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7"
+    },
+    "examples/vite/m4/main.ts": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-automatic-app-revision/main.ts",
+        "sha256": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+        "bytes": 3710
+      },
+      "normalized_sha256": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149"
+    },
+    "examples/vite/m4/employee-setup.json": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-automatic-app-revision/employee-setup.json",
+        "sha256": "8a061586d4f3f1ea27ceedf2f2f2c1fb228bb5e9e79d60a0b13f4ba103f01b2e",
+        "bytes": 109
+      },
+      "normalized_sha256": "8a061586d4f3f1ea27ceedf2f2f2c1fb228bb5e9e79d60a0b13f4ba103f01b2e"
+    },
+    "tests/browser/m36-advice.spec.ts": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-automatic-app-revision/m36-advice.spec.ts",
+        "sha256": "913566de07ee880b56ace3b1f22a5ced08fd72a35b715bca62114f0c664c435a",
+        "bytes": 8301
+      },
+      "normalized_sha256": "913566de07ee880b56ace3b1f22a5ced08fd72a35b715bca62114f0c664c435a"
+    },
+    "tests/consumers/ts/check.ts": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-installed-root-r2/consumer-ts.check.ts",
+        "sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+        "bytes": 24569,
+        "normalized_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b"
+      },
+      "normalized_sha256": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b"
+    },
+    "tests/consumers/browser/main.js": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-installed-root-r2/browser-main.js",
+        "sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+        "bytes": 54069,
+        "normalized_sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100"
+      },
+      "normalized_sha256": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100"
+    },
+    "tools/check-packed-browser.mjs": {
+      "candidate": {
+        "path": "node_modules/.cache/m36-installed-root-r2/check-packed-browser.mjs",
+        "sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+        "bytes": 96826,
+        "normalized_sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5"
+      },
+      "normalized_sha256": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5"
+    }
+  },
+  "source_sha256": {
+    "examples/vite/m4/employees.ts": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+    "examples/vite/m4/main.ts": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+    "examples/vite/m4/employee-setup.json": "8a061586d4f3f1ea27ceedf2f2f2c1fb228bb5e9e79d60a0b13f4ba103f01b2e",
+    "tests/browser/m36-advice.spec.ts": "913566de07ee880b56ace3b1f22a5ced08fd72a35b715bca62114f0c664c435a",
+    "tests/consumers/ts/check.ts": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+    "tests/consumers/browser/main.js": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+    "tools/check-packed-browser.mjs": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5"
+  },
+  "accepted_contract": [
+    "Actual createEmployees returns stable public actions before init; nested discovery selects actions.search without per-method application assignment or a separate engine.",
+    "All initial, native-submit and save-refresh loads read that installed public action. Private lexical implementation, request wrapper, raw search/save bodies, source sharing, validation and existing UX retain their owners.",
+    "Communicator setup decoding checks positive unique choices and an included initial size. Signal checks precede binding creation after await. Close is installed before setup; root capture submit prevents unbound default navigation.",
+    "Pre-construction actions reject explicitly; retained actions after disposal use their own signal guard. No readiness queue or implicit global action-cancellation rule is introduced.",
+    "Six proposed real-M4 browser cases cover nondefault setup, actual pre-init/late actions, early submit, canceled held setup with an independent sibling, invalid setup/retry and default versus eligible/nonmatching raw payloads. Cases remain unexecuted.",
+    "Full installed TS merge adds only PageAdvice import, prepared public-API recipe and two negative synchronous-only match/wrap expectations. Full browser merge adds one actual Page/Rows/Form recipe; checker adds its exact two-generation order/construction/value/release result. Existing bodies/assertions remain.",
+    "Generic unknown advice arguments are checked by the application trim wrapper before reading/spreading a query. The synchronous controller factory and existing Page lifetime remain."
+  ],
+  "findings": [],
+  "metadata_convention_correction": {
+    "initial_attempt": "Stopped before writing review/fixture records after comparing a raw manifest source hash against normalized CRLF text.",
+    "actual_raw_employees_sha256": "e9208b3a8a322ab2c6b184043247397a07ffb1ec643b1587ee5a4bfb9e7a043b",
+    "actual_normalized_employees_sha256": "045e3752641514a08c4f92f9707d5928a807eb15a2860a5ff403eda539a03cdc",
+    "resolution": "Raw source preconditions match the manifest. Selected candidate normalized source hashes are recorded separately. No source/candidate or project gate changed."
+  },
+  "review_scope_limits": [
+    "Independent claim covers only four application targets and three selected full installed targets. The earlier alternate full TS copy is not the selected installed target.",
+    "The reviewer authored the common 51-unit/14-browser fixture candidates and does not independently approve them here. Core helper/Page review remains assigned separately.",
+    "No actual source/docs edits or compiler/browser/unit/benchmark/project checker execution. Read-only no-index diff exit1 indicates text differences, not a project failure.",
+    "App evidence alone cannot close A01-A16/R02, a family or M13. Exact O01-O05 are the only omissions; actual gates and final source/raw/document acceptance remain required."
+  ]
+}

@@ -44,7 +44,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Two-layout CVC integration
-    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
+    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
   - id: rows
     resource: ../../src/data/index.ts
     title: Row identity, mutation, and change tracking

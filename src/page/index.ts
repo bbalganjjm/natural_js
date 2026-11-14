@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
+import { capturePageAdvice, claimPageAdvice } from "./advice.js";
+import type { PageAdvice } from "./advice.js";
+export type { PageAdvice } from "./advice.js";
 
 export interface PageContext<Input = unknown, Output = unknown> {
   readonly root: HTMLElement;
@@ -19,6 +22,7 @@ export interface PageController {
 export interface PageDefinition<Input = unknown, Output = unknown> {
   view: URL | HTMLElement | (() => HTMLElement);
   loadHtml?: (url: URL, signal: AbortSignal) => Promise<string>;
+  advice?: readonly PageAdvice<Input, Output>[];
   controller(context: PageContext<Input, Output>): PageController;
 }
 
@@ -42,6 +46,7 @@ interface Instance {
   active: boolean;
   activationStarted: boolean;
   cleanup?: Promise<void>;
+  releaseAdvice?: () => void;
 }
 
 const borrowedRoots = new WeakSet<HTMLElement>();
@@ -170,6 +175,10 @@ export function mountPage<Input = unknown, Output = unknown>(
   if (typeof createController !== "function") {
     throw pageError("PAGE_OPTIONS", "controller must be a function");
   }
+  let suppliedAdvice: unknown;
+  try { suppliedAdvice = definition.advice; }
+  catch (cause) { throw pageError("PAGE_ADVICE", "Page advice could not be read.", cause, { phase: "options" }); }
+  const advice = capturePageAdvice<Input, Output>(suppliedAdvice);
   let instance: Instance | null = null;
   let disposed = false;
   let generation = 0;
@@ -196,6 +205,8 @@ export function mountPage<Input = unknown, Output = unknown>(
       for (let index = current.owned.length - 1; index >= 0; index--) {
         await run(current.owned[index]);
       }
+      await run(current.releaseAdvice);
+      current.releaseAdvice = undefined;
       if (current.claimed && current.root) borrowedRoots.delete(current.root);
       if (current.generated) current.root?.remove();
       if (instance === current) instance = null;
@@ -218,7 +229,6 @@ export function mountPage<Input = unknown, Output = unknown>(
       if (!isHtmlElement(host)) throw pageError("ROOT_MISSING", "Page host must be an HTML element");
       const root = await untilAbort(current.abort.signal, () => loadRoot(view, current.abort.signal, host.ownerDocument, loadHtml));
       live(current, expected);
-      current.root = root;
       if (current.generated) {
         if (root.isConnected) throw pageError("ROOT_IN_USE", "Page factory must return a detached root");
         if (host.childElementCount) throw pageError("HOST_NOT_EMPTY", "Page host must be empty");
@@ -230,6 +240,7 @@ export function mountPage<Input = unknown, Output = unknown>(
         borrowedRoots.add(root);
         current.claimed = true;
       }
+      current.root = root;
       checkIds(root, host.ownerDocument);
       if (current.generated) host.append(root);
       const context: PageContext<Input, Output> = {
@@ -260,7 +271,12 @@ export function mountPage<Input = unknown, Output = unknown>(
       if (!controller || typeof controller !== "object") {
         throw pageError("CONTROLLER_INVALID", "Page controller must return an object");
       }
+      const advised = claimPageAdvice(controller, context, advice);
+      current.releaseAdvice = advised?.release;
       current.controller = controller;
+      live(current, expected);
+      advised?.install();
+      live(current, expected);
       await untilAbort(current.abort.signal, () => controller.init?.());
       live(current, expected);
       current.activationStarted = true;

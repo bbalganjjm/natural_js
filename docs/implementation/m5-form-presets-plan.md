@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-discovery-plan.md
     title: Completed explicit field discovery and lifetime scope
-    git_blob: dfdeeb8d7828a5c7238210b3779928f2c0ce3f5f
+    git_blob: 7181010801f129251d6d1fc3ad637cd188acf630
   - id: baseline
     resource: evidence/m58-verification.json
     title: Frozen 3f5e3ad source, runtime and installed package baseline
@@ -28,7 +28,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Independent CVC employee Forms and application rules
-    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
+    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Form option precedence and local/global wrapper behavior
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
+    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
 generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }

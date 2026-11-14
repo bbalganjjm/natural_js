@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-local-form-plan.md
     title: Completed local Form raw display and native reset scope
-    git_blob: bdac34d344d187e88116305d05fb26386910c776
+    git_blob: 5f9b469fbb38bea8fb04d5db136634823263eef7
   - id: baseline
     resource: evidence/m55-verification.json
     title: Frozen bbc767b runtime and package receipt

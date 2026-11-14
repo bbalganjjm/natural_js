@@ -1,0 +1,64 @@
+{
+  "label": "example-types",
+  "args": [
+    "node_modules/typescript/bin/tsc",
+    "--ignoreConfig",
+    "--strict",
+    "--noEmit",
+    "--target",
+    "ES2022",
+    "--module",
+    "NodeNext",
+    "--moduleResolution",
+    "NodeNext",
+    "--lib",
+    "ES2022,DOM",
+    "examples/vite/benchmark.ts",
+    "examples/vite/m10/columns.ts",
+    "examples/vite/m10/demo.ts",
+    "examples/vite/m10/detail.ts",
+    "examples/vite/m10/main.ts",
+    "examples/vite/m10/progressive.ts",
+    "examples/vite/m10/scroll-boundary.ts",
+    "examples/vite/m11/main.ts",
+    "examples/vite/m12/main.ts",
+    "examples/vite/m3-fixture.ts",
+    "examples/vite/m4/employee-xhr.ts",
+    "examples/vite/m4/employees.ts",
+    "examples/vite/m4/main.ts",
+    "examples/vite/m5/choices.ts",
+    "examples/vite/m7-fixture.ts",
+    "examples/vite/m7/main.ts",
+    "examples/vite/main.ts"
+  ],
+  "started": "2026-11-14T21:32:23.565Z",
+  "before": {
+    "path": "docs/implementation/evidence/m36-inputs-9e979d276daa.json",
+    "sha256": "9e979d276daa433e427577434e6adaa478347a006c8df0f5921ce9a599b404b1",
+    "bytes": 21980,
+    "entries": 215
+  },
+  "environment": {},
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m36-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m36-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m36-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "stdout_partial": "docs/implementation/evidence/m36-example-types-stdout.partial",
+  "stderr": "docs/implementation/evidence/m36-example-types-stderr.log"
+}

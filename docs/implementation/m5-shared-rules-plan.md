@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m10-pinned-plan.md
     title: Completed pinned-column continuation
-    git_blob: 7b6b1e2c71350b563979c08e61ff191c089f5098
+    git_blob: 323c99720927cf0e6647fbe9ff798d151bc4b217
   - id: baseline
     resource: evidence/m10964p-verification.json
     title: Preserved a0f837a runtime baseline

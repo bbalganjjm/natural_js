@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-source-plan.md
     title: Existing source ownership and next U10 requirement
-    git_blob: 132ea7ba912350cb29c9542a16b8d2f10f5479db
+    git_blob: 0e222ecd5b99b3b35488f40b2570976e93f7ee98
   - id: baseline
     resource: evidence/m512-verification.json
     title: Frozen M5.12 source, runtime and installed artifact baseline
@@ -36,7 +36,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete required outcomes and consolidated omission obligations
-    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
+    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
 generated: { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T07:38:29Z }

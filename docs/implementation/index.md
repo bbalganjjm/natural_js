@@ -1,5 +1,6 @@
 # Concepts
 
+* [Natural-JS 2.0 M3.6 automatic controller advice](m3-advice-plan.md) - Discover controller methods once before init and compose ordinary wrappers through one optional page contract while preserving cancellation and cleanup. (draft)
 * [Natural-JS 2.0 M3.5 scoped configuration and captured ownership](m3-scoped-configuration-plan.md) - Keep one Rows and base URL owner while supporting explicit live locale and message providers on existing UI instances. (draft)
 * [Natural-JS 2.0 M3.4 page metadata and lifetime](m3-page-lifetime-plan.md) - Preserve page-local metadata through typed input and closures, capture controller factories and make every disposal observe the same complete cleanup result. (draft)
 * [Natural-JS 2.0 M3.3 common HTML loading](m3-html-loading-plan.md) - Connect URL views to an application communicator through one captured HTML loader while retaining common CVC parsing, IDs and lifetime. (draft)

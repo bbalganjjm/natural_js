@@ -40,7 +40,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Page definition, scoped root, output, and lifecycle
-    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
+    git_blob: 4aedbe450f442b7d8c96955c837c5c88f379276a
   - id: rows
     resource: ../../src/data/index.ts
     title: RowId, changes, and immutable row values
@@ -108,11 +108,11 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
+    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
-    git_blob: 1d670bd4d61cb8600e28f2ac66cd85ab63b240d0
+    git_blob: 2a52459904aa6454f3fca97592537fc9b6faf473
   - id: employee-view
     resource: ../../examples/vite/m4/side.html
     title: Authored employee screen markers
@@ -148,15 +148,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: 9cd81c778f355813b4a73e7f3d3fa9eeb26751f0
+    git_blob: 0892663b9b5f91da0a11a23ae4da5a8fccf30ed7
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 7d2a99465394f53e901711f294f825d0fc6c2d5b
-generated: { by: codex/gpt-6, at: 2026-11-14T20:09:49Z }
+    git_blob: 0bbbd0a39647721d8d802d4b0f93733dff35b76e
+generated: { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T20:09:49Z }
+  - { by: codex/gpt-6, at: 2026-11-14T22:05:48Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -203,16 +203,21 @@ import { createEmployees } from "./employees.js";
 
 const page = mountPage(host, {
   view: () => template.content.firstElementChild!.cloneNode(true) as HTMLElement,
-  controller: createEmployees
+  controller: context => createEmployees(context, async () => ({
+    pageSizes: [{ label: "2", value: 2 }, { label: "5", value: 5 }], pageSize: 5
+  }))
 }, { close() { void page.dispose(); } });
 await page.ready;
 ```
 
-This compact extract assumes an `HTMLElement` host and an `HTMLTemplateElement` template as in [m4/main.ts](../../examples/vite/m4/main.ts); use that complete file to run it. The controller receives `root`, `input`, `signal`, and `own` per page instance. Dispose the page before removing its host so an aborted request cannot write into a closed view. After an explicit close, return focus to a connected external control; the M4 caller uses its Open button.[^page][^employee-runner][^employee-test]
+This compact extract supplies literal sample setup and assumes an HTMLElement host and an HTMLTemplateElement template. The complete [m4/main.ts](../../examples/vite/m4/main.ts) instead requests and validates the setup asset before component construction. The controller receives `root`, `input`, `signal`, and `own` per page instance. Dispose the page before removing its host so an aborted request cannot write into a closed view. After an explicit close, return focus to a connected external control; the M4 caller uses its Open button.[^page][^employee-runner][^employee-test]
 
 For remote CVC views, supply optional PageDefinition.loadHtml(url, signal) when HTML must share application communication policy. Close over createCommunicator and request text with decode: response => response.text(); keep the explicit controller module and pass the complete definition to each container. Native and custom loading share root/template/ID validation, cancellation and cleanup, including rejection of nested executable templates. Use owned child hosts for add/retain-old replacement and keep its activation/retirement policy distinct from in-place reload. See [the page contract](page.md) and [container recipes](page-containers-example.md).[^page][^comm]
 
 Replace cont.caller, opener/request/context lookups with a concrete typed input object or closure; pass only the capabilities and metadata that page uses. Register child disposal/output unsubscription before awaiting readiness, and guard direct parent capabilities with the parent signal. Controller factories are captured/plain per mount while their returned lifecycle methods retain the controller receiver. View is read once per admitted generation and may change between reloads. Repeated disposal observes one cached result; preserve the difference between canceled ready and a failing initiating cleanup. See [the page lifetime contract](page.md).[^page]
+
+Move configured controller advice to PageDefinition.advice: match selects native method paths/view/custom predicates, and wrap returns an ordinary sync or async wrapper around lexical proceed. Discovery runs automatically before init through own methods and nested plain objects, with root class lifecycle support; no per-method assignment or string advice-type engine is needed. Preserve synchronous results by choosing a synchronous wrapper, and await async after/recovery explicitly. Public actions must exist before init even when their private bindings await setup. Root init/activate proceeds stop after abort; arbitrary actions check their own page signal and cleanup remains callable. See [automatic advice](page.md#automatic-controller-advice) and the executed employee policy.[^page][^employee]
+
 
 ## 2. Bind fields and select a row by identity
 
@@ -349,7 +354,7 @@ The full M7 controller defines one `picker` and uses `openPopup(dialog, picker, 
 | Browser and JavaScript APIs | `N()`/jQuery selectors and events, `N.button`, plain `N.alert`, generic `N.ajax`, simple string/array/date operations | Use scoped DOM queries, `addEventListener`, native buttons/dialogs, `fetch` through `createCommunicator` when its cancellation and hooks help, and standard JavaScript operations. |
 | Framework shell | `N.notify`, `N.docs` | Current bindNotify/bindDocuments support authored templates, explicit page factories and beforeClose. Notification expiry/actions/rich content, document capacity/state eviction, and aggregate request progress/blocking remain required gaps; current application compositions do not retire those framework capabilities. |
 | Current explicit application integrations | `N.context` app settings, generic `N.message`/locale lookup, `N.data` filter/sort, Natural-TEMPLATE `p.`/`c.`/`e.` declarations, API envelopes | Current examples use explicit options, application translations, predicates/comparators, direct functions and server conversion. Framework-reachable configuration, message lookup and declaration behavior still require the coverage review; this row is not an approved exclusion. |
-| Changed mechanisms and required review | `N.data.filter` string conditions evaluated as code, global `N.gc`, generic controller AOP and runtime string declaration parsing, optional `N.code` inspection | Current APIs use explicit predicates, owned cleanup and controller methods, with no 2.0 compatibility entry. Safe equivalents of declaration behavior, cross-cutting hooks and inspection remain required gaps or pending retirement items. Preserve explicit ESM controllers and the current refusal to execute unsafe HTML. |
+| Changed mechanisms and required review | `N.data.filter` string conditions evaluated as code, global `N.gc` and runtime string declaration parsing, optional `N.code` inspection | Current APIs use explicit predicates, owned cleanup and controller methods, with no 2.0 compatibility entry. Safe equivalents of declaration behavior, cross-cutting hooks and inspection remain required gaps or pending retirement items. Preserve explicit ESM controllers and the current refusal to execute unsafe HTML. |
 
 Standalone utility entry points are absent, but Form-reachable formatter, validator, mask, date, and byte behavior remains inside `./ui`. Grid accepts optional `initialPage: { page, size }` to limit the logical page and `viewport: { root, estimate, overscan? }` to limit mounted DOM independently. M11 adds explicit [Tree](tree.md) hierarchy selection over Rows and controlled ISO [DatePicker](datepicker.md) selection in authored calendars. Applications connect date callbacks to Form inputs; formatter declarations do not create calendars. M12 adds persistent [Notify](notify.md) messages and dynamic [Documents](documents.md) with keyed page reuse, an application close guard and explicit reload. The [shell example](shell-example.md) composes those binders with the existing page runtime.[^package][^ui][^rules][^formats][^validators][^grid]
 

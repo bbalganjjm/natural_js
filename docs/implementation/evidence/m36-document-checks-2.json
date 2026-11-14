@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "changed": {
+      "path": "docs/implementation/evidence/m36-docs-changed-2.log",
+      "sha256": "d67c017a76b3149ff70aec8777ec0f9bd6842f0f475bca5c32494046b9c5bf0f",
+      "bytes": 183,
+      "concepts": 94,
+      "reserved_files": 5,
+      "errors": 0,
+      "warnings": 0
+    },
+    "full": {
+      "path": "docs/implementation/evidence/m36-docs-full-2.log",
+      "sha256": "7f2068a1adc44658a091efedc565403e89e93f7782e2d682cf71be88c4bed0a9",
+      "bytes": 173,
+      "concepts": 94,
+      "reserved_files": 5,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "history": {
+    "path": "docs/implementation/evidence/m36-document-history-2.json",
+    "sha256": "50fdbbc1a1e37d6fd34c22387280165ed3e6c1f1fb9d4fc77479825d630ec47c",
+    "bytes": 2545
+  },
+  "fingerprint_log": {
+    "path": "docs/implementation/evidence/m36-docs-fingerprints-2.log",
+    "sha256": "0ecd134e0a09343850d54edbfb3d626e0a4525ecadf697aa1a6d64c02cc4731c",
+    "bytes": 102
+  },
+  "reviewed_bodies_unchanged": true
+}

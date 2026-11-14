@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "stage": "M3.6",
+  "status": "GO_independent_common_source_cache_preflight_only",
+  "written_at": "2026-11-14T21:11:58.902Z",
+  "baseline_commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
+  "reviewed": {
+    "node_modules/.cache/m36-framework-baseline/page-advice.ts": "9a041ac1b34688e5f7c5bacf63d92e0f500ed49c706f9cc4093fce9d20e79f58",
+    "node_modules/.cache/m36-framework-baseline/page-index.ts": "2cd309503654fdc5d89ff6fcbc95a3d5fc08a67b67ed99866fc4866138e196f5",
+    "docs/implementation/m3-advice-plan.md": "514496c4b18849b2a5a13e96d667582fcc75a3f4a89dfb0dd469ed8d0de6426b",
+    "node_modules/.cache/m36-framework-baseline/joint-candidate-manifest.json": "6db990029ba8961adef65936ac3e07f11f68754755855e481b63ad66bddc19c4",
+    "node_modules/.cache/m36-advice-contract-baseline/contract-r4.md": "1441bc3772066e21555cc663cc51ff3a80732426a3f3c7aba49a870362049de8",
+    "node_modules/.cache/m36-core-legacy-review-r1.json": "a609c26b4b4b1aa4763f94176701fce3178819342cb0d7d0c1647601da135224"
+  },
+  "resolved_findings": [
+    {
+      "id": "M36-LR-01",
+      "source": "discover(controller, signal, context)",
+      "finding": "Framework PageContext self-interception through a public controller context field.",
+      "resolution": "Exclude only value===context from nested graph descent. Ordinary input aliases still traverse. No generic blacklist or registry.",
+      "focused_static_witness": "skips the exact framework PageContext while an ordinary alias to application input remains discoverable"
+    },
+    {
+      "id": "M36-LR-02",
+      "source": "Slot.wrappers, install and release",
+      "finding": "Failed second replacement or cleanup reinstatement of an earlier wrapper could leave an owned stale wrapper unrecognized.",
+      "resolution": "Record every attempted wrapper identity before defining it. Final restoration and blocked-claim detection recognize every owned wrapper; foreign replacements stay intact.",
+      "focused_static_witnesses": [
+        "restores attempted wrapper history after a second-layer native definition reject / write-then-throw",
+        "owned cleanup can call an earlier installed wrapper and final release still restores the original method"
+      ]
+    },
+    {
+      "id": "M36-LR-03",
+      "source": "Page start root adoption",
+      "finding": "Preexisting generated-root ownership defect; not introduced by advice.",
+      "resolution": "Store current.root after generated ownership/host validation and borrowed validation/claim, before checkIds/append so owned partial cleanup remains effective.",
+      "focused_static_witness": "rejected generated roots preserve another active page and an occupied host's existing content"
+    }
+  ],
+  "accepted_common_boundaries_by_static_read": [
+    "One optional PageDefinition.advice field, one PageAdvice type through existing page entry; no registry, dependency, engine, async factory or new entry.",
+    "Captured declarations/functions, no-advice fast path, plain factories/wrappers and original-owner lexical proceed preserve synchronous values and actual user causes.",
+    "Discover own/nested plain targets, root class lifecycle shadows, one accessor read, ES-class-value skip, finite aliases/cycles and physical owner/key deduplication.",
+    "Descriptor rechecks preserve callback changes, and selected nonreplaceable methods fail explicitly.",
+    "Controller identity claimed before adoption; claimed discovered slot conflicts rejected before matching, without disposing the foreign controller.",
+    "Only root init/activate invocation/proceed gains automatic abort guards. Arbitrary actions retain domain signal ownership; cleanup remains callable after abort.",
+    "Full/partial wrappers remain through controller and all owned cleanup. Release recognizes own history, preserves newer foreign replacements, continues restoration and retains blocked weak claims.",
+    "Original common first-cleanup-failure handling remains; root adoption correction prevents deleting unowned DOM."
+  ],
+  "static_witness_review_scope": "Read exact newly amended context/history/root-adoption witnesses. Baseline independently owns full54unit/16common-browser static fixture review; this record does not duplicate that whole-fixture claim.",
+  "metadata_checks": {
+    "exact_core_plan_contract_joint_hashes": true,
+    "all_joint_candidate_payload_hashes": true,
+    "existing_six_target_source_bases_raw_exact": true,
+    "new_five_target_paths_absent": true,
+    "submanifest_and_previous_receipt_hashes": true,
+    "actual_source_applied": false,
+    "project_compiler_browser_unit_benchmark_commands": 0
+  },
+  "independent_scope": "Common source and Page lifetime only; own authored actual-M4/cache app changes excluded from this independent approval and reviewed separately by other agents.",
+  "disposition": "Ready for root's bounded actual source-apply decision. No runtime, family, P0, M13, omission or release credit. O01-O05 remain the only approved losses.",
+  "pending": [
+    "Actual source apply and frozen input collection",
+    "Compiler/unit/browser/package/installed/performance gates",
+    "Independent applied source/raw/semantic documentation acceptance",
+    "Separate commit and push"
+  ]
+}

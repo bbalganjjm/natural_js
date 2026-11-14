@@ -28,7 +28,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Existing two-layout CVC request caller
-    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
+    git_blob: 606d71cd04cd34c80a2946f94cba585790260236
   - id: baseline
     resource: evidence/m31-verification.json
     title: Accepted M3.1 source, runtime, raw and document checkpoint
@@ -40,7 +40,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Exact five approved omissions and retained outcomes
-    git_blob: 3480707796d751619a98ae094b61a294d63e74af
+    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
 generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }

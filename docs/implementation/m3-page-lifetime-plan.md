@@ -8,7 +8,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Common page generation, input, output and cleanup owner
-    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
+    git_blob: 4aedbe450f442b7d8c96955c837c5c88f379276a
   - id: legacy
     resource: ../../v1/src/natural.architecture.js
     title: Legacy request attributes and controller initialization
@@ -32,7 +32,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01–O05 are approved exclusions
-    git_blob: 3480707796d751619a98ae094b61a294d63e74af
+    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Definition forwarding, modal result and child page cleanup
@@ -48,7 +48,7 @@ sources:
   - id: installed
     resource: ../../tests/consumers/browser/main.js
     title: Existing installed page loading and communicator witness
-    git_blob: 9f8fad31a4a8acc7467916729f745de34ebbda40
+    git_blob: b11d4967c3127bec693257f4847257b5556e615a
 generated: { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }

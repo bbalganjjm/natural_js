@@ -5,7 +5,12 @@ import type { RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
 import { bindForm, bindGrid, bindList, bindPagination, bindSelect } from "@bbalganjjm/natural_js/ui";
-import type { FormOptions, ListHandle, PageRequest, ValidationIssue } from "@bbalganjjm/natural_js/ui";
+import type { FormOptions, ListHandle, PageRequest, SelectChoice, ValidationIssue } from "@bbalganjjm/natural_js/ui";
+
+export interface EmployeeSetup {
+  readonly pageSizes: readonly SelectChoice<number>[];
+  readonly pageSize: number;
+}
 
 type Employee = {
   id: string;
@@ -38,7 +43,40 @@ const sharedFormOptions: FormOptions<Employee> = {
   }
 };
 
-export function createEmployees({ root, signal, own, input }: PageContext<{ close(): void }>) {
+interface EmployeeActions {
+  search(query: Record<string, unknown>): Promise<boolean>;
+}
+
+export function createEmployees(context: PageContext<{ close(): void }>,
+  prepare: (signal: AbortSignal) => Promise<EmployeeSetup>) {
+  const { root, signal, input } = context;
+  const close = find<HTMLButtonElement>(root, '[data-action="close"]');
+  const status = find<HTMLOutputElement>(root, '[data-role="status"]');
+  close.addEventListener("click", () => input.close(), { signal });
+  let bindings: ReturnType<typeof createEmployeeBindings> | undefined;
+  root.addEventListener("submit", event => { if (!bindings) event.preventDefault(); }, { capture: true, signal });
+  const actions: EmployeeActions = {
+    async search(query) {
+      signal.throwIfAborted();
+      if (!bindings) throw new Error("Employee bindings are not ready.");
+      return await bindings.search(query);
+    }
+  };
+  return {
+    actions,
+    async init() {
+      signal.throwIfAborted();
+      status.textContent = "Preparing…";
+      const setup = await prepare(signal);
+      signal.throwIfAborted();
+      bindings = createEmployeeBindings(context, setup, actions);
+      await bindings.init();
+    }
+  };
+}
+
+function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): void }>,
+  setup: EmployeeSetup, actions: EmployeeActions) {
   const session = crypto.randomUUID();
   const endpoint = (name: string) => "employees/" + name + "?session=" + encodeURIComponent(session);
   const comm = createCommunicator({
@@ -132,10 +170,10 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   });
   own(() => list.dispose());
 
-  let pageRequest: PageRequest = { page: 1, size: 5 };
+  let pageRequest: PageRequest = { page: 1, size: setup.pageSize };
   const pageSize = bindSelect(pageSizeRoot, {
-    choices: [{ label: "2", value: 2 }, { label: "5", value: 5 }],
-    value: 5,
+    choices: setup.pageSizes,
+    value: setup.pageSize,
     onChange(value) {
       if (typeof value === "number") applyPage({ page: 1, size: value });
     }
@@ -199,7 +237,8 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
     error.textContent = cause instanceof Error ? cause.message : String(cause);
   }
 
-  async function load(): Promise<boolean> {
+  async function executeSearch(query: Record<string, unknown>): Promise<boolean> {
+    signal.throwIfAborted();
     searchController?.abort();
     const current = new AbortController();
     searchController = current;
@@ -209,7 +248,7 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
       const values = await request<Employee[]>({
         url: endpoint("search"),
         method: "POST",
-        json: search.read(),
+        json: query,
         signal: current.signal
       });
       if (signal.aborted || current.signal.aborted) return false;
@@ -221,6 +260,16 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
       return true;
     } catch (cause) {
       if (signal.aborted || current.signal.aborted) return false;
+      status.textContent = "Search failed";
+      showFailure(cause);
+      return false;
+    }
+  }
+
+  async function load(): Promise<boolean> {
+    try { return await actions.search(search.read()); }
+    catch (cause) {
+      if (signal.aborted || cause instanceof Error && cause.name === "AbortError") return false;
       status.textContent = "Search failed";
       showFailure(cause);
       return false;
@@ -332,7 +381,6 @@ export function createEmployees({ root, signal, own, input }: PageContext<{ clos
   find<HTMLButtonElement>(root, '[data-action="save"]').addEventListener("click", () => {
     void save();
   }, { signal });
-  find<HTMLButtonElement>(root, '[data-action="close"]').addEventListener("click", () => input.close(), { signal });
 
-  return { init: async () => { await load(); } };
+  return { init: async () => { await load(); }, search: executeSearch };
 }

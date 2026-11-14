@@ -1,6 +1,6 @@
 import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
-import type { PageContext, PageDefinition } from "@bbalganjjm/natural_js/page";
+import type { PageAdvice, PageContext, PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowId, RowSnapshot, RowState, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
@@ -474,3 +474,49 @@ export function connectChoiceGroups(root: HTMLFormElement, genderRoot: HTMLField
   fruit.setChoices([{ value: "apple", label: "Apple again" }]);
   return { rows, form, gender, fruit, dispose() { form.dispose(); fruit.dispose(); gender.dispose(); rows.dispose(); } };
 }
+
+export function connectPreparedEmployeePage(host: HTMLElement, view: () => HTMLElement, comm: Communicator) {
+  const advice: readonly PageAdvice[] = [{
+    match: (path, _owner, page) => /^actions\.(?:search)$/.test(path) && page.root.matches("form"),
+    wrap: proceed => (...args) => {
+      const query = args[0];
+      return proceed(typeof query === "string" ? query.trim() : query, ...args.slice(1));
+    }
+  }];
+  return mountPage(host, {
+    view, advice,
+    controller({ root, signal, own }) {
+      let rows: Rows<{ name: string }> | undefined;
+      const actions = { async search(name: string): Promise<boolean> {
+        signal.throwIfAborted();
+        if (!rows) throw new Error("Employee bindings are not ready.");
+        rows.set(rows.entries()[0].id, "name", name);
+        return true;
+      } };
+      return {
+        actions,
+        async init() {
+          const initial = await comm.request<{ name: string }[]>({ url: "https://example.test/employees", signal });
+          signal.throwIfAborted();
+          rows = createRows(initial); const current = rows; own(() => current.dispose());
+          const form = bindForm(root, { rows }); own(() => form.dispose());
+          form.bind(rows.entries()[0]?.id ?? null);
+          const result: boolean = await actions.search(" Grace ");
+          void result;
+        }
+      };
+    }
+  });
+}
+
+const invalidAsyncMatch: PageAdvice = {
+  // @ts-expect-error Advice selection must return a boolean synchronously.
+  match: async () => true,
+  wrap: proceed => (...args) => proceed(...args)
+};
+const invalidAsyncWrap: PageAdvice = {
+  match: () => true,
+  // @ts-expect-error The wrapper factory must return a function synchronously.
+  wrap: async proceed => proceed
+};
+void invalidAsyncMatch; void invalidAsyncWrap;

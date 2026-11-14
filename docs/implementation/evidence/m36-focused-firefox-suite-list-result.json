@@ -1,0 +1,81 @@
+{
+  "label": "focused-firefox-list",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "tests/playwright.config.ts",
+    "tests/browser/page-advice.spec.ts",
+    "tests/browser/m36-advice.spec.ts",
+    "tests/browser/page-lifecycle.spec.ts",
+    "tests/browser/page-loading.spec.ts",
+    "tests/browser/m4-screen.spec.ts",
+    "--project=firefox",
+    "--workers=1",
+    "--retries=0",
+    "--reporter=json",
+    "--output=docs/implementation/evidence/m36-focused-firefox-suite-failures",
+    "--list"
+  ],
+  "started": "2026-11-14T21:28:40.478Z",
+  "finished": "2026-11-14T21:28:41.131Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m36-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m36-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m36-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m36-inputs-9e979d276daa.json",
+    "sha256": "9e979d276daa433e427577434e6adaa478347a006c8df0f5921ce9a599b404b1",
+    "bytes": 21980,
+    "entries": 215
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m36-inputs-9e979d276daa.json",
+    "sha256": "9e979d276daa433e427577434e6adaa478347a006c8df0f5921ce9a599b404b1",
+    "bytes": 21980,
+    "entries": 215
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m36-focused-firefox-suite-list.json.gz",
+    "sha256": "d034afac2361a26bbdb1e08552430c97e1a14dd22d16517c4ba167e6719d5656",
+    "bytes": 5676,
+    "encoding": "gzip",
+    "uncompressed_sha256": "b47ee6c7e81c87b25cf5d0a0b60a15647be20f12bffe62bfc44b740dac551426",
+    "uncompressed_bytes": 54231
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m36-focused-firefox-suite-list-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

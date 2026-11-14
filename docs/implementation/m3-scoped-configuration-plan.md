@@ -16,7 +16,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01–O05 are approved exclusions
-    git_blob: 3480707796d751619a98ae094b61a294d63e74af
+    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
   - id: legacy
     resource: ../../v1/src/natural.architecture.js
     title: Legacy scoped context references and updates

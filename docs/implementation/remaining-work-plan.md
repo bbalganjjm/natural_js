@@ -32,7 +32,7 @@ sources:
   - id: review
     resource: m13-review-plan.md
     title: Whole-code Ponytail review and remediation rules
-    git_blob: 05fd4604290b403b8e1a5358f5f402875831d44c
+    git_blob: 7d9709d8b072fd43c988e31d9986003d7a6991c8
   - id: evaluation
     resource: m8-eval.md
     title: Three fixed coding-agent tasks and measurement boundaries

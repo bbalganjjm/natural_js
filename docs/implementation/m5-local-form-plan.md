@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-values-plan.md
     title: Completed Rows-backed value callback scope
-    git_blob: 907d040caaccc596e9d39287c4edbd2891006c52
+    git_blob: 802ca244fd763bff66c855255931efe22e76167e
   - id: baseline
     resource: evidence/m54-verification.json
     title: Frozen 7a621e7 runtime and package receipt

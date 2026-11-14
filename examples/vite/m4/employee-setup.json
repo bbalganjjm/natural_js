@@ -1,0 +1,7 @@
+{
+  "pageSizes": [
+    { "label": "2", "value": 2 },
+    { "label": "5", "value": 5 }
+  ],
+  "pageSize": 5
+}

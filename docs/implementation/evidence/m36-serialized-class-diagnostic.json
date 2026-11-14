@@ -1,0 +1,43 @@
+{
+  "kind": "serialized_class_failure_diagnostic",
+  "helper": {
+    "path": "node_modules/.cache/m36-class-diagnostic.mjs",
+    "sha256": "649f82a29289e4b22a858fa9f064bb447107b01740ca697ac23f12296d7b38cd",
+    "bytes": 2259
+  },
+  "before": {
+    "path": "docs/implementation/evidence/m36-inputs-b511713bf768.json",
+    "sha256": "b511713bf768fcf1f7dd17864175580236670ff9ee7d79e644e67232891c86fd",
+    "bytes": 21863,
+    "entries": 214
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m36-inputs-b511713bf768.json",
+    "sha256": "b511713bf768fcf1f7dd17864175580236670ff9ee7d79e644e67232891c86fd",
+    "bytes": 21863,
+    "entries": 214
+  },
+  "expression": {
+    "path": "docs/implementation/evidence/m36-serialized-class-expression.js",
+    "sha256": "bf1b1993a6a0f54169ab860e0f12f3116277fc6f554c25a170cc56a88126dc72",
+    "bytes": 4337
+  },
+  "original_fixture": {
+    "path": "docs/implementation/evidence/m36-initial-page-advice.spec.ts",
+    "sha256": "8bb4bf4c07ce05d6b8d61f4bf8a7af71e43d00ba6f4995078c5e94b5ceb2be6e",
+    "bytes": 34084
+  },
+  "outcome": {
+    "ok": false,
+    "helper": "undefined",
+    "name": "FrameworkError",
+    "code": "PAGE_INIT",
+    "api": "mountPage",
+    "message": "Page operation failed",
+    "cause": {
+      "name": "ReferenceError",
+      "message": "_classPrivateFieldInitSpec is not defined"
+    }
+  },
+  "scope": "Executes the exact failing trace expression against unchanged framework source in Chromium. No canonical/unit/browser-suite credit; no production change."
+}

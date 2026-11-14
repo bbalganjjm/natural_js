@@ -1,0 +1,35 @@
+{
+  "kind": "M36_browser_fixture_transport_correction",
+  "stage": "M3.6",
+  "baseline_commit": "99aef8b0ce2897dbcd20fcf5cae4a80b6baa4450",
+  "initial_application": {
+    "path": "node_modules/.cache/m36-applied-source.json",
+    "sha256": "e37bffaa24617cbbf9abab96af2d2d318ef0f7f34c9f9a164b0e93dc29b5a6eb",
+    "bytes": 2354
+  },
+  "original_fixture": {
+    "path": "docs/implementation/evidence/m36-initial-page-advice.spec.ts",
+    "sha256": "8bb4bf4c07ce05d6b8d61f4bf8a7af71e43d00ba6f4995078c5e94b5ceb2be6e",
+    "bytes": 34084
+  },
+  "diagnosis": {
+    "path": "docs/implementation/evidence/m36-serialized-class-diagnostic.json",
+    "sha256": "9de24ca3606e97ffb516052849ef4de138e579a90cb1431921560c99aeb4cbc6",
+    "bytes": 1529
+  },
+  "source_sha256": {
+    "src/page/index.ts": "2cd309503654fdc5d89ff6fcbc95a3d5fc08a67b67ed99866fc4866138e196f5",
+    "src/page/advice.ts": "9a041ac1b34688e5f7c5bacf63d92e0f500ed49c706f9cc4093fce9d20e79f58",
+    "tests/page-advice.test.ts": "344b7201b4db4e1c1ae8987d0faf8def486a67067639755af74113d9200db0a4",
+    "tests/browser/page-advice.spec.ts": "77e9c975da4be7cba1b719a4b95e55820ba0968246984d53716fa8d787b2279a",
+    "examples/vite/m4/employees.ts": "688cbbdecb3e34571358b188391ad6f48962d4fa34a4f0b79493cfe1e7c450d7",
+    "examples/vite/m4/main.ts": "7b9783c8eaa7382c6363bdad5dc44ae0c3a90f8b89bf160b62bc6f304035e149",
+    "examples/vite/m4/employee-setup.json": "8a061586d4f3f1ea27ceedf2f2f2c1fb228bb5e9e79d60a0b13f4ba103f01b2e",
+    "tests/browser/m36-advice.spec.ts": "913566de07ee880b56ace3b1f22a5ced08fd72a35b715bca62114f0c664c435a",
+    "tests/consumers/ts/check.ts": "8ddbfb28f7121894f8c5f8c54d068ebfbdf63c2ac77d025fa2a45a21984e183b",
+    "tests/consumers/browser/main.js": "fa7b64555319d5dd3d16b76f1f72953a11b0eaac192d64129427a882532c6100",
+    "tools/check-packed-browser.mjs": "4612c273256c434c238dafe0c8310ede7e8ff943ed4efed1343aa3e593a0f4b5",
+    "tests/browser/fixtures/advice-controller.ts": "3e3bdf1414c1cd259a19dd0f53a11dc7be0e04f874818b9c6e8cdeeacd7d1622"
+  },
+  "scope": "Test-only native private-field class moved to a Vite-served module; framework/app/installed bytes unchanged. Original source/reports/trace preserved; no production fix claim."
+}

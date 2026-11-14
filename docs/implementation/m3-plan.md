@@ -14,7 +14,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Page type contract
-    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
+    git_blob: 4aedbe450f442b7d8c96955c837c5c88f379276a
   - id: data
     resource: ../../src/data/index.ts
     title: Data type contract
