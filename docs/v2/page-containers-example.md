@@ -5,6 +5,10 @@ description: One picker PageDefinition shares Rows across main content, Popup, a
 tags: [ui-shell, cvc, example, accessibility]
 status: draft
 sources:
+  - id: lifetime
+    resource: ../../tests/browser/page-lifecycle.spec.ts
+    title: Typed two-parent metadata and complete page disposal witnesses
+    git_blob: dae91a374e38ba10ae294ddabecef907e7d02315
   - id: loading
     resource: ../../tests/browser/page-loading.spec.ts
     title: Communicator HTML loading across all four containers and owned hosts
@@ -12,7 +16,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Shared PageDefinition loading and lifetime owner
-    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
+    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
   - id: controller
     resource: ../../examples/vite/m7/main.ts
     title: Shared page definition and container ownership
@@ -33,10 +37,10 @@ sources:
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Cross-container and MDI browser checks
     git_blob: 67c6bdd310b8083059548eccbfec369678dd5167
-generated: { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T18:39:39Z }
+  - { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
 ---
 
 The M7 Vite example mounts one picker `PageDefinition` independently in main content, a native dialog Popup, and the People and Preview Tab panels. A caller-owned `Rows` store shares the selected person across two authored MDI layouts without repeated DOM IDs.[^controller][^side][^stack]
@@ -73,6 +77,8 @@ For a server-authored view, replace the picker factory with a `URL`; keep the sa
 
 For destination/add operations, create one application-owned child host per page. To retain the old page until a candidate is ready, stage the candidate in a separate connected hidden/inert host, then retire the old handle. Candidate IDs must be absent or document-unique. Candidate ready already includes activation before reveal; old cleanup is a commit boundary, not rollback. The application disposes failed or superseded candidate handles and removes their child hosts; a PageHandle does not remove its caller-owned host. Existing in-place reload removes its previous instance before loading, so it has a different retention policy.[^loading][^page]
 
+Additional caller capabilities, opener elements, parent/request values and scope context belong in concrete typed input or closures. Register child disposal and output unsubscription with the parent PageContext before awaiting readiness. Guard direct parent capabilities with its signal; page output independently enforces the child active/current/canceled lifetime. The lifecycle witnesses exercise Popup and Documents under two separate parents without a global controller or metadata registry.[^lifetime][^page]
+
 A borrowed `HTMLElement` view can be mounted in one live container at a time. A plain Dialog needs only authored `<dialog>` markup and native `showModal()`/`close()`.[^controller]
 
 # Pitfalls
@@ -83,6 +89,7 @@ The example's `find` helper is local application code, not a Natural-JS selector
 
 [Popup](popup.md), [Tabs](tabs.md), and [the page runtime](page.md) define the public contracts. [The employee example](employee-example.md) exercises Rows/Form/Grid data binding; this example focuses on page containers.
 
+[^lifetime]: Typed two-parent metadata and complete page disposal witnesses
 [^loading]: Communicator HTML loading across all four containers and owned hosts
 [^page]: Shared PageDefinition loading and lifetime owner
 [^controller]: Shared page definition and container ownership

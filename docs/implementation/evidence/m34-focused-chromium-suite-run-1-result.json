@@ -1,0 +1,81 @@
+{
+  "label": "focused-chromium-run-1",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "tests/playwright.config.ts",
+    "tests/browser/page-lifecycle.spec.ts",
+    "tests/browser/page.spec.ts",
+    "tests/browser/page-loading.spec.ts",
+    "tests/browser/popup.spec.ts",
+    "tests/browser/tabs.spec.ts",
+    "tests/browser/documents.spec.ts",
+    "--project=chromium",
+    "--workers=1",
+    "--retries=0",
+    "--reporter=json",
+    "--output=docs/implementation/evidence/m34-focused-chromium-suite-failures"
+  ],
+  "started": "2026-11-14T18:46:09.530Z",
+  "finished": "2026-11-14T18:46:23.682Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m34-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+    "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+    "bytes": 21139,
+    "entries": 207
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+    "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+    "bytes": 21139,
+    "entries": 207
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m34-focused-chromium-suite-run-1.json.gz",
+    "sha256": "679a36475943203fedb945bc1ccc64963d1d92922b18c0aad271a7b6f249baf8",
+    "bytes": 5852,
+    "encoding": "gzip",
+    "uncompressed_sha256": "27ea4a062f6175969542524d27adbd88381d93852fc807a4ff7fa1b03ef67394",
+    "uncompressed_bytes": 71518
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m34-focused-chromium-suite-run-1-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": null
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

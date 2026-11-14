@@ -68,6 +68,18 @@ state.checkRequests = async () => {
 state.checkPageLoading = async () => {
   const host = document.createElement("div"); document.querySelector("main").append(host);
   let reads = 0, loads = 0, controllers = 0, cleaned = 0, plain = true, prepared = 0, processed = 0, decoded = 0;
+  let factoryReads = 0, viewReads = 0, factoryPlain = true;
+  const contexts = [], instances = [], outputs = [];
+  const input = { caller: { accept(value) { outputs.push(value); } }, parent: { key: "packed", signal: new AbortController().signal },
+    request: { zero: 0, enabled: false, empty: null }, context: { locale: "en_US", scope: "packed" } };
+  class Controller {
+    constructor(context) { this.context = context; this.order = []; contexts.push(context); instances.push(this); context.own(() => { cleaned++; }); }
+    init() { this.order.push("init"); }
+    activate() { this.order.push("activate"); }
+    deactivate() { this.order.push("deactivate"); }
+    dispose() { this.order.push("dispose"); }
+  }
+  const factory = function(context) { "use strict"; factoryPlain &&= this === undefined; controllers++; return new Controller(context); };
   const comm = createCommunicator({
     prepare(request) { prepared++; request.headers.set("X-Page-Policy", "packed"); return request; },
     async after(response) { processed++; return new Response((await response.text()).replace("Original", "Processed"), { status: response.status, headers: response.headers }); }
@@ -75,19 +87,27 @@ state.checkPageLoading = async () => {
   const readHtml = (url, signal) => comm.request({ url, signal, decode(response) { decoded++; return response.text(); } });
   const loader = async function(url, signal) { loads++; plain &&= this === undefined; return readHtml(url, signal); };
   const html = '<section><span>Original</span><template><input id="packed-page-inert"><input id="packed-page-inert"></template></section>';
+  let url = new URL("data:text/html;charset=utf-8," + encodeURIComponent(html));
   const definition = {
-    view: new URL("data:text/html;charset=utf-8," + encodeURIComponent(html)),
+    get view() { viewReads++; return url; },
     get loadHtml() { reads++; return loader; },
-    controller({ own }) { controllers++; own(() => { cleaned++; }); return {}; }
+    get controller() { factoryReads++; return factory; }
   };
-  const handle = mountPage(host, definition);
+  const handle = mountPage(host, definition, input);
   Object.defineProperty(definition, "loadHtml", { value: () => { throw new Error("Late page loader replacement"); } });
+  Object.defineProperty(definition, "controller", { value: () => { throw new Error("Late controller factory replacement"); } });
   await handle.ready;
   if (reads !== 1 || loads !== 1) throw new Error("Installed PageDefinition.loadHtml was not captured and used.");
   const initial = { text: handle.root.querySelector("span").textContent,
     inertIds: handle.root.querySelector("template").content.querySelectorAll('[id="packed-page-inert"]').length,
     liveIds: document.querySelectorAll('[id="packed-page-inert"]').length };
-  await handle.reload(); const reloaded = handle.root.querySelector("span").textContent; await handle.dispose();
+  handle.onOutput(value => input.caller.accept(value)); contexts[0].output("initial");
+  url = new URL("data:text/html;charset=utf-8," + encodeURIComponent(html.replace("Original", "Original next")));
+  await handle.reload(); const reloaded = handle.root.querySelector("span").textContent;
+  contexts[0].output("stale"); contexts[1].output("current"); await handle.dispose(); contexts[1].output("closed");
+  const lifetime = { factoryReads, viewReads, factoryPlain,
+    methods: instances.map(instance => instance.order), inputs: contexts.every(context => context.input === input && context.input.request.zero === 0 &&
+      context.input.request.enabled === false && context.input.request.empty === null && context.input.context.scope === context.input.parent.key), outputs };
 
   let enter, release, activeSignal, afterAbort = 0, decodeAbort = 0, canceledControllers = 0;
   const entered = new Promise(resolve => { enter = resolve; });
@@ -108,8 +128,21 @@ state.checkPageLoading = async () => {
   const failedCode = await failed.ready.then(() => "none", cause => cause.code); await failed.dispose();
   const rejected = { code: failedCode, controllers: badControllers, empty: host.childElementCount === 0,
     executed: globalThis.__packedTemplateExecuted === true };
+
+  const order = []; let primitive, reentrant;
+  primitive = mountPage(host, { view: () => document.createElement("section"), controller({ own, signal }) {
+    signal.addEventListener("abort", () => { reentrant = primitive.dispose(); }, { once: true });
+    own(() => { order.push("owned"); });
+    return { deactivate() { order.push("deactivate"); throw undefined; }, dispose() { order.push("dispose"); throw new Error("Later cleanup failure"); } };
+  } });
+  await primitive.ready;
+  const first = primitive.dispose(), second = primitive.dispose(), reason = await first.then(() => null, cause => cause);
+  const late = primitive.dispose(), lateReason = await late.then(() => null, cause => cause);
+  const disposal = { same: first === second && first === reentrant && first === late && lateReason === reason,
+    code: reason?.code, ownCause: Object.hasOwn(reason, "cause"), undefinedCause: reason?.cause === undefined,
+    empty: host.childElementCount === 0 && primitive.root === null, order };
   host.remove();
-  return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, canceled: canceledResult, rejected };
+  return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, lifetime, canceled: canceledResult, rejected, disposal };
 };
 
 function view() {

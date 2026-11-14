@@ -112,11 +112,14 @@ try {
 
   const pageLoading = await page.evaluate(() => window.packedConsumer.checkPageLoading());
   assert.deepEqual(pageLoading, {
-    reads: 1, loads: 2, plain: true, initial: { text: "Processed", inertIds: 2, liveIds: 0 }, reloaded: "Processed",
+    reads: 1, loads: 2, plain: true, initial: { text: "Processed", inertIds: 2, liveIds: 0 }, reloaded: "Processed next",
     controllers: 2, cleaned: 2, prepared: 3, processed: 3, decoded: 3,
+    lifetime: { factoryReads: 1, viewReads: 2, factoryPlain: true, inputs: true, outputs: ["initial", "current"],
+      methods: [["init", "activate", "deactivate", "dispose"], ["init", "activate", "deactivate", "dispose"]] },
     canceled: { outcome: "AbortError", signalAborted: true, controllers: 0, empty: true, after: 0, decode: 0 },
-    rejected: { code: "PAGE_HTML", controllers: 0, empty: true, executed: false }
-  }, "Installed pages must capture a plain communicator HTML loader, preserve inert IDs, cancel late work and reject nested executable templates.");
+    rejected: { code: "PAGE_HTML", controllers: 0, empty: true, executed: false },
+    disposal: { same: true, code: "PAGE_DISPOSE", ownCause: true, undefinedCause: true, empty: true, order: ["deactivate", "dispose", "owned"] }
+  }, "Installed pages must preserve captured factories/loaders, live per-generation views, method receivers, input/output identity and shared cleanup failures.");
 
   const choiceGroups = await page.evaluate(() => {
     const h = window.packedConsumer.choiceGroups, id = h.rows.entries()[0].id;

@@ -1,5 +1,6 @@
 # Concepts
 
+* [Natural-JS 2.0 M3.4 page metadata and lifetime](m3-page-lifetime-plan.md) - Preserve page-local metadata through typed input and closures, capture controller factories and make every disposal observe the same complete cleanup result. (draft)
 * [Natural-JS 2.0 M3.3 common HTML loading](m3-html-loading-plan.md) - Connect URL views to an application communicator through one captured HTML loader while retaining common CVC parsing, IDs and lifetime. (draft)
 * [Natural-JS 2.0 M3.2 native protocol workflows](m3-protocol-plan.md) - Preserve native HTTP and custom XHR transfer workflows through one captured sender and explicit application wire recipes. (draft)
 

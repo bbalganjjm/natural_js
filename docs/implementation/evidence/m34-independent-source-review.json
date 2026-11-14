@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.4",
+  "status": "passed_independent_connected_source_and_API_draft_review",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-14T18:53:56.694Z",
+  "baseline_commit": "b1d16082af4b938b1a885c8508f6243c886c3435",
+  "applied_manifest": {
+    "path": "node_modules/.cache/m34-applied-source.json",
+    "sha256": "453163b236de6665269b0fedc11e7c222faa784f157eadf5f26db894769e5060"
+  },
+  "source_sha256": {
+    "src/page/index.ts": "40ff870b56f0a22bf3a1c7481dc5262887e04606de6e415f5829a95b41d96c1a",
+    "tests/consumers/browser/main.js": "7d9da190a9789b213edd29fd4ecdd3423458a696d05fb92f30e5132624efd069",
+    "tests/consumers/ts/check.ts": "442d9ad7daae2d102af291d381e2511a4c36bf59d5921f8bc738424e73552588",
+    "tools/check-packed-browser.mjs": "f12951fb8c63d9e701b752067442b94ef2084709d72e12c0ab416b9143249763",
+    "tests/browser/page-lifecycle.spec.ts": "b068fe473cbc8013759a582493d5896cc85be72d7191614832c43d33c3d164b6"
+  },
+  "normalized_API_draft_bodies": {
+    "docs/v2/page.md": {
+      "normalized_body_sha256": "cff5f56690f6551721e11091adf4638b6083bb3863b6a06f84d0bae6da0248db",
+      "normalized_body_bytes": 7928
+    },
+    "docs/v2/page-containers-example.md": {
+      "normalized_body_sha256": "2bc3024b54cc18a523a67f89ed23d6041dc4710a82eb08512ed150574610688f",
+      "normalized_body_bytes": 6921
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "f358258ea05e31db45c72ca0788187edb70f54aaaa9a878ed39701d407e30342",
+      "normalized_body_bytes": 61748
+    }
+  },
+  "normalization": "UTF-8; CRLF normalized to LF. Markdown body is the untrimmed substring after the second frontmatter delimiter.",
+  "accepted_contract": [
+    "Five actual paths match the independently reviewed revision: one existing Page runtime owner, one new fifteen-case browser file, and three existing installed witnesses. No public API/type/entry/dependency or metadata registry is added.",
+    "Controller and loadHtml factories are captured at creation; controller factory validation is early and invocation is plain. Returned class lifecycle hooks keep their method receiver. View remains live between generations and is read once inside each admitted mountPage generation, followed by a stale/disposed check.",
+    "Reload and dispose capture the canceled instance before abort/waiting. Public disposal publishes one cached promise before abort listeners reenter; repeated callers observe the same complete captured-cleanup result. This retains pending-init cleanup failures after the live instance pointer clears.",
+    "An explicit first-failure flag preserves null/undefined while every normal cleanup action still runs. Existing FrameworkError/AbortError propagation and ordinary PAGE_DISPOSE normalization remain. Ready cancellation and initiating disposal/reload cleanup errors keep separate owners.",
+    "Late context.own registration retains its existing immediate-cleanup/error behavior rather than joining an old cleanup stack. Already-empty handles do not replay a completed old ready failure; later disposal calls reuse an existing disposal promise if one was created.",
+    "Concrete typed input and closures carry caller/opener/parent/request/context values, including zero, false and null. Two parent scopes demonstrate actual Popup/Documents ownership and guarded parent capabilities without a global controller bag.",
+    "Installed witnesses extend existing checkPageLoading, preserving communicator/parser/cancel/template checks while adding captured factory, live view, class receiver, input/output identity and reentrant undefined cleanup failure."
+  ],
+  "resolved_prose_findings": [
+    "Plan cleanup normalization now preserves AbortError as well as FrameworkError and leaves late registration behavior unchanged.",
+    "Page API limits the per-generation getter count to mountPage rather than container preflight. It separates factory plain invocation from lifecycle method receivers and repeated PageHandle disposal from unrelated container policies.",
+    "Migration and container examples assign parent cleanup, output unsubscription, capability guards and caller-owned hosts to application code."
+  ],
+  "runtime_verification": {
+    "status": "pending_independent_raw_and_final_document_acceptance",
+    "reviewer_executed_project_commands": false,
+    "observations": "Root reports strict build/source/example checks,155 units and62 focused cases per engine. Canonical groups are running. These observations are not independently audited runtime credit in this source review."
+  },
+  "scope_limits": [
+    "Only the current selected lifetime/metadata outcomes are reviewed. Actual collection, artifact, declaration, performance and final document facts require later independent raw/final acceptance.",
+    "No global metadata/services/configuration/advice/declaration engine is added; M3.5 onward retains its fixed owners.",
+    "Only the prior exact O01-O05 omissions apply. No full-family, M5.20, final P0, M13 or release closure.",
+    "This reviewer writes only this ignored report and invokes no compiler, browser, benchmark or project checker."
+  ]
+}

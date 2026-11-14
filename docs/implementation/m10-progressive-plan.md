@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: 20237111cf8ac739707f07cc0cbb2e0a5c302374
+    git_blob: 518f062e1a984a25e9ba86aa72c4dc491ad08dce
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable legacy behavior and unresolved cross-owner obligations
@@ -32,7 +32,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Per-instance abort and asynchronous controller cleanup
-    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
+    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
   - id: browser
     resource: ../../tests/browser/grid-progressive.spec.ts
     title: Logical chunks, owned failures, cancellation and bounded work regressions

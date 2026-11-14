@@ -8,7 +8,7 @@ sources:
   - id: acceptance
     resource: m10-acceptance-plan.md
     title: Current semantic acceptance and retained obligations
-    git_blob: e18cfd6a338c256b054735c2d0da0ea6a1a6fa0a
+    git_blob: 32a0927ba4805ee85a592f6a508fa728293ef213
   - id: columns
     resource: ../../src/ui/grid-columns.ts
     title: Existing native topology, resizing and restoration owner

@@ -17,7 +17,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Shared CVC page runtime
-    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
+    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T22:11:10Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }

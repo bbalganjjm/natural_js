@@ -12,7 +12,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: Existing page loader, validation and instance lifetime
-    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
+    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
   - id: legacy
     resource: ../../v1/src/natural.architecture.js
     title: Legacy HTML insertion and controller initialization
@@ -32,7 +32,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01–O05 are approved exclusions
-    git_blob: 3586346b948dbbd2cf38292a89bb71d09aa7f582
+    git_blob: 5305f70fbe67d4f65d29ea081806c80d396f0a6b
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Direct PageDefinition forwarding and modal ownership

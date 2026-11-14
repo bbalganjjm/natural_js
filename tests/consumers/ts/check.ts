@@ -1,6 +1,6 @@
 import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
-import type { PageDefinition } from "@bbalganjjm/natural_js/page";
+import type { PageContext, PageDefinition } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowId, RowSnapshot, RowState, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
@@ -82,18 +82,25 @@ export function receiveEmployees(rows: Rows<Employee>, states: readonly RowState
   return { appended, payload };
 }
 
+class EmployeePageController {
+  constructor(readonly context: PageContext<Employee, string>) {}
+  init() { this.context.output(this.context.input.name); }
+}
+
+interface EmployeePageInput extends Employee {
+  caller: { accept(value: string): void };
+  opener: HTMLButtonElement;
+  parent: { key: string; signal: AbortSignal };
+  request: { method: "GET"; zero: 0; enabled: false; empty: null };
+  context: { locale: string; scope: string };
+}
+
 const htmlCommunicator = createCommunicator();
 export const definition = {
   view: new URL("./employee.html", import.meta.url),
   loadHtml: (url: URL, signal: AbortSignal): Promise<string> =>
     htmlCommunicator.request<string>({ url, signal, decode: response => response.text() }),
-  controller({ input, output }) {
-    return {
-      init() {
-        output(input.name);
-      }
-    };
-  }
+  controller(context) { return new EmployeePageController(context); }
 } satisfies PageDefinition<Employee, string>;
 
 export const invalidHtmlDefinition = {
@@ -103,8 +110,16 @@ export const invalidHtmlDefinition = {
 } satisfies PageDefinition<Employee, string>;
 
 export function mountEmployees(host: HTMLElement) {
-  const page = mountPage(host, definition, { name: "Kim" });
-  page.onOutput(value => value.toUpperCase());
+  const input: EmployeePageInput = { name: "Kim", caller: { accept(value) { value.toUpperCase(); } },
+    opener: document.createElement("button"), parent: { key: "employees", signal: new AbortController().signal },
+    request: { method: "GET", zero: 0, enabled: false, empty: null }, context: { locale: "en_US", scope: "employees" } };
+  const childDefinition = { ...definition, controller(context: PageContext<EmployeePageInput, string>) {
+    if (!context.input.parent.signal.aborted) context.input.caller.accept(context.input.context.scope);
+    context.own(() => context.input.opener.removeAttribute("aria-busy"));
+    return new EmployeePageController(context);
+  } } satisfies PageDefinition<EmployeePageInput, string>;
+  const page = mountPage(host, childDefinition, input);
+  page.onOutput(value => input.caller.accept(value.toUpperCase()));
   return page;
 }
 

@@ -28,7 +28,7 @@ sources:
   - id: page
     resource: ../../src/page/index.ts
     title: CVC page creation and cleanup
-    git_blob: 07b9cfb9b8cd7385ed24c5fc4bbb0f25bd07b6bd
+    git_blob: a9c55c619db80f2fdac55b3b948f6f9ce1d3c20c
   - id: browser
     resource: ../../tests/browser/m513-choice-demo.spec.ts
     title: Authored-screen browser contract witnesses

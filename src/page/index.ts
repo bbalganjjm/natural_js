@@ -163,13 +163,17 @@ export function mountPage<Input = unknown, Output = unknown>(
   definition: PageDefinition<Input, Output>,
   input?: Input
 ): PageHandle<Output> {
-  const { loadHtml } = definition;
+  const { loadHtml, controller: createController } = definition;
   if (loadHtml !== undefined && typeof loadHtml !== "function") {
     throw pageError("PAGE_OPTIONS", "loadHtml must be a function when supplied");
+  }
+  if (typeof createController !== "function") {
+    throw pageError("PAGE_OPTIONS", "controller must be a function");
   }
   let instance: Instance | null = null;
   let disposed = false;
   let generation = 0;
+  let disposal: Promise<void> | undefined;
   const listeners = new Set<(value: Output) => void>();
 
   function live(current: Instance, expected: number): void {
@@ -182,10 +186,10 @@ export function mountPage<Input = unknown, Output = unknown>(
     if (current.cleanup) return current.cleanup;
     current.abort.abort();
     current.cleanup = (async () => {
-      let failure: unknown;
+      let failed = false, failure: unknown;
       async function run(action: (() => void | Promise<void> | undefined) | undefined): Promise<void> {
         if (!action) return;
-        try { await action(); } catch (cause) { failure ??= cause; }
+        try { await action(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       }
       if (current.activationStarted) await run(() => current.controller?.deactivate?.());
       await run(() => current.controller?.dispose?.());
@@ -195,22 +199,24 @@ export function mountPage<Input = unknown, Output = unknown>(
       if (current.claimed && current.root) borrowedRoots.delete(current.root);
       if (current.generated) current.root?.remove();
       if (instance === current) instance = null;
-      if (failure !== undefined) throw normalize(failure, "PAGE_DISPOSE");
+      if (failed) throw normalize(failure, "PAGE_DISPOSE");
     })();
     return current.cleanup;
   }
 
   async function start(expected: number): Promise<void> {
     if (disposed || generation !== expected) throw aborted();
+    const view = definition.view;
+    if (disposed || generation !== expected) throw aborted();
     const current: Instance = {
       abort: new AbortController(), owned: [], root: null, controller: null,
-      generated: !isHtmlElement(definition.view), claimed: false,
+      generated: !isHtmlElement(view), claimed: false,
       active: false, activationStarted: false
     };
     instance = current;
     try {
       if (!isHtmlElement(host)) throw pageError("ROOT_MISSING", "Page host must be an HTML element");
-      const root = await untilAbort(current.abort.signal, () => loadRoot(definition.view, current.abort.signal, host.ownerDocument, loadHtml));
+      const root = await untilAbort(current.abort.signal, () => loadRoot(view, current.abort.signal, host.ownerDocument, loadHtml));
       live(current, expected);
       current.root = root;
       if (current.generated) {
@@ -250,7 +256,7 @@ export function mountPage<Input = unknown, Output = unknown>(
           }
         }
       };
-      const controller = definition.controller(context);
+      const controller = createController(context);
       if (!controller || typeof controller !== "object") {
         throw pageError("CONTROLLER_INVALID", "Page controller must return an object");
       }
@@ -319,20 +325,23 @@ export function mountPage<Input = unknown, Output = unknown>(
     },
     reload() {
       const expected = ++generation;
-      instance?.abort.abort();
+      const current = instance;
+      current?.abort.abort();
       return enqueue(async () => {
         if (disposed || generation !== expected) throw aborted();
-        if (instance) await cleanup(instance);
+        if (current) await cleanup(current);
         await start(expected);
       });
     },
     dispose() {
-      if (disposed) return tail;
+      if (disposal) return disposal;
+      const current = instance;
       disposed = true;
       generation++;
-      instance?.abort.abort();
       listeners.clear();
-      return enqueue(async () => { if (instance) await cleanup(instance); });
+      disposal = enqueue(async () => { if (current) await cleanup(current); });
+      current?.abort.abort();
+      return disposal;
     }
   };
 }

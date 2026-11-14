@@ -20,7 +20,7 @@ sources:
   - id: installed
     resource: ../../tests/consumers/browser/main.js
     title: Installed source normalization and observation fixture
-    git_blob: ae0b58abc95b6d69e4536b1cb6b67ffc4c57f923
+    git_blob: 595e1a9c37dae5189b5c68ee384eafa32c8595d4
   - id: demo-browser
     resource: ../../tests/browser/m512-source-demo.spec.ts
     title: Actual reduced CVC detail and full source panel regression
@@ -28,7 +28,7 @@ sources:
   - id: installed-check
     resource: ../../tools/check-packed-browser.mjs
     title: Exact-package source, original, notification and cleanup assertions
-    git_blob: 802c5a7934b4f6cafc8ab1c6c570b531a0f0ff66
+    git_blob: 774c36714d374cb874b7b10b248b12addbdd1516
   - id: example
     resource: ../../examples/vite/m10/demo.ts
     title: Actual selected or inspected full raw snapshot panel

@@ -1,0 +1,233 @@
+{
+  "label": "focused-webkit",
+  "started": "2026-11-14T18:46:56.931Z",
+  "finished": "2026-11-14T18:47:19.594Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+    "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+    "bytes": 21139,
+    "entries": 207
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+    "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+    "bytes": 21139,
+    "entries": 207
+  },
+  "sources_unchanged": true,
+  "workers": 1,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m34-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [
+    "tests/browser/page-lifecycle.spec.ts",
+    "tests/browser/page.spec.ts",
+    "tests/browser/page-loading.spec.ts",
+    "tests/browser/popup.spec.ts",
+    "tests/browser/tabs.spec.ts",
+    "tests/browser/documents.spec.ts"
+  ],
+  "children": [
+    {
+      "label": "focused-webkit-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/page-lifecycle.spec.ts",
+        "tests/browser/page.spec.ts",
+        "tests/browser/page-loading.spec.ts",
+        "tests/browser/popup.spec.ts",
+        "tests/browser/tabs.spec.ts",
+        "tests/browser/documents.spec.ts",
+        "--project=webkit",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m34-focused-webkit-suite-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T18:46:56.958Z",
+      "finished": "2026-11-14T18:46:57.667Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m34-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m34-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m34-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+        "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+        "bytes": 21139,
+        "entries": 207
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+        "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+        "bytes": 21139,
+        "entries": 207
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m34-focused-webkit-suite-list.json.gz",
+        "sha256": "04b848661865caad18ac932db8f6bea3c7aef1bfb13bcd849feedc596e5652db",
+        "bytes": 4985,
+        "encoding": "gzip",
+        "uncompressed_sha256": "525443020c3589f5af4feaaa9e8b1efb3cc9d2e029349df88636ca1cd5cbb707",
+        "uncompressed_bytes": 42807
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m34-focused-webkit-suite-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "focused-webkit-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/page-lifecycle.spec.ts",
+        "tests/browser/page.spec.ts",
+        "tests/browser/page-loading.spec.ts",
+        "tests/browser/popup.spec.ts",
+        "tests/browser/tabs.spec.ts",
+        "tests/browser/documents.spec.ts",
+        "--project=webkit",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m34-focused-webkit-suite-failures"
+      ],
+      "started": "2026-11-14T18:46:57.695Z",
+      "finished": "2026-11-14T18:47:19.564Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m34-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m34-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m34-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+        "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+        "bytes": 21139,
+        "entries": 207
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+        "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+        "bytes": 21139,
+        "entries": 207
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m34-focused-webkit-suite-run-1.json.gz",
+        "sha256": "7ca8ef6854342e879e8ade3bd405332c8eff18b44f0b25503dd3aadcb17603cc",
+        "bytes": 5873,
+        "encoding": "gzip",
+        "uncompressed_sha256": "ce70cbcdb5af52351dd9b3e12eb199b8529cb65b21a3e6bb03b66a430216f2f3",
+        "uncompressed_bytes": 71261
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m34-focused-webkit-suite-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m34-focused-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    }
+  ],
+  "coverage": {
+    "passed": 62,
+    "identities_sha256": "59d44ffce90470f6f865ce313cd527f6785673da4e487af7490cb91d5d40fa2e",
+    "semantic_identities_sha256": "5e8241372cbb4c16c88a6e06255c3ecd4eab6625e939aee8b98a432c73b6a175",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

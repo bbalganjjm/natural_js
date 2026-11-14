@@ -40,7 +40,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Exact five approved omissions and retained outcomes
-    git_blob: 3586346b948dbbd2cf38292a89bb71d09aa7f582
+    git_blob: 5305f70fbe67d4f65d29ea081806c80d396f0a6b
 generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }

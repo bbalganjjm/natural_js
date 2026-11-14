@@ -1,0 +1,31 @@
+{
+  "label": "browser-chromium",
+  "before": {
+    "path": "docs/implementation/evidence/m34-inputs-cd497db6fb6a.json",
+    "sha256": "cd497db6fb6a29ede09b282c0f5f087c8d1b990dbcede8f4a59d4c67ef221943",
+    "bytes": 21139,
+    "entries": 207
+  },
+  "started": "2026-11-14T18:50:28.613Z",
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m34-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m34-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "output_directory": "docs/implementation/evidence/m34-browser-chromium-suite-failures"
+}

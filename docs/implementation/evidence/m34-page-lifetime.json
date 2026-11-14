@@ -1,0 +1,70 @@
+{
+  "milestone": "M3.4",
+  "status": "accepted_source_and_focused_witness_snapshot",
+  "baseline": {
+    "commit": "b1d16082af4b938b1a885c8508f6243c886c3435",
+    "receipt": {
+      "path": "docs/implementation/evidence/m33-verification.json",
+      "sha256": "2743984fc0fa4820811a5a501b412f4a3a52c635ccb53e82beeddbe2cfa79d48",
+      "bytes": 6804
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/6",
+  "selected_contracts": {
+    "capture": "One captured plain controller factory per mount; returned class lifecycle methods retain their receiver; view remains live and is read once per admitted mountPage generation.",
+    "cleanup": "Capture canceled instance and first primitive failure, continue all cleanup, cache public disposal before abort reentry; every repeated caller sees the same result. Keep ready AbortError and explicit initiating cleanup failure separate.",
+    "metadata": "Concrete typed application input/capabilities and closures carry caller/opener/parent/request/context across independent Popup/Documents parents; no framework metadata registry or type.",
+    "public_delta": "Zero public API/type/entry/dependency or runtime filename; all forty declarations are byte-identical."
+  },
+  "independent_source_review": {
+    "reviewer": "m511_design",
+    "status": "passed_connected_applied_source_callers_and_draft_contracts",
+    "report": {
+      "path": "docs/implementation/evidence/m34-independent-source-review.json",
+      "sha256": "e243b5ab25568523a553f0194afe3420e48a91fbc9cbcdf91aff1e733d36d31e",
+      "bytes": 5146
+    },
+    "source_sha256": {
+      "src/page/index.ts": "40ff870b56f0a22bf3a1c7481dc5262887e04606de6e415f5829a95b41d96c1a",
+      "tests/consumers/browser/main.js": "7d9da190a9789b213edd29fd4ecdd3423458a696d05fb92f30e5132624efd069",
+      "tests/consumers/ts/check.ts": "442d9ad7daae2d102af291d381e2511a4c36bf59d5921f8bc738424e73552588",
+      "tools/check-packed-browser.mjs": "f12951fb8c63d9e701b752067442b94ef2084709d72e12c0ab416b9143249763",
+      "tests/browser/page-lifecycle.spec.ts": "b068fe473cbc8013759a582493d5896cc85be72d7191614832c43d33c3d164b6"
+    }
+  },
+  "witnesses": {
+    "new_browser_cases": 15,
+    "file": "tests/browser/page-lifecycle.spec.ts",
+    "installed": [
+      "tests/consumers/ts/check.ts",
+      "tests/consumers/browser/main.js",
+      "tools/check-packed-browser.mjs"
+    ]
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 155,
+    "focus_each_engine": 62,
+    "scope": "All three focused engines pass on the same source; no failed current-stage development attempt at capture."
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m34-declaration-invariance.json",
+    "sha256": "db2be3ac08979e41b7d6b6cdda7d704099d0494de6a699028bc9121ffcd04992",
+    "bytes": 719
+  },
+  "remaining": [
+    "M3.5 scoped configuration and services; M3.6 advice; M3.7 declarations/actions.",
+    "M7 container activation/retention and M12 shell policies retain their owners.",
+    "All M5 ancestors and whole-framework/M13/release gates remain required."
+  ],
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable pre-canonical source/focus snapshot; m34-verification.json owns later runtime/raw/document completion."
+}

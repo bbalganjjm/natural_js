@@ -1,0 +1,17 @@
+{
+  "kind": "actual_pack_declaration_invariance",
+  "parent_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m33-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "2d443c48d62ae2a06bfe534b6c0bf3704f1974445a83483b872c78a1c8a0812e",
+    "bytes": 359573
+  },
+  "current_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m34-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "bc89851fb0ab02b069188f3df678f6e9ee76ab724e4f89898d0a58be0facfeff",
+    "bytes": 359787
+  },
+  "entries": 40,
+  "unchanged": 40,
+  "changed": [],
+  "scope": "Actual tar payloads and public declaration filenames remain identical; runtime source/JS and maps may change."
+}
