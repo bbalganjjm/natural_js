@@ -72,7 +72,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
   - id: grid-mapping
     resource: evidence/v1-grid-parity.json
     title: Detailed Grid surface, configuration and dynamic mapping

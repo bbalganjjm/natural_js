@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
+import { sendEmployee } from "./employee-xhr.js";
 import type { RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
@@ -40,7 +41,10 @@ const sharedFormOptions: FormOptions<Employee> = {
 export function createEmployees({ root, signal, own, input }: PageContext<{ close(): void }>) {
   const session = crypto.randomUUID();
   const endpoint = (name: string) => "employees/" + name + "?session=" + encodeURIComponent(session);
-  const comm = createCommunicator({ baseURL: new URL("/api/", document.baseURI) });
+  const comm = createCommunicator({
+    baseURL: new URL("/api/", document.baseURI),
+    send: new URL(location.href).searchParams.get("transport") === "xhr" ? request => sendEmployee(request) : undefined
+  });
   let pendingRequests = 0;
   let busyBefore: string | null | undefined;
   function restoreRequestBusy(): void {

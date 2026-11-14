@@ -1,0 +1,39 @@
+{
+  "kind": "actual_changed_full_documentation_preflight_not_final_semantic_acceptance",
+  "started": "2026-11-14T17:14:20.578Z",
+  "finished": "2026-11-14T17:14:23.797Z",
+  "fingerprints": {
+    "path": "docs/implementation/evidence/m32final-docs-preflight-fingerprints.log",
+    "sha256": "81026250a0ac140f7bc29a3d2e1ff6b19466799acc87f6c55ba68250276cf3f1",
+    "bytes": 379
+  },
+  "checks": {
+    "changed": {
+      "path": "docs/implementation/evidence/m32final-docs-preflight-changed.log",
+      "sha256": "7cdd74fa32fdf4af263eb028edefee62a929c518ce8c685aa1953a04232c3cce",
+      "bytes": 183,
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "docs:check",
+        "--",
+        "--changed"
+      ]
+    },
+    "full": {
+      "path": "docs/implementation/evidence/m32final-docs-preflight-full.log",
+      "sha256": "b980f75959af547e0e154c1420abd725dec0562c2cd37f4c2eb3660aeaef489e",
+      "bytes": 173,
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "docs:check"
+      ]
+    }
+  },
+  "scope": "Checks demonstrate the corrected raw-store boundary on the real bundle. New tool-inclusive canonical/runtime and final independent semantic checks remain pending."
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "Windows_case_variant_and_concept_boundary_regression_after_path_relative_correction",
+  "started": "2026-11-14T17:11:23.570Z",
+  "finished": "2026-11-14T17:11:24.580Z",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "tools/knowledge-docs/knowledge-docs.test.mjs"
+  ],
+  "exit_code": 0,
+  "before": {
+    "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+    "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+    "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32final-docs-regression-3-stdout.log",
+    "sha256": "a452f2c80a58c5ac58924dc05d080c138051047c5dec838cba5162112b21133a",
+    "bytes": 193
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32final-docs-regression-3-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "scope": "Exact and descendant raw directories, Windows case variants, raw byte preservation, sibling and explicit file rejection. Separate Node checker test, not Vitest/browser/canonical credit."
+}

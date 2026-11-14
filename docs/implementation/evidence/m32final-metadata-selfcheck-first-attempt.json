@@ -1,0 +1,13 @@
+{
+  "runner_candidate_sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+  "completed": false,
+  "kind": "metadata_only_helper_selfcheck_attempt",
+  "recorded_at": "2026-11-14T17:23:00.3181291Z",
+  "git_candidate_sha256": "f3e4155145a0b2bf207a5f656b4dbb4672ad8c840a4e793c8f65f4129db9c6e1",
+  "exit_code": 1,
+  "session_id": 52458,
+  "helper_sha256": "c2aec47beb206cf39beadc055c1b5324af71b389cb62e3dfd4ae98e669ef36cd",
+  "project_or_browser_or_compiler_or_index_commands": 0,
+  "cause_established": false,
+  "error": "Node allocation failed: Committing semi space failed / JavaScript heap out of memory"
+}

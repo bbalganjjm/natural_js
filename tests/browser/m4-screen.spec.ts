@@ -261,19 +261,27 @@ test("the development mock rejects an entire conflicting save", async ({ page })
   });
   expect(result).toEqual({ status: 409, name: "Ada" });
 });
-test("closing during a delayed search does not update a removed page", async ({ page }) => {
-  const errors: Error[] = [];
-  page.on("pageerror", error => errors.push(error));
-  await page.goto("/m4/side.html");
-  const screen = page.locator('[data-page="employees"]');
-  await expect(screen.locator("tbody tr")).toHaveCount(3);
-  await screen.locator('[data-role="search"] [data-field="query"]').fill("slow");
-  await screen.locator('[data-role="search"] button[type="submit"]').click();
-  await screen.locator('[data-action="close"]').click();
-  await expect(screen).toHaveCount(0);
-  await page.waitForTimeout(700);
-  expect(errors).toEqual([]);
-});
+for (const transport of ["", "?transport=xhr"]) {
+  test(transport ? "closing during a delayed native XHR search does not update a removed page" : "closing during a delayed search does not update a removed page", async ({ page }) => {
+    const errors: Error[] = [];
+    page.on("pageerror", error => errors.push(error));
+    await page.goto("/m4/side.html" + transport);
+    const screen = page.locator('[data-page="employees"]');
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+    await screen.locator('[data-role="search"] [data-field="query"]').fill("slow");
+    await screen.locator('[data-role="search"] button[type="submit"]').click();
+    const retained = await screen.elementHandle();
+    if (!retained) throw new Error("Employee root was not mounted.");
+    await screen.locator('[data-action="close"]').click();
+    await expect(screen).toHaveCount(0);
+    const removed = await retained.evaluate(root => root.outerHTML);
+    await page.waitForTimeout(700);
+    expect(await retained.evaluate(root => root.outerHTML)).toBe(removed);
+    await retained.dispose();
+    expect(errors).toEqual([]);
+  });
+}
+
 test("server HTML runs the same employee controller in two ID-clean pages", async ({ page }) => {
   const fragmentResponse = page.waitForResponse(response =>
     response.url().endsWith("/m4/side-fragment.html"));
@@ -364,5 +372,21 @@ for (const layout of ["side", "stack"] as const) {
     await expect(screens.first().locator("tbody tr")).toHaveCount(3);
     await retained.dispose();
     expect(errors).toEqual([]);
+  });
+}
+
+for (const layout of ["side", "stack"] as const) {
+  test(layout + " runs actual search edit and save through the opt-in native employee sender", async ({ page }) => {
+    await page.goto("/m4/" + layout + ".html?transport=xhr");
+    const screen = page.locator('[data-page="employees"]');
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await screen.locator('[data-role="detail"] [data-field="name"]').fill("Ada XHR");
+    await screen.locator('[data-action="save"]').click();
+    await expect(screen.locator('[data-role="status"]')).toHaveText("Saved");
+    await screen.locator('[data-role="search"] [data-field="query"]').fill("Ada XHR");
+    await screen.locator('[data-role="search"] button[type="submit"]').click();
+    await expect(screen.locator("tbody tr")).toHaveCount(1);
+    await expect(screen.locator('[data-role="status"]')).toHaveText("1 employees");
   });
 }

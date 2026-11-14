@@ -1,0 +1,9 @@
+{
+  "kind": "verification_setup_observation",
+  "stage": "M3.2",
+  "result": "first_setup_failed_before_any_project_command",
+  "observed_error": "Git for Windows failed to stat a full-SHA:path expression for the existing long Tree measurement attachment; Filename too long.",
+  "correction": "Pass core.longpaths=true only to individual helper Git invocations; no persistent Git configuration or framework source changed.",
+  "confirmation": "The exact previously failing Git show returned the existing measurement bytes with the per-invocation flag; subsequent strict build/source/example and unit gates passed.",
+  "scope": "Observed root tool output and metadata setup only; no first-setup gate result or frozen runtime input map is claimed."
+}

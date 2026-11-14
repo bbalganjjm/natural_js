@@ -1,0 +1,221 @@
+{
+  "label": "focused-firefox",
+  "started": "2026-11-14T16:09:07.186Z",
+  "finished": "2026-11-14T16:09:45.259Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "workers": 1,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [
+    "tests/browser/communicator-protocol.spec.ts",
+    "tests/browser/m4-screen.spec.ts"
+  ],
+  "children": [
+    {
+      "label": "focused-firefox-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/communicator-protocol.spec.ts",
+        "tests/browser/m4-screen.spec.ts",
+        "--project=firefox",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m32-focused-firefox-suite-3-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T16:09:07.214Z",
+      "finished": "2026-11-14T16:09:07.818Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+          "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+          "bytes": 15544,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-list.json.gz",
+        "sha256": "bca792c6759b290f552355182b97cc9ecfa450d4aca4fec040cdbd5a5ec6d76b",
+        "bytes": 3439,
+        "encoding": "gzip",
+        "uncompressed_sha256": "ccf7c6d1c9f3b6e00a92d1dd5da2583241ce12d4cb5f6db0e2f59270f077bf65",
+        "uncompressed_bytes": 30477
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "focused-firefox-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/communicator-protocol.spec.ts",
+        "tests/browser/m4-screen.spec.ts",
+        "--project=firefox",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m32-focused-firefox-suite-3-failures"
+      ],
+      "started": "2026-11-14T16:09:07.847Z",
+      "finished": "2026-11-14T16:09:45.230Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+          "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+          "bytes": 15544,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-run-1.json.gz",
+        "sha256": "1f6a630008f3fe6170472e96255f177e8ea5fc55f1084a20f4892d8c49f5dd1b",
+        "bytes": 4082,
+        "encoding": "gzip",
+        "uncompressed_sha256": "9fc4fce73bc2b2d10e2cae8e98d95145137f61a562280dfdffbd72dfc18d92f1",
+        "uncompressed_bytes": 50725
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": "D:\\workspace\\natural_js\\node_modules\\.cache\\playwright-m6"
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    }
+  ],
+  "coverage": {
+    "passed": 44,
+    "identities_sha256": "ee7fa5496c1bbffe2677be20618fe3a52e0285cef4dad049644d4191d7f22be5",
+    "semantic_identities_sha256": "665c1abce29072762b32b7740587503799c64284b3469f7b858fcceaff7501f5",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

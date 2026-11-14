@@ -1,0 +1,224 @@
+{
+  "label": "browser-webkit",
+  "started": "2026-11-14T17:45:48.386Z",
+  "finished": "2026-11-14T17:50:10.320Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+    "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+    "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "workers": 2,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32final-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [],
+  "children": [
+    {
+      "label": "browser-webkit-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=webkit",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m32final-browser-webkit-suite-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T17:45:48.415Z",
+      "finished": "2026-11-14T17:45:50.152Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m32final-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32final-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32final-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+        "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+        "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m32final-browser-webkit-suite-list.json.gz",
+        "sha256": "656fdadc6e4e8230a1b19549548fa28f5babf1438b1a2492551b9daf9b1ad346",
+        "bytes": 55336,
+        "encoding": "gzip",
+        "uncompressed_sha256": "76512cf89b701fd6df3dc66b639da584eecf5be645861493dca1d155d49475ac",
+        "uncompressed_bytes": 564762
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m32final-browser-webkit-suite-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "browser-webkit-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "--project=webkit",
+        "--workers=2",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m32final-browser-webkit-suite-failures"
+      ],
+      "started": "2026-11-14T17:45:50.184Z",
+      "finished": "2026-11-14T17:50:10.260Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m32final-stage-run-98c755b1b338.mjs",
+          "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+          "bytes": 19865,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32final-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32final-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+        "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m32final-inputs-6a1b4c87fc53.json",
+        "sha256": "6a1b4c87fc538b013a6fe6a12ac675b62481fc0aa664c574c0acf525f1381d5d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m32final-browser-webkit-suite-run-1.json.gz",
+        "sha256": "5ad95cfe6ae4dee94862665fb77f9c1f5cbe32a547802cee09e5eb7eb6db4bb5",
+        "bytes": 68737,
+        "encoding": "gzip",
+        "uncompressed_sha256": "62e37a0f9de2aa89228120be013de51c5c2eae6bd521c403e23f1b5bd439e754",
+        "uncompressed_bytes": 966926
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m32final-browser-webkit-suite-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/attachments/tree-binding-measurements-598e038571cdd29f25c2be119372fc4628d41c98.json",
+      "sha256": "534baa68e41ef81e5327fc9fd8dd5fdd1c9ca741299cde6601c4e91e366c730e",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/tree-binding.json",
+      "sha256": "534baa68e41ef81e5327fc9fd8dd5fdd1c9ca741299cde6601c4e91e366c730e",
+      "bytes": 1348
+    }
+  ],
+  "coverage": {
+    "passed": 876,
+    "identities_sha256": "8b430768c405d86b85d9fe1acb43f2131fe744ffb3fd2aeb3ef2af6c251693ea",
+    "semantic_identities_sha256": "f2f1ca919ff7252da351ed442de6b0c35d5aecc2e5b30e31e88175d9c5b1f9a3",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

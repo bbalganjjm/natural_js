@@ -70,6 +70,37 @@ test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
     assert.equal(clean.status, 0, clean.stdout + clean.stderr);
     assert.match(clean.stdout, /0 errors, 0 warnings/);
 
+    const rawName = "docs/implementation/evidence/run-1/failure/error-context.md";
+    const raw = "# Browser failure\n\nOriginal recorded Markdown.\n";
+    write(root, rawName, raw);
+    const withEvidence = run(root, "check");
+    assert.equal(withEvidence.status, 0, withEvidence.stdout + withEvidence.stderr);
+    const stampedBundle = run(root, "stamp", "docs");
+    assert.equal(stampedBundle.status, 0, stampedBundle.stdout + stampedBundle.stderr);
+    const stampedEvidence = run(root, "stamp", "docs/implementation/evidence/run-1");
+    assert.equal(stampedEvidence.status, 0, stampedEvidence.stdout + stampedEvidence.stderr);
+    assert.match(stampedEvidence.stdout, /stamped 0 file/);
+    if (process.platform === "win32") {
+        const mixedCase = run(root, "stamp", "DOCS/implementation/EVIDENCE/run-1");
+        assert.equal(mixedCase.status, 0, mixedCase.stdout + mixedCase.stderr);
+        assert.match(mixedCase.stdout, /stamped 0 file/);
+    }
+    assert.equal(fs.readFileSync(path.join(root, rawName), "utf8"), raw);
+    const explicitRaw = run(root, "stamp", rawName);
+    assert.equal(explicitRaw.status, 1);
+    assert.match(explicitRaw.stdout, /no frontmatter/);
+
+    const malformed = "docs/implementation/evidence-extra/broken.md";
+    write(root, malformed, "# Missing concept metadata\n");
+    const badConcept = run(root, "check");
+    assert.equal(badConcept.status, 1);
+    assert.match(badConcept.stdout, /evidence-extra\/broken\.md.*frontmatter/);
+    const badStamp = run(root, "stamp", "docs");
+    assert.equal(badStamp.status, 1);
+    assert.match(badStamp.stdout, /evidence-extra\/broken\.md.*no frontmatter/);
+    assert.equal(fs.readFileSync(path.join(root, rawName), "utf8"), raw);
+    fs.unlinkSync(path.join(root, malformed));
+
     fs.rmSync(path.join(root, "build"), { recursive: true, force: true });
     const beforeBuild = run(root, "check");
     assert.equal(beforeBuild.status, 0, beforeBuild.stdout + beforeBuild.stderr);

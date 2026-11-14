@@ -1,0 +1,69 @@
+{
+  "label": "pack",
+  "args": [
+    "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "pack",
+    "--json",
+    "--pack-destination",
+    "D:\\workspace\\natural_js\\node_modules\\.cache\\m32-artifact-pack"
+  ],
+  "started": "2026-11-14T16:10:40.258Z",
+  "finished": "2026-11-14T16:10:41.531Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32-pack.json.gz",
+    "sha256": "ac87719c784b159119852c98fffd23b56311ad1a9fdc4ba9ad81e1ef171dfd13",
+    "bytes": 2161,
+    "encoding": "gzip",
+    "uncompressed_sha256": "04eb48e2528a5b3eebf271b4b3ebed3cf323e24728051e0e78c30e707e01380e",
+    "uncompressed_bytes": 21281
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32-pack-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {},
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

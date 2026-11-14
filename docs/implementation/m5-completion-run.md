@@ -8,7 +8,7 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: 06d0143ed4f8b851c6a8c41aae01b65bc2cd0600
+    git_blob: 985d9373362c9c9477b2eef6419479c45a94f46b
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
@@ -16,7 +16,11 @@ sources:
   - id: live
     resource: m5-live-choice-groups-plan.md
     title: Accepted M5.14 private handoff and failure contract
-    git_blob: 4cdf48e3ecbdf722206e187256801251894226dd
+    git_blob: 96d22f6f9b1947cc63359665e698f23f5c97e916
+  - id: protocol
+    resource: evidence/m32final-verification.json
+    title: Tool-inclusive M3.2 runtime and independent acceptance
+    git_blob: c44fa622097d0c1b7073701598a2fe394014db57
   - id: baseline
     resource: evidence/m513-verification.json
     title: Preserved accepted runtime baseline
@@ -29,9 +33,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
 # Goal
@@ -40,7 +44,7 @@ Finish M5.14-M5.20 in one continuous authorized run. Keep every stage's detailed
 
 # Checkpoint
 
-The user explicitly approved both the seven separate M5 stages and their necessary predecessor stages on 2026-11-14. The fixed dependency graph yields 33 unconditional stages: P0.1; M5.14; M3.1-M3.7; M5.15-M5.19; M6.1-M6.7; M7.1-M7.5; M11.1-M11.4; M12.2; M12.4; M5.20. P0.2 remains conditional for actual lost-capability decisions; it is not permission to remove pending capabilities.[^run][^scope]
+The user explicitly approved both the seven separate M5 stages and their necessary predecessor stages on 2026-11-14. The fixed dependency graph yields 33 unconditional stages: P0.1; M5.14; M3.1-M3.7; M5.15-M5.19; M6.1-M6.7; M7.1-M7.5; M11.1-M11.4; M12.2; M12.4; M5.20. P0.2 now records explicit user approval of exactly O01-O05. The immutable proposal retains its pending-at-capture state; all unlisted capabilities remain required.[^run][^scope]
 
 Baseline recovery passes at clean pushed daab0f2b04cb3b8ecac871a3a147f4b0fa8dbcfe. M5.13's 201-input, 138-unit, 836-case-per-engine, 203-file archive and original performance evidence remain at their frozen identities. P0.1 known source-case assignment is independently accepted and pushed as cf2210f, with exact source/hash/pointer assertions. Its preflight records distinguish bounded fresh reads from inherited audits, and do not certify runtime, external-consumer, full-family or P0.2 closure.[^baseline][^core][^ui][^run]
 
@@ -62,7 +66,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Execute M3.2 next after P0.1, M5.14 and M3.1. Review its native protocol/custom-sender contract before code; retain separate commits and actual evidence for every later common/M5 stage through M5.20. Keep the tracker accurate during checks and context recovery.[^run]
+Finish M3.2 independent final-document acceptance and its separate commit/push from the tool-inclusive checkpoint. Then write and implement M3.3; retain separate commits and actual evidence through M5.20. Keep the explicit Windows WebKit native limits, unexplained original Tree/date timeout and fresh installed Edge failure with their recorded attempts. Keep the tracker accurate during checks and context recovery.[^run][^protocol]
 
 # Decisions
 
@@ -74,12 +78,15 @@ Execute M3.2 next after P0.1, M5.14 and M3.1. Review its native protocol/custom-
 
 # Verification log
 
-P0.1 is pushed as cf2210f and M5.14 as 6bc3c04. M3.1 passes independent source/raw/document acceptance on 203 inputs, 150 units and 857 cases per engine, including installed consumers and original performance budgets. The durable queue retains separate receipts/commits; thirty unconditional stages remain pending. No partial Form result closes M5.20 or a whole family. Historical results retain their original scope.[^run][^baseline]
+P0.1 is pushed as cf2210f and M5.14 as 6bc3c04. M3.1 retains its accepted 203-input, 150-unit, 857-case-per-engine evidence. The tool-inclusive M3.2 receipt has 22 fresh attempts and sixteen latest canonical groups on 205 inputs, 155 Vitest units and 876 full cases per engine. Its exact 203-file archive equals the original M3.2 tar and passes JS/TS, five installed browsers and the original thirty budgets. Thirteen source-owned paths include the two documentation-tool corrections and raw-byte Git attributes; three separate Node diagnostics include RED/GREEN with no extra unit/browser credit.[^run][^protocol]
+
+The original M3.2 R0, 34 attempts, 291 retained paths, pending projection and initial document approval remain immutable. The 298-path parent snapshot protects later bookkeeping separately. Original primary 44-case and diagnostic 4-case focus retain their original scope; both current and parent full-case identities are preserved. Windows WebKit cookie/header withholding is not certified. The original Tree/date timeout and fresh Edge ERR_NO_BUFFER_SPACE have no proven cause or production fix; later complete suites and all five installed checks pass. After selected M3.2 acceptance, twenty-nine unconditional stages remain. No partial Form result closes M5.20 or a whole family.[^run][^protocol][^baseline]
 
 # Open questions
 
-The source-backed five-item O01-O05 proposal has been presented once and awaits that existing user decision. Continue independent implementation without asking again. Other source-value/callback, advice, inspection and standalone-rule outcomes remain required in their fixed owners; no undecided candidate is omitted.[^core][^ui][^scope]
+The user approved only the five source-backed O01-O05 omissions through the original question. Apply their exact boundaries without asking again. Other source-value/callback, advice, inspection and standalone-rule outcomes remain required in their fixed owners; no undecided candidate is omitted.[^core][^ui][^scope]
 
+[^protocol]: Tool-inclusive M3.2 runtime and independent acceptance
 [^run]: Durable current stage, exact ancestor queue and completion references
 [^scope]: Fixed 56-stage scope, predecessors and terminal conditions
 [^live]: Accepted M5.14 private handoff and failure contract

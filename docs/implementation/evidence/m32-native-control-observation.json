@@ -1,0 +1,98 @@
+{
+  "kind": "native_engine_control_not_framework_gate",
+  "started": "2026-11-14T16:03:28.388Z",
+  "finished": "2026-11-14T16:03:29.150Z",
+  "exit_code": 0,
+  "script": {
+    "path": "docs/implementation/evidence/m32-native-control.mjs",
+    "sha256": "11879e485258f9fb50b3b1746fa051f742cb7a318a03d5512c84c165d3ff7320",
+    "bytes": 2147
+  },
+  "output": {
+    "path": "docs/implementation/evidence/m32-native-control-output.json",
+    "sha256": "128f0b6f95a4f3a56f85383c0fa4b07ce1d61aec8d940900697b4886a5476ab4",
+    "bytes": 7829
+  },
+  "platform": "win32",
+  "node": "v24.18.0",
+  "findings": {
+    "credentials": [
+      {
+        "kind": "url",
+        "requested": "omit",
+        "constructed": "omit",
+        "cloned": null,
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "request",
+        "requested": "omit",
+        "constructed": "omit",
+        "cloned": "omit",
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "clone",
+        "requested": "omit",
+        "constructed": "omit",
+        "cloned": "omit",
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "url",
+        "requested": "same-origin",
+        "constructed": "same-origin",
+        "cloned": null,
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "request",
+        "requested": "same-origin",
+        "constructed": "same-origin",
+        "cloned": "same-origin",
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "clone",
+        "requested": "same-origin",
+        "constructed": "same-origin",
+        "cloned": "same-origin",
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "url",
+        "requested": "include",
+        "constructed": "include",
+        "cloned": null,
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "request",
+        "requested": "include",
+        "constructed": "include",
+        "cloned": "include",
+        "cookie": "employee-control=yes"
+      },
+      {
+        "kind": "clone",
+        "requested": "include",
+        "constructed": "include",
+        "cloned": "include",
+        "cookie": "employee-control=yes"
+      }
+    ],
+    "content_type": [
+      {
+        "kind": "string",
+        "before": [],
+        "wire": "application/x-www-form-urlencoded"
+      },
+      {
+        "kind": "bytes",
+        "before": [],
+        "wire": "application/x-www-form-urlencoded"
+      }
+    ]
+  },
+  "scope": "Direct platform fetch(URL/Request), with and without Request cloning, before any framework call. Not Safari certification or a standards-compliance pass."
+}

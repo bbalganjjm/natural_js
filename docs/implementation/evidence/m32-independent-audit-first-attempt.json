@@ -1,0 +1,1709 @@
+{
+  "kind": "independent_recorded_byte_audit",
+  "stage": "M3.2",
+  "started": "2026-11-14T16:38:48.342Z",
+  "baseline": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+  "helper": {
+    "path": "node_modules/.cache/m32-independent-audit.mjs",
+    "sha256": "9fe727b72fb656da9df8f3965dc09636f0e6e02e715a44d2167d8d769c3b5e68",
+    "bytes": 33241
+  },
+  "limits": [
+    "Only existing recorded bytes are read; no compiler, browser, benchmark, model or project checker is invoked.",
+    "Shared independently reviewed metadata functions rederive archive, performance and case proofs; actual commands, maps and attempts are separately checked here.",
+    "Historical runtime is preserved rather than rerun. This raw audit confers no additional public-contract or omission approval, whole-family closure, Safari, manual assistive-technology or token result."
+  ],
+  "receipt": {
+    "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+    "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
+    "bytes": 333380
+  },
+  "shared_read_only_metadata": {
+    "path": "node_modules/.cache/stage-metadata.mjs",
+    "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+    "bytes": 19251
+  },
+  "protected_files": [
+    {
+      "path": "tools/benchmark-m4.mjs",
+      "sha256": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+      "bytes": 11967,
+      "baseline_match": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "tools/benchmark-grid-viewport.mjs",
+      "sha256": "87570e023afb814627329fad003783fcefe2f8915ad086c0d209f977aa05de92",
+      "bytes": 31662,
+      "baseline_match": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "examples/vite/benchmark.ts",
+      "sha256": "ef6ed79908de768dcda7bfe07a88adeb4b421df9c30fff7125dae18d602f203d",
+      "bytes": 8475,
+      "baseline_match": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "examples/vite/benchmark.html",
+      "sha256": "3d65a0dda4a30f637f7335172eb54545869fbee3527267d954cd7b20a0b3eb4d",
+      "bytes": 2794,
+      "baseline_match": "UTF-8; CRLF normalized to LF"
+    },
+    {
+      "path": "tests/evaluation/m8/task1-seed.tar",
+      "sha256": "8ae5f81f2f58eff35b9788c3a61b42e8c8b6176b46781f13a00ccca63bc4052e",
+      "bytes": 13824,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "tests/evaluation/m8/task2-seed.tar",
+      "sha256": "ba39cc15dd2eaa6294d19a25537c987c113df3b5f0ac222a7e15dc233a484990",
+      "bytes": 40960,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "tests/evaluation/m8/task3-seed.tar",
+      "sha256": "c1c035df3cf1e2aa320c8365e56a1d87e5f351ac48e2b88aa2376ad19fbfb38d",
+      "bytes": 12800,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-runtime-receipt.json",
+      "sha256": "cf1de2981ec603b84047b12ea8506795bac65bd7a7e126dd04524db684383cf2",
+      "bytes": 204272,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance-result.json",
+      "sha256": "d0aa1746f05f3283cb862a77df26ec5f10ed946f2b5d21508b98ccafc17ff0a7",
+      "bytes": 2359,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance-start.json",
+      "sha256": "8c8c9759451902c38ab81e0a9449c2210928edc124316d56a9bc0c67eac7b381",
+      "bytes": 1498,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance.json.gz",
+      "sha256": "d62acec1390449feadb85d4af6eaa3b878d9738f6b8b5f9d8c10a8c907db1d9d",
+      "bytes": 4645,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/attachments/tree-binding-measurements-199385ca8ee2a8ab803a1149df539a6fc8c54289.json",
+      "sha256": "5d2c77911eba6510a3f0bad7da76e2c6ac36a204da00523a4d9efb6212e3a992",
+      "bytes": 1599,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/tree-binding.json",
+      "sha256": "5d2c77911eba6510a3f0bad7da76e2c6ac36a204da00523a4d9efb6212e3a992",
+      "bytes": 1599,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list-result.json",
+      "sha256": "4095ec08e1aa596b779d0945446041392c32a9daacb58e14ef94aef84a0b70da",
+      "bytes": 2571,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list-start.json",
+      "sha256": "5fed42006cb665c78793f1c42e6becd6a970d364e2214c46f7155180616fd207",
+      "bytes": 1708,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list.json.gz",
+      "sha256": "862e10a517f613a81fe6f26b88e43552b34e24937edac94f12d00b2bff814d75",
+      "bytes": 54117,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-result.json",
+      "sha256": "c2dfb148d01dd5c3ae12838bad20a4d84aef5724a01f09a5c25bbe72205b64c5",
+      "bytes": 8538,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1-result.json",
+      "sha256": "1cde06d945da81a65b253c48af22e99c178057cdd7f71fe74447139db70c8551",
+      "bytes": 2560,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1-start.json",
+      "sha256": "9d0bbc42c14d01fe06a030bb45bfdcef1b8e2ecb34b681753f16328878e6fb51",
+      "bytes": 1697,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1.json.gz",
+      "sha256": "b3f5c584dda63fda9ed33407ea21d218f242233e0dd68ade3c585cbce513f4a5",
+      "bytes": 66753,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-start.json",
+      "sha256": "6fbf0646299b7f10bef7e4e44e75342d457f173b6b80467f9694bd71e57bbc87",
+      "bytes": 1248,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/attachments/tree-binding-measurements-4f6aa1e1e20f6442937a9ec933da712edfb478f3.json",
+      "sha256": "ecb17400dc079feae1975da801f7ef9102a7f1619a3667bdd63b110334dd0caf",
+      "bytes": 1348,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/tree-binding.json",
+      "sha256": "ecb17400dc079feae1975da801f7ef9102a7f1619a3667bdd63b110334dd0caf",
+      "bytes": 1348,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list-result.json",
+      "sha256": "cf74910a49689a5371aef65207fc3ecf2f5d613f65b81f866de9818d6c127740",
+      "bytes": 2626,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list-start.json",
+      "sha256": "28df900cea322c767b2e3cf955d2aa9c103f8e98550a779b89eb97db2e9747ed",
+      "bytes": 1763,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list.json.gz",
+      "sha256": "03580dcbc73df08542f17865acda347e430d3ebab8eb2ef0ca3f2f2650a4bc75",
+      "bytes": 54132,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-result.json",
+      "sha256": "7d932e888b93747ab22ae0b2ee31ffbed9444b22bd9dba3de0575bdc24362802",
+      "bytes": 8642,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1-result.json",
+      "sha256": "5863250b04421d4ceeb38855531afa6c5b070c67b130eec4d142bacb09730d1d",
+      "bytes": 2615,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1-start.json",
+      "sha256": "118697a1c6775ba657921db80521d497f9bb8550608ba18b15c1350e3f475050",
+      "bytes": 1752,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1.json.gz",
+      "sha256": "1fd2140accc55eb9b94350e6c721522c8da0411ac89957ff321bab3184b4adf3",
+      "bytes": 67367,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-start.json",
+      "sha256": "d0d1d71de746471c8ad8001224c409ee52ff91022acea491f17c72390d9873da",
+      "bytes": 1246,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/attachments/tree-binding-measurements-bcdf48fedccfda07a5df82164dfddc850f709668.json",
+      "sha256": "5895fa9c05f65593a9a03dfc2a5e7033efe48daded4fcd0e81e44e09eeedb799",
+      "bytes": 1347,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/tree-binding.json",
+      "sha256": "5895fa9c05f65593a9a03dfc2a5e7033efe48daded4fcd0e81e44e09eeedb799",
+      "bytes": 1347,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list-result.json",
+      "sha256": "933eec4e3807fca057a21288cef44e1c03573fea3e020105889d26d69ea3acd5",
+      "bytes": 2561,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list-start.json",
+      "sha256": "e4a873222c7ce6fd17274e3a65bb7d4eee32783dd798089a4874709f50dacdbb",
+      "bytes": 1698,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list.json.gz",
+      "sha256": "c2c823c489b3d1777ee2485306ae8d8e57311e4cb3bc12b3008d6182da7a83e6",
+      "bytes": 54113,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-result.json",
+      "sha256": "4eab6ee78714731b85089d30769fb03c24ac8674ebcc3c17f07818d85b54cd76",
+      "bytes": 8506,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1-result.json",
+      "sha256": "6f728cc9a542f80ab52a2a5ca21784a2432f2ffe1b362d67b1d0906c7145017e",
+      "bytes": 2550,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1-start.json",
+      "sha256": "58c198f7b363838e5513b4091b313181befe1eceebceaa25163598348f186cda",
+      "bytes": 1687,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1.json.gz",
+      "sha256": "f0bcb65d3635234cd0eaf3d4f36046f3345dc9689fefcd0d139c4b3cbce0d964",
+      "bytes": 67049,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-start.json",
+      "sha256": "2b1e919d5957a41b24953e9df0faaff645545c4aa26a348738496f8d4d750379",
+      "bytes": 1244,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-result.json",
+      "sha256": "4072343de0be3acacc4bed63b1243cddc7efafd54e124df91293f795f1b8ebe5",
+      "bytes": 2109,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-start.json",
+      "sha256": "f85201fc8e4cba2144684ea77ffbe8bf8cd4d65ff3b0d124fb26d90737959158",
+      "bytes": 1396,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-communication.json",
+      "sha256": "331672bcdd29f5df7e5ebd24e4c03d5e7527a2eae36761675dc1c69d8013422c",
+      "bytes": 4464,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-result.json",
+      "sha256": "6f883f7148e2aee7134cd8d677cf8a73c27ff3a66c80faa695d2ce2f2603edfe",
+      "bytes": 2384,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-start.json",
+      "sha256": "d6a5687aac7f4c0e546b05182a01a1e096ada204c3e72ada98757dda3f49f263",
+      "bytes": 1669,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-stdout.partial",
+      "sha256": "33e5fc539e9035b17ea9cb6569a8d8791f796047d708dff325b9a153b05df15a",
+      "bytes": 379,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-declaration-invariance.json",
+      "sha256": "96f61297b2cbc60184a7e36ac9cf3a03b018f0b0382ecc117ea88db5a128da8e",
+      "bytes": 5819,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-changed-2.log",
+      "sha256": "9000172ae3669254334c44741a89de2587a3318e5874445dc58b3ef01c0c7280",
+      "bytes": 183,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-changed.log",
+      "sha256": "9000172ae3669254334c44741a89de2587a3318e5874445dc58b3ef01c0c7280",
+      "bytes": 183,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-fingerprints-2.log",
+      "sha256": "0ecd134e0a09343850d54edbfb3d626e0a4525ecadf697aa1a6d64c02cc4731c",
+      "bytes": 102,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-fingerprints.log",
+      "sha256": "656bbfdc13b756ae7735df75eda0c61d6ecd2fe40c317da2e16b1f55ab393c5f",
+      "bytes": 448,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-full-2.log",
+      "sha256": "4119efcda50ab9297b87ed0dfdc672e4f31e3d6e8cd5b4519a059e47d30a0019",
+      "bytes": 173,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-full.log",
+      "sha256": "4119efcda50ab9297b87ed0dfdc672e4f31e3d6e8cd5b4519a059e47d30a0019",
+      "bytes": 173,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-checks-2.json",
+      "sha256": "ee24ede3aef263e1f917f131da1a7ee0fccb8f6d8f1bb53197126fa04c38f545",
+      "bytes": 1013,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-checks.json",
+      "sha256": "5dae2f8bf64eb76d7121cd4b33f897413133be544d678ae231cc7c9be4c7485f",
+      "bytes": 1005,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-history-2.json",
+      "sha256": "a0d932834fd6eaf7a4af4ae282b45223c709a214b590cf403d36920162d1cd46",
+      "bytes": 2081,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-history.json",
+      "sha256": "a0d932834fd6eaf7a4af4ae282b45223c709a214b590cf403d36920162d1cd46",
+      "bytes": 2081,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-result.json",
+      "sha256": "beefd70e2b5ab6d3f5d832d77efae9e46bc6181210535544a7950de6aca389b6",
+      "bytes": 2847,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-start.json",
+      "sha256": "25c58033ace893b29c89e471c39624d541ae38f06f105a4f7b623e4bc9bd9a27",
+      "bytes": 2134,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-result.json",
+      "sha256": "9025ec29f56d14132af7b08545bbcec929b7dcf9864e6b07e840404c98a51956",
+      "bytes": 2133,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-start.json",
+      "sha256": "4faeef8c180c7664746ec4af128478331114272db83d6337293c698dbd910d6e",
+      "bytes": 1420,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list-result.json",
+      "sha256": "630c2532e27a40a35648363eb81445b0e1dee5c9ac2b5ebe4b588ed878d686c6",
+      "bytes": 2608,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list-start.json",
+      "sha256": "3e7d63efb08ff2eae2e8f48b6dd6c99019084b76819f7f58422e9a1456f23093",
+      "bytes": 1747,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list.json.gz",
+      "sha256": "60e0b5d04e352ff09a34049f1d58ad55ac060d493602170cda68d0ac0cddf308",
+      "bytes": 2224,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-result.json",
+      "sha256": "fd1795ca0ed747ed50b7f1a460e8ee52a91f3107d85007032f597f28d6f1871f",
+      "bytes": 8020,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1-result.json",
+      "sha256": "a319ad50620ca5690bb0a7110bef23a51a81e8aa88685e072563aa7bf81a4799",
+      "bytes": 2597,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1-start.json",
+      "sha256": "3b7310f7f58175e7e6fe57d2ced2af69560d72e046d2051ab07d09d46f6abc1c",
+      "bytes": 1736,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1.json.gz",
+      "sha256": "a1385559a7c22a02d8db9c0747751b74e43f27b2ae00cb0e8d0292daff76e747",
+      "bytes": 2607,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-start.json",
+      "sha256": "11e5b55dac0ab1c556a9f16c5abd9f035be8ab58a7c7207a59a7b8e62042f78d",
+      "bytes": 1248,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-result.json",
+      "sha256": "cae92b3641833c9182529793248c8ed2bf3040245b9013aff8aa3c00c02381f8",
+      "bytes": 2871,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-start.json",
+      "sha256": "a14eb9775c38242362c1c70360535f06a278f93d022a3ba2a3138e13c4eb23fb",
+      "bytes": 2158,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list-result.json",
+      "sha256": "3eb4bb2fa981f813072e6128760d6af47c6dd4c7939c9e58a65bbf301f884849",
+      "bytes": 2663,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list-start.json",
+      "sha256": "e7369bd52b2ebc82e3c4cfa171e3bf8bb08fa40051320f3f6212325dd92b33fb",
+      "bytes": 1802,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list.json.gz",
+      "sha256": "ae84b399e056c5bddc09555747bca9b564fac270a759f2932abe6d02dce96024",
+      "bytes": 2227,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-result.json",
+      "sha256": "90a72c922135fa95ae538b0a991b38d6dc676d1c56b72f163824858fd4bb3c63",
+      "bytes": 8128,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1-result.json",
+      "sha256": "513e1c7fc9b74785da62e0ed00e9bb57bb525f629c152adfe0c1eb6a7248b7d9",
+      "bytes": 2652,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1-start.json",
+      "sha256": "ad22beb5c8a1a28b37183ba7fb7e6fb278c7fc8d1b0c7f6a0e69896ab6adc8ec",
+      "bytes": 1791,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1.json.gz",
+      "sha256": "7f2df175c11944b80e09230d98e8a084f287827af45b1bd34ac390694e89687b",
+      "bytes": 2636,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-start.json",
+      "sha256": "6166d7c434ee03ba96999cf77049e9d5f2d455e2cf3941c9cc01b5daaa658a56",
+      "bytes": 1246,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-result.json",
+      "sha256": "e3a2aaca7346911fba9ea81779c4808ef9bacd8fa235161d25ec08cea3a92a35",
+      "bytes": 2149,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-start.json",
+      "sha256": "328380666884ce7f76365ee9f8410fa5b34d8dfecb0239d5c359f846642f0ae9",
+      "bytes": 1436,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-result.json",
+      "sha256": "467fb68f9029c171f4b8f6f29a9f1c1e3075b7543ad51862478dfa84060f643f",
+      "bytes": 2115,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-start.json",
+      "sha256": "0f64ae537dd4b64f7bedb75901ec3edfa411e4e324297bca12e7b02c31a0839e",
+      "bytes": 1400,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-stdout.partial",
+      "sha256": "14f60bc1ff58b485cf71f2234d7424a34d483a3d84cd808be7f0762c894cfdaf",
+      "bytes": 190,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-result.json",
+      "sha256": "bcfb3576444ce8520ce5cef4fd8568e36a949385451ddd6d2b32faa020d7e4f5",
+      "bytes": 2113,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-start.json",
+      "sha256": "693ae771bbe49ca48561a50a68a77dd0ec03d96170250d8ddb6d8b8a0bfebd3e",
+      "bytes": 1396,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-stderr.log",
+      "sha256": "50191ae8471c05f25e7da1a80e79b29202f858bce09234430ca2c68a9961ee9a",
+      "bytes": 778,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-stdout.partial",
+      "sha256": "1795c4ee41f4445f223ff947a303114e791c9938a43e72e2e3a3ead9734577c2",
+      "bytes": 422,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list-result.json",
+      "sha256": "c14fafa6b4fb70ee3956a7e6d885933b132a16fc73d065aa5cc4dce6114cd5d0",
+      "bytes": 2598,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list-start.json",
+      "sha256": "58254a1205bd01e710be0f1d320faacc2544614c6c3aa0f2c5092737533d47a7",
+      "bytes": 1737,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list.json.gz",
+      "sha256": "98da6915e95688856ae677bb25c2f1e3152eca5ee82e5e56a8e95ad469ad4232",
+      "bytes": 2229,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-result.json",
+      "sha256": "f1b72491249558a893d1474bb75620cfd065e45ad3b2cf053891b3250529c3ff",
+      "bytes": 7996,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1-result.json",
+      "sha256": "880affe5092fcc2b19e7fb25cdb92d5d1a4945e0e0bc2611ef72c3cad9779d5f",
+      "bytes": 2587,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1-start.json",
+      "sha256": "9cedce4f6a066970c942ae01d34981b0f0b2d9038bed2c812b5df6ded7bd74b5",
+      "bytes": 1726,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1.json.gz",
+      "sha256": "8f7028933e03244a3d66d2b7fe253c62fe36fedd0706f3fb210fc5e428d483ac",
+      "bytes": 2631,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-start.json",
+      "sha256": "98ab667540193b76ac97e3c25d4bbc53e88d160c3983326a0a0048052b98aa68",
+      "bytes": 1244,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-gates.jsonl",
+      "sha256": "45f8eaedd4a9392abdb03d239df60c58907d1131455cfe9970d46fb675a1e432",
+      "bytes": 95387,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-independent-audit.json",
+      "sha256": "93cf5941e14c93bf3b23a50ee098c9ef3df89ebea608c89820c34ddec3bfb2ab",
+      "bytes": 79769,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-inputs-353fd91cffa2.json",
+      "sha256": "353fd91cffa2e87543df38fe967dce1728131e22c09b5869d1aa668d725df861",
+      "bytes": 20698,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-inputs-b64cc5640357.json",
+      "sha256": "b64cc5640357e7df5ec26b5aae199afdfbc2e38f6a192dd3be20015d38b7494e",
+      "bytes": 20698,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack-result.json",
+      "sha256": "495b491d4e24cf2a0459e4f2dcb631c52731c2fc2baf30455b13c7741abb73db",
+      "bytes": 2379,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack-start.json",
+      "sha256": "ac3055b2da297595418fc4b6e0922275a615d9598238586562651275e31db7f1",
+      "bytes": 1518,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack.json.gz",
+      "sha256": "823077c5835659b678b74c7489b7630b00e9b7a6d9e8598e75d4fb96942664a0",
+      "bytes": 2161,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-result.json",
+      "sha256": "614663e912a055691704c72f0b7c68d5ce2bb3abc85a04f153ad73c6719e23bc",
+      "bytes": 2472,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-start.json",
+      "sha256": "209754e90dbe56d98c4f45fb39a8b7990503a96b2ae3c873adccbbefb88ef9d0",
+      "bytes": 1757,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-stdout.partial",
+      "sha256": "e54b5c3fc723d56a00d856fe101e210aa20e457d8ee459fbf0c5f20e26c30424",
+      "bytes": 459,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-result.json",
+      "sha256": "df1539400d3d41570fd6e967fb5cd4aa3948c21178654eb7444ab6e9a6b8e0c8",
+      "bytes": 2480,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-start.json",
+      "sha256": "d7864063e822f0ca593e7a92fb39853f7333b5936c6b660abab8db2fda7f4324",
+      "bytes": 1765,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-stdout.partial",
+      "sha256": "1f762484325d36651b2b7832b88a4dee67b2ff747c9b813ea36d1800e6e075e7",
+      "bytes": 463,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-result.json",
+      "sha256": "14555d9f5f63c19dda3d32af9fa4b64110d5e590b64fc8fbee94380852244e1f",
+      "bytes": 2464,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-start.json",
+      "sha256": "f8330fab7c8a583dc3bf6618e22f5c2629a59499a79ce73cbe7fff5ebf8bf7ae",
+      "bytes": 1749,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-stdout.partial",
+      "sha256": "12384569e4e023a8564617d1b17e179849be7f2ed08bfe885a000c61ac145022",
+      "bytes": 455,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-result.json",
+      "sha256": "9d46f2fa719825220728dc256160b1e7e2481a880b9a516cc9ad92c01cc2e0bd",
+      "bytes": 2536,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-start.json",
+      "sha256": "f81a94e9f81bbf347e20f77c98173e84c6597488e6ebb311a87396ee04b484cd",
+      "bytes": 1821,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-stdout.partial",
+      "sha256": "85e38b5a6591c2ba79f9cfe4e0e627e798b5bf166bc84dc85b7eb0319bc08c5d",
+      "bytes": 453,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-result.json",
+      "sha256": "67ed2d255a34a9168185c3fca3f211ba7aee872ac61f9f6e7fabf8c95bb2d563",
+      "bytes": 2472,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-start.json",
+      "sha256": "19d362ba029e5f07f8f950ecfb0a1e31938696974e0fe2b6094fb46d20b66d2e",
+      "bytes": 1757,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-stdout.partial",
+      "sha256": "0204cf3ad9b1e09112b1e6a9667a3bab3a77222183c7208859efcbb75978163f",
+      "bytes": 450,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-setup.json",
+      "sha256": "616692b67979d9089a012243217350df65dc5839807e6f09bae6bd4450b68f29",
+      "bytes": 20813,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-metadata-2cf6b90520bc.mjs",
+      "sha256": "2cf6b90520bcc962ec1c41eae9c3e2c9daab776d0eab39862f09d861d7779122",
+      "bytes": 19222,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-result.json",
+      "sha256": "f33b6447ba1b0588e04ce93bd4297d7f702274ee8a457eed40287952a36c1e53",
+      "bytes": 2125,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-start.json",
+      "sha256": "7bea394077cdbc14c0758ab33429351bfa0d9984a1a06de96783ec40a0023975",
+      "bytes": 1412,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-result.json",
+      "sha256": "11713c9bc897f9f4538b0c6d1ce65f49a4fdcf22d91300c0ba975bdfc0b8219c",
+      "bytes": 2087,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-start.json",
+      "sha256": "e4f7b5ea4a0a964e4d4c425d9e889a73f79607ef96773836d7d7b197e0cfd078",
+      "bytes": 1372,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-stdout.partial",
+      "sha256": "731742ba7a3f5002e8cdfdc12b619f0ecd8beb95cdd5bc2e83a4397eda359c9b",
+      "bytes": 190,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-verification.json",
+      "sha256": "e5a3378bf0a95d2e898a84c9fcf03e2a8c637f8683075e1e5606d22f8e4e623f",
+      "bytes": 5513,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance-result.json",
+      "sha256": "6a2982e04897d0b47f85aec93f665963b023826aa982d9d30e77884ac746d7ac",
+      "bytes": 2374,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance-start.json",
+      "sha256": "8237cb6ae3952cb908a2a713bfe2368d31e6f1476cc51f7c6188e8c9b97fea37",
+      "bytes": 1512,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "baseline_match": "raw bytes"
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance.json.gz",
+      "sha256": "362b0fc54edfe940eb26ea57c80a761eb4ac3d863290cd44468f0b0b758ace95",
+      "bytes": 8517,
+      "baseline_match": "raw bytes"
+    }
+  ],
+  "parent": {
+    "path": "docs/implementation/evidence/m31-runtime-receipt.json",
+    "sha256": "cf1de2981ec603b84047b12ea8506795bac65bd7a7e126dd04524db684383cf2",
+    "bytes": 204272
+  },
+  "historical_evidence": {
+    "baseline_files": 2024,
+    "unchanged_against_git": true,
+    "allowed_current_queue_update": "docs/implementation/evidence/m5-completion-run.json",
+    "historical_runtime_recertified": false
+  },
+  "inputs": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "attempts": {
+    "records": 34,
+    "development": 17,
+    "superseded_canonical": 1,
+    "final_gates": 16,
+    "leaf_commands": 51,
+    "captured_start_result_pairs": 68,
+    "maps": [
+      {
+        "file": "docs/implementation/evidence/m32-inputs-fd15ead9a97f.json",
+        "sha256": "fd15ead9a97f9dc6e3ac0e7e97bf504762752145db87b93e17f55c235068147c",
+        "entries": 205,
+        "current_differences": [
+          "tests/browser/communicator-protocol.spec.ts"
+        ]
+      },
+      {
+        "file": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+        "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+        "entries": 205,
+        "current_differences": [
+          "tests/browser/communicator-protocol.spec.ts"
+        ]
+      },
+      {
+        "file": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "entries": 205,
+        "current_differences": [
+          "tests/browser/communicator-protocol.spec.ts"
+        ]
+      },
+      {
+        "file": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "entries": 205,
+        "current_differences": []
+      }
+    ],
+    "original_failed_browsers": [
+      {
+        "label": "focused-chromium",
+        "before": {
+          "path": "docs/implementation/evidence/m32-inputs-fd15ead9a97f.json",
+          "sha256": "fd15ead9a97f9dc6e3ac0e7e97bf504762752145db87b93e17f55c235068147c",
+          "bytes": 20921,
+          "entries": 205
+        },
+        "list": {
+          "path": "docs/implementation/evidence/m32-focused-chromium-suite-list.json.gz",
+          "sha256": "f3bd439b486667ed2520c9cd5ee8a4ceddfd8950a114098d32809a4bbbfb500c",
+          "bytes": 3428,
+          "encoding": "gzip",
+          "uncompressed_sha256": "7747ec95b3ac370d20457b1bb258097f49d7a85f2b2699c2865d0d2fb35a1aee",
+          "uncompressed_bytes": 30549
+        },
+        "run": {
+          "path": "docs/implementation/evidence/m32-focused-chromium-suite-run-1.json.gz",
+          "sha256": "b101dbcd979e3b3c6d84436f2113b360a8951d6079d849c3608045d6b11cd612",
+          "bytes": 4783,
+          "encoding": "gzip",
+          "uncompressed_sha256": "d406cfbd8d1f41ed707c40108a48d47fa1a40fb340eac2cf57e7ec927c915ceb",
+          "uncompressed_bytes": 55962
+        },
+        "passed": 43,
+        "failed": 1,
+        "failed_cases": [
+          {
+            "semantic": [
+              "communicator-protocol.spec.ts",
+              194,
+              1,
+              [],
+              "native XHR open credentials satisfy a local browser-managed Basic challenge"
+            ],
+            "errors": [
+              {
+                "location": {
+                  "file": "D:\\workspace\\natural_js\\tests\\browser\\communicator-protocol.spec.ts",
+                  "column": 18,
+                  "line": 206
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"authorization\": \"Basic Zml4dHVyZTpzZWNyZXQ=\",\u001b[22m\n\u001b[2m    \"nativeStatus\": 200,\u001b[22m\n\u001b[32m-   \"nativeURL\": \"http://127.0.0.1:62812/auth\",\u001b[39m\n\u001b[31m+   \"nativeURL\": \"http://fixture:secret@127.0.0.1:62812/auth\",\u001b[39m\n\u001b[2m    \"syntheticURL\": \"\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  204 |     return { authorization: echo.value.headers.authorization, nativeURL, nativeStatus, syntheticURL: echo.syntheticURL };\n  205 |   }, { modules, base: endpoint });\n> 206 |   expect(result).toEqual({ authorization: \"Basic Zml4dHVyZTpzZWNyZXQ=\", nativeURL: endpoint + \"/auth\", nativeStatus: 200, syntheticURL: \"\" });\n      |                  ^\n  207 | });\n  208 |\n  209 | test(\"native upload and download observers report bytes while fetch supports unknown-length reads\", async ({ page }) => {\n    at D:\\workspace\\natural_js\\tests\\browser\\communicator-protocol.spec.ts:206:18"
+              }
+            ]
+          }
+        ],
+        "attachments": [
+          {
+            "path": "docs/implementation/evidence/m32-focused-chromium-suite-failures/.last-run.json",
+            "sha256": "a32989eeb4698adb6d53595d56218629d8f9cf0319935b484dca58ce0d300ba2",
+            "bytes": 96
+          },
+          {
+            "path": "docs/implementation/evidence/m32-focused-chromium-suite-failures/communicator-protocol-nati-f7479-ser-managed-Basic-challenge-chromium/error-context.md",
+            "sha256": "ad751a2b8b7b4933fb2d9e5096a22e2606afc14f00552b007a43a2aa89aa4b5b",
+            "bytes": 16653
+          },
+          {
+            "path": "docs/implementation/evidence/m32-focused-chromium-suite-failures/communicator-protocol-nati-f7479-ser-managed-Basic-challenge-chromium/trace.zip",
+            "sha256": "12cb9c9e4f637cc69f56b1b0ff2b75c9471e0b9b00f86c6e06186bc7f14affac",
+            "bytes": 15687
+          }
+        ],
+        "canonical_credit": 0,
+        "platform_annotations": [],
+        "scope": "Original development/native assertion outcome; no framework bug-fix credit."
+      },
+      {
+        "label": "focused-webkit",
+        "before": {
+          "path": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+          "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+          "bytes": 20921,
+          "entries": 205
+        },
+        "list": {
+          "path": "docs/implementation/evidence/m32-focused-webkit-suite-list.json.gz",
+          "sha256": "b091a7e1b8580619fa1770c33f0a1cf52701b1eb5f20eaac02a1031acbe0f3b2",
+          "bytes": 3441,
+          "encoding": "gzip",
+          "uncompressed_sha256": "c0f58e622fb823d216bce6f3fb561f34a47af9c1779f58f54cd4bc1574a1679d",
+          "uncompressed_bytes": 30362
+        },
+        "run": {
+          "path": "docs/implementation/evidence/m32-focused-webkit-suite-run-1.json.gz",
+          "sha256": "a534e9ab98ddeb823a855abbb5388eb6392bb3dc1f97f76b72e2b5c14852e29d",
+          "bytes": 5253,
+          "encoding": "gzip",
+          "uncompressed_sha256": "909fd41aa8f82d7af5a4d3e634c94f52a70a3a51728513870883430cc457af09",
+          "uncompressed_bytes": 60983
+        },
+        "passed": 42,
+        "failed": 2,
+        "failed_cases": [
+          {
+            "semantic": [
+              "communicator-protocol.spec.ts",
+              94,
+              1,
+              [],
+              "native request recipes preserve query JSON repeated keys headers and explicit bodies"
+            ],
+            "errors": [
+              {
+                "location": {
+                  "file": "D:\\workspace\\natural_js\\tests\\browser\\communicator-protocol.spec.ts",
+                  "column": 18,
+                  "line": 110
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[33m@@ -13,11 +13,11 @@\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"value\": \"A&B #+%=한글\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"raw\": Object {\u001b[22m\n\u001b[2m      \"body\": \"literal & text\",\u001b[22m\n\u001b[32m-     \"hasType\": false,\u001b[39m\n\u001b[31m+     \"hasType\": true,\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"repeated\": Array [\u001b[22m\n\u001b[2m      \"1\",\u001b[22m\n\u001b[2m      \"2\",\u001b[22m\n\u001b[2m    ],\u001b[22m\n\n  108 |       raw: { body: raw.body, hasType: Object.hasOwn(raw.headers, \"content-type\") } };\n  109 |   }, endpoint);\n> 110 |   expect(result).toEqual({ query: { value: \"A&B #+%=한글\", ids: [1, 2] }, repeated: [\"1\", \"2\"], empty: \"\",\n      |                  ^\n  111 |     header: \"employee\", accept: \"application/json\", form: { body: \"tag=one&tag=two&name=A%26B\", type: \"application/x-www-form-urlencoded;charset=UTF-8\" },\n  112 |     raw: { body: \"literal & text\", hasType: false } });\n  113 | });\n    at D:\\workspace\\natural_js\\tests\\browser\\communicator-protocol.spec.ts:110:18"
+              }
+            ]
+          },
+          {
+            "semantic": [
+              "communicator-protocol.spec.ts",
+              133,
+              1,
+              [],
+              "second-origin credentials use native browser CORS and explicit include or omit"
+            ],
+            "errors": [
+              {
+                "location": {
+                  "file": "D:\\workspace\\natural_js\\tests\\browser\\communicator-protocol.spec.ts",
+                  "column": 18,
+                  "line": 145
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"cookies\": Array [\u001b[22m\n\u001b[32m-     false,\u001b[39m\n\u001b[32m-     false,\u001b[39m\n\u001b[31m+     true,\u001b[39m\n\u001b[31m+     true,\u001b[39m\n\u001b[2m      true,\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"xhrIncluded\": true,\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  143 |     return { cookies, xhrIncluded: echo.headers.cookie?.includes(\"employee-protocol=yes\") ?? false };\n  144 |   }, endpoint);\n> 145 |   expect(result).toEqual({ cookies: [false, false, true], xhrIncluded: true });\n      |                  ^\n  146 | });\n  147 |\n  148 | test(\"explicit endpoint cache handles 304 before HTTP validation and exposes selected status headers\", async ({ page }) => {\n    at D:\\workspace\\natural_js\\tests\\browser\\communicator-protocol.spec.ts:145:18"
+              }
+            ]
+          }
+        ],
+        "attachments": [
+          {
+            "path": "docs/implementation/evidence/m32-focused-webkit-suite-failures/.last-run.json",
+            "sha256": "b2ebdce276b3dbbc526959ed1f051b7fea3de14452a56d0748cb3468ba00592d",
+            "bytes": 145
+          },
+          {
+            "path": "docs/implementation/evidence/m32-focused-webkit-suite-failures/communicator-protocol-nati-4c016-headers-and-explicit-bodies-webkit/error-context.md",
+            "sha256": "1fd47bd7b640e24d0c839d2cd7c3925cc06f524427e1c3f3a075c02e3a78f963",
+            "bytes": 16471
+          },
+          {
+            "path": "docs/implementation/evidence/m32-focused-webkit-suite-failures/communicator-protocol-nati-4c016-headers-and-explicit-bodies-webkit/trace.zip",
+            "sha256": "9eee4a40c3235c97b389fdd12700bc73c8d7d69d5a002a8b373a26ade9a926d1",
+            "bytes": 17450
+          },
+          {
+            "path": "docs/implementation/evidence/m32-focused-webkit-suite-failures/communicator-protocol-seco-3244c-nd-explicit-include-or-omit-webkit/error-context.md",
+            "sha256": "af1e9f77e8fe25f3a464b6abd8389560aed517b7da96f2016fe9c346796aeee4",
+            "bytes": 16864
+          },
+          {
+            "path": "docs/implementation/evidence/m32-focused-webkit-suite-failures/communicator-protocol-seco-3244c-nd-explicit-include-or-omit-webkit/trace.zip",
+            "sha256": "72fb2b33ff04b07ef8fffd896b137e23808ce593bda9eef9272ca4ee9df3a072",
+            "bytes": 15385
+          }
+        ],
+        "canonical_credit": 0,
+        "platform_annotations": [],
+        "scope": "Original development/native assertion outcome; no framework bug-fix credit."
+      }
+    ],
+    "focused_unit": {
+      "stdout": {
+        "path": "docs/implementation/evidence/m32-focused-unit-stdout.partial",
+        "sha256": "4843d656f60ce2e079ab4d752c7e0f05a900020113d2a94c0121c80a31136137",
+        "bytes": 190
+      },
+      "passed": 155
+    },
+    "limit": "Original auth/strict platform assertions and superseded full-suite failures retain zero final canonical credit. A successful unchanged retry does not explain an earlier failure."
+  },
+  "browsers": [
+    {
+      "label": "focused-chromium",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+        "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": false,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "375bb350a4ede30d8f87b7ad2d1d3c4a330e54103c05610d9f74ad4b61c15217",
+      "semantic_identities_sha256": "b0b6620ed106005670f8ef5cb714c89658767750b755afe52e1e617de50d3a6d",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-chromium-suite-2-list.json.gz",
+        "sha256": "0efe86b82285773ce99102af8fe0de70fc02b020edd0a4f15c359cec25339c1e",
+        "bytes": 3434,
+        "encoding": "gzip",
+        "uncompressed_sha256": "e2fb6fe4e58e3e0d7b1f9df0a7fe29491df27e487778a4c75cc50205778c8dfa",
+        "uncompressed_bytes": 30568
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-chromium-suite-2-run-1.json.gz",
+        "sha256": "91c66cdd9ad0a5540e79457846d84d257a23bc1bf2f325c3e82a65315081b32e",
+        "bytes": 4079,
+        "encoding": "gzip",
+        "uncompressed_sha256": "3d4744414e3b3ea25c2a61ad13e88fcb0ab9839fbeebb5d2ffce079e1d2e543d",
+        "uncompressed_bytes": 50808
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "focused-firefox",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+        "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": false,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "58554206ec03d37eebed063ae4265989bee79e497e9f106f63aea7b5f4103326",
+      "semantic_identities_sha256": "b0b6620ed106005670f8ef5cb714c89658767750b755afe52e1e617de50d3a6d",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-list.json.gz",
+        "sha256": "c6588b6d62d85fa13ff9fcc9e13859e8af8a83e13afd12ed6707f2b71571ba0b",
+        "bytes": 3434,
+        "encoding": "gzip",
+        "uncompressed_sha256": "021654c57790ef2f75083abb50328385137385e0ad947ea299bfc3030cfc0e4d",
+        "uncompressed_bytes": 30466
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-run-1.json.gz",
+        "sha256": "7790371830555859ac966d9a2609a37c739523ce6a5dd215edc0c75473f080a1",
+        "bytes": 4089,
+        "encoding": "gzip",
+        "uncompressed_sha256": "3f24a0380e63be2dcf026969eada40acd966d4e8343c39e7119b09f50dc591b5",
+        "uncompressed_bytes": 50717
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "focused-chromium",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": false,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "95dc70a2450e5a397c13763dd3e1e26de0c8a3786fb23b8689a8de21aa1d6bdd",
+      "semantic_identities_sha256": "c22150d402ec1587078038739d77cf48e490af592b4291040b4e21c18391ad66",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-chromium-suite-3-list.json.gz",
+        "sha256": "84c07c244b43dc748e404dd66cfece00976c35fd77650ff798e5767dbb472b89",
+        "bytes": 3432,
+        "encoding": "gzip",
+        "uncompressed_sha256": "6dc2833bf7539c2b061f7b2746dc0d85664be41c0ed1f1f2d21916f0a6b9c998",
+        "uncompressed_bytes": 30571
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-chromium-suite-3-run-1.json.gz",
+        "sha256": "fbfef65781746e07770649a30f0d4ed4ab82049cc41dfb1e648e2b5eab0a5052",
+        "bytes": 4058,
+        "encoding": "gzip",
+        "uncompressed_sha256": "479dcc22d3ba0864525a8a204860c7e2a2d389baca10a5eb631214940d2fa04f",
+        "uncompressed_bytes": 50802
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "focused-firefox",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": false,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "ee7fa5496c1bbffe2677be20618fe3a52e0285cef4dad049644d4191d7f22be5",
+      "semantic_identities_sha256": "c22150d402ec1587078038739d77cf48e490af592b4291040b4e21c18391ad66",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-2-list.json.gz",
+        "sha256": "7b9db8c87106772f6108482b7edd8fd594f82394333ac5b153daf019b91e1be5",
+        "bytes": 3437,
+        "encoding": "gzip",
+        "uncompressed_sha256": "367af3549951eacf4430cd4aa8ed03292cbbf84ce2362d342914c512c4ebb3ec",
+        "uncompressed_bytes": 30477
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-2-run-1.json.gz",
+        "sha256": "bebb9a96eb730e08fa6080ae576c3e2949cf07d999138bc5160c7676b6e147e3",
+        "bytes": 4104,
+        "encoding": "gzip",
+        "uncompressed_sha256": "2a18f12157b4a03ac04e3548b653b8b4be9076dd44e85595dd5ce74339251e99",
+        "uncompressed_bytes": 50715
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "focused-webkit",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": false,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "b82709402e6ce08dc60fe414c12494281f6bfc3019ea51457d156e071ec82f8d",
+      "semantic_identities_sha256": "c22150d402ec1587078038739d77cf48e490af592b4291040b4e21c18391ad66",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-list.json.gz",
+        "sha256": "e1c2635a950f71661b37043485b33d2700ef8a7fa1c6c7d8c69d607bdf78b83f",
+        "bytes": 3446,
+        "encoding": "gzip",
+        "uncompressed_sha256": "0512476ab05e3dda024a09482a61de73fef9498758c343a1910f6d849e5ee0d2",
+        "uncompressed_bytes": 30385
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-run-1.json.gz",
+        "sha256": "6f3b1fba547216ca058349a56c86b2d307f30926268e089cb8a861040758ef91",
+        "bytes": 4303,
+        "encoding": "gzip",
+        "uncompressed_sha256": "a268cffff4c50bb22ea7eaa58443920ff0c49717036e109229240310dcc5fd9d",
+        "uncompressed_bytes": 51753
+      },
+      "platform_annotations": [
+        {
+          "semantic": [
+            "communicator-protocol.spec.ts",
+            98,
+            1,
+            [],
+            "native request recipes preserve query JSON repeated keys headers and explicit bodies"
+          ],
+          "description": "Windows WebKit adds Content-Type after native Request header deletion; native control and framework agree, wire omission is not certified."
+        },
+        {
+          "semantic": [
+            "communicator-protocol.spec.ts",
+            145,
+            1,
+            [],
+            "second-origin credentials preserve Request policy and report native wire behavior"
+          ],
+          "description": "Windows WebKit sends cookies for native omit/same-origin controls; delegation agrees, cookie withholding is not certified."
+        }
+      ]
+    },
+    {
+      "label": "focused-chromium",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": true,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "95dc70a2450e5a397c13763dd3e1e26de0c8a3786fb23b8689a8de21aa1d6bdd",
+      "semantic_identities_sha256": "665c1abce29072762b32b7740587503799c64284b3469f7b858fcceaff7501f5",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-chromium-suite-4-list.json.gz",
+        "sha256": "235a028fe2d10c49c0f9358e6980a6723e88d600a5be032774a92cb0b6547e52",
+        "bytes": 3440,
+        "encoding": "gzip",
+        "uncompressed_sha256": "a99a2b41ca88add709b3671d32864893bfe3b175a207f119bd3a000dcefc33e1",
+        "uncompressed_bytes": 30571
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-chromium-suite-4-run-1.json.gz",
+        "sha256": "f5e5db5a165f2110f8a6881cb391cd01e9326fb610bcaef383b84ce4d7e4b579",
+        "bytes": 4066,
+        "encoding": "gzip",
+        "uncompressed_sha256": "e4a6088fc02cdb8c15b169324b56dc369b2d7ae25b8b72e9feab2256115a452b",
+        "uncompressed_bytes": 50811
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "focused-firefox",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": true,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "ee7fa5496c1bbffe2677be20618fe3a52e0285cef4dad049644d4191d7f22be5",
+      "semantic_identities_sha256": "665c1abce29072762b32b7740587503799c64284b3469f7b858fcceaff7501f5",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-list.json.gz",
+        "sha256": "bca792c6759b290f552355182b97cc9ecfa450d4aca4fec040cdbd5a5ec6d76b",
+        "bytes": 3439,
+        "encoding": "gzip",
+        "uncompressed_sha256": "ccf7c6d1c9f3b6e00a92d1dd5da2583241ce12d4cb5f6db0e2f59270f077bf65",
+        "uncompressed_bytes": 30477
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-firefox-suite-3-run-1.json.gz",
+        "sha256": "1f6a630008f3fe6170472e96255f177e8ea5fc55f1084a20f4892d8c49f5dd1b",
+        "bytes": 4082,
+        "encoding": "gzip",
+        "uncompressed_sha256": "9fc4fce73bc2b2d10e2cae8e98d95145137f61a562280dfdffbd72dfc18d92f1",
+        "uncompressed_bytes": 50725
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "focused-webkit",
+      "purpose": "primary_protocol_and_M4",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": true,
+      "workers": 1,
+      "shards": 1,
+      "passed": 44,
+      "identities_sha256": "b82709402e6ce08dc60fe414c12494281f6bfc3019ea51457d156e071ec82f8d",
+      "semantic_identities_sha256": "665c1abce29072762b32b7740587503799c64284b3469f7b858fcceaff7501f5",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-3-list.json.gz",
+        "sha256": "ae89048158fb3ccfd54427ca65d23cbce3813bb175accc460dfd20c8e3d2965c",
+        "bytes": 3450,
+        "encoding": "gzip",
+        "uncompressed_sha256": "c57273d11ccdd0129d5a27265a367d1ec19d388b92ebd9819feb86bd40fe1dba",
+        "uncompressed_bytes": 30385
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-3-run-1.json.gz",
+        "sha256": "892c5e1caaf88d8ea171c7d90593ef81cbcaa1741c12504193ebbf5ebb0802f7",
+        "bytes": 4317,
+        "encoding": "gzip",
+        "uncompressed_sha256": "d77f6b958449aeb512de21bc5bb27f171d4edd834a3bf7e7a6ade683efcc9f7e",
+        "uncompressed_bytes": 51753
+      },
+      "platform_annotations": [
+        {
+          "semantic": [
+            "communicator-protocol.spec.ts",
+            98,
+            1,
+            [],
+            "native request recipes preserve query JSON repeated keys headers and explicit bodies"
+          ],
+          "description": "Windows WebKit adds Content-Type after native Request header deletion; native control and framework agree, wire omission is not certified."
+        },
+        {
+          "semantic": [
+            "communicator-protocol.spec.ts",
+            147,
+            1,
+            [],
+            "second-origin credentials preserve Request policy and report native wire behavior"
+          ],
+          "description": "Windows WebKit sends cookies for native omit/same-origin controls; delegation agrees, cookie withholding is not certified."
+        }
+      ]
+    },
+    {
+      "label": "browser-chromium",
+      "purpose": "canonical_full",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": true,
+      "workers": 2,
+      "shards": 1,
+      "passed": 876,
+      "identities_sha256": "cdb184a0c71a35725ebb4a479aee4fa9db340f1e0d710383b35d9c5b6538e44d",
+      "semantic_identities_sha256": "f2f1ca919ff7252da351ed442de6b0c35d5aecc2e5b30e31e88175d9c5b1f9a3",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-browser-chromium-suite-list.json.gz",
+        "sha256": "f1b7c7729a47ab3af0568a5eba629287c6dd95f5a5fd6f447a976a011f0793e2",
+        "bytes": 55347,
+        "encoding": "gzip",
+        "uncompressed_sha256": "1ac1475eab89d8db892cd8c3c1c40921315cd6597f47b5aaba4237caeaea4c0d",
+        "uncompressed_bytes": 568256
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-browser-chromium-suite-run-1.json.gz",
+        "sha256": "239d2cf37ee59d0b354aadc6b421c6658700b9d8cc15b47e3d679dbb72ee5348",
+        "bytes": 68207,
+        "encoding": "gzip",
+        "uncompressed_sha256": "7c1fa296200fe10280cedc25b299c975561566ea829b598547e2067ffbb2205b",
+        "uncompressed_bytes": 969226
+      },
+      "platform_annotations": []
+    },
+    {
+      "label": "browser-firefox",
+      "purpose": "canonical_full",
+      "input_manifest": {
+        "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+        "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "final_source_credit": true,
+      "workers": 2,
+      "shards": 1,
+      "passed": 876,
+      "identities_sha256": "320c07acf12514592b6e19cf73bbdbb9de549ba3cc6396adba6f0eda91d158ef",
+      "semantic_identities_sha256": "f2f1ca919ff7252da351ed442de6b0c35d5aecc2e5b30e31e88175d9c5b1f9a3",
+      "exact_collection_union": true,
+      "retries": 0,
+      "skips": 0,
+      "list": {
+        "path": "docs/implementation/evidence/m32-browser-firefox-suite-list.json.gz",
+        "sha256": "9765118e01012f2bc4e2d6204ad8557750c2cce2d7acc009f6e0b6d27aee41b6",
+        "bytes": 55367,
+        "encoding": "gzip",
+        "uncompressed_sha256": "d281ecf96f5fad4cc3c58b11cf8290b051ffe4d08c1c2130fa33d7c1bc9834ea",
+        "uncompressed_bytes": 566509
+      },
+      "run": {
+        "path": "docs/implementation/evidence/m32-browser-firefox-suite-run-1.json.gz",
+        "sha256": "ea1f0c5bf7acb9fecf8fbb63b45707a945b8b19e6c0cf43c3e69ad8f556e847d",
+        "bytes": 68907,
+        "encoding": "gzip",
+        "uncompressed_sha256": "1906cf79237c5e928ed793b3169d456296f732cc29aa0b3d964262c5b54587c2",
+        "uncompressed_bytes": 967625
+      },
+      "platform_annotations": []
+    }
+  ],
+  "status": "failed",
+  "error": {
+    "message": "Expected values to be strictly equal:\n\n0 !== 1\n",
+    "stack": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///D:/workspace/natural_js/node_modules/.cache/m32-independent-audit.mjs:144:102\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+  },
+  "finished": "2026-11-14T16:38:53.928Z"
+}

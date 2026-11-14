@@ -12,23 +12,23 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: Milestone order and final review gate
-    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
+    git_blob: 492b2e46db6a3c0635ebcf0bde7a8eef1adbc41d
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and dependency order
-    git_blob: 42d57606e683a6bb854e54480259b51530923ea6
+    git_blob: 58f7ec09c3afdcdbbeadb43917f28061b9034c3c
   - id: coverage
     resource: feature-parity.md
     title: Framework behavior coverage and approved omission boundary
-    git_blob: d73d12387064d650ced045e6567cfe1458d76fd0
+    git_blob: 42ccd34a08b6345884ad73664165a18d89ba411e
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Source truth, independent review and documentation upkeep
-    git_blob: a42962520d3f0c575a58fbeee3afb68ea9fc65f9
+    git_blob: d9c9afcd03afc5280c3d562d5e1fc63c9874afa2
   - id: architecture
     resource: ../v2/architecture.md
     title: Public ownership, one-way dependencies and private sharing
-    git_blob: 300d9ad024e10fe8a3d51351a799a550c89235e4
+    git_blob: 951e59371d537ef735a86632787b4b21ff9df444
   - id: evaluation
     resource: m8-eval.md
     title: Fixed agent tasks and honest read-cost accounting

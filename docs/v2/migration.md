@@ -5,6 +5,14 @@ description: Move a 1.x search/list/detail screen, changed-row save, and Popup o
 tags: [project, migration, cvc, form]
 status: draft
 sources:
+  - id: omissions
+    resource: ../implementation/evidence/m32-approved-omissions.json
+    title: Explicit approval of exactly five workflow omissions
+    git_blob: bd15aa6337a470741434ce52358e611bd40704bd
+  - id: xhr
+    resource: ../../examples/vite/m4/employee-xhr.ts
+    title: Application-only native employee sender
+    git_blob: 865d8a4f5f95e0e211a9dd2e33fe90d3569b4662
   - id: scroll-example
     resource: ../../examples/vite/m10/scroll-boundary.ts
     title: Page-owned native wheel boundary composition
@@ -40,7 +48,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request payload, decoder, and cancellation
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public UI bindings and rule types
@@ -100,7 +108,7 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Runnable search/list/detail controller and save flow
-    git_blob: 9a243e065f0db6469d7c819f46df6f7fb061520e
+    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
   - id: employee-runner
     resource: ../../examples/vite/m4/main.ts
     title: Runnable employee page mounting
@@ -120,7 +128,7 @@ sources:
   - id: employee-test
     resource: ../../tests/browser/m4-screen.spec.ts
     title: Search, validation, payload, and cancellation browser checks
-    git_blob: 666a61d7da40766f23c17621e3d88a0ba875a5b6
+    git_blob: d0e02c5f17b1d9bb17b9e5c9819f676c9a97788a
   - id: containers-test
     resource: ../../tests/browser/m7-screen.spec.ts
     title: Popup and Tab browser checks
@@ -140,15 +148,15 @@ sources:
   - id: parity
     resource: ../implementation/feature-parity.md
     title: Required 1.x framework behavior and current 2.0 gaps
-    git_blob: d73d12387064d650ced045e6567cfe1458d76fd0
+    git_blob: 42ccd34a08b6345884ad73664165a18d89ba411e
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 42d57606e683a6bb854e54480259b51530923ea6
-generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+    git_blob: 58f7ec09c3afdcdbbeadb43917f28061b9034c3c
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -283,6 +291,10 @@ const query = new URLSearchParams({ q: JSON.stringify(payload) });
 await communicator.request({ url: "employees?" + query, method: "GET", signal,
   decode: response => response.text() });
 ```
+
+M3.2 adds optional captured send(request): Promise<Response> to the existing communicator. Keep Fetch by default; use the [employee XHR sender](../../examples/vite/m4/employee-xhr.ts) for finite-body native progress and browser-managed authentication, preserving prepared bytes, cancellation and application-owned native response metadata. Its documented subset rejects unsupported Fetch policies; it is outside the package and adds no utility library.[^comm][^xhr]
+
+The user approved only O01 synchronous blocking requests, O02 JSONP, O03 automatic executable-response/controller discovery, O04 JavaScript string-filter compilation and O05 foreign jQuery handler inspection/reprioritization. Use async/await, JSON+CORS or an application backend, explicit HTML/ESM controllers, predicates and owned native listeners respectively. All related behavior outside those exact boundaries stays required; approval is not full-family or runtime acceptance.[^omissions]
 
 There is no implicit first-row truncation, default POST or custom URI escaping. The existing communicator owns HTTP, decoding, errors and cancellation. Selected POST array/scalar, GET q=JSON, state decoding and cancelled-request recipes are covered in M5.2; full legacy protocol/general value-equivalence and remaining C05/C10 obligations still need their owner review.[^rows][^comm][^parity][^parity-plan]
 
@@ -470,6 +482,8 @@ Compose legacy request phases with ordinary typed application functions: normali
 
 The two-layout employee controller wraps its existing search/save calls with one page-local pending counter and owned aria-busy restoration. It joins page/caller signals once and uses no URL-keyed registry or common filter engine. A supplied application completion function must state its own primary-error policy; the [communication contract](comm.md) and installed consumers demonstrate direct try/catch/finally composition.[^employee][^comm]
 
+For inherited xhr factories, native upload/download progress or username/password challenge authentication, use the explicit captured send(Request): Promise<Response> seam. The application-only employee sender demonstrates fresh native ownership, exact buffered multipart bytes, cancellation and native metadata. An Authorization-header recipe alone does not reproduce browser-managed challenge behavior. This sender supports a finite documented subset; native Fetch retains other credentials/cache/redirect policies. Ordinary headers, encoded q JSON/repeated fields, FormData/raw bodies, XML/charset/empty decoding and conditional HTTP 304 handling use native APIs and explicit endpoint recipes. No AjaxSettings serializer, converter graph or cache library is added.[^comm][^legacy-comm][^employee]
+
 Run the installed JS/TS consumer check and the focused existing browser regressions after changing an application screen:[^package][^employee-test][^containers-test]
 
 ```sh
@@ -520,6 +534,8 @@ Catalog replacement preserves raw source/originals, current/hidden drafts, captu
 [^package]: Implemented 2.0 ESM package entries
 [^page]: Page definition, scoped root, output, and lifecycle
 [^rows]: RowId, changes, and immutable row values
+[^omissions]: Explicit approval of exactly five workflow omissions
+[^xhr]: Application-only native employee sender
 [^comm]: Explicit request payload, decoder, and cancellation
 [^ui]: Public UI bindings and rule types
 [^form]: Form fields, drafts, and validation

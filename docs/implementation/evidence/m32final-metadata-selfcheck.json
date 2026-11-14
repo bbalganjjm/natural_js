@@ -1,0 +1,174 @@
+{
+  "kind": "metadata_only_actual_R0_and_mocked_Git_selfcheck",
+  "runner": {
+    "path": "node_modules/.cache/stage-run-working-parent.mjs",
+    "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+    "bytes": 19865
+  },
+  "git_helper": {
+    "path": "node_modules/.cache/stage-git-working-parent.mjs",
+    "sha256": "6f9a61f916a56c2bcb04630d498dbaed826a57e859bfde243d29dc9a4b1bd1b4",
+    "bytes": 4511
+  },
+  "parent": {
+    "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+    "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
+    "bytes": 333380
+  },
+  "original_R0_retained_files": 291,
+  "exact_current_parent_snapshot_files": 298,
+  "additional_bookkeeping_paths": 6,
+  "cases": [
+    {
+      "name": "actual immutable R0 and all linked metadata/artifact refs",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "wrong bound hash",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "wrong current stage",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "wrong current baseline",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "parent and current prefixes must differ",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "wrong parent schema even with its new matching hash",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "wrong parent stage even with its new matching hash",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "wrong parent baseline even with its new matching hash",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "changed original retained file",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "explicit mode skips only exact snapshotted parent evidence",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "default committed-parent Git guard remains strict",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "a nonprefix path cannot use the working exception",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "an unlisted sibling under the old prefix remains Git-bound",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "snapshot refs are rechecked before skipping Git",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "exact ancestor and all thirteen reviewed source paths stage",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "same ancestor prefix does not grant sibling permission",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "protected non-evidence source does not gain permission",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "unsafe ancestor path is rejected",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "chunking preserves all paths and Windows argument limits",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "a single oversized path fails before any Git staging",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "actual stage script permits exact uncommitted ancestor",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "stage script rejects an unlisted sibling",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "failed protection prevents any index mutation",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "changed reviewed non-runtime source prevents staging",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "index checks current and exact ancestor Git bytes",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "index rejects altered ancestor Git bytes",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "index rejects changed non-runtime metadata",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "commit checks current and exact ancestor Git bytes",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "commit rejects altered ancestor Git bytes",
+      "passed": true,
+      "expected": "accept"
+    },
+    {
+      "name": "commit rejects changed non-runtime metadata",
+      "passed": true,
+      "expected": "accept"
+    }
+  ],
+  "limits": "No actual Git index mutation, project, compiler, browser or benchmark command. The old R0 is verified as recorded bytes, not recertified under changed source."
+}

@@ -337,6 +337,9 @@ function publicSymbols() {
 // ---------------------------------------------------------------- bundle model
 
 function walk(dir, out = []) {
+    // Recorded failures can contain Markdown without being OKF concepts.
+    const evidence = path.relative(path.join(BUNDLE, "implementation", "evidence"), dir);
+    if (!evidence || !path.isAbsolute(evidence) && evidence !== ".." && !evidence.startsWith(".." + path.sep)) return out;
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
         if (entry.name.startsWith(".")) continue;
         const abs = path.join(dir, entry.name);

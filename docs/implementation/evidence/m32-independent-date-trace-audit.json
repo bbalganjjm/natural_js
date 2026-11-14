@@ -1,0 +1,582 @@
+{
+  "kind": "read_only_failed_trace_inspection_no_runtime_credit",
+  "zip": {
+    "path": "docs/implementation/evidence/m32-browser-webkit-suite-failures/tree-date-screen-stack-con-a673e-er-to-independent-CVC-Forms-webkit/trace.zip",
+    "sha256": "306b1776148b59414d24d4fd43375c2993f32c0d6a15956c95171927e59ab80a",
+    "bytes": 50226
+  },
+  "trace_member": {
+    "path": "1-trace.trace",
+    "sha256": "6f07672dfbdba9b767a145f99a4cd906a219c18a2a0a16b36ac03d381031fb00",
+    "bytes": 307959
+  },
+  "frameId": "frame@0aa3161137a46fe88e68aa0f556853f9",
+  "snapshots": 114,
+  "input_manifest": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "source_inputs_match_retained_attempt": true,
+  "decoder_source": "Installed coreBundle.js snapshotNodes and SnapshotRenderer reference traversal; no viewer/browser invoked",
+  "decoder_source_sha256": "549070af3acabb3efcc4f55bfe6210f9f7c2fcf633cf7eaa59bfe60719969171",
+  "snapshot_keys": [
+    "callId",
+    "phase",
+    "pageId",
+    "frameId",
+    "frameUrl",
+    "doctype",
+    "html",
+    "viewport",
+    "timestamp",
+    "wallTime",
+    "collectionTime",
+    "resourceOverrides",
+    "isMainFrame"
+  ],
+  "actions": [
+    {
+      "callId": "call@15833",
+      "method": "expect",
+      "start": 256454.198,
+      "finish": 256460.239,
+      "params": {
+        "selector": "[data-screen=\"1\"] >> [data-date-dialog] >> [data-date-value=\"2026-10-13\"]",
+        "expression": "to.be.focused",
+        "expectedValue": {
+          "value": {
+            "v": "undefined"
+          },
+          "handles": []
+        },
+        "isNot": false,
+        "timeout": 5000
+      },
+      "error": null,
+      "logs": [
+        "Expect \"toBeFocused\" locator('[data-screen=\"1\"]').locator('[data-date-dialog]').locator('[data-date-value=\"2026-10-13\"]') with timeout 5000ms",
+        "waiting for locator('[data-screen=\"1\"]').locator('[data-date-dialog]').locator('[data-date-value=\"2026-10-13\"]')"
+      ]
+    },
+    {
+      "callId": "call@15835",
+      "method": "keyboardPress",
+      "start": 256463.118,
+      "finish": 256467.983,
+      "params": {
+        "key": "Escape"
+      },
+      "error": null,
+      "logs": []
+    },
+    {
+      "callId": "call@15837",
+      "method": "fill",
+      "start": 256471.149,
+      "finish": 256483.2,
+      "params": {
+        "selector": "[data-screen=\"1\"] >> input[data-field=\"date\"]",
+        "strict": true,
+        "value": "2027-11-01"
+      },
+      "error": null,
+      "logs": [
+        "waiting for locator('[data-screen=\"1\"]').locator('input[data-field=\"date\"]')",
+        "  locator resolved to <input type=\"date\" required=\"\" min=\"2026-01-01\" max=\"2027-12-31\" data-field=\"date\" data-field-changed=\"true\" aria-describedby=\"natural-form-error-3\"/>",
+        "  fill(\"2027-11-01\")",
+        "attempting fill action",
+        "  waiting for element to be visible, enabled and editable"
+      ]
+    },
+    {
+      "callId": "call@15839",
+      "method": "click",
+      "start": 256486.937,
+      "finish": 256598.376,
+      "params": {
+        "selector": "[data-screen=\"1\"] >> [data-open-date]",
+        "strict": true
+      },
+      "error": null,
+      "logs": [
+        "waiting for locator('[data-screen=\"1\"]').locator('[data-open-date]')",
+        "  locator resolved to <button type=\"button\" data-open-date=\"\">Choose review date</button>",
+        "attempting click action",
+        "  waiting for element to be visible, enabled and stable",
+        "  element is visible, enabled and stable",
+        "  scrolling into view if needed",
+        "  done scrolling",
+        "  performing click action",
+        "  click action done",
+        "  waiting for scheduled navigations to finish",
+        "  navigations have finished"
+      ]
+    },
+    {
+      "callId": "call@15841",
+      "method": "click",
+      "start": 256602.292,
+      "finish": null,
+      "params": {
+        "selector": "[data-screen=\"1\"] >> [data-date-dialog] >> [data-date-value=\"2027-12-04\"]",
+        "strict": true
+      },
+      "error": null,
+      "logs": [
+        "waiting for locator('[data-screen=\"1\"]').locator('[data-date-dialog]').locator('[data-date-value=\"2027-12-04\"]')"
+      ]
+    }
+  ],
+  "selected": [
+    {
+      "timestamp": 256453.044,
+      "callId": "call@15831",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "__playwright_dialog_open_": "modal",
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "__playwright_target__": "",
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256457.903,
+      "callId": "call@15833",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "__playwright_dialog_open_": "modal",
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256462.483,
+      "callId": "call@15833",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "__playwright_dialog_open_": "modal",
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256465.013,
+      "callId": "call@15835",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "__playwright_dialog_open_": "modal",
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256470.391,
+      "callId": "call@15835",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256473.102,
+      "callId": "call@15837",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256479.678,
+      "callId": "call@15837",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "__playwright_target__": "",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256486.191,
+      "callId": "call@15837",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "__playwright_target__": "",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256488.888,
+      "callId": "call@15839",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256586.53,
+      "callId": "call@15839",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "__playwright_target__": "",
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256601.402,
+      "callId": "call@15839",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "__playwright_dialog_open_": "modal",
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "__playwright_target__": "",
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    },
+    {
+      "timestamp": 256606.366,
+      "callId": "call@15841",
+      "inputs": [
+        {
+          "__playwright_value_": "2026-10-13",
+          "type": "date",
+          "data-field": "date",
+          "min": "2026-01-01",
+          "max": "2027-12-31",
+          "required": "",
+          "aria-describedby": "natural-form-error-3",
+          "data-field-changed": "true"
+        }
+      ],
+      "dialogs": [
+        {
+          "__playwright_dialog_open_": "modal",
+          "data-date-dialog": "",
+          "aria-label": "Choose review date"
+        }
+      ],
+      "openers": [
+        {
+          "type": "button",
+          "data-open-date": ""
+        }
+      ],
+      "titles": [
+        "October 2026"
+      ],
+      "dates": {
+        "count": 42,
+        "first": "2026-09-28",
+        "last": "2026-11-08"
+      }
+    }
+  ],
+  "limits": [
+    "Snapshots record DOM/property state at observed checkpoints, not an input/change or native close-event log.",
+    "Later unchanged passes do not prove the failed attempt cause.",
+    "No production or test file is edited and no runtime recertification is performed."
+  ]
+}

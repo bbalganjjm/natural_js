@@ -13,7 +13,7 @@ sources:
   - id: checker
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: knowledge-docs checker and stamper
-    git_blob: 6e58994a0f2fe00466fb67c1f047036e8f150e6a
+    git_blob: 30fcaa6dc11183ff087e5c288eda6709bac3330b
 generated: { by: codex/gpt-6, at: 2026-10-31T08:36:34Z }
 ---
 

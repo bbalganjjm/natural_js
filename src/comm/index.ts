@@ -18,13 +18,15 @@ export function createCommunicator(options: {
   baseURL?: URL;
   prepare?: (request: Request) => Request | Promise<Request>;
   after?: (response: Response) => Response | Promise<Response>;
+  send?: (request: Request) => Promise<Response>;
 } = {}): Communicator {
-  const { prepare, after } = options;
+  const { prepare, after, send } = options;
   if (prepare !== undefined && typeof prepare !== "function" ||
-      after !== undefined && typeof after !== "function") {
+      after !== undefined && typeof after !== "function" ||
+      send !== undefined && typeof send !== "function") {
     throw new FrameworkError({
       code: "REQUEST_OPTIONS", api: "createCommunicator",
-      message: "prepare and after must be functions when supplied."
+      message: "prepare, after and send must be functions when supplied."
     });
   }
   return {
@@ -78,7 +80,11 @@ export function createCommunicator(options: {
         () => new Request(request, { signal: activeSignal }));
 
       let response = await perform("REQUEST_NETWORK", "The request could not be sent.", activeSignal,
-        () => fetch(request));
+        async () => {
+          const received = await (send ? send(request) : fetch(request));
+          if (!(received instanceof Response)) throw new TypeError("send must return a Response");
+          return received;
+        });
       if (after) {
         response = await perform("REQUEST_AFTER", "The response hook failed.", activeSignal,
           async () => {

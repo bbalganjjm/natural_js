@@ -8,7 +8,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: 2.0 release boundary and M10 milestone
-    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
+    git_blob: 492b2e46db6a3c0635ebcf0bde7a8eef1adbc41d
   - id: baseline
     resource: m0-baseline.md
     title: 1.x Grid intent and deferred capabilities

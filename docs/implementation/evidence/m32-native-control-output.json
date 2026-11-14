@@ -1,0 +1,244 @@
+[
+  {
+    "kind": "url",
+    "credentials": "omit",
+    "constructed": "omit",
+    "cloned": null,
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "request",
+    "credentials": "omit",
+    "constructed": "omit",
+    "cloned": "omit",
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "clone",
+    "credentials": "omit",
+    "constructed": "omit",
+    "cloned": "omit",
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "url",
+    "credentials": "same-origin",
+    "constructed": "same-origin",
+    "cloned": null,
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "request",
+    "credentials": "same-origin",
+    "constructed": "same-origin",
+    "cloned": "same-origin",
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "clone",
+    "credentials": "same-origin",
+    "constructed": "same-origin",
+    "cloned": "same-origin",
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "url",
+    "credentials": "include",
+    "constructed": "include",
+    "cloned": null,
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "request",
+    "credentials": "include",
+    "constructed": "include",
+    "cloned": "include",
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "clone",
+    "credentials": "include",
+    "constructed": "include",
+    "cloned": "include",
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR"
+      },
+      "body": ""
+    }
+  },
+  {
+    "kind": "string",
+    "before": [],
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR",
+        "content-length": "8",
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      "body": "raw text"
+    }
+  },
+  {
+    "kind": "bytes",
+    "before": [],
+    "echo": {
+      "headers": {
+        "host": "127.0.0.1:62217",
+        "accept-encoding": "deflate, gzip, br",
+        "origin": "http://127.0.0.1:62216",
+        "referer": "http://127.0.0.1:62216/",
+        "accept": "*/*",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "cookie": "employee-control=yes",
+        "accept-language": "ko-KR",
+        "content-length": "8",
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      "body": "raw text"
+    }
+  }
+]

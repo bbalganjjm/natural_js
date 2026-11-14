@@ -1,0 +1,221 @@
+{
+  "label": "focused-webkit",
+  "started": "2026-11-14T16:07:19.272Z",
+  "finished": "2026-11-14T16:07:52.464Z",
+  "exit_code": 0,
+  "error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+    "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+    "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "workers": 1,
+  "shards": 1,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "driver_signal": null,
+  "helpers_unchanged": true,
+  "focus_paths": [
+    "tests/browser/communicator-protocol.spec.ts",
+    "tests/browser/m4-screen.spec.ts"
+  ],
+  "children": [
+    {
+      "label": "focused-webkit-list",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/communicator-protocol.spec.ts",
+        "tests/browser/m4-screen.spec.ts",
+        "--project=webkit",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m32-focused-webkit-suite-2-failures",
+        "--list"
+      ],
+      "started": "2026-11-14T16:07:19.302Z",
+      "finished": "2026-11-14T16:07:19.896Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+          "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+          "bytes": 15544,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-list.json.gz",
+        "sha256": "e1c2635a950f71661b37043485b33d2700ef8a7fa1c6c7d8c69d607bdf78b83f",
+        "bytes": 3446,
+        "encoding": "gzip",
+        "uncompressed_sha256": "0512476ab05e3dda024a09482a61de73fef9498758c343a1910f6d849e5ee0d2",
+        "uncompressed_bytes": 30385
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-list-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    },
+    {
+      "label": "focused-webkit-run-1",
+      "args": [
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "-c",
+        "tests/playwright.config.ts",
+        "tests/browser/communicator-protocol.spec.ts",
+        "tests/browser/m4-screen.spec.ts",
+        "--project=webkit",
+        "--workers=1",
+        "--retries=0",
+        "--reporter=json",
+        "--output=docs/implementation/evidence/m32-focused-webkit-suite-2-failures"
+      ],
+      "started": "2026-11-14T16:07:19.925Z",
+      "finished": "2026-11-14T16:07:52.435Z",
+      "exit_code": 0,
+      "close_signal": null,
+      "driver_signal": null,
+      "spawn_error": null,
+      "helpers": [
+        {
+          "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+          "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+          "bytes": 15544,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+          "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+          "bytes": 19251,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+        },
+        {
+          "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+          "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+          "bytes": 11142,
+          "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+        }
+      ],
+      "before": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "after": {
+        "path": "docs/implementation/evidence/m32-inputs-a0ff0540d3c6.json",
+        "sha256": "a0ff0540d3c6e1dea281f04e8d921e7f56c2a45e675e5c532bd992307819812d",
+        "bytes": 20921,
+        "entries": 205
+      },
+      "sources_unchanged": true,
+      "stdout": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-run-1.json.gz",
+        "sha256": "6f3b1fba547216ca058349a56c86b2d307f30926268e089cb8a861040758ef91",
+        "bytes": 4303,
+        "encoding": "gzip",
+        "uncompressed_sha256": "a268cffff4c50bb22ea7eaa58443920ff0c49717036e109229240310dcc5fd9d",
+        "uncompressed_bytes": 51753
+      },
+      "stderr": {
+        "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-run-1-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "environment": {
+        "PLAYWRIGHT_BROWSERS_PATH": null
+      },
+      "helpers_unchanged": true,
+      "runtime": {
+        "node": "v24.18.0",
+        "platform": "win32",
+        "arch": "x64"
+      }
+    }
+  ],
+  "attachments": [
+    {
+      "path": "docs/implementation/evidence/m32-focused-webkit-suite-2-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    }
+  ],
+  "coverage": {
+    "passed": 44,
+    "identities_sha256": "b82709402e6ce08dc60fe414c12494281f6bfc3019ea51457d156e071ec82f8d",
+    "semantic_identities_sha256": "c22150d402ec1587078038739d77cf48e490af592b4291040b4e21c18391ad66",
+    "exact_collection_union": true,
+    "retries": 0,
+    "skips": 0
+  },
+  "complete": true
+}

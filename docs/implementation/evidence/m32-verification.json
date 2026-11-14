@@ -1,0 +1,110 @@
+{
+  "milestone": "M3.2",
+  "status": "runtime_verified_final_document_review_pending",
+  "baseline_commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+  "runtime": {
+    "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+    "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2"
+  },
+  "source_review": {
+    "path": "docs/implementation/evidence/m32-protocol.json",
+    "sha256": "ea71519a4e743362c10287ed500bccec1ac2dcb54a918144dacf34ebe6ac9b57",
+    "reviewer": "m511_design"
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m32-independent-audit.json",
+    "sha256": "88dacfac3c7268f338af7301da3c05b3c4b06ac71f0776aa8db213d4c12052d1",
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "docs/implementation/evidence/m32-independent-audit.mjs",
+      "sha256": "e63a37c8aef0eae4c775f01224471b500d8f88e5508d5fa95e0a36c9e0f57642",
+      "bytes": 33437
+    },
+    "original_execution_path": "node_modules/.cache/m32-independent-audit.mjs",
+    "first_metadata_attempt": {
+      "path": "docs/implementation/evidence/m32-independent-audit-first-attempt.json",
+      "sha256": "cbd37d53dc3b3ce8eeab7d283daf1917145f4095fdfc43aec9cb8b5c4f618bd0"
+    }
+  },
+  "counts": {
+    "inputs": 205,
+    "attempts": 34,
+    "canonical_gates": 16,
+    "development_attempts": 17,
+    "superseded_canonical_failures": 1,
+    "unit_cases": 155,
+    "new_unit_cases": 5,
+    "full_cases_each": 876,
+    "new_browser_cases": 19,
+    "focused_each": 44,
+    "diagnostic_focused_each": 4,
+    "package_files": 203,
+    "declarations": 40,
+    "unchanged_declarations": 39,
+    "changed_declarations": 1,
+    "performance_budgets": 30,
+    "raw_medians": 60,
+    "raw_durations": 300
+  },
+  "artifact": {
+    "sha256": "2ac25f2126c58351deb3c7cc9589eae4d71758e24b0e583927ce45f8282fe684",
+    "files": 203,
+    "packed_bytes": 358915,
+    "unpacked_bytes": 1818209
+  },
+  "scope_decision": {
+    "path": "docs/implementation/evidence/m32-approved-omissions.json",
+    "sha256": "359f3ce21a32c354f092d3b146d810bf2b3b4966bfea791142f888208f056817"
+  },
+  "platform_limits": {
+    "native_control": {
+      "path": "docs/implementation/evidence/m32-native-control-observation.json",
+      "sha256": "846a35416dc89b5770543dd2dd1e7fc570809b9abf77e67498be7b4b9569092b"
+    },
+    "attempt_observations": {
+      "path": "docs/implementation/evidence/m32-retained-attempt-observations.json",
+      "sha256": "2ed3a821322b2fc59a4649774d3689a279fb64339a50ee197ba9de04903bfcdb"
+    },
+    "independent_trace": {
+      "path": "docs/implementation/evidence/m32-independent-date-trace-audit.json",
+      "sha256": "8f64f49b2a8dbf93082542136c8860d8df97962a6e4804db003018518d4e03d9"
+    },
+    "open": [
+      "Windows WebKit native cookie/header withholding conformance, reproduced without the framework.",
+      "First unchanged Tree/date full-suite timeout has no proven cause; later passing execution is not a production fix."
+    ],
+    "owners": [
+      "Existing browser/release conformance acceptance.",
+      "Existing M11 native date/Form integration and quality fixture acceptance."
+    ],
+    "standards_certified": false
+  },
+  "documents": {
+    "status": "pending_independent_final_semantics_and_actual_checks",
+    "semantic_files": [
+      "docs/implementation/current.md",
+      "docs/implementation/m3-protocol-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "docs/implementation/omission-decision.md",
+      "docs/v2/comm.md",
+      "docs/v2/employee-example.md",
+      "docs/v2/migration.md",
+      "docs/implementation/feature-parity-plan.md",
+      "docs/implementation/roadmap.md"
+    ],
+    "expected_scope": {
+      "concepts": 90,
+      "reserved_files": 5
+    }
+  },
+  "closure": {
+    "selected_only": true,
+    "full_families": 0,
+    "omissions_approved": 5,
+    "omission_scope": "Only exact O01-O05 user approval; not runtime or broad R/GR acceptance.",
+    "platform_standards_certified": false,
+    "publication": false,
+    "tag": false
+  },
+  "remaining": "Twenty-nine authorized unconditional stages remain after selected M3.2 acceptance. All unlisted required outcomes, measured browser limits and whole-framework/M13/release conditions retain their existing owners."
+}

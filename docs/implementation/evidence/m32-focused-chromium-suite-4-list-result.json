@@ -1,0 +1,78 @@
+{
+  "label": "focused-chromium-list",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "tests/playwright.config.ts",
+    "tests/browser/communicator-protocol.spec.ts",
+    "tests/browser/m4-screen.spec.ts",
+    "--project=chromium",
+    "--workers=1",
+    "--retries=0",
+    "--reporter=json",
+    "--output=docs/implementation/evidence/m32-focused-chromium-suite-4-failures",
+    "--list"
+  ],
+  "started": "2026-11-14T16:08:45.614Z",
+  "finished": "2026-11-14T16:08:46.369Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32-focused-chromium-suite-4-list.json.gz",
+    "sha256": "235a028fe2d10c49c0f9358e6980a6723e88d600a5be032774a92cb0b6547e52",
+    "bytes": 3440,
+    "encoding": "gzip",
+    "uncompressed_sha256": "a99a2b41ca88add709b3671d32864893bfe3b175a207f119bd3a000dcefc33e1",
+    "uncompressed_bytes": 30571
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32-focused-chromium-suite-4-list-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": null
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

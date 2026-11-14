@@ -1,0 +1,236 @@
+{
+  "milestone": "M3.2",
+  "status": "selected_outcomes_verified_remaining_owners_open",
+  "baseline_commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+  "runtime": {
+    "path": "docs/implementation/evidence/m32final-runtime-receipt.json",
+    "sha256": "03bc37761bd88d2a93852f6e570238a1195455c108935d02f61be11c8c09da30"
+  },
+  "source_review": {
+    "path": "docs/implementation/evidence/m32final-source.json",
+    "sha256": "1182ba20fb1fe67a532d4e76cb847ed6679078be7d0e1950e621a1147d554c55",
+    "reviewer": "m511_design"
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m32final-independent-audit.json",
+    "sha256": "f961c7f3036011f54e2132a79319a0a8554aa33733e481026b4c6567d39cb216",
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "docs/implementation/evidence/m32final-independent-audit.mjs",
+      "sha256": "4f5b26b5d90b5dba7ef4d36f2a2035daa292fe618dcc23817934cfb13a04e427",
+      "bytes": 28023
+    },
+    "original_execution_path": "node_modules/.cache/m32final-independent-audit.mjs"
+  },
+  "counts": {
+    "inputs": 205,
+    "attempts": 22,
+    "canonical_gates": 16,
+    "development_attempts": 0,
+    "superseded_installed_attempts": 6,
+    "failed_superseded_installed_attempts": 1,
+    "unit_cases": 155,
+    "new_unit_cases_vs_immediate_parent": 0,
+    "full_cases_each": 876,
+    "new_browser_cases_vs_immediate_parent": 0,
+    "package_files": 203,
+    "declarations": 40,
+    "unchanged_declarations_vs_immediate_parent": 40,
+    "performance_budgets": 30,
+    "raw_medians": 60,
+    "raw_durations": 300,
+    "separate_Node_checker_diagnostics": 3
+  },
+  "artifact": {
+    "sha256": "2ac25f2126c58351deb3c7cc9589eae4d71758e24b0e583927ce45f8282fe684",
+    "files": 203,
+    "packed_bytes": 358915,
+    "unpacked_bytes": 1818209,
+    "byte_identical_to_immediate_parent": true
+  },
+  "parent_history": {
+    "runtime": {
+      "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+      "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2"
+    },
+    "pending_document_projection": {
+      "path": "docs/implementation/evidence/m32-verification.json",
+      "sha256": "f009e5aa3334702a5439156a47c2b1f518d2a47ec2fc1b73f3b5c0ae766beccb"
+    },
+    "initial_semantic_approval": {
+      "path": "docs/implementation/evidence/m32-initial-document-approval.json",
+      "sha256": "70ffc124cca064fdb912ba05ec7ae78a919eb1d284349d8f2b833936b48636ca"
+    },
+    "attempts": 34,
+    "retained_R0_paths": 291,
+    "protected_snapshot_paths": 298,
+    "cumulative_delta_vs_M31": {
+      "unit_cases": 5,
+      "browser_cases": 19,
+      "changed_declarations": 1
+    },
+    "scope": "Original source/runtime and initial document history remain immutable; no retrospective closure from the fresh tool-inclusive run."
+  },
+  "repository_metadata": {
+    "attributes": {
+      "path": "docs/implementation/evidence/.gitattributes",
+      "sha256": "48747480eddba024928d03be9bf83dc579e5515768647507a767e8187a85c9ab",
+      "bytes": 9
+    },
+    "required_raw_index_and_HEAD_attribute_proof": true,
+    "scope": "Raw bytes and effective cached text:unset must be checked after staging and after commit; generic owned normalization checks alone are insufficient."
+  },
+  "scope_decision": {
+    "path": "docs/implementation/evidence/m32-approved-omissions.json",
+    "sha256": "359f3ce21a32c354f092d3b146d810bf2b3b4966bfea791142f888208f056817"
+  },
+  "platform_limits": {
+    "native_control": {
+      "path": "docs/implementation/evidence/m32-native-control-observation.json",
+      "sha256": "846a35416dc89b5770543dd2dd1e7fc570809b9abf77e67498be7b4b9569092b"
+    },
+    "attempt_observations": {
+      "path": "docs/implementation/evidence/m32-retained-attempt-observations.json",
+      "sha256": "2ed3a821322b2fc59a4649774d3689a279fb64339a50ee197ba9de04903bfcdb"
+    },
+    "independent_trace": {
+      "path": "docs/implementation/evidence/m32-independent-date-trace-audit.json",
+      "sha256": "8f64f49b2a8dbf93082542136c8860d8df97962a6e4804db003018518d4e03d9"
+    },
+    "open": [
+      "Windows WebKit native cookie/header withholding conformance, reproduced without the framework.",
+      "First unchanged Tree/date full-suite timeout has no proven cause; later passing execution is not a production fix."
+    ],
+    "owners": [
+      "Existing browser/release conformance acceptance.",
+      "Existing M11 native date/Form integration and quality fixture acceptance."
+    ],
+    "standards_certified": false
+  },
+  "fresh_installed_limit": {
+    "first_failure": "packed-edge ERR_NO_BUFFER_SPACE while initializing consumer resources",
+    "retained": true,
+    "rerun": "The same artifact passes all five installed browsers with no source change.",
+    "cause": "Unproven; no framework production fix claimed."
+  },
+  "documents": {
+    "status": "passed_independent_semantics_and_actual_changed_full_checks",
+    "semantic_files": [
+      "docs/implementation/current.md",
+      "docs/implementation/m3-protocol-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "docs/implementation/omission-decision.md",
+      "docs/v2/comm.md",
+      "docs/v2/employee-example.md",
+      "docs/v2/migration.md",
+      "docs/implementation/feature-parity-plan.md",
+      "docs/implementation/roadmap.md",
+      "docs/governance/okf-conventions.md"
+    ],
+    "expected_scope": {
+      "concepts": 90,
+      "reserved_files": 5
+    },
+    "independent_review": {
+      "reviewer": "m511_design",
+      "path": "node_modules/.cache/m32final-final-document-approval.json",
+      "sha256": "d4476f61d3072857c4bc20008ded56a5af01d1c8d6851557de73dc6aa7424cac",
+      "bytes": 12643,
+      "reviewed_files": {
+        "docs/implementation/current.md": {
+          "normalized_body_sha256": "689cdebe6ff41fff4fcdaf387865f89eaa9cbc099f9d469bc8fa17e02fd4940b",
+          "normalized_body_bytes": 6111,
+          "review": "Fresh independent final semantic body review against immutable tool-inclusive runtime, source review, independent raw audit, preserved parent history, and exact Git-proof requirements."
+        },
+        "docs/implementation/m3-protocol-plan.md": {
+          "normalized_body_sha256": "797d6160b060c256447a0679a6364c88b1f3237fab668ff77d40ed1a514c0881",
+          "normalized_body_bytes": 10826,
+          "review": "Fresh independent final semantic body review against immutable tool-inclusive runtime, source review, independent raw audit, preserved parent history, and exact Git-proof requirements."
+        },
+        "docs/implementation/m5-completion-run.md": {
+          "normalized_body_sha256": "94f9470059a37060c3f2795d27f00cff9eae9912b86b00dac172fee2408183da",
+          "normalized_body_bytes": 7099,
+          "review": "Fresh independent final semantic body review against immutable tool-inclusive runtime, source review, independent raw audit, preserved parent history, and exact Git-proof requirements."
+        },
+        "docs/implementation/omission-decision.md": {
+          "normalized_body_sha256": "776c72ec7fb210bdcb0c8bb4f7e60abf6d94d0d4d35e5706217c9d7f3cd4ae07",
+          "normalized_body_bytes": 12175,
+          "review": "Prior independent full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/v2/comm.md": {
+          "normalized_body_sha256": "941f14c10329798d9e5cf3a89817bf86e85d17ced3c83273664839df3350ceaf",
+          "normalized_body_bytes": 7390,
+          "review": "Prior independent full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/v2/employee-example.md": {
+          "normalized_body_sha256": "54fa92b2eca585f702653cf72e94a9f68a4f698b3fff076922cba535880b76ab",
+          "normalized_body_bytes": 12643,
+          "review": "Prior independent full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/v2/migration.md": {
+          "normalized_body_sha256": "1686fb4e6c69a30d8ab30b1666bf26cb622d4ebb7aecfa7c2d005a084a1a8223",
+          "normalized_body_bytes": 60413,
+          "review": "Prior independent full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/implementation/feature-parity-plan.md": {
+          "normalized_body_sha256": "7fa4de2052ace8d4205bcb5c2732897b225ebfeaa0c9cca121cfd5e3907edbde",
+          "normalized_body_bytes": 22948,
+          "review": "Prior independent full-body acceptance rechecked by exact unchanged hash."
+        },
+        "docs/implementation/roadmap.md": {
+          "normalized_body_sha256": "cc9ba15f9258e6b84586b4e5d4fa1f52ecc2aba5b16cf4d82250e088f17ca1ba",
+          "normalized_body_bytes": 12003,
+          "review": "Fresh independent final semantic body review against immutable tool-inclusive runtime, source review, independent raw audit, preserved parent history, and exact Git-proof requirements."
+        },
+        "docs/governance/okf-conventions.md": {
+          "normalized_body_sha256": "94012d23760e5f3415f69021a8ad2cf5634ae12ffc6dc980d13368aed8862862",
+          "normalized_body_bytes": 13826,
+          "review": "Fresh independent final semantic body review against immutable tool-inclusive runtime, source review, independent raw audit, preserved parent history, and exact Git-proof requirements."
+        }
+      }
+    },
+    "mechanical": {
+      "checks": {
+        "changed": {
+          "path": "docs/implementation/evidence/m32final-docs-changed.log",
+          "sha256": "7cdd74fa32fdf4af263eb028edefee62a929c518ce8c685aa1953a04232c3cce",
+          "bytes": 183,
+          "concepts": 90,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        },
+        "full": {
+          "path": "docs/implementation/evidence/m32final-docs-full.log",
+          "sha256": "b980f75959af547e0e154c1420abd725dec0562c2cd37f4c2eb3660aeaef489e",
+          "bytes": 173,
+          "concepts": 90,
+          "reserved_files": 5,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "history": {
+        "path": "docs/implementation/evidence/m32final-document-history.json",
+        "sha256": "265fe3f04c9eb09366d6ad60614ea2e52d1e333ee2fe1795bf380c4123c73778",
+        "bytes": 2358
+      },
+      "fingerprint_log": {
+        "path": "docs/implementation/evidence/m32final-docs-fingerprints.log",
+        "sha256": "f093ad3d93c6da94fd105db87f75da11ce81efe36cf3903a4804ee6fe96f53b4",
+        "bytes": 448
+      },
+      "reviewed_bodies_unchanged": true
+    }
+  },
+  "closure": {
+    "selected_only": true,
+    "full_families": 0,
+    "omissions_approved": 5,
+    "omission_scope": "Only exact O01-O05 user approval; not runtime or broad R/GR acceptance.",
+    "platform_standards_certified": false,
+    "publication": false,
+    "tag": false
+  },
+  "remaining": "Twenty-nine authorized unconditional stages remain after selected M3.2 acceptance; all unlisted behavior, native limitations and whole-framework/M13/release owners remain open."
+}

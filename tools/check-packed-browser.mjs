@@ -105,7 +105,9 @@ try {
   assert.deepEqual(requests, {
     result: [{ name: "Ada" }],
     order: ["beforeInit", "prepare", "after", "decode", "success", "complete", "beforeInit", "complete"],
-    reads: 1, completed: 2, plain: true, stopped: true, abortName: "AbortError", abortComplete: 1
+    reads: 1, completed: 2, plain: true, stopped: true, abortName: "AbortError", abortComplete: 1,
+    customValue: { employee: "A&B" },
+    customStages: [["send", true, "https://example.test/employees"], ["after"], ["decode"]]
   }, "Installed requests must preserve captured plain hooks, explicit application stages and aborted completion.");
 
   const choiceGroups = await page.evaluate(() => {

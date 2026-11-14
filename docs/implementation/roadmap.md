@@ -4,6 +4,14 @@ title: Natural-JS 2.0 master roadmap
 description: Milestone order, scope boundary, and completion gates for the TypeScript-first Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: omissions
+    resource: evidence/m32-approved-omissions.json
+    title: Explicit approval of exactly O01-O05
+    git_blob: bd15aa6337a470741434ce52358e611bd40704bd
+  - id: protocol
+    resource: evidence/m32final-verification.json
+    title: Tool-inclusive M3.2 runtime and independent acceptance
+    git_blob: c44fa622097d0c1b7073701598a2fe394014db57
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -11,9 +19,9 @@ sources:
   - id: baseline
     resource: https://github.com/bbalganjjm/natural_js/blob/b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6/package.json
     title: Immutable Natural-JS 1.x package baseline
-generated: { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T08:19:16Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
 This roadmap governs the Natural-JS 2.0 migration. Use [the active checkpoint](current.md) for status and a milestone-specific plan before implementing that milestone. The 1.x source and documentation remain available under `v1/` and at commit b96e47a0d7e020d1878f7cecdf1b1a9f462d99a6.
@@ -24,10 +32,10 @@ Ship a TypeScript-source, ESM, jQuery-free UI framework that keeps CVC and attac
 
 # Checkpoint
 
-- M0-M8 are complete on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC data screen. Native Dialog, Popup, and Tabs run on the common CVC page runtime in two authored MDI layouts. M6 and M7 evidence is in their [data UI](m6-plan.md) and [page UI](m7-plan.md) plans; [M8](m8-beta-report.md) holds the unpublished beta-candidate, migration, agent-task, and three-browser evidence. [M9 release work](m9-plan.md) has a verified unpublished beta; publication remains deferred.
+- The initial selected M0-M8 work was completed on branch `2.0.0-alpha.0`. Button stays native HTML; Form, Grid, List, Select, and Pagination run in the two-layout CVC data screen. Native Dialog, Popup, and Tabs run on the common CVC page runtime in two authored MDI layouts. M6 and M7 evidence is in their [data UI](m6-plan.md) and [page UI](m7-plan.md) plans; [M8](m8-beta-report.md) holds the unpublished beta-candidate, migration, agent-task, and three-browser evidence. [M9 release work](m9-plan.md) has a verified unpublished beta; publication remains deferred.
 - The initial plan prioritized form, list, basic grid, select, pagination, button, dialog, popup, and tab. The 2026-10-05 instruction supersedes that limited release scope: all 1.x framework behavior and six required Grid additions must be completed or specifically approved for omission before release preparation.
 - Selected advanced Grid slices and M11 Tree and DatePicker are complete. M12 adds authored notifications, dynamic document tabs and an application shell composed from the same CVC runtime; its final verification is recorded in the [M12 plan](m12-plan.md).
-- Selected completion is scoped historical evidence. The [coverage ledger](feature-parity.md) and [full feature implementation plan](feature-parity-plan.md) identify required gaps across Grid, other UI, CVC and communication. Their P0 exhaustive inventory remains open; no new omission is approved.
+- Selected completion is scoped historical evidence. The [coverage ledger](feature-parity.md) and [full feature implementation plan](feature-parity-plan.md) identify required gaps across Grid, other UI, CVC and communication. P0.1 known source-case assignment is accepted; runtime/full-family and final semantic closure remain separate. Only the exact O01-O05 omissions are explicitly approved.[^omissions]
 - [M13 whole-code review and remediation](m13-review-plan.md) is a required final gate after all required parity work and before personal testing or separately requested release preparation. It reviews the complete 2.0 code and its consumers, then closes findings through authorized fixes, regression checks and independent re-review.
 
 # Steps
@@ -70,11 +78,13 @@ The [numbered remaining plan](remaining-work-plan.md) owns execution orders 01-5
 | M12 Shell | Add notification, document tabs, and application shell behavior on the shared page runtime. |
 | M13 Whole-code review and remediation | After required parity closes, run `ponytail:ponytail-review` over the complete 2.0 source, callers, tests, tools, examples, docs and packaging. Complete all Must fix and Should fix findings through authorized remediation, affected gates and independent re-review; record concrete decisions for remaining suggestions before personal testing or release preparation. |
 
-Each milestone starts with a detailed plan, user review, and approval of its contracts/scope. Record the next plan and verification in [current.md](current.md) before moving on. Reopen uncovered behavior under the existing owning milestone, with shared dependencies first. Required continuation and M13 now precede M9 release preparation; the dated M0-M12 sequence and prior results remain history. The execution plan stages M10.5-M10.9 and M3/M5/M6/M7/M11/M12 parity work before the final whole-code review. Feature retirement receives one consolidated review after P0, not repeated individual requests.
+Each milestone starts with a detailed plan and review within the user-authorized scope. The continuous M5 run already authorizes its listed stages and necessary predecessors; do not request routine repeat approval. Changed scope or core contracts retain their separate review. Record the next plan and verification in [current.md](current.md) before moving on. Reopen uncovered behavior under the existing owning milestone, with shared dependencies first. Required continuation and M13 now precede M9 release preparation; the dated M0-M12 sequence and prior results remain history. The execution plan stages M10.5-M10.9 and M3/M5/M6/M7/M11/M12 parity work before the final whole-code review. Feature retirement receives one consolidated review after P0, not repeated individual requests.
 
 # Next action
 
-Use [current.md](current.md) and [the fixed continuation](remaining-work-plan.md). Start P0.1 semantic/external inventory closure, prepare the single complete omission decision in P0.2 and implement the bounded M5.14 contract in its dependency order. Finish all owning stages and P0 before M13.1-M13.4 whole-code review/remediation/final gates. Personal tests follow in M9.1-M9.2; release, registry/tag and optional master/archive actions retain M9.3-M9.6's separate conditions. Real Safari remains excluded and available WebKit remains required.[^remaining]
+Use [current.md](current.md) and [the fixed continuation](remaining-work-plan.md). P0.1 known assignment, M5.14 and M3.1 are saved. Finish the separate M3.2 commit/push from its tool-inclusive acceptance, then execute M3.3 onward through the authorized M5 ancestor queue; twenty-nine unconditional stages remain after selected M3.2. The new receipt supersedes document status without rewriting the original R0, pending projection, initial approval or failure history.[^protocol][^remaining]
+
+P0.2 approves only O01-O05; do not restart or re-propose them. Finish all owning stages and P0 before M13.1-M13.4 whole-code review/remediation/final gates. Personal tests follow in M9.1-M9.2; release, registry/tag and optional master/archive actions retain M9.3-M9.6's separate conditions. Real Safari remains excluded and available WebKit remains required.[^remaining]
 
 # Decisions
 
@@ -98,6 +108,8 @@ Use [current.md](current.md) and [the fixed continuation](remaining-work-plan.md
 # Open questions
 
 - M6 met the [reference-host binding budgets](m4-plan.md); List's first bind still builds all row records, so larger data sets need a later memory review. A fresh Playwright Firefox build passed the M6 browser suite on this host. M8 compared its three 2.0 tasks with one byte-count method; actual token use and an equivalent 1.x baseline remain unavailable.
-- P0's complete mapping, consolidated omission proposal and detailed new public contracts remain open. Required parity gaps and unfinished M13 review/remediation block personal acceptance and release preparation.
+- P0.1 known mapping is accepted and exactly O01-O05 are approved. Owning runtime/full-family and final P0 semantic acceptance, plus remaining detailed public contracts, stay open.[^omissions] Required parity gaps and unfinished M13 review/remediation block personal acceptance and release preparation.
 
+[^protocol]: Tool-inclusive M3.2 runtime and independent acceptance
+[^omissions]: Explicit approval of exactly O01-O05
 [^remaining]: Fixed 56-stage continuation and exact known-record ownership

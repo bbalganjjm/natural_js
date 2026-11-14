@@ -1,0 +1,31 @@
+{
+  "label": "focused-firefox",
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+    "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "started": "2026-11-14T15:56:32.768Z",
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "output_directory": "docs/implementation/evidence/m32-focused-firefox-suite-failures"
+}

@@ -1,0 +1,92 @@
+{
+  "milestone": "M3.2",
+  "status": "accepted_source_and_focused_native_delegation_snapshot",
+  "baseline": {
+    "commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+    "receipt": {
+      "path": "docs/implementation/evidence/m31-verification.json",
+      "sha256": "e5a3378bf0a95d2e898a84c9fcf03e2a8c637f8683075e1e5606d22f8e4e623f"
+    }
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/4",
+  "selected_contracts": {
+    "sender": "One optional captured/plain native sender inside the existing REQUEST_NETWORK and cancellation owner; dynamic Fetch fallback; no public type/export/entry/dependency.",
+    "application": "Fresh finite-body employee XHR supports authentication, progress, prepared bytes, native response context and owned abort/observer cleanup; both actual CVC layouts can opt in.",
+    "protocol": "Native payload/query/header/status/304/CORS/error/guard/HTML/XML/charset/empty recipes and real upload/download/concurrency/cancellation; pinned Windows WebKit native-parity verification is not cookie/header withholding certification."
+  },
+  "independent_source_review": {
+    "reviewer": "m511_design",
+    "status": "passed_connected_source_callers_and_draft_API_contracts",
+    "report": {
+      "path": "docs/implementation/evidence/m32-independent-source-review.json",
+      "sha256": "2a365db134660126c7f9493ce04817364252447bd4940822f6730b570bd810ea"
+    },
+    "source_sha256": {
+      "src/comm/index.ts": "c46d7811c48e932c019bc5d09169d983a034b38fb51dd323b6b29fc68f8198be",
+      "examples/vite/m4/employee-xhr.ts": "5f69b7d654c4c65fc0dbe818b5eecc29a892976cf75e52a921701c7b4f3d2004",
+      "examples/vite/m4/employees.ts": "045e3752641514a08c4f92f9707d5928a807eb15a2860a5ff403eda539a03cdc",
+      "tests/communicator.test.ts": "3159f00deb71ef9b89565d80d33a8f1026f1cad67e7dfaea78ffa678ce1b2543",
+      "tests/browser/m4-screen.spec.ts": "87a4716e326b9e2f317fbef85f5a22b86ba25c67bbc27b54a5e25eb3a8a8a52e",
+      "tests/consumers/js/check.mjs": "eea1a510812e0080b22ed4aafc9ae455f173a232082bb215cbe7bae7f1458997",
+      "tests/consumers/ts/check.ts": "d09a6786089fa26d41b469ba6acbfee3b89ec7c9032cc62ca739c62d88711865",
+      "tests/consumers/browser/main.js": "a4a91394b1b9433b9a2de4fb76cf43f118eeead3a9718e082dc67248b8832ab7",
+      "tools/check-packed-browser.mjs": "2352fd084e525b3778ae0a8d9e6e5f9125cf78622fff519fdeaa5157face71f4",
+      "tests/browser/communicator-protocol.spec.ts": "1047481cc974f77067c89ae7b64f098c0556f2b6fad9d7f8dfe84dd2a4e8cb11"
+    }
+  },
+  "witnesses": {
+    "units": [
+      {
+        "file": "tests/communicator.test.ts",
+        "new_cases": 5
+      }
+    ],
+    "browser": [
+      {
+        "file": "tests/browser/communicator-protocol.spec.ts",
+        "new_cases": 16
+      },
+      {
+        "file": "tests/browser/m4-screen.spec.ts",
+        "new_cases": 3
+      }
+    ],
+    "installed": [
+      "tests/consumers/js/check.mjs",
+      "tests/consumers/ts/check.ts",
+      "tests/consumers/browser/main.js",
+      "tools/check-packed-browser.mjs"
+    ]
+  },
+  "development": {
+    "strict_types": "passed",
+    "unit_latest": 155,
+    "focus_each_engine": 44,
+    "scope": "Final frozen focus has zero skips/retries; earlier auth-comparison and native-wire failures remain preserved separately."
+  },
+  "scope_decision": {
+    "path": "docs/implementation/evidence/m32-approved-omissions.json",
+    "sha256": "359f3ce21a32c354f092d3b146d810bf2b3b4966bfea791142f888208f056817"
+  },
+  "native_platform_limits": {
+    "path": "docs/implementation/evidence/m32-native-control-observation.json",
+    "sha256": "846a35416dc89b5770543dd2dd1e7fc570809b9abf77e67498be7b4b9569092b"
+  },
+  "remaining": [
+    "Common HTML loader/metadata/configuration/advice/declarations retain M3.3-M3.7.",
+    "Measured Windows WebKit cookie/header native wire-policy differences remain explicitly open in browser/release conformance ownership.",
+    "All fixed M5 ancestors, whole-framework/M13/release gates remain required."
+  ],
+  "closure": {
+    "full_families": 0,
+    "omissions_approved": 5,
+    "omission_scope": "Only the exact independently recorded O01-O05 user decision.",
+    "platform_standards_certified": false,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "independent_raw_review": "pending",
+  "independent_documents": "pending",
+  "scope": "Immutable source/focus snapshot before canonical completion. Final runtime/raw/document acceptance belongs to m32-verification.json; pending fields describe this capture only."
+}

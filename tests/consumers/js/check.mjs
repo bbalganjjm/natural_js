@@ -192,6 +192,28 @@ try {
   globalThis.fetch = originalFetch;
 }
 
+{
+  let reads = 0;
+  const stages = [], receivers = [];
+  const options = {
+    get send() {
+      reads++;
+      return async function(request) {
+        receivers.push(this); stages.push("send");
+        assert.equal(request.url, "https://example.test/employees?q=%7B%22name%22%3A%22A%26B%22%7D");
+        return new Response('{"name":"A&B"}');
+      };
+    },
+    after(response) { stages.push("after"); return response; }
+  };
+  const comm = createCommunicator(options);
+  Object.defineProperty(options, "send", { value: null });
+  const url = new URL("https://example.test/employees"); url.searchParams.set("q", JSON.stringify({ name: "A&B" }));
+  const result = await comm.request({ url, decode: async response => { stages.push("decode"); return await response.json(); } });
+  assert.deepEqual(result, { name: "A&B" }); assert.equal(reads, 1);
+  assert.deepEqual(receivers, [undefined]); assert.deepEqual(stages, ["send", "after", "decode"]);
+}
+
 await assert.rejects(import("@bbalganjjm/natural_js/ui/form"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });

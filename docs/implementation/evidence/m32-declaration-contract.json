@@ -1,0 +1,29 @@
+{
+  "kind": "actual_pack_declaration_delta",
+  "parent_receipt": {
+    "path": "docs/implementation/evidence/m31-runtime-receipt.json",
+    "sha256": "cf1de2981ec603b84047b12ea8506795bac65bd7a7e126dd04524db684383cf2",
+    "bytes": 204272
+  },
+  "parent_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m31-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "6594fa46ebb2eb33dbe5316dedcc58ab0163e3dbe7d7ac9d35169c547ac323eb",
+    "bytes": 358711
+  },
+  "current_tarball": {
+    "path": "D:/workspace/natural_js/node_modules/.cache/m32-artifact-pack/bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "sha256": "2ac25f2126c58351deb3c7cc9589eae4d71758e24b0e583927ce45f8282fe684",
+    "bytes": 358915
+  },
+  "entries": 40,
+  "unchanged": 39,
+  "changed": [
+    {
+      "path": "build/comm/index.d.ts",
+      "sha256": "3f211562233ae407da286174122cfc519203cf3e394ceebc8ef9e94c658630b3",
+      "bytes": 632
+    }
+  ],
+  "public_delta": "Exactly one optional createCommunicator sender, no new exported symbol/type/entry/dependency.",
+  "scope": "Current tar members validated against descriptor and compiled/source bytes; parent payload identities remain protected by its immutable receipt."
+}

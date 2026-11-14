@@ -1,0 +1,64 @@
+{
+  "kind": "independent_metadata_helper_review_and_application",
+  "reviewer": "m511_design",
+  "status": "passed_connected_static_review_and_actual_30_metadata_selfchecks",
+  "applied_at": "2026-11-14T17:29:33.858Z",
+  "runner": {
+    "path": "node_modules/.cache/stage-run.mjs",
+    "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+    "bytes": 19865
+  },
+  "git_helper": {
+    "path": "node_modules/.cache/stage-git.mjs",
+    "sha256": "6f9a61f916a56c2bcb04630d498dbaed826a57e859bfde243d29dc9a4b1bd1b4",
+    "bytes": 4511
+  },
+  "records": {
+    "metadata-selfcheck.mjs": {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck.mjs",
+      "sha256": "68254d740d3f9c5bfab55a3b5597d54abd4a95de9a738880ffd893c8e4a43f77",
+      "bytes": 12690
+    },
+    "metadata-selfcheck.json": {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck.json",
+      "sha256": "ec735b0f83b595cf14bf3e3aca1ff27484316a5fde0335fdcc00af81e9d99abd",
+      "bytes": 4698
+    },
+    "metadata-selfcheck-first-attempt.mjs": {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck-first-attempt.mjs",
+      "sha256": "c2aec47beb206cf39beadc055c1b5324af71b389cb62e3dfd4ae98e669ef36cd",
+      "bytes": 11724
+    },
+    "metadata-selfcheck-first-attempt.json": {
+      "path": "docs/implementation/evidence/m32final-metadata-selfcheck-first-attempt.json",
+      "sha256": "50f1a8eed8c39001963521d404f8568d6b0a93fa68f657c1b139559491306ef8",
+      "bytes": 643
+    },
+    "metadata-candidates.json": {
+      "path": "docs/implementation/evidence/m32final-metadata-candidates.json",
+      "sha256": "495b0a91e889f1105e009fbaf437bee66ce3b8205a0121a08009158188a54400",
+      "bytes": 2132
+    },
+    "stage-git-helper.mjs": {
+      "path": "docs/implementation/evidence/m32final-stage-git-helper.mjs",
+      "sha256": "6f9a61f916a56c2bcb04630d498dbaed826a57e859bfde243d29dc9a4b1bd1b4",
+      "bytes": 4511
+    }
+  },
+  "parent_runtime": {
+    "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+    "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
+    "bytes": 333380
+  },
+  "evidence_attributes": {
+    "path": "docs/implementation/evidence/.gitattributes",
+    "sha256": "48747480eddba024928d03be9bf83dc579e5515768647507a767e8187a85c9ab",
+    "bytes": 9
+  },
+  "limits": [
+    "No compiler/browser/benchmark/Git index credit from metadata selfchecks.",
+    "The first metadata-only OOM remains unexplained and preserved.",
+    "Explicit hash-bound same-stage working-parent mode keeps default committed-parent guards.",
+    "Only exact snapshotted parent evidence paths receive the bounded working-parent exception."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "label": "packed-chromium",
+  "args": [
+    "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "run",
+    "test:packed-browser",
+    "--",
+    "--tarball",
+    "D:\\workspace\\natural_js\\node_modules\\.cache\\m32-artifact-pack\\bbalganjjm-natural_js-2.0.0-beta.0.tgz",
+    "--sha256",
+    "2ac25f2126c58351deb3c7cc9589eae4d71758e24b0e583927ce45f8282fe684",
+    "--browser",
+    "chromium"
+  ],
+  "started": "2026-11-14T16:10:45.670Z",
+  "finished": "2026-11-14T16:10:49.862Z",
+  "exit_code": 0,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+    "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32-packed-chromium-stdout.partial",
+    "sha256": "266a1a89792252f03d14d906927a1b3e87c2b08a5defc4f30219fd93b8fb2ed3",
+    "bytes": 463
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32-packed-chromium-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": null
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

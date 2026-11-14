@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "changed": {
+      "path": "docs/implementation/evidence/m32final-docs-changed.log",
+      "sha256": "7cdd74fa32fdf4af263eb028edefee62a929c518ce8c685aa1953a04232c3cce",
+      "bytes": 183,
+      "concepts": 90,
+      "reserved_files": 5,
+      "errors": 0,
+      "warnings": 0
+    },
+    "full": {
+      "path": "docs/implementation/evidence/m32final-docs-full.log",
+      "sha256": "b980f75959af547e0e154c1420abd725dec0562c2cd37f4c2eb3660aeaef489e",
+      "bytes": 173,
+      "concepts": 90,
+      "reserved_files": 5,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "history": {
+    "path": "docs/implementation/evidence/m32final-document-history.json",
+    "sha256": "265fe3f04c9eb09366d6ad60614ea2e52d1e333ee2fe1795bf380c4123c73778",
+    "bytes": 2358
+  },
+  "fingerprint_log": {
+    "path": "docs/implementation/evidence/m32final-docs-fingerprints.log",
+    "sha256": "f093ad3d93c6da94fd105db87f75da11ce81efe36cf3903a4804ee6fe96f53b4",
+    "bytes": 448
+  },
+  "reviewed_bodies_unchanged": true
+}

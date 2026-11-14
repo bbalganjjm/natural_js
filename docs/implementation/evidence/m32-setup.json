@@ -1,0 +1,907 @@
+{
+  "prefix": "m32",
+  "stage": "M3.2",
+  "baseline_commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+  "created": "2026-11-14T15:52:23.531Z",
+  "head": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+  "initial_worktree": " M docs/implementation/current.md\n M docs/implementation/evidence/m5-completion-run.json\n M docs/implementation/index.md\n M docs/index.md\n M docs/log.md\n M docs/v2/comm.md\n M docs/v2/employee-example.md\n M docs/v2/index.md\n M docs/v2/migration.md\n M examples/vite/m4/employees.ts\n M src/comm/index.ts\n M tests/browser/m4-screen.spec.ts\n M tests/communicator.test.ts\n M tests/consumers/browser/main.js\n M tests/consumers/js/check.mjs\n M tests/consumers/ts/check.ts\n M tools/check-packed-browser.mjs\n?? docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs\n?? docs/implementation/evidence/m32-stage-metadata-2cf6b90520bc.mjs\n?? docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs\n?? docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs\n?? docs/implementation/m3-protocol-plan.md\n?? examples/vite/m4/employee-xhr.ts\n?? tests/browser/communicator-protocol.spec.ts\n",
+  "source_normalization": "UTF-8; CRLF normalized to LF; tar fixtures additionally protected as raw bytes",
+  "protected_files": [
+    {
+      "path": "tools/benchmark-m4.mjs",
+      "sha256": "a4fdb02b0143383b1bf78248ca29daf6d2c2bc4538529d966dcae9341c8a40b7",
+      "bytes": 11967
+    },
+    {
+      "path": "tools/benchmark-grid-viewport.mjs",
+      "sha256": "87570e023afb814627329fad003783fcefe2f8915ad086c0d209f977aa05de92",
+      "bytes": 31662
+    },
+    {
+      "path": "examples/vite/benchmark.ts",
+      "sha256": "ef6ed79908de768dcda7bfe07a88adeb4b421df9c30fff7125dae18d602f203d",
+      "bytes": 8475
+    },
+    {
+      "path": "examples/vite/benchmark.html",
+      "sha256": "3d65a0dda4a30f637f7335172eb54545869fbee3527267d954cd7b20a0b3eb4d",
+      "bytes": 2794
+    },
+    {
+      "path": "tests/evaluation/m8/task1-seed.tar",
+      "sha256": "8ae5f81f2f58eff35b9788c3a61b42e8c8b6176b46781f13a00ccca63bc4052e",
+      "bytes": 13824
+    },
+    {
+      "path": "tests/evaluation/m8/task2-seed.tar",
+      "sha256": "ba39cc15dd2eaa6294d19a25537c987c113df3b5f0ac222a7e15dc233a484990",
+      "bytes": 40960
+    },
+    {
+      "path": "tests/evaluation/m8/task3-seed.tar",
+      "sha256": "c1c035df3cf1e2aa320c8365e56a1d87e5f351ac48e2b88aa2376ad19fbfb38d",
+      "bytes": 12800
+    },
+    {
+      "path": "docs/implementation/evidence/m31-runtime-receipt.json",
+      "sha256": "cf1de2981ec603b84047b12ea8506795bac65bd7a7e126dd04524db684383cf2",
+      "bytes": 204272
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance-result.json",
+      "sha256": "d0aa1746f05f3283cb862a77df26ec5f10ed946f2b5d21508b98ccafc17ff0a7",
+      "bytes": 2359
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance-start.json",
+      "sha256": "8c8c9759451902c38ab81e0a9449c2210928edc124316d56a9bc0c67eac7b381",
+      "bytes": 1498
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-binding-performance.json.gz",
+      "sha256": "d62acec1390449feadb85d4af6eaa3b878d9738f6b8b5f9d8c10a8c907db1d9d",
+      "bytes": 4645
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/attachments/tree-binding-measurements-199385ca8ee2a8ab803a1149df539a6fc8c54289.json",
+      "sha256": "5d2c77911eba6510a3f0bad7da76e2c6ac36a204da00523a4d9efb6212e3a992",
+      "bytes": 1599
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-chromium/tree-binding.json",
+      "sha256": "5d2c77911eba6510a3f0bad7da76e2c6ac36a204da00523a4d9efb6212e3a992",
+      "bytes": 1599
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list-result.json",
+      "sha256": "4095ec08e1aa596b779d0945446041392c32a9daacb58e14ef94aef84a0b70da",
+      "bytes": 2571
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list-start.json",
+      "sha256": "5fed42006cb665c78793f1c42e6becd6a970d364e2214c46f7155180616fd207",
+      "bytes": 1708
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-list.json.gz",
+      "sha256": "862e10a517f613a81fe6f26b88e43552b34e24937edac94f12d00b2bff814d75",
+      "bytes": 54117
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-result.json",
+      "sha256": "c2dfb148d01dd5c3ae12838bad20a4d84aef5724a01f09a5c25bbe72205b64c5",
+      "bytes": 8538
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1-result.json",
+      "sha256": "1cde06d945da81a65b253c48af22e99c178057cdd7f71fe74447139db70c8551",
+      "bytes": 2560
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1-start.json",
+      "sha256": "9d0bbc42c14d01fe06a030bb45bfdcef1b8e2ecb34b681753f16328878e6fb51",
+      "bytes": 1697
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-run-1.json.gz",
+      "sha256": "b3f5c584dda63fda9ed33407ea21d218f242233e0dd68ade3c585cbce513f4a5",
+      "bytes": 66753
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-chromium-suite-start.json",
+      "sha256": "6fbf0646299b7f10bef7e4e44e75342d457f173b6b80467f9694bd71e57bbc87",
+      "bytes": 1248
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/attachments/tree-binding-measurements-4f6aa1e1e20f6442937a9ec933da712edfb478f3.json",
+      "sha256": "ecb17400dc079feae1975da801f7ef9102a7f1619a3667bdd63b110334dd0caf",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-firefox/tree-binding.json",
+      "sha256": "ecb17400dc079feae1975da801f7ef9102a7f1619a3667bdd63b110334dd0caf",
+      "bytes": 1348
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list-result.json",
+      "sha256": "cf74910a49689a5371aef65207fc3ecf2f5d613f65b81f866de9818d6c127740",
+      "bytes": 2626
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list-start.json",
+      "sha256": "28df900cea322c767b2e3cf955d2aa9c103f8e98550a779b89eb97db2e9747ed",
+      "bytes": 1763
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-list.json.gz",
+      "sha256": "03580dcbc73df08542f17865acda347e430d3ebab8eb2ef0ca3f2f2650a4bc75",
+      "bytes": 54132
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-result.json",
+      "sha256": "7d932e888b93747ab22ae0b2ee31ffbed9444b22bd9dba3de0575bdc24362802",
+      "bytes": 8642
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1-result.json",
+      "sha256": "5863250b04421d4ceeb38855531afa6c5b070c67b130eec4d142bacb09730d1d",
+      "bytes": 2615
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1-start.json",
+      "sha256": "118697a1c6775ba657921db80521d497f9bb8550608ba18b15c1350e3f475050",
+      "bytes": 1752
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-run-1.json.gz",
+      "sha256": "1fd2140accc55eb9b94350e6c721522c8da0411ac89957ff321bab3184b4adf3",
+      "bytes": 67367
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-firefox-suite-start.json",
+      "sha256": "d0d1d71de746471c8ad8001224c409ee52ff91022acea491f17c72390d9873da",
+      "bytes": 1246
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/attachments/tree-binding-measurements-bcdf48fedccfda07a5df82164dfddc850f709668.json",
+      "sha256": "5895fa9c05f65593a9a03dfc2a5e7033efe48daded4fcd0e81e44e09eeedb799",
+      "bytes": 1347
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-failures/tree-Tree-measured-binding-0e44d--1-000-flat-and-nested-rows-webkit/tree-binding.json",
+      "sha256": "5895fa9c05f65593a9a03dfc2a5e7033efe48daded4fcd0e81e44e09eeedb799",
+      "bytes": 1347
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list-result.json",
+      "sha256": "933eec4e3807fca057a21288cef44e1c03573fea3e020105889d26d69ea3acd5",
+      "bytes": 2561
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list-start.json",
+      "sha256": "e4a873222c7ce6fd17274e3a65bb7d4eee32783dd798089a4874709f50dacdbb",
+      "bytes": 1698
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-list.json.gz",
+      "sha256": "c2c823c489b3d1777ee2485306ae8d8e57311e4cb3bc12b3008d6182da7a83e6",
+      "bytes": 54113
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-result.json",
+      "sha256": "4eab6ee78714731b85089d30769fb03c24ac8674ebcc3c17f07818d85b54cd76",
+      "bytes": 8506
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1-result.json",
+      "sha256": "6f728cc9a542f80ab52a2a5ca21784a2432f2ffe1b362d67b1d0906c7145017e",
+      "bytes": 2550
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1-start.json",
+      "sha256": "58c198f7b363838e5513b4091b313181befe1eceebceaa25163598348f186cda",
+      "bytes": 1687
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-run-1.json.gz",
+      "sha256": "f0bcb65d3635234cd0eaf3d4f36046f3345dc9689fefcd0d139c4b3cbce0d964",
+      "bytes": 67049
+    },
+    {
+      "path": "docs/implementation/evidence/m31-browser-webkit-suite-start.json",
+      "sha256": "2b1e919d5957a41b24953e9df0faaff645545c4aa26a348738496f8d4d750379",
+      "bytes": 1244
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-result.json",
+      "sha256": "4072343de0be3acacc4bed63b1243cddc7efafd54e124df91293f795f1b8ebe5",
+      "bytes": 2109
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-start.json",
+      "sha256": "f85201fc8e4cba2144684ea77ffbe8bf8cd4d65ff3b0d124fb26d90737959158",
+      "bytes": 1396
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-communication.json",
+      "sha256": "331672bcdd29f5df7e5ebd24e4c03d5e7527a2eae36761675dc1c69d8013422c",
+      "bytes": 4464
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-result.json",
+      "sha256": "6f883f7148e2aee7134cd8d677cf8a73c27ff3a66c80faa695d2ce2f2603edfe",
+      "bytes": 2384
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-start.json",
+      "sha256": "d6a5687aac7f4c0e546b05182a01a1e096ada204c3e72ada98757dda3f49f263",
+      "bytes": 1669
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-consumers-stdout.partial",
+      "sha256": "33e5fc539e9035b17ea9cb6569a8d8791f796047d708dff325b9a153b05df15a",
+      "bytes": 379
+    },
+    {
+      "path": "docs/implementation/evidence/m31-declaration-invariance.json",
+      "sha256": "96f61297b2cbc60184a7e36ac9cf3a03b018f0b0382ecc117ea88db5a128da8e",
+      "bytes": 5819
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-changed-2.log",
+      "sha256": "9000172ae3669254334c44741a89de2587a3318e5874445dc58b3ef01c0c7280",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-changed.log",
+      "sha256": "9000172ae3669254334c44741a89de2587a3318e5874445dc58b3ef01c0c7280",
+      "bytes": 183
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-fingerprints-2.log",
+      "sha256": "0ecd134e0a09343850d54edbfb3d626e0a4525ecadf697aa1a6d64c02cc4731c",
+      "bytes": 102
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-fingerprints.log",
+      "sha256": "656bbfdc13b756ae7735df75eda0c61d6ecd2fe40c317da2e16b1f55ab393c5f",
+      "bytes": 448
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-full-2.log",
+      "sha256": "4119efcda50ab9297b87ed0dfdc672e4f31e3d6e8cd5b4519a059e47d30a0019",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m31-docs-full.log",
+      "sha256": "4119efcda50ab9297b87ed0dfdc672e4f31e3d6e8cd5b4519a059e47d30a0019",
+      "bytes": 173
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-checks-2.json",
+      "sha256": "ee24ede3aef263e1f917f131da1a7ee0fccb8f6d8f1bb53197126fa04c38f545",
+      "bytes": 1013
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-checks.json",
+      "sha256": "5dae2f8bf64eb76d7121cd4b33f897413133be544d678ae231cc7c9be4c7485f",
+      "bytes": 1005
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-history-2.json",
+      "sha256": "a0d932834fd6eaf7a4af4ae282b45223c709a214b590cf403d36920162d1cd46",
+      "bytes": 2081
+    },
+    {
+      "path": "docs/implementation/evidence/m31-document-history.json",
+      "sha256": "a0d932834fd6eaf7a4af4ae282b45223c709a214b590cf403d36920162d1cd46",
+      "bytes": 2081
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-result.json",
+      "sha256": "beefd70e2b5ab6d3f5d832d77efae9e46bc6181210535544a7950de6aca389b6",
+      "bytes": 2847
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-start.json",
+      "sha256": "25c58033ace893b29c89e471c39624d541ae38f06f105a4f7b623e4bc9bd9a27",
+      "bytes": 2134
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-result.json",
+      "sha256": "9025ec29f56d14132af7b08545bbcec929b7dcf9864e6b07e840404c98a51956",
+      "bytes": 2133
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-start.json",
+      "sha256": "4faeef8c180c7664746ec4af128478331114272db83d6337293c698dbd910d6e",
+      "bytes": 1420
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-build-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list-result.json",
+      "sha256": "630c2532e27a40a35648363eb81445b0e1dee5c9ac2b5ebe4b588ed878d686c6",
+      "bytes": 2608
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list-start.json",
+      "sha256": "3e7d63efb08ff2eae2e8f48b6dd6c99019084b76819f7f58422e9a1456f23093",
+      "bytes": 1747
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-list.json.gz",
+      "sha256": "60e0b5d04e352ff09a34049f1d58ad55ac060d493602170cda68d0ac0cddf308",
+      "bytes": 2224
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-result.json",
+      "sha256": "fd1795ca0ed747ed50b7f1a460e8ee52a91f3107d85007032f597f28d6f1871f",
+      "bytes": 8020
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1-result.json",
+      "sha256": "a319ad50620ca5690bb0a7110bef23a51a81e8aa88685e072563aa7bf81a4799",
+      "bytes": 2597
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1-start.json",
+      "sha256": "3b7310f7f58175e7e6fe57d2ced2af69560d72e046d2051ab07d09d46f6abc1c",
+      "bytes": 1736
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-run-1.json.gz",
+      "sha256": "a1385559a7c22a02d8db9c0747751b74e43f27b2ae00cb0e8d0292daff76e747",
+      "bytes": 2607
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-chromium-suite-start.json",
+      "sha256": "11e5b55dac0ab1c556a9f16c5abd9f035be8ab58a7c7207a59a7b8e62042f78d",
+      "bytes": 1248
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-result.json",
+      "sha256": "cae92b3641833c9182529793248c8ed2bf3040245b9013aff8aa3c00c02381f8",
+      "bytes": 2871
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-start.json",
+      "sha256": "a14eb9775c38242362c1c70360535f06a278f93d022a3ba2a3138e13c4eb23fb",
+      "bytes": 2158
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-example-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list-result.json",
+      "sha256": "3eb4bb2fa981f813072e6128760d6af47c6dd4c7939c9e58a65bbf301f884849",
+      "bytes": 2663
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list-start.json",
+      "sha256": "e7369bd52b2ebc82e3c4cfa171e3bf8bb08fa40051320f3f6212325dd92b33fb",
+      "bytes": 1802
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-list.json.gz",
+      "sha256": "ae84b399e056c5bddc09555747bca9b564fac270a759f2932abe6d02dce96024",
+      "bytes": 2227
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-result.json",
+      "sha256": "90a72c922135fa95ae538b0a991b38d6dc676d1c56b72f163824858fd4bb3c63",
+      "bytes": 8128
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1-result.json",
+      "sha256": "513e1c7fc9b74785da62e0ed00e9bb57bb525f629c152adfe0c1eb6a7248b7d9",
+      "bytes": 2652
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1-start.json",
+      "sha256": "ad22beb5c8a1a28b37183ba7fb7e6fb278c7fc8d1b0c7f6a0e69896ab6adc8ec",
+      "bytes": 1791
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-run-1.json.gz",
+      "sha256": "7f2df175c11944b80e09230d98e8a084f287827af45b1bd34ac390694e89687b",
+      "bytes": 2636
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-firefox-suite-start.json",
+      "sha256": "6166d7c434ee03ba96999cf77049e9d5f2d455e2cf3941c9cc01b5daaa658a56",
+      "bytes": 1246
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-result.json",
+      "sha256": "e3a2aaca7346911fba9ea81779c4808ef9bacd8fa235161d25ec08cea3a92a35",
+      "bytes": 2149
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-start.json",
+      "sha256": "328380666884ce7f76365ee9f8410fa5b34d8dfecb0239d5c359f846642f0ae9",
+      "bytes": 1436
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-result.json",
+      "sha256": "467fb68f9029c171f4b8f6f29a9f1c1e3075b7543ad51862478dfa84060f643f",
+      "bytes": 2115
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-start.json",
+      "sha256": "0f64ae537dd4b64f7bedb75901ec3edfa411e4e324297bca12e7b02c31a0839e",
+      "bytes": 1400
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-2-stdout.partial",
+      "sha256": "14f60bc1ff58b485cf71f2234d7424a34d483a3d84cd808be7f0762c894cfdaf",
+      "bytes": 190
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-result.json",
+      "sha256": "bcfb3576444ce8520ce5cef4fd8568e36a949385451ddd6d2b32faa020d7e4f5",
+      "bytes": 2113
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-start.json",
+      "sha256": "693ae771bbe49ca48561a50a68a77dd0ec03d96170250d8ddb6d8b8a0bfebd3e",
+      "bytes": 1396
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-stderr.log",
+      "sha256": "50191ae8471c05f25e7da1a80e79b29202f858bce09234430ca2c68a9961ee9a",
+      "bytes": 778
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-unit-stdout.partial",
+      "sha256": "1795c4ee41f4445f223ff947a303114e791c9938a43e72e2e3a3ead9734577c2",
+      "bytes": 422
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-failures/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list-result.json",
+      "sha256": "c14fafa6b4fb70ee3956a7e6d885933b132a16fc73d065aa5cc4dce6114cd5d0",
+      "bytes": 2598
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list-start.json",
+      "sha256": "58254a1205bd01e710be0f1d320faacc2544614c6c3aa0f2c5092737533d47a7",
+      "bytes": 1737
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-list.json.gz",
+      "sha256": "98da6915e95688856ae677bb25c2f1e3152eca5ee82e5e56a8e95ad469ad4232",
+      "bytes": 2229
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-result.json",
+      "sha256": "f1b72491249558a893d1474bb75620cfd065e45ad3b2cf053891b3250529c3ff",
+      "bytes": 7996
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1-result.json",
+      "sha256": "880affe5092fcc2b19e7fb25cdb92d5d1a4945e0e0bc2611ef72c3cad9779d5f",
+      "bytes": 2587
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1-start.json",
+      "sha256": "9cedce4f6a066970c942ae01d34981b0f0b2d9038bed2c812b5df6ded7bd74b5",
+      "bytes": 1726
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-run-1.json.gz",
+      "sha256": "8f7028933e03244a3d66d2b7fe253c62fe36fedd0706f3fb210fc5e428d483ac",
+      "bytes": 2631
+    },
+    {
+      "path": "docs/implementation/evidence/m31-focused-webkit-suite-start.json",
+      "sha256": "98ab667540193b76ac97e3c25d4bbc53e88d160c3983326a0a0048052b98aa68",
+      "bytes": 1244
+    },
+    {
+      "path": "docs/implementation/evidence/m31-gates.jsonl",
+      "sha256": "45f8eaedd4a9392abdb03d239df60c58907d1131455cfe9970d46fb675a1e432",
+      "bytes": 95387
+    },
+    {
+      "path": "docs/implementation/evidence/m31-independent-audit.json",
+      "sha256": "93cf5941e14c93bf3b23a50ee098c9ef3df89ebea608c89820c34ddec3bfb2ab",
+      "bytes": 79769
+    },
+    {
+      "path": "docs/implementation/evidence/m31-inputs-353fd91cffa2.json",
+      "sha256": "353fd91cffa2e87543df38fe967dce1728131e22c09b5869d1aa668d725df861",
+      "bytes": 20698
+    },
+    {
+      "path": "docs/implementation/evidence/m31-inputs-b64cc5640357.json",
+      "sha256": "b64cc5640357e7df5ec26b5aae199afdfbc2e38f6a192dd3be20015d38b7494e",
+      "bytes": 20698
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack-result.json",
+      "sha256": "495b491d4e24cf2a0459e4f2dcb631c52731c2fc2baf30455b13c7741abb73db",
+      "bytes": 2379
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack-start.json",
+      "sha256": "ac3055b2da297595418fc4b6e0922275a615d9598238586562651275e31db7f1",
+      "bytes": 1518
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-pack.json.gz",
+      "sha256": "823077c5835659b678b74c7489b7630b00e9b7a6d9e8598e75d4fb96942664a0",
+      "bytes": 2161
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-result.json",
+      "sha256": "614663e912a055691704c72f0b7c68d5ce2bb3abc85a04f153ad73c6719e23bc",
+      "bytes": 2472
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-start.json",
+      "sha256": "209754e90dbe56d98c4f45fb39a8b7990503a96b2ae3c873adccbbefb88ef9d0",
+      "bytes": 1757
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chrome-stdout.partial",
+      "sha256": "e54b5c3fc723d56a00d856fe101e210aa20e457d8ee459fbf0c5f20e26c30424",
+      "bytes": 459
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-result.json",
+      "sha256": "df1539400d3d41570fd6e967fb5cd4aa3948c21178654eb7444ab6e9a6b8e0c8",
+      "bytes": 2480
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-start.json",
+      "sha256": "d7864063e822f0ca593e7a92fb39853f7333b5936c6b660abab8db2fda7f4324",
+      "bytes": 1765
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-chromium-stdout.partial",
+      "sha256": "1f762484325d36651b2b7832b88a4dee67b2ff747c9b813ea36d1800e6e075e7",
+      "bytes": 463
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-result.json",
+      "sha256": "14555d9f5f63c19dda3d32af9fa4b64110d5e590b64fc8fbee94380852244e1f",
+      "bytes": 2464
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-start.json",
+      "sha256": "f8330fab7c8a583dc3bf6618e22f5c2629a59499a79ce73cbe7fff5ebf8bf7ae",
+      "bytes": 1749
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-edge-stdout.partial",
+      "sha256": "12384569e4e023a8564617d1b17e179849be7f2ed08bfe885a000c61ac145022",
+      "bytes": 455
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-result.json",
+      "sha256": "9d46f2fa719825220728dc256160b1e7e2481a880b9a516cc9ad92c01cc2e0bd",
+      "bytes": 2536
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-start.json",
+      "sha256": "f81a94e9f81bbf347e20f77c98173e84c6597488e6ebb311a87396ee04b484cd",
+      "bytes": 1821
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-firefox-stdout.partial",
+      "sha256": "85e38b5a6591c2ba79f9cfe4e0e627e798b5bf166bc84dc85b7eb0319bc08c5d",
+      "bytes": 453
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-result.json",
+      "sha256": "67ed2d255a34a9168185c3fca3f211ba7aee872ac61f9f6e7fabf8c95bb2d563",
+      "bytes": 2472
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-start.json",
+      "sha256": "19d362ba029e5f07f8f950ecfb0a1e31938696974e0fe2b6094fb46d20b66d2e",
+      "bytes": 1757
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-packed-webkit-stdout.partial",
+      "sha256": "0204cf3ad9b1e09112b1e6a9667a3bab3a77222183c7208859efcbb75978163f",
+      "bytes": 450
+    },
+    {
+      "path": "docs/implementation/evidence/m31-setup.json",
+      "sha256": "616692b67979d9089a012243217350df65dc5839807e6f09bae6bd4450b68f29",
+      "bytes": 20813
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-metadata-2cf6b90520bc.mjs",
+      "sha256": "2cf6b90520bcc962ec1c41eae9c3e2c9daab776d0eab39862f09d861d7779122",
+      "bytes": 19222
+    },
+    {
+      "path": "docs/implementation/evidence/m31-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-result.json",
+      "sha256": "f33b6447ba1b0588e04ce93bd4297d7f702274ee8a457eed40287952a36c1e53",
+      "bytes": 2125
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-start.json",
+      "sha256": "7bea394077cdbc14c0758ab33429351bfa0d9984a1a06de96783ec40a0023975",
+      "bytes": 1412
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-types-stdout.partial",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-result.json",
+      "sha256": "11713c9bc897f9f4538b0c6d1ce65f49a4fdcf22d91300c0ba975bdfc0b8219c",
+      "bytes": 2087
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-start.json",
+      "sha256": "e4f7b5ea4a0a964e4d4c425d9e889a73f79607ef96773836d7d7b197e0cfd078",
+      "bytes": 1372
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-unit-stdout.partial",
+      "sha256": "731742ba7a3f5002e8cdfdc12b619f0ecd8beb95cdd5bc2e83a4397eda359c9b",
+      "bytes": 190
+    },
+    {
+      "path": "docs/implementation/evidence/m31-verification.json",
+      "sha256": "e5a3378bf0a95d2e898a84c9fcf03e2a8c637f8683075e1e5606d22f8e4e623f",
+      "bytes": 5513
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance-result.json",
+      "sha256": "6a2982e04897d0b47f85aec93f665963b023826aa982d9d30e77884ac746d7ac",
+      "bytes": 2374
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance-start.json",
+      "sha256": "8237cb6ae3952cb908a2a713bfe2368d31e6f1476cc51f7c6188e8c9b97fea37",
+      "bytes": 1512
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/implementation/evidence/m31-viewport-performance.json.gz",
+      "sha256": "362b0fc54edfe940eb26ea57c80a761eb4ac3d863290cd44468f0b0b758ace95",
+      "bytes": 8517
+    }
+  ],
+  "original_lock": {
+    "path": "js/natural_js/@types/package-lock.json",
+    "sha256": "ed9165da5fa2bb5cb7c4e858370e5703941e92a2559751ccf19ee41311313afe",
+    "bytes": 1285
+  },
+  "v1_tree": "4c6dc6d646af8e6646029a95c2cc4ba070cf0a1c",
+  "parent_receipt": {
+    "path": "docs/implementation/evidence/m31-runtime-receipt.json",
+    "sha256": "cf1de2981ec603b84047b12ea8506795bac65bd7a7e126dd04524db684383cf2",
+    "bytes": 204272
+  },
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "milestone": "M3.2",
+  "status": "accepted_source_and_documentation_regression_snapshot_before_final_runtime_acceptance",
+  "baseline": {
+    "commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+    "immediate_parent": {
+      "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+      "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
+      "bytes": 333380
+    },
+    "original_selected_source": {
+      "path": "docs/implementation/evidence/m32-protocol.json",
+      "sha256": "ea71519a4e743362c10287ed500bccec1ac2dcb54a918144dacf34ebe6ac9b57",
+      "bytes": 4514
+    }
+  },
+  "independent_source_review": {
+    "reviewer": "m511_design",
+    "status": "passed_connected_checker_regression_and_exact_evidence_metadata_review",
+    "source_sha256": {
+      "src/comm/index.ts": "c46d7811c48e932c019bc5d09169d983a034b38fb51dd323b6b29fc68f8198be",
+      "examples/vite/m4/employee-xhr.ts": "5f69b7d654c4c65fc0dbe818b5eecc29a892976cf75e52a921701c7b4f3d2004",
+      "examples/vite/m4/employees.ts": "045e3752641514a08c4f92f9707d5928a807eb15a2860a5ff403eda539a03cdc",
+      "tests/communicator.test.ts": "3159f00deb71ef9b89565d80d33a8f1026f1cad67e7dfaea78ffa678ce1b2543",
+      "tests/browser/m4-screen.spec.ts": "87a4716e326b9e2f317fbef85f5a22b86ba25c67bbc27b54a5e25eb3a8a8a52e",
+      "tests/consumers/js/check.mjs": "eea1a510812e0080b22ed4aafc9ae455f173a232082bb215cbe7bae7f1458997",
+      "tests/consumers/ts/check.ts": "d09a6786089fa26d41b469ba6acbfee3b89ec7c9032cc62ca739c62d88711865",
+      "tests/consumers/browser/main.js": "a4a91394b1b9433b9a2de4fb76cf43f118eeead3a9718e082dc67248b8832ab7",
+      "tools/check-packed-browser.mjs": "2352fd084e525b3778ae0a8d9e6e5f9125cf78622fff519fdeaa5157face71f4",
+      "tests/browser/communicator-protocol.spec.ts": "1047481cc974f77067c89ae7b64f098c0556f2b6fad9d7f8dfe84dd2a4e8cb11",
+      "tools/knowledge-docs/knowledge-docs.mjs": "14be100273a57d1de02fffd888016ae1d9f427b0a33f525b8795ae00c10eb5b4",
+      "tools/knowledge-docs/knowledge-docs.test.mjs": "c0cc1c5a8ef3ce075aae469b70bdb36c1d4895278ea6d0e7168ef623471c25a1",
+      "docs/implementation/evidence/.gitattributes": "48747480eddba024928d03be9bf83dc579e5515768647507a767e8187a85c9ab"
+    },
+    "scope": "Ten original runtime/caller paths unchanged; only two existing documentation-tool paths change and one evidence-local Git metadata file is added. No new framework API, fixture, dependency or declaration change relative to the immediate parent."
+  },
+  "repository_metadata": {
+    "evidence_attributes": {
+      "path": "docs/implementation/evidence/.gitattributes",
+      "sha256": "48747480eddba024928d03be9bf83dc579e5515768647507a767e8187a85c9ab",
+      "bytes": 9
+    },
+    "scope": "Raw-hash and Git-byte proof required; outside runtime input inventory."
+  },
+  "diagnostics": [
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-result.json",
+      "sha256": "6402cca1019e852d66aad2c4522d7acddf487d47937c67cb0ac00a8e6ccd2bf8",
+      "bytes": 1374
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-2-result.json",
+      "sha256": "0625b6504e92f08d7b6dbb68fa31ae208e25c5f2f987b447bdd666df656f143c",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/implementation/evidence/m32final-docs-regression-3-result.json",
+      "sha256": "3c42cddfb16033efb49c3ea34f826e72823223573b606e009fef2de297152937",
+      "bytes": 1391
+    }
+  ],
+  "regression_scope": "Initial canonical-case Node pass, real Windows case-variant RED, then final path-relative GREEN. One Node checker test is separate from all155 Vitest units and canonical/browser credit.",
+  "parent_immutability": "The original34 runtime attempts,291 R0 retained paths and original pending projection/semantic approval remain unchanged. Post-R0 bookkeeping receives no retrospective runtime acceptance.",
+  "metadata_helper_review": {
+    "path": "docs/implementation/evidence/m32final-helper-review.json",
+    "sha256": "0b1b9a943bab6d229eba76d93a2e6f335e145ea3690916c4aec3049f05c5e125",
+    "bytes": 2716
+  },
+  "remaining": [
+    "Finish sixteen fresh canonical groups, then independent raw/final ten-body document acceptance and a separate commit.",
+    "Continue M3.3-M3.7 and every required M5 ancestor through M5.20.",
+    "Existing Windows WebKit native limits and unexplained original Tree/date timeout retain their owners."
+  ],
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "runtime_receipt": null,
+  "scope": "Immutable pre-final snapshot; later acceptance belongs to m32final-verification.json."
+}

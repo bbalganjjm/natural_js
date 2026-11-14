@@ -1,0 +1,32 @@
+✖ 2.0 TypeScript exports, fingerprints, and emitted declarations (401.0768ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 474.2084
+
+✖ failing tests:
+
+test at tools\knowledge-docs\knowledge-docs.test.mjs:24:1
+✖ 2.0 TypeScript exports, fingerprints, and emitted declarations (401.0768ms)
+  AssertionError [ERR_ASSERTION]: DOCS/implementation/EVIDENCE/run-1/failure/error-context.md: error stamp: no frontmatter
+  knowledge-docs: stamped 0 file(s), 1 failed
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///D:/workspace/natural_js/tools/knowledge-docs/knowledge-docs.test.mjs:85:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

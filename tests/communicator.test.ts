@@ -305,3 +305,81 @@ describe("captured communicator hook contracts", () => {
     expect(decode).toHaveBeenCalledTimes(phase === "decode" ? 1 : 0);
   });
 });
+
+describe("custom request sender", () => {
+  it("captures a supplied sender once invokes it plainly and keeps response phases", async () => {
+    const order: string[] = [], receivers: unknown[] = [];
+    let reads = 0;
+    const options = {
+      prepare(request: Request) { order.push("prepare"); return new Request(request, { credentials: "include", cache: "no-store", mode: "cors" }); },
+      get send() { reads++; return async function(this: unknown, request: Request) {
+        receivers.push(this); order.push("send");
+        expect(request.url).toBe("https://example.test/employees");
+        expect([request.credentials, request.cache, request.mode]).toEqual(["include", "no-store", "cors"]);
+        return new Response('{"value":2}');
+      }; },
+      after(response: Response) { order.push("after"); return response; }
+    };
+    const comm = createCommunicator(options);
+    Object.defineProperty(options, "send", { value: null });
+    vi.stubGlobal("fetch", vi.fn());
+    for (let i = 0; i < 2; i++) expect(await comm.request({
+      url: "https://example.test/employees",
+      decode: async response => { order.push("decode"); return (await response.json() as { value: number }).value; }
+    })).toBe(2);
+    expect(reads).toBe(1); expect(receivers).toEqual([undefined, undefined]);
+    expect(order).toEqual(["prepare", "send", "after", "decode", "prepare", "send", "after", "decode"]);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("looks up default fetch at execution and ignores a later sender addition", async () => {
+    const options: { send?: (request: Request) => Promise<Response> } = {};
+    const comm = createCommunicator(options), late = vi.fn(async () => new Response("{}"));
+    options.send = late;
+    const first = vi.fn(async () => new Response("1")), second = vi.fn(async () => new Response("2"));
+    vi.stubGlobal("fetch", first); expect(await comm.request({ url: "https://example.test/same" })).toBe(1);
+    vi.stubGlobal("fetch", second); expect(await comm.request({ url: "https://example.test/same" })).toBe(2);
+    expect(first).toHaveBeenCalledOnce(); expect(second).toHaveBeenCalledOnce(); expect(late).not.toHaveBeenCalled();
+  });
+
+  it("validates supplied senders and their response before later phases", async () => {
+    for (const send of [null, false, 0, {}, "bad"]) expect(() => createCommunicator({ send } as never))
+      .toThrowError(expect.objectContaining({ code: "REQUEST_OPTIONS", api: "createCommunicator" }));
+    const after = vi.fn((response: Response) => response), decode = vi.fn(() => 1);
+    await expect(createCommunicator({ send: (async () => ({})) as never, after }).request({
+      url: "https://example.test/employees", decode
+    })).rejects.toMatchObject({ code: "REQUEST_NETWORK", cause: expect.any(TypeError) });
+    expect(after).not.toHaveBeenCalled(); expect(decode).not.toHaveBeenCalled();
+    const cause = new Error("custom connection failed");
+    await expect(createCommunicator({ send: async () => { throw cause; } }).request({ url: "https://example.test/employees" }))
+      .rejects.toMatchObject({ code: "REQUEST_NETWORK", cause });
+  });
+
+  it("passes replacement Request cancellation and ignores a late custom response", async () => {
+    const controller = new AbortController();
+    let enter!: () => void, release!: (response: Response) => void, active!: AbortSignal;
+    const entered = new Promise<void>(resolve => { enter = resolve; });
+    const after = vi.fn((response: Response) => response), decode = vi.fn(() => 1);
+    const comm = createCommunicator({
+      prepare: () => new Request("https://example.test/replaced"), after,
+      send(request) { active = request.signal; enter(); return new Promise(resolve => { release = resolve; }); }
+    });
+    const pending = comm.request({ url: "https://example.test/employees", signal: controller.signal, decode });
+    await entered; controller.abort(); await expect(pending).rejects.toMatchObject({ name: "AbortError" });
+    expect(active.aborted).toBe(true); release(new Response("{}")); await Promise.resolve(); await Promise.resolve();
+    expect(after).not.toHaveBeenCalled(); expect(decode).not.toHaveBeenCalled();
+    const send = vi.fn(async () => new Response("{}"));
+    await expect(createCommunicator({ send }).request({ url: "https://example.test/employees", signal: controller.signal }))
+      .rejects.toMatchObject({ name: "AbortError" });
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("uses frozen shared sender options independently", async () => {
+    const requests: Request[] = [];
+    const options = Object.freeze({ send: async (request: Request) => { requests.push(request); return new Response("{}"); } });
+    const first = createCommunicator(options), second = createCommunicator(options);
+    await Promise.all([first.request({ url: "https://example.test/same" }), second.request({ url: "https://example.test/same" })]);
+    expect(requests).toHaveLength(2); expect(requests[0]).not.toBe(requests[1]);
+  });
+
+});

@@ -1,0 +1,20 @@
+{
+  "kind": "fingerprint_only_preflight_not_semantic_verification",
+  "started": "2026-11-14T17:08:26.308Z",
+  "finished": "2026-11-14T17:08:26.530Z",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "tools/knowledge-docs/knowledge-docs.mjs",
+    "stamp",
+    "docs/v2",
+    "docs/implementation",
+    "docs/governance"
+  ],
+  "exit_code": 0,
+  "output": {
+    "path": "docs/implementation/evidence/m32final-fingerprint-preflight.log",
+    "sha256": "61eb25b20d0d8484c3e16a1e36d1aba603eeff24041eff3ce080f1265ee40f7e",
+    "bytes": 35
+  },
+  "scope": "No by/verified-by arguments; original raw artifacts must remain unchanged. Final fixed-point/semantic/check gates still required."
+}

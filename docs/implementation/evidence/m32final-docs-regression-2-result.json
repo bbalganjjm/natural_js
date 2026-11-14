@@ -1,0 +1,35 @@
+{
+  "kind": "Windows_case_variant_regression_before_path_relative_correction",
+  "started": "2026-11-14T17:10:57.218Z",
+  "finished": "2026-11-14T17:10:57.747Z",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "tools/knowledge-docs/knowledge-docs.test.mjs"
+  ],
+  "exit_code": 1,
+  "before": {
+    "path": "docs/implementation/evidence/m32final-inputs-f3f8aeb8735b.json",
+    "sha256": "f3f8aeb8735bb6dcca5cb47d72dd96cf6783f3b6cef5617a9e425e9289dae94f",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32final-inputs-f3f8aeb8735b.json",
+    "sha256": "f3f8aeb8735bb6dcca5cb47d72dd96cf6783f3b6cef5617a9e425e9289dae94f",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32final-docs-regression-2-stdout.log",
+    "sha256": "d7d3795f402fb88e20af3ab7d3fd98b762822993355534515721427a7bd2c532",
+    "bytes": 1055
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32final-docs-regression-2-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "expected": "Reproduce the case-sensitive raw-directory boundary failure before correcting it; no framework/browser/canonical credit."
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "separate_documentation_checker_regression_not_Vitest_or_canonical_gate",
+  "started": "2026-11-14T17:06:54.871Z",
+  "finished": "2026-11-14T17:06:55.819Z",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "tools/knowledge-docs/knowledge-docs.test.mjs"
+  ],
+  "exit_code": 0,
+  "before": {
+    "path": "docs/implementation/evidence/m32final-inputs-2923a8600769.json",
+    "sha256": "2923a86007692105aee05d2761ad61afcfbbb615712ea5d55568f944776e8160",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32final-inputs-2923a8600769.json",
+    "sha256": "2923a86007692105aee05d2761ad61afcfbbb615712ea5d55568f944776e8160",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32final-docs-regression-stdout.log",
+    "sha256": "2c999f88e98ddc1c7df32afca551917382542b203b5b0d6f89bf1a15cf9c44d1",
+    "bytes": 192
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32final-docs-regression-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "cases": 1,
+  "scope": "Actual raw-artifact exclusion, sibling validation, explicit malformed-file rejection, TypeScript exports/fingerprints/declarations; no runtime browser or benchmark credit."
+}

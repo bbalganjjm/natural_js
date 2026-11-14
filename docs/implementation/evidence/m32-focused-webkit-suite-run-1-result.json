@@ -1,0 +1,77 @@
+{
+  "label": "focused-webkit-run-1",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "tests/playwright.config.ts",
+    "tests/browser/communicator-protocol.spec.ts",
+    "tests/browser/m4-screen.spec.ts",
+    "--project=webkit",
+    "--workers=1",
+    "--retries=0",
+    "--reporter=json",
+    "--output=docs/implementation/evidence/m32-focused-webkit-suite-failures"
+  ],
+  "started": "2026-11-14T15:57:14.266Z",
+  "finished": "2026-11-14T15:57:50.872Z",
+  "exit_code": 1,
+  "close_signal": null,
+  "driver_signal": null,
+  "spawn_error": null,
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m32-stage-run-f41fe3c10815.mjs",
+      "sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "bytes": 15544,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m32-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "before": {
+    "path": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+    "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m32-inputs-ce97afcb6cb0.json",
+    "sha256": "ce97afcb6cb0a62caae3f5d504a3d1f8e724447e7a7a62e251c26d05ab087709",
+    "bytes": 20921,
+    "entries": 205
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m32-focused-webkit-suite-run-1.json.gz",
+    "sha256": "a534e9ab98ddeb823a855abbb5388eb6392bb3dc1f97f76b72e2b5c14852e29d",
+    "bytes": 5253,
+    "encoding": "gzip",
+    "uncompressed_sha256": "909fd41aa8f82d7af5a4d3e634c94f52a70a3a51728513870883430cc457af09",
+    "uncompressed_bytes": 60983
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m32-focused-webkit-suite-run-1-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "environment": {
+    "PLAYWRIGHT_BROWSERS_PATH": null
+  },
+  "helpers_unchanged": true,
+  "runtime": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

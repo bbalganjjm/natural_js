@@ -1,10 +1,14 @@
 ---
 type: Plan
 title: Natural-JS 2.0 consolidated omission decision
-description: Five narrow legacy workflow losses proposed for one explicit decision, with alternatives, migration costs and retained obligations.
+description: Five explicitly approved legacy workflow omissions, with exact boundaries, alternatives, migration costs and retained obligations.
 tags: [meta, plan, migration, parity]
 status: draft
 sources:
+  - id: decision
+    resource: evidence/m32-approved-omissions.json
+    title: Explicit user approval of exactly O01-O05
+    git_blob: bd15aa6337a470741434ce52358e611bd40704bd
   - id: proposal
     resource: evidence/p02-omission-proposal.json
     title: Exact five-item proposal, source hashes and undecided dispositions
@@ -48,7 +52,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current asynchronous communication owner
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
   - id: page
     resource: ../../src/page/index.ts
     title: Explicit inert view and controller factory
@@ -57,20 +61,20 @@ sources:
     resource: ../../src/ui/index.ts
     title: Existing typed Grid and List predicate contracts
     git_blob: 0d3a883198da64468b0a6f967fb49c5423ffbdc4
-generated: { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T13:53:41Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
 # Goal
 
-Ask for one explicit decision on five actual workflow losses. Preserve feasible framework behavior through the modern owners. Do not treat old names, private jQuery machinery, known defects or a different typed API as separate omissions.[^proposal][^core][^grid]
+Record the explicit user decision on five actual workflow losses. Preserve feasible framework behavior through the modern owners. Do not treat old names, private jQuery machinery, known defects or a different typed API as separate omissions.[^proposal][^core][^grid]
 
-Every item below is a proposal. Nothing has been approved or removed by this document. The exact source hashes, line references, caller evidence, alternatives and costs are in the [decision record](evidence/p02-omission-proposal.json).[^proposal]
+The user approved only O01-O05 through the original consolidated question on 2026-11-15 (Asia/Seoul). The immutable [proposal](evidence/p02-omission-proposal.json) preserves its original pending state, source hashes, caller evidence, alternatives and costs. The separate [approval record](evidence/m32-approved-omissions.json) preserves the exact response. Approval does not establish runtime parity.[^proposal][^decision]
 
 # Checkpoint
 
-The user authorized M5.14-M5.20 and their necessary prerequisite stages, with separate implementation, tests, documentation and commits. Feature omission still requires the single consolidated decision. Rejected, unanswered and unlisted outcomes remain required in their existing numbered owners.[^registry]
+The user authorized M5.14-M5.20 and their necessary prerequisite stages, with separate implementation, tests, documentation and commits. The single consolidated decision now approves only the five stated losses. Unlisted outcomes remain required in their existing numbered owners.[^registry]
 
 The known source-case inventory resolves 775 structural records, 53 dynamic groups, 750 supplemental UI records, five UI findings, 30 Grid contracts and 41 original acceptance IDs. The core input separately resolves all 260 core records and 15 dynamic groups. Their exact pointers, inherited profiles/defaults/local acceptance and concrete cases or candidates have no remaining known-record assignment gap identified by the source-case reviews. P0.1's inventory-only gate is accepted and pushed in cf2210fc7d9eeef7b7ef1d126ec2dd79040821e7; its [receipt](evidence/p01-inventory-verification.json) records the scope. P0.2 decisions are separate.[^core-preflight][^ui-preflight][^proposal]
 
@@ -78,11 +82,11 @@ P0.1 acceptance does not establish runtime or full-family parity, approve omissi
 
 # Steps
 
-## Proposed decision set
+## Approved decision set
 
-The recommendation is to omit only the precise capability in each row. Retain the listed alternatives and every related behavior outside that boundary. An alternative marked as an owning-stage obligation is not presented as already implemented.[^proposal]
+The user approved omitting only the precise capability in each row. Retain the listed alternatives and every related behavior outside that boundary. An alternative marked as an owning-stage obligation is not presented as already implemented.[^proposal]
 
-| ID | Proposed loss | Retained route | Migration cost and limit |
+| ID | Approved loss | Retained route | Migration cost and limit |
 |---|---|---|---|
 | O01 | Synchronous network requests that block the browser UI through `async: false`. This is a public request option that reaches the bundled XHR transport. | Current Promise-based communication with `await`; complete timeout, cancellation and ordered terminal hooks in M3.1/M3.2. | Convert synchronous call chains to async code and explicitly manage pending actions. Awaited sequencing does not reproduce a blocked UI thread. |
 | O02 | Framework-provided JSONP callback-script transport, including JSONP-only endpoints. | Ordinary JSON HTTP with the required CORS policy, or an application backend proxy; finish ordinary cross-origin policies in M3.2. | The endpoint or backend may need changes. Fetching JSON is not equivalent when a server offers only JSONP. |
@@ -98,7 +102,7 @@ The five items do not remove ordinary headers, credentials, HTTP status/response
 
 | Original group | Required disposition outside the five narrow proposals |
 |---|---|
-| R01 | Keep CVC, remote inert HTML, explicit controllers, code-data loading, metadata and lifecycle. Only O03 response-code execution is proposed. |
+| R01 | Keep CVC, remote inert HTML, explicit controllers, code-data loading, metadata and lifecycle. Only O03 response-code execution is the approved omission. |
 | R02 | Preserve useful before/after/around/error and path/view/custom-pointcut outcomes through reviewed modern composition, including arguments, results, receivers and async failures. No omission is proposed. |
 | R03 | Preserve typed declarations, code choices, selected defaults, actions, search submission and row events. Property spellings and declaration-to-handle mutation are API migration, not justification to drop those outcomes. |
 | R04 | Preserve scoped shared services/handles and intentional live defaults, locale, messages and rules. A smaller configuration model must still serve the useful workflows. |
@@ -124,11 +128,11 @@ Unrelated convenience helpers use the user's existing removal authorization only
 
 # Next action
 
-Await the existing single O01-O05 user decision and continue independent authorized work. Do not ask again or restart the proposal. Do not remove a proposed capability, change a public contract, or declare a family complete merely because it appears here.[^proposal][^registry]
+Apply the exact O01-O05 boundaries in each owning stage and its migration documentation. Continue all other authorized work. Do not ask the same question again or infer whole-family completion from approval.[^decision][^registry]
 
 # Decisions
 
-- All five items are pending. No R/GR group receives blanket retirement approval.
+- The user approved all five exact items. No R/GR group receives blanket retirement approval.[^decision]
 - Preserve feasible behavior through existing owners before proposing a loss. Do not add a generic extension engine or copy obsolete jQuery machinery to retain an old name.
 - CVC and authored HTML/CSS remain core requirements. Explicit controller modules do not remove page composition, remote views or reusable Popup/Tabs/Documents behavior.[^page]
 - Typed predicates remain supported; filtering and sorting themselves are not proposed for removal.[^ui]
@@ -137,12 +141,13 @@ Await the existing single O01-O05 user decision and continue independent authori
 
 # Verification log
 
-2026-11-14: Source and documented caller review narrowed the original candidates to five precise proposed losses. Independent source/document review confirms the actual legacy branches, 19 source hashes, costs, alternatives and retained obligations. The maintainer presented all five together for the single user decision. All five remain pending; no runtime or omission approval is claimed. Changed/full documentation checks pass with the current bundle.[^proposal]
+2026-11-14: Source and documented caller review narrowed the original candidates to five precise proposed losses. Independent source/document review confirms the actual legacy branches, 19 source hashes, costs, alternatives and retained obligations. The maintainer presented all five together for the single user decision. That historical review did not grant runtime or omission approval. Changed/full documentation checks pass with the current bundle.[^proposal]
 
 # Open questions
 
-The user has not decided O01-O05. Concrete private application dependencies on synchronous requests, JSONP, executable responses, string conditions or external handler introspection are unknown. An unknown external caller does not prove unused behavior, and an unlisted loss remains required until resolved through its existing owner and explicit scope review.[^proposal]
+The user has approved only O01-O05. Concrete private application dependencies on synchronous requests, JSONP, executable responses, string conditions or external handler introspection are unknown. An unknown external caller does not prove unused behavior, and an unlisted loss remains required until resolved through its existing owner and explicit scope review.[^proposal]
 
+[^decision]: Explicit user approval of exactly O01-O05
 [^proposal]: Exact five-item proposal, source hashes and undecided dispositions
 [^core]: Original core retirement candidates and required outcomes
 [^grid]: Original Grid mechanism candidates and preserved behavior

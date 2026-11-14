@@ -156,6 +156,14 @@ export async function searchEmployees(comm: Communicator, query: string,
   } finally { lifecycle.pending--; lifecycle.completed++; }
 }
 
+export async function loadEmployeeWithSender(send: (request: Request) => Promise<Response>): Promise<Employee[]> {
+  const comm: Communicator = createCommunicator({ send });
+  const options: RequestOptions<Employee[]> = { url: "https://example.test/employees" };
+  return await comm.request(options);
+}
+// @ts-expect-error A custom sender must return a Promise of a Response.
+createCommunicator({ send: () => new Response("[]") });
+
 export function connectEditor(root: HTMLFormElement, table: HTMLTableElement, rows: Rows<Employee>, scrollRoot?: HTMLElement) {
   const nameRules: FieldRules = { validate: [["minlength", 2]] };
   const rules = { fields: { name: nameRules } } satisfies RuleSet;

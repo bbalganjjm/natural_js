@@ -51,8 +51,18 @@ state.checkRequests = async () => {
   await entered;
   controller.abort();
   try { await pending; } catch (cause) { abortName = cause.name; }
+  const customStages = [];
+  const custom = createCommunicator({
+    send: async function(request) {
+      customStages.push(["send", this === undefined, request.url]);
+      return new Response('{"employee":"A&B"}');
+    },
+    after(response) { customStages.push(["after"]); return response; }
+  });
+  const customValue = await custom.request({ url: "https://example.test/employees",
+    decode: async response => { customStages.push(["decode"]); return await response.json(); } });
   return { result, order, reads, completed, plain: receivers.every(value => value === undefined),
-    stopped, abortName, abortComplete };
+    stopped, abortName, abortComplete, customValue, customStages };
 };
 
 function view() {

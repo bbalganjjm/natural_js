@@ -5,10 +5,14 @@ description: One CVC controller shares Rows across Form, Grid, and List, coordin
 tags: [example, cvc, form, grid, list, select, pagination, accessibility]
 status: draft
 sources:
+  - id: xhr
+    resource: ../../examples/vite/m4/employee-xhr.ts
+    title: Application-only finite-body XHR sender
+    git_blob: 865d8a4f5f95e0e211a9dd2e33fe90d3569b4662
   - id: controller
     resource: ../../examples/vite/m4/employees.ts
     title: Shared employee controller
-    git_blob: 9a243e065f0db6469d7c819f46df6f7fb061520e
+    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
   - id: runner
     resource: ../../examples/vite/m4/main.ts
     title: Page mounting in the example
@@ -48,15 +52,15 @@ sources:
   - id: m4-test
     resource: ../../tests/browser/m4-screen.spec.ts
     title: Original screen and server-HTML browser regression
-    git_blob: 666a61d7da40766f23c17621e3d88a0ba875a5b6
+    git_blob: d0e02c5f17b1d9bb17b9e5c9819f676c9a97788a
   - id: m6-test
     resource: ../../tests/browser/m6-screen.spec.ts
     title: List and paging browser regression
     git_blob: 9610ad289f93b7636a27f9c893a2640717caca9a
-generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T22:14:07Z }
-  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
 Run `npm run build` and `npm run example`, then open `/m4/side.html` or `/m4/stack.html`. The paths retain their M4 name, but the same screen now exercises the M6 data UI. `/m4/side.html?view=server` loads its authored side view through `mountPage(URL)`.[^runner][^vite][^controller]
@@ -115,6 +119,8 @@ The table has native headers, including a name header with `aria-sort`; its repe
 
 One local typed request function wraps search/save. Its pending counter sets the screen's aria-busy on the first request and restores the captured authored value after the last. It joins caller/page cancellation once; the URL is not a resource key. Page-owned cleanup restores the captured attribute after abort even if request finally blocks have already drained the counter. Aborted requests do not write to a closed page or another instance. The communication API supplies transport and captured hooks; the application owns this request presentation.[^controller][^m4-test]
 
+Add ?transport=xhr to either layout to run the same search/edit/save controller with the application-only [native sender](../../examples/vite/m4/employee-xhr.ts). The communicator's send callback joins the existing response/error/cancellation pipeline; the page still owns busy state and teardown. Ordinary views use Fetch. The sender preserves finite prepared body bytes and multipart boundaries, supports scoped native progress/authentication, and explicitly rejects Fetch policies it cannot reproduce. It adds no framework library, visual theme or transport registry.[^controller][^xhr][^m4-test]
+
 Both search views offer native Reset fields and explicit Restore captured fields. Native reset uses native default properties. Restore calls search.unbind() to restore the construction-time values, then search.refresh() to resume automatic formatting/validation. It sends no request, changes no shared employee row and does not recreate the CVC controller. The action listener uses the same page signal as other authored controls.[^controller][^side][^stack]
 
 Grid and List use one `Rows<Employee>` instance. A List selection calls `grid.select(id)`; Grid's selection callback selects the same ID in List and binds the detail Form. The detail's local onBind updates the live selected-name output after binding; null selection explicitly clears it. The standalone Select offers typed sizes 2 and 5. Page requests go through the controller, which sets Grid and List to the same slice, reads Grid's normalized state, and calls `pagination.set(state)`. Filtering and sorting apply to both views before page slicing. The application resets to page 1 on a new search, filter, or sort; `Rows` subscriptions recalculate totals after edits.[^controller]
@@ -148,6 +154,7 @@ For an optional nested employee field, edit the two detail HTML inputs, the Empl
 
 [Form](form.md) handles detail drafts and rules; [Grid](grid.md) and [List](list.md) share the rows. [Select](select.md) explains typed standalone choices, [Pagination](pagination.md) explains controlled page state, and [UI contracts](ui.md) lists public types. [The M4 plan](../implementation/m4-plan.md) records the original screen gate; [the M6 plan](../implementation/m6-plan.md) records the data UI gate.
 
+[^xhr]: Application-only finite-body XHR sender
 [^controller]: Shared employee controller
 [^runner]: Page mounting in the example
 [^vite]: Development-only HTML fragment route

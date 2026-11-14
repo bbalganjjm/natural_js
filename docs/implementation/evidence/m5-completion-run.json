@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M3.1",
+  "current_stage": "M3.2",
   "queue": [
     {
       "id": "P0.1",
@@ -28,16 +28,16 @@
     {
       "id": "M3.1",
       "scope_ref": "remaining-work-plan.json#/stages/3",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
       "receipt": "m31-verification.json"
     },
     {
       "id": "M3.2",
       "scope_ref": "remaining-work-plan.json#/stages/4",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m32final-verification.json"
     },
     {
       "id": "M3.3",
@@ -244,50 +244,81 @@
     }
   ],
   "limits": [
-    "P0.2 remains conditional for genuine loss decisions even though it is not an unconditional ancestor.",
-    "P0.1 acceptance covers known source-case assignment only; runtime, full-family closure and P0.2 loss decisions remain open.",
+    "P0.2 exact O01-O05 omissions are explicitly approved; all unlisted outcomes remain required.",
+    "P0.1 acceptance covers known source-case assignment only; runtime and full-family closure remain separate.",
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
-    "stage": "M3.1",
-    "runtime": "docs/implementation/evidence/m31-runtime-receipt.json",
-    "source_review": "passed_independent",
-    "raw_review": "passed_independent",
-    "documents": "passed_independent_and_actual_zero_errors_warnings"
+    "stage": "M3.2",
+    "original_runtime_receipt": "m32-runtime-receipt.json",
+    "original_runtime_sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
+    "original_project_attempts": 34,
+    "original_latest_unit_cases": 155,
+    "original_latest_full_each": 876,
+    "correction": "Exclude the designated raw evidence tree from OKF concept traversal; active malformed concepts and explicit file validation remain checked.",
+    "changed_source_paths": [
+      "tools/knowledge-docs/knowledge-docs.mjs",
+      "tools/knowledge-docs/knowledge-docs.test.mjs"
+    ],
+    "separate_checker_regression": "passed 1 Node test; not a Vitest/browser/canonical result",
+    "next_runtime_prefix": "m32final",
+    "next_canonical_groups": "all 16 pending on new frozen tool-inclusive inputs",
+    "documents": "passed_independent_and_actual_zero_errors_warnings",
+    "limits": [
+      "Original Windows WebKit native cookie/header limits remain open.",
+      "Original Tree/date timeout cause remains unproven."
+    ],
+    "fresh_verification": {
+      "prefix": "m32final",
+      "session_id": 90784,
+      "baseline_commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+      "parent_runtime": "m32-runtime-receipt.json",
+      "parent_sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2",
+      "source_snapshot": "m32final-source.json",
+      "source_snapshot_sha256": "1182ba20fb1fe67a532d4e76cb847ed6679078be7d0e1950e621a1147d554c55",
+      "runtime_inputs": 205,
+      "reviewed_owned_paths": 13,
+      "recorded_attempts": 22,
+      "passed_groups": [
+        "build",
+        "types",
+        "example-types",
+        "unit",
+        "pack",
+        "consumers",
+        "packed-chromium",
+        "packed-firefox",
+        "packed-webkit",
+        "packed-chrome",
+        "packed-edge",
+        "binding-performance",
+        "viewport-performance",
+        "browser-chromium",
+        "browser-firefox",
+        "browser-webkit"
+      ],
+      "pending_groups": [],
+      "journal": "m32final-gates.jsonl",
+      "installed_error": "Initial Edge initialization resource load ERR_NO_BUFFER_SPACE; source/artifact unchanged, complete installed rerun passed; cause unproven.",
+      "next": "Wait for Firefox/WebKit full groups, build immutable new R0, independent raw and ten-body final semantics, actual document checks, commit/push, then M3.3.",
+      "runtime_receipt": "m32final-runtime-receipt.json",
+      "runtime_sha256": "03bc37761bd88d2a93852f6e570238a1195455c108935d02f61be11c8c09da30",
+      "independent_raw": "passed recorded-byte audit",
+      "documents": "ten-body final semantic review and mechanical checks pending"
+    }
   },
   "latest_completed_checks": {
-    "stage": "M5.14",
-    "strict_build": "passed",
-    "strict_source_types": "passed",
-    "strict_example_types": "passed",
-    "retained_first_focus": {
-      "cases": 136,
-      "passed": 134,
-      "failed": 2,
-      "log": "m514-focused-chromium.log",
-      "scope": "test-contract corrections only: exact true for successful validators and structural attribute equality plus exact old node identity; original logs, input map and traces retained"
-    },
-    "current_focus": {
-      "chromium": 140,
-      "firefox": 140,
-      "webkit": 140,
-      "failed": 0
-    },
-    "units": 138,
-    "installed_js_ts": "passed",
-    "installed_browsers": [
-      "chromium",
-      "firefox",
-      "webkit",
-      "chrome",
-      "edge"
-    ],
-    "performance_original_budgets": 30,
-    "full_source_suites": {
-      "chromium": 853,
-      "firefox": 853,
-      "webkit": 853
-    },
-    "final_receipt": "m514-verification.json"
+    "stage": "M3.1",
+    "receipt": "m31-verification.json",
+    "inputs": 203,
+    "units": 150,
+    "full_each": 857,
+    "docs_errors": 0,
+    "docs_warnings": 0
+  },
+  "scope_decisions": {
+    "status": "approved_exact_O01_O05_only",
+    "receipt": "m32-approved-omissions.json",
+    "full_family_acceptance": false
   }
 }

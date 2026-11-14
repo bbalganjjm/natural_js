@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-options-plan.md
     title: Completed typed-choice continuation
-    git_blob: 30cf84768b376319eaf1d7354ab1cff2f349081b
+    git_blob: 924f29e132270e4c296f1e8231711d099f346228
   - id: baseline
     resource: evidence/m53-verification.json
     title: Preserved d923434 runtime and code baseline
@@ -40,7 +40,7 @@ sources:
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Current scoped evidence and documentation contract
-    git_blob: a42962520d3f0c575a58fbeee3afb68ea9fc65f9
+    git_blob: d9c9afcd03afc5280c3d562d5e1fc63c9874afa2
 generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }

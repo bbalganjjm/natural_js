@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.2",
+  "status": "approved_independent_final_semantics_mechanical_completion_required",
+  "reviewed_at": "2026-11-14T16:54:36.466Z",
+  "reviewed_files": {
+    "docs/implementation/current.md": {
+      "normalized_body_sha256": "9c85b0c0354042b17dbd97b399221eb23417cd3d82f63e7c650287f8618ccc97",
+      "normalized_body_bytes": 5196,
+      "review": "Fresh independent final semantic review of the full body and bounded current-governance correction against immutable runtime, source review, approved decision and independent raw audit."
+    },
+    "docs/implementation/m3-protocol-plan.md": {
+      "normalized_body_sha256": "55c1a0eea12937a7adaa3dd151300efb39cd726ed7d2f129185e2a588d4073c5",
+      "normalized_body_bytes": 7985,
+      "review": "Fresh independent final semantic review of the full body and bounded current-governance correction against immutable runtime, source review, approved decision and independent raw audit."
+    },
+    "docs/implementation/m5-completion-run.md": {
+      "normalized_body_sha256": "30a337a6214762b0867dbd3f6277f184473ef6aa8318d55d69c91c5474645694",
+      "normalized_body_bytes": 6522,
+      "review": "Fresh independent final semantic review of the full body and bounded current-governance correction against immutable runtime, source review, approved decision and independent raw audit."
+    },
+    "docs/implementation/omission-decision.md": {
+      "normalized_body_sha256": "776c72ec7fb210bdcb0c8bb4f7e60abf6d94d0d4d35e5706217c9d7f3cd4ae07",
+      "normalized_body_bytes": 12175,
+      "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+    },
+    "docs/v2/comm.md": {
+      "normalized_body_sha256": "941f14c10329798d9e5cf3a89817bf86e85d17ced3c83273664839df3350ceaf",
+      "normalized_body_bytes": 7390,
+      "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+    },
+    "docs/v2/employee-example.md": {
+      "normalized_body_sha256": "54fa92b2eca585f702653cf72e94a9f68a4f698b3fff076922cba535880b76ab",
+      "normalized_body_bytes": 12643,
+      "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "1686fb4e6c69a30d8ab30b1666bf26cb622d4ebb7aecfa7c2d005a084a1a8223",
+      "normalized_body_bytes": 60413,
+      "review": "Prior independent connected full-body acceptance rechecked by exact unchanged hash."
+    },
+    "docs/implementation/feature-parity-plan.md": {
+      "normalized_body_sha256": "7fa4de2052ace8d4205bcb5c2732897b225ebfeaa0c9cca121cfd5e3907edbde",
+      "normalized_body_bytes": 22948,
+      "review": "Fresh independent final semantic review of the full body and bounded current-governance correction against immutable runtime, source review, approved decision and independent raw audit."
+    },
+    "docs/implementation/roadmap.md": {
+      "normalized_body_sha256": "2ce0ff8fcc01e7a77fbed6b88ac63af78034c81b4dfacbe234d82b25a7bb4ea5",
+      "normalized_body_bytes": 11705,
+      "review": "Fresh independent final semantic review of the full body and bounded current-governance correction against immutable runtime, source review, approved decision and independent raw audit."
+    }
+  },
+  "normalization": "UTF-8; CRLF normalized to LF; substring after the second frontmatter delimiter, untrimmed including blank lines and final newline.",
+  "raw_runtime_receipt": {
+    "path": "docs/implementation/evidence/m32-runtime-receipt.json",
+    "sha256": "74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2"
+  },
+  "immutable_source_review_snapshot": {
+    "path": "docs/implementation/evidence/m32-protocol.json",
+    "sha256": "ea71519a4e743362c10287ed500bccec1ac2dcb54a918144dacf34ebe6ac9b57",
+    "reviewer": "m511_design"
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m32-independent-audit.json",
+    "sha256": "88dacfac3c7268f338af7301da3c05b3c4b06ac71f0776aa8db213d4c12052d1",
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "docs/implementation/evidence/m32-independent-audit.mjs",
+      "sha256": "e63a37c8aef0eae4c775f01224471b500d8f88e5508d5fa95e0a36c9e0f57642",
+      "bytes": 33437
+    },
+    "original_execution_path": "node_modules/.cache/m32-independent-audit.mjs",
+    "first_metadata_attempt": {
+      "path": "docs/implementation/evidence/m32-independent-audit-first-attempt.json",
+      "sha256": "cbd37d53dc3b3ce8eeab7d283daf1917145f4095fdfc43aec9cb8b5c4f618bd0"
+    }
+  },
+  "reviewed_verification_wrapper": {
+    "path": "docs/implementation/evidence/m32-verification.json",
+    "sha256": "f009e5aa3334702a5439156a47c2b1f518d2a47ec2fc1b73f3b5c0ae766beccb",
+    "scope": "Final acceptance wrapper at semantic review. Only selected completion/document metadata may change after actual mechanical gates; referenced raw/source snapshots, attempt facts and open platform boundaries never change."
+  },
+  "expected_document_checker_scope": {
+    "concepts": 90,
+    "reserved_files": 5
+  },
+  "accepted_scope": [
+    "Selected M3.2 native HTTP protocol delegation adds exactly one captured/plain optional send(Request):Promise<Response>. Default Fetch remains available. The finite-body XHR sender belongs to the application example.",
+    "The independently audited immutable receipt records 205 frozen inputs and 34 attempts: 17 development, 16 latest canonical, and one superseded canonical failure. It records 155 units and 876 full cases per engine, retaining all 857 inherited browser identities. Additions comprise five units and 19 browser cases. Primary focus has 44 cases per engine; separate Tree diagnostics have four per engine.",
+    "The actual 203-file package, 40 declarations with only comm changed, isolated JS/TS and five installed browser consumers, 60 medians, 300 durations, and original 30 budgets match accepted recorded bytes. The audit checked fixture identities, source maps, tar payloads, and budgets directly.",
+    "The original Chromium 43/44 native-auth assertion failure, two strict WebKit wire failures, unchanged Tree/date full-WebKit timedOut case, and first metadata-auditor classification failure remain separately preserved. Unchanged Tree/date diagnostics and the final full-WebKit retry passed without proving a cause or establishing a framework fix.",
+    "Native controls and exactly two final Win32/WebKit platform-conformance-limit annotations establish measured Fetch-delegation parity for credential and Content-Type behavior. They do not certify standard cookie/header withholding, create a skip, or approve another omission. Existing browser/release acceptance owns these open limits.",
+    "The user explicitly approved exactly O01-O05 through the original consolidated question. The original pending-at-capture proposal remains unchanged. All unlisted core, Grid, and UI outcomes retain their required owners. Current parity and roadmap instructions now reflect that decision without rewriting historical evidence or the fixed registry.",
+    "Four API/decision bodies exactly preserve their prior full-body approvals. Three coordinator bodies, two governing plans, and ancillary indexes/log were independently reviewed. The Creation log now describes the historical checkpoint explicitly rather than presenting it as current pending work.",
+    "Twenty-nine authorized unconditional stages remain after selected M3.2 acceptance. M3.3 follows the separate M3.2 checkpoint. This review grants no full-family, M5.20, final P0, M13, release, or browser-standards closure.",
+    "The immutable m32-protocol source/focus snapshot preserves its pending-at-capture canonical and document fields. The final verification wrapper owns later acceptance without rewriting those historical observations."
+  ],
+  "mechanical_completion_authorization": {
+    "owner": "root",
+    "allowed_actions": [
+      "Stamp verified/generated metadata only for these nine independently reviewed semantic concepts.",
+      "Refresh dependency fingerprints in historical concepts while preserving their normalized semantic bodies and generated/verified dates. Add no reverse fingerprint edge or new semantic scope.",
+      "Execute actual changed and full documentation checks. Record their logs and exact historical-preservation assertions.",
+      "After all conditions pass, finalize only the selected M3.2 verification wrapper status and document-review/mechanical metadata. Preserve its immutable runtime/source/raw references, counts, artifact, approved decision, platform limits, and closure boundaries.",
+      "Record the selected M3.2 queue checkpoint and actual commit/push references, then advance the authorized queue to M3.3. Record successful commit/push only after each action succeeds."
+    ],
+    "required_before_completion": [
+      "All nine reviewed normalized semantic body hashes remain unchanged.",
+      "Actual changed and full documentation checks each report 90 concepts, five reserved files, zero errors, and zero warnings.",
+      "History assertions preserve every other concept body and its generated/verified dates. Only dependency fingerprints may differ.",
+      "The raw runtime receipt remains byte-exact at SHA 74d9c886f6591039e827e135243a16d21917ba933e0b8c15973498d1a9112cb2 forever. Never rebuild or rewrite it after documentation.",
+      "The immutable source/focus snapshot, copied accepted raw audit and helper, and preserved first metadata-attempt report retain their recorded hashes. Preserve all captured native controls, failures, diagnostics, source inputs, package observations, and open conformance limits.",
+      "If a gate fails, do not finalize selected completion or deliver final-pass prose as completed. Fix the mechanical issue or request renewed semantic review for any body change."
+    ],
+    "final_pass_prose_delivery_condition": "Current, plan, batch, governing-plan, and log completion wording is approved for delivery only after root actually passes these mechanical gates. This semantic review invokes and claims no project-checker result.",
+    "forbidden_actions": [
+      "Changing source, tests, examples, source maps, or runtime inputs",
+      "Changing raw runtime/source snapshots, retained attempts, native controls, or approved-decision boundaries",
+      "Approving omissions beyond exact O01-O05",
+      "Certifying native cookie/header withholding or claiming a resolved cause for the original Tree/date timeout",
+      "Claiming full-family, M5.20, final P0, M13, or release closure",
+      "Publishing npm, creating release tags, or changing master/v1"
+    ]
+  },
+  "limits": [
+    "The reviewer writes only this ignored approval JSON. The reviewer edits no source, ledger, or documentation and invokes no compiler, browser, benchmark, model, or project-checker command.",
+    "Graph-cycle absence is a parent-reported precondition. This reviewer runs no graph command.",
+    "Windows WebKit native credential/header conformance, the original Tree/date timeout cause, actual macOS/iOS Safari, manual assistive technology, and actual token telemetry retain their recorded boundaries."
+  ]
+}

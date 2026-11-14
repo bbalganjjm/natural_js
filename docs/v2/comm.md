@@ -1,21 +1,29 @@
 ---
 type: API Reference
 title: Natural-JS 2.0 communicator
-description: Fetch requests with explicit JSON or body input, response decoding, hooks, and cancellation.
+description: Native requests with explicit payloads, custom sending, response decoding and cancellation.
 tags: [architecture, communication, typescript]
 status: draft
 symbols: [RequestOptions, Communicator, createCommunicator]
 sources:
+  - id: native-control
+    resource: ../implementation/evidence/m32-native-control-observation.json
+    title: Direct Windows WebKit native Fetch wire-policy observations
+    git_blob: 7124f5181dc6ded9b74675cccf044dbcd30c41ef
+  - id: xhr
+    resource: ../../examples/vite/m4/employee-xhr.ts
+    title: Application-only finite-body XHR sender and native metadata
+    git_blob: 865d8a4f5f95e0e211a9dd2e33fe90d3569b4662
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator runtime and types
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
-generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
-The `./comm` entry exports `createCommunicator` and request types. It uses browser `Request`, `Response`, and `fetch` directly; application code chooses its API URL and data conversion.[^comm]
+The `./comm` entry exports `createCommunicator` and request types. It uses native Request/Response with Fetch as the default sender; application code chooses API URLs, wire conversion and any explicit custom sender.[^comm]
 
 # Summary
 
@@ -32,12 +40,24 @@ The `./comm` entry exports `createCommunicator` and request types. It uses brows
 | Option | Type | Behavior |
 |---|---|---|
 | `baseURL` | `URL` | Resolves relative request URLs. |
-| `prepare` | `(request: Request) => Request \| Promise<Request>` | Runs before `fetch`; may return a new Request, including app headers. |
-| `after` | `(response: Response) => Response \| Promise<Response>` | Runs after `fetch`, before HTTP status and decoding checks. |
+| `prepare` | `(request: Request) => Request \| Promise<Request>` | Runs before sending; may return a new Request, including app headers. |
+| `after` | `(response: Response) => Response \| Promise<Response>` | Runs after sending, before HTTP status and decoding checks. |
+| `send` | `(request: Request) => Promise<Response>` | Optional native/custom sender; omission uses the current global fetch when each request executes. |
 
-A hook must return the native object declared by its type. If `prepare` returns a replacement Request, the caller's abort signal is still attached to the request sent by `fetch`.[^comm]
+Callbacks must satisfy their declared result types. If prepare returns a replacement Request, the caller's abort signal remains attached to the final sent Request.[^comm]
 
-prepare and after are read once when the communicator is created and called as plain functions, with no implicit receiver. Replacing a callback property later does not change an existing communicator. Capture application state in a closure when policy must remain live. Supplying a nonfunction raises REQUEST_OPTIONS at createCommunicator; a hook returning the wrong native object retains its REQUEST_PREPARE or REQUEST_AFTER failure.[^comm]
+prepare, after and a supplied send are read once at communicator creation and called plainly, without an implicit receiver. Replacing or adding a callback later does not change that communicator. Use a closure for deliberate live policy. Nonfunctions raise REQUEST_OPTIONS at createCommunicator; wrong prepare/after results retain REQUEST_PREPARE/REQUEST_AFTER failures. Default fetch is looked up per request, so it is not captured as an artificial sender.[^comm]
+
+send receives the final prepared Request with combined cancellation. Its resolved value must be a Response; rejection or a non-Response uses REQUEST_NETWORK before after, HTTP checks or decoding. Existing cancellation settles a pending sender promptly and suppresses late results. The custom sender must release its own native work when Request.signal aborts.[^comm]
+
+```ts
+const comm = createCommunicator({ send: request => sendEmployee(request, { progress: showTransfer }) });
+await comm.request({ url, method: "POST", body: formData, signal });
+```
+
+sendEmployee and showTransfer above are application code. The executed [employee XHR example](../../examples/vite/m4/employee-xhr.ts) forwards finite prepared bytes, headers and cancellation through fresh native requests. It exposes progress/authentication and native response URL context without becoming a framework utility. Its explicit policy subset differs from native Fetch: it rejects credentials omit, nondefault cache/referrer, manual redirects, integrity and opaque/no-cors modes. Keep Fetch for those native policies. A synthetic Response has an empty url; retain native metadata in the application's transfer context.[^xhr]
+
+Windows WebKit measurements expose two platform limits: native Fetch sends cookies for omit/same-origin and adds Content-Type after header deletion. Direct URL/Request controls reproduce them without the framework. Tests verify the final Request policy and exact native parity, preserving the original failures; they do not certify cookie/header withholding. Chromium and Firefox retain strict wire assertions.[^native-control]
 
 # Methods
 
@@ -49,7 +69,7 @@ prepare and after are read once when the communicator is created and called as p
 | `method` | `string` | Defaults to `GET`. |
 | `json` | `unknown` | Encoded with `JSON.stringify`; sets `Content-Type: application/json`. |
 | `body` | `BodyInit` | Passed to the native Request; cannot be used with `json`. |
-| `signal` | `AbortSignal` | Cancels hooks, fetch, and decoding with `AbortError`. |
+| `signal` | `AbortSignal` | Cancels hooks, sending, and decoding with `AbortError`. |
 | `decode` | `(response: Response) => Result \| Promise<Result>` | Optional application decoder. |
 
 Without `decode`, a successful nonempty response is parsed as JSON. HTTP 204/205 and an empty body fail with `REQUEST_EMPTY`; supply a decoder when an empty successful response is expected. An HTTP failure uses `REQUEST_HTTP`, including status and status text in the error detail.[^comm]
@@ -77,7 +97,7 @@ Here Employee, comm, url, signal and pending belong to the application. finally 
 
 # Pitfalls
 
-`json` and `body` together fail with `REQUEST_OPTIONS` before `fetch`. Encoding, request construction, hooks, network, decoding, and default parsing can fail with `REQUEST_JSON`, `REQUEST_INIT`, `REQUEST_PREPARE`, `REQUEST_NETWORK`, `REQUEST_AFTER`, `REQUEST_DECODE`, and `REQUEST_PARSE` respectively. Non-abort request-execution failures are `FrameworkError` instances with `api: "Communicator.request"` and the original cause when available. Invalid creation-time hooks instead use REQUEST_OPTIONS with api createCommunicator. Aborts remain DOM `AbortError` instances.[^comm]
+`json` and `body` together fail with `REQUEST_OPTIONS` before sending. Encoding, request construction, hooks, network, decoding, and default parsing can fail with `REQUEST_JSON`, `REQUEST_INIT`, `REQUEST_PREPARE`, `REQUEST_NETWORK`, `REQUEST_AFTER`, `REQUEST_DECODE`, and `REQUEST_PARSE` respectively. Non-abort request-execution failures are `FrameworkError` instances with `api: "Communicator.request"` and the original cause when available. Invalid creation-time hooks instead use REQUEST_OPTIONS with api createCommunicator. Aborts remain DOM `AbortError` instances.[^comm]
 
 There is no application-specific response envelope or automatic business data transformation. Implement that in `decode` or application code, rather than adding a generic framework utility.
 
@@ -104,4 +124,6 @@ const employees = await comm.request<{ name: string }[]>({
 
 [Page runtime](page.md) provides a per-instance abort signal. [The M1 contract](../implementation/m1-contract.md) describes server conversion responsibility.
 
+[^native-control]: Direct Windows WebKit native Fetch wire-policy observations
+[^xhr]: Application-only finite-body XHR sender and native metadata
 [^comm]: Communicator runtime and types

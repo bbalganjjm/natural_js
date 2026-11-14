@@ -1,0 +1,45 @@
+{
+  "kind": "explicit_consolidated_P0_2_user_decision",
+  "recorded_at": "2026-11-14T16:04:31.530Z",
+  "status": "approved_exact_five_only",
+  "proposal": {
+    "path": "docs/implementation/evidence/p02-omission-proposal.json",
+    "sha256": "fec3d5edadddb1feb4c8d0d2848705b3281b212b47f3d3ebfae64c7f7cd3e95b"
+  },
+  "user_response": {
+    "question_item_id": "[\"request_user_input_async\",\"call_9091cbaaf4d9460abab8f768650ebff1\",0]",
+    "answer": "5개만 제외 승인 (추천)"
+  },
+  "decisions": [
+    {
+      "id": "O01",
+      "decision": "approved_narrow_omission",
+      "scope": "Only the exact capability, alternatives and migration costs in the immutable proposal; retain all other obligations."
+    },
+    {
+      "id": "O02",
+      "decision": "approved_narrow_omission",
+      "scope": "Only the exact capability, alternatives and migration costs in the immutable proposal; retain all other obligations."
+    },
+    {
+      "id": "O03",
+      "decision": "approved_narrow_omission",
+      "scope": "Only the exact capability, alternatives and migration costs in the immutable proposal; retain all other obligations."
+    },
+    {
+      "id": "O04",
+      "decision": "approved_narrow_omission",
+      "scope": "Only the exact capability, alternatives and migration costs in the immutable proposal; retain all other obligations."
+    },
+    {
+      "id": "O05",
+      "decision": "approved_narrow_omission",
+      "scope": "Only the exact capability, alternatives and migration costs in the immutable proposal; retain all other obligations."
+    }
+  ],
+  "limits": [
+    "No blanket R/GR family retirement.",
+    "No runtime, full-family, release, publication, master, v1 or license acceptance.",
+    "All unlisted framework outcomes remain required; unknown external consumers remain unknown."
+  ]
+}

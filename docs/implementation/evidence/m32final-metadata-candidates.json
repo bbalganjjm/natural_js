@@ -1,0 +1,40 @@
+{
+  "status": "frozen_candidates_not_applied",
+  "metadata_dependency": {
+    "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+    "path": "node_modules/.cache/stage-metadata.mjs"
+  },
+  "real_project_compiler_browser_git_staging_commands": 0,
+  "entries": [
+    {
+      "patch_sha256": "caea926c22a7821a466f7669a69943af0ca596941e8e7cff29664b12916633ea",
+      "original_sha256": "f41fe3c10815667ffdbab142ea68aa552d2540644e9098ed033a9d66664ee88e",
+      "destination": "node_modules/.cache/stage-run.mjs",
+      "patch": "node_modules/.cache/stage-run-working-parent.patch",
+      "candidate": "node_modules/.cache/stage-run-working-parent.mjs",
+      "candidate_sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "original_copy": "node_modules/.cache/stage-working-parent-originals/stage-run-f41fe3c10815.mjs"
+    },
+    {
+      "patch_sha256": "e6aa8480046168837d3271548c90c4b82c75570ee30ecb47e16d20dd197d24e1",
+      "original_sha256": "eb7f26e2f80592c262f46e2c770bb3c4e2ca189eeadd6655a4a20aac9d005edf",
+      "destination": "node_modules/.cache/stage-git.mjs",
+      "patch": "node_modules/.cache/stage-git-working-parent.patch",
+      "candidate": "node_modules/.cache/stage-git-working-parent.mjs",
+      "candidate_sha256": "6f9a61f916a56c2bcb04630d498dbaed826a57e859bfde243d29dc9a4b1bd1b4",
+      "original_copy": "node_modules/.cache/stage-working-parent-originals/stage-git-eb7f26e2f805.mjs"
+    }
+  ],
+  "first_incomplete_selfcheck": {
+    "path": "node_modules/.cache/stage-working-parent-selfcheck-attempt-1.json",
+    "sha256": "50f1a8eed8c39001963521d404f8568d6b0a93fa68f657c1b139559491306ef8",
+    "cause": "Unexplained Node allocation failure; no runtime credit"
+  },
+  "selfcheck": {
+    "execution": "node --max-semi-space-size=1; metadata only, actual R0 reads and mocked Git",
+    "checks": 30,
+    "path": "node_modules/.cache/stage-working-parent-selfcheck.json",
+    "sha256": "ec735b0f83b595cf14bf3e3aca1ff27484316a5fde0335fdcc00af81e9d99abd"
+  },
+  "hash_policy": "SHA-256 of exact raw filesystem bytes"
+}

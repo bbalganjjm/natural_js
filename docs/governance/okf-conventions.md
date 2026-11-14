@@ -13,8 +13,10 @@ sources:
   - id: checker
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: knowledge-docs checker and stamper
-    git_blob: 6e58994a0f2fe00466fb67c1f047036e8f150e6a
-generated: { by: codex/gpt-6, at: 2026-10-31T08:36:34Z }
+    git_blob: 30fcaa6dc11183ff087e5c288eda6709bac3330b
+generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
+verified:
+  - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 ---
 
 `docs/` is an OKF v0.2 knowledge bundle[^okf-spec] maintained as an LLM wiki[^llm-wiki]. The primary reader is an AI coding agent writing Natural-JS code, so every rule below favors fast, unambiguous lookup over prose. The query and maintenance procedures live in [Repository workflow](repository-workflow.md); this page defines the format.
@@ -30,6 +32,8 @@ docs/                     active 2.0 bundle root (index.md declares okf_version 
 
 v1/docs/                  preserved 1.x usage bundle; reference only
 ```
+
+Raw runtime artifacts live under docs/implementation/evidence. Browser error contexts can be Markdown without OKF frontmatter; concept discovery and directory stamping exclude that exact directory and its descendants. Similarly named sibling directories remain ordinary documentation. Explicit file stamping still requires valid frontmatter; malformed active concepts remain errors. Evidence-local Git attributes disable text normalization so recorded CRLF bytes survive staging and checkout. Raw artifact SHA-256 and index/commit checks compare exact bytes.[^checker]
 
 - One active 2.0 concept per public object, component or task. File names are lowercase kebab-case (`framework-error.md`, `package.md`).
 - `index.md` and `log.md` are reserved at every level and are never concepts.
@@ -80,7 +84,7 @@ verified:
 
 - `resource` is REQUIRED in every entry. Code sources use a path relative to the concept file (for example `../../src/internal/framework-error.ts` from `docs/v2/`); external material uses an absolute URL.
 - Local sources carry fingerprints written by `stamp`, never by hand:
-  - `git_blob`: SHA-1 of `"blob <n>\0"` + file content with CRLF normalized to LF. It equals `git hash-object <file>`, works before commit, and is identical on every OS.
+  - `git_blob`: SHA-1 of `"blob <n>\0"` + file content with CRLF normalized to LF. It matches `git hash-object <file>` for normalized source files, works before commit, and is identical on every OS. Raw evidence with text normalization disabled can have a different literal Git blob hash; its receipt SHA-256 preserves the original bytes.
   - `symbol` + `symbol_sha1`: narrows drift detection to one code unit. In 1.x JavaScript, `symbol` is a dotted class/member path such as `NU.grid` or `NU.grid.prototype.add`. In 2.0 TypeScript, it names a top-level exported declaration or explicit named re-export such as `FrameworkError` or `PageContext`. `symbol_sha1` is the first 12 hex chars of the SHA-1 of that slice. When `symbol` is set, drift is decided by `symbol_sha1` only.
 - Prefer a `symbol` over a whole file for large sources such as archived `v1/src/natural.ui.js`; otherwise every edit to that file flags every page.
 - Historical 1.x type and configuration sources remain under `v1/`, alongside [the preserved usage bundle](../../v1/docs/index.md). Active 2.0 concepts cite root `src/**/*.ts`, never generated `build/**/*.d.ts`; the checker compares emitted declaration names to TS entry names when build output exists.

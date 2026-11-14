@@ -1,0 +1,14 @@
+file:///D:/workspace/natural_js/tools/check-packed-browser.mjs:98
+    throw new Error("Packed consumer did not initialize: " + (errors.join(" | ") || cause.message),
+          ^
+
+Error: Packed consumer did not initialize: Failed to load resource: net::ERR_NO_BUFFER_SPACE
+    at file:///D:/workspace/natural_js/tools/check-packed-browser.mjs:98:11 {
+  [cause]: page.waitForFunction: Timeout 20000ms exceeded.
+      at D:\workspace\natural_js\tools\check-packed-browser.mjs:95:16 {
+    log: [],
+    name: 'TimeoutError'
+  }
+}
+
+Node.js v24.18.0

@@ -132,7 +132,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communicator
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
   - id: error
     resource: ../../src/internal/framework-error.ts
     title: Shared framework error

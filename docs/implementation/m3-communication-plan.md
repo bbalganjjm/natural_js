@@ -8,7 +8,7 @@ sources:
   - id: runtime
     resource: ../../src/comm/index.ts
     title: Existing native Request, Response and cancellation owner
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
   - id: legacy
     resource: ../../v1/src/natural.architecture.js
     title: Request filters, transformations, stopping and completion
@@ -16,7 +16,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Actual two-layout CVC search and save caller
-    git_blob: 9a243e065f0db6469d7c819f46df6f7fb061520e
+    git_blob: dfdf60b97c10a347ff46177c1abf34f9eb5d7fb7
   - id: baseline
     resource: evidence/m514-verification.json
     title: Accepted frozen source, archive and browser baseline
@@ -28,7 +28,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Existing pending five-item decision
-    git_blob: 8a61c860bb629c49b53cfd252640ab6175cac872
+    git_blob: 3db0f03a3fb969272a6cbef550ecfa631384406a
 generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }

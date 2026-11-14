@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "milestone": "M3.2",
+  "reviewed_at": "2026-11-14T16:11:17.222Z",
+  "status": "passed_independent_connected_source_and_draft_contract_review_runtime_acceptance_pending",
+  "baseline_commit": "3a9a2c8c8ac978dd39df66c5e9a864ee062ce56c",
+  "normalization": "UTF-8; CRLF normalized to LF.",
+  "reviewed_sources": {
+    "src/comm/index.ts": "c46d7811c48e932c019bc5d09169d983a034b38fb51dd323b6b29fc68f8198be",
+    "examples/vite/m4/employee-xhr.ts": "5f69b7d654c4c65fc0dbe818b5eecc29a892976cf75e52a921701c7b4f3d2004",
+    "examples/vite/m4/employees.ts": "045e3752641514a08c4f92f9707d5928a807eb15a2860a5ff403eda539a03cdc",
+    "tests/communicator.test.ts": "3159f00deb71ef9b89565d80d33a8f1026f1cad67e7dfaea78ffa678ce1b2543",
+    "tests/browser/m4-screen.spec.ts": "87a4716e326b9e2f317fbef85f5a22b86ba25c67bbc27b54a5e25eb3a8a8a52e",
+    "tests/consumers/js/check.mjs": "eea1a510812e0080b22ed4aafc9ae455f173a232082bb215cbe7bae7f1458997",
+    "tests/consumers/ts/check.ts": "d09a6786089fa26d41b469ba6acbfee3b89ec7c9032cc62ca739c62d88711865",
+    "tests/consumers/browser/main.js": "a4a91394b1b9433b9a2de4fb76cf43f118eeead3a9718e082dc67248b8832ab7",
+    "tools/check-packed-browser.mjs": "2352fd084e525b3778ae0a8d9e6e5f9125cf78622fff519fdeaa5157face71f4",
+    "tests/browser/communicator-protocol.spec.ts": "1047481cc974f77067c89ae7b64f098c0556f2b6fad9d7f8dfe84dd2a4e8cb11"
+  },
+  "reviewed_document_bodies": {
+    "docs/v2/comm.md": {
+      "normalized_body_sha256": "941f14c10329798d9e5cf3a89817bf86e85d17ced3c83273664839df3350ceaf",
+      "normalized_body_bytes": 7390
+    },
+    "docs/v2/employee-example.md": {
+      "normalized_body_sha256": "54fa92b2eca585f702653cf72e94a9f68a4f698b3fff076922cba535880b76ab",
+      "normalized_body_bytes": 12643
+    },
+    "docs/v2/migration.md": {
+      "normalized_body_sha256": "1686fb4e6c69a30d8ab30b1666bf26cb622d4ebb7aecfa7c2d005a084a1a8223",
+      "normalized_body_bytes": 60413
+    },
+    "docs/implementation/omission-decision.md": {
+      "normalized_body_sha256": "776c72ec7fb210bdcb0c8bb4f7e60abf6d94d0d4d35e5706217c9d7f3cd4ae07",
+      "normalized_body_bytes": 12175
+    }
+  },
+  "approval_record": {
+    "path": "docs/implementation/evidence/m32-approved-omissions.json",
+    "sha256": "359f3ce21a32c354f092d3b146d810bf2b3b4966bfea791142f888208f056817",
+    "exact_ids": [
+      "O01",
+      "O02",
+      "O03",
+      "O04",
+      "O05"
+    ],
+    "runtime_credit": false,
+    "original_proposal_preserved": true
+  },
+  "public_delta": {
+    "new_option": "createCommunicator.send",
+    "signature": "(request: Request) => Promise<Response>",
+    "new_named_exports": 0,
+    "new_runtime_dependencies": 0,
+    "application_sender_outside_package": true
+  },
+  "reviewed_outcomes": [
+    "One captured/plain optional sender validated in REQUEST_NETWORK; current global fetch remains the default at execution. Existing phase/cancellation ownership is preserved.",
+    "Application-only finite-body XHR owns each native request, buffered prepared bytes, headers, progress/authentication, response URL context and cleanup; unsupported native policies stay explicit.",
+    "Actual overlapping same-URL transfers, native connection error, timeout after native upload, active progress failure and detached M4 XHR disposal are represented by executable witnesses.",
+    "Five new custom-sender units and nineteen new browser cases are source-defined: sixteen protocol and three actual M4 cases. These are not runtime pass counts.",
+    "Installed JS/TS and the five-browser checker actually invoke the public custom sender; custom Response stubs are not represented as native XHR/auth/CORS proof.",
+    "The auth resource assertion strips only userinfo; app/native metadata and Authorization behavior remain unchanged.",
+    "Final sent Request headers and credential modes are independently asserted. Server-returned raw base64/body and exact direct-native policy outcomes are compared.",
+    "Win32/WebKit deviations are pinned to measured exact values with two conformance-limit annotations; other engines retain strict desired expectations. Delegation parity is separate from cookie/header-withholding standards compliance.",
+    "Literal text/html decode stays inert and does not enter M3.3 page loading or response-script execution.",
+    "Only O01-O05 are explicitly approved omissions; other v1/native HTTP outcomes and whole-family/release obligations remain required."
+  ],
+  "unresolved_boundaries": [
+    "Windows WebKit cookie withholding for omit/same-origin and deleted Content-Type wire absence remain measured platform conformance limitations, not standards passes or additional approved omissions.",
+    "Source/draft review gives no compiler/browser/package/performance/document-checker result. Root running focus and later canonical/raw/final-document gates remain separate.",
+    "Full M3.2 coverage and browser/release disposition must retain the explicit open platform boundary rather than infer closure from delegated native parity."
+  ],
+  "limits": [
+    "Only this ignored review JSON is written; no production/source/docs/ledger edits or project/compiler/browser commands.",
+    "Final milestone semantic bodies require their separate final review after recorded raw acceptance."
+  ]
+}

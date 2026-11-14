@@ -12,7 +12,7 @@ sources:
   - id: roadmap
     resource: roadmap.md
     title: First-release scope and M9 gate
-    git_blob: 3bfc97093918cfc909f4102ff787490301272ddd
+    git_blob: 492b2e46db6a3c0635ebcf0bde7a8eef1adbc41d
   - id: m8
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m8-beta-report.md
     title: Unpublished M8 beta-candidate evidence and limits
@@ -29,7 +29,7 @@ sources:
   - id: workflow
     resource: ../governance/repository-workflow.md
     title: Source, documentation, and verification workflow
-    git_blob: a42962520d3f0c575a58fbeee3afb68ea9fc65f9
+    git_blob: d9c9afcd03afc5280c3d562d5e1fc63c9874afa2
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2

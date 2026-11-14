@@ -23,7 +23,7 @@ sources:
   - id: comm
     resource: ../../src/comm/index.ts
     title: M3 request implementation
-    git_blob: 20c31fb67fc20a6b4fefd93742d0c6783483acb9
+    git_blob: 4b05ebaa4121885a96f53e8a3b32dd38e1498704
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T11:01:16Z }
 ---
 

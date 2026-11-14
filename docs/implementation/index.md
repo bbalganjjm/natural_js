@@ -1,8 +1,10 @@
 # Concepts
 
+* [Natural-JS 2.0 M3.2 native protocol workflows](m3-protocol-plan.md) - Preserve native HTTP and custom XHR transfer workflows through one captured sender and explicit application wire recipes. (draft)
+
 * [Natural-JS 2.0 M3.1 communication phases](m3-communication-plan.md) - Capture existing communication hooks and execute ordered application preparation, transformation and terminal cleanup without a middleware engine. (draft)
 
-* [Natural-JS 2.0 consolidated omission decision](omission-decision.md) - Five narrow legacy workflow losses proposed for one explicit decision, with alternatives, migration costs and retained obligations. (draft)
+* [Natural-JS 2.0 consolidated omission decision](omission-decision.md) - Five explicitly approved legacy workflow omissions, with exact boundaries, alternatives, migration costs and retained obligations. (draft)
 
 * [Natural-JS 2.0 sequential M5 completion run](m5-completion-run.md) - Complete M5.14 through M5.20 and their necessary predecessors as separately reviewed, verified and committed stages. (draft)
 

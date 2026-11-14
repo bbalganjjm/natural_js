@@ -1,0 +1,79 @@
+{
+  "kind": "bounded_retained_failure_observations",
+  "captured_at": "2026-11-14T16:33:56.731Z",
+  "native_auth": {
+    "cause": "New comparison assumed native responseURL omits userinfo; browser-managed Authorization, status and actual app metadata were correct.",
+    "correction": "Only resource comparison strips username/password; sender/core unchanged."
+  },
+  "native_wire": {
+    "observation": {
+      "path": "docs/implementation/evidence/m32-native-control-observation.json",
+      "sha256": "846a35416dc89b5770543dd2dd1e7fc570809b9abf77e67498be7b4b9569092b",
+      "bytes": 2654
+    },
+    "cause": "Direct platform Fetch URL/Request controls reproduce cookie/header wire differences in this Windows WebKit backend.",
+    "correction": "Test final Request settings and exact measured native parity; retain strict Chromium/Firefox assertions and two explicit platform-limit annotations. Cookie/header withholding compliance remains open."
+  },
+  "tree_date_full": {
+    "record": {
+      "path": "docs/implementation/evidence/m32-browser-webkit-suite-result.json",
+      "sha256": "7eafaf22dc4227e61742ddcb231e0a4693d31086fe67e0bd4f135f6cb5f19e99",
+      "bytes": 8845
+    },
+    "input": {
+      "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+      "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+      "bytes": 20921,
+      "entries": 205
+    },
+    "passed": 875,
+    "failed": 1,
+    "result": "timeout waiting for 2027-12-04 calendar choice",
+    "trace": {
+      "path": "docs/implementation/evidence/m32-browser-webkit-suite-failures/tree-date-screen-stack-con-a673e-er-to-independent-CVC-Forms-webkit/trace.zip",
+      "sha256": "306b1776148b59414d24d4fd43375c2993f32c0d6a15956c95171927e59ab80a",
+      "bytes": 50226
+    },
+    "cause": "Unproven. Recorded date/calendar remained on 2026-10-13/October2026 after native input fill; no framework production fix is claimed.",
+    "diagnostic": [
+      {
+        "engine": "focused-chromium",
+        "cases": 4,
+        "input": {
+          "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+          "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+          "bytes": 20921,
+          "entries": 205
+        },
+        "exit_code": 0
+      },
+      {
+        "engine": "focused-firefox",
+        "cases": 4,
+        "input": {
+          "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+          "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+          "bytes": 20921,
+          "entries": 205
+        },
+        "exit_code": 0
+      },
+      {
+        "engine": "focused-webkit",
+        "cases": 4,
+        "input": {
+          "path": "docs/implementation/evidence/m32-inputs-e64e8702abfb.json",
+          "sha256": "e64e8702abfbf6ba40d9165490815b750e95005779a1c0aaa7643ee49e65ed50",
+          "bytes": 20921,
+          "entries": 205
+        },
+        "exit_code": 0
+      }
+    ],
+    "fixture_concern": "Final Escape is followed immediately by native date fill without the hidden-dialog/opener-focus barriers used earlier in the same test. Independent source review identifies a valid M11/quality fixture concern, not proof of causality.",
+    "owner": "Existing M11 native date/Form integration and quality acceptance.",
+    "source_change": false,
+    "full_reexecution": "In progress at capture on the same frozen sources; final runtime receipt owns its later outcome."
+  },
+  "scope": "Immutable observation only, not a replacement gate, cause proof, omission or whole-family acceptance."
+}
