@@ -1,0 +1,176 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\workspace\\natural_js\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "node_modules/.cache/m512-trace-fixture/playwright.config.mjs",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--output=node_modules/.cache/m512-trace-fixture/output-2",
+      "--reporter=json"
+    ],
+    "configFile": "D:\\workspace\\natural_js\\node_modules\\.cache\\m512-trace-fixture\\playwright.config.mjs",
+    "rootDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture/output-2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture",
+        "testIgnore": [],
+        "testMatch": [
+          "probe.spec.mjs"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture/output-2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture",
+        "testIgnore": [],
+        "testMatch": [
+          "probe.spec.mjs"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture/output-2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/workspace/natural_js/node_modules/.cache/m512-trace-fixture",
+        "testIgnore": [],
+        "testMatch": [
+          "probe.spec.mjs"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run example",
+      "cwd": "D:\\workspace\\natural_js\\",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "probe.spec.mjs",
+      "file": "probe.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "controlled module request failure retains diagnostic evidence",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 217,
+                  "error": {
+                    "message": "Error: page.evaluate: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:4173/m512-network-probe.js",
+                    "stack": "Error: page.evaluate: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:4173/m512-network-probe.js\n    at D:\\workspace\\natural_js\\node_modules\\.cache\\m512-trace-fixture\\probe.spec.mjs:5:14"
+                  },
+                  "errors": [
+                    {
+                      "message": "Error: page.evaluate: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:4173/m512-network-probe.js\n    at D:\\workspace\\natural_js\\node_modules\\.cache\\m512-trace-fixture\\probe.spec.mjs:5:14"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-14T05:05:44.296Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\workspace\\natural_js\\node_modules\\.cache\\m512-trace-fixture\\output-2\\probe-controlled-module-re-f5ec6-retains-diagnostic-evidence-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "D:\\workspace\\natural_js\\node_modules\\.cache\\m512-trace-fixture\\output-2\\probe-controlled-module-re-f5ec6-retains-diagnostic-evidence-chromium\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "33459b0cee36fa0488f7-7e8de39b8942e85d6dfa",
+          "file": "probe.spec.mjs",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-14T05:05:42.962Z",
+    "duration": 1882.0639999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

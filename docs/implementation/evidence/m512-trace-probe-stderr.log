@@ -1,0 +1,31 @@
+Error: Stripping types is currently unsupported for files under node_modules, for "D:\workspace\natural_js\node_modules\.cache\m512-trace-fixture\playwright.config.ts"
+    at stripTypeScriptModuleTypes (node:internal/modules/typescript:183:11)
+    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:199:26)
+    at defaultGetFormat (node:internal/modules/esm/get_format:262:36)
+    at defaultLoadSync (node:internal/modules/esm/load:161:16)
+    at ModuleLoader.#loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)
+    at nextStep (node:internal/modules/customization_hooks:189:26)
+    at load (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:842:12)
+    at nextStep (node:internal/modules/customization_hooks:189:26)
+    at loadWithHooks (node:internal/modules/customization_hooks:374:18)
+    at ModuleLoader.#loadSync (node:internal/modules/esm/loader:825:16)
+    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)
+    at ModuleLoader.#getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)
+    at afterResolve (node:internal/modules/esm/loader:607:52)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)
+    at node:internal/modules/esm/loader:632:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:628:21)
+    at defaultImportModuleDynamicallyForScript (node:internal/modules/esm/utils:239:31)
+    at importModuleDynamicallyCallback (node:internal/modules/esm/utils:263:12)
+    at eval (eval at esmImport (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:1077:29), <anonymous>:1:1)
+    at esmImport (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:1077:29)
+    at requireOrImport (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:1081:18)
+    at loadUserConfig (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:1268:52)
+    at loadConfig (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:1275:28)
+    at Object.loadConfigFromFile (D:\workspace\natural_js\node_modules\playwright\lib\common\index.js:1490:10)
+    at runTests (D:\workspace\natural_js\node_modules\playwright\lib\cli\testActions.js:46:18)
+    at _Command.<anonymous> (D:\workspace\natural_js\node_modules\playwright\lib\program.js:55:7) {
+  code: 'ERR_UNSUPPORTED_NODE_MODULES_TYPE_STRIPPING'
+}

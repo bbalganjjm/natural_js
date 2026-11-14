@@ -8,7 +8,8 @@ export default defineConfig({
     { name: "firefox", use: { browserName: "firefox" } },
     { name: "webkit", use: { browserName: "webkit" } }
   ],
-  use: { baseURL: "http://127.0.0.1:4173" },
+  use: { baseURL: "http://127.0.0.1:4173",
+    trace: { mode: "retain-on-failure", screenshots: false, sources: false } },
   webServer: {
     command: "npm run example",
     cwd: fileURLToPath(new URL("..", import.meta.url)),

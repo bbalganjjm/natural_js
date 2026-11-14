@@ -1,5 +1,7 @@
 # Concepts
 
+* [Natural-JS 2.0 M5.12 Form source ownership](m5-form-source-plan.md) - Execute application normalization and full-source observation through existing Form and Rows owners. (draft)
+
 * [Natural-JS 2.0 M5.11 captured Grid binding callbacks](m5-grid-callbacks-plan.md) - Capture validated row and completion callbacks once and invoke them without an implicit receiver. (draft)
 
 * [Natural-JS 2.0 M5.10 shared field value callbacks](m5-collection-values-plan.md) - Project mounted Form, Grid and List values through one callback contract without changing raw data ownership. (draft)

@@ -8,7 +8,7 @@ sources:
   - id: closure
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: d2ac58bd92537eb0cca2e2ce7ebf972cdd6360d7
+    git_blob: 5798c2ea1e3bf6fb562780119e400c602de65f3c
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable 7a36a39 Grid audit

@@ -16,6 +16,28 @@ interface Employee {
   options?: { value: string }[];
 }
 
+export function connectReceivedSource(root: HTMLFormElement, received: readonly {
+  name: string; hidden: { amount: string; enabled: string; details: readonly { count: string }[] };
+}[]) {
+  const rows = createRows(received.map(row => ({ ...row, hidden: { ...row.hidden,
+    amount: Number(row.hidden.amount), enabled: row.hidden.enabled === "true",
+    details: row.hidden.details.map(detail => ({ ...detail, count: Number(detail.count) }))
+  } })));
+  const whole: [string, unknown][][] = [];
+  const form = bindForm(root, { rows,
+    beforeBind({ row }) { whole.push(Object.entries(row.value)); },
+    onBind({ row }) { whole.push(Object.entries(row.value)); }
+  });
+  const stop = rows.subscribe(event => {
+    const amount: number | undefined = rows.entries()[0]?.value.hidden.amount;
+    const enabled: boolean | undefined = rows.entries()[0]?.value.hidden.enabled;
+    void [event, amount, enabled];
+  });
+  const first = rows.entries()[0];
+  if (first) form.bind(first.id);
+  return { rows, form, whole, dispose() { stop(); form.dispose(); rows.dispose(); } };
+}
+
 export function connectValueBindings(formRoot: HTMLElement, gridRoot: HTMLTableElement,
   listRoot: HTMLUListElement, rows: Rows<Employee>) {
   const shared = {

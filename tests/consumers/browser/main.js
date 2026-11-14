@@ -372,20 +372,36 @@ try {
     <p>Summary <span data-field="summary"></span></p>
     <label>Choice <select data-field="choice" data-options="options" data-option-label="label" data-option-value="value"></select></label>`;
   document.querySelector("main").append(bindingRoot);
-  const bindingRows = createRows([
-    { name: "Ada", summary: "First", choice: 1, options: [{ label: "One", value: 1 }], hidden: { code: "A" } },
-    { name: "Bea", summary: "Second", choice: 2, options: [{ label: "Two", value: 2 }], hidden: { code: "B" } }
-  ]);
-  const bindingCalls = [];
+  const bindingReceived = [
+    { name: "Ada", summary: "First", choice: 1, options: [{ label: "One", value: 1 }],
+      hidden: { code: "A", amount: "12.5", enabled: "true", details: [{ count: "2" }] } },
+    { name: "Bea", summary: "Second", choice: 2, options: [{ label: "Two", value: 2 }],
+      hidden: { code: "B", amount: "21.5", enabled: "false", details: [{ count: "3" }] } }
+  ];
+  const bindingReceivedText = JSON.stringify(bindingReceived);
+  const bindingRows = createRows(bindingReceived.map(row => ({ ...row, hidden: { ...row.hidden,
+    amount: Number(row.hidden.amount), enabled: row.hidden.enabled === "true",
+    details: row.hidden.details.map(detail => ({ ...detail, count: Number(detail.count) }))
+  } })));
+  const bindingCalls = [], bindingSources = [], bindingCommitted = [];
   const bindingForm = bindForm(bindingRoot, { rows: bindingRows,
     beforeBind({ root, row, event }) {
+      bindingSources.push({ stage: "before", id: row.id, entries: Object.entries(row.value) });
       bindingCalls.push(["before", row.id, event?.type ?? null, row.value.hidden.code,
         root === bindingRoot && Object.isFrozen(row) && Object.isFrozen(row.value.hidden)]);
       return false;
     },
-    onBind({ row, event }) { bindingCalls.push(["after", row.id, event?.type ?? null, bindingRoot.querySelector("input").value]); }
+    onBind({ row, event }) {
+      bindingSources.push({ stage: "after", id: row.id, entries: Object.entries(row.value) });
+      bindingCalls.push(["after", row.id, event?.type ?? null, bindingRoot.querySelector("input").value]);
+    }
   });
-  state.formBinding = { root: bindingRoot, rows: bindingRows, form: bindingForm, calls: bindingCalls };
+  const stopBindingSource = bindingRows.subscribe(event => {
+    bindingCommitted.push({ event, rows: bindingRows.entries() });
+  });
+  state.formBinding = { root: bindingRoot, rows: bindingRows, form: bindingForm, calls: bindingCalls,
+    source: { received: bindingReceived, receivedText: bindingReceivedText, whole: bindingSources,
+      committed: bindingCommitted, stop: stopBindingSource } };
   const presetsRoot = document.createElement("section");
   presetsRoot.innerHTML = `<h2>Explicit Form presets</h2><template><form>
     <label>Name <input data-field="name" value="Captured" required></label><output data-error-for="name"></output>

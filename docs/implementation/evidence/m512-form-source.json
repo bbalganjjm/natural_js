@@ -1,0 +1,1034 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.12 Form source ownership",
+  "recorded_at": "2026-11-14",
+  "workspace_baseline_commit": "0c523cda08ca21f3c0e642666507f29b5ad3a9ea",
+  "status": "selected_outcomes_verified_full_owner_obligations_retained",
+  "inheritance": {
+    "baseline_receipt": {
+      "path": "docs/implementation/evidence/m511-verification.json",
+      "sha256": "992c67b8ea7dd5f201ba179f3dc737a23a22c10f046a6d7108dee8e523d5d1a2",
+      "preserved_in_commit": "0c523cda08ca21f3c0e642666507f29b5ad3a9ea"
+    },
+    "previous_acceptance": {
+      "path": "docs/implementation/evidence/m511-grid-callbacks.json",
+      "sha256": "c678d105531815322f61aa8200d00098eb3e45572e79e08c52d354c499978f79"
+    },
+    "immutable_grid_audit": {
+      "path": "docs/implementation/evidence/m1096-grid-audit.json",
+      "sha256": "ad64ed1e46672d91396de21b0294c98e9876c3c2d849da041450d43d86c287a8"
+    },
+    "original_parity_ledgers": [
+      {
+        "path": "docs/implementation/evidence/v1-core-parity.json",
+        "sha256": "abaeddd9596e0809bd063dc05e8a1c412868e32c04313d34fef69aae9c3cb029"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-grid-parity.json",
+        "sha256": "b9d239965ec7f16d933e22c197a7f90b700bf5c514e7393f64b2b8583e8d3a3c"
+      },
+      {
+        "path": "docs/implementation/evidence/v1-ui-parity.json",
+        "sha256": "15234d2ac6ad8a573277f458c272f28dc92742c37c78345c82c2e9e132fb9fe6"
+      }
+    ],
+    "inherited_grid_counts": {
+      "surface": 89,
+      "dynamic_groups": 17,
+      "contracts": 30,
+      "families": 20
+    },
+    "resolver": "Inherit all full-owner and original parity obligations through immutable M5.11 receipt/ledger and original audit. Selected application source-ownership recipes neither replace parent acceptance nor reproduce legacy per-key/mutation timing. Historical M5.11 launch/import failures and later passing trace remain dated parent facts; no new-stage failure or runtime credit is inferred."
+  },
+  "initial_worktree": {
+    "status": "clean_at_stage_start",
+    "head": "0c523cda08ca21f3c0e642666507f29b5ad3a9ea",
+    "scope": "Independent recorded-byte recovery observed a clean pushed M5.11 tree before authorized M5.12 planning/fixtures; new-stage edits are not pre-existing dirt."
+  },
+  "public_delta": {
+    "new_public_named_types": [],
+    "removed_public_named_types": [],
+    "new_public_options": [],
+    "new_public_methods": 0,
+    "new_public_entries": 0,
+    "new_private_framework_modules": 0,
+    "new_runtime_dependencies": 0,
+    "new_public_runtime_functions": 0,
+    "new_private_shared_factories": 0,
+    "note": "Recipe,documentation,test and failure-only diagnostic-configuration scope only. Framework src and public contracts stay unchanged; actual package member equality to M5.11 is required."
+  },
+  "selected_contracts": {
+    "explicit_normalization_and_raw_ownership": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Applications explicitly normalize named business fields before createRows,replace or append; incoming input stays unchanged and complete normalized records/received originals remain independent of UI projection. Later normalization uses explicit application writes.",
+      "source_refs": [
+        "src/data/index.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B01",
+        "B02",
+        "B07",
+        "B09",
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "No framework converter,serializer or mutation-through-display contract. Inherited data/schema and legacy mutation semantics remain open."
+    },
+    "whole_form_full_source_observation": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Existing beforeBind/onBind callbacks expose full immutable row.value. Object.entries observes every own top-level source key and intact nested JSON,including keys without marked fields. Form.read remains compiled-field-only; Rows.get owns the full record.",
+      "source_refs": [
+        "src/ui/form.ts",
+        "src/data/index.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "B01",
+        "B02",
+        "B03",
+        "B09",
+        "E01",
+        "E02",
+        "I01",
+        "I02",
+        "I03",
+        "R04",
+        "R05"
+      ],
+      "remaining": "Whole hooks surround a Form pass and are not interleaved per source key; focused projection may defer. Per-unbound-key/inherited-key timing equivalence remains open."
+    },
+    "committed_subscriptions_and_lifetime": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Page-owned Rows subscriptions observe committed bound/unbound changes,native input,coherent setMany,reversion and shared Forms. Equal writes stay quiet; subscriber failures retain data and later listeners; cleanup and existing source/disposal checkpoints remain owned.",
+      "source_refs": [
+        "src/data/index.ts",
+        "src/ui/form.ts"
+      ],
+      "witnesses": [
+        "S01",
+        "S02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B08",
+        "B09",
+        "E01",
+        "E02",
+        "I01",
+        "I02",
+        "I03",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05"
+      ],
+      "remaining": "No setter-attempt,changed-key/old-value metadata or DOM-completion promise. Legacy before-set and silent after-notification mutation remain open."
+    },
+    "actual_example_and_exact_installed": {
+      "status": "selected_outcome_verified_full_owner_obligations_retained",
+      "outcome": "Execute source ownership through the existing reduced CVC detail/raw snapshot panel and ordinary exact-package JS/TS/five-browser consumers. Compare actual package payloads to M5.11; add no synthetic application control or second rendering owner.",
+      "source_refs": [
+        "examples/vite/m10/demo.ts",
+        "examples/vite/m10/detail.ts",
+        "tests/consumers/js/check.mjs",
+        "tests/consumers/ts/check.ts",
+        "tests/consumers/browser/main.js",
+        "tools/check-packed-browser.mjs"
+      ],
+      "witnesses": [
+        "B09",
+        "E01",
+        "E02",
+        "I01",
+        "I02",
+        "I03"
+      ],
+      "remaining": "Examples and exact witnesses are finalized from actual fixtures. Broader parity and mandatory whole-code M13 remain open."
+    }
+  },
+  "witnesses": {
+    "S01": {
+      "kind": "source",
+      "file": "src/ui/form.ts",
+      "title": "Whole-row hooks expose a frozen complete row while marked-field reads keep their existing owner",
+      "marker": "function bindRow(id: RowId | null, event: RowsEvent | null, force: boolean)"
+    },
+    "S02": {
+      "kind": "source",
+      "file": "src/data/index.ts",
+      "title": "Immutable committed Rows notification preserves data and later listeners after observer failure",
+      "marker": "function notify(event: RowsEvent): void"
+    },
+    "E01": {
+      "kind": "example_source",
+      "file": "examples/vite/m10/demo.ts",
+      "title": "The actual selected or inspected raw snapshot reads the complete Rows snapshot",
+      "marker": "snapshot.textContent = inspected ? JSON.stringify(inspected, null, 2)"
+    },
+    "E02": {
+      "kind": "example_source",
+      "file": "examples/vite/m10/detail.ts",
+      "title": "Existing CVC detail owns its Form and source subscription together",
+      "marker": "function cleanup(): void { unsubscribe?.(); form?.dispose(); }"
+    },
+    "I01": {
+      "kind": "installed_source",
+      "file": "tests/consumers/ts/check.ts",
+      "title": "Isolated TypeScript consumer normalizes received fields and uses existing full-row and subscription types",
+      "marker": "export function connectReceivedSource"
+    },
+    "I02": {
+      "kind": "installed_source",
+      "file": "tests/consumers/browser/main.js",
+      "title": "Actual installed browser caller retains full-source entries and committed subscription snapshots",
+      "marker": "bindingSources.push({ stage: \"before\", id: row.id, entries: Object.entries(row.value) });"
+    },
+    "I03": {
+      "kind": "installed_source",
+      "file": "tools/check-packed-browser.mjs",
+      "title": "Installed browser assertions cover raw originals hidden changes equal writes and subscription cleanup",
+      "marker": "h.source.stop();"
+    },
+    "D01": {
+      "kind": "diagnostic_configuration",
+      "file": "tests/playwright.config.ts",
+      "title": "Failure-only standard tracing disables screenshots and sources while retaining network-capable DOM snapshots",
+      "marker": "trace: { mode: \"retain-on-failure\", screenshots: false, sources: false }"
+    },
+    "D02": {
+      "kind": "diagnostic_helper",
+      "file": "node_modules/.cache/m512-trace-probe.mjs",
+      "title": "Controlled expected-failure probe validates actual network capture and excludes source and screencast artifacts",
+      "marker": "Collected source files must stay disabled."
+    },
+    "B01": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "whole source observations enumerate own keys and nested hidden values while Form read stays marked"
+    },
+    "B02": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "source enumeration surrounds the whole field pass rather than interleaving unbound keys"
+    },
+    "B03": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "full refresh and revert observe source while selected refresh reads validation and equal writes keep their boundaries"
+    },
+    "B04": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "hidden sets and coherent batches notify full committed source without replaying unchanged field projections"
+    },
+    "B05": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "committed subscriptions do not promise completed focused display and also observe native edits"
+    },
+    "B06": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "shared Forms and application subscriptions retain independent cleanup and separate store identity"
+    },
+    "B07": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "application receive normalization precedes create replace and append without changing wire data"
+    },
+    "B08": {
+      "kind": "browser",
+      "file": "tests/browser/form-source.spec.ts",
+      "title": "a failing source subscriber preserves committed hidden data and does not prevent later Form or observer work"
+    },
+    "B09": {
+      "kind": "browser",
+      "file": "tests/browser/m512-source-demo.spec.ts",
+      "title": "reduced CVC details preserve unmarked source fields and the actual raw snapshot follows committed edits"
+    },
+    "R01": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a failing before hook preserves the previous row view draft and visible errors before a later retry"
+    },
+    "R02": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "a source mutation during before binding supersedes that pass and suppresses its stale after hook"
+    },
+    "R03": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "disposal during a before hook suppresses field work and after hooks and releases ownership"
+    },
+    "R04": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "whole after hooks finish synchronously while full and selected refresh defer focused text projection"
+    },
+    "R05": {
+      "kind": "inherited_browser_source",
+      "file": "tests/browser/form-binding.spec.ts",
+      "title": "selected refresh preserves invalid drafts and issues without parsing validating or committing inputs"
+    }
+  },
+  "witness_counts": {
+    "status": "actual_current_canonical_counts_independent_raw_and_documents_pending",
+    "unit_delta": 0,
+    "browser_delta": 9,
+    "focused_source_browser_cases": 8,
+    "actual_demo_browser_cases": 1,
+    "source_witnesses": 2,
+    "example_source_witnesses": 2,
+    "installed_source_witnesses": 3,
+    "diagnostic_witnesses": 2,
+    "inherited_browser_source_witnesses": 5,
+    "inherited_full_cases_per_engine": 801,
+    "expected_full_cases_per_engine": 810,
+    "expected_unit_pass_count": 138,
+    "actual_unit_pass_count": 138,
+    "actual_full_cases_per_engine": 810
+  },
+  "verification": {
+    "status": "passed_fresh_canonical_source_raw_evidence_semantic_and_mechanical_document_checks",
+    "gate_record": "docs/implementation/evidence/m512-gates.jsonl",
+    "final_receipt": "docs/implementation/evidence/m512-verification.json",
+    "required_engines": [
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "required_package_checks": [
+      "isolated_js",
+      "isolated_ts",
+      "packed_chromium",
+      "packed_firefox",
+      "packed_webkit",
+      "installed_chrome",
+      "installed_edge"
+    ],
+    "required_other_checks": [
+      "strict_build",
+      "strict_source_types",
+      "strict_example_types",
+      "unit",
+      "binding_9_original_budgets",
+      "viewport_21_original_budgets",
+      "docs_changed_zero_errors_warnings",
+      "docs_full_zero_errors_warnings"
+    ],
+    "baseline_input_entries": 192,
+    "baseline_unit_cases": 138,
+    "baseline_full_cases_per_engine": 801,
+    "inventory_expectation": {
+      "status": "actual_final_frozen_counts",
+      "actual_source_inputs": 194,
+      "actual_package_files": 193,
+      "actual_unit_pass_count": 138,
+      "scope": "Actual single frozen map,unchanged package bytes and complete current gate logs."
+    },
+    "semantic_document_scope": [
+      "docs/implementation/current.md",
+      "docs/implementation/m5-form-source-plan.md",
+      "docs/implementation/feature-parity-plan.md",
+      "docs/v2/form-source.md",
+      "docs/v2/form.md",
+      "docs/v2/migration.md",
+      "docs/v2/grid-demo.md"
+    ],
+    "semantic_document_scope_status": "actual7_semantic_bodies_independently_approved_pending_mechanical_stamps",
+    "setup_observations": [
+      {
+        "kind": "own_ignored_helper_syntax",
+        "status": "passed",
+        "recorded_invocations": 6,
+        "unique_helpers": 6,
+        "command_scope": "node --check on six owned ignored M512 helpers; not a project verification command",
+        "log": {
+          "path": "node_modules/.cache/m512-helper-syntax.log",
+          "sha256": "53b720369154fd4a55c0b616ed5051dd73d5ce2787b834d1933367d08c9198c6"
+        }
+      }
+    ],
+    "operator_dispositions": [],
+    "diagnostic_dispositions": [
+      {
+        "status": "controlled_trace_probe_retained_raw_setup_failure_and_verified_expected_failure_capture",
+        "scope": "Controlled diagnostic only; no framework or full-suite credit. The artificial route.abort request establishes future diagnostic capture,not an original module-failure cause.",
+        "initial_setup_failure": {
+          "gate": {
+            "label": "focused-trace-probe",
+            "args": [
+              "node_modules/.cache/m512-trace-probe.mjs"
+            ],
+            "started": "2026-11-14T05:04:46.091Z",
+            "finished": "2026-11-14T05:04:46.674Z",
+            "exit_code": 1,
+            "log": "m512-focused-trace-probe.log",
+            "log_sha256": "5e873d2ad58a3cda4f8873fa2d36c432f50e0c71bc3f861623134cbf9fe60684",
+            "input_manifest": "m512-inputs-993e5acb0540.json",
+            "input_manifest_sha256": "993e5acb0540dbfcad8cb25783dad2dcf51b1fab275f652bdef49f7b0ca439a4",
+            "source_normalization": "UTF-8; CRLF normalized to LF",
+            "sources_unchanged": true,
+            "environment": {
+              "PLAYWRIGHT_BROWSERS_PATH": null
+            },
+            "runtime": {
+              "node": "v24.18.0",
+              "platform": "win32",
+              "arch": "x64"
+            }
+          },
+          "raw_empty_report": {
+            "path": "docs/implementation/evidence/m512-trace-probe-report.json",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0
+          },
+          "raw_stderr": {
+            "path": "docs/implementation/evidence/m512-trace-probe-stderr.log",
+            "sha256": "23124bc7f861396aa4e4e1df13a8762368a434eaeac014294970b28a9fd472f3",
+            "bytes": 2559
+          },
+          "observed_cause": "Node24 refused TypeScript stripping for ignored config under node_modules; collection did not run. The wrapper then failed parsing the empty report.",
+          "changed_after_failure": "Only ignored diagnostic fixture extensions changed to .mjs with explicit testMatch; captured project inputs stayed unchanged.",
+          "fixture_source_limit": "The initial TypeScript fixture source text/hash was not captured or invented.",
+          "canonical_credit": 0
+        },
+        "successful_controlled_probe": {
+          "gate": {
+            "label": "focused-trace-probe",
+            "args": [
+              "node_modules/.cache/m512-trace-probe.mjs"
+            ],
+            "started": "2026-11-14T05:05:42.277Z",
+            "finished": "2026-11-14T05:05:44.947Z",
+            "exit_code": 0,
+            "log": "m512-focused-trace-probe-2.log",
+            "log_sha256": "8b232e91d7d4cb91225d6725828b4923c8a1cf039b850d264e0ca19c4d4e8fd4",
+            "input_manifest": "m512-inputs-993e5acb0540.json",
+            "input_manifest_sha256": "993e5acb0540dbfcad8cb25783dad2dcf51b1fab275f652bdef49f7b0ca439a4",
+            "source_normalization": "UTF-8; CRLF normalized to LF",
+            "sources_unchanged": true,
+            "environment": {
+              "PLAYWRIGHT_BROWSERS_PATH": null
+            },
+            "runtime": {
+              "node": "v24.18.0",
+              "platform": "win32",
+              "arch": "x64"
+            }
+          },
+          "companion": {
+            "path": "docs/implementation/evidence/m512-trace-probe-2.json",
+            "sha256": "e5cd9be5525ebf717bd1c15d8d5139c075b9748226f31ff5a4325ab18c085c53",
+            "bytes": 2313
+          },
+          "raw_report": {
+            "path": "docs/implementation/evidence/m512-trace-probe-2-report.json",
+            "sha256": "f5ac9ed194e1e541de6c4d47ef43f031b0de8c7232b70bef09a7a9cb875cc63a",
+            "bytes": 5726
+          },
+          "raw_stderr": {
+            "path": "docs/implementation/evidence/m512-trace-probe-2-stderr.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0
+          },
+          "trace": {
+            "path": "docs/implementation/evidence/m512-trace-probe-2.zip",
+            "sha256": "470d151eb213b537781d6f5a770b69b9a41611b24fba3b3d1547386232918ede",
+            "bytes": 8750,
+            "members": 10,
+            "trace_events": 63,
+            "source_members": 0,
+            "screencast_frames": 0
+          },
+          "fixture": {
+            "config": "import { defineConfig } from \"@playwright/test\";\nimport { fileURLToPath } from \"node:url\";\nimport base from \"../../../tests/playwright.config.ts\";\nexport default defineConfig({ ...base, testDir: fileURLToPath(new URL(\".\", import.meta.url)), testMatch: \"probe.spec.mjs\" });\n",
+            "test": "import { test } from \"@playwright/test\";\ntest(\"controlled module request failure retains diagnostic evidence\", async ({ page }) => {\n  await page.route(\"**/m512-network-probe.js\", route => route.abort(\"failed\"));\n  await page.goto(\"/\");\n  await page.evaluate(() => import(\"/m512-network-probe.js\"));\n});\n",
+            "config_sha256": "49ec9d42b5f09632c1f438f5679fff709bfe81eadd9bc1046da84be176d0d0f1",
+            "test_sha256": "1c116ed10f940a79586b779dafdc16b8498bf77eb3e43e54907bf3ef32ad80c0",
+            "inherited_config": "tests/playwright.config.ts",
+            "inherited_config_sha256": "742ec337d6f49b9bb1484fd55aad6621e21c72e77dc96c658a9aa5ee5c3bda28"
+          },
+          "expected_child_exit": 1,
+          "actual_child_exit": 1,
+          "wrapper_exit": 0,
+          "request": {
+            "url": "http://127.0.0.1:4173/m512-network-probe.js",
+            "failure": "net::ERR_FAILED"
+          },
+          "retries": 0,
+          "canonical_credit": 0,
+          "original_module_failure_cause": "not established"
+        },
+        "wrapper_inspection": {
+          "path": "node_modules/.cache/m512-trace-probe.mjs",
+          "sha256": "c036b6a61dec799df9a07e8194c48775f1656cca0de73d7192240b8ab537dd24",
+          "scope": "Current read-only wrapper source inspection; no execution-time wrapper hash is inferred."
+        }
+      }
+    ],
+    "superseded_artifacts": [],
+    "independent_reviews": {
+      "baseline": "passed_read_only_0c523cd_M511_source_archive_raw_snapshot_document_and_preservation_recovery",
+      "contract": "bounded_recipe_only_contract_and_snapshotDom_network_trace_correction_independently_approved_before_edits",
+      "source": "passed_independent_connected_recipe_owner_config_probe_and_caller_static_review",
+      "evidence": "passed_independent_raw_gate_source_map_archive_runtime_equality_probe_performance_and_preservation_audit",
+      "documents": "passed_independent_final_semantics_and_actual_changed_full_zero_error_zero_warning_checks"
+    },
+    "independent_notes": {
+      "baseline": {
+        "status": "passed_read_only_M5.11_baseline_recovery_for_M5.12",
+        "helper": {
+          "path": "node_modules/.cache/m512-baseline-audit.mjs",
+          "sha256": "4f491a6880e7f2d13e336714c91de7a6aa0010d779198d35d3e07c2aa253d732"
+        },
+        "log": {
+          "path": "node_modules/.cache/m512-baseline-audit.log",
+          "sha256": "e7e764be2709a740e7e57db50277111259d9106569c888cb7cd004cc41d494bf"
+        },
+        "inputs": 192,
+        "committed_evidence_files": 111,
+        "records": 28,
+        "development": 11,
+        "latest": 16,
+        "superseded": 1,
+        "input_maps": 2,
+        "unit": 138,
+        "full_cases_per_engine": 801,
+        "actual_tar_sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+        "actual_tar_files": 193,
+        "linked_raw_children": 72,
+        "semantic_bodies": 7,
+        "historical_fingerprint_only": 34,
+        "scope": "First-run read-only recorded-byte recovery; no compiler/runtime/browser/performance/model command or historical recertification."
+      },
+      "contract": {
+        "status": "approved_bounded_recipe_and_diagnostic_configuration",
+        "scope": "No framework src/public API/type/module/dependency change. Standard retain-on-failure tracing disables screenshots/sources and retains DOM snapshots because installed coreBundle.js25640 gates HAR start on snapshotDom. A controlled expected-failure probe must verify actual network/error entries without retry/skip/timeout changes; it receives no framework/canonical credit."
+      },
+      "source": {
+        "status": "passed_independent_connected_recipe_owner_config_probe_and_caller_static_review",
+        "reviewer": "m511_baseline, independent of recipe/test/config authorship",
+        "reviewed_at": "2026-11-14",
+        "reviewed_source_sha256": {
+          "src/ui/form.ts": "de6727f0c3059e7a59f18e451378f8e59d2484d7bb9f24f49f6b00b6184cb545",
+          "src/data/index.ts": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+          "tests/browser/form-source.spec.ts": "d731bab9c46046e8718e9f8c905b3a7cdfad4e68ea78e264bf290b09d32c6899",
+          "tests/browser/m512-source-demo.spec.ts": "185022eece545f6f77ab007b6efd38d3f6633413f319dfd0868041cb3fa5eeab",
+          "tests/browser/form-binding.spec.ts": "79f51c2326773bd50c631a607086f7b2fdb646d63f509b78f6dd84dacf77afd5",
+          "examples/vite/m10/demo.ts": "186dbd11c88b9991cb0d8039773cd383da4e4d136bd675d0545b0ea8696fe2ff",
+          "examples/vite/m10/detail.ts": "9c4b3521012d5d53403878f4dcc565cd949fae758708a001318169f60cb6319a",
+          "tests/consumers/browser/main.js": "c45ff6bd511f83200ee98de0251d464b2d9710cc6d87bcef60cad5e8fe53f461",
+          "tests/consumers/ts/check.ts": "472a6caccb59caa79e2a8d7b8fb9308f06377c8c532e2ee90b567b9ab929216a",
+          "tools/check-packed-browser.mjs": "cc2decbf0dd925aaa0018eb866582a77272768f6d49820f77885bc322a64bfc5",
+          "tests/playwright.config.ts": "742ec337d6f49b9bb1484fd55aad6621e21c72e77dc96c658a9aa5ee5c3bda28",
+          "node_modules/.cache/m512-trace-probe.mjs": "c036b6a61dec799df9a07e8194c48775f1656cca0de73d7192240b8ab537dd24"
+        },
+        "framework_and_example_source": "unchanged_from_0c523cda",
+        "new_browser_witnesses": 9,
+        "total_exact_witnesses": 23,
+        "public_api_type_module_dependency_delta": 0,
+        "findings": [],
+        "observations": [
+          "Whole Form callbacks receive the full frozen row and surround the whole field pass; Form.read reconstructs only compiled fields. No per-key interleaving or nullable field context is added.",
+          "Rows.set/setMany publish committed immutable state; equal writes remain quiet,while even unchanged revert intentionally emits its event. Notification failures preserve committed state and continue later listeners. No setter-attempt,old-value metadata or completed-display guarantee is claimed.",
+          "Eight focused cases exercise actual Form/Rows owners; the ninth uses the existing reduced CVC detail/raw panel and checks released input and unique IDs. No application or framework rendering path was added.",
+          "Installed TS/browser fixtures normalize named incoming business fields outside framework code,retain complete originals,observe committed native/hidden/batched edits and release subscriptions. Isolated JS import and browser execution retain distinct scopes.",
+          "Real Playwright config changes only standard retain-on-failure tracing,screenshots/sources disabled,DOM snapshots retained. Current installed core gates HAR capture on snapshotDom. Controlled actual trace proves one route-aborted network request/error; expected child failure and initial ignored-config loader failure carry zero framework/full-suite credit."
+        ],
+        "scope": "Targeted Ponytail connected-change/static review and independent recorded-byte probe inspection only. No compiler/browser/runtime/performance command executed; mandatory final whole-code M13 remains required.",
+        "helper": {
+          "path": "node_modules/.cache/m512-source-review.mjs",
+          "sha256": "73686412a88682d44674306373fb495cc262dad69828e9736344ed28d188bbfb"
+        },
+        "log": {
+          "path": "node_modules/.cache/m512-source-review.log",
+          "sha256": "63b40d231810883e36c5d99bd1d00e1eab26b5f1e9517fda16ea99416cd51e9a"
+        }
+      },
+      "runtime_reconciliation": {
+        "status": "captured_canonical_recipe_runtime_verified_independent_raw_and_documents_pending",
+        "input_manifest": "m512-inputs-993e5acb0540.json",
+        "input_manifest_sha256": "993e5acb0540dbfcad8cb25783dad2dcf51b1fab275f652bdef49f7b0ca439a4",
+        "source_inputs": 194,
+        "gate_records": 24,
+        "development_records": 8,
+        "superseded_records": 0,
+        "failed_records": 1,
+        "input_maps": [
+          {
+            "path": "m512-inputs-993e5acb0540.json",
+            "entries": 194,
+            "sha256": "993e5acb0540dbfcad8cb25783dad2dcf51b1fab275f652bdef49f7b0ca439a4"
+          }
+        ],
+        "canonical_groups": 16,
+        "execution_commands": 27,
+        "collection_commands": 13,
+        "unit_passed": 138,
+        "unit_delta": 0,
+        "new_browser_cases": 9,
+        "full_suites": {
+          "chromium": {
+            "passed": 810,
+            "elapsed": "12 sequential Chromium shards, 323.1s",
+            "log": "m512-browser-chromium.log",
+            "log_sha256": "21165ecda28c8fb5deac4d6530e97df3ca4adf0ad8ee125ecdfd602fe2a7b6a7"
+          },
+          "firefox": {
+            "passed": 810,
+            "elapsed": "8.8m",
+            "log": "m512-browser-firefox.log",
+            "log_sha256": "8f5db9e97d9655d4968986bfa9e5c0773c5995f05e0d7252ee3392a79657f8a1"
+          },
+          "webkit": {
+            "passed": 810,
+            "elapsed": "6.9m",
+            "log": "m512-browser-webkit.log",
+            "log_sha256": "07d4385947011dd29999c139fd666328ae8fbc2c661d1911a903cf750e1ee7b2"
+          }
+        },
+        "chromium": {
+          "manifest": "m512-chromium-shards.json",
+          "manifest_sha256": "176e209c39c1da34cdf82e5be4566965f0117055e8a874ad7a98cd5edcdfa960",
+          "shard_count": 12,
+          "partitions": [
+            71,
+            90,
+            49,
+            66,
+            84,
+            54,
+            74,
+            59,
+            69,
+            62,
+            68,
+            64
+          ],
+          "raw_child_files": 50,
+          "total_linked_raw_children": 50,
+          "elapsed_seconds": 323.057,
+          "retained_partial": [],
+          "canonical_failures": 0
+        },
+        "artifact": {
+          "sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+          "files": 193,
+          "packed_bytes": 340609,
+          "unpacked_bytes": 1716884,
+          "actual_tar_sha_and_listing_verified": true,
+          "byte_identical_M511_tar": true,
+          "framework_source_and_api_delta": 0
+        },
+        "installed_js_ts": "captured pass",
+        "installed_windows_browsers": 5,
+        "performance": {
+          "binding_gate": "captured pass",
+          "viewport_gate": "captured pass",
+          "required_original_budgets": {
+            "binding": 9,
+            "viewport": 21
+          },
+          "recomputed_medians": 60,
+          "raw_durations": 300,
+          "budgets_checked": 30,
+          "independent_raw_geometry_review": "pending"
+        },
+        "controlled_probe": {
+          "initial_setup_failure": 1,
+          "expected_child_failure_verified": 1,
+          "wrapper_success": 1,
+          "canonical_credit": 0
+        },
+        "scope": "Read-only recorded-byte/log/map/shard/archive/median reconciliation; no project runtime rerun. Independent archive payload/test identity/geometry and final document review remain pending. The failed setup probe and later intentional child failure stay distinct from framework and canonical acceptance.",
+        "helper": {
+          "path": "node_modules/.cache/m512-runtime-ledger.mjs",
+          "sha256": "65d9629f316c0b01fb07b5e14f271c22693bb9ffa83f5c6492db8cc96e1455e6"
+        }
+      },
+      "raw_evidence": {
+        "status": "approved_independent_final_raw_evidence",
+        "helper": {
+          "path": "node_modules/.cache/m512-independent-audit.mjs",
+          "sha256": "77412bddf76a808b91edbfec170e06c6b78396059d9ceeb2e71724d81528743a"
+        },
+        "log": {
+          "path": "node_modules/.cache/m512-independent-audit.log",
+          "sha256": "68bf3523d7bfa36df6aef0b78df5f8896b94185abb240d10c677c908aea7dd20"
+        },
+        "audited_receipt": {
+          "path": "node_modules/.cache/m512-reviewed-runtime-receipt.json",
+          "sha256": "e59eb9ec33ad48183f988c1dc46e2638a04a7bcad58167e9ea31f6b6b067e4e7",
+          "byte_exact_R0": true
+        },
+        "records": 24,
+        "source_inputs": 194,
+        "input_maps": 1,
+        "development": 8,
+        "latest": 16,
+        "superseded": 0,
+        "unit_cases": 138,
+        "new_browser_cases": 9,
+        "focused_cases_per_engine": 71,
+        "full_cases_per_engine": 810,
+        "actual_archive": {
+          "sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+          "files": 193,
+          "packed_bytes": 340609,
+          "unpacked_bytes": 1716884,
+          "header_checksums": 193,
+          "all_payloads_byte_identical": true,
+          "M511_payloads_byte_identical": true,
+          "framework_source_delta": 0
+        },
+        "linked_raw_children": 50,
+        "current_incomplete_attempts": 0,
+        "controlled_trace_probe": {
+          "linked_raw_files": 6,
+          "initial_setup_failure_credit": 0,
+          "expected_child_exit": 1,
+          "retries": 0,
+          "canonical_credit": 0,
+          "trace_members": 10,
+          "trace_events": 63,
+          "trace_bytes": 8750,
+          "trace_sha256": "470d151eb213b537781d6f5a770b69b9a41611b24fba3b3d1547386232918ede",
+          "actual_request_failure": "net::ERR_FAILED",
+          "source_members": 0,
+          "screencast_frames": 0,
+          "original_module_failure_cause": "not established",
+          "wrapper_exit": 0,
+          "wrapper_passed": true
+        },
+        "recomputed_medians": 60,
+        "raw_durations": 300,
+        "budgets_checked": 30,
+        "raw_geometry": {
+          "stage_samples": 120,
+          "cycle_windows": 300,
+          "block_records": 1595,
+          "native_merges": 265,
+          "append_cleanup_checked": true
+        },
+        "immutable_parents": 6,
+        "protected_performance_fixtures": 4,
+        "protected_raw_tar_fixtures": 3,
+        "preservation": "v1,ignored original lock,master and alpha baseline verified",
+        "scope": "Accepted independent recorded-byte raw audit; no project/compiler/browser/benchmark/model rerun. Historical runtime,original module-failure cause and final semantic/mechanical document acceptance remain separate."
+      },
+      "final_documents": {
+        "status": "approved_independent_final_semantics_mechanical_checks_completed_by_authorized_root",
+        "review_scope": "Seven semantic concepts accepted through independent full current Guide/Form reads,reviewed new paragraphs plus exact preserved prior full-body proofs for migration/demo/parity,and lead review of current/newplan,navigation/dated log,connected source/witnesses,R1 and accepted raw report. No runtime or model command rerun.",
+        "reviewed_files": {
+          "docs/implementation/current.md": {
+            "normalized_whole_file_sha256": "204f41e93fc2844b5ca61bc6c77c0414600c398cf2b88d1aed57f0d624ae1ece",
+            "normalized_body_sha256": "8fc094c37b0170610ccd069a8fd8c4e92266f450806b38efc26e86abebf32947"
+          },
+          "docs/implementation/m5-form-source-plan.md": {
+            "normalized_whole_file_sha256": "e01df053e5a68698e1adbaef2b4cfb4ad4ff497877f760f653402a01b7c3130c",
+            "normalized_body_sha256": "d2e672f71a1426d635867b250a5498fff50bb9824edc82f6b421e756223d4c92"
+          },
+          "docs/implementation/feature-parity-plan.md": {
+            "normalized_whole_file_sha256": "42ea8ed0b26734766f213b3e498d01d1c425297212b9f96fbad7c88e03de249e",
+            "normalized_body_sha256": "a1c286d6593c476b3bac69d22d8c8276a03e7999b899caf7992a8877ee62bef0"
+          },
+          "docs/v2/form-source.md": {
+            "normalized_whole_file_sha256": "b9edbd1b14a3415f4f58b16d262a4a9807aa96c5626dbc697c1015361321964f",
+            "normalized_body_sha256": "2cafa15d31aa28fa08d948ea11ec7822375b94695a516eba790db46c64ebe140"
+          },
+          "docs/v2/form.md": {
+            "normalized_whole_file_sha256": "6cc7a789f7bedaf261091d21a60285af9caa25441f4ff51f4d2bcacb7fe2b969",
+            "normalized_body_sha256": "bcb5fb3fae3b8b0f7f77b88fd834c8dc82dfcf37e66ee5819c51bb528ec2d5bc"
+          },
+          "docs/v2/migration.md": {
+            "normalized_whole_file_sha256": "fcb9675e2ba5902bc44996efd79cbc28c3413b2bb122fee98fe0724ddc7fe8c7",
+            "normalized_body_sha256": "65b24cbcd7537a06d7db1a9c683b5e00c5efad0553c38f859049c67ca32bcc83"
+          },
+          "docs/v2/grid-demo.md": {
+            "normalized_whole_file_sha256": "2ce757b153ffe00aef6fd638a371e2f750a1ae60772ebe2adfefa8660a18d0ac",
+            "normalized_body_sha256": "eaad974d05d38460a5e16a1f68c1f19b329db2d5ac393180eccad5d353ace9a4"
+          }
+        },
+        "independent_body_reviews": {
+          "docs/v2/form-source.md": {
+            "reviewer": "m511_design",
+            "scope": "Full current body read",
+            "sha256": "2cafa15d31aa28fa08d948ea11ec7822375b94695a516eba790db46c64ebe140"
+          },
+          "docs/v2/form.md": {
+            "reviewer": "m511_design",
+            "scope": "Full current body read",
+            "sha256": "bcb5fb3fae3b8b0f7f77b88fd834c8dc82dfcf37e66ee5819c51bb528ec2d5bc"
+          },
+          "docs/v2/migration.md": {
+            "reviewer": "m511_legacy",
+            "scope": "New paragraph reviewed; unchanged remainder exactly reconstructed against previously fully reviewed M5.11 body",
+            "sha256": "65b24cbcd7537a06d7db1a9c683b5e00c5efad0553c38f859049c67ca32bcc83"
+          },
+          "docs/v2/grid-demo.md": {
+            "reviewer": "m511_legacy",
+            "scope": "New paragraph reviewed; unchanged remainder exactly reconstructed against previously fully reviewed M5.11 body",
+            "sha256": "eaad974d05d38460a5e16a1f68c1f19b329db2d5ac393180eccad5d353ace9a4"
+          },
+          "docs/implementation/feature-parity-plan.md": {
+            "reviewer": "m511_legacy",
+            "scope": "New paragraph reviewed; unchanged remainder exactly reconstructed against previously fully reviewed M5.11 body",
+            "sha256": "a1c286d6593c476b3bac69d22d8c8276a03e7999b899caf7992a8877ee62bef0"
+          }
+        },
+        "review_time_hash_scope": "Whole-file hashes record pre-verified metadata only. Exact LF-normalized bodies must remain unchanged after verified stamping.",
+        "navigation_and_log_reviewed_files": {
+          "docs/index.md": {
+            "normalized_whole_file_sha256": "f64a14b6dbbe8cb7272439a393426aea37d46bceaf457d4e8f92ea03c2cf07d7"
+          },
+          "docs/implementation/index.md": {
+            "normalized_whole_file_sha256": "786d5b1c47058daebd4067766c5557f3f6433887287b647f3e17f870c4a7882b"
+          },
+          "docs/v2/index.md": {
+            "normalized_whole_file_sha256": "da46471ba9746e4a22ba547dd39c15f4a2a71838ced6f4f81888acfc072b7c3f"
+          },
+          "docs/log.md": {
+            "normalized_whole_file_sha256": "9a241a112dc582bb2a9b56d82b9f339c64600863337f9b248aed45f7c0228242"
+          }
+        },
+        "reviewed_receipt_snapshot": {
+          "path": "node_modules/.cache/m512-final-semantics-reviewed-receipt.json",
+          "sha256": "6196c52b7e0d7d7bcaed36fdc3486bacfb45781e7842885ac88b37ffb967dda5",
+          "scope": "Byte-exact R1 at independent semantic review; not a current/final receipt self-hash."
+        },
+        "runtime_invariance_proof": {
+          "path": "node_modules/.cache/m512-runtime-invariance-initial.json",
+          "sha256": "d4395a01149ff77655bf0953e96a6e857a615eea98c3290e0a6e9e654569099e",
+          "audited_receipt_sha256": "e59eb9ec33ad48183f988c1dc46e2638a04a7bcad58167e9ea31f6b6b067e4e7",
+          "unchanged": true,
+          "excluded": [
+            "review",
+            "semantic_acceptance.sha256"
+          ],
+          "scope": "Exact invariant-runtime proof at final semantic review, preserved under an immutable snapshot path. Later current proof files are not represented by this snapshot hash."
+        },
+        "historical_preservation": {
+          "baseline": "0c523cda08ca21f3c0e642666507f29b5ad3a9ea",
+          "historical_fingerprint_only": 27,
+          "preserved_bodies_and_generated_verified_dates": true
+        },
+        "expected_document_checker_scope": {
+          "concepts": 81,
+          "reserved_files": 5
+        },
+        "semantic_findings": [
+          "No framework source,public API/type/module or dependency changes. Every actual package member equals M5.11; fresh recipe witnesses and existing owners define the selected scope.",
+          "Business normalization occurs before Rows loading. Whole Form hooks enumerate own top-level keys with nested JSON intact; Form.read remains marked-field-only. Rows subscriptions observe committed data and own cleanup,without per-key interleaving or DOM-completion promises.",
+          "Equal set/setMany writes stay quiet; unchanged revert still emits its event. Subscriber failures retain committed state and later listeners. Existing source,focus,validation and disposal boundaries remain.",
+          "The actual reduced CVC detail/raw snapshot and exact installed consumers use existing application owners. No synthetic app control or second rendering path was added.",
+          "The initial ignored TypeScript fixture failed collection; the later controlled route-abort child intentionally failed and proved10-member network/error capture. Wrapper success has zero framework/full-suite credit and establishes no earlier cause. Screenshots/sources remain disabled; DOM snapshots stay enabled for the installed network tracer.",
+          "Current plans retain exact legacy timing/default/declaration/receiver and other parity obligations. M5.13 next examines the actual U10 authored radio/checkbox choice gap; no family/P0/M13 closure,omission,publication or token-saving result is claimed."
+        ],
+        "mechanical_completion_authorization": {
+          "owner": "root",
+          "status": "authorized_after_this_independent_semantic_approval",
+          "permitted_actions": [
+            "Apply verified stamps to exactly these seven reviewed semantic concepts.",
+            "Settle fingerprints and run actual changed/full document checks and historical body/date checks.",
+            "After successful checks,complete four selected statuses and actual mechanical notes through m512-complete.",
+            "Regenerate receipt review/semantic-ledger hashes and confirm runtime invariance excluding only review and semantic_acceptance.sha256."
+          ],
+          "conditions": "Seven semantic bodies,frozen runtime inputs,all R0 runtime/setup/operator/diagnostic facts and accepted raw evidence remain unchanged. Any actual body/API/runtime change requires renewed review. Draft final checker claims are conditional on actual passing mechanical checks."
+        },
+        "limits": "Semantic acceptance only until final actual mechanical checks pass. All broader parity/P0/M13,earlier module-failure cause,manual accessibility/personal/token evaluation remain open; Safari excluded and npm/tag deferred.",
+        "helper": {
+          "path": "node_modules/.cache/m512-final-semantic-review.mjs",
+          "sha256": "64ba621b2ee363bc9fd446495c3ee4e4adb5c96c4fe40c3334d7a1790c55c724"
+        },
+        "review_log": {
+          "path": "node_modules/.cache/m512-final-semantic-review.log",
+          "sha256": "71bac730c2008b2864bc2c1172d1b5c499a39aef12c536be1d64d8ac026773d0"
+        },
+        "mechanical_checks": {
+          "checks": {
+            "changed": {
+              "path": "node_modules/.cache/m512-docs-changed.log",
+              "sha256": "7351eb205d1c1f659d641a576d7a831de2389ee6300c515b52b6c794761e6394",
+              "concepts": 81,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            },
+            "full": {
+              "path": "node_modules/.cache/m512-docs-full.log",
+              "sha256": "9cc84e2e487ed3692b73603e2ccb08360d10532964284270de671e265e5ba7f0",
+              "concepts": 81,
+              "reserved_files": 5,
+              "errors": 0,
+              "warnings": 0
+            }
+          },
+          "history": {
+            "path": "docs/implementation/evidence/m512-doc-history.json",
+            "sha256": "3b050f31270c1566f6b8847430c5441340674c2b7fad12034079dcb1050f4806",
+            "historical_fingerprint_only": 27,
+            "preserved_historical_bodies_and_dates": true
+          },
+          "reviewed_bodies_unchanged": true,
+          "verified_semantic_concepts": 7,
+          "scope": "Actual completed checker output and body/history assertions after independently authorized verified stamps; production and audited runtime facts remain unchanged."
+        }
+      }
+    },
+    "limitations": [
+      "Historical runtime remains in its dated scope and is not rerun/recertified.",
+      "Actual macOS/iOS Safari, manual assistive technology, personal acceptance and final fixed-agent/token comparison remain unverified.",
+      "No model-response evaluation, token-saving measurement, npm publication or release tag is performed or inferred."
+    ],
+    "actual_runtime": {
+      "status": "captured_canonical_recipe_runtime_verified_independent_raw_and_documents_pending",
+      "input_manifest": "m512-inputs-993e5acb0540.json",
+      "input_manifest_sha256": "993e5acb0540dbfcad8cb25783dad2dcf51b1fab275f652bdef49f7b0ca439a4",
+      "source_inputs": 194,
+      "gate_records": 24,
+      "development_records": 8,
+      "superseded_records": 0,
+      "failed_records": 1,
+      "input_maps": [
+        {
+          "path": "m512-inputs-993e5acb0540.json",
+          "entries": 194,
+          "sha256": "993e5acb0540dbfcad8cb25783dad2dcf51b1fab275f652bdef49f7b0ca439a4"
+        }
+      ],
+      "canonical_groups": 16,
+      "execution_commands": 27,
+      "collection_commands": 13,
+      "unit_passed": 138,
+      "unit_delta": 0,
+      "new_browser_cases": 9,
+      "full_suites": {
+        "chromium": {
+          "passed": 810,
+          "elapsed": "12 sequential Chromium shards, 323.1s",
+          "log": "m512-browser-chromium.log",
+          "log_sha256": "21165ecda28c8fb5deac4d6530e97df3ca4adf0ad8ee125ecdfd602fe2a7b6a7"
+        },
+        "firefox": {
+          "passed": 810,
+          "elapsed": "8.8m",
+          "log": "m512-browser-firefox.log",
+          "log_sha256": "8f5db9e97d9655d4968986bfa9e5c0773c5995f05e0d7252ee3392a79657f8a1"
+        },
+        "webkit": {
+          "passed": 810,
+          "elapsed": "6.9m",
+          "log": "m512-browser-webkit.log",
+          "log_sha256": "07d4385947011dd29999c139fd666328ae8fbc2c661d1911a903cf750e1ee7b2"
+        }
+      },
+      "chromium": {
+        "manifest": "m512-chromium-shards.json",
+        "manifest_sha256": "176e209c39c1da34cdf82e5be4566965f0117055e8a874ad7a98cd5edcdfa960",
+        "shard_count": 12,
+        "partitions": [
+          71,
+          90,
+          49,
+          66,
+          84,
+          54,
+          74,
+          59,
+          69,
+          62,
+          68,
+          64
+        ],
+        "raw_child_files": 50,
+        "total_linked_raw_children": 50,
+        "elapsed_seconds": 323.057,
+        "retained_partial": [],
+        "canonical_failures": 0
+      },
+      "artifact": {
+        "sha256": "3b78039d0256759142366a690f7d51f507a2964689163f5f1feef32cf8ab0ae2",
+        "files": 193,
+        "packed_bytes": 340609,
+        "unpacked_bytes": 1716884,
+        "actual_tar_sha_and_listing_verified": true,
+        "byte_identical_M511_tar": true,
+        "framework_source_and_api_delta": 0
+      },
+      "installed_js_ts": "captured pass",
+      "installed_windows_browsers": 5,
+      "performance": {
+        "binding_gate": "captured pass",
+        "viewport_gate": "captured pass",
+        "required_original_budgets": {
+          "binding": 9,
+          "viewport": 21
+        },
+        "recomputed_medians": 60,
+        "raw_durations": 300,
+        "budgets_checked": 30,
+        "independent_raw_geometry_review": "pending"
+      },
+      "controlled_probe": {
+        "initial_setup_failure": 1,
+        "expected_child_failure_verified": 1,
+        "wrapper_success": 1,
+        "canonical_credit": 0
+      },
+      "scope": "Read-only recorded-byte/log/map/shard/archive/median reconciliation; no project runtime rerun. Independent archive payload/test identity/geometry and final document review remain pending. The failed setup probe and later intentional child failure stay distinct from framework and canonical acceptance."
+    }
+  },
+  "retained_obligations": [
+    {
+      "owner": "Data / C05,C09,C10",
+      "required": "General schema/value equivalence and all data behaviors outside these selected incoming-state/checkpoint/anchor/wire outcomes."
+    },
+    {
+      "owner": "Form / U01,U03",
+      "required": "Literal per-unbound-key interleaving,equal-write callbacks,inherited enumerable keys,before-set old-value timing,silent post-notification mutation,broader default/global/declaration equivalence,direct hot declarations and all remaining Form/control/source/dynamic outcomes. Existing whole hooks/Rows recipes do not imply equivalence."
+    },
+    {
+      "owner": "List / U04,C08",
+      "required": "Editable List rows, automatic editing/validation policy and remaining row-event/selection workflows; current List remains read-only."
+    },
+    {
+      "owner": "Tree / tree owner",
+      "required": "General validation workflows beyond explicit rejection of bound validators in the current read-only Tree."
+    },
+    {
+      "owner": "Shared rules/defaults / C11,C13",
+      "required": "Remaining retained-rule semantic/configuration parity, global callback/default lifecycle ordering and typed handle/service outcomes."
+    },
+    {
+      "owner": "Date / C12,U20,U21",
+      "required": "Automatic/declarative date and month picker attachment."
+    },
+    {
+      "owner": "Grid / validation-policy",
+      "required": "Legacy unvalidated-paste equivalence and remaining legacy validation-scope crosswalk."
+    },
+    {
+      "owner": "CVC / C07,C08",
+      "required": "Typed declaration assembly, code loading/deferred initialization and remaining shared page/event workflows."
+    },
+    {
+      "owner": "Parent parity / P0,M13",
+      "required": "All outstanding core/UI/Grid parity, consolidated retirement decisions and final whole-code Ponytail review/remediation."
+    }
+  ],
+  "closure": {
+    "full_grid_families_closed": 0,
+    "full_grid_families_still_open": 20,
+    "full_core_or_ui_families_closed": 0,
+    "approved_omissions": 0,
+    "policy": "Only selected application source-ownership outcomes using existing Form/Rows contracts may be accepted after executed witnesses,fresh gates and independent review. Literal per-key/mutation timing,all full-owner/P0/M13 obligations and consolidated omission decisions remain open."
+  }
+}

@@ -1,5 +1,7 @@
 # Concepts
 
+* [Form source ownership and observation](form-source.md) - Normalize application records and observe complete raw Rows without adding field callbacks for absent HTML. (draft)
+
 * [ValueBindContext](value-callbacks.md) - Project mounted Form, Grid and List values without changing raw Rows or validation. (draft)
 
 * [Shared field rules and automatic validation](rules.md) - Supply typed field declarations and shared rule catalogs without global registration or changing authored HTML. (draft)

@@ -33,14 +33,16 @@ sources:
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
     git_blob: dade5db6e1bb7b3c37528034526150d73ce956a6
-generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 ---
 
 This plan applies the user's 2026-10-05 scope correction: all 1.x framework capabilities remain required unless the user approves a specific omission in one consolidated review. Column resize, reorder and hide, multiple selection, bulk paste and true scroll virtualization are mandatory. Existing implementations and immutable evidence remain useful; their selected completion does not establish full parity.[^coverage][^roadmap]
 
 # Goal
+
+[M5.12](m5-form-source-plan.md) executes application receive normalization, full own-source observation and committed Rows notifications with existing Form/data owners and the actual CVC demo. No new observer, nullable field context or dataset is justified by the examined caller. Exact legacy per-key timing, no-op callbacks and silent post-notification mutation remain defect-sensitive unresolved obligations; selected recipe acceptance does not close a family or approve an omission.[^form][^data]
 
 [M5.11](m5-grid-callbacks-plan.md) addresses only construction-time capture and plain invocation of Grid row/completion callbacks, including physical attachment. Existing Form/value callback contracts provide the consistent model. Legacy source-backed local Form recipes do not establish a true DOM-only callback contract; per-unbound-key bind/val timing and legacy instance/initial-selection workflows remain explicit unresolved obligations. No family is closed or capability omitted by this slice.[^grid][^form]
 

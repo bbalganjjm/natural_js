@@ -144,11 +144,11 @@ sources:
   - id: parity-plan
     resource: ../implementation/feature-parity-plan.md
     title: Full framework feature coverage execution plan
-    git_blob: 58251b7b726ac4a654a592b07447f02b76f86fe9
-generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+    git_blob: 98f8a183026bb6b37f92ea4cf9b4572dee14bc98
+generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 ---
 
 Migrate one screen by keeping its authored HTML and CVC roles, then replace implicit global registration, row indexes, and request serialization with explicit page, data, UI, and communication objects. The linked M4 and M7 examples are executable 2.0 screens; the preserved 1.x example is a reference that requires its original application services.[^legacy-screen][^employee][^containers]
@@ -418,6 +418,8 @@ Use Form's existing render for structured/custom DOM and format for text display
 Use a DOM-local Form for authored search inputs. Effective formatters write display without replacing entered raw; local read stays unparsed, while validation and defaults parse separate candidates. Focus exposes editable raw, blur restores valid display and bind(null) refreshes after programmatic native changes. Native reset buttons restore current native defaults without making a request. Cleanup follows default action, respects cancellation and flushes completed work before a later local read/validate/input, including a binding inside an outer native form. beforeBindValue/onBindValue remain Rows-only.[^form]
 
 Legacy N([]).form(...).bind(0, data) still owned a dataset. Use createRows([normalizedRecord]) and bind its RowId for received/business records. Read rows.get(id).value when the complete record, including unbound keys, is needed; Form.read intentionally includes only marked fields. Use Rows.set for source changes and Rows.revert for an existing received checkpoint. Unbound-key normalization belongs in the application receive/factory step, not in a hidden display callback pass.[^rows][^form][^legacy-ui]
+
+The executed [source ownership recipes](form-source.md) use Object.entries(row.value) in whole beforeBind/onBind and an independently owned Rows subscription. Whole callbacks bracket the whole Form pass; subscriptions observe committed raw data, including native input and hidden-key updates, without promising completed DOM. Equal writes do not notify. These recipes add no framework callback and do not reproduce literal v1 key-by-key interleaving, old-value/equal-write invocation or silent post-notification mutation; their defect-sensitive disposition remains unresolved.[^rows][^form][^legacy-ui][^parity]
 
 Legacy add() captured live input values and kept an inserted row through revert. Ordinary Rows.add has no checkpoint; revert removes that insert. Preserve the add-time reset outcome with the existing received-state operation:[^rows][^legacy-ui]
 

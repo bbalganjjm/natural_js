@@ -121,10 +121,10 @@ sources:
     resource: ../../src/ui/index.ts
     title: Public Grid state and handle types
     git_blob: b03e5d6328d64698689621724492dc4e66292737
-generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-25T00:41:28Z }
-  - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
+  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 ---
 
 The interactive demo is the M10 reference screen for the *implemented* `bindGrid` API. It keeps the table's structure and style in authored HTML/CSS, and exposes the raw store and callback results beside it so a coding agent can see what each action changes.[^view][^controller]
@@ -317,6 +317,8 @@ Remaining Grid parity stays required follow-up work. Status/default/lifecycle, c
 Without `initialPage`, `viewport` or `progressive`, Grid creates all initial row clones. Local paging bounds the logical page; viewport bounds connected DOM and keeps page-wide check/range/paste semantics. The scroll root needs finite authored height and stable table/column widths; its estimate does not force fixed-height rows. Interactive use is not a controlled performance measurement. Rebinding for locale, initial page, mode or eligibility policy also discards active identity, selected/checked sets and uncommitted drafts. Use `setSelected([])` or `setChecked([])` to clear a complete set; `select(null)` clears only the active row. Keep the check checkbox separate from `data-field`, do not send `RowId` as a business key, and do not put a fixed `id` in a repeated row.[^grid][^controller][^selection][^viewport]
 
 # Shared value policy preview
+
+The selected/inspected raw snapshot panel already observes the complete Rows record through the controller's source subscription. Reduced CVC details display only selected fields and preserve omitted phone/email/assignment/notes data; editing an omitted field elsewhere still updates the same full source panel. [Form source ownership](form-source.md) separates this committed-data observation from whole binding and mounted value projection. No source observer API or second dataset is added.[^controller][^detail-controller]
 
 The main Grid's row-resource and completion callbacks use explicit closures over its controls and counters. Grid captures these three binding callback references at construction; it does not bind this or reread callback properties. Change live application policy inside a stable forwarding function, and use refresh for unchanged rows. [Grid row binding](grid.md#row-binding-and-owned-resources) defines the boundary; other Grid options retain their own contracts.[^controller]
 

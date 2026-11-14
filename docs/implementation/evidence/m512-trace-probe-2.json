@@ -1,0 +1,48 @@
+{
+  "purpose": "Controlled diagnostic of the real failure-only trace configuration, not framework or full-suite coverage.",
+  "started": "2026-11-14T05:05:42.369Z",
+  "finished": "2026-11-14T05:05:44.939Z",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "-c",
+    "node_modules/.cache/m512-trace-fixture/playwright.config.mjs",
+    "--project=chromium",
+    "--workers=1",
+    "--retries=0",
+    "--output=node_modules/.cache/m512-trace-fixture/output-2",
+    "--reporter=json"
+  ],
+  "expected_child_exit": 1,
+  "actual_child_exit": 1,
+  "report": "m512-trace-probe-2-report.json",
+  "report_sha256": "f5ac9ed194e1e541de6c4d47ef43f031b0de8c7232b70bef09a7a9cb875cc63a",
+  "stderr": "m512-trace-probe-2-stderr.log",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "fixture": {
+    "config": "import { defineConfig } from \"@playwright/test\";\nimport { fileURLToPath } from \"node:url\";\nimport base from \"../../../tests/playwright.config.ts\";\nexport default defineConfig({ ...base, testDir: fileURLToPath(new URL(\".\", import.meta.url)), testMatch: \"probe.spec.mjs\" });\n",
+    "test": "import { test } from \"@playwright/test\";\ntest(\"controlled module request failure retains diagnostic evidence\", async ({ page }) => {\n  await page.route(\"**/m512-network-probe.js\", route => route.abort(\"failed\"));\n  await page.goto(\"/\");\n  await page.evaluate(() => import(\"/m512-network-probe.js\"));\n});\n",
+    "config_sha256": "49ec9d42b5f09632c1f438f5679fff709bfe81eadd9bc1046da84be176d0d0f1",
+    "test_sha256": "1c116ed10f940a79586b779dafdc16b8498bf77eb3e43e54907bf3ef32ad80c0",
+    "inherited_config": "tests/playwright.config.ts",
+    "inherited_config_sha256": "742ec337d6f49b9bb1484fd55aad6621e21c72e77dc96c658a9aa5ee5c3bda28"
+  },
+  "trace": {
+    "file": "m512-trace-probe-2.zip",
+    "sha256": "470d151eb213b537781d6f5a770b69b9a41611b24fba3b3d1547386232918ede",
+    "bytes": 8750,
+    "members": 10
+  },
+  "disabled_capture_checks": {
+    "source_members": 0,
+    "screencast_frames": 0,
+    "trace_events": 63
+  },
+  "request": {
+    "url": "http://127.0.0.1:4173/m512-network-probe.js",
+    "failure": "net::ERR_FAILED"
+  },
+  "retries": 0,
+  "full_suite_credit": 0,
+  "original_module_failure_cause": "not established"
+}

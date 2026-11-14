@@ -382,6 +382,10 @@ try {
     const constructed = h.calls.length === 0;
     h.form.bind(first.id);
     const initial = [...h.calls];
+    const sourceInitial = { keys: h.source.whole[0].entries.map(([key]) => key),
+      hidden: Object.fromEntries(h.source.whole[0].entries).hidden,
+      frozen: Object.isFrozen(first.value.hidden.details[0]),
+      compiledOnly: !Object.hasOwn(h.form.read(), "hidden") && !Object.hasOwn(h.form.read(), "options") };
     input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true }));
     const invalid = !h.form.validate().valid, option = select.firstChild;
     summary.textContent = "Changed display";
@@ -401,14 +405,40 @@ try {
     h.form.bind(second.id);
     input.value = "Beth"; input.dispatchEvent(new Event("input", { bubbles: true }));
     const identity = h.rows.get(first.id).value.name === "Ada" && h.rows.get(second.id).value.name === "Beth";
+    const nativeObserved = h.source.committed.some(({ event, rows }) => event.type === "set" &&
+      rows.some(row => row.id === second.id && row.value.name === "Beth"));
+    const wholeCount = h.calls.length, committedCount = h.source.committed.length;
+    h.rows.set(second.id, "hidden", { ...h.rows.get(second.id).value.hidden, amount: 22.5 });
+    h.rows.setMany([{ id: second.id, values: { name: "Batch Beth", hidden: {
+      ...h.rows.get(second.id).value.hidden, details: [{ count: 5 }]
+    } } }]);
+    const sourceUpdates = h.source.committed.slice(committedCount).map(({ event, rows }) => {
+      const row = rows.find(row => row.id === second.id);
+      return { type: event.type, name: row.value.name, hidden: row.value.hidden };
+    });
+    const equalCount = h.source.committed.length;
+    h.rows.set(second.id, "hidden", h.rows.get(second.id).value.hidden);
+    const source = { initial: sourceInitial, nativeObserved, updates: sourceUpdates,
+      wholeStages: h.source.whole.map(record => record.stage), wholeQuiet: h.calls.length === wholeCount,
+      completeWhole: h.source.whole.every(({ entries }) => {
+        const value = Object.fromEntries(entries);
+        return entries.map(([key]) => key).join(",") === "name,summary,choice,options,hidden" &&
+          value.options.length === 1 && typeof value.hidden.amount === "number" &&
+          typeof value.hidden.enabled === "boolean" && typeof value.hidden.details[0].count === "number";
+      }),
+      equalQuiet: h.source.committed.length === equalCount,
+      original: h.rows.original(second.id).hidden,
+      receivedUnchanged: JSON.stringify(h.source.received) === h.source.receivedText };
+    h.source.stop();
     h.form.dispose(); const stopped = h.calls.length;
     h.rows.revert();
+    source.stopped = h.source.committed.length === equalCount;
     let disposed = false;
     try { h.form.refresh([]); } catch (cause) { disposed = cause.code === "FORM_DISPOSED"; }
     const quiet = stopped === h.calls.length;
     h.rows.dispose(); h.root.remove(); delete window.packedConsumer.formBinding;
     return { constructed, initial, invalid, partial, preflight, commitsSilent, revert, refreshed, identity, disposed, quiet,
-      ids: [first.id, second.id] };
+      ids: [first.id, second.id], source };
   });
   const firstBindingId = formBinding.ids[0];
   assert.deepEqual(formBinding, { constructed: true,
@@ -417,7 +447,15 @@ try {
     preflight: true, commitsSilent: true,
     revert: [["before", firstBindingId, "revert", "A", true], ["after", firstBindingId, "revert", "Ada"]],
     refreshed: [["before", firstBindingId, null, "A", true], ["after", firstBindingId, null, "Ada"]],
-    identity: true, disposed: true, quiet: true, ids: formBinding.ids },
+    identity: true, disposed: true, quiet: true, ids: formBinding.ids,
+    source: { initial: { keys: ["name", "summary", "choice", "options", "hidden"],
+      hidden: { code: "A", amount: 12.5, enabled: true, details: [{ count: 2 }] }, frozen: true, compiledOnly: true },
+      nativeObserved: true,
+      updates: [{ type: "set", name: "Beth", hidden: { code: "B", amount: 22.5, enabled: false, details: [{ count: 3 }] } },
+        { type: "setMany", name: "Batch Beth", hidden: { code: "B", amount: 22.5, enabled: false, details: [{ count: 5 }] } }],
+      wholeStages: ["before", "after", "before", "after", "before", "after", "before", "after"],
+      wholeQuiet: true, completeWhole: true, equalQuiet: true, original: { code: "B", amount: 21.5, enabled: false, details: [{ count: 3 }] },
+      receivedUnchanged: true, stopped: true } },
   "Installed Form whole hooks and same-row refresh must preserve immutable raw context, drafts, errors, choices and lifetime.");
 
   const formChoices = await page.evaluate(() => {

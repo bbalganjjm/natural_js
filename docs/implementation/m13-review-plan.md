@@ -12,7 +12,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Required feature completion and dependency order
-    git_blob: 58251b7b726ac4a654a592b07447f02b76f86fe9
+    git_blob: 98f8a183026bb6b37f92ea4cf9b4572dee14bc98
   - id: coverage
     resource: feature-parity.md
     title: Framework behavior coverage and approved omission boundary

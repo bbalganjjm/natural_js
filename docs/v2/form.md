@@ -6,6 +6,10 @@ tags: [ui, form, binding, accessibility]
 status: draft
 symbols: [bindForm, FormOptions]
 sources:
+  - id: source-browser
+    resource: ../../tests/browser/form-source.spec.ts
+    title: Application normalization and complete raw source observation regressions
+    git_blob: 0e8312b36bc6ec7c537b7dd4ca2d4a78e525881b
   - id: value-binding
     resource: ../../src/ui/value-binding.ts
     title: Private checked value callback execution shared with Grid and List
@@ -86,10 +90,10 @@ sources:
     resource: ../../v1/src/natural.data.js
     title: Preserved 1.x formatter and validator behavior
     git_blob: fe1db485648b4837702cf1c321934b6a78c1344b
-generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6-sol, at: 2026-09-24T14:08:17Z }
-  - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
+  - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 ---
 
 `bindForm` connects marked fields in authored HTML to local input or a caller-owned `Rows` store. It keeps business JSON separate from display text, retains invalid drafts by row, and uses native controls, grouped choices, and authored error regions.[^form]
@@ -271,6 +275,8 @@ A focused editable text field shows source raw and defers both callbacks until b
 Failures identify field, row, phase, callback and cause. During an active before/after value cycle, recursive work on the same field/row fails FORM_VALUE. Rebinding another row during that cycle may complete that row; generation/source checks suppress stale results, including formatter/render results before DOM commit. Ordinary cached, null or no-callback renderer recursion retains UI_RENDER. This is not a whole-Form transaction: earlier DOM writes, committed Rows changes and application side effects are not rolled back. An unchanged failed cycle stays quiet on unrelated repaint; explicit bind or a real row/raw change retries it. Callback output supplies no automatic inverse mapping for edited controls; normalize business values explicitly before loading or through a Rows write.[^form][^render][^values-browser]
 
 ## Whole-row binding and refresh
+
+For hidden business keys and nested source JSON, use the existing full row in whole hooks and a page-owned Rows subscription for committed changes. [Source ownership](form-source.md) gives executed receive/observe/cleanup recipes and exact timing. These operations add no missing-field value callback or hidden source writeback; Form.read remains marked-field data.[^form][^source-browser]
 
 Whole-row hooks observe full binding through one context: readonly root: HTMLElement, row: RowSnapshot<T> and event: RowsEvent | null. The immutable raw row includes unbound keys, identity and status. Constructor rendering does not call the hooks. Both options require Rows and functions; invalid options fail FORM_BIND before root/Select ownership or ARIA changes.[^entry][^form][^binding-browser]
 
@@ -462,6 +468,7 @@ A shared Rows `move` changes order only, and `append` adds separate clean record
 [^local-browser]: Local raw formatting, native reset, lifecycle and CVC regressions
 [^values-browser]: Value projection, raw validation, focus and stale callback regressions
 [^form]: Form binding runtime
+[^source-browser]: Application normalization and complete raw source observation regressions
 [^options]: Shared row option extraction, DOM, selection and availability
 [^options-browser]: Typed Form choices, occurrence identity and owned lifetime regressions
 [^native]: Shared native field values, display and constraints

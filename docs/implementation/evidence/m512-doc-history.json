@@ -1,0 +1,43 @@
+{
+  "baseline_commit": "0c523cda08ca21f3c0e642666507f29b5ad3a9ea",
+  "initial_worktree": "clean",
+  "semantic_concepts": 7,
+  "historical_fingerprint_only": 27,
+  "preserved_historical_bodies_and_generated_verified_dates": true,
+  "historical": [
+    "docs/implementation/m10-acceptance-plan.md",
+    "docs/implementation/m10-change-state-plan.md",
+    "docs/implementation/m10-closure-plan.md",
+    "docs/implementation/m10-columns-plan.md",
+    "docs/implementation/m10-controls-plan.md",
+    "docs/implementation/m10-detail-plan.md",
+    "docs/implementation/m10-interactions-plan.md",
+    "docs/implementation/m10-lifecycle-plan.md",
+    "docs/implementation/m10-parity-plan.md",
+    "docs/implementation/m10-paste-plan.md",
+    "docs/implementation/m10-pinned-plan.md",
+    "docs/implementation/m10-progressive-plan.md",
+    "docs/implementation/m10-row-blocks-plan.md",
+    "docs/implementation/m10-selection-plan.md",
+    "docs/implementation/m10-viewport-plan.md",
+    "docs/implementation/m13-review-plan.md",
+    "docs/implementation/m5-collection-values-plan.md",
+    "docs/implementation/m5-form-binding-plan.md",
+    "docs/implementation/m5-form-defaults-plan.md",
+    "docs/implementation/m5-form-discovery-plan.md",
+    "docs/implementation/m5-form-options-plan.md",
+    "docs/implementation/m5-form-presets-plan.md",
+    "docs/implementation/m5-form-values-plan.md",
+    "docs/implementation/m5-grid-callbacks-plan.md",
+    "docs/implementation/m5-local-form-plan.md",
+    "docs/implementation/m5-shared-rules-plan.md",
+    "docs/implementation/m5-state-plan.md"
+  ],
+  "resume_context": {
+    "scope": "Active resume document only, UTF-8 with CRLF normalized to LF. Not actual tokens or full agent context.",
+    "before_bytes": 5693,
+    "after_bytes": 5901,
+    "before_lines": 72,
+    "after_lines": 72
+  }
+}

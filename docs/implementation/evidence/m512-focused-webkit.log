@@ -1,0 +1,82 @@
+
+
+Running 71 tests using 1 worker
+
+
+
+[1/71] [webkit] › tests\browser\form-binding.spec.ts:50:1 › whole Form hooks surround field projection and expose immutable full raw context without treating false as a veto
+[2/71] [webkit] › tests\browser\form-binding.spec.ts:77:1 › full Form refresh forces explicit value cycles while selecting every field suppresses whole hooks
+[3/71] [webkit] › tests\browser\form-binding.spec.ts:94:1 › whole hook option errors reject before root Select or accessibility ownership
+[4/71] [webkit] › tests\browser\form-binding.spec.ts:112:1 › a failing before hook preserves the previous row view draft and visible errors before a later retry
+[5/71] [webkit] › tests\browser\form-binding.spec.ts:144:1 › a failing after hook retains completed association and display and releases its guard for retry
+[6/71] [webkit] › tests\browser\form-binding.spec.ts:158:1 › whole hooks reject and drain asynchronous results and permit a synchronous recovery
+[7/71] [webkit] › tests\browser\form-binding.spec.ts:176:1 › a superseded hook still drains its rejected asynchronous result without overwriting the nested binding
+[8/71] [webkit] › tests\browser\form-binding.spec.ts:193:1 › unchanged current-row revert observes the exact immutable event without replaying unchanged value hooks
+[9/71] [webkit] › tests\browser\form-binding.spec.ts:208:1 › revert commits source and drops its draft even when the before hook fails before visible changes
+[10/71] [webkit] › tests\browser\form-binding.spec.ts:227:1 › keyed edits validation focus unrelated rows movement and vanishing bindings do not emit whole hooks
+[11/71] [webkit] › tests\browser\form-binding.spec.ts:244:1 › a source mutation during before binding supersedes that pass and suppresses its stale after hook
+[12/71] [webkit] › tests\browser\form-binding.spec.ts:260:1 › a completed different-row nested bind replaces its outer pass without a stale after hook
+[13/71] [webkit] › tests\browser\form-binding.spec.ts:273:1 › same-row and cyclic whole-hook entry fail without poisoning the next explicit binding
+[14/71] [webkit] › tests\browser\form-binding.spec.ts:290:1 › disposal during a before hook suppresses field work and after hooks and releases ownership
+[15/71] [webkit] › tests\browser\form-binding.spec.ts:305:1 › formatter and renderer row replacement during full binding cannot publish an older view or after hook
+[16/71] [webkit] › tests\browser\form-binding.spec.ts:321:1 › a renderer catching a nested before failure cannot publish its stale result or complete the older whole pass
+[17/71] [webkit] › tests\browser\form-binding.spec.ts:346:1 › whole Form rendering bounds same-field and cross-field refresh cycles while permitting nonrecursive hook refresh and retry
+[18/71] [webkit] › tests\browser\form-binding.spec.ts:389:1 › whole after hooks finish synchronously while full and selected refresh defer focused text projection
+[19/71] [webkit] › tests\browser\form-binding.spec.ts:403:1 › selected refresh validates the entire field list before work and visits deduplicated compiled paths in DOM order
+[20/71] [webkit] › tests\browser\form-binding.spec.ts:421:1 › selected refresh treats native groups atomically and keeps focused readonly projection immediate
+[21/71] [webkit] › tests\browser\form-binding.spec.ts:443:1 › selected typed choices prepare only selected sources and reject a later malformed selected source before any writer
+[22/71] [webkit] › tests\browser\form-binding.spec.ts:460:1 › selected refresh preserves invalid drafts and issues without parsing validating or committing inputs
+[23/71] [webkit] › tests\browser\form-binding.spec.ts:478:1 › local selected refresh uses raw context while leaving unselected native display and validation errors alone
+[24/71] [webkit] › tests\browser\form-binding.spec.ts:494:1 › an empty local selection can finish native reset without adding selected writes or validation
+[25/71] [webkit] › tests\browser\form-binding.spec.ts:508:1 › unbound selected refresh only clears selected compiled fields and never emits whole hooks
+[26/71] [webkit] › tests\browser\form-source.spec.ts:36:1 › whole source observations enumerate own keys and nested hidden values while Form read stays marked
+[27/71] [webkit] › tests\browser\form-source.spec.ts:55:1 › source enumeration surrounds the whole field pass rather than interleaving unbound keys
+[28/71] [webkit] › tests\browser\form-source.spec.ts:73:1 › full refresh and revert observe source while selected refresh reads validation and equal writes keep their boundaries
+[29/71] [webkit] › tests\browser\form-source.spec.ts:91:1 › hidden sets and coherent batches notify full committed source without replaying unchanged field projections
+[30/71] [webkit] › tests\browser\form-source.spec.ts:108:1 › committed subscriptions do not promise completed focused display and also observe native edits
+[31/71] [webkit] › tests\browser\form-source.spec.ts:124:1 › shared Forms and application subscriptions retain independent cleanup and separate store identity
+[32/71] [webkit] › tests\browser\form-source.spec.ts:141:1 › application receive normalization precedes create replace and append without changing wire data
+[33/71] [webkit] › tests\browser\form-source.spec.ts:163:1 › a failing source subscriber preserves committed hidden data and does not prevent later Form or observer work
+[34/71] [webkit] › tests\browser\form-values.spec.ts:56:1 › Form value callbacks preserve real replacements and observe native DOM without changing Rows
+[35/71] [webkit] › tests\browser\form-values.spec.ts:93:1 › after projections run the existing formatter or renderer once more only when their raw input changes
+[36/71] [webkit] › tests\browser\form-values.spec.ts:117:1 › projection caching preserves whole-row formatter and renderer reactivity without replaying value callbacks
+[37/71] [webkit] › tests\browser\form-values.spec.ts:136:1 › callback phases follow actual field changes while unrelated rows movement nested siblings and unchanged resets stay quiet
+[38/71] [webkit] › tests\browser\form-values.spec.ts:153:1 › focused text defers explicit binding and preserves its pending reason through unchanged resets until blur
+[39/71] [webkit] › tests\browser\form-values.spec.ts:174:1 › invalid drafts never become binding events and a focused successful commit projects its new raw once on blur
+[40/71] [webkit] › tests\browser\form-values.spec.ts:191:1 › raw constraints and hidden validation ignore display projections and another row native custom validity
+[41/71] [webkit] › tests\browser\form-values.spec.ts:209:1 › parsers and business validation receive committed candidate raw while projections leave originals and save changes intact
+[42/71] [webkit] › tests\browser\form-values.spec.ts:229:1 › native groups typed duplicate choices and unmarked Selects preserve their distinct projection contracts
+[43/71] [webkit] › tests\browser\form-values.spec.ts:256:1 › undefined callbacks preserve structured display and unavailable loaded choices without normalizing their source
+[44/71] [webkit] › tests\browser\form-values.spec.ts:271:1 › callback option errors reject before Form ownership or accessibility changes and leave local Forms unchanged
+[45/71] [webkit] › tests\browser\form-values.spec.ts:292:1 › explicit invalid projections fail synchronously with automatic validation disabled and permit a fresh retry
+[46/71] [webkit] › tests\browser\form-values.spec.ts:332:1 › typed projection guards consume duplicate occurrences and reject an unavailable final replacement before its write
+[47/71] [webkit] › tests\browser\form-values.spec.ts:352:1 › cached explicit typed projections recheck changed options without replaying hooks or changing the received raw
+[48/71] [webkit] › tests\browser\form-values.spec.ts:368:1 › callback failures identify their field row phase and cause without pretending DOM binding is transactional
+[49/71] [webkit] › tests\browser\form-values.spec.ts:394:1 › different-row callback reentry completes the newer binding and rejects same-pair cycles with a recoverable error
+[50/71] [webkit] › tests\browser\form-values.spec.ts:422:1 › formatter and renderer row reentry cannot commit an older returned view over the completed new binding
+[51/71] [webkit] › tests\browser\form-values.spec.ts:443:1 › source removal null binding and replacement clear callback state without stale after work or resurrection
+[52/71] [webkit] › tests\browser\form-values.spec.ts:473:1 › disposal from either callback restores authored render nodes and suppresses every later value write
+[53/71] [webkit] › tests\browser\form-values.spec.ts:494:1 › a callback failure after a committed Rows update keeps the actual change and supports an explicit retry
+[54/71] [webkit] › tests\browser\form-values.spec.ts:509:1 › independent authored Forms share raw data with unique accessible errors and release callbacks without retained ownership
+[55/71] [webkit] › tests\browser\form-values.spec.ts:530:1 › array replacement accessors are materialized once before validation freezing and cached reuse
+[56/71] [webkit] › tests\browser\form-values.spec.ts:544:1 › same-target renderer recursion stays bounded without hooks during cached repaint and after null binding
+[57/71] [webkit] › tests\browser\form-values.spec.ts:565:1 › failed value cycles remain quiet on sibling updates until explicit binding or a real raw change retries them
+[58/71] [webkit] › tests\browser\form-values.spec.ts:583:1 › focused read-only text projects immediately while ordinary formatter-only focus behavior stays compatible
+[59/71] [webkit] › tests\browser\m512-source-demo.spec.ts:5:1 › reduced CVC details preserve unmarked source fields and the actual raw snapshot follows committed edits
+[60/71] [webkit] › tests\browser\row-state.spec.ts:91:1 › state replacement resets shared identities and displays received flags without business metadata
+[61/71] [webkit] › tests\browser\row-state.spec.ts:113:1 › state append preserves shared drafts focus snapshots membership and one frozen append event
+[62/71] [webkit] › tests\browser\row-state.spec.ts:137:1 › received pending checkpoints revert values and flags while ordinary inserts remain cancellable
+[63/71] [webkit] › tests\browser\row-state.spec.ts:163:1 › received tombstones stay protected in native editors membership Forms and paste after checkpoint reversion
+[64/71] [webkit] › tests\browser\row-state.spec.ts:185:1 › first-position add and move use retained deleted anchors and preserve their order when ordinary deletions revert
+[65/71] [webkit] › tests\browser\row-state.spec.ts:204:1 › invalid later state records preserve all shared DOM caches events and the next committed identity
+[66/71] [webkit] › tests\browser\row-state.spec.ts:225:1 › unchanged received checkpoint reversion keeps caches but clears local Form and Grid drafts
+[67/71] [webkit] › tests\browser\row-state.spec.ts:240:1 › state loading and append retain bounded viewport ownership and become quiet after all views dispose
+[68/71] [webkit] › tests\browser\row-state.spec.ts:259:1 › independent received stores keep document-unique error IDs and unaffected native Form ownership
+[69/71] [webkit] › tests\browser\row-state.spec.ts:282:1 › application POST projections choose current or received deletion values and scalar or array bodies without RowId leakage
+[70/71] [webkit] › tests\browser\row-state.spec.ts:307:1 › application GET decoding explicitly maps statuses and cancellation prevents late state publication
+[71/71] [webkit] › tests\browser\row-state.spec.ts:343:1 › the Grid explorer loads and appends received states and contrasts received and current deletion payloads
+  71 passed (25.3s)
+[WebServer] (node:21920) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:11388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
