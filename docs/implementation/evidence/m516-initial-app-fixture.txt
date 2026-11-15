@@ -1,0 +1,200 @@
+// SPDX-License-Identifier: Apache-2.0
+import { expect, test } from "@playwright/test";
+import type { Locator } from "@playwright/test";
+
+async function countBindings(output: Locator): Promise<void> {
+  await output.evaluate(element => {
+    element.setAttribute("data-bind-count", "0");
+    const observer = new MutationObserver(records => {
+      element.setAttribute("data-bind-count", String(Number(element.getAttribute("data-bind-count")) + records.length));
+    });
+    observer.observe(element, { childList: true });
+  });
+}
+
+for (const layout of ["side", "stack"] as const) {
+  test(layout + " creates from entered fields without changing the old row and keeps captured creation distinct", async ({ page }) => {
+    const errors: Error[] = [];
+    page.on("pageerror", error => errors.push(error));
+    await page.goto("/m4/" + layout + ".html");
+    const screen = page.locator('[data-page="employees"]'), detail = screen.locator('[data-role="detail"]');
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await detail.evaluate(root => {
+      const values = { name: "Entered employee", email: "entered@example.com", salary: "222,000",
+        "profile.team": "Operations", "profile.department": "Delivery" };
+      for (const [field, value] of Object.entries(values)) root.querySelector<HTMLInputElement>('[data-field="' + field + '"]')!.value = value;
+    });
+    await screen.locator('[data-action="add-entered"]').click();
+    await expect(screen.locator("tbody tr")).toHaveCount(4);
+    const inserted = screen.locator("tbody tr").first();
+    await expect(inserted.locator('[data-field="id"]')).toHaveText("NEW-1");
+    await expect(inserted.locator('[data-field="name"]')).toHaveText("Entered employee");
+    await expect(inserted.locator("select")).toHaveValue("22");
+    await expect(inserted.locator("select option")).toHaveText(["Choose", "11"]);
+    await expect(screen.locator("tbody tr").filter({ hasText: "E-101" }).locator('[data-field="name"]')).toHaveText("Ada");
+    const saving = page.waitForRequest(request => request.url().includes("/api/employees/save"));
+    await screen.locator('[data-action="save"]').click();
+    expect((await saving).postDataJSON()).toEqual([{ status: "insert", value: {
+      id: "NEW-1", name: "Entered employee", email: "entered@example.com", salary: 222000,
+      profile: { team: "Operations", department: "Delivery" }, a: [{ aa: 11, bb: 22 }, {}], chosen: 22
+    } }]);
+    await expect(screen.locator('[data-role="status"]')).toHaveText("Saved");
+    await screen.locator('[data-action="add"]').click();
+    await expect(screen.locator("tbody tr")).toHaveCount(5);
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("");
+    await expect(detail.locator('[data-field="email"]')).toHaveValue("");
+    await expect(detail.locator('[data-field="salary"]')).toHaveValue("0");
+    await expect(detail.locator('[data-field="profile.team"]')).toHaveValue("");
+    await expect(screen.locator("tbody tr").filter({ hasText: "NEW-2" }).locator("select option")).toHaveText(["Choose"]);
+    await screen.locator('[data-action="delete"]').click();
+    await expect(screen.locator("tbody tr")).toHaveCount(4);
+    await expect(screen.locator('[data-role="status"]')).toHaveText("New employee removed");
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("");
+    await expect(detail.locator('[data-field="salary"]')).toHaveValue("0");
+    await expect(detail).not.toHaveAttribute("data-row-status", "delete");
+    expect(await detail.locator("input").evaluateAll(inputs => inputs.every(input => !input.disabled))).toBe(true);
+    await screen.locator('[data-action="restore-selection"]').click();
+    await expect(screen.locator("tbody tr")).toHaveCount(4);
+    expect(errors).toEqual([]);
+  });
+
+  test(layout + " rejects entered creation without clearing the old row draft or committing a direct sibling edit", async ({ page }) => {
+    await page.goto("/m4/" + layout + ".html");
+    const screen = page.locator('[data-page="employees"]'), detail = screen.locator('[data-role="detail"]');
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    const email = detail.locator('[data-field="email"]');
+    await email.fill("invalid");
+    await detail.locator('[data-field="name"]').evaluate((input: HTMLInputElement) => { input.value = "Uncommitted candidate"; });
+    await screen.locator('[data-action="add-entered"]').click();
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+    await expect(screen.locator("tbody tr").filter({ hasText: "E-101" }).locator('[data-field="name"]')).toHaveText("Ada");
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Uncommitted candidate");
+    await expect(email).toHaveValue("invalid");
+    await expect(email).toHaveAttribute("aria-invalid", "true");
+    await expect(screen.locator('[data-role="error"]')).not.toBeEmpty();
+    await screen.locator("tbody tr").filter({ hasText: "Grace" }).locator("[data-select-row]").click();
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Ada");
+    await expect(email).toHaveValue("invalid");
+    await screen.locator('[data-action="restore-selection"]').click();
+    await expect(email).toHaveValue("ada@example.com");
+    await expect(email).not.toHaveAttribute("aria-invalid", "true");
+    await expect(screen.locator("tbody tr")).toHaveCount(3);
+  });
+
+  test(layout + " restores the complete selection point once while received revert keeps its original meaning", async ({ page }) => {
+    let saves = 0;
+    await page.route("**/api/employees/save?*", route => {
+      saves++;
+      return route.fulfill({ status: 503, contentType: "application/json", body: '{"error":"Keep selection changes"}' });
+    });
+    await page.goto("/m4/" + layout + ".html");
+    const screen = page.locator('[data-page="employees"]'), detail = screen.locator('[data-role="detail"]');
+    const grace = screen.locator("tbody tr").filter({ hasText: "E-102" });
+    await grace.locator("[data-select-row]").click();
+    await detail.locator('[data-field="name"]').fill("Grace prior");
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await grace.locator("[data-select-row]").click();
+    await detail.locator('[data-field="name"]').fill("Grace later");
+    await detail.locator('[data-field="profile.department"]').fill("Later optional field");
+    const output = screen.locator('[data-role="selected"]');
+    await countBindings(output);
+    await screen.locator('[data-action="restore-selection"]').click();
+    await expect(output).toHaveAttribute("data-bind-count", "1");
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Grace prior");
+    await expect(detail.locator('[data-field="profile.department"]')).toHaveValue("");
+    await expect(grace).toHaveAttribute("data-row-status", "update");
+    const saving = page.waitForRequest(request => request.url().includes("/api/employees/save"));
+    await screen.locator('[data-action="save"]').click();
+    const changes = (await saving).postDataJSON();
+    expect(changes).toHaveLength(1);
+    expect(changes[0]).toMatchObject({ status: "update", value: { id: "E-102", name: "Grace prior", profile: { team: "Research" } } });
+    expect(Object.hasOwn(changes[0].value.profile, "department")).toBe(false);
+    await expect(screen.locator('[data-role="status"]')).toHaveText("Save failed");
+    await screen.locator('[data-action="revert"]').click();
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Grace");
+    await expect(detail.locator('[data-field="profile.department"]')).toHaveValue("");
+    await screen.locator('[data-action="save"]').click();
+    await expect(screen.locator('[data-role="status"]')).toHaveText("No changes");
+    expect(saves).toBe(1);
+  });
+
+  test(layout + " retains deleted detail and restores a changed selection once without affecting a declaration sibling", async ({ page }) => {
+    const errors: Error[] = [];
+    page.on("pageerror", error => errors.push(error));
+    await page.goto("/m4/" + layout + ".html?declarations=async");
+    const screens = page.locator('[data-page="employees"]');
+    await expect(screens.first().locator('[data-role="status"]')).toHaveText("Employee declarations ready");
+    await page.locator('[data-action="open"]').click();
+    await expect(screens).toHaveCount(2);
+    const first = screens.first(), second = screens.nth(1), detail = first.locator('[data-role="detail"]');
+    await expect(second.locator('[data-role="status"]')).toHaveText("Employee declarations ready");
+    await first.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await detail.locator('[data-field="name"]').fill("Ada preview");
+    await detail.locator('[data-field="salary"]').fill("125000");
+    await detail.locator('[data-field="salary"]').blur();
+    await detail.locator('[data-field="email"]').fill("invalid");
+    await first.locator('[data-action="delete"]').click();
+    await expect(first.locator("tbody tr")).toHaveCount(2);
+    await expect(detail).toHaveAttribute("data-row-status", "delete");
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Ada preview");
+    await expect(detail.locator('[data-field="email"]')).toHaveValue("ada@example.com");
+    await expect(first.locator('[data-role="selected"]')).toHaveText("Deleted: Ada preview");
+    expect(await detail.locator("input").evaluateAll(inputs => inputs.every(input => input.disabled))).toBe(true);
+    expect(await detail.evaluate(form => (form as HTMLElement).inert)).toBe(false);
+    await expect(first.locator('[data-action="restore-selection"]')).toBeEnabled();
+    await expect(first.locator('[data-action="save"]')).toBeEnabled();
+    await expect(first.locator('[data-action="close"]')).toBeEnabled();
+    await first.locator('[data-action="add-entered"]').click();
+    await expect(first.locator('[data-role="error"]')).toHaveText("Select or restore an employee before copying entered fields.");
+    await detail.evaluate((form: HTMLFormElement) => form.reset());
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Ada preview");
+    await expect(detail.locator('[data-field="salary"]')).toHaveValue("125,000");
+    const selected = first.locator('[data-role="selected"]');
+    await countBindings(selected);
+    await first.locator('[data-action="restore-selection"]').click();
+    await expect(selected).toHaveAttribute("data-bind-count", "1");
+    await expect(selected).toHaveText("Selected: Ada");
+    await expect(detail).not.toHaveAttribute("data-row-status", "delete");
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Ada");
+    expect(await detail.locator("input").evaluateAll(inputs => inputs.every(input => !input.disabled))).toBe(true);
+    await expect(first.locator("tbody tr")).toHaveCount(3);
+    await expect(second.locator('[data-role="selected"]')).toHaveText("Selected: Grace");
+    await first.locator('[data-action="delete"]').click();
+    const retained = await first.elementHandle();
+    if (!retained) throw new Error("Employee page was not mounted.");
+    await detail.evaluate((form: HTMLFormElement) => {
+      form.reset();
+      form.closest('[data-page="employees"]')!.querySelector<HTMLButtonElement>('[data-action="close"]')!.click();
+    });
+    await expect(screens).toHaveCount(1);
+    const removed = await retained.evaluate(root => root.outerHTML);
+    await page.evaluate(() => new Promise<void>(resolve => setTimeout(resolve, 0)));
+    expect(await retained.evaluate(root => root.outerHTML)).toBe(removed);
+    await retained.dispose();
+    await expect(page.locator('[data-action="open"]')).toBeFocused();
+    await expect(screens.locator('[data-role="selected"]')).toHaveText("Selected: Grace");
+    expect(errors).toEqual([]);
+  });
+
+  test(layout + " saves a retained deletion from its received payload without validating its discarded draft", async ({ page }) => {
+    const seed = await import("../../examples/vite/m4/employees.json", { with: { type: "json" } });
+    await page.goto("/m4/" + layout + ".html");
+    const screen = page.locator('[data-page="employees"]'), detail = screen.locator('[data-role="detail"]');
+    await screen.locator("tbody tr").filter({ hasText: "Ada" }).locator("[data-select-row]").click();
+    await detail.locator('[data-field="name"]').fill("Last committed preview");
+    await detail.locator('[data-field="email"]').fill("invalid");
+    await screen.locator('[data-action="delete"]').click();
+    await expect(detail.locator('[data-field="name"]')).toHaveValue("Last committed preview");
+    await expect(detail.locator('[data-field="email"]')).toHaveValue("ada@example.com");
+    const saving = page.waitForRequest(request => request.url().includes("/api/employees/save"));
+    await screen.locator('[data-action="save"]').click();
+    expect((await saving).postDataJSON()).toEqual([{ status: "delete", value: seed.default[0] }]);
+    await expect(screen.locator('[data-role="status"]')).toHaveText("Saved");
+    await expect(screen.locator("tbody tr")).toHaveCount(2);
+    await expect(detail).not.toHaveAttribute("data-row-status", "delete");
+    await screen.locator('[data-action="save"]').click();
+    await expect(screen.locator('[data-role="status"]')).toHaveText("No changes");
+  });
+}

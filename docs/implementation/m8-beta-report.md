@@ -39,7 +39,7 @@ M8 has an unpublished beta candidate on `2.0.0-alpha.0`. The package remains `pr
 
 The root package retains CVC on authored HTML/CSS, per-screen controllers, shared Rows, native controls and documented keyboard/ARIA behavior, and jQuery-free ESM. M8 changed agent navigation, migration documentation, evaluation fixtures, and the M4/M7 application examples' main-screen focus behavior; it did not change framework runtime exports. The API audit found five entries, 11 runtime values, and 35 exported types. Dynamic Form/Grid/List rule dispatch still reaches 23 formatters, 35 validators, and six combined validator spellings, including private mask, date, and byte support. No runtime export or reachable rule has a justified removal case.[^audit]
 
-The [migration guide](../v2/migration.md) links a preserved 1.x search/grid/detail reference to runnable 2.0 M4 and M7 screens. It maps global `N`/jQuery calls to scoped ESM pages, DOM IDs and display indexes to `data-field` and `RowId`, implicit server payloads to explicit changed rows, and popup/tab positions to inputs, outputs, and keyed pages. The 1.x reference needs its original application services; only the linked 2.0 screens are executable here.[^migration]
+The [migration guide](../../wiki/v2/migration.md) links a preserved 1.x search/grid/detail reference to runnable 2.0 M4 and M7 screens. It maps global `N`/jQuery calls to scoped ESM pages, DOM IDs and display indexes to `data-field` and `RowId`, implicit server payloads to explicit changed rows, and popup/tab positions to inputs, outputs, and keyed pages. The 1.x reference needs its original application services; only the linked 2.0 screens are executable here.[^migration]
 
 # Verification
 

@@ -8,14 +8,14 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 rule and binding contract
-    git_blob: 2372a50d7444e6e0ee97546aa43f031ec933dc4d
+    git_blob: 4d0b1b4d261e5a638f68dea6eabb8d0386f11647
   - id: m4
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m4-plan.md
     title: M4 pilot and exit evidence
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form pilot
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid pilot

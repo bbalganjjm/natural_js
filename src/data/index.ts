@@ -47,6 +47,7 @@ export interface Rows<T extends object> {
   copy(id: RowId, before?: RowId): RowId;
   set<Key extends keyof T>(id: RowId, field: Key, value: T[Key]): void;
   setMany(updates: readonly { readonly id: RowId; readonly values: Partial<T> }[]): void;
+  restore(id: RowId, value: T | Snapshot<T>): void;
   remove(id: RowId): void;
   revert(id?: RowId): void;
   changes(): readonly RowChange<T>[];
@@ -357,6 +358,26 @@ export function createRows<T extends object>(initial: readonly T[] = []): Rows<T
         if (applyFields(row, values)) ids.push(id);
       }
       if (ids.length) notify({ type: "setMany", ids: Object.freeze(ids), changed: true });
+    },
+    restore(id, value) {
+      active("Rows.restore");
+      const version = revision;
+      const row = requireRow(id, "Rows.restore");
+      const current = cloneRow(value, "Rows.restore");
+      unchanged(version, "Rows.restore");
+      const dirty = new Set<string>();
+      if (row.original) for (const field of new Set([...Object.keys(row.original), ...Object.keys(current)])) {
+        const before = Object.hasOwn(row.original, field), after = Object.hasOwn(current, field);
+        if (before !== after || before && !sameJson(row.original[field], current[field])) dirty.add(field);
+      }
+      const checkpoint = row.checkpoint ?? (row.original ? "clean" : "insert");
+      const status = checkpoint === "clean" && dirty.size ? "update" : checkpoint;
+      row.dirty = dirty;
+      if (row.status === status && sameJson(row.current, current)) return;
+      row.current = current;
+      row.status = status;
+      row.view = view(id, current, status);
+      notify({ type: "set", id, changed: true });
     },
     remove(id) {
       active("Rows.remove");

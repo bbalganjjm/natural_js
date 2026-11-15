@@ -1,0 +1,12 @@
+
+ RUN  v5.0.1 D:/workspace/natural_js
+
+
+ Test Files  16 passed (16)
+      Tests  242 passed (242)
+   Start at  10:59:53
+   Duration  949ms (transform 49%, tests 28%, import 18%, worker 5%)
+
+    Isolate  16 workers spawned · ~200ms startup each (spawn + environment, per file)
+             at least ~257ms faster with isolate: false — reuses workers across files instead of one per file
+

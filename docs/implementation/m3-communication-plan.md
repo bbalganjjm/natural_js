@@ -16,7 +16,7 @@ sources:
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Actual two-layout CVC search and save caller
-    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
+    git_blob: b01cbd3254a17c5c06b3af9699cbc46c78aca162
   - id: baseline
     resource: evidence/m514-verification.json
     title: Accepted frozen source, archive and browser baseline
@@ -28,7 +28,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Existing pending five-item decision
-    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
+    git_blob: 2e795643d626d0c3161cf859524d8dd464e6b8dc
 generated: { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T15:07:04Z }

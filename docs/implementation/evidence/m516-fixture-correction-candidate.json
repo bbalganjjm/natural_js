@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "author": "m511_legacy",
+  "status": "fixture_only_cache_correction_frozen_for_independent_review_no_actual_apply",
+  "target": "tests/browser/m516-app.spec.ts",
+  "base": {
+    "path": "tests/browser/m516-app.spec.ts",
+    "sha256": "033bf3458cca096d686de1c5632aa9857339754b2b5355f8a6d585a4e741bb4b",
+    "normalized_lf_sha256": "033bf3458cca096d686de1c5632aa9857339754b2b5355f8a6d585a4e741bb4b",
+    "bytes": 13614
+  },
+  "candidate": {
+    "path": "node_modules/.cache/m516-app-fix-legacy/m516-app.spec.ts",
+    "sha256": "15d05437c94f80bcde3c8f60e1bbdfbe87341a2be7af351d3170292e729168bd",
+    "normalized_lf_sha256": "15d05437c94f80bcde3c8f60e1bbdfbe87341a2be7af351d3170292e729168bd",
+    "bytes": 13638
+  },
+  "root_retained_event_diagnostic": {
+    "path": "docs/implementation/evidence/m516-entered-event-diagnostic.json",
+    "sha256": "095be547b78ad26c8e3db6465b1bd3db527c425ab0d8087555fdaf49e6a727a7",
+    "normalized_lf_sha256": "095be547b78ad26c8e3db6465b1bd3db527c425ab0d8087555fdaf49e6a727a7",
+    "bytes": 6807
+  },
+  "exact_case_title": "layout + rejects entered creation without clearing the old row draft or committing a direct sibling edit",
+  "delta": "Insert exactly await email.blur() immediately after invalid-email fill and before direct native sibling assignment. Settle the normal prior change event before arranging prepare invocation-time input.",
+  "diagnosis": "Root four-run event diagnostic confirms original email native change capture sees Uncommitted candidate and bubble sees Ada before click. Settling email blur before direct assignment preserves the candidate under the same click. Current prepare issues rowId:null and reportIssue takes no showRow/detail.validate branch.",
+  "preserved": [
+    "Every assertion and case title",
+    "Both side/stack expansions",
+    "Invalid email draft and error presentation",
+    "Direct sibling edit and old-row source assertions",
+    "Current production reportIssue save cross-row behavior",
+    "Current Form change/blur/render policy",
+    "All runtime/application source files"
+  ],
+  "metadata_checks": {
+    "exactly_one_setup_insertion": true,
+    "reversing_only_added_line_reconstructs_original_fixture": true,
+    "case_titles_unchanged": true,
+    "expanded_case_count_unchanged": true
+  },
+  "original_failed_fixture_preservation": "Root will preserve exact base bytes as tracked evidence text before applying the one-line fixture correction. This cache does not overwrite failed artifacts or old maps.",
+  "actual_source_test_or_docs_writes": false,
+  "project_compiler_browser_unit_benchmark_commands": 0,
+  "runtime_or_canonical_credit": 0
+}

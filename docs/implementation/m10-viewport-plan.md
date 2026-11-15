@@ -12,11 +12,11 @@ sources:
   - id: paste
     resource: m10-paste-plan.md
     title: Completed atomic paste contract
-    git_blob: daf177484c10915333175aaf3496970c8298e763
+    git_blob: 949092dfdbfb428e634cbe131dbafca4f46c3aa0
   - id: parity
     resource: feature-parity-plan.md
     title: Required viewport and remaining parity
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
   - id: viewport
     resource: ../../src/ui/grid-viewport.ts
     title: Private measured window and scroll ownership

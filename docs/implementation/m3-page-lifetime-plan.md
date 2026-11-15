@@ -32,7 +32,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01–O05 are approved exclusions
-    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
+    git_blob: 2e795643d626d0c3161cf859524d8dd464e6b8dc
   - id: popup
     resource: ../../src/ui/popup.ts
     title: Definition forwarding, modal result and child page cleanup
@@ -48,7 +48,7 @@ sources:
   - id: installed
     resource: ../../tests/consumers/browser/main.js
     title: Existing installed page loading and communicator witness
-    git_blob: fb49e1dcc3c4303b6ba78794ebb01eb685d35079
+    git_blob: db039027f82c8603de907453dcc0c9e2667336ca
 generated: { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T19:10:56Z }

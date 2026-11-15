@@ -48,7 +48,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Current public UI contracts
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid implementation
@@ -60,7 +60,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form implementation
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: page
     resource: ../../src/page/index.ts
     title: Current CVC runtime and HTML transport
@@ -68,7 +68,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Current shared Rows contract
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: comm
     resource: ../../src/comm/index.ts
     title: Current communication hooks

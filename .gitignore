@@ -13,6 +13,7 @@ Thumbs.db
 .mcp.json
 *.iml
 AGENTS.md
+!/AGENTS.md
 CLAUDE.md
 
 node_modules/

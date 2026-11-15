@@ -3,7 +3,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import { sendEmployee } from "./employee-xhr.js";
 import type { RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { createRows } from "@bbalganjjm/natural_js/data";
-import type { RowId } from "@bbalganjjm/natural_js/data";
+import type { RowId, Snapshot } from "@bbalganjjm/natural_js/data";
 import type { PageContext } from "@bbalganjjm/natural_js/page";
 import { bindForm, bindGrid, bindList, bindPagination, bindSelect } from "@bbalganjjm/natural_js/ui";
 import type { FormOptions, ListHandle, PageRequest, SelectChoice, ValidationIssue } from "@bbalganjjm/natural_js/ui";
@@ -23,6 +23,23 @@ type Employee = {
   a: { aa?: number; bb?: number }[];
   chosen: number | null;
 };
+
+function completeEmployee(values: Record<string, unknown>, id: string, source?: Snapshot<Employee>): Employee {
+  const profile = values.profile;
+  if (typeof values.name !== "string" || typeof values.email !== "string" ||
+      typeof values.salary !== "number" || !Number.isFinite(values.salary) ||
+      !profile || typeof profile !== "object" || Array.isArray(profile) ||
+      !("team" in profile) || typeof profile.team !== "string" ||
+      "department" in profile && profile.department !== undefined && typeof profile.department !== "string") {
+    throw new Error("Employee fields need name, email, numeric salary and a team.");
+  }
+  return {
+    id, name: values.name, email: values.email, salary: values.salary,
+    profile: { team: profile.team,
+      ...("department" in profile && typeof profile.department === "string" ? { department: profile.department } : {}) },
+    a: source?.a.map(choice => ({ ...choice })) ?? [], chosen: source?.chosen ?? null
+  };
+}
 
 function find<ElementType extends Element>(root: ParentNode, selector: string): ElementType {
   const element = root.querySelector<ElementType>(selector);
@@ -144,6 +161,9 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     search.unbind();
     search.refresh();
   }, { signal });
+  let checkpoint: { id: RowId; value: Snapshot<Employee> } | null = null;
+  let deletedPreview: RowId | null = null;
+  own(() => { checkpoint = null; deletedPreview = null; });
   const detail = bindForm(detailRoot, {
     ...sharedFormOptions,
     rows,
@@ -179,7 +199,10 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     onRowBind: startup ? ({ row, elements, own }) => registerRow(row.id, elements, table, own) : undefined,
     onSelect({ id }) {
       list?.select(id);
+      if (id === null && deletedPreview !== null && rows.get(deletedPreview)?.status === "delete") return;
+      deletedPreview = null;
       detail.bind(id);
+      rememberSelection(id);
       if (id === null) selected.textContent = "No employee selected";
     }
   });
@@ -229,12 +252,17 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     grid.select(id);
   }
 
+  function rememberSelection(id: RowId | null): void {
+    const row = id === null ? undefined : rows.get(id);
+    checkpoint = row && row.status !== "delete" ? { id: row.id, value: row.value } : null;
+  }
+
   const unsubscribePage = rows.subscribe(() => applyPage(pageRequest));
   own(unsubscribePage);
   applyPage(pageRequest);
 
   const lockTargets = [searchRoot, detailRoot, table, listRoot, pagerRoot, pageSizeRoot, filterInput,
-    ...root.querySelectorAll<HTMLElement>('[data-action="add"], [data-action="delete"], [data-action="revert"], [data-action="save"]')];
+    ...root.querySelectorAll<HTMLElement>('[data-action="add"], [data-action="add-entered"], [data-action="restore-selection"], [data-action="delete"], [data-action="revert"], [data-action="save"]')];
   const initialInert = lockTargets.map(element => element.inert);
   let focusBeforeLock: HTMLElement | null = null;
   function lockEditing(locked: boolean): void {
@@ -282,6 +310,8 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
       const values = await requests.search(query, current.signal);
       if (signal.aborted || current.signal.aborted) return false;
       pageRequest = { page: 1, size: pageRequest.size };
+      checkpoint = null;
+      deletedPreview = null;
       rows.replace(values);
       grid.select(null);
       detail.bind(null);
@@ -347,6 +377,8 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
       if (signal.aborted) return;
       if (await load()) status.textContent = "Saved";
       else if (!signal.aborted) {
+        checkpoint = null;
+        deletedPreview = null;
         rows.replace(rows.entries().map(row => structuredClone(row.value) as Employee));
         grid.select(null);
         detail.bind(null);
@@ -404,24 +436,62 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
     list.setSort(compare);
     applyPage({ page: 1, size: pageRequest.size });
   }, { signal });
-  find<HTMLButtonElement>(root, '[data-action="add"]').addEventListener("click", () => {
-    const id = rows.add({
-      id: "NEW-" + nextNew++, name: "", email: "", salary: 0,
-      profile: { team: "", department: "" }, a: [], chosen: null
-    });
+  function addEmployee(entered: boolean): void {
+    signal.throwIfAborted();
+    if (entered && deletedPreview !== null) {
+      error.textContent = "Select or restore an employee before copying entered fields.";
+      return;
+    }
+    const prepared = entered ? detail.prepare() : undefined;
+    if (prepared?.values === null) { reportIssue(prepared.issues[0]); return; }
+    const current = grid.selected();
+    const source = entered && current !== null ? rows.get(current)?.value : undefined;
+    const value = completeEmployee(prepared?.values ?? detail.defaults(), "NEW-" + nextNew++, source);
+    const before = entered ? rows.entries({ includeDeleted: true })[0]?.id : undefined;
+    const id = rows.add(value, before);
+    deletedPreview = null;
     showRow(id);
     find<HTMLInputElement>(detailRoot, '[data-field="name"]').focus();
-    status.textContent = "New employee";
+    error.textContent = "";
+    status.textContent = entered ? "Employee created from entered fields" : "New employee";
+  }
+  find<HTMLButtonElement>(root, '[data-action="add"]').addEventListener("click", () => addEmployee(false), { signal });
+  find<HTMLButtonElement>(root, '[data-action="add-entered"]').addEventListener("click", () => addEmployee(true), { signal });
+  find<HTMLButtonElement>(root, '[data-action="restore-selection"]').addEventListener("click", () => {
+    if (!checkpoint) return;
+    const saved = checkpoint;
+    rows.restore(saved.id, saved.value);
+    deletedPreview = null;
+    detail.unbind();
+    const alreadySelected = grid.selected() === saved.id;
+    showRow(saved.id);
+    if (alreadySelected) detail.bind(saved.id);
+    error.textContent = "";
+    status.textContent = "Selection restored";
   }, { signal });
   find<HTMLButtonElement>(root, '[data-action="delete"]').addEventListener("click", () => {
     const id = grid.selected();
     if (id === null) return;
+    const row = rows.get(id)!;
+    deletedPreview = row.status === "insert" ? null : id;
     rows.remove(id);
-    status.textContent = "Employee marked for deletion";
+    error.textContent = "";
+    if (deletedPreview === null) {
+      checkpoint = null;
+      detail.unbind();
+      selected.textContent = "No employee selected";
+      status.textContent = "New employee removed";
+    } else {
+      selected.textContent = "Deleted: " + row.value.name;
+      status.textContent = "Employee marked for deletion";
+    }
   }, { signal });
   find<HTMLButtonElement>(root, '[data-action="revert"]').addEventListener("click", () => {
+    deletedPreview = null;
     rows.revert();
     detail.bind(grid.selected());
+    rememberSelection(grid.selected());
+    if (grid.selected() === null) selected.textContent = "No employee selected";
     error.textContent = "";
     status.textContent = "Changes reverted";
   }, { signal });

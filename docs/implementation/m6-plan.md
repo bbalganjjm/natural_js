@@ -8,7 +8,7 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved 2.0 public and binding contract
-    git_blob: 2372a50d7444e6e0ee97546aa43f031ec933dc4d
+    git_blob: 4d0b1b4d261e5a638f68dea6eabb8d0386f11647
   - id: roadmap
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/roadmap.md
     title: Milestone and first-release scope
@@ -24,7 +24,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current Form behavior
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current Grid behavior
@@ -44,11 +44,11 @@ sources:
   - id: employee
     resource: ../../examples/vite/m4/employees.ts
     title: Two-layout CVC integration
-    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
+    git_blob: b01cbd3254a17c5c06b3af9699cbc46c78aca162
   - id: rows
     resource: ../../src/data/index.ts
     title: Row identity, mutation, and change tracking
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: legacy-button
     resource: ../../v1/docs/ui/button.md
     title: Preserved 1.x Button contract

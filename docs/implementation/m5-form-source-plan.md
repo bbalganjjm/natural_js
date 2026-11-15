@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-grid-callbacks-plan.md
     title: Captured Grid callbacks and unresolved source observation
-    git_blob: d8f4e83cc690a390abf91b6fb0ca0a61ef34e8b7
+    git_blob: c75721aaa3cc9d5018224b3659978bbe625a067f
   - id: baseline
     resource: evidence/m511-verification.json
     title: Frozen M5.11 source, runtime and installed artifact baseline
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Whole-row Form callbacks, compiled field reads and native commits
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: data
     resource: ../../src/data/index.ts
     title: Immutable full records, committed notifications and no-op writes
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Unbound-key loops, value setters and legacy mutation timing
@@ -32,7 +32,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained outcomes and consolidated omission obligations
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
 generated: { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T05:40:36Z }
@@ -45,7 +45,7 @@ Verify the useful source-only Form outcomes with existing owners: normalize busi
 # Checkpoint
 
 - M5.12 starts at pushed 0c523cda08ca21f3c0e642666507f29b5ad3a9ea with a clean worktree; independent recorded-byte M5.11 recovery and pre-implementation recipe/config reviews pass.[^baseline]
-- Nine new focused/actual CVC witnesses and exact installed consumers execute application normalization and full-source observation using existing owners. Framework source/public contracts stay unchanged. [Source ownership](../v2/form-source.md) owns the executed recipe and timing boundaries.[^form][^data][^example]
+- Nine new focused/actual CVC witnesses and exact installed consumers execute application normalization and full-source observation using existing owners. Framework source/public contracts stay unchanged. [Source ownership](../../wiki/v2/form-source.md) owns the executed recipe and timing boundaries.[^form][^data][^example]
 - Standard failure-only tracing keeps DOM/network evidence without screenshots/sources. A controlled request validates actual capture; fresh canonical gates and independent source/raw/final document reviews accept only selected outcomes.[^parity]
 
 # Steps

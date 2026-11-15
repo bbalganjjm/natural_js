@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "status": "PASS_independent_fixture_only_same_engine_native_reset_parity_review",
+  "reviewer": "/root/m511_baseline",
+  "author": "/root/m511_legacy",
+  "reviewed_manifest": {
+    "path": "node_modules/.cache/m516-reset-fix-legacy/candidate-manifest.json",
+    "sha256": "930e61ac77fae379a844c74f4328d85a9ec6c6d06bba719c7b509498ba4d0ea4",
+    "normalized_lf_sha256": "930e61ac77fae379a844c74f4328d85a9ec6c6d06bba719c7b509498ba4d0ea4",
+    "bytes": 12274
+  },
+  "files": [
+    {
+      "target": "tests/browser/form-deleted-preview.spec.ts",
+      "base": {
+        "path": "tests/browser/form-deleted-preview.spec.ts",
+        "sha256": "fcc0da6b8dabc49f18d77baa7d928583237e44491cf12b54418f9e79f076fa76",
+        "normalized_lf_sha256": "faf4168bfeb239e18e73641220fa009e18f6085c06b0cd96605061b3375f133e",
+        "bytes": 24500
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-reset-fix-legacy/form-deleted-preview.spec.ts",
+        "sha256": "792f4c8d89530296056fe7af8bfa268f1681b76775135a4a3de378e38f123913",
+        "normalized_lf_sha256": "46a11a5270960cf3983fd84a8bcd3556ce003c0c45b4233611ae85343c08c036",
+        "bytes": 25236
+      },
+      "exact_reverse_reconstruction": true,
+      "registration_and_mode_lines_unchanged": true
+    },
+    {
+      "target": "tests/browser/form-prepare.spec.ts",
+      "base": {
+        "path": "tests/browser/form-prepare.spec.ts",
+        "sha256": "0d746c121678f29483c3151c872c7f3ce614a1fb5038a305e7408b378bbf31eb",
+        "normalized_lf_sha256": "1a108ad3ac81573918a73f1a3fa51d50af89f8cbed27c252da762adb1bd1105a",
+        "bytes": 41421
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-reset-fix-legacy/form-prepare.spec.ts",
+        "sha256": "241d701d4b59bc0bc2bfdbed61ae92e150f54a83d64600daa07756cc6f17f487",
+        "normalized_lf_sha256": "e5baddc2d1027b3eb9009a215113a34669103435cb70c6ae7e496be83c0e6e8a",
+        "bytes": 42622
+      },
+      "exact_reverse_reconstruction": true,
+      "registration_and_mode_lines_unchanged": true
+    }
+  ],
+  "source_reads": [
+    {
+      "path": "src/ui/form.ts",
+      "sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "normalized_lf_sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "bytes": 98659
+    },
+    {
+      "path": "src/ui/rules.ts",
+      "sha256": "5f6b5f6c248e6001674362ffe9e3f02fc915ebffd4189049dd37ad22c8cb9c27",
+      "normalized_lf_sha256": "5f6b5f6c248e6001674362ffe9e3f02fc915ebffd4189049dd37ad22c8cb9c27",
+      "bytes": 11240
+    }
+  ],
+  "diagnostic": {
+    "path": "docs/implementation/evidence/m516-native-reset-diagnostic.json",
+    "sha256": "22047913f3455c9095ebb2d5d75ea6bb7ce6f0b256eae1b6a415b7cb39f9ee2e",
+    "normalized_lf_sha256": "22047913f3455c9095ebb2d5d75ea6bb7ce6f0b256eae1b6a415b7cb39f9ee2e",
+    "bytes": 6090,
+    "helper": {
+      "path": "node_modules/.cache/m516-native-reset-diagnostic.mjs",
+      "sha256": "c2a2d899e001535ec9f051666ebc531020bb966bfeb212a59b225758604faa4e",
+      "normalized_lf_sha256": "c2a2d899e001535ec9f051666ebc531020bb966bfeb212a59b225758604faa4e",
+      "bytes": 3087
+    },
+    "actual_recorded_native_observations": 18,
+    "credit": "Previously recorded bare-native diagnostic only; no execution or recertification by this review."
+  },
+  "connected_pattern": {
+    "path": "tests/browser/form-local.spec.ts",
+    "sha256": "938d8f6e4724bf73c3eeca1b79183f0efba47f03086f849be50c4a8ab151ef65",
+    "normalized_lf_sha256": "938d8f6e4724bf73c3eeca1b79183f0efba47f03086f849be50c4a8ab151ef65",
+    "bytes": 44355
+  },
+  "review_notes": [
+    "Read each complete changed test body, the complete diff/edits and metadata, actual Form reset trust/automatic ownership, native preparation and unbind paths, and the recorded native diagnostic plus its source. Other fixture text is preserved by exact reverse reconstruction rather than claimed freshly reviewed.",
+    "Both independent bare controls are separate real HTML forms in the same browser, with matching current/default native values and matching disabled state for the preview case. They are outside the bound Form root; only synthetic default action uses this oracle.",
+    "Trusted in-dispatch preparation and post-default values, fixed canceled reset assertions, exact trusted preview display/typed-option restoration and creation defaults remain unchanged.",
+    "Synthetic preview compares native shown value but still requires unchanged committed raw, identical Rows snapshot, zero Rows events, unchanged whole/value/format counts and locked controls. It does not falsely restore synthetic resets through framework work.",
+    "Local prepare compares its numeric result to actual bare native content, keeps fixed dispatch/cancel expectations and in-dispatch values, and additionally requires unchanged markup/defaults. Paused input/change must remain unformatted at1900, proving reset did not resume automatic ownership.",
+    "No engine branches, skipped cases, deleted registrations, retries, timeout changes or production fixes are introduced. Original failures and native diagnostic remain independent historical evidence."
+  ],
+  "actual_project_edits": false,
+  "production_source_edits": false,
+  "compiler_unit_browser_benchmark_execution": false,
+  "metadata_assertions_only": true,
+  "framework_or_full_suite_credit": 0,
+  "approval_scope": "The exact two frozen fixture candidates are suitable for Root application and fresh checks. This is static independent fixture approval, not a passing browser/canonical claim."
+}

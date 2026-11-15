@@ -103,6 +103,7 @@ export interface FormHandle<T extends object> {
   defaults(): Record<string, unknown>;
   unbind(): void;
   read(): Record<string, unknown>;
+  prepare(): ValidationResult & { readonly values: Record<string, unknown> | null };
   validate(id?: RowId): ValidationResult;
   dispose(): void;
 }

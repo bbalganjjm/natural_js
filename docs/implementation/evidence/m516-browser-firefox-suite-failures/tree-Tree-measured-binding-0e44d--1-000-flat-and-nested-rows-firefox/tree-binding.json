@@ -1,0 +1,78 @@
+{
+  "rows": 1000,
+  "fields": 1,
+  "warmup": 2,
+  "samples": 5,
+  "measurements": [
+    {
+      "layout": "flat",
+      "bindMs": 34,
+      "updateMs": 6,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 34,
+      "updateMs": 6,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 34,
+      "updateMs": 8,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 34,
+      "updateMs": 7,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "flat",
+      "bindMs": 24,
+      "updateMs": 4,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 17,
+      "updateMs": 7,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 15,
+      "updateMs": 7,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 15,
+      "updateMs": 8,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 18,
+      "updateMs": 4,
+      "nodes": 1000,
+      "sameRecords": true
+    },
+    {
+      "layout": "nested",
+      "bindMs": 21,
+      "updateMs": 5,
+      "nodes": 1000,
+      "sameRecords": true
+    }
+  ]
+}

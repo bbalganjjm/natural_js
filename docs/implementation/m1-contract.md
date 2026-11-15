@@ -52,7 +52,7 @@ The 2.0 package lives at the repository root and keeps the name `@bbalganjjm/nat
 | `./ui` | `bindForm`, `bindGrid`, `openPopup`, `bindTabs`; `FormHandle`, `GridHandle`, `PopupHandle`, `TabHandle`, `RuleSet`, `ValidationResult` | Behavior on authored HTML, built-in rules, common handle/disposal convention |
 | `./comm` | `createCommunicator`, `Communicator` | JSON requests, cancellation, common request/response hooks |
 
-This table gives representative contracts, not every entry export. M6 added List, Select, and Pagination; M7 added `openPopup`, `PopupHandle`, `bindTabs`, and `TabHandle`. [The UI concept](../v2/ui.md) lists implemented exports. Component handles expose `dispose()`; Popup owns an authored dialog and a private page handle rather than exposing a root. No formatter/validator utility package is created: Form, List, and Grid share a rule engine within `./ui`. Internal role modules import one private error implementation, never the root entry.
+This table gives representative contracts, not every entry export. M6 added List, Select, and Pagination; M7 added `openPopup`, `PopupHandle`, `bindTabs`, and `TabHandle`. [The UI concept](../../wiki/v2/ui.md) lists implemented exports. Component handles expose `dispose()`; Popup owns an authored dialog and a private page handle rather than exposing a root. No formatter/validator utility package is created: Form, List, and Grid share a rule engine within `./ui`. Internal role modules import one private error implementation, never the root entry.
 
 ## First page on existing HTML, in JavaScript
 

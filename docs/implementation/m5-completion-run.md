@@ -8,7 +8,7 @@ sources:
   - id: run
     resource: evidence/m5-completion-run.json
     title: Durable current stage, exact ancestor queue and completion references
-    git_blob: e7fb8ab46a43afabeab2ab6a2c02db99e64f9f5a
+    git_blob: a6c7d40130aa4c99038729dd8c69498aee094b46
   - id: scope
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage scope, predecessors and terminal conditions
@@ -16,7 +16,7 @@ sources:
   - id: live
     resource: m5-live-choice-groups-plan.md
     title: Accepted M5.14 private handoff and failure contract
-    git_blob: c98be3a79082c2b913327f54e52d1356a9263b87
+    git_blob: 059e0aed04316e54dec195c12617e7ffc993b6be
   - id: protocol
     resource: evidence/m32final-verification.json
     title: Tool-inclusive M3.2 runtime and independent acceptance
@@ -33,9 +33,9 @@ sources:
     resource: evidence/p01-ui-grid-preflight.json
     title: UI and Grid source-case inventory and shared-owner boundaries
     git_blob: 19cb2223720739044d5d391721c582a77a64a89b
-generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
+generated: { by: codex/gpt-6, at: 2026-11-15T03:00:21Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
+  - { by: codex/gpt-6, at: 2026-11-15T03:00:21Z }
 ---
 
 # Goal
@@ -66,7 +66,7 @@ Each runtime stage retains complete available browser/package/performance/docume
 
 # Next action
 
-Save/push the separate M5.15 checkpoint, then implement M5.16 entered-value/full restoration/deleted-detail outcomes and every subsequent ancestor through M5.20. Preserve each exact receipt and inherited/current native/network/test-transport limits.[^run]
+Save/push the separate M5.16 checkpoint, then implement M5.17 and every subsequent ancestor through M5.20. Keep current wiki contracts and docs execution records separate, preserve all original failures and continue the exact authorized queue.[^run]
 
 # Decisions
 
@@ -93,6 +93,8 @@ M3.6 retains 28 records: twelve development attempts and sixteen latest passing 
 M3.7 passes all 23 records: seven development attempts and sixteen canonical groups on 219 inputs, 217 units, 101 focused cases and 955 full cases per engine. Twenty-two browser cases are new and all 933 parent cases remain; no new unit registrations. List.onRowBind alone extends the public options and reuses the existing Grid resource owner. The actual employee mode preserves awaited typed declarations, current payloads, ordered initial selection and stable row events. Separate installed Select declarations retain raw0/false/empty/null defaults. One static generic correction precedes all project execution. The 208-file archive passes JS/TS, five installed browsers and the original thirty budgets. Thirty-eight of forty-one declarations remain identical. Independent source/raw/document acceptance accompanies selected completion. After M3.7, twenty-four unconditional stages remain. M3.8 is outside the fixed batch and is not a prerequisite added to M5.15.[^run]
 
 M5.15 retains 27 records: ten development attempts, sixteen latest canonical passes and one earlier Chromium full import failure with 956 passes/one failure. Its exact dependency trace records ERR_NO_BUFFER_SPACE; the deeper cause is unknown and no production fix is attributed. Unchanged Grid-column diagnostics pass 18 per engine. The 221 inputs pass 225 units, 48 primary focused cases and 957 latest full cases per engine; eight units/two browser cases are new and all 955 parent cases remain. All framework source/API/dependency bytes are unchanged, and the exact 208-file archive and all 41 declarations equal M3.7. JS/TS, five installed browsers and original thirty budgets pass. Independent source/raw/document acceptance accompanies selected completion. After M5.15, twenty-three unconditional stages remain, including the genuine M5.16 entered/full restore/deleted-detail gaps.[^run]
+
+M5.16 completes entered/captured creation, full selection restoration and retained-deleted Form detail through exactly Form.prepare and Rows.restore. The 44 recorded attempts preserve both original focused runs with 190 passes/two failures, the first full Chromium run with 1,005 passes/two failures and sixteen latest canonical groups. The final 225 inputs pass 242 units, 222 expanded focused cases and 1,007 full cases per engine; earlier primary focus passes 192 per engine. All 957 parent cases remain, with 17 new units/50 browser cases. The exact 208-file archive c42f11e568f1822a130e4edc1bb7b0d3a78fdd172035a9080b774e6a4883fc92 passes JS/TS and installed Chromium/Firefox/WebKit/Chrome/Edge. Forty-one declarations retain 37 identical files; 4 existing declarations change, with no new runtime filename, public named type, entry or dependency. The original 30 budgets retain 60 medians/300 raw durations. The 44 records divide into 13 development, 15 superseded canonical and 16 latest canonical groups. The superseded groups retain 13 earlier passes, the full Chromium run with 1,005 passes/two failures and a later benchmark readiness timeout before metrics. That timeout has no proven cause or production fix. Both original focused runs with 190 passes/two failures retain their fixture setup/native-platform explanations. All traces, original fixtures and source epochs remain. The user wiki structure and separate Node tool regression are preserved. After selected M5.16, twenty-two unconditional stages remain; no whole-family/M5.20/M13/release closure follows.[^run]
 
 # Open questions
 

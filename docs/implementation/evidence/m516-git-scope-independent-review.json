@@ -1,0 +1,41 @@
+{
+  "stage": "M5.16",
+  "status": "GO_independent_bounded_untracked_editor_staging_filter",
+  "reviewer": "m511_design",
+  "author": "root",
+  "reviewed_at": "2026-11-15T03:06:28.597Z",
+  "previous_helper": {
+    "path": "node_modules/.cache/m516-stage-git.mjs",
+    "sha256": "09e4a2528acbd4eafd6a0182809f15d93b53730c291d654bb9a00ae62e12ea7f",
+    "bytes": 5350
+  },
+  "reviewed_helper": {
+    "path": "node_modules/.cache/m516-stage-git-r2.mjs",
+    "sha256": "e8cd38206f52a5ed649c08acbc398f1adf4e55aad8df2ac8b788923a44746f2e",
+    "bytes": 5529
+  },
+  "scope_record": {
+    "path": "docs/implementation/evidence/m516-git-scope.json",
+    "sha256": "f54e34d1c09595c7a88002b09107878087a11d474dfe77255e09cb141ed52efa",
+    "bytes": 997
+  },
+  "accepted": [
+    "Exactly one tracked-file guard and one root .obsidian/ candidate filter are added; removing them reconstructs the complete previously accepted09e4 helper byte-for-byte.",
+    "git ls-files must be empty for .obsidian before staging. This includes staged additions, so existing tracked/index content cannot be silently excluded.",
+    "The candidate filter leaves only unrelated untracked editor settings outside the task commit. All other path allowlists,23-source checks, pinned28da/user-text/raw-receipt checks and index/HEAD raw evidence proofs remain unchanged.",
+    "No editor file is deleted/rewritten/ignored and no whitelist is broadened. Initial unexpected-path validation precedes every git add batch, consistent with the recorded zero-mutation abort."
+  ],
+  "supplement_to": {
+    "path": "node_modules/.cache/m516-final-document-approval.json",
+    "sha256": "7198f1c9616f3591017eb6afa3e1ce35eb216e5f9057a3c24518a3e9f98844b1",
+    "bytes": 14608
+  },
+  "limits": [
+    "This supplements only mechanical staging scope; source/runtime/archive/document-body approval is unchanged. No additional stage, source test or release is authorized.",
+    "Reviewer read the helper/delta/scope record and observed read-only git ls-files -- .obsidian return empty. Reviewer did not execute the adapter, stage/index/commit/push or run a project check.",
+    "Root must preserve all four user settings and accurately report them as unrelated untracked work if they remain."
+  ],
+  "findings": [],
+  "git_mutations": 0,
+  "project_commands": 0
+}

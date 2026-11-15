@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {dir,inputs,reference,read} from './stage-metadata.mjs';
+const before=inputs('m516'),started=new Date().toISOString(),args=['--test','tools/knowledge-docs/knowledge-docs.test.mjs'];
+const result=spawnSync(process.execPath,args,{windowsHide:true,encoding:'utf8',maxBuffer:16*1024*1024});
+const stdout=`${dir}/m516-doc-regression-stdout.log`,stderr=`${dir}/m516-doc-regression-stderr.log`;
+fs.writeFileSync(stdout,result.stdout,{flag:'wx'});fs.writeFileSync(stderr,result.stderr,{flag:'wx'});
+const after=inputs('m516'),report={stage:'M5.16',kind:'separate_node_document_tool_regression',started,finished:new Date().toISOString(),args,exit_code:result.status,spawn_error:result.error?String(result.error):null,before,after,sources_unchanged:before.sha256===after.sha256,stdout:reference(stdout),stderr:reference(stderr),helper:reference('node_modules/.cache/m516-doc-regression.mjs'),scope:'Node documentation-tool regression only. No Vitest/browser/canonical credit; the user changed checker source during the authorized pause.'};
+const target=`${dir}/m516-doc-regression.json`;fs.writeFileSync(target,JSON.stringify(report,null,2)+'\n',{flag:'wx'});
+fs.writeFileSync(`${dir}/m516-doc-regression.mjs`,read('node_modules/.cache/m516-doc-regression.mjs'),{flag:'wx'});
+console.log(JSON.stringify({record:reference(target),exit_code:report.exit_code,sources_unchanged:report.sources_unchanged,stdout:result.stdout}));
+assert.equal(result.status,0);assert(report.sources_unchanged);

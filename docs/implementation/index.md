@@ -1,5 +1,8 @@
 # Concepts
 
+* [Natural-JS wiki and work-record separation](wiki-separation.md) - Separate reusable wiki knowledge from work records while preserving the paused v2 migration and its evidence.
+
+* [Natural-JS 2.0 M5.16 entered creation and selection restoration](m5-form-workflows-plan.md) - Read entered native fields without mutation, restore complete row checkpoints and retain accessible deleted details through existing Form and Rows owners. (draft)
 * [Natural-JS 2.0 M5.15 data values and application projections](m5-data-projections-plan.md) - Verify exact JSON source boundaries and executable application normalization, configured wire projections and shared-consumer ownership without another Rows API. (draft)
 * [Natural-JS 2.0 M3.7 typed declarations and row actions](m3-declarations-plan.md) - Assemble asynchronous page requests, components, events and actions through existing CVC ownership and add one List row-resource callback. (draft)
 * [Natural-JS 2.0 M3.6 automatic controller advice](m3-advice-plan.md) - Discover controller methods once before init and compose ordinary wrappers through one optional page contract while preserving cancellation and cleanup. (draft)

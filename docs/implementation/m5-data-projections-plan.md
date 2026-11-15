@@ -16,7 +16,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Existing immutable values, local identity, operations and received checkpoints
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: same
     resource: ../../src/internal/same-json.ts
     title: Existing JSON equality and signed zero
@@ -40,7 +40,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Marked field reads, source Rows binding and restored changed attributes
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Existing selected, checked, view and changed presentation owners
@@ -48,7 +48,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01-O05 are approved losses
-    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
+    git_blob: 2e795643d626d0c3161cf859524d8dd464e6b8dc
 generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }

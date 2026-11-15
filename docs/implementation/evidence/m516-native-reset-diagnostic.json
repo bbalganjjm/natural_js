@@ -1,0 +1,256 @@
+{
+  "kind": "bare_native_form_reset_control_diagnostic",
+  "helper": {
+    "path": "node_modules/.cache/m516-native-reset-diagnostic.mjs",
+    "sha256": "c2a2d899e001535ec9f051666ebc531020bb966bfeb212a59b225758604faa4e",
+    "bytes": 3087
+  },
+  "failed_attempt": {
+    "path": "docs/implementation/evidence/m516-focused-firefox-suite-run-1.json.gz",
+    "sha256": "fb651cc2916ccc834d1b2690e9f65bcf76a426e2cd5eabb735af3d2e3013e029",
+    "bytes": 17431,
+    "encoding": "gzip",
+    "uncompressed_sha256": "baffb46b7bff63452d5b014453a6415dbf999679ae4389e4b6894af26ded9329",
+    "uncompressed_bytes": 228357
+  },
+  "unchanged_inputs": {
+    "path": "docs/implementation/evidence/m516-inputs-52c454766d9b.json",
+    "sha256": "52c454766d9b8bfbc73145d5542c912f310ff8584cb10f55b6924eec02883872",
+    "bytes": 23064,
+    "entries": 225
+  },
+  "results": [
+    {
+      "engine": "chromium",
+      "cases": [
+        {
+          "disabled": false,
+          "mode": "native",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": false,
+          "mode": "canceled",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": false,
+          "mode": "synthetic",
+          "events": [
+            {
+              "trusted": false,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "native",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "canceled",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "synthetic",
+          "events": [
+            {
+              "trusted": false,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        }
+      ]
+    },
+    {
+      "engine": "firefox",
+      "cases": [
+        {
+          "disabled": false,
+          "mode": "native",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": false,
+          "mode": "canceled",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": false,
+          "mode": "synthetic",
+          "events": [
+            {
+              "trusted": false,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "native",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "canceled",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "synthetic",
+          "events": [
+            {
+              "trusted": false,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "cases": [
+        {
+          "disabled": false,
+          "mode": "native",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": false,
+          "mode": "canceled",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": false,
+          "mode": "synthetic",
+          "events": [
+            {
+              "trusted": false,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "native",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "1200",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "canceled",
+          "events": [
+            {
+              "trusted": true,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        },
+        {
+          "disabled": true,
+          "mode": "synthetic",
+          "events": [
+            {
+              "trusted": false,
+              "value": "2500"
+            }
+          ],
+          "value": "2500",
+          "defaultValue": "1200"
+        }
+      ]
+    }
+  ],
+  "scope": "Native form/input only, including disabled inputs. No Natural-JS or Vite imports; engines execute serially. No compiler/unit/browser-suite/canonical credit or source/test/configuration changes. Native trusted/canceled behavior and synthetic event default action are observed separately."
+}

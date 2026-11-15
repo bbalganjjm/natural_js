@@ -247,3 +247,18 @@ await assert.rejects(import("@bbalganjjm/natural_js/ui/grid-hooks"), {
 await assert.rejects(import("@bbalganjjm/natural_js/ui/row-options"), {
   code: "ERR_PACKAGE_PATH_NOT_EXPORTED"
 });
+
+{
+  const restored = createRows([{ id: "business", name: "Received" }]);
+  const id = restored.entries()[0].id, checkpoint = restored.get(id).value, original = restored.original(id);
+  restored.set(id, "id", "Edited business"); restored.set(id, "extra", true); restored.remove(id);
+  const events = []; const stop = restored.subscribe(event => events.push({ type: event.type, value: restored.get(id).value, status: restored.get(id).status }));
+  restored.restore(id, checkpoint);
+  assert.deepEqual(restored.get(id).value, { id: "business", name: "Received" });
+  assert.equal(restored.get(id).status, "clean"); assert.equal(restored.original(id), original);
+  assert.deepEqual(events, [{ type: "set", value: { id: "business", name: "Received" }, status: "clean" }]);
+  const entries = restored.entries(), snapshot = restored.get(id);
+  restored.restore(id, checkpoint);
+  assert.equal(restored.entries(), entries); assert.equal(restored.get(id), snapshot); assert.equal(events.length, 1);
+  stop(); restored.dispose();
+}

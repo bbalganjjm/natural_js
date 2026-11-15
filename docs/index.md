@@ -2,8 +2,9 @@
 okf_version: "0.2"
 ---
 
-# Start here
+# Active work
 
+* [Natural-JS 2.0 M5.16 entered creation and selection restoration](implementation/m5-form-workflows-plan.md) - Read entered native fields without mutation, restore complete row checkpoints and retain accessible deleted details through existing Form and Rows owners. (draft)
 * [Natural-JS 2.0 M5.15 data values and application projections](implementation/m5-data-projections-plan.md) - Verify exact JSON source boundaries and executable application normalization, configured wire projections and shared-consumer ownership without another Rows API. (draft)
 * [Natural-JS 2.0 M3.7 typed declarations and row actions](implementation/m3-declarations-plan.md) - Assemble asynchronous page requests, components, events and actions through existing CVC ownership and add one List row-resource callback. (draft)
 * [Natural-JS 2.0 M3.6 automatic controller advice](implementation/m3-advice-plan.md) - Discover controller methods once before init and compose ordinary wrappers through one optional page contract while preserving cancellation and cleanup. (draft)
@@ -22,8 +23,6 @@ okf_version: "0.2"
 
 * [Natural-JS 2.0 numbered remaining work](implementation/remaining-work-plan.md) - Fixed execution order and terminal stage numbers for every remaining framework capability and delivery gate. (draft)
 
-* [bindChoiceGroup](v2/choice-group.md) - Generate native radio or checkbox choices from an authored fieldset and replace catalogs through its Form owner. (draft)
-* [Authored choice groups in two CVC layouts](v2/choice-groups-example.md) - Generate native choices before Form and replace adopted catalogs in independent authored CVC screens. (draft)
 
 * [Natural-JS 2.0 M5.13 authored choice groups](implementation/m5-choice-groups-plan.md) - Generate native radio and checkbox choices from authored templates and adopt them safely in Form. (draft)
 
@@ -49,24 +48,10 @@ okf_version: "0.2"
 
 * [Natural-JS 2.0 full feature implementation plan](implementation/feature-parity-plan.md) - Staged completion of required legacy behavior and advanced Grid features before release preparation. (draft)
 
-* [Application shell in two CVC layouts](v2/shell-example.md) - Compose independent document workspaces, persistent notifications, shared Form data and Popup with one CVC editor definition. (draft)
+# Work records
 
-* [Tree and DatePicker in two CVC layouts](v2/tree-date-example.md) - Connect authored hierarchy selection and ISO calendar input to a shared Form in independent CVC screens. (draft)
+* [Implementation](implementation/index.md) - Migration plans, current checkpoint, reviews and execution records.
 
-* [Interactive Grid contract demo](v2/grid-demo.md) - Inspect committed field changes, loaded originals and edited deletions alongside authored CVC details and two Grid layouts. (draft)
-* [bindGrid](v2/grid.md) - Bind authored table records with status views, raw field-change flags, owned row hooks, native defaults, bounded rendering, paste, and accessible validation. (draft)
-* [bindForm](v2/form.md) - Bind authored Form fields to local raw input or Rows with formatting, typed choices, validation and accessible errors. (draft)
-* [Authored advanced Grid in two layouts](v2/advanced-grid-example.md) - Grouped native table headings and sticky rows and columns in two authored MDI layouts with no new Grid API. (draft)
-* [Natural-JS 2.0 package](v2/package.md) - Build and verify the unpublished Apache-2.0 ESM beta candidate and its five entry points. (draft)
-* [Natural-JS 2.0 module boundaries](v2/architecture.md) - Small role modules, one-way imports, and evidence-based sharing keep 2.0 easy to navigate. (draft)
-* [Employee screen in two authored layouts](v2/employee-example.md) - One CVC controller shares Rows across Form, Grid, and List, coordinating Select and Pagination in two authored layouts and fetched HTML. (draft)
-* [CVC pages in main content, Popup, and Tabs](v2/page-containers-example.md) - One picker PageDefinition shares Rows across main content, Popup, and People and Preview Tabs in two authored MDI layouts. (draft)
-* [Migrating a 1.x screen to Natural-JS 2.0](v2/migration.md) - Move a 1.x search/list/detail screen, changed-row save, and Popup or Tab page to scoped ESM APIs. (draft)
-* [Natural-JS 2.0 UI contracts](v2/ui.md) - Shared rule, validation, selection, and page types for the implemented HTML-bound UI. (draft)
-* [Natural-JS 1.x reference](../v1/docs/index.md) - Preserved LGPL-2.1 source and usage documentation for migration research.
+# Knowledge
 
-# Topics
-
-* [Natural-JS 2.0](v2/index.md) - Implemented package, type contracts, and module boundaries.
-* [Implementation](implementation/index.md) - Natural-JS 2.0 roadmap, public contract, and active milestone status.
-* [Governance](governance/index.md) - OKF format, evidence-based answers, and repository upkeep rules.
+* [Natural-JS wiki](../wiki/index.md) - Canonical API, architecture, project goals and maintenance knowledge; new reusable knowledge belongs in wiki/.

@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "status": "PASS_independent_two_historical_fixture_positive_preview_contract_review",
+  "reviewer": "/root/m511_baseline",
+  "author": "/root/m511_legacy",
+  "manifest": {
+    "path": "node_modules/.cache/m516-old-contract-fix-legacy/candidate-manifest.json",
+    "sha256": "24f6582205b31143266df66c814901cedcb4712a48a2357daca1254e35193906",
+    "normalized_lf_sha256": "24f6582205b31143266df66c814901cedcb4712a48a2357daca1254e35193906",
+    "bytes": 8517
+  },
+  "files": [
+    {
+      "target": "tests/browser/grid-change-state.spec.ts",
+      "base": {
+        "path": "tests/browser/grid-change-state.spec.ts",
+        "sha256": "fc53dd17bfea82938b09c2335ba3a88764371ae3e0e9f8550a6644c515e73355",
+        "normalized_lf_sha256": "fc53dd17bfea82938b09c2335ba3a88764371ae3e0e9f8550a6644c515e73355",
+        "bytes": 29432
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-old-contract-fix-legacy/grid-change-state.spec.ts",
+        "sha256": "84617ec235e3ec99e08153bd2a58cb8e4b64dceb6c234c66241dfd7dc09afdf6",
+        "normalized_lf_sha256": "84617ec235e3ec99e08153bd2a58cb8e4b64dceb6c234c66241dfd7dc09afdf6",
+        "bytes": 29702
+      },
+      "exact_reverse_reconstruction": true,
+      "titles_registrations_and_mode_loops_unchanged": true
+    },
+    {
+      "target": "tests/browser/row-state.spec.ts",
+      "base": {
+        "path": "tests/browser/row-state.spec.ts",
+        "sha256": "fa6d906b1603ad389e33018114eb26284c703ed14bf57c075284eb5f36df773a",
+        "normalized_lf_sha256": "fa6d906b1603ad389e33018114eb26284c703ed14bf57c075284eb5f36df773a",
+        "bytes": 31199
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-old-contract-fix-legacy/row-state.spec.ts",
+        "sha256": "c8a11291699683ad72f239044d8399d2acae0318ce102351070f9dc0cf3c5577",
+        "normalized_lf_sha256": "c8a11291699683ad72f239044d8399d2acae0318ce102351070f9dc0cf3c5577",
+        "bytes": 32132
+      },
+      "exact_reverse_reconstruction": true,
+      "titles_registrations_and_mode_loops_unchanged": true
+    }
+  ],
+  "actual_written_plan": {
+    "path": "docs/implementation/m5-form-workflows-plan.md",
+    "sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+    "normalized_lf_sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+    "bytes": 17573
+  },
+  "immutable_before_apply_plan": {
+    "path": "docs/implementation/evidence/m516-written-plan-r3.md",
+    "sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+    "normalized_lf_sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+    "bytes": 17573
+  },
+  "historical_plan_preserved": {
+    "path": "docs/implementation/evidence/m516-written-plan-r2.md",
+    "sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+    "normalized_lf_sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+    "bytes": 16315
+  },
+  "connected_source_and_knowledge": [
+    {
+      "path": "src/ui/form.ts",
+      "sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "normalized_lf_sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "bytes": 98659
+    },
+    {
+      "path": "src/data/index.ts",
+      "sha256": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+      "normalized_lf_sha256": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+      "bytes": 16757
+    },
+    {
+      "path": "wiki/v2/form.md",
+      "sha256": "db602b054ae48de10ece21211839aeeac8aa612a7ea75be4859e8db558e6d869",
+      "normalized_lf_sha256": "db602b054ae48de10ece21211839aeeac8aa612a7ea75be4859e8db558e6d869",
+      "bytes": 64704
+    },
+    {
+      "path": "docs/implementation/m5-form-workflows-plan.md",
+      "sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+      "normalized_lf_sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+      "bytes": 17573
+    }
+  ],
+  "review_scope": [
+    "Read both complete affected test bodies and their authored setup/helpers, every changed line, actual Form read/preview/changed-marker/explicit-default validation paths, connected Rows received-state behavior, actual wiki Form contract and exact written-before-apply R3 amendment.",
+    "Grid-change-state keeps null/stale clearing and all retained Grid assertions. Its replacement expectation positively checks Edited native name, nested committed marked read, true original comparison flag, disabled input and delete marker.",
+    "Row-state moves only Form.bind out of the protected-operation loop. All six existing Rows/membership/paste operations still must reject, with unchanged protected/count checks and exact snapshot/status/native editor/Grid/List/Tree assertions.",
+    "The received deleted Form now must bind successfully, keep its actual Name input disabled and committed read/full raw values after received checkpoint reversion, reject prepare with FORM_PREPARE/preview and explicit deleted validation with ROW_MISSING, while default validation succeeds by skipping the preview.",
+    "Authored setup confirms the first Form input is profile.name; employeeNo is a marked span and parent/profile.count are intentionally source-only for Form.read. Expected marked projection and complete raw record therefore differ correctly.",
+    "Exact reverse edits reconstruct both entire original fixtures; complete titles, registrations and mode loops match. Only these two old bodies change, with no skip, engine condition, timeout/retry adjustment or production patch."
+  ],
+  "evidence_limits": "Root-reported original full Chromium1005/2 and all original source/plan/archive/gate evidence stay historical. This review does not execute, decode or grant that run and does not approve a new API.",
+  "actual_source_docs_or_test_edits": false,
+  "project_compiler_unit_browser_benchmark_execution": false,
+  "metadata_hash_and_reverse_assertions_only": true,
+  "runtime_or_family_credit": 0,
+  "approval_scope": "Exact two frozen candidates may be applied by Root under the recorded R3 plan, followed by fresh expanded focused and all canonical gates."
+}

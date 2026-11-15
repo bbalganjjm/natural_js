@@ -7,7 +7,7 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved M1 public contract
-    git_blob: 2372a50d7444e6e0ee97546aa43f031ec933dc4d
+    git_blob: 4d0b1b4d261e5a638f68dea6eabb8d0386f11647
   - id: package
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/package.json
     title: Isolated 2.0 package
@@ -18,7 +18,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Data type contract
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: comm
     resource: ../../src/comm/index.ts
     title: Communication type contract

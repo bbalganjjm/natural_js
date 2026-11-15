@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-options-plan.md
     title: Completed typed-choice continuation
-    git_blob: 98d750d083d8edadd3e1b11911a3e6dcedc1c437
+    git_blob: a1d153aaaeec6212445e04c7bfc95c08a7da2288
   - id: baseline
     resource: evidence/m53-verification.json
     title: Preserved d923434 runtime and code baseline
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Compiled fields, render generations, candidates, drafts and subscriptions
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: ui
     resource: ../../src/ui/index.ts
     title: Existing RuleContext and public Form contract
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Native shape, display and raw constraint operations
@@ -38,9 +38,9 @@ sources:
     title: Historical numeric/boolean conversion workaround
     git_blob: 5afd3868f4f111944481930bb47090a2c2ab6ec0
   - id: workflow
-    resource: ../governance/repository-workflow.md
+    resource: ../../wiki/governance/repository-workflow.md
     title: Current scoped evidence and documentation contract
-    git_blob: d9c9afcd03afc5280c3d562d5e1fc63c9874afa2
+    git_blob: 2d6f65ecb4763000971e655a355b4c9dc703fefe
 generated: { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }
 verified:
   - { by: codex/gpt-6, at: 2026-10-31T10:01:54Z }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
- * knowledge-docs: checker and stamper for the Natural-JS OKF v0.2 bundle in docs/.
- * Zero dependencies (Node >= 18). Rules: docs/governance/okf-conventions.md
+ * knowledge-docs: checker and stamper for the Natural-JS OKF v0.2 wiki and work records.
+ * Zero dependencies (Node >= 18). Rules: wiki/governance/okf-conventions.md
  *
  *   node tools/knowledge-docs/knowledge-docs.mjs check [path...] [--changed]
  *   node tools/knowledge-docs/knowledge-docs.mjs stamp <path...> [--by <actor>] [--verified-by <actor>]
@@ -15,7 +15,9 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const BUNDLE = path.join(REPO, "docs");
+const BUNDLE = path.join(REPO, "wiki");
+const RECORDS = path.join(REPO, "docs");
+const BUNDLES = [BUNDLE, RECORDS];
 const OKF_VERSION = "0.2";
 const STATUSES = new Set(["draft", "stable", "deprecated"]);
 const TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
@@ -338,7 +340,7 @@ function publicSymbols() {
 
 function walk(dir, out = []) {
     // Recorded failures can contain Markdown without being OKF concepts.
-    const evidence = path.relative(path.join(BUNDLE, "implementation", "evidence"), dir);
+    const evidence = path.relative(path.join(RECORDS, "implementation", "evidence"), dir);
     if (!evidence || !path.isAbsolute(evidence) && evidence !== ".." && !evidence.startsWith(".." + path.sep)) return out;
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
         if (entry.name.startsWith(".")) continue;
@@ -347,6 +349,13 @@ function walk(dir, out = []) {
         else if (entry.name.endsWith(".md")) out.push(abs);
     }
     return out;
+}
+
+function bundleOf(abs) {
+    return BUNDLES.find((root) => {
+        const relative = path.relative(root, abs);
+        return !path.isAbsolute(relative) && relative !== ".." && !relative.startsWith(".." + path.sep);
+    }) || BUNDLE;
 }
 
 function stripCode(lines) {
@@ -381,7 +390,7 @@ function loadDoc(abs) {
 function resolveTarget(fromDir, target) {
     const clean = decodeURI(target.split("#")[0].split("?")[0]);
     if (!clean) return null;
-    return clean.startsWith("/") ? path.join(BUNDLE, clean) : path.resolve(fromDir, clean);
+    return clean.startsWith("/") ? path.join(bundleOf(fromDir), clean) : path.resolve(fromDir, clean);
 }
 
 function linksOf(doc) {
@@ -435,16 +444,19 @@ function check(args) {
     const findings = [];
     const add = (level, doc, line, rule, msg) => findings.push({ level, file: doc.rel || doc, abs: doc.abs, line, rule, msg });
 
-    const docs = walk(BUNDLE).map(loadDoc);
+    const docs = BUNDLES.flatMap((root) => walk(root)).map(loadDoc);
     const concepts = docs.filter((d) => d.name !== "index.md" && d.name !== "log.md");
     const byAbs = new Map(docs.map((d) => [d.abs, d]));
-    const log = byAbs.get(path.join(BUNDLE, "log.md"));
-    const logDates = new Set();
+    const logDates = new Map();
     const drift = new Map();
     const covered = new Set();
     const inbound = new Map();
 
-    if (log) {
+    for (const root of BUNDLES) {
+        const log = byAbs.get(path.join(root, "log.md"));
+        if (!log) continue;
+        const dates = new Set();
+        logDates.set(root, dates);
         if (log.fm || log.fmError) add("error", log, 1, "log-format", "log.md must not have frontmatter");
         let prev = null;
         let inSection = false;
@@ -457,13 +469,14 @@ function check(args) {
                 else {
                     if (prev && date >= prev) add("error", log, i + 1, "log-format", `dates must be strictly descending ('${date}' after '${prev}')`);
                     prev = date;
-                    logDates.add(date);
+                    dates.add(date);
                 }
             } else if (inSection && /^[*-] /.test(l) && !/^[*-] \*\*[^*]+\*\*/.test(l)) {
                 add("warn", log, i + 1, "log-entry-format", "entry should start with a bold verb such as **Update**");
             }
         });
     }
+    const firstWikiDay = [...(logDates.get(BUNDLE) || [])].sort()[0];
 
     for (const doc of concepts) {
         if (doc.fmError) {
@@ -475,14 +488,17 @@ function check(args) {
             continue;
         }
         const { data, keyRange, sources } = doc.fm;
+        const knowledge = bundleOf(doc.abs) === BUNDLE;
         const at = (k) => (keyRange[k] ? keyRange[k].start + 1 : 1);
         if (typeof data.type !== "string" || !data.type.trim()) add("error", doc, at("type"), "type-missing", "'type' is required and must be a non-empty string");
+        if (!knowledge && ["API Reference", "UI Component", "Architecture Pattern"].includes(data.type)) add("error", doc, at("type"), "knowledge-location", `${data.type} belongs in wiki/, not work records`);
+        if (knowledge && data.type === "Plan") add("error", doc, at("type"), "work-location", "Plan belongs in docs/, not the knowledge wiki");
         if (!data.title) add("warn", doc, 1, "title-missing", "'title' is recommended");
         if (!data.description) add("warn", doc, 1, "description-missing", "'description' is recommended");
         if (data.status !== undefined && !STATUSES.has(data.status)) add("error", doc, at("status"), "status", `status must be draft, stable or deprecated (got '${data.status}')`);
         if (data.symbols !== undefined) {
             if (!Array.isArray(data.symbols)) add("error", doc, at("symbols"), "symbols", "'symbols' must be a list");
-            else data.symbols.forEach((s) => covered.add(String(s)));
+            else if (knowledge) data.symbols.forEach((s) => covered.add(String(s)));
         }
 
         const stamps = [];
@@ -514,9 +530,12 @@ function check(args) {
             const latest = stamps.map(Date.parse).reduce((a, b) => Math.max(a, b));
             if (latest < Date.parse(data.generated.at)) add("warn", doc, at("verified"), "verified-stale", "content changed after the last verification");
         }
-        if (data.generated && data.generated.at && log && TIMESTAMP.test(data.generated.at)) {
+        const dates = logDates.get(bundleOf(doc.abs));
+        if (data.generated && data.generated.at && dates && TIMESTAMP.test(data.generated.at)) {
             const day = data.generated.at.slice(0, 10);
-            if (!logDates.has(day)) add("warn", doc, at("generated"), "log-gap", `log.md has no '## ${day}' section for this change`);
+            // Moved concepts retain dates recorded before the wiki's own log began.
+            const historical = knowledge && firstWikiDay && day < firstWikiDay && logDates.get(RECORDS)?.has(day);
+            if (!dates.has(day) && !historical) add("warn", doc, at("generated"), "log-gap", `log.md has no '## ${day}' section for this change`);
         }
 
         // Provenance and drift.
@@ -533,7 +552,7 @@ function check(args) {
                 if (ids.has(src.id)) add("error", doc, line, "source-id-dup", `duplicate source id '${src.id}'`);
                 ids.add(src.id);
             }
-            if (src.symbol) covered.add(src.symbol);
+            if (knowledge && src.symbol) covered.add(src.symbol);
             checkTs(src.last_modified, "sources", "sources[].last_modified");
             const abs = localSource(doc, src);
             if (!abs) continue;
@@ -597,7 +616,7 @@ function check(args) {
             if (local.length || childDirs.length) add("warn", rel(dir) + "/", 0, "index-missing", "directory has no index.md");
             continue;
         }
-        const isRoot = dir === BUNDLE;
+        const isRoot = BUNDLES.includes(dir);
         if (idx.fmError) add("error", idx, 1, "index-frontmatter", idx.fmError);
         else if (idx.fm) {
             const keys = Object.keys(idx.fm.data);
@@ -646,7 +665,7 @@ function check(args) {
         const usage = s.symbol.replace(/^N[A-Z]*\./, "N.");
         if (!covered.has(s.symbol) && !covered.has(usage)) {
             const level = s.entry && changedMode && changed.has(s.file) ? "error" : "warn";
-            findings.push({ level, file: rel(s.file), abs: s.file, line: s.line, rule: "uncovered-symbol", msg: s.symbol + " is not referenced by any concept (sources[].symbol or symbols)" });
+            findings.push({ level, file: rel(s.file), abs: s.file, line: s.line, rule: "uncovered-symbol", msg: s.symbol + " is not referenced by any wiki concept (sources[].symbol or symbols)" });
         }
     }
 

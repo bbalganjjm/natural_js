@@ -16,7 +16,7 @@ sources:
   - id: omissions
     resource: omission-decision.md
     title: Only O01–O05 are approved exclusions
-    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
+    git_blob: 2e795643d626d0c3161cf859524d8dd464e6b8dc
   - id: legacy
     resource: ../../v1/src/natural.architecture.js
     title: Legacy scoped context references and updates
@@ -48,11 +48,11 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Literal rule snapshots and generated-message resolution
-    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
+    git_blob: 165d762d680f5aa6787516613f385a87b1334ecf
   - id: api
     resource: ../../src/ui/index.ts
     title: Existing RuleSet locale and messages fields
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
 generated: { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T20:09:48Z }

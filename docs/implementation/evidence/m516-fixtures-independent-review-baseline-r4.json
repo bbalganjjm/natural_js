@@ -1,0 +1,84 @@
+{
+  "stage": "M5.16",
+  "status": "PASS_independent_final_fixture_body_review",
+  "reviewer": "/root/m511_baseline",
+  "author": "/root/m511_design",
+  "manifest": {
+    "path": "node_modules/.cache/m516-fixtures-design/fixture-manifest-r4.json",
+    "sha256": "d75c205a5f541b8f2de44356e2ec559d0ba955c5e91e0aa9c8482b7440f28556",
+    "bytes": 19946
+  },
+  "candidates": [
+    {
+      "target": "tests/browser/form-prepare.spec.ts",
+      "candidate": {
+        "path": "node_modules/.cache/m516-fixtures-design/form-prepare.spec.ts",
+        "sha256": "0d746c121678f29483c3151c872c7f3ce614a1fb5038a305e7408b378bbf31eb",
+        "bytes": 41421
+      },
+      "expected_expanded_cases": 30
+    },
+    {
+      "target": "tests/browser/form-deleted-preview.spec.ts",
+      "candidate": {
+        "path": "node_modules/.cache/m516-fixtures-design/form-deleted-preview.spec.ts",
+        "sha256": "fcc0da6b8dabc49f18d77baa7d928583237e44491cf12b54418f9e79f076fa76",
+        "bytes": 24500
+      },
+      "expected_expanded_cases": 10
+    }
+  ],
+  "prior_body_review": {
+    "path": "node_modules/.cache/m516-fixtures-independent-review-baseline-r2.json",
+    "sha256": "ac6e952c093b6c10adbe91b5600136daad757f6cc61fab6fbe401805c10e1905",
+    "bytes": 1617
+  },
+  "written_plan": {
+    "path": "docs/implementation/m5-form-workflows-plan.md",
+    "sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+    "bytes": 16315
+  },
+  "accepted_runtime_source": {
+    "form": {
+      "path": "node_modules/.cache/m516-framework-baseline/form.ts",
+      "sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "bytes": 98659
+    },
+    "rules": {
+      "path": "node_modules/.cache/m516-framework-baseline/rules.ts",
+      "sha256": "5f6b5f6c248e6001674362ffe9e3f02fc915ebffd4189049dd37ad22c8cb9c27",
+      "bytes": 11240
+    },
+    "manifest": {
+      "path": "node_modules/.cache/m516-framework-baseline/candidate-manifest.json",
+      "sha256": "fa5af3954f303c1d9cf82c122dfc37bfacc75bf23c653f5b3d6c9b58a53dc8e8",
+      "bytes": 12488
+    }
+  },
+  "independent_runtime_source_review": {
+    "path": "node_modules/.cache/m516-framework-independent-review-legacy.json",
+    "sha256": "568a21764451e7857cc317092a4352490ffa04f6befa3bfec4c8b7821e52af5a",
+    "bytes": 15299
+  },
+  "incremental_native_review": {
+    "path": "node_modules/.cache/m516-native-badinput-independent-review-legacy.json",
+    "sha256": "a97caf597e388be67a100346ff940901ce8084bb74287cc7c4ecc0557280f11c",
+    "bytes": 11167
+  },
+  "notes": [
+    "Prior independently read33-case R2 complete bodies remain exact prefixes; metadata proof asserted both file prefixes.",
+    "Freshly read all five R3 additions; then read both refined rule/provider/local validation cases and both final native-keyboard/loaded-delete additions in full.",
+    "Each requested callback, caught-guard, Promise drain, actual native keyboard state, owner listener cleanup and retry branch matches the accepted public behavior; no concrete fixture issue found.",
+    "40 expected framework browser cases (30 prepare,10 preview),30 registration sites, static only; app10 and Rows17 are separate owners.",
+    "Native keypress samples intentionally use existing unbind paused owner to preserve genuine browser badInput without inventing an automatic policy API.",
+    "Loaded active callback deletion retains existing FORM_VALUE/committed data/locks/explicit refresh; no asynchronous replay queue is assumed.",
+    "Reviewer-authored framework runtime is explicitly excluded from independent source acceptance."
+  ],
+  "execution": {
+    "project_commands": false,
+    "collected": false,
+    "compiled": false,
+    "browser_executed": false,
+    "current_runtime_credit": 0
+  }
+}

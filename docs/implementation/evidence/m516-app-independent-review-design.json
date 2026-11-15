@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "milestone": "M5.16",
+  "status": "GO_independent_application_and_all_app_browser_candidates_cache_only",
+  "reviewer": "m511_design",
+  "author": "m511_legacy",
+  "reviewed_at": "2026-11-14T23:50:41.389Z",
+  "manifest": {
+    "path": "node_modules/.cache/m516-app-legacy/candidate-manifest.json",
+    "sha256": "7acc8cecc23c2366b0897cf8062d1efd9ff502cdf6ea5cec02bf6d16b469c5db",
+    "bytes": 13374
+  },
+  "written_plan": {
+    "path": "docs/implementation/m5-form-workflows-plan.md",
+    "sha256": "af7b33989d900cf10ee1c580a9554ff04c0708de7f9aa5d446de1efb76475338",
+    "bytes": 14668
+  },
+  "baseline_commit": "7ee46b7407e8a6c9b1e2ffdb8800fa5527d3b269",
+  "parent": {
+    "path": "docs/implementation/evidence/m515-verification.json",
+    "sha256": "95588ae9f25a4b4de360880dc7f472e9cd34dddbe3e53d0bd0319cad5c8f07b5",
+    "bytes": 8377
+  },
+  "accepted_contract": {
+    "path": "node_modules/.cache/m516-revision-baseline/contract-r2.md",
+    "sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+    "normalized_lf_sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+    "bytes": 25156
+  },
+  "application_contract": {
+    "path": "node_modules/.cache/m516-app-legacy/contract.md",
+    "sha256": "44f0e3b8bca23ef033f7a452843eb45edfcc6fec659759ed8ae8e5978a4fda8c",
+    "normalized_lf_sha256": "44f0e3b8bca23ef033f7a452843eb45edfcc6fec659759ed8ae8e5978a4fda8c",
+    "bytes": 3082
+  },
+  "actual_source_preconditions": [
+    {
+      "path": "examples/vite/m4/employees.ts",
+      "sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+      "bytes": 18120
+    },
+    {
+      "path": "examples/vite/m4/side.html",
+      "sha256": "369536dc41d13e234a69fb0c78a350a6829328fe1def4a0fae6b011e17438b83",
+      "bytes": 5777
+    },
+    {
+      "path": "examples/vite/m4/stack.html",
+      "sha256": "b0bf921dbd5e91ce5c0633cc4f2d8573308f83e0a35b9719a0961a4f01b81986",
+      "bytes": 5587
+    },
+    {
+      "path": "examples/vite/m4/main.ts",
+      "sha256": "4ed89f19aae992edb8f0b43006cb8fa65bb3303dc77d89c9ea22ca8b745392bd",
+      "bytes": 7055
+    },
+    {
+      "path": "examples/vite/m4/employees.json",
+      "sha256": "e006f8b22209588eecafc59ff6e3154bfacb4f39484dab545e36383806ae361a",
+      "bytes": 644
+    },
+    {
+      "path": "examples/vite/m4/mock-server.ts",
+      "sha256": "e0b6eb6c6258c2c9aa0ab5434b9f2a222b250a883703b1aa7b7a8a86806df1f3",
+      "bytes": 3656
+    },
+    {
+      "path": "tests/browser/m4-screen.spec.ts",
+      "sha256": "5a9fd4515e89d9f410d1c67490b23424b6ad85a80da7f46b79622bc1054156a2",
+      "bytes": 22597
+    },
+    {
+      "path": "tests/browser/m37-declarations.spec.ts",
+      "sha256": "045638b32d9a4454737c51b8ae36881b517e9a75e22fc4c24578c959a3b17bea",
+      "bytes": 13396
+    }
+  ],
+  "reviewed_candidates": [
+    {
+      "target": "examples/vite/m4/employees.ts",
+      "new_file": false,
+      "target_exists": true,
+      "candidate": {
+        "path": "node_modules/.cache/m516-app-legacy/employees.ts",
+        "sha256": "93e49909c6c6da999a3df0c4311cf3bd1ab857c66f0b45e219a6bfe04bf22de3",
+        "normalized_lf_sha256": "93e49909c6c6da999a3df0c4311cf3bd1ab857c66f0b45e219a6bfe04bf22de3",
+        "bytes": 21654
+      },
+      "base": {
+        "path": "examples/vite/m4/employees.ts",
+        "sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "normalized_lf_sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "bytes": 18120,
+        "current_sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "unchanged": true
+      }
+    },
+    {
+      "target": "examples/vite/m4/side.html",
+      "new_file": false,
+      "target_exists": true,
+      "candidate": {
+        "path": "node_modules/.cache/m516-app-legacy/side.html",
+        "sha256": "8be8565915cf0b7e53051d7c7f8053fdbf4d16d85bf511435488b75e2da123cb",
+        "normalized_lf_sha256": "8be8565915cf0b7e53051d7c7f8053fdbf4d16d85bf511435488b75e2da123cb",
+        "bytes": 5888
+      },
+      "base": {
+        "path": "examples/vite/m4/side.html",
+        "sha256": "369536dc41d13e234a69fb0c78a350a6829328fe1def4a0fae6b011e17438b83",
+        "normalized_lf_sha256": "f87bae1445b6cdff855e3b56d81f8648919996292cacc6363b90dac9f930d1bf",
+        "bytes": 5777,
+        "current_sha256": "369536dc41d13e234a69fb0c78a350a6829328fe1def4a0fae6b011e17438b83",
+        "unchanged": true
+      }
+    },
+    {
+      "target": "examples/vite/m4/stack.html",
+      "new_file": false,
+      "target_exists": true,
+      "candidate": {
+        "path": "node_modules/.cache/m516-app-legacy/stack.html",
+        "sha256": "8df44cb80db3fcafabb98ca2b764f615b0688d4d50625aaf8609889dc251c1ae",
+        "normalized_lf_sha256": "8df44cb80db3fcafabb98ca2b764f615b0688d4d50625aaf8609889dc251c1ae",
+        "bytes": 5701
+      },
+      "base": {
+        "path": "examples/vite/m4/stack.html",
+        "sha256": "b0bf921dbd5e91ce5c0633cc4f2d8573308f83e0a35b9719a0961a4f01b81986",
+        "normalized_lf_sha256": "590d37c5b5864843e58e5d1263eef27548ed0a5e54d493b015af68b387ac4bd3",
+        "bytes": 5587,
+        "current_sha256": "b0bf921dbd5e91ce5c0633cc4f2d8573308f83e0a35b9719a0961a4f01b81986",
+        "unchanged": true
+      }
+    },
+    {
+      "target": "tests/browser/m516-app.spec.ts",
+      "new_file": true,
+      "target_exists": false,
+      "candidate": {
+        "path": "node_modules/.cache/m516-app-legacy/m516-app.spec.ts",
+        "sha256": "033bf3458cca096d686de1c5632aa9857339754b2b5355f8a6d585a4e741bb4b",
+        "normalized_lf_sha256": "033bf3458cca096d686de1c5632aa9857339754b2b5355f8a6d585a4e741bb4b",
+        "bytes": 13614
+      }
+    }
+  ],
+  "read_scope": "Full candidate Employee module and all five browser definitions expanded over both layouts; complete actual main preparation/advice/Page owner, seed and mock transport, exact authored HTML deltas and actual old controller callers. No authored Design prepare/preview fixture is self-reviewed.",
+  "accepted": [
+    "One explicit completeEmployee factory checks native-only name/email/numeric salary/nested profile types and returns Employee without Record-to-T casts. Entered creation copies current committed source-only a/chosen and supplies a new business ID; captured New remains empty choice catalog/null and uses native salary0 capture.",
+    "The entered branch uses prepare only, stops on invalid values without validating/committing valid siblings into the old row, and inserts once at the first full-store RowId. Captured New stays end insertion. showRow and existing Rows tests retain sorting/index/deleted-anchor responsibilities.",
+    "Checkpoint stores the immutable complete value of a live selection. Restore calls Rows.restore once, unbinds only the current draft, then uses changed selection onSelect or the explicit unchanged-ID bind branch exactly once. Received/all-row Revert stays a separate original command; its previous selector and cancellation behavior remain.",
+    "Loaded delete sets preview ID before Rows.remove, so Grid null-selection notification does not bind the same detail away. The existing Form owner retains last committed values while discarding that row draft; original deletion payload remains server-owned. Ordinary inserted removal unbinds captured values and drops its checkpoint.",
+    "Native-disabled preview never adds inert; application Restore/Save/Close remain available and the entered-copy command reports read-only state instead of calling prepare. Existing save-time inert/busy/abort owner now includes only the two new controls.",
+    "Current public actions/advice/search/save/declaration preparation and per-page row registrations remain intact. Search/received reload retire application references; checkpoint cleanup is Page-owned. No second Rows/Form/renderer, generic factory/dispatch registry, public API or dependency is authored in this app patch.",
+    "Both HTML layouts add only two native type=button commands, named detail Form and salary default0, preserving existing selectors/labels/CSS/template structure and fixed-ID rules.",
+    "All ten proposed browser cases align real mock wire/session behavior: entered versus captured creation, invalid no-add/direct sibling preservation, complete selection restoration versus received revert, one-bind counts for same/changed selection, retained reset/deletion payload, independent declared sibling and Close cleanup. Native classes are not serialized in page.evaluate."
+  ],
+  "static_metadata": {
+    "candidate_hashes_exact": 4,
+    "current_raw_bases_exact": 8,
+    "new_test_target_absent": true,
+    "source_browser_definitions": 5,
+    "expected_expanded_browser_cases": 10,
+    "collected": false,
+    "executed": 0
+  },
+  "findings": [],
+  "ownership_boundary": {
+    "this_review": "Disjoint Legacy application/HTML/new app-test candidates only.",
+    "excluded_self_authored": "The33 Design-authored pure prepare/preview cases are excluded from independent approval; Baseline/Legacy own their separate full-body acceptance.",
+    "framework": "Baseline/Legacy review exact Form/Data/native/default/UI source candidates independently before source GO.",
+    "installed": "Root owns four installed candidates; they require separate independent coverage."
+  },
+  "limits": [
+    "Cache-only static source/caller review and file hashes. No actual project source/docs/test changes or compiler/collector/unit/browser/performance/project checker commands.",
+    "Actual runtime/archive/browsers/performance/raw/final documents and separate stage commit remain required.",
+    "Only O01-O05 omissions; no M5.16/family/P0/M13/release approval is inferred."
+  ]
+}

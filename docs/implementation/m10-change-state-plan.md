@@ -12,7 +12,7 @@ sources:
   - id: browser
     resource: ../../tests/browser/grid-change-state.spec.ts
     title: Independent committed-field, deletion, focus and cleanup regressions
-    git_blob: be9a9ea45faeafd04a14747918668d7318d932e8
+    git_blob: e833addf81662e544f9e4d8bd7fffc85f86a2634
   - id: equality
     resource: ../../src/internal/same-json.ts
     title: Existing private JSON equality shared by three actual callers
@@ -20,15 +20,15 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Grid semantic closure and required continuation
-    git_blob: ae0aa6948d1dcb36dcdc9d01afbff06b84b31cd7
+    git_blob: 7c66d9166bf51f4a3657c4a6efa556b7762bfd31
   - id: data
     resource: ../../src/data/index.ts
     title: Current values, immutable originals, deletion payloads and restoration
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: form
     resource: ../../src/ui/form.ts
     title: Rows-backed fields, drafts, formatting and restoration
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Compiled fields, retained tombstones and mounted ownership

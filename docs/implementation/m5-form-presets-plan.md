@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-discovery-plan.md
     title: Completed explicit field discovery and lifetime scope
-    git_blob: 6ed45b89f4367288d5dd25192aff7d963f9339d1
+    git_blob: 079e571344604637facd84e907f6839425e7f1eb
   - id: baseline
     resource: evidence/m58-verification.json
     title: Frozen 3f5e3ad source, runtime and installed package baseline
@@ -16,19 +16,19 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Constructor option capture and guarded callback execution
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form callback, rule and handle contracts
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Captured catalogs and per-kind field declarations
-    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
+    git_blob: 165d762d680f5aa6787516613f385a87b1334ecf
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Independent CVC employee Forms and application rules
-    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
+    git_blob: b01cbd3254a17c5c06b3af9699cbc46c78aca162
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Form option precedence and local/global wrapper behavior
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
 generated: { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T13:02:15Z }

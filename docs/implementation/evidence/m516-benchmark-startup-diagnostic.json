@@ -1,0 +1,215 @@
+{
+  "kind": "benchmark_startup_transport_diagnostic",
+  "helper": {
+    "path": "node_modules/.cache/m516-benchmark-startup-diagnostic.mjs",
+    "sha256": "e0e6bd43c2920c518171a18b4ab8d1de7112fbbf60bfdc16f1e165ec897105f4",
+    "bytes": 3144
+  },
+  "failed_attempt": {
+    "path": "docs/implementation/evidence/m516-binding-performance-2-result.json",
+    "sha256": "f3b6613266be450817bd53fc888bce85b9e038171f9c712b1dfc6aecb63518d4",
+    "bytes": 2367
+  },
+  "unchanged_inputs": {
+    "path": "docs/implementation/evidence/m516-inputs-7e26d1225fac.json",
+    "sha256": "7e26d1225fac3ebb4cde8b4fab336d94449e4565a1cfe64cb9fe7631ac5c298a",
+    "bytes": 23064,
+    "entries": 225
+  },
+  "result": {
+    "started": "2026-11-15T02:27:19.914Z",
+    "errors": [],
+    "failed_requests": [],
+    "responses": [
+      {
+        "url": "http://127.0.0.1:50484/benchmark.html",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/benchmark.ts",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/index.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@vite/client",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/data/index.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/list.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/choice-group.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/pagination.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/select.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/tabs.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/tree.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/form.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/popup.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/datepicker.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/notify.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/documents.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/node_modules/vite/dist/client/env.mjs",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/internal/framework-error.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/internal/same-json.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/field-path.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/select-owner.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/row-options.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-hooks.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/rules.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/value-binding.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/native-control.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/dom-state.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/choice-group-owner.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-columns.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-selection.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-filters.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-paste.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-viewport.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/field-render.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-row-blocks.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/native-defaults.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/grid-height.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/tab-pages.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/page/index.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/validate-rules.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/page/advice.js",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:50484/@fs/D:/workspace/natural_js/build/ui/format-rules.js",
+        "status": 200
+      }
+    ],
+    "console_errors": [],
+    "navigation_status": 200,
+    "status": "ready",
+    "observed_global": "function",
+    "finished": "2026-11-15T02:27:20.375Z"
+  },
+  "prior_helper_failure": {
+    "helper": {
+      "path": "docs/implementation/evidence/m516-benchmark-startup-diagnostic-initial.mjs",
+      "sha256": "c1ad0c86ef29ca15ab30a3a14c694c0d2804a3fadba80d70ae5f373c11c5b7ba",
+      "bytes": 2886
+    },
+    "exit_code": 1,
+    "phase": "config resolution before any browser launch",
+    "error": "UNRESOLVED_ENTRY: Cannot resolve entry module ../../examples/vite/vite.config.ts.",
+    "scope": "Diagnostic helper relative-path error only; no project source, browser measurement or canonical credit."
+  },
+  "scope": "Replays only the original Vite/page/launch/ready setup, with error and request observers. No benchmark function, warmup, metric or budget executes. This later observation cannot establish the original uninstrumented timeout cause; no source/test/configuration/fixture change or compiler/unit/suite/canonical credit."
+}

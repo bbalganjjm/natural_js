@@ -11,7 +11,7 @@ sources:
   - id: checker
     resource: ../../tools/knowledge-docs/knowledge-docs.mjs
     title: Current OKF checker and stamper
-    git_blob: 30fcaa6dc11183ff087e5c288eda6709bac3330b
+    git_blob: 2752950e806b769b507b3f3e99b4a8a5c2674594
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T08:54:40Z }
 ---
 

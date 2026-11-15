@@ -562,3 +562,26 @@ const invalidAsyncWrap: PageAdvice = {
   wrap: async proceed => proceed
 };
 void invalidAsyncMatch; void invalidAsyncWrap;
+
+export function connectPreparedCreation(root: HTMLFormElement) {
+  interface EnteredEmployee { name: string; amount: number; detail?: { label: string } }
+  const rows = createRows<EnteredEmployee>([{ name: "Received", amount: 1200, detail: { label: "Original" } }]);
+  const id = rows.entries()[0].id, checkpoint: Snapshot<EnteredEmployee> = rows.get(id)!.value;
+  const form = bindForm(root, { rows, parse: { amount: Number } });
+  form.bind(id);
+  const candidate = form.prepare();
+  const validation: ValidationResult = candidate;
+  if (candidate.values !== null) {
+    const { name, amount } = candidate.values;
+    if (typeof name === "string" && typeof amount === "number" && Number.isFinite(amount)) {
+      const complete: EnteredEmployee = { name, amount };
+      rows.add(complete);
+    }
+  }
+  rows.restore(id, checkpoint);
+  if (false) {
+    // @ts-expect-error A restoration requires a complete business value.
+    rows.restore(id, { amount: 0 });
+  }
+  return { rows, form, checkpoint, validation };
+}

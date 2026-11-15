@@ -1,0 +1,240 @@
+{
+  "kind": "actual_m516_app_native_event_order_diagnostic",
+  "helper": {
+    "path": "node_modules/.cache/m516-entered-event-diagnostic.mjs",
+    "sha256": "57d7d89a9b777c17908e74776a567fd5e27d162efaa017a5184a054b2ee629d8",
+    "bytes": 4387
+  },
+  "failed_attempt": {
+    "path": "docs/implementation/evidence/m516-focused-chromium-suite-run-1.json.gz",
+    "sha256": "a7baea4a2fea2ce9781a154fc3d994e149fd30102bdfa7eaf0dc5b9cf039870b",
+    "bytes": 16455,
+    "encoding": "gzip",
+    "uncompressed_sha256": "a326009c906ff51e957a0aa59d4ea365f054dec22fbe007c292ccd315d56085e",
+    "uncompressed_bytes": 227415
+  },
+  "unchanged_inputs": {
+    "path": "docs/implementation/evidence/m516-inputs-fd90b1a11d65.json",
+    "sha256": "fd90b1a11d6589b2227090a150b88e64f8e51281d85517211ef5acbfa793411d",
+    "bytes": 23064,
+    "entries": 225
+  },
+  "results": [
+    {
+      "layout": "side",
+      "settle_email_before_direct_assignment": false,
+      "before": "Uncommitted candidate",
+      "events": [
+        {
+          "type": "change",
+          "phase": 1,
+          "target": "email",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "change",
+          "phase": 3,
+          "target": "email",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 1,
+          "target": "email",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 3,
+          "target": "email",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "click",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "click",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        }
+      ],
+      "after": "Ada",
+      "click_capture_name": "Ada"
+    },
+    {
+      "layout": "side",
+      "settle_email_before_direct_assignment": true,
+      "before": "Uncommitted candidate",
+      "events": [
+        {
+          "type": "click",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "click",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        }
+      ],
+      "after": "Uncommitted candidate",
+      "click_capture_name": "Uncommitted candidate"
+    },
+    {
+      "layout": "stack",
+      "settle_email_before_direct_assignment": false,
+      "before": "Uncommitted candidate",
+      "events": [
+        {
+          "type": "change",
+          "phase": 1,
+          "target": "email",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "change",
+          "phase": 3,
+          "target": "email",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 1,
+          "target": "email",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 3,
+          "target": "email",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "click",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        },
+        {
+          "type": "click",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Ada",
+          "email": "invalid"
+        }
+      ],
+      "after": "Ada",
+      "click_capture_name": "Ada"
+    },
+    {
+      "layout": "stack",
+      "settle_email_before_direct_assignment": true,
+      "before": "Uncommitted candidate",
+      "events": [
+        {
+          "type": "click",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 1,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "focusout",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        },
+        {
+          "type": "click",
+          "phase": 3,
+          "target": "add-entered",
+          "name": "Uncommitted candidate",
+          "email": "invalid"
+        }
+      ],
+      "after": "Uncommitted candidate",
+      "click_capture_name": "Uncommitted candidate"
+    }
+  ],
+  "prior_diagnostic": {
+    "helper": {
+      "path": "docs/implementation/evidence/m516-entered-event-diagnostic-initial.mjs",
+      "sha256": "e4c75cef278c708549331bbb771c12238168d174262a7d4752ec9c5219ed270d",
+      "bytes": 4015
+    },
+    "exit_code": 1,
+    "error": "TypeError: Cannot read properties of undefined (reading 'path')",
+    "phase": "After all four browser observations and source verification, constructing report failed because the failed aggregate stores stdout on children, not directly. No suite credit or source change."
+  },
+  "conclusion": "With the original focused email, native change dispatch precedes the add-entered click and rewrites the direct sibling before prepare is invoked. Settling that native change before direct assignment preserves the sibling through the same prepare rejection/report/focus path.",
+  "scope": "Diagnostic only; no compiler, unit, browser-suite or canonical credit. No source/test/configuration changes. Original failing cases, assertions, reports and traces remain."
+}

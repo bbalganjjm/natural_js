@@ -12,7 +12,7 @@ sources:
   - id: omission
     resource: omission-decision.md
     title: Exact five approved omissions and retained obligations
-    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
+    git_blob: 2e795643d626d0c3161cf859524d8dd464e6b8dc
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -20,7 +20,7 @@ sources:
   - id: coverage
     resource: feature-parity.md
     title: Initial source-backed coverage ledger
-    git_blob: fa0f6d8d5a1fdc251e8f8709b2d8b37793ff22a5
+    git_blob: 699530597d57a6a8060326bf3179855da6346926
   - id: roadmap
     resource: roadmap.md
     title: Milestone governance and current scope
@@ -28,15 +28,15 @@ sources:
   - id: grid-history
     resource: m10-plan.md
     title: Selected Grid implementation and historical measurements
-    git_blob: 0bf915d4c73cad7bb073aa719f011087faf18ae1
+    git_blob: 4653d7f7b1ff69076422a89c17df34a59d760bdb
   - id: architecture
-    resource: ../v2/architecture.md
+    resource: ../../wiki/v2/architecture.md
     title: Implemented module ownership and private sharing
-    git_blob: 3812ecbfaa4ef1428838dfa8d9f2cab16a9f1aba
+    git_blob: 3f5cc74fd50d2cc4df02c91610ffde2ad43c21ce
   - id: data
     resource: ../../src/data/index.ts
     title: Current RowId and shared Rows implementation
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Current authored table implementation
@@ -44,7 +44,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Current input, draft and validation ownership
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
 generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
@@ -182,7 +182,7 @@ P0.1 known source-case assignment is accepted. The exact O01-O05 decision is app
 
 # M5.14 live Form-owned catalogs
 
-[M5.14](m5-live-choice-groups-plan.md) uses the existing setChoices method and a specific private group/Form handoff. The existing compiled field retains raw Rows, all row drafts, captured creation values, rules and display-cache ownership while controls, native lookup, error targets, reset subscriptions and focus follow the new catalog. Removed codes stay in committed data and drafts; zero/one/many choices remain valid catalogs. Ordinary failures restore old node identity and metadata; stale work cannot overwrite later source or ownership. The [two-layout example](../v2/choice-groups-example.md) and [API](../v2/choice-group.md) describe the implemented contract. Fresh full runtime and final independent evidence/document acceptance are recorded by the owning stage; this continuation does not close the whole U10 family.[^form]
+[M5.14](m5-live-choice-groups-plan.md) uses the existing setChoices method and a specific private group/Form handoff. The existing compiled field retains raw Rows, all row drafts, captured creation values, rules and display-cache ownership while controls, native lookup, error targets, reset subscriptions and focus follow the new catalog. Removed codes stay in committed data and drafts; zero/one/many choices remain valid catalogs. Ordinary failures restore old node identity and metadata; stale work cannot overwrite later source or ownership. The [two-layout example](../../wiki/v2/choice-groups-example.md) and [API](../../wiki/v2/choice-group.md) describe the implemented contract. Fresh full runtime and final independent evidence/document acceptance are recorded by the owning stage; this continuation does not close the whole U10 family.[^form]
 
 [^coverage]: Initial source-backed coverage ledger
 [^roadmap]: Milestone governance and current scope

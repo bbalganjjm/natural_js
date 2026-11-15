@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "reviewer": "m511_legacy",
+  "status": "PASS_independent_R2_contract_GO_for_bounded_cache_implementation_design_only",
+  "scope": "Incremental independent contract review. Root retains final cache/source implementation permission. No source/API implementation acceptance, runtime tests or family closure.",
+  "provenance": {
+    "initial_legacy_proposal_authored_by_reviewer": true,
+    "not_self_certification_of_initial_proposal": true,
+    "new_contract_author": "m511_baseline",
+    "prior_independent_review": {
+      "path": "node_modules/.cache/m516-contract-independent-review-legacy.json",
+      "sha256": "a2df3d206e76b2dfa27bf2586a74a03521ffdaabf28e8b10b0fc82f9247c9a46",
+      "normalized_lf_sha256": "a2df3d206e76b2dfa27bf2586a74a03521ffdaabf28e8b10b0fc82f9247c9a46",
+      "bytes": 13595
+    },
+    "reviewed_contract": {
+      "path": "node_modules/.cache/m516-revision-baseline/contract-r2.md",
+      "sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+      "normalized_lf_sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+      "bytes": 25156
+    },
+    "reviewed_manifest": {
+      "path": "node_modules/.cache/m516-revision-baseline/manifest-r2.json",
+      "sha256": "0fadb627f4b97faadf304a6057a57e02888869f290cf09316c4ccf4e32ff42b5",
+      "normalized_lf_sha256": "0fadb627f4b97faadf304a6057a57e02888869f290cf09316c4ccf4e32ff42b5",
+      "bytes": 12544
+    },
+    "current_connected_sources": [
+      {
+        "path": "src/data/index.ts",
+        "sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+        "normalized_lf_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+        "bytes": 15686,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/form.ts",
+        "sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+        "normalized_lf_sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+        "bytes": 80848,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/index.ts",
+        "sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+        "normalized_lf_sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+        "bytes": 7114,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/native-control.ts",
+        "sha256": "1a41cc7bf79c0f00eef7d7163bcc99aeab190f7e5134d7bb2d38fdfcb0f33197",
+        "normalized_lf_sha256": "1a41cc7bf79c0f00eef7d7163bcc99aeab190f7e5134d7bb2d38fdfcb0f33197",
+        "bytes": 5841,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/native-defaults.ts",
+        "sha256": "902042418d6be81564305493837934bba68d9d8af6b4cd74967a193f069981ed",
+        "normalized_lf_sha256": "902042418d6be81564305493837934bba68d9d8af6b4cd74967a193f069981ed",
+        "bytes": 2780,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/choice-group-owner.ts",
+        "sha256": "6792da12c2522cb6d0a654c7a239b60367b8c3a7b4693ca81e771a85a7120f14",
+        "normalized_lf_sha256": "6792da12c2522cb6d0a654c7a239b60367b8c3a7b4693ca81e771a85a7120f14",
+        "bytes": 4635,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/row-options.ts",
+        "sha256": "d7a3a2e84d249b885122d5683f39b0a064245d8ae178a0eeace14b3c31a98dd1",
+        "normalized_lf_sha256": "d7a3a2e84d249b885122d5683f39b0a064245d8ae178a0eeace14b3c31a98dd1",
+        "bytes": 2847,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/field-path.ts",
+        "sha256": "2a31e756daccb79deb5d2f3d4cf43292c0790eb35bacfd88b910010859fbb97a",
+        "normalized_lf_sha256": "2a31e756daccb79deb5d2f3d4cf43292c0790eb35bacfd88b910010859fbb97a",
+        "bytes": 1980,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/grid.ts",
+        "sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+        "normalized_lf_sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+        "bytes": 118014,
+        "matches_prior_review": true
+      },
+      {
+        "path": "src/ui/grid-selection.ts",
+        "sha256": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+        "normalized_lf_sha256": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+        "bytes": 11903,
+        "matches_prior_review": true
+      },
+      {
+        "path": "examples/vite/m4/employees.ts",
+        "sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "normalized_lf_sha256": "91e8bb4fc93033adaddcf8981fdf843add4b1e557ddd850173a9e5e39c6ee114",
+        "bytes": 18120,
+        "matches_prior_review": true
+      },
+      {
+        "path": "v1/src/natural.ui.js",
+        "sha256": "20d5d46a1ad775e630a82355594cebc5b7a0d9b728741982750092be757ad848",
+        "normalized_lf_sha256": "ebdee5a5dedbb1ebf27ba4eb801b1c185b9377a94cc5e8df890004bbe276af42",
+        "bytes": 354376,
+        "matches_prior_review": true
+      },
+      {
+        "path": "v1/docs/ui/form.md",
+        "sha256": "ebf1203071270e44ce442fdc593e05003e50e676e2dc3c76cee0542b3bff6263",
+        "normalized_lf_sha256": "ebf1203071270e44ce442fdc593e05003e50e676e2dc3c76cee0542b3bff6263",
+        "bytes": 24790,
+        "matches_prior_review": true
+      },
+      {
+        "path": "v1/docs/examples/template/search-grid-detail-horizontal.md",
+        "sha256": "325c4a900ad11d92b66f5522217e7a631f26cd1350145ffcf1b4d79935643603",
+        "normalized_lf_sha256": "325c4a900ad11d92b66f5522217e7a631f26cd1350145ffcf1b4d79935643603",
+        "bytes": 18894,
+        "matches_prior_review": true
+      },
+      {
+        "path": "v1/docs/examples/template/search-grid-detail-vertical.md",
+        "sha256": "d2cfc21da3db04760b65a81bf526864b107f2bdbb41951fbc5b6d1db100e832e",
+        "normalized_lf_sha256": "d2cfc21da3db04760b65a81bf526864b107f2bdbb41951fbc5b6d1db100e832e",
+        "bytes": 14521,
+        "matches_prior_review": true
+      },
+      {
+        "path": "tests/rows.test.ts",
+        "sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+        "normalized_lf_sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+        "bytes": 50214,
+        "matches_prior_review": true
+      },
+      {
+        "path": "tests/browser/form-defaults.spec.ts",
+        "sha256": "4e2a040b5ad4e629677e64dc030c4e36695a72d1ac027edf31b8fc492cc4a355",
+        "normalized_lf_sha256": "4e2a040b5ad4e629677e64dc030c4e36695a72d1ac027edf31b8fc492cc4a355",
+        "bytes": 53181,
+        "matches_prior_review": true
+      }
+    ],
+    "unchanged_sections": "Read the full R1/R2 diff; sections1-5 and state table are unchanged. Prior connected owner/caller review applies.",
+    "prior_metadata_path_correction": "Only the prior connected_sources path grid-selection.ts:107 is normalized back to grid-selection.ts; prior source hash, review bytes and conclusions remain immutable.",
+    "retained_metadata_writer_failure": {
+      "path": "node_modules/.cache/m516-contract-independent-review-legacy-r2-metadata-failure.json",
+      "sha256": "62de54ba77243a73de74228c2535c52808b745729a634bdcfee3600fbfa1b0ed",
+      "normalized_lf_sha256": "62de54ba77243a73de74228c2535c52808b745729a634bdcfee3600fbfa1b0ed",
+      "bytes": 566
+    }
+  },
+  "findings_resolved": [
+    {
+      "id": "M516-C01",
+      "status": "resolved",
+      "lines": [
+        104,
+        106,
+        108
+      ],
+      "accepted": "Acquire/release native form listeners only for active deleted preview via existing owner/pending/timer. Preserve M514 publication cancellation; allow shared native default; post-default restore only affected current compiled preview fields from successful shown/native/typed option occurrence tokens, preserving locks. No formatter/value/whole callbacks, local render/reconcile or Rows writes. Canceled/synthetic skip; stale preview cannot repaint; restore/rebind/disposal invalidate old tokens."
+    },
+    {
+      "id": "M516-C02",
+      "status": "resolved",
+      "lines": [
+        128,
+        157
+      ],
+      "accepted": "Example checkpoint is live-only and still present. Its received owner cannot become authoritative received-delete under the same RowId through current loading owners. Separate received-delete restore remains preview-only without live selection; ordinary local deletion can revive from the table."
+    },
+    {
+      "id": "M516-C03",
+      "status": "resolved",
+      "lines": [
+        73
+      ],
+      "accepted": "Framework RowId/order/original/checkpoint stay owned by Rows; all business fields including id copy exactly from supplied complete value, without invented/remapped identity."
+    }
+  ],
+  "additional_revision_acceptance": [
+    {
+      "area": "Exactly one detail binding",
+      "line": 151,
+      "accepted": "After unbind, changed Grid selection uses existing onSelect->detail.bind. Already-selected Grid no-op receives one explicit bind. No extra unconditional bind or unrelated showRow change."
+    },
+    {
+      "area": "Own-key equality and dirty keys",
+      "line": 75,
+      "accepted": "Dirty/effective/no-op comparison distinguishes missing and own keys, including absent versus own __proto__ empty object. Full replacement retains framework identity and received ownership."
+    },
+    {
+      "area": "Minimum surface and owners",
+      "accepted": "Exactly Form.prepare plus Rows.restore on existing owners; no named result/checkpoint/schema/store/factory, reset queue, renderer or generic conversion engine."
+    },
+    {
+      "area": "Prepare purity/raw/parser/error",
+      "accepted": "Prior accepted no-write boundary, actual shown raw/typed occurrence records, parser skip/reparse, detached probes, native-only conditional result, plain parsers, thenable draining and synchronous lifetime/staleness guards are unchanged."
+    },
+    {
+      "area": "Restoration state table",
+      "accepted": "Ordinary/received-clean derive clean/update; inserts stay insert; received-update remains update; received-delete remains delete; missing removed inserts never resurrect. One final set event or silent equality; postcommit errors retain the completed commit."
+    }
+  ],
+  "remaining_contract_blockers": [],
+  "retained_obligations": [
+    "P01-P06/R01/C01-C03/I01 are proposed unexecuted witness groups; actual counts derive from frozen fixtures.",
+    "M5.17 callback/receiver/global ordering, M5.18 rules, M5.19 controls and M5.20 joined integration remain required.",
+    "Only O01-O05 are approved exclusions.",
+    "Root retains actual stage plan, final source application and runtime verification decisions."
+  ],
+  "wrote_only_ignored_review": true,
+  "actual_source_docs_tests_edits": false,
+  "cache_implementation_edits": false,
+  "project_compiler_browser_unit_benchmark_commands": 0,
+  "runtime_credit": 0,
+  "family_closure_credit": 0
+}

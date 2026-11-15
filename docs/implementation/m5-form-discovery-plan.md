@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-defaults-plan.md
     title: Completed captured defaults and reusable unbinding scope
-    git_blob: 1e5bcc1068d80f0d95f0001565268439c9341c03
+    git_blob: 65d903524e07d6366bc90d8e82b541de715802cc
   - id: baseline
     resource: evidence/m57-verification.json
     title: Frozen ebf700c source, runtime and installed package baseline
@@ -16,11 +16,11 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Compiled fields, captures, drafts, errors and Form lifetime
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public Form handle and rule contracts
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
   - id: native
     resource: ../../src/ui/native-control.ts
     title: Native values, groups and constraints
@@ -32,7 +32,7 @@ sources:
   - id: rules
     resource: ../../src/ui/rules.ts
     title: Captured rule catalogs and compiled field declarations
-    git_blob: 2971c8dc0dfdacaef95c92b137a231297fc6c14e
+    git_blob: 165d762d680f5aa6787516613f385a87b1334ecf
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Legacy cache-controlled lookup, creation capture and current-node unbinding
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete retained feature obligations and consolidated omission review
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
 generated: { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-07T11:49:17Z }
@@ -53,7 +53,7 @@ Add one explicit structural reconciliation operation to the existing Form owner.
 # Checkpoint
 
 - M5.8 starts at pushed ebf700c98c3351f052adb4316a996cc5571143f4 with a clean worktree; independent read-only M5.7 recovery and the bounded pre-source contract review pass.[^baseline]
-- Explicit rescan is implemented through the same local compiler as construction. Compatible fields/captures remain, affected drafts/known local issues block retirement, and new bindings adopt one current native capture. No new public type, option, module, entry or dependency. The [Form concept](../v2/form.md#field-rediscovery) owns the implemented API.[^form][^ui]
+- Explicit rescan is implemented through the same local compiler as construction. Compatible fields/captures remain, affected drafts/known local issues block retirement, and new bindings adopt one current native capture. No new public type, option, module, entry or dependency. The [Form concept](../../wiki/v2/form.md#field-rediscovery) owns the implemented API.[^form][^ui]
 - Connected source/caller/test review, fresh canonical gates and independent raw/document reviews accept only these selected outcomes. Direct hot declarations, wider dynamic owners and complete parity remain required.[^parity]
 
 # Steps

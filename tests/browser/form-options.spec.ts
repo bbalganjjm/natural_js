@@ -296,7 +296,10 @@ test("null binding and Rows lifetime operations clear generated choices without 
     const reverted = select.selectedOptions[0]?.textContent === "Choice 0" && h.rows.get(id)!.value.assignment.chosen === 1;
     h.rows.move(id); h.rows.appendState([{ value: { ...h.rows.get(id)!.value, name: "Appended" } as Item, status: "update" }]);
     const sameSelection = select.selectedOptions[0]?.textContent === "Choice 0";
-    h.rows.remove(id); const removed = select.options.length === 3;
+    const catalogSize = select.options.length, raw = h.rows.get(id)!.value.assignment.chosen;
+    h.rows.remove(id); const removed = select.options.length === catalogSize && select.selectedOptions[0]?.textContent === "Choice 0" &&
+      select.disabled && owner.root.getAttribute("data-row-status") === "delete" &&
+      (owner.form.read().assignment as { chosen: unknown }).chosen === raw && h.rows.get(id)!.status === "delete";
     h.rows.replace([]); return { cleared, reverted, sameSelection, removed, empty: select.options.length === 3, count: h.rows.entries().length };
   });
   expect(result).toEqual({ cleared: true, reverted: true, sameSelection: true, removed: true, empty: true, count: 0 });

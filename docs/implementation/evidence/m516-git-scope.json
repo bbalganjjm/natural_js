@@ -1,0 +1,26 @@
+{
+  "stage": "M5.16",
+  "kind": "preserve_unrelated_user_editor_settings",
+  "previous_helper": {
+    "path": "node_modules/.cache/m516-stage-git.mjs",
+    "sha256": "09e4a2528acbd4eafd6a0182809f15d93b53730c291d654bb9a00ae62e12ea7f",
+    "bytes": 5350
+  },
+  "helper": {
+    "path": "node_modules/.cache/m516-stage-git-r2.mjs",
+    "sha256": "e8cd38206f52a5ed649c08acbc398f1adf4e55aad8df2ac8b788923a44746f2e",
+    "bytes": 5529
+  },
+  "first_stage_failure": {
+    "error": "Unexpected change: .obsidian/app.json",
+    "index_mutations": 0,
+    "phase": "Before git add path validation"
+  },
+  "excluded_paths": [
+    ".obsidian/app.json",
+    ".obsidian/appearance.json",
+    ".obsidian/core-plugins.json",
+    ".obsidian/workspace.json"
+  ],
+  "scope": "The four untracked editor settings appeared after the user resume snapshot. Leave them unchanged and outside the authorized code/docs commit. No whitelist expansion, deletion, ignore/config change or source/runtime/document-body mutation."
+}

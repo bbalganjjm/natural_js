@@ -1,0 +1,446 @@
+// SPDX-License-Identifier: Apache-2.0
+import { fileURLToPath } from "node:url";
+import { expect, test } from "@playwright/test";
+import type { bindForm } from "../../src/ui/form.js";
+import type { bindChoiceGroup } from "../../src/ui/choice-group.js";
+import type { createRows } from "../../src/data/index.js";
+
+type Failure = { code?: string; detail?: { phase?: string }; cause?: unknown };
+declare global {
+  interface Window {
+    prepareForm: {
+      api: { bindForm: typeof bindForm; bindChoiceGroup: typeof bindChoiceGroup; createRows: typeof createRows };
+      root(html: string): HTMLFormElement;
+      field<E extends HTMLElement = HTMLInputElement>(root: ParentNode, name: string): E;
+      failure(run: () => unknown): { code: string; phase: string | null } | null;
+    };
+  }
+}
+const source = (file: string) => "/@fs/" + fileURLToPath(new URL(file, import.meta.url)).replaceAll("\\", "/");
+const modules = { ui: source("../../src/ui/index.ts"), data: source("../../src/data/index.ts") };
+test.beforeEach(async ({ page }) => {
+  await page.routeWebSocket(/127\.0\.0\.1:4173/, socket => socket.close()); await page.goto("/");
+  await page.evaluate(async modules => {
+    const [{ bindForm, bindChoiceGroup }, { createRows }] = await Promise.all([import(modules.ui), import(modules.data)]);
+    window.prepareForm = {
+      api: { bindForm, bindChoiceGroup, createRows },
+      root(html) { const root = document.createElement("form"); root.innerHTML = html; document.body.append(root); return root; },
+      field(root, name) { return root.querySelector('[data-field="' + name + '"]')! as never; },
+      failure(run) { try { run(); return null; } catch (cause) { const error = cause as Failure;
+        return { code: error.code ?? "unknown", phase: error.detail?.phase ?? null }; } }
+    };
+  }, modules);
+});
+
+test("preparation preserves unchanged original raw behind formatting and value projections without parsing or binding work", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, rows = h.api.createRows([{ name: "Ada", amount: 1200, note: "Source display", secret: true }]);
+    const root = h.root('<input data-field="name" pattern="Ada"><input data-field="amount" pattern="[0-9]+"><span data-field="note"></span>');
+    let parsed = 0, formatted = 0, bound = 0, values = 0; const contexts: unknown[] = [];
+    const form = h.api.bindForm(root, { rows, parse: { amount: value => { parsed++; return Number(value) * 100; } },
+      beforeBind() { bound++; }, onBind() { bound++; }, beforeBindValue(value, context) { values++; return context.field === "name" ? "Alias" : value; },
+      onBindValue() { values++; }, rules: { fields: { name: { format: [["upper"]], validate: [["nativeOnly"]] }, amount: { format: [["commas"]] } },
+        format: { upper(value) { formatted++; return value.toUpperCase(); } }, validate: { nativeOnly(_value, _args, context) {
+          contexts.push([context.rowId, Object.keys(context.values), context.values.name, context.values.amount]); return true;
+        } } } });
+    const id = rows.entries()[0].id; form.bind(id); const before = { bound, values, formatted }, markup = root.outerHTML, snapshot = rows.get(id);
+    let events = 0; const stop = rows.subscribe(() => events++); const prepared = form.prepare();
+    const result = { prepared, shown: [h.field(root, "name").value, h.field(root, "amount").value], parsed,
+      noBinding: before.bound === bound && before.values === values && before.formatted === formatted,
+      unchanged: markup === root.outerHTML && snapshot === rows.get(id), events, contexts };
+    stop(); form.dispose(); rows.dispose(); root.remove(); return result;
+  });
+  expect(result).toEqual({ prepared: { valid: true, issues: [], values: { name: "Ada", amount: 1200 } }, shown: ["ALIAS", "1,200"], parsed: 0,
+    noBinding: true, unchanged: true, events: 0, contexts: [[null, ["name", "amount"], "Ada", 1200]] });
+});
+
+test("local preparation parses own shadowed fields once with coherent unparsed and parsed contexts and a plain receiver", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input data-field="toString" value="own"><input data-field="count" value="007"><textarea data-field="peer">2</textarea><span data-field="display">Text</span>');
+    const calls: unknown[] = [], validated: unknown[] = []; let inherited = 0, plain = false;
+    const parse = Object.create(Object.defineProperty({}, "display", { get() { inherited++; throw new Error("Inherited parser"); } }));
+    parse.toString = function(this: unknown, value: string, context: { field: string; rowId: number | null; values: Record<string, unknown> }) { "use strict";
+      plain = this === undefined; calls.push([context.field, context.values.count, context.values.peer, context.values.toString, context.rowId]); return value.toUpperCase(); };
+    parse.count = (value: string, context: { field: string; values: Record<string, unknown> }) => {
+      calls.push([context.field, context.values.count, context.values.peer, context.values.toString, null]); return Number(value); };
+    parse.peer = (value: string, context: { field: string; values: Record<string, unknown> }) => {
+      calls.push([context.field, context.values.count, context.values.peer, context.values.toString, null]); return Number(value); };
+    const form = h.api.bindForm(root, { parse, rules: { fields: { count: { format: [["commas"]], validate: [["all"]] } }, validate: {
+      all(_value, _args, context) { validated.push([context.values.toString, context.values.count, context.values.peer, context.values.display]); return true; }
+    } } });
+    const markup = root.outerHTML, shown = h.field(root, "count").value, prepared = form.prepare();
+    const stable = markup === root.outerHTML && shown === h.field(root, "count").value;
+    form.dispose(); root.remove(); return { prepared, calls, validated, plain, inherited, stable };
+  });
+  expect(result).toEqual({ prepared: { valid: true, issues: [], values: { toString: "OWN", count: 7, peer: 2 } },
+    calls: [["toString", "007", "2", "own", null], ["count", "007", "2", "own", null], ["peer", "007", "2", "own", null]],
+    validated: [["OWN", 7, 2, undefined]], plain: true, inherited: 0, stable: true });
+});
+
+test("invalid and corrected preparation preserve existing drafts errors source caches caret and a sibling Form", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, rows = h.api.createRows([{ name: "Ada", amount: 1200 }]), id = rows.entries()[0].id;
+    const root = h.root('<input data-field="name" required><output data-error-for="name"></output><input data-field="amount">'), siblingRoot = h.root('<input data-field="name">');
+    let parsed = 0; const form = h.api.bindForm(root, { rows, parse: { amount: value => { parsed++; return Number(value); } } }), sibling = h.api.bindForm(siblingRoot, { rows });
+    form.bind(id); sibling.bind(id); const name = h.field(root, "name"), amount = h.field(root, "amount");
+    name.value = ""; name.dispatchEvent(new Event("input", { bubbles: true })); amount.value = "2500"; name.focus(); name.setSelectionRange(0, 0);
+    const entries = rows.entries(), changes = rows.changes(), markup = root.outerHTML, original = rows.original(id), focus = document.activeElement;
+    let events = 0; const stop = rows.subscribe(() => events++); parsed = 0;
+    const invalid = form.prepare(), invalidStable = entries === rows.entries() && changes === rows.changes() && original === rows.original(id) && markup === root.outerHTML;
+    name.value = "Grace"; name.setSelectionRange(1, 3); const valid = form.prepare();
+    const stable = entries === rows.entries() && markup === root.outerHTML && focus === document.activeElement && name.selectionStart === 1 && name.selectionEnd === 3;
+    const result = { invalid: { valid: invalid.valid, values: invalid.values, fields: invalid.issues.map(issue => issue.field) }, valid: valid.values,
+      invalidStable, stable, parsed, events, sibling: h.field(siblingRoot, "name").value, committed: form.read() };
+    stop(); form.dispose(); sibling.dispose(); rows.dispose(); root.remove(); siblingRoot.remove(); return result;
+  });
+  expect(result).toEqual({ invalid: { valid: false, values: null, fields: ["name"] }, valid: { name: "Grace", amount: 2500 }, invalidStable: true,
+    stable: true, parsed: 2, events: 0, sibling: "Ada", committed: { name: "Ada", amount: 1200 } });
+});
+
+test("an accepted equal-projection input is entered data even when an older successful projection has identical text", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input data-field="amount"><output data-error-for="amount"></output>'), rows = h.api.createRows([{ amount: 10 }]), id = rows.entries()[0].id;
+    let allow = false, parsed = 0; const form = h.api.bindForm(root, { rows, parse: { amount: text => { parsed++; return parseInt(text, 10) + 1; } },
+      rules: { fields: { amount: { format: [["suffix"]], validate: [["allowed"]] } }, format: { suffix: value => value + "!" }, validate: { allowed: () => allow } } });
+    form.bind(id); const input = h.field(root, "amount"); input.dispatchEvent(new Event("input", { bubbles: true })); allow = true; parsed = 0;
+    const before = rows.get(id), markup = root.outerHTML, equal = form.prepare(); input.value = "12"; const direct = form.prepare();
+    const result = { equal: equal.values, direct: direct.values, parsed, unchanged: before === rows.get(id) && markup === root.outerHTML, committed: rows.get(id)!.value.amount };
+    form.dispose(); rows.dispose(); root.remove(); return result;
+  });
+  expect(result).toEqual({ equal: { amount: 11 }, direct: { amount: 13 }, parsed: 2, unchanged: true, committed: 10 });
+});
+
+test("preparation uses the raw version actually shown while focused source updates defer and after blur publication", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input data-field="amount">'), rows = h.api.createRows([{ amount: 1200 }]), id = rows.entries()[0].id;
+    let parsed = 0; const form = h.api.bindForm(root, { rows, parse: { amount: text => { parsed++; return Number(text) * 2; } }, rules: { fields: { amount: { format: [["commas"]] } } } });
+    form.bind(id); const input = h.field(root, "amount"); input.focus(); rows.set(id, "amount", 2400);
+    const deferred = { value: input.value, prepared: form.prepare().values, source: rows.get(id)!.value.amount };
+    input.blur(); const published = { value: input.value, prepared: form.prepare().values }; const result = { deferred, published, parsed };
+    form.dispose(); rows.dispose(); root.remove(); return result;
+  });
+  expect(result).toEqual({ deferred: { value: "1200", prepared: { amount: 1200 }, source: 2400 }, published: { value: "2,400", prepared: { amount: 2400 } }, parsed: 0 });
+});
+
+test("native-only preparation includes root hidden readonly disabled groups and filenames and excludes action display and image fields", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input data-field="profile.name" value="Ada"><input type="hidden" data-field="hidden" value="secret"><input readonly data-field="readonly" value="read"><input disabled data-field="disabled" value="disabled">' +
+      '<input type="checkbox" data-field="active" checked><input type="checkbox" data-field="tags" value="a" checked><input type="checkbox" data-field="tags" value="b">' +
+      '<input type="radio" name="prepare-radio" data-field="radio" value="r" checked><select multiple data-field="multiple"><option value="a" selected>A</option><option value="b" selected>B</option></select>' +
+      '<fieldset data-field="empty"><legend>Empty choices</legend><template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset>' +
+      '<input type="file" data-field="file"><input type="button" data-field="action" value="Action"><input type="submit" data-field="submit"><input type="reset" data-field="reset"><input type="image" data-field="imageAction">' +
+      '<button type="button" data-field="button">Button</button><span data-field="display">Shown</span><img data-field="image" alt="Image">');
+    const file = h.field<HTMLInputElement>(root, "file"), transfer = new DataTransfer(); transfer.items.add(new File(["content"], "note.txt")); file.files = transfer.files;
+    const group = h.api.bindChoiceGroup(root.querySelector("fieldset")!, { choices: [] }), form = h.api.bindForm(root), prepared = form.prepare();
+    const input = document.createElement("input"); input.dataset.field = "root"; input.value = "Root"; document.body.append(input); const single = h.api.bindForm(input), singleValue = single.prepare().values;
+    single.dispose(); input.remove(); form.dispose(); group.dispose(); root.remove(); return { prepared, singleValue };
+  });
+  expect(result).toEqual({ prepared: { valid: true, issues: [], values: { profile: { name: "Ada" }, hidden: "secret", readonly: "read", disabled: "disabled", active: true, tags: ["a"], radio: "r", multiple: ["a", "b"], empty: [], file: "note.txt" } }, singleValue: { root: "Root" } });
+});
+
+test("preparation keeps typed option occurrences signed zero and stored disabled codes separate from new disabled or unmapped selection", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, choices = [{ label: "Number", value: 1 }, { label: "String", value: "1" }, { label: "False", value: false }, { label: "Null", value: null }, { label: "Negative", value: -0 }, { label: "Zero", value: 0 }, { label: "Number again", value: 1 }];
+    const rows = h.api.createRows([{ choice: 1, multiple: [1, "1", false, null, -0, 0, 1], choices }, { choice: "blocked", multiple: [], choices }]);
+    const ids = rows.entries().map(row => row.id), root = h.root('<select data-field="choice" data-options="choices" data-option-label="label" data-option-value="value"><option value="blocked" disabled>Blocked</option></select>' +
+      '<select multiple data-field="multiple" data-options="choices" data-option-label="label" data-option-value="value"></select>');
+    const form = h.api.bindForm(root, { rows }); form.bind(ids[0]); const initial = form.prepare().values!, selected = initial.multiple as unknown[];
+    const select = h.field<HTMLSelectElement>(root, "choice"), string = [...select.options].find(option => option.textContent === "String")!; string.selected = true;
+    const entered = form.prepare().values; string.disabled = true; const disabled = form.prepare();
+    form.bind(ids[1]); const storedDisabled = form.prepare().values; const extra = new Option("Foreign", "foreign"); select.append(extra); extra.selected = true;
+    const unmapped = form.prepare(), result = { initial: initial.choice, multiple: selected, signs: selected.map(value => Object.is(value, -0)), entered, storedDisabled,
+      disabled: { valid: disabled.valid, values: disabled.values, rules: disabled.issues.map(issue => issue.rule) }, unmapped: { valid: unmapped.valid, values: unmapped.values, rules: unmapped.issues.map(issue => issue.rule) }, changes: rows.changes().length };
+    form.dispose(); rows.dispose(); root.remove(); return result;
+  });
+  expect(result).toEqual({ initial: 1, multiple: [1, "1", false, null, -0, 0, 1], signs: [false, false, false, false, true, false, false],
+    entered: { choice: "1", multiple: [1, "1", false, null, -0, 0, 1] }, storedDisabled: { choice: "blocked", multiple: [] },
+    disabled: { valid: false, values: null, rules: ["select-option"] }, unmapped: { valid: false, values: null, rules: ["select-option"] }, changes: 0 });
+});
+
+test("generated catalog publication and rollback keep preparation on the same field and original raw owner", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<fieldset data-field="choice"><legend>Choices</legend><template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset>');
+    const fieldset = root.querySelector("fieldset")!, choices = ["a", "b"].map(value => ({ label: value, value })), group = h.api.bindChoiceGroup(fieldset, { choices });
+    const rows = h.api.createRows([{ choice: ["a"] }]), id = rows.entries()[0].id, form = h.api.bindForm(root, { rows }); form.bind(id);
+    const snapshot = rows.get(id), first = form.prepare().values; group.setChoices([]); const empty = form.prepare(); group.setChoices(choices);
+    const restored = form.prepare().values, old = [...fieldset.querySelectorAll("input")], insert = fieldset.insertBefore, failure = new Error("Insertion failure");
+    fieldset.insertBefore = () => { throw failure; }; let sameFailure = false; try { group.setChoices([{ label: "C", value: "c" }]); } catch (cause) { sameFailure = cause === failure; } fieldset.insertBefore = insert;
+    const after = form.prepare().values, sameNodes = old.every((input, index) => fieldset.querySelectorAll("input")[index] === input), unchanged = snapshot === rows.get(id);
+    form.dispose(); group.dispose(); rows.dispose(); root.remove(); return { first, empty: { valid: empty.valid, values: empty.values }, restored, after, sameFailure, sameNodes, unchanged };
+  });
+  expect(result).toEqual({ first: { choice: ["a"] }, empty: { valid: false, values: null }, restored: { choice: ["a"] }, after: { choice: ["a"] }, sameFailure: true, sameNodes: true, unchanged: true });
+});
+
+test("pure preparation observes completed native reset without flushing formatting errors or pending cleanup", async ({ page }) => {
+  const result = await page.evaluate(async () => {
+    const h = window.prepareForm, root = h.root('<input data-field="amount" value="1200"><output data-error-for="amount"></output>'); let formats = 0;
+    const form = h.api.bindForm(root, { parse: { amount: Number }, rules: { fields: { amount: { format: [["commas"]], validate: [["integer"]] } },
+      format: { commas: value => { formats++; return Number(value).toLocaleString("en-US"); } } } });
+    const input = h.field(root, "amount"); input.value = "bad"; input.dispatchEvent(new Event("input", { bubbles: true })); input.defaultValue = "3400";
+    root.reset(); const markup = root.outerHTML, beforeFormats = formats, prepared = form.prepare();
+    const immediate = { values: prepared.values, value: input.value, invalid: input.getAttribute("aria-invalid"), sameMarkup: markup === root.outerHTML, formats: formats - beforeFormats };
+    await new Promise<void>(resolve => setTimeout(resolve, 0)); const settled = { value: input.value, invalid: input.getAttribute("aria-invalid"), read: form.read() };
+    form.dispose(); root.remove(); return { immediate, settled };
+  });
+  expect(result).toEqual({ immediate: { values: { amount: 3400 }, value: "3400", invalid: "true", sameMarkup: true, formats: 0 }, settled: { value: "3,400", invalid: null, read: { amount: "3400" } } });
+});
+
+test("dispatching canceled synthetic and paused local resets never fabricate future entered data or resume ownership", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm;
+    return ["dispatch", "cancel", "synthetic", "paused"].map(mode => {
+      const root = h.root('<input data-field="amount" value="1200">'), form = h.api.bindForm(root, { parse: { amount: Number }, rules: { fields: { amount: { format: [["commas"]] } } } });
+      const input = h.field(root, "amount"); input.value = "2500"; input.dispatchEvent(new Event("input", { bubbles: true })); let inside: unknown;
+      if (mode === "paused") { form.unbind(); input.value = "1700"; }
+      const native = h.root('<input value="1200">'), nativeInput = native.querySelector("input")!; nativeInput.value = input.value;
+      native.addEventListener("reset", event => { if (mode === "cancel") event.preventDefault(); });
+      root.addEventListener("reset", event => { inside = form.prepare().values; if (mode === "cancel") event.preventDefault(); });
+      if (mode === "synthetic" || mode === "paused") { native.dispatchEvent(new Event("reset", { bubbles: true, cancelable: true })); root.dispatchEvent(new Event("reset", { bubbles: true, cancelable: true })); } else { native.reset(); root.reset(); }
+      const markup = root.outerHTML, after = form.prepare().values, value = input.value, pure = markup === root.outerHTML && input.defaultValue === "1200", nativeValue = nativeInput.value;
+      let inactive: string | null = null; if (mode === "paused") { input.value = "1900"; input.dispatchEvent(new Event("input", { bubbles: true })); input.dispatchEvent(new Event("change", { bubbles: true })); inactive = input.value; }
+      form.dispose(); root.remove(); native.remove(); return { mode, inside, after, value, nativeValue, pure, inactive };
+    });
+  });
+  expect(result.map(({ nativeValue, pure, inactive, ...state }) => state)).toEqual([{ mode: "dispatch", inside: { amount: 2500 }, after: { amount: 1200 }, value: "1200" },
+    { mode: "cancel", inside: { amount: 2500 }, after: { amount: 2500 }, value: "2,500" },
+    { mode: "synthetic", inside: { amount: 2500 }, after: { amount: Number(result[2].nativeValue.replaceAll(",", "")) }, value: result[2].nativeValue },
+    { mode: "paused", inside: { amount: 1700 }, after: { amount: Number(result[3].nativeValue.replaceAll(",", "")) }, value: result[3].nativeValue }]);
+  expect(result[2].nativeValue).toMatch(/^(1200|2,500)$/); expect(result[3].nativeValue).toMatch(/^(1200|1700)$/);
+  expect(result.map(state => state.pure)).toEqual([true, true, true, true]);
+  expect(result.map(state => state.inactive)).toEqual([null, null, null, "1900"]);
+});
+
+for (const mode of ["throw", "undefined", "async", "clone"] as const) {
+  test("preparation rejects " + mode + " parser results without state writes and releases its guard", async ({ page }) => {
+    const result = await page.evaluate(async mode => {
+      const h = window.prepareForm, root = h.root('<input data-field="amount" value="5">'); let bad = true, unhandled = 0;
+      const listener = (event: PromiseRejectionEvent) => { unhandled++; event.preventDefault(); }; window.addEventListener("unhandledrejection", listener);
+      const form = h.api.bindForm(root, { parse: { amount: text => {
+        if (!bad) return Number(text); if (mode === "throw") throw new Error("Parser failure"); if (mode === "undefined") return undefined;
+        if (mode === "async") return Promise.reject(new Error("Asynchronous parser")); return () => text;
+      } } }); const markup = root.outerHTML; let invalid: unknown, failure: unknown;
+      try { const prepared = form.prepare(); invalid = { valid: prepared.valid, values: prepared.values, rules: prepared.issues.map(issue => issue.rule) }; } catch (cause) {
+        const error = cause as Failure; failure = { code: error.code, phase: error.detail?.phase }; }
+      bad = false; const retry = form.prepare().values, unchanged = markup === root.outerHTML; await new Promise<void>(resolve => setTimeout(resolve, 0));
+      window.removeEventListener("unhandledrejection", listener); form.dispose(); root.remove(); return { invalid: invalid ?? null, failure: failure ?? null, retry, unchanged, unhandled };
+    }, mode);
+    expect(result).toEqual({ invalid: mode === "throw" || mode === "undefined" ? { valid: false, values: null, rules: ["parse"] } : null,
+      failure: mode === "async" || mode === "clone" ? { code: "FORM_PREPARE", phase: mode === "async" ? "parse" : "clone" } : null,
+      retry: { amount: 5 }, unchanged: true, unhandled: 0 });
+  });
+}
+
+for (const mode of ["recursive", "caught-recursive", "dispose", "bind", "refresh", "source", "native", "rescan"] as const) {
+  test("preparation guards " + mode + " user work and never returns a stale candidate", async ({ page }) => {
+    const result = await page.evaluate(mode => {
+      const h = window.prepareForm, root = h.root('<input data-field="amount"><input data-field="peer">'), rows = h.api.createRows([{ amount: 10, peer: "A" }, { amount: 20, peer: "B" }]), ids = rows.entries().map(row => row.id);
+      let armed = false, caught: unknown; let form: ReturnType<typeof h.api.bindForm>;
+      form = h.api.bindForm(root, { rows, parse: { amount: text => {
+        if (armed) { armed = false;
+          if (mode === "recursive") form.prepare();
+          if (mode === "caught-recursive") caught = h.failure(() => form.prepare());
+          if (mode === "dispose") form.dispose();
+          if (mode === "bind") form.bind(ids[1]);
+          if (mode === "refresh") form.refresh();
+          if (mode === "source") rows.set(ids[1], "peer", "Committed side effect");
+          if (mode === "native") h.field(root, "peer").value = "Native side effect";
+          if (mode === "rescan") form.rescan();
+        } return Number(text);
+      } } }); form.bind(ids[0]); h.field(root, "amount").value = "5"; armed = true;
+      let valid: unknown; const failure = h.failure(() => { valid = form.prepare().values; });
+      const sideEffect = mode === "source" ? rows.get(ids[1])!.value.peer : mode === "native" ? h.field(root, "peer").value : null;
+      let retry: unknown = null; if (mode !== "dispose") { form.bind(ids[0]); h.field(root, "amount").value = "6"; retry = form.prepare().values; }
+      form.dispose(); rows.dispose(); root.remove(); return { valid: valid ?? null, failure, caught: caught ?? null, sideEffect, retry };
+    }, mode);
+    const failure = mode === "caught-recursive" ? null : { code: mode === "dispose" ? "FORM_DISPOSED" : mode === "rescan" ? "FORM_RESCAN" : "FORM_PREPARE",
+      phase: mode === "dispose" || mode === "rescan" ? null : mode === "recursive" ? "reentry" : "stale" };
+    expect(result).toEqual({ valid: mode === "caught-recursive" ? { amount: 5, peer: "A" } : null, failure,
+      caught: mode === "caught-recursive" ? { code: "FORM_PREPARE", phase: "reentry" } : null,
+      sideEffect: mode === "source" ? "Committed side effect" : mode === "native" ? "Native side effect" : null,
+      retry: mode === "dispose" ? null : { amount: 6, peer: "A" } });
+  });
+}
+
+test("native getter supersession is checked and conflicting native paths fail before getters or parsers", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input data-field="amount">'), rows = h.api.createRows([{ amount: 10, other: "A" }]), id = rows.entries()[0].id,
+      form = h.api.bindForm(root, { rows }), input = h.field(root, "amount"), descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!;
+    form.bind(id); let armed = true; Object.defineProperty(input, "value", { configurable: true, get() {
+      if (armed) { armed = false; rows.set(id, "other", "Committed getter"); } return descriptor.get!.call(this);
+    }, set(value) { descriptor.set!.call(this, value); } }); const stale = h.failure(() => form.prepare()); delete (input as unknown as { value?: string }).value;
+    const retry = form.prepare().values; form.dispose(); rows.dispose(); root.remove();
+    const conflictRoot = h.root('<input data-field="profile" value="value"><input data-field="profile.name" value="name">'); let reads = 0, parses = 0;
+    const conflict = h.api.bindForm(conflictRoot, { parse: { profile: text => { parses++; return text; } } });
+    for (const element of conflictRoot.querySelectorAll("input")) Object.defineProperty(element, "value", { configurable: true, get() { reads++; return "value"; } });
+    const fields = h.failure(() => conflict.prepare()); for (const element of conflictRoot.querySelectorAll("input")) delete (element as unknown as { value?: string }).value;
+    conflict.dispose(); conflictRoot.remove(); return { stale, retry, fields, reads, parses };
+  });
+  expect(result).toEqual({ stale: { code: "FORM_PREPARE", phase: "stale" }, retry: { amount: 10 }, fields: { code: "FORM_PREPARE", phase: "fields" }, reads: 0, parses: 0 });
+});
+
+test("readonly and disabled ignored events keep raw tokens while preparation returns detached native candidates outside the Rows JSON domain", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input disabled data-field="disabled"><input readonly data-field="readonly"><input data-field="nested">'), rows = h.api.createRows([{ disabled: 1200, readonly: 2400, nested: { items: [{ value: 1 }] } }]), id = rows.entries()[0].id;
+    let parsed = 0; const form = h.api.bindForm(root, { rows, parse: { disabled: value => { parsed++; return Number(value) * 2; }, readonly: value => { parsed++; return Number(value) * 2; } },
+      rules: { fields: { disabled: { format: [["commas"]] }, readonly: { format: [["commas"]] } } } }); form.bind(id);
+    for (const name of ["disabled", "readonly"]) h.field(root, name).dispatchEvent(new Event("input", { bubbles: true }));
+    const initial = form.prepare().values!, rawTypes = [initial.disabled, initial.readonly], ignoredCalls = parsed;
+    (initial.nested as { items: { value: number }[] }).items[0].value = 99; h.field(root, "readonly").value = "5";
+    const direct = form.prepare().values!, detached = (direct.nested as { items: { value: number }[] }).items[0].value === 1;
+    const sourceUnchanged = rows.get(id)!.value.readonly === 2400 && rows.changes().length === 0;
+    form.dispose(); rows.dispose(); root.remove();
+    const local = h.root('<input data-field="date" value="2020-01-02T00:00:00.000Z">'), dateForm = h.api.bindForm(local, { parse: { date: value => new Date(value) } });
+    const first = dateForm.prepare().values!, date = first.date as Date, rejected = h.failure(() => h.api.createRows([{ date }])); date.setUTCFullYear(2001);
+    const second = dateForm.prepare().values!, cloned = (second.date as Date).toISOString(); dateForm.dispose(); local.remove();
+    return { rawTypes, ignoredCalls, direct: [direct.disabled, direct.readonly], parsed, detached, sourceUnchanged, rejected: rejected?.code, cloned };
+  });
+  expect(result).toEqual({ rawTypes: [1200, 2400], ignoredCalls: 0, direct: [1200, 10], parsed: 1, detached: true, sourceUnchanged: true, rejected: "ROW_VALUE", cloned: "2020-01-02T00:00:00.000Z" });
+});
+
+test("compatible rescan retains shown raw while new retired and unbound fields keep their own preparation boundary", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm, root = h.root('<input data-field="amount" value="7">'), rows = h.api.createRows([{ amount: 1200, extra: 9 }]), id = rows.entries()[0].id;
+    let amountCalls = 0, extraCalls = 0; const form = h.api.bindForm(root, { rows, parse: { amount: text => { amountCalls++; return Number(text) * 2; }, extra: text => { extraCalls++; return Number(text); } }, rules: { fields: { amount: { format: [["commas"]] } } } });
+    form.bind(id); form.rescan(); const compatible = form.prepare().values;
+    const extra = document.createElement("input"); extra.dataset.field = "extra"; extra.value = "5"; root.append(extra); form.rescan(); const adopted = form.prepare().values;
+    form.refresh(["extra"]); const refreshed = form.prepare().values; extra.remove(); form.rescan(); const retired = form.prepare().values;
+    const beforeUnbind = { amountCalls, extraCalls }; form.unbind(); const unbound = form.prepare().values; h.field(root, "amount").dispatchEvent(new Event("input", { bubbles: true })); const stillPaused = form.prepare().values;
+    const unchanged = rows.get(id)!.value.amount === 1200 && rows.get(id)!.value.extra === 9 && rows.changes().length === 0;
+    form.dispose(); rows.dispose(); root.remove(); return { compatible, adopted, refreshed, retired, beforeUnbind, unbound, stillPaused, amountCalls, extraCalls, unchanged };
+  });
+  expect(result).toEqual({ compatible: { amount: 1200 }, adopted: { amount: 1200, extra: 5 }, refreshed: { amount: 1200, extra: 9 }, retired: { amount: 1200 }, beforeUnbind: { amountCalls: 0, extraCalls: 1 },
+    unbound: { amount: 14 }, stillPaused: { amount: 14 }, amountCalls: 2, extraCalls: 1, unchanged: true });
+});
+
+test("preparation owner guards stop later validators and providers when a rule or message policy supersedes then fails", async ({ page }) => {
+  const modes = ["validator-dispose", "validator-native", "validator-return", "locale-native", "messages-native", "validator-prepare", "validator-rescan", "locale-prepare", "messages-rescan"];
+  const result = await page.evaluate(modes => {
+    const h = window.prepareForm;
+    return modes.map(mode => {
+      const root = h.root('<input data-field="name"><input data-field="peer">'), rows = h.api.createRows([{ name: "Ada", peer: "Before" }]), id = rows.entries()[0].id;
+      const calls: string[] = []; let armed = true; let form: ReturnType<typeof h.api.bindForm>;
+      const supersede = () => {
+        armed = false;
+        if (mode === "validator-dispose") form.dispose(); else h.field(root, "peer").value = "Native side effect";
+      };
+      const ownerGuard = () => { armed = false; if (mode.endsWith("-prepare")) form.prepare(); else form.rescan(); };
+      form = h.api.bindForm(root, { rows, rules: { fields: { name: { validate: [["first"], ["tail"]] }, peer: { validate: [["laterField"]] } },
+        validate: {
+          first() {
+            if (!armed) return true; calls.push("validator");
+            if (mode === "validator-prepare" || mode === "validator-rescan") ownerGuard();
+            if (mode.startsWith("validator")) { supersede(); if (mode !== "validator-return") throw new Error("Rule failed after supersession"); }
+            return false;
+          },
+          tail() { calls.push("tail"); return true; }, laterField() { calls.push("laterField"); return true; }
+        },
+        locale() {
+          calls.push("locale"); if (armed && mode === "locale-prepare") ownerGuard();
+          if (armed && mode === "locale-native") { supersede(); throw new Error("Locale failed after supersession"); } return "en-US";
+        },
+        messages() {
+          calls.push("messages"); if (armed && mode === "messages-rescan") ownerGuard();
+          if (armed && mode === "messages-native") { supersede(); throw new Error("Messages failed after supersession"); } return { first: "Invalid" };
+        }
+      } }); form.bind(id);
+      const failure = h.failure(() => form.prepare()), stopped = [...calls], sideEffect = h.field(root, "peer").value;
+      const retry = mode === "validator-dispose" ? null : (form.bind(id), form.prepare().valid);
+      const source = rows.get(id)!.value.peer; form.dispose(); rows.dispose(); root.remove();
+      return { mode, failure, stopped, sideEffect, retry, source };
+    });
+  }, modes);
+  expect(result).toEqual(modes.map(mode => {
+    const structural = mode.endsWith("-rescan"), recursive = mode.endsWith("-prepare"), guard = structural || recursive;
+    return { mode, failure: { code: mode === "validator-dispose" ? "FORM_DISPOSED" : structural ? "FORM_RESCAN" : "FORM_PREPARE",
+      phase: mode === "validator-dispose" || structural ? null : recursive ? "reentry" : "stale" },
+      stopped: mode.startsWith("locale") ? ["validator", "locale"] : mode.startsWith("messages") ? ["validator", "locale", "messages"] : ["validator"],
+      sideEffect: mode === "validator-dispose" || guard ? "Before" : "Native side effect", retry: mode === "validator-dispose" ? null : true, source: "Before" };
+  }));
+});
+
+test("rejected parser promises are drained even when disposal or rebinding wins the preparation guard", async ({ page }) => {
+  const result = await page.evaluate(async () => {
+    const h = window.prepareForm, results: unknown[] = []; let unhandled = 0;
+    const listener = (event: PromiseRejectionEvent) => { unhandled++; event.preventDefault(); }; window.addEventListener("unhandledrejection", listener);
+    for (const mode of ["dispose", "bind"]) {
+      const root = h.root('<input data-field="amount">'), rows = h.api.createRows([{ amount: 10 }, { amount: 20 }]), ids = rows.entries().map(row => row.id);
+      let armed = false; let form: ReturnType<typeof h.api.bindForm>;
+      form = h.api.bindForm(root, { rows, parse: { amount: text => {
+        if (!armed) return Number(text); armed = false;
+        if (mode === "dispose") form.dispose(); else form.bind(ids[1]);
+        return Promise.reject(new Error("Rejected after owner supersession"));
+      } } }); form.bind(ids[0]); h.field(root, "amount").value = "5"; armed = true;
+      const failure = h.failure(() => form.prepare()); await Promise.resolve(); await new Promise<void>(resolve => setTimeout(resolve, 0));
+      results.push({ mode, failure, raw: rows.get(ids[0])!.value.amount }); form.dispose(); rows.dispose(); root.remove();
+    }
+    window.removeEventListener("unhandledrejection", listener); return { results, unhandled };
+  });
+  expect(result).toEqual({ results: [{ mode: "dispose", failure: { code: "FORM_DISPOSED", phase: null }, raw: 10 },
+    { mode: "bind", failure: { code: "FORM_PREPARE", phase: "stale" }, raw: 10 }], unhandled: 0 });
+});
+
+test("native supersession wins over then inspection and final clone getter failures", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm;
+    return ["then", "clone"].map(mode => {
+      const root = h.root('<input data-field="amount"><input data-field="peer">'), rows = h.api.createRows([{ amount: 10, peer: "Before" }]), id = rows.entries()[0].id;
+      let armed = false; const form = h.api.bindForm(root, { rows, parse: { amount: text => {
+        if (!armed) return Number(text); armed = false;
+        const value = {};
+        Object.defineProperty(value, mode === "then" ? "then" : "value", { enumerable: true, get() {
+          h.field(root, "peer").value = "Getter side effect"; throw new Error("Result getter failed");
+        } }); return value;
+      } } }); form.bind(id); h.field(root, "amount").value = "5"; armed = true;
+      const failure = h.failure(() => form.prepare()), sideEffect = h.field(root, "peer").value, source = rows.get(id)!.value.peer;
+      form.bind(id); h.field(root, "amount").value = "6"; const retry = form.prepare().values;
+      form.dispose(); rows.dispose(); root.remove(); return { mode, failure, sideEffect, source, retry };
+    });
+  });
+  expect(result).toEqual(["then", "clone"].map(mode => ({ mode, failure: { code: "FORM_PREPARE", phase: "stale" }, sideEffect: "Getter side effect", source: "Before", retry: { amount: 6, peer: "Before" } })));
+});
+
+test("explicit local reads and validation inside a parser supersede captured native cache state without rollback", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const h = window.prepareForm;
+    return ["read", "validate-invalid"].map(mode => {
+      const root = h.root('<input data-field="amount" value="1200">'); let armed = false, allow = mode === "read", read: unknown, validation: boolean | null = null;
+      let form: ReturnType<typeof h.api.bindForm>;
+      form = h.api.bindForm(root, { parse: { amount: text => {
+        if (armed) { armed = false; if (mode === "read") read = form.read(); else validation = form.validate().valid; } return Number(text);
+      } }, rules: { fields: { amount: { format: [["commas"]], validate: [["allowed"]] } }, validate: { allowed: () => allow } } });
+      if (mode === "read") h.field(root, "amount").value = "2500";
+      armed = true; const failure = h.failure(() => form.prepare()); allow = true; const retry = form.prepare().values;
+      const native = h.field(root, "amount").value, invalid = h.field(root, "amount").getAttribute("aria-invalid");
+      form.dispose(); root.remove(); return { mode, failure, read: read ?? null, validation, retry, native, invalid };
+    });
+  });
+  expect(result).toEqual([{ mode: "read", failure: { code: "FORM_PREPARE", phase: "stale" }, read: { amount: "2500" }, validation: null,
+    retry: { amount: 2500 }, native: "2500", invalid: null }, { mode: "validate-invalid", failure: { code: "FORM_PREPARE", phase: "stale" }, read: null, validation: false,
+    retry: { amount: 1200 }, native: "1,200", invalid: "true" }]);
+});
+
+test("keyboard-created native number bad input remains invalid when an empty string parser would accept zero", async ({ page }) => {
+  for (const token of ["e", "-", "."]) {
+    const fixture = await page.evaluateHandle(() => {
+      const h = window.prepareForm, root = h.root('<input type="number" data-field="amount" data-prepare-number value="1200"><output data-error-for="amount"></output>');
+      const rows = h.api.createRows([{ amount: 1200 }]), id = rows.entries()[0].id; let parsed = 0, events = 0;
+      const form = h.api.bindForm(root, { rows, parse: { amount: value => { parsed++; return Number(value); } } });
+      form.bind(id); form.unbind(); const input = h.field(root, "amount"), snapshot = rows.get(id), stop = rows.subscribe(() => events++);
+      return { root, rows, id, form, input, snapshot, stop, parsed: () => parsed, events: () => events };
+    });
+    const input = page.locator("[data-prepare-number]"); await input.fill(""); await input.pressSequentially(token);
+    const result = await fixture.evaluate(fixture => {
+      const { root, rows, id, form, input, snapshot } = fixture;
+      const before = root.outerHTML, invalid = input.getAttribute("aria-invalid"), focused = document.activeElement;
+      const prepared = form.prepare(), result = { token: input.value, badInput: input.validity.badInput, willValidate: input.willValidate,
+        nativeValid: input.validity.valid, coerced: Number(input.value), valid: prepared.valid, values: prepared.values,
+        issues: prepared.issues.map(issue => [issue.field, issue.rule]), parsed: fixture.parsed(), events: fixture.events(),
+        untouched: root.outerHTML === before && input.getAttribute("aria-invalid") === invalid && document.activeElement === focused && rows.get(id) === snapshot,
+        raw: rows.get(id)!.value.amount, changed: rows.changes().length, stillUnbound: form.read().amount === undefined };
+      fixture.stop(); form.dispose(); rows.dispose(); root.remove(); return result;
+    });
+    await fixture.dispose();
+    expect(result, token).toEqual({ token: "", badInput: true, willValidate: true, nativeValid: false, coerced: 0, valid: false, values: null,
+      issues: [["amount", "html"]], parsed: 1, events: 0, untouched: true, raw: 1200, changed: 0, stillUnbound: true });
+  }
+});

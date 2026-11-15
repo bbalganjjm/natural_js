@@ -8,7 +8,7 @@ sources:
   - id: parent
     resource: m10-closure-plan.md
     title: Required Grid semantic continuation
-    git_blob: ae0aa6948d1dcb36dcdc9d01afbff06b84b31cd7
+    git_blob: 7c66d9166bf51f4a3657c4a6efa556b7762bfd31
   - id: audit
     resource: evidence/m1096-grid-audit.json
     title: Immutable legacy behavior and unresolved cross-owner obligations

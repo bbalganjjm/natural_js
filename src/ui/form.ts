@@ -12,7 +12,7 @@ import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } fr
 import type { RowOption } from "./row-options.js";
 import { arrayField, control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
-import { createNativeDefaults } from "./native-defaults.js";
+import { assertNativePaths, createNativeDefaults } from "./native-defaults.js";
 import { createValueBinding } from "./value-binding.js";
 import type { ValueProjection } from "./value-binding.js";
 import type {
@@ -46,9 +46,17 @@ interface Field {
   choices?: Choices;
   group?: ChoiceGroupBinding;
   projection?: ValueProjection;
+  nativeProjection?: { id: RowId; raw: unknown; shown: NativeState; entered: boolean };
   renderingId?: RowId;
   error?: HTMLElement;
   originals: { element: HTMLElement; describedBy: string | null; invalid: string | null; changed: string | null }[];
+}
+
+interface NativeState {
+  value: unknown;
+  badInput: boolean;
+  selected?: { option: HTMLOptionElement; value: string; disabled: boolean; owned: boolean; raw: unknown }[];
+  checked?: { input: HTMLInputElement; value: string; checked: boolean; disabled: boolean }[];
 }
 
 interface Candidate {
@@ -288,6 +296,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let pointerField: Field | undefined;
   let renderVersion = 0;
   let localRendering = false;
+  let preparing = false;
+  let nativeRevision = 0;
+  let preview: { status: string | null; tabIndex: string | null } | undefined;
+  const previewDisabled = new Map<Control, boolean>();
   const drafts = new Map<RowId, Map<Field, unknown>>();
   const issues = new Map<Field, readonly ValidationIssue[]>();
   const activeValues = new Map<Field, Set<RowId>>();
@@ -352,9 +364,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (scanning) throw formError("FORM_RESCAN", "This Form is reconciling its fields.");
   }
 
-  function rowValue(id: RowId): Record<string, unknown> {
+  function rowValue(id: RowId, editable = false): Record<string, unknown> {
     const row = rows?.get(id);
-    if (!row || row.status === "delete") {
+    if (!row || editable && row.status === "delete") {
       throw formError("ROW_MISSING", "The row ID is not available for this Form.", { id });
     }
     return row.value as Record<string, unknown>;
@@ -375,6 +387,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const entered = fieldValue(field);
       if (!Object.is(entered, retained.shown)) {
         retained.raw = retained.shown = entered;
+        nativeRevision++;
         retained.invalid = false;
       }
     }
@@ -383,6 +396,110 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function nativeOwner(element: HTMLElement): HTMLFormElement | null {
     return control(element) || element instanceof HTMLFieldSetElement ? element.form : element.closest<HTMLFormElement>("form");
+  }
+
+  function nativeField(field: Field): boolean {
+    return field.group !== undefined || control(field.element) && !(field.element instanceof HTMLInputElement &&
+      ["button", "submit", "reset", "image"].includes(field.element.type));
+  }
+
+  function setNativeProjection(field: Field, projection?: Field["nativeProjection"]): void {
+    field.nativeProjection = projection;
+    nativeRevision++;
+  }
+
+  function nativeState(field: Field): NativeState {
+    const element = field.element;
+    const selected = element instanceof HTMLSelectElement ? [...element.selectedOptions].map(option => ({
+      option, value: option.value,
+      disabled: option.disabled || option.parentElement instanceof HTMLOptGroupElement && option.parentElement.disabled,
+      owned: !field.choices || field.choices.raw.has(option), raw: field.choices ? field.choices.raw.get(option) : option.value
+    })) : undefined;
+    const checked = field.kind === "radio" || field.kind === "checkbox" ? field.elements.map(element => {
+      const input = element as HTMLInputElement;
+      return { input, value: input.value, checked: input.checked, disabled: input.disabled };
+    }) : undefined;
+    const value = selected && field.choices ? field.kind === "multiple" ? selected.map(item => item.raw) : selected[0]?.raw ?? null : fieldValue(field);
+    return { value, selected, checked, badInput: element instanceof HTMLInputElement && element.validity.badInput };
+  }
+
+  function sameNative(before: NativeState, after: NativeState): boolean {
+    return before.badInput === after.badInput && sameJson(before.value, after.value) &&
+      (!before.selected || !!after.selected && before.selected.length === after.selected.length && before.selected.every((item, index) => {
+        const next = after.selected![index];
+        return item.option === next.option && item.value === next.value && item.disabled === next.disabled &&
+          item.owned === next.owned && Object.is(item.raw, next.raw);
+      })) && (!before.checked || !!after.checked && before.checked.length === after.checked.length && before.checked.every((item, index) => {
+        const next = after.checked![index];
+        return item.input === next.input && item.value === next.value && item.checked === next.checked && item.disabled === next.disabled;
+      }));
+  }
+
+  function rememberNative(field: Field, id: RowId, raw: unknown, entered = false, current?: () => boolean): void {
+    if (!nativeField(field)) return;
+    const shown = nativeState(field);
+    if (!disposed && boundId === id && (!current || current())) setNativeProjection(field, { id, raw, shown, entered });
+  }
+
+  function deletedPreview(): boolean { return !!rows && boundId !== null && rows.get(boundId)?.status === "delete"; }
+
+  function clearPendingResets(): void {
+    if (pendingResets.size || resetTimer !== undefined) nativeRevision++;
+    pendingResets.clear();
+    if (resetTimer !== undefined) { clearTimeout(resetTimer); resetTimer = undefined; }
+  }
+
+  function syncPreview(): void {
+    const id = boundId, graph = fields, version = renderVersion;
+    const current = () => !disposed && boundId === id && fields === graph && renderVersion === version;
+    const locked = !disposed && deletedPreview();
+    const controls = new Set(locked ? fields.flatMap(field => field.elements.filter(control)) : []);
+    for (const [element, original] of previewDisabled) if (!controls.has(element)) {
+      element.disabled = original;
+      previewDisabled.delete(element);
+    }
+    if (locked) {
+      if (!preview) preview = { status: root.getAttribute("data-row-status"), tabIndex: root.getAttribute("tabindex") };
+      const focused = root.ownerDocument.activeElement;
+      for (const element of controls) {
+        if (!previewDisabled.has(element)) previewDisabled.set(element, element.disabled);
+        element.disabled = true;
+      }
+      root.setAttribute("data-row-status", "delete");
+      if (!control(root) && focused instanceof HTMLElement && controls.has(focused as Control)) {
+        if (!root.hasAttribute("tabindex")) root.setAttribute("tabindex", "-1");
+        root.focus();
+      }
+    } else if (preview) {
+      const original = preview; preview = undefined;
+      if (original.status === null) root.removeAttribute("data-row-status"); else root.setAttribute("data-row-status", original.status);
+      if (original.tabIndex === null) root.removeAttribute("tabindex"); else root.setAttribute("tabindex", original.tabIndex);
+      clearPendingResets();
+      for (const field of fields) setNativeProjection(field);
+    }
+    if (locked && !current()) return;
+    if (rows) {
+      const owners = new Set<HTMLFormElement>();
+      if (locked) for (const field of fields) for (const { element } of field.originals) {
+        const owner = nativeOwner(element); if (owner) owners.add(owner);
+      }
+      for (const owner of resetOwners) if (!owners.has(owner)) { owner.removeEventListener("reset", onReset); resetOwners.delete(owner); }
+      for (const owner of owners) if (!resetOwners.has(owner)) { resetOwners.add(owner); owner.addEventListener("reset", onReset); }
+    }
+  }
+
+  function restoreNative(field: Field, shown: NativeState): void {
+    if (shown.selected) {
+      const element = field.element as HTMLSelectElement;
+      if (shown.selected.some(item => item.option.closest("select") !== element)) {
+        throw formError("FORM_BIND", "Refresh the deleted preview before resetting its changed choices.", { field: field.name });
+      }
+      element.selectedIndex = -1;
+      for (const selected of shown.selected) selected.option.selected = true;
+    } else if (shown.checked) {
+      for (const selected of shown.checked) selected.input.checked = selected.checked;
+    } else display(field.element, shown.value);
+    nativeRevision++;
   }
 
   function replaceGroup(field: Field, prepare: () => ChoiceGroupReplacement): void {
@@ -426,7 +543,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       for (const element of next.inputs) nextElements.set(element, field);
       for (const { element } of originals) nextAnnotations.set(element, annotation(element));
       const nextOwners = new Set<HTMLFormElement>();
-      if (!rows) for (const item of fields) for (const { element } of item === field ? originals : item.originals) {
+      if (!rows || deletedPreview()) for (const item of fields) for (const { element } of item === field ? originals : item.originals) {
         let owner: HTMLFormElement | null;
         if (item === field && element instanceof HTMLInputElement) {
           const form = element.getAttribute("form"), target = form === null ? group.root.closest("form") :
@@ -438,7 +555,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const defaultEntry = defaultEntries.find(entry => entry.name === field.name);
       const previous = { element: field.element, elements: field.elements, originals: field.originals,
         byElement, annotations, initialElement: state.element, checked: state.checked,
-        defaultElement: defaultEntry?.element, issues: issues.get(field), owners: new Set(resetOwners) };
+        defaultElement: defaultEntry?.element, issues: issues.get(field), owners: new Set(resetOwners), native: field.nativeProjection };
       const attributes = field.originals.map(({ element }) => ({ element,
         describedBy: element.getAttribute("aria-describedby"), invalid: element.getAttribute("aria-invalid"),
         changed: element.getAttribute("data-field-changed") }));
@@ -475,6 +592,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (defaultEntry) defaultEntry.element = primary;
         if (previous.issues) issues.set(field, previous.issues.map(issue => issue.element ? { ...issue, element: primary } : issue));
         group.write(selected);
+        if (id !== null) rememberNative(field, id, draft?.has(field) ? draft.get(field) :
+          projection?.state === "pending" || projection?.state === "failed" ? previous.native ? previous.native.raw : raw : raw, draft?.has(field) ?? false, current);
+        syncPreview();
         const original = id === null ? undefined : rows!.original(id);
         const changed = original !== undefined && !sameJson(readPath(original, field.path), raw);
         for (const original of originals) {
@@ -497,10 +617,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
           field.element = previous.element; field.elements = previous.elements; field.originals = previous.originals;
           byElement = previous.byElement; annotations = previous.annotations;
           state.element = previous.initialElement; state.checked = previous.checked;
+          setNativeProjection(field, previous.native);
           if (defaultEntry) defaultEntry.element = previous.defaultElement!;
           if (previous.issues) issues.set(field, previous.issues); else issues.delete(field);
           resetOwners.clear(); for (const owner of previous.owners) resetOwners.add(owner);
-          try { undo?.(); } catch { /* Preserve the original publication failure. */ }
+          try { undo?.(); syncPreview(); } catch { /* Preserve the original publication failure. */ }
           for (const original of attributes) try { writeAttributes(original); } catch { /* Preserve the original failure. */ }
           for (const owner of removed) try { owner.addEventListener("reset", onReset); } catch { /* Preserve the original failure. */ }
         }
@@ -589,6 +710,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const completed = new Set<HTMLFormElement>();
       for (const [owner, events] of pendingResets) {
         const dispatching = events.filter(event => event.eventPhase !== Event.NONE);
+        if (dispatching.length !== events.length) nativeRevision++;
         if (events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented)) completed.add(owner);
         if (dispatching.length) pendingResets.set(owner, dispatching);
         else pendingResets.delete(owner);
@@ -598,6 +720,20 @@ export function bindForm<T extends object = Record<string, unknown>>(
         resetTimer = undefined;
       }
       if (!completed.size) return renderVersion;
+      if (rows) {
+        if (!deletedPreview()) return renderVersion;
+        const id = boundId, version = renderVersion;
+        for (const field of fields) {
+          if (disposed || boundId !== id || version !== renderVersion || !deletedPreview()) return renderVersion;
+          if (!nativeField(field) || !field.originals.some(({ element }) => {
+            const owner = nativeOwner(element); return owner !== null && completed.has(owner);
+          })) continue;
+          const retained = field.nativeProjection;
+          if (!retained || retained.id !== id) throw formError("FORM_BIND", "Refresh the deleted preview before resetting this field.", { field: field.name });
+          restoreNative(field, retained.shown);
+        }
+        return renderVersion;
+      }
       for (const field of fields) {
         if (!field.originals.some(({ element }) => {
           const owner = nativeOwner(element);
@@ -630,6 +766,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const pending = pendingResets.get(owner) ?? [];
     pending.push(event);
     pendingResets.set(owner, pending);
+    nativeRevision++;
     resetTimer ??= setTimeout(() => {
       resetTimer = undefined;
       if (!disposed) flushLocalResets();
@@ -648,6 +785,17 @@ export function bindForm<T extends object = Record<string, unknown>>(
       field: field.name, rowId: id, rule, message,
       ...(id === null || id === boundId ? { element: field.element } : {})
     };
+  }
+
+  function validationDisabled(element: HTMLElement, id: RowId | null): boolean {
+    if (id === null || id === boundId || !control(element) || !previewDisabled.has(element)) return disabled(element, root);
+    if (previewDisabled.get(element)) return true;
+    for (let parent = element.parentElement; parent; parent = parent.parentElement) {
+      if (!(parent instanceof HTMLFieldSetElement) || !parent.disabled) continue;
+      const legend = [...parent.children].find(child => child.localName === "legend");
+      if (!legend?.contains(element)) return true;
+    }
+    return false;
   }
 
   function groupDisabled(group: ChoiceGroupBinding): boolean {
@@ -690,7 +838,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function check(field: Field, id: RowId | null, candidate: Candidate,
-    values: Record<string, unknown>, validate: boolean): readonly ValidationIssue[] {
+    values: Record<string, unknown>, validate: boolean, preparing = false, checkpoint?: (cause?: unknown) => void): readonly ValidationIssue[] {
     if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
     if (field.group) {
@@ -698,23 +846,24 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const message = checkGroupValue(group, candidate.value);
       if (message) found.push(issue(field, id, "choice-option", message));
       if (validate && !groupDisabled(group)) {
-        const required = group.inputs.filter(input => input.required && !disabled(input, root));
+        const required = group.inputs.filter(input => input.required && !validationDisabled(input, id));
         const selected = candidate.entered === undefined ? candidate.value : candidate.entered;
         const missing = !group.inputs.length ? group.required : group.kind === "radio"
           ? required.length > 0 && !group.inputs.some(input => typeof selected === "string" && input.value === selected)
           : required.some(input => !Array.isArray(selected) || !selected.includes(input.value));
         if (missing) found.push(issue(field, id, "html", "Select the required options."));
         const custom = (id === null || id === boundId) && group.inputs.find(input =>
-          !disabled(input, root) && input.validity.customError);
+          !validationDisabled(input, id) && input.validity.customError);
         if (custom) found.push(issue(field, id, "html", custom.validationMessage));
       }
     } else if (field.choices) {
       const element = field.element as HTMLSelectElement;
-      const available = [...field.choices.authored, ...choiceOptions(field, values, id).map(option => option.raw)];
+      const available = preparing ? [...field.choices.raw.values()] :
+        [...field.choices.authored, ...choiceOptions(field, values, id).map(option => option.raw)];
       if (!rowOptionAvailable(available, candidate.value, element.multiple)) {
         found.push(issue(field, id, "select-option", "Choose an available option."));
       }
-      if (validate && !disabled(element, root) && element.willValidate) {
+      if (validate && !validationDisabled(element, id) && (element.willValidate || id !== boundId && previewDisabled.has(element))) {
         const missing = element.required && (element.multiple ? !Array.isArray(candidate.value) || !candidate.value.length
           : candidate.value === null || candidate.value === "" || candidate.value === undefined);
         const message = (id === null || id === boundId) && element.validity.customError
@@ -723,7 +872,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       }
     } else if (field.kind === "radio" || arrayField(field) && field.kind === "checkbox") {
       const required = field.elements.some(element => (element as HTMLInputElement).required) &&
-        field.elements.some(element => !disabled(element, root));
+        field.elements.some(element => !validationDisabled(element, id));
       const entered = candidate.entered === undefined ? candidate.value : candidate.entered;
       const selected = field.kind === "radio" ?
         entered != null && field.elements.some(element => (element as HTMLInputElement).value === String(entered)) :
@@ -732,18 +881,21 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (validate && required && !selected) found.push(issue(field, id, "html", "Select an option."));
     } else if (control(field.element)) {
       const visible = id === null || id === boundId;
-      const probe = visible && !valueCallbacks && !(id === null && field.format.length)
+      const probe = !preparing && visible && !valueCallbacks && !(id === null && field.format.length)
         ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
       if (probe !== field.element) {
-        probe.disabled = disabled(field.element, root);
-        display(probe, entered);
+        probe.disabled = validationDisabled(field.element, id);
+        if (preparing && probe instanceof HTMLInputElement && probe.type === "file") {
+          probe.files = (field.element as HTMLInputElement).files;
+        } else display(probe, entered);
         if (visible && field.element.validity.customError) probe.setCustomValidity(field.element.validationMessage);
       }
       const message = nativeMessage(probe, entered, validate);
       if (message) found.push(issue(field, id, "html", message));
     }
-    if (validate) found.push(...runner.validate(field.validate, candidate.value, context(field, id, values)));
+    checkpoint?.();
+    if (validate) found.push(...runner.validate(field.validate, candidate.value, context(field, id, values), checkpoint));
     return found;
   }
 
@@ -807,6 +959,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (!current()) return;
       displayField(field, shown);
     }
+    if (id !== null && current()) rememberNative(field, id, readPath(source, field.path), false, current);
   }
 
   function projectValue(field: Field, raw: unknown, source: Record<string, unknown>, id: RowId,
@@ -846,6 +999,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   function render(phase: ValuePhase = "val", skipFocused = false, force = false,
     prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>): number {
     return working(() => {
+      syncPreview();
       const version = ++renderVersion, id = boundId;
       const snapshot = id === null ? undefined : rows!.get(id);
       const source = id === null ? null : rowValue(id);
@@ -884,6 +1038,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
           }
           if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
           else displayField(field, currentDrafts.get(field));
+          if (id !== null && current()) rememberNative(field, id, currentDrafts.get(field), true, current);
           continue;
         }
         const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
@@ -929,11 +1084,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (!current(version)) return;
         automatic = true;
         boundId = id;
+        for (const field of fields) setNativeProjection(field);
+        clearPendingResets();
+        syncPreview();
         issues.clear();
         const rendered = render("bind", false, force, prepared);
         if (!current(rendered) || boundId !== id) return;
         const currentDrafts = id === null ? undefined : drafts.get(id);
-        if (id !== null && currentDrafts?.size) {
+        if (id !== null && snapshot?.status !== "delete" && currentDrafts?.size) {
           const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
           if (!current(rendered) || boundId !== id) return;
           for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
@@ -945,6 +1103,121 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (bindCallbacks && id !== null) activeBindings.delete(id);
       }
     });
+  }
+
+  function prepare(): ValidationResult & { readonly values: Record<string, unknown> | null } {
+    active();
+    const failure = (phase: string, message: string, field?: string, cause?: unknown) =>
+      new FrameworkError({ api: "bindForm", code: "FORM_PREPARE", message, detail: { phase, ...(field ? { field } : {}) }, cause });
+    if (preparing) throw failure("reentry", "A Form cannot recursively prepare its entered values.");
+    if (workDepth || restoring || reconciling || localRendering || replacingGroup || rescanIncomplete) {
+      throw failure("busy", "Finish current Form work before preparing its entered values.");
+    }
+    if (deletedPreview()) throw failure("preview", "Select a live row or release the deleted preview before preparing new data.");
+    preparing = true;
+    try {
+      return working(() => {
+        const nativeFields = fields.filter(nativeField);
+        assertNativePaths(nativeFields, field => { throw failure("fields", "Native preparation needs distinct nonoverlapping paths.", field); });
+        const graph = fields, id = boundId, version = renderVersion, revision = nativeRevision;
+        const entries = rows?.entries({ includeDeleted: true });
+        const snapshots = new Map<Field, NativeState>();
+        const retained = new Map(nativeFields.map(field => [field, localRenderedValues.get(field) && { ...localRenderedValues.get(field)! }] as const));
+        const resets = [...pendingResets].map(([owner, events]) => ({ owner, events: [...events], canceled: events.map(event => event.defaultPrevented) }));
+        const current = () => {
+          active();
+          if (fields !== graph || boundId !== id || renderVersion !== version || nativeRevision !== revision ||
+              rows && rows.entries({ includeDeleted: true }) !== entries) {
+            throw failure("stale", "Newer Form work superseded this preparation.");
+          }
+        };
+        const observed = (cause?: unknown) => {
+          current();
+          if (pendingResets.size !== resets.length || resets.some(saved => {
+            const events = pendingResets.get(saved.owner);
+            return !events || events.length !== saved.events.length || events.some((event, index) =>
+              event !== saved.events[index] || event.defaultPrevented !== saved.canceled[index]);
+          })) throw failure("stale", "Native reset state changed during preparation.");
+          for (const [field, before] of snapshots) {
+            const after = nativeState(field);
+            current();
+            if (!sameNative(before, after)) throw failure("stale", "Native input changed during preparation.", field.name);
+          }
+          if (cause instanceof FrameworkError && cause.api === "bindForm" &&
+              ["FORM_DISPOSED", "FORM_RESCAN", "FORM_PREPARE"].includes(cause.code)) throw cause;
+        };
+        for (const field of nativeFields) {
+          const state = nativeState(field);
+          current();
+          snapshots.set(field, state);
+        }
+        observed();
+        let source: Record<string, unknown> = {};
+        const entered = new Map<Field, unknown>(), invalid = new Set<Field>();
+        for (const field of nativeFields) {
+          const state = snapshots.get(field)!, previous = field.nativeProjection;
+          const reuse = !!rows && id !== null && previous?.id === id && sameNative(previous.shown, state) && previous.raw !== undefined;
+          const completedReset = resets.some(({ owner, events }) => events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented) &&
+            field.originals.some(({ element }) => nativeOwner(element) === owner));
+          const local = retained.get(field);
+          const input = reuse ? previous!.raw : !rows && !completedReset && local && sameJson(state.value, local.shown) ? local.raw : state.value;
+          if (state.selected?.some(selected => !selected.owned || selected.disabled && !reuse)) invalid.add(field);
+          let cloned: unknown;
+          try { cloned = structuredClone(input); }
+          catch (cause) { observed(cause); throw failure("clone", "Prepared native values must be cloneable.", field.name, cause); }
+          current();
+          source = writePath(source, field.path, cloned);
+          if (!reuse || previous!.entered) entered.set(field, cloned);
+        }
+        const preparse = source;
+        let parsed = source;
+        const candidates = new Map<Field, Candidate>();
+        for (const field of nativeFields) {
+          let value = readPath(source, field.path), parseFailed = false, parseError: string | undefined;
+          const input = entered.get(field), parser = parsers.get(field.name);
+          if (entered.has(field) && parser) {
+            try { value = parser(String(input ?? ""), context(field, null, preparse)); }
+            catch (cause) {
+              if (cause instanceof FrameworkError && cause.api === "bindForm" &&
+                  ["FORM_DISPOSED", "FORM_RESCAN", "FORM_PREPARE"].includes(cause.code)) throw cause;
+              parseFailed = true;
+              parseError = cause instanceof Error && cause.message ? cause.message : "Input could not be parsed.";
+            }
+            let asynchronous = false;
+            if (!parseFailed && value !== null && (typeof value === "object" || typeof value === "function")) {
+              try { asynchronous = typeof (value as { then?: unknown }).then === "function"; }
+              catch (cause) { observed(cause); throw failure("parse", "A preparation parser returned an invalid result.", field.name, cause); }
+              if (asynchronous) void Promise.resolve(value).catch(() => {});
+            }
+            observed();
+            if (asynchronous) throw failure("parse", "Preparation parsers must finish synchronously.", field.name);
+            if (!parseFailed && value === undefined) { parseFailed = true; parseError = "Input could not be parsed."; }
+          }
+          candidates.set(field, { value, ...(entered.has(field) ? { entered: input } : {}), parseFailed, parseError });
+          parsed = writePath(parsed, field.path, value);
+        }
+        const found: ValidationIssue[] = [];
+        for (const field of nativeFields) {
+          const candidate = candidates.get(field)!;
+          let checked: readonly ValidationIssue[];
+          try { checked = check(field, null, candidate, parsed, true, true, observed); }
+          catch (cause) { observed(cause); throw cause; }
+          const rule = field.group ? "choice-option" : "select-option";
+          if (invalid.has(field) && !checked.some(issue => issue.rule === rule)) found.push(issue(field, null, rule, "Choose an available enabled option."));
+          if (snapshots.get(field)!.badInput && field.element instanceof HTMLInputElement && field.element.willValidate) {
+            found.push(issue(field, null, "html", field.element.validationMessage || "Use a value allowed by this input."));
+            found.push(...checked.filter(issue => issue.rule !== "html"));
+          } else found.push(...checked);
+          observed();
+        }
+        if (found.length) return { valid: false, values: null, issues: found };
+        let result: Record<string, unknown>;
+        try { result = structuredClone(parsed); }
+        catch (cause) { observed(cause); throw failure("clone", "Prepared values must be cloneable.", undefined, cause); }
+        observed();
+        return { valid: true, values: result, issues: [] };
+      });
+    } finally { preparing = false; }
   }
 
   function bind(id: RowId | null): void {
@@ -1019,7 +1292,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         });
       }
       const nextOwners = new Set<HTMLFormElement>();
-      if (!rows) for (const field of nextFields) for (const { element } of field.originals) {
+      if (!rows || deletedPreview()) for (const field of nextFields) for (const { element } of field.originals) {
         const owner = nativeOwner(element);
         if (owner) nextOwners.add(owner);
       }
@@ -1081,6 +1354,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         localRenderedValues.delete(field);
         issues.delete(field);
         field.projection = undefined;
+        setNativeProjection(field);
         field.choices?.raw.clear();
         const state = captures.get(field);
         if (state?.files) state.files.length = 0;
@@ -1145,10 +1419,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (id) errorIds.set(field, id);
         else errorIds.delete(field);
       }
+      syncPreview();
       const hadIssues = issues.size > 0;
       showIssues(current);
       if (hadIssues && !issues.size && current()) showIssues(current);
-      if (current()) rescanIncomplete = false;
+      if (current()) {
+        syncPreview();
+        if (current()) rescanIncomplete = false;
+      }
     } catch (cause) {
       if (disposed) return;
       if (!committing && cause instanceof FrameworkError) throw cause;
@@ -1198,12 +1476,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const current = () => !disposed && version === renderVersion;
       if (boundId !== null) drafts.delete(boundId);
       boundId = null;
+      syncPreview();
       automatic = false;
       pointerField = undefined;
       issues.clear();
       pendingResets.clear();
       if (resetTimer !== undefined) { clearTimeout(resetTimer); resetTimer = undefined; }
-      for (const field of fields) field.projection = undefined;
+      for (const field of fields) { field.projection = undefined; setNativeProjection(field); }
       for (const state of initial) {
         if (!current()) return;
         const { field, element } = state;
@@ -1257,7 +1536,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const currentDrafts = drafts.get(id);
     if (!currentDrafts?.size || reconciling) return;
     const snapshot = rows!.get(id), version = renderVersion;
-    const result = evaluate(id, rowValue(id), currentDrafts, validate);
+    if (snapshot?.status === "delete") return;
+    const result = evaluate(id, rowValue(id, true), currentDrafts, validate);
     if (disposed || version !== renderVersion || rows!.get(id) !== snapshot) return;
     const ready = [...currentDrafts.keys()].filter(field => !result.byField.get(field)?.length);
     let failed = false;
@@ -1266,7 +1546,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     try {
       for (const field of ready) {
         if (disposed || version !== renderVersion) return;
-        const source = rowValue(id);
+        const source = rowValue(id, true);
         const value = result.parsed.get(field)!.value;
         if (field.choices && !rowOptionAvailable([
           ...field.choices.authored, ...choiceOptions(field, source, id).map(option => option.raw)
@@ -1316,11 +1596,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (disabled(event.target, root) ||
           (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
       if (rows) {
-        if (boundId === null) return;
-        const currentDrafts = drafts.get(boundId) ?? new Map<Field, unknown>();
-        currentDrafts.set(field, enteredValue(field));
-        drafts.set(boundId, currentDrafts);
-        reconcile(boundId, autoValidate);
+        if (boundId === null || deletedPreview()) return;
+        setNativeProjection(field);
+        const id = boundId, snapshot = rows.get(id), version = renderVersion;
+        const entered = enteredValue(field);
+        if (disposed || boundId !== id || renderVersion !== version || rows.get(id) !== snapshot || snapshot?.status === "delete") return;
+        const currentDrafts = drafts.get(id) ?? new Map<Field, unknown>();
+        currentDrafts.set(field, entered);
+        drafts.set(id, currentDrafts);
+        reconcile(id, autoValidate);
         return;
       }
       const retained = localRenderedValues.get(field);
@@ -1362,7 +1646,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       pointerField = undefined;
       if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
           field.kind !== "single" || !formatCapable(field.element) ||
-          rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
+          rows && (boundId === null || deletedPreview() || drafts.get(boundId)?.has(field))) return;
       if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
       const element = field.element;
       const before = element.value;
@@ -1372,6 +1656,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         ? { start: element.selectionStart, end: element.selectionEnd, direction: element.selectionDirection }
         : null;
       display(element, raw);
+      if (rows && boundId !== null && !disposed) rememberNative(field, boundId, raw);
       if (!rows) {
         localRenderedValues.get(field)!.shown = fieldValue(field);
         renderVersion++;
@@ -1395,7 +1680,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const field = byElement.get(event.target);
       if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
           field.kind !== "single" || !formatCapable(field.element) ||
-          rows && (boundId === null || drafts.get(boundId)?.has(field))) return;
+          rows && (boundId === null || deletedPreview() || drafts.get(boundId)?.has(field))) return;
       if ((!rows || valueCallbacks) && textLengthControl(field.element) && field.element.readOnly) return;
       if (!rows) { renderLocal(undefined, field); return; }
       const id = boundId!, snapshot = rows.get(id), version = renderVersion;
@@ -1405,7 +1690,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (valueCallbacks) projectValue(field, raw, source, id, "val", false, false, current);
       else {
         const shown = runner.format(field.format, raw, context(field, id, source));
-        if (current()) display(field.element, shown);
+        if (current()) { display(field.element, shown); if (current()) rememberNative(field, id, raw, false, current); }
       }
     });
   }
@@ -1419,14 +1704,26 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (boundId === null || event.type === "set" && event.id !== boundId ||
         event.type === "setMany" && !event.ids.includes(boundId)) return;
     const row = rows.get(boundId);
-    if (!row || row.status === "delete") {
+    if (!row) {
       boundId = null;
+      for (const field of fields) setNativeProjection(field);
+      syncPreview();
       issues.clear();
       if (scanning) return;
       render("bind");
       showIssues();
       return;
     }
+    if (row.status === "delete") {
+      drafts.delete(boundId);
+      issues.clear();
+      if (scanning) return;
+      syncPreview();
+      render("val");
+      showIssues();
+      return;
+    }
+    syncPreview();
     if (scanning) {
       if (event.type === "set" || event.type === "setMany" || event.type === "replace" ||
           event.type === "revert" && (event.id === undefined || event.id === boundId)) issues.clear();
@@ -1462,6 +1759,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     bind,
     rescan,
     defaults,
+    prepare,
     unbind,
     refresh(names) {
       active();
@@ -1511,19 +1809,22 @@ export function bindForm<T extends object = Record<string, unknown>>(
             const fieldIssues = checked.byField.get(field) ?? [];
             issues.set(field, fieldIssues);
             const retained = localRenderedValues.get(field);
-            if (retained) retained.invalid = fieldIssues.length > 0;
+            if (retained && retained.invalid !== (fieldIssues.length > 0)) {
+              retained.invalid = fieldIssues.length > 0;
+              nativeRevision++;
+            }
           }
           showIssues();
         }
         return { valid: found.length === 0, issues: found };
       }
       const targets = id === undefined
-        ? [...new Set([...(boundId === null ? [] : [boundId]), ...drafts.keys()])]
+        ? [...new Set([...(boundId === null || deletedPreview() ? [] : [boundId]), ...drafts.keys()])]
         : [id];
       const found: ValidationIssue[] = [];
       for (const target of targets) {
         if (drafts.has(target)) reconcile(target);
-        const checked = evaluate(target, rowValue(target), drafts.get(target) ?? new Map());
+        const checked = evaluate(target, rowValue(target, true), drafts.get(target) ?? new Map());
         for (const fieldIssues of checked.byField.values()) found.push(...fieldIssues);
         if (target === boundId) {
           for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
@@ -1539,10 +1840,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (disposed) return;
     if (!rows && !scanning) flushLocalResets(undefined, false);
     disposed = true;
+    syncPreview();
     renderVersion++;
     activeValues.clear();
     activeBindings.clear();
-    for (const field of fields) field.projection = undefined;
+    for (const field of fields) { field.projection = undefined; setNativeProjection(field); }
     for (const release of pendingSelects.values()) release();
     pendingSelects.clear();
     for (const release of pendingGroups.values()) release();

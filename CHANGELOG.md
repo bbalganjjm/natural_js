@@ -9,4 +9,4 @@
 - Removed jQuery and legacy convenience utilities from the 2.0 artifact. Preserved the 1.x LGPL source and documentation under `v1/` without changing them.
 - Added fixed-artifact JavaScript, TypeScript, and browser consumer checks and M9 accessibility review. Safari is outside the initial 2.0 browser support scope; Playwright WebKit remains engine-only evidence.
 
-This is an unpublished beta candidate in source control. The user deferred npm publication until remaining functionality is complete and personally tested. The existing npm `latest` tag still points to 1.x. See [the migration guide](docs/v2/migration.md) and [M9 gate](docs/implementation/m9-plan.md).
+This is an unpublished beta candidate in source control. The user deferred npm publication until remaining functionality is complete and personally tested. The existing npm `latest` tag still points to 1.x. See [the migration guide](wiki/v2/migration.md) and [M9 gate](docs/implementation/m9-plan.md).

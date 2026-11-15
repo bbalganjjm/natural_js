@@ -8,7 +8,7 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved CVC and Popup result design
-    git_blob: 2372a50d7444e6e0ee97546aa43f031ec933dc4d
+    git_blob: 4d0b1b4d261e5a638f68dea6eabb8d0386f11647
   - id: roadmap
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/roadmap.md
     title: First-release and M7 boundary

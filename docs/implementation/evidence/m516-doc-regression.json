@@ -1,0 +1,41 @@
+{
+  "stage": "M5.16",
+  "kind": "separate_node_document_tool_regression",
+  "started": "2026-11-15T01:38:16.736Z",
+  "finished": "2026-11-15T01:38:18.477Z",
+  "args": [
+    "--test",
+    "tools/knowledge-docs/knowledge-docs.test.mjs"
+  ],
+  "exit_code": 0,
+  "spawn_error": null,
+  "before": {
+    "path": "docs/implementation/evidence/m516-inputs-b0ea1d3d0731.json",
+    "sha256": "b0ea1d3d0731ca85164a5561ac722a7810af7a35a7f1c4070806eff3c640ba96",
+    "bytes": 23064,
+    "entries": 225
+  },
+  "after": {
+    "path": "docs/implementation/evidence/m516-inputs-b0ea1d3d0731.json",
+    "sha256": "b0ea1d3d0731ca85164a5561ac722a7810af7a35a7f1c4070806eff3c640ba96",
+    "bytes": 23064,
+    "entries": 225
+  },
+  "sources_unchanged": true,
+  "stdout": {
+    "path": "docs/implementation/evidence/m516-doc-regression-stdout.log",
+    "sha256": "20f5723926a15774c24373d579a3747af427981facb6de95eec2d0fce973ad19",
+    "bytes": 213
+  },
+  "stderr": {
+    "path": "docs/implementation/evidence/m516-doc-regression-stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "helper": {
+    "path": "node_modules/.cache/m516-doc-regression.mjs",
+    "sha256": "c52a9e93a3cef69d50181a7e9ea7059c0a3d4e3571c7db16fb0f730655e2289e",
+    "bytes": 1598
+  },
+  "scope": "Node documentation-tool regression only. No Vitest/browser/canonical credit; the user changed checker source during the authorized pause."
+}

@@ -21,17 +21,34 @@ function run(root, command, ...args) {
     });
 }
 
-test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
+test("wiki and work records preserve export checks, fingerprints, evidence and history", (t) => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "natural-docs-"));
     t.after(() => {
         assert.ok(path.resolve(root).startsWith(path.resolve(os.tmpdir()) + path.sep));
         fs.rmSync(root, { recursive: true, force: true });
     });
     write(root, "tools/knowledge-docs/knowledge-docs.mjs", fs.readFileSync(checker, "utf8"));
+    write(root, "wiki/index.md", "---\nokf_version: \"0.2\"\n---\n\n# Topics\n\n* [API](v2/index.md) - Fixture.\n");
+    write(root, "wiki/v2/index.md", "# Concepts\n\n* [Fixture](fixture.md) - TypeScript entry fixture.\n");
+    write(root, "wiki/log.md", "## 2026-11-15\n\n* **Creation** Split knowledge from work records.\n");
     write(root, "docs/index.md", "---\nokf_version: \"0.2\"\n---\n\n# Topics\n\n* [Implementation](implementation/index.md) - Fixture.\n");
-    write(root, "docs/implementation/index.md", "# Concepts\n\n* [Fixture](fixture.md) - TypeScript entry fixture.\n");
-    write(root, "docs/log.md", "");
-    write(root, "docs/implementation/fixture.md", [
+    write(root, "docs/implementation/index.md", "# Concepts\n\n* [Plan](plan.md) - Work record fixture.\n");
+    write(root, "docs/log.md", "## 2026-11-16\n\n* **Update** Work records.\n\n## 2020-01-02\n\n* **Creation** Original knowledge.\n");
+    write(root, "docs/implementation/plan.md", [
+        "---",
+        "type: Plan",
+        "title: Plan",
+        "description: Work record fixture.",
+        "symbols: [Extra]",
+        "sources:",
+        "  - id: api",
+        "    resource: ../../wiki/v2/fixture.md",
+        "---",
+        "",
+        "Implement the [Fixture](../../wiki/v2/fixture.md) contract.",
+        ""
+    ].join("\n"));
+    write(root, "wiki/v2/fixture.md", [
         "---",
         "type: API Reference",
         "title: Fixture",
@@ -44,9 +61,10 @@ test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
         "  - id: page",
         "    resource: ../../src/page/index.ts",
         "    symbol: PageContext",
+        "generated: { by: process:fixture, at: 2020-01-02T00:00:00Z }",
         "---",
         "",
-        "The fixture describes both public exports.",
+        "The fixture describes both public exports. See the [Plan](../../docs/implementation/plan.md).",
         ""
     ].join("\n"));
     write(root, "package.json", JSON.stringify({
@@ -64,11 +82,45 @@ test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
     write(root, "v1/src/legacy.js", "class Legacy {\n    static helper = class {}\n}\n");
     write(root, "v1/docs/index.md", "# Archived guides\n\n[Old link](missing.md)\n");
 
-    const stamp = run(root, "stamp", "docs/implementation/fixture.md");
+    const stamp = run(root, "stamp", "wiki", "docs");
     assert.equal(stamp.status, 0, stamp.stdout + stamp.stderr);
     const clean = run(root, "check");
     assert.equal(clean.status, 0, clean.stdout + clean.stderr);
     assert.match(clean.stdout, /0 errors, 0 warnings/);
+
+    const conceptName = "wiki/v2/fixture.md";
+    const concept = fs.readFileSync(path.join(root, conceptName), "utf8");
+    write(root, conceptName, concept.replace("2020-01-02T00:00:00Z", "2026-11-16T00:00:00Z"));
+    const missingWikiLog = run(root, "check", "wiki");
+    assert.match(missingWikiLog.stdout, /log-gap/);
+    write(root, conceptName, concept);
+
+    const planName = "docs/implementation/plan.md";
+    const plan = fs.readFileSync(path.join(root, planName), "utf8");
+    for (const type of ["API Reference", "UI Component", "Architecture Pattern"]) {
+        write(root, planName, plan.replace("type: Plan", `type: ${type}`));
+        const misplacedKnowledge = run(root, "check", "docs");
+        assert.equal(misplacedKnowledge.status, 1);
+        assert.match(misplacedKnowledge.stdout, /error knowledge-location/);
+    }
+    write(root, planName, plan);
+    write(root, conceptName, concept.replace("type: API Reference", "type: Plan"));
+    const misplacedPlan = run(root, "check", "wiki");
+    assert.equal(misplacedPlan.status, 1);
+    assert.match(misplacedPlan.stdout, /error work-location/);
+    write(root, conceptName, concept);
+
+    write(root, planName, plan + "\n[Missing wiki concept](../../wiki/v2/missing.md)\n");
+    const brokenCrossLink = run(root, "check", "docs");
+    assert.equal(brokenCrossLink.status, 1);
+    assert.match(brokenCrossLink.stdout, /link-broken/);
+    assert.doesNotMatch(brokenCrossLink.stdout, /wiki\/v2\/fixture.md:\d+: warn/);
+    write(root, planName, plan);
+    write(root, conceptName, concept + "\n[Missing work record](../../docs/implementation/missing.md)\n");
+    const brokenWorkLink = run(root, "check", "wiki");
+    assert.equal(brokenWorkLink.status, 1);
+    assert.match(brokenWorkLink.stdout, /link-broken/);
+    write(root, conceptName, concept);
 
     const rawName = "docs/implementation/evidence/run-1/failure/error-context.md";
     const raw = "# Browser failure\n\nOriginal recorded Markdown.\n";
@@ -89,6 +141,13 @@ test("2.0 TypeScript exports, fingerprints, and emitted declarations", (t) => {
     const explicitRaw = run(root, "stamp", rawName);
     assert.equal(explicitRaw.status, 1);
     assert.match(explicitRaw.stdout, /no frontmatter/);
+
+    const wikiEvidence = "wiki/implementation/evidence/broken.md";
+    write(root, wikiEvidence, "# This is not the raw work-evidence directory\n");
+    const badWikiEvidence = run(root, "check");
+    assert.equal(badWikiEvidence.status, 1);
+    assert.match(badWikiEvidence.stdout, /wiki\/implementation\/evidence\/broken\.md.*frontmatter/);
+    fs.unlinkSync(path.join(root, wikiEvidence));
 
     const malformed = "docs/implementation/evidence-extra/broken.md";
     write(root, malformed, "# Missing concept metadata\n");

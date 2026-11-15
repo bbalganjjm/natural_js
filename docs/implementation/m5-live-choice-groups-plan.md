@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-choice-groups-plan.md
     title: Accepted generation-before-Form contract
-    git_blob: 11f49367ceef1fcf852894ce261ed812e9fa8e5d
+    git_blob: 96dde68e2a31a91c710acb645f862d0cc8edc138
   - id: baseline
     resource: evidence/m513-verification.json
     title: Frozen M5.13 source and package evidence
@@ -28,7 +28,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Compiled fields, drafts, captures, errors and reset ownership
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: values
     resource: ../../src/ui/value-binding.ts
     title: Cached explicit versus raw field projection

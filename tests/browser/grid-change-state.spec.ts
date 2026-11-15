@@ -239,9 +239,12 @@ test("null and stale Form binding clear field flags without changing retained Gr
     h.rows.set(1, "profile", { name: "Edited", note: "Note 1" }); h.form.bind(null);
     const nullBinding = [...h.formRoot.querySelectorAll("[data-field]")].map(element => element.getAttribute("data-field-changed"));
     h.form.bind(1); h.rows.remove(1);
-    const deleted = { form: h.formFields("profile.name")[0].getAttribute("data-field-changed"), grid: h.markers(1, "profile.name") };
+    const input = h.formFields<HTMLInputElement>("profile.name")[0];
+    const deleted = { form: input.getAttribute("data-field-changed"), grid: h.markers(1, "profile.name"), name: input.value,
+      read: h.form.read().profile, disabled: input.disabled, status: h.formRoot.getAttribute("data-row-status") };
     h.rows.replace([h.item(9)]); return { nullBinding, deleted, stale: h.formFields("profile.name")[0].getAttribute("data-field-changed"), grid: h.grid.rowIds("visible").length }; });
-  expect(new Set(result.nullBinding)).toEqual(new Set(["false"])); expect(result.deleted).toEqual({ form: "false", grid: ["true"] });
+  expect(new Set(result.nullBinding)).toEqual(new Set(["false"])); expect(result.deleted).toEqual({ form: "true", grid: ["true"],
+    name: "Edited", read: { name: "Edited", note: "Note 1" }, disabled: true, status: "delete" });
   expect(result.stale).toBe("false"); expect(result.grid).toBe(1);
 });
 

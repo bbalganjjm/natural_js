@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "author": "/root/m511_legacy",
+  "status": "fixture_only_old_contract_updates_frozen_for_independent_review_no_actual_apply",
+  "parent_reported_attempt": "First full Chromium: 1007 collected, 1005 passed, two old deleted-Form-contract failures. Root retains raw report/traces; this cache independently reads source but claims no run credit.",
+  "sources": [
+    {
+      "path": "src/ui/form.ts",
+      "sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "normalized_lf_sha256": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+      "bytes": 98659
+    },
+    {
+      "path": "src/data/index.ts",
+      "sha256": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+      "normalized_lf_sha256": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+      "bytes": 16757
+    },
+    {
+      "path": "wiki/v2/form.md",
+      "sha256": "db602b054ae48de10ece21211839aeeac8aa612a7ea75be4859e8db558e6d869",
+      "normalized_lf_sha256": "db602b054ae48de10ece21211839aeeac8aa612a7ea75be4859e8db558e6d869",
+      "bytes": 64704
+    },
+    {
+      "path": "docs/implementation/m5-form-workflows-plan.md",
+      "sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+      "normalized_lf_sha256": "bace8d7bb4f52bdf8d6d5eb075bd8a2174e7a4e2cabe2ca51d60b800703973b2",
+      "bytes": 17573
+    }
+  ],
+  "source_basis": [
+    "bindRow/rowValue accepts a retained deleted identity while editable validation rejects it; syncPreview locks native controls.",
+    "render compares retained committed values to original even when status is delete; null/stale associations clear their flags.",
+    "read remains committed marked data; prepare rejects preview, default validate skips it, explicit validate raises ROW_MISSING.",
+    "M516 actual plan already requires positive retained-preview assertion migrations; no production contract is changed here."
+  ],
+  "changes": [
+    {
+      "target": "tests/browser/grid-change-state.spec.ts",
+      "title": "null and stale Form binding clear field flags without changing retained Grid deletion state",
+      "base": {
+        "path": "tests/browser/grid-change-state.spec.ts",
+        "sha256": "fc53dd17bfea82938b09c2335ba3a88764371ae3e0e9f8550a6644c515e73355",
+        "normalized_lf_sha256": "fc53dd17bfea82938b09c2335ba3a88764371ae3e0e9f8550a6644c515e73355",
+        "bytes": 29432
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-old-contract-fix-legacy/grid-change-state.spec.ts",
+        "sha256": "84617ec235e3ec99e08153bd2a58cb8e4b64dceb6c234c66241dfd7dc09afdf6",
+        "normalized_lf_sha256": "84617ec235e3ec99e08153bd2a58cb8e4b64dceb6c234c66241dfd7dc09afdf6",
+        "bytes": 29702
+      },
+      "edits": [
+        {
+          "before": "    const deleted = { form: h.formFields(\"profile.name\")[0].getAttribute(\"data-field-changed\"), grid: h.markers(1, \"profile.name\") };",
+          "after": "    const input = h.formFields<HTMLInputElement>(\"profile.name\")[0];\n    const deleted = { form: input.getAttribute(\"data-field-changed\"), grid: h.markers(1, \"profile.name\"), name: input.value,\n      read: h.form.read().profile, disabled: input.disabled, status: h.formRoot.getAttribute(\"data-row-status\") };"
+        },
+        {
+          "before": "  expect(new Set(result.nullBinding)).toEqual(new Set([\"false\"])); expect(result.deleted).toEqual({ form: \"false\", grid: [\"true\"] });",
+          "after": "  expect(new Set(result.nullBinding)).toEqual(new Set([\"false\"])); expect(result.deleted).toEqual({ form: \"true\", grid: [\"true\"],\n    name: \"Edited\", read: { name: \"Edited\", note: \"Note 1\" }, disabled: true, status: \"delete\" });"
+        }
+      ],
+      "metadata": {
+        "exact_reverse_reconstruction": true,
+        "all_registration_titles_unchanged": true,
+        "outside_target_body_byte_identical": true,
+        "no_skips_engine_branches_or_removed_protections": true
+      }
+    },
+    {
+      "target": "tests/browser/row-state.spec.ts",
+      "title": "received tombstones stay protected in native editors membership Forms and paste after checkpoint reversion",
+      "base": {
+        "path": "tests/browser/row-state.spec.ts",
+        "sha256": "fa6d906b1603ad389e33018114eb26284c703ed14bf57c075284eb5f36df773a",
+        "normalized_lf_sha256": "fa6d906b1603ad389e33018114eb26284c703ed14bf57c075284eb5f36df773a",
+        "bytes": 31199
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-old-contract-fix-legacy/row-state.spec.ts",
+        "sha256": "c8a11291699683ad72f239044d8399d2acae0318ce102351070f9dc0cf3c5577",
+        "normalized_lf_sha256": "c8a11291699683ad72f239044d8399d2acae0318ce102351070f9dc0cf3c5577",
+        "bytes": 32132
+      },
+      "edits": [
+        {
+          "before": "      () => h.rows.move(deleted.id), () => h.rows.copy(deleted.id), () => h.form.bind(deleted.id),",
+          "after": "      () => h.rows.move(deleted.id), () => h.rows.copy(deleted.id),"
+        },
+        {
+          "before": "    h.edit(editor, \"Synthetic edit\"); h.rows.revert(deleted.id);\n    const row = h.block(deleted.id)!;\n    return { failures: failures.length, protected: failures.every(Boolean), snapshot: h.rows.get(deleted.id) === deleted,",
+          "after": "    h.form.bind(deleted.id); h.edit(editor, \"Synthetic edit\"); h.rows.revert(deleted.id);\n    const row = h.block(deleted.id)!, input = h.formRoot.querySelector(\"input\")!;\n    const formFailures = [() => h.form.prepare(), () => h.form.validate(deleted.id)].map(operation => {\n      try { operation(); return null; } catch (cause) { const error = cause as { code: string; detail?: { phase?: string } };\n        return { code: error.code, phase: error.detail?.phase ?? null }; }\n    });\n    const preview = { name: input.value, read: h.form.read(), disabled: input.disabled, status: h.formRoot.getAttribute(\"data-row-status\"),\n      raw: h.rows.get(deleted.id)!.value, failures: formFailures, valid: h.form.validate().valid };\n    return { failures: failures.length, protected: failures.every(Boolean), snapshot: h.rows.get(deleted.id) === deleted, preview,"
+        },
+        {
+          "before": "  expect(result).toEqual({ failures: 7, protected: true, snapshot: true, status: \"delete\", disabled: true,\n    value: \"Employee D\", selected: null, checked: [], list: 1, tree: 1 });",
+          "after": "  expect(result).toEqual({ failures: 6, protected: true, snapshot: true, status: \"delete\", disabled: true,\n    value: \"Employee D\", selected: null, checked: [], list: 1, tree: 1,\n    preview: { name: \"Employee D\", read: { employeeNo: \"D\", profile: { name: \"Employee D\" } }, disabled: true, status: \"delete\",\n      raw: { employeeNo: \"D\", parent: null, profile: { name: \"Employee D\", count: 1 } },\n      failures: [{ code: \"FORM_PREPARE\", phase: \"preview\" }, { code: \"ROW_MISSING\", phase: null }], valid: true } });"
+        }
+      ],
+      "metadata": {
+        "exact_reverse_reconstruction": true,
+        "all_registration_titles_unchanged": true,
+        "outside_target_body_byte_identical": true,
+        "no_skips_engine_branches_or_removed_protections": true
+      }
+    }
+  ],
+  "preserved": [
+    "Both existing complete case titles and registrations",
+    "Null/stale Form marker assertions and retained Grid dirty marker",
+    "All six rejected Rows/membership/paste operations and their original protected/counted assertions",
+    "Native disabled Grid editor synthetic-write protection and received-delete checkpoint reversion",
+    "Exact Rows snapshot identity, deleted marker/value, selected/checked exclusions, List and Tree membership counts",
+    "Every other fixture byte outside the two target bodies",
+    "All production sources, public APIs, user documentation restructuring and original failures"
+  ],
+  "positive_replacement": [
+    "Retained edited detail name/raw nested read/native disabled state and delete marker with true dirty flag",
+    "Explicit binding of received delete succeeds and remains read-only after checkpoint revert",
+    "Form native name, committed marked read, full raw record, prepare preview failure, explicit validation unavailable error and successful default validation"
+  ],
+  "source_input_inventory_changed": false,
+  "actual_source_test_wiki_docs_edits": false,
+  "project_compiler_unit_browser_benchmark_commands": 0,
+  "runtime_credit": 0
+}

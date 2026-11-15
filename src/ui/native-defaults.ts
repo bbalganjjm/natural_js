@@ -11,6 +11,17 @@ interface NativeDefault {
   parse?: ParseInput;
 }
 
+export function assertNativePaths(fields: readonly { name: string; path: readonly string[] }[], fail: (field: string) => never): void {
+  const names = new Set<string>();
+  for (const field of fields) {
+    if (names.has(field.name)) fail(field.name);
+    names.add(field.name);
+  }
+  for (const field of fields) for (let index = 1; index < field.path.length; index++) {
+    if (names.has(field.path.slice(0, index).join("."))) fail(field.name);
+  }
+}
+
 export function createNativeDefaults(api: "bindForm" | "bindGrid", fields: readonly NativeDefault[], active: () => void) {
   const code = api === "bindForm" ? "FORM_DEFAULTS" : "GRID_DEFAULTS";
   let reading = false;
@@ -22,16 +33,7 @@ export function createNativeDefaults(api: "bindForm" | "bindGrid", fields: reado
     if (reading) throw error("Defaults cannot recursively read the same owner.");
     reading = true;
     try {
-      const names = new Set<string>();
-      for (const field of fields) {
-        if (names.has(field.name)) throw error("Native defaults need distinct nonoverlapping paths.", field.name);
-        names.add(field.name);
-      }
-      for (const field of fields) for (let index = 1; index < field.path.length; index++) {
-        if (names.has(field.path.slice(0, index).join("."))) {
-          throw error("Native defaults need distinct nonoverlapping paths.", field.name);
-        }
-      }
+      assertNativePaths(fields, field => { throw error("Native defaults need distinct nonoverlapping paths.", field); });
       let values: Record<string, unknown> = {};
       for (const field of fields) {
         try { values = writePath(values, field.path, structuredClone(field.value)); }

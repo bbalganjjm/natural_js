@@ -166,20 +166,29 @@ test("received tombstones stay protected in native editors membership Forms and 
     const deleted = h.rows.entries({ includeDeleted: true })[0], editor = h.field(deleted.id, "profile.name");
     const failures: string[] = [];
     for (const operation of [() => h.rows.set(deleted.id, "profile", { name: "Forbidden", count: 8 }),
-      () => h.rows.move(deleted.id), () => h.rows.copy(deleted.id), () => h.form.bind(deleted.id),
+      () => h.rows.move(deleted.id), () => h.rows.copy(deleted.id),
       () => h.grid.select(deleted.id), () => h.grid.setChecked([deleted.id]),
       () => h.grid.paste("Forbidden", { id: deleted.id, field: "profile.name" })]) {
       try { operation(); } catch (cause) { failures.push((cause as { code: string }).code); }
     }
-    h.edit(editor, "Synthetic edit"); h.rows.revert(deleted.id);
-    const row = h.block(deleted.id)!;
-    return { failures: failures.length, protected: failures.every(Boolean), snapshot: h.rows.get(deleted.id) === deleted,
+    h.form.bind(deleted.id); h.edit(editor, "Synthetic edit"); h.rows.revert(deleted.id);
+    const row = h.block(deleted.id)!, input = h.formRoot.querySelector("input")!;
+    const formFailures = [() => h.form.prepare(), () => h.form.validate(deleted.id)].map(operation => {
+      try { operation(); return null; } catch (cause) { const error = cause as { code: string; detail?: { phase?: string } };
+        return { code: error.code, phase: error.detail?.phase ?? null }; }
+    });
+    const preview = { name: input.value, read: h.form.read(), disabled: input.disabled, status: h.formRoot.getAttribute("data-row-status"),
+      raw: h.rows.get(deleted.id)!.value, failures: formFailures, valid: h.form.validate().valid };
+    return { failures: failures.length, protected: failures.every(Boolean), snapshot: h.rows.get(deleted.id) === deleted, preview,
       status: row.getAttribute("data-row-status"), disabled: [...row.querySelectorAll("input")].every(input => input.disabled),
       value: h.rows.get(deleted.id)!.value.profile.name, selected: h.grid.selected(), checked: h.grid.checkedIds(),
       list: h.listRoot.querySelectorAll("li").length, tree: h.treeRoot.querySelectorAll('[role="treeitem"]').length };
   });
-  expect(result).toEqual({ failures: 7, protected: true, snapshot: true, status: "delete", disabled: true,
-    value: "Employee D", selected: null, checked: [], list: 1, tree: 1 });
+  expect(result).toEqual({ failures: 6, protected: true, snapshot: true, status: "delete", disabled: true,
+    value: "Employee D", selected: null, checked: [], list: 1, tree: 1,
+    preview: { name: "Employee D", read: { employeeNo: "D", profile: { name: "Employee D" } }, disabled: true, status: "delete",
+      raw: { employeeNo: "D", parent: null, profile: { name: "Employee D", count: 1 } },
+      failures: [{ code: "FORM_PREPARE", phase: "preview" }, { code: "ROW_MISSING", phase: null }], valid: true } });
 });
 
 test("first-position add and move use retained deleted anchors and preserve their order when ordinary deletions revert", async ({ page }) => {

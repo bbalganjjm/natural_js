@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "reviewer": "m511_legacy",
+  "status": "PASS_incremental_installed_R2_native_keyboard_source_review",
+  "provenance": {
+    "author": "root",
+    "reviewer_authored_no_reviewed_candidate": true,
+    "own_app_excluded": true,
+    "manifest": {
+      "path": "node_modules/.cache/m516-installed-root/candidate-manifest-r2.json",
+      "sha256": "8e186392989cb82de04ddc18b663f28e8163ea38e889ff33916bb1a9ca592ca5",
+      "normalized_lf_sha256": "8e186392989cb82de04ddc18b663f28e8163ea38e889ff33916bb1a9ca592ca5",
+      "bytes": 4187
+    },
+    "accepted_R1_manifest": {
+      "path": "node_modules/.cache/m516-installed-root/candidate-manifest.json",
+      "sha256": "f2c9921e97736baf9b7007a668298976786d507855d31d631f32d2f39fb51a3e",
+      "normalized_lf_sha256": "f2c9921e97736baf9b7007a668298976786d507855d31d631f32d2f39fb51a3e",
+      "bytes": 3527
+    },
+    "accepted_R1_independent_review": {
+      "path": "node_modules/.cache/m516-installed-independent-review-legacy.json",
+      "sha256": "c56b165fa1cadc9eeb2ed56ef535bfd8be3a3c4c94f0dcf500c699bcc7b016a2",
+      "normalized_lf_sha256": "c56b165fa1cadc9eeb2ed56ef535bfd8be3a3c4c94f0dcf500c699bcc7b016a2",
+      "bytes": 11020
+    },
+    "accepted_R6_native_source_review": {
+      "path": "node_modules/.cache/m516-native-badinput-independent-review-legacy.json",
+      "sha256": "a97caf597e388be67a100346ff940901ce8084bb74287cc7c4ecc0557280f11c",
+      "normalized_lf_sha256": "a97caf597e388be67a100346ff940901ce8084bb74287cc7c4ecc0557280f11c",
+      "bytes": 11167
+    },
+    "actual_written_plan": {
+      "path": "docs/implementation/m5-form-workflows-plan.md",
+      "sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+      "normalized_lf_sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+      "bytes": 16315
+    },
+    "contract": {
+      "path": "docs/implementation/evidence/m516-reviewed-contract.md",
+      "sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+      "normalized_lf_sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+      "bytes": 25156
+    },
+    "native_only_diagnostic": {
+      "path": "docs/implementation/evidence/m516-native-number-diagnostic.json",
+      "sha256": "c1637a52e61eaf1f09a880e6a6c5cb6fce2200c7e064d7d9540b1078eb4c6856",
+      "normalized_lf_sha256": "c1637a52e61eaf1f09a880e6a6c5cb6fce2200c7e064d7d9540b1078eb4c6856",
+      "bytes": 4162
+    }
+  },
+  "reviewed_entries": [
+    {
+      "target": "tests/consumers/js/check.mjs",
+      "base": {
+        "path": "tests/consumers/js/check.mjs",
+        "sha256": "c44e58a0f527482377edb408822222a4384e3eda8c28751cd329f0e42389f21d",
+        "normalized_lf_sha256": "c44e58a0f527482377edb408822222a4384e3eda8c28751cd329f0e42389f21d",
+        "bytes": 12684
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tests__consumers__js__check.mjs",
+        "sha256": "480282b36dcd1ccb5776e400b323494299dad5987ace070d2a4a4a7e09bd1b06",
+        "normalized_lf_sha256": "480282b36dcd1ccb5776e400b323494299dad5987ace070d2a4a4a7e09bd1b06",
+        "bytes": 13707
+      },
+      "accepted_R1_candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tests__consumers__js__check.mjs",
+        "sha256": "480282b36dcd1ccb5776e400b323494299dad5987ace070d2a4a4a7e09bd1b06",
+        "normalized_lf_sha256": "480282b36dcd1ccb5776e400b323494299dad5987ace070d2a4a4a7e09bd1b06",
+        "bytes": 13707
+      },
+      "unchanged": true
+    },
+    {
+      "target": "tests/consumers/ts/check.ts",
+      "base": {
+        "path": "tests/consumers/ts/check.ts",
+        "sha256": "4dd2b51febade5c3635f324f062fac7c651483622cd54550ae59f3b4669f81b7",
+        "normalized_lf_sha256": "4dd2b51febade5c3635f324f062fac7c651483622cd54550ae59f3b4669f81b7",
+        "bytes": 26831
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tests__consumers__ts__check.ts",
+        "sha256": "95511fd8299db7a8a104b2f623dc3ecf15e2c681a1a3c1b6d2efd820ba0df20d",
+        "normalized_lf_sha256": "95511fd8299db7a8a104b2f623dc3ecf15e2c681a1a3c1b6d2efd820ba0df20d",
+        "bytes": 27848
+      },
+      "accepted_R1_candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tests__consumers__ts__check.ts",
+        "sha256": "95511fd8299db7a8a104b2f623dc3ecf15e2c681a1a3c1b6d2efd820ba0df20d",
+        "normalized_lf_sha256": "95511fd8299db7a8a104b2f623dc3ecf15e2c681a1a3c1b6d2efd820ba0df20d",
+        "bytes": 27848
+      },
+      "unchanged": true
+    },
+    {
+      "target": "tests/consumers/browser/main.js",
+      "base": {
+        "path": "tests/consumers/browser/main.js",
+        "sha256": "0f84b6a8845620c49840e315d080583c7630909242d73accb338ba34ed26af75",
+        "normalized_lf_sha256": "0f84b6a8845620c49840e315d080583c7630909242d73accb338ba34ed26af75",
+        "bytes": 59893
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tests__consumers__browser__main-r2.js",
+        "sha256": "99a9d1d254faa3842ffb717d5f162a6d78750c6179334f5262cdf9fcd7c6ae84",
+        "normalized_lf_sha256": "99a9d1d254faa3842ffb717d5f162a6d78750c6179334f5262cdf9fcd7c6ae84",
+        "bytes": 63048
+      },
+      "accepted_R1_candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tests__consumers__browser__main.js",
+        "sha256": "01abe546712574528d87602980b679247066ffc2d4f55a4af11f2c97cabeeac0",
+        "normalized_lf_sha256": "01abe546712574528d87602980b679247066ffc2d4f55a4af11f2c97cabeeac0",
+        "bytes": 62532
+      },
+      "unchanged": false,
+      "old_body_exactly_reconstructed_deleting_only_addition": true,
+      "addition_LF_code_units": 516,
+      "addition_sha256": "9910d83f2030609cfb933c2f8fe07c13fa2430c1c646c6e1f2010dbb66889e2f"
+    },
+    {
+      "target": "tools/check-packed-browser.mjs",
+      "base": {
+        "path": "tools/check-packed-browser.mjs",
+        "sha256": "5709f2e5cf77a21dd5a7f08f91cf20a2eb6242edae86a3307e3195ab134b45ae",
+        "normalized_lf_sha256": "5709f2e5cf77a21dd5a7f08f91cf20a2eb6242edae86a3307e3195ab134b45ae",
+        "bytes": 98492
+      },
+      "candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tools__check-packed-browser-r2.mjs",
+        "sha256": "aa2647928e577d309bb420e7ff5f2cf0b26c6bb93c6a5ef86d1b424b3243b9c5",
+        "normalized_lf_sha256": "aa2647928e577d309bb420e7ff5f2cf0b26c6bb93c6a5ef86d1b424b3243b9c5",
+        "bytes": 100373
+      },
+      "accepted_R1_candidate": {
+        "path": "node_modules/.cache/m516-installed-root/tools__check-packed-browser.mjs",
+        "sha256": "68cb152f26627fb5304d57453b856a3a2d58d2656ab542194608f26058253e2b",
+        "normalized_lf_sha256": "68cb152f26627fb5304d57453b856a3a2d58d2656ab542194608f26058253e2b",
+        "bytes": 99343
+      },
+      "unchanged": false,
+      "old_body_exactly_reconstructed_deleting_only_addition": true,
+      "addition_LF_code_units": 1030,
+      "addition_sha256": "aa8c089b30e0926a3f9bf76e161c9e114d58da019046a1f40cf87aa74cce77a4"
+    }
+  ],
+  "connected_checks": [
+    "New root is actual public bindForm/root input[type=number] with unique accessible Installed native number name and data marker; createRows amount5 is bound then unbound to captured empty native text. Automatic input commit is intentionally suspended while prepare remains available.",
+    "Actual packed checker pressSequentially(e) exercises native keyboard state; it does not fabricate badInput or set a mocked value. Existing all-five browser engine/channel paths execute the same checker after state.ready.",
+    "R6 native bit prevents accepting parsed empty text as0. Expected result is badInput true, valid false, values null and exactly one html issue; no source snapshot/change or aria-invalid publication is allowed.",
+    "finally disposes Form/Rows, removes native root and drops state pointer. No new API, internal import, runtime engine, browser-suite registration or case count is introduced.",
+    "Only browser setup/checker gain one insertion each. JS/TS candidates remain byte-identical to c56 acceptance; deleting only the R2 additions exactly reconstructs both accepted R1 candidate bodies."
+  ],
+  "findings": [],
+  "metadata_assertions": {
+    "all_four_actual_base_raw_and_LF_hashes_match": true,
+    "all_four_R2_candidate_raw_and_LF_hashes_match": true,
+    "all_four_prior_R1_candidates_unchanged_at_preserved_hashes": true,
+    "exactly_two_insertion_only_deltas": true,
+    "JS_TS_byte_identical": true,
+    "actual_plan_contract_diagnostic_refs_match": true
+  },
+  "actual_source_apply_GO": false,
+  "actual_source_docs_test_edits": false,
+  "project_compiler_browser_unit_benchmark_commands": 0,
+  "reviewer_browser_execution": 0,
+  "new_framework_suite_registrations": 0,
+  "runtime_or_canonical_credit": 0,
+  "remaining": "Root updates the final joint manifest to this installed R2 source review, applies exact accepted bytes and executes all actual archive/browser/runtime gates."
+}

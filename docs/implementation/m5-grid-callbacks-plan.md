@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-collection-values-plan.md
     title: Shared field value callbacks and remaining configuration outcomes
-    git_blob: 8798afbef33c1f7dc64f6ce4c8a85e1e2c023714
+    git_blob: d5f855ed31ae520700dc98b2ddff8a1eb40d194f
   - id: baseline
     resource: evidence/m510-verification.json
     title: Frozen M5.10 source, runtime and installed artifact baseline
@@ -28,7 +28,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: Complete feature obligations and consolidated omission decisions
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
 generated: { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T04:21:00Z }

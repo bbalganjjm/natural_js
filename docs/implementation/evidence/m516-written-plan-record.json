@@ -1,0 +1,43 @@
+{
+  "stage": "M5.16",
+  "status": "written_before_project_source_application",
+  "baseline_commit": "7ee46b7407e8a6c9b1e2ffdb8800fa5527d3b269",
+  "parent": {
+    "path": "docs/implementation/evidence/m515-verification.json",
+    "sha256": "95588ae9f25a4b4de360880dc7f472e9cd34dddbe3e53d0bd0319cad5c8f07b5",
+    "bytes": 8377
+  },
+  "written_plan": {
+    "path": "docs/implementation/m5-form-workflows-plan.md",
+    "sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+    "bytes": 16315
+  },
+  "immutable_written_plan": {
+    "path": "docs/implementation/evidence/m516-written-plan-r2.md",
+    "sha256": "a033fecec8d01d140dc24de2a940307b60a708fd4c30fb46a1f4f1cf25923bb2",
+    "bytes": 16315
+  },
+  "contract": {
+    "path": "docs/implementation/evidence/m516-reviewed-contract.md",
+    "sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+    "bytes": 25156
+  },
+  "independent_contract_review": {
+    "path": "docs/implementation/evidence/m516-independent-contract-review.json",
+    "sha256": "d96facf75ab13476c86e997ecc17a99fbe31edaa9170f9c94044b35495153fef",
+    "bytes": 11066
+  },
+  "scope_ref": "remaining-work-plan.json#/stages/12",
+  "scope": "Cache implementations remain unapplied and unexecuted; exact final candidate/composite source GO is still required.",
+  "prior_written_plan": {
+    "path": "docs/implementation/evidence/m516-written-plan.md",
+    "sha256": "af7b33989d900cf10ee1c580a9554ff04c0708de7f9aa5d446de1efb76475338",
+    "bytes": 14668
+  },
+  "native_number_diagnostic": {
+    "path": "docs/implementation/evidence/m516-native-number-diagnostic.json",
+    "sha256": "c1637a52e61eaf1f09a880e6a6c5cb6fce2200c7e064d7d9540b1078eb4c6856",
+    "bytes": 4162
+  },
+  "pre_source_clarifications": "Prepare-only private rule checkpoints, native badInput validation and existing recoverable presentation reentry; two public methods unchanged."
+}

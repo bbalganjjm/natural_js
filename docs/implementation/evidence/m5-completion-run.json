@@ -9,7 +9,7 @@
     "master_v1_change": false
   },
   "status": "in_progress",
-  "current_stage": "M5.15",
+  "current_stage": "M5.16",
   "queue": [
     {
       "id": "P0.1",
@@ -77,16 +77,16 @@
     {
       "id": "M5.15",
       "scope_ref": "remaining-work-plan.json#/stages/11",
-      "status": "verified_separate_commit_pending",
-      "commit": null,
+      "status": "verified_committed_and_pushed",
+      "commit": "7ee46b7407e8a6c9b1e2ffdb8800fa5527d3b269",
       "receipt": "m515-verification.json"
     },
     {
       "id": "M5.16",
       "scope_ref": "remaining-work-plan.json#/stages/12",
-      "status": "planned",
+      "status": "verified_separate_commit_pending",
       "commit": null,
-      "receipt": null
+      "receipt": "m516-verification.json"
     },
     {
       "id": "M5.17",
@@ -249,14 +249,14 @@
     "Keep original source/evidence and each stage gate independent; never mark M5.20 complete through a partial Form-only substitute."
   ],
   "current_checks": {
-    "contract": "implemented existing owners; independently reviewed six witness/consumer paths and two drafts",
+    "contract": "two existing-owner methods; independent source23 and seven implemented wiki concepts",
     "runtime_checks": "sixteen latest canonical groups passed",
-    "runtime_receipt": "m515-runtime-receipt.json",
-    "inputs": 221,
-    "units": 225,
-    "full_each": 957,
-    "focus_each": 48,
-    "diagnostic_focus_each": 18,
+    "runtime_receipt": "m516-runtime-receipt.json",
+    "inputs": 225,
+    "units": 242,
+    "full_each": 1007,
+    "primary_focus_each": 192,
+    "focus_each": 222,
     "documents": "passed_independent_and_actual_zero_errors_warnings"
   },
   "latest_completed_checks": {

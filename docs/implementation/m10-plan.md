@@ -20,7 +20,7 @@ sources:
   - id: rows
     resource: ../../src/data/index.ts
     title: Rows ownership and event contract
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: old-grid
     resource: ../../v1/src/natural.ui.js
     title: Preserved 1.x Grid options and implementation
@@ -96,7 +96,7 @@ Before implementation or API changes, present the detailed stage contract for hu
 
 The earlier M10.1 implementation slice covered authored fixed/grouped headers in two layouts without a new public API. Each required follow-up slice needs a reviewed usage example, implementation contract, and acceptance evidence.
 
-The [40-row two-layout screen](../v2/advanced-grid-example.md) is the completed M10.1 structure regression: grouped and fixed headings/first column use authored HTML/CSS without a new Grid API. The user then selected an interactive demo for every supported Grid option and behavior. It now covers M10.5 column controls, M10.6 selection/check/filter and M10.7 atomic paste and M10.8 viewport controls alongside nested choices, drafts, accessibility and Rows changes. It must show observed results and label required but unimplemented behavior as unavailable. The demo now includes a 5,000-row viewport mode and RowId reveal. Extend this same demo for remaining parity as implementations and tests become available.
+The [40-row two-layout screen](../../wiki/v2/advanced-grid-example.md) is the completed M10.1 structure regression: grouped and fixed headings/first column use authored HTML/CSS without a new Grid API. The user then selected an interactive demo for every supported Grid option and behavior. It now covers M10.5 column controls, M10.6 selection/check/filter and M10.7 atomic paste and M10.8 viewport controls alongside nested choices, drafts, accessibility and Rows changes. It must show observed results and label required but unimplemented behavior as unavailable. The demo now includes a 5,000-row viewport mode and RowId reveal. Extend this same demo for remaining parity as implementations and tests become available.
 
 The M10.1 two-layout acceptance checks native table semantics, no copied header or duplicate IDs, nested choices, keyboard sort and pointer selection, two-screen isolation, sticky geometry, 320 CSS-pixel reflow with enlarged text spacing, and axe-tagged A/AA results. Chromium, Firefox, and WebKit passed four focused cases each. On this Windows host Firefox required the repository-local Playwright browser cache; the default cache failed at process launch (`spawn UNKNOWN`) even with one worker. Automated checks do not establish manual screen-reader conformance.
 
@@ -142,7 +142,7 @@ Measure the existing flat/nested 100- and 1,000-row fixtures before and after re
 
 Update `docs/v2/grid.md`, the interactive demo and its documentation, the parity ledger, examples, indexes, `docs/log.md`, and this plan with each slice. Keep `npm run docs:check -- --changed` at zero errors and independent `verified` fields honest. Preserve user features without requiring identical 1.x option names or copied implementation. Keep table/clipboard helpers private, preserve the M9 beta artifact, and coordinate other component parity through the [parity plan](feature-parity-plan.md).
 
-Under the earlier selected scope, the user approved M10 and chose the [current-contract Grid demo](../v2/grid-demo.md) as its reference screen. The demo and internal M10.2 rendering-lifetime change passed focused Grid and three-engine demo checks without changing public contracts. M10.3 then added only the `initialPage` Grid option, reusing the existing `PageRequest` type. The Grid source was also independently reviewed for clone, issue, selection, focus, and Select ownership behavior. The current expanded requirement adds mandatory M10.5–M10.9 work; review each stage's contract before adding a public option or Rows mutation. Manual assistive-technology checks remain open; use the repository-local cache for repeat Firefox runs on this host.
+Under the earlier selected scope, the user approved M10 and chose the [current-contract Grid demo](../../wiki/v2/grid-demo.md) as its reference screen. The demo and internal M10.2 rendering-lifetime change passed focused Grid and three-engine demo checks without changing public contracts. M10.3 then added only the `initialPage` Grid option, reusing the existing `PageRequest` type. The Grid source was also independently reviewed for clone, issue, selection, focus, and Select ownership behavior. The current expanded requirement adds mandatory M10.5–M10.9 work; review each stage's contract before adding a public option or Rows mutation. Manual assistive-technology checks remain open; use the repository-local cache for repeat Firefox runs on this host.
 
 # M10.3 contract: bounded initial Grid page
 
@@ -172,7 +172,7 @@ The M10.3 local tarball SHA-256 is `08a698cf0e7008fb0dec4eea627a78ddb1685d135983
 - [Feature parity ledger](feature-parity.md)
 - [Feature parity implementation plan](feature-parity-plan.md)
 - [Roadmap](roadmap.md)
-- [Current Grid contract](../v2/grid.md)
+- [Current Grid contract](../../wiki/v2/grid.md)
 - [Active plan](current.md)
 
 [^roadmap]: 2.0 release boundary and M10 milestone

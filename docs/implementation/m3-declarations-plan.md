@@ -36,11 +36,11 @@ sources:
   - id: example
     resource: ../../examples/vite/m4/employees.ts
     title: Actual awaited preparation, stable public actions and owned UI bindings
-    git_blob: 15f90ca60a62b3398ce3eaab045bfb880c0d683f
+    git_blob: b01cbd3254a17c5c06b3af9699cbc46c78aca162
   - id: omissions
     resource: omission-decision.md
     title: Only O01-O05 are approved exclusions
-    git_blob: 2f05bc3f50c48797e9329aba828a3bcbd6534652
+    git_blob: 2e795643d626d0c3161cf859524d8dd464e6b8dc
 generated: { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T22:40:53Z }

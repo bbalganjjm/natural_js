@@ -456,11 +456,14 @@ test("Rows removal and replacement during native retirement prune drafts and det
       let error: Failure | null = null;
       try { error = h.error(() => form.rescan()); } finally { delete (note as unknown as { replaceChildren?: Element["replaceChildren"] }).replaceChildren; }
       const refresh = h.error(() => form.refresh()), validation = form.validate();
-      return { mode, code: error?.code ?? null, refresh: refresh?.code ?? null, rawUndefined: Object.values(form.read()).every(value => value === undefined),
+      return { mode, code: error?.code ?? null, refresh: refresh?.code ?? null, raw: form.read(),
+        disabled: h.field(root).disabled, marker: root.getAttribute("data-row-status"),
         value: h.field(root).value, error: root.querySelector("output")!.textContent, valid: validation.valid, issues: validation.issues.length, calls, sentinel };
     });
   });
-  expect(result).toEqual(["remove", "replace"].map(mode => ({ mode, code: null, refresh: null, rawUndefined: true, value: "", error: "", valid: true, issues: 0, calls: 1, sentinel: false })));
+  expect(result).toEqual(["remove", "replace"].map(mode => ({ mode, code: null, refresh: null,
+    raw: { name: mode === "remove" ? "Ada" : undefined }, disabled: mode === "remove", marker: mode === "remove" ? "delete" : null,
+    value: mode === "remove" ? "Ada" : "", error: "", valid: true, issues: 0, calls: 1, sentinel: false })));
 });
 
 test("disposal from a newly captured native getter stops adoption and releases old and temporary ownership", async ({ page }) => {
@@ -569,13 +572,14 @@ test("rescan clears obsolete errors after native publication removes the current
     let error: Failure | null = null;
     try { error = h.error(() => form.rescan()); } finally { delete (members[0] as unknown as { setAttribute?: Element["setAttribute"] }).setAttribute; }
     return { known, code: error?.code ?? null, calls, sentinel, invalid: members.map(input => input.getAttribute("aria-invalid")), error: region.textContent,
-      detached: Object.values(form.read()).every(value => value === undefined), status: h.rows.get(id)?.status,
+      retained: form.read(), locked: [...root.querySelectorAll<HTMLInputElement>("input")].every(input => input.disabled),
+      marker: root.getAttribute("data-row-status"), status: h.rows.get(id)?.status,
       originalPreserved: h.rows.original(id) === original, remaining: h.rows.entries().length, hooks,
       name: h.field(root).value, count: h.field(root, "count").value };
   });
   const { known, ...after } = result;
   expect(known.invalid).toEqual(["true", "true"]); expect(known.error).not.toBe(""); expect(known.valid).toBe(false);
-  expect(after).toEqual({ code: null, calls: 1, sentinel: false, invalid: [null, null], error: "", detached: true,
+  expect(after).toEqual({ code: null, calls: 1, sentinel: false, invalid: [null, null], error: "", retained: { choice: null, name: "Ada", count: 1200 }, locked: true, marker: "delete",
     status: "delete", originalPreserved: true, remaining: 1, hooks: 0, name: "Ada", count: "7" });
 });
 

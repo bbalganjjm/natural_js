@@ -4,14 +4,18 @@ title: Natural-JS 2.0 active plan
 description: Current checkpoint, remaining gates and next owner for the Natural-JS 2.0 migration.
 tags: [meta, plan, migration]
 sources:
+  - id: workflows
+    resource: m5-form-workflows-plan.md
+    title: Current M5.16 entered creation and complete selection restoration
+    git_blob: b9b2a59711c4e4a8588a4d4c88b85f12bf29ccfe
   - id: projection
     resource: m5-data-projections-plan.md
     title: Current M5.15 data values and application projections
-    git_blob: 58adbc84f3e2d0ea47a7788f932772dac99e3830
+    git_blob: 808d45d7bc367ac00924b636cfb6268cb9cc3c01
   - id: batch
     resource: m5-completion-run.md
     title: Authorized separate-stage M5 completion and prerequisite run
-    git_blob: 02ed7c8d5e0c4735d0d6a5482daf2ca4603ea652
+    git_blob: 93f959a895d699fe28796e4b0bdb899ca5982977
   - id: remaining
     resource: evidence/remaining-work-plan.json
     title: Fixed 56-stage continuation and exact known-record ownership
@@ -19,29 +23,31 @@ sources:
   - id: choices
     resource: m5-live-choice-groups-plan.md
     title: Safe live Form-owned choice replacement
-    git_blob: c98be3a79082c2b913327f54e52d1356a9263b87
+    git_blob: 059e0aed04316e54dec195c12617e7ffc993b6be
   - id: evidence
-    resource: evidence/m515-verification.json
-    title: Selected M5.15 runtime and independent acceptance
-    git_blob: 43e58d011aab626e95108581cd4f0ef226c7c771
+    resource: evidence/m516-verification.json
+    title: Selected M5.16 runtime and independent acceptance
+    git_blob: 3f2d89f5fa6d7470ab8fcbcee28a6300e195bf7c
   - id: parity
     resource: feature-parity-plan.md
     title: Complete required feature coverage and one omission review
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
   - id: review
     resource: m13-review-plan.md
     title: Mandatory whole-code review and remediation
-    git_blob: 5c77d901fb7fc10291b0db265306d0e1d02942c8
+    git_blob: 828ccf4f284c41621fe0dc4c9283fe4cebcfe760
   - id: conventions
-    resource: ../governance/okf-conventions.md
+    resource: ../../wiki/governance/okf-conventions.md
     title: OKF document and verification rules
-    git_blob: 81500f1f325ac03d4a2772fca8f5f2a87e715191
-generated: { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
+    git_blob: a686d5dddba29d0079fbdbbd3851d9c20bb28bb4
+generated: { by: codex/gpt-6, at: 2026-11-15T03:00:21Z }
 verified:
-  - { by: codex/gpt-6, at: 2026-11-14T23:27:26Z }
+  - { by: codex/gpt-6, at: 2026-11-15T03:00:21Z }
 ---
 
 Use this file to resume. The [milestone index](index.md), [roadmap](roadmap.md) and [completed log](../log.md) retain historical work; refresh fingerprints without recertifying old bodies.
+
+Documentation routing: [project goals](../../wiki/project-goals.md), implemented contracts and governance now live in [wiki/](../../wiki/index.md); this folder retains work plans and evidence. The [separation record](wiki-separation.md) describes path migration and preservation checks. Resume the stage below without treating this documentation work as runtime acceptance.
 
 # Goal
 
@@ -49,9 +55,9 @@ Complete 1.x framework capabilities in TypeScript/ESM without jQuery, preserving
 
 # Checkpoint
 
-- M5.15 retains source/value and configured projection outcomes through existing Rows and explicit application code. Eight unit cases and two connected browser cases cover exact clone boundaries, rich-source normalization, shared Form/Grid/List ownership and raw wire scopes without a new framework API, module, type, dependency or convenience library.[^projection]
-- Sixteen latest canonical groups pass on 221 frozen inputs, 225 units and 957 full cases per engine, retaining all 955 parent cases. Primary focus passes 48 and separate unchanged Grid-column diagnostics pass 18 per engine. The 208-file archive and all package payloads are byte-identical to M3.7; all forty-one declarations remain identical. JS/TS, five installed browsers and the original thirty budgets/sixty medians pass.[^evidence]
-- M3.7 is saved and pushed as 1f2eeaf; every earlier separate commit and immutable receipt remains. The user authorized every necessary predecessor through joined M5.20 with separate plans, checks, documents and commits.[^batch]
+- M5.16 implements entered native preparation, complete row restoration and accessible retained-deletion detail through the existing Form/Rows owners. Two methods extend existing handles; business factories and selection checkpoints stay in application code.[^workflows]
+- The 44 recorded attempts preserve both original focused runs with 190 passes/two failures, the first full Chromium run with 1,005 passes/two failures and sixteen latest canonical groups. The final 225 inputs pass 242 units, 222 expanded focused cases and 1,007 full cases per engine; earlier primary focus passes 192 per engine. All 957 parent cases remain, with 17 new units/50 browser cases. The exact 208-file archive c42f11e568f1822a130e4edc1bb7b0d3a78fdd172035a9080b774e6a4883fc92 passes JS/TS and installed Chromium/Firefox/WebKit/Chrome/Edge. Forty-one declarations retain 37 identical files; 4 existing declarations change, with no new runtime filename, public named type, entry or dependency. The original 30 budgets retain 60 medians/300 raw durations.[^evidence]
+- The user documentation restructuring is preserved: current implemented contracts live in wiki/, while this plan and immutable execution evidence remain in docs/. The separate authorized queue continues through joined M5.20.[^batch]
 
 # Steps
 
@@ -59,7 +65,7 @@ Follow the durable ordered queue and separate-stage procedure in the [completion
 
 # Next action
 
-Save/push the separate M5.15 checkpoint, then implement M5.16 from its reviewed entered-value and full restoration/deleted-detail contract. Keep current native/creation/committed/received/selection values distinct and reuse existing Form/Rows ownership. Continue the separate queue through joined M5.20; twenty-three unconditional stages remain after selected M5.15.[^batch][^review]
+Save/push the separate M5.16 checkpoint, then write and review M5.17 source-key/callback/receiver/initial-selection details against that saved source. Reuse current Form/Grid/List and captured selection owners. Twenty-two unconditional authorized stages remain; continue separately through M5.20.[^workflows][^batch][^review]
 
 # Decisions
 
@@ -73,14 +79,14 @@ Save/push the separate M5.15 checkpoint, then implement M5.16 from its reviewed 
 
 # Verification log
 
-The [M5.15 acceptance](evidence/m515-verification.json) links immutable runtime/source records, independent source/two-draft review, recorded-byte audit and final document checks. Twenty-seven records retain ten development attempts, sixteen latest canonical passes and one earlier Chromium full run with 956 passes/one import failure. Its trace records grid.ts HTTP 200 and dependency grid-selection.ts ERR_NO_BUFFER_SPACE. The deeper cause is unknown; no source/test/configuration fix is claimed. Unchanged diagnostics pass 18 per engine and later complete suites pass 957 per engine. The metadata-only trace reader receives no suite credit. The exact archive 4194aba11bdb1c2d583c3440685efa42b7e87068cc0dacb00a506eae74cea61c and all forty-one declarations remain identical to M3.7. Original benchmarks and inherited limits remain; no whole-family, M5.20, M13 or release closure is inferred.[^evidence][^batch]
+The [M5.16 acceptance](evidence/m516-verification.json) binds immutable source/focus/runtime and independent raw/document reviews. The original Chromium focused failure is an email native change before the command, corrected only by settling blur before arranging the direct candidate. The original Firefox failures assume synthetic reset has no native default action; independent bare controls show its native reset in Firefox and no reset in Chromium/WebKit. Same-engine parity retains every substantive trusted/canceled/projection assertion and adds source/callback/lock/purity checks. The first full Chromium failures are two old clearing/rejection expectations; positive retained-preview checks preserve all other state protections. These fixture corrections make no production change. A later benchmark startup waits 30 seconds for its ready function and times out before metrics; subsequent identical startup/performance checks pass, but the original cause remains unknown and no fix is claimed. Diagnostics and the separate passing Node documentation-tool regression receive no Vitest/browser/canonical credit. Original failures, source epochs and user structure snapshots remain exact. Historical native/network and manual-AT/token limits remain; no whole-family, M5.20, M13 or release closure follows.[^evidence][^batch]
 
 # Open questions
 
 Only O01-O05 are explicitly excluded. Other source-value/callback, configuration/advice/declaration and component obligations remain required. The first Tree/date timeout has no proven cause; direct Windows WebKit cookie/header wire differences remain measured platform limits. Manual assistive-technology, actual token measurements and the earlier module-fetch cause retain their existing limits. M13 whole-code review, publication/tags/master/v1 cleanup remain outside this ancestor run.[^evidence][^batch][^review]
 
 [^choices]: Safe live Form-owned choice replacement
-[^evidence]: Selected M5.15 runtime and independent acceptance
+[^evidence]: Selected M5.16 runtime and independent acceptance
 [^parity]: Complete required feature coverage and one omission review
 [^review]: Mandatory whole-code review and remediation
 [^conventions]: OKF document and verification rules
@@ -88,3 +94,5 @@ Only O01-O05 are explicitly excluded. Other source-value/callback, configuration
 [^batch]: Authorized separate-stage M5 completion and prerequisite run
 
 [^projection]: Current M5.15 data values and application projections
+
+[^workflows]: Current M5.16 entered creation and complete selection restoration

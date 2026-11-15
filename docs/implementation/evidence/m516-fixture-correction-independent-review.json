@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "stage": "M5.16",
+  "status": "GO_independent_fixture_only_native_event_settlement_correction",
+  "reviewer": "m511_design",
+  "author": "m511_legacy",
+  "reviewed_at": "2026-11-15T01:39:14.829Z",
+  "manifest": {
+    "path": "node_modules/.cache/m516-app-fix-legacy/candidate-manifest.json",
+    "sha256": "e9e2fdce2ae12d96bf39bdfaa9ec8d7065e59ca487de1729289bc31035150d34",
+    "bytes": 2675
+  },
+  "target": "tests/browser/m516-app.spec.ts",
+  "base": {
+    "path": "tests/browser/m516-app.spec.ts",
+    "sha256": "033bf3458cca096d686de1c5632aa9857339754b2b5355f8a6d585a4e741bb4b",
+    "bytes": 13614
+  },
+  "candidate": {
+    "path": "node_modules/.cache/m516-app-fix-legacy/m516-app.spec.ts",
+    "sha256": "15d05437c94f80bcde3c8f60e1bbdfbe87341a2be7af351d3170292e729168bd",
+    "bytes": 13638
+  },
+  "source_sha256": {
+    "tests/browser/m516-app.spec.ts": "15d05437c94f80bcde3c8f60e1bbdfbe87341a2be7af351d3170292e729168bd"
+  },
+  "diagnostic": {
+    "path": "docs/implementation/evidence/m516-entered-event-diagnostic.json",
+    "sha256": "095be547b78ad26c8e3db6465b1bd3db527c425ab0d8087555fdaf49e6a727a7",
+    "bytes": 6807
+  },
+  "executed_diagnostic_helper_copy": {
+    "path": "docs/implementation/evidence/m516-entered-event-diagnostic.mjs",
+    "sha256": "57d7d89a9b777c17908e74776a567fd5e27d162efaa017a5184a054b2ee629d8",
+    "bytes": 4387
+  },
+  "resume_snapshot": {
+    "path": "docs/implementation/evidence/m516-resume-snapshot.json",
+    "sha256": "28da478ff347ca3e4afc1a277389ed32c5209f973886a4b58909127a30494092",
+    "bytes": 230140
+  },
+  "prior_exact_source_GO": {
+    "path": "node_modules/.cache/m516-joint-plan-source-go.json",
+    "sha256": "4ab3a0128c85d6041e3dea1f0b0462b0922e05e8a32a82d9e72edcec255bf272",
+    "bytes": 16690
+  },
+  "reviewed_instructions": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "734179a490fde702f0e3bc6e0b8d1ba0ecdc6f0afb5eb84e3ebf388838837a3d",
+      "bytes": 19907
+    },
+    {
+      "path": "wiki/project-goals.md",
+      "sha256": "bdf21041ed9eba50ebccdccc876d6290de4ec7043c921b5898b43087883fcb89",
+      "bytes": 7003
+    },
+    {
+      "path": "wiki/index.md",
+      "sha256": "8e8322709265ef997dcaba82dcc50471113717b1eb736635b4240502d398f6ca",
+      "bytes": 1365
+    },
+    {
+      "path": "wiki/governance/repository-workflow.md",
+      "sha256": "876efb95fe88714b06b94160285076db001a91ede556572b5e3a15973ca075c6",
+      "bytes": 14385
+    },
+    {
+      "path": "wiki/governance/okf-conventions.md",
+      "sha256": "e3add29865578c3826c69e0878b1b6e4334ab557676ce2ed300ef196ef554e2e",
+      "bytes": 16007
+    }
+  ],
+  "checks": {
+    "exact_one_line_insertion": "await email.blur();",
+    "deleting_only_insertion_reconstructs_complete_failed_base": true,
+    "all_assertions_exactly_unchanged": true,
+    "all_five_registration_titles_and_both_layout_expansions_unchanged": true,
+    "all18_original_source_targets_still_exact_before_correction": true,
+    "source_or_app_correction_needed": false
+  },
+  "reasoning": [
+    "Recorded original email change dispatch replaces the sibling during Form.onInput/reconciliation before the add-entered click and before prepare invocation.",
+    "Settling that real native blur/change immediately after invalid fill establishes the accepted invalid draft before the direct sibling property edit. Both layouts retain the candidate through the unchanged prepare rejection/report/focus.",
+    "prepare returns rowId:null issues and the existing reportIssue therefore does not call showRow or detail.validate. Existing cross-row save reporting/revalidation and all application/framework policies stay unchanged."
+  ],
+  "limits": [
+    "This is an independent review of a one-line fixture correction authored by Legacy; the reviewer did not author this app fixture.",
+    "Original failed fixture033bf345,192-collected/190pass2fail traces/maps and native diagnostic metadata failure remain evidence. This is not a production bug/fix or new suite pass.",
+    "The user wiki/docs restructure and README/checker changes are preserved as a separate resumed source epoch; the original fd90 map does not cover those bytes.",
+    "Root owns actual application of the candidate and all project/compiler/browser/unit/performance/document checks. No wiki/docs/source or user edits were changed by this review."
+  ],
+  "findings": [],
+  "project_execution": 0,
+  "runtime_credit": 0,
+  "family_closure_credit": 0
+}

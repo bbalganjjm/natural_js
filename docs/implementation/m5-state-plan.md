@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-shared-rules-plan.md
     title: Completed shared-rule continuation
-    git_blob: 7ba2492e24accc43b818f4c352bf72f3b6644b29
+    git_blob: 117c506bdc8178351b70d19a10797eeed1b4b6a5
   - id: baseline
     resource: evidence/m51-verification.json
     title: Preserved 73f5a88 source and runtime evidence
@@ -16,7 +16,7 @@ sources:
   - id: data
     resource: ../../src/data/index.ts
     title: Existing identity, immutable values, changes and batch ownership
-    git_blob: 38faf810b59fecebd9e0d0e7ee8a935b480bcecd
+    git_blob: f6ba2fec9512b94efda549ab8508f4e7c7c20e42
   - id: comm
     resource: ../../src/comm/index.ts
     title: Explicit request method, JSON body, decoding and cancellation

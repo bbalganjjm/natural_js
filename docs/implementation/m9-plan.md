@@ -27,9 +27,9 @@ sources:
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m4-plan.md
     title: Fixed binding fixture and M6 performance budgets
   - id: workflow
-    resource: ../governance/repository-workflow.md
+    resource: ../../wiki/governance/repository-workflow.md
     title: Source, documentation, and verification workflow
-    git_blob: d9c9afcd03afc5280c3d562d5e1fc63c9874afa2
+    git_blob: 2d6f65ecb4763000971e655a355b4c9dc703fefe
   - id: wcag
     resource: https://www.w3.org/TR/WCAG22/
     title: W3C Web Content Accessibility Guidelines 2.2

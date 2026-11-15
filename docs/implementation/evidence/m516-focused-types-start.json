@@ -1,0 +1,39 @@
+{
+  "label": "focused-types",
+  "args": [
+    "node_modules/typescript/bin/tsc",
+    "-p",
+    "tsconfig.json",
+    "--noEmit"
+  ],
+  "started": "2026-11-15T00:42:24.630Z",
+  "before": {
+    "path": "docs/implementation/evidence/m516-inputs-fd90b1a11d65.json",
+    "sha256": "fd90b1a11d6589b2227090a150b88e64f8e51281d85517211ef5acbfa793411d",
+    "bytes": 23064,
+    "entries": 225
+  },
+  "environment": {},
+  "helpers": [
+    {
+      "path": "docs/implementation/evidence/m516-stage-run-98c755b1b338.mjs",
+      "sha256": "98c755b1b338cd400a66bee111002856562a5ef270b2779fc94b359dbad53588",
+      "bytes": 19865,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-run.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m516-stage-metadata-c788135184d3.mjs",
+      "sha256": "c788135184d315656139e728c989953ef1f6d4c089e1d7f7687bfec5651616cf",
+      "bytes": 19251,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-metadata.mjs"
+    },
+    {
+      "path": "docs/implementation/evidence/m516-stage-evidence-67303c6384dc.mjs",
+      "sha256": "67303c6384dcceaf07f016603291dbb0e8df33c10918a7c2d173c8ddcd6d9a41",
+      "bytes": 11142,
+      "source": "D:\\workspace\\natural_js\\node_modules\\.cache\\stage-evidence.mjs"
+    }
+  ],
+  "stdout_partial": "docs/implementation/evidence/m516-focused-types-stdout.partial",
+  "stderr": "docs/implementation/evidence/m516-focused-types-stderr.log"
+}

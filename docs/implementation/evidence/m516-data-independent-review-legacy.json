@@ -1,0 +1,212 @@
+{
+  "schema": 1,
+  "stage": "M5.16",
+  "reviewer": "m511_legacy",
+  "status": "PASS_independent_partial_cache_source_review_Data_UI_Rows_units_only",
+  "provenance": {
+    "producer": "m511_baseline",
+    "reviewer_authored_initial_legacy_contract_proposal": true,
+    "reviewer_did_not_author_reviewed_Data_UI_or_restore_tests": true,
+    "reviewer_app_candidate_excluded_from_this_independent_review": true,
+    "prior_contract_review": {
+      "path": "node_modules/.cache/m516-contract-independent-review-legacy-r2.json",
+      "sha256": "d96facf75ab13476c86e997ecc17a99fbe31edaa9170f9c94044b35495153fef",
+      "normalized_lf_sha256": "d96facf75ab13476c86e997ecc17a99fbe31edaa9170f9c94044b35495153fef",
+      "bytes": 11066
+    },
+    "producer_manifest": {
+      "path": "node_modules/.cache/m516-framework-baseline/core-submanifest.json",
+      "sha256": "b3b031b19c546b82ad51e7933f55ca853c6f70722dc9af301560a27778a2e467",
+      "normalized_lf_sha256": "b3b031b19c546b82ad51e7933f55ca853c6f70722dc9af301560a27778a2e467",
+      "bytes": 3256
+    },
+    "baseline_commit": "7ee46b7407e8a6c9b1e2ffdb8800fa5527d3b269",
+    "actual_written_plan": {
+      "path": "docs/implementation/m5-form-workflows-plan.md",
+      "sha256": "af7b33989d900cf10ee1c580a9554ff04c0708de7f9aa5d446de1efb76475338",
+      "normalized_lf_sha256": "af7b33989d900cf10ee1c580a9554ff04c0708de7f9aa5d446de1efb76475338",
+      "bytes": 14668
+    },
+    "contract": {
+      "path": "node_modules/.cache/m516-revision-baseline/contract-r2.md",
+      "sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+      "normalized_lf_sha256": "b6495c94cec82068b077b109f7547d7d0eaae19409553581755460d1a1541110",
+      "bytes": 25156
+    }
+  },
+  "scope": {
+    "reviewed_targets": [
+      {
+        "target": "src/data/index.ts",
+        "base": {
+          "path": "src/data/index.ts",
+          "sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+          "normalized_lf_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+          "bytes": 15686
+        },
+        "candidate": {
+          "path": "node_modules/.cache/m516-framework-baseline/data-index.ts",
+          "sha256": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+          "normalized_lf_sha256": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+          "bytes": 16757
+        }
+      },
+      {
+        "target": "src/ui/index.ts",
+        "base": {
+          "path": "src/ui/index.ts",
+          "sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+          "normalized_lf_sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+          "bytes": 7114
+        },
+        "candidate": {
+          "path": "node_modules/.cache/m516-framework-baseline/ui-index.ts",
+          "sha256": "7b23c6d5e291b5de9213582bbe042212e2e1eb7352064530f78d78c54de3400c",
+          "normalized_lf_sha256": "7b23c6d5e291b5de9213582bbe042212e2e1eb7352064530f78d78c54de3400c",
+          "bytes": 7199
+        }
+      },
+      {
+        "target": "tests/rows-restore.test.ts",
+        "new_target_absent": true,
+        "candidate": {
+          "path": "node_modules/.cache/m516-framework-baseline/rows-restore.test.ts",
+          "sha256": "c434b3941f02e929e51d450ac419221f8767c95a5cc36b72bcce715d7e0d3459",
+          "normalized_lf_sha256": "c434b3941f02e929e51d450ac419221f8767c95a5cc36b72bcce715d7e0d3459",
+          "bytes": 8506
+        }
+      }
+    ],
+    "excluded": [
+      "Form implementation in progress",
+      "new Form/browser fixtures",
+      "app authored by reviewer",
+      "installed consumer candidates",
+      "actual source apply or runtime acceptance"
+    ]
+  },
+  "connected_current_owners": [
+    {
+      "path": "src/data/index.ts",
+      "sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+      "normalized_lf_sha256": "72392300173c7152ab60fa1603ff8b4f0ec74f8dce3f48e93da110926589f827",
+      "bytes": 15686
+    },
+    {
+      "path": "src/internal/same-json.ts",
+      "sha256": "a454ae3c392509ad4f222dafda69b2aea4fd54bd08d622a5d7845d3c725084d6",
+      "normalized_lf_sha256": "a454ae3c392509ad4f222dafda69b2aea4fd54bd08d622a5d7845d3c725084d6",
+      "bytes": 717
+    },
+    {
+      "path": "src/ui/index.ts",
+      "sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+      "normalized_lf_sha256": "5868e2d841fd661cf8b3493efb880e85d418710db602585ebbbe02f3868f28a5",
+      "bytes": 7114
+    },
+    {
+      "path": "src/ui/form.ts",
+      "sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+      "normalized_lf_sha256": "66b885b36bcd06a76cce7fed3a0a933bffbd3559f50b793b6d5e571f3532099a",
+      "bytes": 80848
+    },
+    {
+      "path": "src/ui/grid.ts",
+      "sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+      "normalized_lf_sha256": "8c1c2b3b1e43ca4df2e467c4cf563e3d776ebc60b88f26c1cfef0b6383b06573",
+      "bytes": 118014
+    },
+    {
+      "path": "src/ui/grid-selection.ts",
+      "sha256": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+      "normalized_lf_sha256": "69d8df662685050ead09410acb896d2e6971c64470a428b660516a40a5de52ec",
+      "bytes": 11903
+    },
+    {
+      "path": "src/ui/list.ts",
+      "sha256": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19",
+      "normalized_lf_sha256": "ea7e911713b8c1b379717de7f6840e5b16d1a1022908544f19af982460fc4a19",
+      "bytes": 29282
+    },
+    {
+      "path": "tests/rows.test.ts",
+      "sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+      "normalized_lf_sha256": "71be2fa3beac2df5977febbd1cd33c60cb5807ac3b7b08953f7c6694568c1f32",
+      "bytes": 50214
+    },
+    {
+      "path": "tests/consumers/ts/check.ts",
+      "sha256": "4dd2b51febade5c3635f324f062fac7c651483622cd54550ae59f3b4669f81b7",
+      "normalized_lf_sha256": "4dd2b51febade5c3635f324f062fac7c651483622cd54550ae59f3b4669f81b7",
+      "bytes": 26831
+    }
+  ],
+  "checks": [
+    {
+      "area": "Small public delta",
+      "result": "One restore method on Rows, one exact prepare method signature on FormHandle. No new named type/export/event/option/engine/registry.",
+      "candidate_lines": {
+        "restore_type": 50,
+        "prepare_type": 106
+      }
+    },
+    {
+      "area": "Complete content and framework identity",
+      "result": "cloneRow produces a detached frozen complete value; replace current directly removes absent keys, leaves Map order/framework ID/received original/checkpoint untouched; business fields including body id copy exactly.",
+      "candidate_line": 362
+    },
+    {
+      "area": "State and dirty table",
+      "result": "Dirty union compares own-key presence before own values. Ordinary/received-clean becomes clean/update, ordinary or received insert stays insert, received update stays update, received delete stays delete. Local deletion revives only according to unchanged received owner; missing removed insert rejects before input getter.",
+      "candidate_line": 368
+    },
+    {
+      "area": "Original/deletion/revert ownership",
+      "result": "No original/checkpoint write; received insertion still hides public original, authoritative deletion changes retained current display only while changes() emits received original, later revert obeys its received state. New17-case proposal reads every status path and missing ordinary/received inserts."
+    },
+    {
+      "area": "Silent equality and snapshots",
+      "result": "Equal full content/status returns before current/view/notify changes, retaining entries/allEntries/changes/original identities. Recomputed private dirty state has no new public publication; status-only revival is a set change."
+    },
+    {
+      "area": "Atomic input, getter reentry and disposal",
+      "result": "Require live store/retained ID before clone, capture revision, reuse cloneFrozen and unchanged after all input reads. Invalid values fail before commit; nested ordered writes remain while stale outer restore rejects; disposal retains ROWS_DISPOSED precedence."
+    },
+    {
+      "area": "Single commit and subscriber failure",
+      "result": "Current/status/view installed before exactly one existing set notify. Existing notify invalidates caches/revision, snapshots listeners, continues eligible remaining listeners, preserves first primitive error and stops on disposal. Restore never rolls back a committed subscriber failure."
+    },
+    {
+      "area": "UI type",
+      "result": "Exact accepted synchronous field-only nullable values intersection; no inferred Employee/Rows schema, no new result union/type/casts. Runtime conditional and error semantics still require Form implementation review."
+    },
+    {
+      "area": "Existing owners unchanged",
+      "result": "Removing only restore interface line plus its20-line body exactly reconstructs current Data source. Removing only prepare signature exactly reconstructs current UI entry. Existing Rows methods and event consumer contracts are unchanged byte-normalized."
+    },
+    {
+      "area": "Witness bodies",
+      "result": "Read every line of new Rows restore proposal. It covers full optional-key removal/local deletion in one final event,8 received-owner cases, ordinary insert, own __proto__ presence/body-id copy, missing IDs before value reads, no-op caches, invalid atomic values, stale getter ordering, disposal and primitive postcommit error. Existing shared notification/ordering/clone matrices remain owners; no generic test duplication requested."
+    }
+  ],
+  "findings": [],
+  "metadata_assertions": {
+    "all_three_frozen_candidate_raw_hashes_match": true,
+    "raw_and_LF_base_hashes_match": true,
+    "linked_plan_contract_review_hashes_match": true,
+    "new_restore_test_target_absent": true,
+    "Data_existing_body_exactly_reconstructed": true,
+    "UI_existing_body_exactly_reconstructed": true,
+    "unit_registration_sites": 10,
+    "proposed_parameter_table_rows": 8,
+    "proposed_expanded_units_uncollected": 17
+  },
+  "source_apply_GO": false,
+  "framework_Form_acceptance": false,
+  "actual_source_docs_test_edits": false,
+  "project_compiler_browser_unit_benchmark_commands": 0,
+  "collected_or_executed_cases": 0,
+  "runtime_or_canonical_credit": 0,
+  "family_closure_credit": 0,
+  "remaining": "Root must bind this partial review into the final joint source manifest and actual plan after Form, new browser fixtures, app and installed candidates receive their disjoint reviews. This record does not approve those unseen bytes."
+}

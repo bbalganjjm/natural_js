@@ -449,6 +449,28 @@ try {
     projectedChoice: ["Two", "Two", "Two"], validation: { valid: [false, false, false], choiceIssues: true, quiet: true, raw: 99 },
     raw: { current: " Bea ", original: " Ada ", active: true, listDisabled: true }
   }, "Installed Form/Grid/List callbacks must share typed policy, preserve raw validation and refresh without source writes.");
+  const formWorkflows = await page.evaluate(() => window.packedConsumer.checkFormWorkflows());
+  assert.deepEqual(formWorkflows, {
+    prepared: { valid: true, values: { name: "Candidate", amount: 1200 }, parseReads: 0, untouched: true },
+    defaults: { name: "Captured", amount: 0 },
+    created: { value: { name: "Candidate", amount: 1200 }, status: "insert", distinct: true },
+    preview: { name: "Received", amount: "1,200", disabled: true, marker: "delete", sourceQuiet: true, valid: true, inert: false },
+    restored: { value: { name: "Received", amount: 1200 }, status: "clean", id: true, original: true, extra: false, enabled: true, marker: false },
+    noOp: true
+  }, "Installed entered preparation must preserve the old source, create through an explicit factory and restore one retained deletion without changing received ownership.");
+  const nativeNumber = page.getByRole("spinbutton", { name: "Installed native number" });
+  await nativeNumber.pressSequentially("e");
+  const nativePrepared = await page.evaluate(() => {
+    const h = window.packedConsumer.nativeNumber, before = h.rows.get(h.id), errors = h.root.getAttribute("aria-invalid");
+    try {
+      const result = h.form.prepare();
+      return { badInput: h.root.validity.badInput, valid: result.valid, values: result.values,
+        rules: result.issues.map(issue => issue.rule), untouched: h.rows.get(h.id) === before && h.rows.changes().length === 0,
+        errors: h.root.getAttribute("aria-invalid") === errors };
+    } finally { h.form.dispose(); h.rows.dispose(); h.root.remove(); delete window.packedConsumer.nativeNumber; }
+  });
+  assert.deepEqual(nativePrepared, { badInput: true, valid: false, values: null, rules: ["html"], untouched: true, errors: true },
+    "Installed preparation must retain real native badInput without committing parsed empty text as zero or publishing errors.");
   const sourceProjection = await page.evaluate(() => window.packedConsumer.checkSourceProjection());
   const sourceBusiness = { id: "business-a", note: null, active: false, count: 0, choices: [{ code: 0 }], status: "approved", rowStatus: "domain", value: { amount: 0 }, tenant: "T" };
   assert.deepEqual(sourceProjection, { detached: "Core", shared: ["Edith", "Edith", "Edith"], read: { name: "Edith" },

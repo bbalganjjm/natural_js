@@ -60,7 +60,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Existing typed Grid and List predicate contracts
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
 generated: { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-14T18:01:25Z }

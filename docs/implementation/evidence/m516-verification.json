@@ -1,0 +1,323 @@
+{
+  "milestone": "M5.16",
+  "status": "selected_outcomes_verified_remaining_owners_open",
+  "baseline_commit": "7ee46b7407e8a6c9b1e2ffdb8800fa5527d3b269",
+  "runtime": {
+    "path": "docs/implementation/evidence/m516-runtime-receipt.json",
+    "sha256": "7f9468c5d54b0728f4a0117a3b073f521c8df33979fa022269a98bdc639766f6",
+    "bytes": 392311
+  },
+  "source_review": {
+    "path": "docs/implementation/evidence/m516-form-workflows-r2.json",
+    "sha256": "4c1b5739afa91d315bfa2f945efcfda5e4e65079408c000b5b27aade1b75af10",
+    "bytes": 12534,
+    "reviewer": "composite",
+    "connected_report": {
+      "path": "docs/implementation/evidence/m516-independent-source-review-final.json",
+      "sha256": "4563155c3ff8b580a67fd17fb83a58d9e683e7304e52cf4e16b3508b466a2f3c",
+      "bytes": 19828
+    }
+  },
+  "independent_raw_review": {
+    "path": "docs/implementation/evidence/m516-independent-audit.json",
+    "sha256": "6f1c15ab6e5c536276161843e78f425ac9ff5d5eef7d18bb5e20ec3c0e8293fe",
+    "bytes": 98675,
+    "reviewer": "m511_design",
+    "helper": {
+      "path": "docs/implementation/evidence/m516-independent-audit.mjs",
+      "sha256": "5ef5f21e4d462213e3dbc275c59c488c54f3f755b9d27a6700958d3b82d62ffd",
+      "bytes": 35881
+    },
+    "original_execution_path": "node_modules/.cache/m516-independent-audit-r3.mjs"
+  },
+  "counts": {
+    "inputs": 225,
+    "attempts": 44,
+    "canonical_gates": 16,
+    "development_attempts": 13,
+    "superseded_canonical_attempts": 15,
+    "unit_cases": 242,
+    "new_unit_cases": 17,
+    "full_cases_each": 1007,
+    "new_browser_cases": 50,
+    "primary_focused_each": 192,
+    "focused_each": 222,
+    "package_files": 208,
+    "declarations": 41,
+    "unchanged_declarations": 37,
+    "changed_declarations": 4,
+    "added_declarations": 0,
+    "performance_budgets": 30,
+    "raw_medians": 60,
+    "raw_durations": 300
+  },
+  "artifact": {
+    "sha256": "c42f11e568f1822a130e4edc1bb7b0d3a78fdd172035a9080b774e6a4883fc92",
+    "files": 208,
+    "packed_bytes": 383240,
+    "unpacked_bytes": 1943878
+  },
+  "declarations": {
+    "path": "docs/implementation/evidence/m516-declaration-contract-r2.json",
+    "sha256": "81d795eb3f08ea174451f243c4a0a90b28fbff31ab8501ae6a47f06060771d3d",
+    "bytes": 877
+  },
+  "documents": {
+    "status": "passed_independent_semantics_and_actual_changed_full_checks",
+    "semantic_files": [
+      "docs/implementation/current.md",
+      "docs/implementation/m5-form-workflows-plan.md",
+      "docs/implementation/m5-completion-run.md",
+      "wiki/v2/form.md",
+      "wiki/v2/data.md",
+      "wiki/v2/ui.md",
+      "wiki/v2/employee-example.md",
+      "wiki/v2/migration.md",
+      "wiki/v2/architecture.md",
+      "wiki/v2/choice-group.md"
+    ],
+    "supplemental_source_review": {
+      "path": "docs/implementation/evidence/m516-choice-group-supplemental-review.json",
+      "sha256": "4b221515c4b4d2b881e6301497505c7391de17f191fac6d75c842ebda59a76e1",
+      "bytes": 3134
+    },
+    "expected_scope": {
+      "concepts": 99,
+      "reserved_files": 7
+    },
+    "independent_review": {
+      "reviewer": "m511_design",
+      "path": "node_modules/.cache/m516-final-document-approval.json",
+      "sha256": "7198f1c9616f3591017eb6afa3e1ce35eb216e5f9057a3c24518a3e9f98844b1",
+      "bytes": 14608,
+      "reviewed_files": {
+        "docs/implementation/current.md": {
+          "normalized_body_sha256": "867741872a152b972d8a320a8ce2e6e534101d07e95a56960f78e67be50a56c1",
+          "normalized_body_bytes": 6249,
+          "review": "Fresh independent final full-body review against immutable source/runtime/raw evidence, plus reread bounded temporal/reset/assertion-scope corrections."
+        },
+        "docs/implementation/m5-form-workflows-plan.md": {
+          "normalized_body_sha256": "b2ecb22fa2807af2878bc44905cbcd2f184511c717804317ada3576058e62a26",
+          "normalized_body_bytes": 17943,
+          "review": "Fresh independent final full-body review against immutable source/runtime/raw evidence, plus reread bounded temporal/reset/assertion-scope corrections."
+        },
+        "docs/implementation/m5-completion-run.md": {
+          "normalized_body_sha256": "6b2480b3803a3fb40bce72abc9a357b78de6b49945a14344a245bf0c8780e137",
+          "normalized_body_bytes": 13438,
+          "review": "Fresh independent final full-body review against immutable source/runtime/raw evidence, plus reread bounded temporal/reset/assertion-scope corrections."
+        },
+        "wiki/v2/form.md": {
+          "normalized_body_sha256": "afbb7da7bf7ed92acf6f4ae513bf3d77c4e5c59526c88cdeb76786695e636452",
+          "normalized_body_bytes": 59757,
+          "review": "Reuse the independently accepted source-linked M516 body and exact resumed-predecessor reconstruction from composite4563155c; full accepted normalized hash unchanged."
+        },
+        "wiki/v2/data.md": {
+          "normalized_body_sha256": "14a89c1ec9745f8e52ebef94a0c391ef47600efc5a47c2bb23fddb0e60009d9e",
+          "normalized_body_bytes": 21223,
+          "review": "Reuse the independently accepted source-linked M516 body and exact resumed-predecessor reconstruction from composite4563155c; full accepted normalized hash unchanged."
+        },
+        "wiki/v2/ui.md": {
+          "normalized_body_sha256": "6fbe5f536c8302f4890516e72658b4f52ef4536c803a93886e6f10228f4add5c",
+          "normalized_body_bytes": 26368,
+          "review": "Reuse the independently accepted source-linked M516 body and exact resumed-predecessor reconstruction from composite4563155c; full accepted normalized hash unchanged."
+        },
+        "wiki/v2/employee-example.md": {
+          "normalized_body_sha256": "42f5fb70470e4354b828034711161cf44173956c11d7ce6fe966eacbe5bdd305",
+          "normalized_body_bytes": 18634,
+          "review": "Reuse the independently accepted source-linked M516 body and exact resumed-predecessor reconstruction from composite4563155c; full accepted normalized hash unchanged."
+        },
+        "wiki/v2/migration.md": {
+          "normalized_body_sha256": "4ec620c89029906bba7d4ce0563a14e5d52bf7c8fcda8ef149b8d7b7d0267c08",
+          "normalized_body_bytes": 68215,
+          "review": "Reuse the independently accepted source-linked M516 body and exact resumed-predecessor reconstruction from composite4563155c; full accepted normalized hash unchanged."
+        },
+        "wiki/v2/architecture.md": {
+          "normalized_body_sha256": "dbbec7ffcaab3ea0bc118d5fe65c3a46866286227bc0800028a0e4d13feddf28",
+          "normalized_body_bytes": 22704,
+          "review": "Reuse the independently accepted source-linked M516 body and exact resumed-predecessor reconstruction from composite4563155c; full accepted normalized hash unchanged."
+        },
+        "wiki/v2/choice-group.md": {
+          "normalized_body_sha256": "f99fa09c6bb70318b8c5fdca874ed568fc3d81f46445a49a23bf0412ac7bef5f",
+          "normalized_body_bytes": 13243,
+          "review": "Reuse the independent supplemental paragraph/source review4b221515 and exact predecessor-body reconstruction; full accepted body hash unchanged."
+        }
+      }
+    },
+    "mechanical": {
+      "checks": {
+        "changed": {
+          "path": "docs/implementation/evidence/m516-docs-changed.log",
+          "sha256": "b81fa37c504e2b88f72ae68fd76eae31502f9f3d09ce2e772724effdbfa6f033",
+          "bytes": 183,
+          "concepts": 99,
+          "reserved_files": 7,
+          "errors": 0,
+          "warnings": 0
+        },
+        "full": {
+          "path": "docs/implementation/evidence/m516-docs-full.log",
+          "sha256": "75bff12a905150d1c19f54ec1e98d886438f35ccb7aa72da4a3a72f95371e930",
+          "bytes": 173,
+          "concepts": 99,
+          "reserved_files": 7,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "history": {
+        "path": "docs/implementation/evidence/m516-document-history.json",
+        "sha256": "f2b5b468103183d7e0b243b81fa0b1d651af7d5cbd68805f0d5b3116e3fdd2ef",
+        "bytes": 3934
+      },
+      "fingerprint_log": {
+        "path": "docs/implementation/evidence/m516-docs-fingerprints.log",
+        "sha256": "ede58a18d0d836eb4ec64d850537fcd5b00d90eb94d59a9feb291b17a13cc3d1",
+        "bytes": 448
+      },
+      "reviewed_bodies_unchanged": true
+    }
+  },
+  "resumed_document_structure": {
+    "snapshot": {
+      "path": "docs/implementation/evidence/m516-resume-snapshot.json",
+      "sha256": "28da478ff347ca3e4afc1a277389ed32c5209f973886a4b58909127a30494092",
+      "bytes": 230140
+    },
+    "independent_tools": {
+      "path": "docs/implementation/evidence/m516-doc-tool-independent-review.json",
+      "sha256": "6a134aca69f4d0d310d98032f06d6c3546fede532efc98f91ccd03c2c8f429c9",
+      "bytes": 7612
+    },
+    "node_regression": {
+      "path": "docs/implementation/evidence/m516-doc-regression.json",
+      "sha256": "99d971e94e5cda361dcdf719e06f6c5527de0219bd0f1242f36b30430d4d3a61",
+      "bytes": 1451
+    },
+    "helpers": {
+      "path": "docs/implementation/evidence/m516-wiki-helpers-independent-review.json",
+      "sha256": "76c6cbe928dfac33c84689b107d7ee4e80f0e34fd4207feb5cb91d8c1f24837f",
+      "bytes": 2340
+    },
+    "scope": "User AGENTS/docs-to-wiki/README/checker changes are preserved. Three input paths form a distinct epoch; seven implemented wiki concepts carry current knowledge, including the independently reviewed choice-group supplement, while stage/execution/raw records remain in docs. Historical bodies and generated/verified dates compare to the exact post-user resume snapshot."
+  },
+  "retained_current_failures": [
+    {
+      "label": "focused-chromium",
+      "inputs": {
+        "path": "docs/implementation/evidence/m516-inputs-fd90b1a11d65.json",
+        "sha256": "fd90b1a11d6589b2227090a150b88e64f8e51281d85517211ef5acbfa793411d",
+        "bytes": 23064,
+        "entries": 225
+      },
+      "report": {
+        "path": "docs/implementation/evidence/m516-focused-chromium-suite-run-1.json.gz",
+        "sha256": "a7baea4a2fea2ce9781a154fc3d994e149fd30102bdfa7eaf0dc5b9cf039870b",
+        "bytes": 16455,
+        "encoding": "gzip",
+        "uncompressed_sha256": "a326009c906ff51e957a0aa59d4ea365f054dec22fbe007c292ccd315d56085e",
+        "uncompressed_bytes": 227415
+      },
+      "passed": 190,
+      "failed": 2,
+      "skipped": 0,
+      "production_fix": false
+    },
+    {
+      "label": "focused-firefox",
+      "inputs": {
+        "path": "docs/implementation/evidence/m516-inputs-52c454766d9b.json",
+        "sha256": "52c454766d9b8bfbc73145d5542c912f310ff8584cb10f55b6924eec02883872",
+        "bytes": 23064,
+        "entries": 225
+      },
+      "report": {
+        "path": "docs/implementation/evidence/m516-focused-firefox-suite-run-1.json.gz",
+        "sha256": "fb651cc2916ccc834d1b2690e9f65bcf76a426e2cd5eabb735af3d2e3013e029",
+        "bytes": 17431,
+        "encoding": "gzip",
+        "uncompressed_sha256": "baffb46b7bff63452d5b014453a6415dbf999679ae4389e4b6894af26ded9329",
+        "uncompressed_bytes": 228357
+      },
+      "passed": 190,
+      "failed": 2,
+      "skipped": 0,
+      "production_fix": false
+    },
+    {
+      "label": "browser-chromium",
+      "inputs": {
+        "path": "docs/implementation/evidence/m516-inputs-1f4c984b8722.json",
+        "sha256": "1f4c984b8722620c791743e09969a087359dfb906ffa5a5837a431c7c1cbe0d1",
+        "bytes": 23064,
+        "entries": 225
+      },
+      "report": {
+        "path": "docs/implementation/evidence/m516-browser-chromium-suite-run-1.json.gz",
+        "sha256": "bc28ed5f1eab1a7ae85e9b32f162b79b72c9653acdfdbb03e9c28170d0067099",
+        "bytes": 79695,
+        "encoding": "gzip",
+        "uncompressed_sha256": "7714f0ebde42dbba58992d87746d39f3083a87ffa15469b58597ca3efa6d70f4",
+        "uncompressed_bytes": 1124849
+      },
+      "passed": 1005,
+      "failed": 2,
+      "skipped": 0,
+      "production_fix": false
+    }
+  ],
+  "fixture_diagnostics": {
+    "existing_deletion_expectations": {
+      "path": "docs/implementation/evidence/m516-existing-preview-fixture-independent-review.json",
+      "sha256": "df70a5a2dc2c7c802fd4810a83b2b433a00cad1499987d55c59c9394fe60f0e8",
+      "bytes": 6248
+    },
+    "entered": {
+      "path": "docs/implementation/evidence/m516-entered-event-diagnostic.json",
+      "sha256": "095be547b78ad26c8e3db6465b1bd3db527c425ab0d8087555fdaf49e6a727a7",
+      "bytes": 6807
+    },
+    "synthetic_reset": {
+      "path": "docs/implementation/evidence/m516-native-reset-diagnostic.json",
+      "sha256": "22047913f3455c9095ebb2d5d75ea6bb7ce6f0b256eae1b6a415b7cb39f9ee2e",
+      "bytes": 6090
+    },
+    "scope": "Earlier email native change precedes prepare; Firefox synthetic reset also performs the same bare native default action. Fixture setup/native-parity corrections preserve all substantive contracts and add lifetime/purity assertions; no production defect or fix is claimed."
+  },
+  "retained_late_benchmark_startup": {
+    "attempt": {
+      "path": "docs/implementation/evidence/m516-binding-performance-2-result.json",
+      "sha256": "f3b6613266be450817bd53fc888bce85b9e038171f9c712b1dfc6aecb63518d4",
+      "bytes": 2367
+    },
+    "error_report": {
+      "path": "docs/implementation/evidence/m516-binding-performance-2.json.gz",
+      "sha256": "f7fbe5978f005e7c88f0164cb9c52508d5c25bf9e208792e72a13fdb5844c993",
+      "bytes": 132,
+      "encoding": "gzip",
+      "uncompressed_sha256": "eccc2ccd23133785f2866ec8fb51ef3ec585f655fae5edc43d7343485d2500d3",
+      "uncompressed_bytes": 131
+    },
+    "diagnostic": {
+      "path": "docs/implementation/evidence/m516-benchmark-startup-diagnostic.json",
+      "sha256": "65f7a8ff3ddf1bec604b97edaa4fd423c898364e63d487b88577a2cf5e814e4f",
+      "bytes": 7387
+    },
+    "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+    "scope": "Before benchmark function readiness or any metric. Later identical startup and original performance checks pass without source/fixture/budget changes. Original cause remains unknown; diagnostic initial config-path error occurs before browser launch and receives zero project credit. No production fix is claimed."
+  },
+  "inherited_limits": {
+    "parent": {
+      "path": "docs/implementation/evidence/m515-verification.json",
+      "sha256": "95588ae9f25a4b4de360880dc7f472e9cd34dddbe3e53d0bd0319cad5c8f07b5",
+      "bytes": 8377
+    },
+    "scope": "Prior Windows WebKit native cookie/header differences, unknown Tree/date timeout and earlier Edge/module-fetch/navigation causes retain exact parent scope. Actual Safari/manual-AT/token telemetry remain unverified."
+  },
+  "closure": {
+    "full_families": 0,
+    "additional_omissions": 0,
+    "publication": false,
+    "tag": false
+  },
+  "remaining": "Twenty-two authorized unconditional stages remain after selected M5.16. Source-key/receiver/selection M5.17, rule/mask M5.18, generated controls M5.19 and all later native/List/Tree/date/shell owners remain required. No whole-family/M5.20/M13/release closure."
+}

@@ -145,6 +145,40 @@ state.checkPageLoading = async () => {
   return { reads, loads, plain, initial, reloaded, controllers, cleaned, prepared, processed, decoded, lifetime, canceled: canceledResult, rejected, disposal };
 };
 
+state.checkFormWorkflows = async () => {
+  const root = document.createElement("form"); root.setAttribute("aria-label", "Installed employee preparation");
+  root.innerHTML = `<label>Name <input data-field="name" value="Captured" required></label>
+    <label>Amount <input data-field="amount" value="0" required pattern="[0-9]+" data-format='[["commas"]]'></label>
+    <output data-error-for="amount"></output>`;
+  document.querySelector("main").append(root);
+  const rows = createRows([{ name: "Received", amount: 1200 }]);
+  const id = rows.entries()[0].id, checkpoint = rows.get(id).value, original = rows.original(id);
+  let reads = 0;
+  const form = bindForm(root, { rows, parse: { amount(value) { reads++; return Number(String(value).replaceAll(",", "")); } } });
+  try {
+    form.bind(id); reads = 0;
+    const name = root.querySelector('[data-field="name"]'), amount = root.querySelector('[data-field="amount"]');
+    name.value = "Candidate";
+    const candidate = form.prepare(), parseReads = reads, untouched = rows.get(id).value === checkpoint && rows.changes().length === 0;
+    if (!candidate.valid || candidate.values === null || typeof candidate.values.name !== "string" || typeof candidate.values.amount !== "number") throw new Error("Installed entered employee is invalid.");
+    const created = rows.add({ name: candidate.values.name, amount: candidate.values.amount });
+    const defaults = form.defaults();
+    rows.set(id, "extra", true); rows.remove(id);
+    const beforeReset = rows.get(id);
+    root.reset(); await new Promise(resolve => setTimeout(resolve, 0));
+    const preview = { name: name.value, amount: amount.value, disabled: name.disabled && amount.disabled,
+      marker: root.getAttribute("data-row-status"), sourceQuiet: rows.get(id) === beforeReset, valid: form.validate().valid, inert: root.inert };
+    rows.restore(id, checkpoint);
+    const restored = { value: rows.get(id).value, status: rows.get(id).status, id: rows.get(id).id === id,
+      original: rows.original(id) === original, extra: Object.hasOwn(rows.get(id).value, "extra"),
+      enabled: !name.disabled && !amount.disabled, marker: root.hasAttribute("data-row-status") };
+    const same = rows.get(id), entries = rows.entries(); rows.restore(id, checkpoint);
+    return { prepared: { valid: candidate.valid, values: candidate.values, parseReads, untouched },
+      defaults, created: { value: rows.get(created).value, status: rows.get(created).status, distinct: created !== id },
+      preview, restored, noOp: rows.get(id) === same && rows.entries() === entries };
+  } finally { form.dispose(); rows.dispose(); root.remove(); }
+};
+
 state.checkSourceProjection = async () => {
   const host = document.createElement("section"); host.innerHTML = '<form><label>Name <input data-field="name"></label></form>' +
     '<table><caption>Installed shared data</caption><thead><tr><th scope="col">Name</th></tr></thead><tbody><tr data-row-template><td><span data-field="name"></span></td></tr></tbody></table>' +
@@ -851,6 +885,15 @@ try {
     const valueList = bindList(valueListRoot, { rows: valueRows, ...valueCallbacks });
     state.collectionValues = { root: valuesRoot, roots: [valueFormRoot, valueGridRoot, valueListRoot],
       handles: [valueForm, valueGrid, valueList], rows: valueRows, policy: valuePolicy, calls: valueCalls };
+  }
+  {
+    const root = document.createElement("input"); root.type = "number";
+    root.setAttribute("data-field", "amount"); root.setAttribute("aria-label", "Installed native number");
+    root.setAttribute("data-packed-native-number", ""); document.querySelector("main").append(root);
+    const rows = createRows([{ amount: 5 }]), id = rows.entries()[0].id;
+    const form = bindForm(root, { rows, parse: { amount: Number } });
+    form.bind(id); form.unbind();
+    state.nativeNumber = { root, rows, id, form };
   }
   state.incoming = createRows();
   for (const [slot, name] of [["a", "Ada"], ["b", "Bea"]]) {

@@ -15,14 +15,14 @@ sources:
   - id: contract
     resource: m1-contract.md
     title: Approved CVC and retained Form rule contracts
-    git_blob: 2372a50d7444e6e0ee97546aa43f031ec933dc4d
+    git_blob: 4d0b1b4d261e5a638f68dea6eabb8d0386f11647
   - id: m7
     resource: https://github.com/bbalganjjm/natural_js/blob/e9db5d81496b5674b67e6d267c184cb63aa987c0/docs/implementation/m7-plan.md
     title: M7 page-container result and fixed Preview task
   - id: workflow
-    resource: ../governance/repository-workflow.md
+    resource: ../../wiki/governance/repository-workflow.md
     title: Same-task OKF source and verification rules
-    git_blob: d9c9afcd03afc5280c3d562d5e1fc63c9874afa2
+    git_blob: 2d6f65ecb4763000971e655a355b4c9dc703fefe
 generated: { by: codex/gpt-6-sol, at: 2026-09-24T18:59:01Z }
 ---
 
@@ -67,7 +67,7 @@ Review [the M8 candidate report](m8-beta-report.md), [fixed evaluation results](
 |---|---|---|
 | 2026-09-25 | Planning input | Derived this plan from the M0 fixed tasks, M1 retained-rule contract, M7 container result, roadmap, and repository workflow. |
 | 2026-09-25 | User approval | User approved M8 after the M7 GitHub push. Evaluation, migration, reachability, and beta-candidate checks may proceed; public API deletion and publication remain separate decisions. |
-| 2026-09-25 | Migration and API | Indexed 1.x-to-2.0 migration, audited five public entries, 11 runtime values, 35 types, and all declaratively reachable Form rules. The only public removal candidate, `Rule`, remains unchanged. See [audit](m8-api-audit.md) and [guide](../v2/migration.md). |
+| 2026-09-25 | Migration and API | Indexed 1.x-to-2.0 migration, audited five public entries, 11 runtime values, 35 types, and all declaratively reachable Form rules. The only public removal candidate, `Rule`, remains unchanged. See [audit](m8-api-audit.md) and [guide](../../wiki/v2/migration.md). |
 | 2026-09-25 | Fixed agent tasks | Three fresh 2.0 tasks passed frozen Chromium acceptance (2/2 each) with zero post-implementation code retries. First-pass content output was 154,895/163,253/109,304 UTF-8 bytes across 27/24/14 unique files. Task 2/3 elapsed 7m18s/5m39s; Task 1 and actual token counts are unavailable. Raw meter logs and cutoffs are tracked; no 1.x or M8-doc-effect savings claim is made. See [evaluation](m8-eval.md). |
 | 2026-09-25 | Browser, package, binding | Focused CVC/UI checks passed 75/75 each in Chromium, Firefox, and WebKit, plus Task 1 supplemental simultaneous-ID QA 2/2. Build, strict types, Vitest 81/81, packed JS/TS consumers, and 1,000-row reference Grid/List budgets passed. The 98-file tarball excludes legacy and evaluation files. See [candidate report](m8-beta-report.md). |
 | 2026-09-25 | Documentation | Changed/full OKF checks passed with 35 concepts, 5 reserved files, zero errors and warnings after source review and fingerprinting. The M9 release plan is a draft for separate approval. |

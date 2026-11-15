@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "stage": "M5.16",
+  "status": "GO_composite_actual_source_and_six_implemented_wiki_draft_bodies_runtime_acceptance_pending",
+  "reviewer": "m511_design",
+  "reviewed_at": "2026-11-15T01:43:26.992Z",
+  "baseline_commit": "7ee46b7407e8a6c9b1e2ffdb8800fa5527d3b269",
+  "applied_source": {
+    "path": "node_modules/.cache/m516-applied-source-r2.json",
+    "sha256": "b2c5a9f3f0a5c2332b1b0388403164da6d202b193f1a53987e65cfb38fc39478",
+    "bytes": 7635
+  },
+  "source_sha256": {
+    "src/data/index.ts": "d62302a8072a6a8d852e42fef221c2953e7ac0951aecaaa17b692c0fd3021a37",
+    "src/ui/index.ts": "7b23c6d5e291b5de9213582bbe042212e2e1eb7352064530f78d78c54de3400c",
+    "src/ui/form.ts": "6def8c1c187a18ea2c085fc7b7373a8806483a0722e991dea16843e65a37a48e",
+    "src/ui/native-defaults.ts": "28410bb2f3405f28e20e8437bc357300f6926fefe925644f86c31804b2e922dd",
+    "src/ui/rules.ts": "5f6b5f6c248e6001674362ffe9e3f02fc915ebffd4189049dd37ad22c8cb9c27",
+    "tests/rows-restore.test.ts": "c434b3941f02e929e51d450ac419221f8767c95a5cc36b72bcce715d7e0d3459",
+    "tests/browser/form-options.spec.ts": "5f1081cfec8c579ead2a2a4ba68a81887a912385509da51710a06f63e26d74ce",
+    "tests/browser/form-discovery.spec.ts": "f12c2ff47433a97e809e46a2d634b2ab36e251db22f2667ec71751a328a293fc",
+    "examples/vite/m4/employees.ts": "93e49909c6c6da999a3df0c4311cf3bd1ab857c66f0b45e219a6bfe04bf22de3",
+    "examples/vite/m4/side.html": "8be8565915cf0b7e53051d7c7f8053fdbf4d16d85bf511435488b75e2da123cb",
+    "examples/vite/m4/stack.html": "8df44cb80db3fcafabb98ca2b764f615b0688d4d50625aaf8609889dc251c1ae",
+    "tests/browser/m516-app.spec.ts": "15d05437c94f80bcde3c8f60e1bbdfbe87341a2be7af351d3170292e729168bd",
+    "tests/browser/form-prepare.spec.ts": "1a108ad3ac81573918a73f1a3fa51d50af89f8cbed27c252da762adb1bd1105a",
+    "tests/browser/form-deleted-preview.spec.ts": "faf4168bfeb239e18e73641220fa009e18f6085c06b0cd96605061b3375f133e",
+    "tests/consumers/js/check.mjs": "480282b36dcd1ccb5776e400b323494299dad5987ace070d2a4a4a7e09bd1b06",
+    "tests/consumers/ts/check.ts": "95511fd8299db7a8a104b2f623dc3ecf15e2c681a1a3c1b6d2efd820ba0df20d",
+    "tests/consumers/browser/main.js": "99a9d1d254faa3842ffb717d5f162a6d78750c6179334f5262cdf9fcd7c6ae84",
+    "tools/check-packed-browser.mjs": "aa2647928e577d309bb420e7ff5f2cf0b26c6bb93c6a5ef86d1b424b3243b9c5",
+    "README.md": "6232544662e1745afdfe9052b69256805a6bf02aa587c559677567f44fe932d5",
+    "tools/knowledge-docs/knowledge-docs.mjs": "49a3cc1e35db3885bffd4c7e4f9248e80ae9749eb2bb475ecd3738345f911818",
+    "tools/knowledge-docs/knowledge-docs.test.mjs": "6d7d7cb733bbc17eaf2d18b7b5501b8316d33fddec41b4100859f3d552f731a5"
+  },
+  "composite_independent_reviews": [
+    {
+      "path": "docs/implementation/evidence/m516-data-independent-review-legacy.json",
+      "sha256": "1dbe7f7bc09610e0b7adab0743417f36800dcfe42817d6c2e9a62624e56845ee",
+      "bytes": 10636
+    },
+    {
+      "path": "docs/implementation/evidence/m516-fixtures-independent-review-baseline-r4.json",
+      "sha256": "ec3df2c250179ed3acdc9cec513422ee3ab322e132e313e0b4484379db221af6",
+      "bytes": 3758
+    },
+    {
+      "path": "docs/implementation/evidence/m516-app-independent-review-design.json",
+      "sha256": "31169b988cc3c7c4c2e35f98cd992453a06475dd102fcce6035db777cbed3129",
+      "bytes": 9738
+    },
+    {
+      "path": "docs/implementation/evidence/m516-installed-independent-review-legacy.json",
+      "sha256": "c56b165fa1cadc9eeb2ed56ef535bfd8be3a3c4c94f0dcf500c699bcc7b016a2",
+      "bytes": 11020
+    },
+    {
+      "path": "docs/implementation/evidence/m516-framework-independent-review-legacy.json",
+      "sha256": "568a21764451e7857cc317092a4352490ffa04f6befa3bfec4c8b7821e52af5a",
+      "bytes": 15299
+    },
+    {
+      "path": "docs/implementation/evidence/m516-discovery-expectation-independent-review-legacy.json",
+      "sha256": "cd6305b06f5447f2e77f87942ba5c3719743ba56fd313e36862846a0c20d623b",
+      "bytes": 6541
+    },
+    {
+      "path": "docs/implementation/evidence/m516-native-badinput-independent-review-legacy.json",
+      "sha256": "a97caf597e388be67a100346ff940901ce8084bb74287cc7c4ecc0557280f11c",
+      "bytes": 11167
+    },
+    {
+      "path": "docs/implementation/evidence/m516-installed-independent-review-legacy-r2.json",
+      "sha256": "7ae7c3085cfda0f6a04908d2270a91e9428eeeed67770f45d668550d3c5c9ecf",
+      "bytes": 9047
+    }
+  ],
+  "fixture_correction_review": {
+    "path": "docs/implementation/evidence/m516-fixture-correction-independent-review.json",
+    "sha256": "f2e740420660bd881b313411b47ed6075ee87a334e9b0329aaed64ecdfe6e9a2",
+    "bytes": 4437
+  },
+  "documentation_tool_review": {
+    "path": "docs/implementation/evidence/m516-doc-tool-independent-review.json",
+    "sha256": "6a134aca69f4d0d310d98032f06d6c3546fede532efc98f91ccd03c2c8f429c9",
+    "bytes": 7612
+  },
+  "normalized_API_draft_bodies": {
+    "wiki/v2/form.md": "bade4878e472ecb4435ed85078063713fd14df36f008dab7fc655f21f6f858ed",
+    "wiki/v2/data.md": "14a89c1ec9745f8e52ebef94a0c391ef47600efc5a47c2bb23fddb0e60009d9e",
+    "wiki/v2/ui.md": "6fbe5f536c8302f4890516e72658b4f52ef4536c803a93886e6f10228f4add5c",
+    "wiki/v2/employee-example.md": "42f5fb70470e4354b828034711161cf44173956c11d7ce6fe966eacbe5bdd305",
+    "wiki/v2/migration.md": "4ec620c89029906bba7d4ce0563a14e5d52bf7c8fcda8ef149b8d7b7d0267c08",
+    "wiki/v2/architecture.md": "dbbec7ffcaab3ea0bc118d5fe65c3a46866286227bc0800028a0e4d13feddf28"
+  },
+  "knowledge_body_reconstruction": [
+    {
+      "path": "wiki/v2/form.md",
+      "normalized_body_sha256": "bade4878e472ecb4435ed85078063713fd14df36f008dab7fc655f21f6f858ed",
+      "resumed_body_sha256": "4eafeb4023d8b757e564ca3908c08e599ab89669b31babeaa501b957846a06ed",
+      "changed_passages": 12,
+      "exact_resumed_body_after_reversing_only_M516_edits": true
+    },
+    {
+      "path": "wiki/v2/data.md",
+      "normalized_body_sha256": "14a89c1ec9745f8e52ebef94a0c391ef47600efc5a47c2bb23fddb0e60009d9e",
+      "resumed_body_sha256": "4d430a76d0ae03ec18e2e3313b1b2a84105c6fff62d8c91643988f45aa6bf164",
+      "changed_passages": 2,
+      "exact_resumed_body_after_reversing_only_M516_edits": true
+    },
+    {
+      "path": "wiki/v2/ui.md",
+      "normalized_body_sha256": "6fbe5f536c8302f4890516e72658b4f52ef4536c803a93886e6f10228f4add5c",
+      "resumed_body_sha256": "5ca5644b8ed7282d67509f0e58e6d3e9559bc63767f4995ebcc91bf4a09adfae",
+      "changed_passages": 1,
+      "exact_resumed_body_after_reversing_only_M516_edits": true
+    },
+    {
+      "path": "wiki/v2/employee-example.md",
+      "normalized_body_sha256": "42f5fb70470e4354b828034711161cf44173956c11d7ce6fe966eacbe5bdd305",
+      "resumed_body_sha256": "b2d8529da8f3e011289ef2e1ceddbd8c1f4a742eea53fd1c6c3dbaf75f49e808",
+      "changed_passages": 1,
+      "exact_resumed_body_after_reversing_only_M516_edits": true
+    },
+    {
+      "path": "wiki/v2/migration.md",
+      "normalized_body_sha256": "4ec620c89029906bba7d4ce0563a14e5d52bf7c8fcda8ef149b8d7b7d0267c08",
+      "resumed_body_sha256": "a94472ef07a6ad63ee32124dddd1d17c1b5dc2a4a650e2b85590a789bea00595",
+      "changed_passages": 2,
+      "exact_resumed_body_after_reversing_only_M516_edits": true
+    },
+    {
+      "path": "wiki/v2/architecture.md",
+      "normalized_body_sha256": "dbbec7ffcaab3ea0bc118d5fe65c3a46866286227bc0800028a0e4d13feddf28",
+      "resumed_body_sha256": "cd776dc864835e92423c62c0bed7d2a4f5595a4ef384cb5962be5c1e7d479098",
+      "changed_passages": 1,
+      "exact_resumed_body_after_reversing_only_M516_edits": true
+    }
+  ],
+  "resumed_user_structure": {
+    "path": "docs/implementation/evidence/m516-resume-snapshot.json",
+    "sha256": "28da478ff347ca3e4afc1a277389ed32c5209f973886a4b58909127a30494092",
+    "bytes": 230140
+  },
+  "metadata_edit_script": {
+    "path": "node_modules/.cache/m516-wiki-api.mjs",
+    "sha256": "6e833cf954c419b5cc7b2cc9b6e3e078a6ac05650b7a87204edbdf89acfcd29b",
+    "bytes": 15390
+  },
+  "reviewed_contract_claims": [
+    "Form.prepare returns detached native-only parsed values or null and issues; it performs no source/draft/error/native/capture/focus/reset publication. It reuses the successful original raw token, coherent rowId:null contexts and existing native/rule/choice owners.",
+    "Same-owner lifetime errors, raw/native/reset epochs, parser thenables, clone failures, keyboard badInput and exact option occurrences retain the actual private owners. Ordinary validate and broader rule behavior are unchanged.",
+    "Rows.restore replaces full content and absent keys without replacing identity/order/original/checkpoint; received status, post-commit notification and no-op snapshots match Data and17 independent unit candidates.",
+    "Retained deleted detail uses the same Form renderer and native locks. Preview validation/reset/focus/cleanup and physical insert removal are distinct; active value-callback deletion keeps recoverable FORM_VALUE plus explicit retry.",
+    "Employee creation keeps entered/captured/received/selection checkpoints and source-only business context separate. The fixture blur correction settles earlier native work; production reporting/save/cross-row revalidation remain unchanged.",
+    "Architecture/UI/migration explain the same existing owner boundaries, exactly two public methods and no extra engine/store/registry/dependency. Existing later rule/control/List/closure owners stay required."
+  ],
+  "semantic_review_basis": "Fresh-read all M516 inserted/replaced passages in six actual wiki topics and connected current Form/Data/native/rule/application owners. The metadata editor is evaluated with mocked string-only callbacks, never file writes; reversing only those edits exactly reconstructs every resumed predecessor body, so unchanged accepted knowledge and intentional user path migration are reused rather than recertified.",
+  "authorship_limits": [
+    "Reviewer authored the40 Form browser fixtures; their independent full-body acceptance is Baseline ec3df2, not self-approval.",
+    "Legacy owns complete framework/Data/unit/old-expectation/native/installed R1/R2 reviews; this review binds their exact unchanged actual hashes. Reviewer independently reviewed app4 and the Legacy one-line correction.",
+    "All six wiki edits were authored by Root. No source/wiki/docs/checker or user change was written by this reviewer."
+  ],
+  "preservation": {
+    "initial_fixture": {
+      "path": "docs/implementation/evidence/m516-initial-app-fixture.txt",
+      "sha256": "033bf3458cca096d686de1c5632aa9857339754b2b5355f8a6d585a4e741bb4b",
+      "bytes": 13614
+    },
+    "native_event_diagnostic": {
+      "path": "docs/implementation/evidence/m516-entered-event-diagnostic.json",
+      "sha256": "095be547b78ad26c8e3db6465b1bd3db527c425ab0d8087555fdaf49e6a727a7",
+      "bytes": 6807
+    },
+    "source_epochs": "Initial fd90 input map, user README/checker resume epoch, and one-line test correction are distinct. Original190/2 failure and all traces remain; native diagnostics and diagnostic metadata errors receive zero suite credit."
+  },
+  "findings": [],
+  "verification_status": "Actual source/type/unit/focus/canonical results are Root-owned and are not granted by this source/body review. Final runtime, raw audit and final-document semantics remain required.",
+  "project_commands": 0,
+  "reviewer_browser_execution": 0,
+  "runtime_credit": 0,
+  "family_closure_credit": 0
+}

@@ -17,7 +17,7 @@ export interface RuleRunner {
   formats(element: Element, field: string): readonly RuleCall<FormatRule>[];
   validators(element: Element, field: string): readonly RuleCall<ValidateRule>[];
   format(calls: readonly RuleCall<FormatRule>[], value: unknown, context: RuleContext): string;
-  validate(calls: readonly RuleCall<ValidateRule>[], value: unknown, context: RuleContext): ValidationIssue[];
+  validate(calls: readonly RuleCall<ValidateRule>[], value: unknown, context: RuleContext, checkpoint?: (cause?: unknown) => void): ValidationIssue[];
 }
 
 const combined = new Set(["alphabet", "integer", "korean", "dash", "commas"]);
@@ -122,10 +122,10 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
     }
   }
 
-  function message(call: RuleCall<ValidateRule>, field: string): string {
+  function message(call: RuleCall<ValidateRule>, field: string, checkpoint?: (cause?: unknown) => void): string {
     let currentLocale = locale, currentMessages = messages;
-    try {
-      if (typeof localePolicy === "function") {
+    if (typeof localePolicy === "function") {
+      try {
         const value = localePolicy();
         if (typeof value !== "string") {
           if (value !== null && (typeof value === "object" || typeof value === "function") &&
@@ -133,14 +133,22 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
           throw new TypeError("A locale provider must return text.");
         }
         currentLocale = value.toLowerCase().startsWith("ko") ? "ko_KR" : "en_US";
+      } catch (cause) {
+        checkpoint?.(cause);
+        throw ruleError(api, "RULE_FAILED", "Rule message policy failed for " + field + ".", field, call.name, cause);
       }
-      if (typeof messagePolicy === "function") {
+      checkpoint?.();
+    }
+    if (typeof messagePolicy === "function") {
+      try {
         const value = messagePolicy();
         if (value === undefined) throw new TypeError("A message provider must return a message object.");
         currentMessages = suppliedMessages(api, value);
+      } catch (cause) {
+        checkpoint?.(cause);
+        throw ruleError(api, "RULE_FAILED", "Rule message policy failed for " + field + ".", field, call.name, cause);
       }
-    } catch (cause) {
-      throw ruleError(api, "RULE_FAILED", "Rule message policy failed for " + field + ".", field, call.name, cause);
+      checkpoint?.();
     }
     const template = currentMessages.get(call.key) ??
       (Object.hasOwn(builtinMessages[currentLocale], call.key) ? builtinMessages[currentLocale][call.key] : undefined) ??
@@ -169,23 +177,33 @@ export function createRuleRunner(api: string, rules?: RuleSet): RuleRunner {
       }
       return text;
     },
-    validate(calls, value, context) {
-      if (String(value ?? "").trim() === "" &&
-          !calls.some(call => call.key === "required")) return [];
+    validate(calls, value, context, checkpoint) {
+      const empty = String(value ?? "").trim() === "";
+      checkpoint?.();
+      if (empty && !calls.some(call => call.key === "required")) return [];
       const issues: ValidationIssue[] = [];
       for (const call of calls) {
-        let result: boolean | string;
-        try {
-          result = call.key === "required" && call.run === builtinValidators.required && value === false
-            ? false : call.run(String(value ?? ""), call.args, context);
-        }
+        let result: boolean | string, input: string;
+        try { input = String(value ?? ""); }
         catch (cause) {
+          checkpoint?.(cause);
           throw ruleError(api, "RULE_FAILED", `Validator ${call.name} failed for ${context.field}.`,
             context.field, call.name, cause);
         }
+        checkpoint?.();
+        try {
+          result = call.key === "required" && call.run === builtinValidators.required && value === false
+            ? false : call.run(input, call.args, context);
+        }
+        catch (cause) {
+          checkpoint?.(cause);
+          throw ruleError(api, "RULE_FAILED", `Validator ${call.name} failed for ${context.field}.`,
+            context.field, call.name, cause);
+        }
+        checkpoint?.();
         if (result !== true) {
           issues.push({ rowId: context.rowId, field: context.field, rule: call.name,
-            message: typeof result === "string" && result.trim() ? result : message(call, context.field),
+            message: typeof result === "string" && result.trim() ? result : message(call, context.field, checkpoint),
             ...(context.element ? { element: context.element } : {}) });
         }
       }

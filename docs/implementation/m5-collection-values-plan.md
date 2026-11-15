@@ -8,7 +8,7 @@ sources:
   - id: previous
     resource: m5-form-presets-plan.md
     title: Explicit typed presets and application callback composition
-    git_blob: 12ed9fbdf4e7cb2ad30d26c7d9f62c572e7402ea
+    git_blob: 0c14f046117066c8f9f8f658a3a8dbc6ff641c70
   - id: baseline
     resource: evidence/m59-verification.json
     title: Frozen 5ecda44 source, runtime and installed artifact baseline
@@ -16,7 +16,7 @@ sources:
   - id: form
     resource: ../../src/ui/form.ts
     title: Existing guarded Form projection and raw input ownership
-    git_blob: 08985e05ef5675e4b359655e410bb018a01eca51
+    git_blob: 727e0beafc9173628ff99286af22ad36cb825819
   - id: grid
     resource: ../../src/ui/grid.ts
     title: Grid field caches, native editing and mounted row lifecycle
@@ -28,7 +28,7 @@ sources:
   - id: ui
     resource: ../../src/ui/index.ts
     title: Public value context and component handles
-    git_blob: 539621049109c0b416b33081e134dc6c6621aedf
+    git_blob: 39cfde5b63a33a576505d086c4211ce4d556f814
   - id: legacy
     resource: ../../v1/src/natural.ui.js
     title: Embedded row Forms, global lookup and mounted value updates
@@ -40,7 +40,7 @@ sources:
   - id: parity
     resource: feature-parity-plan.md
     title: All retained behavior and consolidated omission obligations
-    git_blob: 2b5c1bb8145f2f0eb26830a8abbce71e1fa33627
+    git_blob: b0d6b72ee9cd3e0ecd84452e45c3b3d149db5fb5
 generated: { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
 verified:
   - { by: codex/gpt-6, at: 2026-11-08T08:49:36Z }
@@ -53,7 +53,7 @@ Restore the supported shared field-value callback outcome for rendered Grid/List
 # Checkpoint
 
 - M5.10 starts at pushed 5ecda443abbe2f9c41a7a23b672507e4a82ed59b with a clean worktree; independent read-only M5.9 recovery and bounded pre-source contract review pass.[^baseline]
-- One private owner shares checked native replacements and before-write-after execution. Grid/List add the two value functions, List gains refresh, and ValueBindContext replaces the old name without an alias. Component-local raw, validation, cache, focus and lifetime ownership remain. [Shared value callbacks](../v2/value-callbacks.md) owns the API.[^form][^grid][^list][^ui]
+- One private owner shares checked native replacements and before-write-after execution. Grid/List add the two value functions, List gains refresh, and ValueBindContext replaces the old name without an alias. Component-local raw, validation, cache, focus and lifetime ownership remain. [Shared value callbacks](../../wiki/v2/value-callbacks.md) owns the API.[^form][^grid][^list][^ui]
 - The real Grid demo and exact installed JS/TS/browser consumers exercise one explicit policy across three owners. Connected source/caller/test review, fresh canonical gates and independent raw/document reviews accept only these selected outcomes; broader source/default/declaration and complete parity remain required.[^parity]
 
 # Steps
