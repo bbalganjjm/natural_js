@@ -298,7 +298,9 @@ test("Select claim conflicts roll back newly acquired claims and preserve retain
   const result = await page.evaluate(() => {
     const h = window.formDiscovery, root = h.root('<input data-field="name" value="Capture">'), form = h.api.bindForm(root);
     h.add(root, '<select data-field="first"><option value="a">A</option></select><select data-field="second"><option value="b">B</option></select>');
-    const first = h.field<HTMLSelectElement>(root, "first"), second = h.field<HTMLSelectElement>(root, "second"), external = h.api.bindSelect(second, { choices: [] });
+    const first = h.field<HTMLSelectElement>(root, "first"), second = h.field<HTMLSelectElement>(root, "second");
+    const externalRoot = document.createElement("div"); second.before(externalRoot); externalRoot.append(second);
+    const external = h.api.bindForm(externalRoot);
     const before = root.innerHTML, error = h.error(() => form.rescan()), unchanged = before === root.innerHTML;
     const temporary = h.api.bindSelect(first, { choices: [] }); temporary.dispose(); external.dispose(); form.rescan();
     const claimed = h.error(() => h.api.bindSelect(second, { choices: [] }))?.code, defaults = form.defaults(); form.dispose();

@@ -90,7 +90,7 @@ export interface SelectChoice<V extends SelectValue> {
   readonly disabled?: boolean;
 }
 
-export type SelectSelection<V extends SelectValue> = V | string | null;
+export type SelectSelection<V extends SelectValue> = V | SelectValue;
 
 export interface SelectHandle<V extends SelectValue> {
   setChoices(choices: readonly SelectChoice<V>[]): void;

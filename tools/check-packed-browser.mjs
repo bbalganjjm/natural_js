@@ -457,6 +457,14 @@ try {
     numeric: "-$1,234.50", numericRoundtrip: "-$1,234.50", nativeMasked: "$1,234.5", disposed: true, secondAlive: true
   }, "Installed standalone rules, masks and CVC bound rule adoption must agree.");
 
+  const sharedControls = await page.evaluate(() => window.packedConsumer.checkSharedControls());
+  assert.deepEqual(sharedControls, {
+    initial: { typed: false, choices: [1, 1, 1], shown: "Raw summary", readOnly: true },
+    coded: { raw: "N", updates: 1, checked: [false, false, false] },
+    empty: { inputs: [0, 0, 0], valid: [false, false, false], raw: ["email"] },
+    restored: [0, 1, 2].map(() => ({ count: 1, selected: true })), defaultCode: "Y", closed: true
+  }, "Installed CVC Form/Grid/List must share generated controls, typed common catalogs and raw checkbox codes.");
+
   const sourceCallbacks = await page.evaluate(() => window.packedConsumer.checkSourceCallbacks());
   const sourcePairs = (keys, phase) => keys.flatMap(([key, count]) => [["before", key, phase, count], ["after", key, phase, count]]);
   const sourceOwners = value => Object.fromEntries(["form", "grid", "list"].map(owner => [owner, value]));

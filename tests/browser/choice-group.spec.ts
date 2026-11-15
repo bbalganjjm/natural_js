@@ -190,7 +190,7 @@ test("constructor preparation stays unadoptable until native nodes defaults and 
     const retry = h.bind(root, { choices: [] }); retry.dispose();
     return { preparation, provisional, blocked, duplicate, duplicateGetter, duplicateReads, defaults, sameFailure, released, restored };
   }, source("../../src/ui/form.ts"));
-  expect(result).toEqual({ preparation: [false, false], provisional: false, blocked: "FORM_CHOICE_GROUP", duplicate: "CHOICE_OWNED", duplicateGetter: "CHOICE_OWNED", duplicateReads: 0,
+  expect(result).toEqual({ preparation: [false, false], provisional: false, blocked: "CHOICE_OWNED", duplicate: "CHOICE_OWNED", duplicateGetter: "CHOICE_OWNED", duplicateReads: 0,
     defaults: { choice: ["a"] }, sameFailure: true, released: true, restored: true });
 });
 

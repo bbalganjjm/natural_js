@@ -654,3 +654,21 @@ export function connectRuleMasks(root: HTMLFormElement) {
   return { form, passing, next, problems, bytes: rules.validate("한", { field: "bytes", values: {}, rowId: null }),
     total: rules.format(passing.length, { field: "total", values: {}, rowId: null }) };
 }
+
+export function connectSharedNativeControls(detail: HTMLElement, gridRoot: HTMLTableElement, listRoot: HTMLUListElement) {
+  const rows = createRows([{ active: "Y", channels: ["email"], team: false,
+    summary: "Raw", codes: { channels: [{ code: "email", label: "Email" }], teams: [{ code: false, label: "No team" }] } }]);
+  const common = bindSelect(detail.querySelector<HTMLSelectElement>("select")!, { choices: [{ value: 1, label: "One" }] });
+  const form = bindForm(detail, { rows });
+  const grid = bindGrid(gridRoot, { rows });
+  const list = bindList(listRoot, { rows, render: { summary(value, context) {
+    const field: string = context.field, id: RowId | null = context.rowId;
+    const strong = document.createElement("strong"); void [field, id]; strong.textContent = String(value); return strong;
+  } } });
+  const current: SelectValue | readonly SelectValue[] = common.value();
+  const hasBoolean: boolean = common.value() === false;
+  const nativeCode: unknown = form.defaults().active;
+  const first = rows.entries()[0];
+  rows.set(first.id, "codes", { channels: [], teams: first.value.codes.teams.map(team => ({ ...team })) });
+  return { current, hasBoolean, nativeCode, form, grid, list, dispose() { list.dispose(); grid.dispose(); form.dispose(); common.dispose(); rows.dispose(); } };
+}

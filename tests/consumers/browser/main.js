@@ -1018,3 +1018,56 @@ state.checkRuleMasks = async () => {
   return { retained, issues, separate, paste, offscreen, checks: report.checks.map(check => [check.rule, check.valid]), total: standalone.format(1234, { field: "total", values: {}, rowId: null }),
     byteResults, widthCalls, numeric: formatted.value, numericRoundtrip, nativeMasked, disposed, secondAlive };
 };
+
+state.checkSharedControls = async () => {
+  const host = document.createElement("section"); document.body.append(host);
+  let result;
+  const controls = '<label>Active <input type="checkbox" data-field="active" value="Y" data-unchecked-value="N" checked></label>' +
+    '<fieldset data-field="channels" data-options="codes.channels" data-option-label="label" data-option-value="code"><legend>Channels</legend>' +
+    '<template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset>' +
+    '<label>Team <select data-field="team" data-options="codes.teams" data-option-label="label" data-option-value="code"><option value="">Choose team</option></select></label>' +
+    '<span data-field="summary"></span>';
+  const page = mountPage(host, {
+    view() {
+      const root = document.createElement("section");
+      root.innerHTML = '<section data-shared-detail>' + controls + '</section><table><caption>Shared installed controls</caption>' +
+        '<thead><tr><th scope="col" data-column="record">Record</th></tr></thead><tbody><tr data-row-template><td data-column="record">' + controls +
+        '</td></tr></tbody></table><ul><li data-row-template>' + controls + '</li></ul>';
+      return root;
+    },
+    controller({ root, own }) {
+      const rows = createRows([{ active: "Y", channels: ["email"], team: false, summary: "Raw summary",
+        codes: { channels: [{ code: "email", label: "Email" }], teams: [{ code: false, label: "No team" }, { code: 0, label: "Zero" }] } }]);
+      own(() => rows.dispose());
+      const detail = root.querySelector("[data-shared-detail]"), table = root.querySelector("table"), listRoot = root.querySelector("ul");
+      const common = [detail, table, listRoot].map(element => bindSelect(element.querySelector("select"), {
+        choices: [{ value: 1, label: "One" }, { value: "1", label: "String one" }]
+      }));
+      for (const select of common) own(() => select.dispose());
+      const form = bindForm(detail, { rows }); own(() => form.dispose());
+      const grid = bindGrid(table, { rows }); own(() => grid.dispose());
+      const list = bindList(listRoot, { rows, render: { summary(value) {
+        const strong = document.createElement("strong"); strong.textContent = String(value); return strong;
+      } } }); own(() => list.dispose());
+      return { init() {
+        const id = rows.entries()[0].id; form.bind(id);
+        const initial = { typed: common[0].value(), choices: [detail, table, listRoot].map(element => element.querySelectorAll('fieldset input').length),
+          shown: listRoot.querySelector("strong").textContent, readOnly: listRoot.querySelector('input[data-field="active"]').disabled };
+        let changes = 0; const stop = rows.subscribe(event => { if (event.type === "set") changes++; });
+        detail.querySelector('input[data-field="active"]').click(); stop();
+        const coded = { raw: rows.get(id).value.active, updates: changes,
+          checked: [detail, table, listRoot].map(element => element.querySelector('input[data-field="active"]').checked) };
+        rows.set(id, "codes", { ...rows.get(id).value.codes, channels: [] });
+        const empty = { inputs: [detail, table, listRoot].map(element => element.querySelectorAll('fieldset input').length),
+          valid: [form.validate().valid, grid.validate().valid, list.validate().valid], raw: rows.get(id).value.channels };
+        rows.set(id, "codes", { ...rows.get(id).value.codes, channels: [{ code: "email", label: "Email" }] });
+        const restored = [detail, table, listRoot].map(element => ({ count: element.querySelectorAll('fieldset input').length,
+          selected: element.querySelector('fieldset input').checked }));
+        result = { initial, coded, empty, restored, defaultCode: form.defaults().active };
+      } };
+    }
+  });
+  try { await page.ready; }
+  finally { await page.dispose(); }
+  result.closed = host.childElementCount === 0; host.remove(); return result;
+};

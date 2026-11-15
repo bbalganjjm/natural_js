@@ -16,6 +16,14 @@
       [data-screens] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr)); gap: 1.5rem; }
       [data-screen] { border: 1px solid #bcc6d2; padding: 1rem; }
       [data-layout="chips"] fieldset > label { display: inline-flex; gap: .4rem; padding: .5rem; border: 1px solid #bdc9d5; border-radius: 1rem; }
+      [data-choice-page] { min-width: 0; }
+      [data-shared-controls] { margin-top: 1.5rem; border: 1px solid #bcc6d2; padding: 1rem; }
+      [data-shared-form] > label { display: block; margin: .5rem 0; }
+      [data-shared-table-scroll] { overflow-x: auto; }
+      [data-shared-grid] { border-collapse: collapse; width: 100%; }
+      [data-shared-grid] th, [data-shared-grid] td { padding: .5rem; border: 1px solid #bcc6d2; vertical-align: top; }
+      [data-shared-list] { padding-left: 1.5rem; }
+      [data-shared-list] > li { margin: 1rem 0; border-bottom: 1px solid #bcc6d2; padding-bottom: 1rem; }
     </style>
   </head>
   <body>
@@ -51,6 +59,7 @@
       </section>
     </main>
     <template data-workspace>
+      <div data-choice-page>
       <section data-screen>
         <h3 data-title></h3>
         <button type="button" data-close>Close screen</button>
@@ -76,6 +85,49 @@
         <h4>Committed source</h4><pre data-source tabindex="0"></pre>
         <h4>Captured defaults</h4><pre data-defaults tabindex="0"></pre>
       </section>
+        <section data-shared-controls aria-label="Shared row controls">
+          <h3>One record store, three views</h3>
+          <p>Select a record in either view. The editor and both views share raw values, while this page keeps its own store.</p>
+          <section data-shared-form aria-label="Shared record editor">
+            <label>Shared name <input data-field="name" value="Captured shared" required></label><output data-error-for="name"></output>
+            <label>Shared choice <select data-field="chosen" data-options="codes.options" data-option-label="label" data-option-value="value"><option value="">Choose</option></select></label>
+            <fieldset data-field="tags" data-options="codes.tags" data-option-label="label" data-option-value="value">
+              <legend>Shared permissions</legend>
+              <template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template>
+            </fieldset><output data-error-for="tags"></output>
+            <label>Shared active <input type="checkbox" data-field="active" value="Y" data-unchecked-value="N"></label>
+            <img data-field="photo" alt="Profile portrait" width="32" height="32"><div data-field="summary"></div>
+          </section>
+          <label>Shared permission catalog <select data-shared-catalog><option value="all">Read and Write</option><option value="one">Read only</option><option value="empty">No permissions</option></select></label>
+          <button type="button" data-shared-validate>Validate shared record</button>
+          <button type="button" data-shared-revert>Revert shared record</button>
+          <div data-shared-table-scroll>
+            <table data-shared-grid>
+              <caption>Editable shared records</caption>
+              <thead><tr><th scope="col">Record</th><th scope="col">Choice</th><th scope="col">Permissions</th><th scope="col">Active</th><th scope="col">Portrait</th><th scope="col">Summary</th></tr></thead>
+              <tbody><tr data-row-template>
+                <th scope="row"><button type="button" data-select-row><span data-field="name"></span></button></th>
+                <td><label>Grid choice <select data-field="chosen" data-options="codes.options" data-option-label="label" data-option-value="value"><option value="">Choose</option></select></label></td>
+                <td><fieldset data-field="tags" data-options="codes.tags" data-option-label="label" data-option-value="value"><legend>Grid permissions</legend><template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset><output data-error-for="tags"></output></td>
+                <td><label>Grid active <input type="checkbox" data-field="active" value="Y" data-unchecked-value="N"></label></td>
+                <td><img data-field="photo" alt="Profile portrait" width="32" height="32"></td><td><div data-field="summary"></div></td>
+              </tr></tbody>
+            </table>
+          </div>
+          <ul data-shared-list aria-label="Read-only shared records">
+            <li data-row-template>
+              <button type="button" data-select-row><span data-field="name"></span></button>
+              <label>List choice <select data-field="chosen" data-options="codes.options" data-option-label="label" data-option-value="value"><option value="">Choose</option></select></label>
+              <fieldset data-field="tags" data-options="codes.tags" data-option-label="label" data-option-value="value"><legend>List permissions</legend><template data-choice-template><label><input type="checkbox"><span data-choice-label></span></label></template></fieldset><output data-error-for="tags"></output>
+              <label>List active <input type="checkbox" data-field="active" value="Y" data-unchecked-value="N"></label>
+              <img data-field="photo" alt="Profile portrait" width="32" height="32"><div data-field="summary"></div>
+            </li>
+          </ul>
+          <output data-shared-status aria-live="polite"></output>
+          <h4>Shared raw values and status</h4><pre data-shared-source tabindex="0"></pre>
+          <h4>Shared creation defaults</h4><pre data-shared-defaults tabindex="0"></pre>
+        </section>
+      </div>
     </template>
     <script type="module" src="./choices.ts"></script>
   </body>

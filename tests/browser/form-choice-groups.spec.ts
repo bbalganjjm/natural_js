@@ -258,14 +258,21 @@ test("local native reset and captured defaults remain separate through unbind", 
 test("uninitialized disposed and configured display groups fail before adoption", async ({ page }) => {
   const result = await page.evaluate(() => {
     const h = window.formChoices, root = h.root(), fieldset = root.querySelector("fieldset")!;
-    const uninitialized = h.code(() => h.form(root));
+    const original = root.cloneNode(true), automatic = h.form(root);
+    const uninitialized = { read: automatic.read(), defaults: automatic.defaults() };
+    automatic.dispose();
+    const firstRestored = root.isEqualNode(original);
     const group = h.group(fieldset, { choices: [] }); fieldset.dataset.format = '[["commas"]]';
     const format = h.code(() => h.form(root)); delete fieldset.dataset.format;
     const parse = h.code(() => h.form(root, { parse: { choice: Number } }));
     const render = h.code(() => h.form(root, { render: { choice: () => "display" } }));
     const writable = h.code(() => group.setValue([])); group.dispose();
-    const disposed = h.code(() => h.form(root)); return { uninitialized, format, parse, render, writable, disposed };
+    const recreated = h.form(root);
+    const disposed = { read: recreated.read(), defaults: recreated.defaults() };
+    recreated.dispose();
+    return { uninitialized, firstRestored, format, parse, render, writable, disposed, finalRestored: root.isEqualNode(original) };
   });
-  expect(result).toEqual({ uninitialized: "FORM_CHOICE_GROUP", format: "FORM_FORMAT_CONTROL", parse: "FORM_CHOICE_GROUP",
-    render: "FORM_CHOICE_GROUP", writable: "none", disposed: "FORM_CHOICE_GROUP" });
+  expect(result).toEqual({ uninitialized: { read: { choice: [] }, defaults: { choice: [] } }, firstRestored: true,
+    format: "FORM_FORMAT_CONTROL", parse: "FORM_CHOICE_GROUP", render: "FORM_CHOICE_GROUP", writable: "none",
+    disposed: { read: { choice: [] }, defaults: { choice: [] } }, finalRestored: true });
 });

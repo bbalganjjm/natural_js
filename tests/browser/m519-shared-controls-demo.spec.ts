@@ -1,0 +1,81 @@
+// SPDX-License-Identifier: Apache-2.0
+import { expect, test } from "@playwright/test";
+
+for (const layout of ["stack", "chips"] as const) {
+  test(`${layout} shares real Form Grid List edits and exact native Select raw values`, async ({ page }) => {
+    await page.routeWebSocket(/127\.0\.0\.1:4173/, socket => socket.close()); await page.goto("/m5/choices.html");
+    const screen = page.getByRole("region", { name: layout === "stack" ? "Stacked shared controls" : "Chip shared controls", exact: true });
+    const other = page.getByRole("region", { name: layout === "stack" ? "Chip shared controls" : "Stacked shared controls", exact: true });
+    const editor = screen.locator("[data-shared-form]"), grid = screen.locator("[data-shared-grid]"), list = screen.locator("[data-shared-list]");
+    await expect(editor.getByRole("checkbox", { name: "Shared active", exact: true })).toBeChecked();
+    await expect(editor.getByRole("combobox", { name: "Shared choice", exact: true })).toHaveValue("false");
+    const defaults = JSON.parse(await screen.locator("[data-shared-defaults]").innerText());
+    expect(defaults.form).toEqual({ name: "Captured shared", chosen: 1, tags: [], active: "N" });
+    expect(defaults.grid.chosen).toBe(1); expect(defaults.grid.active).toBe("N"); expect(defaults.grid.tags).toEqual([]);
+    const untouchedOther = await other.locator("[data-shared-source]").innerText();
+    const select = editor.getByRole("combobox", { name: "Shared choice", exact: true });
+    expect(await select.locator("option").allTextContents()).toEqual(["Choose", "Common one", "Common two", "Row false", "Row zero"]);
+    await select.selectOption({ label: "Row zero" });
+    await expect(grid.getByRole("combobox", { name: "Grid choice", exact: true }).first()).toHaveValue("0");
+    await expect(list.getByRole("combobox", { name: "List choice", exact: true }).first()).toHaveValue("0");
+    const afterChoice = JSON.parse(await screen.locator("[data-shared-source]").innerText());
+    expect(afterChoice.rows[0].value.chosen).toBe(0); expect(typeof afterChoice.rows[0].value.chosen).toBe("number");
+    await editor.getByRole("checkbox", { name: "Shared active", exact: true }).uncheck();
+    await expect(grid.getByRole("checkbox", { name: "Grid active", exact: true }).first()).not.toBeChecked();
+    await expect(list.getByRole("checkbox", { name: "List active", exact: true }).first()).not.toBeChecked();
+    expect(JSON.parse(await screen.locator("[data-shared-source]").innerText()).rows[0].value.active).toBe("N");
+    await grid.getByRole("checkbox", { name: "Grid active", exact: true }).first().check();
+    await expect(editor.getByRole("checkbox", { name: "Shared active", exact: true })).toBeChecked();
+    await expect(list.getByRole("checkbox", { name: "List active", exact: true }).first()).toBeDisabled();
+    await list.getByRole("button", { name: "Second shared", exact: true }).click();
+    await expect(editor.getByRole("textbox", { name: "Shared name", exact: true })).toHaveValue("Second shared");
+    await expect(editor.locator('[data-field="tags"] input')).toHaveCount(0);
+    await expect(editor.locator('[data-field="summary"] strong')).toHaveText("Second shared record");
+    await expect(editor.getByRole("img", { name: "Profile portrait", exact: true })).not.toHaveAttribute("src");
+    const selected = JSON.parse(await screen.locator("[data-shared-source]").innerText()); expect(selected.selected).toBe(selected.rows[1].id);
+    await grid.getByRole("button", { name: layout === "stack" ? "Ada shared" : "Bea shared", exact: true }).click();
+    await expect(editor.getByRole("textbox", { name: "Shared name", exact: true })).toHaveValue(layout === "stack" ? "Ada shared" : "Bea shared");
+    await expect(editor.getByRole("combobox", { name: "Shared choice", exact: true })).toHaveValue("0");
+    const final = JSON.parse(await screen.locator("[data-shared-source]").innerText());
+    expect(final.rows[0].value.active).toBe("Y"); expect(final.rows[0].status).toBe("update"); expect(final.rows[1].status).toBe("clean");
+    await expect(other.locator("[data-shared-source]")).toHaveText(untouchedOther);
+    await expect(grid.locator('[data-field="summary"] strong').first()).toHaveText("First shared record");
+    await expect(list.locator('[data-field="summary"] strong').first()).toHaveText("First shared record");
+    expect(JSON.parse(await screen.locator("[data-shared-defaults]").innerText())).toEqual(defaults);
+  });
+
+  test(`${layout} retains raw codes across zero one many catalogs and isolates close reopen lifetimes`, async ({ page }) => {
+    await page.routeWebSocket(/127\.0\.0\.1:4173/, socket => socket.close()); await page.goto("/m5/choices.html");
+    const name = layout === "stack" ? "Stacked shared controls" : "Chip shared controls";
+    const screen = page.getByRole("region", { name, exact: true }), editor = screen.locator("[data-shared-form]");
+    const other = page.getByRole("region", { name: layout === "stack" ? "Chip shared controls" : "Stacked shared controls", exact: true });
+    await expect(editor.getByRole("checkbox", { name: "Read", exact: true })).toBeChecked();
+    const defaults = await screen.locator("[data-shared-defaults]").innerText(), sibling = await other.locator("[data-shared-source]").innerText();
+    const catalog = screen.getByRole("combobox", { name: "Shared permission catalog", exact: true });
+    await catalog.selectOption("empty"); await expect(editor.locator('[data-field="tags"] input')).toHaveCount(0);
+    await expect(screen.locator('[data-shared-grid] tbody tr').first().locator('[data-field="tags"] input')).toHaveCount(0);
+    await expect(screen.locator('[data-shared-list] li').first().locator('[data-field="tags"] input')).toHaveCount(0);
+    let source = JSON.parse(await screen.locator("[data-shared-source]").innerText()); expect(source.rows[0].value.tags).toEqual(["read"]);
+    await screen.getByRole("button", { name: "Validate shared record", exact: true }).click(); await expect(editor.locator('[data-error-for="tags"]')).not.toBeEmpty();
+    await catalog.selectOption("one"); await expect(editor.locator('[data-field="tags"] input')).toHaveCount(1);
+    await expect(editor.getByRole("checkbox", { name: "Read", exact: true })).toBeChecked();
+    await catalog.selectOption("all"); await expect(editor.locator('[data-field="tags"] input')).toHaveCount(2);
+    await editor.getByRole("checkbox", { name: "Write", exact: true }).check();
+    await expect(screen.locator('[data-shared-grid] tbody tr').first().getByRole("checkbox", { name: "Write", exact: true })).toBeChecked();
+    await expect(screen.locator('[data-shared-list] li').first().getByRole("checkbox", { name: "Write", exact: true })).toBeChecked();
+    source = JSON.parse(await screen.locator("[data-shared-source]").innerText()); expect(source.rows[0].value.tags).toEqual(["read", "write"]);
+    await expect(screen.locator("[data-shared-defaults]")).toHaveText(defaults); await expect(other.locator("[data-shared-source]")).toHaveText(sibling);
+    await editor.getByRole("textbox", { name: "Shared name", exact: true }).fill("Edited shared");
+    const detached = await editor.getByRole("checkbox", { name: "Shared active", exact: true }).elementHandle();
+    await page.getByRole("region", { name: layout === "stack" ? "Stacked choice screen" : "Chip choice screen", exact: true }).getByRole("button", { name: "Close screen", exact: true }).click();
+    await expect(screen).toHaveCount(0); await detached!.evaluate(input => { (input as HTMLInputElement).checked = false; input.dispatchEvent(new Event("change", { bubbles: true })); });
+    await page.getByRole("button", { name: layout === "stack" ? "Open stacked screen" : "Open chip screen", exact: true }).click();
+    await expect(editor.getByRole("textbox", { name: "Shared name", exact: true })).toHaveValue(layout === "stack" ? "Ada shared" : "Bea shared");
+    await expect(editor.getByRole("combobox", { name: "Shared choice", exact: true })).toHaveValue("false");
+    await expect(editor.getByRole("checkbox", { name: "Write", exact: true })).not.toBeChecked();
+    await expect(other.locator("[data-shared-source]")).toHaveText(sibling);
+    const ids = await page.locator("[id]").evaluateAll(elements => elements.map(element => element.id)); expect(new Set(ids).size).toBe(ids.length);
+    const radioNames = await page.locator('[data-screen] input[type="radio"]').evaluateAll(inputs => inputs.map(input => (input as HTMLInputElement).name));
+    expect(new Set(radioNames).size).toBe(2);
+  });
+}

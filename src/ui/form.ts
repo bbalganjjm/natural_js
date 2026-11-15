@@ -5,12 +5,14 @@ import type { RowId, RowSnapshot, RowsEvent } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner, sameRuleCalls } from "./rules.js";
 import type { RuleCall, RuleDeclarations } from "./rules.js";
-import { claimSelect } from "./select-owner.js";
-import { checkGroupValue, claimChoiceGroup, getChoiceGroup } from "./choice-group-owner.js";
-import type { ChoiceGroupBinding, ChoiceGroupReplacement } from "./choice-group-owner.js";
+import { claimSelect, getSelect } from "./select-owner.js";
+import type { SelectBinding, SelectCatalog, SelectReplacement } from "./select-owner.js";
+import { compileChoiceGroup, choiceGroupChoices, choiceGroupOptions, choiceGroupRequired, mountChoiceGroup } from "./choice-group.js";
+import { checkGroupValue, choiceGroupCheckpoint, claimChoiceGroup, getChoiceGroup } from "./choice-group-owner.js";
+import type { ChoiceGroupBinding, ChoiceGroupDefinition, ChoiceGroupPrepare, ChoiceGroupReplacement } from "./choice-group-owner.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
-import type { RowOption } from "./row-options.js";
-import { arrayField, control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
+import type { RowOption, RowOptionValue } from "./row-options.js";
+import { arrayField, captureCheckboxValues, control, disabled, display, displayField, fieldValue, formatCapable, interactiveContent, nativeMessage, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { assertNativePaths, createNativeDefaults } from "./native-defaults.js";
 import { createValueBinding } from "./value-binding.js";
@@ -23,12 +25,14 @@ import type {
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 type ValuePhase = ValueBindContext["phase"];
 interface Choices {
-  options: readonly string[];
-  label: readonly string[];
-  value: readonly string[];
+  options?: readonly string[];
+  label?: readonly string[];
+  value?: readonly string[];
+  select?: SelectBinding;
+  catalog?: SelectCatalog;
   authoredNodes: Node[];
   authoredOptions: HTMLOptionElement[];
-  authored: (string | null)[];
+  authored: RowOptionValue[];
   selection: boolean[];
   raw: Map<HTMLOptionElement, unknown>;
   source?: unknown;
@@ -46,6 +50,11 @@ interface Field {
   declarations: { format: string | null; validate: string | null };
   choices?: Choices;
   group?: ChoiceGroupBinding;
+  checkboxValues?: readonly [string, string];
+  groupRoot?: HTMLFieldSetElement;
+  groupDefinition?: ChoiceGroupDefinition;
+  groupSource?: unknown;
+  groupBound?: boolean;
   projection?: ValueProjection;
   nativeProjection?: { id: RowId; raw: unknown; shown: NativeState; entered: boolean };
   renderingId?: RowId;
@@ -57,7 +66,7 @@ interface NativeState {
   value: unknown;
   badInput: boolean;
   selected?: { option: HTMLOptionElement; value: string; disabled: boolean; owned: boolean; raw: unknown }[];
-  checked?: { input: HTMLInputElement; value: string; checked: boolean; disabled: boolean }[];
+  checked?: { input: HTMLInputElement; value: string; checked: boolean; disabled: boolean; unchecked?: string | null }[];
 }
 
 interface Candidate {
@@ -122,11 +131,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     checkpoint?.();
     for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-options]")]) {
       if (!element.hasAttribute("data-options")) continue;
-      if (!rows || !(element instanceof HTMLSelectElement) || !element.hasAttribute("data-field") ||
+      if (!rows || !(element instanceof HTMLSelectElement || element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]"))) || !element.hasAttribute("data-field") ||
           !element.hasAttribute("data-option-label") || !element.hasAttribute("data-option-value")) {
         throw formError("FORM_OPTIONS", "Row-local choices need Rows and a Select with data-field, data-options, data-option-label and data-option-value.",
           { field: element.getAttribute("data-field") ?? "" });
       }
+    }
+    for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-unchecked-value]")]) if (element.hasAttribute("data-unchecked-value") && !element.hasAttribute("data-field")) {
+      throw formError("FORM_CONTROL", "A coded checkbox needs one marked native checkbox.");
     }
     const errorRegions = new Map<string, HTMLElement>();
     for (const region of root.querySelectorAll<HTMLElement>("[data-error-for]")) {
@@ -144,25 +156,29 @@ export function bindForm<T extends object = Record<string, unknown>>(
     for (const element of elements) {
       const name = element.getAttribute("data-field")!;
       const group = getChoiceGroup(element);
-      if (!group && element instanceof HTMLFieldSetElement && [...element.children].some(child =>
-        child instanceof HTMLTemplateElement && child.hasAttribute("data-choice-template"))) {
-        throw formError("FORM_CHOICE_GROUP", "Initialize this choice group before binding Form.", { field: name });
+      const generated = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]"));
+      let groupDefinition: ChoiceGroupDefinition | undefined;
+      if (generated) {
+        try { groupDefinition = group?.definition ?? compileChoiceGroup(element as HTMLFieldSetElement); }
+        catch (cause) { throw new FrameworkError({ api: "bindForm", code: "FORM_CHOICE_GROUP", message: "Use a valid generated choice template.", detail: { field: name }, cause }); }
       }
+      const checkboxValues = captureCheckboxValues(element, () => { throw formError("FORM_CONTROL", "A coded checkbox needs distinct explicit value and data-unchecked-value strings.", { field: name }); });
       const input = element.localName === "input" ? element as HTMLInputElement : null;
-      const kind = group?.kind ?? (input?.type === "radio" ? "radio" :
+      const kind = groupDefinition?.kind ?? group?.kind ?? (input?.type === "radio" ? "radio" :
         input?.type === "checkbox" ? "checkbox" :
           element.localName === "select" && (element as HTMLSelectElement).multiple ? "multiple" : "single");
       if (input?.type === "file") {
         if (rows) throw formError("FORM_FILE_ROWS", "File inputs require a local Form; Rows store JSON values.", { field: name });
         if (input.multiple) throw formError("FORM_FILE_MULTIPLE", "Validate multiple files in application code.", { field: name });
       }
-      if (!group && kind === "radio" && (!input?.form || !input.name ||
+      if (!groupDefinition && !group && kind === "radio" && (!input?.form || !input.name ||
           input.form !== root && !root.contains(input.form))) {
         throw formError("FORM_RADIO_OWNER", "Radio fields need a name and a form owner inside this Form root.", { field: name });
       }
       const existing = byName.get(name);
       if (existing) {
-        if (group || existing.group || (kind !== "radio" && kind !== "checkbox") || existing.kind !== kind) {
+        if (checkboxValues || existing.checkboxValues) throw formError("FORM_CONTROL", "Coded values belong to one checkbox, not a field group.", { field: name });
+        if (groupDefinition || existing.groupDefinition || group || existing.group || (kind !== "radio" && kind !== "checkbox") || existing.kind !== kind) {
           throw formError("FORM_FIELD_REPEAT", "Only radio or checkbox controls may repeat a field.", { field: name });
         }
         if (kind === "radio") {
@@ -181,25 +197,27 @@ export function bindForm<T extends object = Record<string, unknown>>(
         });
         continue;
       }
-      const members = group ? [...group.inputs] : [element];
+      const members = group ? [...group.inputs] : groupDefinition ? [] : [element];
       const field: Field = {
-        element: group?.inputs[0] ?? element, elements: members, kind, name, path: parsePath(name), group,
+        element: group?.inputs[0] ?? element, elements: members, kind, name, path: parsePath(name), group, groupDefinition, checkboxValues,
+        groupRoot: generated ? element as HTMLFieldSetElement : undefined,
         format: [], validate: [], declarations: { format: null, validate: null }, error: errorRegions.get(name),
-        originals: (group ? [element, ...members] : members).map(element => ({
+        originals: (group || groupDefinition ? [element, ...members] : members).map(element => ({
           element, describedBy: element.getAttribute("aria-describedby"),
           invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
         }))
       };
-      if (element instanceof HTMLSelectElement && element.hasAttribute("data-options")) {
-        const authoredOptions = [...element.options];
-        const authored = authoredOptions.map(option => option.value === "" ? null : option.value);
+      const select = element instanceof HTMLSelectElement ? getSelect(element) : undefined;
+      if (element instanceof HTMLSelectElement && (element.hasAttribute("data-options") || select)) {
+        const authoredOptions = [...select?.catalog.options ?? element.options];
+        const authored = select ? [...select.catalog.values] : authoredOptions.map(option => option.value === "" ? null : option.value);
         field.choices = {
-          options: parsePath(element.getAttribute("data-options")!),
-          label: parsePath(element.getAttribute("data-option-label")!),
-          value: parsePath(element.getAttribute("data-option-value")!),
-          authoredNodes: [...element.childNodes], authoredOptions, authored,
+          options: element.hasAttribute("data-options") ? parsePath(element.getAttribute("data-options")!) : undefined,
+          label: element.hasAttribute("data-option-label") ? parsePath(element.getAttribute("data-option-label")!) : undefined,
+          value: element.hasAttribute("data-option-value") ? parsePath(element.getAttribute("data-option-value")!) : undefined, select, catalog: select?.catalog,
+          authoredNodes: [...select?.catalog.nodes ?? element.childNodes], authoredOptions, authored,
           selection: authoredOptions.map(option => option.selected),
-          raw: new Map(authoredOptions.map((option, index) => [option, authored[index]])), bound: false
+          raw: select ? new Map(select.raw) : new Map(authoredOptions.map((option, index) => [option, authored[index]])), bound: false
         };
       }
       fields.push(field);
@@ -215,8 +233,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
           throw formError("FORM_GROUP_RULES", "One field group needs one rule declaration.", { field: field.name });
         }
       }
-      const formatElement = field.group?.root ?? field.elements.find(element => element.hasAttribute("data-format")) ?? field.element;
-      const validateElement = field.group?.root ?? field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
+      const formatElement = field.groupRoot ?? field.group?.root ?? field.elements.find(element => element.hasAttribute("data-format")) ?? field.element;
+      const validateElement = field.groupRoot ?? field.group?.root ?? field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
       field.declarations.format = formatElement.getAttribute("data-format"); checkpoint?.();
       field.declarations.validate = validateElement.getAttribute("data-validate"); checkpoint?.();
       const retained = previous?.get(field.name);
@@ -224,10 +242,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
         retained.declarations.format === field.declarations.format ? retained.format : view.formats(field.declarations.format, field.name, checkpoint);
       field.validate = retained && !view.configured(field.name, "data-validate") && !runner.configured(field.name, "data-validate") &&
         retained.declarations.validate === field.declarations.validate ? retained.validate : view.validators(field.declarations.validate, field.name, checkpoint);
-      if (field.format.length && (field.group || !formatCapable(field.element))) {
+      if (field.format.length && (field.groupDefinition || field.group || !formatCapable(field.element))) {
         throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
       }
-      if (field.group && (parsers.has(field.name) || Object.hasOwn(options.render ?? {}, field.name))) {
+      if ((field.groupDefinition || field.group) && (parsers.has(field.name) || Object.hasOwn(options.render ?? {}, field.name))) {
         throw formError("FORM_CHOICE_GROUP", "Choice groups do not accept parsers or display renderers.", { field: field.name });
       }
       if (!rows && field.format.length && !control(field.element) && (field.element.isContentEditable ||
@@ -246,7 +264,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (!values.sourceEnabled) return undefined;
     const groups = new Map<string, Field[]>();
     for (const field of graph) {
-      const direct = field.path[0], dependency = field.choices?.options[0];
+      const direct = field.path[0], dependency = field.choices?.options?.[0] ?? field.groupDefinition?.source?.options[0];
       for (const key of dependency !== undefined && dependency !== direct ? [direct, dependency] : [direct]) {
         const group = groups.get(key) ?? [];
         group.push(field); groups.set(key, group);
@@ -282,6 +300,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       ...bindingOnly ? [] : [element.getAttribute("data-format"), element.getAttribute("data-validate")],
       element.getAttribute("data-options"),
       element.getAttribute("data-option-label"), element.getAttribute("data-option-value"),
+      element.getAttribute("data-unchecked-value"),
       element instanceof HTMLInputElement ? element.type : null,
       element instanceof HTMLInputElement && ["radio", "checkbox"].includes(element.type) ? [element.name, element.value] : null,
       element instanceof HTMLSelectElement || element instanceof HTMLInputElement && element.type === "file" ? element.multiple : null
@@ -298,6 +317,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const releaseSelects = new Map<HTMLSelectElement, () => void>();
   const pendingSelects = new Map<HTMLSelectElement, () => void>();
   const releaseGroups = new Map<ChoiceGroupBinding, () => void>();
+  const ownedGroups = new Map<ChoiceGroupBinding, () => void>();
   const pendingGroups = new Map<ChoiceGroupBinding, () => void>();
   let annotations = new Map(fields.flatMap(field => field.originals.map(({ element }) => [element, annotation(element)] as const)));
   const errorIds = new Map<Field, string>();
@@ -331,7 +351,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const issues = new Map<Field, readonly ValidationIssue[]>();
   const activeValues = new Map<Field, Set<RowId>>();
   const activeBindings = new Set<RowId>();
-  function nativeEntries(states: readonly ReturnType<typeof capture>[]) { return states.filter(state => state.field.group || control(state.element)).map(state => ({
+  function nativeEntries(states: readonly ReturnType<typeof capture>[]) { return states.filter(state => state.field.groupDefinition || state.field.group || control(state.element)).map(state => ({
     name: state.field.name, path: state.field.path, value: state.value, element: state.element,
     ...(!state.field.choices && parsers.has(state.field.name) ? { parse: parsers.get(state.field.name)! } : {})
   })); }
@@ -341,9 +361,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let localRenderStarted = false;
   try {
     for (const field of fields) {
-      if (field.group) releaseGroups.set(field.group, claimChoiceGroup(field.group, prepare => replaceGroup(field, prepare)));
+      if (field.groupDefinition && !field.group) mountFieldGroup(field, active);
+      if (field.group) releaseGroups.set(field.group, acquireGroup(field));
       if (field.element instanceof HTMLSelectElement) {
-        releaseSelects.set(field.element, claimSelect(field.element, "bindForm"));
+        releaseSelects.set(field.element, claimSelect(field.element, "bindForm", field.choices?.select ? prepare => replaceSelectChoices(field, prepare) : undefined));
+        const select = getSelect(field.element);
+        if (select !== field.choices?.select || select && field.choices?.catalog !== select.catalog) {
+          throw formError("FORM_OPTIONS", "The common Select catalog changed during field admission.", { field: field.name });
+        }
       }
     }
     boundRoots.add(root);
@@ -351,9 +376,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
   } catch (cause) {
     boundRoots.delete(root);
     for (const release of releaseSelects.values()) release();
-    for (const release of releaseGroups.values()) release();
+    for (const release of releaseGroups.values()) try { release(); } catch {}
+    for (const dispose of ownedGroups.values()) try { dispose(); } catch {} ownedGroups.clear();
     if (localRenderStarted) {
-      for (const [field, value] of localRenderedValues) if (control(field.element)) display(field.element, value.raw);
+      for (const [field, value] of localRenderedValues) if (control(field.element)) display(field.element, value.raw, field.checkboxValues);
       restoreRendered(true);
     }
     throw cause;
@@ -414,7 +440,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function localFieldValue(field: Field): unknown {
     const retained = localRenderedValues.get(field);
-    if (!retained) return fieldValue(field);
+    if (!retained) return field.choices ? nativeState(field).value : fieldValue(field);
     if (control(field.element) || field.element.localName === "img") {
       const entered = fieldValue(field);
       if (!Object.is(entered, retained.shown)) {
@@ -431,7 +457,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function nativeField(field: Field): boolean {
-    return field.group !== undefined || control(field.element) && !(field.element instanceof HTMLInputElement &&
+    return field.groupDefinition !== undefined || field.group !== undefined || control(field.element) && !(field.element instanceof HTMLInputElement &&
       ["button", "submit", "reset", "image"].includes(field.element.type));
   }
 
@@ -449,7 +475,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     })) : undefined;
     const checked = field.kind === "radio" || field.kind === "checkbox" ? field.elements.map(element => {
       const input = element as HTMLInputElement;
-      return { input, value: input.value, checked: input.checked, disabled: input.disabled };
+      return { input, value: input.value, checked: input.checked, disabled: input.disabled,
+        ...(field.checkboxValues ? { unchecked: input.getAttribute("data-unchecked-value") } : {}) };
     }) : undefined;
     const value = selected && field.choices ? field.kind === "multiple" ? selected.map(item => item.raw) : selected[0]?.raw ?? null : fieldValue(field);
     return { value, selected, checked, badInput: element instanceof HTMLInputElement && element.validity.badInput };
@@ -463,7 +490,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
           item.owned === next.owned && Object.is(item.raw, next.raw);
       })) && (!before.checked || !!after.checked && before.checked.length === after.checked.length && before.checked.every((item, index) => {
         const next = after.checked![index];
-        return item.input === next.input && item.value === next.value && item.checked === next.checked && item.disabled === next.disabled;
+        return item.input === next.input && item.value === next.value && item.checked === next.checked && item.disabled === next.disabled && item.unchecked === next.unchecked;
       }));
   }
 
@@ -530,8 +557,69 @@ export function bindForm<T extends object = Record<string, unknown>>(
       for (const selected of shown.selected) selected.option.selected = true;
     } else if (shown.checked) {
       for (const selected of shown.checked) selected.input.checked = selected.checked;
-    } else display(field.element, shown.value);
+    } else display(field.element, shown.value, field.checkboxValues);
     nativeRevision++;
+  }
+
+  function groupSuffix(field: Field, source: unknown) {
+    return choiceGroupOptions(field.groupDefinition!, source, key => {
+      throw formError("FORM_OPTIONS", "A generated group needs string row choices.", { field: field.name, options: key, rowId: boundId });
+    });
+  }
+
+  function mountFieldGroup(field: Field, checkpoint: () => void): void {
+    const mounted = mountChoiceGroup(field.groupRoot!, field.groupDefinition!, { choices: [], defaults: [] }, { current: checkpoint });
+    field.group = mounted.binding;
+    ownedGroups.set(mounted.binding, mounted.dispose);
+    field.groupBound = !field.groupDefinition!.source;
+  }
+
+  function acquireGroup(field: Field, creation?: unknown): () => void {
+    const captured = initial.find(state => state.field === field);
+    if (creation === undefined) creation = captured ? captured.value : fieldValue(field);
+    const group = field.group!, release = claimChoiceGroup(group, (prepare: ChoiceGroupPrepare) =>
+      replaceGroup(field, () => prepare(groupSuffix(field, boundId === null ? null : rowValue(boundId)))));
+    let released = false;
+    return () => {
+      if (released) return; released = true;
+      const dispose = ownedGroups.get(group); ownedGroups.delete(group);
+      try {
+        if (!dispose) {
+          const current = choiceGroupCheckpoint(group), next = group.prepare([], current, true);
+          let undo: (() => void) | undefined;
+          try { undo = next.apply(); group.write(creation, () => { current(); return true; }); current(); next.finish(false); }
+          catch (cause) { try { undo?.(); } catch { /* Preserve the release failure. */ } throw cause; }
+        }
+      } finally { release(); dispose?.(); }
+    };
+  }
+
+  function refreshGroups(source: unknown, id: RowId | null, selected?: ReadonlySet<Field>): number | undefined {
+    const snapshot = id === null ? undefined : rows!.get(id);
+    let version = renderVersion;
+    const current = () => !disposed && boundId === id && version === renderVersion && (id === null || rows!.get(id) === snapshot);
+    for (const field of selected ?? fields) if (field.groupDefinition?.source && field.group) {
+      if (!current()) return;
+      const nextSource = readPath(source, field.groupDefinition.source.options);
+      if (field.groupBound && Object.is(field.groupSource, nextSource)) continue;
+      if (values.sourceRunning) throw formError("FORM_SOURCE", "A source callback cannot replace native membership inside its current source pair.", { field: field.name, rowId: id });
+      if (id !== null && activeValues.get(field)?.has(id)) throw values.error(Object.freeze({ ...context(field, id, source as Record<string, unknown>), rowId: id, element: field.element, phase: "val" }),
+        beforeBindValue ? "beforeBindValue" : "onBindValue", "A value callback cannot recursively bind the same field and row.");
+      const suffix = groupSuffix(field, source);
+      let next: ChoiceGroupReplacement | undefined, failed = false;
+      try {
+        publishGroup(field, () => next = field.group!.prepare(suffix, () => {
+          if (disposed) throw formError("FORM_DISPOSED", "This Form has been disposed.");
+          if (boundId !== id || id !== null && rows!.get(id) !== snapshot) throw formError("FORM_CHOICE_GROUP", "The source changed during group preparation.", { field: field.name });
+        }));
+        if (boundId !== id || id !== null && rows!.get(id) !== snapshot) return;
+        version = renderVersion;
+        field.groupSource = nextSource; field.groupBound = true;
+      } catch (cause) { failed = true; throw cause; }
+      finally { try { next?.finish(); } catch (cause) { if (!failed) throw cause; } }
+      if (!current()) return;
+    }
+    return current() ? version : undefined;
   }
 
   function replaceGroup(field: Field, prepare: () => ChoiceGroupReplacement): void {
@@ -539,6 +627,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (!initialized || workDepth || restoring || reconciling || localRendering || rescanIncomplete || pendingResets.size) {
       throw formError("FORM_CHOICE_GROUP", "Finish current Form work before replacing its choices.", { field: field.name });
     }
+    publishGroup(field, prepare);
+  }
+
+  function publishGroup(field: Field, prepare: () => ChoiceGroupReplacement): void {
     working(() => {
       const group = field.group!, id = boundId, snapshot = id === null ? undefined : rows!.get(id);
       let version = renderVersion;
@@ -558,7 +650,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const raw = snapshot ? readPath(snapshot.value, field.path) : undefined, projection = field.projection;
       const applied = projection?.state === "applied" && projection.id === id && sameJson(projection.raw, raw);
       if (id !== null && !draft?.has(field) && applied && projection.callback) {
-        const message = checkGroupValue({ ...group, inputs: next.inputs, values: next.values }, projection.value);
+        const message = checkGroupValue({ kind: group.kind, values: next.values }, projection.value);
         if (message) throw values.error(Object.freeze({ ...context(field, id, snapshot!.value as Record<string, unknown>),
           rowId: id, element: field.element, phase: projection.phase }), projection.callback, message);
       }
@@ -623,7 +715,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         state.checked = next.inputs.map(input => ({ input, checked: captured.has(input.value) }));
         if (defaultEntry) defaultEntry.element = primary;
         if (previous.issues) issues.set(field, previous.issues.map(issue => issue.element ? { ...issue, element: primary } : issue));
-        group.write(selected);
+        group.write(selected, current);
         if (id !== null) rememberNative(field, id, draft?.has(field) ? draft.get(field) :
           projection?.state === "pending" || projection?.state === "failed" ? previous.native ? previous.native.raw : raw : raw, draft?.has(field) ?? false, current);
         syncPreview();
@@ -644,6 +736,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
         resetOwners.clear(); for (const owner of nextOwners) resetOwners.add(owner);
         committed = true;
       } catch (cause) {
+        if (cause instanceof FrameworkError && cause.api === "bindChoiceGroup" && ["CHOICE_STALE", "CHOICE_DISPOSED"].includes(cause.code)) {
+          try { checkpoint(); } catch (guard) { cause = guard; }
+        }
         failed = true; failure = cause;
         if (!disposed) {
           field.element = previous.element; field.elements = previous.elements; field.originals = previous.originals;
@@ -669,16 +764,92 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
+  function replaceSelectChoices(field: Field, prepare: () => SelectReplacement): void {
+    active();
+    if (!initialized || workDepth || restoring || reconciling || localRendering || rescanIncomplete || pendingResets.size) {
+      throw formError("FORM_OPTIONS", "Finish current Form work before replacing its choices.", { field: field.name });
+    }
+    working(() => {
+      const element = field.element as HTMLSelectElement, choices = field.choices!, binding = choices.select!;
+      const id = boundId, snapshot = id === null ? undefined : rows!.get(id);
+      let version = renderVersion;
+      const current = () => !disposed && version === renderVersion && boundId === id &&
+        (id === null || rows!.get(id) === snapshot) && !replacingGroup?.reset;
+      const checkpoint = () => {
+        if (!current()) throw formError("FORM_OPTIONS", "Newer Form work superseded this choice replacement.", { field: field.name });
+      };
+      const selectedOptions = [...element.selectedOptions].map(option => choices.raw.get(option));
+      const shown = element.multiple ? selectedOptions : selectedOptions[0] ?? null;
+      const next = prepare();
+      checkpoint();
+      if (byName.get(field.name) !== field || !root.contains(element) && root !== element ||
+          field.originals.some(({ element }) => annotations.get(element) !== annotation(element))) {
+        throw formError("FORM_OPTIONS", "Reconcile changed Form fields before replacing choices.", { field: field.name });
+      }
+      const suffix = choiceOptions(field, snapshot?.value ?? null, id);
+      const available = [...next.values, ...suffix.map(choice => choice.raw)];
+      const draft = id === null ? undefined : drafts.get(id), raw = snapshot ? readPath(snapshot.value, field.path) : undefined;
+      const projection = field.projection, applied = projection?.state === "applied" && projection.id === id && sameJson(projection.raw, raw);
+      if (id !== null && !draft?.has(field) && applied && projection.callback && !rowOptionAvailable(available, projection.value, element.multiple)) {
+        throw values.error(Object.freeze({ ...context(field, id, snapshot!.value as Record<string, unknown>),
+          rowId: id, element, phase: projection.phase }), projection.callback, "Choose an available option.");
+      }
+      const selected = id !== null ? draft?.has(field) ? draft.get(field) : applied ? projection.value :
+        projection?.state === "failed" || projection?.state === "pending" ? shown : raw : shown;
+      const previous = { catalog: choices.catalog, nodes: choices.authoredNodes, options: choices.authoredOptions, authored: choices.authored,
+        selection: choices.selection, raw: choices.raw, source: choices.source, bound: choices.bound, native: field.nativeProjection };
+      const transaction = { events: [] as RowsEvent[], reset: false };
+      let undo: (() => void) | undefined, failed = false, failure: unknown;
+      checkpoint();
+      replacingGroup = transaction; scanning = true; version = ++renderVersion;
+      try {
+        undo = next.apply(); checkpoint();
+        choices.authoredNodes = [...next.nodes]; choices.authoredOptions = [...next.options]; choices.authored = [...next.values];
+        choices.selection = next.options.map(option => option.selected);
+        choices.raw = renderRowOptions(element, choices.authoredNodes, choices.authoredOptions, choices.authored, suffix);
+        checkpoint();
+        binding.raw = choices.raw;
+        choices.source = choices.options ? readPath(snapshot?.value, choices.options) : undefined;
+        choices.bound = id !== null;
+        selectRowOptions(element, choices.raw, selected, current); checkpoint();
+        if (id !== null) rememberNative(field, id, draft?.has(field) ? draft.get(field) :
+          projection?.state === "pending" || projection?.state === "failed" ? previous.native ? previous.native.raw : raw : raw,
+          draft?.has(field) ?? false, current);
+        syncPreview(); checkpoint();
+        choices.catalog = next.finish();
+      } catch (cause) {
+        failed = true; failure = cause;
+        if (current()) {
+          try { undo?.(); } catch { /* Preserve the original publication failure. */ }
+          if (current()) {
+            choices.catalog = previous.catalog;
+            choices.authoredNodes = previous.nodes; choices.authoredOptions = previous.options; choices.authored = previous.authored;
+            choices.selection = previous.selection; choices.raw = previous.raw; choices.source = previous.source; choices.bound = previous.bound;
+            binding.raw = previous.raw; setNativeProjection(field, previous.native);
+            try { syncPreview(); } catch { /* Preserve the original publication failure. */ }
+          }
+        }
+      } finally {
+        scanning = false; replacingGroup = undefined;
+        for (const event of transaction.events) try { onRows(event); } catch (cause) {
+          if (!failed) { failed = true; failure = cause; }
+        }
+      }
+      if (failed) throw failure;
+    });
+  }
+
   function choiceOptions(field: Field, values: unknown, id: RowId | null): readonly RowOption[] {
     const choices = field.choices!;
-    return rowOptions(values, choices.options, choices.label, choices.value, options => {
+    if (!choices.options) return [];
+    return rowOptions(values, choices.options, choices.label!, choices.value!, options => {
       throw formError("FORM_OPTIONS", "A row-local Select needs an array of options.", { field: field.name, rowId: id, options });
     });
   }
 
   function prepareChoices(values: Record<string, unknown> | null, id: RowId | null, selected?: ReadonlySet<Field>) {
     return new Map((selected ? choiceFields.filter(field => selected.has(field)) : choiceFields).map(field => [field, {
-      source: readPath(values, field.choices!.options), options: choiceOptions(field, values, id)
+      source: field.choices!.options ? readPath(values, field.choices!.options) : undefined, options: choiceOptions(field, values, id)
     }] as const));
   }
 
@@ -873,14 +1044,20 @@ export function bindForm<T extends object = Record<string, unknown>>(
     values: Record<string, unknown>, validate: boolean, preparing = false, checkpoint?: (cause?: unknown) => void): readonly ValidationIssue[] {
     if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
+    if (field.checkboxValues && !field.checkboxValues.some(code => code === candidate.value)) {
+      found.push(issue(field, id, "choice-option", "Choose an available checkbox value."));
+    }
     if (field.group) {
       const group = field.group;
-      const message = checkGroupValue(group, candidate.value);
+      const catalog = !preparing && field.groupDefinition?.source ? choiceGroupChoices(field.groupDefinition, group.catalog, values, key => {
+        throw formError("FORM_OPTIONS", "A generated group needs string row choices.", { field: field.name, options: key, rowId: id });
+      }) : undefined;
+      const message = checkGroupValue(catalog ? { kind: group.kind, values: catalog.map(choice => choice.value) } : group, candidate.value);
       if (message) found.push(issue(field, id, "choice-option", message));
       if (validate && !groupDisabled(group)) {
         const required = group.inputs.filter(input => input.required && !validationDisabled(input, id));
         const selected = candidate.entered === undefined ? candidate.value : candidate.entered;
-        const missing = !group.inputs.length ? group.required : group.kind === "radio"
+        const missing = catalog && id !== null && id !== boundId ? choiceGroupRequired(field.groupDefinition!, catalog, selected) : !group.inputs.length ? group.required : group.kind === "radio"
           ? required.length > 0 && !group.inputs.some(input => typeof selected === "string" && input.value === selected)
           : required.some(input => !Array.isArray(selected) || !selected.includes(input.value));
         if (missing) found.push(issue(field, id, "html", "Select the required options."));
@@ -913,14 +1090,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (validate && required && !selected) found.push(issue(field, id, "html", "Select an option."));
     } else if (control(field.element)) {
       const visible = id === null || id === boundId;
-      const probe = !preparing && visible && !valueCallbacks && !(id === null && field.format.length)
+      const probe = !field.checkboxValues && !preparing && visible && !valueCallbacks && !(id === null && field.format.length)
         ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
       if (probe !== field.element) {
         probe.disabled = validationDisabled(field.element, id);
         if (preparing && probe instanceof HTMLInputElement && probe.type === "file") {
           probe.files = (field.element as HTMLInputElement).files;
-        } else display(probe, entered);
+        } else display(probe, entered, field.checkboxValues);
         if (visible && field.element.validity.customError) probe.setCustomValidity(field.element.validationMessage);
       }
       const message = nativeMessage(probe, entered, validate);
@@ -989,7 +1166,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const shown = source && !focused && field.format.length
         ? runner.format(field.format, value, context(field, id, source)) : value;
       if (!current()) return;
-      displayField(field, shown);
+      displayField(field, shown, current);
     }
     if (id !== null && current()) rememberNative(field, id, readPath(source, field.path), false, current);
   }
@@ -1032,6 +1209,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
     prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>,
     selectedKeys?: ReadonlySet<string>): number {
     return working(() => {
+      const entry = renderVersion, admitted = refreshGroups(boundId === null ? null : rowValue(boundId), boundId, selected);
+      if (admitted === undefined) return entry;
       syncPreview();
       const version = ++renderVersion, id = boundId;
       const snapshot = id === null ? undefined : rows!.get(id);
@@ -1050,6 +1229,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
             if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
               field.choices.raw = renderRowOptions(field.element as HTMLSelectElement, field.choices.authoredNodes,
                 field.choices.authoredOptions, field.choices.authored, next.options);
+              if (field.choices.select) field.choices.select.raw = field.choices.raw;
               field.choices.source = next.source;
               field.choices.bound = true;
             }
@@ -1071,11 +1251,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
               }
             }
             if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
-            else displayField(field, currentDrafts.get(field));
+            else displayField(field, currentDrafts.get(field), current);
             if (id !== null && current()) rememberNative(field, id, currentDrafts.get(field), true, current);
             continue;
           }
-          const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
+          const raw = source ? readPath(source, field.path) : field.group?.kind === "checkbox" ? [] : field.choices || field.kind === "radio" ? null : "";
           if (valueCallbacks && id !== null) projectValue(field, raw, source!, id, phase, force, focused, current);
           else if (!(skipFocused && focused && field.kind === "single" && formatCapable(field.element))) {
             writeValue(field, raw, source, id, focused, current);
@@ -1213,7 +1393,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         const entered = new Map<Field, unknown>(), invalid = new Set<Field>();
         for (const field of nativeFields) {
           const state = snapshots.get(field)!, previous = field.nativeProjection;
-          const reuse = !!rows && id !== null && previous?.id === id && sameNative(previous.shown, state) && previous.raw !== undefined;
+          const reuse = !!rows && id !== null && previous?.id === id && sameNative(previous.shown, state) && (previous.raw !== undefined || field.checkboxValues !== undefined);
           const completedReset = resets.some(({ owner, events }) => events.some(event => event.eventPhase === Event.NONE && !event.defaultPrevented) &&
             field.originals.some(({ element }) => nativeOwner(element) === owner));
           const local = retained.get(field);
@@ -1307,6 +1487,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         message: "Newer Form work superseded this rule adoption.", cause });
     };
     const adopted: ReturnType<typeof capture>[] = [];
+    let rescanFailed = false;
     scanning = true;
     try {
       for (const [element, declaration] of annotations) {
@@ -1394,10 +1575,19 @@ export function bindForm<T extends object = Record<string, unknown>>(
       checkpoint();
       if (unchanged) { publishRules(); return; }
       for (const field of nextFields) if (field.element instanceof HTMLSelectElement && !releaseSelects.has(field.element)) {
-        pendingSelects.set(field.element, claimSelect(field.element, "bindForm"));
+        pendingSelects.set(field.element, claimSelect(field.element, "bindForm", field.choices?.select ? prepare => replaceSelectChoices(field, prepare) : undefined));
+        const select = getSelect(field.element);
+        if (select !== field.choices?.select || select && field.choices?.catalog !== select.catalog) {
+          throw formError("FORM_OPTIONS", "The common Select catalog changed during field admission.", { field: field.name });
+        }
       }
-      for (const field of nextFields) if (field.group && !releaseGroups.has(field.group)) {
-        pendingGroups.set(field.group, claimChoiceGroup(field.group, prepare => replaceGroup(field, prepare)));
+      for (const field of nextFields) if (field.groupDefinition && !field.group) {
+        mountFieldGroup(field, checkpoint);
+        const release = acquireGroup(field, nextInitial.find(state => state.field === field)!.value); pendingGroups.set(field.group!, release);
+        checkpoint();
+      }
+      for (const field of nextFields) if (field.group && !releaseGroups.has(field.group) && !pendingGroups.has(field.group)) {
+        pendingGroups.set(field.group, acquireGroup(field, nextInitial.find(state => state.field === field)!.value));
       }
       if (!current()) return;
       committing = true;
@@ -1418,7 +1608,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (!rows && localRenderedValues.has(field) && (control(field.element) || field.element.localName === "img")) {
           const raw = localFieldValue(field);
           if (!current()) return;
-          display(field.element, raw);
+          display(field.element, raw, field.checkboxValues);
         } else if (renderedOriginals.some(state => state.field === field)) {
           const state = captures.get(field)!;
           if (!current()) return;
@@ -1427,7 +1617,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (!current()) return;
         if (field.choices) {
           (field.element as HTMLSelectElement).replaceChildren(...field.choices.authoredNodes);
-          for (let index = 0; index < field.choices.authoredOptions.length; index++) {
+          if (field.choices.select) {
+            const raw = new Map(field.choices.authoredOptions.map((option, index) => [option, field.choices!.authored[index]]));
+            field.choices.select.raw = raw;
+            selectRowOptions(field.element as HTMLSelectElement, raw, captures.get(field)!.value, current);
+          } else for (let index = 0; index < field.choices.authoredOptions.length; index++) {
             if (!current()) return;
             field.choices.authoredOptions[index].selected = field.choices.selection[index];
           }
@@ -1520,16 +1714,20 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (current()) rescanIncomplete = false;
       }
     } catch (cause) {
+      rescanFailed = true;
       if (disposed) return;
       if (!committing && cause instanceof FrameworkError) throw cause;
       throw new FrameworkError({ api: "bindForm", code: "FORM_RESCAN", message: "The Form fields could not be reconciled.", cause });
     } finally {
-      for (const release of pendingSelects.values()) release();
+      let failed = false, failure: unknown;
+      for (const release of pendingSelects.values()) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       pendingSelects.clear();
-      for (const release of pendingGroups.values()) release();
+      for (const release of pendingGroups.values()) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       pendingGroups.clear();
+      for (const [group, dispose] of ownedGroups) if (!releaseGroups.has(group)) { ownedGroups.delete(group); try { dispose(); } catch (cause) { if (!failed) { failed = true; failure = cause; } } }
       if (!published) for (const state of adopted) if (state.files) state.files.length = 0;
       scanning = false;
+      if (failed && !rescanFailed) throw failure;
     }
   }
 
@@ -1564,11 +1762,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
         }
       }
       if (!entered()) return;
-      const version = ++renderVersion;
+      let version = ++renderVersion;
       const current = () => !disposed && version === renderVersion;
       if (boundId !== null) drafts.delete(boundId);
       boundId = null;
       acceptedSource = undefined;
+      const admitted = refreshGroups(null, null);
+      if (admitted === undefined || disposed || boundId !== null) return;
+      version = admitted;
       syncPreview();
       automatic = false;
       pointerField = undefined;
@@ -1581,20 +1782,24 @@ export function bindForm<T extends object = Record<string, unknown>>(
         const { field, element } = state;
         const retained = localRenderedValues.get(field);
         if (retained) { retained.raw = state.value; retained.invalid = false; }
-        if (field.group) field.group.write(state.value);
+        if (field.group) field.group.write(state.value, current);
         else if (element instanceof HTMLSelectElement) {
           const choices = field.choices;
           if (choices) {
             choices.raw = new Map(choices.authoredOptions.map((option, index) => [option, choices.authored[index]]));
+            if (choices.select) choices.select.raw = choices.raw;
             choices.source = undefined;
             choices.bound = false;
             element.replaceChildren(...choices.authoredNodes);
             if (!current()) return;
           }
-          element.selectedIndex = -1;
-          for (const selected of state.selection!) if (selected.selected && selected.option.closest("select") === element) {
-            if (!current()) return;
-            selected.option.selected = true;
+          if (choices?.select) selectRowOptions(element, choices.raw, state.value, current);
+          else {
+            element.selectedIndex = -1;
+            for (const selected of state.selection!) if (selected.selected && selected.option.closest("select") === element) {
+              if (!current()) return;
+              selected.option.selected = true;
+            }
           }
         } else if (state.files) {
           const captured = files.get(field);
@@ -1605,7 +1810,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
             if (!current()) return;
             selected.input.checked = selected.checked;
           }
-        } else if (control(element)) display(element, state.value);
+        } else if (control(element)) display(element, state.value, field.checkboxValues);
         else if (state.src !== undefined) {
           if (state.src === null) element.removeAttribute("src");
           else element.setAttribute("src", state.src);
@@ -1749,7 +1954,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const selection = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
         ? { start: element.selectionStart, end: element.selectionEnd, direction: element.selectionDirection }
         : null;
-      display(element, raw);
+      display(element, raw, field.checkboxValues);
       if (rows && boundId !== null && !disposed) rememberNative(field, boundId, raw);
       if (!rows) {
         localRenderedValues.get(field)!.shown = fieldValue(field);
@@ -1784,7 +1989,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (valueCallbacks) projectValue(field, raw, source, id, "val", false, false, current);
       else {
         const shown = runner.format(field.format, raw, context(field, id, source));
-        if (current()) { display(field.element, shown); if (current()) rememberNative(field, id, raw, false, current); }
+        if (current()) { display(field.element, shown, field.checkboxValues); if (current()) rememberNative(field, id, raw, false, current); }
       }
     });
   }
@@ -1949,59 +2154,76 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (disposed) return;
     if (!rows && !scanning) flushLocalResets(undefined, false);
     disposed = true;
-    acceptedSource = undefined;
-    syncPreview();
-    renderVersion++;
-    activeValues.clear();
-    activeBindings.clear();
-    for (const field of fields) { field.projection = undefined; setNativeProjection(field); }
-    for (const release of pendingSelects.values()) release();
-    pendingSelects.clear();
-    for (const release of pendingGroups.values()) release();
-    pendingGroups.clear();
-    for (const release of releaseGroups.values()) release();
-    releaseGroups.clear();
-    boundRoots.delete(root);
-    unsubscribe?.();
-    for (const release of releaseSelects.values()) release();
-    root.removeEventListener("input", onInput);
-    root.removeEventListener("change", onInput);
-    root.removeEventListener("pointerdown", onPointerDown);
-    root.removeEventListener("pointerup", onPointerEnd);
-    root.removeEventListener("pointercancel", onPointerEnd);
-    root.removeEventListener("focusin", onFocusIn);
-    root.removeEventListener("focusout", onFocusOut);
-    for (const owner of resetOwners) owner.removeEventListener("reset", onReset);
-    pendingResets.clear();
-    if (resetTimer !== undefined) clearTimeout(resetTimer);
-    if (!rows) for (const [field] of localRenderedValues) {
-      if (control(field.element)) display(field.element, localFieldValue(field));
-    }
-    for (const field of fields) {
-      for (const original of field.originals) {
-        if (original.describedBy === null) original.element.removeAttribute("aria-describedby");
-        else original.element.setAttribute("aria-describedby", original.describedBy);
-        if (original.invalid === null) original.element.removeAttribute("aria-invalid");
-        else original.element.setAttribute("aria-invalid", original.invalid);
-        if (rows) {
-          if (original.changed === null) original.element.removeAttribute("data-field-changed");
-          else original.element.setAttribute("data-field-changed", original.changed);
+    let failed = false, failure: unknown;
+    try {
+      acceptedSource = undefined;
+      syncPreview();
+      renderVersion++;
+      activeValues.clear();
+      activeBindings.clear();
+      for (const field of fields) { field.projection = undefined; setNativeProjection(field); }
+      boundRoots.delete(root);
+      unsubscribe?.();
+      root.removeEventListener("input", onInput);
+      root.removeEventListener("change", onInput);
+      root.removeEventListener("pointerdown", onPointerDown);
+      root.removeEventListener("pointerup", onPointerEnd);
+      root.removeEventListener("pointercancel", onPointerEnd);
+      root.removeEventListener("focusin", onFocusIn);
+      root.removeEventListener("focusout", onFocusOut);
+      for (const owner of resetOwners) owner.removeEventListener("reset", onReset);
+      pendingResets.clear();
+      if (resetTimer !== undefined) clearTimeout(resetTimer);
+      if (!rows) for (const [field] of localRenderedValues) {
+        if (control(field.element)) display(field.element, localFieldValue(field), field.checkboxValues);
+      }
+      for (const field of fields) {
+        for (const original of field.originals) {
+          if (original.describedBy === null) original.element.removeAttribute("aria-describedby");
+          else original.element.setAttribute("aria-describedby", original.describedBy);
+          if (original.invalid === null) original.element.removeAttribute("aria-invalid");
+          else original.element.setAttribute("aria-invalid", original.invalid);
+          if (rows) {
+            if (original.changed === null) original.element.removeAttribute("data-field-changed");
+            else original.element.setAttribute("data-field-changed", original.changed);
+          }
         }
       }
-    }
-    for (const [region, original] of regionState) {
-      if (original.id === null) region.removeAttribute("id");
-      else region.setAttribute("id", original.id);
-      if (original.live === null) region.removeAttribute("aria-live");
-      else region.setAttribute("aria-live", original.live);
-      region.textContent = original.text;
-    }
-    restoreRendered();
-    for (const field of choiceFields) {
-      const choices = field.choices!;
-      (field.element as HTMLSelectElement).replaceChildren(...choices.authoredNodes);
-      choices.authoredOptions.forEach((option, index) => { option.selected = choices.selection[index]; });
-      choices.raw.clear();
+      for (const [region, original] of regionState) {
+        if (original.id === null) region.removeAttribute("id");
+        else region.setAttribute("id", original.id);
+        if (original.live === null) region.removeAttribute("aria-live");
+        else region.setAttribute("aria-live", original.live);
+        region.textContent = original.text;
+      }
+      restoreRendered();
+    } catch (cause) { failed = true; failure = cause; }
+    finally {
+      for (const release of pendingGroups.values()) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      pendingGroups.clear();
+      for (const release of releaseGroups.values()) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      releaseGroups.clear();
+      for (const field of choiceFields) {
+        const choices = field.choices!;
+        try {
+          const element = field.element as HTMLSelectElement;
+          if (choices.select) {
+            const catalog = choices.select.catalog;
+            element.replaceChildren(...catalog.nodes);
+            const raw = new Map(catalog.options.map((option, index) => [option, catalog.values[index]]));
+            choices.select.raw = raw;
+            selectRowOptions(element, raw, initial.find(state => state.field === field)!.value);
+          } else {
+            element.replaceChildren(...choices.authoredNodes);
+            choices.authoredOptions.forEach((option, index) => { option.selected = choices.selection[index]; });
+          }
+          choices.raw.clear();
+        } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      }
+      for (const release of pendingSelects.values()) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      pendingSelects.clear();
+      for (const release of releaseSelects.values()) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      releaseSelects.clear();
     }
     for (const state of initial) if (state.files) state.files.length = 0;
     initial.length = 0;
@@ -2009,5 +2231,6 @@ export function bindForm<T extends object = Record<string, unknown>>(
     localRenderedValues.clear();
     drafts.clear();
     issues.clear();
+    if (failed) throw failure;
   }
 }

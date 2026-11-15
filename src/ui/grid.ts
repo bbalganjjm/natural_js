@@ -7,7 +7,12 @@ import { createRuleRunner } from "./rules.js";
 import { createRowRules } from "./row-rules.js";
 import type { RowRuleSource } from "./row-rules.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
-import { claimSelect } from "./select-owner.js";
+import { claimSelect, getSelect } from "./select-owner.js";
+import type { SelectCatalog } from "./select-owner.js";
+import type { RowOptionValue } from "./row-options.js";
+import { captureChoiceGroup, choiceGroupChoices, choiceGroupOptions, choiceGroupRequired, mountChoiceGroup } from "./choice-group.js";
+import { checkGroupValue, claimChoiceGroup } from "./choice-group-owner.js";
+import type { ChoiceGroupBinding } from "./choice-group-owner.js";
 import { bindGridColumns } from "./grid-columns.js";
 import { createGridSelection } from "./grid-selection.js";
 import { createGridFilters } from "./grid-filters.js";
@@ -16,7 +21,7 @@ import { focusVisible, restoreAttributes } from "./dom-state.js";
 import { readClipboard } from "./grid-paste.js";
 import { createGridViewport, validateGridViewport } from "./grid-viewport.js";
 import { compileGridBody } from "./grid-row-blocks.js";
-import { display, displayField, fieldValue, nativeMessage, interactiveContent, disabled as controlDisabled, textLengthControl } from "./native-control.js";
+import { captureCheckboxValues, display, displayField, fieldValue, nativeMessage, interactiveContent, disabled as controlDisabled, textLengthControl } from "./native-control.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createNativeDefaults } from "./native-defaults.js";
 import { createValueBinding } from "./value-binding.js";
@@ -29,6 +34,7 @@ import type { RuleCall } from "./rules.js";
 import type { FormatRule, GridBindResult, GridColumn, GridFilterChoice, GridHandle, GridIdsChange, GridRowScope, PageRequest, PageState, ParseInput, RuleContext, RuleSet, SelectHandle, SelectValue, SortIndicator, SourceBindContext, ValidateRule, ValidationIssue, ValidationResult, ValueBindContext } from "./index.js";
 
 interface TextField {
+  group?: ReturnType<typeof captureChoiceGroup>;
   index: number;
   indexes: number[];
   kind: "single" | "radio" | "checkbox";
@@ -38,6 +44,7 @@ interface TextField {
   validate: readonly RuleCall<ValidateRule>[];
   editable: boolean;
   checkbox: boolean;
+  checkboxValues?: readonly [string, string];
 }
 
 interface SelectField {
@@ -48,11 +55,18 @@ interface SelectField {
   options?: readonly string[];
   label?: readonly string[];
   value?: readonly string[];
-  authored: readonly (string | null)[];
+  authored: readonly RowOptionValue[];
+  typed: boolean;
+  catalog?: SelectCatalog;
   multiple: boolean;
 }
 
 interface BoundText {
+  group?: ChoiceGroupBinding;
+  groupInvalid?: string | null;
+  releaseGroup?: () => void;
+  groupSource?: unknown;
+  groupBound?: boolean;
   descriptor: TextField;
   element: HTMLElement;
   elements: HTMLElement[];
@@ -245,6 +259,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       options.onPaste !== undefined && typeof options.onPaste !== "function") {
     throw gridError("GRID_PASTE", "paste must be boolean and onPaste must be a function.");
   }
+  const releaseTemplateGroups: (() => void)[] = [];
+  try {
+  for (const element of authored) if (element.hasAttribute("data-unchecked-value") && !element.hasAttribute("data-field")) {
+    throw gridError("GRID_CONTROL", "A coded checkbox needs one marked native checkbox.");
+  }
   for (const [index, element] of authored.entries()) {
     const errorFor = element.getAttribute("data-error-for");
     if (errorFor !== null) {
@@ -273,9 +292,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       throw gridError("GRID_ACTION", "A row action needs a named button, type=button and onRowAction.");
     }
     const fieldName = element.getAttribute("data-field");
+    const checkboxValues = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]")) ? undefined : captureCheckboxValues(element, () => { throw gridError("GRID_CONTROL", "A coded checkbox needs one marked checkbox and distinct explicit value/data-unchecked-value strings.", { field: fieldName ?? "" }); });
     const optionsName = element.getAttribute("data-options");
     if (element.tagName === "SELECT" && (fieldName !== null || optionsName !== null)) {
       const select = element as HTMLSelectElement;
+      const catalog = getSelect(select)?.catalog;
       const labelName = select.getAttribute("data-option-label");
       const valueName = select.getAttribute("data-option-value");
       if (optionsName !== null && (labelName === null || valueName === null)) {
@@ -292,11 +313,16 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         options: optionsName === null ? undefined : parsePath(optionsName),
         label: labelName === null ? undefined : parsePath(labelName),
         value: valueName === null ? undefined : parsePath(valueName),
-        authored: [...select.options].map(option => option.value === "" ? null : option.value),
+        authored: [...catalog?.values ?? [...select.options].map(option => option.value === "" ? null : option.value)],
+        typed: catalog !== undefined || optionsName !== null, catalog,
         multiple: select.multiple
       });
     } else if (fieldName !== null) {
+      const generated = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]"));
+      const group = generated ? captureChoiceGroup(element as HTMLFieldSetElement) : undefined;
+      if (group) releaseTemplateGroups.push(group.release);
       const format = runner.formats(element, fieldName);
+      if (group && (format.length || parsers.has(fieldName) || Object.hasOwn(options.render ?? {}, fieldName))) throw gridError("GRID_CONTROL", "A generated group cannot own a parser, formatting or renderer.", { field: fieldName });
       if (element instanceof HTMLInputElement) {
         const type = element.getAttribute("type")?.toLowerCase() ?? element.type;
         if (type === "file") {
@@ -313,11 +339,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           throw gridError("GRID_PARSE_FIELD", "A number or range input needs a parser to preserve its raw value type.", { field: fieldName });
         }
       }
-      const kind = element instanceof HTMLInputElement && ["radio", "checkbox"].includes(element.type)
-        ? element.type as "radio" | "checkbox" : "single";
+      const kind = group?.definition.kind ?? (element instanceof HTMLInputElement && ["radio", "checkbox"].includes(element.type)
+        ? element.type as "radio" | "checkbox" : "single");
       const existing = textFields.find(field => field.name === fieldName && field.kind !== "single");
       if (existing) {
-        if (kind !== existing.kind) throw gridError("GRID_CONTROL", "One field group needs matching native controls.", { field: fieldName });
+        if (checkboxValues || existing.checkboxValues) throw gridError("GRID_CONTROL", "Coded values belong to one checkbox, not a field group.", { field: fieldName });
+        if (group || existing.group || kind !== existing.kind) throw gridError("GRID_CONTROL", "One field group needs matching native controls.", { field: fieldName });
         if (kind === "radio" && (authored[existing.index] as HTMLInputElement).form !== (element as HTMLInputElement).form) {
           throw gridError("GRID_CONTROL", "One radio field needs the same native form owner.", { field: fieldName });
         }
@@ -327,13 +354,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         existing.indexes.push(index);
         continue;
       }
-      textFields.push({ index, indexes: [index], kind, name: fieldName, path: parsePath(fieldName),
+      textFields.push({ index, indexes: [index], kind, group, name: fieldName, path: parsePath(fieldName),
         format, validate: runner.validators(element, fieldName),
-        editable: element instanceof HTMLTextAreaElement || element instanceof HTMLInputElement,
-        checkbox: element instanceof HTMLInputElement && element.type === "checkbox" });
+        editable: group !== undefined || element instanceof HTMLTextAreaElement || element instanceof HTMLInputElement,
+        checkbox: group?.definition.kind === "checkbox" || element instanceof HTMLInputElement && element.type === "checkbox", checkboxValues });
     }
   }
 
+  const generatedGroups = textFields.some(field => field.group);
+  const guarded = values.sourceEnabled || generatedGroups;
   if (options.selectOnRowClick !== undefined && typeof options.selectOnRowClick !== "boolean" ||
       options.selectOnRowClick && !buttonIndexes.length) {
     throw gridError("GRID_SELECT", "selectOnRowClick needs a boolean and an authored row selection button when enabled.");
@@ -372,8 +401,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const authoredDefaults: { name: string; path: readonly string[]; value: unknown; element: HTMLElement; parse?: ParseInput }[] = [];
   for (const field of textFields) if (field.editable) {
     authoredDefaults.push({ name: field.name, path: field.path, element: authored[field.index],
-      ...(parsers.has(field.name) ? { parse: parsers.get(field.name)! } : {}), value: fieldValue({
-      element: authored[field.index], elements: field.indexes.map(index => authored[index]), kind: field.kind
+      ...(parsers.has(field.name) ? { parse: parsers.get(field.name)! } : {}), value: field.group ? field.group.value : fieldValue({
+      element: authored[field.index], elements: field.indexes.map(index => authored[index]), kind: field.kind, checkboxValues: field.checkboxValues
     }) });
   }
   for (const field of selectFields) if (field.name && field.field) {
@@ -388,7 +417,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   const rowRules = createRowRules<RenderedRow<T>>(runner, [
     ...textFields.map(target => ({ target, elements: target.indexes.map(index => authored[index]) })),
     ...selectFields.map(target => ({ target, elements: [authored[target.index]] }))
-  ], (record, position) => position < textFields.length ? record.texts[position].elements :
+  ], (record, position) => position < textFields.length ? record.texts[position].group ? [record.texts[position].group!.root] : record.texts[position].elements :
     [record.selects[position - textFields.length].element], (position, calls, source, declarations) => {
     if (position >= textFields.length) {
       if (calls.format.length) throw gridError("GRID_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.", { field: selectFields[position - textFields.length].name ?? "" });
@@ -407,7 +436,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       message: "A render target cannot own formatting.", detail: { field: field.name } });
   }, () => { throw gridError("GRID_BIND_REENTRANT", "Finish the current rule before changing its declaration."); });
   const sourceFields = values.sourceEnabled ? [
-    ...textFields.map((field, index) => ({ key: field.path[0], dependency: undefined, index, select: false })),
+    ...textFields.map((field, index) => ({ key: field.path[0], dependency: field.group?.definition.source?.options[0], index, select: false })),
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
   ] : undefined;
   const selection = createGridSelection(sourceRows, { multiple, toggleSelection, checkMode, canSelect, canCheck,
@@ -486,10 +515,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   try {
     for (const field of selectFields) {
       templateReleases.push(claimSelect(authored[field.index] as HTMLSelectElement, "bindGrid"));
+      if (getSelect(authored[field.index] as HTMLSelectElement)?.catalog !== field.catalog) {
+        throw gridError("GRID_OPTIONS", "The common Select catalog changed during template capture.", { field: field.name ?? "" });
+      }
     }
   } catch (cause) {
-    for (const release of templateReleases) release();
-    columns.dispose();
+    for (const release of templateReleases) try { release(); } catch {}
+    for (const release of releaseTemplateGroups) try { release(); } catch {}
+    try { columns.dispose(); } catch {}
     throw cause;
   }
   const staticRows = [...root.rows].filter(row => !templates.includes(row));
@@ -587,17 +620,32 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     return controlDisabled(element, root);
   }
 
-  function createRecord(id: RowId): RenderedRow<T> {
+  function createRecord(id: RowId, checkpoint: () => void): RenderedRow<T> {
     const { elements, nodes, mergeCells } = body.clone();
-    const texts = textFields.map(descriptor => ({
+    const texts: BoundText[] = textFields.map(descriptor => ({
       descriptor,
       element: nodes[descriptor.index],
       elements: descriptor.indexes.map(index => nodes[index]),
       invalids: descriptor.indexes.map(index => nodes[index].getAttribute("aria-invalid")),
       bound: false
     }));
+    const acquired: (() => void)[] = [];
+    try {
     for (const binding of texts) {
-      if (binding.descriptor.kind === "radio") {
+      if (binding.descriptor.group) {
+        const captured = binding.descriptor.group, snapshot = sourceRows.get(id)!;
+        const suffix = choiceGroupOptions(captured.definition, snapshot.value, field => { throw gridError("GRID_OPTIONS", "A generated group needs string row choices.", { field, rowId: id }); }); checkpoint();
+        const mounted = mountChoiceGroup(binding.element as HTMLFieldSetElement, captured.definition, captured.catalog,
+          { suffix, capturedLabels: captured.capturedLabels, current: checkpoint });
+        let release: (() => void) | undefined;
+        try { release = claimChoiceGroup(mounted.binding); checkpoint(); }
+        catch (cause) { release?.(); mounted.dispose(); throw cause; }
+        binding.group = mounted.binding; binding.elements = [...mounted.binding.inputs]; binding.element = mounted.binding.inputs[0] ?? mounted.binding.root;
+        binding.groupInvalid = mounted.binding.root.getAttribute("aria-invalid");
+        binding.invalids = binding.elements.map(element => element.getAttribute("aria-invalid"));
+        binding.groupSource = captured.definition.source ? readPath(snapshot.value, captured.definition.source.options) : undefined;
+        binding.groupBound = true; binding.releaseGroup = () => { release!(); mounted.dispose(); }; acquired.push(binding.releaseGroup);
+      } else if (binding.descriptor.kind === "radio") {
         let name: string;
         do { name = `natural-grid-radio-${++nextRadioName}`; } while (root.ownerDocument.getElementsByName(name).length);
         for (const element of binding.elements) (element as HTMLInputElement).name = name;
@@ -624,6 +672,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         release: claimSelect(element, "bindGrid")
       };
       selects.set(element, { id, binding });
+      acquired.push(binding.release);
       return binding;
     });
     const buttons = buttonIndexes.map(index => nodes[index] as HTMLButtonElement);
@@ -637,7 +686,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (!region.hasAttribute("aria-live")) region.setAttribute("aria-live", "polite");
       region.textContent = "";
       const controls = [
-        ...texts.filter(binding => binding.descriptor.name === field).flatMap(binding => binding.elements),
+        ...texts.filter(binding => binding.descriptor.name === field).flatMap(binding => binding.group ? [binding.group.root, ...binding.elements] : binding.elements),
         ...rowSelects.filter(binding => binding.descriptor.name === field).map(binding => binding.element)
       ];
       for (const control of controls) {
@@ -649,22 +698,32 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const checks = checkIndexes.map(index => nodes[index] as HTMLInputElement);
     for (const element of elements) rowIds.set(element, id);
     return { id, elements, mergeCells, errors, hasIssues: false, texts, selects: rowSelects, buttons, ruleSources: rowRules.sources(id),
-      controls: controlIndexes.map(index => nodes[index] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement),
+      controls: [...controlIndexes.map(index => nodes[index] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement).filter(control => elements.some(row => row.contains(control))),
+        ...texts.flatMap(binding => binding.group ? [...binding.group.inputs] : [])],
       buttonDisabled: buttons.map(button => button.disabled), checks, checkDisabled: checks.map(check => check.disabled),
       releaseColumns: columns.attach(elements) };
+    } catch (cause) { for (const release of acquired.reverse()) try { release(); } catch {} throw cause; }
   }
 
   function releaseRecord(record: RenderedRow<T>, sourceVersion?: number): void {
-    if (sourceVersion !== undefined && record.sourceVersion !== sourceVersion) return;
-    hooks.release(record.id);
-    if (sourceVersion !== undefined && record.sourceVersion !== sourceVersion) return;
+    let failed = false, failure: unknown;
+    const current = () => { if (sourceVersion === undefined || record.sourceVersion === sourceVersion) return true; if (failed) throw failure; return false; };
+    if (!current()) return;
+    try { hooks.release(record.id); } catch (cause) { failed = true; failure = cause; }
+    if (!current()) return;
     for (const element of record.elements) {
-      element.remove();
-      if (sourceVersion !== undefined && record.sourceVersion !== sourceVersion) return;
+      try { element.remove(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      if (!current()) return;
     }
-    record.releaseColumns();
-    if (sourceVersion !== undefined && record.sourceVersion !== sourceVersion) return;
-    for (const select of record.selects) select.release();
+    try { record.releaseColumns(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+    if (!current()) return;
+    for (const select of record.selects) { try { select.release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } } if (!current()) return; }
+    for (const binding of record.texts) {
+      if (binding.group) for (const element of binding.elements) edits.delete(element);
+      try { binding.releaseGroup?.(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      if (!current()) return;
+    }
+    if (failed) throw failure;
   }
 
   function projection(binding: { projection?: ValueProjection }, raw: unknown, id: RowId): void {
@@ -692,8 +751,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         const context: ValueBindContext = Object.freeze({ field: descriptor.name!,
           values: value as Snapshot<Record<string, unknown>>, rowId: id, element, phase: binding.projection!.phase });
         values.apply(binding, { element, elements: [element], kind: descriptor.multiple ? "multiple" : "single" }, raw, context,
-          shown => descriptor.options ? selectRowOptions(element, binding.rawByOption, shown) : display(element, shown),
-          current, descriptor.options ? () => [...binding.rawByOption.values()] : undefined);
+          shown => descriptor.typed ? selectRowOptions(element, binding.rawByOption, shown, current) : display(element, shown),
+          current, descriptor.typed ? () => [...binding.rawByOption.values()] : undefined);
         if (!current()) return;
         binding.previous = raw;
         binding.selectedBound = true;
@@ -720,7 +779,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       }
     } else if (!current || current()) {
       if (field.kind === "single") display(binding.element, value);
-      else displayField({ element: binding.element, elements: binding.elements, kind: field.kind }, value);
+      else displayField({ element: binding.element, elements: binding.elements, kind: field.kind, group: binding.group, checkboxValues: field.checkboxValues }, value, current);
     }
   }
 
@@ -736,8 +795,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (!repaint && binding.bound && Object.is(binding.previous, raw) && binding.projection!.state !== "pending") return;
       const context: ValueBindContext = Object.freeze({ field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
         rowId: snapshot.id, element, phase: binding.projection!.phase });
-      values.apply(binding, { element, elements: binding.elements,
-        kind: field.checkbox ? "checkbox" : field.kind }, raw, context,
+      values.apply(binding, { element, elements: binding.elements, group: binding.group,
+        kind: field.checkbox ? "checkbox" : field.kind, checkboxValues: field.checkboxValues }, raw, context,
         value => writeText(binding, snapshot, value, false, current), current);
       if (!current()) return;
     } else {
@@ -771,6 +830,49 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     if (binding.descriptor.field) binding.element.setAttribute("data-field-changed", String(original !== undefined &&
       !sameJson(readPath(original, binding.descriptor.field), readPath(snapshot.value, binding.descriptor.field))));
     renderSelect(binding, snapshot.value, snapshot.id, current);
+  }
+
+  function publishGroups(record: RenderedRow<T>, row: RowSnapshot<T>, current?: () => boolean): void {
+    const checkpoint = () => { if (current && !current()) throw gridError("GRID_BIND_STALE", "Newer Grid work superseded group publication.", { rowId: row.id }); };
+    for (const binding of record.texts) if (binding.group && binding.descriptor.group) {
+      const captured = binding.descriptor.group, source = captured.definition.source ? readPath(row.value, captured.definition.source.options) : undefined;
+      if (binding.groupBound && Object.is(binding.groupSource, source)) continue;
+      const suffix = choiceGroupOptions(captured.definition, row.value, field => { throw gridError("GRID_OPTIONS", "A generated group needs string row choices.", { field, rowId: row.id }); }); checkpoint();
+      const next = binding.group.prepare(suffix, checkpoint), raw = readPath(row.value, binding.descriptor.path), projection = binding.projection;
+      if (!drafts.get(row.id)?.has(binding.descriptor.name) && projection?.state === "applied" && projection.id === row.id && sameJson(projection.raw, raw) && projection.callback) {
+        const message = checkGroupValue({ kind: binding.group.kind, values: next.values }, projection.value);
+        if (message) throw values.error(Object.freeze({ field: binding.descriptor.name, values: row.value as Snapshot<Record<string, unknown>>, rowId: row.id, element: binding.element, phase: projection.phase }), projection.callback, message);
+      }
+      const previous = { element: binding.element, elements: binding.elements, invalids: binding.invalids, controls: record.controls, disabled: record.deletedDisabled, source: binding.groupSource, bound: binding.bound }, version = record.sourceVersion;
+      const originalDisabled = new Map(record.controls.map((control, index) => [control, record.deletedDisabled?.[index] ?? control.disabled]));
+      let undo: (() => void) | undefined, failed = false;
+      try {
+        undo = next.apply(); checkpoint();
+        for (const element of previous.elements) edits.delete(element);
+        binding.elements = [...next.inputs]; binding.element = next.inputs[0] ?? binding.group.root;
+        binding.invalids = next.inputs.map(input => input.getAttribute("aria-invalid"));
+        for (const element of next.inputs) edits.set(element, { id: row.id, binding });
+        record.controls = [...previous.controls.filter(control => !previous.elements.includes(control)), ...next.inputs];
+        if (record.deletedDisabled) record.deletedDisabled = record.controls.map(control => originalDisabled.get(control) ?? control.disabled);
+        const region = record.errors.get(binding.descriptor.name), invalid = issueText.get(row.id)?.has(binding.descriptor.name);
+        for (const element of [binding.group.root, ...next.inputs]) {
+          if (region) { const ids = new Set((element.getAttribute("aria-describedby") ?? "").split(/\s+/).filter(Boolean)); ids.add(region.id); element.setAttribute("aria-describedby", [...ids].join(" ")); checkpoint(); }
+          if (invalid) element.setAttribute("aria-invalid", "true");
+          if (row.status === "delete" && element instanceof HTMLInputElement) { element.disabled = true; checkpoint(); }
+        }
+        binding.groupSource = source; binding.groupBound = true; binding.bound = false;
+      } catch (cause) {
+        failed = true;
+        if (records.get(record.id) === record && record.sourceVersion === version) {
+          for (const element of next.inputs) edits.delete(element);
+          binding.element = previous.element; binding.elements = previous.elements; binding.invalids = previous.invalids; binding.groupSource = previous.source; binding.bound = previous.bound;
+          record.controls = previous.controls; record.deletedDisabled = previous.disabled;
+          for (const element of previous.elements) edits.set(element, { id: row.id, binding });
+          try { undo?.(); } catch {}
+        }
+        throw cause;
+      } finally { try { next.finish(); } catch (cause) { if (!failed) throw cause; } }
+    }
   }
 
   function renderRecord(record: RenderedRow<T>, snapshot: RowSnapshot<T>, current?: () => boolean): void {
@@ -866,9 +968,18 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           message: parseError, ...(element ? { element } : {}) });
         continue;
       }
+      if (descriptor.checkboxValues && !descriptor.checkboxValues.some(code => code === value)) {
+        issues.push({ rowId: row.id, field: descriptor.name, rule: "choice-option", message: "Choose an available checkbox value.", ...(element ? { element } : {}) });
+      }
       const context = ruleContext(row, descriptor.name, values, element);
       const original = bound?.element ?? authored[descriptor.index];
-      if (descriptor.kind === "radio" || descriptor.checkbox && descriptor.indexes.length > 1) {
+      if (descriptor.group) {
+        const catalog = choiceGroupChoices(descriptor.group.definition, descriptor.group.catalog, values, field => { throw gridError("GRID_OPTIONS", "A generated group needs string row choices.", { field, rowId: row.id }); });
+        const entered = pending?.get(descriptor.name)?.entered ?? value;
+        const message = checkGroupValue({ kind: descriptor.group.definition.kind, values: catalog.map(choice => choice.value) }, entered);
+        if (message) issues.push({ rowId: row.id, field: descriptor.name, rule: "choice-option", message, ...(element ? { element } : {}) });
+        if (full && !disabled(bound?.group?.root ?? authored[descriptor.index]) && choiceGroupRequired(descriptor.group.definition, catalog, entered)) issues.push({ rowId: row.id, field: descriptor.name, rule: "html", message: "Choose an option.", ...(element ? { element } : {}) });
+      } else if (descriptor.kind === "radio" || descriptor.checkbox && descriptor.indexes.length > 1) {
         const members = bound?.elements ?? descriptor.indexes.map(index => authored[index]);
         const draft = pending?.get(descriptor.name);
         const entered = draft ? draft.entered : value;
@@ -887,7 +998,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           validationControls.set(descriptor.index, source);
         }
         source.disabled = disabled(original);
-        display(source, pending?.get(descriptor.name)?.entered ?? value);
+        display(source, pending?.get(descriptor.name)?.entered ?? value, descriptor.checkboxValues);
         const message = nativeMessage(source, pending?.get(descriptor.name)?.entered ?? value, full);
         if (message) {
           issues.push({
@@ -938,10 +1049,12 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   function showIssues(record: RenderedRow<T>, byField: ReadonlyMap<string, readonly string[]>): void {
     for (const bound of record.texts) {
       const invalid = byField.has(bound.descriptor.name);
-      for (const [index, element] of bound.elements.entries()) {
+      const targets = bound.group ? [bound.group.root, ...bound.elements] : bound.elements;
+      const originals = bound.group ? [bound.groupInvalid ?? null, ...bound.invalids] : bound.invalids;
+      for (const [index, element] of targets.entries()) {
         if (invalid) element.setAttribute("aria-invalid", "true");
-        else if (bound.invalids[index] === null) element.removeAttribute("aria-invalid");
-        else element.setAttribute("aria-invalid", bound.invalids[index]!);
+        else if (originals[index] === null) element.removeAttribute("aria-invalid");
+        else element.setAttribute("aria-invalid", originals[index]!);
       }
     }
     for (const bound of record.selects) {
@@ -1155,9 +1268,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       for (const [id, record] of records) {
         if (previousIds.has(id)) continue;
         if (current && !current()) throw cause;
-        const sourceVersion = values.sourceEnabled ? record.sourceVersion : undefined;
+        const sourceVersion = guarded ? record.sourceVersion : undefined;
         releaseRecord(record, sourceVersion);
-        if (!values.sourceEnabled || records.get(id) === record && record.sourceVersion === sourceVersion) records.delete(id);
+        if (!guarded || records.get(id) === record && record.sourceVersion === sourceVersion) records.delete(id);
         if (current && !current()) throw cause;
       }
       mergeRows();
@@ -1343,15 +1456,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           const existed = records.has(id);
           let sourceVersion: number | undefined;
           try {
-            renderWindow(false, [id], false, true, values.sourceEnabled ? version => { sourceVersion = version; } : undefined);
+            renderWindow(false, [id], false, true, guarded ? version => { sourceVersion = version; } : undefined);
             checkOperation(current);
           } catch (cause) {
             if (operation === current) {
               const record = records.get(id);
-              if (record && (!values.sourceEnabled || sourceVersion !== undefined && record.sourceVersion === sourceVersion)) {
+              if (record && (!guarded || sourceVersion !== undefined && record.sourceVersion === sourceVersion)) {
                 if (!existed) {
-                  releaseRecord(record, sourceVersion);
-                  if (!values.sourceEnabled || records.get(id) === record && record.sourceVersion === sourceVersion) records.delete(id);
+                  try { releaseRecord(record, sourceVersion); } catch {}
+                  if (!guarded || records.get(id) === record && record.sourceVersion === sourceVersion) records.delete(id);
                 } else {
                   hooks.release(id);
                   if (sourceVersion === undefined || record.sourceVersion === sourceVersion) {
@@ -1553,8 +1666,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     admitSource?: (version: number) => void): (() => void) | undefined {
     if (disposed) return;
     bindable();
-    const valueVersion = values.enabled || values.sourceEnabled ? ++valueRenderVersion : 0;
-    if (values.sourceEnabled) admitSource?.(valueVersion);
+    const valueVersion = values.enabled || guarded ? ++valueRenderVersion : 0;
+    if (guarded) admitSource?.(valueVersion);
     const activeOperation = operation;
     const sourcePending = values.sourceEnabled ? new Map<RenderedRow<T>, RowSnapshot<T>>() : undefined;
     if (place) body.resetMerges();
@@ -1568,11 +1681,11 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const revision = viewRevision;
     const source = sourceRows.entries({ includeDeleted: true });
     const layout = columns.columns();
-    const current = values.enabled || values.sourceEnabled ? () => {
+    const current = values.enabled || guarded ? () => {
       const live = !disposed && valueVersion === valueRenderVersion &&
         (!values.sourceEnabled || operation === activeOperation) &&
         source === sourceRows.entries({ includeDeleted: true }) && revision === viewRevision && layout === columns.columns();
-      if (values.sourceEnabled && !live) { active(); throw gridError("GRID_BIND_STALE", "The rows or view changed during a row callback."); }
+      if (guarded && !live) { active(); throw gridError("GRID_BIND_STALE", "The rows or view changed during a row callback."); }
       return live;
     } : undefined;
     const check = (id?: RowId) => {
@@ -1587,8 +1700,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         if (!snapshot) continue;
         let record = records.get(id);
         if (!record) {
-          record = createRecord(id);
-          if (values.sourceEnabled) record.sourceVersion = valueVersion;
+          record = createRecord(id, () => check(id));
+          if (guarded) record.sourceVersion = valueVersion;
           records.set(id, record);
           rowRules.attach(record, () => check(id));
           if (beforeRowBind || values.sourceEnabled || !place) for (const element of record.elements) {
@@ -1597,12 +1710,14 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
             if (current && !current()) return;
           }
         }
-        if (values.sourceEnabled) record.sourceVersion = valueVersion;
+        if (guarded) record.sourceVersion = valueVersion;
         if (values.sourceEnabled) for (const element of record.elements) if (element.parentNode !== anchor.parentNode) {
           if (current && !current()) return;
           anchor.parentNode!.insertBefore(element, anchor);
           if (current && !current()) return;
         }
+        publishGroups(record, snapshot, current);
+        if (current && !current()) return;
         if (record.snapshot !== snapshot) {
           pinLayoutChanged = true;
           renderStatus(record, snapshot);
@@ -1614,7 +1729,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           if (snapshot.status === "delete") for (const control of record.controls) control.disabled = true;
         }
         renderRecord(record, snapshot, current);
-        if (values.enabled || values.sourceEnabled) check(id);
+        if (values.enabled || guarded) check(id);
         sourcePending?.set(record, snapshot);
         const issues = issueText.get(id);
         if (issues) showIssues(record, issues);
@@ -1627,18 +1742,18 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         }
       }
     } catch (cause) {
-      for (const record of rebound) if (!values.sourceEnabled || record.sourceVersion === valueVersion) {
+      for (const record of rebound) if (!guarded || record.sourceVersion === valueVersion) {
         hooks.release(record.id);
-        if (!values.sourceEnabled || record.sourceVersion === valueVersion) {
+        if (!guarded || record.sourceVersion === valueVersion) {
           resetRecord(record);
           if (values.sourceEnabled) record.acceptedSource = undefined;
         }
       }
       for (const id of nextIds) if (!existing.has(id)) {
         const record = records.get(id);
-        if (record && (!values.sourceEnabled || record.sourceVersion === valueVersion)) {
-          releaseRecord(record, values.sourceEnabled ? valueVersion : undefined);
-          if (!values.sourceEnabled || records.get(id) === record && record.sourceVersion === valueVersion) records.delete(id);
+        if (record && (!guarded || record.sourceVersion === valueVersion)) {
+          try { releaseRecord(record, guarded ? valueVersion : undefined); } catch {}
+          if (!guarded || records.get(id) === record && record.sourceVersion === valueVersion) records.delete(id);
         }
       }
       throw cause;
@@ -1692,9 +1807,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       for (const [id, record] of records) {
         if (nextSet.has(id)) continue;
         if (values.sourceEnabled && current && !current()) return;
-        const sourceVersion = values.sourceEnabled ? record.sourceVersion : undefined;
+        const sourceVersion = guarded ? record.sourceVersion : undefined;
         releaseRecord(record, sourceVersion);
-        if (!values.sourceEnabled || records.get(id) === record && record.sourceVersion === sourceVersion) records.delete(id);
+        if (!guarded || records.get(id) === record && record.sourceVersion === sourceVersion) records.delete(id);
         if (values.sourceEnabled && current && !current()) return;
       }
     }
@@ -1725,9 +1840,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           }
         }
       } catch (cause) {
-        for (const record of rebound) if (!values.sourceEnabled || record.sourceVersion === valueVersion) {
+        for (const record of rebound) if (!guarded || record.sourceVersion === valueVersion) {
           hooks.release(record.id);
-          if (!values.sourceEnabled || record.sourceVersion === valueVersion) {
+          if (!guarded || record.sourceVersion === valueVersion) {
             resetRecord(record);
             if (values.sourceEnabled) record.acceptedSource = undefined;
           }
@@ -2101,7 +2216,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const entry = edits.get(target);
     if (!entry) return;
     const descriptor = entry.binding.descriptor;
-    const entered = fieldValue({ element: entry.binding.element, elements: entry.binding.elements, kind: descriptor.kind });
+    const entered = fieldValue({ element: entry.binding.element, elements: entry.binding.elements, kind: descriptor.kind, group: entry.binding.group, checkboxValues: descriptor.checkboxValues });
     draft(entry.id, descriptor.name, descriptor.path, entered,
       validateOn === "change" || validateOn === "blur" && descriptor.kind !== "single");
   }
@@ -2201,7 +2316,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
               !record && root.closest('[inert], [aria-readonly="true"]') ||
               (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) && element.readOnly) continue;
           let entered: unknown = text;
-          const array = field.select >= 0 ? selectFields[field.select].multiple : textFields[field.text].kind === "checkbox" && members.length > 1;
+          const array = field.select >= 0 ? selectFields[field.select].multiple : textFields[field.text].kind === "checkbox" && (textFields[field.text].group !== undefined || members.length > 1);
           let requested: unknown[] = [];
           if (array) {
             try {
@@ -2232,12 +2347,20 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
             }
             entered = array ? values : values[0];
           } else if (textFields[field.text].kind === "radio" || array) {
-            const values = members.map(member => (member as HTMLInputElement).value);
+            const descriptor = textFields[field.text];
+            const values = descriptor.group ? [...descriptor.group.catalog.choices, ...choiceGroupOptions(descriptor.group.definition, row.value, key => { throw gridError("GRID_OPTIONS", "A generated group needs string row choices.", { field: key, rowId: id }); })]
+              .filter(choice => !descriptor.group!.definition.templateDisabled && !choice.disabled).map(choice => choice.value) : members.map(member => (member as HTMLInputElement).value);
             if (array ? requested.some(value => typeof value !== "string" || !values.includes(value)) : text !== "" && !values.includes(text)) {
               issue(id, field.name, "Choose available group values.");
               continue;
             }
             entered = array ? requested : text || null;
+          } else if (textFields[field.text].checkboxValues) {
+            if (!textFields[field.text].checkboxValues!.some(code => code === text)) {
+              issue(id, field.name, "Paste an available checkbox value.");
+              continue;
+            }
+            entered = text;
           } else if (textFields[field.text].checkbox) {
             if (text !== "true" && text !== "false") {
               issue(id, field.name, "Paste true or false into a checkbox.");
@@ -2388,10 +2511,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       for (const restore of restoreStaticAria) restore();
     }
     restoreHeader();
-    for (const record of records.values()) {
-      releaseRecord(record);
-    }
-    for (const release of templateReleases) release();
+    for (const record of records.values()) try { releaseRecord(record); } catch {}
+    for (const release of templateReleases) try { release(); } catch {}
+    for (const release of releaseTemplateGroups) try { release(); } catch {}
     columns.dispose();
     restoreBusy();
     restoreChanged();
@@ -2533,6 +2655,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     dispose() {
       if (disposed) return;
       disposed = true;
+      let failed = false, failure: unknown;
       rowRules.dispose();
       cancelOperation();
       unsubscribe();
@@ -2557,10 +2680,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
         for (const restore of restoreStaticAria) restore();
       }
       restoreHeader();
-      for (const record of records.values()) {
-        releaseRecord(record);
-      }
-      for (const release of templateReleases) release();
+      for (const record of records.values()) try { releaseRecord(record); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      for (const release of templateReleases) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      for (const release of releaseTemplateGroups) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       records.clear();
       drafts.clear();
       issueText.clear();
@@ -2582,7 +2704,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
       if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
       boundRoots.delete(root);
       body.restore();
-      cleanupFailure();
+      try { cleanupFailure(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      if (failed) throw failure;
     }
   };
+  } catch (cause) { for (const release of releaseTemplateGroups) try { release(); } catch {} throw cause; }
 }

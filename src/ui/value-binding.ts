@@ -22,6 +22,7 @@ interface Field {
   elements: readonly HTMLElement[];
   kind: "single" | "radio" | "checkbox" | "multiple";
   group?: ChoiceGroupBinding;
+  checkboxValues?: readonly [string, string];
 }
 
 /** Binders retain their field graph, projection slots and lifetime checkpoints. */
@@ -83,12 +84,15 @@ export function createValueBinding<T extends object>(api: "bindForm" | "bindGrid
       catch (cause) { throw error(context, callback, "The value replacement could not be read.", cause); }
     }
     if (array ? !selected || !selected.every(scalar) : !scalar(value) ||
-        field.kind === "checkbox" && typeof value !== "boolean") {
+        field.kind === "checkbox" && !field.checkboxValues && typeof value !== "boolean") {
       throw error(context, callback, api === "bindList"
         ? "Return a native scalar value or a scalar array for a multiple-value control; project structured data to text."
         : "Return a native scalar value or a scalar array for a multiple-value control; use render for structured display.");
     }
     const projected = selected ?? value;
+    if (field.checkboxValues && !field.checkboxValues.some(code => code === projected)) {
+      throw error(context, callback, "A coded checkbox replacement needs an available string value.");
+    }
     if (field.group) {
       const message = checkGroupValue(field.group, projected);
       if (message) throw error(context, callback, message);

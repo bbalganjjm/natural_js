@@ -1,10 +1,19 @@
 // SPDX-License-Identifier: Apache-2.0
-import type { ChoiceGroupBinding } from "./choice-group-owner.js";
+import type { ChoiceGroupBinding, ChoiceGroupDefinition } from "./choice-group-owner.js";
 type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-type Field = { element: HTMLElement; elements: readonly HTMLElement[]; kind: "single" | "radio" | "checkbox" | "multiple"; group?: ChoiceGroupBinding };
+type Field = { element: HTMLElement; elements: readonly HTMLElement[]; kind: "single" | "radio" | "checkbox" | "multiple"; group?: ChoiceGroupBinding; groupDefinition?: ChoiceGroupDefinition; checkboxValues?: readonly [string, string] };
+
+export function captureCheckboxValues(element: HTMLElement, invalid: () => never): readonly [string, string] | undefined {
+  const unchecked = element.getAttribute("data-unchecked-value");
+  if (unchecked === null) return undefined;
+  const checked = element.getAttribute("value");
+  if (!(element instanceof HTMLInputElement) || element.type !== "checkbox" ||
+      !element.hasAttribute("data-field") || checked === null || checked === unchecked) return invalid();
+  return Object.freeze([checked, unchecked] as const);
+}
 
 export function arrayField(field: Field): boolean {
-  return field.kind === "multiple" || field.kind === "checkbox" && (field.group !== undefined || field.elements.length > 1);
+  return field.kind === "multiple" || field.kind === "checkbox" && (field.group !== undefined || field.groupDefinition !== undefined || field.elements.length > 1);
 }
 
 export const interactiveContent = "button, input, textarea, select, a[href], area[href], details, dialog, audio[controls], video[controls], iframe, object, embed, img[usemap], [tabindex], [contenteditable]";
@@ -46,11 +55,12 @@ export function inputValue(element: HTMLElement): unknown {
 
 export function fieldValue(field: Field): unknown {
   if (field.group) return field.group.read();
+  if (field.checkboxValues) return (field.element as HTMLInputElement).checked ? field.checkboxValues[0] : field.checkboxValues[1];
   if (field.kind === "radio") {
     const selected = field.elements.find(element => (element as HTMLInputElement).checked);
     return selected ? (selected as HTMLInputElement).value : null;
   }
-  if (field.kind === "checkbox" && field.elements.length > 1) {
+  if (field.kind === "checkbox" && (field.groupDefinition !== undefined || field.elements.length > 1)) {
     return field.elements.filter(element => (element as HTMLInputElement).checked)
       .map(element => (element as HTMLInputElement).value);
   }
@@ -58,14 +68,14 @@ export function fieldValue(field: Field): unknown {
   return inputValue(field.element);
 }
 
-export function display(element: HTMLElement, value: unknown): void {
+export function display(element: HTMLElement, value: unknown, checkboxValues?: readonly [string, string]): void {
   if (element.localName === "img") {
     if (value == null || value === "") element.removeAttribute("src");
     else element.setAttribute("src", String(value));
   } else if (!control(element)) {
     element.textContent = value == null ? "" : String(value);
   } else if (element.localName === "input" && (element as HTMLInputElement).type === "checkbox") {
-    (element as HTMLInputElement).checked = value === true;
+    (element as HTMLInputElement).checked = checkboxValues ? value === checkboxValues[0] : value === true;
   } else if (element.localName === "select" && (element as HTMLSelectElement).multiple) {
     const selected = new Set(Array.isArray(value) ? value.map(String) : []);
     for (const option of (element as HTMLSelectElement).options) option.selected = selected.has(option.value);
@@ -74,21 +84,21 @@ export function display(element: HTMLElement, value: unknown): void {
   }
 }
 
-export function displayField(field: Field, value: unknown): void {
-  if (field.group) { field.group.write(value); return; }
+export function displayField(field: Field, value: unknown, current?: () => boolean): void {
+  if (field.group) { field.group.write(value, current); return; }
   if (field.kind === "radio") {
     const selected = value == null ? null : String(value);
     for (const element of field.elements) {
       const input = element as HTMLInputElement;
       input.checked = selected !== null && input.value === selected;
     }
-  } else if (field.kind === "checkbox" && field.elements.length > 1) {
+  } else if (field.kind === "checkbox" && (field.groupDefinition !== undefined || field.elements.length > 1)) {
     const selected = new Set(Array.isArray(value) ? value.map(String) : []);
     for (const element of field.elements) {
       const input = element as HTMLInputElement;
       input.checked = selected.has(input.value);
     }
-  } else display(field.element, value);
+  } else display(field.element, value, field.checkboxValues);
 }
 
 /** The binder supplies the entered value and a native probe with effective disabled state. */

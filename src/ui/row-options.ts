@@ -36,7 +36,7 @@ export function rowOptions(
 
 export function renderRowOptions(
   element: HTMLSelectElement, authoredNodes: readonly Node[], authoredOptions: readonly HTMLOptionElement[],
-  authored: readonly (string | null)[], choices: readonly RowOption[]
+  authored: readonly RowOptionValue[], choices: readonly RowOption[]
 ): Map<HTMLOptionElement, unknown> {
   const raw = new Map<HTMLOptionElement, unknown>();
   const children = [...authoredNodes];
@@ -52,15 +52,21 @@ export function renderRowOptions(
   return raw;
 }
 
-export function selectRowOptions(element: HTMLSelectElement, raw: ReadonlyMap<HTMLOptionElement, unknown>, value: unknown): void {
+export function selectRowOptions(element: HTMLSelectElement, raw: ReadonlyMap<HTMLOptionElement, unknown>, value: unknown, current?: () => boolean): void {
+  if (current && !current()) return;
   if (!element.multiple) {
-    element.selectedIndex = [...element.options].findIndex(option => raw.has(option) && Object.is(raw.get(option), value));
+    const selected = [...element.options].findIndex(option => raw.has(option) && Object.is(raw.get(option), value));
+    if (current && !current()) return;
+    element.selectedIndex = selected;
+    current?.();
     return;
   }
   const remaining = Array.isArray(value) ? [...value] : [];
   for (const option of element.options) {
+    if (current && !current()) return;
     const index = raw.has(option) ? remaining.findIndex(item => Object.is(item, raw.get(option))) : -1;
     option.selected = index >= 0;
+    if (current && !current()) return;
     if (index >= 0) remaining.splice(index, 1);
   }
 }

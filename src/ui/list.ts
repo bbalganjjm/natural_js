@@ -8,11 +8,17 @@ import type { RowBinding } from "./grid-hooks.js";
 import type { ValueProjection } from "./value-binding.js";
 import { parsePath, readPath } from "./field-path.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
-import { claimSelect } from "./select-owner.js";
+import { claimSelect, getSelect } from "./select-owner.js";
+import type { SelectCatalog } from "./select-owner.js";
+import type { RowOptionValue } from "./row-options.js";
+import { captureChoiceGroup, choiceGroupChoices, choiceGroupOptions, choiceGroupRequired, mountChoiceGroup } from "./choice-group.js";
+import { checkGroupValue, claimChoiceGroup } from "./choice-group-owner.js";
+import type { ChoiceGroupBinding } from "./choice-group-owner.js";
 import { createRuleRunner } from "./rules.js";
+import { fieldRenderers, renderField } from "./field-render.js";
 import { createRowRules } from "./row-rules.js";
 import type { RowRuleSource } from "./row-rules.js";
-import { disabled, display, nativeMessage } from "./native-control.js";
+import { captureCheckboxValues, disabled, display, displayField, nativeMessage } from "./native-control.js";
 import type { RuleCall } from "./rules.js";
 import type {
   FormatRule, ListHandle, PageRequest, PageState, RuleContext, RuleSet,
@@ -20,11 +26,13 @@ import type {
 } from "./index.js";
 
 interface TextField {
+  group?: ReturnType<typeof captureChoiceGroup>;
   index: number;
   name: string;
   path: readonly string[];
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
+  checkboxValues?: readonly [string, string];
 }
 
 interface SelectField {
@@ -34,11 +42,19 @@ interface SelectField {
   options?: readonly string[];
   label?: readonly string[];
   value?: readonly string[];
-  authored: readonly (string | null)[];
+  authored: readonly RowOptionValue[];
+  typed: boolean;
+  catalog?: SelectCatalog;
   validate: readonly RuleCall<ValidateRule>[];
 }
 
 interface BoundText {
+  group?: ChoiceGroupBinding;
+  elements: HTMLElement[];
+  groupInvalids?: Map<HTMLElement, string | null>;
+  releaseGroup?: () => void;
+  groupSource?: unknown;
+  groupBound?: boolean;
   field: TextField;
   element: HTMLElement;
   invalid: string | null;
@@ -86,6 +102,7 @@ function listError(code: string, message: string, detail?: Record<string, unknow
 export function bindList<T extends object>(root: HTMLUListElement | HTMLOListElement, options: {
   rows: Rows<T>;
   rules?: RuleSet;
+  render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>;
   onRowBind?: (context: RowBinding<T, HTMLLIElement>) => void;
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
@@ -126,6 +143,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   const errorFields = new Map<string, number>();
   const buttonIndexes: number[] = [];
   const authored = [template, ...template.querySelectorAll<HTMLElement>("*")];
+  const releaseTemplateGroups: (() => void)[] = [];
+  try {
   for (const [index, element] of authored.entries()) {
     const errorFor = element.getAttribute("data-error-for");
     if (errorFor !== null) {
@@ -145,9 +164,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       buttonIndexes.push(index);
     }
     const name = element.getAttribute("data-field");
+    const checkboxValues = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]")) ? undefined : captureCheckboxValues(element, () => { throw listError("LIST_CONTROL", "A coded checkbox needs one marked checkbox and distinct explicit value/data-unchecked-value strings.", { field: name ?? "" }); });
     const optionsName = element.getAttribute("data-options");
     if (element.tagName === "SELECT" && (name !== null || optionsName !== null)) {
       const select = element as HTMLSelectElement;
+      const catalog = getSelect(select)?.catalog;
       const labelName = select.getAttribute("data-option-label");
       const valueName = select.getAttribute("data-option-value");
       if (optionsName !== null && (labelName === null || valueName === null)) {
@@ -163,11 +184,16 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         options: optionsName === null ? undefined : parsePath(optionsName),
         label: labelName === null ? undefined : parsePath(labelName),
         value: valueName === null ? undefined : parsePath(valueName),
-        authored: [...select.options].map(option => option.value === "" ? null : option.value),
+        authored: [...catalog?.values ?? [...select.options].map(option => option.value === "" ? null : option.value)],
+        typed: catalog !== undefined || optionsName !== null, catalog,
         validate: name === null ? [] : runner.validators(select, name)
       });
     } else if (name !== null) {
+      const generated = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]"));
+      const group = generated ? captureChoiceGroup(element as HTMLFieldSetElement) : undefined;
+      if (group) releaseTemplateGroups.push(group.release);
       const format = runner.formats(element, name);
+      if (group && (format.length || Object.hasOwn(options.render ?? {}, name))) throw listError("LIST_CONTROL", "A generated group cannot own formatting or a renderer.", { field: name });
       if (element.isContentEditable) {
         throw listError("LIST_CONTROL", "A bound List field cannot be contenteditable; use Form to edit.", { field: name });
       }
@@ -184,9 +210,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           throw listError("LIST_FORMAT", "Only text-like inputs can display formatted text.", { field: name });
         }
       }
-      textFields.push({ index, name, path: parsePath(name),
+      textFields.push({ index, name, path: parsePath(name), group, checkboxValues,
         format, validate: runner.validators(element, name) });
     }
+  }
+  for (const field of textFields) if (field.checkboxValues && textFields.some(other => other !== field && other.name === field.name &&
+      authored[other.index] instanceof HTMLInputElement && (authored[other.index] as HTMLInputElement).type === "checkbox")) {
+    throw listError("LIST_CONTROL", "Coded values belong to one checkbox, not a field group.", { field: field.name });
   }
   const known = new Set([...textFields.map(field => field.name),
     ...selectFields.map(field => field.name).filter((name): name is string => name !== undefined)]);
@@ -195,32 +225,44 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       throw listError("LIST_ERROR_REGION", "An error region needs a matching data-field.", { field });
     }
   }
+  const renderers = fieldRenderers("bindList", [
+    ...textFields.map(field => ({ name: field.name, element: authored[field.index], formatted: field.format.length > 0 })),
+    ...selectFields.flatMap(field => field.name ? [{ name: field.name, element: authored[field.index] }] : [])
+  ], options.render);
   const rowRules = createRowRules<RenderedRow<T>>(runner, [
     ...textFields.map(target => ({ target, elements: [authored[target.index]] })),
     ...selectFields.map(target => ({ target, elements: [authored[target.index]] }))
-  ], (record, position) => [position < textFields.length ? record.texts[position].element :
+  ], (record, position) => [position < textFields.length ? record.texts[position].group?.root ?? record.texts[position].element :
     record.selects[position - textFields.length].element], (position, calls) => {
     if (position >= textFields.length) {
       if (calls.format.length) throw listError("LIST_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.", { field: selectFields[position - textFields.length].name ?? "" });
       return;
     }
     const field = textFields[position], element = authored[field.index];
+    if (field.group && calls.format.length) throw listError("LIST_FORMAT", "A generated group cannot own formatting.", { field: field.name });
+    if (calls.format.length && renderers.has(field.name)) throw listError("UI_RENDER", "A render target cannot also format its value.", { field: field.name });
     if (calls.format.length && element instanceof HTMLInputElement && !["text", "search", "tel", "url", "email", "password"].includes(element.type)) {
       throw listError("LIST_FORMAT", "Only text-like inputs can display formatted text.", { field: field.name });
     }
   }, () => { throw listError("LIST_BIND_REENTRANT", "Finish the current rule before changing its declaration."); });
 
+  const generatedGroups = textFields.some(field => field.group);
+  const guarded = values.sourceEnabled || renderers.size > 0 || generatedGroups;
   const sourceFields = values.sourceEnabled ? [
-    ...textFields.map((field, index) => ({ key: field.path[0], dependency: undefined, index, select: false })),
+    ...textFields.map((field, index) => ({ key: field.path[0], dependency: field.group?.definition.source?.options[0], index, select: false })),
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
   ] : undefined;
   const releaseTemplateSelects: (() => void)[] = [];
   try {
     for (const field of selectFields) {
       releaseTemplateSelects.push(claimSelect(authored[field.index] as HTMLSelectElement, "bindList"));
+      if (getSelect(authored[field.index] as HTMLSelectElement)?.catalog !== field.catalog) {
+        throw listError("LIST_OPTIONS", "The common Select catalog changed during template capture.", { field: field.name ?? "" });
+      }
     }
   } catch (cause) {
-    for (const release of releaseTemplateSelects) release();
+    for (const release of releaseTemplateSelects) try { release(); } catch {}
+    for (const release of releaseTemplateGroups) try { release(); } catch {}
     boundRoots.delete(root);
     throw cause;
   }
@@ -256,17 +298,32 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     throw cause;
   }
 
-  function createRecord(id: RowId): RenderedRow<T> {
+  function createRecord(id: RowId, checkpoint: () => void): RenderedRow<T> {
     const element = template.cloneNode(true) as HTMLLIElement;
     element.removeAttribute("data-row-template");
     const nodes = [element, ...element.querySelectorAll<HTMLElement>("*")];
-    const texts = textFields.map(field => ({
-      field, element: nodes[field.index], invalid: nodes[field.index].getAttribute("aria-invalid"),
+    const texts: BoundText[] = textFields.map(field => ({
+      field, element: nodes[field.index], elements: [nodes[field.index]], invalid: nodes[field.index].getAttribute("aria-invalid"),
       bound: false
     }));
     const releaseSelects: (() => void)[] = [];
     let selects: BoundSelect[];
     try {
+      for (const binding of texts) if (binding.field.group) {
+        const captured = binding.field.group, snapshot = sourceRows.get(id)!;
+        const suffix = choiceGroupOptions(captured.definition, snapshot.value, invalidOptions(id)); checkpoint();
+        const mounted = mountChoiceGroup(binding.element as HTMLFieldSetElement, captured.definition, captured.catalog,
+          { suffix, capturedLabels: captured.capturedLabels, current: checkpoint });
+        let release: (() => void) | undefined;
+        try { release = claimChoiceGroup(mounted.binding); checkpoint(); }
+        catch (cause) { release?.(); mounted.dispose(); throw cause; }
+        binding.group = mounted.binding; binding.elements = [...mounted.binding.inputs];
+        binding.element = mounted.binding.inputs[0] ?? mounted.binding.root;
+        binding.groupInvalids = new Map([mounted.binding.root, ...mounted.binding.inputs].map(element => [element, element.getAttribute("aria-invalid")]));
+        binding.groupSource = captured.definition.source ? readPath(snapshot.value, captured.definition.source.options) : undefined;
+        binding.groupBound = true;
+        binding.releaseGroup = () => { release!(); mounted.dispose(); };
+      }
       selects = selectFields.map(field => {
         const select = nodes[field.index] as HTMLSelectElement;
         releaseSelects.push(claimSelect(select, "bindList"));
@@ -277,14 +334,9 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           rawByOption: new Map<HTMLOptionElement, unknown>(), optionsBound: false, selectedBound: false
         };
       });
-    } catch (cause) {
-      for (const release of releaseSelects) release();
-      throw cause;
-    }
-    for (const binding of texts) {
-      if (binding.element instanceof HTMLInputElement || binding.element instanceof HTMLTextAreaElement) {
-        binding.element.disabled = true;
-      }
+
+    for (const binding of texts) for (const element of binding.elements) {
+      if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) element.disabled = true;
     }
     const buttons = buttonIndexes.map(index => nodes[index] as HTMLButtonElement);
     const errors = new Map([...errorFields].map(([field, index]) => [field, nodes[index]] as const));
@@ -296,7 +348,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       if (!region.hasAttribute("aria-live")) region.setAttribute("aria-live", "polite");
       region.textContent = "";
       for (const control of [
-        ...texts.filter(binding => binding.field.name === field).map(binding => binding.element),
+        ...texts.filter(binding => binding.field.name === field).flatMap(binding => binding.group ? [binding.group.root, ...binding.elements] : binding.elements),
         ...selects.filter(binding => binding.field.name === field).map(binding => binding.element)
       ]) {
         const ids = new Set((control.getAttribute("aria-describedby") ?? "").split(/\s+/).filter(Boolean));
@@ -307,6 +359,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     for (const button of buttons) button.setAttribute("aria-pressed", String(selected === id));
     rowIds.set(element, id);
     return { id, element, texts, selects, buttons, errors, hasIssues: false, releaseSelects, ruleSources: rowRules.sources(id) };
+    } catch (cause) { for (const release of releaseSelects) try { release(); } catch {} for (const binding of texts) try { binding.releaseGroup?.(); } catch {} throw cause; }
   }
 
   function invalidOptions(id: RowId): (field: string) => never {
@@ -345,8 +398,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         const context: ValueBindContext = Object.freeze({ field: field.name!,
           values: sourceValue as Snapshot<Record<string, unknown>>, rowId: id, element, phase: binding.projection!.phase });
         values.apply(binding, { element, elements: [element], kind: element.multiple ? "multiple" : "single" }, raw, context,
-          shown => field.options ? selectRowOptions(element, binding.rawByOption, shown) : display(element, shown),
-          current, field.options ? () => [...binding.rawByOption.values()] : undefined);
+          shown => field.typed ? selectRowOptions(element, binding.rawByOption, shown, current) : display(element, shown),
+          current, field.typed ? () => [...binding.rawByOption.values()] : undefined);
         if (!current()) return;
         binding.previous = raw;
         binding.selectedBound = true;
@@ -359,13 +412,23 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }
 
   function writeText(binding: BoundText, row: RowSnapshot<T>, value: unknown, current?: () => boolean): void {
-    const format = rowRules.formats(row.id, binding.field);
-    if (format.length) {
+    const format = rowRules.formats(row.id, binding.field), renderer = renderers.get(binding.field.name);
+    if (renderer || format.length) {
       const context: RuleContext = { field: binding.field.name, values: row.value as Snapshot<Record<string, unknown>>,
         rowId: row.id, element: binding.element };
-      const shown = runner.format(format, value, context);
-      if (!current || current()) display(binding.element, shown);
-    } else if (!current || current()) display(binding.element, value);
+      if (renderer) {
+        const version = renderVersion, entries = sourceRows.entries();
+        renderField("bindList", binding.element, value, context, renderer, false,
+          () => !disposed && version === renderVersion && entries === sourceRows.entries());
+      }
+      else {
+        const shown = runner.format(format, value, context);
+        if (!current || current()) display(binding.element, shown);
+      }
+    } else if (!current || current()) {
+      if (binding.group) displayField({ element: binding.element, elements: binding.elements, kind: binding.group.kind, group: binding.group }, value, current);
+      else display(binding.element, value, binding.field.checkboxValues);
+    }
   }
 
   function renderText(binding: BoundText, row: RowSnapshot<T>, current?: () => boolean): void {
@@ -376,21 +439,55 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const element = binding.element;
       const context: ValueBindContext = Object.freeze({ field: binding.field.name,
         values: row.value as Snapshot<Record<string, unknown>>, rowId: row.id, element, phase: binding.projection!.phase });
-      values.apply(binding, { element, elements: [element],
-        kind: element instanceof HTMLInputElement && element.type === "checkbox" ? "checkbox" : "single" }, raw, context,
+      values.apply(binding, { element, elements: binding.elements, group: binding.group,
+        kind: binding.group?.kind ?? (element instanceof HTMLInputElement && element.type === "checkbox" ? "checkbox" : "single"), checkboxValues: binding.field.checkboxValues }, raw, context,
         value => writeText(binding, row, value, current), current);
       if (!current()) return;
     } else {
       if (binding.bound && Object.is(binding.previous, raw)) return;
-      writeText(binding, row, raw, values.sourceEnabled ? current : undefined);
+      writeText(binding, row, raw, guarded ? current : undefined);
     }
-    if (values.sourceEnabled && current && !current()) return;
+    if (guarded && current && !current()) return;
     binding.previous = raw;
     binding.bound = true;
   }
 
+  function publishGroups(record: RenderedRow<T>, row: RowSnapshot<T>, current?: () => boolean): void {
+    const checkpoint = () => { if (current && !current()) throw listError("LIST_BIND_STALE", "Newer List work superseded group publication.", { rowId: row.id }); };
+    for (const binding of record.texts) if (binding.group && binding.field.group) {
+      const captured = binding.field.group, source = captured.definition.source ? readPath(row.value, captured.definition.source.options) : undefined;
+      if (binding.groupBound && Object.is(binding.groupSource, source)) continue;
+      const suffix = choiceGroupOptions(captured.definition, row.value, invalidOptions(row.id)); checkpoint();
+      const next = binding.group.prepare(suffix, checkpoint), raw = readPath(row.value, binding.field.path), projection = binding.projection;
+      if (projection?.state === "applied" && projection.id === row.id && sameJson(projection.raw, raw) && projection.callback) {
+        const message = checkGroupValue({ kind: binding.group.kind, values: next.values }, projection.value);
+        if (message) throw values.error(Object.freeze({ field: binding.field.name, values: row.value as Snapshot<Record<string, unknown>>, rowId: row.id, element: binding.element, phase: projection.phase }), projection.callback, message);
+      }
+      const previous = { element: binding.element, elements: binding.elements, invalids: binding.groupInvalids, source: binding.groupSource, bound: binding.bound }, version = record.sourceVersion;
+      let undo: (() => void) | undefined, failed = false;
+      try {
+        undo = next.apply(); checkpoint();
+        binding.elements = [...next.inputs]; binding.element = next.inputs[0] ?? binding.group.root;
+        binding.groupInvalids = new Map<HTMLElement, string | null>([[binding.group.root, previous.invalids?.get(binding.group.root) ?? null], ...next.inputs.map(input => [input, input.getAttribute("aria-invalid")] as const)]);
+        const region = record.errors.get(binding.field.name);
+        for (const element of [binding.group.root, ...next.inputs]) {
+          if (region) { const ids = new Set((element.getAttribute("aria-describedby") ?? "").split(/\s+/).filter(Boolean)); ids.add(region.id); element.setAttribute("aria-describedby", [...ids].join(" ")); checkpoint(); }
+          if (element instanceof HTMLInputElement) { element.disabled = true; checkpoint(); }
+          if (record.hasIssues && region?.textContent) element.setAttribute("aria-invalid", "true");
+        }
+        binding.groupSource = source; binding.groupBound = true; binding.bound = false;
+      } catch (cause) {
+        failed = true;
+        if (records.get(record.id) === record && record.sourceVersion === version) { binding.element = previous.element; binding.elements = previous.elements; binding.groupInvalids = previous.invalids; binding.groupSource = previous.source; binding.bound = previous.bound; try { undo?.(); } catch {} }
+        throw cause;
+      } finally { try { next.finish(); } catch (cause) { if (!failed) throw cause; } }
+    }
+  }
+
   function renderRecord(record: RenderedRow<T>, row: RowSnapshot<T>, current?: () => boolean, fullSource = false): void {
     if (record.snapshot === row && (!values.sourceEnabled || !fullSource && record.acceptedSource === row)) return;
+    publishGroups(record, row, current);
+    if (current && !current()) return;
     if (sourceFields && current) {
       const scheduled = sourceFields, previous = record.acceptedSource;
       const keys = Object.keys(row.value).filter(key => fullSource || !previous ||
@@ -410,8 +507,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       for (const key of keys) {
         if (!current()) return;
         const fields = assigned.get(key) ?? [];
-        const elements = Object.freeze([...new Set(fields.map(field => field.select
-          ? record.selects[field.index].element : record.texts[field.index].element))]);
+        const elements = Object.freeze([...new Set(fields.flatMap(field => field.select
+          ? [record.selects[field.index].element] : record.texts[field.index].elements))]);
         const context: SourceBindContext<T> = Object.freeze({ root, row, key, elements, phase: fullSource || !previous ? "bind" : "val" });
         values.source(context, () => { for (const field of fields) { if (!current()) return; write(field); } }, current);
       }
@@ -438,10 +535,19 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const element = binding?.element.isConnected ? binding.element : undefined;
       const value = readPath(values, field.path);
       const original = authored[field.index];
-      const source = original.cloneNode(true);
+      if (field.checkboxValues && !field.checkboxValues.some(code => code === value)) {
+        issues.push({ rowId: row.id, field: field.name, rule: "choice-option", message: "Choose an available checkbox value.", ...(element ? { element } : {}) });
+      }
+      if (field.group) {
+        const catalog = choiceGroupChoices(field.group.definition, field.group.catalog, values, invalidOptions(row.id));
+        const message = checkGroupValue({ kind: field.group.definition.kind, values: catalog.map(choice => choice.value) }, value);
+        if (message) issues.push({ rowId: row.id, field: field.name, rule: "choice-option", message, ...(element ? { element } : {}) });
+        if (!disabled(binding?.group?.root ?? original, root) && choiceGroupRequired(field.group.definition, catalog, value)) issues.push({ rowId: row.id, field: field.name, rule: "html", message: "Choose an option.", ...(element ? { element } : {}) });
+      }
+      const source = field.group ? null : original.cloneNode(true);
       if (source instanceof HTMLInputElement || source instanceof HTMLTextAreaElement) {
         source.disabled = disabled(original, root);
-        display(source, value);
+        display(source, value, field.checkboxValues);
         const message = nativeMessage(source, value);
         if (message) {
           issues.push({ rowId: row.id, field: field.name, rule: "html", message,
@@ -483,9 +589,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       for (const binding of [...record.texts, ...record.selects]) {
         const name = "field" in binding ? binding.field.name : undefined;
         if (!name) continue;
-        if (byField.has(name)) binding.element.setAttribute("aria-invalid", "true");
-        else if (binding.invalid === null) binding.element.removeAttribute("aria-invalid");
-        else binding.element.setAttribute("aria-invalid", binding.invalid);
+        invalidBinding(binding, byField.has(name));
       }
       for (const [field, region] of record.errors) {
         region.textContent = (byField.get(field) ?? []).map(issue => issue.message).join(" ");
@@ -495,12 +599,26 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     return issues;
   }
 
+  function invalidBinding(binding: BoundText | BoundSelect, invalid: boolean): void {
+    if (!("group" in binding) || !binding.group) {
+      if (invalid) binding.element.setAttribute("aria-invalid", "true");
+      else if (binding.invalid === null) binding.element.removeAttribute("aria-invalid");
+      else binding.element.setAttribute("aria-invalid", binding.invalid);
+      return;
+    }
+    const targets = binding.groupInvalids!;
+    for (const [element, original] of targets) {
+      if (invalid) element.setAttribute("aria-invalid", "true");
+      else if (original === null) element.removeAttribute("aria-invalid");
+      else element.setAttribute("aria-invalid", original);
+    }
+  }
+
   function clearIssues(record: RenderedRow<T>): void {
     if (!record.hasIssues) return;
     record.hasIssues = false;
     for (const binding of [...record.texts, ...record.selects]) {
-      if (binding.invalid === null) binding.element.removeAttribute("aria-invalid");
-      else binding.element.setAttribute("aria-invalid", binding.invalid);
+      invalidBinding(binding, false);
     }
     for (const region of record.errors.values()) region.textContent = "";
   }
@@ -521,12 +639,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   function render(force = false): void {
     if (disposed) return;
     bindable();
-    const tracked = hooks.enabled || values.enabled || values.sourceEnabled;
+    const tracked = hooks.enabled || values.enabled || guarded;
     const version = ++renderVersion;
     const entries = sourceRows.entries();
     const current = tracked ? () => {
       const live = !disposed && version === renderVersion && entries === sourceRows.entries();
-      if (values.sourceEnabled && !live) { active(); throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback."); }
+      if (guarded && !live) { active(); throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback."); }
       return live;
     } : undefined;
     const check = (id?: RowId) => {
@@ -546,6 +664,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           record.element.remove();
           if (current) check(id);
           for (const release of record.releaseSelects) release();
+          for (const binding of record.texts) binding.releaseGroup?.();
           records.delete(id);
         }
       }
@@ -571,13 +690,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       for (const row of displayed) {
         let record = records.get(row.id);
         if (!record) {
-          record = createRecord(row.id);
+          record = createRecord(row.id, () => check(row.id));
           records.set(row.id, record);
           rowRules.attach(record, () => check(row.id));
-          if (hooks.enabled || values.sourceEnabled) created.push(record);
+          if (hooks.enabled || guarded) created.push(record);
         }
+        if (guarded) record.sourceVersion = version;
         if (values.sourceEnabled) {
-          record.sourceVersion = version;
           if (record.element.parentElement !== root) root.insertBefore(record.element, anchor);
           check(row.id);
         }
@@ -636,22 +755,23 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         for (const [record, row] of sourcePending) if (records.get(row.id) === record && record.snapshot === row) record.acceptedSource = row;
       }
     } catch (cause) {
-      for (const record of rebound) if (!values.sourceEnabled || record.sourceVersion === version) {
+      for (const record of rebound) if (!guarded || record.sourceVersion === version) {
         hooks.release(record.id);
-        if (!values.sourceEnabled || record.sourceVersion === version) resetProjection(record);
+        if (!guarded || record.sourceVersion === version) resetProjection(record);
       }
-      for (const record of created) if (records.get(record.id) === record && (!values.sourceEnabled || record.sourceVersion === version)) {
-        record.element.remove();
-        if (values.sourceEnabled && record.sourceVersion !== version) continue;
-        for (const release of record.releaseSelects) release();
-        if (!values.sourceEnabled || records.get(record.id) === record) records.delete(record.id);
+      for (const record of created) if (records.get(record.id) === record && (!guarded || record.sourceVersion === version)) {
+        try { record.element.remove(); } catch {}
+        if (guarded && record.sourceVersion !== version) continue;
+        for (const release of record.releaseSelects) try { release(); } catch {}
+        for (const binding of record.texts) try { binding.releaseGroup?.(); } catch {}
+        if (!guarded || records.get(record.id) === record) records.delete(record.id);
       }
-      if (values.sourceEnabled) for (const record of records.values()) if (record.sourceVersion === version && !mounted!.has(record.id) && record.element.parentElement === root) {
+      if (guarded) for (const record of records.values()) if (record.sourceVersion === version && !mounted!.has(record.id) && record.element.parentElement === root) {
         record.element.remove();
         if (record.sourceVersion === version) resetProjection(record);
       }
-      if (!values.sourceEnabled || version === renderVersion) {
-        if (hooks.enabled || values.sourceEnabled) visibleIds = visibleIds.filter(id => records.get(id)?.element.parentElement === root);
+      if (!guarded || version === renderVersion) {
+        if (hooks.enabled || guarded) visibleIds = visibleIds.filter(id => records.get(id)?.element.parentElement === root);
         cleanupErrors.length = 0;
       }
       throw cause;
@@ -671,24 +791,23 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   let unsubscribe = () => {};
   function dispose(): void {
     if (disposed) return;
-    disposed = true;
-    renderVersion++;
-    rowRules.dispose();
-    unsubscribe();
-    root.removeEventListener("click", onClick);
-    hooks.dispose();
+    disposed = true; renderVersion++;
+    let failed = false, failure: unknown;
+    try { rowRules.dispose(); unsubscribe(); root.removeEventListener("click", onClick); hooks.dispose(); }
+    catch (cause) { failed = true; failure = cause; }
     for (const record of records.values()) {
-      record.element.remove();
-      for (const release of record.releaseSelects) release();
+      try { record.element.remove(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      for (const release of record.releaseSelects) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+      for (const binding of record.texts) try { binding.releaseGroup?.(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
     }
-    records.clear();
-    visibleIds = [];
-    anchor.replaceWith(template);
-    if (empty) empty.hidden = emptyWasHidden!;
-    if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex");
-    for (const release of releaseTemplateSelects) release();
+    records.clear(); visibleIds = [];
+    try { anchor.replaceWith(template); if (empty) empty.hidden = emptyWasHidden!; if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex"); }
+    catch (cause) { if (!failed) { failed = true; failure = cause; } }
+    for (const release of releaseTemplateSelects) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+    for (const release of releaseTemplateGroups) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
     boundRoots.delete(root);
-    cleanupFailure();
+    try { cleanupFailure(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+    if (failed) throw failure;
   }
   try {
     unsubscribe = sourceRows.subscribe(event => {
@@ -770,4 +889,5 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     },
     dispose
   };
+  } catch (cause) { for (const release of releaseTemplateGroups) try { release(); } catch {} throw cause; }
 }
