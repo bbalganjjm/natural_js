@@ -1,9 +1,0 @@
-## 2026-11-15
-
-* **Update** [Form](v2/form.md), [Rows](v2/data.md), [UI contracts](v2/ui.md), [employee workflows](v2/employee-example.md), [migration](v2/migration.md) and [module boundaries](v2/architecture.md) document actual native-only prepare, complete restore and retained deleted preview. Application factories/checkpoints remain explicit; native/captured/committed/received values and synthetic native reset behavior remain distinct. Independent source/body review precedes fingerprint completion.
-* **Correction** [Choice groups](v2/choice-group.md) distinguishes live Rows native reset policy from Form-owned restoration while showing a retained deleted row; reset never writes Rows.
-
-* **Creation** [Project goals](project-goals.md) records three required outcomes: migrate required v1 behavior, make owners and contracts usable by coding agents, and remove proven unnecessary code without losing supported behavior. It separates development acceptance from personal testing and release approval.
-* **Update** Move the implemented API and governance concepts from docs/ into wiki/. Keep plans, execution/review records, original historical logs and raw evidence in docs/. Update relative links without claiming that historical runtime checks ran again.
-* **Update** [Repository workflow](governance/repository-workflow.md) applies Karpathy's ingest/query/lint pattern and the source-evidence and selective-retrieval principles researched through Context7 for LangChain OpenWiki. No OpenWiki runtime, Claims store, model job or scheduled service is introduced.
-* **Update** [OKF conventions](governance/okf-conventions.md) defines the separate knowledge and work roots, per-root logs, historical-log lookup and wiki-only public symbol coverage. The checker validates both roots and their cross-links.
