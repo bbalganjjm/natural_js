@@ -16,7 +16,8 @@ function scalar(value: unknown): value is SelectValue {
 export function createGridFilters<T extends object>(options: {
   rows: Rows<T>;
   filters?: Record<string, { value: (row: Snapshot<T>) => SelectValue; label?: (value: SelectValue) => string }>;
-}, manual: () => ((row: Snapshot<T>) => boolean) | null, changed: () => (() => void) | undefined,
+}, manual: () => ((row: Snapshot<T>) => boolean) | null,
+  changed: (admit?: (current: () => boolean) => void) => (() => void) | undefined,
   project: () => readonly RowSnapshot<T>[]) {
   if (options.filters !== undefined && (!options.filters || typeof options.filters !== "object" || Array.isArray(options.filters))) {
     fail("", "filters must be an object of scalar value functions.");
@@ -109,8 +110,9 @@ export function createGridFilters<T extends object>(options: {
       }
       write(next);
       let notify: (() => void) | undefined;
-      try { notify = changed(); }
-      catch (cause) { write(previous); throw cause; }
+      let current: (() => boolean) | undefined;
+      try { notify = changed(owner => { current = owner; }); }
+      catch (cause) { if (!current || current()) write(previous); throw cause; }
       notify?.();
     }
   };

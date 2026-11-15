@@ -449,6 +449,20 @@ try {
     projectedChoice: ["Two", "Two", "Two"], validation: { valid: [false, false, false], choiceIssues: true, quiet: true, raw: 99 },
     raw: { current: " Bea ", original: " Ada ", active: true, listDisabled: true }
   }, "Installed Form/Grid/List callbacks must share typed policy, preserve raw validation and refresh without source writes.");
+  const sourceCallbacks = await page.evaluate(() => window.packedConsumer.checkSourceCallbacks());
+  const sourcePairs = (keys, phase) => keys.flatMap(([key, count]) => [["before", key, phase, count], ["after", key, phase, count]]);
+  const sourceOwners = value => Object.fromEntries(["form", "grid", "list"].map(owner => [owner, value]));
+  assert.deepEqual(sourceCallbacks, {
+    full: sourceOwners(sourcePairs([["audit", 0], ["choices", 0], ["profile", 1], ["chosen", 1]], "bind")),
+    initial: [0, 1, 2].map(() => ({ name: "Ada", choice: "False" })),
+    catalog: sourceOwners(sourcePairs([["choices", 1]], "val")),
+    catalogDisplay: [0, 1, 2].map(() => ({ name: "Ada", choice: "Updated false" })),
+    missing: sourceOwners(sourcePairs([["audit", 0], ["profile", 1]], "val")),
+    missingDisplay: [0, 1, 2].map(() => ({ name: "Grace", choice: undefined })),
+    missingSelection: [0, 1, 2].map(() => ({ index: -1, authored: "Choose" })),
+    contextValid: true, plain: true, quiet: true, raw: { ownChosen: false, originalChosen: false },
+    capture: { gridReads: 1, listReads: 1, gridCalls: 3, listCalls: 2, plain: true, native: { active: 2, members: [], pressed: ["false", "true"] }, aria: true, selected: null, listSelected: null }
+  }, "Installed source observers must preserve full raw contexts, one catalog assignment, missing-key clearing, plain captures and existing native ownership.");
   const formWorkflows = await page.evaluate(() => window.packedConsumer.checkFormWorkflows());
   assert.deepEqual(formWorkflows, {
     prepared: { valid: true, values: { name: "Candidate", amount: 1200 }, parseReads: 0, untouched: true },

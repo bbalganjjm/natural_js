@@ -14,7 +14,7 @@ import { disabled, display, nativeMessage } from "./native-control.js";
 import type { RuleCall } from "./rules.js";
 import type {
   FormatRule, ListHandle, PageRequest, PageState, RuleContext, RuleSet,
-  ValidateRule, ValidationIssue, ValidationResult, ValueBindContext
+  SourceBindContext, ValidateRule, ValidationIssue, ValidationResult, ValueBindContext
 } from "./index.js";
 
 interface TextField {
@@ -63,6 +63,8 @@ interface RenderedRow<T> {
   id: RowId;
   element: HTMLLIElement;
   snapshot?: RowSnapshot<T>;
+  acceptedSource?: RowSnapshot<T>;
+  sourceVersion?: number;
   texts: BoundText[];
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
@@ -84,6 +86,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   onRowBind?: (context: RowBinding<T, HTMLLIElement>) => void;
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
+  beforeSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
+  onSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
   onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
 }): ListHandle<T> {
   if (!root || (root.tagName !== "UL" && root.tagName !== "OL")) {
@@ -91,9 +95,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }
   if (boundRoots.has(root)) throw listError("LIST_IN_USE", "This List root is already bound.");
   const sourceRows = options.rows;
-  const values = createValueBinding("bindList", options);
+  const values = createValueBinding<T>("bindList", options);
   const cleanupErrors: unknown[] = [];
-  const { onRowBind } = options;
+  const { onRowBind, onSelect } = options;
+  if (onSelect !== undefined && typeof onSelect !== "function") {
+    throw listError("LIST_SELECT", "onSelect must be a function.");
+  }
   const hooks = createRowHooks("bindList", { onRowBind }, cause => cleanupErrors.push(cause));
   const templates = [...root.querySelectorAll<HTMLLIElement>("li[data-row-template]")];
   if (templates.length !== 1 || templates[0].parentElement !== root) {
@@ -186,6 +193,10 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     }
   }
 
+  const sourceFields = values.sourceEnabled ? [
+    ...textFields.map((field, index) => ({ key: field.path[0], dependency: undefined, index, select: false })),
+    ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
+  ] : undefined;
   const releaseTemplateSelects: (() => void)[] = [];
   try {
     for (const field of selectFields) {
@@ -218,7 +229,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
 
   function bindable(): void {
     active();
-    if (hooks.running || values.running) throw listError("LIST_BIND_REENTRANT", "A row callback cannot reenter binding.");
+    if (hooks.running || values.running || values.sourceRunning) throw listError("LIST_BIND_REENTRANT", "A row callback cannot reenter binding.");
   }
 
   function cleanupFailure(): void {
@@ -295,6 +306,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
 
   function resetProjection(record: RenderedRow<T>): void {
     record.snapshot = undefined;
+    if (values.sourceEnabled) record.acceptedSource = undefined;
     for (const binding of record.texts) { binding.projection = undefined; binding.bound = false; }
     for (const binding of record.selects) { binding.projection = undefined; binding.selectedBound = false; }
   }
@@ -338,31 +350,63 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     } else if (!current || current()) display(binding.element, value);
   }
 
-  function renderRecord(record: RenderedRow<T>, row: RowSnapshot<T>, current?: () => boolean): void {
-    if (record.snapshot === row) return;
-    for (const binding of record.texts) {
-      if (current && !current()) return;
-      const raw = readPath(row.value, binding.field.path);
-      if (values.enabled && current) {
-        projection(binding, raw, row.id);
-        if (binding.bound && Object.is(binding.previous, raw) && binding.projection!.state !== "pending") continue;
-        const element = binding.element;
-        const context: ValueBindContext = Object.freeze({ field: binding.field.name,
-          values: row.value as Snapshot<Record<string, unknown>>, rowId: row.id, element, phase: binding.projection!.phase });
-        values.apply(binding, { element, elements: [element],
-          kind: element instanceof HTMLInputElement && element.type === "checkbox" ? "checkbox" : "single" }, raw, context,
-          value => writeText(binding, row, value, current), current);
-        if (!current()) return;
-      } else {
-        if (binding.bound && Object.is(binding.previous, raw)) continue;
-        writeText(binding, row, raw);
-      }
-      binding.previous = raw;
-      binding.bound = true;
+  function renderText(binding: BoundText, row: RowSnapshot<T>, current?: () => boolean): void {
+    const raw = readPath(row.value, binding.field.path);
+    if (values.enabled && current) {
+      projection(binding, raw, row.id);
+      if (binding.bound && Object.is(binding.previous, raw) && binding.projection!.state !== "pending") return;
+      const element = binding.element;
+      const context: ValueBindContext = Object.freeze({ field: binding.field.name,
+        values: row.value as Snapshot<Record<string, unknown>>, rowId: row.id, element, phase: binding.projection!.phase });
+      values.apply(binding, { element, elements: [element],
+        kind: element instanceof HTMLInputElement && element.type === "checkbox" ? "checkbox" : "single" }, raw, context,
+        value => writeText(binding, row, value, current), current);
+      if (!current()) return;
+    } else {
+      if (binding.bound && Object.is(binding.previous, raw)) return;
+      writeText(binding, row, raw, values.sourceEnabled ? current : undefined);
     }
-    for (const binding of record.selects) {
-      if (current && !current()) return;
-      renderSelect(binding, row.value, row.id, current);
+    if (values.sourceEnabled && current && !current()) return;
+    binding.previous = raw;
+    binding.bound = true;
+  }
+
+  function renderRecord(record: RenderedRow<T>, row: RowSnapshot<T>, current?: () => boolean, fullSource = false): void {
+    if (record.snapshot === row && (!values.sourceEnabled || !fullSource && record.acceptedSource === row)) return;
+    if (sourceFields && current) {
+      const scheduled = sourceFields, previous = record.acceptedSource;
+      const keys = Object.keys(row.value).filter(key => fullSource || !previous ||
+        !Object.hasOwn(previous.value, key) || !sameJson(Reflect.get(previous.value, key), Reflect.get(row.value, key)));
+      const selected = new Set(keys);
+      const assigned = new Map<string, typeof scheduled>();
+      const remaining: typeof scheduled = [];
+      for (const field of scheduled) {
+        const key = field.key !== undefined && selected.has(field.key) ? field.key :
+          field.dependency !== undefined && selected.has(field.dependency) ? field.dependency : undefined;
+        if (key === undefined) remaining.push(field);
+        else { const fields = assigned.get(key) ?? []; fields.push(field); assigned.set(key, fields); }
+      }
+      const write = (field: (typeof scheduled)[number]) => field.select
+        ? renderSelect(record.selects[field.index], row.value, row.id, current)
+        : renderText(record.texts[field.index], row, current);
+      for (const key of keys) {
+        if (!current()) return;
+        const fields = assigned.get(key) ?? [];
+        const elements = Object.freeze([...new Set(fields.map(field => field.select
+          ? record.selects[field.index].element : record.texts[field.index].element))]);
+        const context: SourceBindContext<T> = Object.freeze({ root, row, key, elements, phase: fullSource || !previous ? "bind" : "val" });
+        values.source(context, () => { for (const field of fields) { if (!current()) return; write(field); } }, current);
+      }
+      for (const field of remaining) { if (!current()) return; write(field); }
+    } else {
+      for (const binding of record.texts) {
+        if (current && !current()) return;
+        renderText(binding, row, current);
+      }
+      for (const binding of record.selects) {
+        if (current && !current()) return;
+        renderSelect(binding, row.value, row.id, current);
+      }
     }
     if (!current || current()) record.snapshot = row;
   }
@@ -453,22 +497,28 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         button.setAttribute("aria-pressed", String(rowId === id));
       }
     }
-    options.onSelect?.({ id, row: id === null ? null : sourceRows.get(id) ?? null, event });
+    onSelect?.({ id, row: id === null ? null : sourceRows.get(id) ?? null, event });
   }
 
   function render(force = false): void {
     if (disposed) return;
     bindable();
-    const tracked = hooks.enabled || values.enabled;
+    const tracked = hooks.enabled || values.enabled || values.sourceEnabled;
     const version = tracked ? ++renderVersion : 0;
     const entries = sourceRows.entries();
-    const current = tracked ? () => !disposed && version === renderVersion && entries === sourceRows.entries() : undefined;
+    const current = tracked ? () => {
+      const live = !disposed && version === renderVersion && entries === sourceRows.entries();
+      if (values.sourceEnabled && !live) { active(); throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback."); }
+      return live;
+    } : undefined;
     const check = (id?: RowId) => {
       active();
       if (current && !current()) throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback.", { rowId: id });
     };
     const created: RenderedRow<T>[] = [];
     const rebound: RenderedRow<T>[] = [];
+    const sourcePending = values.sourceEnabled ? new Map<RenderedRow<T>, RowSnapshot<T>>() : undefined;
+    const mounted = tracked ? new Set(visibleIds) : undefined;
     try {
       const live = new Set(entries.map(row => row.id));
       for (const [id, record] of records) {
@@ -496,8 +546,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       } else pageState = null;
       const ids = displayed.map(row => row.id);
       const changed = ids.length !== visibleIds.length || ids.some((id, index) => id !== visibleIds[index]);
-      const next = hooks.enabled || changed ? new Set(ids) : undefined;
-      const mounted = tracked ? new Set(visibleIds) : undefined;
+      const next = hooks.enabled || values.sourceEnabled || changed ? new Set(ids) : undefined;
       if (hooks.enabled) for (const id of visibleIds) if (!next!.has(id)) {
         hooks.release(id); check(id);
       }
@@ -506,15 +555,21 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         if (!record) {
           record = createRecord(row.id);
           records.set(row.id, record);
-          if (hooks.enabled) created.push(record);
+          if (hooks.enabled || values.sourceEnabled) created.push(record);
+        }
+        if (values.sourceEnabled) {
+          record.sourceVersion = version;
+          if (record.element.parentElement !== root) root.insertBefore(record.element, anchor);
+          check(row.id);
         }
         if (hooks.enabled && (force || !mounted!.has(row.id) || record.snapshot !== row)) {
           hooks.before(row, [record.element], () => check(row.id));
           rebound.push(record);
         }
         if (force || tracked && !mounted!.has(row.id)) resetProjection(record);
-        renderRecord(record, row, current);
+        renderRecord(record, row, current, force || !mounted?.has(row.id));
         if (current) check(row.id);
+        sourcePending?.set(record, row);
       }
       if (changed) {
         const focused = root.ownerDocument.activeElement;
@@ -526,7 +581,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           focusedId !== null && !next!.has(focusedId);
         for (const id of visibleIds) if (!next!.has(id)) {
           if (current) check(id);
-          records.get(id)?.element.remove();
+          const record = records.get(id);
+          if (record) {
+            record.element.remove();
+            if (values.sourceEnabled) record.acceptedSource = undefined;
+          }
         }
         if (current) check();
         let cursor: Node = anchor;
@@ -553,15 +612,29 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       if (empty) empty.hidden = ids.length > 0;
       for (const record of rebound) hooks.after(record.id, () => check(record.id));
       cleanupFailure();
-    } catch (cause) {
-      for (const record of rebound) { hooks.release(record.id); resetProjection(record); }
-      for (const record of created) if (records.get(record.id) === record) {
-        record.element.remove();
-        for (const release of record.releaseSelects) release();
-        records.delete(record.id);
+      if (sourcePending) {
+        check();
+        for (const [record, row] of sourcePending) if (records.get(row.id) === record && record.snapshot === row) record.acceptedSource = row;
       }
-      if (hooks.enabled) visibleIds = visibleIds.filter(id => records.get(id)?.element.parentElement === root);
-      cleanupErrors.length = 0;
+    } catch (cause) {
+      for (const record of rebound) if (!values.sourceEnabled || record.sourceVersion === version) {
+        hooks.release(record.id);
+        if (!values.sourceEnabled || record.sourceVersion === version) resetProjection(record);
+      }
+      for (const record of created) if (records.get(record.id) === record && (!values.sourceEnabled || record.sourceVersion === version)) {
+        record.element.remove();
+        if (values.sourceEnabled && record.sourceVersion !== version) continue;
+        for (const release of record.releaseSelects) release();
+        if (!values.sourceEnabled || records.get(record.id) === record) records.delete(record.id);
+      }
+      if (values.sourceEnabled) for (const record of records.values()) if (record.sourceVersion === version && !mounted!.has(record.id) && record.element.parentElement === root) {
+        record.element.remove();
+        if (record.sourceVersion === version) resetProjection(record);
+      }
+      if (!values.sourceEnabled || version === renderVersion) {
+        if (hooks.enabled || values.sourceEnabled) visibleIds = visibleIds.filter(id => records.get(id)?.element.parentElement === root);
+        cleanupErrors.length = 0;
+      }
       throw cause;
     }
   }
@@ -580,7 +653,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   function dispose(): void {
     if (disposed) return;
     disposed = true;
-    if (hooks.enabled || values.enabled) renderVersion++;
+    if (hooks.enabled || values.enabled || values.sourceEnabled) renderVersion++;
     unsubscribe();
     root.removeEventListener("click", onClick);
     hooks.dispose();

@@ -11,6 +11,7 @@ import type { FormOptions, ListHandle, PageRequest, SelectChoice, ValidationIssu
 export interface EmployeeSetup {
   readonly pageSizes: readonly SelectChoice<number>[];
   readonly pageSize: number;
+  readonly selectFirstResult?: boolean;
   readonly declarations?: { readonly query: string; readonly selectedEmployee: string | null };
 }
 
@@ -280,6 +281,7 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
   }
 
   let searchController: AbortController | undefined;
+  let initializing = true;
   let saving = false;
   let sortDirection = 0;
   let nextNew = 1;
@@ -316,6 +318,17 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
       grid.select(null);
       detail.bind(null);
       status.textContent = values.length + " employees";
+      if (setup.selectFirstResult === true && !(initializing && startup)) {
+        const binding = grid.whenBound();
+        try { await binding; }
+        catch (cause) {
+          if (cause instanceof Error && cause.name === "AbortError") return false;
+          throw cause;
+        }
+        if (signal.aborted || current.signal.aborted || searchController !== current || grid.whenBound() !== binding) return false;
+        const first = grid.rowIds("visible")[0];
+        if (first !== undefined) grid.select(first);
+      }
       return true;
     } catch (cause) {
       if (signal.aborted || current.signal.aborted) return false;
@@ -501,7 +514,7 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
 
   return {
     async init() {
-      if (!startup) { connectEvents(); await load(); return; }
+      if (!startup) { connectEvents(); await load(); initializing = false; return; }
       if (!await load()) throw new Error("Employee declarations need a successful initial search.");
       signal.throwIfAborted();
       connectEvents();
@@ -515,6 +528,7 @@ function createEmployeeBindings({ root, signal, own }: PageContext<{ close(): vo
         () => { status.textContent = "Employee declarations ready"; }
       ];
       for (const action of initialActions) { signal.throwIfAborted(); await action(); signal.throwIfAborted(); }
+      initializing = false;
     },
     search: executeSearch
   };

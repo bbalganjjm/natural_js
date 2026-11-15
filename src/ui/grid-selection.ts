@@ -27,6 +27,8 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
   revision: () => number;
   changed: () => void;
 }) {
+  const { multiple, toggleSelection, checkMode, canSelect, canCheck, beforeSelect, onSelect,
+    beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange } = options;
   type Kind = "selection" | "check";
   const empty: readonly RowId[] = Object.freeze([]);
   let selected: RowId | null = null;
@@ -39,22 +41,22 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     throw new FrameworkError({ api: "bindGrid", code, message, detail });
   }
 
-  if (options.multiple !== undefined && typeof options.multiple !== "boolean") {
+  if (multiple !== undefined && typeof multiple !== "boolean") {
     fail("GRID_SELECTION", "Grid multiple selection must be a boolean.");
   }
-  if (options.toggleSelection !== undefined && typeof options.toggleSelection !== "boolean") {
+  if (toggleSelection !== undefined && typeof toggleSelection !== "boolean") {
     fail("GRID_SELECTION", "Grid toggleSelection must be a boolean.");
   }
-  if (options.checkMode !== undefined && options.checkMode !== "multiple" && options.checkMode !== "single") {
+  if (checkMode !== undefined && checkMode !== "multiple" && checkMode !== "single") {
     fail("GRID_CHECK_MODE", "Grid checkMode must be multiple or single.");
   }
-  for (const name of ["canSelect", "beforeSelect", "onSelect", "beforeSelectionChange", "onSelectionChange"] as const) {
-    if (options[name] !== undefined && typeof options[name] !== "function") {
+  for (const [name, run] of Object.entries({ canSelect, beforeSelect, onSelect, beforeSelectionChange, onSelectionChange })) {
+    if (run !== undefined && typeof run !== "function") {
       fail("GRID_SELECTION", "A Grid selection callback must be a function.", { option: name });
     }
   }
-  for (const name of ["canCheck", "beforeCheckChange", "onCheckChange"] as const) {
-    if (options[name] !== undefined && typeof options[name] !== "function") {
+  for (const [name, run] of Object.entries({ canCheck, beforeCheckChange, onCheckChange })) {
+    if (run !== undefined && typeof run !== "function") {
       fail("GRID_CHECK", "A Grid check callback must be a function.", { option: name });
     }
   }
@@ -68,7 +70,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
   function eligible(id: RowId, kind: Kind): boolean {
     const row = rows.get(id);
     if (!row || row.status === "delete") return false;
-    const predicate = kind === "selection" ? options.canSelect : options.canCheck;
+    const predicate = kind === "selection" ? canSelect : canCheck;
     if (!predicate) return true;
     const allowed = predicate(row);
     if (typeof allowed !== "boolean") {
@@ -134,8 +136,8 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     const active = activeChange(id, event);
     const batch = idsChange(ids, selection, event);
     unchanged();
-    if (activeChanged && !allowed(options.beforeSelect, active, unchanged, "selection")) return false;
-    if (idsChanged && !allowed(options.beforeSelectionChange, batch, unchanged, "selection")) return false;
+    if (activeChanged && !allowed(beforeSelect, active, unchanged, "selection")) return false;
+    if (idsChanged && !allowed(beforeSelectionChange, batch, unchanged, "selection")) return false;
     if (!activeChanged && !idsChanged && nextAnchor === anchor) return true;
     selected = id;
     selection = ids;
@@ -143,8 +145,8 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     revision++;
     if (!activeChanged && !idsChanged) return true;
     view.changed();
-    if (activeChanged) options.onSelect?.(active);
-    if (idsChanged) options.onSelectionChange?.(batch);
+    if (activeChanged) onSelect?.(active);
+    if (idsChanged) onSelectionChange?.(batch);
     return true;
   }
 
@@ -158,15 +160,15 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     const next = checkedIds(ids, "check");
     const change = idsChange(next, checks, event);
     unchanged();
-    if (options.checkMode === "single" && next.length > 1) {
+    if (checkMode === "single" && next.length > 1) {
       fail("GRID_CHECK_MODE", "Single check mode accepts at most one checked row.");
     }
     if (same(next, checks)) return;
-    if (!allowed(options.beforeCheckChange, change, unchanged, "check")) return;
+    if (!allowed(beforeCheckChange, change, unchanged, "check")) return;
     checks = next;
     revision++;
     view.changed();
-    options.onCheckChange?.(change);
+    onCheckChange?.(change);
   }
 
   function scopeIds(scope: GridRowScope): readonly RowId[] {
@@ -191,8 +193,8 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     choose(id: RowId, event: MouseEvent | KeyboardEvent, origin?: RowId): boolean {
       const unchanged = checkpoint("selection");
       if (!eligible(id, "selection")) { unchanged(); return false; }
-      const toggle = options.toggleSelection && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-      if (!options.multiple) {
+      const toggle = toggleSelection && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+      if (!multiple) {
         return changeSelection(toggle && selected === id ? null : id, selection, event, anchor, unchanged);
       }
       let nextId: RowId | null = id;
@@ -219,7 +221,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
       if (typeof checked !== "boolean") fail("GRID_CHECK", "Grid check-all requires a boolean.");
       const unchanged = checkpoint("check");
       const ids = new Set(checks);
-      let replace = checked && options.checkMode === "single";
+      let replace = checked && checkMode === "single";
       for (const id of scopeIds(scope)) {
         if (!eligible(id, "check")) continue;
         if (checked) {
@@ -262,9 +264,9 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
       if (!activeChanged && !idsChanged && !checksChanged) return;
       view.changed();
       return () => {
-        if (activeChanged) options.onSelect?.(active);
-        if (idsChanged) options.onSelectionChange?.(batch);
-        if (checksChanged) options.onCheckChange?.(checkChange);
+        if (activeChanged) onSelect?.(active);
+        if (idsChanged) onSelectionChange?.(batch);
+        if (checksChanged) onCheckChange?.(checkChange);
       };
     }
   };

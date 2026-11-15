@@ -13,6 +13,7 @@ const serverView = new URL(location.href).searchParams.get("view") === "server";
 const startup = createCommunicator();
 const declarationMode = new URL(location.href).searchParams.get("declarations") === "async";
 const trimSearch = new URL(location.href).searchParams.get("policy") === "trim-search";
+const selectFirstResult = new URL(location.href).searchParams.get("selection") === "first";
 const searchAdvice: readonly PageAdvice<{ close(): void }>[] = [{
   match: (path, owner, page) => /^actions\.(?:search)$/.test(path) &&
     Object.hasOwn(owner, "search") && page.root.matches('[data-page="employees"]'),
@@ -90,14 +91,14 @@ const requests = {
 };
 
 async function prepareEmployee(signal: AbortSignal): Promise<EmployeeSetup> {
-  if (!declarationMode) return await requests.setup(signal);
+  if (!declarationMode) return { ...await requests.setup(signal), selectFirstResult };
   const [setup, codes, start] = await Promise.all([requests.setup(signal), requests.codes(signal), requests.start(signal)]);
   signal.throwIfAborted();
   const declaration = { group: "page-size", filter: (code: EmployeeCode) => code.value <= start.maxPageSize };
   const pageSizes = codes.filter(code => code.group === declaration.group && declaration.filter(code))
     .map(code => ({ label: code.label, value: code.value }));
   if (!pageSizes.some(choice => choice.value === setup.pageSize)) throw new Error("The initial page size is unavailable after the code filter.");
-  return { pageSizes, pageSize: setup.pageSize, declarations: { query: start.query, selectedEmployee: start.selectedEmployee } };
+  return { pageSizes, pageSize: setup.pageSize, selectFirstResult, declarations: { query: start.query, selectedEmployee: start.selectedEmployee } };
 }
 
 function open(): void {

@@ -6,7 +6,7 @@ import { checkGroupValue } from "./choice-group-owner.js";
 import type { ChoiceGroupBinding } from "./choice-group-owner.js";
 import { rowOptionAvailable } from "./row-options.js";
 import type { RowId } from "../data/index.js";
-import type { ValueBindContext } from "./index.js";
+import type { SourceBindContext, ValueBindContext } from "./index.js";
 
 export type ValueCallback = "beforeBindValue" | "onBindValue";
 export interface ValueProjection {
@@ -25,17 +25,49 @@ interface Field {
 }
 
 /** Binders retain their field graph, projection slots and lifetime checkpoints. */
-export function createValueBinding(api: "bindForm" | "bindGrid" | "bindList", options: {
+export function createValueBinding<T extends object>(api: "bindForm" | "bindGrid" | "bindList", options: {
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
+  beforeSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
+  onSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
 }) {
-  const { beforeBindValue, onBindValue } = options;
+  const { beforeBindValue, onBindValue, beforeSourceBind, onSourceBind } = options;
   const prefix = api.slice(4).toUpperCase();
   if (beforeBindValue !== undefined && typeof beforeBindValue !== "function" ||
       onBindValue !== undefined && typeof onBindValue !== "function") {
     throw new FrameworkError({ api, code: `${prefix}_VALUE_OPTIONS`, message: "Value callbacks must be synchronous functions." });
   }
+  if (beforeSourceBind !== undefined && typeof beforeSourceBind !== "function" ||
+      onSourceBind !== undefined && typeof onSourceBind !== "function") {
+    throw new FrameworkError({ api, code: `${prefix}_SOURCE_OPTIONS`, message: "Source callbacks must be synchronous functions." });
+  }
   let depth = 0;
+  let sourceDepth = 0;
+  let activeSources: Map<RowId, Set<string>> | undefined;
+  function sourceError(context: SourceBindContext<T>, callback: "beforeSourceBind" | "onSourceBind",
+    message: string, cause?: unknown): FrameworkError {
+    if (cause instanceof FrameworkError && cause.api === api) return cause;
+    return new FrameworkError({ api, code: `${prefix}_SOURCE`, message, cause,
+      detail: { key: context.key, rowId: context.row.id, phase: context.phase, callback } });
+  }
+  function invokeSource(callback: "beforeSourceBind" | "onSourceBind", value: unknown,
+    context: SourceBindContext<T>, current: () => boolean): boolean {
+    const run = callback === "beforeSourceBind" ? beforeSourceBind : onSourceBind;
+    let failed = false, failure: unknown;
+    try {
+      const result = run?.(value, context);
+      if (result !== null && (typeof result === "object" || typeof result === "function") &&
+          typeof (result as { then?: unknown }).then === "function") {
+        void Promise.resolve(result).catch(() => {});
+        throw new TypeError("Source callbacks must finish synchronously.");
+      }
+    } catch (cause) { failed = true; failure = cause; }
+    const live = current();
+    if (failed && failure instanceof FrameworkError && failure.api === api) throw failure;
+    if (!live) return false;
+    if (failed) throw sourceError(context, callback, "The source callback failed.", failure);
+    return true;
+  }
   function error(context: ValueBindContext, callback: ValueCallback, message: string, cause?: unknown): FrameworkError {
     return new FrameworkError({ api, code: `${prefix}_VALUE`, message, cause,
       detail: { field: context.field, rowId: context.rowId, phase: context.phase, callback } });
@@ -91,6 +123,30 @@ export function createValueBinding(api: "bindForm" | "bindGrid" | "bindList", op
   return {
     enabled: beforeBindValue !== undefined || onBindValue !== undefined,
     get running() { return depth > 0; },
+    sourceEnabled: beforeSourceBind !== undefined || onSourceBind !== undefined,
+    get sourceRunning() { return sourceDepth > 0; },
+    source(context: SourceBindContext<T>, write: () => void, current: () => boolean): void {
+      if (!current()) return;
+      const { id } = context.row;
+      activeSources ??= new Map();
+      let keys = activeSources.get(id);
+      if (keys?.has(context.key)) throw sourceError(context,
+        beforeSourceBind ? "beforeSourceBind" : "onSourceBind", "A source callback cannot recursively bind the same key and row.");
+      if (!keys) { keys = new Set(); activeSources.set(id, keys); }
+      keys.add(context.key);
+      sourceDepth++;
+      try {
+        const value = (context.row.value as Readonly<Record<string, unknown>>)[context.key];
+        if (!invokeSource("beforeSourceBind", value, context, current)) return;
+        write();
+        if (!current()) return;
+        invokeSource("onSourceBind", value, context, current);
+      } finally {
+        sourceDepth--;
+        keys.delete(context.key);
+        if (!keys.size) activeSources.delete(id);
+      }
+    },
     error,
     apply(slot: { projection?: ValueProjection }, field: Field, raw: unknown, context: ValueBindContext,
       write: (value: unknown) => void, current: () => boolean, available?: () => readonly unknown[]): void {

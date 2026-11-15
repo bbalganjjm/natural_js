@@ -262,3 +262,7 @@ await assert.rejects(import("@bbalganjjm/natural_js/ui/row-options"), {
   assert.equal(restored.entries(), entries); assert.equal(restored.get(id), snapshot); assert.equal(events.length, 1);
   stop(); restored.dispose();
 }
+
+const sourceUI = await import("@bbalganjjm/natural_js/ui");
+assert.equal(Object.hasOwn(sourceUI, "SourceBindContext"), false);
+await assert.rejects(import("@bbalganjjm/natural_js/ui/value-binding"), { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" });

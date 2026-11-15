@@ -20,6 +20,14 @@ export interface FormBindContext<T extends object> {
   readonly event: RowsEvent | null;
 }
 
+export interface SourceBindContext<T extends object> {
+  readonly root: HTMLElement;
+  readonly row: RowSnapshot<T>;
+  readonly key: string;
+  readonly elements: readonly HTMLElement[];
+  readonly phase: "bind" | "val";
+}
+
 export type FormatRule = (
   value: string,
   args: readonly unknown[],
@@ -117,6 +125,8 @@ export interface FormOptions<T extends object = Record<string, unknown>> {
   onBind?: (context: FormBindContext<T>) => unknown;
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
+  beforeSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
+  onSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
   render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>;
 }
 

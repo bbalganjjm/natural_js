@@ -8,7 +8,7 @@ import type { Communicator, RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { ChoiceGroupHandle } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
-import type { FieldRules, FormBindContext, ValueBindContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
+import type { FieldRules, FormBindContext, ValueBindContext, SourceBindContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
 // @ts-expect-error Use the common ValueBindContext; the Form-only name was removed.
 import type { FormValueContext } from "@bbalganjjm/natural_js/ui";
 
@@ -584,4 +584,38 @@ export function connectPreparedCreation(root: HTMLFormElement) {
     rows.restore(id, { amount: 0 });
   }
   return { rows, form, checkpoint, validation };
+}
+
+export function connectSourceObservers(formRoot: HTMLFormElement, tableRoot: HTMLTableElement, listRoot: HTMLUListElement) {
+  interface SourceEmployee { audit: { token: string }; profile: { name: string }; chosen: number | null; choices: { label: string; code: number }[] }
+  const rows = createRows<SourceEmployee>([{ audit: { token: "A" }, profile: { name: "Ada" }, chosen: 1, choices: [{ label: "One", code: 1 }] }]);
+  const seen: SourceBindContext<SourceEmployee>[] = [];
+  function beforeSourceBind(value: unknown, context: SourceBindContext<SourceEmployee>) {
+    const token: string = context.row.value.audit.token, root: HTMLElement = context.root;
+    const elements: readonly HTMLElement[] = context.elements, phase: "bind" | "val" = context.phase, key: string = context.key;
+    const source: Snapshot<SourceEmployee> = context.row.value;
+    seen.push(context); void value; void token; void root; void elements; void phase; void key; void source;
+    if (false) {
+      // @ts-expect-error A source-only key has no fabricated primary element.
+      context.element;
+      // @ts-expect-error Source snapshots stay immutable.
+      context.row.value.profile.name = "Changed";
+      // @ts-expect-error A context target list is readonly.
+      context.elements.push(root);
+    }
+    return false;
+  }
+  const shared = { beforeSourceBind, onSourceBind: beforeSourceBind };
+  const options: FormOptions<SourceEmployee> = { rows, ...shared };
+  const form = bindForm(formRoot, options), grid = bindGrid(tableRoot, { rows, ...shared }), list = bindList(listRoot, { rows, ...shared });
+  form.bind(rows.entries()[0].id); form.refresh(["audit"]);
+  if (false) {
+    const invalid: FormOptions<SourceEmployee> = {
+      rows,
+      // @ts-expect-error Source callbacks must be functions.
+      beforeSourceBind: 42
+    };
+    void invalid;
+  }
+  return { rows, form, grid, list, seen };
 }

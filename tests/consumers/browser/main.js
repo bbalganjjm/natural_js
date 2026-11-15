@@ -907,3 +907,58 @@ try {
 } catch (cause) {
   state.error = cause?.stack ?? String(cause);
 }
+
+state.checkSourceCallbacks = () => {
+  const root = document.createElement("section");
+  root.innerHTML = '<form data-source-owner="form"><label>Name <input data-field="profile.name"></label><label>Choice <select data-field="chosen" data-options="choices" data-option-label="label" data-option-value="code"><option value="">Choose</option></select></label></form><table data-source-owner="grid"><caption>Installed source</caption><thead><tr><th scope="col">Name</th><th scope="col">Choice</th></tr></thead><tbody><tr data-row-template><td data-field="profile.name"></td><td><select aria-label="Choice" data-field="chosen" data-options="choices" data-option-label="label" data-option-value="code"><option value="">Choose</option></select></td></tr></tbody></table><ul data-source-owner="list"><li data-row-template><span data-field="profile.name"></span><select aria-label="Choice" data-field="chosen" data-options="choices" data-option-label="label" data-option-value="code"><option value="">Choose</option></select></li></ul>';
+  document.body.append(root);
+  const rows = createRows([{ audit: { token: "A" }, choices: [{ label: "False", code: false }, { label: "Zero", code: 0 }], profile: { name: "Ada" }, chosen: false }]), id = rows.entries()[0].id;
+  const trace = [], pending = new Map(); let contextValid = true, plain = true;
+  function before(value, context) {
+    plain &&= this === undefined;
+    const key = context.root.dataset.sourceOwner + ":" + context.key; pending.set(key, context);
+    contextValid &&= Object.isFrozen(context) && Object.isFrozen(context.elements) && context.row === rows.get(id) && Object.is(value, context.row.value[context.key]) && context.elements.every(element => context.root.contains(element));
+    trace.push([context.root.dataset.sourceOwner, "before", context.key, context.phase, context.elements.length]); return false;
+  }
+  function after(value, context) {
+    plain &&= this === undefined;
+    const key = context.root.dataset.sourceOwner + ":" + context.key;
+    contextValid &&= pending.get(key) === context && Object.is(value, context.row.value[context.key]); pending.delete(key);
+    trace.push([context.root.dataset.sourceOwner, "after", context.key, context.phase, context.elements.length]);
+  }
+  const options = { rows, beforeSourceBind: before, onSourceBind: after };
+  const formRoot = root.querySelector("form"), table = root.querySelector("table"), listRoot = root.querySelector("ul");
+  const form = bindForm(formRoot, options), grid = bindGrid(table, options), list = bindList(listRoot, options); form.bind(id);
+  const grouped = () => Object.fromEntries(["form", "grid", "list"].map(owner => [owner, trace.filter(event => event[0] === owner).map(event => event.slice(1))]));
+  const display = () => [formRoot, table, listRoot].map(owner => {
+    const name = owner.querySelector('[data-field="profile.name"]'), choice = owner.querySelector("select");
+    return { name: name instanceof HTMLInputElement ? name.value : name.textContent, choice: choice.selectedOptions[0]?.textContent };
+  });
+  const full = grouped(), initial = display(); trace.length = 0;
+  rows.set(id, "choices", [{ label: "Updated false", code: false }, { label: "Zero", code: 0 }]);
+  const catalog = grouped(), catalogDisplay = display(); trace.length = 0;
+  rows.restore(id, { audit: { token: "B" }, choices: rows.get(id).value.choices, profile: { name: "Grace" } });
+  const missing = grouped(), missingDisplay = display(); trace.length = 0;
+  const missingSelection = [formRoot, table, listRoot].map(owner => {
+    const choice = owner.querySelector("select");
+    return { index: choice.selectedIndex, authored: choice.options[0].textContent };
+  });
+  const snapshot = rows.get(id); form.read(); form.defaults(); form.prepare(); grid.rowIds("visible"); list.selected();
+  const quiet = trace.length === 0 && rows.get(id) === snapshot;
+  const raw = { ownChosen: Object.hasOwn(rows.get(id).value, "chosen"), originalChosen: rows.original(id).chosen };
+  form.dispose(); grid.dispose(); list.dispose(); rows.dispose(); root.remove();
+  const captureRoot = document.createElement("section"); captureRoot.innerHTML = '<table><caption>Capture</caption><thead><tr><th scope="col">Name</th></tr></thead><tbody><tr data-row-template><td><button type="button" data-select-row><span data-field="name"></span></button></td></tr></tbody></table><ul><li data-row-template><button type="button" data-select-row><span data-field="name"></span></button></li></ul>'; document.body.append(captureRoot);
+  const selectionRows = createRows([{ name: "One" }, { name: "Two" }]), ids = selectionRows.entries().map(row => row.id);
+  let gridReads = 0, listReads = 0, gridCalls = 0, listCalls = 0, capturePlain = true;
+  const gridOptions = { rows: selectionRows, multiple: false, get onSelect() { gridReads++; return function() { capturePlain &&= this === undefined; gridCalls++; }; } };
+  const listOptions = { rows: selectionRows, get onSelect() { listReads++; return function() { capturePlain &&= this === undefined; listCalls++; }; } };
+  const captureTable = captureRoot.querySelector("table"), capturedGrid = bindGrid(captureTable, gridOptions), capturedList = bindList(captureRoot.querySelector("ul"), listOptions), aria = captureTable.getAttribute("aria-multiselectable");
+  Object.defineProperty(gridOptions, "onSelect", { value: () => { throw new Error("Late Grid callback"); } });
+  Object.defineProperty(listOptions, "onSelect", { value: () => { throw new Error("Late List callback"); } }); gridOptions.multiple = true;
+  const buttons = [...captureTable.querySelectorAll("tbody [data-select-row]")]; buttons[0].click(); buttons[1].click();
+  const native = { active: capturedGrid.selected(), members: [...capturedGrid.selectedIds()], pressed: buttons.map(button => button.getAttribute("aria-pressed")) };
+  capturedList.select(ids[1]); selectionRows.remove(ids[1]);
+  const capture = { gridReads, listReads, gridCalls, listCalls, plain: capturePlain, native, aria: captureTable.getAttribute("aria-multiselectable") === aria, selected: capturedGrid.selected(), listSelected: capturedList.selected() };
+  capturedGrid.dispose(); capturedList.dispose(); selectionRows.dispose(); captureRoot.remove();
+  return { full, initial, catalog, catalogDisplay, missing, missingDisplay, missingSelection, contextValid, plain, quiet, raw, capture };
+};

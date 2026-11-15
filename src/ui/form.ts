@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
-import type { RowId, RowsEvent } from "../data/index.js";
+import type { RowId, RowSnapshot, RowsEvent } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
 import type { RuleCall } from "./rules.js";
@@ -16,7 +16,7 @@ import { assertNativePaths, createNativeDefaults } from "./native-defaults.js";
 import { createValueBinding } from "./value-binding.js";
 import type { ValueProjection } from "./value-binding.js";
 import type {
-  FormBindContext, FormHandle, FormOptions, ValueBindContext, FormatRule, RuleContext,
+  FormBindContext, FormHandle, FormOptions, SourceBindContext, ValueBindContext, FormatRule, RuleContext,
   ValidateRule, ValidationIssue, ValidationResult
 } from "./index.js";
 
@@ -109,7 +109,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
       onBindValue !== undefined && typeof onBindValue !== "function")) {
     throw formError("FORM_VALUE_OPTIONS", "Value callbacks need Rows and synchronous functions.");
   }
-  const values = createValueBinding("bindForm", { beforeBindValue, onBindValue });
+  const { beforeSourceBind, onSourceBind } = options;
+  if (!rows && (beforeSourceBind !== undefined || onSourceBind !== undefined)) {
+    throw formError("FORM_SOURCE_OPTIONS", "Source callbacks need Rows and synchronous functions.");
+  }
+  const values = createValueBinding<T>("bindForm", { beforeBindValue, onBindValue, beforeSourceBind, onSourceBind });
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
@@ -230,6 +234,19 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
   const regionState = new Map<HTMLElement, { id: string | null; live: string | null; text: string | null }>();
   let { fields, byName } = compileFields();
+  function compileSourceFields(graph: readonly Field[]): Map<string, Field[]> | undefined {
+    if (!values.sourceEnabled) return undefined;
+    const groups = new Map<string, Field[]>();
+    for (const field of graph) {
+      const direct = field.path[0], dependency = field.choices?.options[0];
+      for (const key of dependency !== undefined && dependency !== direct ? [direct, dependency] : [direct]) {
+        const group = groups.get(key) ?? [];
+        group.push(field); groups.set(key, group);
+      }
+    }
+    return groups;
+  }
+  let sourceFields = compileSourceFields(fields);
   const renderers = fieldRenderers("bindForm", fields.map(field => ({
     name: field.name, element: field.element, formatted: field.format.length > 0
   })), options.render);
@@ -283,6 +300,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const pendingResets = new Map<HTMLFormElement, Event[]>();
   let resetTimer: ReturnType<typeof setTimeout> | undefined;
   let boundId: RowId | null = null;
+  let acceptedSource: RowSnapshot<T> | undefined;
   let unsubscribe: (() => void) | undefined;
   let disposed = false;
   let initialized = false;
@@ -370,6 +388,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
       throw formError("ROW_MISSING", "The row ID is not available for this Form.", { id });
     }
     return row.value as Record<string, unknown>;
+  }
+
+  function acceptSource(version: number, snapshot?: RowSnapshot<T>): void {
+    if (values.sourceEnabled && snapshot && !disposed && version === renderVersion &&
+        boundId === snapshot.id && rows!.get(snapshot.id) === snapshot) acceptedSource = snapshot;
   }
 
   function localValues(): Record<string, unknown> {
@@ -997,7 +1020,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function render(phase: ValuePhase = "val", skipFocused = false, force = false,
-    prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>): number {
+    prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>,
+    selectedKeys?: ReadonlySet<string>): number {
     return working(() => {
       syncPreview();
       const version = ++renderVersion, id = boundId;
@@ -1009,44 +1033,66 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const current = () => !disposed && version === renderVersion && boundId === id &&
         (id === null || rows!.get(id) === snapshot);
       if (id === null && valueCallbacks) for (const field of selected ?? fields) field.projection = undefined;
-      for (const field of selected ?? fields) {
-        if (!current()) return version;
-        if (field.choices) {
-          const next = choices!.get(field)!;
-          if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
-            field.choices.raw = renderRowOptions(field.element as HTMLSelectElement, field.choices.authoredNodes,
-              field.choices.authoredOptions, field.choices.authored, next.options);
-            field.choices.source = next.source;
-            field.choices.bound = true;
-          }
-        }
-        const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
-        for (const { element } of field.originals) element.setAttribute("data-field-changed", String(changed));
-        const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
-        if (selected && focused && field.kind === "single" && control(field.element) &&
-            textLengthControl(field.element) && !field.element.readOnly) {
-          if (valueCallbacks && id !== null) projectValue(field, readPath(source, field.path), source!, id,
-            phase, force, true, current, true);
-          continue;
-        }
-        if (currentDrafts?.has(field)) {
-          if (valueCallbacks && id !== null) {
-            const raw = readPath(source, field.path), previous = field.projection;
-            if (force || !previous || previous.id !== id || !sameJson(previous.raw, raw)) {
-              field.projection = { id, raw, value: raw, phase, state: "pending" };
+      function writeFields(targets: Iterable<Field>): void {
+        for (const field of targets) {
+          if (!current()) return;
+          if (field.choices) {
+            const next = choices!.get(field)!;
+            if (!field.choices.bound || !Object.is(field.choices.source, next.source)) {
+              field.choices.raw = renderRowOptions(field.element as HTMLSelectElement, field.choices.authoredNodes,
+                field.choices.authoredOptions, field.choices.authored, next.options);
+              field.choices.source = next.source;
+              field.choices.bound = true;
             }
           }
-          if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
-          else displayField(field, currentDrafts.get(field));
-          if (id !== null && current()) rememberNative(field, id, currentDrafts.get(field), true, current);
-          continue;
-        }
-        const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
-        if (valueCallbacks && id !== null) projectValue(field, raw, source!, id, phase, force, focused, current);
-        else if (!(skipFocused && focused && field.kind === "single" && formatCapable(field.element))) {
-          writeValue(field, raw, source, id, focused, current);
+          const changed = original !== undefined && !sameJson(readPath(original, field.path), readPath(source, field.path));
+          for (const { element } of field.originals) element.setAttribute("data-field-changed", String(changed));
+          const focused = field.elements.includes(root.ownerDocument.activeElement as HTMLElement);
+          if (selected && focused && field.kind === "single" && control(field.element) &&
+              textLengthControl(field.element) && !field.element.readOnly) {
+            if (valueCallbacks && id !== null) projectValue(field, readPath(source, field.path), source!, id,
+              phase, force, true, current, true);
+            continue;
+          }
+          if (currentDrafts?.has(field)) {
+            if (valueCallbacks && id !== null) {
+              const raw = readPath(source, field.path), previous = field.projection;
+              if (force || !previous || previous.id !== id || !sameJson(previous.raw, raw)) {
+                field.projection = { id, raw, value: raw, phase, state: "pending" };
+              }
+            }
+            if (field.choices) selectRowOptions(field.element as HTMLSelectElement, field.choices.raw, currentDrafts.get(field));
+            else displayField(field, currentDrafts.get(field));
+            if (id !== null && current()) rememberNative(field, id, currentDrafts.get(field), true, current);
+            continue;
+          }
+          const raw = source ? readPath(source, field.path) : field.choices || field.kind === "radio" ? null : "";
+          if (valueCallbacks && id !== null) projectValue(field, raw, source!, id, phase, force, focused, current);
+          else if (!(skipFocused && focused && field.kind === "single" && formatCapable(field.element))) {
+            writeValue(field, raw, source, id, focused, current);
+          }
         }
       }
+      if (!values.sourceEnabled || !snapshot || !source || values.running &&
+          [...activeValues].some(([field, ids]) => ids.has(snapshot.id) && (!selected || selected.has(field)))) {
+        writeFields(selected ?? fields);
+        return version;
+      }
+      const previous = acceptedSource && acceptedSource.id === id ? acceptedSource.value as Record<string, unknown> : undefined;
+      const keys = Object.keys(source).filter(key => selectedKeys ? selectedKeys.has(key) :
+        phase === "bind" || !previous || !Object.hasOwn(previous, key) || !sameJson(previous[key], source[key]));
+      const keySet = new Set(keys), remaining = new Set(selected ?? fields);
+      for (const key of keys) {
+        if (!current()) return version;
+        const assigned = (sourceFields!.get(key) ?? []).filter(field => remaining.has(field) &&
+          (field.path[0] === key || !keySet.has(field.path[0])));
+        for (const field of assigned) remaining.delete(field);
+        const binding: SourceBindContext<T> = Object.freeze({ root, row: snapshot, key, phase,
+          elements: Object.freeze([...new Set(assigned.flatMap(field => field.elements))]) });
+        values.source(binding, () => writeFields(assigned), current);
+        if (!current()) return version;
+      }
+      writeFields(remaining);
       return version;
     });
   }
@@ -1084,6 +1130,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (!current(version)) return;
         automatic = true;
         boundId = id;
+        if (acceptedSource?.id !== id) acceptedSource = undefined;
         for (const field of fields) setNativeProjection(field);
         clearPendingResets();
         syncPreview();
@@ -1099,6 +1146,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         showIssues(() => current(rendered) && boundId === id);
         if (!current(rendered) || boundId !== id) return;
         invoke("onBind");
+        acceptSource(rendered, snapshot);
       } finally {
         if (bindCallbacks && id !== null) activeBindings.delete(id);
       }
@@ -1372,7 +1420,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
       pendingSelects.clear();
       for (const [group, release] of pendingGroups) releaseGroups.set(group, release);
       pendingGroups.clear();
+      const graphChanged = values.sourceEnabled && (nextFields.length !== fields.length ||
+        nextFields.some((field, index) => field !== fields[index]));
       fields = nextFields;
+      sourceFields = compileSourceFields(fields);
+      if (graphChanged) acceptedSource = undefined;
       byName = new Map(fields.map(field => [field.name, field]));
       byElement = new Map(fields.flatMap(field => field.elements.map(element => [element, field] as const)));
       annotations = nextAnnotations;
@@ -1476,6 +1528,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const current = () => !disposed && version === renderVersion;
       if (boundId !== null) drafts.delete(boundId);
       boundId = null;
+      acceptedSource = undefined;
       syncPreview();
       automatic = false;
       pointerField = undefined;
@@ -1578,8 +1631,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (id === boundId) {
         const checked = evaluate(id, rowValue(id), currentDrafts, validate);
         for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
-        render("val", true);
+        const renderedRow = rows!.get(id), rendered = render("val", true);
         showIssues();
+        if (!failed) acceptSource(rendered, renderedRow);
       }
     } catch (cause) {
       if (!failed) throw cause;
@@ -1706,6 +1760,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     const row = rows.get(boundId);
     if (!row) {
       boundId = null;
+      acceptedSource = undefined;
       for (const field of fields) setNativeProjection(field);
       syncPreview();
       issues.clear();
@@ -1719,8 +1774,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
       issues.clear();
       if (scanning) return;
       syncPreview();
-      render("val");
+      const rendered = render("val");
       showIssues();
+      acceptSource(rendered, row);
       return;
     }
     syncPreview();
@@ -1735,8 +1791,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
     const reset = event.type === "replace";
     if (reset || event.type === "set" || event.type === "setMany") issues.clear();
-    render(reset ? "bind" : "val", !reset);
+    const rendered = render(reset ? "bind" : "val", !reset);
     showIssues();
+    acceptSource(rendered, row);
   }
 
   try {
@@ -1766,11 +1823,23 @@ export function bindForm<T extends object = Record<string, unknown>>(
       if (names === undefined) { bind(boundId); return; }
       if (!Array.isArray(names)) throw formError("FORM_BIND", "Refresh fields must be an array of compiled field paths.");
       const requested = new Set<string>();
+      const sourceKeys = values.sourceEnabled ? new Set<string>() : undefined;
+      const row = sourceKeys && boundId !== null ? rows!.get(boundId) : undefined;
       for (const name of names) {
-        if (typeof name !== "string" || !byName.has(name)) {
+        if (typeof name !== "string") {
           throw formError("FORM_BIND", "Refresh needs an existing compiled field path.", { field: name });
         }
-        requested.add(name);
+        const field = byName.get(name);
+        if (field) {
+          requested.add(name);
+          if (sourceKeys && row && Object.hasOwn(row.value, field.path[0])) sourceKeys.add(field.path[0]);
+        } else if (sourceKeys && row && Object.hasOwn(row.value, name)) {
+          sourceKeys.add(name);
+          for (const field of sourceFields!.get(name) ?? []) requested.add(field.name);
+        } else {
+          throw formError("FORM_BIND", values.sourceEnabled
+            ? "Refresh needs an existing field path or own source key." : "Refresh needs an existing compiled field path.", { field: name });
+        }
       }
       const selected = new Set(fields.filter(field => requested.has(field.name)));
       if (!rows) {
@@ -1778,11 +1847,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
         active();
         if (flushed !== renderVersion) return;
       }
-      if (!selected.size) return;
+      if (!selected.size && !sourceKeys?.size) return;
       if (!rows) { renderLocal(undefined, undefined, selected); return; }
       const source = boundId === null ? null : rowValue(boundId);
       const prepared = prepareChoices(source, boundId, selected);
-      render("bind", true, true, prepared, selected);
+      render("bind", true, true, prepared, selected, sourceKeys);
     },
     read() {
       active();
@@ -1840,6 +1909,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     if (disposed) return;
     if (!rows && !scanning) flushLocalResets(undefined, false);
     disposed = true;
+    acceptedSource = undefined;
     syncPreview();
     renderVersion++;
     activeValues.clear();
