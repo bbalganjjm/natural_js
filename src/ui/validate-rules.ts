@@ -79,7 +79,7 @@ export function assertValidateArgs(name: string, args: readonly unknown[]): void
     count(name, args, size, size + 1);
     const low = numeric(args[0], name, true);
     if (size === 2 && low > numeric(args[1], name, true)) throw new RangeError(`${name} minimum exceeds maximum.`);
-    if (args.length > size && numeric(args[size], name, true) < 1) {
+    if (args[size] !== undefined && numeric(args[size], name, true) < 1) {
       throw new RangeError(`${name} character width must be positive.`);
     }
     return;

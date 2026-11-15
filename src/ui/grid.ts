@@ -4,6 +4,8 @@ import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner } from "./rules.js";
+import { createRowRules } from "./row-rules.js";
+import type { RowRuleSource } from "./row-rules.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
 import { bindGridColumns } from "./grid-columns.js";
@@ -84,6 +86,7 @@ interface RenderedRow<T> {
   snapshot?: RowSnapshot<T>;
   acceptedSource?: RowSnapshot<T>;
   sourceVersion?: number;
+  ruleSources: readonly RowRuleSource[];
   texts: BoundText[];
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
@@ -382,6 +385,27 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     ...textFields.map(field => ({ name: field.name, element: authored[field.index], formatted: field.format.length > 0 })),
     ...selectFields.flatMap(field => field.name ? [{ name: field.name, element: authored[field.index] }] : [])
   ], options.render);
+  const rowRules = createRowRules<RenderedRow<T>>(runner, [
+    ...textFields.map(target => ({ target, elements: target.indexes.map(index => authored[index]) })),
+    ...selectFields.map(target => ({ target, elements: [authored[target.index]] }))
+  ], (record, position) => position < textFields.length ? record.texts[position].elements :
+    [record.selects[position - textFields.length].element], (position, calls, source, declarations) => {
+    if (position >= textFields.length) {
+      if (calls.format.length) throw gridError("GRID_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.", { field: selectFields[position - textFields.length].name ?? "" });
+      return;
+    }
+    const field = textFields[position], element = authored[field.index];
+    if (field.kind !== "single") {
+      for (const kind of ["format", "validate"] as const) if (!declarations.configured(field.name, kind === "format" ? "data-format" : "data-validate") &&
+          new Set(source[kind].filter(value => value !== null)).size > 1) throw gridError("GRID_CONTROL", "One group needs one rule declaration.", { field: field.name });
+      if (calls.format.length) throw gridError("GRID_FORMAT", "A choice group cannot display formatted text.", { field: field.name });
+    }
+    if (calls.format.length && element instanceof HTMLInputElement && !["text", "search", "tel", "url", "email", "password"].includes(element.type)) {
+      throw gridError("GRID_FORMAT", "Only text-like inputs can display formatted text.", { field: field.name });
+    }
+    if (calls.format.length && renderers.has(field.name)) throw new FrameworkError({ api: "bindGrid", code: "UI_RENDER",
+      message: "A render target cannot own formatting.", detail: { field: field.name } });
+  }, () => { throw gridError("GRID_BIND_REENTRANT", "Finish the current rule before changing its declaration."); });
   const sourceFields = values.sourceEnabled ? [
     ...textFields.map((field, index) => ({ key: field.path[0], dependency: undefined, index, select: false })),
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
@@ -624,7 +648,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     const checks = checkIndexes.map(index => nodes[index] as HTMLInputElement);
     for (const element of elements) rowIds.set(element, id);
-    return { id, elements, mergeCells, errors, hasIssues: false, texts, selects: rowSelects, buttons,
+    return { id, elements, mergeCells, errors, hasIssues: false, texts, selects: rowSelects, buttons, ruleSources: rowRules.sources(id),
       controls: controlIndexes.map(index => nodes[index] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement),
       buttonDisabled: buttons.map(button => button.disabled), checks, checkDisabled: checks.map(check => check.disabled),
       releaseColumns: columns.attach(elements) };
@@ -683,14 +707,15 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function writeText(binding: BoundText, snapshot: RowSnapshot<T>, value: unknown, draft: boolean, current?: () => boolean): void {
     const field = binding.descriptor;
+    const format = rowRules.formats(snapshot.id, field);
     const renderer = renderers.get(field.name);
-    if ((renderer || field.format.length) && !draft) {
+    if ((renderer || format.length) && !draft) {
       const context: RuleContext = { field: field.name, values: snapshot.value as Snapshot<Record<string, unknown>>,
         rowId: snapshot.id, element: binding.element };
       if (renderer) renderField("bindGrid", binding.element, value, context, renderer,
         !!binding.element.closest("[data-merge]"), current);
       else {
-        const shown = runner.format(field.format, value, context);
+        const shown = runner.format(format, value, context);
         if (!current || current()) display(binding.element, shown);
       }
     } else if (!current || current()) {
@@ -871,7 +896,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           });
         }
       }
-      if (full) issues.push(...runner.validate(descriptor.validate, value, context));
+      if (full) issues.push(...runner.validate(rowRules.validators(row.id, descriptor), value, context));
     }
     for (const [index, descriptor] of selectFields.entries()) {
       if (!descriptor.field || !descriptor.name) continue;
@@ -893,7 +918,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           message: "Choose an option.", ...(element ? { element } : {})
         });
       }
-      if (full) issues.push(...runner.validate(descriptor.validate, value,
+      if (full) issues.push(...runner.validate(rowRules.validators(row.id, descriptor), value,
         ruleContext(row, descriptor.name, values, element)));
     }
     const byField = new Map<string, string[]>();
@@ -996,6 +1021,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
   }
 
   function onRows(event: RowsEvent): void {
+    rowRules.prune(event, id => sourceRows.get(id) !== undefined);
     bindable();
     if (pasteCommit) pasteNotified = true;
     if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
@@ -1540,8 +1566,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     const rebound: RenderedRow<T>[] = [];
     let pinLayoutChanged = false;
     const revision = viewRevision;
-    const source = hooks.enabled || values.enabled || values.sourceEnabled ? sourceRows.entries({ includeDeleted: true }) : undefined;
-    const layout = hooks.enabled || values.enabled || values.sourceEnabled ? columns.columns() : undefined;
+    const source = sourceRows.entries({ includeDeleted: true });
+    const layout = columns.columns();
     const current = values.enabled || values.sourceEnabled ? () => {
       const live = !disposed && valueVersion === valueRenderVersion &&
         (!values.sourceEnabled || operation === activeOperation) &&
@@ -1564,6 +1590,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           record = createRecord(id);
           if (values.sourceEnabled) record.sourceVersion = valueVersion;
           records.set(id, record);
+          rowRules.attach(record, () => check(id));
           if (beforeRowBind || values.sourceEnabled || !place) for (const element of record.elements) {
             if (current && !current()) return;
             anchor.parentNode!.insertBefore(element, anchor);
@@ -1582,6 +1609,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
           if (hooks.enabled) {
             hooks.before(snapshot, record.elements, () => check(id));
             rebound.push(record);
+            if (beforeRowBind) rowRules.before(record, () => check(id));
           }
           if (snapshot.status === "delete") for (const control of record.controls) control.disabled = true;
         }
@@ -2335,6 +2363,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     unsubscribe = sourceRows.subscribe(onRows);
     render(null)?.();
   } catch (cause) {
+    rowRules.dispose();
     boundRoots.delete(root);
     cancelOperation();
     unsubscribe();
@@ -2382,6 +2411,16 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     defaults,
     refresh() {
       bindable();
+      const revision = viewRevision, binding = bindingPromise, source = sourceRows.entries({ includeDeleted: true }), layout = columns.columns();
+      try {
+        rowRules.refresh(Array.from(records.values()).filter(record => sourceRows.get(record.id) !== undefined), cause => {
+          active();
+          if (revision !== viewRevision || binding !== bindingPromise || source !== sourceRows.entries({ includeDeleted: true }) || layout !== columns.columns()) {
+            throw gridError("GRID_BIND_STALE", "The rows or view changed while preparing rules.");
+          }
+          if (cause instanceof FrameworkError && cause.api === "bindGrid") throw cause;
+        });
+      } catch (cause) { failBinding(cause); }
       for (const record of records.values()) {
         resetRecord(record);
         if (values.sourceEnabled) record.acceptedSource = undefined;
@@ -2494,6 +2533,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     dispose() {
       if (disposed) return;
       disposed = true;
+      rowRules.dispose();
       cancelOperation();
       unsubscribe();
       failedPrunes.length = 0;

@@ -243,7 +243,7 @@ test("still-owned binding annotations and native shapes require explicit release
       return { mode, code: error?.code, sameMarkup };
     });
   });
-  expect(result).toEqual(["field", "format", "validate", "type", "multiple", "group-value", "radio-name", "options"].map(mode => ({ mode, code: "FORM_RESCAN", sameMarkup: true })));
+  expect(result).toEqual(["field", "format", "validate", "type", "multiple", "group-value", "radio-name", "options"].map(mode => ({ mode, code: mode === "format" || mode === "validate" ? undefined : "FORM_RESCAN", sameMarkup: true })));
 });
 
 test("release change and readopt on the same node establishes new declarations and a new live capture", async ({ page }) => {

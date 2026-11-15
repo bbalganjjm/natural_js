@@ -1,7 +1,7 @@
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { createRules, createInputMask, bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
 const state = { ready: false, screens: {}, handles: {}, outputs: [], allowClose: false, documentControllers: 0 };
 window.packedConsumer = state;
@@ -961,4 +961,60 @@ state.checkSourceCallbacks = () => {
   const capture = { gridReads, listReads, gridCalls, listCalls, plain: capturePlain, native, aria: captureTable.getAttribute("aria-multiselectable") === aria, selected: capturedGrid.selected(), listSelected: capturedList.selected() };
   capturedGrid.dispose(); capturedList.dispose(); selectionRows.dispose(); captureRoot.remove();
   return { full, initial, catalog, catalogDisplay, missing, missingDisplay, missingSelection, contextValid, plain, quiet, raw, capture };
+};
+
+state.checkRuleMasks = async () => {
+  const screens = [], hosts = [];
+  const definition = {
+    view() {
+      const root = document.createElement("section");
+      root.innerHTML = '<label>Manual amount <input data-manual></label><form><label>Name <input data-field="name" value="Capture"></label><output data-error-for="name"></output></form><table><caption>Installed rules</caption><thead><tr><th scope="col">Name</th></tr></thead><tbody><tr data-row-template><td><label>Name <input data-field="name"></label></td></tr></tbody></table><ul><li data-row-template><span data-field="name"></span></li></ul>';
+      return root;
+    },
+    controller({ root, input, signal, own }) {
+      const rows = createRows([{ name: "Ada" }, { name: "Bea" }]), id = rows.entries()[0].id;
+      own(() => rows.dispose());
+      const fields = { name: { validate: [["required"], ["minlength", 5]] } };
+      const form = bindForm(root.querySelector("form"), { rows, rules: { fields } }); own(() => form.dispose());
+      const grid = bindGrid(root.querySelector("table"), { rows, rules: { fields } }); own(() => grid.dispose());
+      const list = bindList(root.querySelector("ul"), { rows, rules: { fields } }); own(() => list.dispose());
+      const manual = root.querySelector("[data-manual]"), mask = createInputMask({ kind: "numeric", pattern: "$#,##0.00", partial: true });
+      const screen = { root, rows, id, fields, form, grid, list, manual, events: 0 };
+      manual.addEventListener("input", () => { screen.events++; manual.value = mask.apply(manual.value).value; }, { signal });
+      return { async init() { form.bind(id); await grid.whenBound(); screens[input] = screen; } };
+    }
+  };
+  const pages = [0, 1].map(index => { const host = document.createElement("div"); document.body.append(host); hosts.push(host); return mountPage(host, definition, index); });
+  await Promise.all(pages.map(page => page.ready));
+  const first = screens[0], second = screens[1], input = first.root.querySelector("form input"), cell = first.root.querySelector("tbody input");
+  for (const control of [input, cell]) { control.value = ""; control.dispatchEvent(new Event("input", { bubbles: true })); }
+  const beforeIssues = first.root.querySelector("output").textContent;
+  first.fields.name = { validate: [["required"], ["minlength", 8], ["minlength", 8]] };
+  first.form.rescan(); first.grid.refresh(); first.list.refresh(); await first.grid.whenBound();
+  const retained = input.value === "" && first.root.querySelector("tbody input").value === "" && first.root.querySelector("output").textContent === beforeIssues && first.rows.get(first.id).value.name === "Ada";
+  const issues = [first.form, first.grid, first.list].map(owner => owner.validate(first.id).issues.map(issue => issue.rule));
+  const beforePaste = first.rows.get(first.id);
+  const rejectedPaste = first.grid.paste("Short", { id: first.id, field: "name" });
+  const paste = { valid: rejectedPaste.valid, rules: rejectedPaste.issues.map(issue => issue.rule), unchanged: first.rows.get(first.id) === beforePaste,
+    draft: first.root.querySelector("tbody input").value === "" };
+  first.grid.setPage({ page: 2, size: 1 }); await first.grid.whenBound();
+  const hidden = first.grid.validate(first.id);
+  const offscreen = { rules: hidden.issues.map(issue => issue.rule), elements: hidden.issues.some(issue => issue.element !== undefined) };
+  const separate = second.root.querySelector("form input").value === "Ada" && second.fields.name.validate[1][1] === 5;
+  const standalone = createRules({ fields: { total: { format: [["commas"]] }, amount: { validate: [["required"], ["minvalue", 100], ["minvalue", 200]] } } });
+  const report = standalone.validate("50", { field: "amount", values: { amount: 50 }, rowId: null });
+  let width = 2, widthCalls = 0;
+  const bytes = createRules({ byteWidth: () => { widthCalls++; return width; }, fields: { text: { validate: [["maxbyte", 2]] } } });
+  const byteResults = [bytes.validate("한", { field: "text", values: {}, rowId: null }).valid]; width = 3;
+  byteResults.push(bytes.validate("한", { field: "text", values: {}, rowId: null }).valid);
+  const numeric = createInputMask({ kind: "numeric", pattern: "$#,##0.00" }), formatted = numeric.apply("-1234.5");
+  const numericRoundtrip = numeric.apply(formatted.value).value;
+  first.manual.value = "1234.5"; first.manual.dispatchEvent(new Event("input", { bubbles: true }));
+  const nativeMasked = first.manual.value;
+  await pages[0].dispose(); first.manual.value = "9"; first.manual.dispatchEvent(new Event("input", { bubbles: true }));
+  const disposed = first.events === 1 && first.manual.value === "9";
+  const secondAlive = second.root.querySelector("form input").value === "Ada";
+  await pages[1].dispose(); for (const host of hosts) host.remove();
+  return { retained, issues, separate, paste, offscreen, checks: report.checks.map(check => [check.rule, check.valid]), total: standalone.format(1234, { field: "total", values: {}, rowId: null }),
+    byteResults, widthCalls, numeric: formatted.value, numericRoundtrip, nativeMasked, disposed, secondAlive };
 };

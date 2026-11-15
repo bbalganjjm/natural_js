@@ -3,7 +3,7 @@ import { FrameworkError } from "@bbalganjjm/natural_js";
 import { mountPage } from "@bbalganjjm/natural_js/page";
 import { createRows } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { createRules, createInputMask, bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 
 const cause = new Error("original");
 const error = new FrameworkError({
@@ -266,3 +266,19 @@ await assert.rejects(import("@bbalganjjm/natural_js/ui/row-options"), {
 const sourceUI = await import("@bbalganjjm/natural_js/ui");
 assert.equal(Object.hasOwn(sourceUI, "SourceBindContext"), false);
 await assert.rejects(import("@bbalganjjm/natural_js/ui/value-binding"), { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" });
+
+const scalarRules = createRules({ fields: {
+  total: { format: [["commas"]] }, amount: { validate: [["required"], ["minvalue", 100], ["minvalue", 200]] }
+} });
+assert.equal(scalarRules.format(1234, { field: "total", values: {}, rowId: null }), "1,234");
+const scalarResult = scalarRules.validate("50", { field: "amount", values: { amount: 50 }, rowId: null });
+assert.deepEqual(scalarResult.checks.map(({ rule, valid, message }) => [rule, valid, message === null]), [["required", true, true], ["minvalue", false, false], ["minvalue", false, false]]);
+assert.equal(scalarResult.issues.length, 2);
+const currencyMask = createInputMask({ kind: "numeric", pattern: "$#,##0.00" });
+assert.deepEqual(currencyMask.apply("-1234.5"), { value: "-$1,234.50", stripped: "-1234.5", complete: true, next: null, issues: [] });
+assert.equal(currencyMask.apply("-$1,234.50").value, "-$1,234.50");
+const firstMask = createInputMask({ kind: "generic", pattern: "#-##", partial: true });
+const secondMask = createInputMask({ kind: "generic", pattern: "#-##", partial: true });
+assert.equal(firstMask.apply("1").value, "1-");
+assert.equal(firstMask.apply("1-", { deleting: true }).value, "");
+assert.equal(secondMask.apply("1-", { deleting: true }).value, "1-");

@@ -5,7 +5,7 @@ import { createRows } from "@bbalganjjm/natural_js/data";
 import type { RowId, RowSnapshot, RowState, Rows, RowStatus, RowsEvent, Snapshot } from "@bbalganjjm/natural_js/data";
 import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator, RequestOptions } from "@bbalganjjm/natural_js/comm";
-import { bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
+import { createRules, createInputMask, bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { ChoiceGroupHandle } from "@bbalganjjm/natural_js/ui";
 import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 import type { FieldRules, FormBindContext, ValueBindContext, SourceBindContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
@@ -618,4 +618,39 @@ export function connectSourceObservers(formRoot: HTMLFormElement, tableRoot: HTM
     void invalid;
   }
   return { rows, form, grid, list, seen };
+}
+
+export function connectRuleMasks(root: HTMLFormElement) {
+  const fields: NonNullable<RuleSet["fields"]> = { name: { validate: [["required"], ["minlength", 5]] } };
+  let width = 2;
+  const rules = createRules({ fields: {
+    total: { format: [["commas"]] }, name: { validate: [["required"], ["minlength", 5]] }, bytes: { validate: [["maxbyte", 2]] }
+  }, byteWidth: () => width });
+  const form = bindForm(root, { rules: { fields } });
+  fields.name = { validate: [["required"], ["minlength", 8]] }; form.rescan();
+  const report = rules.validate("Ada", { field: "name", values: { name: "Ada" }, rowId: null });
+  const passing: readonly { readonly rule: string; readonly args: readonly unknown[]; readonly valid: boolean; readonly message: string | null }[] = report.checks;
+  const mask = createInputMask({ kind: "numeric", pattern: "$#,##0.00", partial: true, rounding: "round" });
+  const masked = mask.apply("1200.5", { deleting: false });
+  const next: "#" | "@" | "~" | null = masked.next;
+  const problems: readonly { readonly code: 1 | 2; readonly phase: "pattern" | "value"; readonly message: string }[] = masked.issues;
+  if (false) {
+    // @ts-expect-error Formatters must return synchronous text.
+    createRules({ format: { asyncFormat: async value => value } });
+    // @ts-expect-error Validators must return synchronous boolean or text.
+    createRules({ validate: { asyncValidate: async () => true } });
+    // @ts-expect-error Byte width providers return a synchronous number.
+    createRules({ byteWidth: async () => 3 });
+    // @ts-expect-error A standalone rule context needs the caller's field and values.
+    rules.validate("Ada", { rowId: null });
+    // @ts-expect-error Passing-check reports are readonly.
+    report.checks.push({ rule: "required", args: [], valid: true, message: null });
+    // @ts-expect-error Generic masks have no numeric rounding option.
+    createInputMask({ kind: "generic", pattern: "#", rounding: "ceil" });
+    // @ts-expect-error Mask patterns are required.
+    createInputMask({ kind: "numeric" });
+  }
+  width = 3;
+  return { form, passing, next, problems, bytes: rules.validate("한", { field: "bytes", values: {}, rowId: null }),
+    total: rules.format(passing.length, { field: "total", values: {}, rowId: null }) };
 }

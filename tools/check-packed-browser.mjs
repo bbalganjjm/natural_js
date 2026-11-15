@@ -449,6 +449,14 @@ try {
     projectedChoice: ["Two", "Two", "Two"], validation: { valid: [false, false, false], choiceIssues: true, quiet: true, raw: 99 },
     raw: { current: " Bea ", original: " Ada ", active: true, listDisabled: true }
   }, "Installed Form/Grid/List callbacks must share typed policy, preserve raw validation and refresh without source writes.");
+  const ruleMasks = await page.evaluate(() => window.packedConsumer.checkRuleMasks());
+  assert.deepEqual(ruleMasks, {
+    retained: true, issues: [["required", "minlength", "minlength"], ["required", "minlength", "minlength"], ["minlength", "minlength"]], separate: true,
+    paste: { valid: false, rules: ["minlength", "minlength"], unchanged: true, draft: true }, offscreen: { rules: ["required", "minlength", "minlength"], elements: false },
+    checks: [["required", true], ["minvalue", false], ["minvalue", false]], total: "1,234", byteResults: [true, false], widthCalls: 2,
+    numeric: "-$1,234.50", numericRoundtrip: "-$1,234.50", nativeMasked: "$1,234.5", disposed: true, secondAlive: true
+  }, "Installed standalone rules, masks and CVC bound rule adoption must agree.");
+
   const sourceCallbacks = await page.evaluate(() => window.packedConsumer.checkSourceCallbacks());
   const sourcePairs = (keys, phase) => keys.flatMap(([key, count]) => [["before", key, phase, count], ["after", key, phase, count]]);
   const sourceOwners = value => Object.fromEntries(["form", "grid", "list"].map(owner => [owner, value]));

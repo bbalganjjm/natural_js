@@ -6,7 +6,7 @@ const MONTHS = ["January", "February", "March", "April", "May", "June", "July", 
 const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const COMPOUND_SURNAMES = new Set(["남궁", "제갈", "선우", "독고", "황보", "강전", "동방", "망절", "사공", "서문", "소봉", "장곡"]);
 const REGIONS = new Set(["경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"]);
-const NUMERIC_PATTERN = /^(\$)?([+-])?(\()?([0#,]+)(?:\.([0#]+))?(\))?$/;
+const NUMERIC_PATTERN = /^(\$)?([+-])?(?:(\()([+-])?)?([0#,]+)(?:\.([0#]*))?(\))?$/;
 const EMAIL_CONTEXT: RuleContext = { field: "", values: {}, rowId: null };
 
 function text(value: unknown): string {
@@ -41,17 +41,21 @@ function maskCharacter(name: string, value: unknown): string {
   return character;
 }
 
-function numericPattern(value: unknown): { currency: boolean; plus: boolean; parenthesis: boolean; group: boolean; minInteger: number; minFraction: number; maxFraction: number } {
-  const pattern = string("numeric pattern", value);
+export function numericPattern(value: unknown) {
+  const pattern = string("numeric pattern", value, false);
+  if (pattern === "") return null;
   const match = NUMERIC_PATTERN.exec(pattern);
-  if (!match || Boolean(match[3]) !== Boolean(match[6]) || !/[0#]/.test(match[4]) ||
-      (match[4].includes(",") && !/^([0#]{1,3},)?[0#]+$/.test(match[4]))) {
+  if (!match || Boolean(match[3]) !== Boolean(match[7]) || !/[0#]/.test(match[5]) ||
+      (match[5].includes(",") && !/^([0#]{1,3},)?[0#]+$/.test(match[5]))) {
     throw new TypeError(`Invalid numeric pattern: ${pattern}.`);
   }
+  const whole = match[5].replaceAll(",", ""), firstZero = whole.indexOf("0");
   return {
-    currency: Boolean(match[1]), plus: match[2] === "+", parenthesis: Boolean(match[3]),
-    group: match[4].includes(","), minInteger: (match[4].match(/0/g) ?? []).length,
-    minFraction: (match[5]?.match(/0/g) ?? []).length, maxFraction: match[5]?.length ?? 0
+    currency: Boolean(match[1]), plus: match[2] === "+" || match[4] === "+",
+    minus: match[2] === "-" || match[4] === "-", parenthesis: Boolean(match[3]),
+    negativeShell: match[3] ? new RegExp(`^\\(-?${match[1] ? "\\$" : ""}[0-9,]+(?:\\.[0-9]*)?\\)$`) : undefined,
+    group: match[5].includes(","), minInteger: firstZero < 0 ? 0 : whole.length - firstZero,
+    minFraction: (match[6]?.lastIndexOf("0") ?? -1) + 1, maxFraction: match[6]?.length ?? 0
   };
 }
 
@@ -114,7 +118,7 @@ export function assertFormatArgs(name: string, args: readonly unknown[]): void {
       return;
     case "generic":
       count(name, args, 1);
-      string("generic pattern", args[0]);
+      string("generic pattern", args[0], false);
       return;
     case "numeric":
       count(name, args, 1, 2);
@@ -188,33 +192,76 @@ function formatMask(value: string, args: readonly unknown[]): string {
   }).join("");
 }
 
-function formatGeneric(value: string, pattern: string): string {
-  const source = Array.from(value.replace(/[^\p{L}\p{N}\s]/gu, ""));
-  let index = 0;
-  let output = "";
-  const templates = Array.from(pattern);
-  for (let position = 0; position < templates.length; position++) {
-    const token = templates[position];
-    if (token === "!" && position + 1 < templates.length) {
-      output += templates[++position];
-      continue;
-    }
-    if (token !== "#" && token !== "@" && token !== "~") {
-      output += token;
-      continue;
-    }
-    const accept = token === "#" ? /^\d$/u : token === "@" ? /^[\p{L}\s]$/u : /^[\p{L}\p{N}\s]$/u;
-    while (index < source.length && !accept.test(source[index])) index++;
-    if (index >= source.length) return value;
-    output += source[index++];
+const GENERIC_CHARACTERS = {
+  "#": /^\d$/u, "@": /^[\p{L}\s]$/u, "~": /^[\p{L}\p{N}\s]$/u
+};
+
+export function genericPattern(pattern: string) {
+  const tokens: { text: string; slot: "#" | "@" | "~" | null }[] = [];
+  const slots: ("#" | "@" | "~")[] = [];
+  const characters = Array.from(pattern);
+  for (let index = 0; index < characters.length; index++) {
+    const character = characters[index];
+    if (character === "!" && index + 1 < characters.length) {
+      tokens.push({ text: characters[++index], slot: null });
+    } else if (character === "#" || character === "@" || character === "~") {
+      tokens.push({ text: character, slot: character });
+      slots.push(character);
+    } else tokens.push({ text: character, slot: null });
   }
-  return index === source.length ? output : value;
+  return { tokens, slots, expression: new RegExp(slots.map(slot =>
+    slot === "#" ? "[0-9]" : slot === "@" ? "[\\p{L}\\s]" : "[\\p{L}\\p{N}\\s]").join(""), "u") };
 }
 
-function formatNumeric(value: string, pattern: string, rounding: string): string {
-  const match = /^([+-]?)(\d*)(?:\.(\d*))?$/.exec(value.replace(/,/g, ""));
-  if (!match || (!match[2] && !match[3])) return value;
-  const spec = numericPattern(pattern);
+export function genericInput(value: string): string {
+  return value.replace(/[^\p{L}\p{N}\s]/gu, "");
+}
+
+export function projectGeneric(source: string, pattern: ReturnType<typeof genericPattern>, partial = false) {
+  if (!pattern.slots.length) {
+    return { value: partial ? "" : pattern.tokens.map(token => token.text).join(""), complete: true,
+      next: null as "#" | "@" | "~" | null };
+  }
+  const match = partial ? null : pattern.expression.exec(source);
+  const characters = Array.from(match?.[0] ?? source);
+  if (!partial && !match) {
+    let longest = 0;
+    for (let start = 0; start < characters.length; start++) {
+      let count = 0;
+      while (count < pattern.slots.length && start + count < characters.length &&
+          GENERIC_CHARACTERS[pattern.slots[count]].test(characters[start + count])) count++;
+      longest = Math.max(longest, count);
+    }
+    return { value: "", complete: false, next: pattern.slots[longest] };
+  }
+  let output = "", index = 0, filled = 0;
+  for (const token of pattern.tokens) {
+    if (token.slot === null) { output += token.text; continue; }
+    while (index < characters.length && !GENERIC_CHARACTERS[token.slot].test(characters[index])) index++;
+    if (index === characters.length) return { value: filled ? output : "", complete: false, next: token.slot };
+    output += characters[index++];
+    filled++;
+  }
+  return { value: output, complete: true, next: null };
+}
+
+function formatGeneric(value: string, pattern: string): string {
+  const result = projectGeneric(genericInput(value), genericPattern(pattern));
+  return result.complete ? result.value : value;
+}
+
+export function numericInput(value: string, pattern: ReturnType<typeof numericPattern>): string {
+  let source = value;
+  if (pattern?.negativeShell?.test(source)) source = "-" + source.slice(1, -1).replace(/^-/, "");
+  const stripped = source.replace(/[^\d.-]/g, "");
+  const point = stripped.indexOf(".");
+  return point < 0 ? stripped : stripped.slice(0, point + 1) + stripped.slice(point + 1).replaceAll(".", "");
+}
+
+export function projectNumeric(value: string, spec: ReturnType<typeof numericPattern>, rounding: string, partial = false): string | null {
+  const match = /^(-?)(\d*)(?:\.(\d*))?$/.exec(value);
+  if (!match || (!match[2] && !match[3])) return null;
+  if (spec === null) return value;
   const negative = match[1] === "-";
   const integerPart = match[2] || "0";
   const fraction = match[3] ?? "";
@@ -228,11 +275,18 @@ function formatNumeric(value: string, pattern: string, rounding: string): string
   const scale = 10n ** BigInt(spec.maxFraction);
   const whole = (scaled / scale).toString().padStart(spec.minInteger, "0");
   let decimal = spec.maxFraction ? (scaled % scale).toString().padStart(spec.maxFraction, "0") : "";
-  while (decimal.length > spec.minFraction && decimal.endsWith("0")) decimal = decimal.slice(0, -1);
-  const isNegative = negative && scaled !== 0n;
-  const sign = isNegative ? (spec.parenthesis ? "" : "-") : spec.plus ? "+" : "";
-  const body = `${spec.group ? grouped(whole) : whole}${decimal ? `.${decimal}` : ""}`;
-  return `${spec.currency ? "$" : ""}${sign}${isNegative && spec.parenthesis ? `(${body})` : body}`;
+  const minimum = partial ? Math.min(fraction.length, spec.maxFraction) : spec.minFraction;
+  while (decimal.length > minimum && decimal.endsWith("0")) decimal = decimal.slice(0, -1);
+  const isNegative = negative && (scaled !== 0n || partial);
+  const sign = isNegative ? (spec.parenthesis && !spec.minus ? "" : "-") : spec.plus ? "+" : "";
+  const point = decimal ? `.${decimal}` : partial && value.endsWith(".") ? "." : "";
+  const body = `${sign}${spec.currency ? "$" : ""}${spec.group ? grouped(whole) : whole}${point}`;
+  return isNegative && spec.parenthesis ? `(${body})` : body;
+}
+
+function formatNumeric(value: string, pattern: string, rounding: string): string {
+  const spec = numericPattern(pattern);
+  return projectNumeric(numericInput(value, spec), spec, rounding) ?? value;
 }
 
 function parsedDate(value: string): Date | null {

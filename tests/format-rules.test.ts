@@ -97,4 +97,35 @@ describe("retained Form formatter rules", () => {
     expect(() => assertFormatArgs("rrn", [-1])).toThrow(RangeError);
     expect(() => assertFormatArgs("missing", [])).toThrow(TypeError);
   });
+
+  it("shares full generic first-run projection and explicit empty patterns with manual masks", () => {
+    expect(format("generic", "123", "##")).toBe("12");
+    expect(format("generic", "a12b", "##")).toBe("12");
+    expect(format("generic", "1a2", "##")).toBe("1a2");
+    expect(format("generic", "12", "!#-##")).toBe("#-12");
+    expect(format("generic", "12", "AB!")).toBe("AB!");
+    expect(format("generic", "12", "")).toBe("");
+    expect(format("numeric", "$-001,234.50", "")).toBe("-001234.50");
+    expect(() => assertFormatArgs("generic", [])).toThrow(TypeError);
+    expect(() => assertFormatArgs("numeric", [])).toThrow(TypeError);
+  });
+
+  it("puts numeric signs before currency inside negative outer parentheses", () => {
+    expect(format("numeric", "-1234.5", "$#,##0.00")).toBe("-$1,234.50");
+    expect(format("numeric", "1234.5", "$+#,##0.00")).toBe("+$1,234.50");
+    expect(format("numeric", "-1234.5", "$(#,##0.00)")).toBe("($1,234.50)");
+    expect(format("numeric", "($1,234.50)", "$(#,##0.00)")).toBe("($1,234.50)");
+    expect(format("numeric", "-1234.5", "$(-#,##0.00)")).toBe("(-$1,234.50)");
+    expect(format("numeric", "(-$1,234.50)", "$(-#,##0.00)")).toBe("(-$1,234.50)");
+    expect(format("numeric", "7", "0##")).toBe("007");
+    expect(format("numeric", "1.2", "0.#0#")).toBe("1.20");
+  });
+
+  it("cleans numeric full input while preserving failed raw input and precise carry", () => {
+    expect(format("numeric", "$12.3.4x", "0.00")).toBe("12.34");
+    expect(format("numeric", "--1", "0.00")).toBe("--1");
+    expect(format("numeric", "", "0.00")).toBe("");
+    expect(format("numeric", "9007199254740993.995", "0.00")).toBe("9007199254740994.00");
+  });
+
 });

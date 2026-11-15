@@ -83,13 +83,13 @@ describe("creation snapshots and explicit live message policy", () => {
     expect([scans, values]).toEqual([0, 0]);
   });
 
-  it("bypasses providers for a validator's nonempty message and preserves existing fallback and false/zero placeholders", () => {
+  it("bypasses providers for direct text and uses global fallback with false/zero placeholders", () => {
     const bypass = () => { throw new Error("Must not read message policy"); };
     const runner = createRuleRunner("bindForm", { locale: bypass, messages: bypass, validate: { custom: () => "Direct" } });
     expect(runner.validate(runner.validators(marked('[["custom"]]'), "name"), "bad", context)[0].message).toBe("Direct");
-    const other = createRuleRunner("bindForm", { messages: { global: "Still not a global fallback", custom: "{0}/{1}" }, validate: { custom: () => false, absent: () => false } });
+    const other = createRuleRunner("bindForm", { messages: { global: "Scoped global fallback", custom: "{0}/{1}" }, validate: { custom: () => false, absent: () => false } });
     const calls = other.validators(marked('[["custom",0,false],["absent"]]'), "name");
-    expect(other.validate(calls, "bad", context).map(found => found.message)).toEqual(["0/false", "name failed absent."]);
+    expect(other.validate(calls, "bad", context).map(found => found.message)).toEqual(["0/false", "Scoped global fallback"]);
   });
 
   it("reports invalid locale providers with RULE_FAILED and drains rejected asynchronous returns", async () => {

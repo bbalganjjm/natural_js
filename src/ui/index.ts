@@ -53,6 +53,7 @@ export interface RuleSet {
   messages?: Record<string, string> | (() => Record<string, string>);
   locale?: string | (() => string);
   fields?: Record<string, FieldRules>;
+  byteWidth?: number | (() => number);
 }
 
 export interface ValidationIssue {
@@ -220,6 +221,8 @@ export interface GridHandle<T extends object> {
 }
 
 export { bindForm } from "./form.js";
+export { createRules } from "./rules.js";
+export { createInputMask } from "./input-mask.js";
 export { bindGrid } from "./grid.js";
 export { bindList } from "./list.js";
 export { bindSelect } from "./select.js";

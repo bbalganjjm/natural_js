@@ -91,7 +91,7 @@ describe("private UI rule contract", () => {
   it("never emits an empty error message and rejects an empty message override", () => {
     const runner = createRuleRunner("bindGrid", { validate: { custom: () => "" } });
     const calls = runner.validators(marked("data-validate", '[["custom"]]'), "email");
-    expect(runner.validate(calls, "bad", context)[0].message).toBe("email failed custom.");
+    expect(runner.validate(calls, "bad", context)[0].message).toBe("Invalid value.");
     expect(() => createRuleRunner("bindForm", { messages: { email: "" } }))
       .toThrowError(/rule message/u);
   });

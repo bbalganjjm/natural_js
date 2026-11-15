@@ -10,6 +10,8 @@ import { parsePath, readPath } from "./field-path.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
 import { claimSelect } from "./select-owner.js";
 import { createRuleRunner } from "./rules.js";
+import { createRowRules } from "./row-rules.js";
+import type { RowRuleSource } from "./row-rules.js";
 import { disabled, display, nativeMessage } from "./native-control.js";
 import type { RuleCall } from "./rules.js";
 import type {
@@ -65,6 +67,7 @@ interface RenderedRow<T> {
   snapshot?: RowSnapshot<T>;
   acceptedSource?: RowSnapshot<T>;
   sourceVersion?: number;
+  ruleSources: readonly RowRuleSource[];
   texts: BoundText[];
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
@@ -192,6 +195,20 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       throw listError("LIST_ERROR_REGION", "An error region needs a matching data-field.", { field });
     }
   }
+  const rowRules = createRowRules<RenderedRow<T>>(runner, [
+    ...textFields.map(target => ({ target, elements: [authored[target.index]] })),
+    ...selectFields.map(target => ({ target, elements: [authored[target.index]] }))
+  ], (record, position) => [position < textFields.length ? record.texts[position].element :
+    record.selects[position - textFields.length].element], (position, calls) => {
+    if (position >= textFields.length) {
+      if (calls.format.length) throw listError("LIST_FORMAT", "A Select cannot display a formatted scalar; format its option labels instead.", { field: selectFields[position - textFields.length].name ?? "" });
+      return;
+    }
+    const field = textFields[position], element = authored[field.index];
+    if (calls.format.length && element instanceof HTMLInputElement && !["text", "search", "tel", "url", "email", "password"].includes(element.type)) {
+      throw listError("LIST_FORMAT", "Only text-like inputs can display formatted text.", { field: field.name });
+    }
+  }, () => { throw listError("LIST_BIND_REENTRANT", "Finish the current rule before changing its declaration."); });
 
   const sourceFields = values.sourceEnabled ? [
     ...textFields.map((field, index) => ({ key: field.path[0], dependency: undefined, index, select: false })),
@@ -289,7 +306,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     }
     for (const button of buttons) button.setAttribute("aria-pressed", String(selected === id));
     rowIds.set(element, id);
-    return { id, element, texts, selects, buttons, errors, hasIssues: false, releaseSelects };
+    return { id, element, texts, selects, buttons, errors, hasIssues: false, releaseSelects, ruleSources: rowRules.sources(id) };
   }
 
   function invalidOptions(id: RowId): (field: string) => never {
@@ -342,10 +359,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }
 
   function writeText(binding: BoundText, row: RowSnapshot<T>, value: unknown, current?: () => boolean): void {
-    if (binding.field.format.length) {
+    const format = rowRules.formats(row.id, binding.field);
+    if (format.length) {
       const context: RuleContext = { field: binding.field.name, values: row.value as Snapshot<Record<string, unknown>>,
         rowId: row.id, element: binding.element };
-      const shown = runner.format(binding.field.format, value, context);
+      const shown = runner.format(format, value, context);
       if (!current || current()) display(binding.element, shown);
     } else if (!current || current()) display(binding.element, value);
   }
@@ -430,7 +448,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
             ...(element ? { element } : {}) });
         }
       }
-      issues.push(...runner.validate(field.validate, value, {
+      issues.push(...runner.validate(rowRules.validators(row.id, field), value, {
         field: field.name, values, rowId: row.id, ...(element ? { element } : {})
       }));
     }
@@ -451,7 +469,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         issues.push({ rowId: row.id, field: field.name, rule: "html", message: "Choose an option.",
           ...(element ? { element } : {}) });
       }
-      issues.push(...runner.validate(field.validate, value, {
+      issues.push(...runner.validate(rowRules.validators(row.id, field), value, {
         field: field.name, values, rowId: row.id, ...(element ? { element } : {})
       }));
     }
@@ -504,7 +522,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (disposed) return;
     bindable();
     const tracked = hooks.enabled || values.enabled || values.sourceEnabled;
-    const version = tracked ? ++renderVersion : 0;
+    const version = ++renderVersion;
     const entries = sourceRows.entries();
     const current = tracked ? () => {
       const live = !disposed && version === renderVersion && entries === sourceRows.entries();
@@ -513,7 +531,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     } : undefined;
     const check = (id?: RowId) => {
       active();
-      if (current && !current()) throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback.", { rowId: id });
+      if (version !== renderVersion || entries !== sourceRows.entries() || current && !current()) throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback.", { rowId: id });
     };
     const created: RenderedRow<T>[] = [];
     const rebound: RenderedRow<T>[] = [];
@@ -555,6 +573,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         if (!record) {
           record = createRecord(row.id);
           records.set(row.id, record);
+          rowRules.attach(record, () => check(row.id));
           if (hooks.enabled || values.sourceEnabled) created.push(record);
         }
         if (values.sourceEnabled) {
@@ -653,7 +672,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   function dispose(): void {
     if (disposed) return;
     disposed = true;
-    if (hooks.enabled || values.enabled || values.sourceEnabled) renderVersion++;
+    renderVersion++;
+    rowRules.dispose();
     unsubscribe();
     root.removeEventListener("click", onClick);
     hooks.dispose();
@@ -672,6 +692,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }
   try {
     unsubscribe = sourceRows.subscribe(event => {
+      rowRules.prune(event, id => sourceRows.get(id) !== undefined);
       if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
         for (const record of records.values()) clearIssues(record);
       } else if (event.type === "setMany") {
@@ -692,7 +713,16 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }
 
   return {
-    refresh() { bindable(); render(true); },
+    refresh() {
+      bindable();
+      const version = renderVersion, source = sourceRows.entries({ includeDeleted: true });
+      rowRules.refresh(Array.from(records.values()).filter(record => sourceRows.get(record.id) !== undefined), cause => {
+        active();
+        if (version !== renderVersion || source !== sourceRows.entries({ includeDeleted: true })) throw listError("LIST_BIND_STALE", "The rows or view changed while preparing rules.");
+        if (cause instanceof FrameworkError && cause.api === "bindList") throw cause;
+      });
+      render(true);
+    },
     select(id) {
       active();
       const row = id === null ? null : sourceRows.get(id);

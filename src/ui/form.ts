@@ -3,8 +3,8 @@ import { FrameworkError } from "../internal/framework-error.js";
 import { sameJson } from "../internal/same-json.js";
 import type { RowId, RowSnapshot, RowsEvent } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
-import { createRuleRunner } from "./rules.js";
-import type { RuleCall } from "./rules.js";
+import { createRuleRunner, sameRuleCalls } from "./rules.js";
+import type { RuleCall, RuleDeclarations } from "./rules.js";
 import { claimSelect } from "./select-owner.js";
 import { checkGroupValue, claimChoiceGroup, getChoiceGroup } from "./choice-group-owner.js";
 import type { ChoiceGroupBinding, ChoiceGroupReplacement } from "./choice-group-owner.js";
@@ -43,6 +43,7 @@ interface Field {
   path: readonly string[];
   format: readonly RuleCall<FormatRule>[];
   validate: readonly RuleCall<ValidateRule>[];
+  declarations: { format: string | null; validate: string | null };
   choices?: Choices;
   group?: ChoiceGroupBinding;
   projection?: ValueProjection;
@@ -117,7 +118,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
   const parsers = new Map(Object.entries(parse ?? {}));
   const runner = createRuleRunner("bindForm", rules);
   rows?.entries();
-  function compileFields() {
+  function compileFields(view: RuleDeclarations = runner, previous?: ReadonlyMap<string, Field>, checkpoint?: () => void) {
+    checkpoint?.();
     for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-options]")]) {
       if (!element.hasAttribute("data-options")) continue;
       if (!rows || !(element instanceof HTMLSelectElement) || !element.hasAttribute("data-field") ||
@@ -182,7 +184,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const members = group ? [...group.inputs] : [element];
       const field: Field = {
         element: group?.inputs[0] ?? element, elements: members, kind, name, path: parsePath(name), group,
-        format: [], validate: [], error: errorRegions.get(name),
+        format: [], validate: [], declarations: { format: null, validate: null }, error: errorRegions.get(name),
         originals: (group ? [element, ...members] : members).map(element => ({
           element, describedBy: element.getAttribute("aria-describedby"),
           invalid: element.getAttribute("aria-invalid"), changed: element.getAttribute("data-field-changed")
@@ -205,17 +207,23 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
     for (const field of fields) {
       for (const attribute of ["data-format", "data-validate"] as const) {
-        if (runner.configured(field.name, attribute)) continue;
-        const declarations = field.elements.map(element => element.getAttribute(attribute))
-          .filter((value): value is string => value !== null);
+        if (view.configured(field.name, attribute)) continue;
+        const declarations = field.elements.map(element => {
+          const value = element.getAttribute(attribute); checkpoint?.(); return value;
+        }).filter((value): value is string => value !== null);
         if (new Set(declarations).size > 1) {
           throw formError("FORM_GROUP_RULES", "One field group needs one rule declaration.", { field: field.name });
         }
       }
       const formatElement = field.group?.root ?? field.elements.find(element => element.hasAttribute("data-format")) ?? field.element;
       const validateElement = field.group?.root ?? field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
-      field.format = runner.formats(formatElement, field.name);
-      field.validate = runner.validators(validateElement, field.name);
+      field.declarations.format = formatElement.getAttribute("data-format"); checkpoint?.();
+      field.declarations.validate = validateElement.getAttribute("data-validate"); checkpoint?.();
+      const retained = previous?.get(field.name);
+      field.format = retained && !view.configured(field.name, "data-format") && !runner.configured(field.name, "data-format") &&
+        retained.declarations.format === field.declarations.format ? retained.format : view.formats(field.declarations.format, field.name, checkpoint);
+      field.validate = retained && !view.configured(field.name, "data-validate") && !runner.configured(field.name, "data-validate") &&
+        retained.declarations.validate === field.declarations.validate ? retained.validate : view.validators(field.declarations.validate, field.name, checkpoint);
       if (field.format.length && (field.group || !formatCapable(field.element))) {
         throw formError("FORM_FORMAT_CONTROL", "Formatting requires a text field.", { field: field.name });
       }
@@ -268,10 +276,11 @@ export function bindForm<T extends object = Record<string, unknown>>(
       selection, files
     };
   }
-  function annotation(element: HTMLElement): string {
+  function annotation(element: HTMLElement, bindingOnly = false): string {
     return JSON.stringify([
-      element.localName, element.getAttribute("data-field"), element.getAttribute("data-format"),
-      element.getAttribute("data-validate"), element.getAttribute("data-options"),
+      element.localName, element.getAttribute("data-field"),
+      ...bindingOnly ? [] : [element.getAttribute("data-format"), element.getAttribute("data-validate")],
+      element.getAttribute("data-options"),
       element.getAttribute("data-option-label"), element.getAttribute("data-option-value"),
       element instanceof HTMLInputElement ? element.type : null,
       element instanceof HTMLInputElement && ["radio", "checkbox"].includes(element.type) ? [element.name, element.value] : null,
@@ -1289,30 +1298,41 @@ export function bindForm<T extends object = Record<string, unknown>>(
       throw formError("FORM_RESCAN", "Finish current Form work before reconciling its fields.");
     }
     let version = renderVersion, committing = false, published = false;
-    const retrying = rescanIncomplete;
-    const current = () => !disposed && version === renderVersion;
+    const retrying = rescanIncomplete, enteredId = boundId;
+    const enteredRows = rows?.entries({ includeDeleted: true });
+    const current = () => !disposed && version === renderVersion &&
+      (committing || enteredId === boundId && (!rows || enteredRows === rows.entries({ includeDeleted: true })));
+    const checkpoint = (cause?: unknown) => {
+      if (!current()) throw new FrameworkError({ api: "bindForm", code: "FORM_RESCAN",
+        message: "Newer Form work superseded this rule adoption.", cause });
+    };
     const adopted: ReturnType<typeof capture>[] = [];
     scanning = true;
     try {
       for (const [element, declaration] of annotations) {
-        if ((element.hasAttribute("data-field") || byElement.get(element)?.group) && annotation(element) !== declaration) {
+        const binding: unknown[] = JSON.parse(declaration);
+        binding.splice(2, 2);
+        if ((element.hasAttribute("data-field") || byElement.get(element)?.group) && annotation(element, true) !== JSON.stringify(binding)) {
           throw formError("FORM_RESCAN", "Release this field before changing its binding declarations.",
             { field: byElement.get(element)?.name });
         }
       }
-      const candidate = compileFields();
+      const declarationView = runner.candidate(checkpoint);
+      const candidate = compileFields(declarationView, byName, checkpoint);
       if (!current()) return;
       fieldRenderers("bindForm", candidate.fields.map(field => ({
         name: field.name, element: field.element, formatted: field.format.length > 0
       })), Object.fromEntries([...renderers].filter(([name]) => candidate.byName.has(name))));
       const originals = new Map(fields.flatMap(field => field.originals.map(original => [original.element, original] as const)));
       const nextErrors = new Map<Field, HTMLElement | undefined>();
+      const nextRules = new Map<Field, Field>();
       const nextFields = candidate.fields.map(field => {
         const previous = byName.get(field.name);
         const retained = previous && previous.group === field.group && previous.kind === field.kind && previous.elements.length === field.elements.length &&
           previous.elements.every((element, index) => element === field.elements[index]) ? previous : field;
         if (retained === field) field.originals = field.originals.map(original => originals.get(original.element) ?? original);
         nextErrors.set(retained, field.error);
+        nextRules.set(retained, field);
         return retained;
       });
       const nextSet = new Set(nextFields);
@@ -1349,7 +1369,30 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const unchanged = !rescanIncomplete && nextFields.length === fields.length && nextFields.every((field, index) => field === fields[index] &&
         nextErrors.get(field) === field.error && (!field.error || errorIds.get(field) === field.error.id)) &&
         nextOwners.size === resetOwners.size && [...nextOwners].every(owner => resetOwners.has(owner));
-      if (unchanged) return;
+      const addedValues = new Map<Field, { raw: unknown; shown: unknown; invalid: boolean }>();
+      if (!rows) for (const [field, policy] of nextRules) {
+        if (!localRenderedValues.has(field) && (renderers.has(field.name) || policy.format.length)) {
+          const raw = fieldValue(field);
+          checkpoint();
+          addedValues.set(field, { raw, shown: raw, invalid: Boolean(issues.get(field)?.length) });
+        }
+      }
+      const rendered = new Set(renderedOriginals.map(state => state.field));
+      const nextRendered = nextInitial.filter(({ field, element }) => rendered.has(field) || renderers.has(field.name) ||
+        !rows && nextRules.get(field)!.format.length > 0 && !control(element));
+      const publishRules = () => {
+        runner.adopt(declarationView);
+        for (const [field, policy] of nextRules) {
+          if (!sameRuleCalls(field.format, policy.format)) field.format = policy.format;
+          if (!sameRuleCalls(field.validate, policy.validate)) field.validate = policy.validate;
+          field.declarations = policy.declarations;
+        }
+        for (const [field, value] of addedValues) localRenderedValues.set(field, value);
+        renderedOriginals = nextRendered;
+        annotations = nextAnnotations;
+      };
+      checkpoint();
+      if (unchanged) { publishRules(); return; }
       for (const field of nextFields) if (field.element instanceof HTMLSelectElement && !releaseSelects.has(field.element)) {
         pendingSelects.set(field.element, claimSelect(field.element, "bindForm"));
       }
@@ -1376,7 +1419,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
           const raw = localFieldValue(field);
           if (!current()) return;
           display(field.element, raw);
-        } else if (renderers.has(field.name) || !rows && field.format.length && !control(field.element)) {
+        } else if (renderedOriginals.some(state => state.field === field)) {
           const state = captures.get(field)!;
           if (!current()) return;
           field.element.replaceChildren(...state.children);
@@ -1422,6 +1465,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       pendingGroups.clear();
       const graphChanged = values.sourceEnabled && (nextFields.length !== fields.length ||
         nextFields.some((field, index) => field !== fields[index]));
+      publishRules();
       fields = nextFields;
       sourceFields = compileSourceFields(fields);
       if (graphChanged) acceptedSource = undefined;
@@ -1430,14 +1474,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
       annotations = nextAnnotations;
       initial = nextInitial;
       choiceFields = fields.filter(field => field.choices);
-      renderedOriginals = initial.filter(({ field, element }) => renderers.has(field.name) || !rows && field.format.length && !control(element));
       defaultEntries.length = 0;
       for (const entry of nativeEntries(initial)) defaultEntries.push(entry);
       regionState.clear();
       for (const [region, original] of nextRegions) regionState.set(region, original);
-      for (const state of adopted) if (!rows && (renderers.has(state.field.name) || state.field.format.length)) {
-        localRenderedValues.set(state.field, { raw: state.value, shown: state.value, invalid: false });
-      }
       if (pointerField && !nextSet.has(pointerField)) pointerField = undefined;
       for (const field of fields) field.error = nextErrors.get(field);
       published = true;

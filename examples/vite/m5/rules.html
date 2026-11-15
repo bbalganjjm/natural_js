@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rules, manual masks and retained inputs</title>
+  <style>
+    body { max-width: 80rem; margin: 2rem auto; padding: 0 1rem; font: 1rem/1.5 system-ui, sans-serif; }
+    button, input { font: inherit; } button { margin: .3rem; }
+    [data-screens] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: 1rem; }
+    [data-screen] { border: 1px solid #afbac6; padding: 1rem; } label, output { display: block; margin: .5rem 0; }
+    [data-layout="compact"] [data-editor] { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+    [data-layout="compact"] ul { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #b9c4d0; padding: .4rem; text-align: left; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: .6rem; background: #f2f4f7; }
+    [data-error-for], [data-manual-error] { color: #971a32; }
+  </style>
+</head>
+<body><main>
+  <h1>Rules, manual masks and retained inputs</h1>
+  <p>These independent screens share one page definition. Edit a name shorter than five characters, adopt a new minimum, then validate. Stored records change only after valid input.</p>
+  <output data-page-status aria-live="polite"></output>
+  <div data-screens>
+    <div><button type="button" data-open="stack">Open stacked screen</button><div data-host="stack"></div></div>
+    <div><button type="button" data-open="compact">Open compact screen</button><div data-host="compact"></div></div>
+  </div>
+</main>
+<template data-workspace><section data-screen>
+  <h2 data-title></h2><button type="button" data-close>Close screen</button>
+  <h3>Application-owned amount</h3>
+  <label>Manual amount <input data-manual-amount inputmode="decimal"></label>
+  <output data-manual-error aria-live="polite"></output>
+  <p>Raw amount: <output data-manual-raw></output></p>
+  <h3>Bound record</h3>
+  <form data-editor>
+    <label>Name <input data-field="name" value="Captured name"></label><output data-error-for="name"></output>
+    <label>Amount <input data-field="amount" data-format='[["numeric","$#,##0.00"]]' readonly></label>
+    <button type="submit">Validate Form</button>
+  </form>
+  <table aria-label="Editable records"><thead><tr><th scope="col">Name</th><th scope="col">Amount</th></tr></thead><tbody>
+    <tr data-row-template><td><label>Name <input data-field="name"></label></td><td data-field="amount" data-format='[["numeric","$#,##0.00"]]'></td></tr>
+  </tbody></table>
+  <ul aria-label="Readonly records"><li data-row-template><span data-field="name"></span> <span data-field="amount" data-format='[["numeric","$#,##0.00"]]'></span></li></ul>
+  <p>Name minimum: <output data-minimum>5</output>. Total records: <output data-total></output></p>
+  <button type="button" data-adopt>Adopt new rules</button><button type="button" data-validate-all>Validate all owners</button><button type="button" data-append>Add record</button>
+  <output data-status aria-live="polite"></output>
+  <h3>Validation results</h3><pre data-rule-issues tabindex="0"></pre>
+  <h3>Stored records</h3><pre data-records tabindex="0"></pre>
+</section></template>
+<script type="module" src="./rules.ts"></script>
+</body></html>
