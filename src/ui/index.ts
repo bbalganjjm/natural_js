@@ -171,6 +171,10 @@ export interface GridFilterChoice {
 
 export interface ListHandle<T extends object> {
   refresh(): void;
+  rowForm(id: RowId): Pick<FormHandle<T>, "read" | "prepare"> & { validate(): ValidationResult } | null;
+  value(id: RowId): Snapshot<T>;
+  update(id?: RowId, fields?: readonly string[]): void;
+  reveal(id: RowId): boolean;
   select(id: RowId | null): void;
   selected(): RowId | null;
   setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null): void;

@@ -4,7 +4,7 @@ import { sameJson } from "../internal/same-json.js";
 import type { RowId, RowSnapshot, RowsEvent } from "../data/index.js";
 import { parsePath, readPath, writePath } from "./field-path.js";
 import { createRuleRunner, sameRuleCalls } from "./rules.js";
-import type { RuleCall, RuleDeclarations } from "./rules.js";
+import type { RuleCall, RuleDeclarations, RuleRunner } from "./rules.js";
 import { claimSelect, getSelect } from "./select-owner.js";
 import type { SelectBinding, SelectCatalog, SelectReplacement } from "./select-owner.js";
 import { compileChoiceGroup, choiceGroupChoices, choiceGroupOptions, choiceGroupRequired, mountChoiceGroup } from "./choice-group.js";
@@ -96,6 +96,16 @@ export function bindForm<T extends object = Record<string, unknown>>(
   root: HTMLElement,
   options: FormOptions<T> = {}
 ): FormHandle<T> {
+  return createForm(root, options).form;
+}
+
+type RowFormOwner = { root: HTMLElement; rules: RuleRunner; mounted: () => boolean; afterEdit: (painted: boolean) => void };
+
+export function bindRowForm<T extends object>(root: HTMLLIElement, options: FormOptions<T>, owner: RowFormOwner) {
+  return createForm(root, options, owner);
+}
+
+function createForm<T extends object>(root: HTMLElement, options: FormOptions<T>, rowOwner?: RowFormOwner) {
   if (!root || root.nodeType !== 1) {
     throw formError("FORM_ROOT", "Form root must be an HTML element.");
   }
@@ -125,12 +135,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
   const values = createValueBinding<T>("bindForm", { beforeBindValue, onBindValue, beforeSourceBind, onSourceBind });
   const parsers = new Map(Object.entries(parse ?? {}));
-  const runner = createRuleRunner("bindForm", rules);
+  const runner = rowOwner?.rules ?? createRuleRunner("bindForm", rules);
   rows?.entries();
   function compileFields(view: RuleDeclarations = runner, previous?: ReadonlyMap<string, Field>, checkpoint?: () => void) {
     checkpoint?.();
     for (const element of [root, ...root.querySelectorAll<HTMLElement>("[data-options]")]) {
       if (!element.hasAttribute("data-options")) continue;
+      if (rowOwner && element instanceof HTMLSelectElement && !element.hasAttribute("data-field")) continue;
       if (!rows || !(element instanceof HTMLSelectElement || element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]"))) || !element.hasAttribute("data-field") ||
           !element.hasAttribute("data-option-label") || !element.hasAttribute("data-option-value")) {
         throw formError("FORM_OPTIONS", "Row-local choices need Rows and a Select with data-field, data-options, data-option-label and data-option-value.",
@@ -171,8 +182,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (rows) throw formError("FORM_FILE_ROWS", "File inputs require a local Form; Rows store JSON values.", { field: name });
         if (input.multiple) throw formError("FORM_FILE_MULTIPLE", "Validate multiple files in application code.", { field: name });
       }
-      if (!groupDefinition && !group && kind === "radio" && (!input?.form || !input.name ||
-          input.form !== root && !root.contains(input.form))) {
+      if (!groupDefinition && !group && kind === "radio" && (!input?.name ||
+          !rowOwner && (!input.form || input.form !== root && !root.contains(input.form)))) {
         throw formError("FORM_RADIO_OWNER", "Radio fields need a name and a form owner inside this Form root.", { field: name });
       }
       const existing = byName.get(name);
@@ -237,7 +248,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const validateElement = field.groupRoot ?? field.group?.root ?? field.elements.find(element => element.hasAttribute("data-validate")) ?? field.element;
       field.declarations.format = formatElement.getAttribute("data-format"); checkpoint?.();
       field.declarations.validate = validateElement.getAttribute("data-validate"); checkpoint?.();
-      const retained = previous?.get(field.name);
+      const retained = rowOwner ? undefined : previous?.get(field.name);
       field.format = retained && !view.configured(field.name, "data-format") && !runner.configured(field.name, "data-format") &&
         retained.declarations.format === field.declarations.format ? retained.format : view.formats(field.declarations.format, field.name, checkpoint);
       field.validate = retained && !view.configured(field.name, "data-validate") && !runner.configured(field.name, "data-validate") &&
@@ -334,7 +345,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   let disposed = false;
   let initialized = false;
   let scanning = false;
-  let replacingGroup: { events: RowsEvent[]; reset: boolean } | undefined;
+  let replacingGroup: { events: { event: RowsEvent; paint: boolean }[]; reset: boolean } | undefined;
   let rescanIncomplete = false;
   let workDepth = 0;
   let automatic = true;
@@ -597,7 +608,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
   function refreshGroups(source: unknown, id: RowId | null, selected?: ReadonlySet<Field>): number | undefined {
     const snapshot = id === null ? undefined : rows!.get(id);
     let version = renderVersion;
-    const current = () => !disposed && boundId === id && version === renderVersion && (id === null || rows!.get(id) === snapshot);
+    const current = () => !disposed && mounted() && boundId === id && version === renderVersion && (id === null || rows!.get(id) === snapshot);
     for (const field of selected ?? fields) if (field.groupDefinition?.source && field.group) {
       if (!current()) return;
       const nextSource = readPath(source, field.groupDefinition.source.options);
@@ -693,7 +704,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
           else original.element.setAttribute("data-field-changed", original.changed);
         }
       };
-      const transaction = { events: [] as RowsEvent[], reset: false }, added: HTMLFormElement[] = [], removed: HTMLFormElement[] = [];
+      const transaction: NonNullable<typeof replacingGroup> = { events: [], reset: false };
+      const added: HTMLFormElement[] = [], removed: HTMLFormElement[] = [];
       let undo: (() => void) | undefined, committed = false, failed = false, failure: unknown;
       checkpoint();
       replacingGroup = transaction;
@@ -756,7 +768,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (!committed) for (const owner of added) try { owner.removeEventListener("reset", onReset); } catch { /* Preserve the original failure. */ }
         scanning = false;
         replacingGroup = undefined;
-        for (const event of transaction.events) try { onRows(event); } catch (cause) {
+        for (const { event, paint } of transaction.events) try { onRows(event, paint); } catch (cause) {
           if (!failed) { failed = true; failure = cause; }
         }
       }
@@ -799,7 +811,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         projection?.state === "failed" || projection?.state === "pending" ? shown : raw : shown;
       const previous = { catalog: choices.catalog, nodes: choices.authoredNodes, options: choices.authoredOptions, authored: choices.authored,
         selection: choices.selection, raw: choices.raw, source: choices.source, bound: choices.bound, native: field.nativeProjection };
-      const transaction = { events: [] as RowsEvent[], reset: false };
+      const transaction: NonNullable<typeof replacingGroup> = { events: [], reset: false };
       let undo: (() => void) | undefined, failed = false, failure: unknown;
       checkpoint();
       replacingGroup = transaction; scanning = true; version = ++renderVersion;
@@ -834,7 +846,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         }
       } finally {
         scanning = false; replacingGroup = undefined;
-        for (const event of transaction.events) try { onRows(event); } catch (cause) {
+        for (const { event, paint } of transaction.events) try { onRows(event, paint); } catch (cause) {
           if (!failed) { failed = true; failure = cause; }
         }
       }
@@ -961,8 +973,12 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
+  function mounted(): boolean {
+    return !rowOwner || rowOwner.mounted();
+  }
+
   function onReset(event: Event): void {
-    if (disposed || !automatic || !event.isTrusted || event.target !== event.currentTarget) return;
+    if (disposed || !automatic || !mounted() || !event.isTrusted || event.target !== event.currentTarget) return;
     if (replacingGroup) {
       event.preventDefault();
       replacingGroup.reset = true;
@@ -975,26 +991,26 @@ export function bindForm<T extends object = Record<string, unknown>>(
     nativeRevision++;
     resetTimer ??= setTimeout(() => {
       resetTimer = undefined;
-      if (!disposed) flushLocalResets();
+      if (!disposed && mounted()) flushLocalResets();
     }, 0);
   }
 
-  function context(field: Field, id: RowId | null, values: Record<string, unknown>): RuleContext {
+  function context(field: Field, id: RowId | null, values: Record<string, unknown>, observe = id === null || id === boundId): RuleContext {
     return {
       field: field.name, values, rowId: id,
-      ...(id === null || id === boundId ? { element: field.element } : {})
+      ...(observe ? { element: field.element } : {})
     };
   }
 
-  function issue(field: Field, id: RowId | null, rule: string, message: string): ValidationIssue {
+  function issue(field: Field, id: RowId | null, rule: string, message: string, observe = id === null || id === boundId): ValidationIssue {
     return {
       field: field.name, rowId: id, rule, message,
-      ...(id === null || id === boundId ? { element: field.element } : {})
+      ...(observe ? { element: field.element } : {})
     };
   }
 
   function validationDisabled(element: HTMLElement, id: RowId | null): boolean {
-    if (id === null || id === boundId || !control(element) || !previewDisabled.has(element)) return disabled(element, root);
+    if (id === null || id === boundId || !control(element) || !previewDisabled.has(element)) return disabled(element, rowOwner?.root ?? root);
     if (previewDisabled.get(element)) return true;
     for (let parent = element.parentElement; parent; parent = parent.parentElement) {
       if (!(parent instanceof HTMLFieldSetElement) || !parent.disabled) continue;
@@ -1004,18 +1020,22 @@ export function bindForm<T extends object = Record<string, unknown>>(
     return false;
   }
 
-  function groupDisabled(group: ChoiceGroupBinding): boolean {
-    if (group.templateDisabled) return true;
-    for (let parent: HTMLElement | null = group.root; parent; parent = parent.parentElement) {
+  function disabledFieldset(element: HTMLElement): boolean {
+    for (let parent: HTMLElement | null = element; parent; parent = parent.parentElement) {
       if (!(parent instanceof HTMLFieldSetElement) || !parent.disabled) continue;
       const legend = [...parent.children].find(child => child.localName === "legend");
-      if (parent === group.root || !legend?.contains(group.root)) return true;
+      if (parent === element || !legend?.contains(element)) return true;
     }
     return false;
   }
 
+  function groupDisabled(group: ChoiceGroupBinding): boolean {
+    return group.templateDisabled || disabledFieldset(group.root) ||
+      rowOwner !== undefined && !rowOwner.root.contains(group.root) && disabledFieldset(rowOwner.root);
+  }
+
   function candidates(id: RowId | null, source: Record<string, unknown>,
-    entered: ReadonlyMap<Field, unknown>): { values: Record<string, unknown>; parsed: Map<Field, Candidate> } {
+    entered: ReadonlyMap<Field, unknown>, observe?: boolean): { values: Record<string, unknown>; parsed: Map<Field, Candidate> } {
     let values = source;
     for (const [field, value] of entered) values = writePath(values, field.path, value);
     const enteredValues = values;
@@ -1026,7 +1046,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       let parseFailed = false;
       const parser = parsers.get(field.name);
       if (parser) {
-        try { value = parser(String(input ?? ""), context(field, id, enteredValues)); }
+        try { value = parser(String(input ?? ""), context(field, id, enteredValues, observe)); }
         catch (cause) {
           parseFailed = true;
           parseError = cause instanceof Error && cause.message
@@ -1044,11 +1064,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function check(field: Field, id: RowId | null, candidate: Candidate,
-    values: Record<string, unknown>, validate: boolean, preparing = false, checkpoint?: (cause?: unknown) => void): readonly ValidationIssue[] {
-    if (candidate.parseFailed) return [issue(field, id, "parse", candidate.parseError ?? "Input could not be parsed.")];
+    values: Record<string, unknown>, validate: boolean, preparing = false, checkpoint?: (cause?: unknown) => void,
+    observe = id === null || id === boundId): readonly ValidationIssue[] {
+    const problem = (rule: string, message: string) => issue(field, id, rule, message, observe);
+    if (candidate.parseFailed) return [problem("parse", candidate.parseError ?? "Input could not be parsed.")];
     const found: ValidationIssue[] = [];
     if (field.checkboxValues && !field.checkboxValues.some(code => code === candidate.value)) {
-      found.push(issue(field, id, "choice-option", "Choose an available checkbox value."));
+      found.push(problem("choice-option", "Choose an available checkbox value."));
     }
     if (field.group) {
       const group = field.group;
@@ -1056,31 +1078,31 @@ export function bindForm<T extends object = Record<string, unknown>>(
         throw formError("FORM_OPTIONS", "A generated group needs string row choices.", { field: field.name, options: key, rowId: id });
       }) : undefined;
       const message = checkGroupValue(catalog ? { kind: group.kind, values: catalog.map(choice => choice.value) } : group, candidate.value);
-      if (message) found.push(issue(field, id, "choice-option", message));
+      if (message) found.push(problem("choice-option", message));
       if (validate && !groupDisabled(group)) {
         const required = group.inputs.filter(input => input.required && !validationDisabled(input, id));
         const selected = candidate.entered === undefined ? candidate.value : candidate.entered;
-        const missing = catalog && id !== null && id !== boundId ? choiceGroupRequired(field.groupDefinition!, catalog, selected) : !group.inputs.length ? group.required : group.kind === "radio"
+        const missing = catalog && !observe ? choiceGroupRequired(field.groupDefinition!, catalog, selected) : !group.inputs.length ? group.required : group.kind === "radio"
           ? required.length > 0 && !group.inputs.some(input => typeof selected === "string" && input.value === selected)
           : required.some(input => !Array.isArray(selected) || !selected.includes(input.value));
-        if (missing) found.push(issue(field, id, "html", "Select the required options."));
-        const custom = (id === null || id === boundId) && group.inputs.find(input =>
+        if (missing) found.push(problem("html", "Select the required options."));
+        const custom = observe && group.inputs.find(input =>
           !validationDisabled(input, id) && input.validity.customError);
-        if (custom) found.push(issue(field, id, "html", custom.validationMessage));
+        if (custom) found.push(problem("html", custom.validationMessage));
       }
     } else if (field.choices) {
       const element = field.element as HTMLSelectElement;
       const available = preparing ? [...field.choices.raw.values()] :
         [...field.choices.authored, ...choiceOptions(field, values, id).map(option => option.raw)];
       if (!rowOptionAvailable(available, candidate.value, element.multiple)) {
-        found.push(issue(field, id, "select-option", "Choose an available option."));
+        found.push(problem("select-option", "Choose an available option."));
       }
       if (validate && !validationDisabled(element, id) && (element.willValidate || id !== boundId && previewDisabled.has(element))) {
         const missing = element.required && (element.multiple ? !Array.isArray(candidate.value) || !candidate.value.length
           : candidate.value === null || candidate.value === "" || candidate.value === undefined);
-        const message = (id === null || id === boundId) && element.validity.customError
+        const message = observe && element.validity.customError
           ? element.validationMessage : missing ? "Choose an option." : null;
-        if (message) found.push(issue(field, id, "html", message));
+        if (message) found.push(problem("html", message));
       }
     } else if (field.kind === "radio" || arrayField(field) && field.kind === "checkbox") {
       const required = field.elements.some(element => (element as HTMLInputElement).required) &&
@@ -1090,10 +1112,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
         entered != null && field.elements.some(element => (element as HTMLInputElement).value === String(entered)) :
         Array.isArray(entered) && field.elements.some(element =>
           entered.some(value => String(value) === (element as HTMLInputElement).value));
-      if (validate && required && !selected) found.push(issue(field, id, "html", "Select an option."));
+      if (validate && required && !selected) found.push(problem("html", "Select an option."));
     } else if (control(field.element)) {
-      const visible = id === null || id === boundId;
-      const probe = !field.checkboxValues && !preparing && visible && !valueCallbacks && !(id === null && field.format.length)
+      const probe = !field.checkboxValues && !preparing && observe && !valueCallbacks && !(id === null && field.format.length)
         ? field.element : field.element.cloneNode(true) as Control;
       const entered = candidate.entered ?? candidate.value;
       if (probe !== field.element) {
@@ -1101,23 +1122,24 @@ export function bindForm<T extends object = Record<string, unknown>>(
         if (preparing && probe instanceof HTMLInputElement && probe.type === "file") {
           probe.files = (field.element as HTMLInputElement).files;
         } else display(probe, entered, field.checkboxValues);
-        if (visible && field.element.validity.customError) probe.setCustomValidity(field.element.validationMessage);
+        if (observe && field.element.validity.customError) probe.setCustomValidity(field.element.validationMessage);
       }
       const message = nativeMessage(probe, entered, validate);
-      if (message) found.push(issue(field, id, "html", message));
+      if (message) found.push(problem("html", message));
     }
     checkpoint?.();
-    if (validate) found.push(...runner.validate(field.validate, candidate.value, context(field, id, values), checkpoint));
+    if (validate) found.push(...runner.validate(field.validate, candidate.value, context(field, id, values, observe), checkpoint));
     return found;
   }
 
-  function evaluate(id: RowId | null, source: Record<string, unknown>, entered: ReadonlyMap<Field, unknown>, validate = true) {
+  function evaluate(id: RowId | null, source: Record<string, unknown>, entered: ReadonlyMap<Field, unknown>,
+    validate = true, observe?: boolean) {
     return working(() => {
-      const { values, parsed } = candidates(id, source, entered);
+      const { values, parsed } = candidates(id, source, entered, observe);
       const byField = new Map<Field, readonly ValidationIssue[]>();
       for (const field of fields) {
         const candidate = parsed.get(field) ?? { value: readPath(values, field.path) };
-        byField.set(field, check(field, id, candidate, values, validate));
+        byField.set(field, check(field, id, candidate, values, validate, false, undefined, observe));
       }
       return { byField, parsed };
     });
@@ -1212,6 +1234,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     prepared?: ReadonlyMap<Field, { source: unknown; options: readonly RowOption[] }>, selected?: ReadonlySet<Field>,
     selectedKeys?: ReadonlySet<string>): number {
     return working(() => {
+      if (!mounted()) return renderVersion;
       const entry = renderVersion, admitted = refreshGroups(boundId === null ? null : rowValue(boundId), boundId, selected);
       if (admitted === undefined) return entry;
       syncPreview();
@@ -1221,7 +1244,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const original = id === null ? undefined : rows!.original(id);
       const currentDrafts = id === null ? undefined : drafts.get(id);
       const choices = prepared ?? (choiceFields.length ? prepareChoices(source, id, selected) : undefined);
-      const current = () => !disposed && version === renderVersion && boundId === id &&
+      const current = () => !disposed && mounted() && version === renderVersion && boundId === id &&
         (id === null || rows!.get(id) === snapshot);
       if (id === null && valueCallbacks) for (const field of selected ?? fields) field.projection = undefined;
       function writeFields(targets: Iterable<Field>): void {
@@ -1279,7 +1302,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         const assigned = (sourceFields!.get(key) ?? []).filter(field => remaining.has(field) &&
           (field.path[0] === key || !keySet.has(field.path[0])));
         for (const field of assigned) remaining.delete(field);
-        const binding: SourceBindContext<T> = Object.freeze({ root, row: snapshot, key, phase,
+        const binding: SourceBindContext<T> = Object.freeze({ root: rowOwner?.root ?? root, row: snapshot, key, phase,
           elements: Object.freeze([...new Set(assigned.flatMap(field => field.elements))]) });
         values.source(binding, () => writeFields(assigned), current);
         if (!current()) return version;
@@ -1289,7 +1312,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
-  function bindRow(id: RowId | null, event: RowsEvent | null, force: boolean): void {
+  function bindRow(id: RowId | null, event: RowsEvent | null, force: boolean, validated?: readonly ValidationIssue[]): void {
     return working(() => {
       if (bindCallbacks && id !== null && activeBindings.has(id)) {
         throw formError("FORM_BIND", "A whole-row callback cannot recursively bind an active row.", { rowId: id });
@@ -1298,7 +1321,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const snapshot = id === null ? undefined : rows!.get(id)!;
       const prepared = choiceFields.length ? prepareChoices(source, id) : undefined;
       const version = ++renderVersion;
-      const current = (generation: number) => !disposed && generation === renderVersion &&
+      const current = (generation: number) => !disposed && mounted() && generation === renderVersion &&
         (id === null || rows!.get(id) === snapshot);
       const binding: FormBindContext<T> | undefined = snapshot ? Object.freeze({ root, row: snapshot, event }) : undefined;
       function invoke(callback: "beforeBind" | "onBind"): void {
@@ -1330,7 +1353,10 @@ export function bindForm<T extends object = Record<string, unknown>>(
         const rendered = render("bind", false, force, prepared);
         if (!current(rendered) || boundId !== id) return;
         const currentDrafts = id === null ? undefined : drafts.get(id);
-        if (id !== null && snapshot?.status !== "delete" && currentDrafts?.size) {
+        if (validated) {
+          for (const field of fields) issues.set(field, validated.filter(issue => issue.field === field.name)
+            .map(issue => ({ ...issue, element: field.element })));
+        } else if (id !== null && snapshot?.status !== "delete" && currentDrafts?.size) {
           const checked = evaluate(id, rowValue(id), currentDrafts, autoValidate);
           if (!current(rendered) || boundId !== id) return;
           for (const field of currentDrafts.keys()) issues.set(field, checked.byField.get(field) ?? []);
@@ -1366,7 +1392,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         const resets = [...pendingResets].map(([owner, events]) => ({ owner, events: [...events], canceled: events.map(event => event.defaultPrevented) }));
         const current = () => {
           active();
-          if (fields !== graph || boundId !== id || renderVersion !== version || nativeRevision !== revision ||
+          if (!mounted() || fields !== graph || boundId !== id || renderVersion !== version || nativeRevision !== revision ||
               rows && rows.entries({ includeDeleted: true }) !== entries) {
             throw failure("stale", "Newer Form work superseded this preparation.");
           }
@@ -1392,7 +1418,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
           snapshots.set(field, state);
         }
         observed();
-        let source: Record<string, unknown> = {};
+        const scopedId = rowOwner ? id : null;
+        let source: Record<string, unknown> = scopedId === null ? {} : rowValue(scopedId);
         const entered = new Map<Field, unknown>(), invalid = new Set<Field>();
         for (const field of nativeFields) {
           const state = snapshots.get(field)!, previous = field.nativeProjection;
@@ -1416,7 +1443,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
           let value = readPath(source, field.path), parseFailed = false, parseError: string | undefined;
           const input = entered.get(field), parser = parsers.get(field.name);
           if (entered.has(field) && parser) {
-            try { value = parser(String(input ?? ""), context(field, null, preparse)); }
+            try { value = parser(String(input ?? ""), context(field, scopedId, preparse)); }
             catch (cause) {
               if (cause instanceof FrameworkError && cause.api === "bindForm" &&
                   ["FORM_DISPOSED", "FORM_RESCAN", "FORM_PREPARE"].includes(cause.code)) throw cause;
@@ -1440,19 +1467,23 @@ export function bindForm<T extends object = Record<string, unknown>>(
         for (const field of nativeFields) {
           const candidate = candidates.get(field)!;
           let checked: readonly ValidationIssue[];
-          try { checked = check(field, null, candidate, parsed, true, true, observed); }
+          try { checked = check(field, scopedId, candidate, parsed, true, true, observed); }
           catch (cause) { observed(cause); throw cause; }
           const rule = field.group ? "choice-option" : "select-option";
-          if (invalid.has(field) && !checked.some(issue => issue.rule === rule)) found.push(issue(field, null, rule, "Choose an available enabled option."));
+          if (invalid.has(field) && !checked.some(issue => issue.rule === rule)) found.push(issue(field, scopedId, rule, "Choose an available enabled option."));
           if (snapshots.get(field)!.badInput && field.element instanceof HTMLInputElement && field.element.willValidate) {
-            found.push(issue(field, null, "html", field.element.validationMessage || "Use a value allowed by this input."));
+            found.push(issue(field, scopedId, "html", field.element.validationMessage || "Use a value allowed by this input."));
             found.push(...checked.filter(issue => issue.rule !== "html"));
           } else found.push(...checked);
           observed();
         }
         if (found.length) return { valid: false, values: null, issues: found };
         let result: Record<string, unknown>;
-        try { result = structuredClone(parsed); }
+        try {
+          const enteredValues = scopedId === null ? parsed : nativeFields.reduce((values, field) =>
+            writePath(values, field.path, readPath(parsed, field.path)), {} as Record<string, unknown>);
+          result = structuredClone(enteredValues);
+        }
         catch (cause) { observed(cause); throw failure("clone", "Prepared values must be cloneable.", undefined, cause); }
         observed();
         return { valid: true, values: result, issues: [] };
@@ -1501,12 +1532,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
             { field: byElement.get(element)?.name });
         }
       }
-      const declarationView = runner.candidate(checkpoint);
-      const candidate = compileFields(declarationView, byName, checkpoint);
+      const declarationView = rowOwner ? runner : runner.candidate(checkpoint);
+      const candidate = compileRescan(declarationView, checkpoint);
       if (!current()) return;
-      fieldRenderers("bindForm", candidate.fields.map(field => ({
-        name: field.name, element: field.element, formatted: field.format.length > 0
-      })), Object.fromEntries([...renderers].filter(([name]) => candidate.byName.has(name))));
       const originals = new Map(fields.flatMap(field => field.originals.map(original => [original.element, original] as const)));
       const nextErrors = new Map<Field, HTMLElement | undefined>();
       const nextRules = new Map<Field, Field>();
@@ -1565,7 +1593,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const nextRendered = nextInitial.filter(({ field, element }) => rendered.has(field) || renderers.has(field.name) ||
         !rows && nextRules.get(field)!.format.length > 0 && !control(element));
       const publishRules = () => {
-        runner.adopt(declarationView);
+        if (!rowOwner) runner.adopt(declarationView);
         for (const [field, policy] of nextRules) {
           if (!sameRuleCalls(field.format, policy.format)) field.format = policy.format;
           if (!sameRuleCalls(field.validate, policy.validate)) field.validate = policy.validate;
@@ -1734,6 +1762,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     }
   }
 
+  function compileRescan(declarations: RuleDeclarations, checkpoint: () => void) {
+    const compiled = compileFields(declarations, byName, checkpoint);
+    fieldRenderers("bindForm", compiled.fields.map(field => ({
+      name: field.name, element: field.element, formatted: field.format.length > 0
+    })), Object.fromEntries([...renderers].filter(([name]) => compiled.byName.has(name))));
+    return compiled;
+  }
+
   function unbind(): void {
     active();
     if (restoring) throw formError("FORM_UNBIND", "A Form cannot recursively restore its captured view.");
@@ -1833,13 +1869,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
     } finally { restoring = false; }
   }
 
-  function reconcile(id: RowId, validate = true): void {
+  function reconcile(id: RowId, validate = true): boolean | undefined {
     const currentDrafts = drafts.get(id);
     if (!currentDrafts?.size || reconciling) return;
     const snapshot = rows!.get(id), version = renderVersion;
     if (snapshot?.status === "delete") return;
     const result = evaluate(id, rowValue(id, true), currentDrafts, validate);
-    if (disposed || version !== renderVersion || rows!.get(id) !== snapshot) return;
+    if (disposed || !mounted() || version !== renderVersion || rows!.get(id) !== snapshot) return;
     const ready = [...currentDrafts.keys()].filter(field => !result.byField.get(field)?.length);
     let failed = false;
     let failure: unknown;
@@ -1847,11 +1883,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
     try {
       for (const field of ready) {
         if (disposed || version !== renderVersion) return;
+        if (!mounted()) break;
         const source = rowValue(id, true);
         const value = result.parsed.get(field)!.value;
         if (field.choices && !rowOptionAvailable([
           ...field.choices.authored, ...choiceOptions(field, source, id).map(option => option.raw)
         ], value, (field.element as HTMLSelectElement).multiple)) continue;
+        if (!mounted()) break;
         const next = writePath(source, field.path, value);
         const key = field.path[0] as keyof T;
         const before = rows!.get(id);
@@ -1875,26 +1913,33 @@ export function bindForm<T extends object = Record<string, unknown>>(
       reconciling = false;
     }
     if (!currentDrafts.size) drafts.delete(id);
+    let painted = false;
     try {
-      if (id === boundId) {
+      if (id === boundId && mounted()) {
         const checked = evaluate(id, rowValue(id), currentDrafts, validate);
-        for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
-        const renderedRow = rows!.get(id), rendered = render("val", true);
-        showIssues();
-        if (!failed) acceptSource(rendered, renderedRow);
+        if (mounted()) {
+          for (const field of fields) issues.set(field, checked.byField.get(field) ?? []);
+          const renderedRow = rows!.get(id), rendered = render("val", true);
+          showIssues();
+          if (!failed) {
+            acceptSource(rendered, renderedRow);
+            painted = !disposed && mounted() && id === boundId && rendered === renderVersion && rows!.get(id) === renderedRow;
+          }
+        }
       }
     } catch (cause) {
       if (!failed) throw cause;
     }
     if (failed) throw failure;
+    return painted;
   }
   function onInput(event: Event): void {
     return working(() => {
-      if (disposed || scanning || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+      if (disposed || scanning || !automatic || !mounted() || !(event.target instanceof HTMLElement)) return;
       const field = byElement.get(event.target);
       if (!field || !control(field.element)) return;
       const flushed = rows ? renderVersion : flushLocalResets(field);
-      if (disposed || !automatic || flushed !== renderVersion) return;
+      if (disposed || !automatic || !mounted() || flushed !== renderVersion) return;
       if (disabled(event.target, root) ||
           (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) && event.target.readOnly) return;
       if (rows) {
@@ -1902,11 +1947,13 @@ export function bindForm<T extends object = Record<string, unknown>>(
         setNativeProjection(field);
         const id = boundId, snapshot = rows.get(id), version = renderVersion;
         const entered = enteredValue(field);
-        if (disposed || boundId !== id || renderVersion !== version || rows.get(id) !== snapshot || snapshot?.status === "delete") return;
+        if (disposed || !mounted() || boundId !== id || renderVersion !== version || rows.get(id) !== snapshot || snapshot?.status === "delete") return;
         const currentDrafts = drafts.get(id) ?? new Map<Field, unknown>();
         currentDrafts.set(field, entered);
         drafts.set(id, currentDrafts);
-        reconcile(id, autoValidate);
+        let painted = false;
+        try { painted = reconcile(id, autoValidate) ?? false; }
+        finally { rowOwner?.afterEdit(painted); }
         return;
       }
       const retained = localRenderedValues.get(field);
@@ -1933,16 +1980,16 @@ export function bindForm<T extends object = Record<string, unknown>>(
   }
 
   function onPointerDown(event: PointerEvent): void {
-    if (scanning || !automatic) return;
+    if (scanning || !automatic || !mounted()) return;
     pointerField = event.target instanceof HTMLElement ? byElement.get(event.target) : undefined;
   }
-  function onPointerEnd(): void { if (!scanning) pointerField = undefined; }
+  function onPointerEnd(): void { if (!scanning && mounted()) pointerField = undefined; }
 
   function onFocusIn(event: FocusEvent): void {
     return working(() => {
-      if (disposed || scanning || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+      if (disposed || scanning || !automatic || !mounted() || !(event.target instanceof HTMLElement)) return;
       const flushed = rows ? renderVersion : flushLocalResets();
-      if (disposed || !automatic || flushed !== renderVersion) return;
+      if (disposed || !automatic || !mounted() || flushed !== renderVersion) return;
       const field = byElement.get(event.target);
       const pointed = field !== undefined && pointerField === field;
       pointerField = undefined;
@@ -1976,9 +2023,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
 
   function onFocusOut(event: FocusEvent): void {
     return working(() => {
-      if (disposed || scanning || !automatic || !event.target || !(event.target instanceof HTMLElement)) return;
+      if (disposed || scanning || !automatic || !mounted() || !(event.target instanceof HTMLElement)) return;
       const flushed = rows ? renderVersion : flushLocalResets();
-      if (disposed || !automatic || flushed !== renderVersion) return;
+      if (disposed || !automatic || !mounted() || flushed !== renderVersion) return;
       const field = byElement.get(event.target);
       if (!field || !field.format.length && !valueCallbacks || !control(field.element) ||
           field.kind !== "single" || !formatCapable(field.element) ||
@@ -1988,7 +2035,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const id = boundId!, snapshot = rows.get(id), version = renderVersion;
       const source = rowValue(id);
       const raw = readPath(source, field.path);
-      const current = () => !disposed && boundId === id && version === renderVersion && rows.get(id) === snapshot;
+      const current = () => !disposed && mounted() && boundId === id && version === renderVersion && rows.get(id) === snapshot;
       if (valueCallbacks) projectValue(field, raw, source, id, "val", false, false, current);
       else {
         const shown = runner.format(field.format, raw, context(field, id, source));
@@ -1997,14 +2044,15 @@ export function bindForm<T extends object = Record<string, unknown>>(
     });
   }
 
-  function onRows(event: RowsEvent): void {
-    if (replacingGroup) { replacingGroup.events.push(event); return; }
+  function onRows(event: RowsEvent, paint = true): void {
+    if (replacingGroup) { replacingGroup.events.push({ event, paint }); return; }
     if (!rows || disposed || event.type === "move" || event.type === "append" || (event.type === "set" || event.type === "setMany") && reconciling) return;
     if (event.type === "replace" || event.type === "revert" && event.id === undefined) drafts.clear();
     else if (event.type === "remove") drafts.delete(event.id);
     else if (event.type === "revert" && event.id !== undefined) drafts.delete(event.id);
     if (boundId === null || event.type === "set" && event.id !== boundId ||
         event.type === "setMany" && !event.ids.includes(boundId)) return;
+    if (!paint) return;
     const row = rows.get(boundId);
     if (!row) {
       boundId = null;
@@ -2053,14 +2101,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
     root.addEventListener("focusin", onFocusIn);
     root.addEventListener("focusout", onFocusOut);
     for (const owner of resetOwners) owner.addEventListener("reset", onReset);
-    unsubscribe = rows?.subscribe(onRows);
+    if (!rowOwner) unsubscribe = rows?.subscribe(onRows);
   } catch (cause) {
     try { dispose(); } catch { /* Preserve the setup failure after releasing ownership. */ }
     throw cause;
   }
   initialized = true;
 
-  return {
+  const form: FormHandle<T> = {
     bind,
     rescan,
     defaults,
@@ -2153,6 +2201,37 @@ export function bindForm<T extends object = Record<string, unknown>>(
     dispose
   };
 
+  function validateRow(id: RowId, publish: boolean): ValidationResult {
+    active();
+    const snapshot = rows?.get(id), version = renderVersion;
+    const visible = boundId === id && mounted();
+    const { byField } = evaluate(id, rowValue(id, true), drafts.get(id) ?? new Map(), true, visible);
+    const current = () => !disposed && version === renderVersion && rows?.get(id) === snapshot && boundId === id && mounted();
+    const found = [...byField.values()].flat();
+    if (publish && visible && current()) present(id, found);
+    return { valid: found.length === 0, issues: visible && !current() ? found.map(({ element: _, ...problem }) => problem) : found };
+  }
+
+  function present(id: RowId, problems: readonly ValidationIssue[]): void {
+    active();
+    if (boundId !== id || !mounted()) return;
+    const snapshot = rows?.get(id), version = renderVersion;
+    if (!snapshot || snapshot.status === "delete") return;
+    issues.clear();
+    for (const problem of problems) {
+      const field = problem.rowId === id ? byName.get(problem.field) : undefined;
+      if (field) issues.set(field, [...issues.get(field) ?? [], { ...problem, element: field.element }]);
+    }
+    showIssues(() => !disposed && version === renderVersion && rows?.get(id) === snapshot && boundId === id && mounted());
+  }
+
+  function controls(name: string): readonly HTMLElement[] {
+    active();
+    const field = byName.get(name);
+    if (!field) return [];
+    return field.elements.length ? [...field.elements] : [field.element];
+  }
+
   function dispose(): void {
     if (disposed) return;
     if (!rows && !scanning) flushLocalResets(undefined, false);
@@ -2237,4 +2316,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
     issues.clear();
     if (failed) throw failure;
   }
+
+  return { form, changed: onRows, validate: validateRow, checkRules: compileRescan, controls, get committing() { return reconciling; },
+    bind(id: RowId, validated?: readonly ValidationIssue[]) { active(); bindRow(id, null, true, validated); } };
 }

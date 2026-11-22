@@ -246,6 +246,20 @@ state.checkListRows = () => {
     intact: initial === JSON.stringify(declarations) && declarations.every(Object.isFrozen) && Object.isFrozen(choices),
     separate: handles.every((handle, index) => handle !== declarations[index]) };
   for (const handle of handles) handle.dispose();
+  root.innerHTML = '<li data-row-template><label>Name <input data-field="name" required></label><small data-error-for="name"></small></li>';
+  const editable = bindList(root, { rows, editable: true, revealInvalid: true });
+  const id = rows.entries()[0].id, input = root.querySelector("input");
+  input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true }));
+  editable.setPage({ page: 2, size: 1 });
+  if (editable.validate(id).valid || document.activeElement !== input || editable.value(id).name !== "Ada2") {
+    throw new Error("Installed List failed to preserve and reveal an invalid draft.");
+  }
+  input.value = "Ada Lovelace"; input.dispatchEvent(new Event("input", { bubbles: true }));
+  editable.update(id, ["name"]);
+  if (editable.rowForm(id)?.read().name !== "Ada Lovelace" || !editable.validate(id).valid) {
+    throw new Error("Installed List did not edit the projected Rows entry.");
+  }
+  editable.dispose();
   rows.dispose(); host.remove(); return result;
 };
 

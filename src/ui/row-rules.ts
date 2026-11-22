@@ -156,12 +156,14 @@ export function createRowRules<R extends RowRuleRecord>(runner: RuleRunner,
       else { overrides?.delete(record.id); if (overrides?.size === 0) overrides = undefined; }
       record.ruleSources = observed; revision++;
     },
-    refresh(records: Iterable<R>, checkpoint: Checkpoint): void {
+    refresh(records: Iterable<R>, checkpoint: Checkpoint,
+      preflight?: (candidate: RuleDeclarations, current: Checkpoint) => void): void {
       let entry = revision;
       const retained = [...records], current = (cause?: unknown) => { checkpoint(cause); if (entry !== revision) busy(); };
       current(); const candidate = runner.candidate(current);
       const templates = fields.map((field, position) => read(field.elements, templateSources[position], current));
       const calls = templates.map((source, position) => compile(candidate, position, source, current, accepted(position)));
+      preflight?.(candidate, current);
       const next = new Map<RowId, Map<number, Override>>();
       if (overrides) for (const [id, row] of overrides) for (const [index, own] of row) {
         const position = positions.get(index)!, source = { format: own.format?.source ?? templates[position].format,

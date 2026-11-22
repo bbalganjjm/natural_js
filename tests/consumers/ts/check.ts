@@ -677,3 +677,12 @@ export function connectSharedNativeControls(detail: HTMLElement, gridRoot: HTMLT
   rows.set(first.id, "codes", { channels: [], teams: first.value.codes.teams.map(team => ({ ...team })) });
   return { current, hasBoolean, nativeCode, indexes, form, grid, list, dispose() { list.dispose(); grid.dispose(); form.dispose(); common.dispose(); rows.dispose(); } };
 }
+
+export function connectEditableList(root: HTMLUListElement) {
+  const rows = createRows([{ line: { quantity: 1, code: "A" } }]);
+  const list = bindList(root, { rows, editable: true, revealInvalid: true, parse: { "line.quantity": Number } });
+  const id = rows.entries()[0].id;
+  const quantity: number = list.value(id).line.quantity;
+  if (list.reveal(id)) list.update(id, ["line.quantity"]);
+  return { list, quantity, prepared: list.rowForm(id)?.prepare(), rowValid: list.rowForm(id)?.validate().valid };
+}
