@@ -1044,6 +1044,11 @@ state.checkSharedControls = async () => {
         choices: [{ value: 1, label: "One" }, { value: "1", label: "String one" }]
       }));
       for (const select of common) own(() => select.dispose());
+      common[0].setIndexes([2]);
+      if (common[0].value() !== "1") throw new Error("Installed Select lost typed positional choice.");
+      common[0].reset("clear");
+      const group = bindChoiceGroup(detail.querySelector("fieldset"), { choices: [] });
+      own(() => group.dispose());
       const form = bindForm(detail, { rows }); own(() => form.dispose());
       const grid = bindGrid(table, { rows }); own(() => grid.dispose());
       const list = bindList(listRoot, { rows, render: { summary(value) {
@@ -1051,6 +1056,11 @@ state.checkSharedControls = async () => {
       } } }); own(() => list.dispose());
       return { init() {
         const id = rows.entries()[0].id; form.bind(id);
+        common[0].appendChoices([{ value: true, label: "Added" }]);
+        common[0].removeChoices(true);
+        if (common[0].indexes().length !== 1 || common[0].value() !== false) throw new Error("Installed Select did not preserve the row-local choice.");
+        group.appendChoices([{ value: "web", label: "Web" }]); group.removeChoices("web");
+        if (group.indexes()[0] !== 0 || group.value()[0] !== "email") throw new Error("Installed choice group lost its selected row choice.");
         const initial = { typed: common[0].value(), choices: [detail, table, listRoot].map(element => element.querySelectorAll('fieldset input').length),
           shown: listRoot.querySelector("strong").textContent, readOnly: listRoot.querySelector('input[data-field="active"]').disabled };
         let changes = 0; const stop = rows.subscribe(event => { if (event.type === "set") changes++; });

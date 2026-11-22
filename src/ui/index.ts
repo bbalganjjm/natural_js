@@ -94,8 +94,13 @@ export type SelectSelection<V extends SelectValue> = V | SelectValue;
 
 export interface SelectHandle<V extends SelectValue> {
   setChoices(choices: readonly SelectChoice<V>[]): void;
+  appendChoices(choices: readonly SelectChoice<V>[]): void;
+  removeChoices(value: SelectSelection<V>): void;
   setValue(value: SelectSelection<V> | readonly SelectSelection<V>[]): void;
   value(): SelectSelection<V> | readonly SelectSelection<V>[];
+  indexes(): readonly number[];
+  setIndexes(indexes: readonly number[]): void;
+  reset(mode?: "default" | "first" | "clear"): void;
   dispose(): void;
 }
 

@@ -773,7 +773,8 @@ export function bindForm<T extends object = Record<string, unknown>>(
       const element = field.element as HTMLSelectElement, choices = field.choices!, binding = choices.select!;
       const id = boundId, snapshot = id === null ? undefined : rows!.get(id);
       let version = renderVersion;
-      const current = () => !disposed && version === renderVersion && boundId === id &&
+      const sameRender = () => !disposed && version === renderVersion && boundId === id;
+      const current = () => sameRender() &&
         (id === null || rows!.get(id) === snapshot) && !replacingGroup?.reset;
       const checkpoint = () => {
         if (!current()) throw formError("FORM_OPTIONS", "Newer Form work superseded this choice replacement.", { field: field.name });
@@ -806,12 +807,14 @@ export function bindForm<T extends object = Record<string, unknown>>(
         undo = next.apply(); checkpoint();
         choices.authoredNodes = [...next.nodes]; choices.authoredOptions = [...next.options]; choices.authored = [...next.values];
         choices.selection = next.options.map(option => option.selected);
-        choices.raw = renderRowOptions(element, choices.authoredNodes, choices.authoredOptions, choices.authored, suffix);
+        choices.raw = id === null ? new Map(next.raw) :
+          renderRowOptions(element, choices.authoredNodes, choices.authoredOptions, choices.authored, suffix);
         checkpoint();
         binding.raw = choices.raw;
         choices.source = choices.options ? readPath(snapshot?.value, choices.options) : undefined;
         choices.bound = id !== null;
-        selectRowOptions(element, choices.raw, selected, current); checkpoint();
+        if (id !== null) selectRowOptions(element, choices.raw, selected, current);
+        checkpoint();
         if (id !== null) rememberNative(field, id, draft?.has(field) ? draft.get(field) :
           projection?.state === "pending" || projection?.state === "failed" ? previous.native ? previous.native.raw : raw : raw,
           draft?.has(field) ?? false, current);
@@ -819,9 +822,9 @@ export function bindForm<T extends object = Record<string, unknown>>(
         choices.catalog = next.finish();
       } catch (cause) {
         failed = true; failure = cause;
-        if (current()) {
+        if (sameRender()) {
           try { undo?.(); } catch { /* Preserve the original publication failure. */ }
-          if (current()) {
+          if (sameRender()) {
             choices.catalog = previous.catalog;
             choices.authoredNodes = previous.nodes; choices.authoredOptions = previous.options; choices.authored = previous.authored;
             choices.selection = previous.selection; choices.raw = previous.raw; choices.source = previous.source; choices.bound = previous.bound;
@@ -2208,6 +2211,7 @@ export function bindForm<T extends object = Record<string, unknown>>(
         try {
           const element = field.element as HTMLSelectElement;
           if (choices.select) {
+            choices.select.restoreNested();
             const catalog = choices.select.catalog;
             element.replaceChildren(...catalog.nodes);
             const raw = new Map(catalog.options.map((option, index) => [option, catalog.values[index]]));

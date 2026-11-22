@@ -4,15 +4,20 @@ import type { SelectChoice } from "./index.js";
 import { focusVisible, restoreAttributes, uniqueId } from "./dom-state.js";
 import { parsePath } from "./field-path.js";
 import { interactiveContent } from "./native-control.js";
-import { rowOptions } from "./row-options.js";
+import { choiceIndexes, rowOptions } from "./row-options.js";
 import { assertChoiceGroupWritable, beginChoiceGroupPublication, choiceGroupCheckpoint, claimChoiceGroup, getChoiceGroup,
   publishChoiceGroup, registerChoiceGroup, replaceChoiceGroup, retireChoiceGroup } from "./choice-group-owner.js";
 import type { ChoiceGroupBinding, ChoiceGroupCatalog, ChoiceGroupDefinition, ChoiceGroupReplacement } from "./choice-group-owner.js";
 
 export interface ChoiceGroupHandle {
   setChoices(choices: readonly SelectChoice<string>[]): void;
+  appendChoices(choices: readonly SelectChoice<string>[]): void;
+  removeChoices(value: string): void;
   setValue(value: string | null | readonly string[]): void;
   value(): string | null | readonly string[];
+  indexes(): readonly number[];
+  setIndexes(indexes: readonly number[]): void;
+  reset(mode?: "default" | "first" | "clear"): void;
   dispose(): void;
 }
 
@@ -109,7 +114,7 @@ function choices(source: readonly SelectChoice<string>[], current: () => void): 
 
 function createChoiceGroup(root: HTMLFieldSetElement, definition: ChoiceGroupDefinition, options: {
   choices: readonly SelectChoice<string>[]; value?: string | null | readonly string[];
-  onChange?: (value: string | null | readonly string[], event: Event) => void;
+  onChange?: (this: void, value: string | null | readonly string[], event: Event) => void;
 }, mounted: { defaults?: readonly string[]; labels?: readonly number[]; current?: () => void; suffix?: readonly SelectChoice<string>[] } = {}) {
   const document = root.ownerDocument, authored = [...root.childNodes], restoreRoot = restoreAttributes(root, ["tabindex"]);
   const initialCurrent = mounted.current ?? (() => {});
@@ -215,6 +220,35 @@ function createChoiceGroup(root: HTMLFieldSetElement, definition: ChoiceGroupDef
     };
   }
   function change(event: Event) { if (!disposed && inputs.includes(event.target as HTMLInputElement)) onChange?.(group.read(), event); }
+  function mutateChoices(update: (common: readonly SelectChoice<string>[]) => readonly SelectChoice<string>[]): void {
+    active(); const expected = generation;
+    replaceChoiceGroup(group, (current, suffix) => {
+      const owned = () => { active(); current(); };
+      const checkpoint = () => {
+        owned();
+        if (generation !== expected) throw error("CHOICE_STALE", "A newer choice-group operation superseded this change.");
+      };
+      const next = observed(checkpoint, () => update(committed.choices));
+      const shown = observed(checkpoint, () => group.read());
+      const defaults = observed(checkpoint, () => inputs.filter(input => input.defaultChecked).map(input => input.value));
+      return replacement(prepare(next, suffix, shown, defaults, checkpoint), expected, current, owned);
+    });
+  }
+  function changeSelection(prepare: () => string | null | readonly string[]): void {
+    const current = (version: number) => {
+      active(); assertChoiceGroupWritable(group);
+      if (generation !== version) throw error("CHOICE_STALE", "A newer choice-group operation superseded this change.");
+    };
+    const expected = generation;
+    current(expected);
+    const selected = observed(() => current(expected), prepare);
+    const written = ++generation; catalogGeneration = generation;
+    group.write(selected, () => { current(written); return true; });
+  }
+  function indexedValue(include: (input: HTMLInputElement, index: number) => boolean): string | null | readonly string[] {
+    const selected = values.filter((_, index) => include(inputs[index], index));
+    return definition.kind === "radio" ? selected.at(-1) ?? null : selected;
+  }
   const unregister = registerChoiceGroup(group);
   function dispose() {
     if (disposed) return; retireChoiceGroup(group); disposed = true; generation++;
@@ -246,20 +280,38 @@ function createChoiceGroup(root: HTMLFieldSetElement, definition: ChoiceGroupDef
     throw cause;
   }
   return { binding: group, dispose, handle: {
-    setChoices(next: readonly SelectChoice<string>[]) {
-      active(); const expected = generation;
-      replaceChoiceGroup(group, (current, suffix) => {
-        const checkpoint = () => { active(); current(); };
-        return replacement(prepare(next, suffix, group.read(), inputs.filter(input => input.defaultChecked).map(input => input.value), checkpoint), expected, current, checkpoint);
+    setChoices(next: readonly SelectChoice<string>[]) { mutateChoices(() => next); },
+    appendChoices(next: readonly SelectChoice<string>[]) {
+      mutateChoices(common => {
+        if (!Array.isArray(next)) throw error("CHOICE_OPTIONS", "Choices must be an array.");
+        return [...common, ...next];
       });
     },
-    setValue(value: string | null | readonly string[]) {
-      active(); assertChoiceGroupWritable(group); const expected = generation, selected = selections(definition.kind, value);
-      active(); assertChoiceGroupWritable(group); if (generation !== expected) throw error("CHOICE_STALE", "A newer choice-group operation superseded this change.");
-      const written = ++generation; catalogGeneration = generation;
-      group.write(selected, () => { active(); if (generation !== written) throw error("CHOICE_STALE", "A newer choice-group operation superseded this change."); return true; });
+    removeChoices(value: string) {
+      active();
+      if (typeof value !== "string") throw error("CHOICE_VALUE", "A choice code must be a string.");
+      if (committed.choices.some(choice => choice.value === value)) {
+        mutateChoices(common => common.filter(choice => choice.value !== value));
+      }
     },
+    setValue(value: string | null | readonly string[]) { changeSelection(() => selections(definition.kind, value)); },
     value() { active(); return group.read(); },
+    indexes() { active(); return inputs.flatMap((input, index) => input.checked ? [index] : []); },
+    setIndexes(indexes: readonly number[]) {
+      changeSelection(() => {
+        const selected = choiceIndexes(indexes, inputs.length, definition.kind === "checkbox");
+        if (!selected) throw error("CHOICE_INDEX", "Use distinct positions from the current choices and at most one for a radio group.");
+        return indexedValue((_, index) => selected.has(index));
+      });
+    },
+    reset(mode: "default" | "first" | "clear" = "default") {
+      changeSelection(() => {
+        if (mode === "clear") return definition.kind === "radio" ? null : [];
+        if (mode === "first") return indexedValue((_, index) => index === 0);
+        if (mode === "default") return indexedValue(input => input.defaultChecked);
+        throw error("CHOICE_VALUE", "Choice reset mode must be default, first or clear.");
+      });
+    },
     dispose() { if (disposed) return; assertChoiceGroupWritable(group); dispose(); }
   } satisfies ChoiceGroupHandle };
 }
@@ -290,7 +342,7 @@ export function captureChoiceGroup(root: HTMLFieldSetElement) {
 export function bindChoiceGroup(root: HTMLFieldSetElement, options: {
   choices: readonly SelectChoice<string>[];
   value?: string | null | readonly string[];
-  onChange?: (value: string | null | readonly string[], event: Event) => void;
+  onChange?: (this: void, value: string | null | readonly string[], event: Event) => void;
 }): ChoiceGroupHandle {
   if (!options || typeof options !== "object") throw error("CHOICE_OPTIONS", "Choice group options are required.");
   return createChoiceGroup(root, compileChoiceGroup(root), options).handle;

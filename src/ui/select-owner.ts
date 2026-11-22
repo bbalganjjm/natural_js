@@ -12,6 +12,7 @@ export interface SelectBinding {
   readonly root: HTMLSelectElement;
   readonly catalog: SelectCatalog;
   raw: ReadonlyMap<HTMLOptionElement, unknown>;
+  restoreNested(): void;
 }
 
 export interface SelectReplacement extends SelectCatalog {

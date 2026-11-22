@@ -8,6 +8,18 @@ export interface RowOption {
   readonly raw: RowOptionValue;
 }
 
+export function choiceIndexes(indexes: unknown, count: number, multiple: boolean): Set<number> | null {
+  if (!Array.isArray(indexes)) return null;
+  const positions: unknown[] = Array.from(indexes);
+  if (!multiple && positions.length > 1) return null;
+  const result = new Set<number>();
+  for (const index of positions) {
+    if (typeof index !== "number" || !Number.isInteger(index) || index < 0 || index >= count || result.has(index)) return null;
+    result.add(index);
+  }
+  return result;
+}
+
 function scalar(value: unknown): value is RowOptionValue {
   return value === null || typeof value === "string" || typeof value === "boolean" ||
     (typeof value === "number" && Number.isFinite(value));
