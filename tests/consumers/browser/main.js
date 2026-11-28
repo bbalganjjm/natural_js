@@ -246,11 +246,14 @@ state.checkListRows = () => {
     intact: initial === JSON.stringify(declarations) && declarations.every(Object.isFrozen) && Object.isFrozen(choices),
     separate: handles.every((handle, index) => handle !== declarations[index]) };
   for (const handle of handles) handle.dispose();
-  root.innerHTML = '<li data-row-template><button type="button" data-select-row>Select</button><label>Check Row <input type="checkbox" data-check-row></label><label>Name <input data-field="name" required></label><small data-error-for="name"></small></li>';
+  root.innerHTML = '<li data-row-template><button type="button" data-select-row>Select</button><label>Check Row <input type="checkbox" data-check-row></label><label>Name <input data-field="name" required></label><small data-error-for="name"></small><label>Quantity <input type="number" data-field="quantity" value="3"></label><button type="button" data-row-action="inspect">Inspect</button></li>';
   const master = document.createElement("input");
   master.type = "checkbox"; master.setAttribute("data-check-all", "visible"); master.setAttribute("aria-label", "Check page");
   master.checked = true; master.indeterminate = true; host.append(master);
-  const editable = bindList(root, { rows, editable: true, revealInvalid: true, multiple: true, checkAllControls: [master] });
+  const completions = [], actions = [];
+  const editable = bindList(root, { rows, editable: true, revealInvalid: true, multiple: true, checkAllControls: [master],
+    parse: { quantity: Number }, addSelect: true, onBind: result => completions.push(result),
+    onRowAction: ({ action, row }) => actions.push([action, row.id, row.value.name]) });
   const id = rows.entries()[0].id, input = root.querySelector("input[data-field]");
   input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true }));
   root.querySelector("button[data-select-row]").click();
@@ -274,6 +277,25 @@ state.checkListRows = () => {
   editable.update(id, ["name"]);
   if (editable.rowForm(id)?.read().name !== "Ada Lovelace" || !editable.validate(id).valid) {
     throw new Error("Installed List did not edit the projected Rows entry.");
+  }
+  editable.setPage(null);
+  completions.length = 0;
+  const defaults = editable.defaults();
+  const added = editable.add({ ...defaults, name: "Edsger" });
+  if (defaults.quantity !== 3 || editable.value(added).quantity !== 3 || editable.rowIds("store")[0] !== added ||
+      editable.selected() !== added || editable.selectedIds().join() !== String(added) || editable.checkedIds().length !== 2) {
+    throw new Error("Installed List did not insert typed defaults and select the new identity.");
+  }
+  const [loaded] = rows.append([{ name: "Barbara", quantity: 7 }]);
+  const [completion] = completions;
+  if (completions.length !== 1 || completion.event?.type !== "append" || completion.event.ids[0] !== loaded ||
+      completion.visible !== 4 || rows.get(loaded)?.status !== "clean") {
+    throw new Error("Installed List did not signal the completed clean append.");
+  }
+  rows.set(loaded, "name", "Barbara Liskov");
+  [...root.querySelectorAll("button[data-row-action]")].at(-1).click();
+  if (JSON.stringify(actions) !== JSON.stringify([["inspect", loaded, "Barbara Liskov"]]) || editable.selected() !== added) {
+    throw new Error("Installed List did not dispatch a fresh independent row action.");
   }
   editable.dispose();
   if (!master.checked || !master.indeterminate) throw new Error("Installed List did not restore its authored check-all control.");

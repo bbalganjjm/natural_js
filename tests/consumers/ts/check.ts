@@ -683,6 +683,9 @@ export function connectEditableList(root: HTMLUListElement, master?: HTMLInputEl
   const list: ListHandle<{ line: { quantity: number; code: string } }> = bindList(root, {
     rows, editable: true, revealInvalid: true, parse: { "line.quantity": Number }, multiple: true,
     checkMode: "single", checkAllControls: master ? [master] : [],
+    addSelect: true,
+    onBind(result: GridBindResult) { root.dataset.bound = String(result.visible); },
+    onRowAction({ id, row, element }) { element.dataset.inspected = `${id}:${row.value.line.code}`; },
     canSelect: row => row.value.line.quantity > 0,
     beforeCheckChange: (change: GridIdsChange) => change.ids.length <= 1
   });
@@ -697,5 +700,7 @@ export function connectEditableList(root: HTMLUListElement, master?: HTMLInputEl
   list.checkAll(false, "filtered");
   const checked: readonly RowId[] = list.checkedIds();
   const checkState: GridCheckState = list.checkState("store");
-  return { list, quantity, active, checked, checkState, prepared: list.rowForm(id)?.prepare(), rowValid: list.rowForm(id)?.validate().valid };
+  const defaults: Record<string, unknown> = list.defaults();
+  const added: RowId = list.add({ line: { quantity, code: "B" } }, null);
+  return { list, quantity, active, checked, checkState, defaults, added, prepared: list.rowForm(id)?.prepare(), rowValid: list.rowForm(id)?.validate().valid };
 }

@@ -3,7 +3,7 @@ import { FrameworkError } from "../internal/framework-error.js";
 import { readPath, writePath } from "./field-path.js";
 import type { ParseInput } from "./index.js";
 
-interface NativeDefault {
+export interface NativeDefault {
   name: string;
   path: readonly string[];
   value: unknown;
@@ -22,8 +22,8 @@ export function assertNativePaths(fields: readonly { name: string; path: readonl
   }
 }
 
-export function createNativeDefaults(api: "bindForm" | "bindGrid", fields: readonly NativeDefault[], active: () => void) {
-  const code = api === "bindForm" ? "FORM_DEFAULTS" : "GRID_DEFAULTS";
+export function createNativeDefaults(api: "bindForm" | "bindGrid" | "bindList", fields: readonly NativeDefault[], active: () => void) {
+  const code = { bindForm: "FORM_DEFAULTS", bindGrid: "GRID_DEFAULTS", bindList: "LIST_DEFAULTS" }[api];
   let reading = false;
   function error(message: string, field?: string, cause?: unknown) {
     return new FrameworkError({ api, code, message, ...(field ? { detail: { field } } : {}), cause });

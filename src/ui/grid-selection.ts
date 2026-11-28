@@ -199,17 +199,17 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
       if (id !== null) checkedIds([id], "selection");
       changeSelection(id, selection, event, anchor, unchanged);
     },
-    choose(id: RowId, event: MouseEvent | KeyboardEvent, origin?: RowId): boolean {
+    choose(id: RowId, event: MouseEvent | KeyboardEvent | null, origin?: RowId): boolean {
       const unchanged = checkpoint("selection");
       if (!eligible(id, "selection")) { unchanged(); return false; }
-      const toggle = toggleSelection && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+      const toggle = toggleSelection && event && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
       if (!multiple) {
         return changeSelection(toggle && selected === id ? null : id, selection, event, anchor, unchanged);
       }
       let nextId: RowId | null = id;
       let nextAnchor = id;
       let ids: Set<RowId>;
-      if (event.shiftKey) {
+      if (event?.shiftKey) {
         const visible = view.visible();
         const rangeAnchor = anchor !== null && visible.includes(anchor) && eligible(anchor, "selection") ? anchor : origin ?? null;
         const start = rangeAnchor === null || !eligible(rangeAnchor, "selection") ? -1 : visible.indexOf(rangeAnchor);
@@ -219,7 +219,7 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
         ids = new Set(event.ctrlKey || event.metaKey ? selection : []);
         for (const target of range) if (eligible(target, "selection")) ids.add(target);
         if (start >= 0 && rangeAnchor !== null) nextAnchor = rangeAnchor;
-      } else if (event.ctrlKey || event.metaKey || toggle) {
+      } else if (event?.ctrlKey || event?.metaKey || toggle) {
         ids = new Set(selection);
         if (!ids.delete(id)) ids.add(id);
         else if (toggle) nextId = null;

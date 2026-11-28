@@ -170,6 +170,8 @@ export interface GridFilterChoice {
 }
 
 export interface ListHandle<T extends object> {
+  defaults(): Record<string, unknown>;
+  add(value: T, before?: RowId | null): RowId;
   refresh(): void;
   rowForm(id: RowId): Pick<FormHandle<T>, "read" | "prepare"> & { validate(): ValidationResult } | null;
   value(id: RowId): Snapshot<T>;

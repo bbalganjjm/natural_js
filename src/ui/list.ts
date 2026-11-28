@@ -20,12 +20,14 @@ import { createRuleRunner } from "./rules.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createRowRules } from "./row-rules.js";
 import type { RowRuleSource } from "./row-rules.js";
-import { captureCheckboxValues, disabled, display, displayField, interactiveContent, nativeMessage } from "./native-control.js";
+import { captureCheckboxValues, control, disabled, display, displayField, fieldValue, interactiveContent, nativeMessage } from "./native-control.js";
+import { createNativeDefaults } from "./native-defaults.js";
+import type { NativeDefault } from "./native-defaults.js";
 import { bindRowForm } from "./form.js";
 import { focusVisible, uniqueId } from "./dom-state.js";
 import type { RuleCall } from "./rules.js";
 import type {
-  FormatRule, GridRowScope, ListHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet,
+  FormatRule, GridBindResult, GridRowScope, ListHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet,
   SourceBindContext, ValidateRule, ValidationIssue, ValidationResult, ValueBindContext
 } from "./index.js";
 
@@ -92,6 +94,7 @@ interface RenderedRow<T extends object> {
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
   checks: HTMLInputElement[];
+  actions: HTMLButtonElement[];
   errors: Map<string, HTMLElement>;
   hasIssues: boolean;
   releaseSelects: (() => void)[];
@@ -115,7 +118,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   revealInvalid?: boolean;
   rules?: RuleSet;
   render?: Record<string, (value: unknown, context: RuleContext) => Node | string | null>;
+  addTop?: boolean;
+  addSelect?: boolean;
+  beforeRowBind?: (context: RowBinding<T, HTMLLIElement>) => void;
   onRowBind?: (context: RowBinding<T, HTMLLIElement>) => void;
+  onBind?: (result: GridBindResult) => void;
+  onRowAction?: (action: { action: string; id: RowId; row: RowSnapshot<T>; element: HTMLButtonElement; event: Event }) => void;
   beforeBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   beforeSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
@@ -139,12 +147,16 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     beforeSourceBind: options.beforeSourceBind, onSourceBind: options.onSourceBind } : undefined;
   const values = createValueBinding<T>("bindList", editorCallbacks ?? options);
   const cleanupErrors: unknown[] = [];
-  const { onRowBind, onSelect, beforeSelect, beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange,
+  const { addTop = true, addSelect = false, beforeRowBind, onRowBind, onBind, onRowAction,
+    onSelect, beforeSelect, beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange,
     multiple, toggleSelection, checkMode, canSelect, canCheck, selectOnRowClick, hover, checkAllControls } = options;
   if (onSelect !== undefined && typeof onSelect !== "function") {
     throw listError("LIST_SELECT", "onSelect must be a function.");
   }
-  const hooks = createRowHooks("bindList", { onRowBind }, cause => cleanupErrors.push(cause));
+  if (typeof addTop !== "boolean" || typeof addSelect !== "boolean") throw listError("LIST_ADD", "addTop and addSelect must be booleans.");
+  if (onBind !== undefined && typeof onBind !== "function") throw listError("LIST_BIND", "onBind must be a synchronous function.");
+  if (onRowAction !== undefined && typeof onRowAction !== "function") throw listError("LIST_ACTION", "onRowAction must be a function.");
+  const hooks = createRowHooks("bindList", { beforeRowBind, onRowBind }, cause => cleanupErrors.push(cause));
   const templates = [...root.querySelectorAll<HTMLLIElement>("li[data-row-template]")];
   if (templates.length !== 1 || templates[0].parentElement !== root) {
     throw listError("LIST_TEMPLATE", "The List needs one direct li marked data-row-template.");
@@ -185,6 +197,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   const errorFields = new Map<string, number>();
   const buttonIndexes: number[] = [];
   const checkIndexes: number[] = [];
+  const actionIndexes: number[] = [];
   const authored = [template, ...template.querySelectorAll<HTMLElement>("*")];
   const releaseTemplateGroups: (() => void)[] = [];
   try {
@@ -211,6 +224,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         throw listError("LIST_CHECK", "A row check needs a checkbox separate from data-field.");
       }
       checkIndexes.push(index);
+    }
+    if (onRowAction && element.hasAttribute("data-row-action")) {
+      if (!(element instanceof HTMLButtonElement) || element.type !== "button" || !element.getAttribute("data-row-action")?.trim() ||
+          element.hasAttribute("data-select-row") || element.hasAttribute("data-field")) {
+        throw listError("LIST_ACTION", "A row action needs a named button with type=button, separate from selection and fields.");
+      }
+      actionIndexes.push(index);
     }
     const name = element.getAttribute("data-field");
     const checkboxValues = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]")) ? undefined : captureCheckboxValues(element, () => { throw listError("LIST_CONTROL", "A coded checkbox needs one marked checkbox and distinct explicit value/data-unchecked-value strings.", { field: name ?? "" }); });
@@ -277,6 +297,37 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       throw listError("LIST_ERROR_REGION", "An error region needs a matching data-field.", { field });
     }
   }
+  const nativeDefaults: NativeDefault[] = [];
+  const groups = new Map<string, HTMLElement[]>();
+  for (const field of textFields) {
+    const element = authored[field.index];
+    if (element instanceof HTMLInputElement && (element.type === "radio" || element.type === "checkbox") && !field.checkboxValues) {
+      const key = `${element.type}:${field.name}`;
+      const members = groups.get(key);
+      if (members) members.push(element); else groups.set(key, [element]);
+    }
+  }
+  function defaultField(name: string, path: readonly string[], element: HTMLElement, value: unknown, parseNative = true): void {
+    const parse = editorOptions.parse;
+    nativeDefaults.push({ name, path, element, value, ...(parseNative && parse && Object.hasOwn(parse, name) ? { parse: parse[name] } : {}) });
+  }
+  for (const field of textFields) {
+    const element = authored[field.index];
+    if (field.group) defaultField(field.name, field.path, element, field.group.value, false);
+    else if (control(element)) {
+      const kind = element instanceof HTMLInputElement && (element.type === "radio" || element.type === "checkbox") ? element.type : "single";
+      const members = kind !== "single" && !field.checkboxValues ? groups.get(`${kind}:${field.name}`)! : [element];
+      if (members[0] === element) defaultField(field.name, field.path, element,
+        fieldValue({ element, elements: members, kind, checkboxValues: field.checkboxValues }), kind !== "checkbox");
+    }
+  }
+  for (const field of selectFields) if (field.name && field.field) {
+    const element = authored[field.index] as HTMLSelectElement;
+    const selected = [...element.selectedOptions].map(option => field.typed ? field.authored[option.index] : option.value);
+    defaultField(field.name, field.field, element, element.multiple ? selected : field.typed ? selected[0] ?? null : element.value,
+      !field.typed && !element.multiple);
+  }
+  const defaults = createNativeDefaults("bindList", nativeDefaults, active);
   const renderers = fieldRenderers("bindList", [
     ...textFields.map(field => ({ name: field.name, element: authored[field.index], formatted: field.format.length > 0 })),
     ...selectFields.flatMap(field => field.name ? [{ name: field.name, element: authored[field.index] }] : [])
@@ -299,7 +350,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }, () => { throw listError("LIST_BIND_REENTRANT", "Finish the current rule before changing its declaration."); });
 
   const generatedGroups = textFields.some(field => field.group);
-  const guarded = editable || values.sourceEnabled || renderers.size > 0 || generatedGroups;
+  const guarded = editable || values.sourceEnabled || renderers.size > 0 || generatedGroups || beforeRowBind !== undefined;
   const sourceFields = values.sourceEnabled ? [
     ...textFields.map((field, index) => ({ key: field.path[0], dependency: field.group?.definition.source?.options[0], index, select: false })),
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
@@ -371,6 +422,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     const nodes = [element, ...element.querySelectorAll<HTMLElement>("*")];
     const buttons = buttonIndexes.map(index => nodes[index] as HTMLButtonElement);
     const checks = checkIndexes.map(index => nodes[index] as HTMLInputElement);
+    const actions = actionIndexes.map(index => nodes[index] as HTMLButtonElement);
     for (const button of buttons) button.setAttribute("aria-pressed", String(multiple ? selection.selectedIds().includes(id) : selection.selected() === id));
     const releaseSelects: (() => void)[] = [];
     const readonlySelect = (field: SelectField): BoundSelect => {
@@ -428,7 +480,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         releaseSelects.unshift(editor.form.dispose);
         checkpoint();
         if (!probe) rowIds.set(element, id);
-        return { id, element, texts: [], selects, buttons, checks, errors: new Map(), hasIssues: false, releaseSelects, ruleSources: [], editor };
+        return { id, element, texts: [], selects, buttons, checks, actions, errors: new Map(), hasIssues: false, releaseSelects, ruleSources: [], editor };
       } catch (cause) { for (const release of releaseSelects) try { release(); } catch {} throw cause; }
     }
     const texts: BoundText[] = textFields.map(field => ({
@@ -475,7 +527,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       }
     }
     rowIds.set(element, id);
-    return { id, element, texts, selects, buttons, checks, errors, hasIssues: false, releaseSelects, ruleSources: rowRules.sources(id) };
+    return { id, element, texts, selects, buttons, checks, actions, errors, hasIssues: false, releaseSelects, ruleSources: rowRules.sources(id) };
     } catch (cause) { for (const release of releaseSelects) try { release(); } catch {} for (const binding of texts) try { binding.releaseGroup?.(); } catch {} throw cause; }
   }
 
@@ -808,7 +860,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     } finally { projectingSelection = false; }
   }
 
-  function render(force = false, event?: RowsEvent, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>): void {
+  function render(force = false, event?: RowsEvent | null, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>): void {
     if (disposed) return;
     bindable();
     const tracked = hooks.enabled || values.enabled || guarded;
@@ -880,7 +932,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           if (!record.editor) rowRules.attach(record, () => check(row.id));
         }
         if (guarded) record.sourceVersion = version;
-        if (editable || values.sourceEnabled) {
+        if (editable || values.sourceEnabled || beforeRowBind !== undefined) {
           if (record.element.parentElement !== root) root.insertBefore(record.element, anchor);
           check(row.id);
         }
@@ -992,6 +1044,24 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         } else notifySelection();
       }
     }
+    if (onBind && (event === null || event?.type === "replace" || event?.type === "append") &&
+        !disposed && version === renderVersion && entries === sourceRows.entries()) {
+      const visible = visibleIds.length;
+      const result: GridBindResult = Object.freeze({ total: sourceRows.entries({ includeDeleted: true }).length,
+        filtered: filteredIds.length, visible, mounted: visible, available: visible, event, first: true, last: true });
+      try {
+        const returned: unknown = onBind(result);
+        if (returned !== null && (typeof returned === "object" || typeof returned === "function") &&
+            typeof (returned as { then?: unknown }).then === "function") {
+          void Promise.resolve(returned).catch(() => {});
+          throw new TypeError("onBind must finish synchronously.");
+        }
+      } catch (cause) {
+        if (cause instanceof FrameworkError && cause.api === "bindList") throw cause;
+        throw new FrameworkError({ api: "bindList", code: "LIST_BIND", message: "The bind completion callback failed.",
+          detail: { phase: "onBind" }, cause });
+      }
+    }
   }
 
   function eventRecord(target: Element): RenderedRow<T> | undefined {
@@ -1014,6 +1084,15 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (!(event instanceof MouseEvent) || event.defaultPrevented || !(event.target instanceof Element)) return;
     const target = event.target, record = eventRecord(target);
     if (!record || target.closest('[hidden], [inert], [aria-disabled="true"]')) return;
+    const action = onRowAction ? target.closest<HTMLButtonElement>("button[data-row-action]") : null;
+    if (action && record.actions.includes(action)) {
+      const name = action.getAttribute("data-row-action")?.trim();
+      if (name && available(action)) {
+        const row = sourceRows.get(record.id);
+        if (row && row.status !== "delete") onRowAction?.({ action: name, id: row.id, row, element: action, event });
+      }
+      return;
+    }
     const button = target.closest<HTMLButtonElement>("button[data-select-row]");
     if (button) {
       if (record.buttons.includes(button) && available(button)) { selectionWritable(); selection.choose(record.id, event); }
@@ -1122,9 +1201,9 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         const record = records.get(event.id);
         if (record) clearIssues(record);
       }
-      render();
+      render(false, event);
     });
-    render();
+    render(false, null);
   } catch (cause) {
     try { dispose(); } catch { /* The setup failure remains primary. */ }
     throw cause;
@@ -1182,28 +1261,41 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     }) };
   }
 
+  function refresh(completion: boolean): void {
+    bindable();
+    const version = renderVersion, source = sourceRows.entries({ includeDeleted: true });
+    const check = (cause?: unknown) => {
+      active();
+      if (version !== renderVersion || source !== sourceRows.entries({ includeDeleted: true })) throw listError("LIST_BIND_STALE", "The rows or view changed while preparing rules.");
+      if (cause instanceof FrameworkError && cause.api === "bindList") throw cause;
+    };
+    const retained = Array.from(records.values()).filter(record => sourceRows.get(record.id) !== undefined);
+    if (editable) {
+      if (runner.running) throw listError("LIST_BIND_REENTRANT", "Finish the current rule before changing its declaration.");
+      editingRender = true;
+      try {
+        rowRules.refresh([], check, (candidate, current) => {
+          for (const record of retained) record.editor!.checkRules(candidate, current);
+        });
+        for (const record of retained) { record.editor!.form.rescan(); check(); }
+      } finally { editingRender = false; }
+    } else rowRules.refresh(retained, check);
+    render(true, completion ? null : undefined);
+  }
+
   const handle: ListHandle<T> = {
-    refresh() {
+    defaults,
+    add(value, before) {
       bindable();
-      const version = renderVersion, source = sourceRows.entries({ includeDeleted: true });
-      const check = (cause?: unknown) => {
-        active();
-        if (version !== renderVersion || source !== sourceRows.entries({ includeDeleted: true })) throw listError("LIST_BIND_STALE", "The rows or view changed while preparing rules.");
-        if (cause instanceof FrameworkError && cause.api === "bindList") throw cause;
-      };
-      const retained = Array.from(records.values()).filter(record => sourceRows.get(record.id) !== undefined);
-      if (editable) {
-        if (runner.running) throw listError("LIST_BIND_REENTRANT", "Finish the current rule before changing its declaration.");
-        editingRender = true;
-        try {
-          rowRules.refresh([], check, (candidate, current) => {
-            for (const record of retained) record.editor!.checkRules(candidate, current);
-          });
-          for (const record of retained) { record.editor!.form.rescan(); check(); }
-        } finally { editingRender = false; }
-      } else rowRules.refresh(retained, check);
-      render(true);
+      const version = renderVersion, activeId = selection.selected(), ids = selection.selectedIds();
+      const anchor = before === null ? undefined : before ?? (addTop ? sourceRows.entries()[0]?.id : undefined);
+      const id = sourceRows.add(value, anchor);
+      if (addSelect && !disposed && renderVersion === version + 1 && selection.selected() === activeId && selection.selectedIds() === ids) {
+        selection.choose(id, null);
+      }
+      return id;
     },
+    refresh() { refresh(true); },
     rowForm(id) {
       active();
       const record = records.get(id);
@@ -1218,7 +1310,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     value(id) { active(); return liveRow(id).value; },
     update(id, fields) {
       bindable();
-      if (id === undefined && fields === undefined) { handle.refresh(); return; }
+      if (id === undefined && fields === undefined) { refresh(false); return; }
       if (!editable) throw listError("LIST_EDIT", "Enable List editing before updating a row Form.");
       const record = id === undefined ? undefined : records.get(id);
       if (!record?.editor) throw listError("LIST_ROW", "Reveal the row before updating its Form.", { id });
@@ -1240,12 +1332,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     setSort(compare) {
       bindable();
       sort = compare;
-      render();
+      render(false, null);
     },
     setFilter(predicate) {
       bindable();
       filter = predicate;
-      render();
+      render(false, null);
     },
     setPage(next) {
       bindable();
@@ -1254,7 +1346,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         throw listError("LIST_PAGE", "A page request needs positive integer page and size values.");
       }
       request = next && { page: next.page, size: next.size };
-      render();
+      render(false, null);
     },
     page() {
       active();
