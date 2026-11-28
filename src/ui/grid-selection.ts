@@ -9,7 +9,7 @@ interface ActiveChange<T> {
   event: Event | null;
 }
 
-export function createGridSelection<T extends object>(rows: Rows<T>, options: {
+export interface RowSelectionOptions<T extends object> {
   multiple?: boolean;
   toggleSelection?: boolean;
   checkMode?: "multiple" | "single";
@@ -21,7 +21,10 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
   onSelectionChange?: (change: GridIdsChange) => void;
   beforeCheckChange?: (change: GridIdsChange) => boolean | void;
   onCheckChange?: (change: GridIdsChange) => void;
-}, view: {
+}
+
+export function createRowSelection<T extends object>(api: "bindGrid" | "bindList", rows: Rows<T>,
+  options: RowSelectionOptions<T>, view: {
   visible: () => readonly RowId[];
   filtered: () => readonly RowId[];
   revision: () => number;
@@ -29,6 +32,8 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
 }) {
   const { multiple, toggleSelection, checkMode, canSelect, canCheck, beforeSelect, onSelect,
     beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange } = options;
+  const component = api === "bindGrid" ? "Grid" : "List";
+  const prefix = component.toUpperCase();
   type Kind = "selection" | "check";
   const empty: readonly RowId[] = Object.freeze([]);
   let selected: RowId | null = null;
@@ -38,26 +43,26 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
   let revision = 0;
 
   function fail(code: string, message: string, detail?: Record<string, unknown>): never {
-    throw new FrameworkError({ api: "bindGrid", code, message, detail });
+    throw new FrameworkError({ api, code: `${prefix}_${code}`, message, detail });
   }
 
   if (multiple !== undefined && typeof multiple !== "boolean") {
-    fail("GRID_SELECTION", "Grid multiple selection must be a boolean.");
+    fail("SELECTION", `${component} multiple selection must be a boolean.`);
   }
   if (toggleSelection !== undefined && typeof toggleSelection !== "boolean") {
-    fail("GRID_SELECTION", "Grid toggleSelection must be a boolean.");
+    fail("SELECTION", `${component} toggleSelection must be a boolean.`);
   }
   if (checkMode !== undefined && checkMode !== "multiple" && checkMode !== "single") {
-    fail("GRID_CHECK_MODE", "Grid checkMode must be multiple or single.");
+    fail("CHECK_MODE", `${component} checkMode must be multiple or single.`);
   }
   for (const [name, run] of Object.entries({ canSelect, beforeSelect, onSelect, beforeSelectionChange, onSelectionChange })) {
     if (run !== undefined && typeof run !== "function") {
-      fail("GRID_SELECTION", "A Grid selection callback must be a function.", { option: name });
+      fail("SELECTION", `A ${component} selection callback must be a function.`, { option: name });
     }
   }
   for (const [name, run] of Object.entries({ canCheck, beforeCheckChange, onCheckChange })) {
     if (run !== undefined && typeof run !== "function") {
-      fail("GRID_CHECK", "A Grid check callback must be a function.", { option: name });
+      fail("CHECK", `A ${component} check callback must be a function.`, { option: name });
     }
   }
 
@@ -65,7 +70,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     return left.length === right.length && left.every((id, index) => id === right[index]);
   }
 
-  function code(kind: Kind): string { return kind === "selection" ? "GRID_SELECTION" : "GRID_CHECK"; }
+  function code(kind: Kind): string { return kind === "selection" ? "SELECTION" : "CHECK"; }
 
   function eligible(id: RowId, kind: Kind): boolean {
     const row = rows.get(id);
@@ -74,7 +79,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     if (!predicate) return true;
     const allowed = predicate(row);
     if (typeof allowed !== "boolean") {
-      fail(code(kind), "A Grid row eligibility callback must return a boolean.", { id });
+      fail(code(kind), `A ${component} row eligibility callback must return a boolean.`, { id });
     }
     return allowed;
   }
@@ -88,7 +93,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     return () => {
       if (revision !== expected || view.revision() !== expectedView || rows.entries() !== entries ||
           !same(view.visible(), visible) || !same(view.filtered(), filtered)) {
-        fail(code(kind), "Grid state changed while a row transition was being prepared.");
+        fail(code(kind), `${component} state changed while a row transition was being prepared.`);
       }
     };
   }
@@ -99,13 +104,13 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
   }
 
   function checkedIds(ids: readonly RowId[], kind: Kind): readonly RowId[] {
-    if (!Array.isArray(ids)) fail(code(kind), "Grid row IDs must be an array.");
+    if (!Array.isArray(ids)) fail(code(kind), `${component} row IDs must be an array.`);
     const next = new Set<RowId>();
     for (const id of ids) {
-      if (next.has(id)) fail(code(kind), "Grid row IDs must not repeat.", { id });
+      if (next.has(id)) fail(code(kind), `${component} row IDs must not repeat.`, { id });
       const row = rows.get(id);
-      if (!row || row.status === "delete") fail("GRID_ROW", "The row ID is not available in this Grid.", { id });
-      if (!eligible(id, kind)) fail(code(kind), "The row is not eligible for this Grid operation.", { id });
+      if (!row || row.status === "delete") fail("ROW", `The row ID is not available in this ${component}.`, { id });
+      if (!eligible(id, kind)) fail(code(kind), `The row is not eligible for this ${component} operation.`, { id });
       next.add(id);
     }
     return ordered(next);
@@ -124,7 +129,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     const result = hook?.(change);
     unchanged();
     if (result !== undefined && typeof result !== "boolean") {
-      fail(code(kind), "A Grid before-change callback must return a boolean or undefined.");
+      fail(code(kind), `A ${component} before-change callback must return a boolean or undefined.`);
     }
     return result !== false;
   }
@@ -161,7 +166,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     const change = idsChange(next, checks, event);
     unchanged();
     if (checkMode === "single" && next.length > 1) {
-      fail("GRID_CHECK_MODE", "Single check mode accepts at most one checked row.");
+      fail("CHECK_MODE", "Single check mode accepts at most one checked row.");
     }
     if (same(next, checks)) return;
     if (!allowed(beforeCheckChange, change, unchanged, "check")) return;
@@ -175,13 +180,17 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
     if (scope === "visible") return view.visible();
     if (scope === "filtered") return view.filtered();
     if (scope === "store") return rows.entries().map(row => row.id);
-    return fail("GRID_CHECK", "A Grid check scope must be visible, filtered, or store.");
+    return fail("CHECK", `A ${component} check scope must be visible, filtered, or store.`);
   }
 
   return {
     selected: (): RowId | null => selected,
     selectedIds: (): readonly RowId[] => selection,
     checkedIds: (): readonly RowId[] => checks,
+    rowIds(scope: GridRowScope): readonly RowId[] {
+      const ids = scopeIds(scope);
+      return scope === "store" ? Object.freeze(ids) : ids;
+    },
     eligible,
     setSelected,
     setChecked,
@@ -218,7 +227,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
       return changeSelection(nextId, ordered(ids), event, nextAnchor, unchanged);
     },
     checkAll(checked: boolean, scope: GridRowScope, event: Event | null = null): void {
-      if (typeof checked !== "boolean") fail("GRID_CHECK", "Grid check-all requires a boolean.");
+      if (typeof checked !== "boolean") fail("CHECK", `${component} check-all requires a boolean.`);
       const unchanged = checkpoint("check");
       const ids = new Set(checks);
       let replace = checked && checkMode === "single";
@@ -243,6 +252,7 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
         indeterminate: count > 0 && count < total, total, count });
     },
     prune(): (() => void) | undefined {
+      if (selected === null && anchor === null && !selection.length && !checks.length) return;
       const unchanged = checkpoint("selection");
       const id = selected !== null && !eligible(selected, "selection") ? null : selected;
       const ids = ordered(new Set(selection.filter(target => eligible(target, "selection"))));
@@ -262,7 +272,6 @@ export function createGridSelection<T extends object>(rows: Rows<T>, options: {
       anchor = nextAnchor;
       revision++;
       if (!activeChanged && !idsChanged && !checksChanged) return;
-      view.changed();
       return () => {
         if (activeChanged) onSelect?.(active);
         if (idsChanged) onSelectionChange?.(batch);

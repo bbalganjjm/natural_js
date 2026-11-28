@@ -14,7 +14,7 @@ import { captureChoiceGroup, choiceGroupChoices, choiceGroupOptions, choiceGroup
 import { checkGroupValue, claimChoiceGroup } from "./choice-group-owner.js";
 import type { ChoiceGroupBinding } from "./choice-group-owner.js";
 import { bindGridColumns } from "./grid-columns.js";
-import { createGridSelection } from "./grid-selection.js";
+import { createRowSelection } from "./grid-selection.js";
 import { createGridFilters } from "./grid-filters.js";
 import { bindSelect } from "./select.js";
 import { focusVisible, restoreAttributes } from "./dom-state.js";
@@ -439,7 +439,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     ...textFields.map((field, index) => ({ key: field.path[0], dependency: field.group?.definition.source?.options[0], index, select: false })),
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
   ] : undefined;
-  const selection = createGridSelection(sourceRows, { multiple, toggleSelection, checkMode, canSelect, canCheck,
+  const selection = createRowSelection("bindGrid", sourceRows, { multiple, toggleSelection, checkMode, canSelect, canCheck,
     beforeSelect, onSelect, beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange }, {
     visible: () => { active(); return visibleIds; },
     filtered: () => { active(); return filteredIds; },
@@ -1572,6 +1572,7 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     let current: BindingOperation | undefined;
     try {
       notify = selection.prune();
+      if (notify) syncSelection();
       if (preflight && !preflight()) throw gridError("GRID_BIND_STALE", "The view changed during binding preparation.");
       if (disposed) return;
       const entries = statusEntries();

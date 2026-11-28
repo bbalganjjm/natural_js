@@ -7,7 +7,7 @@ import { createCommunicator } from "@bbalganjjm/natural_js/comm";
 import type { Communicator, RequestOptions } from "@bbalganjjm/natural_js/comm";
 import { createRules, createInputMask, bindForm, bindGrid, bindList, bindSelect, bindChoiceGroup, bindPagination, openPopup, bindTabs, bindTree, bindDatePicker, bindNotify, bindDocuments } from "@bbalganjjm/natural_js/ui";
 import type { ChoiceGroupHandle } from "@bbalganjjm/natural_js/ui";
-import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
+import type { FormHandle, GridColumn, GridHandle, GridBindResult, GridIdsChange, GridRowScope, GridCheckState, GridFilterChoice, ListHandle, PageRequest, PageState, SelectValue, SelectChoice, PopupHandle, TabHandle, TreeHandle, DatePickerHandle, NotifyHandle, DocumentHandle, ValidationResult } from "@bbalganjjm/natural_js/ui";
 import type { FieldRules, FormBindContext, ValueBindContext, SourceBindContext, FormOptions, RuleContext, RuleSet } from "@bbalganjjm/natural_js/ui";
 // @ts-expect-error Use the common ValueBindContext; the Form-only name was removed.
 import type { FormValueContext } from "@bbalganjjm/natural_js/ui";
@@ -678,11 +678,24 @@ export function connectSharedNativeControls(detail: HTMLElement, gridRoot: HTMLT
   return { current, hasBoolean, nativeCode, indexes, form, grid, list, dispose() { list.dispose(); grid.dispose(); form.dispose(); common.dispose(); rows.dispose(); } };
 }
 
-export function connectEditableList(root: HTMLUListElement) {
+export function connectEditableList(root: HTMLUListElement, master?: HTMLInputElement) {
   const rows = createRows([{ line: { quantity: 1, code: "A" } }]);
-  const list = bindList(root, { rows, editable: true, revealInvalid: true, parse: { "line.quantity": Number } });
+  const list: ListHandle<{ line: { quantity: number; code: string } }> = bindList(root, {
+    rows, editable: true, revealInvalid: true, parse: { "line.quantity": Number }, multiple: true,
+    checkMode: "single", checkAllControls: master ? [master] : [],
+    canSelect: row => row.value.line.quantity > 0,
+    beforeCheckChange: (change: GridIdsChange) => change.ids.length <= 1
+  });
   const id = rows.entries()[0].id;
   const quantity: number = list.value(id).line.quantity;
   if (list.reveal(id)) list.update(id, ["line.quantity"]);
-  return { list, quantity, prepared: list.rowForm(id)?.prepare(), rowValid: list.rowForm(id)?.validate().valid };
+  list.select(id);
+  const active: RowId | null = list.selected();
+  const visible: readonly RowId[] = list.rowIds("visible");
+  list.setSelected(visible);
+  list.setChecked(list.selectedIds().slice(0, 1));
+  list.checkAll(false, "filtered");
+  const checked: readonly RowId[] = list.checkedIds();
+  const checkState: GridCheckState = list.checkState("store");
+  return { list, quantity, active, checked, checkState, prepared: list.rowForm(id)?.prepare(), rowValid: list.rowForm(id)?.validate().valid };
 }

@@ -246,11 +246,27 @@ state.checkListRows = () => {
     intact: initial === JSON.stringify(declarations) && declarations.every(Object.isFrozen) && Object.isFrozen(choices),
     separate: handles.every((handle, index) => handle !== declarations[index]) };
   for (const handle of handles) handle.dispose();
-  root.innerHTML = '<li data-row-template><label>Name <input data-field="name" required></label><small data-error-for="name"></small></li>';
-  const editable = bindList(root, { rows, editable: true, revealInvalid: true });
-  const id = rows.entries()[0].id, input = root.querySelector("input");
+  root.innerHTML = '<li data-row-template><button type="button" data-select-row>Select</button><label>Check Row <input type="checkbox" data-check-row></label><label>Name <input data-field="name" required></label><small data-error-for="name"></small></li>';
+  const master = document.createElement("input");
+  master.type = "checkbox"; master.setAttribute("data-check-all", "visible"); master.setAttribute("aria-label", "Check page");
+  master.checked = true; master.indeterminate = true; host.append(master);
+  const editable = bindList(root, { rows, editable: true, revealInvalid: true, multiple: true, checkAllControls: [master] });
+  const id = rows.entries()[0].id, input = root.querySelector("input[data-field]");
   input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true }));
+  root.querySelector("button[data-select-row]").click();
+  root.querySelector("input[data-check-row]").click();
+  if (editable.selected() !== id || editable.selectedIds().join() !== String(id) || editable.checkedIds().join() !== String(id) ||
+      master.checked || !master.indeterminate || editable.checkState("store").count !== 1) {
+    throw new Error("Installed List did not publish independent native selection and mixed checks.");
+  }
   editable.setPage({ page: 2, size: 1 });
+  if (master.checked || master.indeterminate || editable.rowIds("visible").includes(id)) {
+    throw new Error("Installed List check-all did not follow the authored scope.");
+  }
+  master.click();
+  if (!master.checked || editable.checkState("store").count !== 2 || editable.selected() !== id) {
+    throw new Error("Installed List did not preserve off-page checked and active identities.");
+  }
   if (editable.validate(id).valid || document.activeElement !== input || editable.value(id).name !== "Ada2") {
     throw new Error("Installed List failed to preserve and reveal an invalid draft.");
   }
@@ -260,6 +276,7 @@ state.checkListRows = () => {
     throw new Error("Installed List did not edit the projected Rows entry.");
   }
   editable.dispose();
+  if (!master.checked || !master.indeterminate) throw new Error("Installed List did not restore its authored check-all control.");
   rows.dispose(); host.remove(); return result;
 };
 

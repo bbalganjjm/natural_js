@@ -5,6 +5,8 @@ import { sameJson } from "../internal/same-json.js";
 import { createValueBinding } from "./value-binding.js";
 import { createRowHooks } from "./grid-hooks.js";
 import type { RowBinding } from "./grid-hooks.js";
+import { createRowSelection } from "./grid-selection.js";
+import type { RowSelectionOptions } from "./grid-selection.js";
 import type { ValueProjection } from "./value-binding.js";
 import { parsePath, readPath } from "./field-path.js";
 import { renderRowOptions, rowOptionAvailable, rowOptions, selectRowOptions } from "./row-options.js";
@@ -18,12 +20,12 @@ import { createRuleRunner } from "./rules.js";
 import { fieldRenderers, renderField } from "./field-render.js";
 import { createRowRules } from "./row-rules.js";
 import type { RowRuleSource } from "./row-rules.js";
-import { captureCheckboxValues, disabled, display, displayField, nativeMessage } from "./native-control.js";
+import { captureCheckboxValues, disabled, display, displayField, interactiveContent, nativeMessage } from "./native-control.js";
 import { bindRowForm } from "./form.js";
 import { focusVisible, uniqueId } from "./dom-state.js";
 import type { RuleCall } from "./rules.js";
 import type {
-  FormatRule, ListHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet,
+  FormatRule, GridRowScope, ListHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet,
   SourceBindContext, ValidateRule, ValidationIssue, ValidationResult, ValueBindContext
 } from "./index.js";
 
@@ -89,6 +91,7 @@ interface RenderedRow<T extends object> {
   texts: BoundText[];
   selects: BoundSelect[];
   buttons: HTMLButtonElement[];
+  checks: HTMLInputElement[];
   errors: Map<string, HTMLElement>;
   hasIssues: boolean;
   releaseSelects: (() => void)[];
@@ -98,6 +101,7 @@ interface RenderedRow<T extends object> {
 
 let nextErrorId = 0;
 const boundRoots = new WeakSet<HTMLUListElement | HTMLOListElement>();
+const ownedMasters = new WeakSet<HTMLInputElement>();
 
 function listError(code: string, message: string, detail?: Record<string, unknown>): FrameworkError {
   return new FrameworkError({ api: "bindList", code, message, detail });
@@ -116,8 +120,10 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   onBindValue?: (value: unknown, context: ValueBindContext) => unknown;
   beforeSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
   onSourceBind?: (value: unknown, context: SourceBindContext<T>) => unknown;
-  onSelect?: (selection: { id: RowId | null; row: RowSnapshot<T> | null; event: Event | null }) => void;
-}): ListHandle<T> {
+  selectOnRowClick?: boolean;
+  hover?: boolean;
+  checkAllControls?: readonly HTMLInputElement[];
+} & RowSelectionOptions<T>): ListHandle<T> {
   if (!root || (root.tagName !== "UL" && root.tagName !== "OL")) {
     throw listError("LIST_ROOT", "The List root must be a ul or ol element.");
   }
@@ -133,7 +139,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     beforeSourceBind: options.beforeSourceBind, onSourceBind: options.onSourceBind } : undefined;
   const values = createValueBinding<T>("bindList", editorCallbacks ?? options);
   const cleanupErrors: unknown[] = [];
-  const { onRowBind, onSelect } = options;
+  const { onRowBind, onSelect, beforeSelect, beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange,
+    multiple, toggleSelection, checkMode, canSelect, canCheck, selectOnRowClick, hover, checkAllControls } = options;
   if (onSelect !== undefined && typeof onSelect !== "function") {
     throw listError("LIST_SELECT", "onSelect must be a function.");
   }
@@ -147,6 +154,25 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   if (fixedId) {
     throw listError("DUPLICATE_ID", "A repeated list item cannot contain a fixed DOM id.", { id: fixedId.id });
   }
+  if (hover !== undefined && typeof hover !== "boolean" ||
+      selectOnRowClick !== undefined && typeof selectOnRowClick !== "boolean") {
+    throw listError("LIST_SELECT", "hover and selectOnRowClick must be booleans.");
+  }
+  if (checkAllControls !== undefined && !Array.isArray(checkAllControls)) {
+    throw listError("LIST_CHECK", "checkAllControls must be an array of checkboxes.");
+  }
+  const masters = (checkAllControls ?? []).map(element => {
+    const scope = element instanceof HTMLInputElement ? element.getAttribute("data-check-all") : null;
+    if (!(element instanceof HTMLInputElement) || element.type !== "checkbox" || element.ownerDocument !== root.ownerDocument ||
+        element.hasAttribute("data-field") || element.hasAttribute("data-check-row") || template.contains(element) ||
+        (scope !== "visible" && scope !== "filtered" && scope !== "store") || ownedMasters.has(element)) {
+      throw listError("LIST_CHECK", "Each All control needs an available checkbox outside the template and an explicit row scope.");
+    }
+    return { element, scope: scope as GridRowScope, checked: element.checked, mixed: element.indeterminate, disabled: element.disabled };
+  });
+  if (new Set(masters.map(master => master.element)).size !== masters.length) {
+    throw listError("LIST_CHECK", "An All checkbox cannot be bound more than once.");
+  }
   const empties = [...root.children].filter(element => element.matches("li[data-empty]")) as HTMLLIElement[];
   if (empties.length > 1 || empties[0] === template) {
     throw listError("LIST_EMPTY", "The List accepts at most one direct li marked data-empty.");
@@ -158,6 +184,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   const selectFields: SelectField[] = [];
   const errorFields = new Map<string, number>();
   const buttonIndexes: number[] = [];
+  const checkIndexes: number[] = [];
   const authored = [template, ...template.querySelectorAll<HTMLElement>("*")];
   const releaseTemplateGroups: (() => void)[] = [];
   try {
@@ -178,6 +205,12 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         throw listError("LIST_SELECT", "A row selection button needs type=button to avoid form submission.");
       }
       buttonIndexes.push(index);
+    }
+    if (element.hasAttribute("data-check-row")) {
+      if (!(element instanceof HTMLInputElement) || element.type !== "checkbox" || element.hasAttribute("data-field")) {
+        throw listError("LIST_CHECK", "A row check needs a checkbox separate from data-field.");
+      }
+      checkIndexes.push(index);
     }
     const name = element.getAttribute("data-field");
     const checkboxValues = element instanceof HTMLFieldSetElement && [...element.children].some(child => child.matches("template[data-choice-template]")) ? undefined : captureCheckboxValues(element, () => { throw listError("LIST_CONTROL", "A coded checkbox needs one marked checkbox and distinct explicit value/data-unchecked-value strings.", { field: name ?? "" }); });
@@ -230,6 +263,9 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         format, validate: runner.validators(element, name) });
     }
   }
+  if (selectOnRowClick && !buttonIndexes.length) {
+    throw listError("LIST_SELECT", "Row click needs an authored selection button for keyboard access.");
+  }
   for (const field of textFields) if (field.checkboxValues && textFields.some(other => other !== field && other.name === field.name &&
       authored[other.index] instanceof HTMLInputElement && (authored[other.index] as HTMLInputElement).type === "checkbox")) {
     throw listError("LIST_CONTROL", "Coded values belong to one checkbox, not a field group.", { field: field.name });
@@ -269,6 +305,17 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
   ] : undefined;
   const releaseTemplateSelects: (() => void)[] = [];
+  let visibleIds: readonly RowId[] = Object.freeze([]);
+  let filteredIds = visibleIds;
+  const selection = createRowSelection("bindList", sourceRows, {
+    multiple, toggleSelection: toggleSelection ?? multiple, checkMode, canSelect, canCheck,
+    beforeSelect, onSelect, beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange
+  }, {
+    visible: () => { active(); return visibleIds; },
+    filtered: () => { active(); return filteredIds; },
+    revision: () => { active(); return renderVersion; },
+    changed: syncSelection
+  });
   try {
     for (const field of selectFields) {
       releaseTemplateSelects.push(claimSelect(authored[field.index] as HTMLSelectElement, "bindList"));
@@ -288,17 +335,19 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   boundRoots.add(root);
   const records = new Map<RowId, RenderedRow<T>>();
   const rowIds = new WeakMap<HTMLLIElement, RowId>();
-  let selected: RowId | null = null;
   let sort: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null = null;
   let filter: ((row: Snapshot<T>) => boolean) | null = null;
   let request: PageRequest | null = null;
   let pageState: PageState | null = null;
-  let visibleIds: RowId[] = [];
   let projected: readonly RowSnapshot<T>[] = [];
   let editingRender = false;
   let rootFocusTabIndex = false;
   let disposed = false;
   let renderVersion = 0;
+  let projectingSelection = false;
+  const originalHover = root.getAttribute("data-list-hover");
+  const authoredButtonDisabled = buttonIndexes.map(index => (authored[index] as HTMLButtonElement).disabled);
+  const authoredCheckDisabled = checkIndexes.map(index => (authored[index] as HTMLInputElement).disabled);
 
   function active(): void {
     if (disposed) throw listError("LIST_DISPOSED", "This List has been disposed.");
@@ -306,7 +355,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
 
   function bindable(): void {
     active();
-    if (editingRender || hooks.running || values.running || values.sourceRunning) throw listError("LIST_BIND_REENTRANT", "A row callback cannot reenter binding.");
+    if (projectingSelection || editingRender || hooks.running || values.running || values.sourceRunning) throw listError("LIST_BIND_REENTRANT", "A row callback cannot reenter binding.");
   }
 
   function cleanupFailure(): void {
@@ -321,7 +370,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     element.removeAttribute("data-row-template");
     const nodes = [element, ...element.querySelectorAll<HTMLElement>("*")];
     const buttons = buttonIndexes.map(index => nodes[index] as HTMLButtonElement);
-    for (const button of buttons) button.setAttribute("aria-pressed", String(selected === id));
+    const checks = checkIndexes.map(index => nodes[index] as HTMLInputElement);
+    for (const button of buttons) button.setAttribute("aria-pressed", String(multiple ? selection.selectedIds().includes(id) : selection.selected() === id));
     const releaseSelects: (() => void)[] = [];
     const readonlySelect = (field: SelectField): BoundSelect => {
       const select = nodes[field.index] as HTMLSelectElement;
@@ -378,7 +428,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         releaseSelects.unshift(editor.form.dispose);
         checkpoint();
         if (!probe) rowIds.set(element, id);
-        return { id, element, texts: [], selects, buttons, errors: new Map(), hasIssues: false, releaseSelects, ruleSources: [], editor };
+        return { id, element, texts: [], selects, buttons, checks, errors: new Map(), hasIssues: false, releaseSelects, ruleSources: [], editor };
       } catch (cause) { for (const release of releaseSelects) try { release(); } catch {} throw cause; }
     }
     const texts: BoundText[] = textFields.map(field => ({
@@ -425,7 +475,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       }
     }
     rowIds.set(element, id);
-    return { id, element, texts, selects, buttons, errors, hasIssues: false, releaseSelects, ruleSources: rowRules.sources(id) };
+    return { id, element, texts, selects, buttons, checks, errors, hasIssues: false, releaseSelects, ruleSources: rowRules.sources(id) };
     } catch (cause) { for (const release of releaseSelects) try { release(); } catch {} for (const binding of texts) try { binding.releaseGroup?.(); } catch {} throw cause; }
   }
 
@@ -710,17 +760,52 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     for (const region of record.errors.values()) region.textContent = "";
   }
 
-  function updateSelection(id: RowId | null, event: Event | null): void {
-    if (id === selected) return;
-    const previous = selected;
-    selected = id;
-    for (const rowId of [previous, id]) {
-      if (rowId === null) continue;
-      for (const button of records.get(rowId)?.buttons ?? []) {
-        button.setAttribute("aria-pressed", String(rowId === id));
+  function selectionWritable(): void {
+    active();
+    if (projectingSelection) throw listError("LIST_BIND_REENTRANT", "Finish projecting the row controls before changing their state.");
+  }
+
+  function syncSelection(): void {
+    selectionWritable();
+    const entries = sourceRows.entries(), current = () => {
+      active();
+      if (entries !== sourceRows.entries()) throw listError("LIST_BIND_STALE", "The rows changed while projecting row controls.");
+    };
+    const selected = selection.selected(), selectedIds = new Set(selection.selectedIds()), checkedIds = new Set(selection.checkedIds());
+    projectingSelection = true;
+    try {
+      for (const id of visibleIds) {
+        const record = records.get(id);
+        if (!record || !mounted(record)) continue;
+        const pressed = multiple ? selectedIds.has(id) : selected === id;
+        const checked = checkedIds.has(id);
+        let selectable = true, checkable = true;
+        if (canSelect && record.buttons.length) { selectable = selection.eligible(id, "selection"); current(); }
+        if (canCheck && record.checks.length) { checkable = selection.eligible(id, "check"); current(); }
+        record.element.toggleAttribute("data-row-active", selected === id);
+        record.element.toggleAttribute("data-row-selected", pressed);
+        record.element.toggleAttribute("data-row-checked", checked);
+        for (const [index, button] of record.buttons.entries()) {
+          button.disabled = authoredButtonDisabled[index] || !selectable;
+          if (button.getAttribute("aria-pressed") !== String(pressed)) button.setAttribute("aria-pressed", String(pressed));
+          if (multiple) {
+            if (selected === id) button.setAttribute("aria-current", "true");
+            else button.removeAttribute("aria-current");
+          }
+        }
+        for (const [index, input] of record.checks.entries()) {
+          input.checked = checked;
+          input.disabled = authoredCheckDisabled[index] || !checkable;
+        }
       }
-    }
-    onSelect?.({ id, row: id === null ? null : sourceRows.get(id) ?? null, event });
+      for (const { element, scope, disabled: originallyDisabled } of masters) {
+        const state = selection.checkState(scope);
+        current();
+        element.checked = state.checked;
+        element.indeterminate = state.indeterminate;
+        element.disabled = originallyDisabled || !state.total || checkMode === "single" && state.total > 1;
+      }
+    } finally { projectingSelection = false; }
   }
 
   function render(force = false, event?: RowsEvent, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>): void {
@@ -729,6 +814,8 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     const tracked = hooks.enabled || values.enabled || guarded;
     const version = ++renderVersion;
     const entries = sourceRows.entries();
+    const priorFocus = root.ownerDocument.activeElement, priorFiltered = filteredIds;
+    const priorRow = priorFocus?.closest("li"), priorFocusId = priorRow ? rowIds.get(priorRow) : undefined;
     const current = tracked ? () => {
       const live = !disposed && version === renderVersion && entries === sourceRows.entries();
       if (guarded && !live) { active(); throw listError("LIST_BIND_STALE", "The rows or view changed during a row callback."); }
@@ -740,10 +827,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     };
     const created: RenderedRow<T>[] = [];
     const rebound: RenderedRow<T>[] = [];
+    let notifySelection: (() => void) | undefined;
+    let failed = false;
     const sourcePending = !editable && values.sourceEnabled ? new Map<RenderedRow<T>, RowSnapshot<T>>() : undefined;
     const mounted = tracked ? new Set(visibleIds) : undefined;
     editingRender = editable;
     try {
+      notifySelection = selection.prune();
       const live = new Set(entries.map(row => row.id));
       for (const [id, record] of records) {
         if (!live.has(id)) {
@@ -756,7 +846,6 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           records.delete(id);
         }
       }
-      if (selected !== null && !live.has(selected)) updateSelection(null, null);
       if (disposed || current && !current()) return;
       const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
       if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
@@ -815,14 +904,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         if (current) check(row.id);
         sourcePending?.set(record, row);
       }
+      const activeElement = root.ownerDocument.activeElement;
+      const focused = activeElement === root.ownerDocument.body && priorFocusId !== undefined ? priorFocus : activeElement;
+      const focusedRow = focused instanceof Element ? focused.closest("li") : null;
+      const focusedId = focusedRow ? rowIds.get(focusedRow) : undefined;
       if (changed) {
-        const focused = root.ownerDocument.activeElement;
-        const focusedRow = focused instanceof Element ? focused.closest("li") : null;
-        const focusedId = focusedRow && rowIds.get(focusedRow);
-        const restoreFocus = focused instanceof HTMLElement && focusedId !== undefined &&
-          focusedId !== null && next!.has(focusedId);
-        const moveFocus = focused instanceof HTMLElement && focusedId !== undefined &&
-          focusedId !== null && !next!.has(focusedId);
         for (const id of visibleIds) if (!next!.has(id)) {
           if (current) check(id);
           const record = records.get(id);
@@ -840,17 +926,21 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           if (current) check(ids[index]);
           cursor = element;
         }
-        if (restoreFocus && root.ownerDocument.activeElement !== focused) focused.focus({ preventScroll: true });
-        else if (moveFocus) {
-          const nextControl = root.querySelector<HTMLElement>('button[data-select-row]:not(:disabled)') ?? root;
-          if (nextControl === root && !root.hasAttribute("tabindex")) {
-            root.tabIndex = -1;
-            rootFocusTabIndex = true;
-          }
-          nextControl.focus({ preventScroll: true });
+        visibleIds = Object.freeze(ids);
+      }
+      filteredIds = displayed === filtered ? visibleIds : Object.freeze(filtered.map(row => row.id));
+      if (notifySelection || changed || canSelect || canCheck || masters.length) syncSelection();
+      if (focused instanceof HTMLElement && focusedId !== undefined) {
+        const retained = !changed || next!.has(focusedId);
+        const disabledControl = focused.matches("button[data-select-row], input[data-check-row]") && !available(focused);
+        const after = root.ownerDocument.activeElement;
+        if (retained && !disabledControl) {
+          if (changed && after !== focused) focused.focus({ preventScroll: true });
+        } else if ((after === focused || after === root.ownerDocument.body) &&
+            !visibleIds.some(id => records.get(id)?.buttons.some(focusVisible)) && !disposed) {
+          if (!root.hasAttribute("tabindex")) { root.tabIndex = -1; rootFocusTabIndex = true; }
+          root.focus({ preventScroll: true });
         }
-        if (current) check();
-        visibleIds = ids;
       }
       if (current) check();
       if (empty) empty.hidden = ids.length > 0;
@@ -865,6 +955,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         for (const [record, row] of sourcePending) if (records.get(row.id) === record && record.snapshot === row) record.acceptedSource = row;
       }
     } catch (cause) {
+      failed = true;
       for (const record of rebound) if (!guarded || record.sourceVersion === version) {
         record.pendingHook = undefined;
         hooks.release(record.id);
@@ -882,36 +973,127 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         if (record.sourceVersion === version) resetProjection(record);
       }
       if (!guarded || version === renderVersion) {
-        if (hooks.enabled || guarded) visibleIds = visibleIds.filter(id => records.get(id)?.element.parentElement === root);
+        visibleIds = Object.freeze(visibleIds.filter(id => records.get(id)?.element.parentElement === root));
         cleanupErrors.length = 0;
       }
+      if (version === renderVersion) {
+        filteredIds = Object.freeze(priorFiltered.filter(id => {
+          const row = sourceRows.get(id);
+          return row && row.status !== "delete";
+        }));
+      }
       throw cause;
-    } finally { editingRender = false; }
+    } finally {
+      editingRender = false;
+      if (notifySelection && !disposed) {
+        if (failed) {
+          try { syncSelection(); } catch { /* Keep the binding failure primary. */ }
+          try { notifySelection(); } catch { /* Keep the binding failure primary. */ }
+        } else notifySelection();
+      }
+    }
+  }
+
+  function eventRecord(target: Element): RenderedRow<T> | undefined {
+    const element = target.closest("li");
+    if (!element || element.parentElement !== root || target.closest("ul, ol") !== root) return;
+    const id = rowIds.get(element);
+    return id === undefined ? undefined : records.get(id);
+  }
+
+  function available(control: HTMLElement): boolean {
+    return !control.matches(":disabled") && !control.closest('[hidden], [inert], [aria-disabled="true"]');
+  }
+
+  function keyboardButton(button: HTMLButtonElement): boolean {
+    return button.tabIndex >= 0 && available(button) && button.getClientRects().length > 0 &&
+      button.ownerDocument.defaultView?.getComputedStyle(button).visibility === "visible";
   }
 
   function onClick(event: Event): void {
-    const target = event.target;
-    if (!(target instanceof Element)) return;
+    if (!(event instanceof MouseEvent) || event.defaultPrevented || !(event.target instanceof Element)) return;
+    const target = event.target, record = eventRecord(target);
+    if (!record || target.closest('[hidden], [inert], [aria-disabled="true"]')) return;
     const button = target.closest<HTMLButtonElement>("button[data-select-row]");
-    const row = button?.closest<HTMLLIElement>("li");
-    const id = row && rowIds.get(row);
-    if (id !== undefined && button && root.contains(button)) updateSelection(id, event);
+    if (button) {
+      if (record.buttons.includes(button) && available(button)) { selectionWritable(); selection.choose(record.id, event); }
+      return;
+    }
+    if (!selectOnRowClick) return;
+    const interactive = target.closest(`${interactiveContent}, label, [role="button"], [role="link"]`);
+    if (interactive && record.element.contains(interactive)) return;
+    if (record.buttons.some(keyboardButton)) { selectionWritable(); selection.choose(record.id, event); }
   }
 
-  root.addEventListener("click", onClick);
+  function onKeyDown(event: Event): void {
+    if (!(event instanceof KeyboardEvent) || event.defaultPrevented || !(event.target instanceof HTMLButtonElement)) return;
+    const button = event.target, record = eventRecord(button);
+    if (!record?.buttons.includes(button) || !available(button)) return;
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "a") {
+      event.preventDefault(); selectionWritable();
+      selection.setSelected(visibleIds.filter(id => selection.eligible(id, "selection")), event);
+    } else if (event.key === "Escape") {
+      event.preventDefault(); selectionWritable(); selection.setSelected([], event);
+    } else if (["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+      const enabled = visibleIds.flatMap(id => {
+        const target = records.get(id)?.buttons.find(keyboardButton);
+        return target ? [{ id, target }] : [];
+      });
+      const index = enabled.findIndex(({ id }) => id === record.id);
+      if (index < 0) return;
+      const next = event.key === "Home" ? 0 : event.key === "End" ? enabled.length - 1
+        : index + (event.key === "ArrowDown" ? 1 : -1);
+      const { id, target } = enabled[Math.max(0, Math.min(enabled.length - 1, next))];
+      event.preventDefault(); selectionWritable();
+      if ((!event.shiftKey || selection.choose(id, event, record.id)) && !disposed && eventRecord(target)?.id === id) focusVisible(target);
+    }
+  }
+
+  function onCheck(event: Event): void {
+    if (!(event.target instanceof HTMLInputElement)) return;
+    const input = event.target, master = masters.find(control => control.element === input);
+    if (master && event.currentTarget !== input) return;
+    const record = master ? undefined : eventRecord(input);
+    if (!master && !record?.checks.includes(input)) return;
+    selectionWritable();
+    try {
+      if (!available(input)) return;
+      if (master) selection.checkAll(input.checked, master.scope, event);
+      else {
+        const ids = new Set(checkMode === "single" && input.checked ? [] : selection.checkedIds());
+        if (input.checked) ids.add(record!.id); else ids.delete(record!.id);
+        selection.setChecked([...ids], event);
+      }
+    } finally { if (!disposed) syncSelection(); }
+  }
+
   let unsubscribe = () => {};
   function dispose(): void {
     if (disposed) return;
     disposed = true; renderVersion++;
     let failed = false, failure: unknown;
-    try { rowRules.dispose(); unsubscribe(); root.removeEventListener("click", onClick); hooks.dispose(); }
+    try {
+      rowRules.dispose(); unsubscribe();
+      root.removeEventListener("click", onClick); root.removeEventListener("keydown", onKeyDown);
+      root.removeEventListener("change", onCheck); hooks.dispose();
+    }
     catch (cause) { failed = true; failure = cause; }
+    for (const master of masters) {
+      ownedMasters.delete(master.element);
+      const { element, checked, mixed, disabled: originallyDisabled } = master;
+      element.removeEventListener("change", onCheck);
+      element.checked = checked; element.indeterminate = mixed; element.disabled = originallyDisabled;
+    }
+    if (hover !== undefined) {
+      if (originalHover === null) root.removeAttribute("data-list-hover");
+      else root.setAttribute("data-list-hover", originalHover);
+    }
     for (const record of records.values()) {
       try { record.element.remove(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       for (const release of record.releaseSelects) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       for (const binding of record.texts) try { binding.releaseGroup?.(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
     }
-    records.clear(); visibleIds = []; projected = [];
+    records.clear(); visibleIds = []; filteredIds = []; projected = [];
     try { anchor.replaceWith(template); if (empty) empty.hidden = emptyWasHidden!; if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex"); }
     catch (cause) { if (!failed) { failed = true; failure = cause; } }
     for (const release of releaseTemplateSelects) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
@@ -921,6 +1103,11 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (failed) throw failure;
   }
   try {
+    if (hover !== undefined) root.toggleAttribute("data-list-hover", hover);
+    root.addEventListener("click", onClick);
+    if (multiple) root.addEventListener("keydown", onKeyDown);
+    if (checkIndexes.length) root.addEventListener("change", onCheck);
+    for (const master of masters) { ownedMasters.add(master.element); master.element.addEventListener("change", onCheck); }
     unsubscribe = sourceRows.subscribe(event => {
       if (editable) { render(false, event); return; }
       rowRules.prune(event, id => sourceRows.get(id) !== undefined);
@@ -1041,18 +1228,15 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       finally { editingRender = false; }
     },
     reveal(id) { return reveal(id); },
-    select(id) {
-      active();
-      const row = id === null ? null : sourceRows.get(id);
-      if (id !== null && (!row || row.status === "delete")) {
-        throw listError("LIST_ROW", "The selected row is not available in this List.", { id });
-      }
-      updateSelection(id, null);
-    },
-    selected() {
-      active();
-      return selected;
-    },
+    select(id) { selectionWritable(); selection.select(id); },
+    selected() { active(); return selection.selected(); },
+    rowIds(scope: GridRowScope) { active(); return selection.rowIds(scope); },
+    selectedIds() { active(); return selection.selectedIds(); },
+    setSelected(ids) { selectionWritable(); selection.setSelected(ids); },
+    checkedIds() { active(); return selection.checkedIds(); },
+    setChecked(ids) { selectionWritable(); selection.setChecked(ids); },
+    checkAll(checked, scope) { selectionWritable(); selection.checkAll(checked, scope); },
+    checkState(scope) { active(); return selection.checkState(scope); },
     setSort(compare) {
       bindable();
       sort = compare;

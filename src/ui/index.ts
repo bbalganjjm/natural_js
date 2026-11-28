@@ -177,6 +177,13 @@ export interface ListHandle<T extends object> {
   reveal(id: RowId): boolean;
   select(id: RowId | null): void;
   selected(): RowId | null;
+  rowIds(scope: GridRowScope): readonly RowId[];
+  selectedIds(): readonly RowId[];
+  setSelected(ids: readonly RowId[]): void;
+  checkedIds(): readonly RowId[];
+  setChecked(ids: readonly RowId[]): void;
+  checkAll(checked: boolean, scope: GridRowScope): void;
+  checkState(scope: GridRowScope): GridCheckState;
   setSort(compare: ((a: Snapshot<T>, b: Snapshot<T>) => number) | null): void;
   setFilter(predicate: ((row: Snapshot<T>) => boolean) | null): void;
   setPage(request: PageRequest | null): void;
