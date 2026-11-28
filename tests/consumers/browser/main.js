@@ -202,7 +202,7 @@ state.checkSourceProjection = async () => {
   form.dispose(); grid.dispose(); list.dispose(); rows.dispose(); host.remove(); return result;
 };
 
-state.checkListRows = () => {
+state.checkListRows = async () => {
   const host = document.createElement("section");
   host.innerHTML = '<ul><li data-row-template><button type="button" data-row-action><span data-field="name"></span></button></li><li data-empty hidden>Empty</li></ul>';
   document.querySelector("main").append(host);
@@ -299,6 +299,37 @@ state.checkListRows = () => {
   }
   editable.dispose();
   if (!master.checked || !master.indeterminate) throw new Error("Installed List did not restore its authored check-all control.");
+  host.innerHTML = `<div style="height: 72px; overflow-y: auto; overscroll-behavior-y: auto !important">
+    <ol aria-busy="false" style="margin: 0"><li data-row-template style="height: 48px"><span data-field="name"></span></li></ol>
+    </div><button type="button" aria-label="Resize rows">Resize</button>`;
+  const pane = host.querySelector("div"), ordered = host.querySelector("ol"), resize = host.querySelector("button");
+  const progressive = bindList(ordered, { rows, progressive: { size: 2 }, scroll: { root: pane, auto: false },
+    heightResize: { root: pane, handle: resize, min: 48, max: 144 } });
+  const ready = await progressive.whenBound(), firstRow = ordered.firstElementChild;
+  const property = "overscroll-behavior-y", cssSupported = CSS.supports(property, "contain");
+  const boundaryWheel = new WheelEvent("wheel", { deltaY: -40, cancelable: true });
+  pane.dispatchEvent(boundaryWheel);
+  if (ready.visible !== 4 || ready.mounted !== 2 || ready.last || ordered.children.length !== 2 ||
+      !pane.id || resize.getAttribute("aria-controls") !== pane.id || !boundaryWheel.defaultPrevented ||
+      cssSupported && pane.style.getPropertyValue(property) !== "contain") {
+    throw new Error("Installed List did not admit a prefix or connect its authored scroll and resize controls.");
+  }
+  const pending = progressive.renderMore(), coalesced = pending === progressive.whenBound();
+  const stopped = progressive.cancelBinding(), aborted = await pending.then(() => false, cause => cause.name === "AbortError");
+  if (!coalesced || !aborted || stopped.mounted !== 2 || ordered.children.length !== 2 || ordered.getAttribute("aria-busy") !== "false") {
+    throw new Error("Installed List did not cancel pending admission and keep its committed prefix.");
+  }
+  if (!progressive.reveal(loaded, { block: "end" }) || ordered.children.length !== 4 || ordered.firstElementChild !== firstRow || pane.scrollTop <= 0) {
+    throw new Error("Installed List did not reveal a later row inside its scroll root while preserving the prefix.");
+  }
+  resize.dispatchEvent(new KeyboardEvent("keydown", { key: "End" }));
+  if (resize.getAttribute("aria-valuenow") !== "144") throw new Error("Installed List did not resize to its authored maximum.");
+  progressive.dispose();
+  if (pane.id || resize.hasAttribute("aria-controls") || pane.style.height !== "72px" ||
+      cssSupported && (pane.style.getPropertyValue(property) !== "auto" || pane.style.getPropertyPriority(property) !== "important") ||
+      ordered.getAttribute("aria-busy") !== "false" || !ordered.firstElementChild?.hasAttribute("data-row-template")) {
+    throw new Error("Installed List did not restore its scroll root, resize handle and template.");
+  }
   rows.dispose(); host.remove(); return result;
 };
 

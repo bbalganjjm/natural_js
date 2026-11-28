@@ -462,6 +462,18 @@ export function connectProgressive(table: HTMLTableElement, rows: Rows<Employee>
   return grid;
 }
 
+export function connectProgressiveList(root: HTMLOListElement, scrollRoot: HTMLElement, resize: HTMLButtonElement, rows: Rows<Employee>) {
+  const list: ListHandle<Employee> = bindList(root, { rows, progressive: { size: 40, delay: 0 },
+    scroll: { root: scrollRoot, auto: false, contain: true }, heightResize: { root: scrollRoot, handle: resize, min: 160, max: 480 },
+    appendScroll: true, addScroll: true, selectScroll: true, checkScroll: true, validateScroll: true,
+    onBind(result: GridBindResult) { root.dataset.available = String(result.available); } });
+  const pending: Promise<GridBindResult> = list.whenBound();
+  const continued: Promise<GridBindResult> = list.renderMore();
+  const stopped: GridBindResult = list.cancelBinding();
+  const reveal = (id: RowId): boolean => list.reveal(id, { block: "center" });
+  return { list, pending, continued, stopped, reveal };
+}
+
 export function connectRowChoices(root: HTMLFormElement, rows: Rows<{
   assignment: { choices: { meta: { label: string }; code: string | number | boolean | null }[];
     chosen: string | number | boolean | null; selected: (string | number | boolean | null)[] };

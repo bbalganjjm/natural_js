@@ -24,7 +24,9 @@ import { captureCheckboxValues, control, disabled, display, displayField, fieldV
 import { createNativeDefaults } from "./native-defaults.js";
 import type { NativeDefault } from "./native-defaults.js";
 import { bindRowForm } from "./form.js";
-import { focusVisible, uniqueId } from "./dom-state.js";
+import { bindScrollBoundary, focusVisible, scrollRowWithin, uniqueId } from "./dom-state.js";
+import { bindGridHeight, validateGridHeight } from "./grid-height.js";
+import type { GridHeightOptions } from "./grid-height.js";
 import type { RuleCall } from "./rules.js";
 import type {
   FormatRule, GridBindResult, GridRowScope, ListHandle, PageRequest, PageState, ParseInput, RuleContext, RuleSet,
@@ -102,6 +104,21 @@ interface RenderedRow<T extends object> {
   pendingHook?: RowSnapshot<T>;
 }
 
+interface AdmissionGoal {
+  readonly target: number;
+  readonly first: boolean;
+  readonly event: RowsEvent | null;
+}
+
+interface AdmissionWork {
+  readonly goal: AdmissionGoal;
+  readonly promise: Promise<GridBindResult>;
+  resolve(result: GridBindResult): void;
+  reject(reason: unknown): void;
+  timer?: number;
+  completed?: boolean;
+}
+
 let nextErrorId = 0;
 const boundRoots = new WeakSet<HTMLUListElement | HTMLOListElement>();
 const ownedMasters = new WeakSet<HTMLInputElement>();
@@ -131,12 +148,41 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   selectOnRowClick?: boolean;
   hover?: boolean;
   checkAllControls?: readonly HTMLInputElement[];
+  progressive?: { size: number; delay?: number };
+  scroll?: { root: HTMLElement; auto?: boolean; contain?: boolean };
+  heightResize?: GridHeightOptions;
+  appendScroll?: boolean;
+  addScroll?: boolean;
+  selectScroll?: boolean;
+  checkScroll?: boolean;
+  validateScroll?: boolean;
 } & RowSelectionOptions<T>): ListHandle<T> {
   if (!root || (root.tagName !== "UL" && root.tagName !== "OL")) {
     throw listError("LIST_ROOT", "The List root must be a ul or ol element.");
   }
   if (boundRoots.has(root)) throw listError("LIST_IN_USE", "This List root is already bound.");
   const sourceRows = options.rows;
+  const { progressive, scroll, heightResize, appendScroll, addScroll, selectScroll, checkScroll, validateScroll } = options;
+  const size = progressive?.size;
+  const delay = progressive?.delay === undefined ? 0 : progressive.delay;
+  if (progressive !== undefined && (!progressive || typeof progressive !== "object" || Array.isArray(progressive) ||
+      !Number.isSafeInteger(size) || size! < 1 || !Number.isFinite(delay) || delay < 0 || delay > 2147483647)) {
+    throw listError("LIST_PROGRESSIVE", "progressive needs a positive safe-integer size and a delay from 0 to 2147483647.");
+  }
+  const view = root.ownerDocument.defaultView;
+  const scrollRoot = scroll?.root ?? heightResize?.root;
+  if (scroll !== undefined && (!scroll || typeof scroll !== "object" || !view || !(scroll.root instanceof view.HTMLElement) ||
+      scroll.root === root || scroll.root.ownerDocument !== root.ownerDocument || !scroll.root.contains(root) ||
+      [scroll.auto, scroll.contain].some(flag => flag !== undefined && typeof flag !== "boolean"))) {
+    throw listError("LIST_SCROLL", "scroll needs an authored ancestor root and boolean auto/contain options.");
+  }
+  if ([appendScroll, addScroll, selectScroll, checkScroll, validateScroll].some(flag => flag !== undefined && typeof flag !== "boolean")) {
+    throw listError("LIST_SCROLL", "Row scroll options must be booleans.");
+  }
+  if (progressive && !view) throw listError("LIST_PROGRESSIVE", "Progressive binding needs a document Window.");
+  if (heightResize !== undefined) validateGridHeight(root, heightResize, scroll?.root, "bindList");
+  const autoScroll = Boolean(scrollRoot && size && scroll?.auto !== false);
+  const containScroll = Boolean(scrollRoot && scroll?.contain !== false);
   const { editable = false, parse, autoValidate, revealInvalid = false, rules, render: renderersOption } = options;
   if (typeof editable !== "boolean" || typeof revealInvalid !== "boolean" || autoValidate !== undefined && typeof autoValidate !== "boolean" ||
       !editable && (parse !== undefined || autoValidate !== undefined || revealInvalid)) {
@@ -350,7 +396,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   }, () => { throw listError("LIST_BIND_REENTRANT", "Finish the current rule before changing its declaration."); });
 
   const generatedGroups = textFields.some(field => field.group);
-  const guarded = editable || values.sourceEnabled || renderers.size > 0 || generatedGroups || beforeRowBind !== undefined;
+  const guarded = editable || values.sourceEnabled || renderers.size > 0 || generatedGroups || beforeRowBind !== undefined || size !== undefined;
   const sourceFields = values.sourceEnabled ? [
     ...textFields.map((field, index) => ({ key: field.path[0], dependency: field.group?.definition.source?.options[0], index, select: false })),
     ...selectFields.map((field, index) => ({ key: field.field?.[0], dependency: field.options?.[0], index, select: true }))
@@ -358,6 +404,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   const releaseTemplateSelects: (() => void)[] = [];
   let visibleIds: readonly RowId[] = Object.freeze([]);
   let filteredIds = visibleIds;
+  let mountedIds: RowId[] = [];
   const selection = createRowSelection("bindList", sourceRows, {
     multiple, toggleSelection: toggleSelection ?? multiple, checkMode, canSelect, canCheck,
     beforeSelect, onSelect, beforeSelectionChange, onSelectionChange, beforeCheckChange, onCheckChange
@@ -391,6 +438,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
   let request: PageRequest | null = null;
   let pageState: PageState | null = null;
   let projected: readonly RowSnapshot<T>[] = [];
+  let logicalPage: readonly RowSnapshot<T>[] = [];
+  let operation: AdmissionWork | undefined;
+  let unfinished: AdmissionGoal | undefined;
+  let bindingPromise: Promise<GridBindResult> | undefined;
+  const originalBusy = size === undefined ? null : root.getAttribute("aria-busy");
+  let height: ReturnType<typeof bindGridHeight> | undefined;
+  let releaseScroll: (() => void) | undefined;
   let editingRender = false;
   let rootFocusTabIndex = false;
   let disposed = false;
@@ -768,24 +822,23 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         field: field.name, values, rowId: row.id, ...(element ? { element } : {})
       }));
     }
-    if (record) {
-      const byField = new Map<string, ValidationIssue[]>();
-      for (const issue of issues) {
-        const group = byField.get(issue.field) ?? [];
-        group.push(issue);
-        byField.set(issue.field, group);
-      }
-      for (const binding of [...record.texts, ...record.selects]) {
-        const name = "field" in binding ? binding.field.name : undefined;
-        if (!name) continue;
-        invalidBinding(binding, byField.has(name));
-      }
-      for (const [field, region] of record.errors) {
-        region.textContent = (byField.get(field) ?? []).map(issue => issue.message).join(" ");
-      }
-      record.hasIssues = issues.length > 0;
-    }
+    if (record) presentIssues(record, issues);
     return issues;
+  }
+
+  function presentIssues(record: RenderedRow<T>, issues: readonly ValidationIssue[]): void {
+    const byField = new Map<string, string[]>();
+    for (const issue of issues) {
+      const messages = byField.get(issue.field) ?? [];
+      messages.push(issue.message);
+      byField.set(issue.field, messages);
+    }
+    for (const binding of [...record.texts, ...record.selects]) {
+      const name = binding.field.name;
+      if (name) invalidBinding(binding, byField.has(name));
+    }
+    for (const [field, region] of record.errors) region.textContent = byField.get(field)?.join(" ") ?? "";
+    record.hasIssues = issues.length > 0;
   }
 
   function invalidBinding(binding: BoundText | BoundSelect, invalid: boolean): void {
@@ -817,16 +870,16 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (projectingSelection) throw listError("LIST_BIND_REENTRANT", "Finish projecting the row controls before changing their state.");
   }
 
-  function syncSelection(): void {
+  function syncSelection(ids = mountedIds, includeMasters = true): void {
     selectionWritable();
     const entries = sourceRows.entries(), current = () => {
       active();
       if (entries !== sourceRows.entries()) throw listError("LIST_BIND_STALE", "The rows changed while projecting row controls.");
     };
-    const selected = selection.selected(), selectedIds = new Set(selection.selectedIds()), checkedIds = new Set(selection.checkedIds());
+    const selected = selection.selected(), selectedIds = selection.membership(selection.selectedIds()), checkedIds = selection.membership(selection.checkedIds());
     projectingSelection = true;
     try {
-      for (const id of visibleIds) {
+      for (const id of ids) {
         const record = records.get(id);
         if (!record || !mounted(record)) continue;
         const pressed = multiple ? selectedIds.has(id) : selected === id;
@@ -850,7 +903,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           input.disabled = authoredCheckDisabled[index] || !checkable;
         }
       }
-      for (const { element, scope, disabled: originallyDisabled } of masters) {
+      if (includeMasters) for (const { element, scope, disabled: originallyDisabled } of masters) {
         const state = selection.checkState(scope);
         current();
         element.checked = state.checked;
@@ -860,13 +913,15 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     } finally { projectingSelection = false; }
   }
 
-  function render(force = false, event?: RowsEvent | null, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>): void {
+  function render(force = false, event?: RowsEvent | null, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>,
+    admission?: { limit: number; extend?: boolean; demand?: RowId }): void {
     if (disposed) return;
     bindable();
     const tracked = hooks.enabled || values.enabled || guarded;
     const version = ++renderVersion;
     const entries = sourceRows.entries();
-    const priorFocus = root.ownerDocument.activeElement, priorFiltered = filteredIds;
+    const extending = admission?.extend === true;
+    const priorFocus = root.ownerDocument.activeElement, priorFiltered = filteredIds, priorVisible = visibleIds, priorPage = logicalPage;
     const priorRow = priorFocus?.closest("li"), priorFocusId = priorRow ? rowIds.get(priorRow) : undefined;
     const current = tracked ? () => {
       const live = !disposed && version === renderVersion && entries === sourceRows.entries();
@@ -882,13 +937,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     let notifySelection: (() => void) | undefined;
     let failed = false;
     const sourcePending = !editable && values.sourceEnabled ? new Map<RenderedRow<T>, RowSnapshot<T>>() : undefined;
-    const mounted = tracked ? new Set(visibleIds) : undefined;
+    const mounted = tracked ? new Set(extending ? [] : mountedIds) : undefined;
     editingRender = editable;
     try {
-      notifySelection = selection.prune();
-      const live = new Set(entries.map(row => row.id));
-      for (const [id, record] of records) {
-        if (!live.has(id)) {
+      if (!extending) {
+        notifySelection = selection.prune();
+        const live = new Set(entries.map(row => row.id));
+        for (const [id, record] of records) if (!live.has(id)) {
           hooks.release(id);
           if (current) check(id);
           record.element.remove();
@@ -899,37 +954,48 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         }
       }
       if (disposed || current && !current()) return;
-      const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
-      if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
+      const filtered = extending ? projected : projectRows(entries);
       if (current) check();
-      let displayed = filtered;
-      if (request) {
+      let page = extending ? logicalPage : filtered;
+      if (!extending && request) {
         const pages = Math.ceil(filtered.length / request.size);
-        const page = Math.min(request.page, Math.max(1, pages));
-        request = { page, size: request.size };
+        const index = admission?.demand === undefined ? -1 : filtered.findIndex(row => row.id === admission.demand);
+        const number = index < 0 ? Math.min(request.page, Math.max(1, pages)) : Math.floor(index / request.size) + 1;
+        request = { page: number, size: request.size };
         pageState = Object.freeze({ ...request, total: filtered.length, pages });
-        displayed = filtered.slice((page - 1) * request.size, page * request.size);
-      } else pageState = null;
-      const ids = displayed.map(row => row.id);
-      const changed = ids.length !== visibleIds.length || ids.some((id, index) => id !== visibleIds[index]);
-      const next = editable || hooks.enabled || values.sourceEnabled || changed ? new Set(ids) : undefined;
+        page = filtered.slice((number - 1) * request.size, number * request.size);
+      } else if (!extending) pageState = null;
+      const offset = extending ? mountedIds.length : 0;
+      const demand = admission?.demand;
+      const keepFocus = extending || priorFocusId === undefined ? 0 : page.findIndex(row => row.id === priorFocusId) + 1;
+      const limit = admission && !appendAtEnd(event, page) ? Math.max(admission.limit,
+        keepFocus, demand === undefined ? 0 : page.findIndex(row => row.id === demand) + 1) : page.length;
+      const displayed = admission ? page.slice(offset, limit) : page;
+      const addedIds = displayed.map(row => row.id);
+      const changed = extending ? addedIds.length > 0 :
+        addedIds.length !== mountedIds.length || addedIds.some((id, index) => id !== mountedIds[index]);
+      const next = !extending && (editable || hooks.enabled || values.sourceEnabled || changed) ? new Set(addedIds) : undefined;
       if (editable && event && (event.type === "replace" || event.type === "revert")) {
         if (event.type === "revert" && event.id !== undefined) {
           if (!next!.has(event.id)) records.get(event.id)?.editor?.changed(event, false);
         } else for (const record of records.values()) if (!next!.has(record.id)) record.editor?.changed(event, false);
       }
-      if (hooks.enabled) for (const id of visibleIds) if (!next!.has(id)) {
+      if (hooks.enabled && !extending) for (const id of mountedIds) if (!next!.has(id)) {
         const record = records.get(id);
         if (record) record.pendingHook = undefined;
         hooks.release(id); check(id);
       }
-      for (const row of displayed) {
+      for (const [index, row] of displayed.entries()) {
         let record = records.get(row.id);
         if (!record) {
           record = createRecord(row.id, () => check(row.id));
           records.set(row.id, record);
           if (hooks.enabled || guarded) created.push(record);
           if (!record.editor) rowRules.attach(record, () => check(row.id));
+        }
+        if (size !== undefined) {
+          record.element.setAttribute("aria-posinset", String(offset + index + 1));
+          record.element.setAttribute("aria-setsize", String(page.length));
         }
         if (guarded) record.sourceVersion = version;
         if (editable || values.sourceEnabled || beforeRowBind !== undefined) {
@@ -960,8 +1026,14 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       const focused = activeElement === root.ownerDocument.body && priorFocusId !== undefined ? priorFocus : activeElement;
       const focusedRow = focused instanceof Element ? focused.closest("li") : null;
       const focusedId = focusedRow ? rowIds.get(focusedRow) : undefined;
-      if (changed) {
-        for (const id of visibleIds) if (!next!.has(id)) {
+      if (extending) {
+        for (const id of addedIds) {
+          const element = records.get(id)!.element;
+          if (element.parentElement !== root) root.insertBefore(element, anchor);
+          check(id);
+        }
+      } else if (changed) {
+        for (const id of mountedIds) if (!next!.has(id)) {
           if (current) check(id);
           const record = records.get(id);
           if (record) {
@@ -971,37 +1043,43 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         }
         if (current) check();
         let cursor: Node = anchor;
-        for (let index = ids.length - 1; index >= 0; index--) {
-          const element = records.get(ids[index])!.element;
-          if (current) check(ids[index]);
+        for (let index = addedIds.length - 1; index >= 0; index--) {
+          const id = addedIds[index], element = records.get(id)!.element;
+          if (current) check(id);
           if (element !== focusedRow && element.nextSibling !== cursor) root.insertBefore(element, cursor);
-          if (current) check(ids[index]);
+          if (current) check(id);
           cursor = element;
         }
-        visibleIds = Object.freeze(ids);
       }
-      filteredIds = displayed === filtered ? visibleIds : Object.freeze(filtered.map(row => row.id));
-      if (notifySelection || changed || canSelect || canCheck || masters.length) syncSelection();
-      if (focused instanceof HTMLElement && focusedId !== undefined) {
+      if (extending) mountedIds.push(...addedIds);
+      else if (changed) mountedIds = addedIds;
+      if (!extending) {
+        logicalPage = page;
+        visibleIds = admission ? Object.freeze(page.map(row => row.id)) : Object.freeze(mountedIds);
+        filteredIds = page === filtered ? visibleIds : Object.freeze(filtered.map(row => row.id));
+      }
+      if (extending) syncSelection(addedIds, false);
+      else if (notifySelection || changed || canSelect || canCheck || masters.length) syncSelection();
+      if (!extending && focused instanceof HTMLElement && focusedId !== undefined) {
         const retained = !changed || next!.has(focusedId);
         const disabledControl = focused.matches("button[data-select-row], input[data-check-row]") && !available(focused);
         const after = root.ownerDocument.activeElement;
         if (retained && !disabledControl) {
           if (changed && after !== focused) focused.focus({ preventScroll: true });
         } else if ((after === focused || after === root.ownerDocument.body) &&
-            !visibleIds.some(id => records.get(id)?.buttons.some(focusVisible)) && !disposed) {
+            !mountedIds.some(id => records.get(id)?.buttons.some(focusVisible)) && !disposed) {
           if (!root.hasAttribute("tabindex")) { root.tabIndex = -1; rootFocusTabIndex = true; }
           root.focus({ preventScroll: true });
         }
       }
       if (current) check();
-      if (empty) empty.hidden = ids.length > 0;
+      if (empty) empty.hidden = page.length > 0;
       for (const record of rebound) {
         if (record.editor?.committing) record.pendingHook = record.snapshot;
         else { record.pendingHook = undefined; hooks.after(record.id, () => check(record.id)); }
       }
       cleanupFailure();
-      projected = filtered;
+      if (!extending) projected = filtered;
       if (sourcePending) {
         check();
         for (const [record, row] of sourcePending) if (records.get(row.id) === record && record.snapshot === row) record.acceptedSource = row;
@@ -1025,10 +1103,13 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         if (record.sourceVersion === version) resetProjection(record);
       }
       if (!guarded || version === renderVersion) {
-        visibleIds = Object.freeze(visibleIds.filter(id => records.get(id)?.element.parentElement === root));
+        mountedIds = mountedIds.filter(id => records.get(id)?.element.parentElement === root);
         cleanupErrors.length = 0;
       }
       if (version === renderVersion) {
+        logicalPage = priorPage.filter(row => sourceRows.get(row.id)?.status !== "delete" && sourceRows.get(row.id) !== undefined);
+        visibleIds = size === undefined ? Object.freeze(mountedIds) :
+          logicalPage.length === priorPage.length ? priorVisible : Object.freeze(logicalPage.map(row => row.id));
         filteredIds = Object.freeze(priorFiltered.filter(id => {
           const row = sourceRows.get(id);
           return row && row.status !== "delete";
@@ -1044,11 +1125,10 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         } else notifySelection();
       }
     }
-    if (onBind && (event === null || event?.type === "replace" || event?.type === "append") &&
-        !disposed && version === renderVersion && entries === sourceRows.entries()) {
-      const visible = visibleIds.length;
-      const result: GridBindResult = Object.freeze({ total: sourceRows.entries({ includeDeleted: true }).length,
-        filtered: filteredIds.length, visible, mounted: visible, available: visible, event, first: true, last: true });
+  }
+
+  function publishBinding(result: GridBindResult): void {
+    if (onBind) {
       try {
         const returned: unknown = onBind(result);
         if (returned !== null && (typeof returned === "object" || typeof returned === "function") &&
@@ -1062,6 +1142,129 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
           detail: { phase: "onBind" }, cause });
       }
     }
+  }
+
+  function projectRows(entries: readonly RowSnapshot<T>[]): readonly RowSnapshot<T>[] {
+    const filtered = filter ? entries.filter(row => filter!(row.value)) : [...entries];
+    if (sort) filtered.sort((left, right) => sort!(left.value, right.value));
+    return filtered;
+  }
+
+  function appendAtEnd(event: RowsEvent | null | undefined, page: readonly RowSnapshot<T>[]): boolean {
+    if (!appendScroll || event?.type !== "append") return false;
+    const added = new Set(event.ids);
+    return page.some(row => added.has(row.id));
+  }
+
+  function result(event: RowsEvent | null = null, first = true): GridBindResult {
+    return Object.freeze({ total: sourceRows.entries({ includeDeleted: true }).length, filtered: filteredIds.length,
+      visible: visibleIds.length, mounted: mountedIds.length, available: mountedIds.length, event, first,
+      last: mountedIds.length === visibleIds.length });
+  }
+
+  function restoreBusy(): void {
+    if (root.getAttribute("aria-busy") !== "true") return;
+    if (originalBusy === null) root.removeAttribute("aria-busy");
+    else root.setAttribute("aria-busy", originalBusy);
+  }
+
+  function stopWork(): void {
+    const work = operation;
+    if (!work) return;
+    operation = undefined;
+    if (work.timer !== undefined) view!.clearTimeout(work.timer);
+    restoreBusy();
+    work.reject(new DOMException("List binding was superseded or canceled.", "AbortError"));
+  }
+
+  function rememberFailure(cause: unknown): void {
+    bindingPromise = Promise.reject(cause);
+    void bindingPromise.catch(() => {});
+  }
+
+  function schedule(work: AdmissionWork): void {
+    work.timer = view!.setTimeout(() => {
+      work.timer = undefined;
+      if (disposed || work !== operation) return;
+      try {
+        const limit = Math.min(work.goal.target, visibleIds.length, mountedIds.length + (delay > 0 ? 1 : 32));
+        if (limit > mountedIds.length) render(false, undefined, undefined, { limit, extend: true });
+        if (disposed || work !== operation) return;
+        if (mountedIds.length < Math.min(visibleIds.length, work.goal.target)) { schedule(work); return; }
+        work.completed = true;
+        unfinished = undefined;
+        restoreBusy();
+        const completed = result(work.goal.event, work.goal.first);
+        publishBinding(completed);
+        if (disposed || work !== operation) return;
+        operation = undefined;
+        work.resolve(completed);
+      } catch (cause) {
+        if (operation === work) { operation = undefined; restoreBusy(); }
+        work.reject(cause);
+      }
+    }, delay);
+  }
+
+  function begin(goal: AdmissionGoal): Promise<GridBindResult> {
+    let resolve!: AdmissionWork["resolve"], reject!: AdmissionWork["reject"];
+    const promise = new Promise<GridBindResult>((accept, fail) => { resolve = accept; reject = fail; });
+    void promise.catch(() => {});
+    const work = { goal, promise, resolve, reject };
+    bindingPromise = promise;
+    unfinished = goal;
+    operation = work;
+    root.setAttribute("aria-busy", "true");
+    schedule(work);
+    return promise;
+  }
+
+  function beginView(force = false, event?: RowsEvent | null, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>, demand?: RowId): void {
+    bindable();
+    const entries = sourceRows.entries(), version = renderVersion + 1;
+    const append = event?.type === "append";
+    const fresh = event === null || event?.type === "replace";
+    const before = mountedIds.length, previous = unfinished;
+    stopWork();
+    unfinished = undefined;
+    const target = size === undefined ? before : fresh ? size : append ? Math.max(before, previous?.target ?? before + size) : before;
+    const limit = size === undefined ? before : demand !== undefined && !visibleIds.includes(demand) ? 0 :
+      delay > 0 && (fresh || append) ? Math.min(target, fresh ? 1 : before + 1) : target;
+    try { render(force, event, validated, size === undefined && demand === undefined ? undefined : { limit, demand }); }
+    catch (cause) {
+      if (!disposed && renderVersion === version) rememberFailure(cause);
+      throw cause;
+    }
+    if (disposed || renderVersion !== version || entries !== sourceRows.entries()) return;
+    if (appendAtEnd(event, logicalPage)) scrollRecord(visibleIds.at(-1), "end");
+    if (fresh || append) {
+      const goal = { target: Math.min(visibleIds.length, target), first: fresh || before === 0 || previous?.first === true, event: event ?? null };
+      if (size !== undefined && mountedIds.length < goal.target) { void begin(goal); return; }
+      const completed = result(goal.event, size === undefined || goal.first);
+      const ready = bindingPromise = Promise.resolve(completed);
+      try { publishBinding(completed); }
+      catch (cause) { if (bindingPromise === ready) rememberFailure(cause); throw cause; }
+    } else {
+      if (previous && size !== undefined && previous.target > mountedIds.length && mountedIds.length < visibleIds.length) {
+        unfinished = { ...previous, event: null };
+      }
+      if (bindingPromise || size !== undefined) bindingPromise = Promise.resolve(result());
+    }
+  }
+
+  function renderMore(): Promise<GridBindResult> {
+    bindable();
+    if (operation && !operation.completed) return operation.promise;
+    if (size === undefined || mountedIds.length === visibleIds.length) return bindingPromise ?? Promise.resolve(result());
+    stopWork();
+    return begin(unfinished ?? { target: Math.min(visibleIds.length, mountedIds.length + size), first: mountedIds.length === 0, event: null });
+  }
+
+  function onScroll(event: Event): void {
+    if (event.target !== scrollRoot || disposed || operation || hooks.running || editingRender || projectingSelection ||
+        mountedIds.length >= visibleIds.length || !scrollRoot) return;
+    const { clientHeight, scrollHeight, scrollTop } = scrollRoot;
+    if (clientHeight > 0 && scrollHeight > clientHeight && scrollTop + clientHeight >= scrollHeight - 1) void renderMore();
   }
 
   function eventRecord(target: Element): RenderedRow<T> | undefined {
@@ -1114,6 +1317,33 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     } else if (event.key === "Escape") {
       event.preventDefault(); selectionWritable(); selection.setSelected([], event);
     } else if (["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+      if (size !== undefined) {
+        let version = renderVersion;
+        const direction = event.key === "ArrowUp" || event.key === "End" ? -1 : 1;
+        const origin = visibleIds.indexOf(record.id);
+        let index = event.key === "Home" ? 0 : event.key === "End" ? visibleIds.length - 1 : origin + direction;
+        for (; index >= 0 && index < visibleIds.length; index += direction) {
+          const id = visibleIds[index];
+          selectionWritable();
+          let candidate = records.get(id);
+          if (!candidate || !mounted(candidate)) {
+            if (!authoredButtonDisabled.includes(false) || !selection.eligible(id, "selection")) continue;
+            if (disposed || version !== renderVersion) return;
+            beginView(false, undefined, undefined, id);
+            if (disposed || ++version !== renderVersion) return;
+            candidate = records.get(id);
+          }
+          const target = candidate?.buttons.find(keyboardButton);
+          if (!target) continue;
+          event.preventDefault();
+          if (event.shiftKey && !selection.choose(id, event, record.id)) return;
+          if (disposed || renderVersion !== version) return;
+          if (focusVisible(target)) scrollRecord(id, "nearest");
+          return;
+        }
+        event.preventDefault();
+        return;
+      }
       const enabled = visibleIds.flatMap(id => {
         const target = records.get(id)?.buttons.find(keyboardButton);
         return target ? [{ id, target }] : [];
@@ -1167,12 +1397,17 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       if (originalHover === null) root.removeAttribute("data-list-hover");
       else root.setAttribute("data-list-hover", originalHover);
     }
+    stopWork();
+    unfinished = undefined;
+    if (autoScroll) scrollRoot!.removeEventListener("scroll", onScroll);
+    try { releaseScroll?.(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
+    try { height?.dispose(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
     for (const record of records.values()) {
       try { record.element.remove(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       for (const release of record.releaseSelects) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
       for (const binding of record.texts) try { binding.releaseGroup?.(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
     }
-    records.clear(); visibleIds = []; filteredIds = []; projected = [];
+    records.clear(); visibleIds = []; filteredIds = []; mountedIds = []; projected = []; logicalPage = [];
     try { anchor.replaceWith(template); if (empty) empty.hidden = emptyWasHidden!; if (rootFocusTabIndex && root.getAttribute("tabindex") === "-1") root.removeAttribute("tabindex"); }
     catch (cause) { if (!failed) { failed = true; failure = cause; } }
     for (const release of releaseTemplateSelects) try { release(); } catch (cause) { if (!failed) { failed = true; failure = cause; } }
@@ -1182,13 +1417,16 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     if (failed) throw failure;
   }
   try {
+    if (heightResize) height = bindGridHeight(root, heightResize, "bindList");
+    if (containScroll) releaseScroll = bindScrollBoundary(scrollRoot!);
+    if (autoScroll) scrollRoot!.addEventListener("scroll", onScroll, { passive: true });
     if (hover !== undefined) root.toggleAttribute("data-list-hover", hover);
     root.addEventListener("click", onClick);
     if (multiple) root.addEventListener("keydown", onKeyDown);
     if (checkIndexes.length) root.addEventListener("change", onCheck);
     for (const master of masters) { ownedMasters.add(master.element); master.element.addEventListener("change", onCheck); }
     unsubscribe = sourceRows.subscribe(event => {
-      if (editable) { render(false, event); return; }
+      if (editable) { beginView(false, event); return; }
       rowRules.prune(event, id => sourceRows.get(id) !== undefined);
       if (event.type === "replace" || (event.type === "revert" && event.id === undefined)) {
         for (const record of records.values()) clearIssues(record);
@@ -1201,30 +1439,56 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         const record = records.get(event.id);
         if (record) clearIssues(record);
       }
-      render(false, event);
+      beginView(false, event);
     });
-    render(false, null);
+    beginView(false, null);
   } catch (cause) {
     try { dispose(); } catch { /* The setup failure remains primary. */ }
     throw cause;
   }
 
-  function reveal(id: RowId, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>): boolean {
+  function scrollRecord(id: RowId | undefined, block: ScrollLogicalPosition): boolean {
+    const record = id === undefined ? undefined : records.get(id);
+    if (!record || !mounted(record)) return false;
+    if (record.element.isConnected) {
+      if (scrollRoot) scrollRowWithin(scrollRoot, record.element, block);
+      else record.element.scrollIntoView({ block, inline: "nearest" });
+    }
+    return true;
+  }
+
+  function reveal(id: RowId, block: ScrollLogicalPosition, validated?: ReadonlyMap<RowId, readonly ValidationIssue[]>): boolean {
     bindable();
+    let expected = renderVersion;
     const index = projected.findIndex(row => row.id === id);
     const row = sourceRows.get(id);
     if (index < 0 || !row || row.status === "delete") return false;
     if (request) {
       const page = Math.floor(index / request.size) + 1;
-      if (page !== request.page) { request = { page, size: request.size }; render(false, undefined, validated); }
+      if (page !== request.page) {
+        request = { page, size: request.size };
+        expected++;
+        beginView(false, undefined, validated, size === undefined ? undefined : id);
+      }
     }
-    const record = records.get(id);
-    if (!record || !mounted(record)) return false;
-    if (record.element.isConnected) record.element.scrollIntoView({ block: "nearest", inline: "nearest" });
-    return true;
+    if (expected === renderVersion && !mountedIds.includes(id) && size !== undefined) {
+      expected++;
+      beginView(false, undefined, validated, id);
+    }
+    return !disposed && expected === renderVersion && scrollRecord(id, block);
   }
 
-  function validateEditable(rows: readonly RowSnapshot<T>[], show = revealInvalid): ValidationResult {
+  function revealAction(id: RowId | null | undefined, version: number): void {
+    if (id != null && !disposed && version === renderVersion && visibleIds.includes(id) && !editingRender && !hooks.running &&
+        !values.running && !values.sourceRunning && !projectingSelection) reveal(id, "center");
+  }
+
+  function lastInvalid(issues: readonly ValidationIssue[]): RowId | undefined {
+    const invalid = new Set(issues.map(issue => issue.rowId));
+    for (let index = projected.length - 1; index >= 0; index--) if (invalid.has(projected[index].id)) return projected[index].id;
+  }
+
+  function validateEditable(rows: readonly RowSnapshot<T>[], show = Boolean(revealInvalid || validateScroll)): ValidationResult {
     bindable();
     const entries = sourceRows.entries(), version = renderVersion;
     const check = () => {
@@ -1250,10 +1514,10 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
     check();
     if (!show || !issues.length) return { valid: issues.length === 0, issues };
     const eligible = new Set(projected.map(row => row.id));
-    const first = issues.find(issue => issue.rowId !== null && eligible.has(issue.rowId));
-    if (first?.rowId == null || !reveal(first.rowId, validated)) return { valid: false, issues };
-    const record = records.get(first.rowId)!;
-    record.editor!.controls(first.field).some(focusVisible);
+    const first = revealInvalid ? issues.find(issue => issue.rowId !== null && eligible.has(issue.rowId)) : undefined;
+    const id = revealInvalid ? first?.rowId : lastInvalid(issues);
+    if (id == null || !reveal(id, revealInvalid ? "nearest" : "center", validated)) return { valid: false, issues };
+    if (first) records.get(id)?.editor!.controls(first.field).some(focusVisible);
     return { valid: false, issues: issues.map(({ element: _element, ...issue }) => {
       const record = issue.rowId === null ? undefined : records.get(issue.rowId);
       const element = record && mounted(record) ? record.editor!.controls(issue.field).find(control => control.isConnected) : undefined;
@@ -1280,11 +1544,14 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         for (const record of retained) { record.editor!.form.rescan(); check(); }
       } finally { editingRender = false; }
     } else rowRules.refresh(retained, check);
-    render(true, completion ? null : undefined);
+    beginView(true, completion ? null : undefined);
   }
 
   const handle: ListHandle<T> = {
     defaults,
+    whenBound() { active(); return bindingPromise ?? Promise.resolve(result()); },
+    renderMore,
+    cancelBinding() { bindable(); stopWork(); return result(unfinished?.event, unfinished?.first); },
     add(value, before) {
       bindable();
       const version = renderVersion, activeId = selection.selected(), ids = selection.selectedIds();
@@ -1293,6 +1560,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       if (addSelect && !disposed && renderVersion === version + 1 && selection.selected() === activeId && selection.selectedIds() === ids) {
         selection.choose(id, null);
       }
+      if (addScroll) revealAction(id, version + 1);
       return id;
     },
     refresh() { refresh(true); },
@@ -1319,25 +1587,45 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       try { record.editor.form.refresh(fields); }
       finally { editingRender = false; }
     },
-    reveal(id) { return reveal(id); },
-    select(id) { selectionWritable(); selection.select(id); },
+    reveal(id, options) {
+      active();
+      const block = options?.block === undefined ? "nearest" : options.block;
+      if (options !== undefined && (!options || typeof options !== "object" || Array.isArray(options)) ||
+          !["nearest", "start", "center", "end"].includes(block)) {
+        throw listError("LIST_SCROLL", "Reveal alignment must be nearest, start, center or end.");
+      }
+      return reveal(id, block);
+    },
+    select(id) {
+      selectionWritable();
+      const version = renderVersion;
+      if (selection.select(id) && selectScroll && selection.selected() === id) revealAction(id, version);
+    },
     selected() { active(); return selection.selected(); },
     rowIds(scope: GridRowScope) { active(); return selection.rowIds(scope); },
     selectedIds() { active(); return selection.selectedIds(); },
-    setSelected(ids) { selectionWritable(); selection.setSelected(ids); },
+    setSelected(ids) {
+      selectionWritable();
+      const version = renderVersion, target = Array.isArray(ids) ? ids.at(-1) : undefined;
+      if (selection.setSelected(ids) && selectScroll && target !== undefined && selection.selectedIds().includes(target)) revealAction(target, version);
+    },
     checkedIds() { active(); return selection.checkedIds(); },
-    setChecked(ids) { selectionWritable(); selection.setChecked(ids); },
+    setChecked(ids) {
+      selectionWritable();
+      const version = renderVersion, target = Array.isArray(ids) ? ids.at(-1) : undefined;
+      if (selection.setChecked(ids) && checkScroll && target !== undefined && selection.checkedIds().includes(target)) revealAction(target, version);
+    },
     checkAll(checked, scope) { selectionWritable(); selection.checkAll(checked, scope); },
     checkState(scope) { active(); return selection.checkState(scope); },
     setSort(compare) {
       bindable();
       sort = compare;
-      render(false, null);
+      beginView(false, null);
     },
     setFilter(predicate) {
       bindable();
       filter = predicate;
-      render(false, null);
+      beginView(false, null);
     },
     setPage(next) {
       bindable();
@@ -1346,7 +1634,7 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
         throw listError("LIST_PAGE", "A page request needs positive integer page and size values.");
       }
       request = next && { page: next.page, size: next.size };
-      render(false, null);
+      beginView(false, null);
     },
     page() {
       active();
@@ -1360,7 +1648,15 @@ export function bindList<T extends object>(root: HTMLUListElement | HTMLOListEle
       }
       const rows = target ? [target] : sourceRows.entries();
       if (editable) return validateEditable(rows);
+      const version = renderVersion;
       const issues = rows.flatMap(row => validateRow(row));
+      if (validateScroll && !disposed && renderVersion === version) {
+        const id = lastInvalid(issues);
+        if (id !== undefined && reveal(id, "center")) {
+          const record = records.get(id);
+          if (record) presentIssues(record, issues.filter(issue => issue.rowId === id));
+        }
+      }
       return { valid: issues.length === 0, issues };
     },
     dispose

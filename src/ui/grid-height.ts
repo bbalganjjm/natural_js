@@ -12,31 +12,32 @@ export interface GridHeightOptions {
 const roots = new WeakSet<HTMLElement>();
 const handles = new WeakSet<HTMLButtonElement>();
 const properties = ["height", "min-height", "max-height"] as const;
+type HeightApi = "bindGrid" | "bindList";
 
-function fail(message: string): never {
-  throw new FrameworkError({ api: "bindGrid", code: "GRID_HEIGHT", message });
+function fail(api: HeightApi, message: string): never {
+  throw new FrameworkError({ api, code: api === "bindGrid" ? "GRID_HEIGHT" : "LIST_HEIGHT", message });
 }
 
-export function validateGridHeight(table: HTMLTableElement, options: GridHeightOptions, viewportRoot?: HTMLElement): void {
-  const document = table.ownerDocument;
+export function validateGridHeight(content: HTMLElement, options: GridHeightOptions, expectedRoot?: HTMLElement, api: HeightApi = "bindGrid"): void {
+  const document = content.ownerDocument;
   const view = document.defaultView;
   const { root, handle, min, max } = options ?? {};
-  if (!view || !(root instanceof view.HTMLElement) || root === table || root.ownerDocument !== document || !root.contains(table) ||
-      !(handle instanceof view.HTMLButtonElement) || handle.ownerDocument !== document || handle.type !== "button" || table.contains(handle) ||
-      viewportRoot && root !== viewportRoot || !Number.isFinite(min) || !Number.isFinite(max) || min <= 0 || min > max) {
-    fail("Height resize needs an ancestor root, an external type=button handle and positive finite min/max pixel bounds.");
+  if (!view || !(root instanceof view.HTMLElement) || root === content || root.ownerDocument !== document || !root.contains(content) ||
+      !(handle instanceof view.HTMLButtonElement) || handle.ownerDocument !== document || handle.type !== "button" || content.contains(handle) ||
+      expectedRoot && root !== expectedRoot || !Number.isFinite(min) || !Number.isFinite(max) || min <= 0 || min > max) {
+    fail(api, "Height resize needs an ancestor root, an external type=button handle and positive finite min/max pixel bounds.");
   }
   if (!handle.getAttribute("aria-label")?.trim() && !handle.getAttribute("aria-labelledby")?.trim()) {
-    fail("The height handle needs an authored aria-label or aria-labelledby.");
+    fail(api, "The height handle needs an authored aria-label or aria-labelledby.");
   }
-  if (roots.has(root) || handles.has(handle)) fail("The height root or handle already has an owner.");
+  if (roots.has(root) || handles.has(handle)) fail(api, "The height root or handle already has an owner.");
   if (root.id && [...document.querySelectorAll("[id]")].some(element => element !== root && element.id === root.id)) {
-    fail("The height root DOM id must be unique.");
+    fail(api, "The height root DOM id must be unique.");
   }
 }
 
-export function bindGridHeight(table: HTMLTableElement, options: GridHeightOptions) {
-  validateGridHeight(table, options);
+export function bindGridHeight(content: HTMLElement, options: GridHeightOptions, api: HeightApi = "bindGrid") {
+  validateGridHeight(content, options, undefined, api);
   const { root, handle, min, max } = options;
   const document = root.ownerDocument;
   const view = document.defaultView!;
@@ -164,7 +165,7 @@ export function bindGridHeight(table: HTMLTableElement, options: GridHeightOptio
     apply(height);
   }
   const observer = new view.ResizeObserver(announce);
-  if (!root.id) root.id = uniqueId(document, "njs-grid-height");
+  if (!root.id) root.id = uniqueId(document, api === "bindGrid" ? "njs-grid-height" : "njs-list-height");
   handle.setAttribute("role", "separator");
   handle.setAttribute("aria-controls", root.id);
   handle.setAttribute("aria-orientation", "horizontal");

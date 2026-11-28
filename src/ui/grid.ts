@@ -1174,16 +1174,9 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
     }
     if (!pasteCommit) bindRows(event.type === "replace" || event.type === "append" ? event : false);
   }
-  const membershipSets = new WeakMap<readonly RowId[], ReadonlySet<RowId>>();
-  function membership(ids: readonly RowId[]): ReadonlySet<RowId> {
-    let result = membershipSets.get(ids);
-    if (!result) { result = new Set(ids); membershipSets.set(ids, result); }
-    return result;
-  }
-
   function syncRecordSelection(id: RowId, record: RenderedRow<T>,
-    selectedIds: ReadonlySet<RowId> = membership(selection.selectedIds()),
-    checkedIds: ReadonlySet<RowId> = membership(selection.checkedIds())): void {
+    selectedIds: ReadonlySet<RowId> = selection.membership(selection.selectedIds()),
+    checkedIds: ReadonlySet<RowId> = selection.membership(selection.checkedIds())): void {
     const selectable = selection.eligible(id, "selection");
     for (const [index, button] of record.buttons.entries()) {
       button.disabled = record.buttonDisabled[index] || !selectable;
@@ -1202,8 +1195,8 @@ export function bindGrid<T extends object>(root: HTMLTableElement, options: {
 
   function syncSelection(): void {
     if (!buttonIndexes.length && !checkIndexes.length && !headerChecks.length) return;
-    const selectedIds = membership(selection.selectedIds());
-    const checkedIds = membership(selection.checkedIds());
+    const selectedIds = selection.membership(selection.selectedIds());
+    const checkedIds = selection.membership(selection.checkedIds());
     for (const [id, record] of records) syncRecordSelection(id, record, selectedIds, checkedIds);
     for (const header of headerChecks) {
       const state = selection.checkState(header.scope);

@@ -173,10 +173,13 @@ export interface ListHandle<T extends object> {
   defaults(): Record<string, unknown>;
   add(value: T, before?: RowId | null): RowId;
   refresh(): void;
+  whenBound(): Promise<GridBindResult>;
+  renderMore(): Promise<GridBindResult>;
+  cancelBinding(): GridBindResult;
   rowForm(id: RowId): Pick<FormHandle<T>, "read" | "prepare"> & { validate(): ValidationResult } | null;
   value(id: RowId): Snapshot<T>;
   update(id?: RowId, fields?: readonly string[]): void;
-  reveal(id: RowId): boolean;
+  reveal(id: RowId, options?: { block?: ScrollLogicalPosition }): boolean;
   select(id: RowId | null): void;
   selected(): RowId | null;
   rowIds(scope: GridRowScope): readonly RowId[];

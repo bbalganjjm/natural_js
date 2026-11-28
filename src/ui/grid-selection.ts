@@ -41,6 +41,7 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
   let checks = empty;
   let anchor: RowId | null = null;
   let revision = 0;
+  const membershipSets = new WeakMap<readonly RowId[], ReadonlySet<RowId>>();
 
   function fail(code: string, message: string, detail?: Record<string, unknown>): never {
     throw new FrameworkError({ api, code: `${prefix}_${code}`, message, detail });
@@ -152,15 +153,15 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
     view.changed();
     if (activeChanged) onSelect?.(active);
     if (idsChanged) onSelectionChange?.(batch);
-    return true;
+    return selected === id && selection === ids && anchor === nextAnchor;
   }
 
-  function setSelected(ids: readonly RowId[], event: Event | null = null): void {
+  function setSelected(ids: readonly RowId[], event: Event | null = null): boolean {
     const unchanged = checkpoint("selection");
-    changeSelection(selected, checkedIds(ids, "selection"), event, anchor, unchanged);
+    return changeSelection(selected, checkedIds(ids, "selection"), event, anchor, unchanged);
   }
 
-  function setChecked(ids: readonly RowId[], event: Event | null = null): void {
+  function setChecked(ids: readonly RowId[], event: Event | null = null): boolean {
     const unchanged = checkpoint("check");
     const next = checkedIds(ids, "check");
     const change = idsChange(next, checks, event);
@@ -168,12 +169,13 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
     if (checkMode === "single" && next.length > 1) {
       fail("CHECK_MODE", "Single check mode accepts at most one checked row.");
     }
-    if (same(next, checks)) return;
-    if (!allowed(beforeCheckChange, change, unchanged, "check")) return;
+    if (same(next, checks)) return true;
+    if (!allowed(beforeCheckChange, change, unchanged, "check")) return false;
     checks = next;
     revision++;
     view.changed();
     onCheckChange?.(change);
+    return checks === next;
   }
 
   function scopeIds(scope: GridRowScope): readonly RowId[] {
@@ -194,10 +196,10 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
     eligible,
     setSelected,
     setChecked,
-    select(id: RowId | null, event: Event | null = null): void {
+    select(id: RowId | null, event: Event | null = null): boolean {
       const unchanged = checkpoint("selection");
       if (id !== null) checkedIds([id], "selection");
-      changeSelection(id, selection, event, anchor, unchanged);
+      return changeSelection(id, selection, event, anchor, unchanged);
     },
     choose(id: RowId, event: MouseEvent | KeyboardEvent | null, origin?: RowId): boolean {
       const unchanged = checkpoint("selection");
@@ -250,6 +252,11 @@ export function createRowSelection<T extends object>(api: "bindGrid" | "bindList
       unchanged();
       return Object.freeze({ checked: total > 0 && count === total,
         indeterminate: count > 0 && count < total, total, count });
+    },
+    membership(ids: readonly RowId[]): ReadonlySet<RowId> {
+      let set = membershipSets.get(ids);
+      if (!set) { set = new Set(ids); membershipSets.set(ids, set); }
+      return set;
     },
     prune(): (() => void) | undefined {
       if (selected === null && anchor === null && !selection.length && !checks.length) return;
